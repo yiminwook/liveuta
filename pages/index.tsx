@@ -3,7 +3,6 @@ import { NextPage, GetServerSideProps } from "next";
 import axios, { AxiosResponse } from "axios";
 import getBaseUrl from "@/utils/get_base_url";
 import ServiceLayout from "./components/service_layout";
-import YouTube from "react-youtube";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
