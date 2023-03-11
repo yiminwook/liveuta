@@ -61,27 +61,28 @@ const Home: NextPage<Props> = ({ sheetData }) => {
             return (
               <div className={home.content_container} key={videoId}>
                 <div className={home.youtube_container}>
-                  <YouTube
-                    videoId={videoId}
-                    title={data.title ?? "no title"}
-                    opts={{
-                      // width: "560",
-                      // height: "315",
-                      playerVars: {
-                        autoplay: 0, //자동재생 O
-                        modestbranding: 1, // 컨트롤 바에 youtube 로고를 표시하지 않음
-                      },
-                    }}
-                    //이벤트 리스너
-                    onEnd={(e) => {
-                      e.target.stopVideo(0);
-                    }}
-                  />
+                  <iframe
+                    width="560"
+                    height="315"
+                    src={`https://www.youtube.com/embed/${videoId}`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
                 </div>
-                <div>{data.title ?? "no title"}</div>
-                <Link href={data.url ?? ""}>{data.url ?? "no url"}</Link>
-                <div>{data.channelName ?? "no channel name"}</div>
-                <div>{data.scheduledTime ?? "no sheduled time"}</div>
+                <div className={home.youtube_title}>
+                  {data.title ?? "no title"}
+                </div>
+                <Link className={home.youtube_link} href={data.url ?? ""}>
+                  {data.url ?? "no url"}
+                </Link>
+                <div className={home.youtube_channel_name}>
+                  {data.channelName ?? "no channel name"}
+                </div>
+                <div className={home.youtube_scheduledTime}>
+                  {data.scheduledTime ?? "no sheduled time"}
+                </div>
               </div>
             );
           })}

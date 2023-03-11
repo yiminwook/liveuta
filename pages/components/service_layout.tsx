@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import Head from "next/head";
 import GNB from "./GNB";
+import home from "@/styles/Home.module.scss";
 
 interface Props {
   title?: string;
@@ -22,8 +23,10 @@ const ServiceLayout: React.FC<Props> = function ({
           href="https://img.icons8.com/external-microdots-premium-microdot-graphic/64/null/external-holiday-christmas-new-year-vol2-microdots-premium-microdot-graphic-4.png"
         />
       </Head>
-      <GNB />
-      {children}
+      <div className={home.app}>
+        <GNB />
+        {children}
+      </div>
     </>
   );
 };

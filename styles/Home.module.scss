@@ -1,14 +1,53 @@
-.content_container {
-  margin-bottom: 2rem;
-}
+.app {
+  display: grid;
+  min-width: 24rem;
+  grid-template-rows: 3.5rem 100vh;
+  grid-template-areas:
+    "nav"
+    "main";
 
-.button {
-  padding: 1rem;
-  border: 3px solid black;
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-  border-radius: 15px;
-  background-color: darkgray;
-  color: white;
+  nav {
+    grid-area: nav;
+    text-align: center;
+    background-color: #ffc1cc;
+    display: flex;
+    padding: 0 1rem;
+    height: 100%;
+    align-items: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  main {
+    grid-area: main;
+    z-index: 1;
+    padding: 1rem 0;
+    margin: auto;
+
+    .content_container {
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2rem;
+      .youtube_title {
+        font-size: 0.8rem;
+      }
+      .youtube_link {
+        color: rgb(204, 113, 143);
+      }
+    }
+    .button {
+      padding: 1rem;
+      border: 3px solid black;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+      border-radius: 15px;
+      background-color: darkgray;
+      color: white;
+    }
+  }
 }
