@@ -4,7 +4,14 @@ import { google } from "googleapis";
 interface Data {
   range: string;
   majorDmension: string;
-  values: [string, string, string, string][];
+  values: string[][];
+}
+
+interface ConverterData {
+  title: string;
+  url: string;
+  channelName: string;
+  scheduledTime: string;
 }
 
 export default async function handler(
@@ -18,12 +25,17 @@ export default async function handler(
     range: "시트1",
   });
   const data = result.data as Data;
-  const converterData = data.values.map(
-    ([title, url, channeName, scheduledTime]) => {
-      const date = new Date(scheduledTime);
-      return { title, url, channeName, scheduledTime };
-    }
+  let init: ConverterData[] = [];
+  const converterData: ConverterData[] = data.values.reduce(
+    (acc, [title, url, channelName, scheduledTime], index) => {
+      if (index === 0) {
+        return [...acc];
+      }
+      return [...acc, { title, url, channelName, scheduledTime }];
+    },
+    init
   );
+
   return res.status(200).json(converterData);
 }
 

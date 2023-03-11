@@ -1,12 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import Head from "next/head";
+import GNB from "./GNB";
 
 interface Props {
   title?: string;
   children: React.ReactNode;
 }
 
-export const ServiceLayout: React.FC<Props> = function ({
+const ServiceLayout: React.FC<Props> = function ({
   title = "LiveUta",
   children,
 }: Props) {
@@ -18,7 +19,10 @@ export const ServiceLayout: React.FC<Props> = function ({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <GNB />
       {children}
     </>
   );
 };
+
+export default ServiceLayout;
