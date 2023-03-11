@@ -17,7 +17,10 @@ const ServiceLayout: React.FC<Props> = function ({
         <title>{title}</title>
         <meta name="description" content="content" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="icon"
+          href="https://img.icons8.com/external-microdots-premium-microdot-graphic/64/null/external-holiday-christmas-new-year-vol2-microdots-premium-microdot-graphic-4.png"
+        />
       </Head>
       <GNB />
       {children}
