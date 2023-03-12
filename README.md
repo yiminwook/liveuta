@@ -10,4 +10,7 @@ spreadsheetId
 sheet_apiKey
 upcoming_sheet_range
 
+local_time
+interval_time
+
 </pre>

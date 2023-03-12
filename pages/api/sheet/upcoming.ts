@@ -20,9 +20,9 @@ export default async function handler(
   });
   const data = result.data as SheetResponseData;
   const upcoming: UpcomingData[] = [];
-  const now = getNowDate();
+  const now = getNowDate() + +(process.env.local_time ?? 0);
   /** 2시간 지연 */
-  const delayTime = now - 7200000;
+  const delayTime = now - +(process.env.local_time ?? 7200000);
 
   data.values.forEach(
     ([
