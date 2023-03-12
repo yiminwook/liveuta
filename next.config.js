@@ -7,6 +7,7 @@ const {
   client_projectId,
   spreadsheetId,
   sheet_apiKey,
+  meta_img,
 } = process.env;
 
 const nextConfig = {
@@ -17,6 +18,7 @@ const nextConfig = {
     client_projectId: client_projectId || "",
     spreadsheetId: spreadsheetId || "",
     sheet_apiKey: sheet_apiKey || "",
+    meta_img: meta_img || "",
   },
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
