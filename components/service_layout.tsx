@@ -16,6 +16,7 @@ const ServiceLayout: React.FC<Props> = function ({
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: "auto" });
   };
+
   return (
     <>
       <Head>
@@ -30,9 +31,14 @@ const ServiceLayout: React.FC<Props> = function ({
       <div className={home.app}>
         <GNB />
         {children}
-        <div className="foat_button" onTouchEnd={scrollUp}>
+        <button
+          className="foat_button"
+          onClick={scrollUp}
+          onTouchEnd={scrollUp}
+          onTouchStart={scrollUp}
+        >
           <Image src="/float.png" width={50} height={50} alt="float"></Image>
-        </div>
+        </button>
       </div>
     </>
   );
