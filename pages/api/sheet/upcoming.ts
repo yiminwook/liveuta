@@ -22,7 +22,7 @@ export default async function handler(
   const upcoming: UpcomingData[] = [];
   const now = getNowDate() + +(process.env.local_time ?? 0);
   /** 2시간 지연 */
-  const delayTime = now - +(process.env.local_time ?? 7200000);
+  const delayTime = now - +(process.env.interval_time ?? 7200000);
 
   data.values.forEach(
     ([
