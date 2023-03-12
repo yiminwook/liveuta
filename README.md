@@ -2,9 +2,12 @@
 
 <h2>.env</h2>
 <pre>
-spreadsheetId
-sheet_apiKey
 PORT
 HOST
 PROTOCOL
+
+spreadsheetId
+sheet_apiKey
+upcoming_sheet_range
+
 </pre>

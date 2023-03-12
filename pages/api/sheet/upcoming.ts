@@ -1,19 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { google } from "googleapis";
-import { SheetResponseData, rowData } from "@/pages/models/in_sheet";
+import {
+  SheetResponseData,
+  rowData,
+  UpcomingData,
+} from "@/models/sheet/in_sheet";
 import getNowDate from "@/utils/get_now_date";
 import getinterval from "@/utils/get_interval";
-
-interface UpcomingData {
-  title: string;
-  url: string;
-  channelName: string;
-  videoId: string;
-  timestamp: number;
-  thumnalUrl: string;
-  korTime: string;
-  iterval: string;
-}
 
 export default async function handler(
   _req: NextApiRequest,
@@ -32,7 +25,14 @@ export default async function handler(
   const delayTime = now - 7200000;
 
   data.values.forEach(
-    ([title, url, channelName, scheduledTime, thumnalUrl, _bool]: rowData) => {
+    ([
+      title,
+      url,
+      channelName,
+      scheduledTime,
+      thumbnailUrl,
+      _bool,
+    ]: rowData) => {
       const time = new Date(scheduledTime.replace(" ", "T").split(" JST")[0]);
       const timestamp = time.getTime();
       if (delayTime < timestamp) {
@@ -44,6 +44,10 @@ export default async function handler(
           hour: "numeric",
         });
         const iterval = getinterval(now, timestamp);
+        const highThumbnailUrl = thumbnailUrl.replace(
+          /(default|maxresdefault)/i,
+          "hqdefault"
+        );
         const videoId = url.replace("https://www.youtube.com/watch?v=", "");
         const upcomingData: UpcomingData = {
           title,
@@ -51,7 +55,7 @@ export default async function handler(
           channelName,
           videoId,
           timestamp,
-          thumnalUrl,
+          thumbnailUrl: highThumbnailUrl,
           korTime,
           iterval,
         };
@@ -60,7 +64,7 @@ export default async function handler(
     }
   );
 
-  return res.status(200).json({ upcoming });
+  return res.status(200).json({ total: upcoming.length, upcoming });
 }
 
 // https://developers.google.com/sheets/api/guides/concepts?hl=ko#cell
