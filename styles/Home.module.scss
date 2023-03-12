@@ -4,7 +4,7 @@
 .app {
   display: grid;
   min-width: 24rem;
-  grid-template-rows: 3.5rem 100vh;
+  grid-template-rows: 3.5rem calc(100vh - 3.5rem);
   grid-template-areas:
     "nav"
     "main";
