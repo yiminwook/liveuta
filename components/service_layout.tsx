@@ -2,6 +2,8 @@
 import Head from "next/head";
 import GNB from "./GNB";
 import home from "@/styles/Home.module.scss";
+import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
   title?: string;
@@ -26,6 +28,14 @@ const ServiceLayout: React.FC<Props> = function ({
       <div className={home.app}>
         <GNB />
         {children}
+        <div
+          className="foat_button"
+          onClick={() => {
+            window.scroll({ top: 0, behavior: "smooth" });
+          }}
+        >
+          <Image src="/float.png" width={50} height={50} alt="float"></Image>
+        </div>
       </div>
     </>
   );

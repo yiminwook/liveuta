@@ -4,7 +4,7 @@ import axios, { AxiosResponse } from "axios";
 import getBaseUrl from "@/utils/get_base_url";
 import ServiceLayout from "../components/service_layout";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { UpcomingData } from "../models/sheet/in_sheet";
 import Image from "next/image";
 
@@ -14,15 +14,13 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ total, upcoming }) => {
-  const [contents, setContents] = useState<UpcomingData[]>(upcoming);
-  const [filter, setFilter] = useState<string>("channelName");
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [contents, _setContents] = useState<UpcomingData[]>(upcoming);
 
   return (
     <>
       <ServiceLayout title="LiveUta Home">
         <main className={home.main}>
-          <div className={home.total}>{`total: ${total}`}</div>
+          <div className={home.total}>{`Total: ${total}`}</div>
           {contents.map((data) => {
             let title = data.title.replace(/\【(.*?)\】|\〖(.*?)\〗/gi, "");
             if (title.length > 40) {

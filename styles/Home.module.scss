@@ -24,17 +24,17 @@
   }
 
   main {
+    padding: 0.2rem;
+    margin: auto;
+
     .total {
       text-align: right;
       margin-bottom: 0.2rem;
       margin-right: 0.2rem;
-      @include width(28rem) {
+      @include width($mixin-middle-width) {
         grid-column: 3;
       }
     }
-    z-index: 1;
-    padding: 0.2rem 0;
-    margin: auto;
 
     .youtube__container {
       margin-bottom: 2rem;
@@ -46,6 +46,9 @@
         .youtube_thumnail__container {
           margin-right: 0.8rem;
           width: 7rem;
+          min-width: 7rem;
+          border-radius: 5px;
+          overflow: hidden;
           img {
             width: 100%;
             height: 100%;
@@ -78,19 +81,25 @@
           }
           .youtube_time__container {
             display: flex;
+            font-size: 0.8rem;
             .youtube_time__kor {
               margin-right: 0.2rem;
             }
             .youtube_time__inter {
-              color: #9e5d69;
+              color: #ee526f;
+            }
+            @include width($mixin-max-width) {
+              font-size: 1rem;
             }
           }
         }
+
         @include width($mixin-middle-width) {
           display: block;
           max-width: 13rem;
         }
         @include width($mixin-max-width) {
+          display: block;
           max-width: 17rem;
         }
       }
@@ -98,7 +107,7 @@
 
     @include width($mixin-middle-width) {
       display: grid;
-      grid-template-columns: [col-start] repeat(3, auto) [col-end];
+      grid-template-columns: repeat(3, auto);
       gap: 0.2;
     }
     @include width($mixin-max-width) {
