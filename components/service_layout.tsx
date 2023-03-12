@@ -3,7 +3,6 @@ import Head from "next/head";
 import GNB from "./GNB";
 import home from "@/styles/Home.module.scss";
 import Image from "next/image";
-import Link from "next/link";
 
 interface Props {
   title?: string;
@@ -31,7 +30,7 @@ const ServiceLayout: React.FC<Props> = function ({
         <div
           className="foat_button"
           onClick={() => {
-            window.scroll({ top: 0, behavior: "smooth" });
+            window.scrollTo({ top: 0, behavior: "auto" });
           }}
         >
           <Image src="/float.png" width={50} height={50} alt="float"></Image>

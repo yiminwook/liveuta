@@ -20,27 +20,15 @@ body {
   background-color: #d3d3d3;
   .foat_button {
     position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    width: 2.3rem;
-    height: 2.3rem;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 3.3rem;
+    height: 3.3rem;
     background-color: #dfafb8be;
     border-radius: 100%;
     img {
       width: 100%;
       height: 100%;
-    }
-    @include width($mixin-middle-width) {
-      width: 2.5rem;
-      height: 2.5rem;
-      bottom: 1rem;
-      right: 1rem;
-    }
-    @include width($mixin-max-width) {
-      width: 3.5rem;
-      height: 3.5rem;
-      bottom: 1rem;
-      right: 1rem;
     }
   }
 }
