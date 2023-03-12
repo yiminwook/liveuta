@@ -24,20 +24,29 @@ const Home: NextPage<Props> = ({ total, upcoming }) => {
         <main className={home.main}>
           <div className={home.total}>{`total: ${total}`}</div>
           {contents.map((data) => {
+            let title = data.title.replace(/\【(.*?)\】|\〖(.*?)\〗/gi, "");
+            if (title.length > 40) {
+              title = title.substring(0, 40) + "...";
+            }
             return (
               <div className={home.youtube__container} key={data.videoId}>
                 <div className={home.youtube_content__container}>
                   <div className={home.youtube_thumnail__container}>
-                    <Image
-                      src={data.thumbnailUrl}
-                      width={480}
-                      height={380}
-                      alt="thumbail"
-                    ></Image>
+                    <Link href={data.url ?? ""}>
+                      <Image
+                        src={data.thumbnailUrl}
+                        width={480}
+                        height={380}
+                        alt="thumbail"
+                      ></Image>
+                    </Link>
                   </div>
                   <div className={home.youtube_description}>
                     <div className={home.youtube_channel_name}>
                       {data.channelName ?? "no channel name"}
+                    </div>
+                    <div className={home.youtube_title}>
+                      {title ?? "no title"}
                     </div>
                     <Link className={home.youtube_link} href={data.url ?? ""}>
                       {data.url ?? "no url"}
@@ -51,9 +60,6 @@ const Home: NextPage<Props> = ({ total, upcoming }) => {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className={home.youtube_title}>
-                  {data.title ?? "no title"}
                 </div>
               </div>
             );

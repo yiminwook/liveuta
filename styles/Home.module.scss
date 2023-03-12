@@ -1,3 +1,6 @@
+@import "mixin";
+@import "var";
+
 .app {
   display: grid;
   min-width: 24rem;
@@ -25,6 +28,9 @@
       text-align: right;
       margin-bottom: 0.2rem;
       margin-right: 0.2rem;
+      @include width(28rem) {
+        grid-column: 3;
+      }
     }
     z-index: 1;
     padding: 0.2rem 0;
@@ -33,9 +39,9 @@
     .youtube__container {
       margin-bottom: 2rem;
       padding: 0.2rem;
+
       .youtube_content__container {
         display: flex;
-        margin-bottom: 0.2rem;
 
         .youtube_thumnail__container {
           margin-right: 0.8rem;
@@ -44,9 +50,28 @@
             width: 100%;
             height: 100%;
           }
+          @include width($mixin-middle-width) {
+            width: 13rem;
+            margin: auto;
+          }
+          @include width($mixin-max-width) {
+            width: 17rem;
+          }
         }
         .youtube_description {
           max-width: 20rem;
+          display: flex;
+          flex-flow: column;
+          .youtube_channel_name {
+            @include width($mixin-middle-width) {
+              margin-bottom: 0.2rem;
+            }
+          }
+          .youtube_title {
+            white-space: pre-line;
+            overflow: hidden;
+            font-size: 0.5rem;
+          }
           .youtube_link {
             color: rgb(204, 113, 143);
             font-size: 0.5rem;
@@ -61,12 +86,23 @@
             }
           }
         }
+        @include width($mixin-middle-width) {
+          display: block;
+          max-width: 13rem;
+        }
+        @include width($mixin-max-width) {
+          max-width: 17rem;
+        }
       }
-      .youtube_title {
-        white-space: pre-line;
-        overflow: hidden;
-        font-size: 0.5rem;
-      }
+    }
+
+    @include width($mixin-middle-width) {
+      display: grid;
+      grid-template-columns: [col-start] repeat(3, auto) [col-end];
+      gap: 0.2;
+    }
+    @include width($mixin-max-width) {
+      gap: 0.4rem;
     }
   }
 }
