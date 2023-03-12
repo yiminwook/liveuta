@@ -13,6 +13,9 @@ const ServiceLayout: React.FC<Props> = function ({
   title = "LiveUta",
   children,
 }: Props) {
+  const scrollUp = () => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  };
   return (
     <>
       <Head>
@@ -27,12 +30,7 @@ const ServiceLayout: React.FC<Props> = function ({
       <div className={home.app}>
         <GNB />
         {children}
-        <div
-          className="foat_button"
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: "auto" });
-          }}
-        >
+        <div className="foat_button" onTouchEnd={scrollUp}>
           <Image src="/float.png" width={50} height={50} alt="float"></Image>
         </div>
       </div>
