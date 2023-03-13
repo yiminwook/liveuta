@@ -37,11 +37,16 @@
       @include width($mixin-middle-width) {
         grid-column: 3;
       }
+      @include width($mixin-full-width) {
+        grid-column: 4;
+      }
     }
 
     .youtube__container {
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       padding: 0.2rem;
+      background-color: rgba(255, 255, 255, 0.35);
+      border-radius: 5px;
 
       .youtube_content__container {
         display: flex;
@@ -77,10 +82,20 @@
             white-space: pre-line;
             overflow: hidden;
             font-size: 0.5rem;
+            @include width($mixin-middle-width) {
+              font-size: 0.8rem;
+            }
+            @include width($mixin-max-width) {
+              font-size: 1rem;
+            }
           }
           .youtube_link {
             color: rgb(204, 113, 143);
             font-size: 0.5rem;
+            margin-bottom: 0.4rem;
+            @include width($mixin-middle-width) {
+              font-size: 0.7rem;
+            }
           }
           .youtube_time__container {
             display: flex;
@@ -102,7 +117,6 @@
           max-width: 13rem;
         }
         @include width($mixin-max-width) {
-          display: block;
           max-width: 17rem;
         }
       }
@@ -111,10 +125,10 @@
     @include width($mixin-middle-width) {
       display: grid;
       grid-template-columns: repeat(3, auto);
-      gap: 0.2;
-    }
-    @include width($mixin-max-width) {
       gap: 0.4rem;
+    }
+    @include width($mixin-full-width) {
+      grid-template-columns: repeat(4, auto);
     }
   }
 }

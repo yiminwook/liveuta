@@ -11,11 +11,11 @@ const getinterval = (
   }
 
   if (interval >= 0 && interval < 60) {
-    return `${Math.trunc(interval)}분 남음`;
+    return `${Math.trunc(interval)}분 후`;
   }
 
   if (interval > 60) {
-    return `${Math.trunc(interval / 60)}시간 남음`;
+    return `${Math.trunc(interval / 60)}시간 후`;
   }
 
   return "";

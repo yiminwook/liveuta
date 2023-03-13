@@ -19,7 +19,7 @@ const ServiceLayout: React.FC<Props> = function ({
   };
 
   const { publicRuntimeConfig } = getConfig();
-  
+
   return (
     <>
       <Head>
