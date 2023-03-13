@@ -16,6 +16,7 @@ interface Props {
 
 const Home: NextPage<Props> = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [total, setTotal] = useState<number>(0);
   const [contents, setContents] = useState<UpcomingData[]>([]);
 
@@ -24,14 +25,20 @@ const Home: NextPage<Props> = () => {
   }, []);
 
   const getContents = async () => {
-    const result: AxiosResponse<{ total: number; upcoming: UpcomingData[] }> =
-      await axios.get("/api/sheet/upcoming");
-
-    if (result.status === 200 && result.data.total > 0) {
-      console.log(result);
-      const { total, upcoming } = result.data;
-      setTotal((_pre) => total);
-      setContents((_pre) => [...upcoming]);
+    try {
+      setIsLoading((_pre) => true);
+      const result: AxiosResponse<{ total: number; upcoming: UpcomingData[] }> =
+        await axios.get("/api/sheet/upcoming");
+      if (result.status === 200 && result.data.total > 0) {
+        console.log(result);
+        const { total, upcoming } = result.data;
+        setTotal((_pre) => total);
+        setContents((_pre) => [...upcoming]);
+      }
+      setIsLoading((_pre) => false);
+    } catch (err) {
+      console.error(err);
+      setIsLoading((_pre) => false);
     }
   };
 
@@ -39,7 +46,7 @@ const Home: NextPage<Props> = () => {
     <>
       <ServiceLayout title="LiveUta Home">
         <main className={home.main}>
-          {router.isFallback ? (
+          {isLoading ? (
             <div
               style={{
                 position: "fixed",
