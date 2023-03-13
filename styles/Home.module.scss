@@ -67,6 +67,7 @@
           }
           @include width($mixin-max-width) {
             width: 17rem;
+            min-height: 12.75rem;
           }
         }
         .youtube_description {
