@@ -7,14 +7,33 @@ import Link from "next/link";
 import { UpcomingData } from "../models/sheet/in_sheet";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 interface Props {
-  total: number;
-  upcoming: UpcomingData[];
+  // total: number;
+  // upcoming: UpcomingData[];
 }
 
-const Home: NextPage<Props> = ({ total, upcoming }) => {
+const Home: NextPage<Props> = () => {
   const router = useRouter();
+  const [total, setTotal] = useState<number>(0);
+  const [contents, setContents] = useState<UpcomingData[]>([]);
+
+  useEffect(() => {
+    getContents();
+  }, []);
+
+  const getContents = async () => {
+    const result: AxiosResponse<{ total: number; upcoming: UpcomingData[] }> =
+      await axios.get("/api/sheet/upcoming");
+
+    if (result.status === 200 && result.data.total > 0) {
+      console.log(result);
+      const { total, upcoming } = result.data;
+      setTotal((_pre) => total);
+      setContents((_pre) => [...upcoming]);
+    }
+  };
 
   return (
     <>
@@ -39,9 +58,11 @@ const Home: NextPage<Props> = ({ total, upcoming }) => {
             </div>
           ) : (
             <>
-              <div className={home.total}>{`Total: ${total}`}</div>
-              {upcoming.length > 0 &&
-                upcoming.map((data) => {
+              <div className={home.total}>
+                {total ? `Total: ${total}` : "검색된 결과가 없습니다."}
+              </div>
+              {contents.length > 0 &&
+                contents.map((data) => {
                   return (
                     <div className={home.youtube__container} key={data.videoId}>
                       <div className={home.youtube_content__container}>
@@ -51,10 +72,10 @@ const Home: NextPage<Props> = ({ total, upcoming }) => {
                               src={data.thumbnailUrl}
                               width={480}
                               height={380}
-                              alt="thumbail"
+                              alt="thumbnail"
                               loading="lazy"
                               placeholder="blur"
-                              blurDataURL="/thumnail_alt_img.jpg"
+                              blurDataURL="/thumbnail_alt_img.jpg"
                             ></Image>
                           </Link>
                         </div>
@@ -92,37 +113,37 @@ const Home: NextPage<Props> = ({ total, upcoming }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  try {
-    const baseUrl = getBaseUrl(true);
-    const result: AxiosResponse<{ total: number; upcoming: UpcomingData[] }> =
-      await axios.get(`${baseUrl}/api/sheet/upcoming`);
+// export const getServerSideProps: GetServerSideProps<Props> = async () => {
+//   try {
+//     const baseUrl = getBaseUrl(true);
+//     const result: AxiosResponse<{ total: number; upcoming: UpcomingData[] }> =
+//       await axios.get(`${baseUrl}/api/sheet/upcoming`);
 
-    if (result.status !== 200 && result.data.total > 0) {
-      return {
-        props: {
-          total: 0,
-          upcoming: [],
-        },
-      };
-    }
+//     if (result.status !== 200 && result.data.total > 0) {
+//       return {
+//         props: {
+//           total: 0,
+//           upcoming: [],
+//         },
+//       };
+//     }
 
-    const { total, upcoming } = result.data;
-    return {
-      props: {
-        total,
-        upcoming,
-      },
-    };
-  } catch (err) {
-    console.error(err);
-    return {
-      props: {
-        total: 0,
-        upcoming: [],
-      },
-    };
-  }
-};
+//     const { total, upcoming } = result.data;
+//     return {
+//       props: {
+//         total,
+//         upcoming,
+//       },
+//     };
+//   } catch (err) {
+//     console.error(err);
+//     return {
+//       props: {
+//         total: 0,
+//         upcoming: [],
+//       },
+//     };
+//   }
+// };
 
 export default Home;
