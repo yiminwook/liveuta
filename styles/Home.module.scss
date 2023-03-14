@@ -2,21 +2,9 @@
 @import "var";
 
 .app {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  grid-template-areas:
-    "nav"
-    "main";
-
-  nav {
-    grid-area: nav;
-    background-color: map-get($colors, main);
-    @include box-shadow(true);
-    padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 
   main {
     padding: 0.2rem;
@@ -34,10 +22,10 @@
         background-color: lighten(map-get($colors, main), 10%);
         border-radius: 5px;
       }
-      @include width($mixin-middle-width) {
+      @include min-width($mixin-middle-width) {
         margin-bottom: 0.6rem;
       }
-      @include width($mixin-large-width) {
+      @include min-width($mixin-large-width) {
         margin-bottom: 0.8rem;
       }
     }
@@ -70,18 +58,18 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                @include width($mixin-middle-width) {
+                @include min-width($mixin-middle-width) {
                   transform: scale(1.01);
                 }
               }
             }
-            @include width($mixin-middle-width) {
+            @include min-width($mixin-middle-width) {
               width: auto;
               width: fit-content;
               margin: auto;
               min-height: 7.14rem;
             }
-            @include width($mixin-large-width) {
+            @include min-width($mixin-large-width) {
               min-height: 9.35rem;
             }
           }
@@ -95,7 +83,7 @@
             margin-top: 0.2rem;
             .youtube_channel_name {
               font-weight: 500;
-              @include width($mixin-middle-width) {
+              @include min-width($mixin-middle-width) {
                 margin-bottom: 0.2rem;
               }
             }
@@ -105,10 +93,10 @@
               color: #4b5563;
               @include text-line(2, 1.4);
 
-              @include width($mixin-middle-width) {
+              @include min-width($mixin-middle-width) {
                 font-size: 0.7rem;
               }
-              @include width($mixin-large-width) {
+              @include min-width($mixin-large-width) {
                 font-size: 1rem;
               }
             }
@@ -117,7 +105,7 @@
               font-size: 0.5rem;
               @include text-line(1, 1.2);
 
-              @include width($mixin-large-width) {
+              @include min-width($mixin-large-width) {
                 font-size: 0.7rem;
               }
             }
@@ -130,22 +118,22 @@
               .youtube_time__inter {
                 color: #ee526f;
               }
-              @include width($mixin-large-width) {
+              @include min-width($mixin-large-width) {
                 font-size: 1rem;
               }
             }
           }
 
-          @include width($mixin-middle-width) {
+          @include min-width($mixin-middle-width) {
             flex-direction: column;
             max-width: 13rem;
           }
-          @include width($mixin-large-width) {
+          @include min-width($mixin-large-width) {
             max-width: 17rem;
           }
         }
 
-        @include width($mixin-middle-width) {
+        @include min-width($mixin-middle-width) {
           transition: all 150ms $bezier-curve;
 
           &:hover {
@@ -154,27 +142,27 @@
         }
       }
 
-      @include width($mixin-middle-width) {
+      @include min-width($mixin-middle-width) {
         grid-template-columns: repeat(3, 1fr);
         column-gap: 0.4rem;
         row-gap: 1.8rem;
       }
-      @include width($mixin-large-width) {
+      @include min-width($mixin-large-width) {
         column-gap: 0.6rem;
         row-gap: 2rem;
       }
-      @include width($mixin-xl-width) {
+      @include min-width($mixin-xl-width) {
         grid-template-columns: repeat(4, 1fr);
       }
-      @include width($mixin-2xl-width) {
+      @include min-width($mixin-2xl-width) {
         grid-template-columns: repeat(5, 1fr);
       }
     }
-    @include width($mixin-middle-width) {
+    @include min-width($mixin-middle-width) {
       padding: 0.6rem;
       min-width: auto;
     }
-    @include width($mixin-large-width) {
+    @include min-width($mixin-large-width) {
       padding: 1rem;
     }
   }

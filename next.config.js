@@ -2,6 +2,9 @@
 const path = require("path");
 
 const {
+  PORT,
+  HOST,
+  PROTOCOL,
   client_apiKey,
   client_authDomain,
   client_projectId,
@@ -13,6 +16,9 @@ const {
 const nextConfig = {
   reactStrictMode: true,
   publicRuntimeConfig: {
+    protocol: PROTOCOL || "http",
+    host: HOST || "localhost",
+    port: PORT || "3000",
     client_apiKey: client_apiKey || "",
     client_authDomain: client_authDomain || "",
     client_projectId: client_projectId || "",

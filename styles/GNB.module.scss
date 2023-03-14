@@ -1,56 +1,76 @@
 @import "var";
 @import "mixin";
 
-.internet_link {
-  padding: 0.3rem 0;
-  a {
-    display: block;
-    img {
-      vertical-align: middle;
+.nav {
+  top: 0;
+  z-index: 100;
+  position: fixed;
+  transition: top 0.4s;
+  width: 100%;
+  height: 3.5rem;
+  background-color: map-get($colors, main);
+  @include box-shadow(true);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include max-width($mixin-middle-width) {
+    top: 0 !important;
+  }
+
+  .internet_link {
+    margin-left: 1rem;
+    padding: 0.3rem 0;
+    a {
+      display: block;
+      img {
+        vertical-align: middle;
+      }
+    }
+
+    @include min-width($mixin-large-width) {
+      margin-left: 1.5rem;
+    }
+    @include min-width($mixin-xl-width) {
+      margin-left: 2rem;
     }
   }
 
-  @include width($mixin-large-width) {
-    margin-left: 0.5rem;
-  }
-  @include width($mixin-xl-width) {
-    margin-left: 1rem;
-  }
-}
-
-.title {
-  font-size: 2rem;
-  color: white;
-  font-weight: 600;
-}
-
-.form_link {
-  padding: 0.4rem 0.8rem;
-  border-radius: 10px;
-  font-size: 1rem;
-  color: white;
-  font-weight: 600;
-  background-color: salmon;
-  transition-property: background-color;
-  transition-duration: 80ms;
-  transition-timing-function: $bezier-curve;
-  @include box-shadow();
-
-  &:hover {
-    background-color: rgb(224, 110, 97);
+  .title {
+    font-size: 2rem;
+    color: white;
+    font-weight: 600;
   }
 
-  &:active {
-    background-color: rgb(180, 80, 69);
-  }
-
-  a:focus-visible {
-    outline-offset: 0.7rem;
-  }
-  @include width($mixin-large-width) {
-    margin-right: 0.5rem;
-  }
-  @include width($mixin-xl-width) {
+  .form_link {
     margin-right: 1rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: white;
+    font-weight: 600;
+    background-color: salmon;
+    transition-property: background-color;
+    transition-duration: 80ms;
+    transition-timing-function: $bezier-curve;
+    @include box-shadow();
+
+    &:hover {
+      background-color: rgb(224, 110, 97);
+    }
+
+    &:active {
+      background-color: rgb(180, 80, 69);
+    }
+
+    a:focus-visible {
+      outline-offset: 0.7rem;
+    }
+    @include min-width($mixin-large-width) {
+      margin-right: 1.5rem;
+    }
+    @include min-width($mixin-xl-width) {
+      margin-right: 2rem;
+    }
   }
 }

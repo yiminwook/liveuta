@@ -2,7 +2,6 @@
 import Head from "next/head";
 import GNB from "./GNB";
 import home from "@/styles/Home.module.scss";
-import Image from "next/image";
 import getConfig from "next/config";
 
 const { publicRuntimeConfig } = getConfig();
@@ -16,10 +15,6 @@ const ServiceLayout: React.FC<Props> = function ({
   title = "LiveUta",
   children,
 }: Props) {
-  const scrollUp = () => {
-    window.scrollTo({ top: 0, behavior: "auto" });
-  };
-
   const discription = "Show V-Tuber Utawaku schedule";
   const meta_img = publicRuntimeConfig.meta_img;
 
@@ -44,14 +39,6 @@ const ServiceLayout: React.FC<Props> = function ({
       <div className={home.app}>
         <GNB />
         {children}
-        <button
-          className="foat_button"
-          onClick={scrollUp}
-          onTouchEnd={scrollUp}
-          onTouchStart={scrollUp}
-        >
-          <Image src="/float.png" width={50} height={50} alt="float"></Image>
-        </button>
       </div>
     </>
   );
