@@ -11,12 +11,9 @@
 
   nav {
     grid-area: nav;
-    background-color: #ffc1cc;
-    box-shadow: 0px 1px 2px 0 rgba(56, 52, 52, 0.6);
-    -webkit-box-shadow: 0px 1px 2px 0 rgba(56, 52, 52, 0.6);
-    -moz-box-shdow: 0px 1px 2px 0 rgba(56, 52, 52, 0.6);
+    background-color: map-get($colors, main);
+    @include box-shadow(true);
     padding: 0 1rem;
-    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,119 +22,138 @@
   main {
     padding: 0.2rem;
     margin: auto;
+    background-color: #b99198b4;
 
     .total {
-      text-align: right;
+      display: flex;
+      justify-content: flex-end;
       margin-bottom: 0.2rem;
       margin-right: 0.2rem;
-      @include width($mixin-middle-width) {
-        grid-column: 1 / -1;
+      grid-column: 1 / -1;
+      div {
+        color: salmon;
+        padding: 0.4rem;
+        background-color: white;
+        border-radius: 5px;
       }
     }
 
-    .youtube__container {
-      margin-bottom: 1rem;
-      padding: 0.2rem;
-      background-color: rgba(255, 255, 255, 0.35);
-      border-radius: 5px;
+    .contents {
+      display: grid;
+      row-gap: 0.5rem;
+      grid-template-columns: 1fr;
+      margin-bottom: 2rem;
 
-      .youtube_content__container {
-        display: flex;
+      .youtube__container {
+        padding: 0.2rem;
+        background-color: lighten(map-get($colors, main), 10%);
+        border-radius: 5px;
+        @include box-shadow();
 
-        .youtube_thumnail__container {
-          margin-right: 0.8rem;
-          width: 7rem;
-          min-width: 7rem;
-          border-radius: 5px;
-          overflow: hidden;
-          aspect-ratio: 16 / 9;
-          a {
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
+        .youtube_content__container {
+          display: flex;
+          .youtube_thumnail__container {
+            margin-right: 0.8rem;
+            width: 7rem;
+            min-width: 7rem;
+            aspect-ratio: 16 / 9;
+            border-radius: 5px;
+            overflow: hidden;
+            @include box-shadow();
+            a {
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                @include width($mixin-middle-width) {
+                  transform: scale(1.01);
+                }
+              }
+            }
+            @include width($mixin-middle-width) {
+              width: auto;
+              width: fit-content;
+              margin: auto;
+              min-height: 7.14rem;
+            }
+            @include width($mixin-large-width) {
+              min-height: 9.35rem;
+            }
+          }
+
+          .youtube_description {
+            max-width: 20rem;
+            width: 100%;
+            display: flex;
+            flex-flow: column;
+            margin-top: 0.2rem;
+            .youtube_channel_name {
+              font-weight: 500;
               @include width($mixin-middle-width) {
-                transform: scale(1.01);
+                margin-bottom: 0.2rem;
+              }
+            }
+            .youtube_title {
+              white-space: pre-line;
+              overflow: hidden;
+              font-size: 0.5rem;
+              color: #4b5563;
+              @include width($mixin-middle-width) {
+                font-size: 0.8rem;
+              }
+              @include width($mixin-large-width) {
+                font-size: 1rem;
+              }
+              @include box-shadow();
+            }
+            .youtube_link {
+              color: rgb(204, 113, 143);
+              font-size: 0.5rem;
+              margin-bottom: 0.4rem;
+              @include width($mixin-large-width) {
+                font-size: 0.7rem;
+              }
+            }
+            .youtube_time__container {
+              display: flex;
+              font-size: 0.8rem;
+              .youtube_time__kor {
+                margin-right: 0.2rem;
+              }
+              .youtube_time__inter {
+                color: #ee526f;
+              }
+              @include width($mixin-large-width) {
+                font-size: 1rem;
               }
             }
           }
+
           @include width($mixin-middle-width) {
-            width: auto;
-            width: fit-content;
-            margin: auto;
-            min-height: 7.14rem;
+            display: block;
+            max-width: 13rem;
           }
           @include width($mixin-large-width) {
-            min-height: 9.35rem;
+            max-width: 17rem;
           }
-        }
-        .youtube_description {
-          max-width: 20rem;
-          display: flex;
-          flex-flow: column;
-          width: 100%;
-          margin-top: 0.2rem;
-
-          .youtube_channel_name {
-            @include width($mixin-middle-width) {
-              margin-bottom: 0.2rem;
-            }
-          }
-          .youtube_title {
-            white-space: pre-line;
-            overflow: hidden;
-            font-size: 0.5rem;
-            color: #4b5563;
-            @include width($mixin-middle-width) {
-              font-size: 0.8rem;
-            }
-            @include width($mixin-large-width) {
-              font-size: 1rem;
-            }
-          }
-          .youtube_link {
-            color: rgb(204, 113, 143);
-            font-size: 0.5rem;
-            margin-bottom: 0.4rem;
-            @include width($mixin-large-width) {
-              font-size: 0.7rem;
-            }
-          }
-          .youtube_time__container {
-            display: flex;
-            font-size: 0.8rem;
-            .youtube_time__kor {
-              margin-right: 0.2rem;
-            }
-            .youtube_time__inter {
-              color: #ee526f;
-            }
-            @include width($mixin-xl-width) {
-              font-size: 1rem;
-            }
-          }
-        }
-
-        @include width($mixin-middle-width) {
-          display: block;
-          max-width: 13rem;
-        }
-        @include width($mixin-large-width) {
-          max-width: 17rem;
         }
       }
-    }
 
-    @include width($mixin-middle-width) {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.4rem;
-    }
-    @include width($mixin-xl-width) {
-      grid-template-columns: repeat(4, 1fr);
-    }
-    @include width($mixin-2xl-width) {
-      grid-template-columns: repeat(5, 1fr);
+      @include width($mixin-middle-width) {
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 0.4rem;
+        row-gap: 1.8rem;
+      }
+      @include width($mixin-large-width) {
+        column-gap: 0.6rem;
+        row-gap: 2rem;
+      }
+      @include width($mixin-xl-width) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      @include width($mixin-2xl-width) {
+        grid-template-columns: repeat(5, 1fr);
+      }
     }
   }
 }

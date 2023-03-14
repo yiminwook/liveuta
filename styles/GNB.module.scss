@@ -4,6 +4,7 @@
 .internet_link {
   padding: 0.3rem;
   a {
+    display: block;
     img {
       vertical-align: middle;
       width: 2.3rem;
@@ -26,8 +27,7 @@
 }
 
 .form_link {
-  border: 1.5px solid salmon;
-  padding: 0.3rem 0.5rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 10px;
   font-size: 1rem;
   color: white;
@@ -36,6 +36,8 @@
   transition-property: background-color;
   transition-duration: 80ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  @include box-shadow();
+
   &:hover {
     background-color: rgb(224, 110, 97);
   }
@@ -43,8 +45,9 @@
   &:active {
     background-color: rgb(180, 80, 69);
   }
+
   a:focus-visible {
-    outline-offset: 0.5rem;
+    outline-offset: 0.7rem;
   }
   @include width($mixin-large-width) {
     margin-right: 0.5rem;

@@ -3,3 +3,35 @@
     @content;
   }
 }
+
+@mixin keyframe($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@include keyframe(loading) {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-360deg);
+  }
+}
+
+@mixin animation($keyframe-name, $duration, $delay, $count: infinite) {
+  animation-name: $keyframe-name;
+  animation-duration: $duration;
+  animation-delay: $delay;
+  animation-iteration-count: $count;
+}
+
+@mixin box-shadow($isnav: false) {
+  @if ($isnav) {
+    box-shadow: 0px 1px 2px 0 rgba(56, 52, 52, 0.6);
+    -webkit-box-shadow: 0px 1px 2px 0 rgba(56, 52, 52, 0.6);
+    -moz-box-shdow: 0px 1px 2px 0 rgba(56, 52, 52, 0.6);
+  } @else {
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+}

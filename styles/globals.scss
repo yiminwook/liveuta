@@ -20,7 +20,57 @@ a {
 }
 
 body {
-  background-color: #d3d3d3;
+  .background {
+    width: 100vw;
+    height: 100vh;
+    z-index: -100;
+    background-image: url("/background.png");
+    background-position: center;
+    background-size: cover;
+    filter: grayscale(60%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    scale: 1.3;
+  }
+
+  .loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    .loading__container {
+      position: absolute;
+      .loading_center {
+        position: relative;
+        top: 40vh;
+        left: calc(50vw - 50px);
+        @include width($mixin-middle-width) {
+          position: static;
+        }
+        div {
+          font-size: 0.8rem;
+          text-align: center;
+          color: white;
+        }
+        img {
+          @include animation(loading, 2s, 0s);
+        }
+      }
+      @include width($mixin-middle-width) {
+        position: static;
+      }
+    }
+    @include width($mixin-middle-width) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
   .foat_button {
     position: fixed;
     bottom: 1.5rem;
@@ -36,6 +86,8 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    cursor: pointer;
+    @include box-shadow();
     img {
       width: 100%;
       height: 100%;
