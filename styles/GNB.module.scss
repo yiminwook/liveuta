@@ -13,9 +13,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-width: 43.75rem;
 
   @include max-width($mixin-middle-width) {
     top: 0 !important;
+    min-width: auto;
   }
 
   .internet_link {
@@ -34,12 +36,16 @@
     @include min-width($mixin-xl-width) {
       margin-left: 2rem;
     }
+    @include max-width($mixin-middle-width) {
+      margin-left: 0.4rem;
+    }
   }
 
   .title {
     font-size: 2rem;
     color: white;
     font-weight: 600;
+    @include text-line(1, 1.2);
   }
 
   .form_link {
@@ -71,6 +77,9 @@
     }
     @include min-width($mixin-xl-width) {
       margin-right: 2rem;
+    }
+    @include max-width($mixin-middle-width) {
+      margin-right: 0.4rem;
     }
   }
 }
