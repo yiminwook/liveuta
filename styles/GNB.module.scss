@@ -1,12 +1,21 @@
 @import "var";
+@import "mixin";
 
 .internet_link {
-  position: absolute;
-  left: 1rem;
+  padding: 0.3rem;
   a {
     img {
       vertical-align: middle;
+      width: 2.3rem;
+      height: 2.3rem;
     }
+  }
+
+  @include width($mixin-large-width) {
+    margin-left: 0.5rem;
+  }
+  @include width($mixin-xl-width) {
+    margin-left: 1rem;
   }
 }
 
@@ -24,6 +33,23 @@
   color: white;
   font-weight: 600;
   background-color: salmon;
-  position: absolute;
-  right: 1rem;
+  transition-property: background-color;
+  transition-duration: 80ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    background-color: rgb(224, 110, 97);
+  }
+
+  &:active {
+    background-color: rgb(180, 80, 69);
+  }
+  a:focus-visible {
+    outline-offset: 0.5rem;
+  }
+  @include width($mixin-large-width) {
+    margin-right: 0.5rem;
+  }
+  @include width($mixin-xl-width) {
+    margin-right: 1rem;
+  }
 }

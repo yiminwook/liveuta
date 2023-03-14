@@ -78,7 +78,7 @@ const Home: NextPage<Props> = () => {
                             <Image
                               src={data.thumbnailUrl}
                               width={480}
-                              height={380}
+                              height={360}
                               alt="thumbnail"
                               loading="lazy"
                               placeholder="blur"
