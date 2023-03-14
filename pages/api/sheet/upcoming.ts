@@ -43,9 +43,10 @@ export default async function handler(
               const korTime = time.toLocaleString("ko-kr", {
                 // year: "numeric",
                 month: "short",
-                day: "2-digit",
+                day: "numeric",
                 weekday: "short",
                 hour: "numeric",
+                minute: "numeric",
               });
               const iterval = getinterval(now, timestamp);
               const highThumbnailUrl = thumbnailUrl.replace(
