@@ -3,7 +3,6 @@
 
 .app {
   display: grid;
-  min-width: 24rem;
   grid-template-rows: 1fr auto;
   grid-template-areas:
     "nav"
@@ -22,18 +21,17 @@
   main {
     padding: 0.2rem;
     margin: auto;
-    background-color: #b99198b4;
+    min-width: calc(100vw - 0.4rem);
 
     .total {
       display: flex;
       justify-content: flex-end;
       margin-bottom: 0.2rem;
-      margin-right: 0.2rem;
       grid-column: 1 / -1;
       div {
         color: salmon;
         padding: 0.4rem;
-        background-color: white;
+        background-color: lighten(map-get($colors, main), 10%);
         border-radius: 5px;
       }
       @include width($mixin-middle-width) {
@@ -103,12 +101,12 @@
             }
             .youtube_title {
               flex: 1;
-              white-space: pre-line;
-              overflow: hidden;
               font-size: 0.5rem;
               color: #4b5563;
+              @include text-line(2, 1.4);
+
               @include width($mixin-middle-width) {
-                font-size: 0.8rem;
+                font-size: 0.7rem;
               }
               @include width($mixin-large-width) {
                 font-size: 1rem;
@@ -117,15 +115,15 @@
             .youtube_link {
               color: rgb(204, 113, 143);
               font-size: 0.5rem;
-              margin-bottom: 0.4rem;
-              
+              @include text-line(1, 1.2);
+
               @include width($mixin-large-width) {
                 font-size: 0.7rem;
               }
             }
             .youtube_time__container {
               display: flex;
-              font-size: 0.8rem;
+              font-size: 0.6rem;
               .youtube_time__kor {
                 margin-right: 0.2rem;
               }
@@ -139,7 +137,6 @@
           }
 
           @include width($mixin-middle-width) {
-            display: flex;
             flex-direction: column;
             max-width: 13rem;
           }
@@ -175,6 +172,7 @@
     }
     @include width($mixin-middle-width) {
       padding: 0.6rem;
+      min-width: auto;
     }
     @include width($mixin-large-width) {
       padding: 1rem;

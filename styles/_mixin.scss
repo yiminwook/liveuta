@@ -43,3 +43,15 @@
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   }
 }
+
+@mixin text-line($line-count, $line-height) {
+  white-space: pre-line;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: $line-count;
+  -webkit-box-orient: vertical;
+  line-height: $line-height;
+  height: $line-height * $line-count;
+}

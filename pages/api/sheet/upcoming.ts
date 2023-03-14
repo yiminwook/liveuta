@@ -57,9 +57,9 @@ export default async function handler(
                 /\【(.*?)\】|\〖(.*?)\〗/gi,
                 ""
               );
-              if (replacedTitle.length > 40) {
-                replacedTitle = replacedTitle.substring(0, 40) + "...";
-              }
+              // if (replacedTitle.length > 40) {
+              //   replacedTitle = replacedTitle.substring(0, 40) + "...";
+              // }
               const videoId = url.replace(
                 "https://www.youtube.com/watch?v=",
                 ""
