@@ -4,7 +4,6 @@ import GNB from "./GNB";
 import home from "@/styles/Home.module.scss";
 import Image from "next/image";
 import getConfig from "next/config";
-import getBaseUrl from "@/utils/get_base_url";
 
 interface Props {
   title?: string;
@@ -18,16 +17,15 @@ const ServiceLayout: React.FC<Props> = function ({
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: "auto" });
   };
+
   const { publicRuntimeConfig } = getConfig();
-  const baseUrl = getBaseUrl(false);
+
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta name="description" content="show real time vtuber schedule" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={baseUrl} />
         <meta property="og:title" content="live uta" />
         <meta property="og:image" content={publicRuntimeConfig.meta_img} />
         <meta name="twitter:image" content={publicRuntimeConfig.meta_img} />
