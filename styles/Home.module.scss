@@ -58,6 +58,7 @@
 
         .youtube_content__container {
           display: flex;
+          height: 100%;
           .youtube_thumnail__container {
             margin-right: 0.8rem;
             width: 7rem;
@@ -88,6 +89,7 @@
           }
 
           .youtube_description {
+            flex: 1;
             max-width: 20rem;
             width: 100%;
             display: flex;
@@ -100,6 +102,7 @@
               }
             }
             .youtube_title {
+              flex: 1;
               white-space: pre-line;
               overflow: hidden;
               font-size: 0.5rem;
@@ -115,6 +118,7 @@
               color: rgb(204, 113, 143);
               font-size: 0.5rem;
               margin-bottom: 0.4rem;
+              
               @include width($mixin-large-width) {
                 font-size: 0.7rem;
               }
@@ -135,11 +139,20 @@
           }
 
           @include width($mixin-middle-width) {
-            display: block;
+            display: flex;
+            flex-direction: column;
             max-width: 13rem;
           }
           @include width($mixin-large-width) {
             max-width: 17rem;
+          }
+        }
+
+        @include width($mixin-middle-width) {
+          transition: all 150ms $bezier-curve;
+
+          &:hover {
+            transform: scale(1.02);
           }
         }
       }
