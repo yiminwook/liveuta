@@ -42,33 +42,36 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     width: 100vw;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .loading__container {
-      position: absolute;
+      // position: absolute;
       .loading_center {
-        position: relative;
-        top: 40vh;
-        left: calc(50vw - 50px);
-        @include width($mixin-middle-width) {
-          position: static;
-        }
+        // position: relative;
+        // top: 40vh;
+        // left: calc(50vw - 50px);
+        // @include width($mixin-middle-width) {
+        //   position: static;
+        // }
         div {
           font-size: 0.8rem;
           text-align: center;
           color: white;
         }
         img {
-          @include animation(loading, 2s, 0s);
+          @include animation(loading, 1.5s, 0s);
         }
       }
-      @include width($mixin-middle-width) {
-        position: static;
-      }
+      // @include width($mixin-middle-width) {
+      //   position: static;
+      // }
     }
-    @include width($mixin-middle-width) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    // @include width($mixin-middle-width) {
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    // }
   }
 
   .foat_button {

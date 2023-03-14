@@ -5,8 +5,8 @@ import ServiceLayout from "../components/service_layout";
 import Link from "next/link";
 import { UpcomingData } from "../models/sheet/in_sheet";
 import Image from "next/image";
-// import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Loading from "@/components/loading";
 
 interface Props {
   // total: number;
@@ -14,7 +14,6 @@ interface Props {
 }
 
 const Home: NextPage<Props> = () => {
-  // const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [total, setTotal] = useState<number>(0);
   const [contents, setContents] = useState<UpcomingData[]>([]);
@@ -44,24 +43,14 @@ const Home: NextPage<Props> = () => {
     <>
       <ServiceLayout title="LiveUta Home">
         {isLoading ? (
-          <div className="loading">
-            <div className="loading__container">
-              <div className="loading_center" style={{ border: "none" }}>
-                <Image
-                  src="/utawaku.png"
-                  width={100}
-                  height={100}
-                  alt="loading_img"
-                ></Image>
-                <div>Loading Now</div>
-              </div>
-            </div>
-          </div>
+          <Loading />
         ) : (
           <main className={home.main}>
-            <div className={home.total}>
-              <div>{total ? `Total: ${total}` : "검색된 결과가 없습니다."}</div>
-            </div>
+            {total > 0 ?? (
+              <div className={home.total}>
+                <div>{`Total: ${total}`}</div>
+              </div>
+            )}
             <div className={home.contents}>
               {contents.length > 0 &&
                 contents.map((data) => {
