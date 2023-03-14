@@ -11,7 +11,7 @@ import Loading from "@/components/loading";
 interface Props {}
 
 const Home: NextPage<Props> = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [total, setTotal] = useState<number>(0);
   const [contents, setContents] = useState<UpcomingData[]>([]);
 
@@ -21,7 +21,6 @@ const Home: NextPage<Props> = () => {
 
   const getContents = async () => {
     try {
-      setIsLoading((_pre) => true);
       const result: AxiosResponse<{ total: number; upcoming: UpcomingData[] }> =
         await axios.get("/api/sheet/upcoming");
       if (result.status === 200 && result.data.total > 0) {
