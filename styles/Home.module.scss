@@ -36,6 +36,12 @@
         background-color: white;
         border-radius: 5px;
       }
+      @include width($mixin-middle-width) {
+        margin-bottom: 0.6rem;
+      }
+      @include width($mixin-large-width) {
+        margin-bottom: 0.8rem;
+      }
     }
 
     .contents {
@@ -104,7 +110,6 @@
               @include width($mixin-large-width) {
                 font-size: 1rem;
               }
-              @include box-shadow();
             }
             .youtube_link {
               color: rgb(204, 113, 143);
@@ -154,6 +159,12 @@
       @include width($mixin-2xl-width) {
         grid-template-columns: repeat(5, 1fr);
       }
+    }
+    @include width($mixin-middle-width) {
+      padding: 0.6rem;
+    }
+    @include width($mixin-large-width) {
+      padding: 1rem;
     }
   }
 }
