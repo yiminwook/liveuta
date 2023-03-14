@@ -8,10 +8,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Loading from "@/components/loading";
 
-interface Props {
-  // total: number;
-  // upcoming: UpcomingData[];
-}
+interface Props {}
 
 const Home: NextPage<Props> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -46,7 +43,7 @@ const Home: NextPage<Props> = () => {
           <Loading />
         ) : (
           <main className={home.main}>
-            {total > 0 ?? (
+            {total > 0 && (
               <div className={home.total}>
                 <div>{`Total: ${total}`}</div>
               </div>
@@ -106,32 +103,14 @@ const Home: NextPage<Props> = () => {
 
 // export const getServerSideProps: GetServerSideProps<Props> = async () => {
 //   try {
-//     const baseUrl = getBaseUrl(true);
-//     const result: AxiosResponse<{ total: number; upcoming: UpcomingData[] }> =
-//       await axios.get(`${baseUrl}/api/sheet/upcoming`);
-
-//     if (result.status !== 200 && result.data.total > 0) {
-//       return {
-//         props: {
-//           total: 0,
-//           upcoming: [],
-//         },
-//       };
-//     }
-
-//     const { total, upcoming } = result.data;
 //     return {
 //       props: {
-//         total,
-//         upcoming,
 //       },
 //     };
 //   } catch (err) {
 //     console.error(err);
 //     return {
 //       props: {
-//         total: 0,
-//         upcoming: [],
 //       },
 //     };
 //   }
