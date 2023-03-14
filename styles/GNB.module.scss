@@ -37,7 +37,7 @@
   background-color: salmon;
   transition-property: background-color;
   transition-duration: 80ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: $bezier-curve;
   @include box-shadow();
 
   &:hover {
