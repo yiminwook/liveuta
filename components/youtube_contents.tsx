@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { UpcomingData } from "@/models/sheet/in_sheet";
 import youtube_contents from "@/styles/youtube_contents.module.scss";
 import Image from "next/image";
@@ -11,7 +11,7 @@ interface Props {
 const Youtube_contents: React.FC<Props> = ({ contents }) => {
   const { title, url, channelName, videoId, thumbnailUrl, korTime, iterval } =
     contents;
-  const [imgLoaded, setImgLoaded] = React.useState(true);
+  const [imgLoaded, setImgLoaded] = useState(true);
 
   return (
     <div className={youtube_contents.youtube__container} key={videoId}>
@@ -27,17 +27,18 @@ const Youtube_contents: React.FC<Props> = ({ contents }) => {
               placeholder="blur"
               blurDataURL="/thumbnail_alt_img.jpg"
               onError={() => {
-                setImgLoaded(false)
+                setImgLoaded(false);
               }}
               className={imgLoaded ? "" : youtube_contents.hidden}
             ></Image>
-            {!imgLoaded &&
+            {!imgLoaded && (
               <Image
                 src="/thumbnail_alt_img.jpg"
                 alt="thumbnail error"
                 width={480}
-                height={360} />
-            }
+                height={360}
+              />
+            )}
           </Link>
         </div>
         <div className={youtube_contents.youtube_description}>
