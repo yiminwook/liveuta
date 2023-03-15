@@ -16,6 +16,7 @@
       min-width: 7rem;
       aspect-ratio: 16 / 9;
       border-radius: 5px;
+      background-color: #f4f4f5;
       overflow: hidden;
       @include box-shadow();
       a {
@@ -26,6 +27,11 @@
           @include min-width($mixin-middle-width) {
             transform: scale(1.01);
           }
+        }
+
+        .hidden {
+          display: none;
+          visibility: hidden;
         }
       }
       @include min-width($mixin-middle-width) {
