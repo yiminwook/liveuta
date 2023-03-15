@@ -17,6 +17,7 @@ const GNB: React.FC = function () {
       if (window.scrollY > 0) {
         console.log("test");
         current.style.top = "-3.5rem";
+        setTimeout(() => (current.style.top = "0"), 1000);
       } else {
         current.style.top = "0";
       }

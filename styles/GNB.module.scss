@@ -2,7 +2,8 @@
 @import "mixin";
 
 .nav {
-  top: 0;
+  top: 0px;
+  left: 0px;
   z-index: 100;
   position: fixed;
   transition: top 0.4s;
@@ -16,7 +17,6 @@
   min-width: 43.75rem;
 
   @include max-width($mixin-middle-width) {
-    top: 0 !important;
     min-width: auto;
   }
 

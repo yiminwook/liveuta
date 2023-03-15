@@ -49,38 +49,42 @@ export default async function handler(
                 minute: "numeric",
               });
               const iterval = getinterval(now, timestamp);
-              const highThumbnailUrl = thumbnailUrl.replace(
-                /(default|maxresdefault)/i,
-                "hqdefault"
-              );
-              let replacedTitle = title.replace(
-                /\【(.*?)\】|\〖(.*?)\〗/gi,
-                ""
-              );
-              // if (replacedTitle.length > 40) {
-              //   replacedTitle = replacedTitle.substring(0, 40) + "...";
-              // }
-              const videoId = url.replace(
-                "https://www.youtube.com/watch?v=",
-                ""
-              );
-              const upcomingData: UpcomingData = {
-                title: replacedTitle,
-                url,
-                channelName,
-                videoId,
-                timestamp,
-                thumbnailUrl: highThumbnailUrl,
-                korTime,
-                iterval,
-              };
-              upcoming.push(upcomingData);
+              const vaildURL = thumbnailUrl.match(
+                "https://i.ytimg.com/vi/"
+              )?.length;
+              if (vaildURL === 1) {
+                const highThumbnailUrl = thumbnailUrl.replace(
+                  /(default|maxresdefault)/i,
+                  "hqdefault"
+                );
+                let replacedTitle = title.replace(
+                  /\【(.*?)\】|\〖(.*?)\〗/gi,
+                  ""
+                );
+                // if (replacedTitle.length > 40) {
+                //   replacedTitle = replacedTitle.substring(0, 40) + "...";
+                // }
+                const videoId = url.replace(
+                  "https://www.youtube.com/watch?v=",
+                  ""
+                );
+                const upcomingData: UpcomingData = {
+                  title: replacedTitle,
+                  url,
+                  channelName,
+                  videoId,
+                  timestamp,
+                  thumbnailUrl: highThumbnailUrl,
+                  korTime,
+                  iterval,
+                };
+                upcoming.push(upcomingData);
+              }
             }
           }
         }
       }
     );
-
     return res.status(200).json({ total: upcoming.length, upcoming });
   } catch (err) {
     console.error(err);
