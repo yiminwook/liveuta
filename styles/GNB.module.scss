@@ -16,8 +16,9 @@
   align-items: center;
   min-width: 43.75rem;
 
-  @include max-width($mixin-middle-width) {
+  @include max-width($mixin-large-width) {
     min-width: auto;
+    top: 0 !important;
   }
 
   .internet_link {
