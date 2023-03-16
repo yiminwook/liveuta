@@ -5,23 +5,24 @@ import {
   rowData,
   UpcomingData,
 } from "@/models/sheet/in_sheet";
-import getNowDate from "@/utils/get_now_date";
-import getinterval from "@/utils/get_interval";
+import { getinterval, getNow } from "@/utils/get_time";
 
 export default async function handler(
-  _req: NextApiRequest,
+  req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
+    if (req.method !== "GET") throw new Error("invaild method");
     const service = google.sheets({ version: "v4" });
     const result = await service.spreadsheets.values.get({
       spreadsheetId: process.env.spreadsheetId || "",
       key: process.env.sheet_apiKey || "",
-      range: process.env.upcoming_sheet_range || "",
+      range: process.env.upcoming_sheet_range || "Upcoming",
     });
     const data = result.data as SheetResponseData;
     const upcoming: UpcomingData[] = [];
-    const now = getNowDate() + +(process.env.local_time ?? 0);
+
+    const now = getNow(true);
     /** default 2시간 지연 */
     const delayTime = now - +(process.env.interval_time ?? 7200000);
 
@@ -49,37 +50,32 @@ export default async function handler(
                 minute: "numeric",
               });
               const iterval = getinterval(now, timestamp);
-              const vaildURL = thumbnailUrl.match(
-                "https://i.ytimg.com/vi/"
-              )?.length;
-              if (vaildURL === 1) {
-                const highThumbnailUrl = thumbnailUrl.replace(
-                  /(default|maxresdefault)/i,
-                  "hqdefault"
-                );
-                let replacedTitle = title.replace(
-                  /\【(.*?)\】|\〖(.*?)\〗/gi,
-                  ""
-                );
-                // if (replacedTitle.length > 40) {
-                //   replacedTitle = replacedTitle.substring(0, 40) + "...";
-                // }
-                const videoId = url.replace(
-                  "https://www.youtube.com/watch?v=",
-                  ""
-                );
-                const upcomingData: UpcomingData = {
-                  title: replacedTitle,
-                  url,
-                  channelName,
-                  videoId,
-                  timestamp,
-                  thumbnailUrl: highThumbnailUrl,
-                  korTime,
-                  iterval,
-                };
-                upcoming.push(upcomingData);
-              }
+              const highThumbnailUrl = thumbnailUrl.replace(
+                /(default|maxresdefault)/i,
+                "hqdefault"
+              );
+              let replacedTitle = title.replace(
+                /\【(.*?)\】|\〖(.*?)\〗|\[(.*?)\]|\((.*?)\)/gi,
+                ""
+              );
+              // if (replacedTitle.length > 40) {
+              //   replacedTitle = replacedTitle.substring(0, 40) + "...";
+              // }
+              const videoId = url.replace(
+                "https://www.youtube.com/watch?v=",
+                ""
+              );
+              const upcomingData: UpcomingData = {
+                title: replacedTitle,
+                url,
+                channelName,
+                videoId,
+                timestamp,
+                thumbnailUrl: highThumbnailUrl,
+                korTime,
+                iterval,
+              };
+              upcoming.push(upcomingData);
             }
           }
         }
@@ -88,7 +84,7 @@ export default async function handler(
     return res.status(200).json({ total: upcoming.length, upcoming });
   } catch (err) {
     console.error(err);
-    return res.status(200).json({ total: 0, upcoming: [] });
+    return res.status(400).json({ total: 0, upcoming: [] });
   }
 }
 

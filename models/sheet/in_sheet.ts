@@ -12,7 +12,7 @@ export interface UpcomingData {
   channelName: string;
   videoId: string;
   timestamp: number;
-  thumbnailUrl: string;
+  thumbnailUrl?: string;
   korTime: string;
   iterval: string;
 }

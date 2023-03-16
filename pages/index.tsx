@@ -5,7 +5,6 @@ import { UpcomingData } from "../models/sheet/in_sheet";
 import getBaseUrl from "@/utils/get_base_url";
 import home from "@/styles/Home.module.scss";
 import Youtube_content from "@/components/youtube_content";
-import Loading from "@/components/loading";
 
 interface Props {
   total: number;

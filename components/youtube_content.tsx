@@ -9,9 +9,17 @@ interface Props {
 }
 
 const Youtube_content: React.FC<Props> = ({ contents }) => {
-  const { title, url, channelName, videoId, thumbnailUrl, korTime, iterval } =
-    contents;
+  const { title, url, channelName, videoId, korTime, iterval } = contents;
   const [imgLoaded, setImgLoaded] = useState(true);
+  let thumbnailUrl = contents.thumbnailUrl;
+
+  if (
+    thumbnailUrl === "failed to get" ||
+    thumbnailUrl === undefined ||
+    thumbnailUrl === null
+  ) {
+    thumbnailUrl = "/thumbnail_alt_img.jpg";
+  }
 
   return (
     <div className={youtube_content.youtube__container} key={videoId}>
