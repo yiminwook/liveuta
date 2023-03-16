@@ -10,9 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <div className="background">
-        <div className="background_inner"></div>
-      </div>
+      <div className="background"></div>
       <Component {...pageProps} />
       <button
         className="foat_button"

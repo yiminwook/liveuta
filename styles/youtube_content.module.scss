@@ -62,7 +62,7 @@
         flex: 1;
         font-size: 0.5rem;
         color: #4b5563;
-        @include text-line(2, 1.4);
+        @include text-line(2, 1.2rem);
 
         @include min-width($mixin-middle-width) {
           font-size: 0.7rem;
@@ -74,7 +74,7 @@
       .youtube_link {
         color: rgb(204, 113, 143);
         font-size: 0.5rem;
-        @include text-line(1, 1.2);
+        @include text-line(1, 1.2rem);
 
         @include min-width($mixin-large-width) {
           font-size: 0.7rem;
@@ -105,7 +105,7 @@
   }
 
   @include min-width($mixin-middle-width) {
-    transition: all 150ms $bezier-curve;
+    @include transition(all, 150ms, $bezier-curve);
 
     &:hover {
       transform: scale(1.02);

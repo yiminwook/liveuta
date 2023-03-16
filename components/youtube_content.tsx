@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { UpcomingData } from "@/models/sheet/in_sheet";
-import youtube_contents from "@/styles/youtube_contents.module.scss";
+import youtube_content from "@/styles/youtube_content.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,15 +8,15 @@ interface Props {
   contents: UpcomingData;
 }
 
-const Youtube_contents: React.FC<Props> = ({ contents }) => {
+const Youtube_content: React.FC<Props> = ({ contents }) => {
   const { title, url, channelName, videoId, thumbnailUrl, korTime, iterval } =
     contents;
   const [imgLoaded, setImgLoaded] = useState(true);
 
   return (
-    <div className={youtube_contents.youtube__container} key={videoId}>
-      <div className={youtube_contents.youtube_content__container}>
-        <div className={youtube_contents.youtube_thumnail__container}>
+    <div className={youtube_content.youtube__container} key={videoId}>
+      <div className={youtube_content.youtube_content__container}>
+        <div className={youtube_content.youtube_thumnail__container}>
           <Link href={url ?? ""}>
             <Image
               src={thumbnailUrl}
@@ -29,7 +29,7 @@ const Youtube_contents: React.FC<Props> = ({ contents }) => {
               onError={() => {
                 setImgLoaded(false);
               }}
-              className={imgLoaded ? "" : youtube_contents.hidden}
+              className={imgLoaded ? "" : youtube_content.hidden}
             ></Image>
             {!imgLoaded && (
               <Image
@@ -41,21 +41,21 @@ const Youtube_contents: React.FC<Props> = ({ contents }) => {
             )}
           </Link>
         </div>
-        <div className={youtube_contents.youtube_description}>
-          <div className={youtube_contents.youtube_channel_name}>
+        <div className={youtube_content.youtube_description}>
+          <div className={youtube_content.youtube_channel_name}>
             {channelName ?? "no channel name"}
           </div>
-          <div className={youtube_contents.youtube_title}>
+          <div className={youtube_content.youtube_title}>
             {title ?? "no title"}
           </div>
-          <Link className={youtube_contents.youtube_link} href={url ?? ""}>
+          <Link className={youtube_content.youtube_link} href={url ?? ""}>
             {url ?? "no url"}
           </Link>
-          <div className={youtube_contents.youtube_time__container}>
-            <div className={youtube_contents.youtube_time__kor}>
+          <div className={youtube_content.youtube_time__container}>
+            <div className={youtube_content.youtube_time__kor}>
               {korTime ?? "no sheduled time"}
             </div>
-            <div className={youtube_contents.youtube_time__inter}>
+            <div className={youtube_content.youtube_time__inter}>
               {iterval ? `(${iterval})` : ""}
             </div>
           </div>
@@ -65,4 +65,4 @@ const Youtube_contents: React.FC<Props> = ({ contents }) => {
   );
 };
 
-export default Youtube_contents;
+export default Youtube_content;

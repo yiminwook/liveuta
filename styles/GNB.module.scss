@@ -6,7 +6,7 @@
   left: 0px;
   z-index: 100;
   position: fixed;
-  transition: top 0.4s;
+  @include transition(top, 0.1s, linear);
   width: 100%;
   height: 3.5rem;
   background-color: map-get($colors, main);
@@ -45,7 +45,7 @@
     font-size: 2rem;
     color: white;
     font-weight: 600;
-    @include text-line(1, 1.2);
+    @include text-line(1, 2.2rem);
   }
 
   .form_link {
@@ -56,9 +56,7 @@
     color: white;
     font-weight: 600;
     background-color: salmon;
-    transition-property: background-color;
-    transition-duration: 80ms;
-    transition-timing-function: $bezier-curve;
+    @include transition(background-color, 80ms, $bezier-curve);
     @include box-shadow();
 
     &:hover {

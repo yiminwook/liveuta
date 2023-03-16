@@ -1,0 +1,28 @@
+@import "var";
+@import "mixin";
+
+.loading {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  font-size: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .loading__container {
+    .loading_center {
+      div {
+        font-size: 0.8rem;
+        text-align: center;
+        color: white;
+      }
+      img {
+        @include animation(loading, 1.5s, 0s);
+      }
+    }
+  }
+}

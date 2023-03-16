@@ -1,10 +1,11 @@
 import Image from "next/image";
+import loading from "@/styles/loading.module.scss";
 
 const Loading = function () {
   return (
-    <div className="loading">
-      <div className="loading__container">
-        <div className="loading_center" style={{ border: "none" }}>
+    <div className={loading.loading}>
+      <div className={loading.loading__container}>
+        <div className={loading.loading_center} style={{ border: "none" }}>
           <Image
             src="/utawaku.png"
             width={100}

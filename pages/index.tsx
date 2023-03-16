@@ -4,7 +4,8 @@ import ServiceLayout from "../components/service_layout";
 import { UpcomingData } from "../models/sheet/in_sheet";
 import getBaseUrl from "@/utils/get_base_url";
 import home from "@/styles/Home.module.scss";
-import Youtube_contents from "@/components/youtube_contents";
+import Youtube_content from "@/components/youtube_content";
+import Loading from "@/components/loading";
 
 interface Props {
   total: number;
@@ -24,7 +25,7 @@ const Home: NextPage<Props> = ({ total, upcoming }) => {
           <div className={home.contents}>
             {upcoming.length > 0 &&
               upcoming.map((data) => {
-                return <Youtube_contents key={data.videoId} contents={data} />;
+                return <Youtube_content key={data.videoId} contents={data} />;
               })}
           </div>
         </main>
