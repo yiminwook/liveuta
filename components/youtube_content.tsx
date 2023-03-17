@@ -12,6 +12,7 @@ const Youtube_content: React.FC<Props> = ({ contents }) => {
   const { title, url, channelName, videoId, korTime, iterval } = contents;
   const [imgLoaded, setImgLoaded] = useState(true);
   let thumbnailUrl = contents.thumbnailUrl;
+  let thumbnailAlt = "thumbnail";
 
   if (
     thumbnailUrl === "failed to get" ||
@@ -19,6 +20,7 @@ const Youtube_content: React.FC<Props> = ({ contents }) => {
     thumbnailUrl === null
   ) {
     thumbnailUrl = "/thumbnail_alt_img.jpg";
+    thumbnailAlt = "thumbnail error";
   }
 
   return (
@@ -30,7 +32,7 @@ const Youtube_content: React.FC<Props> = ({ contents }) => {
               src={thumbnailUrl}
               width={480}
               height={360}
-              alt="thumbnail"
+              alt={thumbnailAlt}
               loading="lazy"
               placeholder="blur"
               blurDataURL="/thumbnail_alt_img.jpg"
@@ -42,7 +44,7 @@ const Youtube_content: React.FC<Props> = ({ contents }) => {
             {!imgLoaded && (
               <Image
                 src="/thumbnail_alt_img.jpg"
-                alt="thumbnail error"
+                alt={thumbnailAlt}
                 width={480}
                 height={360}
               />

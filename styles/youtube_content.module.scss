@@ -62,13 +62,17 @@
         flex: 1;
         font-size: 0.5rem;
         color: #4b5563;
-        @include text-line(2, 1.2rem);
+        @include text-line(2, 1rem);
 
         @include min-width($mixin-middle-width) {
           font-size: 0.7rem;
+          line-height: 1rem;
+          height: 2 * 1.2;
         }
         @include min-width($mixin-large-width) {
           font-size: 1rem;
+          line-height: 1.5rem;
+          height: 2 * 1.5rem;
         }
       }
       .youtube_link {
