@@ -66,8 +66,8 @@
 
         @include min-width($mixin-middle-width) {
           font-size: 0.7rem;
-          line-height: 1rem;
-          height: 2 * 1.2;
+          line-height: 1.2rem;
+          height: 2 * 1.2rem;
         }
         @include min-width($mixin-large-width) {
           font-size: 1rem;
