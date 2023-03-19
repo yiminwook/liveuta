@@ -14,6 +14,7 @@ const GNB: React.FC = function () {
   const handleScroll = () => {
     const current = gnbRef.current;
     if (current) {
+      console.log("test");
       const timeOut = setTimeout(() => {
         current.style.top = "0";
       }, 3000);
@@ -27,11 +28,8 @@ const GNB: React.FC = function () {
   };
 
   useEffect(() => {
-    const timeInterval = setInterval(() => {
-      window.addEventListener("scroll", handleScroll);
-    }, 2000);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      clearInterval(timeInterval);
       window.removeEventListener("scroll", handleScroll);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
