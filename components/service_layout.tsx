@@ -3,6 +3,9 @@ import Head from "next/head";
 import GNB from "./GNB";
 import home from "@/styles/Home.module.scss";
 import getConfig from "next/config";
+import { useRecoilValue } from "recoil";
+import { isLoadingAtom } from "@/recoil/atom";
+import Loading from "./loading";
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -17,6 +20,7 @@ const ServiceLayout: React.FC<Props> = function ({
 }: Props) {
   const discription = "Show V-Tuber Utawaku schedule";
   const meta_img = publicRuntimeConfig.meta_img;
+  const isLoading = useRecoilValue(isLoadingAtom);
 
   return (
     <>
@@ -37,6 +41,7 @@ const ServiceLayout: React.FC<Props> = function ({
         />
       </Head>
       <div className={home.app}>
+        {isLoading && <Loading />}
         <GNB />
         {children}
       </div>

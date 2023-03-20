@@ -40,7 +40,7 @@ const Youtube_content: React.FC<Props> = ({ contents }) => {
                 setImgLoaded(false);
               }}
               className={imgLoaded ? "" : youtube_content.hidden}
-            ></Image>
+            />
             {!imgLoaded && (
               <Image
                 src="/thumbnail_alt_img.jpg"

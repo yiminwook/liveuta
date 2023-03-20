@@ -14,7 +14,6 @@ const GNB: React.FC = function () {
   const handleScroll = () => {
     const current = gnbRef.current;
     if (current) {
-      console.log("test");
       const timeOut = setTimeout(() => {
         current.style.top = "0";
       }, 3000);
