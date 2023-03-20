@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { UpcomingData } from "@/models/sheet/in_sheet";
 import youtube_content from "@/styles/youtube_content.module.scss";
-// import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
@@ -29,20 +29,21 @@ const Youtube_content: React.FC<Props> = ({ contents }) => {
       <div className={youtube_content.youtube_content__container}>
         <div className={youtube_content.youtube_thumnail__container}>
           <Link href={url ?? ""}>
-            <img
+            <Image
               src={thumbnailUrl}
               width={480}
               height={360}
               alt={thumbnailAlt}
               loading="lazy"
               placeholder="blur"
+              blurDataURL="/thumbnail_alt_img.jpg"
               onError={() => {
                 setImgLoaded(false);
               }}
               className={imgLoaded ? "" : youtube_content.hidden}
             />
             {!imgLoaded && (
-              <img
+              <Image
                 src="/thumbnail_alt_img.jpg"
                 alt={thumbnailAlt}
                 width={480}

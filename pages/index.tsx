@@ -8,11 +8,6 @@ import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { isLoadingAtom } from "@/recoil/atom";
 
-// interface Props {
-//   total: number;
-//   upcoming: UpcomingData[];
-// }
-
 const Home: NextPage = () => {
   const [total, setTotal] = useState<number>(0);
   const [contents, setContents] = useState<UpcomingData[]>([]);
@@ -60,40 +55,5 @@ const Home: NextPage = () => {
     </>
   );
 };
-
-// export const getStaticProps: GetStaticProps<Props> = async () => {
-//   try {
-//     const baseUrl = getBaseUrl(true);
-//     const result: AxiosResponse<{ total: number; upcoming: UpcomingData[] }> =
-//       await axios.get(`${baseUrl}/api/sheet/upcoming`);
-//     if (result.status !== 200) {
-//       return {
-//         props: {
-//           total: 0,
-//           upcoming: [],
-//         },
-//         revalidate: 30,
-//       };
-//     }
-
-//     const { total, upcoming } = result.data;
-//     return {
-//       props: {
-//         total,
-//         upcoming,
-//       },
-//       revalidate: 30,
-//     };
-//   } catch (err) {
-//     console.error(err);
-//     return {
-//       props: {
-//         total: 0,
-//         upcoming: [],
-//       },
-//       revalidate: 30,
-//     };
-//   }
-// };
 
 export default Home;
