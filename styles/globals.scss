@@ -15,9 +15,6 @@ a {
   display: block;
   color: inherit;
   text-decoration: none;
-  width: 100%;
-  height: 100%;
-
   &:focus:not(:focus-visible) {
     outline: none;
   }
@@ -45,18 +42,17 @@ body {
     top: 0;
     left: 0;
     margin: 0;
-    &::before {
-      position: absolute;
-      content: "";
-      // backdrop-filter: blur(2px);
-      background-color: #b99198b4;
-      width: 100%;
-      height: 100%;
-      @include min-width($mixin-1080p-width) {
-        width: 90%;
-        left: 4.5%;
-      }
-    }
+  }
+
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -50;
+    background-color: #b9919867;
+    content: "";
   }
 
   .foat_button {
@@ -70,15 +66,21 @@ body {
     border: none;
     padding: 0;
     margin: 0;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    @include prevent-user-select();
     cursor: pointer;
     @include box-shadow();
+
     img {
       width: 100%;
       height: 100%;
+      @include prevent-user-select();
+    }
+
+    &:focus-visible {
+      outline: 3px solid map-get($colors, secondary);
+      border-radius: 3px;
+      outline-offset: -3px;
+      z-index: 10;
     }
   }
 }

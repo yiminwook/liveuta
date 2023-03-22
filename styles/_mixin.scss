@@ -67,3 +67,14 @@
   -webkit-transition: $property-name $duration $easing-fuc $delay;
   transition: $property-name $duration $easing-fuc $delay;
 }
+
+@mixin prevent-user-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  -webkit-user-drag: none;
+}

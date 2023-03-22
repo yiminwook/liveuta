@@ -36,23 +36,21 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <>
-      <ServiceLayout title="LiveUta Home">
-        <main className={home.main}>
-          {total > 0 && (
-            <div className={home.total}>
-              <div>{`Total: ${total}`}</div>
-            </div>
-          )}
-          <div className={home.contents}>
-            {contents.length > 0 &&
-              contents.map((data) => {
-                return <Youtube_content key={data.videoId} contents={data} />;
-              })}
+    <ServiceLayout title="LiveUta Home">
+      <main className={home.main}>
+        {total > 0 && (
+          <div className={home.total}>
+            <div>{`Total: ${total}`}</div>
           </div>
-        </main>
-      </ServiceLayout>
-    </>
+        )}
+        <div className={home.contents}>
+          {contents.length > 0 &&
+            contents.map((data) => {
+              return <Youtube_content key={data.videoId} contents={data} />;
+            })}
+        </div>
+      </main>
+    </ServiceLayout>
   );
 };
 

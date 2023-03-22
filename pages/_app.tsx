@@ -12,7 +12,8 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <RecoilRoot>
-        <div className="background"></div>
+        <div className="background" />
+        <div className="backdrop" />
         <Component {...pageProps} />
         <button
           className="foat_button"

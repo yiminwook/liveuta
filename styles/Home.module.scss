@@ -4,18 +4,17 @@
 .app {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 
-  main {
+  .main {
     padding: 0.2rem;
-    margin: auto;
     min-width: calc(100vw - 0.4rem);
-
     .total {
       display: flex;
       justify-content: flex-end;
       margin-bottom: 0.2rem;
       grid-column: 1 / -1;
+
       div {
         color: salmon;
         padding: 0.4rem;
