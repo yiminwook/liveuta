@@ -27,7 +27,7 @@ const Youtube_content: React.FC<Props> = ({ contents }) => {
     <div className={youtube_content.youtube__container} key={videoId}>
       <div className={youtube_content.youtube_content__container}>
         <div className={youtube_content.youtube_thumnail__container}>
-          <Link href={url ?? ""}>
+          <Link className={youtube_content.img_link} href={url ?? ""}>
             <img
               src={thumbnailUrl}
               width={480}

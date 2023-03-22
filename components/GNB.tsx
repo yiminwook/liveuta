@@ -47,7 +47,7 @@ const GNB: React.FC = function () {
         </Link>
       </div>
       <div className={gnb.title}>
-        <a href={baseurl}>Live Uta</a>
+        <Link href={baseurl}>Live Uta</Link>
       </div>
       <div className={gnb.form_link}>
         <Link

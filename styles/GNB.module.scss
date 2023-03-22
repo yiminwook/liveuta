@@ -23,9 +23,8 @@
 
   .internet_link {
     margin-left: 1rem;
-    padding: 0.3rem 0;
+    padding: 0.3rem 0.5rem;
     a {
-      display: block;
       img {
         vertical-align: middle;
       }
@@ -46,7 +45,6 @@
     font-size: 2rem;
     color: white;
     font-weight: 600;
-    @include text-line(1, 2.2rem);
   }
 
   .form_link {
@@ -54,6 +52,7 @@
     padding: 0.4rem 0.8rem;
     border-radius: 10px;
     font-size: 1rem;
+    line-height: 1.2rem;
     color: white;
     font-weight: 600;
     background-color: salmon;
@@ -71,6 +70,7 @@
     a:focus-visible {
       outline-offset: 0.7rem;
     }
+
     @include min-width($mixin-large-width) {
       margin-right: 1.5rem;
     }
