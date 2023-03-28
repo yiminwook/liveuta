@@ -3,9 +3,7 @@ import Head from "next/head";
 import GNB from "./GNB";
 import home from "@/styles/Home.module.scss";
 import getConfig from "next/config";
-import { useRecoilValue } from "recoil";
-import { isLoadingAtom } from "@/recoil/atom";
-import Loading from "./loading";
+import Image from "next/image";
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -20,7 +18,10 @@ const ServiceLayout: React.FC<Props> = function ({
 }: Props) {
   const discription = "Show V-Tuber Utawaku schedule";
   const meta_img = publicRuntimeConfig.meta_img;
-  const isLoading = useRecoilValue(isLoadingAtom);
+
+  const scrollUp = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <>
@@ -41,8 +42,22 @@ const ServiceLayout: React.FC<Props> = function ({
         />
       </Head>
       <GNB />
-      {isLoading && <Loading />}
+      {/* {isLoading && <Loading />} */}
       <div className={home.app}>{children}</div>
+      <button
+        className="foat_button"
+        onClick={scrollUp}
+        onTouchEnd={scrollUp}
+        onTouchStart={scrollUp}
+      >
+        <Image
+          src="/float.png"
+          width={50}
+          height={50}
+          alt="float"
+          unoptimized
+        />
+      </button>
     </>
   );
 };

@@ -14,14 +14,10 @@ const GNB: React.FC = function () {
   const handleScroll = () => {
     const current = gnbRef.current;
     if (current) {
-      const timeOut = setTimeout(() => {
-        current.style.top = "0";
-      }, 3000);
       if (window.scrollY > 0) {
         current.style.top = "-3.5rem";
       } else {
-        clearTimeout(timeOut);
-        current.style.top = "";
+        current.style.top = "0rem";
       }
     }
   };
@@ -43,7 +39,8 @@ const GNB: React.FC = function () {
             width={40}
             height={40}
             alt="internet_icon"
-          ></Image>
+            unoptimized
+          />
         </Link>
       </div>
       <div className={gnb.title}>

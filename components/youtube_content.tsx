@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { UpcomingData } from "@/models/sheet/in_sheet";
 import youtube_content from "@/styles/youtube_content.module.scss";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Props {
   contents: UpcomingData;
@@ -28,24 +28,25 @@ const Youtube_content: React.FC<Props> = ({ contents }) => {
       <div className={youtube_content.youtube_content__container}>
         <div className={youtube_content.youtube_thumnail__container}>
           <Link className={youtube_content.img_link} href={url ?? ""}>
-            <img
+            <Image
               src={thumbnailUrl}
               width={480}
               height={360}
               alt={thumbnailAlt}
               loading="lazy"
-              placeholder="blur"
               onError={() => {
                 setImgLoaded(false);
               }}
               className={imgLoaded ? "" : youtube_content.hidden}
+              unoptimized
             />
             {!imgLoaded && (
-              <img
+              <Image
                 src="/thumbnail_alt_img.jpg"
                 alt={thumbnailAlt}
                 width={480}
                 height={360}
+                unoptimized
               />
             )}
           </Link>

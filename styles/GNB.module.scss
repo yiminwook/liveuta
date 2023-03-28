@@ -6,7 +6,7 @@
   left: 0px;
   z-index: 100;
   position: fixed;
-  @include transition(top, 0.1s, linear);
+  @include transition(top, 0.3s, linear);
   width: 100%;
   height: 3.5rem;
   background-color: map-get($colors, main);

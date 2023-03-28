@@ -11,8 +11,8 @@ const Loading = function () {
             width={100}
             height={100}
             alt="loading_img"
-            priority
-          ></Image>
+            unoptimized
+          />
           <div>Loading Now</div>
         </div>
       </div>
