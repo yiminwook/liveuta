@@ -36,21 +36,11 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     const result: AxiosResponse<{ total: number; upcoming: UpcomingData[] }> =
       await axios.get(`${baseURL}/api/sheet/upcoming`);
 
-    if (result.status === 200 && result.data.total > 0) {
-      const { total, upcoming } = result.data;
-      return {
-        props: {
-          total,
-          upcoming,
-        },
-        revalidate: 30,
-      };
-    }
-
+    const { total, upcoming } = result.data;
     return {
       props: {
-        total: 0,
-        upcoming: [],
+        total,
+        upcoming,
       },
       revalidate: 5,
     };
