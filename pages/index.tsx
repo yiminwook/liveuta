@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
         total: 0,
         upcoming: [],
       },
-      revalidate: 30,
+      revalidate: 5,
     };
   } catch (err) {
     console.error(err);
@@ -61,7 +61,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
         total: 0,
         upcoming: [],
       },
-      revalidate: 30,
+      revalidate: 5,
     };
   }
 };
