@@ -26,12 +26,14 @@
       .img_link {
         width: 100%;
         height: 100%;
+        position: relative;
         @include transition(scale, 0.3s, linear);
 
         img {
           position: absolute;
           width: 100%;
           height: 100%;
+          object-fit: cover;
         }
 
         @include min-width($mixin-middle-width) {

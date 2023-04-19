@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { UpcomingData } from '@/models/sheet/in_sheet';
 import Link from 'next/link';
 import Image from 'next/image';
-import youtube_content from '@/styles/youtube_content.module.scss';
+import youtubeContent from '@/styles/youtube_content.module.scss';
 
 interface YoutubeContentProps {
   contents: UpcomingData;
@@ -20,10 +20,10 @@ const YoutubeContent = ({ contents }: YoutubeContentProps) => {
   }
 
   return (
-    <div className={youtube_content['youtube__container']} key={videoId}>
-      <div className={youtube_content['youtube_content__container']}>
-        <div className={youtube_content['youtube_thumnail__container']}>
-          <Link className={youtube_content['img_link']} href={url ?? ''}>
+    <div className={youtubeContent['youtube__container']} key={videoId}>
+      <div className={youtubeContent['youtube_content__container']}>
+        <div className={youtubeContent['youtube_thumnail__container']}>
+          <Link className={youtubeContent['img_link']} href={url ?? ''}>
             {imgLoaded ? (
               <Image
                 src={thumbnailUrl}
@@ -31,23 +31,22 @@ const YoutubeContent = ({ contents }: YoutubeContentProps) => {
                 loading="lazy"
                 onError={() => setImgLoaded(false)}
                 unoptimized
-                layout="fill"
-                objectFit="cover"
+                fill
               />
             ) : (
               <Image src="/thumbnail_alt_img.jpg" alt={thumbnailAlt} layout="fill" objectFit="cover" unoptimized />
             )}
           </Link>
         </div>
-        <div className={youtube_content['youtube_description']}>
-          <div className={youtube_content['youtube_channel_name']}>{channelName ?? 'no channel name'}</div>
-          <div className={youtube_content['youtube_title']}>{title ?? 'no title'}</div>
-          <Link className={youtube_content['youtube_link']} href={url ?? ''}>
+        <div className={youtubeContent['youtube_description']}>
+          <div className={youtubeContent['youtube_channel_name']}>{channelName ?? 'no channel name'}</div>
+          <div className={youtubeContent['youtube_title']}>{title ?? 'no title'}</div>
+          <Link className={youtubeContent['youtube_link']} href={url ?? ''}>
             {url ?? 'no url'}
           </Link>
-          <div className={youtube_content['youtube_time__container']}>
-            <div className={youtube_content['youtube_time__kor']}>{korTime ?? 'no sheduled time'}</div>
-            <div className={youtube_content['youtube_time__inter']}>{iterval ? `(${iterval})` : ''}</div>
+          <div className={youtubeContent['youtube_time__container']}>
+            <div className={youtubeContent['youtube_time__kor']}>{korTime ?? 'no sheduled time'}</div>
+            <div className={youtubeContent['youtube_time__inter']}>{iterval ? `(${iterval})` : ''}</div>
           </div>
         </div>
       </div>
