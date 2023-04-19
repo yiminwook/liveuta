@@ -31,17 +31,17 @@ const GNB = () => {
   return (
     <nav>
       <ul className={gnb['nav']} ref={gnbRef}>
-        <ol className={gnb['internet_link']}>
+        <li className={gnb['internet_link']}>
           <Link href="https://gall.dcinside.com/mini/board/lists?id=vuta">
             <Image src="/nav_internet.png" width={40} height={40} alt="internet_icon" unoptimized />
           </Link>
-        </ol>
-        <ol className={gnb['title']}>
+        </li>
+        <li className={gnb['title']}>
           <a href="/">Live Uta</a>
-        </ol>
-        <ol className={gnb['form_link']}>
+        </li>
+        <li className={gnb['form_link']}>
           <Link href={`https://docs.google.com/spreadsheets/d/${publicRuntimeConfig.spreadsheetId ?? ''}/`}>Form</Link>
-        </ol>
+        </li>
       </ul>
       <div className={gnb['blank']} />
     </nav>
