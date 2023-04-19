@@ -4,11 +4,11 @@ import youtube_content from "@/styles/youtube_content.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 
-interface Props {
+interface YoutubeContentProps {
   contents: UpcomingData;
 }
 
-const Youtube_content: React.FC<Props> = ({ contents }) => {
+const YoutubeContent = ({ contents }: YoutubeContentProps) => {
   const { title, url, channelName, videoId, korTime, iterval } = contents;
   const [imgLoaded, setImgLoaded] = useState(true);
   let thumbnailUrl = contents.thumbnailUrl;
@@ -28,19 +28,20 @@ const Youtube_content: React.FC<Props> = ({ contents }) => {
       <div className={youtube_content.youtube_content__container}>
         <div className={youtube_content.youtube_thumnail__container}>
           <Link className={youtube_content.img_link} href={url ?? ""}>
-            <Image
-              src={thumbnailUrl}
-              width={480}
-              height={360}
-              alt={thumbnailAlt}
-              loading="lazy"
-              onError={() => {
-                setImgLoaded(false);
-              }}
-              className={imgLoaded ? "" : youtube_content.hidden}
-              unoptimized
-            />
-            {!imgLoaded && (
+            {imgLoaded ? (
+              <Image
+                src={thumbnailUrl}
+                width={480}
+                height={360}
+                alt={thumbnailAlt}
+                loading="lazy"
+                onError={() => {
+                  setImgLoaded(false);
+                }}
+                className={imgLoaded ? "" : youtube_content.hidden}
+                unoptimized
+              />
+            ) : (
               <Image
                 src="/thumbnail_alt_img.jpg"
                 alt={thumbnailAlt}
@@ -75,4 +76,4 @@ const Youtube_content: React.FC<Props> = ({ contents }) => {
   );
 };
 
-export default Youtube_content;
+export default YoutubeContent;

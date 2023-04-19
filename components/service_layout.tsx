@@ -2,22 +2,27 @@
 import Head from "next/head";
 import GNB from "./GNB";
 import home from "@/styles/Home.module.scss";
-import getConfig from "next/config";
 import Image from "next/image";
+import Loading from "./loading";
+import useUpcomming from "@/hooks/useUpcomming";
+import { ReactNode } from "react";
+import getConfig from "next/config";
+
+interface ServiceLayoutProps {
+  title?: string;
+  discription?: string;
+  children: ReactNode;
+}
 
 const { publicRuntimeConfig } = getConfig();
 
-interface Props {
-  title?: string;
-  children: React.ReactNode;
-}
-
-const ServiceLayout: React.FC<Props> = function ({
+const ServiceLayout = function ({
   title = "LiveUta",
+  discription = "Show V-Tuber Utawaku schedule",
   children,
-}: Props) {
-  const discription = "Show V-Tuber Utawaku schedule";
-  const meta_img = publicRuntimeConfig.meta_img;
+}: ServiceLayoutProps) {
+  const { isLoading } = useUpcomming();
+  const metaImg = publicRuntimeConfig.meta_img;
 
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -34,15 +39,15 @@ const ServiceLayout: React.FC<Props> = function ({
         <meta property="og:description" content={discription} />
         <meta name="description" content={discription} />
         <meta name="twitter:card" content="summary" />
-        <meta property="og:image" content={meta_img} />
-        <meta name="twitter:image" content={meta_img} />
+        <meta property="og:image" content={metaImg} />
+        <meta name="twitter:image" content={metaImg} />
         <link
           rel="icon"
           href="https://img.icons8.com/external-microdots-premium-microdot-graphic/64/null/external-holiday-christmas-new-year-vol2-microdots-premium-microdot-graphic-4.png"
         />
       </Head>
       <GNB />
-      {/* {isLoading && <Loading />} */}
+      {isLoading ? <Loading /> : null}
       <div className={home.app}>{children}</div>
       <button
         className="foat_button"

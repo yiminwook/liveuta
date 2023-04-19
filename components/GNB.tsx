@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import gnb from "@/styles/GNB.module.scss";
 import getConfig from "next/config";
 import Image from "next/image";
@@ -6,10 +7,7 @@ import { useRef, useEffect } from "react";
 
 const { publicRuntimeConfig } = getConfig();
 
-const { protocol, host, port } = publicRuntimeConfig;
-const baseurl = `${protocol}://${host}:${port}/`;
-
-const GNB: React.FC = function () {
+const GNB = () => {
   const gnbRef = useRef<HTMLDivElement>(null);
   const handleScroll = () => {
     const current = gnbRef.current;
@@ -44,7 +42,7 @@ const GNB: React.FC = function () {
         </Link>
       </div>
       <div className={gnb.title}>
-        <Link href={baseurl}>Live Uta</Link>
+        <a href="/">Live Uta</a>
       </div>
       <div className={gnb.form_link}>
         <Link
