@@ -1,7 +1,13 @@
-@import "var";
-@import "mixin";
+@import 'var';
+@import 'mixin';
+
+.blank {
+  height: 3.5rem;
+}
 
 .nav {
+  margin: 0;
+  padding: 0;
   top: 0px;
   left: 0px;
   z-index: 100;

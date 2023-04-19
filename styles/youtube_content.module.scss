@@ -1,5 +1,5 @@
-@import "mixin";
-@import "var";
+@import 'mixin';
+@import 'var';
 
 .youtube__container {
   padding: 0.2rem;
@@ -27,11 +27,6 @@
           width: 100%;
           height: 100%;
           object-fit: cover;
-        }
-
-        .hidden {
-          display: none;
-          visibility: hidden;
         }
 
         @include min-width($mixin-middle-width) {

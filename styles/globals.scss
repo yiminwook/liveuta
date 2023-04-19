@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap");
-@import "mixin";
-@import "var";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap');
+@import 'mixin';
+@import 'var';
 
 html,
 body {
@@ -8,7 +8,7 @@ body {
   padding: 0;
   max-width: 100vw;
   box-sizing: border-box;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 a {
@@ -28,13 +28,12 @@ a {
 }
 
 body {
-  padding-top: 3.5rem;
   background-color: #b99198b4;
   .background {
     width: 100vw;
     height: 100vh;
     z-index: -100;
-    background-image: url("/background.png");
+    background-image: url('/background.png');
     background-position: center;
     background-size: cover;
     filter: grayscale(50%);
@@ -52,35 +51,6 @@ body {
     height: 100%;
     z-index: -50;
     background-color: #b9919867;
-    content: "";
-  }
-
-  .foat_button {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    width: 3.3rem;
-    height: 3.3rem;
-    background-color: #dfafb8be;
-    border-radius: 100%;
-    border: none;
-    padding: 0;
-    margin: 0;
-    @include prevent-user-select();
-    cursor: pointer;
-    @include box-shadow();
-
-    img {
-      width: 100%;
-      height: 100%;
-      @include prevent-user-select();
-    }
-
-    &:focus-visible {
-      outline: 3px solid map-get($colors, secondary);
-      border-radius: 3px;
-      outline-offset: -3px;
-      z-index: 10;
-    }
+    content: '';
   }
 }

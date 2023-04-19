@@ -1,7 +1,7 @@
-import type { AppProps } from "next/app";
-import { Analytics } from "@vercel/analytics/react";
-import ServiceLayout from "@/components/service_layout";
-import "@/styles/globals.scss";
+import type { AppProps } from 'next/app';
+import { Analytics } from '@vercel/analytics/react';
+import ServiceLayout from '@/components/service_layout';
+import '@/styles/globals.scss';
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -11,7 +11,6 @@ const App = ({ Component, pageProps }: AppProps) => {
       <ServiceLayout title="LiveUta Home">
         <Component {...pageProps} />
       </ServiceLayout>
-
       <Analytics />
     </>
   );

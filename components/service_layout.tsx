@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import Head from "next/head";
-import GNB from "./GNB";
-import home from "@/styles/Home.module.scss";
-import Image from "next/image";
-import Loading from "./loading";
-import useUpcomming from "@/hooks/useUpcomming";
-import { ReactNode } from "react";
-import getConfig from "next/config";
+import { ReactNode } from 'react';
+import Head from 'next/head';
+import GNB from './GNB';
+import Image from 'next/image';
+import Loading from './loading';
+import useUpcomming from '@/hooks/useUpcomming';
+import getConfig from 'next/config';
+import home from '@/styles/Home.module.scss';
 
 interface ServiceLayoutProps {
   title?: string;
@@ -16,16 +16,16 @@ interface ServiceLayoutProps {
 
 const { publicRuntimeConfig } = getConfig();
 
-const ServiceLayout = function ({
-  title = "LiveUta",
-  discription = "Show V-Tuber Utawaku schedule",
+const ServiceLayout = ({
+  title = 'LiveUta',
+  discription = 'Show V-Tuber Utawaku schedule',
   children,
-}: ServiceLayoutProps) {
+}: ServiceLayoutProps) => {
   const { isLoading } = useUpcomming();
   const metaImg = publicRuntimeConfig.meta_img;
 
   const scrollUp = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -48,20 +48,9 @@ const ServiceLayout = function ({
       </Head>
       <GNB />
       {isLoading ? <Loading /> : null}
-      <div className={home.app}>{children}</div>
-      <button
-        className="foat_button"
-        onClick={scrollUp}
-        onTouchEnd={scrollUp}
-        onTouchStart={scrollUp}
-      >
-        <Image
-          src="/float.png"
-          width={50}
-          height={50}
-          alt="float"
-          unoptimized
-        />
+      <div className={home['app']}>{children}</div>
+      <button className={home['foat_button']} onClick={scrollUp} onTouchEnd={scrollUp} onTouchStart={scrollUp}>
+        <Image src="/float.png" width={50} height={50} alt="float" unoptimized />
       </button>
     </>
   );

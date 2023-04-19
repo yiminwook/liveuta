@@ -1,9 +1,9 @@
-import { NextPage } from "next";
-import { UpcomingData } from "../models/sheet/in_sheet";
-import home from "@/styles/Home.module.scss";
-import YoutubeContent from "@/components/youtube_content";
-import { useEffect, useState } from "react";
-import useUpcomming from "@/hooks/useUpcomming";
+import { useEffect, useState } from 'react';
+import { NextPage } from 'next';
+import { UpcomingData } from '../models/sheet/in_sheet';
+import YoutubeContent from '@/components/youtube_content';
+import useUpcomming from '@/hooks/useUpcomming';
+import home from '@/styles/Home.module.scss';
 
 interface IndexPageProps {
   total: number;
@@ -25,13 +25,13 @@ const Home: NextPage<IndexPageProps> = () => {
   }, [data]);
 
   return (
-    <main className={home.main}>
-      {total > 0 && (
+    <main className={home['main']}>
+      {total > 0 ? (
         <div className={home.total}>
           <div>{`Total: ${total}`}</div>
         </div>
-      )}
-      <section className={home.contents}>
+      ) : null}
+      <section className={home['contents']}>
         {contents.map((data) => (
           <YoutubeContent key={data.videoId} contents={data} />
         ))}
