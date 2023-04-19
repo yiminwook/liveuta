@@ -10,23 +10,28 @@
   .youtube_content__container {
     display: flex;
     height: 100%;
+    gap: 0.8rem;
+
     .youtube_thumnail__container {
-      margin-right: 0.8rem;
       width: 7rem;
       min-width: 7rem;
       aspect-ratio: 16 / 9;
       border-radius: 5px;
       background-color: #f4f4f5;
-      overflow: hidden;
       @include box-shadow();
+      overflow: hidden;
+      border-radius: 5px;
+      position: relative;
+
       .img_link {
         width: 100%;
         height: 100%;
+        @include transition(scale, 0.3s, linear);
 
         img {
+          position: absolute;
           width: 100%;
           height: 100%;
-          object-fit: cover;
         }
 
         @include min-width($mixin-middle-width) {
@@ -34,8 +39,7 @@
         }
 
         &:focus-visible {
-          outline-width: 5px;
-          outline-offset: -5px;
+          scale: 1.2;
         }
       }
 
@@ -51,12 +55,12 @@
     }
 
     .youtube_description {
-      flex: 1;
+      margin-bottom: 0.2rem;
       max-width: 20rem;
       width: 100%;
+      height: 100%;
       display: flex;
       flex-flow: column;
-      margin-top: 0.2rem;
       .youtube_channel_name {
         font-weight: 500;
         @include min-width($mixin-middle-width) {
@@ -83,7 +87,7 @@
       .youtube_link {
         color: rgb(204, 113, 143);
         font-size: 0.5rem;
-        @include text-line(1, 1.2rem);
+        @include text-line(1, 1rem);
 
         @include min-width($mixin-large-width) {
           font-size: 0.7rem;
@@ -105,7 +109,9 @@
     }
 
     @include min-width($mixin-middle-width) {
+      gap: 0.2rem;
       flex-direction: column;
+      padding: 0.2rem 0;
       max-width: 13rem;
     }
     @include min-width($mixin-large-width) {

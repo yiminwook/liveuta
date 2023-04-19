@@ -12,11 +12,11 @@ const YoutubeContent = ({ contents }: YoutubeContentProps) => {
   const { title, url, channelName, videoId, korTime, iterval } = contents;
   const [imgLoaded, setImgLoaded] = useState(true);
   let thumbnailUrl = contents.thumbnailUrl;
-  let thumbnailAlt = 'thumbnail';
+  let thumbnailAlt = `${title}_img`;
 
   if (thumbnailUrl === 'failed to get' || thumbnailUrl === undefined || thumbnailUrl === null) {
     thumbnailUrl = '/thumbnail_alt_img.jpg';
-    thumbnailAlt = 'thumbnail error';
+    thumbnailAlt = `${title}_error_img`;
   }
 
   return (
@@ -27,15 +27,15 @@ const YoutubeContent = ({ contents }: YoutubeContentProps) => {
             {imgLoaded ? (
               <Image
                 src={thumbnailUrl}
-                width={480}
-                height={360}
                 alt={thumbnailAlt}
                 loading="lazy"
                 onError={() => setImgLoaded(false)}
                 unoptimized
+                layout="fill"
+                objectFit="cover"
               />
             ) : (
-              <Image src="/thumbnail_alt_img.jpg" alt={thumbnailAlt} width={480} height={360} unoptimized />
+              <Image src="/thumbnail_alt_img.jpg" alt={thumbnailAlt} layout="fill" objectFit="cover" unoptimized />
             )}
           </Link>
         </div>
