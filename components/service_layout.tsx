@@ -4,9 +4,10 @@ import Head from 'next/head';
 import GNB from './header/GNB';
 import Image from 'next/image';
 import Loading from './loading';
-import useUpcomming from '@/hooks/useUpcomming';
+import useUpcommingData from '@/hooks/useUpcommingData';
 import getConfig from 'next/config';
 import home from '@/styles/Home.module.scss';
+import useAllData from '@/hooks/useAllData';
 
 interface ServiceLayoutProps {
   title?: string;
@@ -21,7 +22,8 @@ const ServiceLayout = ({
   discription = 'Show V-Tuber Utawaku schedule',
   children,
 }: ServiceLayoutProps) => {
-  const { isLoading } = useUpcomming();
+  const { isLoading: upcomingDataLoading } = useUpcommingData();
+  const { isLoading: allDataLoading } = useAllData();
   const metaImg = publicRuntimeConfig.meta_img;
 
   const scrollUp = () => {
@@ -47,7 +49,7 @@ const ServiceLayout = ({
         />
       </Head>
       <GNB />
-      {isLoading ? <Loading /> : null}
+      {upcomingDataLoading || allDataLoading ? <Loading /> : null}
       <div className={home['app']}>{children}</div>
       <button className={home['foat_button']} onClick={scrollUp} onTouchEnd={scrollUp} onTouchStart={scrollUp}>
         <Image src="/float.png" width={50} height={50} alt="float" unoptimized />
