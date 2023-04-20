@@ -1,6 +1,9 @@
 import { FaWindowClose } from 'react-icons/fa';
 import mobileNav from '@/styles/header/sidebar.module.scss';
 import Link from 'next/link';
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
 
 const Sidebar = () => {
   return (
@@ -12,8 +15,11 @@ const Sidebar = () => {
             <li>
               <Link href="https://gall.dcinside.com/mini/board/lists?id=vuta">갤러리로</Link>
             </li>
-            <li>channel sheet</li>
-            <li>전체방송</li>
+            <li>
+              <Link href={`https://docs.google.com/spreadsheets/d/${publicRuntimeConfig.channelsheetId ?? ''}/`}>
+                Channel_ID
+              </Link>
+            </li>
           </ul>
           <label htmlFor="mobile_nav" className={mobileNav['close']}>
             <FaWindowClose size={'2rem'} color="inherit" />
