@@ -1,0 +1,115 @@
+@import 'var';
+@import 'mixin';
+
+.blank {
+  height: 3.5rem;
+}
+
+.nav {
+  margin: 0;
+  padding: 0;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+  position: fixed;
+  @include transition(top, 0.3s, linear);
+  width: 100%;
+
+  background-color: map-get($colors, main);
+  @include box-shadow(true);
+
+  ul {
+    margin: auto;
+    max-width: $mixin-2xl-width;
+    height: 3.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 43.75rem;
+
+    @include max-width($mixin-large-width) {
+      min-width: auto;
+      top: 0 !important;
+    }
+
+    .mobile-nav {
+      margin-left: 1rem;
+
+      label {
+        display: block;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 1;
+        padding: 0.3rem 1.2rem;
+        background-color: #fa8072;
+        @include box-shadow();
+
+        &:hover {
+          background-color: rgb(224, 110, 97);
+        }
+
+        &:active {
+          background-color: rgb(180, 80, 69);
+        }
+
+        &:focus-visible {
+          outline-offset: 5px;
+        }
+      }
+
+      @include min-width($mixin-large-width) {
+        margin-left: 1.5rem;
+      }
+      @include min-width($mixin-xl-width) {
+        margin-left: 2rem;
+      }
+      @include max-width($mixin-middle-width) {
+        margin-left: 0.4rem;
+      }
+    }
+
+    .title {
+      font-size: 2rem;
+      color: white;
+      font-weight: 600;
+    }
+
+    .form_link {
+      margin-right: 1rem;
+      font-size: 1rem;
+      line-height: 1.2rem;
+      @include transition(background-color, 80ms, $bezier-curve);
+
+      a {
+        display: block;
+        padding: 0.4rem 0.8rem;
+        border-radius: 10px;
+        font-weight: 600;
+        color: white;
+        background-color: #fa8072;
+        @include box-shadow();
+
+        &:focus-visible {
+          outline-offset: 5px;
+        }
+        &:hover {
+          background-color: rgb(224, 110, 97);
+        }
+
+        &:active {
+          background-color: rgb(180, 80, 69);
+        }
+      }
+
+      @include min-width($mixin-large-width) {
+        margin-right: 1.5rem;
+      }
+      @include min-width($mixin-xl-width) {
+        margin-right: 2rem;
+      }
+      @include max-width($mixin-middle-width) {
+        margin-right: 0.4rem;
+      }
+    }
+  }
+}

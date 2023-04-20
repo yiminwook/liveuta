@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { ReactNode } from 'react';
 import Head from 'next/head';
-import GNB from './GNB';
+import GNB from './header/GNB';
 import Image from 'next/image';
 import Loading from './loading';
 import useUpcomming from '@/hooks/useUpcomming';

@@ -1,0 +1,57 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
+import { useRef, useEffect } from 'react';
+import getConfig from 'next/config';
+import Link from 'next/link';
+import Sidebar from './sidebar';
+import { RiMenuAddLine } from 'react-icons/ri';
+import gnb from '@/styles/header/GNB.module.scss';
+
+const { publicRuntimeConfig } = getConfig();
+
+const GNB = () => {
+  const gnbRef = useRef<HTMLElement>(null);
+  const handleScroll = () => {
+    const current = gnbRef.current;
+    if (current) {
+      if (window.scrollY > 0) {
+        current.style.top = '-3.5rem';
+      } else {
+        current.style.top = '0rem';
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <header>
+      <nav className={gnb['nav']} ref={gnbRef}>
+        <ul>
+          <li className={gnb['mobile-nav']}>
+            <label htmlFor="mobile_nav" tabIndex={0}>
+              <RiMenuAddLine size={'1.2rem'} color={'#ffffff'} />
+            </label>
+          </li>
+          <li className={gnb['title']}>
+            <a href="/">Live Uta</a>
+          </li>
+          <li className={gnb['form_link']}>
+            <Link href={`https://docs.google.com/spreadsheets/d/${publicRuntimeConfig.spreadsheetId ?? ''}/`}>
+              Form
+            </Link>
+          </li>
+        </ul>
+      </nav>
+      <div className={gnb['blank']} />
+      <Sidebar />
+    </header>
+  );
+};
+
+export default GNB;

@@ -11,13 +11,15 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
 }
 
+ul,
 li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-a {
+a,
+label {
   display: block;
   color: inherit;
   text-decoration: none;
