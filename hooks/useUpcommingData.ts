@@ -2,7 +2,7 @@ import { UpcomingData } from '@/models/sheet/in_sheet';
 import useSWR from 'swr';
 import { fetcher } from './fetcher';
 
-const useUpcomming = () => {
+const useUpcommingData = () => {
   const { data, error, mutate, isLoading } = useSWR(
     '/api/sheet/upcoming',
     fetcher<{ total: number; upcoming: UpcomingData[] }>(),
@@ -12,4 +12,4 @@ const useUpcomming = () => {
   return { data, error, mutate, isLoading };
 };
 
-export default useUpcomming;
+export default useUpcommingData;
