@@ -7,25 +7,51 @@
   align-items: center;
 
   .main {
-    padding: 0.2rem;
-    min-width: calc(100vw - 0.4rem);
-    .total {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 0.2rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    @include min-width($mixin-middle-width) {
+      gap: 0.6rem;
+    }
+    @include min-width($mixin-large-width) {
+      gap: 0.8rem;
+    }
+
+    .nav-section {
       grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        padding: 0.4rem;
+        color: salmon;
+        font-weight: 600;
+        border: none;
+        border-radius: 5px;
+        background-color: lighten(map-get($colors, main), 10%);
+        @include transition(all, 0.2s, linear);
+        @include box-shadow();
+
+        &:hover,
+        &:active {
+          scale: 1.1;
+          color: lighten(map-get($colors, main), 10%);
+          background-color: salmon;
+        }
+
+        &:focus-visible {
+          outline-offset: 5px;
+        }
+      }
 
       div {
         color: salmon;
         padding: 0.4rem;
         background-color: lighten(map-get($colors, main), 10%);
         border-radius: 5px;
-      }
-      @include min-width($mixin-middle-width) {
-        margin-bottom: 0.6rem;
-      }
-      @include min-width($mixin-large-width) {
-        margin-bottom: 0.8rem;
+        @include box-shadow();
       }
     }
 

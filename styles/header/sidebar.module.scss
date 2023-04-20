@@ -1,0 +1,71 @@
+@import 'var';
+@import 'mixin';
+
+.check-box {
+  display: none;
+
+  &:checked ~ .container {
+    visibility: visible;
+    opacity: 1;
+    .sidebar {
+      transform: translateX(0%);
+    }
+  }
+}
+
+.container {
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  position: fixed;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  opacity: 0;
+  @include transition(all, 0.3s, linear);
+
+  .sidebar {
+    position: relative;
+    background-color: #ffd7de;
+    width: 80%;
+    height: 100%;
+    max-width: 20rem;
+    transform: translateX(-100%);
+    @include transition(transform, 0.3s, linear);
+
+    ul {
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      li {
+        &:hover,
+        &:active {
+          color: #ffffff;
+        }
+      }
+    }
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translateX(-50%) translateY(30%);
+      cursor: pointer;
+      color: white;
+
+      &:hover {
+        color: salmon;
+      }
+    }
+  }
+
+  .back-drop {
+    top: 0;
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+}
