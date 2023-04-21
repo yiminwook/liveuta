@@ -4,6 +4,12 @@
   }
 }
 
+@mixin check-device() {
+  @media only screen and (max-device-width: $mixin-2xl-width) {
+    @content;
+  }
+}
+
 @mixin max-width($width) {
   @media (max-width: $width) {
     @content;
