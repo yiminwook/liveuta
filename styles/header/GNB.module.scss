@@ -11,16 +11,19 @@
   padding: 0;
   top: 0px;
   left: 0px;
-  z-index: 100;
-  position: fixed;
-  @include transition(top, 0.3s, linear);
   width: 100%;
-
+  position: fixed;
+  z-index: 100;
   background-color: map-get($colors, main);
+  @include transition(opacity, 0.2s, linear);
   @include box-shadow(true);
 
   @include max-width($mixin-large-width) {
-    top: 0 !important;
+    opacity: 1 !important;
+  }
+
+  &:hover {
+    opacity: 1 !important;
   }
 
   ul {
@@ -42,6 +45,7 @@
         padding: 0.3rem 1.2rem;
         background-color: map-get($colors, salmon);
         @include box-shadow();
+        cursor: pointer;
 
         &:hover {
           background-color: map-get($colors, hover-salmon);

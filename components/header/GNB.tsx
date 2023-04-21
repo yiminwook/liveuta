@@ -15,9 +15,9 @@ const GNB = () => {
     const current = gnbRef.current;
     if (current) {
       if (window.scrollY > 0) {
-        current.style.top = '-3.5rem';
+        current.style.opacity = '0';
       } else {
-        current.style.top = '0rem';
+        current.style.opacity = '1';
       }
     }
   };
