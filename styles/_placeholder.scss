@@ -1,0 +1,19 @@
+%scroll-bar {
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: map-get($colors, hover-salmon);
+    border-radius: 10px;
+    &:hover {
+      background-color: lighten(map-get($colors, hover-salmon), 25%);
+    }
+  }
+  &::-webkit-scrollbar-button {
+    display: none;
+    visibility: hidden;
+  }
+}

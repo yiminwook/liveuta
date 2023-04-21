@@ -5,8 +5,16 @@ $mixin-2xl-width: 96rem;
 $mixin-1080p-width: 120rem;
 $mixin-1440p-width: 160rem;
 $colors: (
+  light-font: #ffffff,
+  highlight-font: #ee526f,
+  link-font: #cc718f,
+  font: #4b5563,
   main: #ffc1cc,
+  bg: #d8aab1ec,
+  back-drop: #b9919867,
   secondary: #fa923f,
   salmon: #fa8072,
+  hover-salmon: #e06e61,
+  card-bg: #f4f4f5,
 );
 $bezier-curve: cubic-bezier(0.4, 0, 0.2, 1);

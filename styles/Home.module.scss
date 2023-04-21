@@ -1,5 +1,6 @@
 @import 'mixin';
 @import 'var';
+@import 'placeholder';
 
 .app {
   display: flex;
@@ -26,7 +27,7 @@
 
       button {
         padding: 0.4rem;
-        color: salmon;
+        color: map-get($colors, salmon);
         font-weight: 600;
         border: none;
         border-radius: 5px;
@@ -38,7 +39,7 @@
         &:active {
           scale: 1.1;
           color: lighten(map-get($colors, main), 10%);
-          background-color: salmon;
+          background-color: map-get($colors, salmon);
         }
 
         &:focus-visible {
@@ -47,7 +48,7 @@
       }
 
       div {
-        color: salmon;
+        color: map-get($colors, salmon);
         padding: 0.4rem;
         background-color: lighten(map-get($colors, main), 10%);
         border-radius: 5px;
@@ -87,24 +88,27 @@
   }
 }
 
-.foat_button {
+.foat {
   position: fixed;
   bottom: 1.5rem;
   right: 1.5rem;
-  width: 3.3rem;
-  height: 3.3rem;
-  background-color: #dfafb8be;
+  width: 3.25rem;
+  height: 3.25rem;
+  color: map-get($colors, light-font);
+  background-color: map-get($colors, salmon);
   border-radius: 100%;
   border: none;
-  padding: 0;
-  margin: 0;
   @include prevent-user-select();
   cursor: pointer;
   @include box-shadow();
-
-  img {
-    width: 100%;
-    height: 100%;
-    @include prevent-user-select();
+  text-align: center;
+  padding: 0.125rem;
+  & > svg {
+    width: 3rem;
+    height: 3rem;
+  }
+  &:hover {
+    color: map-get($colors, salmon);
+    background-color: map-get($colors, light-font);
   }
 }

@@ -17,7 +17,7 @@
       min-width: 7rem;
       aspect-ratio: 16 / 9;
       border-radius: 5px;
-      background-color: #f4f4f5;
+      background-color: map-get($colors, card-bg);
       @include box-shadow();
       overflow: hidden;
       border-radius: 5px;
@@ -72,7 +72,7 @@
       .youtube_title {
         flex: 1;
         font-size: 0.5rem;
-        color: #4b5563;
+        color: map-get($colors, font);
         @include text-line(2, 1rem);
 
         @include min-width($mixin-middle-width) {
@@ -87,7 +87,7 @@
         }
       }
       .youtube_link {
-        color: rgb(204, 113, 143);
+        color: map-get($colors, link-font);
         font-size: 0.5rem;
         @include text-line(1, 1rem);
 
@@ -102,7 +102,7 @@
           margin-right: 0.2rem;
         }
         .youtube_time__inter {
-          color: #ee526f;
+          color: map-get($colors, highlight-font);
         }
         @include min-width($mixin-large-width) {
           font-size: 1rem;

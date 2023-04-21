@@ -42,7 +42,7 @@
       li {
         &:hover,
         &:active {
-          color: #ffffff;
+          color: map-get($colors, light-font);
         }
       }
     }
@@ -52,10 +52,10 @@
       right: 0;
       transform: translateX(-50%) translateY(30%);
       cursor: pointer;
-      color: white;
+      color: map-get($colors, light-font);
 
       &:hover {
-        color: salmon;
+        color: map-get($colors, salmon);
       }
     }
   }

@@ -1,5 +1,6 @@
 @import 'var';
 @import 'mixin';
+@import 'placeholder';
 
 .blank {
   height: 3.5rem;
@@ -29,7 +30,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: white;
+    color: map-get($colors, light-font);
 
     .mobile-nav {
       margin-left: 1rem;
@@ -39,15 +40,15 @@
         text-align: center;
         line-height: 1;
         padding: 0.3rem 1.2rem;
-        background-color: #fa8072;
+        background-color: map-get($colors, salmon);
         @include box-shadow();
 
         &:hover {
-          background-color: rgb(224, 110, 97);
+          background-color: map-get($colors, hover-salmon);
         }
 
         &:active {
-          background-color: rgb(180, 80, 69);
+          background-color: map-get($colors, hover-salmon);
         }
       }
 
@@ -64,7 +65,7 @@
 
     .title {
       font-size: 2rem;
-      color: white;
+      color: map-get($colors, light-font);
       font-weight: 600;
       a {
         line-height: 1;
@@ -81,18 +82,18 @@
         padding: 0.4rem 0.8rem;
         border-radius: 10px;
         padding: 0.3rem 1.2rem;
-        background-color: #fa8072;
+        background-color: map-get($colors, salmon);
         text-align: center;
         line-height: 1;
-        color: white;
+        color: map-get($colors, light-font);
         @include box-shadow();
 
         &:hover {
-          background-color: rgb(224, 110, 97);
+          background-color: map-get($colors, hover-salmon);
         }
 
         &:active {
-          background-color: rgb(180, 80, 69);
+          background-color: map-get($colors, hover-salmon);
         }
       }
 

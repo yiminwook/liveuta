@@ -2,7 +2,7 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
 import GNB from './header/GNB';
-import Image from 'next/image';
+import { TfiArrowCircleUp } from 'react-icons/tfi';
 import Loading from './loading';
 import useUpcommingData from '@/hooks/useUpcommingData';
 import getConfig from 'next/config';
@@ -51,8 +51,8 @@ const ServiceLayout = ({
       <GNB />
       {upcomingDataLoading || allDataLoading ? <Loading /> : null}
       <div className={home['app']}>{children}</div>
-      <button className={home['foat_button']} onClick={scrollUp} onTouchEnd={scrollUp} onTouchStart={scrollUp}>
-        <Image src="/float.png" width={50} height={50} alt="float" unoptimized />
+      <button className={home['foat']} onClick={scrollUp} onTouchEnd={scrollUp} onTouchStart={scrollUp}>
+        <TfiArrowCircleUp size={'3rem'} color={'inherit'} />
       </button>
     </>
   );
