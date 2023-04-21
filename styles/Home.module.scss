@@ -55,7 +55,7 @@
       }
     }
 
-    .contents {
+    .contents-section {
       display: grid;
       row-gap: 0.5rem;
       grid-template-columns: 1fr;
@@ -106,12 +106,5 @@
     width: 100%;
     height: 100%;
     @include prevent-user-select();
-  }
-
-  &:focus-visible {
-    outline: 3px solid map-get($colors, secondary);
-    border-radius: 3px;
-    outline-offset: -3px;
-    z-index: 10;
   }
 }

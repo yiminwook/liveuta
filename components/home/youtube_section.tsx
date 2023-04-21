@@ -8,7 +8,7 @@ interface YoutubeSectionProps {
 
 const YoutubeSection = ({ contents }: YoutubeSectionProps) => {
   return (
-    <section className={home['contents']}>
+    <section className={home['contents-section']}>
       {contents.map((data) => (
         <YoutubeContent key={data.videoId} contents={data} />
       ))}
