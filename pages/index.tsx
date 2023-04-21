@@ -49,7 +49,7 @@ const Home: NextPage<HomePageProps> = () => {
 
   return (
     <main className={home['main']}>
-      <NavSection value={showLive ? 'Live' : 'All'} buttonFunc={handleShow} total={total} />
+      <NavSection value={showLive ? '1시간' : '24시간'} buttonFunc={handleShow} total={total} />
       <YoutubeSection contents={contents} />
     </main>
   );

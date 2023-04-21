@@ -4,6 +4,7 @@ import getConfig from 'next/config';
 import Link from 'next/link';
 import Sidebar from './sidebar';
 import { RiMenuAddLine } from 'react-icons/ri';
+import { SiGooglesheets } from 'react-icons/si';
 import gnb from '@/styles/header/GNB.module.scss';
 
 const { publicRuntimeConfig } = getConfig();
@@ -35,7 +36,7 @@ const GNB = () => {
         <ul>
           <li className={gnb['mobile-nav']}>
             <label htmlFor="mobile_nav" tabIndex={0}>
-              <RiMenuAddLine size={'1.2rem'} color={'#ffffff'} />
+              <RiMenuAddLine size={'1.2rem'} color={'inherit'} />
             </label>
           </li>
           <li className={gnb['title']}>
@@ -43,7 +44,7 @@ const GNB = () => {
           </li>
           <li className={gnb['form_link']}>
             <Link href={`https://docs.google.com/spreadsheets/d/${publicRuntimeConfig.spreadsheetId ?? ''}/`}>
-              Form
+              <SiGooglesheets size={'1.2rem'} color={'inherit'} />
             </Link>
           </li>
         </ul>

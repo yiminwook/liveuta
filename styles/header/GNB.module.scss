@@ -18,6 +18,10 @@
   background-color: map-get($colors, main);
   @include box-shadow(true);
 
+  @include max-width($mixin-large-width) {
+    top: 0 !important;
+  }
+
   ul {
     margin: auto;
     max-width: $mixin-2xl-width;
@@ -25,18 +29,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-width: 43.75rem;
-
-    @include max-width($mixin-large-width) {
-      min-width: auto;
-      top: 0 !important;
-    }
+    color: white;
 
     .mobile-nav {
       margin-left: 1rem;
 
       label {
-        display: block;
         border-radius: 10px;
         text-align: center;
         line-height: 1;
@@ -50,10 +48,6 @@
 
         &:active {
           background-color: rgb(180, 80, 69);
-        }
-
-        &:focus-visible {
-          outline-offset: 5px;
         }
       }
 
@@ -72,6 +66,9 @@
       font-size: 2rem;
       color: white;
       font-weight: 600;
+      a {
+        line-height: 1;
+      }
     }
 
     .form_link {
@@ -81,17 +78,15 @@
       @include transition(background-color, 80ms, $bezier-curve);
 
       a {
-        display: block;
         padding: 0.4rem 0.8rem;
         border-radius: 10px;
-        font-weight: 600;
-        color: white;
+        padding: 0.3rem 1.2rem;
         background-color: #fa8072;
+        text-align: center;
+        line-height: 1;
+        color: white;
         @include box-shadow();
 
-        &:focus-visible {
-          outline-offset: 5px;
-        }
         &:hover {
           background-color: rgb(224, 110, 97);
         }

@@ -9,8 +9,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{ total: number
     if (req.method !== 'GET') throw new Error('invaild method');
     const sheetData = await getGoogleSheetData();
     const nowTime = getNow(true);
-    const delayTime = 0;
-    const parsedSheetData = parseSheetData({ data: sheetData, nowTime, delayTime });
+    /** 24시간 */
+    const intervalTime = 24 * 60 * 60 * 1000;
+    const parsedSheetData = parseSheetData({ data: sheetData, nowTime, intervalTime, showAll: true });
     const total = parsedSheetData.length;
     return res.status(200).json({ total, upcoming: parsedSheetData });
   } catch (err) {

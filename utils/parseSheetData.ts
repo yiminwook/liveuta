@@ -5,15 +5,17 @@ import { getinterval } from './get_time';
 interface ParseSheetDataType {
   data: sheets_v4.Schema$ValueRange;
   nowTime: number;
-  delayTime: number;
+  intervalTime: number;
+  showAll?: boolean;
 }
 
-const parseSheetData = ({ data, nowTime, delayTime }: ParseSheetDataType): UpcomingData[] => {
+const parseSheetData = ({ data, nowTime, intervalTime, showAll }: ParseSheetDataType): UpcomingData[] => {
   const upcoming: UpcomingData[] = [];
+  const delayTime = nowTime - intervalTime;
   const dataValue = data.values as rowData[];
   if (!dataValue) return [];
   dataValue.forEach(([title, url, channelName, scheduledTime, thumbnailUrl, bool]: rowData) => {
-    if (bool === 'FALSE') {
+    if (showAll || bool === 'FALSE') {
       const stringTime = scheduledTime.replace(' ', 'T').split(' JST')[0];
       if (stringTime.length === 19) {
         const time = new Date(stringTime);

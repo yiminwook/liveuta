@@ -16,6 +16,8 @@ export const getinterval = (nowTimeStamp: number, scheduledTimeStamp: number): s
   return '';
 };
 
+const now = new Date();
+
 /** 유닉스 시간을 반환
  *
  *  서버에서 사용
@@ -24,8 +26,8 @@ export const getinterval = (nowTimeStamp: number, scheduledTimeStamp: number): s
  */
 export const getNow = (isLocalTime: boolean) => {
   if (isLocalTime) {
-    return Date.now() + +(process.env.local_time ?? 32400000);
+    return now.getTime() + +(process.env.local_time ?? 32400000);
   } else {
-    return Date.now();
+    return now.getTime();
   }
 };
