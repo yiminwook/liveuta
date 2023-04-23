@@ -4,11 +4,9 @@ import loading from '@/styles/loading.module.scss';
 const Loading = () => {
   return (
     <div className={loading['loading']}>
-      <div className={loading['loading__container']}>
-        <div className={loading['loading_center']} style={{ border: 'none' }}>
-          <Image src="/utawaku.png" width={100} height={100} alt="loading_img" unoptimized />
-          <div>Loading Now</div>
-        </div>
+      <div style={{ border: 'none' }}>
+        <Image src="/utawaku.png" width={100} height={100} alt="loading_img" unoptimized />
+        <div>Loading Now!</div>
       </div>
     </div>
   );
