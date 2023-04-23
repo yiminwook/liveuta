@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { UpcomingData } from '@/models/sheet/in_sheet';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,6 +11,15 @@ interface YoutubeContentProps {
 const YoutubeContent = ({ contents }: YoutubeContentProps) => {
   const { title, url, channelName, videoId, korTime, iterval } = contents;
   const [imgLoaded, setImgLoaded] = useState(true);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  const handleImgValidity = () => {
+    if (!imgRef.current) return;
+    if (imgRef.current.naturalHeight === 90) {
+      setImgLoaded(() => false);
+    }
+  };
+
   let thumbnailUrl = contents.thumbnailUrl;
   let thumbnailAlt = `${title}_img`;
 
@@ -29,12 +38,14 @@ const YoutubeContent = ({ contents }: YoutubeContentProps) => {
                 src={thumbnailUrl}
                 alt={thumbnailAlt}
                 loading="lazy"
+                ref={imgRef}
+                onLoad={handleImgValidity}
                 onError={() => setImgLoaded(false)}
                 unoptimized
                 fill
               />
             ) : (
-              <Image src="/thumbnail_alt_img.jpg" alt={thumbnailAlt} layout="fill" objectFit="cover" unoptimized />
+              <Image src="/thumbnail_alt_img.jpg" alt={thumbnailAlt} unoptimized fill />
             )}
           </Link>
         </div>

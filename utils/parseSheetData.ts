@@ -30,7 +30,7 @@ const parseSheetData = ({ data, nowTime, intervalTime, showAll }: ParseSheetData
             minute: 'numeric',
           });
           const iterval = getinterval(nowTime, timestamp);
-          const highThumbnailUrl = thumbnailUrl.replace(/(default|maxresdefault)/i, 'hqdefault');
+          const highThumbnailUrl = thumbnailUrl.replace(/(hqdefault|maxresdefault|sddefault|default)/i, 'hqdefault');
           let replacedTitle = title.replace(/\【(.*?)\】|\〖(.*?)\〗|\[(.*?)\]|\((.*?)\)/gi, '');
           // if (replacedTitle.length > 40) {
           //   replacedTitle = replacedTitle.substring(0, 40) + "...";
