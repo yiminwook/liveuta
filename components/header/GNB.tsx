@@ -34,8 +34,8 @@ const GNB = () => {
     <header>
       <nav className={gnb['nav']} ref={gnbRef}>
         <ul>
-          <li className={gnb['mobile-nav']}>
-            <label htmlFor="mobile_nav" tabIndex={0}>
+          <li className={gnb['sidebar']}>
+            <label htmlFor="sidebar" tabIndex={0}>
               <RiMenuAddLine size={'1.2rem'} color={'inherit'} />
             </label>
           </li>

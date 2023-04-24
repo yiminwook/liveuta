@@ -8,7 +8,7 @@ const { publicRuntimeConfig } = getConfig();
 const Sidebar = () => {
   return (
     <div>
-      <input type="checkBox" id="mobile_nav" className={mobileNav['check-box']} />
+      <input type="checkBox" id="sidebar" className={mobileNav['check-box']} />
       <div className={mobileNav['container']}>
         <div className={mobileNav['sidebar']}>
           <ul>
@@ -21,11 +21,11 @@ const Sidebar = () => {
               </Link>
             </li>
           </ul>
-          <label htmlFor="mobile_nav" className={mobileNav['close']}>
+          <label htmlFor="sidebar" className={mobileNav['close']}>
             <FaWindowClose size={'2rem'} color="inherit" />
           </label>
         </div>
-        <label htmlFor="mobile_nav" className={mobileNav['back-drop']} />
+        <label htmlFor="sidebar" className={mobileNav['back-drop']} />
       </div>
     </div>
   );
