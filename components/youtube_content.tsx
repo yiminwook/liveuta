@@ -24,7 +24,7 @@ const YoutubeContent = ({ contents }: YoutubeContentProps) => {
   let thumbnailAlt = `${title}_img`;
 
   if (thumbnailUrl === 'failed to get' || thumbnailUrl === undefined || thumbnailUrl === null) {
-    thumbnailUrl = '/thumbnail_alt_img.jpg';
+    thumbnailUrl = '/thumbnail_alt_img.png';
     thumbnailAlt = `${title}_error_img`;
   }
 
@@ -45,7 +45,7 @@ const YoutubeContent = ({ contents }: YoutubeContentProps) => {
                 fill
               />
             ) : (
-              <Image src="/thumbnail_alt_img.jpg" alt={thumbnailAlt} unoptimized fill />
+              <Image src="/thumbnail_alt_img.png" alt={thumbnailAlt} unoptimized fill />
             )}
           </Link>
         </div>

@@ -1,6 +1,15 @@
 @import 'var';
 @import 'mixin';
 
+@include keyframe(loading) {
+  0% {
+    transform: rotateZ(-90deg);
+  }
+  100% {
+    transform: rotateZ(270deg);
+  }
+}
+
 .loading {
   position: fixed;
   z-index: 100;
@@ -15,13 +24,26 @@
   justify-content: center;
 
   div {
-    img {
-      @include animation(loading, 1.5s, 0s);
-    }
     div {
-      font-size: 0.8rem;
+      color: map-get($colors, main);
+      position: relative;
       text-align: center;
+
+      svg {
+        position: absolute;
+        top: -15px;
+        left: 0px;
+        transform: rotateZ(-90deg);
+        @include animation(loading, 1.5s, 0s);
+      }
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      text-align: center;
+      font-weight: 500;
       color: map-get($colors, light-font);
+      margin: 0;
     }
   }
 }

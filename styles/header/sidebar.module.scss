@@ -7,6 +7,7 @@
   &:checked ~ .container {
     visibility: visible;
     opacity: 1;
+
     .sidebar {
       transform: translateX(0%);
     }
@@ -14,15 +15,16 @@
 }
 
 .container {
-  visibility: hidden;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 500;
-  position: fixed;
+  visibility: hidden;
+  opacity: 0;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   height: 100vh;
-  opacity: 0;
+
   @include transition(all, 0.3s, linear);
 
   .sidebar {
@@ -46,6 +48,7 @@
         }
       }
     }
+
     .close {
       position: absolute;
       top: 0;
