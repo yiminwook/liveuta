@@ -41,6 +41,8 @@ const YoutubeContent = ({ contents }: YoutubeContentProps) => {
                 ref={imgRef}
                 onLoad={handleImgValidity}
                 onError={() => setImgLoaded(false)}
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mPMiCuoBwAEIwG3Vpkr7gAAAABJRU5ErkJggg=="
                 unoptimized
                 fill
               />

@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { ReactNode } from 'react';
 import Head from 'next/head';
-import GNB from './header/GNB';
+import GNB from '@/components/header/GNB';
 import { TfiArrowCircleUp } from 'react-icons/tfi';
-import Loading from './loading';
+import Loading from '@/components/loading';
 import useUpcommingData from '@/hooks/useUpcommingData';
 import getConfig from 'next/config';
 import home from '@/styles/Home.module.scss';

@@ -1,6 +1,6 @@
 import { rowData, UpcomingData } from '@/models/sheet/in_sheet';
 import { sheets_v4 } from 'googleapis';
-import { getinterval } from './get_time';
+import { getinterval } from '@/utils/get_time';
 
 interface ParseSheetDataType {
   data: sheets_v4.Schema$ValueRange;
