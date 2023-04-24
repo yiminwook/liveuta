@@ -5,9 +5,9 @@ import { AiOutlineLoading } from 'react-icons/ai';
 const Loading = () => {
   return (
     <div className={loading['loading']}>
-      <div style={{ border: 'none' }}>
-        <div>
-          <Image src="/loading.png" width={100} height={100} alt="loading_img" unoptimized />
+      <div>
+        <div style={{ border: 'none' }}>
+          <Image src="/loading.png" width={100} height={100} alt="loading_img" unoptimized style={{ border: 'none' }} />
           <AiOutlineLoading size={130} color={'inherit'} />
         </div>
         <h2>Loading Now!</h2>
