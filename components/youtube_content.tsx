@@ -42,7 +42,7 @@ const YoutubeContent = ({ contents }: YoutubeContentProps) => {
                 onLoad={handleImgValidity}
                 onError={() => setImgLoaded(false)}
                 placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mPMiCuoBwAEIwG3Vpkr7gAAAABJRU5ErkJggg=="
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8U9hfDwAGKgJNP3RWxQAAAABJRU5ErkJggg=="
                 unoptimized
                 fill
               />
