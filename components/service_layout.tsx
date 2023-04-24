@@ -47,6 +47,7 @@ const ServiceLayout = ({
           rel="icon"
           href="https://img.icons8.com/external-microdots-premium-microdot-graphic/64/null/external-holiday-christmas-new-year-vol2-microdots-premium-microdot-graphic-4.png"
         />
+        <link rel="preload" as="image" href="/loading.png" />
       </Head>
       <GNB />
       {upcomingDataLoading || allDataLoading ? <Loading /> : null}

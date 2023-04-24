@@ -1,18 +1,19 @@
 import Image from 'next/image';
 import loading from '@/styles/loading.module.scss';
 import { AiOutlineLoading } from 'react-icons/ai';
+import loadingImage from '/public/loading.png';
 
 const Loading = () => {
   return (
     <div className={loading['loading']}>
       <div>
-        <div style={{ border: 'none' }}>
+        <div>
           <Image
-            src="/loading.png"
+            src={loadingImage}
             width={100}
             height={100}
             alt="loading_img"
-            style={{ border: 'none' }}
+            placeholder="blur"
             unoptimized
             priority
           />
