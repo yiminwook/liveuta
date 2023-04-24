@@ -7,7 +7,15 @@ const Loading = () => {
     <div className={loading['loading']}>
       <div>
         <div style={{ border: 'none' }}>
-          <Image src="/loading.png" width={100} height={100} alt="loading_img" unoptimized style={{ border: 'none' }} />
+          <Image
+            src="/loading.png"
+            width={100}
+            height={100}
+            alt="loading_img"
+            style={{ border: 'none' }}
+            unoptimized
+            priority
+          />
           <AiOutlineLoading size={130} color={'inherit'} />
         </div>
         <h2>Loading Now!</h2>
