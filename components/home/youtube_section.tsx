@@ -1,6 +1,6 @@
 import { UpcomingData } from '@/models/sheet/in_sheet';
 import home from '@/styles/Home.module.scss';
-import YoutubeContent from '../youtube_content';
+import YoutubeContent from '@/components/youtube_content';
 
 interface YoutubeSectionProps {
   contents: UpcomingData[];
