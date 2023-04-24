@@ -8,7 +8,7 @@
     visibility: visible;
 
     .sidebar {
-      transform: translateX(0%);
+      transform: translateX(100%);
     }
     .back-drop {
       opacity: 1;
@@ -29,10 +29,9 @@
   .sidebar {
     position: relative;
     background-color: #ffd7de;
-    width: 80%;
+    width: 18rem;
     height: 100%;
-    max-width: 20rem;
-    transform: translateX(-100%);
+    left: -18rem;
     @include transition(transform, 0.3s, linear);
 
     ul {
