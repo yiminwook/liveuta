@@ -20,11 +20,11 @@ const YoutubeContentCard = ({ contents }: YoutubeContentCardProps) => {
     }
   };
 
-  let thumbnailUrl = contents.thumbnailUrl;
+  let thumbnailURL = contents.thumbnailURL;
   let thumbnailAlt = `${title}_img`;
 
-  if (thumbnailUrl === 'failed to get' || thumbnailUrl === undefined || thumbnailUrl === null) {
-    thumbnailUrl = '/thumbnail_alt_img.png';
+  if (thumbnailURL === 'failed to get' || thumbnailURL === undefined || thumbnailURL === null) {
+    thumbnailURL = '/thumbnail_alt_img.png';
     thumbnailAlt = `${title}_error_img`;
   }
 
@@ -35,7 +35,7 @@ const YoutubeContentCard = ({ contents }: YoutubeContentCardProps) => {
           <Link className={youtubeContentCard['img_link']} href={url ?? ''}>
             {imgLoaded ? (
               <Image
-                src={thumbnailUrl}
+                src={thumbnailURL}
                 alt={thumbnailAlt}
                 loading="lazy"
                 ref={imgRef}

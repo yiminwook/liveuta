@@ -1,20 +1,25 @@
 import { rowData, UpcomingData } from '@/models/sheet/Insheet';
 import { sheets_v4 } from 'googleapis';
-import { getinterval } from '@/utils/get_time';
+import { getinterval } from '@/utils/GetTime';
 
-interface ParseSheetDataType {
+interface ParseYoutubeContentDataType {
   data: sheets_v4.Schema$ValueRange;
   nowTime: number;
   intervalTime: number;
   showAll?: boolean;
 }
 
-const parseSheetData = ({ data, nowTime, intervalTime, showAll }: ParseSheetDataType): UpcomingData[] => {
+const parseYoutubeContentData = ({
+  data,
+  nowTime,
+  intervalTime,
+  showAll,
+}: ParseYoutubeContentDataType): UpcomingData[] => {
   const upcoming: UpcomingData[] = [];
   const delayTime = nowTime - intervalTime;
   const dataValue = data.values as rowData[];
   if (!dataValue) return [];
-  dataValue.forEach(([title, url, channelName, scheduledTime, thumbnailUrl, bool]: rowData) => {
+  dataValue.forEach(([title, url, channelName, scheduledTime, thumbnailURL, bool]: rowData) => {
     if (showAll || bool === 'FALSE') {
       const stringTime = scheduledTime.replace(' ', 'T').split(' JST')[0];
       if (stringTime.length === 19) {
@@ -30,7 +35,7 @@ const parseSheetData = ({ data, nowTime, intervalTime, showAll }: ParseSheetData
             minute: 'numeric',
           });
           const iterval = getinterval(nowTime, timestamp);
-          const highThumbnailUrl = thumbnailUrl.replace(/(hqdefault|maxresdefault|sddefault|default)/i, 'hqdefault');
+          const highThumbnailURL = thumbnailURL.replace(/(hqdefault|maxresdefault|sddefault|default)/i, 'hqdefault');
           let replacedTitle = title.replace(/\【(.*?)\】|\〖(.*?)\〗|\[(.*?)\]|\((.*?)\)/gi, '');
           // if (replacedTitle.length > 40) {
           //   replacedTitle = replacedTitle.substring(0, 40) + "...";
@@ -42,7 +47,7 @@ const parseSheetData = ({ data, nowTime, intervalTime, showAll }: ParseSheetData
             channelName,
             videoId,
             timestamp,
-            thumbnailUrl: highThumbnailUrl,
+            thumbnailURL: highThumbnailURL,
             korTime,
             iterval,
           };
@@ -54,4 +59,4 @@ const parseSheetData = ({ data, nowTime, intervalTime, showAll }: ParseSheetData
   return upcoming;
 };
 
-export default parseSheetData;
+export default parseYoutubeContentData;

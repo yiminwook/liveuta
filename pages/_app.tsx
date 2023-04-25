@@ -8,7 +8,6 @@ const App = ({ Component, pageProps }: AppProps) => {
     <>
       <div className="background-left" />
       <div className="background-right" />
-      <div className="backdrop" />
       <ServiceLayout title="LiveUta Home">
         <Component {...pageProps} />
       </ServiceLayout>

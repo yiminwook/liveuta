@@ -8,7 +8,7 @@ export interface GoogleSheetConfigType {
 
 export const googleSheetService = google.sheets({ version: 'v4' });
 
-export const getGoogleSheetData = async ({ spreadsheetId, key, range }: GoogleSheetConfigType) => {
+export const getGoogleSheet = async ({ spreadsheetId, key, range }: GoogleSheetConfigType) => {
   const googleSheetConfig: GoogleSheetConfigType = {
     spreadsheetId,
     key,
