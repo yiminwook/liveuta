@@ -2,6 +2,23 @@
 @import 'mixin';
 @import 'placeholder';
 
+%nav-button {
+  border-radius: 10px;
+  padding: 0.3rem 1.2rem;
+  background-color: map-get($colors, salmon);
+  color: map-get($colors, light-font);
+  @include transition(background-color, 80ms, $bezier-curve);
+  @include box-shadow();
+
+  &:hover {
+    background-color: map-get($colors, hover-salmon);
+  }
+
+  &:active {
+    background-color: map-get($colors, hover-salmon);
+  }
+}
+
 .blank {
   height: 3.5rem;
 }
@@ -40,20 +57,7 @@
       margin-left: 1rem;
 
       button {
-        border-radius: 10px;
-        text-align: center;
-        padding: 0.3rem 1.2rem;
-        background-color: map-get($colors, salmon);
-        @include box-shadow();
-        cursor: pointer;
-
-        &:hover {
-          background-color: map-get($colors, hover-salmon);
-        }
-
-        &:active {
-          background-color: map-get($colors, hover-salmon);
-        }
+        @extend %nav-button;
       }
 
       @include min-width($mixin-large-width) {
@@ -76,26 +80,13 @@
       }
     }
 
-    .form_link {
+    .form {
       margin-right: 1rem;
       @include transition(background-color, 80ms, $bezier-curve);
 
       a {
-        padding: 0.4rem 0.8rem;
-        border-radius: 10px;
-        padding: 0.3rem 1.2rem;
-        background-color: map-get($colors, salmon);
-        text-align: center;
-        line-height: 1;
-        color: map-get($colors, light-font);
-        @include box-shadow();
-
-        &:hover {
-          background-color: map-get($colors, hover-salmon);
-        }
-
-        &:active {
-          background-color: map-get($colors, hover-salmon);
+        button {
+          @extend %nav-button;
         }
       }
 
