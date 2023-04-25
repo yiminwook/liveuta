@@ -1,9 +1,9 @@
-import { UpcomingData } from '@/models/sheet/Insheet';
+import { ContentsDataType } from '@/models/sheet/Insheet';
 import home from '@/styles/home/Home.module.scss';
 import YoutubeContentCard from '@/components/YoutubeContentCard';
 
 interface YoutubeSectionProps {
-  contents: UpcomingData[];
+  contents: ContentsDataType[];
 }
 
 const YoutubeSection = ({ contents }: YoutubeSectionProps) => {
