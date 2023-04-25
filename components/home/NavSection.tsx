@@ -1,34 +1,38 @@
 import home from '@/styles/home/Home.module.scss';
+import NavLink from '@/components/common/NavLink';
 
 interface NavSectionProps {
-  value: 0 | 1 | 2;
-  buttonFunc: () => void;
   total: number;
 }
 
-const NavSection = ({ value, buttonFunc, total }: NavSectionProps) => {
+const NavSection = ({ total }: NavSectionProps) => {
   let string: string;
-
-  switch (value) {
-    case 0:
-      string = '예정';
-      break;
-    case 1:
-      string = '라이브';
-      break;
-    case 2:
-      string = '전체';
-      break;
-    default:
-      string = '예정';
-  }
 
   return (
     <section className={home['nav-section']}>
-      <button onClick={buttonFunc}>{string}</button>
+      <NavTap />
       <div>{`Total: ${total}`}</div>
     </section>
   );
 };
 
 export default NavSection;
+
+const NavTap = () => {
+  return (
+    <ul className={home['nav-tab']}>
+      <NavLink modifier={home['active']} href="/scheduled">
+        예정
+      </NavLink>
+      <NavLink modifier={home['active']} href="/live">
+        라이브
+      </NavLink>
+      <NavLink modifier={home['active']} href="/daily">
+        24시
+      </NavLink>
+      <NavLink modifier={home['active']} href="/all">
+        전체
+      </NavLink>
+    </ul>
+  );
+};

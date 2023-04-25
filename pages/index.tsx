@@ -1,65 +1,69 @@
 import { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import { ContentsDataType } from '@/models/sheet/Insheet';
-import useUpcommingData from '@/hooks/UseUpcommingData';
+import useScheduledData from '@/hooks/UseScheduledData';
 import home from '@/styles/home/Home.module.scss';
 import useAllData from '@/hooks/UseAllData';
 import NavSection from '@/components/home/NavSection';
 import YoutubeSection from '@/components/home/YoutubeSection';
 import Loading from '@/components/Loading';
+import useDailyData from '@/hooks/UseDailyData';
+import useLiveData from '@/hooks/UseLiveData';
 
-interface HomePageProps {
-  total: number;
-  upcoming: ContentsDataType[];
+export interface HomePageProps {
+  filter?: 'scheduled' | 'live' | 'daily' | 'all';
 }
 
-const HomePage: NextPage<HomePageProps> = () => {
-  const [total, setTotal] = useState<number>(0);
-  const [filter, setFilter] = useState<0 | 1 | 2>(0);
-  const [contents, setContents] = useState<ContentsDataType[]>([]);
-
-  const { data: upcomingData, isLoading: upcommingDataLoading } = useUpcommingData();
+const HomePage: NextPage<HomePageProps> = ({ filter }) => {
+  const { data: scheduledData, isLoading: scheduledLoading } = useScheduledData();
+  const { data: liveData, isLoading: liveLoading } = useLiveData();
+  const { data: dailyData, isLoading: dailyLoading } = useDailyData();
   const { data: allData, isLoading: allDataLoading } = useAllData();
 
-  const getData = () => {
-    if (filter === 0) {
-      if (!upcomingData) return;
-      const { total, upcoming } = upcomingData;
-      setTotal(() => total);
-      setContents(() => upcoming);
-    } else if (filter === 1) {
-      if (!upcomingData) return;
-      const { upcoming } = upcomingData;
-      const liveData = upcoming.filter((data) => data.isLive === true);
-      setTotal(() => liveData.length);
-      setContents(() => liveData);
-    } else {
-      if (!allData) return;
-      const { total, upcoming } = allData;
-      setTotal(() => total);
-      setContents(() => upcoming);
-    }
-  };
+  const [contents, setContents] = useState<ContentsDataType[]>([]);
+  const [total, setTotal] = useState<number>(0);
 
-  const handleShow = () => {
-    setFilter((pre) => {
-      if (pre === 2) return 0;
-      else return (pre + 1) as 1 | 2;
-    });
+  const setData = () => {
+    let data: ContentsDataType[] | undefined;
+    let count: number | undefined;
+    switch (filter) {
+      case 'scheduled':
+        data = scheduledData?.contents;
+        count = scheduledData?.total;
+        break;
+      case 'live':
+        data = liveData?.contents;
+        count = liveData?.total;
+        break;
+      case 'daily':
+        data = dailyData?.contents;
+        count = dailyData?.total;
+        break;
+      case 'all':
+        data = allData?.contents;
+        count = allData?.total;
+        break;
+      default:
+        data = scheduledData?.contents;
+        count = scheduledData?.total;
+    }
+
+    setContents(() => [...(data ?? [])]);
+    setTotal(() => count ?? 0);
   };
 
   useEffect(() => {
-    getData();
+    setData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [upcomingData, allData, filter]);
+  }, [filter, scheduledData, liveData, dailyData, allData]);
 
-  if (allDataLoading || upcommingDataLoading) {
+  if (scheduledLoading || liveLoading || dailyLoading || allDataLoading) {
     return <Loading />;
   }
 
   return (
     <main className={home['main']}>
-      <NavSection value={filter} buttonFunc={handleShow} total={total} />
+      <NavSection total={total} />
       <YoutubeSection contents={contents} />
     </main>
   );

@@ -3,6 +3,26 @@
 @import 'var';
 @import 'placeholder';
 
+%background-side {
+  @include check-device() {
+    display: none;
+  }
+
+  z-index: -1;
+  width: 10%;
+  height: 100vh;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  margin: 0;
+  opacity: 0;
+  @include transition(opacity, 0.3s, linear);
+
+  @include min-width($mixin-2xl-width) {
+    opacity: 1;
+  }
+}
+
 html,
 body {
   min-width: 20rem;
@@ -22,7 +42,7 @@ li {
   padding: 0;
 
   &.active {
-    color: map-get($colors, highlight-font) !important;
+    color: map-get($colors, highlight-font);
   }
 }
 
@@ -75,24 +95,5 @@ body {
     background-image: url('/background3.jpg');
     background-position: 40%;
     right: 0;
-  }
-}
-
-%background-side {
-  @include check-device() {
-    display: none;
-  }
-
-  width: 10%;
-  height: 100vh;
-  background-size: cover;
-  position: fixed;
-  top: 0;
-  margin: 0;
-  opacity: 0;
-  @include transition(opacity, 0.3s, linear);
-
-  @include min-width($mixin-2xl-width) {
-    opacity: 1;
   }
 }

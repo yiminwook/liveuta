@@ -13,3 +13,8 @@ export interface ContentsDataType {
   korTime: string;
   interval: string;
 }
+
+export interface sheetAPIReturnType {
+  total: number;
+  contents: ContentsDataType[];
+}

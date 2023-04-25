@@ -56,7 +56,7 @@ const GNB = () => {
           <li className={gnb['title']}>
             <a href="/">Live Uta</a>
           </li>
-          <li className={gnb['form_link']}>
+          <li className={gnb['form']}>
             <Link href={`https://docs.google.com/spreadsheets/d/${CONTENTS_SHEET_ID ?? ''}/`}>
               <button tabIndex={-1}>
                 <SiGooglesheets size={'1.2rem'} color={'inherit'} />
