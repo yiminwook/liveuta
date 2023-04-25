@@ -4,7 +4,7 @@ import Head from 'next/head';
 import GNB from '@/components/header/GNB';
 import { TfiArrowCircleUp } from 'react-icons/tfi';
 import getConfig from 'next/config';
-import home from '@/styles/home/Home.module.scss';
+import home from '@/styles/home/home.module.scss';
 
 interface ServiceLayoutProps {
   title?: string;

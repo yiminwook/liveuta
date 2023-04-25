@@ -1,6 +1,6 @@
 import { ContentsDataType } from '@/models/sheet/Insheet';
 import useSWR from 'swr';
-import { fetcher } from '@/hooks/Fetcher';
+import { fetcher } from '@/hooks/fetcher';
 
 const useUpcommingData = () => {
   const { data, error, mutate, isLoading } = useSWR(

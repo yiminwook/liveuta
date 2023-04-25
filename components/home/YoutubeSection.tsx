@@ -1,5 +1,5 @@
 import { ContentsDataType } from '@/models/sheet/Insheet';
-import home from '@/styles/home/Home.module.scss';
+import home from '@/styles/home/home.module.scss';
 import YoutubeContentCard from '@/components/YoutubeContentCard';
 
 interface YoutubeSectionProps {

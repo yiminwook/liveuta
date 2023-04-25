@@ -1,9 +1,9 @@
 import { FaWindowClose } from 'react-icons/fa';
-import mobileNav from '@/styles/header/Sidebar.module.scss';
+import mobileNav from '@/styles/header/sidebar.module.scss';
 import getConfig from 'next/config';
 import { MouseEvent } from 'react';
 import useStopPropagation from '@/hooks/UseStopPropagation';
-import NavLink from '@/components/common/NavLink';
+import NavLink from '@/components/common/navLink';
 
 const {
   publicRuntimeConfig: { CHANNELS_SHEET_ID },
