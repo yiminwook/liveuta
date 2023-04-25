@@ -2,7 +2,7 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import getConfig from 'next/config';
 import Link from 'next/link';
-import Sidebar from '@/components/header/sidebar';
+import Sidebar from '@/components/header/Sidebar';
 import { RiMenuAddLine } from 'react-icons/ri';
 import { SiGooglesheets } from 'react-icons/si';
 import gnb from '@/styles/header/GNB.module.scss';

@@ -1,4 +1,4 @@
-import home from '@/styles/home/home.module.scss';
+import home from '@/styles/home/Home.module.scss';
 
 interface NavSectionProps {
   value: 0 | 1 | 2;

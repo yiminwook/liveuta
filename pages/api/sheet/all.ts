@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { ContentsDataType } from '@/models/sheet/Insheet';
 import { getNow } from '@/utils/GetTime';
 import { getSheet } from '@/models/sheet/Sheets';
-import parseYoutubeContentData from '@/utils/parseSheetData';
+import parseYoutubeContentData from '@/utils/ParseSheetData';
 import getENV from '@/utils/GetENV';
 import { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } from '@/const';
 
