@@ -8,7 +8,9 @@ import { SiGooglesheets } from 'react-icons/si';
 import gnb from '@/styles/header/GNB.module.scss';
 import { useRouter } from 'next/router';
 
-const { publicRuntimeConfig } = getConfig();
+const {
+  publicRuntimeConfig: { CONTENTS_SHEET_ID },
+} = getConfig();
 
 const GNB = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -35,10 +37,8 @@ const GNB = () => {
   }, [router]);
 
   useEffect(() => {
-    console.log('scroll m');
     window.addEventListener('scroll', handleScroll);
     return () => {
-      console.log('scroll u');
       window.removeEventListener('scroll', handleScroll);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -57,7 +57,7 @@ const GNB = () => {
             <a href="/">Live Uta</a>
           </li>
           <li className={gnb['form_link']}>
-            <Link href={`https://docs.google.com/spreadsheets/d/${publicRuntimeConfig.spreadsheetId ?? ''}/`}>
+            <Link href={`https://docs.google.com/spreadsheets/d/${CONTENTS_SHEET_ID ?? ''}/`}>
               <button tabIndex={-1}>
                 <SiGooglesheets size={'1.2rem'} color={'inherit'} />
               </button>

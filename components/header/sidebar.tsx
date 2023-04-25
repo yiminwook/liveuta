@@ -5,7 +5,9 @@ import { MouseEvent } from 'react';
 import useStopPropagation from '@/hooks/UseStopPropagation';
 import NavLink from '@/components/common/NavLink';
 
-const { publicRuntimeConfig } = getConfig();
+const {
+  publicRuntimeConfig: { CHANNELS_SHEET_ID },
+} = getConfig();
 
 interface SidebarProps {
   show: boolean;
@@ -16,7 +18,6 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
   const { stopPropagation } = useStopPropagation();
   const onClick = (e: MouseEvent) => {
     e.stopPropagation();
-    console.log(e.target);
     onClose();
   };
 
@@ -28,9 +29,7 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
             <NavLink href="/">Home</NavLink>
             <NavLink href="https://gall.dcinside.com/mini/board/lists?id=vuta">갤러리로</NavLink>
             <NavLink href="/channels">Channels</NavLink>
-            <NavLink href={`https://docs.google.com/spreadsheets/d/${publicRuntimeConfig.channelsheetId ?? ''}/`}>
-              Channel_ID
-            </NavLink>
+            <NavLink href={`https://docs.google.com/spreadsheets/d/${CHANNELS_SHEET_ID ?? ''}/`}>Channel_ID</NavLink>
           </ul>
           <button className={mobileNav['close']} onClick={onClose}>
             <FaWindowClose size={'2rem'} color="inherit" />

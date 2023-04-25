@@ -12,15 +12,15 @@ interface ServiceLayoutProps {
   children: ReactNode;
 }
 
-const { publicRuntimeConfig } = getConfig();
+const {
+  publicRuntimeConfig: { META_IMAGE },
+} = getConfig();
 
 const ServiceLayout = ({
   title = 'LiveUta',
   discription = 'Show V-Tuber Utawaku schedule',
   children,
 }: ServiceLayoutProps) => {
-  const metaImg = publicRuntimeConfig.meta_img;
-
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -36,8 +36,8 @@ const ServiceLayout = ({
         <meta property="og:description" content={discription} />
         <meta name="description" content={discription} />
         <meta name="twitter:card" content="summary" />
-        <meta property="og:image" content={metaImg} />
-        <meta name="twitter:image" content={metaImg} />
+        <meta property="og:image" content={META_IMAGE} />
+        <meta name="twitter:image" content={META_IMAGE} />
         <link
           rel="icon"
           href="https://img.icons8.com/external-microdots-premium-microdot-graphic/64/null/external-holiday-christmas-new-year-vol2-microdots-premium-microdot-graphic-4.png"
