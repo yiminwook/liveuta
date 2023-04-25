@@ -30,28 +30,34 @@
       font-size: 1rem;
       font-weight: 500;
 
-      button {
-        width: 4.5rem;
-        padding: 0.4rem;
+      .nav-tab {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 13rem;
+        overflow: hidden;
         font-family: inherit;
         font-size: inherit;
         font-weight: inherit;
         border: none;
         border-radius: 5px;
         background-color: lighten(map-get($colors, main), 10%);
-        cursor: pointer;
-        @include transition(all, 0.2s, linear);
         @include box-shadow();
 
-        &:hover,
-        &:active {
-          scale: 1.1;
-          color: lighten(map-get($colors, main), 10%);
-          background-color: map-get($colors, salmon);
-        }
+        li {
+          width: 100%;
+          line-height: 2.5rem;
+          text-align: center;
+          @include transition(background-color, 0.2s, linear);
 
-        &:focus-visible {
-          outline-offset: 5px;
+          &:hover {
+            background-color: map-get($colors, salmon);
+            color: lighten(map-get($colors, main), 10%);
+          }
+          &.active {
+            background-color: darken(map-get($colors, highlight-font), 3%);
+            color: white;
+          }
         }
       }
 
