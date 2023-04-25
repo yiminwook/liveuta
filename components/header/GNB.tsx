@@ -6,15 +6,16 @@ import Sidebar from '@/components/header/Sidebar';
 import { RiMenuAddLine } from 'react-icons/ri';
 import { SiGooglesheets } from 'react-icons/si';
 import gnb from '@/styles/header/GNB.module.scss';
+import { useRouter } from 'next/router';
 
 const { publicRuntimeConfig } = getConfig();
 
 const GNB = () => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const router = useRouter();
   const gnbRef = useRef<HTMLElement>(null);
 
   const toggleSidebar = () => {
-    console.log(showSidebar);
     setShowSidebar((pre) => !pre);
   };
 
@@ -28,6 +29,10 @@ const GNB = () => {
       }
     }
   }, []);
+
+  useEffect(() => {
+    setShowSidebar(() => false);
+  }, [router]);
 
   useEffect(() => {
     console.log('scroll m');
