@@ -8,16 +8,18 @@
   align-items: center;
 
   .main {
+    width: 100%;
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 
     @include min-width($mixin-middle-width) {
+      width: auto;
       padding: 0.6rem;
-      min-width: auto;
       gap: 0.6rem;
     }
+
     @include min-width($mixin-large-width) {
       padding: 1rem;
       gap: 0.8rem;
