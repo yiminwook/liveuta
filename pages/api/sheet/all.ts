@@ -3,11 +3,15 @@ import { UpcomingData } from '@/models/sheet/in_sheet';
 import { getNow } from '@/utils/get_time';
 import { getGoogleSheetData } from '@/models/sheet/google_sheet';
 import parseSheetData from '@/utils/parseSheetData';
+import getEnv from '@/utils/get_env';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<{ total: number; upcoming: UpcomingData[] }>) => {
   try {
     if (req.method !== 'GET') throw new Error('invaild method');
-    const sheetData = await getGoogleSheetData();
+    const spreadsheetId = getEnv('spreadsheetId');
+    const key = getEnv('sheet_apiKey');
+    const range = getEnv('upcoming_sheet_range');
+    const sheetData = await getGoogleSheetData({ spreadsheetId, key, range });
     const nowTime = getNow(true);
     /** 24시간 */
     const intervalTime = 24 * 60 * 60 * 1000;
