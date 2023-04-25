@@ -1,4 +1,4 @@
-import { rowData, UpcomingData } from '@/models/sheet/in_sheet';
+import { rowData, UpcomingData } from '@/models/sheet/Insheet';
 import { sheets_v4 } from 'googleapis';
 import { getinterval } from '@/utils/get_time';
 

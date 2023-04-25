@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { UpcomingData } from '@/models/sheet/in_sheet';
+import { UpcomingData } from '@/models/sheet/Insheet';
 import { getNow } from '@/utils/get_time';
-import { getGoogleSheetData } from '@/models/sheet/google_sheet';
+import { getGoogleSheetData } from '@/models/sheet/GoogleSheet';
 import parseSheetData from '@/utils/parseSheetData';
 import getEnv from '@/utils/get_env';
 

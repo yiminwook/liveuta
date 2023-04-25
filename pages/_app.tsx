@@ -1,5 +1,5 @@
 import '@/styles/globals.scss';
-import ServiceLayout from '@/components/service_layout';
+import ServiceLayout from '@/components/ServiceLayout';
 import { Analytics } from '@vercel/analytics/react';
 import type { AppProps } from 'next/app';
 

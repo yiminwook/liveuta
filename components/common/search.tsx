@@ -5,10 +5,10 @@ interface SearchProps {
   style?: CSSProperties;
   placeHolder?: string;
   disabled?: boolean;
-  searchFunc: (value: string) => void;
+  onSearch: (value: string) => void;
 }
 
-const Search = ({ ref, style, placeHolder = '', disabled = false, searchFunc }: SearchProps) => {
+const Search = ({ ref, style, placeHolder = '', disabled = false, onSearch }: SearchProps) => {
   const [value, setValue] = useState('');
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +20,7 @@ const Search = ({ ref, style, placeHolder = '', disabled = false, searchFunc }: 
   const onSubmit = (e: FormEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    searchFunc(value);
+    onSearch(value);
   };
 
   return (

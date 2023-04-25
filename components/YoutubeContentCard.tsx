@@ -1,14 +1,14 @@
 import { useRef, useState } from 'react';
-import { UpcomingData } from '@/models/sheet/in_sheet';
+import { UpcomingData } from '@/models/sheet/Insheet';
 import Link from 'next/link';
 import Image from 'next/image';
-import youtubeContent from '@/styles/youtube_content.module.scss';
+import youtubeContentCard from '@/styles/YoutubeContentCard.module.scss';
 
-interface YoutubeContentProps {
+interface YoutubeContentCardProps {
   contents: UpcomingData;
 }
 
-const YoutubeContent = ({ contents }: YoutubeContentProps) => {
+const YoutubeContentCard = ({ contents }: YoutubeContentCardProps) => {
   const { title, url, channelName, videoId, korTime, iterval } = contents;
   const [imgLoaded, setImgLoaded] = useState(true);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -29,10 +29,10 @@ const YoutubeContent = ({ contents }: YoutubeContentProps) => {
   }
 
   return (
-    <div className={youtubeContent['youtube__container']} key={videoId}>
-      <div className={youtubeContent['youtube_content__container']}>
-        <div className={youtubeContent['youtube_thumnail__container']}>
-          <Link className={youtubeContent['img_link']} href={url ?? ''}>
+    <div className={youtubeContentCard['youtube__container']} key={videoId}>
+      <div className={youtubeContentCard['youtube_content__container']}>
+        <div className={youtubeContentCard['youtube_thumnail__container']}>
+          <Link className={youtubeContentCard['img_link']} href={url ?? ''}>
             {imgLoaded ? (
               <Image
                 src={thumbnailUrl}
@@ -51,15 +51,15 @@ const YoutubeContent = ({ contents }: YoutubeContentProps) => {
             )}
           </Link>
         </div>
-        <div className={youtubeContent['youtube_description']}>
-          <div className={youtubeContent['youtube_channel_name']}>{channelName ?? 'no channel name'}</div>
-          <div className={youtubeContent['youtube_title']}>{title ?? 'no title'}</div>
-          <Link className={youtubeContent['youtube_link']} href={url ?? ''}>
+        <div className={youtubeContentCard['youtube_description']}>
+          <div className={youtubeContentCard['youtube_channel_name']}>{channelName ?? 'no channel name'}</div>
+          <div className={youtubeContentCard['youtube_title']}>{title ?? 'no title'}</div>
+          <Link className={youtubeContentCard['youtube_link']} href={url ?? ''}>
             {url ?? 'no url'}
           </Link>
-          <div className={youtubeContent['youtube_time__container']}>
-            <div className={youtubeContent['youtube_time__kor']}>{korTime ?? 'no sheduled time'}</div>
-            <div className={youtubeContent['youtube_time__inter']}>{iterval ? `(${iterval})` : ''}</div>
+          <div className={youtubeContentCard['youtube_time__container']}>
+            <div className={youtubeContentCard['youtube_time__kor']}>{korTime ?? 'no sheduled time'}</div>
+            <div className={youtubeContentCard['youtube_time__inter']}>{iterval ? `(${iterval})` : ''}</div>
           </div>
         </div>
       </div>
@@ -67,4 +67,4 @@ const YoutubeContent = ({ contents }: YoutubeContentProps) => {
   );
 };
 
-export default YoutubeContent;
+export default YoutubeContentCard;

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { NextPage } from 'next';
-import { UpcomingData } from '@/models/sheet/in_sheet';
+import { UpcomingData } from '@/models/sheet/Insheet';
 import useUpcommingData from '@/hooks/useUpcommingData';
-import home from '@/styles/home/home.module.scss';
-import useAllData from '@/hooks/useAllData';
-import NavSection from '@/components/home/nav_section';
-import YoutubeSection from '@/components/home/youtube_section';
-import Loading from '@/components/loading';
+import home from '@/styles/home/Home.module.scss';
+import useAllData from '@/hooks/UseAllData';
+import NavSection from '@/components/home/NavSection';
+import YoutubeSection from '@/components/home/YoutubeSection';
+import Loading from '@/components/Loading';
 
 interface HomePageProps {
   total: number;

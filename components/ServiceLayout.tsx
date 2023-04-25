@@ -3,11 +3,8 @@ import { ReactNode } from 'react';
 import Head from 'next/head';
 import GNB from '@/components/header/GNB';
 import { TfiArrowCircleUp } from 'react-icons/tfi';
-import Loading from '@/components/loading';
-import useUpcommingData from '@/hooks/useUpcommingData';
 import getConfig from 'next/config';
-import home from '@/styles/home/home.module.scss';
-import useAllData from '@/hooks/useAllData';
+import home from '@/styles/home/Home.module.scss';
 
 interface ServiceLayoutProps {
   title?: string;

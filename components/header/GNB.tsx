@@ -2,7 +2,7 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import getConfig from 'next/config';
 import Link from 'next/link';
-import Sidebar from '@/components/header/sidebar';
+import Sidebar from '@/components/header/Sidebar';
 import { RiMenuAddLine } from 'react-icons/ri';
 import { SiGooglesheets } from 'react-icons/si';
 import gnb from '@/styles/header/GNB.module.scss';
@@ -53,7 +53,9 @@ const GNB = () => {
           </li>
           <li className={gnb['form_link']}>
             <Link href={`https://docs.google.com/spreadsheets/d/${publicRuntimeConfig.spreadsheetId ?? ''}/`}>
-              <SiGooglesheets size={'1.2rem'} color={'inherit'} />
+              <button tabIndex={-1}>
+                <SiGooglesheets size={'1.2rem'} color={'inherit'} />
+              </button>
             </Link>
           </li>
         </ul>

@@ -1,11 +1,9 @@
 import { FaWindowClose } from 'react-icons/fa';
-import mobileNav from '@/styles/header/sidebar.module.scss';
-import Link from 'next/link';
+import mobileNav from '@/styles/header/Sidebar.module.scss';
 import getConfig from 'next/config';
-import React, { MouseEvent, PropsWithChildren, ReactNode } from 'react';
-import useStopPropagation from '@/hooks/useStopPropagation';
-import { useRouter } from 'next/router';
-import NavLink from '../common/navLink';
+import { MouseEvent } from 'react';
+import useStopPropagation from '@/hooks/UseStopPropagation';
+import NavLink from '@/components/common/NavLink';
 
 const { publicRuntimeConfig } = getConfig();
 
