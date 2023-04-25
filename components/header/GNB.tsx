@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import getConfig from 'next/config';
 import Link from 'next/link';
 import Sidebar from '@/components/header/sidebar';
@@ -10,8 +10,15 @@ import gnb from '@/styles/header/GNB.module.scss';
 const { publicRuntimeConfig } = getConfig();
 
 const GNB = () => {
+  const [showSidebar, setShowSidebar] = useState(false);
   const gnbRef = useRef<HTMLElement>(null);
-  const handleScroll = () => {
+
+  const toggleSidebar = () => {
+    console.log(showSidebar);
+    setShowSidebar((pre) => !pre);
+  };
+
+  const handleScroll = useCallback(() => {
     const current = gnbRef.current;
     if (current) {
       if (window.scrollY > 0) {
@@ -20,11 +27,13 @@ const GNB = () => {
         current.style.opacity = '1';
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
+    console.log('scroll m');
     window.addEventListener('scroll', handleScroll);
     return () => {
+      console.log('scroll u');
       window.removeEventListener('scroll', handleScroll);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,9 +44,9 @@ const GNB = () => {
       <nav className={gnb['nav']} ref={gnbRef}>
         <ul>
           <li className={gnb['sidebar']}>
-            <label htmlFor="sidebar" tabIndex={0}>
+            <button onClick={toggleSidebar}>
               <RiMenuAddLine size={'1.2rem'} color={'inherit'} />
-            </label>
+            </button>
           </li>
           <li className={gnb['title']}>
             <a href="/">Live Uta</a>
@@ -50,7 +59,7 @@ const GNB = () => {
         </ul>
       </nav>
       <div className={gnb['blank']} />
-      <Sidebar />
+      <Sidebar show={showSidebar} onClose={toggleSidebar} />
     </header>
   );
 };

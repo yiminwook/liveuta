@@ -2,30 +2,42 @@ import { FaWindowClose } from 'react-icons/fa';
 import mobileNav from '@/styles/header/sidebar.module.scss';
 import Link from 'next/link';
 import getConfig from 'next/config';
+import React, { MouseEvent, PropsWithChildren, ReactNode } from 'react';
+import useStopPropagation from '@/hooks/useStopPropagation';
+import { useRouter } from 'next/router';
+import NavLink from '../common/navLink';
 
 const { publicRuntimeConfig } = getConfig();
 
-const Sidebar = () => {
+interface SidebarProps {
+  show: boolean;
+  onClose: () => void;
+}
+
+const Sidebar = ({ show, onClose }: SidebarProps) => {
+  const { stopPropagation } = useStopPropagation();
+  const onClick = (e: MouseEvent) => {
+    e.stopPropagation();
+    console.log(e.target);
+    onClose();
+  };
+
   return (
     <div>
-      <input type="checkBox" id="sidebar" className={mobileNav['check-box']} />
-      <div className={mobileNav['container']}>
-        <div className={mobileNav['sidebar']}>
+      <div className={[mobileNav['container'], show ? mobileNav['show'] : ''].join(' ')} onClick={onClick}>
+        <div className={[mobileNav['sidebar'], show ? mobileNav['show'] : ''].join(' ')} onClick={stopPropagation}>
           <ul>
-            <li>
-              <Link href="https://gall.dcinside.com/mini/board/lists?id=vuta">갤러리로</Link>
-            </li>
-            <li>
-              <Link href={`https://docs.google.com/spreadsheets/d/${publicRuntimeConfig.channelsheetId ?? ''}/`}>
-                Channel_ID
-              </Link>
-            </li>
+            <NavLink href="/">Home</NavLink>
+            <NavLink href="https://gall.dcinside.com/mini/board/lists?id=vuta">갤러리로</NavLink>
+            <NavLink href="/channels">Channels</NavLink>
+            <NavLink href={`https://docs.google.com/spreadsheets/d/${publicRuntimeConfig.channelsheetId ?? ''}/`}>
+              Channel_ID
+            </NavLink>
           </ul>
-          <label htmlFor="sidebar" className={mobileNav['close']}>
+          <button className={mobileNav['close']} onClick={onClose}>
             <FaWindowClose size={'2rem'} color="inherit" />
-          </label>
+          </button>
         </div>
-        <label htmlFor="sidebar" className={mobileNav['back-drop']} />
       </div>
     </div>
   );
