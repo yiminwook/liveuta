@@ -15,7 +15,7 @@ const parseYoutubeContentData = ({ data, nowTime, showAll }: ParseYoutubeContent
   dataValue.forEach(([title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream]: ContentsRowType) => {
     if (showAll || isStream !== 'FALSE') {
       const stringTime = scheduledTime.replace(' ', 'T').split(' JST')[0];
-      if (stringTime.length === 19) {
+      if (stringTime.length === 19 || stringTime.length === 18) {
         const time = new Date(stringTime);
         const timestamp = time.getTime();
         const korTime = time.toLocaleString('ko-kr', {
