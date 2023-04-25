@@ -2,17 +2,18 @@ import { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import { UpcomingData } from '@/models/sheet/in_sheet';
 import useUpcommingData from '@/hooks/useUpcommingData';
-import home from '@/styles/Home.module.scss';
+import home from '@/styles/home/home.module.scss';
 import useAllData from '@/hooks/useAllData';
 import NavSection from '@/components/home/nav_section';
 import YoutubeSection from '@/components/home/youtube_section';
+import Loading from '@/components/loading';
 
 interface HomePageProps {
   total: number;
   upcoming: UpcomingData[];
 }
 
-const Home: NextPage<HomePageProps> = () => {
+const HomePage: NextPage<HomePageProps> = () => {
   const [total, setTotal] = useState<number>(0);
   const [showLive, setShowLive] = useState(true);
   const [contents, setContents] = useState<UpcomingData[]>([]);
@@ -44,7 +45,7 @@ const Home: NextPage<HomePageProps> = () => {
   }, [upcomingData, allData, showLive]);
 
   if (allDataLoading || upcommingDataLoading) {
-    return null;
+    return <Loading />;
   }
 
   return (
@@ -55,4 +56,4 @@ const Home: NextPage<HomePageProps> = () => {
   );
 };
 
-export default Home;
+export default HomePage;

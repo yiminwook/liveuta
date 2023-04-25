@@ -1,5 +1,5 @@
 import { UpcomingData } from '@/models/sheet/in_sheet';
-import home from '@/styles/Home.module.scss';
+import home from '@/styles/home/home.module.scss';
 import YoutubeContent from '@/components/youtube_content';
 
 interface YoutubeSectionProps {

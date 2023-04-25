@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import home from '@/styles/Home.module.scss';
+import home from '@/styles/home/home.module.scss';
 
 interface NavSectionProps {
   value: ReactNode;

@@ -6,7 +6,7 @@ import { TfiArrowCircleUp } from 'react-icons/tfi';
 import Loading from '@/components/loading';
 import useUpcommingData from '@/hooks/useUpcommingData';
 import getConfig from 'next/config';
-import home from '@/styles/Home.module.scss';
+import home from '@/styles/home/home.module.scss';
 import useAllData from '@/hooks/useAllData';
 
 interface ServiceLayoutProps {
@@ -22,8 +22,6 @@ const ServiceLayout = ({
   discription = 'Show V-Tuber Utawaku schedule',
   children,
 }: ServiceLayoutProps) => {
-  const { isLoading: upcomingDataLoading } = useUpcommingData();
-  const { isLoading: allDataLoading } = useAllData();
   const metaImg = publicRuntimeConfig.meta_img;
 
   const scrollUp = () => {
@@ -49,7 +47,6 @@ const ServiceLayout = ({
         />
       </Head>
       <GNB />
-      {upcomingDataLoading || allDataLoading ? <Loading /> : null}
       <div className={home['app']}>{children}</div>
       <button className={home['foat']} onClick={scrollUp} onTouchEnd={scrollUp} onTouchStart={scrollUp}>
         <TfiArrowCircleUp size={'3rem'} color={'inherit'} />
