@@ -1,17 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { UpcomingData } from '@/models/sheet/in_sheet';
-import { getNow } from '@/utils/get_time';
-import { getGoogleSheetData } from '@/models/sheet/google_sheet';
-import parseSheetData from '@/utils/parseSheetData';
+import { ContentsDataType } from '@/models/sheet/Insheet';
+import { getNow } from '@/utils/GetTime';
+import { getSheet } from '@/models/sheet/Sheets';
+import parseYoutubeContentData from '@/utils/ParseSheetData';
+import getENV from '@/utils/GetENV';
+import { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE, INTERVAL_TIME } from '@/const';
 
-const handler = async (req: NextApiRequest, res: NextApiResponse<{ total: number; upcoming: UpcomingData[] }>) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse<{ total: number; upcoming: ContentsDataType[] }>) => {
   try {
     if (req.method !== 'GET') throw new Error('invaild method');
-    const sheetData = await getGoogleSheetData();
+    const spreadsheetId = getENV(CONTENTS_SHEET_ID);
+    const range = getENV(CONTENTS_SHEET_RANGE);
+    const sheetData = await getSheet({ spreadsheetId, range });
     const nowTime = getNow(true);
-    /** default 2시간 지연 */
-    const intervalTime = +(process.env.interval_time ?? 7200000);
-    const parsedSheetData = parseSheetData({ data: sheetData, nowTime, intervalTime });
+    const parsedSheetData = parseYoutubeContentData({ data: sheetData, nowTime });
     const total = parsedSheetData.length;
     return res.status(200).json({ total, upcoming: parsedSheetData });
   } catch (err) {

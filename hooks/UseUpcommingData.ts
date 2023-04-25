@@ -1,11 +1,11 @@
-import { UpcomingData } from '@/models/sheet/in_sheet';
+import { ContentsDataType } from '@/models/sheet/Insheet';
 import useSWR from 'swr';
-import { fetcher } from '@/hooks/fetcher';
+import { fetcher } from '@/hooks/Fetcher';
 
 const useUpcommingData = () => {
   const { data, error, mutate, isLoading } = useSWR(
     '/api/sheet/upcoming',
-    fetcher<{ total: number; upcoming: UpcomingData[] }>(),
+    fetcher<{ total: number; upcoming: ContentsDataType[] }>(),
     { dedupingInterval: 5 * 1000, errorRetryCount: 3, errorRetryInterval: 1000 },
   );
 

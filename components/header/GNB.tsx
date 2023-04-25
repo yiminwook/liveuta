@@ -1,17 +1,27 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import getConfig from 'next/config';
 import Link from 'next/link';
-import Sidebar from '@/components/header/sidebar';
+import Sidebar from '@/components/header/Sidebar';
 import { RiMenuAddLine } from 'react-icons/ri';
 import { SiGooglesheets } from 'react-icons/si';
 import gnb from '@/styles/header/GNB.module.scss';
+import { useRouter } from 'next/router';
 
-const { publicRuntimeConfig } = getConfig();
+const {
+  publicRuntimeConfig: { CONTENTS_SHEET_ID },
+} = getConfig();
 
 const GNB = () => {
+  const [showSidebar, setShowSidebar] = useState(false);
+  const router = useRouter();
   const gnbRef = useRef<HTMLElement>(null);
-  const handleScroll = () => {
+
+  const toggleSidebar = () => {
+    setShowSidebar((pre) => !pre);
+  };
+
+  const handleScroll = useCallback(() => {
     const current = gnbRef.current;
     if (current) {
       if (window.scrollY > 0) {
@@ -20,7 +30,11 @@ const GNB = () => {
         current.style.opacity = '1';
       }
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    setShowSidebar(() => false);
+  }, [router]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -35,22 +49,24 @@ const GNB = () => {
       <nav className={gnb['nav']} ref={gnbRef}>
         <ul>
           <li className={gnb['sidebar']}>
-            <label htmlFor="sidebar" tabIndex={0}>
+            <button onClick={toggleSidebar}>
               <RiMenuAddLine size={'1.2rem'} color={'inherit'} />
-            </label>
+            </button>
           </li>
           <li className={gnb['title']}>
             <a href="/">Live Uta</a>
           </li>
           <li className={gnb['form_link']}>
-            <Link href={`https://docs.google.com/spreadsheets/d/${publicRuntimeConfig.spreadsheetId ?? ''}/`}>
-              <SiGooglesheets size={'1.2rem'} color={'inherit'} />
+            <Link href={`https://docs.google.com/spreadsheets/d/${CONTENTS_SHEET_ID ?? ''}/`}>
+              <button tabIndex={-1}>
+                <SiGooglesheets size={'1.2rem'} color={'inherit'} />
+              </button>
             </Link>
           </li>
         </ul>
       </nav>
       <div className={gnb['blank']} />
-      <Sidebar />
+      <Sidebar show={showSidebar} onClose={toggleSidebar} />
     </header>
   );
 };

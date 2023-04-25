@@ -1,3 +1,5 @@
+import getENV from '@/utils/GetENV';
+
 export const getinterval = (nowTimeStamp: number, scheduledTimeStamp: number): string => {
   /** 분 */
   const interval = Math.trunc((scheduledTimeStamp - nowTimeStamp) / (1000 * 60));
@@ -26,7 +28,8 @@ const now = new Date();
  */
 export const getNow = (isLocalTime: boolean) => {
   if (isLocalTime) {
-    return now.getTime() + +(process.env.local_time ?? 32400000);
+    const localTime = getENV('LOCAL_TIME');
+    return now.getTime() + +(localTime ?? 32400000);
   } else {
     return now.getTime();
   }

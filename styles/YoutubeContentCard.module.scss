@@ -1,18 +1,22 @@
 @import 'mixin';
 @import 'var';
 
-.youtube__container {
+.card {
   padding: 0.2rem;
   background-color: lighten(map-get($colors, main), 10%);
   border-radius: 5px;
   @include box-shadow();
 
-  .youtube_content__container {
+  &.live {
+    background-color: map-get($colors, main-live);
+  }
+
+  .content {
     display: flex;
     height: 100%;
     gap: 0.8rem;
 
-    .youtube_thumnail__container {
+    .thumnail {
       width: 7rem;
       min-width: 7rem;
       aspect-ratio: 16 / 9;
@@ -23,7 +27,7 @@
       border-radius: 5px;
       position: relative;
 
-      .img_link {
+      a {
         width: 100%;
         height: 100%;
         position: relative;
@@ -56,54 +60,69 @@
       }
     }
 
-    .youtube_description {
+    .description {
       margin-bottom: 0.2rem;
       max-width: 20rem;
       width: 100%;
       height: 100%;
       display: flex;
       flex-flow: column;
-      .youtube_channel_name {
+      .channel_name {
         font-weight: 500;
+
+        &.live {
+          font-weight: 600;
+          color: map-get($colors, highlight-font);
+        }
+
         @include min-width($mixin-middle-width) {
           margin-bottom: 0.2rem;
         }
       }
-      .youtube_title {
+
+      .title {
         flex: 1;
         font-size: 0.5rem;
         color: map-get($colors, font);
-        @include text-line(2, 1rem);
+        @include text-line(2, 1.2rem);
+
+        &.live {
+          font-weight: 500;
+          color: map-get($colors, secondary);
+        }
 
         @include min-width($mixin-middle-width) {
           font-size: 0.7rem;
-          line-height: 1.2rem;
-          height: 2 * 1.2rem;
         }
+
         @include min-width($mixin-large-width) {
           font-size: 1rem;
           line-height: 1.5rem;
           height: 2 * 1.5rem;
         }
       }
-      .youtube_link {
+      .link {
         color: map-get($colors, link-font);
         font-size: 0.5rem;
-        @include text-line(1, 1rem);
+        @include text-line(1, 1.2rem);
 
         @include min-width($mixin-large-width) {
           font-size: 0.7rem;
         }
       }
-      .youtube_time__container {
+
+      .time {
         display: flex;
         font-size: 0.6rem;
-        .youtube_time__kor {
+        gap: 0.5rem;
+        .kor {
           margin-right: 0.2rem;
         }
-        .youtube_time__inter {
+        .status {
+          font-weight: 500;
           color: map-get($colors, highlight-font);
         }
+
         @include min-width($mixin-large-width) {
           font-size: 1rem;
         }

@@ -7,13 +7,16 @@ PORT=
 HOST=
 PROTOCOL=
 
-spreadsheetId=
-sheet_apiKey=
-upcoming_sheet_range=
+GOOGLE_API_KEY=
 
-local_time=
-interval_time=
+CONTENTS_SHEET_ID=
+CHANNELS_SHEET_ID=
 
-meta_img=
+CONTENTS_SHEET_RANGE=
+CHANNELS_SHEET_RANGE=
 
+LOCAL_TIME=32400000
+INTERVAL_TIME=3600000
+
+META_IMAGE=
 ```

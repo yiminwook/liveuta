@@ -12,6 +12,7 @@
   top: 0px;
   left: 0px;
   width: 100%;
+  min-width: 20rem;
   position: fixed;
   z-index: 100;
   background-color: map-get($colors, main);
@@ -38,10 +39,9 @@
     .sidebar {
       margin-left: 1rem;
 
-      label {
+      button {
         border-radius: 10px;
         text-align: center;
-        line-height: 1;
         padding: 0.3rem 1.2rem;
         background-color: map-get($colors, salmon);
         @include box-shadow();
@@ -72,14 +72,12 @@
       color: map-get($colors, light-font);
       font-weight: 600;
       a {
-        line-height: 1;
+        @include text-line(1, 2.2rem);
       }
     }
 
     .form_link {
       margin-right: 1rem;
-      font-size: 1rem;
-      line-height: 1.2rem;
       @include transition(background-color, 80ms, $bezier-curve);
 
       a {
