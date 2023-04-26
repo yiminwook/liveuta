@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
 
-const { PORT, HOST, PROTOCOL, CONTENTS_SHEET_ID, CHANNELS_SHEET_ID, META_IMAGE } = process.env;
+const { PORT, HOST, PROTOCOL, CONTENTS_SHEET_ID, CHANNELS_SHEET_ID, META_IMAGE, LOCAL_TIME } = process.env;
 
 const nextConfig = {
   reactStrictMode: true,
@@ -12,6 +12,7 @@ const nextConfig = {
     CONTENTS_SHEET_ID: CONTENTS_SHEET_ID ?? '',
     CHANNELS_SHEET_ID: CHANNELS_SHEET_ID ?? '',
     META_IMAGE: META_IMAGE ?? '',
+    LOCAL_TIME: LOCAL_TIME ?? '0',
   },
 
   sassOptions: {

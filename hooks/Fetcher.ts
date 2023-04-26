@@ -1,5 +1,10 @@
 import { sheetAPIReturnType } from '@/models/sheet/Insheet';
 import axios, { AxiosResponse } from 'axios';
+import getConfig from 'next/config';
+
+const {
+  publicRuntimeConfig: { LOCAL_TIME },
+} = getConfig();
 
 export const fetcher =
   <T>() =>
@@ -15,7 +20,7 @@ export const fetcher =
 export const dailyFetcher = async (url: string) => {
   try {
     const response: AxiosResponse<sheetAPIReturnType> = await axios.get(url);
-    const now = Date.now() - 24 * 60 * 60 * 1000;
+    const now = Date.now() - 24 * 60 * 60 * 1000 + +LOCAL_TIME;
     const contents = response.data.contents.filter((data) => {
       return data.timestamp >= now;
     });
