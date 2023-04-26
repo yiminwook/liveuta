@@ -42,11 +42,13 @@
         align-items: center;
 
         a {
+          font-size: inherit;
           font-weight: 500;
           color: map-get($colors, highlight-font);
         }
 
         button {
+          font-size: inherit;
           padding: 0.25rem 0.4rem;
           background-color: map-get($colors, salmon);
           border-radius: 5px;

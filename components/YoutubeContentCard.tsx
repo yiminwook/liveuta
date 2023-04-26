@@ -3,6 +3,7 @@ import { ContentsDataType } from '@/models/sheet/InSheet';
 import Link from 'next/link';
 import Image from 'next/image';
 import youtubeContentCard from '@/styles/common/YoutubeContentCard.module.scss';
+import { clipText } from '@/utils/cliptext';
 
 interface YoutubeContentCardProps {
   contents: ContentsDataType;
@@ -58,9 +59,10 @@ const YoutubeContentCard = ({ contents }: YoutubeContentCardProps) => {
           <div className={[youtubeContentCard['title'], isLive ? youtubeContentCard['live'] : ''].join(' ')}>
             {title}
           </div>
-          <Link className={youtubeContentCard['link']} href={url}>
-            {url}
-          </Link>
+          <div className={youtubeContentCard['link']}>
+            <Link href={url}>유투브 채널로 이동</Link>
+            <button onClick={() => clipText(url)}>Copy</button>
+          </div>
           <div className={youtubeContentCard['time']}>
             <div className={youtubeContentCard['kor']}>{korTime}</div>
             <div className={youtubeContentCard['status']}>{isLive ? 'LIVE!' : interval}</div>
