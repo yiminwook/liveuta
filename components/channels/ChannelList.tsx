@@ -1,26 +1,18 @@
 import { ChannelsDataType } from '@/models/youtube/InChannel';
 import ChannelItem from './ChannelItem';
+import channels from '@/styles/channel/Channel.module.scss';
 
 interface ChannelListProps {
-  channels: ChannelsDataType[];
+  contents: ChannelsDataType[];
 }
 
-const ChannelList = ({ channels }: ChannelListProps) => {
+const ChannelList = ({ contents }: ChannelListProps) => {
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>프로필</th>
-          <th>채널</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {channels.map((channel) => (
-          <ChannelItem key={channel.uid} channel={channel} />
-        ))}
-      </tbody>
-    </table>
+    <div className={channels['channel-list']}>
+      {contents.map((content) => (
+        <ChannelItem key={content.uid} content={content} />
+      ))}
+    </div>
   );
 };
 

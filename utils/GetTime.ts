@@ -34,3 +34,21 @@ export const getNow = (isLocalTime: boolean) => {
     return now.getTime();
   }
 };
+
+/**
+ * ISO 8601 -
+ * EX: "2016-03-29T06:54:53Z"
+ */
+export const stringToTime = (stringTime: string) => {
+  const time = new Date(stringTime);
+  const timestamp = time.getTime();
+  const korTime = time.toLocaleString('ko-kr', {
+    // year: "numeric",
+    month: 'short',
+    day: 'numeric',
+    weekday: 'short',
+    hour: 'numeric',
+    minute: 'numeric',
+  });
+  return { timestamp, korTime };
+};

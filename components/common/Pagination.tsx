@@ -2,6 +2,7 @@ import { ITEMS_PER_PAGE, PAGENATION_RANGE } from '@/consts';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
+import pagnination from '@/styles/common/Pagination.module.scss';
 
 interface PaginationProps {
   totalLength: number;
@@ -16,17 +17,13 @@ const Pagination = ({ totalLength }: PaginationProps) => {
   );
 
   return (
-    <div>
+    <div className={pagnination['pagnination']}>
       <ul>
-        <li>
-          <PaginationItem to={currentPage - 1} value="&lt;" disabled={currentPage === 1} />
-        </li>
+        <PaginationItem to={currentPage - 1} value="&lt;" disabled={currentPage === 1} />
         {pages.map((page) => (
           <PaginationItem key={page} to={page} value={page} active={page === currentPage} />
         ))}
-        <li>
-          <PaginationItem to={currentPage + 1} value="&gt;" disabled={currentPage === totalPage} />
-        </li>
+        <PaginationItem to={currentPage + 1} value="&gt;" disabled={currentPage === totalPage} />
       </ul>
     </div>
   );
@@ -47,9 +44,23 @@ const PaginationItem = ({ to, value, disabled = false, active = false }: Paginat
   const extendedPathname =
     pathname.indexOf(paginationRoute) === -1 ? `${pathname.replace(/\/$/, '')}${paginationRoute}` : pathname;
 
+  const renderClassName = () => {
+    if (active === true) {
+      return [pagnination['button'], pagnination['active']].join(' ');
+    } else if (disabled === true) {
+      return [pagnination['button'], pagnination['disabled']].join(' ');
+    } else {
+      return pagnination['button'];
+    }
+  };
+
   return (
-    <Link href={{ pathname: extendedPathname, query: { ...query, page: to } }}>
-      <button disabled={disabled}>{value}</button>
-    </Link>
+    <li>
+      <Link href={{ pathname: extendedPathname, query: { ...query, page: to } }}>
+        <button className={renderClassName()} disabled={disabled} tabIndex={-1}>
+          {value}
+        </button>
+      </Link>
+    </li>
   );
 };

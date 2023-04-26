@@ -1,5 +1,6 @@
-@import 'var';
 @import 'mixin';
+@import 'var';
+@import 'placeholder';
 
 @include keyframe(loading) {
   0% {

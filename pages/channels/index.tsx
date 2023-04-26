@@ -1,20 +1,21 @@
-import ChannelsSection from '@/components/channels/ChannelSection';
+import ChannelSection from '@/components/channels/ChannelSection';
 import { ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
 import { getYoutubeChannels } from '@/models/youtube/Channel';
 import { ChannelsDataType } from '@/models/youtube/InChannel';
-import { parseChannelData } from '@/utils/ParseChannelData';
-import { parseChannelSheet } from '@/utils/ParseChannelSheet';
+import { combineChannelData } from '@/utils/ParseChannelData';
+import { parseChannelIDSheet } from '@/utils/ParseChannelSheet';
 import { GetStaticProps } from 'next';
+import channels from '@/styles/channel/Channel.module.scss';
 
 export interface ChannelsPageProps {
   totalLength: number;
-  channels: ChannelsDataType[];
+  contents: ChannelsDataType[];
 }
 
-const ChannelsPage = ({ channels, totalLength }: ChannelsPageProps) => {
+const ChannelsPage = ({ contents, totalLength }: ChannelsPageProps) => {
   return (
-    <div>
-      <ChannelsSection channels={channels} totalLength={totalLength} />
+    <div className={channels['main']}>
+      <ChannelSection contents={contents} totalLength={totalLength} />
     </div>
   );
 };
@@ -23,7 +24,7 @@ export default ChannelsPage;
 
 export const getStaticProps: GetStaticProps<ChannelsPageProps> = async ({}) => {
   /* Google spread sheet API */
-  const { totalLength, sheetDataValues } = await parseChannelSheet();
+  const { totalLength, sheetDataValues } = await parseChannelIDSheet();
   const sliceData = sheetDataValues.slice(0, ITEMS_PER_PAGE);
 
   /* YoutubeData API */
@@ -32,10 +33,10 @@ export const getStaticProps: GetStaticProps<ChannelsPageProps> = async ({}) => {
   });
 
   const youtubeData = await Promise.all(callYoubeAPI);
-  const channels = parseChannelData({ youtubeData, sheetData: sliceData });
+  const contents = combineChannelData({ youtubeData, sheetData: sliceData });
 
   return {
-    props: { channels, totalLength },
+    props: { contents, totalLength },
     revalidate: PAGE_REVALIDATE_TIME,
   };
 };

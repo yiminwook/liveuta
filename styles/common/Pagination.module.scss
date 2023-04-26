@@ -1,0 +1,42 @@
+@import 'mixin';
+@import 'var';
+@import 'placeholder';
+
+.pagnination {
+  padding: 0.5rem;
+  display: flex;
+
+  ul {
+    margin: auto;
+    display: flex;
+    gap: 0.5rem;
+    li {
+      button {
+        border-radius: 5px;
+        background-color: lighten(map-get($colors, main), 10%);
+        width: 3rem;
+        height: 2rem;
+        font-weight: 600;
+        color: map-get($colors, salmon);
+        font-size: 1.25rem;
+        text-align: center;
+        @include transition(background-color, 0.2s, linear);
+
+        &:hover {
+          background-color: map-get($colors, salmon);
+          color: lighten(map-get($colors, main), 10%);
+        }
+
+        &.active {
+          background-color: darken(map-get($colors, highlight-font), 3%) !important;
+          color: lighten(map-get($colors, main), 10%) !important;
+        }
+
+        &.disabled {
+          background-color: map-get($colors, font) !important;
+          color: map-get($colors, light-font) !important;
+        }
+      }
+    }
+  }
+}

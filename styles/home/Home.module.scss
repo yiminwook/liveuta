@@ -53,12 +53,12 @@
         }
         &.active {
           background-color: darken(map-get($colors, highlight-font), 3%);
-          color: white;
+          color: lighten(map-get($colors, main), 10%);
         }
       }
     }
 
-    div {
+    .total {
       padding: 0.4rem;
       background-color: lighten(map-get($colors, main), 10%);
       border-radius: 5px;

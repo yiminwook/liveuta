@@ -1,32 +1,23 @@
 import { ContentsRowType, ContentsDataType } from '@/models/sheet/InSheet';
 import { sheets_v4 } from 'googleapis';
-import { getinterval } from '@/utils/GetTime';
+import { getinterval, stringToTime } from '@/utils/GetTime';
 
-interface ParseYoutubeContentType {
+export interface ParseUpcommingSheetType {
   data: sheets_v4.Schema$ValueRange;
   nowTime: number;
   showAll?: boolean;
 }
 
 /** Parse Google spread sheet - Upcomming */
-export const parseYoutubeContent = ({ data, nowTime, showAll }: ParseYoutubeContentType): ContentsDataType[] => {
+export const parseUpcommingSheet = ({ data, nowTime, showAll }: ParseUpcommingSheetType): ContentsDataType[] => {
   const upcoming: ContentsDataType[] = [];
   const dataValue = data.values as ContentsRowType[];
   if (!dataValue) return [];
   dataValue.forEach(([title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream]: ContentsRowType) => {
     if (showAll || isStream !== 'FALSE') {
       const stringTime = scheduledTime.replace(' ', 'T').split(' JST')[0];
-      if (stringTime.length === 19 || stringTime.length === 18) {
-        const time = new Date(stringTime);
-        const timestamp = time.getTime();
-        const korTime = time.toLocaleString('ko-kr', {
-          // year: "numeric",
-          month: 'short',
-          day: 'numeric',
-          weekday: 'short',
-          hour: 'numeric',
-          minute: 'numeric',
-        });
+      if (stringTime.length === 19) {
+        const { timestamp, korTime } = stringToTime(stringTime);
         const interval = getinterval(nowTime, timestamp);
         const highThumbnailURL = thumbnailURL.replace(/(hqdefault|maxresdefault|sddefault|default)/i, 'hqdefault');
         let replacedTitle = title.replace(/\【(.*?)\】|\〖(.*?)\〗|\[(.*?)\]|\((.*?)\)/gi, '');

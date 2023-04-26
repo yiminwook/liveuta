@@ -1,3 +1,21 @@
 @import 'var';
 @import 'mixin';
 @import 'placeholder';
+
+.main {
+  padding: 0.5rem;
+  .channel-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    .channel-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      .channel {
+        display: flex;
+        background-color: lighten(map-get($colors, main), 10%);
+      }
+    }
+  }
+}

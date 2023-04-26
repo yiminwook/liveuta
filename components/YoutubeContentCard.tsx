@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { ContentsDataType } from '@/models/sheet/InSheet';
 import Link from 'next/link';
 import Image from 'next/image';
-import youtubeContentCard from '@/styles/YoutubeContentCard.module.scss';
+import youtubeContentCard from '@/styles/common/YoutubeContentCard.module.scss';
 
 interface YoutubeContentCardProps {
   contents: ContentsDataType;

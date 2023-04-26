@@ -9,7 +9,7 @@ const NavSection = ({ total }: NavSectionProps) => {
   return (
     <section className={home['nav-section']}>
       <NavTap />
-      <div>{`Total: ${total}`}</div>
+      <div className={home['total']}>{`Total: ${total}`}</div>
     </section>
   );
 };
