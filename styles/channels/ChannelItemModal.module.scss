@@ -1,0 +1,80 @@
+@import 'var';
+@import 'mixin';
+@import 'placeholder';
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 90%;
+
+  .profile {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    .image-container {
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      width: 88px;
+      height: 88px;
+      @include box-shadow();
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-weight: 500;
+        font-size: 1.25rem;
+      }
+
+      .link {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+
+        a {
+          font-weight: 500;
+          color: map-get($colors, highlight-font);
+        }
+
+        button {
+          padding: 0.25rem 0.4rem;
+          background-color: map-get($colors, salmon);
+          border-radius: 5px;
+          color: lighten(map-get($colors, main), 10%);
+          @include box-shadow();
+          @include transition(background-color, 80ms, $bezier-curve);
+
+          &:hover {
+            background-color: map-get($colors, hover-salmon);
+          }
+        }
+      }
+
+      .detail {
+        display: flex;
+        gap: 1rem;
+      }
+    }
+  }
+
+  .desc {
+    white-space: pre-line;
+    word-break: break-word;
+    overflow-y: auto;
+    @extend %scroll-bar;
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+    }
+  }
+}

@@ -55,6 +55,7 @@
         margin: auto;
         min-height: 7.14rem;
       }
+
       @include min-width($mixin-large-width) {
         min-height: 9.35rem;
       }
