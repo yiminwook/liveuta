@@ -1,21 +1,49 @@
-import { CHANNELS_SHEET_ID, CHANNELS_SHEET_RANGE, ITEMS_PER_PAGE } from '@/const';
+import ChannelsSection from '@/components/channels/ChannelSection';
+import { CHANNELS_SHEET_ID, CHANNELS_SHEET_RANGE, ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
 import { getSheet } from '@/models/sheet/Sheets';
+import { getYoutubeChannels } from '@/models/youtube/Channel';
+import { ChannelRowType, ChannelsDataType } from '@/models/youtube/InChannel';
 import getENV from '@/utils/GetENV';
+import { GetStaticProps } from 'next';
 
-interface ChannelsPageProps {}
+interface ChannelsPageProps {
+  channels: ChannelsDataType[];
+}
 
-const ChannelsPage = () => {
-  return <main></main>;
+const ChannelsPage = ({ channels }: ChannelsPageProps) => {
+  return (
+    <div>
+      <ChannelsSection channels={channels} />
+    </div>
+  );
 };
 
 export default ChannelsPage;
 
-export const getStaticProps = async ({}: ChannelsPageProps) => {
-  // const spreadsheetId = getENV(CHANNELS_SHEET_ID);
-  // const range = getENV(CHANNELS_SHEET_RANGE);
-  // const sheetData = await getSheet({ spreadsheetId, range });
-  // const sliceData = sheetData.values?.slice(0, ITEMS_PER_PAGE) ?? [];
-  // const channels = sliceData.map((data) => console.log(data));
+export const getStaticProps: GetStaticProps<ChannelsPageProps> = async ({}) => {
+  /** Google spread sheet API */
+  const spreadsheetId = getENV(CHANNELS_SHEET_ID);
+  const range = getENV(CHANNELS_SHEET_RANGE);
+  const sheetData = await getSheet({ spreadsheetId, range });
+  const sheetDataValues = sheetData.values;
+  if (!(sheetDataValues && sheetDataValues.length >= 2)) throw new Error('sheetData has not values');
+  sheetDataValues.shift();
+  const sliceData = sheetDataValues.slice(0, ITEMS_PER_PAGE) as ChannelRowType[];
+  /** YoutubeData API */
+  const callYoubeAPI = sliceData.slice().map(([uid, _channelName, _url]) => {
+    return getYoutubeChannels(uid);
+  });
+  const yotubeData = await Promise.all(callYoubeAPI);
+  const channels = yotubeData.reduce<ChannelsDataType[]>((acc, data, idx) => {
+    if (!data.items) return acc;
+    const items = data.items[0];
+    const [uid, channelName, url] = sliceData[idx];
+    const channel = { ...items, uid, channelName, url } as ChannelsDataType;
+    return [...acc, channel];
+  }, []);
 
-  return { props: {} };
+  return {
+    props: { channels },
+    revalidate: PAGE_REVALIDATE_TIME,
+  };
 };
