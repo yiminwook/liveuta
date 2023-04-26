@@ -1,7 +1,7 @@
 import { CHANNELS_SHEET_ID, CHANNELS_SHEET_RANGE } from '@/consts';
 import { getSheet } from '@/models/sheet/Sheets';
 import { ChannelRowType } from '@/models/youtube/InChannel';
-import getENV from './GetENV';
+import getENV from '@/utils/GetENV';
 
 /** Parse Google spread sheet - reference */
 export const parseChannelIDSheet = async () => {

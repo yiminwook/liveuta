@@ -1,6 +1,6 @@
 import { ChannelsDataType } from '@/models/youtube/InChannel';
-import ChannelItem from './ChannelItem';
-import channels from '@/styles/channel/Channel.module.scss';
+import ChannelItem from '@/components/channels/ChannelItem';
+import channels from '@/styles/channels/Channels.module.scss';
 
 interface ChannelListProps {
   contents: ChannelsDataType[];

@@ -1,7 +1,7 @@
 import { ChannelsDataType } from '@/models/youtube/InChannel';
-import Pagination from '../common/Pagination';
-import ChannelList from './ChannelList';
-import channels from '@/styles/channel/Channel.module.scss';
+import Pagination from '@/components/common/Pagination';
+import ChannelList from '@/components/channels/ChannelList';
+import channels from '@/styles/channels/Channels.module.scss';
 
 interface ChannelSectionProps {
   contents: ChannelsDataType[];

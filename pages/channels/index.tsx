@@ -5,7 +5,7 @@ import { ChannelsDataType } from '@/models/youtube/InChannel';
 import { combineChannelData } from '@/utils/ParseChannelData';
 import { parseChannelIDSheet } from '@/utils/ParseChannelSheet';
 import { GetStaticProps } from 'next';
-import channels from '@/styles/channel/Channel.module.scss';
+import channels from '@/styles/channels/Channels.module.scss';
 
 export interface ChannelsPageProps {
   totalLength: number;
