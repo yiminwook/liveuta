@@ -1,4 +1,4 @@
-import { GOOGLE_API_KEY } from '@/const';
+import { GOOGLE_API_KEY } from '@/consts';
 import getENV from '@/utils/GetENV';
 import { google } from 'googleapis';
 

@@ -1,4 +1,4 @@
-import { ContentsRowType, ContentsDataType } from '@/models/sheet/Insheet';
+import { ContentsRowType, ContentsDataType } from '@/models/sheet/InSheet';
 import { sheets_v4 } from 'googleapis';
 import { getinterval } from '@/utils/GetTime';
 

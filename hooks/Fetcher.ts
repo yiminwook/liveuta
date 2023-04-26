@@ -1,4 +1,4 @@
-import { sheetAPIReturnType } from '@/models/sheet/Insheet';
+import { SheetAPIReturnType } from '@/models/sheet/InSheet';
 import axios, { AxiosResponse } from 'axios';
 import getConfig from 'next/config';
 
@@ -19,7 +19,7 @@ export const fetcher =
 
 export const dailyFetcher = async (url: string) => {
   try {
-    const response: AxiosResponse<sheetAPIReturnType> = await axios.get(url);
+    const response: AxiosResponse<SheetAPIReturnType> = await axios.get(url);
     const now = Date.now() - 24 * 60 * 60 * 1000 + +LOCAL_TIME;
     const contents = response.data.contents.filter((data) => {
       return data.timestamp >= now;
@@ -32,7 +32,7 @@ export const dailyFetcher = async (url: string) => {
 
 export const liveFetcher = async (url: string) => {
   try {
-    const response: AxiosResponse<sheetAPIReturnType> = await axios.get(url);
+    const response: AxiosResponse<SheetAPIReturnType> = await axios.get(url);
     const contents = response.data.contents.filter((data) => data.isLive === true);
     return { total: contents.length, contents };
   } catch (error) {

@@ -14,7 +14,7 @@ export interface ContentsDataType {
   interval: string;
 }
 
-export interface sheetAPIReturnType {
+export interface SheetAPIReturnType {
   total: number;
   contents: ContentsDataType[];
 }

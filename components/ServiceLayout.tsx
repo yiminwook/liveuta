@@ -44,8 +44,8 @@ const ServiceLayout = ({
         />
       </Head>
       <GNB />
-      <div className={home['app']}>{children}</div>
-      <button className={home['foat']} onClick={scrollUp} onTouchEnd={scrollUp} onTouchStart={scrollUp}>
+      <main className="app">{children}</main>
+      <button className="foat" onClick={scrollUp} onTouchEnd={scrollUp} onTouchStart={scrollUp}>
         <TfiArrowCircleUp size={'3rem'} color={'inherit'} />
       </button>
     </>

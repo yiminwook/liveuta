@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import HomePage, { HomePageProps } from '@/pages';
-import { HOME_FILTER } from '@/const';
+import { HOME_FILTER } from '@/consts';
 
 const HomeWithFilterPage = ({ filter }: HomePageProps) => {
   return <HomePage filter={filter} />;

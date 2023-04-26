@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { ContentsDataType } from '@/models/sheet/Insheet';
+import { ContentsDataType } from '@/models/sheet/InSheet';
 import Link from 'next/link';
 import Image from 'next/image';
 import youtubeContentCard from '@/styles/YoutubeContentCard.module.scss';
