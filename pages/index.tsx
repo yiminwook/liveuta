@@ -11,7 +11,7 @@ import useDailyData from '@/hooks/UseDailyData';
 import useLiveData from '@/hooks/UseLiveData';
 
 export interface HomePageProps {
-  filter?: 'scheduled' | 'live' | 'daily' | 'all';
+  filter?: 'live' | 'daily' | 'all';
 }
 
 const HomePage: NextPage<HomePageProps> = ({ filter }) => {
@@ -27,10 +27,6 @@ const HomePage: NextPage<HomePageProps> = ({ filter }) => {
     let data: ContentsDataType[] | undefined;
     let count: number | undefined;
     switch (filter) {
-      case 'scheduled':
-        data = scheduledData?.contents;
-        count = scheduledData?.total;
-        break;
       case 'live':
         data = liveData?.contents;
         count = liveData?.total;

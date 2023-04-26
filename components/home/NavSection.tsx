@@ -6,8 +6,6 @@ interface NavSectionProps {
 }
 
 const NavSection = ({ total }: NavSectionProps) => {
-  let string: string;
-
   return (
     <section className={home['nav-section']}>
       <NavTap />
@@ -21,7 +19,7 @@ export default NavSection;
 const NavTap = () => {
   return (
     <ul className={home['nav-tab']}>
-      <NavLink modifier={home['active']} href="/scheduled">
+      <NavLink modifier={home['active']} href="/">
         예정
       </NavLink>
       <NavLink modifier={home['active']} href="/live">

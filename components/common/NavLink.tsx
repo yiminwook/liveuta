@@ -7,6 +7,7 @@ interface NavLinkProps {
   children: ReactNode;
   modifier?: string;
 }
+
 const NavLink = ({ href, children, modifier = '' }: NavLinkProps) => {
   const router = useRouter();
   const isActive = router.asPath === href;
