@@ -1,9 +1,9 @@
 import ChannelsSection from '@/components/channels/ChannelSection';
-import { CHANNELS_SHEET_ID, CHANNELS_SHEET_RANGE, ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
-import { getSheet } from '@/models/sheet/Sheets';
+import { ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
 import { getYoutubeChannels } from '@/models/youtube/Channel';
-import { ChannelRowType, ChannelsDataType } from '@/models/youtube/InChannel';
-import getENV from '@/utils/GetENV';
+import { ChannelsDataType } from '@/models/youtube/InChannel';
+import { parseChannelData } from '@/utils/ParseChannelData';
+import { parseChannelSheet } from '@/utils/ParseChannelSheet';
 import { GetStaticProps } from 'next';
 
 export interface ChannelsPageProps {
@@ -22,28 +22,17 @@ const ChannelsPage = ({ channels, totalLength }: ChannelsPageProps) => {
 export default ChannelsPage;
 
 export const getStaticProps: GetStaticProps<ChannelsPageProps> = async ({}) => {
-  /** Google spread sheet API */
-  const spreadsheetId = getENV(CHANNELS_SHEET_ID);
-  const range = getENV(CHANNELS_SHEET_RANGE);
-  const sheetData = await getSheet({ spreadsheetId, range });
-  const sheetDataValues = sheetData.values;
-  if (!(sheetDataValues && sheetDataValues.length >= 2)) throw new Error('sheetData has not values');
-  sheetDataValues.shift();
-  const totalLength = sheetDataValues.length;
-  const sliceData = sheetDataValues.slice(0, ITEMS_PER_PAGE) as ChannelRowType[];
+  /* Google spread sheet API */
+  const { totalLength, sheetDataValues } = await parseChannelSheet();
+  const sliceData = sheetDataValues.slice(0, ITEMS_PER_PAGE);
 
-  /** YoutubeData API */
+  /* YoutubeData API */
   const callYoubeAPI = sliceData.slice().map(([uid, _channelName, _url]) => {
     return getYoutubeChannels(uid);
   });
-  const yotubeData = await Promise.all(callYoubeAPI);
-  const channels = yotubeData.reduce<ChannelsDataType[]>((acc, data, idx) => {
-    if (!data.items) return acc;
-    const items = data.items[0];
-    const [uid, channelName, url] = sliceData[idx];
-    const channel = { ...items, uid, channelName, url } as ChannelsDataType;
-    return [...acc, channel];
-  }, []);
+
+  const youtubeData = await Promise.all(callYoubeAPI);
+  const channels = parseChannelData({ youtubeData, sheetData: sliceData });
 
   return {
     props: { channels, totalLength },

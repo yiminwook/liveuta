@@ -15,8 +15,6 @@ const Pagination = ({ totalLength }: PaginationProps) => {
     (page) => page > 0 && totalPage >= page,
   );
 
-  console.log(pages);
-
   return (
     <div>
       <ul>

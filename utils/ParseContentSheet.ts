@@ -2,13 +2,14 @@ import { ContentsRowType, ContentsDataType } from '@/models/sheet/InSheet';
 import { sheets_v4 } from 'googleapis';
 import { getinterval } from '@/utils/GetTime';
 
-interface ParseYoutubeContentDataType {
+interface ParseYoutubeContentType {
   data: sheets_v4.Schema$ValueRange;
   nowTime: number;
   showAll?: boolean;
 }
 
-const parseYoutubeContentData = ({ data, nowTime, showAll }: ParseYoutubeContentDataType): ContentsDataType[] => {
+/** Parse Google spread sheet - Upcomming */
+export const parseYoutubeContent = ({ data, nowTime, showAll }: ParseYoutubeContentType): ContentsDataType[] => {
   const upcoming: ContentsDataType[] = [];
   const dataValue = data.values as ContentsRowType[];
   if (!dataValue) return [];
@@ -51,5 +52,3 @@ const parseYoutubeContentData = ({ data, nowTime, showAll }: ParseYoutubeContent
   });
   return upcoming;
 };
-
-export default parseYoutubeContentData;

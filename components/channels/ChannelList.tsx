@@ -8,12 +8,18 @@ interface ChannelListProps {
 const ChannelList = ({ channels }: ChannelListProps) => {
   return (
     <table>
-      <th>photo</th>
-      <th></th>
-      <th></th>
-      {channels.map((channel) => (
-        <ChannelItem key={channel.uid} channel={channel} />
-      ))}
+      <thead>
+        <tr>
+          <th>프로필</th>
+          <th>채널</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {channels.map((channel) => (
+          <ChannelItem key={channel.uid} channel={channel} />
+        ))}
+      </tbody>
     </table>
   );
 };
