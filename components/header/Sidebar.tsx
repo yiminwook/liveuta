@@ -27,6 +27,7 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
         <div className={[mobileNav['sidebar'], show ? mobileNav['show'] : ''].join(' ')} onClick={stopPropagation}>
           <ul>
             <NavLink href="/">Home</NavLink>
+            <NavLink href="/channels">Channels</NavLink>
             <NavLink href="https://gall.dcinside.com/mini/board/lists?id=vuta">갤러리로</NavLink>
             <NavLink href="https://www.piku.co.kr/w/6js7eW">아이도루 월드컵</NavLink>
             <NavLink href={`https://docs.google.com/spreadsheets/d/${CHANNELS_SHEET_ID ?? ''}/`}>Channel_ID</NavLink>

@@ -1,21 +1,42 @@
-import { CHANNELS_SHEET_ID, CHANNELS_SHEET_RANGE, ITEMS_PER_PAGE } from '@/const';
-import { getSheet } from '@/models/sheet/Sheets';
-import getENV from '@/utils/GetENV';
+import ChannelSection from '@/components/channels/ChannelSection';
+import { ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
+import { getYoutubeChannels } from '@/models/youtube/Channel';
+import { ChannelsDataType } from '@/models/youtube/InChannel';
+import { combineChannelData } from '@/utils/ParseChannelData';
+import { parseChannelIDSheet } from '@/utils/ParseChannelSheet';
+import { GetStaticProps } from 'next';
+import channels from '@/styles/channels/Channels.module.scss';
 
-interface ChannelsPageProps {}
+export interface ChannelsPageProps {
+  totalLength: number;
+  contents: ChannelsDataType[];
+}
 
-const ChannelsPage = () => {
-  return <main></main>;
+const ChannelsPage = ({ contents, totalLength }: ChannelsPageProps) => {
+  return (
+    <div className={channels['main']}>
+      <ChannelSection contents={contents} totalLength={totalLength} />
+    </div>
+  );
 };
 
 export default ChannelsPage;
 
-export const getStaticProps = async ({}: ChannelsPageProps) => {
-  // const spreadsheetId = getENV(CHANNELS_SHEET_ID);
-  // const range = getENV(CHANNELS_SHEET_RANGE);
-  // const sheetData = await getSheet({ spreadsheetId, range });
-  // const sliceData = sheetData.values?.slice(0, ITEMS_PER_PAGE) ?? [];
-  // const channels = sliceData.map((data) => console.log(data));
+export const getStaticProps: GetStaticProps<ChannelsPageProps> = async ({}) => {
+  /* Google spread sheet API */
+  const { totalLength, sheetDataValues } = await parseChannelIDSheet();
+  const sliceData = sheetDataValues.slice(0, ITEMS_PER_PAGE);
 
-  return { props: {} };
+  /* YoutubeData API */
+  const callYoubeAPI = sliceData.slice().map(([uid, _channelName, _url]) => {
+    return getYoutubeChannels(uid);
+  });
+
+  const youtubeData = await Promise.all(callYoubeAPI);
+  const contents = combineChannelData({ youtubeData, sheetData: sliceData });
+
+  return {
+    props: { contents, totalLength },
+    revalidate: PAGE_REVALIDATE_TIME,
+  };
 };

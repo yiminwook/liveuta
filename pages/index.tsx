@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NextPage } from 'next';
-import { ContentsDataType } from '@/models/sheet/Insheet';
+import { ContentsDataType } from '@/models/sheet/InSheet';
 import useScheduledData from '@/hooks/UseScheduledData';
 import home from '@/styles/home/Home.module.scss';
 import useAllData from '@/hooks/UseAllData';

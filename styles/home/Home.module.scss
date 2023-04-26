@@ -2,122 +2,90 @@
 @import 'var';
 @import 'placeholder';
 
-.app {
+.main {
+  width: 100%;
+  padding: 0.5rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
 
-  .main {
-    width: 100%;
-    padding: 0.5rem;
+  @include min-width($mixin-middle-width) {
+    width: auto;
+    padding: 0.6rem;
+    gap: 0.6rem;
+  }
+
+  @include min-width($mixin-large-width) {
+    padding: 1rem;
+    gap: 0.8rem;
+  }
+
+  .nav-section {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    justify-content: space-between;
+    color: map-get($colors, salmon);
+    font-size: 1rem;
+    font-weight: 500;
 
-    @include min-width($mixin-middle-width) {
-      width: auto;
-      padding: 0.6rem;
-      gap: 0.6rem;
-    }
-
-    @include min-width($mixin-large-width) {
-      padding: 1rem;
-      gap: 0.8rem;
-    }
-
-    .nav-section {
+    .nav-tab {
       display: flex;
-      justify-content: space-between;
-      color: map-get($colors, salmon);
-      font-size: 1rem;
-      font-weight: 500;
+      justify-content: space-around;
+      align-items: center;
+      width: 13rem;
+      overflow: hidden;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      border: none;
+      border-radius: 5px;
+      background-color: lighten(map-get($colors, main), 10%);
+      @include box-shadow();
 
-      .nav-tab {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        width: 13rem;
-        overflow: hidden;
-        font-family: inherit;
-        font-size: inherit;
-        font-weight: inherit;
-        border: none;
-        border-radius: 5px;
-        background-color: lighten(map-get($colors, main), 10%);
-        @include box-shadow();
+      li {
+        width: 100%;
+        line-height: 2.5rem;
+        text-align: center;
+        @include transition(background-color, 0.2s, linear);
 
-        li {
-          width: 100%;
-          line-height: 2.5rem;
-          text-align: center;
-          @include transition(background-color, 0.2s, linear);
-
-          &:hover {
-            background-color: map-get($colors, salmon);
-            color: lighten(map-get($colors, main), 10%);
-          }
-          &.active {
-            background-color: darken(map-get($colors, highlight-font), 3%);
-            color: white;
-          }
+        &:hover {
+          background-color: map-get($colors, salmon);
+          color: lighten(map-get($colors, main), 10%);
+        }
+        &.active {
+          background-color: darken(map-get($colors, highlight-font), 3%);
+          color: lighten(map-get($colors, main), 10%);
         }
       }
-
-      div {
-        padding: 0.4rem;
-        background-color: lighten(map-get($colors, main), 10%);
-        border-radius: 5px;
-        @include box-shadow();
-      }
     }
 
-    .contents-section {
-      display: grid;
-      row-gap: 0.5rem;
-      grid-template-columns: 1fr;
-      margin-bottom: 2rem;
-
-      @include min-width($mixin-middle-width) {
-        grid-template-columns: repeat(3, 1fr);
-        column-gap: 0.4rem;
-        row-gap: 1.8rem;
-      }
-      @include min-width($mixin-large-width) {
-        column-gap: 0.6rem;
-        row-gap: 2rem;
-      }
-      @include min-width($mixin-xl-width) {
-        grid-template-columns: repeat(4, 1fr);
-      }
-      @include min-width(118rem) {
-        grid-template-columns: repeat(5, 1fr);
-      }
+    .total {
+      padding: 0.4rem;
+      background-color: lighten(map-get($colors, main), 10%);
+      border-radius: 5px;
+      @include box-shadow();
     }
   }
-}
 
-.foat {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  width: 3.25rem;
-  height: 3.25rem;
-  color: map-get($colors, light-font);
-  background-color: map-get($colors, salmon);
-  border-radius: 100%;
-  border: none;
-  @include prevent-user-select();
-  cursor: pointer;
-  @include box-shadow();
-  text-align: center;
-  padding: 0.125rem;
+  .contents-section {
+    display: grid;
+    row-gap: 0.5rem;
+    grid-template-columns: 1fr;
+    margin-bottom: 2rem;
 
-  & > svg {
-    width: 3rem;
-    height: 3rem;
-  }
-  &:hover {
-    color: map-get($colors, salmon);
-    background-color: map-get($colors, light-font);
+    @include min-width($mixin-middle-width) {
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 0.4rem;
+      row-gap: 1.8rem;
+    }
+    @include min-width($mixin-large-width) {
+      column-gap: 0.6rem;
+      row-gap: 2rem;
+    }
+    @include min-width($mixin-xl-width) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @include min-width(118rem) {
+      grid-template-columns: repeat(5, 1fr);
+    }
   }
 }
