@@ -6,14 +6,15 @@ import { ChannelRowType, ChannelsDataType } from '@/models/youtube/InChannel';
 import getENV from '@/utils/GetENV';
 import { GetStaticProps } from 'next';
 
-interface ChannelsPageProps {
+export interface ChannelsPageProps {
+  totalLength: number;
   channels: ChannelsDataType[];
 }
 
-const ChannelsPage = ({ channels }: ChannelsPageProps) => {
+const ChannelsPage = ({ channels, totalLength }: ChannelsPageProps) => {
   return (
     <div>
-      <ChannelsSection channels={channels} />
+      <ChannelsSection channels={channels} totalLength={totalLength} />
     </div>
   );
 };
@@ -28,7 +29,9 @@ export const getStaticProps: GetStaticProps<ChannelsPageProps> = async ({}) => {
   const sheetDataValues = sheetData.values;
   if (!(sheetDataValues && sheetDataValues.length >= 2)) throw new Error('sheetData has not values');
   sheetDataValues.shift();
+  const totalLength = sheetDataValues.length;
   const sliceData = sheetDataValues.slice(0, ITEMS_PER_PAGE) as ChannelRowType[];
+
   /** YoutubeData API */
   const callYoubeAPI = sliceData.slice().map(([uid, _channelName, _url]) => {
     return getYoutubeChannels(uid);
@@ -43,7 +46,7 @@ export const getStaticProps: GetStaticProps<ChannelsPageProps> = async ({}) => {
   }, []);
 
   return {
-    props: { channels },
+    props: { channels, totalLength },
     revalidate: PAGE_REVALIDATE_TIME,
   };
 };
