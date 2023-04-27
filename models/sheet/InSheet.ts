@@ -1,6 +1,6 @@
 export type isStream = 'TRUE' | 'NULL' | 'FALSE';
 
-export type ContentsRowType = [string, string, string, string, string, string, ContentsDataType['isStream']];
+export type ContentsRowType = [string, string, string, string, string, 'TRUE' | 'FALSE', ContentsDataType['isStream']];
 
 export interface ContentsDataType {
   title: string;
@@ -9,7 +9,7 @@ export interface ContentsDataType {
   videoId: string;
   timestamp: number;
   thumbnailURL?: string;
-  isStream: 'FALSE' | 'TRUE' | 'NULL';
+  isStream: isStream;
   korTime: string;
   interval: string;
 }
