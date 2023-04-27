@@ -3,10 +3,11 @@ import Image from 'next/image';
 import channels from '@/styles/channels/Channels.module.scss';
 import { renderSubscribe } from '@/utils/RenderSubscribe';
 import Link from 'next/link';
-import { BiSearchAlt } from 'react-icons/bi';
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import ChannelItemModal from '@/components/channels/ChannelItemModal';
-import { clipText } from '@/utils/cliptext';
+import { openWindow } from '@/utils/windowEvent';
+import CopyButton from '../common/CopyButton';
+import useStopPropagation from '@/hooks/UseStopPropagation';
 
 interface ChannelItemProps {
   content: ChannelsDataType;
@@ -14,6 +15,7 @@ interface ChannelItemProps {
 
 const ChannelItem = ({ content }: ChannelItemProps) => {
   const [showModal, setShowModal] = useState(false);
+  const { stopPropagation } = useStopPropagation();
   const { channelName, snippet, url, statistics } = content;
   const title = snippet.title ?? '';
   const imageURL = snippet.thumbnails?.default?.url ?? '/loading.png';
@@ -21,39 +23,44 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
   const subscribe = renderSubscribe(statistics.subscriberCount ?? '비공개');
   const videoCount = statistics.videoCount ?? '비공개';
 
-  const toggleModal = () => {
+  const toggleModal = (e: MouseEvent) => {
+    e.stopPropagation();
     setShowModal((pre) => !pre);
   };
 
+  const handleOpenWindow = (e: MouseEvent) => {
+    e.stopPropagation();
+    openWindow(url);
+  };
+
   return (
-    <div className={channels['channel']}>
-      <Link href={url}>
-        <div className={channels['image-container']}>
-          <Image
-            src={imageURL}
-            alt=""
-            loading="lazy"
-            placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8U9hfDwAGKgJNP3RWxQAAAABJRU5ErkJggg=="
-            fill
-            unoptimized
-          />
-        </div>
-      </Link>
-      <div className={channels['desc']}>
-        <h1>{channelName}</h1>
-        <div className={channels['details']}>
-          <h2>{title}</h2>
-          <p className={channels['subscribe']}>구독자 {subscribe}</p>
-          <p className={channels['upload-count']}>업로드 수: {videoCount}</p>
-          <div className={channels['link']}>
-            <Link href={url}>유투브 채널</Link>
-            <button onClick={() => clipText(url)}>Copy</button>
+    <>
+      <div className={channels['channel']} onClick={toggleModal}>
+        <Link href={url} onClick={stopPropagation}>
+          <div className={channels['image-container']}>
+            <Image
+              src={imageURL}
+              alt=""
+              loading="lazy"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8U9hfDwAGKgJNP3RWxQAAAABJRU5ErkJggg=="
+              fill
+              unoptimized
+            />
+          </div>
+        </Link>
+        <div className={channels['desc']}>
+          <h1>{channelName}</h1>
+          <div className={channels['details']}>
+            <h2>{title}</h2>
+            <p className={channels['subscribe']}>구독자 {subscribe}</p>
+            <p className={channels['upload-count']}>업로드 수: {videoCount}</p>
+            <div className={channels['link']}>
+              <button onClick={handleOpenWindow}>유투브 채널</button>
+              <CopyButton value={url} size={'0.8rem'} />
+            </div>
           </div>
         </div>
-        <button className={channels['close']} onClick={toggleModal}>
-          <BiSearchAlt color={'inherit'} size={'2rem'} />
-        </button>
       </div>
       {showModal ? (
         <ChannelItemModal
@@ -67,7 +74,7 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
           onClose={toggleModal}
         />
       ) : null}
-    </div>
+    </>
   );
 };
 

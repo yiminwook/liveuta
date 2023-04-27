@@ -6,7 +6,7 @@ import home from '@/styles/home/Home.module.scss';
 import useAllData from '@/hooks/UseAllData';
 import NavSection from '@/components/home/NavSection';
 import YoutubeSection from '@/components/home/YoutubeSection';
-import Loading from '@/components/Loading';
+import Loading from '@/components/common/Loading';
 import useDailyData from '@/hooks/UseDailyData';
 import useLiveData from '@/hooks/UseLiveData';
 

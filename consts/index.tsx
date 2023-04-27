@@ -17,6 +17,6 @@ export const PAGENATION_RANGE = 5;
 
 export const ITEMS_PER_PAGE = 12;
 
-export const PAGE_REVALIDATE_TIME = 3 * 60 * 60 * 1000;
+export const PAGE_REVALIDATE_TIME = 12 * 60 * 60;
 
 export const HOME_FILTER = ['live', 'daily', 'all'];

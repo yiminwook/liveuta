@@ -51,9 +51,14 @@
           background-color: map-get($colors, salmon);
           color: lighten(map-get($colors, main), 10%);
         }
+
         &.active {
           background-color: darken(map-get($colors, highlight-font), 3%);
           color: lighten(map-get($colors, main), 10%);
+        }
+
+        a:focus-visible {
+          outline-offset: -4px;
         }
       }
     }
@@ -70,7 +75,6 @@
     display: grid;
     row-gap: 0.5rem;
     grid-template-columns: 1fr;
-    margin-bottom: 2rem;
 
     @include min-width($mixin-middle-width) {
       grid-template-columns: repeat(3, 1fr);

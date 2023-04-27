@@ -44,7 +44,7 @@
       color: map-get($colors, salmon);
 
       &:hover {
-        scale: 1.02;
+        transform: scale(1.02);
         color: map-get($colors, hover-salmon);
       }
     }

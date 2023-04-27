@@ -1,6 +1,8 @@
 import getENV from '@/utils/GetENV';
 
-export const getinterval = (nowTimeStamp: number, scheduledTimeStamp: number): string => {
+export const getInterval = (scheduledTimeStamp: number): string => {
+  const nowTimeStamp = getNow(true);
+
   /** 분 */
   const interval = Math.trunc((scheduledTimeStamp - nowTimeStamp) / (1000 * 60));
   if (interval < 0) {

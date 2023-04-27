@@ -33,7 +33,7 @@ export const dailyFetcher = async (url: string) => {
 export const liveFetcher = async (url: string) => {
   try {
     const response: AxiosResponse<SheetAPIReturnType> = await axios.get(url);
-    const contents = response.data.contents.filter((data) => data.isLive === true);
+    const contents = response.data.contents.filter((data) => data.isStream === 'TRUE');
     return { total: contents.length, contents };
   } catch (error) {
     console.error(error);

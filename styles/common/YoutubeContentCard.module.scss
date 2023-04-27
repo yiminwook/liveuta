@@ -7,46 +7,52 @@
   border-radius: 5px;
   @include box-shadow();
 
-  &.live {
-    background-color: map-get($colors, main-live);
+  @include min-width($mixin-middle-width) {
+    @include transition(all, 150ms, $bezier-curve);
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  &.closed {
+    background-color: lighten(map-get($colors, light-blue), 3%);
+  }
+
+  &.stream {
+    background-color: map-get($colors, light-yellow);
   }
 
   .content {
     display: flex;
-    height: 100%;
     gap: 0.8rem;
+
+    @include min-width($mixin-middle-width) {
+      gap: 0.2rem;
+      flex-direction: column;
+      padding: 0.2rem 0;
+      max-width: 13rem;
+      height: calc(100% - 0.4rem);
+    }
+
+    @include min-width($mixin-large-width) {
+      max-width: 17rem;
+    }
 
     .thumnail {
       width: 7rem;
       min-width: 7rem;
       aspect-ratio: 16 / 9;
       border-radius: 5px;
-      background-color: map-get($colors, card-bg);
-      @include box-shadow();
+      height: 100%;
       overflow: hidden;
-      border-radius: 5px;
       position: relative;
+      background-color: map-get($colors, card-bg);
+      @include transition(scale, 0.3s, linear);
+      @include box-shadow();
 
-      a {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        @include transition(scale, 0.3s, linear);
-
-        img {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        @include min-width($mixin-middle-width) {
-          transform: scale(1.01);
-        }
-
-        &:focus-visible {
-          scale: 1.2;
-        }
+      @include min-width($mixin-middle-width) {
+        transform: scale(1.01);
       }
 
       @include min-width($mixin-middle-width) {
@@ -59,6 +65,10 @@
       @include min-width($mixin-large-width) {
         min-height: 9.35rem;
       }
+
+      img {
+        object-fit: cover;
+      }
     }
 
     .description {
@@ -68,10 +78,11 @@
       height: 100%;
       display: flex;
       flex-flow: column;
+
       .channel_name {
         font-weight: 500;
 
-        &.live {
+        &.stream {
           font-weight: 600;
           color: map-get($colors, highlight-font);
         }
@@ -83,62 +94,33 @@
 
       .title {
         flex: 1;
-        font-size: 0.5rem;
+        font-size: 0.7rem;
         color: map-get($colors, font);
         @include text-line(2, 1.2rem);
 
-        &.live {
+        @include min-width($mixin-middle-width) {
+          line-height: 1.4rem;
+          height: 2 * 1.4rem;
+        }
+
+        @include min-width($mixin-large-width) {
+          font-size: 1.2rem;
+          line-height: 1.8rem;
+          height: 2 * 1.8rem;
+        }
+
+        &.stream {
           font-weight: 500;
           color: map-get($colors, secondary);
-        }
-
-        @include min-width($mixin-middle-width) {
-          font-size: 0.7rem;
-        }
-
-        @include min-width($mixin-large-width) {
-          font-size: 1rem;
-          line-height: 1.6rem;
-          height: 2 * 1.6rem;
-        }
-      }
-
-      .link {
-        display: flex;
-        gap: 0.75rem;
-        align-items: center;
-        font-size: 0.75rem;
-
-        @include min-width($mixin-large-width) {
-          font-size: 1rem;
-        }
-
-        a {
-          font-size: inherit;
-          font-weight: 500;
-          color: map-get($colors, highlight-font);
-        }
-
-        button {
-          font-weight: 600;
-          font-size: inherit;
-          color: map-get($colors, salmon);
-          @include transition(color, 80ms, $bezier-curve);
-          cursor: pointer;
-
-          &:hover {
-            color: map-get($colors, hover-salmon);
-          }
         }
       }
 
       .time {
         display: flex;
         font-size: 0.6rem;
+        margin-bottom: 0.2rem;
         gap: 0.5rem;
-        .kor {
-          margin-right: 0.2rem;
-        }
+
         .status {
           font-weight: 500;
           color: map-get($colors, highlight-font);
@@ -150,22 +132,25 @@
       }
     }
 
-    @include min-width($mixin-middle-width) {
-      gap: 0.2rem;
-      flex-direction: column;
-      padding: 0.2rem 0;
-      max-width: 13rem;
-    }
-    @include min-width($mixin-large-width) {
-      max-width: 17rem;
-    }
-  }
+    .link {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.5rem;
 
-  @include min-width($mixin-middle-width) {
-    @include transition(all, 150ms, $bezier-curve);
+      @include min-width($mixin-large-width) {
+        font-size: 1rem;
+      }
 
-    &:hover {
-      transform: scale(1.02);
+      button:nth-child(1) {
+        font-size: inherit;
+        font-weight: 600;
+        color: map-get($colors, salmon);
+      }
+
+      // button:nth-child(2) {
+
+      // }
     }
   }
 }
