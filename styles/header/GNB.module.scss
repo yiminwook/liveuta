@@ -2,24 +2,6 @@
 @import 'mixin';
 @import 'placeholder';
 
-%nav-button {
-  display: flex;
-  border-radius: 10px;
-  padding: 0.4rem 1.2rem;
-  background-color: map-get($colors, salmon);
-  color: map-get($colors, light-font);
-  @include transition(background-color, 80ms, $bezier-curve);
-  @include box-shadow();
-
-  &:hover {
-    background-color: map-get($colors, hover-salmon);
-  }
-
-  &:active {
-    background-color: map-get($colors, hover-salmon);
-  }
-}
-
 .blank {
   height: 3.5rem;
 }
@@ -58,7 +40,13 @@
       margin-left: 1rem;
 
       button {
-        @extend %nav-button;
+        display: flex;
+        padding: 0.2rem 0.3rem;
+        border-radius: 5px;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.3);
+        }
       }
 
       @include min-width($mixin-large-width) {
@@ -81,13 +69,27 @@
       }
     }
 
-    .form {
+    .search {
       margin-right: 1rem;
       @include transition(background-color, 80ms, $bezier-curve);
 
       a {
         button {
-          @extend %nav-button;
+          display: flex;
+          border-radius: 10px;
+          padding: 0.5rem 0.7rem;
+          background-color: map-get($colors, salmon);
+          color: map-get($colors, light-font);
+          @include transition(background-color, 80ms, $bezier-curve);
+          @include box-shadow();
+
+          &:hover {
+            background-color: map-get($colors, hover-salmon);
+          }
+
+          &:active {
+            background-color: map-get($colors, hover-salmon);
+          }
         }
       }
 
