@@ -54,6 +54,9 @@ export const parseAllUpcomming = (data: sheets_v4.Schema$ValueRange): ContentsDa
   const dataValue = data.values as ContentsRowType[];
   if (!dataValue) return [];
   dataValue.forEach((value) => {
+    const bool = value[5];
+    const isStream = value[6];
+    if (bool === 'TRUE' && isStream === 'NULL') value[6] = 'FALSE';
     const data = parseSheetData(value);
     if (data) {
       upcoming.push(data);
