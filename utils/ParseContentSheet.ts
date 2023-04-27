@@ -24,7 +24,6 @@ export const parseUpcommingSheet = ({ data, showAll = false }: ParseUpcommingShe
         //   replacedTitle = replacedTitle.substring(0, 40) + "...";
         // }
         const videoId = url.replace('https://www.youtube.com/watch?v=', '');
-        const isLive = isStream === 'TRUE';
         const upcomingData: ContentsDataType = {
           title: replacedTitle,
           url,
@@ -33,7 +32,7 @@ export const parseUpcommingSheet = ({ data, showAll = false }: ParseUpcommingShe
           timestamp,
           thumbnailURL: highThumbnailURL,
           korTime,
-          isLive,
+          isStream,
           interval,
         };
         upcoming.push(upcomingData);

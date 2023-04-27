@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { BiSearchAlt } from 'react-icons/bi';
 import { useState } from 'react';
 import ChannelItemModal from '@/components/channels/ChannelItemModal';
-import { clipText } from '@/utils/cliptext';
+import { clipText } from '@/utils/windowEvent';
 
 interface ChannelItemProps {
   content: ChannelsDataType;

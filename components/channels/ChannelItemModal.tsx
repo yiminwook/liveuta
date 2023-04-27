@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Modal from '../layout/Modal';
 import channelItemModal from '@/styles/channels/ChannelItemModal.module.scss';
-import { clipText } from '@/utils/cliptext';
+import { clipText } from '@/utils/windowEvent';
 
 interface ChannelItemModalProp {
   onClose: () => void;
