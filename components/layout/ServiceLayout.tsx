@@ -4,6 +4,7 @@ import Head from 'next/head';
 import GNB from '@/components/header/GNB';
 import { TfiArrowCircleUp } from 'react-icons/tfi';
 import getConfig from 'next/config';
+import Footer from '@/components/layout/Footer';
 
 interface ServiceLayoutProps {
   title?: string;
@@ -44,6 +45,7 @@ const ServiceLayout = ({
       </Head>
       <GNB />
       <main className="app">{children}</main>
+      <Footer />
       <button className="foat" onClick={scrollUp} onTouchEnd={scrollUp} onTouchStart={scrollUp}>
         <TfiArrowCircleUp size={'3rem'} color={'inherit'} />
       </button>

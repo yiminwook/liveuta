@@ -4,8 +4,8 @@ import { ContentsDataType } from '@/models/sheet/InSheet';
 import Link from 'next/link';
 import Image from 'next/image';
 import youtubeContentCard from '@/styles/common/YoutubeContentCard.module.scss';
-import { clipText, openWindow } from '@/utils/windowEvent';
-import CopyButton from './common/CopyButton';
+import { openWindow } from '@/utils/windowEvent';
+import CopyButton from '@/components/common/CopyButton';
 
 interface YoutubeContentCardProps {
   contents: ContentsDataType;
@@ -86,7 +86,7 @@ const YoutubeContentCard = ({ contents }: YoutubeContentCardProps) => {
           </div>
           <div className={youtubeContentCard['link']}>
             <button onClick={() => openWindow(url)}>새 탭으로 열기</button>
-            <CopyButton value={url} size={'1rem'} />
+            <CopyButton value={url} size={'0.8rem'} />
           </div>
         </div>
       </div>

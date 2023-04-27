@@ -1,0 +1,11 @@
+@import 'mixin';
+@import 'var';
+@import 'placeholder';
+
+.copy-button {
+  display: flex;
+  font-weight: 600;
+  font-size: inherit;
+  color: map-get($colors, highlight-font);
+  @include transition(color, 80ms, $bezier-curve);
+}

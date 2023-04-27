@@ -148,13 +148,9 @@
         color: map-get($colors, salmon);
       }
 
-      button:nth-child(2) {
-        display: flex;
-        font-weight: 600;
-        font-size: inherit;
-        color: map-get($colors, highlight-font);
-        @include transition(color, 80ms, $bezier-curve);
-      }
+      // button:nth-child(2) {
+
+      // }
     }
   }
 }

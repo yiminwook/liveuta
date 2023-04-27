@@ -1,11 +1,12 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import Modal from '../layout/Modal';
 import channelItemModal from '@/styles/channels/ChannelItemModal.module.scss';
-import { clipText } from '@/utils/windowEvent';
+import { openWindow } from '@/utils/windowEvent';
+import CopyButton from '../common/CopyButton';
+import { MouseEvent } from 'react';
 
 interface ChannelItemModalProp {
-  onClose: () => void;
+  onClose: (e: MouseEvent) => void;
   channelName: string;
   title: string;
   imageURL: string;
@@ -43,18 +44,18 @@ const ChannelItemModal = ({
           <div className={channelItemModal['info']}>
             <h1 className={channelItemModal['channel-name']}>{channelName}</h1>
             <h2 className={channelItemModal['title']}>{title}</h2>
-            <div className={channelItemModal['link']}>
-              <Link href={url}>유투브 채널</Link>
-              <button onClick={() => clipText(url)}>Copy</button>
-            </div>
             <div className={channelItemModal['detail']}>
-              <div className={channelItemModal['subscribe']}>구독자 {subscribe}</div>
-              <div className={channelItemModal['video-count']}>업로드 수 {videoCount} 개</div>
+              <h3 className={channelItemModal['subscribe']}>구독자 {subscribe}</h3>
+              <h3 className={channelItemModal['video-count']}>업로드 수 {videoCount} 개</h3>
+            </div>
+            <div className={channelItemModal['link']}>
+              <button onClick={() => openWindow(url)}>유투브 채널</button>
+              <CopyButton value={url} size={'1rem'} />
             </div>
           </div>
         </div>
 
-        <div className={channelItemModal['desc']}>{description}</div>
+        <pre className={channelItemModal['desc']}>{description}</pre>
       </div>
     </Modal>
   );

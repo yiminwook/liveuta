@@ -36,35 +36,36 @@
         font-size: 1.25rem;
       }
 
+      .detail {
+        display: flex;
+        flex-direction: column;
+
+        @include min-width($mixin-middle-width) {
+          gap: 1rem;
+          flex-direction: row;
+        }
+
+        h3 {
+          font-weight: 400;
+          font-size: 0.8rem;
+        }
+      }
+
       .link {
         display: flex;
         gap: 0.5rem;
         align-items: center;
 
-        a {
+        button {
           font-size: inherit;
           font-weight: 500;
           color: map-get($colors, highlight-font);
         }
 
-        button {
+        button:first-child {
+          font-weight: 600;
           font-size: inherit;
-          padding: 0.25rem 0.4rem;
-          background-color: map-get($colors, salmon);
-          border-radius: 5px;
-          color: lighten(map-get($colors, main), 10%);
-          @include box-shadow();
-          @include transition(background-color, 80ms, $bezier-curve);
-
-          &:hover {
-            background-color: map-get($colors, hover-salmon);
-          }
         }
-      }
-
-      .detail {
-        display: flex;
-        gap: 1rem;
       }
     }
   }

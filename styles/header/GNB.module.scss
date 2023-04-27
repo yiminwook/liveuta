@@ -3,8 +3,9 @@
 @import 'placeholder';
 
 %nav-button {
+  display: flex;
   border-radius: 10px;
-  padding: 0.3rem 1.2rem;
+  padding: 0.4rem 1.2rem;
   background-color: map-get($colors, salmon);
   color: map-get($colors, light-font);
   @include transition(background-color, 80ms, $bezier-curve);

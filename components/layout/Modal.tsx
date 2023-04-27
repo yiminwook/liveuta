@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from 'react';
+import { CSSProperties, MouseEvent, ReactNode } from 'react';
 import modal from '@/styles/common/Modal.module.scss';
 import { FaWindowClose } from 'react-icons/fa';
 import useStopPropagation from '@/hooks/UseStopPropagation';
@@ -6,7 +6,7 @@ import useStopPropagation from '@/hooks/UseStopPropagation';
 interface ModalProps {
   children: ReactNode;
   style?: CSSProperties;
-  onClose: () => void;
+  onClose: (e: MouseEvent) => void;
 }
 const Modal = ({ children, style, onClose }: ModalProps) => {
   const { stopPropagation } = useStopPropagation();
