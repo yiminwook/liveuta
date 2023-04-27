@@ -46,7 +46,6 @@
       top: 0;
       right: 0;
       transform: translateX(-50%) translateY(30%);
-      cursor: pointer;
       color: map-get($colors, light-font);
 
       &:hover {

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import youtubeContentCard from '@/styles/common/YoutubeContentCard.module.scss';
 import { clipText, openWindow } from '@/utils/windowEvent';
+import CopyButton from './common/CopyButton';
 
 interface YoutubeContentCardProps {
   contents: ContentsDataType;
@@ -56,8 +57,8 @@ const YoutubeContentCard = ({ contents }: YoutubeContentCardProps) => {
   return (
     <div className={[youtubeContentCard['card'], addStreamModifier].join(' ')} key={videoId}>
       <div className={youtubeContentCard['content']}>
-        <div className={youtubeContentCard['thumnail']}>
-          <Link href={url}>
+        <Link href={url}>
+          <div className={youtubeContentCard['thumnail']}>
             {imgLoaded ? (
               <Image
                 src={thumbnail.thumbnailURL}
@@ -74,8 +75,8 @@ const YoutubeContentCard = ({ contents }: YoutubeContentCardProps) => {
             ) : (
               <Image src="/thumbnail_alt_img.png" alt={thumbnail.thumbnailAlt} unoptimized fill />
             )}
-          </Link>
-        </div>
+          </div>
+        </Link>
         <div className={youtubeContentCard['description']}>
           <div className={[youtubeContentCard['channel_name'], addStreamModifier].join(' ')}>{channelName}</div>
           <div className={[youtubeContentCard['title'], addStreamModifier].join(' ')}>{title}</div>
@@ -85,7 +86,7 @@ const YoutubeContentCard = ({ contents }: YoutubeContentCardProps) => {
           </div>
           <div className={youtubeContentCard['link']}>
             <button onClick={() => openWindow(url)}>새 탭으로 열기</button>
-            <button onClick={() => clipText(url)}>복사</button>
+            <CopyButton value={url} size={'1rem'} />
           </div>
         </div>
       </div>

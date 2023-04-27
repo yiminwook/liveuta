@@ -33,7 +33,6 @@
       justify-content: space-around;
       align-items: center;
       width: 13rem;
-      overflow: hidden;
       font-family: inherit;
       font-size: inherit;
       font-weight: inherit;
@@ -52,6 +51,7 @@
           background-color: map-get($colors, salmon);
           color: lighten(map-get($colors, main), 10%);
         }
+
         &.active {
           background-color: darken(map-get($colors, highlight-font), 3%);
           color: lighten(map-get($colors, main), 10%);

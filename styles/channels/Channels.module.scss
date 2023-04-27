@@ -101,7 +101,6 @@
             color: lighten(map-get($colors, main), 10%);
             @include transition(background-color, 0.2s, linear);
             @include box-shadow();
-            cursor: pointer;
 
             &:hover {
               scale: 1.02;
