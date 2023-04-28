@@ -3,6 +3,7 @@
 @import 'placeholder';
 
 %section-layout {
+  margin: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -12,6 +13,11 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin: auto;
+
+  span {
+    font-weight: 500;
+  }
 }
 
 .main {
@@ -113,6 +119,7 @@
 
   .channel-section {
     @extend %section-layout;
+    max-width: 90%;
 
     & > div {
       @extend %section-header;

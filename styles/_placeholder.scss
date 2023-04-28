@@ -34,11 +34,11 @@
   @include min-width($mixin-large-width) {
     padding: 1rem;
     gap: 0.8rem;
-    width: $mixin-large-width;
   }
 }
 
 %home-contents-section {
+  margin: auto;
   display: grid;
   row-gap: 0.5rem;
 

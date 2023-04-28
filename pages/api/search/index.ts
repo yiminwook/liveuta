@@ -7,7 +7,7 @@ import { parseSheetData } from '@/utils/ParseContentSheet';
 import { parseChannelIDSheet } from '@/utils/ParseChannelSheet';
 import { getYoutubeChannels } from '@/models/youtube/Channel';
 import { combineChannelData } from '@/utils/ParseChannelData';
-import { ChannelsDataType } from '@/models/youtube/InChannel';
+import { ChannelRowType, ChannelsDataType } from '@/models/youtube/InChannel';
 
 export interface SearchResponseType {
   contents: ContentsDataType[];
@@ -43,7 +43,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<SearchResponseT
     searchedContents.sort((a, b) => b.timestamp - a.timestamp); //최신순
 
     const { sheetDataValues } = await parseChannelIDSheet();
-    const searchData = sheetDataValues.filter(([_uid, channelName, _url]) => regex.test(channelName));
+    const searchData: ChannelRowType[] = [];
+    sheetDataValues.forEach((value) => {
+      if (searchData.length >= 12) return; //채널 검색 12개로 제한
+      if (!regex.test(value[1])) return;
+      searchData.push(value);
+    });
     const callYoubeAPI = searchData.map(([uid, _channelName, _url]) => {
       return getYoutubeChannels(uid);
     });
