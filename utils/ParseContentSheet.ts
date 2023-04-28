@@ -4,7 +4,7 @@ import { getInterval, stringToTime } from '@/utils/GetTime';
 import getENV from './GetENV';
 import { LOCAL_TIME } from '@/consts';
 
-const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {
+export const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {
   const [title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream]: ContentsRowType = value;
   const stringTime = scheduledTime.replace(' ', 'T').split(' JST')[0];
   if (stringTime.length === 19) {
@@ -49,10 +49,9 @@ export const parseScheduledData = (data: sheets_v4.Schema$ValueRange): parseSche
     if (bool === 'TRUE' && isStream === 'NULL') return;
     if (bool === 'TRUE' && isStream === 'FALSE') return;
     const data = parseSheetData(value);
-    if (data) {
-      scheduled.push(data);
-      if (data.isStream === 'TRUE') live.push(data);
-    }
+    if (!data) return;
+    scheduled.push(data);
+    if (data.isStream === 'TRUE') live.push(data);
   });
 
   return {
