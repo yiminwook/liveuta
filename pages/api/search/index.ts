@@ -45,7 +45,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<SearchResponseT
     const { sheetDataValues } = await parseChannelIDSheet();
     const searchData: ChannelRowType[] = [];
     sheetDataValues.forEach((value) => {
-      if (searchData.length >= 12) return; //채널 검색 12개로 제한
+      if (searchData.length >= 6) return; //채널 검색 12개로 제한
       if (!regex.test(value[1])) return;
       searchData.push(value);
     });
