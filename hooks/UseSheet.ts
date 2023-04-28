@@ -4,9 +4,9 @@ import { fetcher } from '@/hooks/Fetcher';
 
 const useSheet = () => {
   const { data, error, mutate, isLoading } = useSWR<SheetAPIReturntype>('/api/sheet', fetcher, {
-    dedupingInterval: 15 * 1000,
+    dedupingInterval: 30 * 1000,
     errorRetryCount: 3,
-    errorRetryInterval: 3 * 1000,
+    errorRetryInterval: 5 * 1000,
   });
   return { data, error, mutate, isLoading };
 };
