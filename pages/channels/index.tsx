@@ -1,4 +1,3 @@
-import ChannelSection from '@/components/channels/ChannelSection';
 import { ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
 import { getYoutubeChannels } from '@/models/youtube/Channel';
 import { ChannelsDataType } from '@/models/youtube/InChannel';
@@ -6,6 +5,8 @@ import { combineChannelData } from '@/utils/ParseChannelData';
 import { parseChannelIDSheet } from '@/utils/ParseChannelSheet';
 import { GetStaticProps } from 'next';
 import channels from '@/styles/channels/Channels.module.scss';
+import ChannelList from '@/components/channels/ChannelList';
+import Pagination from '@/components/common/Pagination';
 
 export interface ChannelsPageProps {
   totalLength: number;
@@ -14,9 +15,10 @@ export interface ChannelsPageProps {
 
 const ChannelsPage = ({ contents, totalLength }: ChannelsPageProps) => {
   return (
-    <div className={channels['main']}>
-      <ChannelSection contents={contents} totalLength={totalLength} />
-    </div>
+    <main className={channels['main']}>
+      <ChannelList contents={contents} />
+      <Pagination totalLength={totalLength} />
+    </main>
   );
 };
 

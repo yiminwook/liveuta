@@ -14,7 +14,14 @@ export interface ContentsDataType {
   interval: string;
 }
 
-export interface SheetAPIReturnType {
+export interface ContentsDataTypes {
   total: number;
   contents: ContentsDataType[];
+}
+
+export interface SheetAPIReturntype {
+  scheduled: ContentsDataTypes;
+  live: ContentsDataTypes;
+  daily: ContentsDataTypes;
+  all: ContentsDataTypes;
 }

@@ -3,7 +3,6 @@
 @import 'placeholder';
 
 .copy-button {
-  display: flex;
   font-weight: 600;
   font-size: inherit;
   color: map-get($colors, highlight-font);

@@ -1,0 +1,132 @@
+@import 'mixin';
+@import 'var';
+@import 'placeholder';
+
+%section-layout {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+%section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: auto;
+
+  span {
+    font-weight: 500;
+  }
+}
+
+.main {
+  @extend %home-main;
+  gap: 2rem;
+
+  .search-section {
+    form {
+      min-width: 20rem;
+      max-width: 30rem;
+      margin: auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-self: center;
+      gap: 1rem;
+      height: 7rem;
+      padding: 0.5rem;
+
+      label:nth-of-type(1) {
+        display: none;
+      }
+
+      input {
+        width: auto;
+        position: relative;
+        font-family: inherit;
+        padding: 0 2rem;
+        height: 3rem;
+        flex-basis: 1;
+        flex-grow: 2;
+        border-radius: 30px;
+        border: none;
+        @include box-shadow();
+
+        &:focus {
+          outline: none;
+        }
+
+        &::placeholder {
+          font-family: inherit;
+          font-size: 1.3rem;
+        }
+      }
+
+      label:nth-of-type(2) {
+        position: absolute;
+        right: 4.5rem;
+        display: flex;
+        border-radius: 100%;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      button[type='submit'] {
+        position: absolute;
+        right: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        padding: 0.5rem;
+        border-radius: 100%;
+        background-color: map-get($colors, salmon);
+        color: map-get($colors, light-font);
+        @include transition(background-color, 80ms, $bezier-curve);
+        @include box-shadow();
+
+        &:hover {
+          background-color: map-get($colors, hover-salmon);
+        }
+      }
+
+      p {
+        position: absolute;
+        bottom: 0;
+        transform: translateY(-50%);
+        left: 2rem;
+        color: #b10a0a;
+
+        &:before {
+          content: '* ';
+        }
+      }
+    }
+  }
+
+  .content-section {
+    @extend %section-layout;
+
+    & > div {
+      @extend %section-header;
+    }
+
+    section {
+      @extend %home-contents-section;
+    }
+  }
+
+  .channel-section {
+    @extend %section-layout;
+    max-width: 90%;
+
+    & > div {
+      @extend %section-header;
+    }
+
+    section {
+      @extend %channels-channel-section;
+    }
+  }
+}

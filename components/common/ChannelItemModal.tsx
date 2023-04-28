@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Modal from '../layout/Modal';
-import channelItemModal from '@/styles/channels/ChannelItemModal.module.scss';
+import channelItemModal from '@/styles/common/ChannelItemModal.module.scss';
 import { openWindow } from '@/utils/windowEvent';
-import CopyButton from '../common/CopyButton';
+import CopyButton from './CopyButton';
 import { MouseEvent } from 'react';
 
 interface ChannelItemModalProp {

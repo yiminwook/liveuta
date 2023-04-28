@@ -1,5 +1,5 @@
 import { FaWindowClose } from 'react-icons/fa';
-import mobileNav from '@/styles/header/Sidebar.module.scss';
+import sidebar from '@/styles/layout/Sidebar.module.scss';
 import getConfig from 'next/config';
 import { MouseEvent } from 'react';
 import useStopPropagation from '@/hooks/UseStopPropagation';
@@ -25,8 +25,8 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
 
   return (
     <div>
-      <div className={[mobileNav['container'], show ? mobileNav['show'] : ''].join(' ')} onClick={onClick}>
-        <div className={[mobileNav['sidebar'], show ? mobileNav['show'] : ''].join(' ')} onClick={stopPropagation}>
+      <div className={[sidebar['container'], show ? sidebar['show'] : ''].join(' ')} onClick={onClick}>
+        <div className={[sidebar['sidebar'], show ? sidebar['show'] : ''].join(' ')} onClick={stopPropagation}>
           <ul>
             <li>
               <h1>
@@ -36,7 +36,7 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
             </li>
             <NavLink href="/">Home</NavLink>
             <NavLink href="/channels">Channels</NavLink>
-            <NavLink href="/channels">Search</NavLink>
+            <NavLink href="/search">Search</NavLink>
           </ul>
           <ul>
             <li>
@@ -50,7 +50,7 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
             <NavLink href={`https://docs.google.com/spreadsheets/d/${CONTENTS_SHEET_ID ?? ''}/`}>스케쥴 시트</NavLink>
             <NavLink href={`https://docs.google.com/spreadsheets/d/${CHANNELS_SHEET_ID ?? ''}/`}>채널 시트</NavLink>
           </ul>
-          <button className={mobileNav['close']} onClick={onClose}>
+          <button className={sidebar['close']} onClick={onClose}>
             <FaWindowClose size={'2rem'} color="inherit" />
           </button>
         </div>

@@ -3,22 +3,7 @@
 @import 'placeholder';
 
 .main {
-  width: 100%;
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  @include min-width($mixin-middle-width) {
-    width: auto;
-    padding: 0.6rem;
-    gap: 0.6rem;
-  }
-
-  @include min-width($mixin-large-width) {
-    padding: 1rem;
-    gap: 0.8rem;
-  }
+  @extend %home-main;
 
   .nav-section {
     display: flex;
@@ -43,22 +28,28 @@
 
       li {
         width: 100%;
-        line-height: 2.5rem;
-        text-align: center;
-        @include transition(background-color, 0.2s, linear);
 
-        &:hover {
-          background-color: map-get($colors, salmon);
-          color: lighten(map-get($colors, main), 10%);
-        }
+        a {
+          &:focus-visible {
+            outline-offset: -4px;
+          }
 
-        &.active {
-          background-color: darken(map-get($colors, highlight-font), 3%);
-          color: lighten(map-get($colors, main), 10%);
-        }
+          button {
+            width: 100%;
+            height: 2.4rem;
+            text-align: center;
+            @include transition(background-color, 0.2s, linear);
 
-        a:focus-visible {
-          outline-offset: -4px;
+            &:hover {
+              background-color: map-get($colors, salmon);
+              color: lighten(map-get($colors, main), 10%);
+            }
+
+            &.active {
+              background-color: darken(map-get($colors, highlight-font), 3%);
+              color: lighten(map-get($colors, main), 10%);
+            }
+          }
         }
       }
     }
@@ -72,24 +63,6 @@
   }
 
   .contents-section {
-    display: grid;
-    row-gap: 0.5rem;
-    grid-template-columns: 1fr;
-
-    @include min-width($mixin-middle-width) {
-      grid-template-columns: repeat(3, 1fr);
-      column-gap: 0.4rem;
-      row-gap: 1.8rem;
-    }
-    @include min-width($mixin-large-width) {
-      column-gap: 0.6rem;
-      row-gap: 2rem;
-    }
-    @include min-width($mixin-xl-width) {
-      grid-template-columns: repeat(4, 1fr);
-    }
-    @include min-width(118rem) {
-      grid-template-columns: repeat(5, 1fr);
-    }
+    @extend %home-contents-section;
   }
 }

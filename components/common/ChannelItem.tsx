@@ -1,12 +1,12 @@
 import { ChannelsDataType } from '@/models/youtube/InChannel';
 import Image from 'next/image';
-import channels from '@/styles/channels/Channels.module.scss';
+import channel from '@/styles/common/ChanneItem.module.scss';
 import { renderSubscribe } from '@/utils/RenderSubscribe';
 import Link from 'next/link';
 import { MouseEvent, useState } from 'react';
-import ChannelItemModal from '@/components/channels/ChannelItemModal';
+import ChannelItemModal from '@/components/common/ChannelItemModal';
 import { openWindow } from '@/utils/windowEvent';
-import CopyButton from '../common/CopyButton';
+import CopyButton from './CopyButton';
 import useStopPropagation from '@/hooks/UseStopPropagation';
 
 interface ChannelItemProps {
@@ -35,9 +35,9 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
 
   return (
     <>
-      <div className={channels['channel']} onClick={toggleModal}>
+      <div className={channel['channel']} onClick={toggleModal}>
         <Link href={url} onClick={stopPropagation}>
-          <div className={channels['image-container']}>
+          <div className={channel['image-container']}>
             <Image
               src={imageURL}
               alt=""
@@ -49,13 +49,13 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
             />
           </div>
         </Link>
-        <div className={channels['desc']}>
+        <div className={channel['desc']}>
           <h1>{channelName}</h1>
-          <div className={channels['details']}>
+          <div className={channel['details']}>
             <h2>{title}</h2>
-            <p className={channels['subscribe']}>구독자 {subscribe}</p>
-            <p className={channels['upload-count']}>업로드 수: {videoCount}</p>
-            <div className={channels['link']}>
+            <p className={channel['subscribe']}>구독자 {subscribe}</p>
+            <p className={channel['upload-count']}>업로드 수: {videoCount}</p>
+            <div className={channel['link']}>
               <button onClick={handleOpenWindow}>유투브 채널</button>
               <CopyButton value={url} size={'0.8rem'} />
             </div>

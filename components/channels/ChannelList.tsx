@@ -1,5 +1,5 @@
 import { ChannelsDataType } from '@/models/youtube/InChannel';
-import ChannelItem from '@/components/channels/ChannelItem';
+import ChannelItem from '@/components/common/ChannelItem';
 import channels from '@/styles/channels/Channels.module.scss';
 
 interface ChannelListProps {
@@ -8,11 +8,11 @@ interface ChannelListProps {
 
 const ChannelList = ({ contents }: ChannelListProps) => {
   return (
-    <div className={channels['channel-list']}>
+    <section className={channels['channel-section']}>
       {contents.map((content) => (
         <ChannelItem key={content.uid} content={content} />
       ))}
-    </div>
+    </section>
   );
 };
 

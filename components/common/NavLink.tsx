@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { MouseEvent, ReactNode } from 'react';
+import { MouseEvent, ReactNode, useMemo } from 'react';
 
 interface NavLinkProps {
   href: string;
@@ -20,9 +20,11 @@ const NavLink = ({ href, children, modifier = '' }: NavLinkProps) => {
   };
 
   return (
-    <li className={isActive ? ['active', modifier].join(' ') : ''}>
+    <li>
       <Link href={href} onClick={onClick}>
-        {children}
+        <button tabIndex={-1} className={isActive ? ['active', modifier].join(' ') : ''}>
+          {children}
+        </button>
       </Link>
     </li>
   );

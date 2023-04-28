@@ -1,3 +1,5 @@
+import { SheetAPIReturntype } from '@/models/sheet/InSheet';
+
 /* ENV */
 export const GOOGLE_API_KEY = 'GOOGLE_API_KEY';
 
