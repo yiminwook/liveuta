@@ -7,8 +7,12 @@ import { parseSheetData } from '@/utils/ParseContentSheet';
 import { parseChannelIDSheet } from '@/utils/ParseChannelSheet';
 import { getYoutubeChannels } from '@/models/youtube/Channel';
 import { combineChannelData } from '@/utils/ParseChannelData';
+import { ChannelsDataType } from '@/models/youtube/InChannel';
 
-export interface SearchResponseType {}
+export interface SearchResponseType {
+  contents: ContentsDataType[];
+  channels: ChannelsDataType[];
+}
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<SearchResponseType>) => {
   try {
@@ -47,14 +51,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<SearchResponseT
     const searchedChannels = combineChannelData({ youtubeData, sheetData: searchData });
 
     return res.status(200).json({
-      contents: {
-        data: searchedContents,
-        total: searchedContents.length,
-      },
-      channels: {
-        data: searchedChannels,
-        total: searchedChannels.length,
-      },
+      contents: searchedContents,
+      channels: searchedChannels,
     });
   } catch (err) {
     console.error(err);

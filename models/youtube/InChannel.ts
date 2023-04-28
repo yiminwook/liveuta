@@ -10,7 +10,12 @@ export interface ChannelsDataType extends youtube_v3.Schema$Channel {
   statistics: youtube_v3.Schema$ChannelStatistics;
 }
 
+export interface ChannelsDataTypes extends youtube_v3.Schema$Channel {
+  channels: ChannelsDataType[];
+  total: number;
+}
+
 export interface ChannelAPIReturnType {
-  totalLength: number;
+  total: number;
   contents: ChannelsDataType[];
 }

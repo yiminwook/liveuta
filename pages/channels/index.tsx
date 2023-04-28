@@ -14,9 +14,9 @@ export interface ChannelsPageProps {
 
 const ChannelsPage = ({ contents, totalLength }: ChannelsPageProps) => {
   return (
-    <div className={channels['main']}>
+    <main className={channels['main']}>
       <ChannelSection contents={contents} totalLength={totalLength} />
-    </div>
+    </main>
   );
 };
 
