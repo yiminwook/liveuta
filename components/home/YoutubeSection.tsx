@@ -10,7 +10,7 @@ const YoutubeSection = ({ contents }: YoutubeSectionProps) => {
   return (
     <section className={home['contents-section']}>
       {contents.map((data) => (
-        <YoutubeContentCard key={data.videoId} contents={data} />
+        <YoutubeContentCard key={data.videoId} content={data} />
       ))}
     </section>
   );

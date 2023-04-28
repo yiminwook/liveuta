@@ -27,8 +27,7 @@ const SearchSection = ({ onSubmit }: SearchSectionProps) => {
       e.preventDefault();
       const value = inputValue.trim();
       if (!value) return setShowErrMsg(() => true);
-      // onSubmit(inputValue);
-      console.log('제출');
+      onSubmit(inputValue);
     },
     [inputValue],
   );

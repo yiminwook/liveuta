@@ -9,12 +9,7 @@ interface ChannelSectionProps {
 }
 
 const ChannelSection = ({ contents, totalLength }: ChannelSectionProps) => {
-  return (
-    <section className={channels['channel-section']}>
-      <ChannelList contents={contents} />
-      <Pagination totalLength={totalLength} />
-    </section>
-  );
+  return <section className={channels['channel-section']}></section>;
 };
 
 export default ChannelSection;

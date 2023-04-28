@@ -8,11 +8,11 @@ import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/CopyButton';
 
 interface YoutubeContentCardProps {
-  contents: ContentsDataType;
+  content: ContentsDataType;
 }
 
-const YoutubeContentCard = ({ contents }: YoutubeContentCardProps) => {
-  const { title, url, channelName, videoId, korTime, interval, isStream } = contents;
+const YoutubeContentCard = ({ content: content }: YoutubeContentCardProps) => {
+  const { title, url, channelName, videoId, korTime, interval, isStream } = content;
   const [imgLoaded, setImgLoaded] = useState(true);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -24,7 +24,7 @@ const YoutubeContentCard = ({ contents }: YoutubeContentCardProps) => {
   };
 
   const thumbnail = useMemo(() => {
-    let thumbnailURL = contents.thumbnailURL;
+    let thumbnailURL = content.thumbnailURL;
     let thumbnailAlt = `${title}_img`;
 
     if (thumbnailURL === 'failed to get' || thumbnailURL === undefined || thumbnailURL === null) {

@@ -2,18 +2,26 @@
 @import 'var';
 @import 'placeholder';
 
-.main {
-  width: 100%;
+%section-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-  @include min-width($mixin-2xl-width) {
-    width: 80%;
-  }
+%section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.main {
+  @extend %home-main;
+  gap: 2rem;
 
   .search-section {
-    background-color: map-get($colors, bg);
     form {
+      min-width: 20rem;
       max-width: 30rem;
-      width: 80%;
       margin: auto;
       position: relative;
       display: flex;
@@ -21,18 +29,20 @@
       justify-self: center;
       gap: 1rem;
       height: 7rem;
-      padding: 1rem;
+      padding: 0.5rem;
 
       label:nth-of-type(1) {
         display: none;
       }
 
       input {
+        width: auto;
+        position: relative;
         font-family: inherit;
         padding: 0 2rem;
         height: 3rem;
-        flex: 2;
-        font-size: 1.5rem;
+        flex-basis: 1;
+        flex-grow: 2;
         border-radius: 30px;
         border: none;
         @include box-shadow();
@@ -86,6 +96,30 @@
           content: '* ';
         }
       }
+    }
+  }
+
+  .content-section {
+    @extend %section-layout;
+
+    & > div {
+      @extend %section-header;
+    }
+
+    section {
+      @extend %home-contents-section;
+    }
+  }
+
+  .channel-section {
+    @extend %section-layout;
+
+    & > div {
+      @extend %section-header;
+    }
+
+    section {
+      @extend %channels-channel-section;
     }
   }
 }
