@@ -1,6 +1,8 @@
-import { ContentsRowType, ContentsDataType } from '@/models/sheet/InSheet';
+import { ContentsRowType, ContentsDataType, SheetAPIReturntype } from '@/models/sheet/InSheet';
 import { sheets_v4 } from 'googleapis';
 import { getInterval, stringToTime } from '@/utils/GetTime';
+import getENV from './GetENV';
+import { LOCAL_TIME } from '@/consts';
 
 const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {
   const [title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream]: ContentsRowType = value;
@@ -29,11 +31,18 @@ const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined =>
   }
 };
 
+interface parseScheduledDataType {
+  scheduled: SheetAPIReturntype['scheduled'];
+  live: SheetAPIReturntype['live'];
+}
 /** Parse Google spread sheet - Scheduled & Live */
-export const parseScheduledUpcomming = (data: sheets_v4.Schema$ValueRange): ContentsDataType[] => {
-  const upcoming: ContentsDataType[] = [];
+export const parseScheduledData = (data: sheets_v4.Schema$ValueRange): parseScheduledDataType => {
   const dataValue = data.values as ContentsRowType[];
-  if (!dataValue) return [];
+  if (!dataValue) throw new Error('No DataValue');
+
+  const scheduled: SheetAPIReturntype['scheduled']['contents'] = [];
+  const live: SheetAPIReturntype['live']['contents'] = [];
+
   dataValue.forEach((value) => {
     const bool = value[5];
     const isStream = value[6];
@@ -41,27 +50,55 @@ export const parseScheduledUpcomming = (data: sheets_v4.Schema$ValueRange): Cont
     if (bool === 'TRUE' && isStream === 'FALSE') return;
     const data = parseSheetData(value);
     if (data) {
-      upcoming.push(data);
+      scheduled.push(data);
+      if (data.isStream === 'TRUE') live.push(data);
     }
   });
 
-  return upcoming;
+  return {
+    scheduled: {
+      contents: scheduled,
+      total: scheduled.length,
+    },
+    live: {
+      contents: live,
+      total: live.length,
+    },
+  };
 };
 
+interface parseAllDataType {
+  daily: SheetAPIReturntype['daily'];
+  all: SheetAPIReturntype['all'];
+}
 /** Parse Google spread sheet - Daily & All */
-export const parseAllUpcomming = (data: sheets_v4.Schema$ValueRange): ContentsDataType[] => {
-  const upcoming: ContentsDataType[] = [];
+export const parseAllData = (data: sheets_v4.Schema$ValueRange): parseAllDataType => {
   const dataValue = data.values as ContentsRowType[];
-  if (!dataValue) return [];
+  if (!dataValue) throw new Error('No DataValue');
+
+  const daily: SheetAPIReturntype['daily']['contents'] = [];
+  const all: SheetAPIReturntype['all']['contents'] = [];
+  const yesterday = Date.now() - 24 * 60 * 60 * 1000 + +getENV(LOCAL_TIME);
+
   dataValue.forEach((value) => {
     const bool = value[5];
     const isStream = value[6];
     if (bool === 'TRUE' && isStream === 'NULL') value[6] = 'FALSE';
     const data = parseSheetData(value);
     if (data) {
-      upcoming.push(data);
+      all.push(data);
+      if (data.timestamp >= yesterday) daily.push(data);
     }
   });
 
-  return upcoming;
+  return {
+    daily: {
+      contents: daily,
+      total: daily.length,
+    },
+    all: {
+      contents: all,
+      total: all.length,
+    },
+  };
 };
