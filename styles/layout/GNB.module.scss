@@ -86,10 +86,6 @@
           &:hover {
             background-color: map-get($colors, hover-salmon);
           }
-
-          &:active {
-            background-color: map-get($colors, hover-salmon);
-          }
         }
       }
 

@@ -8,6 +8,7 @@ import axios, { AxiosResponse } from 'axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { SearchResponseType } from './api/search';
+import search from '@/styles/search/Search.module.scss';
 
 interface SearchProps {}
 
@@ -37,7 +38,7 @@ const Search = ({}: SearchProps) => {
   }
 
   return (
-    <main>
+    <main className={search['main']}>
       <SearchSection onSubmit={searchChannelName} />
       <ContentSection contents={contents} />
       <ChannelSection channels={channels} />
