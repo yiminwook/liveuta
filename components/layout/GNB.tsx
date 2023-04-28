@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { useRef, useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
-import Sidebar from '@/components/header/Sidebar';
+import Sidebar from '@/components/layout/Sidebar';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { BiSearchAlt } from 'react-icons/bi';
 import gnb from '@/styles/header/GNB.module.scss';

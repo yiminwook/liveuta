@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { ReactNode } from 'react';
 import Head from 'next/head';
-import GNB from '@/components/header/GNB';
+import GNB from '@/components/layout/GNB';
 import { TfiArrowCircleUp } from 'react-icons/tfi';
 import getConfig from 'next/config';
 import Footer from '@/components/layout/Footer';
