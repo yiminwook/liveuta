@@ -20,9 +20,11 @@ const NavLink = ({ href, children, modifier = '' }: NavLinkProps) => {
   };
 
   return (
-    <li className={isActive ? ['active', modifier].join(' ') : ''}>
+    <li>
       <Link href={href} onClick={onClick}>
-        {children}
+        <button tabIndex={-1} className={isActive ? ['active', modifier].join(' ') : ''}>
+          {children}
+        </button>
       </Link>
     </li>
   );

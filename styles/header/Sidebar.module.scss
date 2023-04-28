@@ -37,6 +37,8 @@
 
       li {
         h1 {
+          display: flex;
+          align-items: center;
           font-size: 1.5rem;
           font-weight: 600;
         }
@@ -54,8 +56,10 @@
 
     .close {
       position: absolute;
+      display: flex;
       top: 0;
       right: 0;
+      padding: 0 0.1rem;
       transform: translateX(-50%) translateY(30%);
       color: map-get($colors, light-font);
 

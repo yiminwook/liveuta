@@ -19,7 +19,7 @@ const HomePage: NextPage<HomePageProps> = ({ filter = 'scheduled' }) => {
 
   const setData = () => {
     if (!data) return;
-    setContents(() => [...data[filter].contents]);
+    setContents(() => data[filter].contents);
     setTotal(() => data[filter].total);
   };
 
