@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { MouseEvent, ReactNode } from 'react';
+import { MouseEvent, ReactNode, useMemo } from 'react';
 
 interface NavLinkProps {
   href: string;

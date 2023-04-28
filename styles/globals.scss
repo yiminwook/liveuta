@@ -40,10 +40,6 @@ li {
   list-style: none;
   margin: 0;
   padding: 0;
-
-  &.active {
-    color: map-get($colors, highlight-font);
-  }
 }
 
 h1,
@@ -72,6 +68,10 @@ button {
     border-radius: 5px;
     outline-offset: 5px;
     z-index: 10;
+  }
+
+  &.active {
+    color: map-get($colors, highlight-font);
   }
 }
 

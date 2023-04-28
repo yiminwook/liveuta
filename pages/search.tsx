@@ -38,7 +38,7 @@ const Search = ({}: SearchProps) => {
 
   return (
     <main>
-      <SearchSection />
+      <SearchSection onSubmit={searchChannelName} />
       <ContentSection contents={contents} />
       <ChannelSection channels={channels} />
     </main>
