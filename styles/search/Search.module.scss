@@ -24,16 +24,31 @@
   @extend %home-main;
   padding: 0.5rem;
   gap: 2rem;
+  width: 100%;
 
   .search-section {
-    div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+
+    @include min-width($mixin-large-width) {
+      gap: 0.5rem;
+    }
+
+    div:nth-child(1) {
+      width: 100%;
       margin: auto;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 1rem;
-      height: 7rem;
+      height: 5rem;
       padding: 0.5rem;
+
+      @include min-width($mixin-large-width) {
+        height: 8rem;
+      }
 
       form {
         margin: auto;
@@ -43,15 +58,19 @@
         }
 
         input {
-          width: auto;
+          width: 20rem;
           position: relative;
           font-family: inherit;
           padding: 0 2rem;
-          height: 3rem;
-          font-size: 1.25rem;
+          height: 3.5rem;
           border-radius: 30px;
           border: none;
           @include box-shadow();
+
+          @include min-width($mixin-large-width) {
+            font-size: 1.25rem;
+            height: 4rem;
+          }
 
           &:focus {
             outline: none;
@@ -60,6 +79,7 @@
           &::placeholder {
             font-family: inherit;
             font-size: 1.25rem;
+            display: none;
           }
         }
 
@@ -106,7 +126,6 @@
         }
       }
     }
-
     .result > p {
       word-break: keep-all;
       text-align: center;

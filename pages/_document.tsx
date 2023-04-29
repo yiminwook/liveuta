@@ -21,7 +21,7 @@ const Document = () => {
         {/* apple */}
         <meta name="apple-mobile-web-app-title" content="Live Uta" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link rel="apple-touch-icon" href="/assets/icon-192-192.png" />
         {/* basic */}
         <meta name="description" content="Show V-Tuber Utawaku schedule" />
