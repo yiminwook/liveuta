@@ -26,8 +26,6 @@
 
   .search-section {
     form {
-      min-width: 20rem;
-      max-width: 30rem;
       margin: auto;
       position: relative;
       display: flex;
@@ -48,7 +46,6 @@
         padding: 0 2rem;
         height: 3rem;
         font-size: 1.25rem;
-        flex-basis: 1;
         flex-grow: 2;
         border-radius: 30px;
         border: none;
