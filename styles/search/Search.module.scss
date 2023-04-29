@@ -47,6 +47,7 @@
         font-family: inherit;
         padding: 0 2rem;
         height: 3rem;
+        font-size: 1.25rem;
         flex-basis: 1;
         flex-grow: 2;
         border-radius: 30px;
@@ -59,7 +60,7 @@
 
         &::placeholder {
           font-family: inherit;
-          font-size: 1.3rem;
+          font-size: 1.25rem;
         }
       }
 
@@ -102,6 +103,16 @@
           content: '* ';
         }
       }
+    }
+
+    & > p {
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 500;
+      background-color: map-get($colors, card-bg);
+      padding: 0.25rem;
+      border-radius: 10px;
+      @include box-shadow();
     }
   }
 
