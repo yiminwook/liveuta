@@ -27,28 +27,30 @@ const SearchSection = ({ onSubmit, searchMsg }: SearchSectionProps) => {
 
   return (
     <section className={search['search-section']}>
-      <form onSubmit={handleOnSubmit}>
-        <label htmlFor="searchInput">채널명</label>
-        <input
-          id="searchInput"
-          name="searchInput"
-          type="text"
-          onChange={onChangeValue}
-          value={inputValue}
-          placeholder="채널명으로 검색"
-          tabIndex={1}
-        />
-        {showErrMsg ? <p>입력되지 않았습니다.</p> : null}
-        {inputValue ? (
-          <label onClick={resetValue} tabIndex={0}>
-            <GrFormClose color={'inherit'} size={'1.5rem'} />
-          </label>
-        ) : null}
-        <button type="submit">
-          <BsSearchHeart color={'inherit'} size={'1.5rem'} />
-        </button>
-      </form>
-      {searchMsg !== '' ? <p>{`"${searchMsg}" 검색결과`}</p> : null}
+      <div>
+        <form onSubmit={handleOnSubmit}>
+          <label htmlFor="searchInput">채널명</label>
+          <input
+            id="searchInput"
+            name="searchInput"
+            type="text"
+            onChange={onChangeValue}
+            value={inputValue}
+            placeholder="채널명으로 검색"
+            tabIndex={1}
+          />
+          {showErrMsg ? <p>입력되지 않았습니다.</p> : null}
+          {inputValue ? (
+            <label onClick={resetValue} tabIndex={0}>
+              <GrFormClose color={'inherit'} size={'1.5rem'} />
+            </label>
+          ) : null}
+          <button type="submit">
+            <BsSearchHeart color={'inherit'} size={'1.5rem'} />
+          </button>
+        </form>
+      </div>
+      <div className={search['result']}>{searchMsg !== '' ? <p>{`"${searchMsg}" 검색결과`}</p> : null}</div>
     </section>
   );
 };
