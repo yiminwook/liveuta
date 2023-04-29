@@ -16,11 +16,7 @@ const {
   publicRuntimeConfig: { META_IMAGE },
 } = getConfig();
 
-const ServiceLayout = ({
-  title = 'LiveUta',
-  discription = 'Show V-Tuber Utawaku schedule',
-  children,
-}: ServiceLayoutProps) => {
+const ServiceLayout = ({ title = 'Live Uta', children }: ServiceLayoutProps) => {
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -29,18 +25,9 @@ const ServiceLayout = ({
     <>
       <Head>
         <title>{title}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="Live Uta" />
-        <meta name="twitter:site" content="Live Uta" />
-        <meta name="twitter:title" content="Live Uta" />
-        <meta property="og:description" content={discription} />
-        <meta name="description" content={discription} />
-        <meta name="twitter:card" content="summary" />
-        <meta property="og:image" content={META_IMAGE} />
-        <meta name="twitter:image" content={META_IMAGE} />
-        <link
-          rel="icon"
-          href="https://img.icons8.com/external-microdots-premium-microdot-graphic/64/null/external-holiday-christmas-new-year-vol2-microdots-premium-microdot-graphic-4.png"
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1"
         />
       </Head>
       <GNB />

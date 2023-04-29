@@ -1,6 +1,6 @@
 import { ChannelsDataType } from '@/models/youtube/InChannel';
 import Image from 'next/image';
-import channel from '@/styles/common/ChanneItem.module.scss';
+import channelCard from '@/styles/common/ChannelCard.module.scss';
 import { renderSubscribe } from '@/utils/RenderSubscribe';
 import Link from 'next/link';
 import { MouseEvent, useState } from 'react';
@@ -35,9 +35,9 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
 
   return (
     <>
-      <div className={channel['channel']} onClick={toggleModal}>
+      <div className={channelCard['channel']} onClick={toggleModal}>
         <Link href={url} onClick={stopPropagation}>
-          <div className={channel['image-container']}>
+          <div className={channelCard['image-container']}>
             <Image
               src={imageURL}
               alt=""
@@ -49,13 +49,13 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
             />
           </div>
         </Link>
-        <div className={channel['desc']}>
+        <div className={channelCard['desc']}>
           <h1>{channelName}</h1>
-          <div className={channel['details']}>
+          <div className={channelCard['details']}>
             <h2>{title}</h2>
-            <p className={channel['subscribe']}>구독자 {subscribe}</p>
-            <p className={channel['upload-count']}>업로드 수: {videoCount}</p>
-            <div className={channel['link']}>
+            <p className={channelCard['subscribe']}>구독자 {subscribe}</p>
+            <p className={channelCard['upload-count']}>업로드 수: {videoCount}</p>
+            <div className={channelCard['link']}>
               <button onClick={handleOpenWindow}>유투브 채널</button>
               <CopyButton value={url} size={'0.8rem'} />
             </div>

@@ -96,14 +96,14 @@ body {
 
   .background-left {
     @extend %background-side;
-    background-image: url('/background2.jpg');
+    background-image: url('/background-left.jpg');
     background-position: 60%;
     left: 0;
   }
 
   .background-right {
     @extend %background-side;
-    background-image: url('/background3.jpg');
+    background-image: url('/background-right.jpg');
     background-position: 40%;
     right: 0;
   }

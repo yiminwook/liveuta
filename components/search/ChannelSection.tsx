@@ -1,5 +1,5 @@
 import { SearchResponseType } from '@/pages/api/search';
-import ChannelItem from '../common/ChannelItem';
+import ChannelItem from '../common/ChannelCard';
 import search from '@/styles/search/Search.module.scss';
 
 interface ChannelSectionProps {
