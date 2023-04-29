@@ -64,6 +64,8 @@
 
         label:nth-of-type(2) {
           position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
           right: 4.5rem;
           display: flex;
           border-radius: 100%;
