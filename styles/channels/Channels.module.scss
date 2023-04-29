@@ -11,7 +11,7 @@
 
   @include min-width($mixin-middle-width) {
     width: auto;
-    max-width: calc(80% - 1rem);
+    max-width: 70%;
   }
 
   @include min-width($mixin-large-width) {
