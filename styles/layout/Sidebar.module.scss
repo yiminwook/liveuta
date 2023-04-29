@@ -43,13 +43,12 @@
           font-weight: 600;
         }
 
-        &:hover {
-          color: map-get($colors, light-font);
-        }
-
-        &:not(:first-child) {
-          font-size: 1.2rem;
-          padding-left: 1rem;
+        a {
+          button {
+            &:hover:not(&.active) {
+              color: map-get($colors, light-font);
+            }
+          }
         }
       }
     }

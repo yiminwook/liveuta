@@ -5,7 +5,7 @@ import { combineChannelData } from '@/utils/ParseChannelData';
 import { parseChannelIDSheet } from '@/utils/ParseChannelSheet';
 import { GetStaticProps } from 'next';
 import channels from '@/styles/channels/Channels.module.scss';
-import ChannelList from '@/components/channels/ChannelList';
+import ChannelSection from '@/components/channels/ChannelSection';
 import Pagination from '@/components/common/Pagination';
 
 export interface ChannelsPageProps {
@@ -16,7 +16,7 @@ export interface ChannelsPageProps {
 const ChannelsPage = ({ contents, totalLength }: ChannelsPageProps) => {
   return (
     <main className={channels['main']}>
-      <ChannelList contents={contents} />
+      <ChannelSection contents={contents} />
       <Pagination totalLength={totalLength} />
     </main>
   );
