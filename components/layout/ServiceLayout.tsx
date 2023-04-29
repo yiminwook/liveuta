@@ -25,7 +25,7 @@ const ServiceLayout = ({ title = 'Live Uta', children }: ServiceLayoutProps) => 
     <>
       <Head>
         <title>{title}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
       </Head>
       <GNB />
       <main className="app">{children}</main>
