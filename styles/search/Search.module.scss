@@ -58,7 +58,7 @@
         }
 
         input {
-          width: 20rem;
+          width: 15rem;
           position: relative;
           font-family: inherit;
           padding: 0 2rem;
@@ -68,6 +68,7 @@
           @include box-shadow();
 
           @include min-width($mixin-large-width) {
+            width: 20rem;
             font-size: 1.25rem;
             height: 4rem;
           }
