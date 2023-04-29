@@ -1,7 +1,7 @@
 import { ContentsRowType, ContentsDataType, SheetAPIReturntype } from '@/models/sheet/InSheet';
 import { sheets_v4 } from 'googleapis';
 import { getInterval, stringToTime } from '@/utils/GetTime';
-import getENV from './GetENV';
+import getENV from '@/utils/GetENV';
 import { LOCAL_TIME } from '@/consts';
 
 export const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {

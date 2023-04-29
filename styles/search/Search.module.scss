@@ -130,7 +130,7 @@
 
   .channel-section {
     @extend %section-layout;
-    max-width: 90%;
+    width: 100%;
 
     & > div {
       @extend %section-header;

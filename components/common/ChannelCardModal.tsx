@@ -4,8 +4,9 @@ import channelCardModal from '@/styles/common/ChannelCardModal.module.scss';
 import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/CopyButton';
 import { MouseEvent } from 'react';
+import Link from 'next/link';
 
-interface ChannelItemModalProp {
+interface ChannelCardModalProp {
   onClose: (e: MouseEvent) => void;
   channelName: string;
   title: string;
@@ -16,7 +17,7 @@ interface ChannelItemModalProp {
   description: string;
 }
 
-const ChannelItemModal = ({
+const ChannelCardModal = ({
   title,
   channelName,
   imageURL,
@@ -25,22 +26,24 @@ const ChannelItemModal = ({
   subscribe,
   description,
   onClose,
-}: ChannelItemModalProp) => {
+}: ChannelCardModalProp) => {
   return (
     <Modal onClose={onClose}>
       <div className={channelCardModal['modal']}>
         <div className={channelCardModal['profile']}>
-          <div className={channelCardModal['image-container']}>
-            <Image
-              src={imageURL}
-              alt=""
-              loading="lazy"
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8U9hfDwAGKgJNP3RWxQAAAABJRU5ErkJggg=="
-              fill
-              unoptimized
-            />
-          </div>
+          <Link href={url}>
+            <div className={channelCardModal['image-container']}>
+              <Image
+                src={imageURL}
+                alt=""
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8U9hfDwAGKgJNP3RWxQAAAABJRU5ErkJggg=="
+                fill
+                unoptimized
+              />
+            </div>
+          </Link>
           <div className={channelCardModal['info']}>
             <h1 className={channelCardModal['channel-name']}>{channelName}</h1>
             <h2 className={channelCardModal['title']}>{title}</h2>
@@ -54,11 +57,11 @@ const ChannelItemModal = ({
             </div>
           </div>
         </div>
-
+        <hr />
         <pre className={channelCardModal['desc']}>{description}</pre>
       </div>
     </Modal>
   );
 };
 
-export default ChannelItemModal;
+export default ChannelCardModal;

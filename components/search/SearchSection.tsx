@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import { BsSearchHeart } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 import search from '@/styles/search/Search.module.scss';

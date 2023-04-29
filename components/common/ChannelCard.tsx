@@ -4,9 +4,9 @@ import channelCard from '@/styles/common/ChannelCard.module.scss';
 import { renderSubscribe } from '@/utils/RenderSubscribe';
 import Link from 'next/link';
 import { MouseEvent, useState } from 'react';
-import ChannelItemModal from '@/components/common/ChannelItemModal';
+import ChannelCardModal from '@/components/common/ChannelCardModal';
 import { openWindow } from '@/utils/windowEvent';
-import CopyButton from './CopyButton';
+import CopyButton from '@/components/common/CopyButton';
 import useStopPropagation from '@/hooks/UseStopPropagation';
 
 interface ChannelItemProps {
@@ -63,7 +63,7 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
         </div>
       </div>
       {showModal ? (
-        <ChannelItemModal
+        <ChannelCardModal
           channelName={channelName}
           title={title}
           imageURL={imageURL}

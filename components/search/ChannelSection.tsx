@@ -1,5 +1,5 @@
 import { SearchResponseType } from '@/pages/api/search';
-import ChannelItem from '../common/ChannelCard';
+import ChannelCard from '@/components/common/ChannelCard';
 import search from '@/styles/search/Search.module.scss';
 
 interface ChannelSectionProps {
@@ -14,7 +14,7 @@ const ChannelSection = ({ channels }: ChannelSectionProps) => {
       </div>
       <section>
         {channels.map((channel) => (
-          <ChannelItem key={channel.uid} content={channel} />
+          <ChannelCard key={channel.uid} content={channel} />
         ))}
       </section>
     </section>
