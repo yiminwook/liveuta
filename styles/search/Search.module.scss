@@ -24,7 +24,10 @@
   @extend %home-main;
   padding: 0.5rem;
   gap: 2rem;
-  width: 100%;
+
+  @include min-width($mixin-xl-width) {
+    width: 70%;
+  }
 
   .search-section {
     display: flex;
@@ -45,6 +48,7 @@
       gap: 1rem;
       height: 5rem;
       padding: 0.5rem;
+      position: relative;
 
       @include min-width($mixin-large-width) {
         height: 8rem;
@@ -67,8 +71,11 @@
           border: none;
           @include box-shadow();
 
-          @include min-width($mixin-large-width) {
+          @include min-width($mixin-middle-width) {
             width: 20rem;
+          }
+
+          @include min-width($mixin-large-width) {
             font-size: 1.25rem;
             height: 4rem;
           }
@@ -113,29 +120,30 @@
             background-color: map-get($colors, hover-salmon);
           }
         }
+      }
+      p {
+        position: absolute;
+        left: 50%;
+        bottom: -1rem;
+        transform: translateX(-50%) translateY(-50%);
+        color: #b10a0a;
 
-        p {
-          position: absolute;
-          bottom: 0;
-          transform: translateY(-50%);
-          left: 2rem;
-          color: #b10a0a;
-
-          &:before {
-            content: '* ';
-          }
+        &:before {
+          content: '* ';
         }
       }
     }
-    .result > p {
-      word-break: keep-all;
-      text-align: center;
-      font-size: 1.25rem;
-      font-weight: 500;
-      background-color: map-get($colors, card-bg);
-      padding: 2rem 7rem;
-      border-radius: 10px;
-      @include box-shadow();
+    .result {
+      p {
+        word-break: keep-all;
+        text-align: center;
+        font-size: 1.25rem;
+        font-weight: 500;
+        background-color: map-get($colors, card-bg);
+        padding: 2rem 7rem;
+        border-radius: 10px;
+        @include box-shadow();
+      }
     }
   }
 

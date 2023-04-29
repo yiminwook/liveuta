@@ -39,7 +39,6 @@ const SearchSection = ({ onSubmit, searchMsg }: SearchSectionProps) => {
             placeholder="채널명으로 검색"
             tabIndex={1}
           />
-          {showErrMsg ? <p>입력되지 않았습니다.</p> : null}
           {inputValue ? (
             <label onClick={resetValue} tabIndex={0}>
               <GrFormClose color={'inherit'} size={'1.5rem'} />
@@ -49,6 +48,7 @@ const SearchSection = ({ onSubmit, searchMsg }: SearchSectionProps) => {
             <BsSearchHeart color={'inherit'} size={'1.5rem'} />
           </button>
         </form>
+        {showErrMsg ? <p>입력되지 않았습니다.</p> : null}
       </div>
       <div className={search['result']}>{searchMsg !== '' ? <p>{`"${searchMsg}" 검색결과`}</p> : null}</div>
     </section>
