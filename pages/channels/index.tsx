@@ -1,7 +1,6 @@
 import { ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
-import { getYoutubeChannelsByUid } from '@/models/youtube/Channel';
 import { ChannelsDataType } from '@/models/youtube/InChannel';
-import { combineChannelData } from '@/utils/CombineChannelData';
+import { ChannelSheetDataType, combineChannelData } from '@/utils/CombineChannelData';
 import { parseChannelIDSheet } from '@/utils/ParseChannelSheet';
 import { GetStaticProps } from 'next';
 import channels from '@/styles/channels/Channels.module.scss';
@@ -29,16 +28,21 @@ export const getStaticProps: GetStaticProps<ChannelsPageProps> = async ({}) => {
   const { totalLength, sheetDataValues } = await parseChannelIDSheet();
   const sliceData = sheetDataValues.slice(0, ITEMS_PER_PAGE);
 
-  /* YoutubeData API */
-  const callYoubeAPI = sliceData.slice().map(([uid, _channelName, _url]) => {
-    return getYoutubeChannelsByUid(uid);
+  /* Youtube API */
+  const channelSheetData: ChannelSheetDataType = {};
+  sliceData.forEach(([uid, channelName, url]) => {
+    if (channelSheetData[uid]) return;
+    channelSheetData[uid] = { uid, channelName, url };
   });
 
-  const youtubeData = await Promise.all(callYoubeAPI);
-  const contents = combineChannelData({ youtubeData, sheetData: sliceData });
+  /* Youtube API */
+  const combinedSearchDataValues = await combineChannelData(channelSheetData);
 
   return {
-    props: { contents, totalLength },
+    props: {
+      totalLength,
+      contents: combinedSearchDataValues,
+    },
     revalidate: PAGE_REVALIDATE_TIME,
   };
 };

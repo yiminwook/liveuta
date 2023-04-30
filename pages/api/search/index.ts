@@ -5,7 +5,7 @@ import getENV from '@/utils/GetENV';
 import { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE, SEARCH_ITEMS_SIZE } from '@/consts';
 import { parseSheetData } from '@/utils/ParseContentSheet';
 import { parseChannelIDSheet } from '@/utils/ParseChannelSheet';
-import { ChannelSheetDataType, combineChannelItemData } from '@/utils/CombineChannelData';
+import { ChannelSheetDataType, combineChannelData } from '@/utils/CombineChannelData';
 import { ChannelsDataType } from '@/models/youtube/InChannel';
 
 export interface SearchResponseType {
@@ -51,7 +51,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<SearchResponseT
       searchData[uid] = { uid, channelName, url };
     });
 
-    const combinedSearchDataValues = await combineChannelItemData(searchData);
+    const combinedSearchDataValues = await combineChannelData(searchData);
 
     return res.status(200).json({
       contents: searchedContents,
