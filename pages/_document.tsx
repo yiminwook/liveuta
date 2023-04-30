@@ -1,20 +1,23 @@
-import { META_IMAGE } from '@/consts';
+import { HOST, META_IMAGE, PROTOCOL } from '@/consts';
 import getENV from '@/utils/GetENV';
 import { Html, Head, Main, NextScript } from 'next/document';
 
 const Document = () => {
+  const protocol = getENV(PROTOCOL);
+  const host = getENV(HOST);
+  const metaImageURL = `${protocol}://${host}/api/assets/meta-image`;
   return (
     <Html lang="ko">
       <Head>
         {/* OG */}
         <meta property="og:title" content="Live Uta" />
-        <meta property="og:image" content={getENV(META_IMAGE)} />
+        <meta property="og:image" content={metaImageURL} />
         <meta property="og:description" content="Show V-Tuber Utawaku schedule" />
         {/* Twitter */}
         <meta name="twitter:site" content="Live Uta" />
         <meta name="twitter:title" content="Live Uta" />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:image" content={getENV(META_IMAGE)} />
+        <meta name="twitter:image" content={metaImageURL} />
         {/* mobile */}
         <meta name="application-name" content="Live Uta" />
         <meta name="mobile-web-app-capable" content="yes" />

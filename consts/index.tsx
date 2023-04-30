@@ -1,4 +1,8 @@
 /* ENV */
+export const PORT = 'PORT';
+export const HOST = 'HOST';
+export const PROTOCOL = 'PROTOCOL';
+
 export const GOOGLE_API_KEY = 'GOOGLE_API_KEY';
 
 export const CONTENTS_SHEET_ID = 'CONTENTS_SHEET_ID';
@@ -24,3 +28,6 @@ export const SEARCH_ITEMS_SIZE = 12;
 export const PAGE_REVALIDATE_TIME = 12 * 60 * 60;
 
 export const HOME_FILTER = ['live', 'daily', 'all'];
+
+export const DEFAULT_BLUR_BASE64 =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8U9hfDwAGKgJNP3RWxQAAAABJRU5ErkJggg==';

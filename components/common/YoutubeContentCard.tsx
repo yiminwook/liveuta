@@ -6,6 +6,7 @@ import Image from 'next/image';
 import youtubeContentCard from '@/styles/common/YoutubeContentCard.module.scss';
 import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/CopyButton';
+import { DEFAULT_BLUR_BASE64 } from '@/consts';
 
 interface YoutubeContentCardProps {
   content: ContentsDataType;
@@ -68,7 +69,7 @@ const YoutubeContentCard = ({ content: content }: YoutubeContentCardProps) => {
                 onLoad={handleImgValidity}
                 onError={() => setImgLoaded(false)}
                 placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8U9hfDwAGKgJNP3RWxQAAAABJRU5ErkJggg=="
+                blurDataURL={DEFAULT_BLUR_BASE64}
                 unoptimized
                 fill
               />

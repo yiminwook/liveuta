@@ -8,6 +8,7 @@ import ChannelCardModal from '@/components/common/ChannelCardModal';
 import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/CopyButton';
 import useStopPropagation from '@/hooks/UseStopPropagation';
+import { DEFAULT_BLUR_BASE64 } from '@/consts';
 
 interface ChannelItemProps {
   content: ChannelsDataType;
@@ -43,7 +44,7 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
               alt=""
               loading="lazy"
               placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8U9hfDwAGKgJNP3RWxQAAAABJRU5ErkJggg=="
+              blurDataURL={DEFAULT_BLUR_BASE64}
               fill
               unoptimized
             />

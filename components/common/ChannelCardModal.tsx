@@ -5,6 +5,7 @@ import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/CopyButton';
 import { MouseEvent } from 'react';
 import Link from 'next/link';
+import { DEFAULT_BLUR_BASE64 } from '@/consts';
 
 interface ChannelCardModalProp {
   onClose: (e: MouseEvent) => void;
@@ -38,7 +39,7 @@ const ChannelCardModal = ({
                 alt=""
                 loading="lazy"
                 placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8U9hfDwAGKgJNP3RWxQAAAABJRU5ErkJggg=="
+                blurDataURL={DEFAULT_BLUR_BASE64}
                 fill
                 unoptimized
               />
