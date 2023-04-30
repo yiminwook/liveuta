@@ -15,7 +15,11 @@ export const META_IMAGE = 'META_IMAGE';
 //
 export const PAGENATION_RANGE = 5;
 
+/** 채널 페이지 카드갯수 */
 export const ITEMS_PER_PAGE = 24;
+
+/** 채널 검색 갯수 */
+export const SEARCH_ITEMS_SIZE = 12;
 
 export const PAGE_REVALIDATE_TIME = 12 * 60 * 60;
 

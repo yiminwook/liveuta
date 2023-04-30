@@ -2,12 +2,11 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { ContentsDataType, ContentsRowType } from '@/models/sheet/InSheet';
 import { getSheet } from '@/models/sheet/Sheets';
 import getENV from '@/utils/GetENV';
-import { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } from '@/consts';
+import { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE, SEARCH_ITEMS_SIZE } from '@/consts';
 import { parseSheetData } from '@/utils/ParseContentSheet';
 import { parseChannelIDSheet } from '@/utils/ParseChannelSheet';
-import { getYoutubeChannels } from '@/models/youtube/Channel';
-import { combineChannelData } from '@/utils/ParseChannelData';
-import { ChannelRowType, ChannelsDataType } from '@/models/youtube/InChannel';
+import { ChannelSheetDataType, combineChannelItemData } from '@/utils/CombineChannelData';
+import { ChannelsDataType } from '@/models/youtube/InChannel';
 
 export interface SearchResponseType {
   contents: ContentsDataType[];
@@ -16,7 +15,7 @@ export interface SearchResponseType {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<SearchResponseType>) => {
   try {
-    if (req.method !== 'GET') throw new Error('invaild method');
+    if (req.method !== 'GET') throw new Error('Invaild HTTP method');
 
     const { name } = req.query;
     if (!name) throw new Error('No query');
@@ -43,21 +42,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<SearchResponseT
     searchedContents.sort((a, b) => b.timestamp - a.timestamp); //최신순
 
     const { sheetDataValues } = await parseChannelIDSheet();
-    const searchData: ChannelRowType[] = [];
-    sheetDataValues.forEach((value) => {
-      if (searchData.length >= 6) return; //채널 검색 6개로 제한
-      if (!regex.test(value[1])) return;
-      searchData.push(value);
+
+    const searchData: ChannelSheetDataType = {};
+    sheetDataValues.forEach(([uid, channelName, url]) => {
+      if (Object.keys(searchData).length >= SEARCH_ITEMS_SIZE) return;
+      if (searchData[uid]) return;
+      if (!regex.test(channelName)) return;
+      searchData[uid] = { uid, channelName, url };
     });
-    const callYoubeAPI = searchData.map(([uid, _channelName, _url]) => {
-      return getYoutubeChannels(uid);
-    });
-    const youtubeData = await Promise.all(callYoubeAPI);
-    const searchedChannels = combineChannelData({ youtubeData, sheetData: searchData });
+
+    const combinedSearchDataValues = await combineChannelItemData(searchData);
 
     return res.status(200).json({
       contents: searchedContents,
-      channels: searchedChannels,
+      channels: combinedSearchDataValues,
     });
   } catch (err) {
     console.error(err);

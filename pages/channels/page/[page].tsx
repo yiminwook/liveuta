@@ -1,8 +1,8 @@
 import { ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
-import { getYoutubeChannels } from '@/models/youtube/Channel';
+import { getYoutubeChannelsByUid } from '@/models/youtube/Channel';
 import ChannelsPage, { ChannelsPageProps } from '@/pages/channels';
 import getPaginationRange from '@/utils/GetPagenationRange';
-import { combineChannelData } from '@/utils/ParseChannelData';
+import { combineChannelData } from '@/utils/CombineChannelData';
 import { parseChannelIDSheet } from '@/utils/ParseChannelSheet';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps<ChannelsPageProps, ChannelsWithPageP
 
   /* YoutubeData API */
   const callYoubeAPI = sliceData.slice().map(([uid, _channelName, _url]) => {
-    return getYoutubeChannels(uid);
+    return getYoutubeChannelsByUid(uid);
   });
 
   const youtubeData = await Promise.all(callYoubeAPI);
