@@ -4,10 +4,10 @@ import Link from 'next/link';
 import Sidebar from '@/components/layout/Sidebar';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { BiSearchAlt } from 'react-icons/bi';
-import gnb from '@/styles/layout/GNB.module.scss';
+import header from '@/styles/layout/Header.module.scss';
 import { useRouter } from 'next/router';
 
-const GNB = () => {
+const Header = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const router = useRouter();
   const gnbRef = useRef<HTMLElement>(null);
@@ -41,17 +41,17 @@ const GNB = () => {
 
   return (
     <header>
-      <nav className={gnb['nav']} ref={gnbRef}>
+      <nav className={header['nav']} ref={gnbRef}>
         <ul>
-          <li className={gnb['sidebar']}>
+          <li className={header['sidebar']}>
             <button onClick={toggleSidebar}>
               <RxHamburgerMenu size={'2rem'} color={'inherit'} />
             </button>
           </li>
-          <li className={gnb['title']}>
+          <li className={header['title']}>
             <a href="/">Live Uta</a>
           </li>
-          <li className={gnb['search']}>
+          <li className={header['search']}>
             <Link href="/search">
               <button tabIndex={-1}>
                 <BiSearchAlt size={'1.6rem'} color={'inherit'} />
@@ -60,10 +60,10 @@ const GNB = () => {
           </li>
         </ul>
       </nav>
-      <div className={gnb['blank']} />
+      <div className={header['blank']} />
       <Sidebar show={showSidebar} onClose={toggleSidebar} />
     </header>
   );
 };
 
-export default GNB;
+export default Header;

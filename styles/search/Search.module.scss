@@ -4,6 +4,7 @@
 
 %section-layout {
   margin: auto;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -11,9 +12,10 @@
 
 %section-header {
   display: flex;
-  align-items: center;
   gap: 1rem;
   margin: auto;
+  font-size: 1.5rem;
+  font-weight: 600;
 
   span {
     font-weight: 500;
@@ -22,63 +24,30 @@
 
 .main {
   @extend %home-main;
-  padding: 0.5rem;
   gap: 2rem;
 
-  @include min-width($mixin-xl-width) {
-    width: 70%;
-  }
-
   .search-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
-
-    @include min-width($mixin-large-width) {
-      gap: 0.5rem;
-    }
+    background-color: map-get($colors, bg);
 
     div:nth-child(1) {
-      width: 100%;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      height: 5rem;
-      padding: 0.5rem;
+      margin: 0 auto;
+      width: 80%;
       position: relative;
-
-      @include min-width($mixin-large-width) {
-        height: 8rem;
-      }
+      padding: 3rem 0;
 
       form {
-        margin: auto;
         position: relative;
+
         label:nth-of-type(1) {
           display: none;
         }
 
         input {
-          width: 15rem;
-          position: relative;
-          font-family: inherit;
-          padding: 0 2rem;
-          height: 3.5rem;
+          padding: 1rem 1.5rem;
+          width: 100%;
           border-radius: 30px;
           border: none;
           @include box-shadow();
-
-          @include min-width($mixin-middle-width) {
-            width: 20rem;
-          }
-
-          @include min-width($mixin-large-width) {
-            font-size: 1.25rem;
-            height: 4rem;
-          }
 
           &:focus {
             outline: none;
@@ -121,28 +90,36 @@
           }
         }
       }
+
       p {
         position: absolute;
         left: 50%;
-        bottom: -1rem;
+        bottom: 0rem;
         transform: translateX(-50%) translateY(-50%);
         color: #b10a0a;
+        @include text-line(1, 1.2rem);
 
         &:before {
           content: '* ';
         }
       }
     }
-    .result {
+  }
+
+  .result {
+    div {
+      width: 75%;
+      margin: auto;
+      padding: 2rem 1rem;
+      background-color: map-get($colors, card-bg);
+      border-radius: 10px;
+      @include box-shadow();
+
       p {
-        word-break: keep-all;
         text-align: center;
         font-size: 1.25rem;
         font-weight: 500;
-        background-color: map-get($colors, card-bg);
-        padding: 2rem 7rem;
-        border-radius: 10px;
-        @include box-shadow();
+        @include text-line(1, 1.5rem);
       }
     }
   }

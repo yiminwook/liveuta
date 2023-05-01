@@ -23,6 +23,13 @@ const SearchPage = ({}: SearchPageProps) => {
   return (
     <main className={search['main']}>
       <SearchSection />
+      {nameQuery !== '' ? (
+        <section className={search['result']}>
+          <div>
+            <p>{`"${nameQuery}" 검색결과`}</p>
+          </div>
+        </section>
+      ) : null}
       <ContentSection contents={data.contents} />
       <ChannelSection channels={data.channels} />
     </main>
