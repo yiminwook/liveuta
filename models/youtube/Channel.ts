@@ -18,7 +18,6 @@ export const getYoutubeChannelsByUid = async (uid: string) => {
 
 export const getYoutubeChannels = async (idArr: string[]) => {
   const key = getENV(GOOGLE_API_KEY);
-
   const response = await youtubeService.channels.list({
     id: idArr,
     part: ['id', 'snippet', 'statistics'],

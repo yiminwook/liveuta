@@ -1,18 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FormEvent, useCallback, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { BsSearchHeart } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 import search from '@/styles/search/Search.module.scss';
-import useInput from '@/hooks/UseInput';
+import useInput from '@/hooks/useInput';
+import { useRouter } from 'next/router';
 
-interface SearchSectionProps {
-  searchMsg: string;
-  onSubmit: (name: string) => Promise<void>;
-}
-
-const SearchSection = ({ onSubmit, searchMsg }: SearchSectionProps) => {
-  const [inputValue, onChangeValue, resetValue] = useInput('');
+const SearchSection = () => {
+  const [inputValue, onChangeValue, resetValue, setInputValue] = useInput('');
   const [showErrMsg, setShowErrMsg] = useState(false);
+
+  const {
+    push,
+    query: { query },
+  } = useRouter();
+
+  const nameQuery = query?.toString() ?? '';
 
   const handleOnSubmit = useCallback(
     async (e: FormEvent) => {
@@ -20,10 +23,14 @@ const SearchSection = ({ onSubmit, searchMsg }: SearchSectionProps) => {
       e.preventDefault();
       const value = inputValue.trim();
       if (!value) return setShowErrMsg(() => true);
-      onSubmit(inputValue);
+      push(`/search?query=${value}`);
     },
     [inputValue],
   );
+
+  useEffect(() => {
+    setInputValue(() => nameQuery);
+  }, [nameQuery]);
 
   return (
     <section className={search['search-section']}>
@@ -50,7 +57,7 @@ const SearchSection = ({ onSubmit, searchMsg }: SearchSectionProps) => {
         </form>
         {showErrMsg ? <p>입력되지 않았습니다.</p> : null}
       </div>
-      <div className={search['result']}>{searchMsg !== '' ? <p>{`"${searchMsg}" 검색결과`}</p> : null}</div>
+      <div className={search['result']}>{nameQuery !== '' ? <p>{`"${nameQuery}" 검색결과`}</p> : null}</div>
     </section>
   );
 };

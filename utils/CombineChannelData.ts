@@ -13,6 +13,7 @@ export interface ChannelSheetDataType {
 /* YoutubeData API + Channel ID Sheet */
 export const combineChannelData = async (sheetData: ChannelSheetDataType): Promise<ChannelsDataType[]> => {
   const idArr = [...Object.keys(sheetData)];
+  if (idArr.length <= 0) return [];
   const youtubeData = await getYoutubeChannels(idArr);
   if (!youtubeData.items) throw new Error('No YoutubeData Items');
 

@@ -17,9 +17,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<SearchResponseT
   try {
     if (req.method !== 'GET') throw new Error('Invaild HTTP method');
 
-    const { name } = req.query;
-    if (!name) throw new Error('No query');
-    const nameQuery = decodeURIComponent(name.toString());
+    const { query } = req.query;
+    if (!query) throw new Error('No query');
+    const nameQuery = decodeURIComponent(query.toString());
     const regex = new RegExp(nameQuery, 'g');
 
     const contentsSheetId = getENV(CONTENTS_SHEET_ID);

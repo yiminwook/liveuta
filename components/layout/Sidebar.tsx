@@ -2,7 +2,7 @@ import { FaWindowClose } from 'react-icons/fa';
 import sidebar from '@/styles/layout/Sidebar.module.scss';
 import getConfig from 'next/config';
 import { MouseEvent } from 'react';
-import useStopPropagation from '@/hooks/UseStopPropagation';
+import useStopPropagation from '@/hooks/useStopPropagation';
 import NavLink from '@/components/common/NavLink';
 import { RxLink2 } from 'react-icons/rx';
 import { MdOutlineExplore } from 'react-icons/md';

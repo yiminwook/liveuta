@@ -1,6 +1,6 @@
 import { SheetAPIReturntype } from '@/models/sheet/InSheet';
 import useSWR from 'swr';
-import { fetcher } from '@/hooks/Fetcher';
+import { fetcher } from '@/hooks/fetcher';
 
 const useSheet = () => {
   const { data, error, mutate, isLoading } = useSWR<SheetAPIReturntype>('/api/sheet', fetcher, {
