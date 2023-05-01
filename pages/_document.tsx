@@ -1,5 +1,5 @@
-import { HOST, META_IMAGE, PROTOCOL } from '@/consts';
-import getENV from '@/utils/GetENV';
+import { HOST, PROTOCOL } from '@/consts';
+import getENV from '@/utils/getENV';
 import { Html, Head, Main, NextScript } from 'next/document';
 
 const Document = () => {

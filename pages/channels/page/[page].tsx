@@ -1,8 +1,8 @@
 import { ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
 import ChannelsPage, { ChannelsPageProps } from '@/pages/channels';
-import getPaginationRange from '@/utils/GetPagenationRange';
-import { ChannelSheetDataType, combineChannelData } from '@/utils/CombineChannelData';
-import { parseChannelIDSheet } from '@/utils/ParseChannelSheet';
+import getPaginationRange from '@/utils/petPagenationRange';
+import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
+import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 

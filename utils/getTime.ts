@@ -1,4 +1,4 @@
-import getENV from '@/utils/GetENV';
+import getENV from '@/utils/getENV';
 
 export const getInterval = (scheduledTimeStamp: number): string => {
   const nowTimeStamp = getNow(true);

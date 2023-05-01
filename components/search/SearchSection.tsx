@@ -57,7 +57,6 @@ const SearchSection = () => {
         </form>
         {showErrMsg ? <p>입력되지 않았습니다.</p> : null}
       </div>
-      <div className={search['result']}>{nameQuery !== '' ? <p>{`"${nameQuery}" 검색결과`}</p> : null}</div>
     </section>
   );
 };

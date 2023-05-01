@@ -4,18 +4,14 @@
 
 .main {
   padding: 0.5rem;
-  width: 100%;
+  margin: auto;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 
-  @include min-width($mixin-middle-width) {
-    width: auto;
-    max-width: 70%;
-  }
-
-  @include min-width($mixin-large-width) {
+  @include min-width(map-get($points, md)) {
     padding: 1rem;
+    width: 90%;
   }
 
   .channel-section {

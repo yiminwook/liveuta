@@ -1,9 +1,20 @@
-$mixin-middle-width: 41rem;
-$mixin-large-width: 56rem;
-$mixin-xl-width: 80rem;
-$mixin-2xl-width: 96rem;
-$mixin-1080p-width: 120rem;
-$mixin-1440p-width: 160rem;
+//사용X
+$mixin-middle-width: 640px;
+$mixin-large-width: 768px;
+$mixin-xl-width: 1024px;
+$mixin-2xl-width: 1280px;
+$mixin-1080p-width: 1280px;
+$mixin-1440p-width: 1536px;
+
+$points: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  2xl: 1536px,
+  full: 1900px,
+);
+
 $colors: (
   light-font: #ffffff,
   highlight-font: #ee526f,

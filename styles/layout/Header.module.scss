@@ -12,14 +12,13 @@
   top: 0px;
   left: 0px;
   width: 100%;
-  min-width: 20rem;
   position: fixed;
   z-index: 100;
   background-color: map-get($colors, main);
   @include transition(opacity, 0.2s, linear);
   @include box-shadow(true);
 
-  @include max-width($mixin-large-width) {
+  @include max-width(map-get($points, md)) {
     opacity: 1 !important;
   }
 
@@ -29,7 +28,7 @@
 
   ul {
     margin: auto;
-    max-width: $mixin-2xl-width;
+    max-width: map-get($points, 2xl);
     height: 3.5rem;
     display: flex;
     justify-content: space-between;
