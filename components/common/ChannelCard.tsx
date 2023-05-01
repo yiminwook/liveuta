@@ -7,7 +7,7 @@ import { MouseEvent, useState } from 'react';
 import ChannelCardModal from '@/components/common/ChannelCardModal';
 import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/CopyButton';
-import useStopPropagation from '@/hooks/UseStopPropagation';
+import useStopPropagation from '@/hooks/useStopPropagation';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
 
 interface ChannelItemProps {
