@@ -7,11 +7,27 @@
   border-radius: 5px;
   @include box-shadow();
 
-  @include min-width($mixin-middle-width) {
+  @include min-width(map-get($points, sm)) {
     @include transition(all, 150ms, $bezier-curve);
 
     &:hover {
       transform: scale(1.02);
+    }
+  }
+
+  @include min-width(map-get($points, md)) {
+    transform: scale(1.1);
+
+    &:hover {
+      transform: scale(1.12);
+    }
+  }
+
+  @include min-width(map-get($points, lg)) {
+    transform: scale(1.2);
+
+    &:hover {
+      transform: scale(1.22);
     }
   }
 
@@ -27,7 +43,7 @@
     display: flex;
     gap: 0.8rem;
 
-    @include min-width($mixin-middle-width) {
+    @include min-width(map-get($points, sm)) {
       gap: 0.2rem;
       flex-direction: column;
       padding: 0.2rem 0;
@@ -35,11 +51,8 @@
       height: calc(100% - 0.4rem);
     }
 
-    @include min-width($mixin-large-width) {
-      max-width: 17rem;
-    }
-
     .thumnail {
+      margin: auto;
       width: 7rem;
       aspect-ratio: 16 / 9;
       border-radius: 5px;
@@ -51,18 +64,7 @@
       @include box-shadow();
 
       @include min-width($mixin-middle-width) {
-        transform: scale(1.01);
-      }
-
-      @include min-width($mixin-middle-width) {
-        width: 100%;
-        width: fit-content;
-        margin: auto;
-        min-height: 7.14rem;
-      }
-
-      @include min-width($mixin-large-width) {
-        min-height: 9.35rem;
+        width: calc(100% - 0.4rem);
       }
 
       img {
@@ -84,10 +86,6 @@
           font-weight: 600;
           color: map-get($colors, highlight-font);
         }
-
-        @include min-width($mixin-middle-width) {
-          margin-bottom: 0.2rem;
-        }
       }
 
       .title {
@@ -95,17 +93,6 @@
         font-size: 0.7rem;
         color: map-get($colors, font);
         @include text-line(2, 1.2rem);
-
-        @include min-width($mixin-middle-width) {
-          line-height: 1.4rem;
-          height: 2 * 1.4rem;
-        }
-
-        @include min-width($mixin-large-width) {
-          font-size: 1.2rem;
-          line-height: 1.8rem;
-          height: 2 * 1.8rem;
-        }
 
         &.stream {
           font-weight: 500;
@@ -123,10 +110,6 @@
           font-weight: 500;
           color: map-get($colors, highlight-font);
         }
-
-        @include min-width($mixin-large-width) {
-          font-size: 1rem;
-        }
       }
     }
 
@@ -135,10 +118,6 @@
       gap: 1rem;
       align-items: center;
       font-size: 0.5rem;
-
-      @include min-width($mixin-large-width) {
-        font-size: 1rem;
-      }
 
       button:nth-child(1) {
         font-size: inherit;

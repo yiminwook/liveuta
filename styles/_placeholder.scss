@@ -32,16 +32,26 @@
   @include min-width(map-get($points, sm)) {
     grid-template-columns: repeat(3, 1fr);
     column-gap: 0.4rem;
-    row-gap: 1.8rem;
+    row-gap: 1.2rem;
   }
 
   @include min-width(map-get($points, md)) {
-    column-gap: 0.6rem;
-    row-gap: 2rem;
+    column-gap: 2rem;
+    row-gap: 2.5rem;
+    padding: 1rem;
+  }
+
+  @include min-width(map-get($points, lg)) {
+    column-gap: 3.25rem;
+    row-gap: 4rem;
+    padding: 1.5rem;
   }
 
   @include min-width(map-get($points, 2xl)) {
     grid-template-columns: repeat(4, 1fr);
+    column-gap: 3.5rem;
+    row-gap: 4.25rem;
+    padding: 2rem;
   }
 
   @include min-width(map-get($points, full)) {
