@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo, useRef, useState } from 'react';
-import { ContentsDataType } from '@/models/sheet/InSheet';
+import { ContentsDataType } from '@/models/sheet/inSheet';
 import Link from 'next/link';
 import Image from 'next/image';
 import youtubeContentCard from '@/styles/common/YoutubeContentCard.module.scss';

@@ -1,7 +1,7 @@
 import { ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
-import { ChannelsDataType } from '@/models/youtube/InChannel';
-import { ChannelSheetDataType, combineChannelData } from '@/utils/CombineChannelData';
-import { parseChannelIDSheet } from '@/utils/ParseChannelSheet';
+import { ChannelsDataType } from '@/models/youtube/inYoutube';
+import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
+import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
 import { GetStaticProps } from 'next';
 import channels from '@/styles/channels/Channels.module.scss';
 import ChannelSection from '@/components/channels/ChannelSection';

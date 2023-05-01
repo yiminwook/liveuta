@@ -1,7 +1,7 @@
-import { ChannelsDataType } from '@/models/youtube/InChannel';
+import { ChannelsDataType } from '@/models/youtube/inYoutube';
 import Image from 'next/image';
 import channelCard from '@/styles/common/ChannelCard.module.scss';
-import { renderSubscribe } from '@/utils/RenderSubscribe';
+import { renderSubscribe } from '@/utils/renderSubscribe';
 import Link from 'next/link';
 import { MouseEvent, useState } from 'react';
 import ChannelCardModal from '@/components/common/ChannelCardModal';

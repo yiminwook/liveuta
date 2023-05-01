@@ -1,5 +1,5 @@
 import { GOOGLE_API_KEY } from '@/consts';
-import getENV from '@/utils/GetENV';
+import getENV from '@/utils/getENV';
 import { google } from 'googleapis';
 
 export const youtubeService = google.youtube('v3');

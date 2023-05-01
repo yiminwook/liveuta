@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { SheetAPIReturntype } from '@/models/sheet/InSheet';
-import { getSheet } from '@/models/sheet/Sheets';
-import { parseAllData, parseScheduledData } from '@/utils/ParseContentSheet';
-import getENV from '@/utils/GetENV';
+import { SheetAPIReturntype } from '@/models/sheet/inSheet';
+import { getSheet } from '@/models/sheet';
+import { parseAllData, parseScheduledData } from '@/utils/parseContentSheet';
+import getENV from '@/utils/getENV';
 import { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } from '@/consts';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<SheetAPIReturntype | undefined>) => {

@@ -1,4 +1,4 @@
-import { ContentsDataType } from '@/models/sheet/InSheet';
+import { ContentsDataType } from '@/models/sheet/inSheet';
 import home from '@/styles/home/Home.module.scss';
 import YoutubeContentCard from '@/components/common/YoutubeContentCard';
 

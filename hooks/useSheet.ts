@@ -1,4 +1,4 @@
-import { SheetAPIReturntype } from '@/models/sheet/InSheet';
+import { SheetAPIReturntype } from '@/models/sheet/inSheet';
 import useSWR from 'swr';
 import { fetcher } from '@/hooks/fetcher';
 
