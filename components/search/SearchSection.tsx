@@ -44,7 +44,6 @@ const SearchSection = () => {
             onChange={onChangeValue}
             value={inputValue}
             placeholder="채널명으로 검색"
-            tabIndex={1}
           />
           {inputValue ? (
             <label onClick={resetValue} tabIndex={0}>

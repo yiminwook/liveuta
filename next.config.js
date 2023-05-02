@@ -1,14 +1,12 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
 
-const { PORT, HOST, PROTOCOL, CONTENTS_SHEET_ID, CHANNELS_SHEET_ID, META_IMAGE, LOCAL_TIME } = process.env;
+const { SITE_URL, CONTENTS_SHEET_ID, CHANNELS_SHEET_ID, META_IMAGE, LOCAL_TIME } = process.env;
 
 const nextConfig = {
   reactStrictMode: true,
   publicRuntimeConfig: {
-    PROTOCOL: PROTOCOL ?? 'http',
-    HOST: HOST ?? 'localhost',
-    PORT: PORT ?? '3000',
+    SITE_URL: SITE_URL ?? 'http://localhost:3000',
     CONTENTS_SHEET_ID: CONTENTS_SHEET_ID ?? '',
     CHANNELS_SHEET_ID: CHANNELS_SHEET_ID ?? '',
     META_IMAGE: META_IMAGE ?? '',

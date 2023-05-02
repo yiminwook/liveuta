@@ -1,20 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { ReactNode } from 'react';
-import Head from 'next/head';
 import Header from '@/components/layout/Header';
 import { TfiArrowCircleUp } from 'react-icons/tfi';
-import getConfig from 'next/config';
 import Footer from '@/components/layout/Footer';
+import PageHead from '@/components/layout/PageHead';
 
 interface ServiceLayoutProps {
   title?: string;
   discription?: string;
   children: ReactNode;
 }
-
-const {
-  publicRuntimeConfig: { META_IMAGE },
-} = getConfig();
 
 const ServiceLayout = ({ title = 'Live Uta', children }: ServiceLayoutProps) => {
   const scrollUp = () => {
@@ -23,10 +18,7 @@ const ServiceLayout = ({ title = 'Live Uta', children }: ServiceLayoutProps) => 
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" />
-      </Head>
+      <PageHead />
       <Header />
       <main className="app">{children}</main>
       <Footer />

@@ -1,7 +1,5 @@
 /* ENV */
-export const PORT = 'PORT';
-export const HOST = 'HOST';
-export const PROTOCOL = 'PROTOCOL';
+export const SITE_URL = 'SITE_URL';
 
 export const GOOGLE_API_KEY = 'GOOGLE_API_KEY';
 
