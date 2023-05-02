@@ -1,12 +1,13 @@
-import { SITE_URL } from '@/consts';
-import getENV from '@/utils/getENV';
+import getConfig from 'next/config';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+const {
+  publicRuntimeConfig: { SITE_URL },
+} = getConfig();
+
 const DEFAULT_TITLE = 'Live Uta';
 const DEFAULT_DESC = 'Show V-Tuber Utawaku schedule';
-const DEFAULT_KEYWORD = 'Next.js, Blog, tw';
-const DEFAULT_IMAGE = `/api/og?title=${DEFAULT_TITLE}`;
 
 interface PagePHeadProps {
   title?: string;
@@ -17,22 +18,21 @@ interface PagePHeadProps {
 
 const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
   const { asPath } = useRouter();
-  const siteURL = process.env.SITE_URL;
   const pageTitle = title ? `${title} | ${DEFAULT_TITLE}` : DEFAULT_TITLE;
   const pageDesc = description ?? DEFAULT_DESC;
-  const pageKeywords = keywords ? `${keywords}, ${DEFAULT_KEYWORD}` : DEFAULT_KEYWORD;
-  const pageImage = image ?? `${siteURL}${image ?? DEFAULT_IMAGE}`;
-  const pageURL = `${siteURL}${asPath}`;
+  const pageKeywords = keywords ?? '';
+  const pageImage = image ?? '/assets/meta-image.png';
+  const pageURL = `${SITE_URL}${asPath}`;
 
   return (
     <Head>
       {/* OG */}
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content={pageURL} />
-      <meta property="og:title" content={pageTitle} />
-      <meta property="og:desciption" content={pageDesc} />
-      <meta property="og:site_name" content={pageTitle} />
       <meta property="og:locale" content="ko_KR" />
+      <meta property="og:url" content={pageURL} />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={pageTitle} />
+      <meta property="og:site_name" content={pageTitle} />
+      <meta property="og:desciption" content={pageDesc} />
       <meta property="og:image" content={pageImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="627" />
@@ -49,7 +49,7 @@ const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
       <meta name="apple-mobile-web-app-title" content="Live Uta" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-      <link rel="apple-touch-icon" href="/assets/icon-192-192.png" />
+      <link rel="apple-touch-icon" href={`${SITE_URL}/assets/icon-192-192.png`} />
       {/* default */}
       <title>{pageTitle}</title>
       <meta name="description" content={pageDesc} />
@@ -59,8 +59,8 @@ const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
       {/* 컨텐츠 중복방지 */}
       <link rel="canonical" href={pageURL} />
       <link rel="shortcut icon" href="/assets/icon-192-192.png" />
-      <link rel="manifest" href="/manifest.json" />
-      <link rel="assets" href="/assets" />
+      <link rel="manifest" href={`${SITE_URL}/manifest.json`} />
+      <link rel="assets" href={`${SITE_URL}/assets`} />
       <link
         rel="icon"
         href="https://img.icons8.com/external-microdots-premium-microdot-graphic/64/null/external-holiday-christmas-new-year-vol2-microdots-premium-microdot-graphic-4.png"
