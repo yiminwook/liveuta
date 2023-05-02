@@ -17,7 +17,7 @@ interface PagePHeadProps {
 
 const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
   const { asPath } = useRouter();
-  const siteURL = getENV(SITE_URL);
+  const siteURL = process.env.SITE_URL;
   const pageTitle = title ? `${title} | ${DEFAULT_TITLE}` : DEFAULT_TITLE;
   const pageDesc = description ?? DEFAULT_DESC;
   const pageKeywords = keywords ? `${keywords}, ${DEFAULT_KEYWORD}` : DEFAULT_KEYWORD;

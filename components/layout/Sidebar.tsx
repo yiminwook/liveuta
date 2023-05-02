@@ -54,8 +54,8 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
             <NavLink href="https://gall.dcinside.com/mgallery/board/lists?id=kizunaai">키즈나아이 갤러리</NavLink>
             <NavLink href="https://gall.dcinside.com/mini/board/lists?id=vuta">우타와꾸 갤러리</NavLink>
             <NavLink href="https://www.piku.co.kr/w/6js7eW">아이도루 월드컵</NavLink>
-            <NavLink href={`https://docs.google.com/spreadsheets/d/${CONTENTS_SHEET_ID ?? ''}/`}>일정 시트</NavLink>
-            <NavLink href={`https://docs.google.com/spreadsheets/d/${CHANNELS_SHEET_ID ?? ''}/`}>채널 시트</NavLink>
+            <NavLink href={`https://docs.google.com/spreadsheets/d/${CONTENTS_SHEET_ID ?? ''}`}>일정 시트</NavLink>
+            <NavLink href={`https://docs.google.com/spreadsheets/d/${CHANNELS_SHEET_ID ?? ''}`}>채널 시트</NavLink>
           </ul>
           <button className={sidebar['close']} onClick={onClose}>
             <FaWindowClose size={'2rem'} color="inherit" />
