@@ -1,6 +1,7 @@
 import getConfig from 'next/config';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Analytics from '@/components/layout/Analytics';
 
 const {
   publicRuntimeConfig: { SITE_URL },
@@ -64,6 +65,7 @@ const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
         rel="icon"
         href="https://img.icons8.com/external-microdots-premium-microdot-graphic/64/null/external-holiday-christmas-new-year-vol2-microdots-premium-microdot-graphic-4.png"
       />
+      <Analytics />
     </Head>
   );
 };
