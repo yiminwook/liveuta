@@ -19,15 +19,15 @@ export const getServerSideProps: GetServerSideProps<HomePageProps, HomeWithFilte
 }) => {
   const { filter } = params!;
 
-  let filterProps = 'scheduled';
-
-  if (HOME_FILTER.indexOf(filter) >= 0) {
-    filterProps = filter;
+  if (HOME_FILTER.indexOf(filter) === -1) {
+    res.setHeader('Location', '/');
+    res.statusCode = 308;
+    res.end();
   }
 
   return {
     props: {
-      filter: filterProps as HomePageProps['filter'],
+      filter: filter as HomePageProps['filter'],
     },
   };
 };
