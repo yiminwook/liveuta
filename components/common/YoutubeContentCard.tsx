@@ -7,13 +7,14 @@ import youtubeContentCard from '@/styles/common/YoutubeContentCard.module.scss';
 import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/CopyButton';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
+import altImage from '@/images/thumbnail_alt_img.png';
 
 interface YoutubeContentCardProps {
   content: ContentsDataType;
 }
 
-const YoutubeContentCard = ({ content: content }: YoutubeContentCardProps) => {
-  const { title, url, channelName, videoId, korTime, interval, isStream } = content;
+const YoutubeContentCard = ({ content }: YoutubeContentCardProps) => {
+  const { title, url, channelName, videoId, korTime, interval, isStream, thumbnailURL } = content;
   const [imgLoaded, setImgLoaded] = useState(true);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -23,17 +24,6 @@ const YoutubeContentCard = ({ content: content }: YoutubeContentCardProps) => {
       setImgLoaded(() => false);
     }
   };
-
-  const thumbnail = useMemo(() => {
-    let thumbnailURL = content.thumbnailURL;
-    let thumbnailAlt = `${title}_img`;
-
-    if (thumbnailURL === 'failed to get' || thumbnailURL === undefined || thumbnailURL === null) {
-      thumbnailURL = '/thumbnail_alt_img.png';
-      thumbnailAlt = `${title}_error_img`;
-    }
-    return { thumbnailURL, thumbnailAlt };
-  }, []);
 
   const addStreamModifier = useMemo(() => {
     let streamModifer: string;
@@ -62,8 +52,8 @@ const YoutubeContentCard = ({ content: content }: YoutubeContentCardProps) => {
           <div className={youtubeContentCard['thumnail']}>
             {imgLoaded ? (
               <Image
-                src={thumbnail.thumbnailURL}
-                alt={thumbnail.thumbnailAlt}
+                src={thumbnailURL ?? altImage}
+                alt={`${channelName}의 라이브방송`}
                 loading="lazy"
                 ref={imgRef}
                 onLoad={handleImgValidity}
@@ -74,7 +64,7 @@ const YoutubeContentCard = ({ content: content }: YoutubeContentCardProps) => {
                 fill
               />
             ) : (
-              <Image src="/thumbnail_alt_img.png" alt={thumbnail.thumbnailAlt} unoptimized fill />
+              <Image src={altImage} alt={`${channelName}의 라이브방송`} placeholder="blur" unoptimized fill />
             )}
           </div>
         </Link>
