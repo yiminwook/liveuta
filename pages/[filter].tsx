@@ -25,5 +25,9 @@ export const getServerSideProps: GetServerSideProps<HomePageProps, HomeWithFilte
     res.end();
   }
 
-  return { props: { filter: filter as HomePageProps['filter'] } };
+  return {
+    props: {
+      filter: filter as HomePageProps['filter'],
+    },
+  };
 };

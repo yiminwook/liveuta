@@ -29,7 +29,7 @@
   .search-section {
     background-color: map-get($colors, bg);
 
-    div:nth-child(1) {
+    & > div:nth-child(1) {
       margin: 0 auto;
       width: 80%;
       position: relative;
@@ -107,7 +107,7 @@
   }
 
   .result {
-    div {
+    & > div {
       width: 75%;
       margin: auto;
       padding: 2rem 1rem;

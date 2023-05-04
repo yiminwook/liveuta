@@ -24,8 +24,8 @@
   align-items: center;
   justify-content: center;
 
-  div {
-    div {
+  & > div {
+    & > div {
       color: map-get($colors, main);
       position: relative;
       text-align: center;

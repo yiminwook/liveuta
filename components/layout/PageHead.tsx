@@ -8,6 +8,7 @@ const {
 
 const DEFAULT_TITLE = 'Live Uta';
 const DEFAULT_DESC = 'Show V-Tuber Utawaku schedule';
+const DEFAULT_IMAGE = 'meta-image.png';
 
 interface PagePHeadProps {
   title?: string;
@@ -21,7 +22,7 @@ const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
   const pageTitle = title ? `${title} | ${DEFAULT_TITLE}` : DEFAULT_TITLE;
   const pageDesc = description ?? DEFAULT_DESC;
   const pageKeywords = keywords ?? '';
-  const pageImage = image ?? '/assets/meta-image.png';
+  const pageImage = `${SITE_URL}/assets/${image ?? DEFAULT_IMAGE}`;
   const pageURL = `${SITE_URL}${asPath}`;
 
   return (
@@ -39,8 +40,6 @@ const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
       <meta property="og:image:alt" content={pageTitle} />
       {/* twitter */}
       <meta property="twitter:card" content={pageDesc} />
-      <meta property="twitter:site" content={pageDesc} />
-      <meta property="twitter:creator" content={pageDesc} />
       <meta property="twitter:description" content={pageDesc} />
       {/* mobile */}
       <meta name="application-name" content="Live Uta" />
@@ -58,7 +57,7 @@ const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
       <meta name="theme-color" content="#d8aab1ec" />
       {/* 컨텐츠 중복방지 */}
       <link rel="canonical" href={pageURL} />
-      <link rel="shortcut icon" href="/assets/icon-192-192.png" />
+      <link rel="shortcut icon" href={`${SITE_URL}/assets/icon-192-192.png`} />
       <link rel="manifest" href={`${SITE_URL}/manifest.json`} />
       <link rel="assets" href={`${SITE_URL}/assets`} />
       <link
