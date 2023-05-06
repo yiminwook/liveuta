@@ -2,8 +2,8 @@
 @import 'var';
 @import 'placeholder';
 
-.short {
-  width: 100%;
+.iframe {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,11 +18,13 @@
       height: 100%;
       background-color: map-get($colors, back-drop);
       @include box-shadow();
-
-      html,
-      body {
-        @extend %scroll-bar;
-      }
     }
+  }
+
+  & > button {
+    position: fixed;
+    bottom: 2.5rem;
+    transform: translateY(50%);
+    font-size: 1.5rem;
   }
 }
