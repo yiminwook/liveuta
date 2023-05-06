@@ -43,6 +43,9 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
             <NavLink modifier={sidebar['active']} href="/search">
               Search
             </NavLink>
+            <NavLink modifier={sidebar['active']} href="/short">
+              Short Link
+            </NavLink>
           </ul>
           <ul>
             <li>
