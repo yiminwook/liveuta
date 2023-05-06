@@ -9,7 +9,7 @@ const Iframe = ({ url }: IframeProps) => {
   return (
     <section className={iframe['iframe']}>
       <div>
-        <iframe id="liveuta-iframe" src={url} />
+        <iframe id="liveuta-iframe" src={url} scrolling="no" />
       </div>
       <button onClick={() => openWindow(url)}>새 탭에서 열기</button>
     </section>
