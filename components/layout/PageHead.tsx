@@ -54,7 +54,10 @@ const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
       <title>{pageTitle}</title>
       <meta name="description" content={pageDesc} />
       <meta name="keywords" content={pageKeywords} />
-      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, viewport-fit=cover"
+      />
       <meta name="theme-color" content="#d8aab1ec" />
       {/* 컨텐츠 중복방지 */}
       <link rel="canonical" href={pageURL} />

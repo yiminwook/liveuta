@@ -86,7 +86,7 @@ body {
   .app {
     max-width: map-get($points, 2xl);
     width: 100%;
-    min-height: calc(100vh - 3.5rem - 5rem);
+    min-height: calc(100vh - 3.5rem - 5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
     margin: auto;
 
     @include min-width(map-get($points, xl)) {
@@ -110,6 +110,7 @@ body {
 
   .footer {
     height: 5rem;
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
   .foat {
@@ -117,7 +118,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 1.5rem;
+    bottom: calc(env(safe-area-inset-bottom) + 1.5rem);
     right: 1.5rem;
     width: 3.25rem;
     height: 3.25rem;
