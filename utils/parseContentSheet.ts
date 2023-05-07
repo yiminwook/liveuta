@@ -10,7 +10,10 @@ export const parseSheetData = (value: ContentsRowType): ContentsDataType | undef
   if (stringTime.length === 19) {
     const { timestamp, korTime } = stringToTime(stringTime);
     const interval = getInterval(timestamp);
-    const highThumbnailURL = thumbnailURL.replace(/(hqdefault|maxresdefault|sddefault|default)/i, 'hqdefault');
+    const highThumbnailURL = thumbnailURL.replace(
+      /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
+      'mqdefault',
+    );
     let replacedTitle = title.replace(/\【(.*?)\】|\〖(.*?)\〗|\[(.*?)\]|\((.*?)\)/gi, '');
     // if (replacedTitle.length > 40) {
     //   replacedTitle = replacedTitle.substring(0, 40) + "...";
