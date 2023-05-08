@@ -1,15 +1,10 @@
 import { FaWindowClose } from 'react-icons/fa';
 import sidebar from '@/styles/layout/Sidebar.module.scss';
-import getConfig from 'next/config';
 import { MouseEvent } from 'react';
 import useStopPropagation from '@/hooks/useStopPropagation';
 import NavLink from '@/components/common/NavLink';
 import { RxLink2 } from 'react-icons/rx';
 import { MdOutlineExplore } from 'react-icons/md';
-
-const {
-  publicRuntimeConfig: { REQUEST_URL },
-} = getConfig();
 
 interface SidebarProps {
   show: boolean;
@@ -43,6 +38,9 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
             <NavLink modifier={sidebar['active']} href="/search">
               Search
             </NavLink>
+            <NavLink modifier={sidebar['active']} href="/sheet/request">
+              리퀘스트 요청
+            </NavLink>
             <NavLink modifier={sidebar['active']} href="/short">
               Short Link
             </NavLink>
@@ -59,7 +57,7 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
             </li>
             <NavLink href="https://gall.dcinside.com/mgallery/board/lists?id=kizunaai">키즈나아이 갤러리</NavLink>
             <NavLink href="https://gall.dcinside.com/mini/board/lists?id=vuta">우타와꾸 갤러리</NavLink>
-            <NavLink href={REQUEST_URL}>리퀘스트 요청</NavLink>
+
             <NavLink href="https://www.piku.co.kr/w/6js7eW">아이도루 월드컵</NavLink>
           </ul>
           <button className={sidebar['close']} onClick={onClose}>
