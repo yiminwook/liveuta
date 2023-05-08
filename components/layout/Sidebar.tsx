@@ -24,10 +24,10 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
         <div className={[sidebar['sidebar'], show ? sidebar['show'] : ''].join(' ')} onClick={stopPropagation}>
           <ul>
             <li>
-              <h1>
+              <h2>
                 <MdOutlineExplore size={'1rem'} color="inherit" />
                 &nbsp;페이지
-              </h1>
+              </h2>
             </li>
             <NavLink modifier={sidebar['active']} href="/">
               Home
@@ -50,14 +50,13 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
           </ul>
           <ul>
             <li>
-              <h1>
+              <h2>
                 <RxLink2 size={'1rem'} color="inherit" />
                 &nbsp;외부링크
-              </h1>
+              </h2>
             </li>
             <NavLink href="https://gall.dcinside.com/mgallery/board/lists?id=kizunaai">키즈나아이 갤러리</NavLink>
             <NavLink href="https://gall.dcinside.com/mini/board/lists?id=vuta">우타와꾸 갤러리</NavLink>
-
             <NavLink href="https://www.piku.co.kr/w/6js7eW">아이도루 월드컵</NavLink>
           </ul>
           <button className={sidebar['close']} onClick={onClose}>
