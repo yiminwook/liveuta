@@ -26,3 +26,17 @@ export const getYoutubeChannels = async (idArr: string[]) => {
 
   return response.data;
 };
+
+export const searchYoutubeChannels = async (channelName: string) => {
+  const key = getENV(GOOGLE_API_KEY);
+  const response = await youtubeService.search.list({
+    part: ['id', 'snippet', 'statistics'],
+    q: channelName,
+    type: ['channel'],
+    key,
+  });
+
+  return response.data;
+};
+
+// https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q={custom_username}&key={api_key}'

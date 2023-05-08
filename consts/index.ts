@@ -1,7 +1,9 @@
 /* ENV */
 export const SITE_URL = 'SITE_URL';
-
+export const REDIRECT_URL = 'REDIRECT_URL';
 export const GOOGLE_API_KEY = 'GOOGLE_API_KEY';
+export const GOOGLE_CLIENT_ID = 'GOOGLE_CLIENT_ID';
+export const GOOGLE_SECRET_KEY = 'GOOGLE_SECRET_KEY';
 
 export const CONTENTS_SHEET_ID = 'CONTENTS_SHEET_ID';
 export const CONTENTS_SHEET_RANGE = 'CONTENTS_SHEET_RANGE';
@@ -14,7 +16,8 @@ export const REQUEST_URL = 'REQUEST_URL';
 export const LOCAL_TIME = 'LOCAL_TIME';
 export const INTERVAL_TIME = 'INTERVAL_TIME';
 
-export const META_IMAGE = 'META_IMAGE';
+export const ACCESS_SECRET = 'ACCESS_SECRET';
+export const REFRESH_SECRET = 'REFRESH_SECRET';
 
 //
 export const PAGENATION_RANGE = 5;
