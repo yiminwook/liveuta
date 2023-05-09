@@ -6,11 +6,11 @@ import { LOCAL_TIME } from '@/consts';
 
 export const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {
   const [title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream]: ContentsRowType = value;
-  const stringTime = scheduledTime.replace(' ', 'T').split(' JST')[0];
+  const stringTime = scheduledTime.replace(' ', 'T').split(' JST')[0].substring(0, 19);
   if (stringTime.length === 19) {
     const { timestamp, korTime } = stringToTime(stringTime);
     const interval = getInterval(timestamp);
-    const highThumbnailURL = thumbnailURL.replace(
+    const replacedThumbnailURL = thumbnailURL.replace(
       /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
       'mqdefault',
     );
@@ -25,7 +25,7 @@ export const parseSheetData = (value: ContentsRowType): ContentsDataType | undef
       channelName,
       videoId,
       timestamp,
-      thumbnailURL: highThumbnailURL,
+      thumbnailURL: replacedThumbnailURL,
       korTime,
       isStream,
       interval,
