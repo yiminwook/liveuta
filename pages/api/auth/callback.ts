@@ -16,7 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!(accessToken && refreshToken)) throw new Error('Fail to get Tokens');
     const encodeAccessToken = jwt.sign(accessToken, getENV(ACCESS_SECRET));
     const encodeRefreshToken = jwt.sign(refreshToken, getENV(REFRESH_SECRET));
-    const expiresIn = 30 * 24 * 60 * 60 * 1000;
+    // const expiresIn = 30 * 24 * 60 * 60 * 1000;
     res.setHeader('location', '/');
     res.setHeader('Set-Cookie', [
       `accessCookie=${encodeAccessToken};` +
