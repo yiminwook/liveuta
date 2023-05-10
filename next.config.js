@@ -12,6 +12,7 @@ const nextConfig = {
     LOCAL_TIME: LOCAL_TIME ?? '0',
     REQUEST_URL: REQUEST_URL ?? '/',
   },
+  swcMinify: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
