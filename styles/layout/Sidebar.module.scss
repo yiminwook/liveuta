@@ -48,6 +48,8 @@
 
         a {
           button {
+            @include transition(color, 0.05s, $bezier-curve);
+
             &:hover:not(&.active) {
               color: map-get($colors, light-font);
             }
@@ -64,6 +66,7 @@
       padding: 0 0.1rem;
       transform: translateX(-50%) translateY(30%);
       color: map-get($colors, light-font);
+      @include transition(color, 80ms, $bezier-curve);
 
       &:hover {
         color: map-get($colors, salmon);
