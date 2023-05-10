@@ -130,6 +130,7 @@ body {
     cursor: pointer;
     @include prevent-user-select();
     @include box-shadow();
+    @include transition(all, 80ms, $bezier-curve);
 
     &:hover {
       color: map-get($colors, salmon);
