@@ -26,7 +26,7 @@
     left: -18rem;
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
-    @include transition(transform, 0.3s, linear);
+    @include transition(transform, 0.3s, cubic-bezier(.8,.05,.2,.95));
 
     &.show {
       transform: translateX(100%);
@@ -48,6 +48,8 @@
 
         a {
           button {
+            @include transition(color, 0.05s, $bezier-curve);
+
             &:hover:not(&.active) {
               color: map-get($colors, light-font);
             }
@@ -64,6 +66,7 @@
       padding: 0 0.1rem;
       transform: translateX(-50%) translateY(30%);
       color: map-get($colors, light-font);
+      @include transition(color, 80ms, $bezier-curve);
 
       &:hover {
         color: map-get($colors, salmon);
