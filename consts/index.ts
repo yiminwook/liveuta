@@ -1,5 +1,5 @@
 /* ENV */
-export const SITE_URL = 'SITE_URL';
+export const NEXT_PUBLIC_SITE_URL = 'NEXT_PUBLIC_SITE_URL';
 export const REDIRECT_URL = 'REDIRECT_URL';
 export const GOOGLE_API_KEY = 'GOOGLE_API_KEY';
 export const GOOGLE_CLIENT_ID = 'GOOGLE_CLIENT_ID';

@@ -1,11 +1,8 @@
-import getConfig from 'next/config';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Analytics from '@/components/layout/Analytics';
-
-const {
-  publicRuntimeConfig: { SITE_URL },
-} = getConfig();
+import getENV from '@/utils/getENV';
+import { NEXT_PUBLIC_SITE_URL } from '@/consts';
 
 const DEFAULT_TITLE = 'Live Uta';
 const DEFAULT_DESC = 'Show V-Tuber Utawaku schedule';
@@ -19,12 +16,13 @@ interface PagePHeadProps {
 }
 
 const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
+  const siteURL = getENV(NEXT_PUBLIC_SITE_URL);
   const { asPath } = useRouter();
   const pageTitle = title ? `${title} | ${DEFAULT_TITLE}` : DEFAULT_TITLE;
   const pageDesc = description ?? DEFAULT_DESC;
   const pageKeywords = keywords ?? '';
-  const pageImage = `${SITE_URL}/assets/${image ?? DEFAULT_IMAGE}`;
-  const pageURL = `${SITE_URL}${asPath}`;
+  const pageImage = `${siteURL}/assets/${image ?? DEFAULT_IMAGE}`;
+  const pageURL = `${siteURL}${asPath}`;
 
   return (
     <Head>
@@ -49,7 +47,7 @@ const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
       <meta name="apple-mobile-web-app-title" content="Live Uta" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-      <link rel="apple-touch-icon" href={`${SITE_URL}/assets/icon-192-192.png`} />
+      <link rel="apple-touch-icon" href={`${siteURL}/assets/icon-192-192.png`} />
       {/* default */}
       <title>{pageTitle}</title>
       <meta name="description" content={pageDesc} />
@@ -61,9 +59,9 @@ const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
       <meta name="theme-color" content="#d8aab1ec" />
       {/* 컨텐츠 중복방지 */}
       <link rel="canonical" href={pageURL} />
-      <link rel="shortcut icon" href={`${SITE_URL}/assets/icon-192-192.png`} />
-      <link rel="manifest" href={`${SITE_URL}/manifest.json`} />
-      <link rel="assets" href={`${SITE_URL}/assets`} />
+      <link rel="shortcut icon" href={`${siteURL}/assets/icon-192-192.png`} />
+      <link rel="manifest" href={`${siteURL}/manifest.json`} />
+      <link rel="assets" href={`${siteURL}/assets`} />
       <link
         rel="icon"
         href="https://img.icons8.com/external-microdots-premium-microdot-graphic/64/null/external-holiday-christmas-new-year-vol2-microdots-premium-microdot-graphic-4.png"
