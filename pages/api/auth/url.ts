@@ -1,4 +1,4 @@
-import { GoogleClient } from '@/models/auth/googClient';
+import { GoogleClient } from '@/temp/auth/googClient';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 /** Authorization URL 반환 */

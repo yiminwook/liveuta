@@ -1,6 +1,4 @@
-import { ACCESS_SECRET, REFRESH_SECRET } from '@/consts';
-import { GoogleClient } from '@/models/auth/googClient';
-import getENV from '@/utils/getENV';
+import { GoogleClient } from '@/temp/auth/googClient';
 import jwt from 'jsonwebtoken';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -14,8 +12,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const accessToken = token.tokens.access_token;
     const refreshToken = token.tokens.refresh_token;
     if (!(accessToken && refreshToken)) throw new Error('Fail to get Tokens');
-    const encodeAccessToken = jwt.sign(accessToken, getENV(ACCESS_SECRET));
-    const encodeRefreshToken = jwt.sign(refreshToken, getENV(REFRESH_SECRET));
+    const encodeAccessToken = jwt.sign(accessToken, 'ACCESS_SECRET');
+    const encodeRefreshToken = jwt.sign(refreshToken, 'REFRESH_SECRET');
     // const expiresIn = 30 * 24 * 60 * 60 * 1000;
     res.setHeader('location', '/');
     res.setHeader('Set-Cookie', [

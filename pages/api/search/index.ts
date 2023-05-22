@@ -1,17 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { ContentsDataType, ContentsRowType } from '@/models/sheet/inSheet';
 import { getSheet } from '@/models/sheet';
-import getENV from '@/utils/getENV';
-import { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE, SEARCH_ITEMS_SIZE } from '@/consts';
+import { SEARCH_ITEMS_SIZE } from '@/consts';
 import { parseSheetData } from '@/utils/parseContentSheet';
 import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
 import { ChannelsDataType } from '@/models/youtube/inYoutube';
+import { serverEnvConfig } from '@/configs';
 
 export interface SearchResponseType {
   contents: ContentsDataType[];
   channels: ChannelsDataType[];
 }
+
+const { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } = serverEnvConfig();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<SearchResponseType>) => {
   try {
@@ -22,9 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<SearchResponseT
     const nameQuery = decodeURIComponent(query.toString());
     const regex = new RegExp(nameQuery, 'g');
 
-    const contentsSheetId = getENV(CONTENTS_SHEET_ID);
-    const contentsSheetRange = getENV(CONTENTS_SHEET_RANGE);
-    const contentsSheetData = await getSheet({ spreadsheetId: contentsSheetId, range: contentsSheetRange });
+    const contentsSheetData = await getSheet({ spreadsheetId: CONTENTS_SHEET_ID, range: CONTENTS_SHEET_RANGE });
     const contentsSheetDataValue = contentsSheetData.values as ContentsRowType[];
     if (!contentsSheetDataValue) throw new Error('No ContentsValues');
 

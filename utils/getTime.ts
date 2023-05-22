@@ -1,4 +1,6 @@
-import getENV from '@/utils/getENV';
+import { serverEnvConfig } from '@/configs';
+
+const { LOCAL_TIME } = serverEnvConfig();
 
 export const getInterval = (scheduledTimeStamp: number): string => {
   const nowTimeStamp = getNow(true);
@@ -30,8 +32,8 @@ const now = new Date();
  */
 export const getNow = (isLocalTime: boolean) => {
   if (isLocalTime) {
-    const localTime = getENV('LOCAL_TIME');
-    return now.getTime() + +(localTime ?? 32400000);
+    //vercel 배포시
+    return now.getTime() + +(LOCAL_TIME ?? 32400000);
   } else {
     return now.getTime();
   }

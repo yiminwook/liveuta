@@ -1,8 +1,9 @@
 import { ContentsRowType, ContentsDataType, SheetAPIReturntype } from '@/models/sheet/inSheet';
 import { sheets_v4 } from 'googleapis';
 import { getInterval, stringToTime } from '@/utils/getTime';
-import getENV from '@/utils/getENV';
-import { LOCAL_TIME } from '@/consts';
+import { serverEnvConfig } from '@/configs';
+
+const { LOCAL_TIME } = serverEnvConfig();
 
 export const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {
   const [title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream]: ContentsRowType = value;
@@ -80,7 +81,7 @@ export const parseAllData = (data: sheets_v4.Schema$ValueRange): parseAllDataTyp
 
   const daily: SheetAPIReturntype['daily']['contents'] = [];
   const all: SheetAPIReturntype['all']['contents'] = [];
-  const yesterday = Date.now() - 24 * 60 * 60 * 1000 + +getENV(LOCAL_TIME);
+  const yesterday = Date.now() - 24 * 60 * 60 * 1000 + +LOCAL_TIME;
 
   dataValue.forEach((value) => {
     const bool = value[5];
