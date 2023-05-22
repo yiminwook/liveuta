@@ -1,6 +1,5 @@
 import Iframe, { IframeProps } from '@/components/common/Iframe';
-import { CONTENTS_SHEET_ID } from '@/consts';
-import getENV from '@/utils/getENV';
+import { serverEnvConfig } from '@/configs';
 import { GetStaticProps } from 'next';
 
 interface ShortPageProps extends IframeProps {}
@@ -16,7 +15,8 @@ const ChannelSheetPage = ({ url }: ShortPageProps) => {
 export default ChannelSheetPage;
 
 export const getStaticProps: GetStaticProps = () => {
-  const sheetId = getENV(CONTENTS_SHEET_ID);
-  const url = `https://docs.google.com/spreadsheets/d/${sheetId}`;
+  const { CONTENTS_SHEET_ID } = serverEnvConfig();
+
+  const url = `https://docs.google.com/spreadsheets/d/${CONTENTS_SHEET_ID}`;
   return { props: { url } };
 };

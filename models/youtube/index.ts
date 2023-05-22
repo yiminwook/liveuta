@@ -1,39 +1,36 @@
-import { GOOGLE_API_KEY } from '@/consts';
-import getENV from '@/utils/getENV';
+import { serverEnvConfig } from '@/configs';
 import { google } from 'googleapis';
+
+const { GOOGLE_API_KEY } = serverEnvConfig();
 
 export const youtubeService = google.youtube('v3');
 
 export const getYoutubeChannelsByUid = async (uid: string) => {
-  const key = getENV(GOOGLE_API_KEY);
-
   const response = await youtubeService.channels.list({
     id: [uid],
     part: ['id', 'snippet', 'statistics'],
-    key,
+    key: GOOGLE_API_KEY,
   });
 
   return response.data;
 };
 
 export const getYoutubeChannels = async (idArr: string[]) => {
-  const key = getENV(GOOGLE_API_KEY);
   const response = await youtubeService.channels.list({
     id: idArr,
     part: ['id', 'snippet', 'statistics'],
-    key,
+    key: GOOGLE_API_KEY,
   });
 
   return response.data;
 };
 
 export const searchYoutubeChannels = async (channelName: string) => {
-  const key = getENV(GOOGLE_API_KEY);
   const response = await youtubeService.search.list({
     part: ['id', 'snippet', 'statistics'],
     q: channelName,
     type: ['channel'],
-    key,
+    key: GOOGLE_API_KEY,
   });
 
   return response.data;

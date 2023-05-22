@@ -1,5 +1,3 @@
-import { ACCESS_SECRET } from '@/consts';
-import getENV from '@/utils/getENV';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
 
@@ -10,7 +8,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{ isLogin: bool
     if (!(accessCookie && refreshCookie)) {
       return res.status(200).json({ isLogin: false, message: 'Not Logged in' });
     }
-    const decodeAccessToken = jwt.verify(accessCookie, getENV(ACCESS_SECRET));
+    const decodeAccessToken = jwt.verify(accessCookie, 'ACCESS_SECRET');
 
     return res.status(200).json({ isLogin: true, message: 'ok' });
   } catch (err) {
