@@ -14,8 +14,13 @@ const ContentSection = ({ contents }: ContentSectionProps) => {
         <span>{`(${contents.length} 개)`}</span>
       </div>
       <section>
-        {contents.map((content) => (
-          <YoutubeContentCard key={content.videoId} content={content} />
+        {contents.map((content, index) => (
+          <YoutubeContentCard
+            key={content.videoId}
+            content={content}
+            currentIndex={index}
+            lastContentsIndex={contents.length - 1}
+          />
         ))}
       </section>
     </section>

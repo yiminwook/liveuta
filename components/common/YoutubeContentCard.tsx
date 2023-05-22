@@ -13,7 +13,7 @@ interface YoutubeContentCardProps {
   content: ContentsDataType;
   currentIndex: number;
   lastContentsIndex: number;
-  handleInfinityScroll: () => void;
+  handleInfinityScroll?: () => void;
 }
 
 const YoutubeContentCard = ({
@@ -57,6 +57,7 @@ const YoutubeContentCard = ({
 
   const onIntersect: IntersectionObserverCallback = useCallback(
     (items, observer) => {
+      if (!handleInfinityScroll) return;
       const currentTarget = target.current;
       const isIntersecting = items[0].isIntersecting;
       if (!(currentTarget && isIntersecting && currentIndex === lastContentsIndex)) return;
@@ -68,6 +69,7 @@ const YoutubeContentCard = ({
   );
 
   useEffect(() => {
+    if (!handleInfinityScroll) return;
     const currentTarget = target.current;
     if (!(currentTarget && currentIndex === lastContentsIndex)) return;
     //마지막 요소만 관찰
