@@ -1,16 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { SheetAPIReturntype } from '@/models/sheet/inSheet';
-import { getSheet } from '@/models/sheet';
-import { parseAllData, parseScheduledData } from '@/utils/parseContentSheet';
-import getENV from '@/utils/getENV';
-import { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } from '@/consts';
+import { SheetAPIReturntype } from '@/types/inSheet';
 import { google } from 'googleapis';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<SheetAPIReturntype | undefined>) => {
   try {
     if (!req.method) throw new Error('invaild method');
-    const spreadsheetId = getENV(CONTENTS_SHEET_ID);
-    const range = getENV(CONTENTS_SHEET_RANGE);
 
     //write 코드
     //1 youtube data api videoId 로 계정 정보를 가져온다.

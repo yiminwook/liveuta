@@ -1,16 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { SheetAPIReturntype } from '@/models/sheet/inSheet';
+import { SheetAPIReturntype } from '@/types/inSheet';
 import { getSheet } from '@/models/sheet';
 import { parseAllData, parseScheduledData } from '@/utils/parseContentSheet';
-import getENV from '@/utils/getENV';
-import { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } from '@/consts';
+import { serverEnvConfig } from '@/configs';
+
+const { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } = serverEnvConfig();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<SheetAPIReturntype | undefined>) => {
   try {
     if (req.method !== 'GET') throw new Error('invaild method');
-    const spreadsheetId = getENV(CONTENTS_SHEET_ID);
-    const range = getENV(CONTENTS_SHEET_RANGE);
-    const sheetData = await getSheet({ spreadsheetId, range });
+
+    const sheetData = await getSheet({ spreadsheetId: CONTENTS_SHEET_ID, range: CONTENTS_SHEET_RANGE });
     const { scheduled, live } = parseScheduledData(sheetData);
     const { daily, all } = parseAllData(sheetData);
 

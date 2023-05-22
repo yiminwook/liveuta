@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useMemo, useRef, useState } from 'react';
-import { ContentsDataType } from '@/models/sheet/inSheet';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ContentsDataType } from '@/types/inSheet';
 import Link from 'next/link';
 import Image from 'next/image';
 import youtubeContentCard from '@/styles/common/YoutubeContentCard.module.scss';
@@ -11,19 +11,29 @@ import altImage from '@/images/thumbnail_alt_img.png';
 
 interface YoutubeContentCardProps {
   content: ContentsDataType;
+  currentIndex: number;
+  lastContentsIndex: number;
+  handleInfinityScroll?: () => void;
 }
 
-const YoutubeContentCard = ({ content }: YoutubeContentCardProps) => {
+const YoutubeContentCard = ({
+  content,
+  currentIndex,
+  lastContentsIndex,
+  handleInfinityScroll,
+}: YoutubeContentCardProps) => {
   const { title, url, channelName, videoId, korTime, interval, isStream, thumbnailURL } = content;
   const [imgLoaded, setImgLoaded] = useState(true);
   const imgRef = useRef<HTMLImageElement>(null);
+  const target = useRef<HTMLDivElement>(null);
 
-  const handleImgValidity = () => {
-    if (!imgRef.current) return;
-    if (imgRef.current.naturalHeight === 90) {
+  const handleImgValidity = useCallback(() => {
+    const currentImage = imgRef.current;
+    if (!currentImage) return;
+    if (currentImage.naturalHeight === 90) {
       setImgLoaded(() => false);
     }
-  };
+  }, [imgRef]);
 
   const addStreamModifier = useMemo(() => {
     let streamModifer: string;
@@ -45,8 +55,32 @@ const YoutubeContentCard = ({ content }: YoutubeContentCardProps) => {
     return streamModifer;
   }, []);
 
+  const onIntersect: IntersectionObserverCallback = useCallback(
+    (items, observer) => {
+      if (!handleInfinityScroll) return;
+      const currentTarget = target.current;
+      const isIntersecting = items[0].isIntersecting;
+      if (!(currentTarget && isIntersecting && currentIndex === lastContentsIndex)) return;
+      //마지막 요소가 관찰될때만
+      handleInfinityScroll();
+      observer.unobserve(currentTarget);
+    },
+    [target, lastContentsIndex],
+  );
+
+  useEffect(() => {
+    if (!handleInfinityScroll) return;
+    const currentTarget = target.current;
+    if (!(currentTarget && currentIndex === lastContentsIndex)) return;
+    //마지막 요소만 관찰
+    const observer = new IntersectionObserver(onIntersect, { rootMargin: '100%' });
+    observer.observe(currentTarget);
+
+    return () => observer.disconnect();
+  }, [target, content, lastContentsIndex]);
+
   return (
-    <div className={[youtubeContentCard['card'], addStreamModifier].join(' ')} key={videoId}>
+    <div className={[youtubeContentCard['card'], addStreamModifier].join(' ')} key={videoId} ref={target}>
       <div className={youtubeContentCard['content']}>
         <Link href={url}>
           <div className={youtubeContentCard['thumnail']}>

@@ -1,8 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Analytics from '@/components/layout/Analytics';
-import getENV from '@/utils/getENV';
-import { NEXT_PUBLIC_SITE_URL } from '@/consts';
 
 const DEFAULT_TITLE = 'Live Uta';
 const DEFAULT_DESC = 'Show V-Tuber Utawaku schedule';
@@ -16,7 +14,9 @@ interface PagePHeadProps {
 }
 
 const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
-  const siteURL = getENV(NEXT_PUBLIC_SITE_URL);
+  const NEXT_PUBLIC_SITE_URL = process.env['NEXT_PUBLIC_SITE_URL'] || 'http://localhost:3000';
+
+  const siteURL = NEXT_PUBLIC_SITE_URL;
   const { asPath } = useRouter();
   const pageTitle = title ? `${title} | ${DEFAULT_TITLE}` : DEFAULT_TITLE;
   const pageDesc = description ?? DEFAULT_DESC;

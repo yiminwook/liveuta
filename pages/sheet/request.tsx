@@ -1,6 +1,5 @@
 import Iframe, { IframeProps } from '@/components/common/Iframe';
-import { REQUEST_URL } from '@/consts';
-import getENV from '@/utils/getENV';
+import { serverEnvConfig } from '@/configs';
 import { GetStaticProps } from 'next';
 
 interface RequestPageProps extends IframeProps {}
@@ -16,6 +15,7 @@ const RequestPage = ({ url }: RequestPageProps) => {
 export default RequestPage;
 
 export const getStaticProps: GetStaticProps = () => {
-  const url = getENV(REQUEST_URL);
-  return { props: { url } };
+  const { REQUEST_URL } = serverEnvConfig();
+
+  return { props: { url: REQUEST_URL } };
 };

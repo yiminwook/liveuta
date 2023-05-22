@@ -1,5 +1,5 @@
 import { getYoutubeChannels } from '@/models/youtube';
-import { ChannelsDataType } from '@/models/youtube/inYoutube';
+import { ChannelsDataType } from '@/types/inYoutube';
 import { youtube_v3 } from 'googleapis';
 
 export interface ChannelSheetDataType {

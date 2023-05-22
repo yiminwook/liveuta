@@ -1,5 +1,4 @@
-import { GOOGLE_API_KEY } from '@/consts';
-import getENV from '@/utils/getENV';
+import { serverEnvConfig } from '@/configs';
 import { google } from 'googleapis';
 
 export interface SheetConfigType {
@@ -8,14 +7,14 @@ export interface SheetConfigType {
   range: string;
 }
 
+const { GOOGLE_API_KEY } = serverEnvConfig();
+
 export const sheetService = google.sheets({ version: 'v4' });
 
 export const getSheet = async ({ spreadsheetId, range }: Omit<SheetConfigType, 'key'>) => {
-  const key = getENV(GOOGLE_API_KEY);
-
   const sheetConfig: SheetConfigType = {
     spreadsheetId,
-    key,
+    key: GOOGLE_API_KEY,
     range,
   };
 
