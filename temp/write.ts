@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { SheetAPIReturntype } from '@/models/sheet/inSheet';
+import { SheetAPIReturntype } from '@/types/inSheet';
 import { google } from 'googleapis';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<SheetAPIReturntype | undefined>) => {

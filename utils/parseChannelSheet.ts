@@ -1,6 +1,6 @@
 import { serverEnvConfig } from '@/configs';
 import { getSheet } from '@/models/sheet';
-import { ChannelRowType } from '@/models/youtube/inYoutube';
+import { ChannelRowType } from '@/types/inYoutube';
 
 const { CHANNELS_SHEET_ID, CHANNELS_SHEET_RANGE } = serverEnvConfig();
 

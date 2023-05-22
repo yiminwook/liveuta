@@ -1,4 +1,4 @@
-import { ChannelsDataType } from '@/models/youtube/inYoutube';
+import { ChannelsDataType } from '@/types/inYoutube';
 import Image from 'next/image';
 import channelCard from '@/styles/common/ChannelCard.module.scss';
 import { renderSubscribe } from '@/utils/renderSubscribe';

@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { ContentsDataType, ContentsRowType } from '@/models/sheet/inSheet';
+import { ContentsDataType, ContentsRowType } from '@/types/inSheet';
 import { getSheet } from '@/models/sheet';
 import { SEARCH_ITEMS_SIZE } from '@/consts';
 import { parseSheetData } from '@/utils/parseContentSheet';
 import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
-import { ChannelsDataType } from '@/models/youtube/inYoutube';
+import { ChannelsDataType } from '@/types/inYoutube';
 import { serverEnvConfig } from '@/configs';
 
 export interface SearchResponseType {
