@@ -1,5 +1,5 @@
 import { ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
-import { ChannelsDataType } from '@/models/youtube/inYoutube';
+import { ChannelsDataType } from '@/types/inYoutube';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
 import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
 import { GetStaticProps } from 'next';

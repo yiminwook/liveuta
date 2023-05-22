@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NextPage } from 'next';
-import { ContentsDataType, SheetAPIReturntype } from '@/models/sheet/inSheet';
+import { ContentsDataType, SheetAPIReturntype } from '@/types/inSheet';
 import useSheet from '@/hooks/useSheet';
 import home from '@/styles/home/Home.module.scss';
 import NavSection from '@/components/home/NavSection';

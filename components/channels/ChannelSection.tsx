@@ -1,4 +1,4 @@
-import { ChannelsDataType } from '@/models/youtube/inYoutube';
+import { ChannelsDataType } from '@/types/inYoutube';
 import channels from '@/styles/channels/Channels.module.scss';
 import ChannelCard from '@/components/common/ChannelCard';
 

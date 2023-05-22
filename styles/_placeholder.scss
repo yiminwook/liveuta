@@ -25,11 +25,14 @@
 }
 
 %home-contents-section {
+  //sm point보다 작을때 화면에 꽉차도록 100%
+  width: 100%;
   margin: auto;
   display: grid;
   row-gap: 0.5rem;
 
   @include min-width(map-get($points, sm)) {
+    width: auto;
     grid-template-columns: repeat(3, 1fr);
     column-gap: 0.4rem;
     row-gap: 1.2rem;
