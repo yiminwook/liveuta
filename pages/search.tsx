@@ -21,7 +21,7 @@ const SearchPage = ({}: SearchPageProps) => {
   }
 
   return (
-    <main className={search['main']}>
+    <section className={search['main']}>
       <SearchSection />
       {nameQuery !== '' ? (
         <section className={search['result']}>
@@ -32,7 +32,7 @@ const SearchPage = ({}: SearchPageProps) => {
       ) : null}
       <ContentSection contents={data.contents} />
       <ChannelSection channels={data.channels} />
-    </main>
+    </section>
   );
 };
 

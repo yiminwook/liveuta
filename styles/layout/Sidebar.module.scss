@@ -26,32 +26,38 @@
     left: -18rem;
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
-    @include transition(transform, 0.3s, cubic-bezier(.8,.05,.2,.95));
+    @include transition(transform, 0.3s, cubic-bezier(0.8, 0.05, 0.2, 0.95));
 
     &.show {
       transform: translateX(100%);
     }
 
-    ul {
+    section {
       padding: 3rem 2rem;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
 
-      li {
-        h2 {
-          display: flex;
-          align-items: center;
-          font-size: 1.5rem;
-          font-weight: 600;
-        }
+      h2 {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
 
-        a {
-          button {
-            @include transition(color, 0.05s, $bezier-curve);
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
 
-            &:hover:not(&.active) {
-              color: map-get($colors, light-font);
+        li {
+          a {
+            button {
+              @include transition(color, 0.05s, $bezier-curve);
+
+              &:hover:not(&.active) {
+                color: map-get($colors, light-font);
+              }
             }
           }
         }

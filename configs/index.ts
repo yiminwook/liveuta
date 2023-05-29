@@ -1,7 +1,6 @@
 import getEnv from '@/utils/getEnv';
 
 export const serverEnvConfig = () => {
-  const SITE_URL = getEnv('SITE_URL');
   const GOOGLE_API_KEY = getEnv('GOOGLE_API_KEY');
   const CONTENTS_SHEET_ID = getEnv('CONTENTS_SHEET_ID');
   const CONTENTS_SHEET_RANGE = getEnv('CONTENTS_SHEET_RANGE');
@@ -13,7 +12,6 @@ export const serverEnvConfig = () => {
   // const INTERVAL_TIME = getENV('INTERVAL_TIME');
 
   return {
-    SITE_URL,
     GOOGLE_API_KEY,
     CONTENTS_SHEET_ID,
     CONTENTS_SHEET_RANGE,
@@ -23,4 +21,9 @@ export const serverEnvConfig = () => {
     REQUEST_URL,
     LOCAL_TIME,
   };
+};
+
+export const publicEnvConfig = () => {
+  const NEXT_PUBLIC_SITE_URL = getEnv('NEXT_PUBLIC_SITE_URL');
+  return { NEXT_PUBLIC_SITE_URL };
 };
