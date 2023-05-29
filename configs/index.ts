@@ -25,6 +25,5 @@ export const serverEnvConfig = () => {
 
 export const publicEnvConfig = () => {
   const NEXT_PUBLIC_SITE_URL = getEnv('NEXT_PUBLIC_SITE_URL');
-  console.log(NEXT_PUBLIC_SITE_URL);
   return { NEXT_PUBLIC_SITE_URL };
 };

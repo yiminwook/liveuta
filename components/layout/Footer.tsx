@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
 const Footer = () => {
-  return <div className="footer" />;
+  return <footer className="footer" />;
 };
 
 export default Footer;
