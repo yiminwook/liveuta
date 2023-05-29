@@ -4,6 +4,7 @@ import Header from '@/components/layout/Header';
 import { TfiArrowCircleUp } from 'react-icons/tfi';
 import Footer from '@/components/layout/Footer';
 import PageHead from '@/components/layout/PageHead';
+import Analytics from '@/components/layout/Analytics';
 
 interface ServiceLayoutProps {
   title?: string;
@@ -18,6 +19,7 @@ const ServiceLayout = ({ title = 'Live Uta', children }: ServiceLayoutProps) => 
 
   return (
     <>
+      {/* meta tags */}
       <PageHead />
       <Header />
       <main className="app">{children}</main>
@@ -25,6 +27,9 @@ const ServiceLayout = ({ title = 'Live Uta', children }: ServiceLayoutProps) => 
       <button className="foat" onClick={scrollUp} onTouchEnd={scrollUp} onTouchStart={scrollUp}>
         <TfiArrowCircleUp size={'3rem'} color={'inherit'} />
       </button>
+
+      {/* Google Analytics */}
+      <Analytics />
     </>
   );
 };
