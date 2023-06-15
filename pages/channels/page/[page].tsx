@@ -49,6 +49,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   /* Google spread sheet API */
   const { totalLength } = await parseChannelIDSheet();
   const numberOfPages = Math.ceil(totalLength / ITEMS_PER_PAGE);
+
   const paths = Array.from({ length: numberOfPages }, (_, i) => {
     return { params: { page: (i + 1).toString() } };
   });
