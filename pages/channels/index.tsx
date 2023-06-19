@@ -5,7 +5,7 @@ import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
 import { GetStaticProps } from 'next';
 import channels from '@/styles/channels/Channels.module.scss';
 import ChannelSection from '@/components/channels/ChannelSection';
-import Pagination from '@/components/common/Pagination';
+import Pagination from '@/components/common/pagination/Pagination';
 
 export interface ChannelsPageProps {
   totalLength: number;

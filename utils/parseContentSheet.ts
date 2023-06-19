@@ -35,12 +35,12 @@ export const parseSheetData = (value: ContentsRowType): ContentsDataType | undef
   }
 };
 
-interface parseScheduledDataType {
+interface ParseScheduledDataReturnType {
   scheduled: SheetAPIReturntype['scheduled'];
   live: SheetAPIReturntype['live'];
 }
 /** Parse Google spread sheet - Scheduled & Live */
-export const parseScheduledData = (data: sheets_v4.Schema$ValueRange): parseScheduledDataType => {
+export const parseScheduledData = (data: sheets_v4.Schema$ValueRange): ParseScheduledDataReturnType => {
   const dataValue = data.values as ContentsRowType[];
   if (!dataValue) throw new Error('No DataValue');
 
@@ -48,10 +48,11 @@ export const parseScheduledData = (data: sheets_v4.Schema$ValueRange): parseSche
   const live: SheetAPIReturntype['live']['contents'] = [];
 
   dataValue.forEach((value) => {
-    const bool = value[5];
+    const isHide = value[5];
     const isStream = value[6];
-    if (bool === 'TRUE' && isStream === 'NULL') return;
-    if (bool === 'TRUE' && isStream === 'FALSE') return;
+    //숨김처리된 컨텐츠는 가져오지 않음, 단 isStream이 TRUE인 경우 제외
+    if (isHide === 'TRUE' && isStream === 'NULL') return;
+    if (isHide === 'TRUE' && isStream === 'FALSE') return;
     const data = parseSheetData(value);
     if (!data) return;
     scheduled.push(data);
@@ -70,12 +71,12 @@ export const parseScheduledData = (data: sheets_v4.Schema$ValueRange): parseSche
   };
 };
 
-interface parseAllDataType {
+interface ParseAllDataReturnType {
   daily: SheetAPIReturntype['daily'];
   all: SheetAPIReturntype['all'];
 }
 /** Parse Google spread sheet - Daily & All */
-export const parseAllData = (data: sheets_v4.Schema$ValueRange): parseAllDataType => {
+export const parseAllData = (data: sheets_v4.Schema$ValueRange): ParseAllDataReturnType => {
   const dataValue = data.values as ContentsRowType[];
   if (!dataValue) throw new Error('No DataValue');
 
@@ -84,9 +85,10 @@ export const parseAllData = (data: sheets_v4.Schema$ValueRange): parseAllDataTyp
   const yesterday = Date.now() - 24 * 60 * 60 * 1000 + +LOCAL_TIME;
 
   dataValue.forEach((value) => {
-    const bool = value[5];
+    const isHide = value[5];
     const isStream = value[6];
-    if (bool === 'TRUE' && isStream === 'NULL') value[6] = 'FALSE';
+    //숨김처리된 컨텐츠는 지난 컨텐츠로 처리
+    if (isHide === 'TRUE' && isStream === 'NULL') value[6] = 'FALSE';
     const data = parseSheetData(value);
     if (data) {
       all.push(data);

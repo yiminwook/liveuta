@@ -1,4 +1,4 @@
-export const PAGENATION_RANGE = 5;
+export const PAGINATION_RANGE = 5;
 
 /** 채널 페이지 카드갯수 */
 export const ITEMS_PER_PAGE = 24;
