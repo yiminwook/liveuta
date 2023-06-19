@@ -5,7 +5,7 @@ import {
   BeforeLink,
   FirstLink,
   LastLink,
-  PaginationChild,
+  PaginationItem,
 } from '@/components/common/pagination/PaginationChild';
 import { ITEMS_PER_PAGE, PAGINATION_RANGE } from '@/consts';
 import { useRouter } from 'next/router';
@@ -38,9 +38,9 @@ const Pagination = ({ totalLength }: PaginationProps) => {
   return (
     <ul className={pagination['pagination']}>
       <FirstLink currentPage={currentPage} />
-      <BeforeLink initialPage={pageArray[0]} totalLength={totalPage} />
+      <BeforeLink initialPage={pageArray[0]} totalPage={totalPage} />
       {pageArray.map((page, index) => (
-        <PaginationChild key={`pagination-list-${index}`} page={page} currentPage={currentPage} />
+        <PaginationItem key={`pagination-list-${index}`} nextPage={page} currentPage={currentPage} value={page} />
       ))}
       <AfterLink initialPage={pageArray[0]} totalPage={totalPage} />
       <LastLink currentPage={currentPage} totalPage={totalPage} />
