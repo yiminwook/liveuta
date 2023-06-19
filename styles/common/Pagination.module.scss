@@ -1,46 +1,46 @@
-@import 'var';
-@import 'mixin';
-@import 'placeholder';
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
 
-.pagnination {
+.pagination {
   padding: 0.5rem;
   display: flex;
+  margin: auto;
+  display: flex;
+  gap: 0.5rem;
 
-  ul {
-    margin: auto;
-    display: flex;
-    gap: 0.5rem;
+  li {
+    a {
+      border-radius: 5px;
+      background-color: lighten(map-get($colors, main), 10%);
+      padding: 0.25rem 0.5rem;
+      line-height: 1;
+      font-weight: 600;
+      color: map-get($colors, salmon);
+      font-size: 1.15rem;
+      text-align: center;
+      @include transition(background-color, 0.2s, linear);
 
-    li {
-      button {
-        border-radius: 5px;
-        background-color: lighten(map-get($colors, main), 10%);
-        padding: 0.25rem 0.5rem;
-        line-height: 1;
-        font-weight: 600;
-        color: map-get($colors, salmon);
+      @include min-width($mixin-middle-width) {
+        padding: 0.5rem 0.75rem;
         font-size: 1.25rem;
-        text-align: center;
-        @include transition(background-color, 0.2s, linear);
+      }
 
-        @include min-width($mixin-middle-width) {
-          padding: 0.5rem 0.75rem;
-        }
+      &:hover {
+        background-color: map-get($colors, salmon);
+        color: lighten(map-get($colors, main), 10%);
+      }
 
-        &:hover {
-          background-color: map-get($colors, salmon);
-          color: lighten(map-get($colors, main), 10%);
-        }
+      &.active {
+        background-color: darken(map-get($colors, highlight-font), 3%) !important;
+        color: lighten(map-get($colors, main), 10%) !important;
+        pointer-events: none;
+      }
 
-        &.active {
-          background-color: darken(map-get($colors, highlight-font), 3%) !important;
-          color: lighten(map-get($colors, main), 10%) !important;
-        }
-
-        &.disabled {
-          background-color: map-get($colors, font) !important;
-          color: map-get($colors, light-font) !important;
-        }
+      &.disabled {
+        background-color: map-get($colors, font) !important;
+        color: map-get($colors, light-font) !important;
+        pointer-events: none;
       }
     }
   }
