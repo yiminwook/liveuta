@@ -22,9 +22,19 @@
   }
 
   & > button {
-    position: fixed;
-    bottom: calc(env(safe-area-inset-bottom) + 2.5rem);
-    transform: translateY(50%);
-    font-size: 1.5rem;
+    position: absolute;
+    top: 0.7rem;
+    right: 0.5rem;
+    font-size: 1.1rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+    color: map-get($colors, light-font);
+    background-color: darken(map-get($colors, main), 3%);
+    border: 2px solid map-get($colors, light-font);
+    @include transition(background-color, 80ms, $bezier-curve);
+
+    &:hover {
+      background-color: darken(map-get($colors, main), 10%);
+    }
   }
 }

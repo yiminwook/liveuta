@@ -11,7 +11,7 @@ const Iframe = ({ url }: IframeProps) => {
       <div>
         <iframe id="liveuta-iframe" src={url} scrolling="no" allow="clipboard-write;" />
       </div>
-      <button onClick={() => openWindow(url)}>새 탭에서 열기</button>
+      <button onClick={() => openWindow(url)}>+ 새로 열기</button>
     </section>
   );
 };
