@@ -49,7 +49,8 @@ ContentsDataTypes: {
 "react": "^18.2.0",
 "next": "^13.4.1",
 "axios": "^1.3.4",
-"swr": "^2.1.3"
+"swr": "^2.1.3",
+"googleapis": "^112.0.0",
 "react-toastify": "^9.1.2",
 "next-sitemap": "^4.0.9",
 "react-icons": "^4.8.0",
