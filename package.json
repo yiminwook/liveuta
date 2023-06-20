@@ -10,7 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "add": "^2.0.6",
     "axios": "^1.3.4",
     "googleapis": "^112.0.0",
     "jsonwebtoken": "^9.0.0",
@@ -20,8 +19,7 @@
     "react-icons": "^4.8.0",
     "react-toastify": "^9.1.2",
     "sharp": "^0.31.3",
-    "swr": "^2.1.3",
-    "yarn": "^1.22.19"
+    "swr": "^2.1.3"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.2",

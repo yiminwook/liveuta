@@ -1,6 +1,63 @@
-<h2>node v18.13.0</h2>
+## node v18.13.0
 
-<h2>.env</h2>
+## API docs
+
+1. /search?query={채널명}
+
+```
+  return {
+   contents: ContentsDataType[];
+   channels: ContentsDataType[];
+  }
+```
+
+2. /sheet
+
+```
+  return {
+    scheduled: ContentsDataTypes;
+    live: ContentsDataTypes;
+    daily: ContentsDataTypes;
+    all: ContentsDataTypes;
+  }
+```
+
+## Types
+
+```
+ContentsDataType: {
+  title: string;
+  url: string;
+  channelName: string;
+  videoId: string;
+  timestamp: number;
+  thumbnailURL?: string;
+  isStream: isStream;
+  korTime: string;
+  interval: string;
+}
+
+ContentsDataTypes: {
+  total: number;
+  contents: ContentsDataType[];
+}
+```
+
+## Packages
+
+```
+"react": "^18.2.0",
+"next": "^13.4.1",
+"axios": "^1.3.4",
+"swr": "^2.1.3"
+"react-toastify": "^9.1.2",
+"next-sitemap": "^4.0.9",
+"react-icons": "^4.8.0",
+"sass": "^1.59.2",
+"typescript": "4.9.5"
+```
+
+## Environments
 
 ```
 NEXT_PUBLIC_SITE_URL=
