@@ -1,8 +1,8 @@
 ## node v18.13.0
 
-## API docs
+## Server API docs
 
-1. /search?query={채널명}
+1. GET /api/search?query={채널명}
 
 ```
   return {
@@ -11,7 +11,7 @@
   }
 ```
 
-2. /sheet
+2. GET /api/sheet
 
 ```
   return {
