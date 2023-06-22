@@ -13,7 +13,6 @@
     "axios": "^1.3.4",
     "dayjs": "^1.11.8",
     "googleapis": "^112.0.0",
-    "jsonwebtoken": "^9.0.0",
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

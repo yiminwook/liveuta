@@ -2,7 +2,7 @@ import { google } from 'googleapis';
 import { OAuth2Client } from 'google-auth-library';
 import type { NextApiRequest } from 'next';
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import { serverEnvConfig } from '@/configs';
 
 const { GOOGLE_API_KEY } = serverEnvConfig();
@@ -36,11 +36,11 @@ interface tokenAPIResponseType {
 export const getAccesTokenByRefeshToken = async (req: NextApiRequest) => {
   const { refreshCookie } = req.cookies;
   if (!refreshCookie) throw new Error('Fail to get RefreshCookie');
-  const decodeRefreshToken = jwt.verify(refreshCookie, 'REFRESH_SECRET');
+  // const decodeRefreshToken = jwt.verify(refreshCookie, 'REFRESH_SECRET');
   const response = await axios.post<tokenAPIResponseType>('https://www.googleapis.com/oauth2/v4/token', {
     client_id: 'GOOGLE_CLIENT_ID',
     client_secret: 'GOOGLE_SECRET_KEY',
-    refresh_token: decodeRefreshToken,
+    // refresh_token: decodeRefreshToken,
     grant_type: 'refresh_token',
   });
 

@@ -1,5 +1,5 @@
 import { GoogleClient } from '@/temp/auth/googClient';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 /** GET: 쿠키 저장 */
@@ -12,15 +12,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const accessToken = token.tokens.access_token;
     const refreshToken = token.tokens.refresh_token;
     if (!(accessToken && refreshToken)) throw new Error('Fail to get Tokens');
-    const encodeAccessToken = jwt.sign(accessToken, 'ACCESS_SECRET');
-    const encodeRefreshToken = jwt.sign(refreshToken, 'REFRESH_SECRET');
+    // const encodeAccessToken = jwt.sign(accessToken, 'ACCESS_SECRET');
+    // const encodeRefreshToken = jwt.sign(refreshToken, 'REFRESH_SECRET');
     // const expiresIn = 30 * 24 * 60 * 60 * 1000;
     res.setHeader('location', '/');
     res.setHeader('Set-Cookie', [
-      `accessCookie=${encodeAccessToken};` +
-        // `Max-Age=${expiresIn};Expires=${expiresIn};` +
-        `Path=/;HttpOnly;Secure;SameSite=strict;`,
-      `refreshCookie=${encodeRefreshToken};` + `Path=/;HttpOnly;Secure;SameSite=strict;`,
+      // `accessCookie=${encodeAccessToken};` +
+      // `Max-Age=${expiresIn};Expires=${expiresIn};` +
+      `Path=/;HttpOnly;Secure;SameSite=strict;`,
+      // `refreshCookie=${encodeRefreshToken};` + `Path=/;HttpOnly;Secure;SameSite=strict;`,
     ]);
     res.statusCode = 308;
     res.end();

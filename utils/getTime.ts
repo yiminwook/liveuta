@@ -1,8 +1,6 @@
 import { serverEnvConfig } from '@/configs';
 import dayjs from '@/models/dayjs';
 
-const { LOCAL_TIME } = serverEnvConfig();
-
 export const getInterval = (scheduledTimeStamp: number): string => {
   const nowTimeStamp = dayjs().valueOf();
 
