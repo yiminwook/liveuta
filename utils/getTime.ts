@@ -1,9 +1,7 @@
-import { serverEnvConfig } from '@/configs';
-
-const { LOCAL_TIME } = serverEnvConfig();
+import dayjs from '@/models/dayjs';
 
 export const getInterval = (scheduledTimeStamp: number): string => {
-  const nowTimeStamp = getNow(true);
+  const nowTimeStamp = dayjs().valueOf();
 
   /** 분 */
   const interval = Math.trunc((scheduledTimeStamp - nowTimeStamp) / (1000 * 60));
@@ -22,37 +20,14 @@ export const getInterval = (scheduledTimeStamp: number): string => {
   return '';
 };
 
-const now = new Date();
-
-/** 유닉스 시간을 반환
- *
- *  서버에서 사용
- *
- *  Localtime default utc+9
- */
-export const getNow = (isLocalTime: boolean) => {
-  if (isLocalTime) {
-    //vercel 배포시
-    return now.getTime() + +(LOCAL_TIME ?? 32400000);
-  } else {
-    return now.getTime();
-  }
-};
-
 /**
  * ISO 8601 -
  * EX: "2016-03-29T06:54:53Z"
  */
 export const stringToTime = (stringTime: string) => {
-  const time = new Date(stringTime);
-  const timestamp = time.getTime();
-  const korTime = time.toLocaleString('ko-kr', {
-    // year: "numeric",
-    month: 'short',
-    day: 'numeric',
-    weekday: 'short',
-    hour: 'numeric',
-    minute: 'numeric',
-  });
+  const time = dayjs(stringTime);
+  const timestamp = time.valueOf();
+  const korTime = time.format('M월 DD일 (ddd) A hh:mm');
+
   return { timestamp, korTime };
 };
