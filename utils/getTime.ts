@@ -1,4 +1,3 @@
-import { serverEnvConfig } from '@/configs';
 import dayjs from '@/models/dayjs';
 
 export const getInterval = (scheduledTimeStamp: number): string => {
@@ -28,7 +27,7 @@ export const getInterval = (scheduledTimeStamp: number): string => {
 export const stringToTime = (stringTime: string) => {
   const time = dayjs(stringTime);
   const timestamp = time.valueOf();
-  const korTime = time.format('M월 DD일 (ddd) Ahh:mm');
+  const korTime = time.format('M월 DD일 (ddd) A hh:mm');
 
   return { timestamp, korTime };
 };
