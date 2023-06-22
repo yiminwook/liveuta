@@ -2,8 +2,7 @@ import { ContentsRowType, ContentsDataType, SheetAPIReturntype } from '@/types/i
 import { sheets_v4 } from 'googleapis';
 import { getInterval, stringToTime } from '@/utils/getTime';
 import { serverEnvConfig } from '@/configs';
-
-const { LOCAL_TIME } = serverEnvConfig();
+import dayjs from '@/models/dayjs';
 
 export const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {
   const [title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream]: ContentsRowType = value;
@@ -82,7 +81,7 @@ export const parseAllData = (data: sheets_v4.Schema$ValueRange): ParseAllDataRet
 
   const daily: SheetAPIReturntype['daily']['contents'] = [];
   const all: SheetAPIReturntype['all']['contents'] = [];
-  const yesterday = Date.now() - 24 * 60 * 60 * 1000 + +LOCAL_TIME;
+  const yesterday = dayjs().subtract(1, 'day').valueOf();
 
   dataValue.forEach((value) => {
     const isHide = value[5];
