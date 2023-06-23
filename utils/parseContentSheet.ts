@@ -4,31 +4,35 @@ import { getInterval, stringToTime } from '@/utils/getTime';
 import dayjs from '@/models/dayjs';
 
 export const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {
-  const [title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream]: ContentsRowType = value;
-  if (scheduledTime.length >= 18) {
-    const { timestamp, korTime } = stringToTime(scheduledTime);
-    const interval = getInterval(timestamp);
-    const replacedThumbnailURL = thumbnailURL.replace(
-      /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
-      'mqdefault',
-    );
-    let replacedTitle = title.replace(/\【(.*?)\】|\〖(.*?)\〗|\[(.*?)\]|\((.*?)\)/gi, '');
-    // if (replacedTitle.length > 40) {
-    //   replacedTitle = replacedTitle.substring(0, 40) + "...";
-    // }
-    const videoId = url.replace('https://www.youtube.com/watch?v=', '');
-    const data: ContentsDataType = {
-      title: replacedTitle,
-      url,
-      channelName,
-      videoId,
-      timestamp,
-      thumbnailURL: replacedThumbnailURL,
-      korTime,
-      isStream,
-      interval,
-    };
-    return data;
+  try {
+    const [title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream]: ContentsRowType = value;
+    if (scheduledTime.length >= 18) {
+      const { timestamp, korTime } = stringToTime(scheduledTime);
+      const interval = getInterval(timestamp);
+      const replacedThumbnailURL = thumbnailURL.replace(
+        /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
+        'mqdefault',
+      );
+      let replacedTitle = title.replace(/\【(.*?)\】|\〖(.*?)\〗|\[(.*?)\]|\((.*?)\)/gi, '');
+      // if (replacedTitle.length > 40) {
+      //   replacedTitle = replacedTitle.substring(0, 40) + "...";
+      // }
+      const videoId = url.replace('https://www.youtube.com/watch?v=', '');
+      const data: ContentsDataType = {
+        title: replacedTitle,
+        url,
+        channelName,
+        videoId,
+        timestamp,
+        thumbnailURL: replacedThumbnailURL,
+        korTime,
+        isStream,
+        interval,
+      };
+      return data;
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
 
