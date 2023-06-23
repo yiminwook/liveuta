@@ -5,9 +5,8 @@ import dayjs from '@/models/dayjs';
 
 export const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {
   const [title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream]: ContentsRowType = value;
-  const stringTime = scheduledTime.replace(' ', 'T').split(' JST')[0].substring(0, 19);
-  if (stringTime.length === 19) {
-    const { timestamp, korTime } = stringToTime(stringTime);
+  if (scheduledTime.length >= 18) {
+    const { timestamp, korTime } = stringToTime(scheduledTime);
     const interval = getInterval(timestamp);
     const replacedThumbnailURL = thumbnailURL.replace(
       /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
