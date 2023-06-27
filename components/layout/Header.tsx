@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import Sidebar from '@/components/layout/Sidebar';
-import { RxHamburgerMenu } from 'react-icons/rx';
+import { RxColumnSpacing, RxHamburgerMenu } from 'react-icons/rx';
 import { BiSearchAlt } from 'react-icons/bi';
 import header from '@/styles/layout/Header.module.scss';
 import { useRouter } from 'next/router';
@@ -16,15 +16,17 @@ const Header = () => {
     setShowSidebar((pre) => !pre);
   };
 
-  const handleScroll = useCallback(() => {
-    const current = gnbRef.current;
-    if (current) {
-      if (window.scrollY > 0) {
-        current.style.opacity = '0';
-      } else {
-        current.style.opacity = '1';
-      }
-    }
+  const handleScroll = useMemo(() => {
+    let timer: NodeJS.Timeout | null = null;
+    return () => {
+      if (timer) return;
+      timer = setTimeout(() => {
+        timer = null;
+        const current = gnbRef.current;
+        if (!current) return;
+        window.scrollY > 0 ? (current.style.opacity = '0') : (current.style.opacity = '1');
+      }, 300);
+    };
   }, []);
 
   useEffect(() => {

@@ -25,6 +25,7 @@ export const getYoutubeChannels = async (idArr: string[]) => {
   return response.data;
 };
 
+// 맞춤채널 url로 검색
 export const searchYoutubeChannels = async (channelName: string) => {
   const response = await youtubeService.search.list({
     part: ['id', 'snippet', 'statistics'],
