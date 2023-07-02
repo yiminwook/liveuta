@@ -17,20 +17,28 @@ export const combineChannelData = async (sheetData: ChannelSheetDataType): Promi
   const youtubeData = await getYoutubeChannels(idArr);
   if (!youtubeData.items) throw new Error('No YoutubeData Items');
 
-  const combinedSearchData: Record<string, youtube_v3.Schema$Channel & ChannelSheetDataType[string]> = {};
+  const combinedSearchData: (youtube_v3.Schema$Channel & ChannelSheetDataType[string])[] = [];
+
   youtubeData.items.forEach((data) => {
     const id = data.id;
     if (!(id && sheetData[id])) return;
     const { uid, channelName, url } = sheetData[id];
-    combinedSearchData[uid] = {
+
+    combinedSearchData.push({
       ...data,
       uid,
       channelName,
       url,
-    };
+    });
   });
 
-  const combinedSheetDataValues = [...Object.values(combinedSearchData)] as ChannelsDataType[];
+  const combinedSheetDataValues = combinedSearchData.sort((a, b) => {
+    const A = a.channelName;
+    const B = b.channelName;
+    if (A < B) return -1;
+    if (A > B) return 1;
+    else return 0;
+  }) as ChannelsDataType[];
 
   return combinedSheetDataValues;
 };
