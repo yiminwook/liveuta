@@ -2,7 +2,7 @@
 import { useRef, useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import Sidebar from '@/components/layout/Sidebar';
-import { RxColumnSpacing, RxHamburgerMenu } from 'react-icons/rx';
+import { RxHamburgerMenu } from 'react-icons/rx';
 import { BiSearchAlt } from 'react-icons/bi';
 import header from '@/styles/layout/Header.module.scss';
 import { useRouter } from 'next/router';
