@@ -33,10 +33,10 @@ const HomePage: NextPage<HomePageProps> = ({ filter = 'scheduled' }) => {
   }
 
   return (
-    <section className={home['main']}>
+    <>
       <NavSection total={total} />
       <YoutubeSection contents={contents} />
-    </section>
+    </>
   );
 };
 

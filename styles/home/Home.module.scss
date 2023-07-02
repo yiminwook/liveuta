@@ -2,77 +2,67 @@
 @import 'mixin';
 @import 'placeholder';
 
-.main {
-  @extend %home-main;
+.nav-section {
+  display: flex;
+  justify-content: space-between;
+  color: map-get($colors, salmon);
+  font-size: 1rem;
+  font-weight: 500;
   padding: 0.5rem;
-
-  @include min-width(map-get($points, sm)) {
-    gap: 0.6rem;
-  }
 
   @include min-width(map-get($points, md)) {
     padding: 1rem;
-    gap: 0.8rem;
   }
 
-  .nav-section {
+  .nav-tab {
     display: flex;
-    justify-content: space-between;
-    color: map-get($colors, salmon);
-    font-size: 1rem;
-    font-weight: 500;
+    justify-content: space-around;
+    width: 13rem;
+    overflow: hidden;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    border: none;
+    border-radius: 5px;
+    @include box-shadow();
 
-    .nav-tab {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      width: 13rem;
-      overflow: hidden;
-      font-family: inherit;
-      font-size: inherit;
-      font-weight: inherit;
-      border: none;
-      border-radius: 5px;
-      background-color: lighten(map-get($colors, main), 10%);
-      @include box-shadow();
+    li {
+      width: 100%;
 
-      li {
+      a {
+        background-color: lighten(map-get($colors, main), 10%);
+
         width: 100%;
+        line-height: 2.4rem;
+        text-align: center;
+        @include transition(background-color, 0.2s, linear);
 
-        a {
-          &:focus-visible {
-            outline-offset: -4px;
-          }
+        &:hover {
+          background-color: map-get($colors, salmon);
+          color: lighten(map-get($colors, main), 10%);
+        }
 
-          button {
-            width: 100%;
-            height: 2.4rem;
-            text-align: center;
-            @include transition(background-color, 0.2s, linear);
+        &.active {
+          background-color: darken(map-get($colors, highlight-font), 3%);
+          color: lighten(map-get($colors, main), 10%);
+        }
 
-            &:hover {
-              background-color: map-get($colors, salmon);
-              color: lighten(map-get($colors, main), 10%);
-            }
-
-            &.active {
-              background-color: darken(map-get($colors, highlight-font), 3%);
-              color: lighten(map-get($colors, main), 10%);
-            }
-          }
+        &:focus-visible {
+          outline-offset: -4px;
         }
       }
     }
-
-    .total {
-      padding: 0.4rem;
-      background-color: lighten(map-get($colors, main), 10%);
-      border-radius: 5px;
-      @include box-shadow();
-    }
   }
 
-  .contents-section {
-    @extend %home-contents-section;
+  .total {
+    line-height: 2.4rem;
+    padding: 0 0.4rem;
+    background-color: lighten(map-get($colors, main), 10%);
+    border-radius: 5px;
+    @include box-shadow();
   }
+}
+
+.contents-section {
+  @extend %home-contents-section;
 }
