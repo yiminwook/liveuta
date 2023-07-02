@@ -9,6 +9,8 @@
   @include box-shadow();
 
   @include min-width(map-get($points, sm)) {
+    width: 12rem;
+    margin: 0 auto;
     @include transition(all, 150ms, $bezier-curve);
 
     &:hover {
@@ -17,7 +19,7 @@
   }
 
   @include min-width(map-get($points, md)) {
-    transform: scale(1.1);
+    transform: scale(1.2);
 
     &:hover {
       transform: scale(1.12);
@@ -25,10 +27,10 @@
   }
 
   @include min-width(map-get($points, lg)) {
-    transform: scale(1.2);
+    transform: scale(1.3);
 
     &:hover {
-      transform: scale(1.22);
+      transform: scale(1.33);
     }
   }
 
@@ -42,6 +44,7 @@
 
   .content {
     display: flex;
+    margin: 0 auto;
     gap: 0.8rem;
 
     @include min-width(map-get($points, sm)) {

@@ -3,11 +3,14 @@
 @import 'placeholder';
 
 %section-layout {
-  margin: auto;
-  padding: 0.5rem;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+
+  @include min-width(map-get($points, sm)) {
+    width: auto;
+  }
 }
 
 %section-header {
@@ -22,129 +25,128 @@
   }
 }
 
-.main {
-  @extend %home-main;
-  gap: 2rem;
+.search-section {
+  background-color: map-get($colors, bg);
 
-  .search-section {
-    background-color: map-get($colors, bg);
+  & > div:nth-child(1) {
+    margin: 0 auto;
+    width: 80%;
+    position: relative;
+    padding: 3rem 0;
 
-    & > div:nth-child(1) {
-      margin: 0 auto;
-      width: 80%;
+    form {
       position: relative;
-      padding: 3rem 0;
 
-      form {
-        position: relative;
+      label:nth-of-type(1) {
+        display: none;
+      }
 
-        label:nth-of-type(1) {
+      input {
+        padding: 1rem 1.5rem;
+        width: 100%;
+        border-radius: 30px;
+        border: none;
+        @include box-shadow();
+
+        &:focus {
+          outline: none;
+        }
+
+        &::placeholder {
+          font-family: inherit;
+          font-size: 1.25rem;
           display: none;
         }
-
-        input {
-          padding: 1rem 1.5rem;
-          width: 100%;
-          border-radius: 30px;
-          border: none;
-          @include box-shadow();
-
-          &:focus {
-            outline: none;
-          }
-
-          &::placeholder {
-            font-family: inherit;
-            font-size: 1.25rem;
-            display: none;
-          }
-        }
-
-        label:nth-of-type(2) {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          right: 4.5rem;
-          display: flex;
-          border-radius: 100%;
-          &:hover {
-            background-color: rgba(0, 0, 0, 0.2);
-          }
-        }
-
-        button[type='submit'] {
-          position: absolute;
-          right: 1.5rem;
-          top: 50%;
-          transform: translateY(-50%);
-          display: flex;
-          padding: 0.5rem;
-          border-radius: 100%;
-          background-color: map-get($colors, salmon);
-          color: map-get($colors, light-font);
-          @include transition(background-color, 80ms, $bezier-curve);
-          @include box-shadow();
-
-          &:hover {
-            background-color: map-get($colors, hover-salmon);
-          }
-        }
       }
 
-      p {
+      label:nth-of-type(2) {
         position: absolute;
-        left: 50%;
-        bottom: 0rem;
-        transform: translateX(-50%) translateY(-50%);
-        color: #b10a0a;
-        @include text-line(1, 1.2rem);
+        top: 50%;
+        transform: translateY(-50%);
+        right: 4.5rem;
+        display: flex;
+        border-radius: 100%;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.2);
+        }
+      }
 
-        &:before {
-          content: '* ';
+      button[type='submit'] {
+        position: absolute;
+        right: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        padding: 0.5rem;
+        border-radius: 100%;
+        background-color: map-get($colors, salmon);
+        color: map-get($colors, light-font);
+        @include transition(background-color, 80ms, $bezier-curve);
+        @include box-shadow();
+
+        &:hover {
+          background-color: map-get($colors, hover-salmon);
         }
       }
     }
-  }
 
-  .result {
-    & > div {
-      width: 75%;
-      margin: auto;
-      padding: 2rem 1rem;
-      background-color: map-get($colors, card-bg);
-      border-radius: 10px;
-      @include box-shadow();
+    p {
+      position: absolute;
+      left: 50%;
+      bottom: 0rem;
+      transform: translateX(-50%) translateY(-50%);
+      color: #b10a0a;
+      @include text-line(1, 1.2rem);
 
-      p {
-        text-align: center;
-        font-size: 1.25rem;
-        font-weight: 500;
-        @include text-line(1, 1.5rem);
+      &:before {
+        content: '* ';
       }
     }
   }
+}
 
-  .content-section {
-    @extend %section-layout;
+.result {
+  padding: 0.5rem;
 
-    & > div {
-      @extend %section-header;
-    }
+  & > div {
+    width: 75%;
+    margin: auto;
+    padding: 2rem 1rem;
+    background-color: rgba(map-get($colors, card-bg), 75%);
+    border-radius: 10px;
+    @include box-shadow();
 
-    section {
-      @extend %home-contents-section;
+    p {
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 500;
+      @include text-line(1, 1.5rem);
     }
   }
+}
 
-  .channel-section {
-    @extend %section-layout;
+.content-section {
+  @extend %section-layout;
 
-    & > div {
-      @extend %section-header;
-    }
+  & > div {
+    @extend %section-header;
+  }
 
-    section {
-      @extend %channels-channel-section;
-    }
+  section {
+    @extend %home-contents-section;
+    margin: 1.5rem 0;
+  }
+}
+
+.channel-section {
+  @extend %section-layout;
+
+  & > div {
+    @extend %section-header;
+  }
+
+  section {
+    @extend %channels-channel-section;
+    margin: 1.5rem 0;
   }
 }

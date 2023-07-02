@@ -2,19 +2,6 @@
 @import 'mixin';
 @import 'placeholder';
 
-.main {
-  padding: 0.5rem;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-
-  @include min-width(map-get($points, md)) {
-    padding: 1rem;
-    width: 90%;
-  }
-
-  .channel-section {
-    @extend %channels-channel-section;
-  }
+.channel-section {
+  @extend %channels-channel-section;
 }

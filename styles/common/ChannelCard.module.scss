@@ -11,6 +11,11 @@
   cursor: pointer;
   @include transition(scale, 0.2s, linear);
 
+  @include min-width(950px) {
+    width: 17rem;
+    margin: 0 auto;
+  }
+
   &:hover {
     transform: scale(1.02);
   }

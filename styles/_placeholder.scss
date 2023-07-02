@@ -22,12 +22,21 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  @include min-width(map-get($points, sm)) {
+    gap: 0.6rem;
+  }
+
+  @include min-width(map-get($points, md)) {
+    gap: 0.8rem;
+  }
 }
 
 %home-contents-section {
   //sm point보다 작을때 화면에 꽉차도록 100%
-  width: 100%;
-  margin: auto;
+  padding: 0 0.5rem;
+  width: calc(100% - 1rem);
+  margin: 0 auto;
   display: grid;
   row-gap: 0.5rem;
 
@@ -35,26 +44,22 @@
     width: auto;
     grid-template-columns: repeat(3, 1fr);
     column-gap: 0.4rem;
-    row-gap: 1.2rem;
+    row-gap: 0.8rem;
   }
 
   @include min-width(map-get($points, md)) {
-    column-gap: 2rem;
-    row-gap: 2.5rem;
+    column-gap: 3rem;
+    row-gap: 3.5rem;
     padding: 1rem;
   }
 
   @include min-width(map-get($points, lg)) {
-    column-gap: 3.25rem;
-    row-gap: 4rem;
-    padding: 1.5rem;
+    column-gap: 4.5rem;
+    row-gap: 5rem;
   }
 
   @include min-width(map-get($points, 2xl)) {
     grid-template-columns: repeat(4, 1fr);
-    column-gap: 3.5rem;
-    row-gap: 4.25rem;
-    padding: 2rem;
   }
 
   @include min-width(map-get($points, full)) {
@@ -63,14 +68,20 @@
 }
 
 %channels-channel-section {
+  width: calc(100% - 1rem);
+  padding: 0.5rem;
   display: grid;
   gap: 0.75rem;
 
-  @include min-width($mixin-middle-width) {
+  @include min-width(map-get($points, sm)) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include min-width($mixin-xl-width) {
+  @include min-width(950px) {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include min-width(map-get($points, 2xl)) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
