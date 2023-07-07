@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { ContentsDataType } from '@/types/inSheet';
 import home from '@/components/home/Home.module.scss';
 import ScheduleCard from '@/components/common/scheduleCard/ScheduleCard';

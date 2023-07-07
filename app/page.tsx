@@ -21,7 +21,6 @@ const HomePage = () => {
 
   useEffect(() => {
     setData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, data]);
 
   return (
