@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
+'use client';
 import { ReactNode } from 'react';
 import Header from '@/components/layout/Header';
-import { TfiArrowCircleUp } from 'react-icons/tfi';
 import Footer from '@/components/layout/Footer';
-import PageHead from '@/components/layout/PageHead';
-import Analytics from '@/components/layout/Analytics';
+import FloatButton from '@/components/common/FlotButton';
+import { ToastContainer } from 'react-toastify';
 
 interface ServiceLayoutProps {
   title?: string;
@@ -13,23 +13,13 @@ interface ServiceLayoutProps {
 }
 
 const ServiceLayout = ({ title = 'Live Uta', children }: ServiceLayoutProps) => {
-  const scrollUp = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <>
-      {/* meta tags */}
-      <PageHead />
       <Header />
       <main className="app">{children}</main>
       <Footer />
-      <button className="foat" onClick={scrollUp} onTouchEnd={scrollUp} onTouchStart={scrollUp}>
-        <TfiArrowCircleUp size={'3rem'} color={'inherit'} />
-      </button>
-
-      {/* Google Analytics */}
-      <Analytics />
+      <FloatButton />
+      <ToastContainer position="bottom-center" autoClose={1000} />
     </>
   );
 };

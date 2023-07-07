@@ -1,17 +1,22 @@
-import iframe from '@/styles/common/iframe.module.scss';
+'use client';
+import iframe from '@/components/common/iframe.module.scss';
 import { openWindow } from '@/utils/windowEvent';
 
-export interface IframeProps {
+interface IframeProps {
   url: string;
 }
 
 const Iframe = ({ url }: IframeProps) => {
+  const onClick = () => {
+    openWindow(url);
+  };
+
   return (
     <section className={iframe['iframe']}>
       <div>
         <iframe id="liveuta-iframe" src={url} scrolling="no" allow="clipboard-write;" />
       </div>
-      <button onClick={() => openWindow(url)}>+ 새로 열기</button>
+      <button onClick={onClick}>+ 새로 열기</button>
     </section>
   );
 };

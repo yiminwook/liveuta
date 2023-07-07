@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { ChangeEvent, Dispatch, SetStateAction, useCallback, useState } from 'react';
 
 type UseInputReturnType = [

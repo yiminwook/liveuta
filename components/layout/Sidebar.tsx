@@ -1,5 +1,5 @@
 import { FaWindowClose } from 'react-icons/fa';
-import sidebar from '@/styles/layout/Sidebar.module.scss';
+import sidebar from '@/components/layout/Sidebar.module.scss';
 import { MouseEvent } from 'react';
 import useStopPropagation from '@/hooks/useStopPropagation';
 import NavLink from '@/components/common/NavLink';

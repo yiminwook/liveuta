@@ -1,28 +1,10 @@
-import { ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
-import { ChannelsDataType } from '@/types/inYoutube';
+import { ITEMS_PER_PAGE } from '@/consts';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
 import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
-import { GetStaticProps } from 'next';
 import ChannelSection from '@/components/channels/ChannelSection';
 import Pagination from '@/components/common/pagination/Pagination';
 
-export interface ChannelsPageProps {
-  totalLength: number;
-  contents: ChannelsDataType[];
-}
-
-const ChannelsPage = ({ contents, totalLength }: ChannelsPageProps) => {
-  return (
-    <>
-      <ChannelSection contents={contents} />
-      <Pagination totalLength={totalLength} />
-    </>
-  );
-};
-
-export default ChannelsPage;
-
-export const getStaticProps: GetStaticProps<ChannelsPageProps> = async ({}) => {
+const getChannelData = async () => {
   /* Google spread sheet API */
   const { totalLength, sheetDataValues } = await parseChannelIDSheet();
   const sliceData = sheetDataValues.slice(0, ITEMS_PER_PAGE);
@@ -38,10 +20,20 @@ export const getStaticProps: GetStaticProps<ChannelsPageProps> = async ({}) => {
   const combinedSearchDataValues = await combineChannelData(channelSheetData);
 
   return {
-    props: {
-      totalLength,
-      contents: combinedSearchDataValues,
-    },
-    revalidate: PAGE_REVALIDATE_TIME,
+    totalLength,
+    contents: combinedSearchDataValues,
   };
 };
+
+const ChannelsPage = async () => {
+  const { totalLength, contents } = await getChannelData();
+
+  return (
+    <>
+      <ChannelSection contents={contents} />
+      <Pagination totalLength={totalLength} />
+    </>
+  );
+};
+
+export default ChannelsPage;

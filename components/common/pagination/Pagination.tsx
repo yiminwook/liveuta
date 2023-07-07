@@ -1,5 +1,6 @@
+'use client';
 import { useMemo } from 'react';
-import pagination from '@/styles/common/Pagination.module.scss';
+import pagination from '@/components/common/pagination/Pagination.module.scss';
 import {
   AfterLink,
   BeforeLink,
@@ -8,20 +9,18 @@ import {
   PaginationItem,
 } from '@/components/common/pagination/PaginationChild';
 import { ITEMS_PER_PAGE, PAGINATION_RANGE } from '@/consts';
-import { useRouter } from 'next/router';
+import { useParams } from 'next/navigation';
 
 interface PaginationProps {
   totalLength: number;
 }
 
 const Pagination = ({ totalLength }: PaginationProps) => {
-  const {
-    query: { page },
-  } = useRouter();
+  const params = useParams();
 
   const currentPage = useMemo(() => {
-    return Number(page?.toString()) || 1;
-  }, [page]);
+    return Number(params?.page) || 1;
+  }, []);
 
   const totalPage = useMemo(() => {
     return Math.ceil(totalLength / ITEMS_PER_PAGE);

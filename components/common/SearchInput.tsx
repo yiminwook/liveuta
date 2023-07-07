@@ -1,6 +1,6 @@
 import { ChangeEvent, CSSProperties, FormEvent, RefObject, useState } from 'react';
 
-interface SearchProps {
+interface SearchInputProps {
   ref?: RefObject<HTMLInputElement>;
   style?: CSSProperties;
   placeHolder?: string;
@@ -8,7 +8,7 @@ interface SearchProps {
   onSearch: (value: string) => void;
 }
 
-const Search = ({ ref, style, placeHolder = '', disabled = false, onSearch }: SearchProps) => {
+const SearchInput = ({ ref, style, placeHolder = '', disabled = false, onSearch }: SearchInputProps) => {
   const [value, setValue] = useState('');
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,4 +39,4 @@ const Search = ({ ref, style, placeHolder = '', disabled = false, onSearch }: Se
   );
 };
 
-export default Search;
+export default SearchInput;

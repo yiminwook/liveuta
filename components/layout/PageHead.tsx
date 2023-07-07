@@ -1,7 +1,6 @@
+'use client';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import Analytics from '@/components/layout/Analytics';
-
+import { usePathname } from 'next/navigation';
 const DEFAULT_TITLE = 'Live Uta';
 const DEFAULT_DESC = 'Show V-Tuber Utawaku schedule';
 const DEFAULT_IMAGE = 'meta-image.png';
@@ -17,12 +16,12 @@ const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
   const NEXT_PUBLIC_SITE_URL = process.env['NEXT_PUBLIC_SITE_URL'] || 'http://localhost:3000';
 
   const siteURL = NEXT_PUBLIC_SITE_URL;
-  const { asPath } = useRouter();
+  const pathName = usePathname();
   const pageTitle = title ? `${title} | ${DEFAULT_TITLE}` : DEFAULT_TITLE;
   const pageDesc = description ?? DEFAULT_DESC;
   const pageKeywords = keywords ?? '';
   const pageImage = `${siteURL}/assets/${image ?? DEFAULT_IMAGE}`;
-  const pageURL = `${siteURL}${asPath}`;
+  const pageURL = `${siteURL}${pathName}`;
 
   return (
     <Head>
@@ -66,7 +65,6 @@ const PageHead = ({ title, description, image, keywords }: PagePHeadProps) => {
         rel="icon"
         href="https://img.icons8.com/external-microdots-premium-microdot-graphic/64/null/external-holiday-christmas-new-year-vol2-microdots-premium-microdot-graphic-4.png"
       />
-      <link rel="stylesheet" href={`${siteURL}/reset.css`} />
     </Head>
   );
 };

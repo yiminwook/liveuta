@@ -1,4 +1,4 @@
-import home from '@/styles/home/Home.module.scss';
+import home from '@/components/home/Home.module.scss';
 import NavLink from '@/components/common/NavLink';
 
 interface NavSectionProps {
