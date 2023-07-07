@@ -28,3 +28,4 @@ export default RootLayout;
 /** Default Route Segment Config */
 export const revalidate = PAGE_REVALIDATE_TIME;
 export const dynamicParams = false; //fallback
+export const preferredRegion = ['icn1'];
