@@ -18,7 +18,7 @@ export const getSheet = async ({ spreadsheetId, range }: Omit<SheetConfigType, '
     range,
   };
 
-  const response = await sheetService.spreadsheets.values.get(sheetConfig);
+  const response = await sheetService.spreadsheets.values.get(sheetConfig, { fetchImplementation: fetch });
   const data = response.data;
 
   return data;
