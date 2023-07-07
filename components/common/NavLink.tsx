@@ -1,5 +1,6 @@
+'use client';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { MouseEvent, ReactNode } from 'react';
 
 interface NavLinkProps {
@@ -9,8 +10,8 @@ interface NavLinkProps {
 }
 
 const NavLink = ({ href, children, modifier = '' }: NavLinkProps) => {
-  const router = useRouter();
-  const isActive = router.asPath === href;
+  const pathName = usePathname();
+  const isActive = pathName === href;
 
   const onClick = (e: MouseEvent) => {
     if (isActive) {

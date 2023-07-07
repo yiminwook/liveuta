@@ -21,7 +21,7 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
       </div>
       <div className={scheduleCard['link']}>
         <button onClick={() => openWindow(url)}>새 탭으로 열기</button>
-        <CopyButton value={url} size={'0.8rem'} />
+        <CopyButton value={url} size="0.8rem" />
       </div>
     </div>
   );
