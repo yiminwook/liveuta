@@ -2,12 +2,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ContentsDataType } from '@/types/inSheet';
 import Link from 'next/link';
-import Image from 'next/image';
 import scheduleCard from '@/components/common/scheduleCard/ScheduleCard.module.scss';
-import { openWindow } from '@/utils/windowEvent';
-import CopyButton from '@/components/common/CopyButton';
-import { DEFAULT_BLUR_BASE64 } from '@/consts';
-import altImage from '@/images/thumbnail_alt_img.png';
+import SchduleCardImage from '@/components/common/scheduleCard/ScheduleCardImage';
+import ScheduleCardDesc from '@/components/common/scheduleCard/ScheduleCardDesc';
 
 interface ScheduleCardProps {
   content: ContentsDataType;
@@ -17,18 +14,8 @@ interface ScheduleCardProps {
 }
 
 const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinityScroll }: ScheduleCardProps) => {
-  const { title, url, channelName, videoId, korTime, interval, isStream, thumbnailURL } = content;
-  const [imgLoaded, setImgLoaded] = useState(true);
-  const imgRef = useRef<HTMLImageElement>(null);
+  const { url, videoId, isStream } = content;
   const target = useRef<HTMLDivElement>(null);
-
-  const handleImgValidity = useCallback(() => {
-    const currentImage = imgRef.current;
-    if (!currentImage) return;
-    if (currentImage.naturalHeight === 90) {
-      setImgLoaded(() => false);
-    }
-  }, [imgRef]);
 
   const addStreamModifier = useMemo(() => {
     let streamModifer: string;
@@ -78,37 +65,9 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
     <div className={[scheduleCard['card'], addStreamModifier].join(' ')} key={videoId} ref={target}>
       <div className={scheduleCard['content']}>
         <Link href={url}>
-          <div className={scheduleCard['thumnail']}>
-            {imgLoaded ? (
-              <Image
-                src={thumbnailURL ?? altImage}
-                alt={`${channelName}의 라이브방송`}
-                loading="lazy"
-                ref={imgRef}
-                onLoad={handleImgValidity}
-                onError={() => setImgLoaded(false)}
-                placeholder="blur"
-                blurDataURL={DEFAULT_BLUR_BASE64}
-                unoptimized
-                fill
-              />
-            ) : (
-              <Image src={altImage} alt={`${channelName}의 라이브방송`} placeholder="blur" unoptimized fill />
-            )}
-          </div>
+          <SchduleCardImage content={content} />
         </Link>
-        <div className={scheduleCard['description']}>
-          <div className={[scheduleCard['channel_name'], addStreamModifier].join(' ')}>{channelName}</div>
-          <div className={[scheduleCard['title'], addStreamModifier].join(' ')}>{title}</div>
-          <div className={scheduleCard['time']}>
-            <time className={scheduleCard['kor']}>{korTime}</time>
-            <div className={scheduleCard['status']}>{isStream === 'TRUE' ? 'LIVE!' : interval}</div>
-          </div>
-          <div className={scheduleCard['link']}>
-            <button onClick={() => openWindow(url)}>새 탭으로 열기</button>
-            <CopyButton value={url} size={'0.8rem'} />
-          </div>
-        </div>
+        <ScheduleCardDesc content={content} addStreamModifier={addStreamModifier} />
       </div>
     </div>
   );
