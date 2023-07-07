@@ -1,25 +1,22 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { NextPage } from 'next';
+import { useEffect, useMemo, useState } from 'react';
 import { ContentsDataType, SheetAPIReturntype } from '@/types/inSheet';
 import useSheet from '@/hooks/useSheet';
 import NavSection from '@/components/home/NavSection';
 import ScheduleSection from '@/components/home/ScheduleSection';
 import Loading from '@/components/common/Loading';
+import { usePathname } from 'next/navigation';
 
-export interface HomePageProps {
-  filter?: keyof SheetAPIReturntype;
-}
+const HomePage = () => {
+  const pathName = usePathname()?.replace('/', '') || '';
+  const filter = useMemo(() => (pathName === '' ? 'scheduled' : pathName) as keyof SheetAPIReturntype, [pathName]);
 
-const HomePage: NextPage<HomePageProps> = ({ filter = 'scheduled' }) => {
   const { data, isLoading } = useSheet();
   const [contents, setContents] = useState<ContentsDataType[]>([]);
-  const [total, setTotal] = useState<number>(0);
 
   const setData = () => {
     if (!data) return;
     setContents(() => data[filter].contents);
-    setTotal(() => data[filter].total);
   };
 
   useEffect(() => {
@@ -33,7 +30,7 @@ const HomePage: NextPage<HomePageProps> = ({ filter = 'scheduled' }) => {
         <Loading />
       ) : (
         <>
-          <NavSection total={total} />
+          <NavSection total={contents.length} />
           <ScheduleSection contents={contents} />
         </>
       )}
