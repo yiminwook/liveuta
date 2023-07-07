@@ -1,5 +1,5 @@
 import { PAGINATION_RANGE } from '@/consts';
-import pagination from '@/styles/common/Pagination.module.scss';
+import pagination from '@/components/common/pagination/Pagination.module.scss';
 import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,

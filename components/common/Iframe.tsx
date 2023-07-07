@@ -1,4 +1,4 @@
-import iframe from '@/styles/common/iframe.module.scss';
+import iframe from '@/components/common/iframe.module.scss';
 import { openWindow } from '@/utils/windowEvent';
 
 export interface IframeProps {

@@ -1,6 +1,6 @@
 import { ChannelsDataType } from '@/types/inYoutube';
-import channels from '@/styles/channels/Channels.module.scss';
-import ChannelCard from '@/components/common/ChannelCard';
+import channels from '@/components/channels/Channels.module.scss';
+import ChannelCard from '@/components/common/channelCard/ChannelCard';
 
 interface ChannelSectionProps {
   contents: ChannelsDataType[];

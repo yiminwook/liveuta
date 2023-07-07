@@ -4,7 +4,7 @@ import { ContentsDataType, SheetAPIReturntype } from '@/types/inSheet';
 import useSheet from '@/hooks/useSheet';
 import home from '@/styles/home/Home.module.scss';
 import NavSection from '@/components/home/NavSection';
-import YoutubeSection from '@/components/home/YoutubeSection';
+import ScheduleSection from '@/components/home/ScheduleSection';
 import Loading from '@/components/common/Loading';
 
 export interface HomePageProps {
@@ -35,7 +35,7 @@ const HomePage: NextPage<HomePageProps> = ({ filter = 'scheduled' }) => {
   return (
     <>
       <NavSection total={total} />
-      <YoutubeSection contents={contents} />
+      <ScheduleSection contents={contents} />
     </>
   );
 };

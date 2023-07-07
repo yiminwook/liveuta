@@ -1,6 +1,6 @@
 import { SearchResponseType } from '@/pages/api/search';
-import YoutubeContentCard from '@/components/common/YoutubeContentCard';
-import search from '@/styles/search/Search.module.scss';
+import ScheduleCard from '@/components/common/scheduleCard/ScheduleCard';
+import search from '@/components/search/Search.module.scss';
 
 interface ContentSectionProps {
   contents: SearchResponseType['contents'];
@@ -15,7 +15,7 @@ const ContentSection = ({ contents }: ContentSectionProps) => {
       </div>
       <section>
         {contents.map((content, index) => (
-          <YoutubeContentCard
+          <ScheduleCard
             key={content.videoId}
             content={content}
             currentIndex={index}

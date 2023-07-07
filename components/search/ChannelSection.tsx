@@ -1,6 +1,6 @@
 import { SearchResponseType } from '@/pages/api/search';
-import ChannelCard from '@/components/common/ChannelCard';
-import search from '@/styles/search/Search.module.scss';
+import ChannelCard from '@/components/common/channelCard/ChannelCard';
+import search from '@/components/search/Search.module.scss';
 import { SEARCH_ITEMS_SIZE } from '@/consts';
 
 interface ChannelSectionProps {

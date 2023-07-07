@@ -2,7 +2,7 @@ import Loading from '@/components/common/Loading';
 import ChannelSection from '@/components/search/ChannelSection';
 import ContentSection from '@/components/search/ContentSection';
 import SearchSection from '@/components/search/SearchSection';
-import search from '@/styles/search/Search.module.scss';
+import search from '@/components/search/Search.module.scss';
 import useSearch from '@/hooks/useSearch';
 import { useRouter } from 'next/router';
 

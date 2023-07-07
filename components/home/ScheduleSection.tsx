@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ContentsDataType } from '@/types/inSheet';
-import home from '@/styles/home/Home.module.scss';
-import YoutubeContentCard from '@/components/common/YoutubeContentCard';
+import home from '@/components/home/Home.module.scss';
+import ScheduleCard from '@/components/common/scheduleCard/ScheduleCard';
 import { useEffect, useMemo, useState } from 'react';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/consts';
 
@@ -9,7 +9,7 @@ interface YoutubeSectionProps {
   contents: ContentsDataType[];
 }
 
-const YoutubeSection = ({ contents }: YoutubeSectionProps) => {
+const ScheduleSection = ({ contents }: YoutubeSectionProps) => {
   const [loadContents, setLoadContents] = useState(contents.slice(0, SCROLL_PER_YOUTUBE_CARD));
   const [scrollPage, setScrollPage] = useState(1);
 
@@ -39,7 +39,7 @@ const YoutubeSection = ({ contents }: YoutubeSectionProps) => {
   return (
     <section className={home['contents-section']}>
       {loadContents.map((data, index) => (
-        <YoutubeContentCard
+        <ScheduleCard
           key={data.videoId}
           content={data}
           currentIndex={index}
@@ -51,4 +51,4 @@ const YoutubeSection = ({ contents }: YoutubeSectionProps) => {
   );
 };
 
-export default YoutubeSection;
+export default ScheduleSection;

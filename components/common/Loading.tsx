@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import loading from '@/styles/common/Loading.module.scss';
+import loading from '@/components/common/Loading.module.scss';
 import { AiOutlineLoading } from 'react-icons/ai';
 import loadingImage from '@/public/loading.png';
 

@@ -2,7 +2,7 @@
 import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { BsSearchHeart } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
-import search from '@/styles/search/Search.module.scss';
+import search from '@/components/search/Search.module.scss';
 import useInput from '@/hooks/useInput';
 import { useRouter } from 'next/router';
 

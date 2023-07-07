@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import pagination from '@/styles/common/Pagination.module.scss';
+import pagination from '@/components/common/pagination/Pagination.module.scss';
 import {
   AfterLink,
   BeforeLink,
