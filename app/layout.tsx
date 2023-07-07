@@ -2,6 +2,7 @@ import Analytics from '@/components/layout/Analytics';
 import PageHead from '@/components/layout/PageHead';
 import { PropsWithChildren } from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
+import { PAGE_REVALIDATE_TIME } from '@/consts';
 import '@/styles/reset.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'pretendard/dist/web/variable/pretendardvariable.css';
@@ -23,3 +24,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
 };
 
 export default RootLayout;
+
+/** Default Route Segment Config */
+export const revalidate = PAGE_REVALIDATE_TIME;
+export const dynamicParams = false; //fallback
