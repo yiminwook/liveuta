@@ -1,19 +1,17 @@
+'use client';
 import Loading from '@/components/common/Loading';
 import ChannelSection from '@/components/search/ChannelSection';
 import ContentSection from '@/components/search/ContentSection';
 import SearchSection from '@/components/search/SearchSection';
 import search from '@/components/search/Search.module.scss';
 import useSearch from '@/hooks/useSearch';
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 
 interface SearchPageProps {}
 
 const SearchPage = ({}: SearchPageProps) => {
-  const {
-    query: { query },
-  } = useRouter();
-
-  const nameQuery = query?.toString() ?? '';
+  const searchParams = useSearchParams();
+  const nameQuery = searchParams?.get('query') ?? '';
   const { data = { contents: [], channels: [] }, isLoading } = useSearch(nameQuery);
 
   if (isLoading) {

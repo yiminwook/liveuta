@@ -4,18 +4,16 @@ import { BsSearchHeart } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 import search from '@/components/search/Search.module.scss';
 import useInput from '@/hooks/useInput';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const SearchSection = () => {
   const [inputValue, onChangeValue, resetValue, setInputValue] = useInput('');
   const [showErrMsg, setShowErrMsg] = useState(false);
 
-  const {
-    push,
-    query: { query },
-  } = useRouter();
+  const { push } = useRouter();
+  const searchParams = useSearchParams();
 
-  const nameQuery = query?.toString() ?? '';
+  const nameQuery = searchParams?.get('query') ?? '';
 
   const handleOnSubmit = useCallback(
     async (e: FormEvent) => {
