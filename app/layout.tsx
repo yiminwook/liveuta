@@ -4,6 +4,7 @@ import { PropsWithChildren } from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
 import '@/styles/reset.css';
 import 'react-toastify/dist/ReactToastify.css';
+import 'pretendard/dist/web/variable/pretendardvariable.css';
 import '@/styles/globals.scss';
 
 const RootLayout = ({ children }: PropsWithChildren) => {
