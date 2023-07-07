@@ -1,3 +1,4 @@
+'use client';
 import { ChannelsDataType } from '@/types/inYoutube';
 import Image from 'next/image';
 import channelCard from '@/components/common/channelCard/ChannelCard.module.scss';

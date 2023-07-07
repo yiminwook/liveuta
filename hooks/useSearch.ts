@@ -1,19 +1,29 @@
 import useSWR from 'swr';
 import { fetcher } from '@/hooks/fetcher';
 import { SearchResponseType } from '@/pages/api/search';
+import { useSearchParams } from 'next/navigation';
 
-const useSearch = (nameQuery: string) => {
+export const useSearchQuery = () => {
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams?.get('query') ?? '';
+  return searchQuery;
+};
+
+export const useSearch = () => {
+  const searchQuery = useSearchQuery();
+
   const options = {
     errorRetryCount: 3,
     errorRetryInterval: 3 * 1000,
     dedupingInterval: 10 * 1000,
   };
-  const { data, error, mutate, isLoading } = useSWR<SearchResponseType>(
-    nameQuery ? `/api/search?query=${nameQuery}` : null,
-    fetcher,
-    options,
-  );
+
+  const {
+    data = { contents: [], channels: [] },
+    error,
+    mutate,
+    isLoading,
+  } = useSWR<SearchResponseType>(searchQuery ? `/api/search?query=${searchQuery}` : null, fetcher, options);
+
   return { data, error, mutate, isLoading };
 };
-
-export default useSearch;

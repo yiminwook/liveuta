@@ -3,33 +3,24 @@ import Loading from '@/components/common/Loading';
 import ChannelSection from '@/components/search/ChannelSection';
 import ContentSection from '@/components/search/ContentSection';
 import SearchSection from '@/components/search/SearchSection';
-import search from '@/components/search/Search.module.scss';
-import useSearch from '@/hooks/useSearch';
-import { useSearchParams } from 'next/navigation';
+import SummarySection from '@/components/search/SummarySection';
+import { useSearch } from '@/hooks/useSearch';
 
-interface SearchPageProps {}
-
-const SearchPage = ({}: SearchPageProps) => {
-  const searchParams = useSearchParams();
-  const nameQuery = searchParams?.get('query') ?? '';
-  const { data = { contents: [], channels: [] }, isLoading } = useSearch(nameQuery);
-
-  if (isLoading) {
-    return <Loading />;
-  }
+const SearchPage = () => {
+  const { data, isLoading } = useSearch();
 
   return (
     <>
-      <SearchSection />
-      {nameQuery !== '' ? (
-        <section className={search['result']}>
-          <div>
-            <p>{`"${nameQuery}" 검색결과`}</p>
-          </div>
-        </section>
-      ) : null}
-      <ContentSection contents={data.contents} />
-      <ChannelSection channels={data.channels} />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <SearchSection />
+          <SummarySection />
+          <ContentSection contents={data.contents} />
+          <ChannelSection channels={data.channels} />
+        </>
+      )}
     </>
   );
 };

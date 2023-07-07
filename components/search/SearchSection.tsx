@@ -1,19 +1,19 @@
+'use client';
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { BsSearchHeart } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 import search from '@/components/search/Search.module.scss';
 import useInput from '@/hooks/useInput';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { useSearchQuery } from '@/hooks/useSearch';
 
 const SearchSection = () => {
   const [inputValue, onChangeValue, resetValue, setInputValue] = useInput('');
   const [showErrMsg, setShowErrMsg] = useState(false);
 
   const { push } = useRouter();
-  const searchParams = useSearchParams();
-
-  const nameQuery = searchParams?.get('query') ?? '';
+  const searchQuery = useSearchQuery();
 
   const handleOnSubmit = useCallback(
     async (e: FormEvent) => {
@@ -27,8 +27,8 @@ const SearchSection = () => {
   );
 
   useEffect(() => {
-    setInputValue(() => nameQuery);
-  }, [nameQuery]);
+    setInputValue(() => searchQuery);
+  }, [searchQuery]);
 
   return (
     <section className={search['search-section']}>
