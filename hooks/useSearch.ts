@@ -2,6 +2,7 @@ import useSWR from 'swr';
 import { fetcher } from '@/hooks/fetcher';
 import { SearchResponseType } from '@/pages/api/search';
 import { useSearchParams } from 'next/navigation';
+import { PublicConfiguration } from 'swr/_internal';
 
 export const useSearchQuery = () => {
   const searchParams = useSearchParams();
@@ -13,8 +14,6 @@ export const useSearch = () => {
   const searchQuery = useSearchQuery();
 
   const options = {
-    errorRetryCount: 3,
-    errorRetryInterval: 3 * 1000,
     dedupingInterval: 10 * 1000,
   };
 

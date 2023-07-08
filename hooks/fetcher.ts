@@ -8,5 +8,6 @@ export const fetcher = async (url: string) => {
   } catch (error) {
     console.error(error);
     toast.error('통신에러');
+    throw error;
   }
 };

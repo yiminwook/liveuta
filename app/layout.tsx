@@ -1,5 +1,4 @@
 import Analytics from '@/components/layout/Analytics';
-import PageHead from '@/components/layout/PageHead';
 import { PropsWithChildren } from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
 import { PAGE_REVALIDATE_TIME } from '@/consts';
@@ -11,7 +10,6 @@ import '@/styles/globals.scss';
 const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <html lang="ko">
-      <PageHead />
       {/* Google Analytics */}
       <Analytics />
       <body>

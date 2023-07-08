@@ -16,7 +16,7 @@ const HomePage = () => {
 
   const setData = () => {
     if (!data) return;
-    setContents(() => data[filter].contents);
+    setContents(() => data[filter].contents.slice());
   };
 
   useEffect(() => {
