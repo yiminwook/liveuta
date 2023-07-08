@@ -1,4 +1,4 @@
-import { SearchResponseType } from '@/pages/api/search';
+import { SearchResponseType } from '@/app/api/search/route';
 import ChannelCard from '@/components/common/channelCard/ChannelCard';
 import search from '@/components/search/Search.module.scss';
 import { SEARCH_ITEMS_SIZE } from '@/consts';

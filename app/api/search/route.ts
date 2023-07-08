@@ -1,4 +1,3 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { ContentsDataType, ContentsRowType } from '@/types/inSheet';
 import { getSheet } from '@/models/sheet';
 import { SEARCH_ITEMS_SIZE } from '@/consts';
@@ -7,6 +6,8 @@ import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
 import { ChannelsDataType } from '@/types/inYoutube';
 import { serverEnvConfig } from '@/configs';
+import { NextRequest, NextResponse } from 'next/server';
+import errorHandler from '@/models/error/handler';
 
 export interface SearchResponseType {
   contents: ContentsDataType[];
@@ -15,14 +16,12 @@ export interface SearchResponseType {
 
 const { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } = serverEnvConfig();
 
-const handler = async (req: NextApiRequest, res: NextApiResponse<SearchResponseType>) => {
+export const GET = async (req: NextRequest) => {
   try {
-    if (req.method !== 'GET') throw new Error('Invaild HTTP method');
-
-    const { query } = req.query;
+    const query = req.nextUrl.searchParams.get('query');
     if (!query) throw new Error('No query');
-    const nameQuery = decodeURIComponent(query.toString());
-    const regex = new RegExp(nameQuery, 'g');
+    const decodeQuery = decodeURIComponent(query);
+    const regex = new RegExp(decodeQuery, 'g');
 
     const contentsSheetData = await getSheet({ spreadsheetId: CONTENTS_SHEET_ID, range: CONTENTS_SHEET_RANGE });
     const contentsSheetDataValue = contentsSheetData.values as ContentsRowType[];
@@ -53,17 +52,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<SearchResponseT
 
     const combinedSearchDataValues = await combineChannelData(searchData);
 
-    return res.status(200).json({
-      contents: searchedContents,
-      channels: combinedSearchDataValues,
-    });
-  } catch (err) {
-    console.error(err);
-    return res.status(400).end();
+    return NextResponse.json<SearchResponseType>(
+      {
+        contents: searchedContents,
+        channels: combinedSearchDataValues,
+      },
+      { status: 200 },
+    );
+  } catch (error) {
+    const { status, message } = errorHandler(error);
+    return NextResponse.json({ error: message }, { status });
   }
 };
-
-export default handler;
 
 // https://developers.google.com/sheets/api/guides/concepts?hl=ko#cell
 

@@ -1,4 +1,4 @@
-import { SearchResponseType } from '@/pages/api/search';
+import { SearchResponseType } from '@/app/api/search/route';
 import ScheduleCard from '@/components/common/scheduleCard/ScheduleCard';
 import search from '@/components/search/Search.module.scss';
 

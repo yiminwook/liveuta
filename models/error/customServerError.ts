@@ -9,7 +9,6 @@ export default class CustomServerError extends Error {
   }
 
   serializeErrorMessage() {
-    console.log('test!!!!!!!!', this);
     return this.message;
   }
 }

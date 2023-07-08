@@ -1,8 +1,7 @@
 import useSWR from 'swr';
 import { fetcher } from '@/hooks/fetcher';
-import { SearchResponseType } from '@/pages/api/search';
+import { SearchResponseType } from '@/app/api/search/route';
 import { useSearchParams } from 'next/navigation';
-import { PublicConfiguration } from 'swr/_internal';
 
 export const useSearchQuery = () => {
   const searchParams = useSearchParams();
