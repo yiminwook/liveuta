@@ -7,6 +7,8 @@ export const SCROLL_PER_YOUTUBE_CARD = 60;
 /** 채널 검색 갯수 */
 export const SEARCH_ITEMS_SIZE = 12;
 
+/** reavalidate time(초) */
+export const FETCH_REVALIDATE_TIME = 30;
 export const PAGE_REVALIDATE_TIME = 1800;
 
 export const HOME_FILTER = ['live', 'daily', 'all'];
