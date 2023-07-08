@@ -9,7 +9,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: map-get($colors, back-drop);
+  background-color: var(--liveuta-backdrop-color);
 
   .modal {
     top: 50%;
@@ -41,11 +41,11 @@
       top: 1rem;
       right: 1rem;
       @include transition(color, 0.2s, linear);
-      color: map-get($colors, salmon);
+      color: var(--liveuta-active-color);
 
       &:hover {
         transform: scale(1.02);
-        color: map-get($colors, hover-salmon);
+        color: var(--liveuta-hover-color);
       }
     }
   }

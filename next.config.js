@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: false,
+});
 const path = require('path');
+
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 const nextConfig = {
   // reactStrictMode: true,
@@ -10,6 +15,12 @@ const nextConfig = {
   images: {
     domains: ['i.ytimg.com'],
   },
+  webpack: (config, options) => {
+    if (!isDevelopment) {
+      // config.externals.push({ 'lottie-web': 'lottie' });
+    }
+    return { ...config };
+  },
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

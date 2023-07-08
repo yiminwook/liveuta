@@ -19,7 +19,7 @@
 
   .sidebar {
     position: absolute;
-    background-color: #ffd7de;
+    background-color: var(--liveuta-sidebar-color);
     width: 18rem;
     top: 0;
     bottom: 0;
@@ -30,6 +30,23 @@
 
     &.show {
       transform: translateX(100%);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      padding: calc(env(safe-area-inset-top) + 1rem) 1rem 0 1rem;
+
+      .close {
+        display: flex;
+        padding: 0 0.1rem;
+        color: map-get($colors, light-font);
+        @include transition(color, 0.3s, $bezier-curve);
+
+        &:hover {
+          color: var(--liveuta-hover-color);
+        }
+      }
     }
 
     section {
@@ -52,30 +69,13 @@
 
         li {
           a {
-            button {
-              @include transition(color, 0.05s, $bezier-curve);
+            @include transition(color, 0.05s, $bezier-curve);
 
-              &:hover:not(&.active) {
-                color: map-get($colors, light-font);
-              }
+            &:hover:not(&.active) {
+              color: var(--liveuta-hover-color);
             }
           }
         }
-      }
-    }
-
-    .close {
-      position: absolute;
-      display: flex;
-      top: env(safe-area-inset-top);
-      right: 0;
-      padding: 0 0.1rem;
-      transform: translateX(-50%) translateY(30%);
-      color: map-get($colors, light-font);
-      @include transition(color, 80ms, $bezier-curve);
-
-      &:hover {
-        color: map-get($colors, salmon);
       }
     }
   }

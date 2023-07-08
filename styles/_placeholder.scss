@@ -6,10 +6,10 @@
     background-color: rgba(0, 0, 0, 0.1);
   }
   &::-webkit-scrollbar-thumb {
-    background-color: map-get($colors, hover-salmon);
+    background-color: var(--liveuta-active-color);
     border-radius: 10px;
     &:hover {
-      background-color: lighten(map-get($colors, hover-salmon), 25%);
+      background-color: var(--liveuta-hover-color);
     }
   }
   &::-webkit-scrollbar-button {

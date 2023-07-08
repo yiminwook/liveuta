@@ -10,7 +10,7 @@ import DefaultHead from '@/components/layout/DefaultHead';
 
 const RootLayout = ({ children }: PropsWithChildren) => {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning={true}>
       <DefaultHead />
       <body>
         <ServiceLayout>{children}</ServiceLayout>

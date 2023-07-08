@@ -68,7 +68,7 @@
         button {
           font-size: inherit;
           font-weight: 500;
-          color: map-get($colors, highlight-font);
+          color: var(--liveuta-active-color);
         }
 
         button:first-child {
