@@ -43,9 +43,6 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
               <NavLink modifier={sidebar['active']} href="/short">
                 Short Link
               </NavLink>
-              <NavLink modifier={sidebar['active']} href="/sheet/schedule">
-                일정 시트
-              </NavLink>
             </ul>
           </section>
           <section>
