@@ -55,14 +55,11 @@ const Header = () => {
           </li>
           <li className={header['search']}>
             <Link href="/search">
-              <button tabIndex={-1}>
-                <BiSearchAlt size={'1.6rem'} color={'inherit'} />
-              </button>
+              <BiSearchAlt size={'1.6rem'} color={'inherit'} />
             </Link>
           </li>
         </ul>
       </nav>
-      <div className={header['blank']} />
       <Sidebar show={showSidebar} onClose={toggleSidebar} />
     </header>
   );
