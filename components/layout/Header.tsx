@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { useRef, useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
-import Sidebar from '@/components/layout/Sidebar';
+import Sidebar from '@/components/layout/sidebar/Sidebar';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { BiSearchAlt } from 'react-icons/bi';
 import header from '@/components/layout/Header.module.scss';

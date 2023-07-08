@@ -3,5 +3,15 @@
 @import 'placeholder';
 
 .channel-section {
+  position: relative;
   @extend %channels-channel-section;
+
+  .alert {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
 }

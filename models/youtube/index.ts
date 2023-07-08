@@ -1,5 +1,6 @@
 import { serverEnvConfig } from '@/configs';
 import { google } from 'googleapis';
+import { customFetch } from '@/models/customFetch';
 
 const { GOOGLE_API_KEY } = serverEnvConfig();
 
@@ -12,7 +13,7 @@ export const getYoutubeChannelsByUid = async (uid: string) => {
       part: ['id', 'snippet', 'statistics'],
       key: GOOGLE_API_KEY,
     },
-    { fetchImplementation: fetch },
+    { fetchImplementation: customFetch },
   );
 
   return response.data;
@@ -25,7 +26,7 @@ export const getYoutubeChannels = async (idArr: string[]) => {
       part: ['id', 'snippet', 'statistics'],
       key: GOOGLE_API_KEY,
     },
-    { fetchImplementation: fetch },
+    { fetchImplementation: customFetch },
   );
 
   return response.data;
@@ -40,7 +41,7 @@ export const searchYoutubeChannels = async (channelName: string) => {
       type: ['channel'],
       key: GOOGLE_API_KEY,
     },
-    { fetchImplementation: fetch },
+    { fetchImplementation: customFetch },
   );
 
   return response.data;

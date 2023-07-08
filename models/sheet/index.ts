@@ -1,5 +1,6 @@
 import { serverEnvConfig } from '@/configs';
 import { google } from 'googleapis';
+import { customFetch } from '@/models/customFetch';
 
 export interface SheetConfigType {
   spreadsheetId: string;
@@ -18,7 +19,7 @@ export const getSheet = async ({ spreadsheetId, range }: Omit<SheetConfigType, '
     range,
   };
 
-  const response = await sheetService.spreadsheets.values.get(sheetConfig, { fetchImplementation: fetch });
+  const response = await sheetService.spreadsheets.values.get(sheetConfig, { fetchImplementation: customFetch });
   const data = response.data;
 
   return data;
