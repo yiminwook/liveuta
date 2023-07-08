@@ -60,6 +60,7 @@ const Header = () => {
           </li>
         </ul>
       </nav>
+      <div className={header['blank']} />
       <Sidebar show={showSidebar} onClose={toggleSidebar} />
     </header>
   );
