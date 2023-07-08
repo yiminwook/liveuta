@@ -18,7 +18,8 @@ const { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } = serverEnvConfig();
 
 export const GET = async (req: NextRequest) => {
   try {
-    const query = req.nextUrl.searchParams.get('query');
+    const { searchParams } = new URL(req.url);
+    const query = searchParams.get('query');
     if (!query) throw new Error('No query');
     const decodeQuery = decodeURIComponent(query);
     const regex = new RegExp(decodeQuery, 'g');
