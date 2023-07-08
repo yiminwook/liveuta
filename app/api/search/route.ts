@@ -66,6 +66,8 @@ export const GET = async (req: NextRequest) => {
   }
 };
 
+export const dynamic = 'force-dynamic';
+
 // https://developers.google.com/sheets/api/guides/concepts?hl=ko#cell
 
 // const result = await google
