@@ -7,9 +7,10 @@ interface NavLinkProps {
   href: string;
   children: ReactNode;
   modifier?: string;
+  shallow?: boolean;
 }
 
-const NavLink = ({ href, children, modifier = '' }: NavLinkProps) => {
+const NavLink = ({ href, children, modifier = '', shallow = false }: NavLinkProps) => {
   const pathName = usePathname();
   const isActive = pathName === href;
 
@@ -22,7 +23,7 @@ const NavLink = ({ href, children, modifier = '' }: NavLinkProps) => {
 
   return (
     <li>
-      <Link href={href} onClick={onClick} className={isActive ? ['active', modifier].join(' ') : ''}>
+      <Link href={href} onClick={onClick} className={isActive ? ['active', modifier].join(' ') : ''} shallow={shallow}>
         {children}
       </Link>
     </li>

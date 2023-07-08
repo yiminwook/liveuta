@@ -64,9 +64,9 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
   return (
     <div className={[scheduleCard['card'], addStreamModifier].join(' ')} key={videoId} ref={target}>
       <div className={scheduleCard['content']}>
-        <Link href={url}>
+        <a href={url}>
           <SchduleCardImage content={content} />
-        </Link>
+        </a>
         <ScheduleCardDesc content={content} addStreamModifier={addStreamModifier} />
       </div>
     </div>
