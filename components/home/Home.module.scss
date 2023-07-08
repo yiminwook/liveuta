@@ -5,7 +5,7 @@
 .nav-section {
   display: flex;
   justify-content: space-between;
-  color: map-get($colors, salmon);
+  color: var(--liveuta-default-text-color);
   font-size: 1rem;
   font-weight: 500;
   padding: 0.5rem;
@@ -38,13 +38,13 @@
         @include transition(background-color, 0.2s, linear);
 
         &:hover {
-          background-color: map-get($colors, salmon);
+          background-color: var(--liveuta-default-color);
           color: lighten(map-get($colors, main), 10%);
         }
 
         &.active {
-          background-color: darken(map-get($colors, highlight-font), 3%);
-          color: lighten(map-get($colors, main), 10%);
+          background-color: var(--liveuta-active-color);
+          color: var(--liveuta-bg-color-light);
         }
 
         &:focus-visible {

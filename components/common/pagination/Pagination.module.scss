@@ -22,7 +22,7 @@
       padding: 0.25rem 0.5rem;
       line-height: 1;
       font-weight: 600;
-      color: map-get($colors, salmon);
+      color: var(--liveuta-default-color);
       font-size: 1.15rem;
       text-align: center;
       @include transition(background-color, 0.2s, linear);
@@ -33,12 +33,12 @@
       }
 
       &:hover {
-        background-color: map-get($colors, salmon);
+        background-color: var(--liveuta-default-color);
         color: lighten(map-get($colors, main), 10%);
       }
 
       &.active {
-        background-color: darken(map-get($colors, highlight-font), 3%) !important;
+        background-color: var(--liveuta-active-color) !important;
         color: lighten(map-get($colors, main), 10%) !important;
         pointer-events: none;
       }

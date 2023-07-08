@@ -54,7 +54,7 @@
 
         button {
           font-weight: 600;
-          color: map-get($colors, highlight-font);
+          color: var(--liveuta-active-color);
         }
       }
     }
