@@ -3,7 +3,7 @@ import DropDown from '@/components/common/dropDown/DropDown';
 import DarkModeButton from '@/components/common/button/DarkModeButton';
 import { IndexLinkList } from '@/components/layout/sidebar/IndexSection';
 
-const HeaderNavigation = () => {
+const NavigationList = () => {
   return (
     <ul>
       <li>
@@ -23,4 +23,4 @@ const HeaderNavigation = () => {
   );
 };
 
-export default HeaderNavigation;
+export default NavigationList;

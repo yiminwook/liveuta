@@ -7,7 +7,7 @@ import { BiSearchAlt } from 'react-icons/bi';
 import header from '@/components/layout/Header.module.scss';
 import { usePathname } from 'next/navigation';
 import HamburgerButton from '@/components/common/button/HamburgerButton';
-import HeaderNavigation from '@/components/layout/HeaderNavigation';
+import NavigationList from '@/components/layout/NavigationList';
 
 const Header = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -51,7 +51,7 @@ const Header = () => {
             Live Uta
           </a>
           <div className={header['navigation']}>
-            <HeaderNavigation />
+            <NavigationList />
             <Link href="/search" className={header['search']}>
               <BiSearchAlt size="1.6rem" color="inherit" />
             </Link>

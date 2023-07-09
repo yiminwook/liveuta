@@ -35,7 +35,7 @@
     justify-content: space-between;
     align-items: center;
     color: map-get($colors, light-font);
-    max-width: 1400px;
+    max-width: map-get($points, 2xl);
     padding: 0 0.5rem;
 
     @include min-width(map-get($points, md)) {
