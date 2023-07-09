@@ -1,7 +1,8 @@
 'use client';
 import { useDarkModeStorage } from '@/hooks/useLocalStorage';
 import { darkModeStorage } from '@/models/darkModeLocalStorage';
-import DarkModeToggle from 'react-dark-mode-toggle';
+import { memo } from 'react';
+import ToggleButton from '@/components/common/button/ToggleButton';
 
 interface DarkModeButtonProps {
   className?: string;
@@ -10,12 +11,12 @@ interface DarkModeButtonProps {
 const DarkModeButton = ({ className }: DarkModeButtonProps) => {
   const { isDarkMode, mutateDarkMode } = useDarkModeStorage();
 
-  const onChange = async () => {
+  const handleDarkMode = async () => {
     darkModeStorage.toggleDarkMode();
     mutateDarkMode();
   };
 
-  return <DarkModeToggle className={className} onChange={onChange} checked={isDarkMode} size={50} />;
+  return <ToggleButton toggled={isDarkMode} onChange={handleDarkMode} alt="다크모드 온오프 버튼" />;
 };
 
-export default DarkModeButton;
+export default memo(DarkModeButton);

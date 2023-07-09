@@ -35,7 +35,8 @@
     nav {
       display: flex;
       justify-content: space-between;
-      padding: calc(env(safe-area-inset-top) + 1rem) 1rem 0 1rem;
+      padding: calc(env(safe-area-inset-top)+ 0.5rem) 1rem 0 1rem;
+      align-items: center;
 
       .close {
         display: flex;

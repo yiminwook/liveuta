@@ -14,6 +14,7 @@
   --liveuta-default-text-color: #e06e61;
   --liveuta-default-color: #fa8072; //salmon
   --liveuta-header-color: #ffc1cc;
+  --liveuta-darkmode-button-color: #0d1524;
   --liveuta-sidebar-color: #ffd7de;
   --liveuta-active-color: #ed4463;
   --liveuta-hover-color: #e06e61;
@@ -32,6 +33,7 @@
   --liveuta-default-text-color: #7ea6ec;
   --liveuta-default-color: #8693da;
   --liveuta-header-color: #0d1524;
+  --liveuta-darkmode-button-color: #ffc1cc;
   --liveuta-sidebar-color: #b5ccf3;
   --liveuta-active-color: #204791;
   --liveuta-hover-color: #466db6;
@@ -119,7 +121,7 @@ body {
   overflow-x: hidden;
   background-color: var(--liveuta-bg-color);
   background-image: var(--liveuta-bg-pattern);
-  transition: background-color 0.3s ease, background-image 0.3s ease;
+  transition: background-color 0.2s $bezier-curve, background-image 0.2s $bezier-curve;
 
   #app {
     @extend %home-main;

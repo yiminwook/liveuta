@@ -13,7 +13,7 @@ const Header = () => {
   const pathname = usePathname();
   const gnbRef = useRef<HTMLElement>(null);
 
-  const toggleSidebar = () => {
+  const handleToggleSidebar = () => {
     setShowSidebar((pre) => !pre);
   };
 
@@ -46,7 +46,7 @@ const Header = () => {
       <nav className={header['nav']} ref={gnbRef}>
         <ul>
           <li className={header['sidebar']}>
-            <button onClick={toggleSidebar}>
+            <button onClick={handleToggleSidebar}>
               <RxHamburgerMenu size={'2rem'} color={'inherit'} />
             </button>
           </li>
@@ -61,7 +61,7 @@ const Header = () => {
         </ul>
       </nav>
       <div className={header['blank']} />
-      <Sidebar show={showSidebar} onClose={toggleSidebar} />
+      <Sidebar show={showSidebar} onClose={handleToggleSidebar} />
     </header>
   );
 };
