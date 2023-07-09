@@ -11,7 +11,7 @@ const Loading = () => {
           <Image src={loadingImage} width={100} height={100} alt="loading_img" unoptimized priority />
           <AiOutlineLoading size={130} color={'inherit'} />
         </div>
-        <h2>Loading Now!</h2>
+        <p>Loading Now!</p>
       </div>
     </div>
   );
