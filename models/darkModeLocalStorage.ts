@@ -20,6 +20,7 @@ class DarkModeLocalStorage {
 
   /** window color scheme값을 우선하여 초기화 */
   public init() {
+    console.log('initialize localStorage');
     if (typeof window === 'undefined') return;
     const initData: boolean = JSON.parse(localStorage.getItem(this.key) ?? 'false') || this.getWindowColorScheme();
     this.setState(initData);
