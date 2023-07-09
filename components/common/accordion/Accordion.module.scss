@@ -1,0 +1,51 @@
+@import 'mixin';
+@import 'var';
+@import 'placeholder';
+
+.accordion {
+  margin-bottom: 1rem;
+
+  &.active {
+    header {
+      button {
+        svg {
+          transform: rotateZ(-180deg);
+        }
+      }
+    }
+
+    & > div {
+      max-height: 100vh;
+    }
+  }
+
+  header {
+    padding: 0.2rem;
+    border-bottom: 2px solid map-get($colors, gray);
+
+    button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      svg {
+        @include transition(transform, 0.3s, ease);
+      }
+    }
+  }
+
+  & > div {
+    max-height: 0;
+    overflow: hidden;
+    @include transition(max-height, 0.2s, ease);
+
+    ul {
+      padding: 0.4rem 0;
+
+      li {
+        padding: 0.2rem;
+      }
+    }
+  }
+}

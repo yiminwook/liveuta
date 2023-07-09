@@ -2,9 +2,8 @@ import Image from 'next/image';
 import Modal from '@/components/layout/Modal';
 import channelCardModal from '@/components/common/channelCard/ChannelCardModal.module.scss';
 import { openWindow } from '@/utils/windowEvent';
-import CopyButton from '@/components/common/CopyButton';
+import CopyButton from '@/components/common/button/CopyButton';
 import { MouseEvent } from 'react';
-import Link from 'next/link';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
 
 interface ChannelCardModalProp {

@@ -9,6 +9,15 @@ const ExternalLink = ({ href, text }: { href: string; text: ReactNode }) => {
   );
 };
 
+export const ExternalLinkList = () => {
+  return (
+    <ul>
+      <ExternalLink href="https://gall.dcinside.com/mgallery/board/lists?id=kizunaai" text="키즈나아이 갤러리" />
+      <ExternalLink href="https://gall.dcinside.com/mini/board/lists?id=vuta" text="우타와꾸 갤러리" />
+    </ul>
+  );
+};
+
 const ExternalLinksSection = () => {
   return (
     <section>
@@ -16,10 +25,7 @@ const ExternalLinksSection = () => {
         <RxLink2 size={'1rem'} color="inherit" />
         &nbsp;외부링크
       </h2>
-      <ul>
-        <ExternalLink href="https://gall.dcinside.com/mgallery/board/lists?id=kizunaai" text="키즈나아이 갤러리" />
-        <ExternalLink href="https://gall.dcinside.com/mini/board/lists?id=vuta" text="우타와꾸 갤러리" />
-      </ul>
+      <ExternalLinkList />
     </section>
   );
 };

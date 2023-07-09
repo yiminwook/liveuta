@@ -16,8 +16,11 @@
   --liveuta-header-color: #ffc1cc;
   --liveuta-sidebar-color: #ffd7de;
   --liveuta-active-color: #ed4463;
-  --liveuta-hover-color: #e06e61;
+  --liveuta-hover-color: #cc3a54;
+  --liveuta-loading-color: #ffc1cc;
   --liveuta-backdrop-color: #b9919867;
+  --liveuta-half-transparent-color: #d8aab1af;
+  --liveuta-half-card-bg-color: #f4f4f5bf;
 }
 
 :root[color-mode='dark'] {
@@ -35,7 +38,10 @@
   --liveuta-sidebar-color: #b5ccf3;
   --liveuta-active-color: #204791;
   --liveuta-hover-color: #466db6;
+  --liveuta-loading-color: #7ea6ec;
   --liveuta-backdrop-color: #919fb967;
+  --liveuta-half-transparent-color: #7ea6eca2;
+  --liveuta-half-card-bg-color: #f4f4f5bf;
 }
 
 %background-side {
@@ -60,7 +66,6 @@
 
 html,
 body {
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -119,7 +124,7 @@ body {
   overflow-x: hidden;
   background-color: var(--liveuta-bg-color);
   background-image: var(--liveuta-bg-pattern);
-  transition: background-color 0.3s ease, background-image 0.3s ease;
+  transition: background-color 0.2s $bezier-curve, background-image 0.2s $bezier-curve;
 
   #app {
     @extend %home-main;

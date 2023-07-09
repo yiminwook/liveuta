@@ -26,7 +26,7 @@
 
   & > div {
     & > div {
-      color: map-get($colors, main);
+      color: var(--liveuta-loading-color);
       position: relative;
       text-align: center;
 
@@ -39,12 +39,12 @@
       }
     }
 
-    h2 {
+    p {
+      margin-top: 0.5rem;
       font-size: 1.25rem;
       text-align: center;
       font-weight: 500;
       color: map-get($colors, light-font);
-      margin: 0;
     }
   }
 }

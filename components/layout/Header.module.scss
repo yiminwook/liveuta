@@ -7,7 +7,7 @@
   padding-top: env(safe-area-inset-top);
 }
 
-.nav {
+.inner {
   margin: 0;
   padding-top: env(safe-area-inset-top);
   top: 0px;
@@ -27,7 +27,7 @@
     opacity: 1 !important;
   }
 
-  ul {
+  nav {
     margin: auto;
     max-width: map-get($points, 2xl);
     height: 3.5rem;
@@ -35,29 +35,25 @@
     justify-content: space-between;
     align-items: center;
     color: map-get($colors, light-font);
+    max-width: 1400px;
+    padding: 0 0.5rem;
 
-    .sidebar {
-      margin-left: 1rem;
+    @include min-width(map-get($points, md)) {
+      padding: 0 1.5rem;
+    }
 
-      button {
-        display: flex;
-        padding: 0.2rem 0.3rem;
-        border-radius: 5px;
-        @include transition(background-color, 80ms, $bezier-curve);
+    .hamburger {
+      display: flex;
+      padding: 0.2rem 0.3rem;
+      border-radius: 5px;
+      @include transition(background-color, 80ms, $bezier-curve);
 
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.3);
-        }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
       }
 
-      @include min-width($mixin-large-width) {
-        margin-left: 1.5rem;
-      }
-      @include min-width($mixin-xl-width) {
-        margin-left: 2rem;
-      }
-      @include max-width($mixin-middle-width) {
-        margin-left: 0.4rem;
+      @include min-width(map-get($points, md)) {
+        display: none !important;
       }
     }
 
@@ -65,36 +61,33 @@
       font-size: 2rem;
       color: var(--liveuta-title-color);
       font-weight: 600;
-      a {
-        @include text-line(1, 2.2rem);
-      }
+      @include text-line(1, 2.2rem);
     }
 
-    .search {
-      margin-right: 1rem;
-      @include transition(background-color, 80ms, $bezier-curve);
+    .navigation {
+      display: flex;
+      gap: 1rem;
 
-      a {
+      ul {
+        display: none;
+        align-items: center;
+        gap: 0.5rem;
+
+        @include min-width(map-get($points, md)) {
+          display: flex;
+        }
+      }
+
+      .search {
         border-radius: 10px;
         padding: 0.5rem 0.7rem;
         background-color: var(--liveuta-active-color);
-        color: map-get($colors, light-font);
         @include transition(background-color, 80ms, $bezier-curve);
         @include box-shadow();
 
         &:hover {
           background-color: var(--liveuta-hover-color);
         }
-      }
-
-      @include min-width($mixin-large-width) {
-        margin-right: 1.5rem;
-      }
-      @include min-width($mixin-xl-width) {
-        margin-right: 2rem;
-      }
-      @include max-width($mixin-middle-width) {
-        margin-right: 0.4rem;
       }
     }
   }

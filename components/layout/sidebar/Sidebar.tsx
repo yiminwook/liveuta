@@ -3,8 +3,8 @@ import useStopPropagation from '@/hooks/useStopPropagation';
 import ExternalLinksSection from '@/components/layout/sidebar/ExternalLinksSection';
 import IndexSection from '@/components/layout/sidebar/IndexSection';
 import sidebar from '@/components/layout/sidebar/Sidebar.module.scss';
-import CloseButton from '@/components/common/CloseButton';
-import DarkModeButton from '@/components/common/DarkModeButton';
+import CloseButton from '@/components/common/button/CloseButton';
+import DarkModeButton from '@/components/common/button/DarkModeButton';
 
 interface SidebarProps {
   show: boolean;
@@ -25,7 +25,7 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
         <div className={[sidebar['sidebar'], show ? sidebar['show'] : ''].join(' ')} onClick={stopPropagation}>
           <nav>
             <CloseButton className={sidebar['close']} onClose={onClose} />
-            <DarkModeButton className={sidebar['darkmode']} />
+            <DarkModeButton />
           </nav>
           <IndexSection />
           <ExternalLinksSection />

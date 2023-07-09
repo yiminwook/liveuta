@@ -26,7 +26,7 @@
 }
 
 .search-section {
-  background-color: map-get($colors, bg);
+  background-color: var(--liveuta-half-transparent-color);
 
   & > div:nth-child(1) {
     margin: 0 auto;
@@ -79,7 +79,7 @@
         display: flex;
         padding: 0.5rem;
         border-radius: 100%;
-        background-color: map-get($colors, salmon);
+        background-color: var(--liveuta-default-color);
         color: map-get($colors, light-font);
         @include transition(background-color, 80ms, $bezier-curve);
         @include box-shadow();
@@ -112,7 +112,7 @@
     width: 75%;
     margin: auto;
     padding: 2rem 1rem;
-    background-color: rgba(map-get($colors, card-bg), 75%);
+    background-color: var(--liveuta-half-card-bg-color);
     border-radius: 10px;
     @include box-shadow();
 

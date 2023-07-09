@@ -1,6 +1,6 @@
 import scheduleCard from '@/components/common/scheduleCard/ScheduleCard.module.scss';
 import { openWindow } from '@/utils/windowEvent';
-import CopyButton from '@/components/common/CopyButton';
+import CopyButton from '@/components/common/button/CopyButton';
 import { ContentsDataType } from '@/types/inSheet';
 
 interface ScheduleCardDescProps {

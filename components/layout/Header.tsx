@@ -3,17 +3,18 @@
 import { useRef, useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import Sidebar from '@/components/layout/sidebar/Sidebar';
-import { RxHamburgerMenu } from 'react-icons/rx';
 import { BiSearchAlt } from 'react-icons/bi';
 import header from '@/components/layout/Header.module.scss';
 import { usePathname } from 'next/navigation';
+import HamburgerButton from '@/components/common/button/HamburgerButton';
+import HeaderNavigation from '@/components/layout/HeaderNavigation';
 
 const Header = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const pathname = usePathname();
-  const gnbRef = useRef<HTMLElement>(null);
+  const gnbRef = useRef<HTMLDivElement>(null);
 
-  const toggleSidebar = () => {
+  const handleToggleSidebar = () => {
     setShowSidebar((pre) => !pre);
   };
 
@@ -43,25 +44,22 @@ const Header = () => {
 
   return (
     <header>
-      <nav className={header['nav']} ref={gnbRef}>
-        <ul>
-          <li className={header['sidebar']}>
-            <button onClick={toggleSidebar}>
-              <RxHamburgerMenu size={'2rem'} color={'inherit'} />
-            </button>
-          </li>
-          <li className={header['title']}>
-            <a href="/">Live Uta</a>
-          </li>
-          <li className={header['search']}>
-            <Link href="/search">
-              <BiSearchAlt size={'1.6rem'} color={'inherit'} />
+      <div className={header['inner']} ref={gnbRef}>
+        <nav>
+          <HamburgerButton className={header['hamburger']} onClick={handleToggleSidebar} />
+          <a href="/" className={header['title']}>
+            Live Uta
+          </a>
+          <div className={header['navigation']}>
+            <HeaderNavigation />
+            <Link href="/search" className={header['search']}>
+              <BiSearchAlt size="1.6rem" color="inherit" />
             </Link>
-          </li>
-        </ul>
-      </nav>
+          </div>
+        </nav>
+      </div>
+      <Sidebar show={showSidebar} onClose={handleToggleSidebar} />
       <div className={header['blank']} />
-      <Sidebar show={showSidebar} onClose={toggleSidebar} />
     </header>
   );
 };

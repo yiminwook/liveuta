@@ -1,7 +1,7 @@
 import { clipText } from '@/utils/windowEvent';
 import { CSSProperties, MouseEvent } from 'react';
 import { FaCopy } from 'react-icons/fa';
-import copyButton from '@/components/common/CopyButton.module.scss';
+import copyButton from '@/components/common/button/CopyButton.module.scss';
 
 interface CopyButtonProps {
   value: string;
@@ -19,7 +19,7 @@ const CopyButton = ({ value, size = '2rem', className, style }: CopyButtonProps)
 
   return (
     <button className={[copyButton['copy-button'], className].join(' ')} onClick={onClick} style={style}>
-      <FaCopy size={size} color={'inherit'} />
+      <FaCopy size={size} color="inherit" />
     </button>
   );
 };

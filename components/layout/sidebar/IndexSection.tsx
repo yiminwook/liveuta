@@ -11,6 +11,18 @@ const IndexLink = ({ href, text }: { href: string; text: ReactNode }) => {
   );
 };
 
+export const IndexLinkList = () => {
+  return (
+    <ul>
+      <IndexLink href="/" text="홈" />
+      <IndexLink href="/channels" text="채널조회" />
+      <IndexLink href="/search" text="검색" />
+      <IndexLink href="/sheet/request" text="리퀘스트 요청" />
+      <IndexLink href="/short" text="단축링크 생성" />
+    </ul>
+  );
+};
+
 const IndexSection = () => {
   return (
     <section>
@@ -18,13 +30,7 @@ const IndexSection = () => {
         <MdOutlineExplore size={'1rem'} color="inherit" />
         &nbsp;목차
       </h2>
-      <ul>
-        <IndexLink href="/" text="홈" />
-        <IndexLink href="/channels" text="채널조회" />
-        <IndexLink href="/search" text="검색" />
-        <IndexLink href="/sheet/request" text="리퀘스트 요청" />
-        <IndexLink href="/short" text="단축링크 생성" />
-      </ul>
+      <IndexLinkList />
     </section>
   );
 };

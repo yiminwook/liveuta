@@ -3,6 +3,9 @@
 @import 'placeholder';
 
 .nav-section {
+  position: sticky;
+  top: 3.5rem;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   color: var(--liveuta-default-text-color);
