@@ -12,6 +12,10 @@
   width: 100%;
   @include transition(all, 0.3s, linear);
 
+  @include min-width(map-get($points, md)) {
+    display: none !important;
+  }
+
   &.show {
     visibility: visible;
     background-color: rgba(0, 0, 0, 0.5);
