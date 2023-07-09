@@ -1,0 +1,59 @@
+@import 'var';
+@import 'mixin';
+@import 'placeholder';
+
+.dropDown {
+  position: relative;
+
+  &.active {
+    button {
+      color: var(--liveuta-active-color);
+    }
+
+    span {
+      transform: rotate(180deg);
+    }
+
+    & > div:nth-child(2) {
+      max-height: 100vh;
+    }
+  }
+
+  & > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+
+    &:hover {
+      color: var(--liveuta-hover-color);
+    }
+
+    span {
+      transition: all 0.2s ease;
+      transform: rotate(0deg);
+    }
+  }
+
+  & > div:nth-child(2) {
+    width: 100%;
+    transition: max-height 0.2s ease;
+    position: absolute;
+    overflow: hidden;
+    max-height: 0;
+    background-color: var(--liveuta-bg-color-light);
+    color: var(--liveuta-default-text-color);
+    border-radius: 0 0 0.5rem 0.5rem;
+
+    & > div {
+      padding: 0.5rem;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+    }
+  }
+}

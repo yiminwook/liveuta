@@ -2,7 +2,7 @@
 @import 'mixin';
 @import 'placeholder';
 
-.toggleButton {
+.darkModeButton {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -16,6 +16,14 @@
     height: 1.25em;
     cursor: pointer;
     background-color: var(--liveuta-header-color);
+    transition: background-color 0.2s $bezier-curve, border-color 0.2s $bezier-curve;
+
+    &:hover {
+      border-color: var(--liveuta-hover-color);
+      &::before {
+        background-color: var(--liveuta-hover-color);
+      }
+    }
 
     &:before {
       content: '';

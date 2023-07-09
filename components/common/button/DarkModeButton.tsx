@@ -3,12 +3,9 @@ import { useDarkModeStorage } from '@/hooks/useLocalStorage';
 import { darkModeStorage } from '@/models/darkModeLocalStorage';
 import { memo } from 'react';
 import ToggleButton from '@/components/common/button/ToggleButton';
+import darkModeButton from '@/components/common/button/DarkModeButton.module.scss';
 
-interface DarkModeButtonProps {
-  className?: string;
-}
-
-const DarkModeButton = ({ className }: DarkModeButtonProps) => {
+const DarkModeButton = () => {
   const { isDarkMode, mutateDarkMode } = useDarkModeStorage();
 
   const handleDarkMode = async () => {
@@ -16,7 +13,14 @@ const DarkModeButton = ({ className }: DarkModeButtonProps) => {
     mutateDarkMode();
   };
 
-  return <ToggleButton toggled={isDarkMode} onChange={handleDarkMode} alt="다크모드 온오프 버튼" />;
+  return (
+    <ToggleButton
+      className={darkModeButton['darkModeButton']}
+      toggled={isDarkMode}
+      onChange={handleDarkMode}
+      alt="다크모드 온오프 버튼"
+    />
+  );
 };
 
 export default memo(DarkModeButton);
