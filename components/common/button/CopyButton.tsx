@@ -1,7 +1,7 @@
 import { clipText } from '@/utils/windowEvent';
 import { CSSProperties, MouseEvent } from 'react';
 import { FaCopy } from 'react-icons/fa';
-import copyButton from '@/components/common/CopyButton.module.scss';
+import copyButton from '@/components/common/button/CopyButton.module.scss';
 
 interface CopyButtonProps {
   value: string;

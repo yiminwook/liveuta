@@ -3,11 +3,10 @@ import { ChannelsDataType } from '@/types/inYoutube';
 import Image from 'next/image';
 import channelCard from '@/components/common/channelCard/ChannelCard.module.scss';
 import { renderSubscribe } from '@/utils/renderSubscribe';
-import Link from 'next/link';
 import { MouseEvent, useState } from 'react';
 import ChannelCardModal from '@/components/common/channelCard/ChannelCardModal';
 import { openWindow } from '@/utils/windowEvent';
-import CopyButton from '@/components/common/CopyButton';
+import CopyButton from '@/components/common/button/CopyButton';
 import useStopPropagation from '@/hooks/useStopPropagation';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
 
