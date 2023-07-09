@@ -19,7 +19,7 @@ const CopyButton = ({ value, size = '2rem', className, style }: CopyButtonProps)
 
   return (
     <button className={[copyButton['copy-button'], className].join(' ')} onClick={onClick} style={style}>
-      <FaCopy size={size} color={'inherit'} />
+      <FaCopy size={size} color="inherit" />
     </button>
   );
 };
