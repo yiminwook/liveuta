@@ -6,15 +6,16 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  cursor: pointer;
 
   input[type='checkbox'] {
     appearance: none;
     position: relative;
-    border: max(2px, 0.1em) solid gray;
-    border-radius: 1.25em;
-    width: 2.25em;
+    border: max(2px, 0.1em) solid var(--liveuta-title-color);
+    border-radius: 1.5em;
+    width: 2.5em;
     height: 1.25em;
+    cursor: pointer;
+    background-color: var(--liveuta-header-color);
 
     &:before {
       content: '';
@@ -23,23 +24,15 @@
       width: 1em;
       height: 1em;
       border-radius: 50%;
-      transform: scale(0.8);
-      background-color: gray;
+      transform: scale(0.75);
+      background-color: var(--liveuta-title-color);
       transition: left 250ms linear;
     }
 
     &:checked {
-      background-color: tomato;
-      border-color: tomato;
-
       &:before {
-        background-color: white;
-        left: 1em;
+        left: 1.25em;
       }
-    }
-
-    &:enabled:hover {
-      box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
     }
 
     &:disabled {

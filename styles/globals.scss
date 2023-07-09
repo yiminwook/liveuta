@@ -14,11 +14,13 @@
   --liveuta-default-text-color: #e06e61;
   --liveuta-default-color: #fa8072; //salmon
   --liveuta-header-color: #ffc1cc;
-  --liveuta-darkmode-button-color: #0d1524;
   --liveuta-sidebar-color: #ffd7de;
   --liveuta-active-color: #ed4463;
-  --liveuta-hover-color: #e06e61;
+  --liveuta-hover-color: #cc3a54;
+  --liveuta-loading-color: #ffc1cc;
   --liveuta-backdrop-color: #b9919867;
+  --liveuta-half-transparent-color: #d8aab1af;
+  --liveuta-half-card-bg-color: #f4f4f5bf;
 }
 
 :root[color-mode='dark'] {
@@ -33,11 +35,13 @@
   --liveuta-default-text-color: #7ea6ec;
   --liveuta-default-color: #8693da;
   --liveuta-header-color: #0d1524;
-  --liveuta-darkmode-button-color: #ffc1cc;
   --liveuta-sidebar-color: #b5ccf3;
   --liveuta-active-color: #204791;
   --liveuta-hover-color: #466db6;
+  --liveuta-loading-color: #7ea6ec;
   --liveuta-backdrop-color: #919fb967;
+  --liveuta-half-transparent-color: #7ea6eca2;
+  --liveuta-half-card-bg-color: #f4f4f5bf;
 }
 
 %background-side {
