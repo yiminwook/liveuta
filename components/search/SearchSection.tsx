@@ -4,7 +4,7 @@ import { BsSearchHeart } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 import search from '@/components/search/Search.module.scss';
 import useInput from '@/hooks/useInput';
-import { useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import { useSearchQuery } from '@/hooks/useSearch';
 
 const SearchSection = () => {
@@ -12,6 +12,7 @@ const SearchSection = () => {
   const [showErrMsg, setShowErrMsg] = useState(false);
 
   const { push } = useRouter();
+  const pathname = usePathname();
   const searchQuery = useSearchQuery();
 
   const handleOnSubmit = useCallback(
@@ -20,7 +21,7 @@ const SearchSection = () => {
       e.preventDefault();
       const value = inputValue.trim();
       if (!value) return setShowErrMsg(() => true);
-      push(`/search?query=${value}`);
+      push(`${pathname}?query=${value}`);
     },
     [inputValue],
   );
