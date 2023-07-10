@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const PAGINATION_LIMIT = 15;
 const SERCH_COMMENT_ENDPOINT = 'https://holodex.net/api/v2/search/commentSearch';
 
-interface SetListResponseType extends SearchCommentResponseType {
+export interface SetListResponseType extends SearchCommentResponseType {
   totalPage: number;
 }
 
@@ -16,8 +16,11 @@ export const GET = async (req: NextRequest) => {
   try {
     const { searchParams } = new URL(req.url);
     const page = Number(searchParams.get('page')) || 1;
-    const song = searchParams.get('song');
-    if (!song) throw new Error('song is not exist');
+    const query = searchParams.get('query');
+
+    if (!query) {
+      return NextResponse.json<SetListResponseType>({ total: 0, totalPage: 0, items: [] }, { status: 200 });
+    }
 
     const offset = (page - 1) * PAGINATION_LIMIT + 1;
 
@@ -26,7 +29,7 @@ export const GET = async (req: NextRequest) => {
       lang: ['ko'],
       target: ['stream'],
       topic: ['singing'],
-      comment: [song],
+      comment: [query],
       paginated: true,
       offset,
       limit: PAGINATION_LIMIT,
