@@ -3,10 +3,10 @@ import { Metadata } from 'next';
 export const DEFAULT_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 export const DEFAULT_TITLE = 'Live Uta';
 export const DEFAULT_DESC = 'Show V-Tuber Utawaku schedule';
-export const DEFAULT_COLOR = '#d8aab1ec';
+// export const DEFAULT_COLOR = '#d8aab1ec';
 export const DEFAULT_ICON = `${DEFAULT_SITE_URL}/assets/icon-192-192.png`;
 export const DEFAULT_IMAGE = {
-  url: `${DEFAULT_SITE_URL}/meta-image.png`,
+  url: `${DEFAULT_SITE_URL}/assets/meta-image.png`,
   width: 1200,
   height: 627,
   alt: 'v-singer 일정조회 사이트 LiveUta입니다.',
@@ -30,7 +30,7 @@ export const DEFALUT_METADATA: Metadata = {
     maximumScale: 1,
     viewportFit: 'cover',
   },
-  themeColor: DEFAULT_COLOR,
+  // themeColor: DEFAULT_COLOR,
   applicationName: 'Live Uta',
   appleWebApp: {
     title: DEFAULT_TITLE,
