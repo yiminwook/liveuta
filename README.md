@@ -63,6 +63,7 @@ ContentsDataTypes: {
 
 ```
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
+HOLODEX_API_KEY=
 GOOGLE_API_KEY=AIz...
 
 CONTENTS_SHEET_ID=sheetId
