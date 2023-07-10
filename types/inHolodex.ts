@@ -1,3 +1,8 @@
+export interface SearchCommentType {
+  comments_key: string;
+  message: string;
+}
+
 export interface SearchCommentItemType {
   id: string;
   title: string;
@@ -7,8 +12,13 @@ export interface SearchCommentItemType {
   duration: number;
   status: 'past';
   songcount: number;
-  channel: any;
-  comments: any[];
+  channel: {
+    id: string;
+    name: string;
+    photo: string;
+    english_name?: string;
+  };
+  comments: SearchCommentType[];
 }
 
 export interface SearchCommentResponseType {
