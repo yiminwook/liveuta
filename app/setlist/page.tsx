@@ -6,6 +6,7 @@ import SetlistSection from '@/components/setlist/SetlistSection';
 const SetListPage = () => {
   return (
     <>
+      <div>TEST</div>
       <SearchSection />
       <SetlistSection />
     </>
