@@ -108,7 +108,7 @@ button {
   }
 
   &:focus-visible {
-    outline: 3px solid map-get($colors, secondary);
+    outline: 3px solid var(--liveuta-active-color);
     border-radius: 5px;
     outline-offset: 2.5px;
     z-index: 10;

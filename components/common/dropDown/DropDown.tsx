@@ -1,6 +1,7 @@
 import { memo, MouseEvent, ReactNode, useEffect, useState } from 'react';
 import { GoTriangleDown } from 'react-icons/go';
 import dropDown from '@/components/common/dropDown/DropDown.module.scss';
+import { combineClassName } from '@/utils/combineClassName';
 
 interface DropDownProps {
   title: string;
@@ -32,14 +33,14 @@ const DropDown = ({ children, width = 'auto', height = '2.5rem', title }: DropDo
   }, []);
 
   return (
-    <div className={[dropDown['dropDown'], isShow ? dropDown['active'] : ''].join(' ')} onClick={onClick}>
+    <div className={combineClassName(dropDown['wrap'], isShow ? dropDown['active'] : '')} onClick={onClick}>
       <button onClick={handleToggle} style={{ height, width }}>
         <h3>{title}</h3>
         <span>
           <GoTriangleDown size="1rem" color="inherit" />
         </span>
       </button>
-      <div className={isShow ? dropDown['active'] : ''}>
+      <div className={combineClassName(dropDown['content'], isShow ? dropDown['active'] : '')}>
         <div>{children}</div>
       </div>
     </div>

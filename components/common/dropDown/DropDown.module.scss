@@ -2,20 +2,21 @@
 @import 'mixin';
 @import 'placeholder';
 
-.dropDown {
+.wrap {
   position: relative;
 
   &.active {
+    //펼쳐지는 효과
     button {
       color: var(--liveuta-active-color);
+      > span {
+        transform: rotate(180deg);
+      }
     }
 
-    span {
-      transform: rotate(180deg);
-    }
-
-    & > div:nth-child(2) {
+    & > .content {
       max-height: 100vh;
+      visibility: visible;
     }
   }
 
@@ -36,15 +37,18 @@
     }
   }
 
-  & > div:nth-child(2) {
+  & > .content {
     width: 100%;
-    transition: max-height 0.2s ease;
     position: absolute;
     overflow: hidden;
-    max-height: 0;
     background-color: var(--liveuta-bg-color-light);
     color: var(--liveuta-default-text-color);
     border-radius: 0 0 0.5rem 0.5rem;
+
+    //펼쳐지는 효과
+    transition: max-height 0.2s ease;
+    visibility: hidden;
+    max-height: 0;
 
     & > div {
       padding: 0.5rem;

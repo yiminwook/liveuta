@@ -1,13 +1,6 @@
-import { ChangeEvent, Dispatch, SetStateAction, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 
-type UseInputReturnType = [
-  string,
-  (e: ChangeEvent<HTMLInputElement>) => void,
-  () => void,
-  Dispatch<SetStateAction<string>>,
-];
-
-const useInput = (value: string): UseInputReturnType => {
+const useInput = (value: string) => {
   const [inputValue, setInputValue] = useState(value);
 
   const onChangeValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +12,7 @@ const useInput = (value: string): UseInputReturnType => {
     setInputValue(() => '');
   }, []);
 
-  return [inputValue, onChangeValue, resetValue, setInputValue];
+  return { inputValue, onChangeValue, resetValue, setInputValue };
 };
 
 export default useInput;
