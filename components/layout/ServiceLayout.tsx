@@ -6,8 +6,10 @@ import FloatButton from '@/components/common/button/FlotButton';
 import { ToastContainer } from 'react-toastify';
 import { PublicConfiguration } from 'swr/_internal';
 import Header from '@/components/layout/Header';
+import ThemeProvider from '@/components/layout/ThemeProvider';
 
 interface ServiceLayoutProps {
+  initialTheme: string | undefined;
   children: ReactNode;
 }
 
@@ -19,14 +21,16 @@ const SWR_CONFIG_OPTIONS: Partial<PublicConfiguration> = {
   revalidateOnReconnect: true,
 };
 
-const ServiceLayout = ({ children }: ServiceLayoutProps) => {
+const ServiceLayout = ({ initialTheme: theme, children }: ServiceLayoutProps) => {
   return (
     <>
       <SWRConfig value={SWR_CONFIG_OPTIONS}>
-        <Header />
-        <main id="app">{children}</main>
-        <Footer />
-        <FloatButton />
+        <ThemeProvider initialTheme={theme}>
+          <Header />
+          <main id="app">{children}</main>
+          <Footer />
+          <FloatButton />
+        </ThemeProvider>
       </SWRConfig>
       <ToastContainer position="bottom-center" autoClose={1000} />
     </>

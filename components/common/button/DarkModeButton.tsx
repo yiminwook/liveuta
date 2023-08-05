@@ -1,22 +1,21 @@
 'use client';
-import { useDarkModeStorage } from '@/hooks/useLocalStorage';
-import { darkModeStorage } from '@/models/darkModeLocalStorage';
+
 import { memo } from 'react';
 import ToggleButton from '@/components/common/button/ToggleButton';
 import darkModeButton from '@/components/common/button/DarkModeButton.module.scss';
+import { useTheme } from '@/components/layout/ThemeProvider';
 
 const DarkModeButton = () => {
-  const { isDarkMode, mutateDarkMode } = useDarkModeStorage();
+  const { currentTheme, setTheme } = useTheme();
 
-  const handleDarkMode = async () => {
-    darkModeStorage.toggleDarkMode();
-    mutateDarkMode();
+  const handleDarkMode = () => {
+    currentTheme === 'theme1' ? setTheme('theme2') : setTheme('theme1');
   };
 
   return (
     <ToggleButton
       className={darkModeButton['darkModeButton']}
-      toggled={isDarkMode}
+      toggled={currentTheme === 'theme1'}
       onChange={handleDarkMode}
       alt="다크모드 온오프 버튼"
     />
