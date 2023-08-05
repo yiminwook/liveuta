@@ -10,5 +10,6 @@ export const customFetchCached = (props: any) => {
 };
 
 export const customFetchNoCached = (props: any) => {
-  return fetch(props, { next: { revalidate: 0 }, cache: 'no-cache' });
+  //cache: no-store, revalidate: 0 둘중 하나면 설정해야함.
+  return fetch(props, { next: { revalidate: 0 } });
 };
