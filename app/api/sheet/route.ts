@@ -9,7 +9,7 @@ const { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } = serverEnvConfig();
 
 export const GET = async (_req: NextRequest) => {
   try {
-    const sheetData = await getSheet({ spreadsheetId: CONTENTS_SHEET_ID, range: CONTENTS_SHEET_RANGE });
+    const sheetData = await getSheet({ spreadsheetId: CONTENTS_SHEET_ID, range: CONTENTS_SHEET_RANGE, cache: false });
     const { scheduled, live } = parseScheduledData(sheetData);
     const { daily, all } = parseAllData(sheetData);
 
