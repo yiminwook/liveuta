@@ -1,14 +1,13 @@
 'use client';
 import { FormEvent, useCallback, useEffect, useState } from 'react';
-import { BsSearchHeart } from 'react-icons/bs';
-import { GrFormClose } from 'react-icons/gr';
 import search from '@/components/search/Search.module.scss';
 import useInput from '@/hooks/useInput';
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useSearchQuery } from '@/hooks/useSearch';
+import Input from '@/components/common/Input';
 
 const SearchSection = () => {
-  const [inputValue, onChangeValue, resetValue, setInputValue] = useInput('');
+  const { inputValue, onChangeValue, setInputValue } = useInput('');
   const [showErrMsg, setShowErrMsg] = useState(false);
 
   const { push } = useRouter();
@@ -16,9 +15,8 @@ const SearchSection = () => {
   const searchQuery = useSearchQuery();
 
   const handleOnSubmit = useCallback(
-    async (e: FormEvent) => {
+    async (e: FormEvent, inputValue: string) => {
       setShowErrMsg(() => false);
-      e.preventDefault();
       const value = inputValue.trim();
       if (!value) return setShowErrMsg(() => true);
       push(`${pathname}?query=${value}`);
@@ -33,25 +31,18 @@ const SearchSection = () => {
   return (
     <section className={search['search-section']}>
       <div>
-        <form onSubmit={handleOnSubmit}>
-          <label htmlFor="searchInput">채널명</label>
-          <input
-            id="searchInput"
-            name="searchInput"
-            type="text"
-            onChange={onChangeValue}
-            value={inputValue}
-            placeholder="채널명으로 검색"
-          />
-          {inputValue ? (
-            <label onClick={resetValue} tabIndex={0}>
-              <GrFormClose color={'inherit'} size={'1.5rem'} />
-            </label>
-          ) : null}
-          <button type="submit">
-            <BsSearchHeart color={'inherit'} size={'1.5rem'} />
-          </button>
-        </form>
+        <label htmlFor="searchInput" className="blind">
+          채널명 검색
+        </label>
+        <Input
+          id="searchInput"
+          name="searchInput"
+          className={search['searchInput']}
+          type="text"
+          onSubmit={handleOnSubmit}
+          value={inputValue}
+          placeholder="채널명으로 검색"
+        />
         {showErrMsg ? <p>입력되지 않았습니다.</p> : null}
       </div>
     </section>

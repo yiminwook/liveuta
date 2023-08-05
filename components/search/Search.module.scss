@@ -35,58 +35,10 @@
     position: relative;
     padding: 3rem 0;
 
-    form {
-      position: relative;
-
-      label:nth-of-type(1) {
-        display: none;
-      }
-
+    .searchInput {
       input {
-        padding: 1rem 1.5rem;
-        width: 100%;
-        border-radius: 30px;
-        border: none;
-        @include box-shadow();
-
-        &:focus {
-          outline: none;
-        }
-
         &::placeholder {
-          font-family: inherit;
           font-size: 1.25rem;
-          display: none;
-        }
-      }
-
-      label:nth-of-type(2) {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 4.5rem;
-        display: flex;
-        border-radius: 100%;
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.2);
-        }
-      }
-
-      button[type='submit'] {
-        position: absolute;
-        right: 1.5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        display: flex;
-        padding: 0.5rem;
-        border-radius: 100%;
-        background-color: var(--liveuta-default-color);
-        color: map-get($colors, light-font);
-        @include transition(background-color, 80ms, $bezier-curve);
-        @include box-shadow();
-
-        &:hover {
-          background-color: map-get($colors, hover-salmon);
         }
       }
     }
