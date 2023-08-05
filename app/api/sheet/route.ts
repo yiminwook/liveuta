@@ -21,3 +21,5 @@ export const GET = async (_req: NextRequest) => {
 };
 
 // https://developers.google.com/sheets/api/guides/concepts?hl=ko#cell
+
+export const dynamic = 'force-dynamic';
