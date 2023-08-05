@@ -39,6 +39,7 @@ export default RootLayout;
 
 /** Default Route Segment Config */
 export const revalidate = PAGE_REVALIDATE_TIME;
+export const fetchCache = 'default-no-store';
 export const dynamicParams = true; //fallback
 export const preferredRegion = ['icn1'];
 export const metadata = DEFALUT_METADATA;

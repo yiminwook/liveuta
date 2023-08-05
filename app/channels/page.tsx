@@ -1,4 +1,4 @@
-import { ITEMS_PER_PAGE } from '@/consts';
+import { ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
 import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
 import ChannelSection from '@/components/channels/ChannelSection';
@@ -37,3 +37,5 @@ const ChannelsPage = async () => {
 };
 
 export default ChannelsPage;
+
+export const revalidate = PAGE_REVALIDATE_TIME;
