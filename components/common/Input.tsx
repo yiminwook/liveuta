@@ -5,6 +5,7 @@ import input from '@/components/common/Input.module.scss';
 import { GrFormClose } from 'react-icons/gr';
 import useInput from '@/hooks/useInput';
 import { BsSearchHeart } from 'react-icons/bs';
+import { combineClassName } from '@/utils/combineClassName';
 
 type OriginalInputProps = InputHTMLAttributes<HTMLInputElement>;
 
@@ -12,7 +13,7 @@ interface InputProps extends Omit<OriginalInputProps, 'onSubmit'> {
   onSubmit: (e: React.FormEvent<HTMLFormElement>, inputValue: string) => void;
 }
 
-const Input = ({ className, onSubmit, type = 'text', value, onChange, ...props }: InputProps) => {
+const Input = ({ className = '', onSubmit, type = 'text', value, onChange, ...props }: InputProps) => {
   const { inputValue, resetValue, onChangeValue } = useInput('');
 
   const handleSubit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,15 +22,9 @@ const Input = ({ className, onSubmit, type = 'text', value, onChange, ...props }
   };
 
   return (
-    <form onSubmit={handleSubit} className={[input['form'], className].join(' ')}>
+    <form onSubmit={handleSubit} className={combineClassName(input['form'], className)}>
       <div>
-        <input
-          {...props}
-          type={type}
-          className={[input['input']].join(' ')}
-          value={inputValue}
-          onChange={onChangeValue}
-        />
+        <input {...props} type={type} className={input['input']} value={inputValue} onChange={onChangeValue} />
         {inputValue ? (
           <button type="button" onClick={resetValue} tabIndex={0}>
             <GrFormClose color={'inherit'} size={'1.5rem'} />

@@ -1,17 +1,19 @@
 'use client';
 /* eslint-disable @next/next/no-html-link-for-pages */
-import { useRef, useEffect, useState, useMemo } from 'react';
+import { useRef, useEffect, useState, useMemo, FormEvent } from 'react';
 import Link from 'next/link';
 import Sidebar from '@/components/layout/sidebar/Sidebar';
 import { BiSearchAlt } from 'react-icons/bi';
 import header from '@/components/layout/Header.module.scss';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import HamburgerButton from '@/components/common/button/HamburgerButton';
 import NavigationList from '@/components/layout/NavigationList';
+import Input from '@/components/common/Input';
 
 const Header = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const pathname = usePathname();
+  const route = useRouter();
   const gnbRef = useRef<HTMLDivElement>(null);
 
   const handleToggleSidebar = () => {
@@ -30,6 +32,10 @@ const Header = () => {
       }, 300);
     };
   }, []);
+
+  const handleSearch = (_: FormEvent, inputVale: string) => {
+    route.push(`/search?query=${inputVale}`);
+  };
 
   useEffect(() => {
     setShowSidebar(() => false);
@@ -50,9 +56,12 @@ const Header = () => {
           <a href="/" className={header['title']}>
             Live Uta
           </a>
+          {pathname !== '/search' ? (
+            <Input className={header['search-input']} onSubmit={handleSearch} placeholder="채널명으로 검색" />
+          ) : null}
           <div className={header['navigation']}>
             <NavigationList />
-            <Link href="/search" className={header['search']}>
+            <Link href="/search" className={header['search-button']}>
               <BiSearchAlt size="1.6rem" color="inherit" />
             </Link>
           </div>

@@ -31,13 +31,13 @@ const SearchSection = () => {
   return (
     <section className={search['search-section']}>
       <div>
-        <label htmlFor="searchInput" className="blind">
+        <label htmlFor="search-input" className="blind">
           채널명 검색
         </label>
         <Input
-          id="searchInput"
-          name="searchInput"
-          className={search['searchInput']}
+          id="search-input"
+          name="search-input"
+          className={search['search-input']}
           type="text"
           onSubmit={handleOnSubmit}
           value={inputValue}

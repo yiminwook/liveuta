@@ -42,6 +42,33 @@
       padding: 0 1.5rem;
     }
 
+    .search-input {
+      max-width: 30%;
+      height: 2.25rem;
+      color: black;
+      display: none;
+
+      @include min-width(map-get($points, md)) {
+        display: block;
+      }
+
+      > div {
+        > input {
+          &::placeholder {
+            text-align: center;
+          }
+        }
+        > button[type='submit'] {
+          padding: 0.25rem;
+
+          > svg {
+            width: 1rem;
+            height: 1rem;
+          }
+        }
+      }
+    }
+
     .hamburger {
       display: flex;
       padding: 0.2rem 0.3rem;
@@ -53,7 +80,7 @@
       }
 
       @include min-width(map-get($points, md)) {
-        display: none !important;
+        display: none;
       }
     }
 
@@ -78,12 +105,16 @@
         }
       }
 
-      .search {
+      .search-button {
         border-radius: 10px;
         padding: 0.5rem 0.7rem;
         background-color: var(--liveuta-active-color);
         @include transition(background-color, 80ms, $bezier-curve);
         @include box-shadow();
+
+        @include min-width(map-get($points, md)) {
+          display: none;
+        }
 
         &:hover {
           background-color: var(--liveuta-hover-color);
