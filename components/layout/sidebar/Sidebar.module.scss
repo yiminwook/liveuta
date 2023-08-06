@@ -10,6 +10,7 @@
   z-index: 500;
   visibility: hidden;
   width: 100%;
+  color: var(--liveuta-default-text-color);
   @include transition(all, 0.3s, linear);
 
   @include min-width(map-get($points, md)) {

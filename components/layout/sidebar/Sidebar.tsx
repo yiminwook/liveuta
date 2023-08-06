@@ -4,7 +4,7 @@ import ExternalLinksSection from '@/components/layout/sidebar/ExternalLinksSecti
 import IndexSection from '@/components/layout/sidebar/IndexSection';
 import sidebar from '@/components/layout/sidebar/Sidebar.module.scss';
 import CloseButton from '@/components/common/button/CloseButton';
-import DarkModeButton from '@/components/common/button/DarkModeButton';
+import DarkModeButton from '@/components/common/button/ThemeButton';
 
 interface SidebarProps {
   show: boolean;

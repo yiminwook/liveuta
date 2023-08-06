@@ -4,7 +4,7 @@ import Image from 'next/image';
 import channelCard from '@/components/common/channelCard/ChannelCard.module.scss';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import { MouseEvent, useState } from 'react';
-import ChannelCardModal from '@/components/common/channelCard/ChannelCardModal';
+import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
 import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
 import useStopPropagation from '@/hooks/useStopPropagation';

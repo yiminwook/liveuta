@@ -1,6 +1,6 @@
 import { ExternalLinkList } from '@/components/layout/sidebar/ExternalLinksSection';
 import DropDown from '@/components/common/dropDown/DropDown';
-import DarkModeButton from '@/components/common/button/DarkModeButton';
+import DarkModeButton from '@/components/common/button/ThemeButton';
 import { IndexLinkList } from '@/components/layout/sidebar/IndexSection';
 
 const NavigationList = () => {

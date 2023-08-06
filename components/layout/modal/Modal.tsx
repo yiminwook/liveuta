@@ -1,3 +1,4 @@
+'use client';
 import { CSSProperties, MouseEvent, ReactNode } from 'react';
 import modal from '@/components/layout/modal/Modal.module.scss';
 import { FaWindowClose } from 'react-icons/fa';

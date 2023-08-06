@@ -1,7 +1,8 @@
-import '@/styles/reset.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'pretendard/dist/web/variable/pretendardvariable.css';
+import '@/styles/reset.css';
 import '@/styles/globals.scss';
+import '@/styles/theme.scss';
 import { PropsWithChildren } from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
 import { PAGE_REVALIDATE_TIME } from '@/consts';
