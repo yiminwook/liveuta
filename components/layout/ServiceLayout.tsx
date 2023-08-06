@@ -14,8 +14,8 @@ interface ServiceLayoutProps {
 }
 
 const SWR_CONFIG_OPTIONS: Partial<PublicConfiguration> = {
-  dedupingInterval: 30 * 1000,
-  refreshInterval: 30 * 1000,
+  dedupingInterval: 1000 * 60 * 3,
+  refreshInterval: 1000 * 60 * 3,
   errorRetryCount: 3,
   errorRetryInterval: 5 * 1000,
   revalidateOnReconnect: true,
