@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Modal from '@/components/layout/Modal';
+import Modal from '@/components/layout/modal/Modal';
 import channelCardModal from '@/components/common/channelCard/ChannelCardModal.module.scss';
 import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
