@@ -1,0 +1,22 @@
+@import 'var';
+@import 'mixin';
+@import 'placeholder';
+
+.wrap {
+  box-sizing: border-box;
+  position: relative;
+  height: 100%;
+  max-width: 100%;
+  font-size: inherit;
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  &::-webkit-scrollbar {
+    height: 3px;
+    cursor: pointer;
+  }
+
+  > div {
+    min-width: 100%;
+  }
+}

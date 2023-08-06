@@ -3,12 +3,12 @@
 @import '@/styles/placeholder.scss';
 
 .pagination {
+  box-sizing: border-box;
   padding: 0.25rem;
   display: flex;
   margin: auto;
   display: flex;
   gap: 0.5rem;
-  flex-wrap: wrap;
   justify-content: center;
 
   @include min-width($mixin-middle-width) {

@@ -3,6 +3,8 @@ import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannel
 import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
 import ChannelSection from '@/components/channels/ChannelSection';
 import Pagination from '@/components/common/pagination/Pagination';
+import HorizonScrollBox from '@/components/common/HorizonScrollBox';
+import channels from '@/components/channels/Channels.module.scss';
 
 const getChannelData = async () => {
   /* Google spread sheet API */
@@ -31,7 +33,9 @@ const ChannelsPage = async () => {
   return (
     <>
       <ChannelSection contents={contents} />
-      <Pagination totalLength={totalLength} />
+      <HorizonScrollBox className={channels['pagination']}>
+        <Pagination totalLength={totalLength} />
+      </HorizonScrollBox>
     </>
   );
 };

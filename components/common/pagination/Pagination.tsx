@@ -10,12 +10,14 @@ import {
 } from '@/components/common/pagination/PaginationChild';
 import { ITEMS_PER_PAGE, PAGINATION_RANGE } from '@/consts';
 import { useParams } from 'next/navigation';
+import { combineClassName } from '@/utils/combineClassName';
 
 interface PaginationProps {
   totalLength: number;
+  className?: string;
 }
 
-const Pagination = ({ totalLength }: PaginationProps) => {
+const Pagination = ({ totalLength, className = '' }: PaginationProps) => {
   const params = useParams();
 
   const currentPage = useMemo(() => {
@@ -35,7 +37,7 @@ const Pagination = ({ totalLength }: PaginationProps) => {
   });
 
   return (
-    <ul className={pagination['pagination']}>
+    <ul className={combineClassName(pagination['pagination'], className)}>
       <FirstLink currentPage={currentPage} />
       <BeforeLink initialPage={pageArray[0]} totalPage={totalPage} />
       {pageArray.map((page, index) => (

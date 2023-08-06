@@ -15,3 +15,9 @@
     font-weight: 600;
   }
 }
+
+.pagination {
+  > div {
+    min-width: 500px;
+  }
+}
