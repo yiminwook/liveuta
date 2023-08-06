@@ -1,5 +1,5 @@
 import { ITEMS_PER_PAGE } from '@/consts';
-import getPaginationRange from '@/utils/petPagenationRange';
+import getPaginationRange from '@/utils/getPagenationRange';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
 import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
 import ChannelSection from '@/components/channels/ChannelSection';
