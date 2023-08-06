@@ -42,33 +42,6 @@
       padding: 0 1.5rem;
     }
 
-    .search-input {
-      max-width: 30%;
-      height: 2.25rem;
-      color: black;
-      display: none;
-
-      @include min-width(map-get($points, md)) {
-        display: block;
-      }
-
-      > div {
-        > input {
-          &::placeholder {
-            text-align: center;
-          }
-        }
-        > button[type='submit'] {
-          padding: 0.25rem;
-
-          > svg {
-            width: 1rem;
-            height: 1rem;
-          }
-        }
-      }
-    }
-
     .hamburger {
       display: flex;
       padding: 0.2rem 0.3rem;
@@ -94,6 +67,33 @@
     .navigation {
       display: flex;
       gap: 1rem;
+
+      .search-input {
+        max-width: 15rem;
+        height: 2.25rem;
+        color: black;
+        display: none;
+
+        @include min-width(map-get($points, md)) {
+          display: block;
+        }
+
+        > div {
+          > input {
+            &::placeholder {
+              text-align: center;
+            }
+          }
+          > button[type='submit'] {
+            padding: 0.25rem;
+
+            > svg {
+              width: 1rem;
+              height: 1rem;
+            }
+          }
+        }
+      }
 
       ul {
         display: none;

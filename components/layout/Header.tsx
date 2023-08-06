@@ -56,10 +56,10 @@ const Header = () => {
           <a href="/" className={header['title']}>
             Live Uta
           </a>
-          {pathname !== '/search' ? (
-            <Input className={header['search-input']} onSubmit={handleSearch} placeholder="채널명으로 검색" />
-          ) : null}
           <div className={header['navigation']}>
+            {pathname !== '/search' ? (
+              <Input className={header['search-input']} onSubmit={handleSearch} placeholder="채널명으로 검색" />
+            ) : null}
             <NavigationList />
             <Link href="/search" className={header['search-button']}>
               <BiSearchAlt size="1.6rem" color="inherit" />
