@@ -4,7 +4,7 @@
 
 .card {
   padding: 0.2rem;
-  background-color: lighten(map-get($colors, main), 10%);
+  background-color: #fff;
   border-radius: 5px;
   @include box-shadow();
 
@@ -63,7 +63,7 @@
       height: 100%;
       overflow: hidden;
       position: relative;
-      background-color: map-get($colors, card-bg);
+      background-color: #fff;
       @include transition(scale, 0.3s, linear);
       @include box-shadow();
 

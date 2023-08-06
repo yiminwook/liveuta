@@ -90,6 +90,7 @@
     white-space: pre-line;
     word-break: break-word;
     overflow-y: auto;
+    height: 30rem;
     @extend %scroll-bar;
 
     &::-webkit-scrollbar-track {

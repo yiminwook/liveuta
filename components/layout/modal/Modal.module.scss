@@ -15,11 +15,10 @@
     top: 50%;
     left: 50%;
     position: relative;
-    background-color: map-get($colors, card-bg);
+    background-color: #fff;
     max-width: 40rem;
     max-height: 30rem;
     width: 90%;
-    height: 60%;
     transform: translateX(-50%) translateY(-50%);
     border-radius: 30px;
 
@@ -28,7 +27,6 @@
 
     @include min-width($mixin-large-width) {
       width: 40rem;
-      height: 30rem;
     }
 
     .inner {
