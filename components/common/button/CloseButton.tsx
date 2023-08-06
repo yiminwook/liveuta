@@ -5,14 +5,13 @@ import { combineClassName } from '@/utils/combineClassName';
 
 interface CloseButtonProps {
   className?: string;
-  onClose: () => void;
+  onClose: (e: MouseEvent) => void;
   size?: string;
 }
 
 const CloseButton = ({ className = '', onClose, size = '1.5rem' }: CloseButtonProps) => {
   const onClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    onClose();
+    onClose(e);
   };
 
   return (

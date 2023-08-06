@@ -9,7 +9,6 @@ import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
 import useStopPropagation from '@/hooks/useStopPropagation';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
-import Link from 'next/link';
 
 interface ChannelItemProps {
   content: ChannelsDataType;

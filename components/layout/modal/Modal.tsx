@@ -1,7 +1,6 @@
 'use client';
 import { CSSProperties, MouseEvent, ReactNode } from 'react';
 import modal from '@/components/layout/modal/Modal.module.scss';
-import { FaWindowClose } from 'react-icons/fa';
 import useStopPropagation from '@/hooks/useStopPropagation';
 import ModalPortal from '@/components/layout/modal/ModalPortal';
 import CloseButton from '@/components/common/button/CloseButton';
@@ -9,7 +8,7 @@ import CloseButton from '@/components/common/button/CloseButton';
 interface ModalProps {
   children: ReactNode;
   style?: CSSProperties;
-  onClose: () => void;
+  onClose: (e: MouseEvent) => void;
 }
 
 const Modal = ({ children, style, onClose }: ModalProps) => {

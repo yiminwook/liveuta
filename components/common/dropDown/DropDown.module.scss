@@ -4,7 +4,6 @@
 
 .wrap {
   position: relative;
-
   &.active {
     //펼쳐지는 효과
     button {
@@ -41,12 +40,13 @@
     width: 100%;
     position: absolute;
     overflow: hidden;
-    background-color: var(--liveuta-bg-color-light);
+    background-color: #fff;
     color: var(--liveuta-default-text-color);
     border-radius: 0 0 0.5rem 0.5rem;
+    @include box-shadow();
 
     //펼쳐지는 효과
-    transition: max-height 0.2s ease;
+    transition: max-height 0.2s ease, visibility 0.2s ease;
     visibility: hidden;
     max-height: 0;
 

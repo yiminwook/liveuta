@@ -8,14 +8,15 @@ import ThemeButton from '@/components/common/button/ThemeButton';
 
 interface SidebarProps {
   show: boolean;
-  onClose: () => void;
+  onClose: (e: MouseEvent) => void;
 }
 
 const Sidebar = ({ show, onClose }: SidebarProps) => {
   const { stopPropagation } = useStopPropagation();
 
-  const onClick = () => {
-    onClose();
+  const onClick = (e: MouseEvent) => {
+    e.stopPropagation();
+    onClose(e);
   };
 
   return (

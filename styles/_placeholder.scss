@@ -1,6 +1,6 @@
 %scroll-bar {
   &::-webkit-scrollbar {
-    width: 15px;
+    width: 10px;
   }
   &::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0.1);
@@ -8,6 +8,7 @@
   &::-webkit-scrollbar-thumb {
     background-color: var(--liveuta-active-color);
     border-radius: 10px;
+
     &:hover {
       background-color: var(--liveuta-hover-color);
     }

@@ -1,6 +1,5 @@
 import { RxLink2 } from 'react-icons/rx';
 import { ReactNode } from 'react';
-import Link from 'next/link';
 
 const ExternalLink = ({ href, text }: { href: string; text: ReactNode }) => {
   return (

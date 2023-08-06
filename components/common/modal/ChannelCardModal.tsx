@@ -3,9 +3,8 @@ import Modal from '@/components/layout/modal/Modal';
 import channelCardModal from '@/components/common/modal/ChannelCardModal.module.scss';
 import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
-import { MouseEvent } from 'react';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
-import Link from 'next/link';
+import { MouseEvent } from 'react';
 
 interface ChannelCardModalProp {
   onClose: (e: MouseEvent) => void;
