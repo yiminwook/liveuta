@@ -7,7 +7,6 @@
   top: 3.5rem;
   z-index: 2;
   display: flex;
-  justify-content: space-between;
   color: var(--liveuta-default-text-color);
   font-size: 1rem;
   font-weight: 500;
@@ -17,52 +16,66 @@
     padding: 1rem;
   }
 
-  .nav-tab {
-    display: flex;
-    justify-content: space-around;
-    width: 13rem;
-    overflow: hidden;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    border: none;
-    border-radius: 5px;
-    @include box-shadow();
+  .nav-scroll-box {
+    width: 100%;
 
-    li {
-      width: 100%;
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
-      a {
-        background-color: lighten(map-get($colors, main), 10%);
+    > div {
+      display: flex;
+      justify-content: space-between;
+      min-width: 18.75rem;
 
-        width: 100%;
-        line-height: 2.4rem;
-        text-align: center;
-        @include transition(background-color, 0.2s, linear);
+      .nav-tab {
+        display: flex;
+        justify-content: space-around;
+        width: 13rem;
+        overflow: hidden;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        border: none;
+        border-radius: 5px;
+        @include box-shadow();
 
-        &:hover {
-          background-color: var(--liveuta-default-color);
-          color: lighten(map-get($colors, main), 10%);
-        }
+        li {
+          width: 100%;
 
-        &.active {
-          background-color: var(--liveuta-active-color);
-          color: var(--liveuta-bg-color-light);
-        }
+          a {
+            background-color: lighten(map-get($colors, main), 10%);
 
-        &:focus-visible {
-          outline-offset: -4px;
+            width: 100%;
+            line-height: 2.4rem;
+            text-align: center;
+            @include transition(background-color, 0.2s, linear);
+
+            &:hover {
+              background-color: var(--liveuta-default-color);
+              color: lighten(map-get($colors, main), 10%);
+            }
+
+            &.active {
+              background-color: var(--liveuta-active-color);
+              color: var(--liveuta-bg-color-light);
+            }
+
+            &:focus-visible {
+              outline-offset: -4px;
+            }
+          }
         }
       }
     }
-  }
 
-  .total {
-    line-height: 2.4rem;
-    padding: 0 0.4rem;
-    background-color: lighten(map-get($colors, main), 10%);
-    border-radius: 5px;
-    @include box-shadow();
+    .total {
+      line-height: 2.4rem;
+      padding: 0 0.4rem;
+      background-color: lighten(map-get($colors, main), 10%);
+      border-radius: 5px;
+      @include box-shadow();
+    }
   }
 }
 

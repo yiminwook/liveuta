@@ -1,6 +1,7 @@
 import home from '@/components/home/Home.module.scss';
 import NavLink from '@/components/common/NavLink';
 import { ReactNode } from 'react';
+import HorizonScrollBox from '@/components/common/HorizonScrollBox';
 
 interface NavSectionProps {
   total: number;
@@ -28,8 +29,10 @@ const NavTap = () => {
 const NavSection = ({ total }: NavSectionProps) => {
   return (
     <section className={home['nav-section']}>
-      <NavTap />
-      {total > 0 ? <div className={home['total']}>{`Total: ${total}`}</div> : null}
+      <HorizonScrollBox className={home['nav-scroll-box']}>
+        <NavTap />
+        {total > 0 ? <div className={home['total']}>{`Total: ${total}`}</div> : null}
+      </HorizonScrollBox>
     </section>
   );
 };
