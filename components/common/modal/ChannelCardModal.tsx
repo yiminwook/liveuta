@@ -32,7 +32,7 @@ const ChannelCardModal = ({
     <Modal onClose={onClose}>
       <div className={channelCardModal['modal']}>
         <div className={channelCardModal['profile']}>
-          <Link href={url}>
+          <a href={url}>
             <div className={channelCardModal['image-container']}>
               <Image
                 src={imageURL}
@@ -44,7 +44,7 @@ const ChannelCardModal = ({
                 unoptimized
               />
             </div>
-          </Link>
+          </a>
           <div className={channelCardModal['info']}>
             <h1 className={channelCardModal['channel-name']}>{channelName}</h1>
             <h2 className={channelCardModal['title']}>{title}</h2>

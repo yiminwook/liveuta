@@ -5,7 +5,7 @@ import Link from 'next/link';
 const ExternalLink = ({ href, text }: { href: string; text: ReactNode }) => {
   return (
     <li>
-      <Link href={href}>{text}</Link>
+      <a href={href}>{text}</a>
     </li>
   );
 };

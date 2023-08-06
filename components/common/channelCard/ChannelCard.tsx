@@ -38,7 +38,7 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
   return (
     <>
       <div className={channelCard['channel']} onClick={toggleModal}>
-        <Link href={url} onClick={stopPropagation}>
+        <a href={url} onClick={stopPropagation}>
           <div className={channelCard['image-container']}>
             <Image
               src={imageURL}
@@ -50,7 +50,7 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
               unoptimized
             />
           </div>
-        </Link>
+        </a>
         <div className={channelCard['desc']}>
           <h1>{channelName}</h1>
           <div className={channelCard['details']}>
