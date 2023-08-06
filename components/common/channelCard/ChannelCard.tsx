@@ -9,6 +9,7 @@ import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
 import useStopPropagation from '@/hooks/useStopPropagation';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
+import Link from 'next/link';
 
 interface ChannelItemProps {
   content: ChannelsDataType;
@@ -37,7 +38,7 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
   return (
     <>
       <div className={channelCard['channel']} onClick={toggleModal}>
-        <a href={url} onClick={stopPropagation}>
+        <Link href={url} onClick={stopPropagation}>
           <div className={channelCard['image-container']}>
             <Image
               src={imageURL}
@@ -49,7 +50,7 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
               unoptimized
             />
           </div>
-        </a>
+        </Link>
         <div className={channelCard['desc']}>
           <h1>{channelName}</h1>
           <div className={channelCard['details']}>

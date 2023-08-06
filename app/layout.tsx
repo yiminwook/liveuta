@@ -28,9 +28,9 @@ const RootLayout = ({ children }: PropsWithChildren) => {
       <DefaultHead />
       <body>
         <ServiceLayout initialTheme={cookie.theme}>{children}</ServiceLayout>
-        <div className="backgroundLeft" />
-        <div className="backgroundRight" />
-        <div id="modalRoot" />
+        <div className="background-left" />
+        <div className="background-right" />
+        <div id="modal-root" />
       </body>
     </html>
   );

@@ -137,14 +137,14 @@ body {
     }
   }
 
-  .backgroundLeft {
+  .background-left {
     @extend %background-side;
     background-image: var(--liveuta-bg-left);
     background-position: var(--liveuta-bg-left-position);
     left: 0;
   }
 
-  .backgroundRight {
+  .background-right {
     @extend %background-side;
     background-image: var(--liveuta-bg-right);
     background-position: var(--liveuta-bg-right-position);

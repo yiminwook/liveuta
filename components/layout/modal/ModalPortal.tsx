@@ -8,7 +8,7 @@ interface PortalProps {
 }
 
 const ModalPortal = ({ children }: PortalProps) => {
-  return createPortal(children, document.getElementById('modalRoot')!);
+  return createPortal(children, document.getElementById('modal-root')!);
 };
 
 export default ModalPortal;

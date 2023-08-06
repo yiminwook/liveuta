@@ -5,6 +5,7 @@ import scheduleCard from '@/components/common/scheduleCard/ScheduleCard.module.s
 import SchduleCardImage from '@/components/common/scheduleCard/ScheduleCardImage';
 import ScheduleCardDesc from '@/components/common/scheduleCard/ScheduleCardDesc';
 import { combineClassName } from '@/utils/combineClassName';
+import Link from 'next/link';
 
 interface ScheduleCardProps {
   content: ContentsDataType;
@@ -64,9 +65,9 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
   return (
     <div className={combineClassName(scheduleCard['card'], addStreamModifier)} key={videoId} ref={target}>
       <div className={scheduleCard['content']}>
-        <a href={url}>
+        <Link href={url}>
           <SchduleCardImage content={content} />
-        </a>
+        </Link>
         <ScheduleCardDesc content={content} addStreamModifier={addStreamModifier} />
       </div>
     </div>

@@ -2,6 +2,7 @@ import scheduleCard from '@/components/common/scheduleCard/ScheduleCard.module.s
 import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
 import { ContentsDataType } from '@/types/inSheet';
+import { combineClassName } from '@/utils/combineClassName';
 
 interface ScheduleCardDescProps {
   content: ContentsDataType;
@@ -13,8 +14,8 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
 
   return (
     <div className={scheduleCard['description']}>
-      <div className={[scheduleCard['channel_name'], addStreamModifier].join(' ')}>{channelName}</div>
-      <div className={[scheduleCard['title'], addStreamModifier].join(' ')}>{title}</div>
+      <div className={combineClassName(scheduleCard['channel_name'], addStreamModifier)}>{channelName}</div>
+      <div className={combineClassName(scheduleCard['title'], addStreamModifier)}>{title}</div>
       <div className={scheduleCard['time']}>
         <time className={scheduleCard['kor']}>{korTime}</time>
         <div className={scheduleCard['status']}>{isStream === 'TRUE' ? 'LIVE!' : interval}</div>
