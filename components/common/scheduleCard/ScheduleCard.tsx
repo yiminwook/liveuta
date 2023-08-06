@@ -1,10 +1,10 @@
 'use client';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ContentsDataType } from '@/types/inSheet';
-import Link from 'next/link';
 import scheduleCard from '@/components/common/scheduleCard/ScheduleCard.module.scss';
 import SchduleCardImage from '@/components/common/scheduleCard/ScheduleCardImage';
 import ScheduleCardDesc from '@/components/common/scheduleCard/ScheduleCardDesc';
+import { combineClassName } from '@/utils/combineClassName';
 
 interface ScheduleCardProps {
   content: ContentsDataType;
@@ -35,7 +35,7 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
     }
 
     return streamModifer;
-  }, []);
+  }, [isStream]);
 
   const onIntersect: IntersectionObserverCallback = useCallback(
     (items, observer) => {
@@ -62,7 +62,7 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
   }, [target, content, lastContentsIndex]);
 
   return (
-    <div className={[scheduleCard['card'], addStreamModifier].join(' ')} key={videoId} ref={target}>
+    <div className={combineClassName(scheduleCard['card'], addStreamModifier)} key={videoId} ref={target}>
       <div className={scheduleCard['content']}>
         <a href={url}>
           <SchduleCardImage content={content} />
