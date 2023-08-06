@@ -1,5 +1,5 @@
 import useSWRInfinite from 'swr/infinite';
-import { fetcher } from '@/hooks/fetcher';
+import { fetcher } from '@/hooks/api/fetcher';
 import { SetListResponseType } from '@/app/api/setlist/route';
 import { useMemo } from 'react';
 

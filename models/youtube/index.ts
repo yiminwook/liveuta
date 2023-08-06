@@ -1,4 +1,4 @@
-import { serverEnvConfig } from '@/configs';
+import { serverEnvConfig } from '@/configs/envConfig';
 import { google } from 'googleapis';
 import { customFetchCached } from '@/models/customFetch';
 

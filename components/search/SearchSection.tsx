@@ -3,7 +3,7 @@ import { FormEvent, useCallback, useEffect, useState } from 'react';
 import search from '@/components/search/Search.module.scss';
 import useInput from '@/hooks/useInput';
 import { usePathname, useRouter } from 'next/navigation';
-import { useSearchQuery } from '@/hooks/useSearch';
+import { useSearchQuery } from '@/hooks/api/useSearch';
 import Input from '@/components/common/Input';
 
 const SearchSection = () => {

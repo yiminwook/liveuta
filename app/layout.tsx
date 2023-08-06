@@ -7,7 +7,7 @@ import ServiceLayout from '@/components/layout/ServiceLayout';
 import { PAGE_REVALIDATE_TIME } from '@/consts';
 import { cookies } from 'next/headers';
 import { DEFALUT_METADATA } from '@/consts/metaData';
-import DefaultHead from '@/components/layout/DefaultHead';
+import DefaultHead from '@/configs/DefaultHead';
 
 interface CookieType {
   theme: string | undefined;

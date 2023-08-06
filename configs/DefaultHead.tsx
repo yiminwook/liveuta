@@ -1,4 +1,4 @@
-import Analytics from '@/components/layout/Analytics';
+import Analytics from '@/configs/Analytics';
 import { DEFAULT_ICON, DEFAULT_SITE_URL } from '@/consts/metaData';
 import Script from 'next/script';
 const DefaultHead = () => {

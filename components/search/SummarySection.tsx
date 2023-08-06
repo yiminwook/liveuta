@@ -1,6 +1,6 @@
 'use client';
 import search from '@/components/search/Search.module.scss';
-import { useSearchQuery } from '@/hooks/useSearch';
+import { useSearchQuery } from '@/hooks/api/useSearch';
 
 const SummarySection = () => {
   const searchQuery = useSearchQuery();

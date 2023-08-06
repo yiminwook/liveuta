@@ -4,7 +4,7 @@ import ChannelSection from '@/components/search/ChannelSection';
 import ContentSection from '@/components/search/ContentSection';
 import SearchSection from '@/components/search/SearchSection';
 import SummarySection from '@/components/search/SummarySection';
-import { useSearch } from '@/hooks/useSearch';
+import { useSearch } from '@/hooks/api/useSearch';
 
 const SearchPage = () => {
   const { data, isLoading } = useSearch();

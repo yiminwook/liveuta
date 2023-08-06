@@ -3,7 +3,7 @@
 import { memo } from 'react';
 import ToggleButton from '@/components/common/button/ToggleButton';
 import darkModeButton from '@/components/common/button/DarkModeButton.module.scss';
-import { useTheme } from '@/components/layout/ThemeProvider';
+import { useTheme } from '@/configs/ThemeProvider';
 
 const DarkModeButton = () => {
   const { currentTheme, setTheme } = useTheme();

@@ -3,7 +3,7 @@ import { OAuth2Client } from 'google-auth-library';
 import type { NextApiRequest } from 'next';
 import axios from 'axios';
 // import jwt from 'jsonwebtoken';
-import { serverEnvConfig } from '@/configs';
+import { serverEnvConfig } from '@/configs/envConfig';
 
 const { GOOGLE_API_KEY } = serverEnvConfig();
 

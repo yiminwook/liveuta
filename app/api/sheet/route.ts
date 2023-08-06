@@ -1,7 +1,7 @@
 import { SheetAPIReturntype } from '@/types/inSheet';
 import { getSheet } from '@/models/sheet';
 import { parseAllData, parseScheduledData } from '@/utils/parseContentSheet';
-import { serverEnvConfig } from '@/configs';
+import { serverEnvConfig } from '@/configs/envConfig';
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/models/error/handler';
 

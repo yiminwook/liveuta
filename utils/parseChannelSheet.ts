@@ -1,4 +1,4 @@
-import { serverEnvConfig } from '@/configs';
+import { serverEnvConfig } from '@/configs/envConfig';
 import { getSheet } from '@/models/sheet';
 import { ChannelRowType } from '@/types/inYoutube';
 

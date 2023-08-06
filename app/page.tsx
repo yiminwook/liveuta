@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import { ContentsDataType, SheetAPIReturntype } from '@/types/inSheet';
-import useSheet from '@/hooks/useSheet';
+import useSheet from '@/hooks/api/useSheet';
 import NavSection from '@/components/home/NavSection';
 import ScheduleSection from '@/components/home/ScheduleSection';
 import Loading from '@/components/common/Loading';

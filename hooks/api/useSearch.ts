@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { fetcher } from '@/hooks/fetcher';
+import { fetcher } from '@/hooks/api/fetcher';
 import { SearchResponseType } from '@/app/api/search/route';
 import { useSearchParams } from 'next/navigation';
 

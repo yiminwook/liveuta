@@ -1,5 +1,5 @@
 import Iframe from '@/components/common/Iframe';
-import { serverEnvConfig } from '@/configs';
+import { serverEnvConfig } from '@/configs/envConfig';
 
 const getShortUrl = async () => {
   const { SHORT_URL } = serverEnvConfig();

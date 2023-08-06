@@ -1,4 +1,4 @@
-import { serverEnvConfig } from '@/configs';
+import { serverEnvConfig } from '@/configs/envConfig';
 import errorHandler from '@/models/error/handler';
 import { SearchCommentItemType, SearchCommentResponseType } from '@/types/inHolodex';
 import axios, { AxiosResponse } from 'axios';

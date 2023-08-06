@@ -5,7 +5,7 @@ import { parseSheetData } from '@/utils/parseContentSheet';
 import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
 import { ChannelsDataType } from '@/types/inYoutube';
-import { serverEnvConfig } from '@/configs';
+import { serverEnvConfig } from '@/configs/envConfig';
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/models/error/handler';
 

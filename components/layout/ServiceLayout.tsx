@@ -6,7 +6,7 @@ import FloatButton from '@/components/common/button/FlotButton';
 import { ToastContainer } from 'react-toastify';
 import { PublicConfiguration } from 'swr/_internal';
 import Header from '@/components/layout/Header';
-import ThemeProvider from '@/components/layout/ThemeProvider';
+import ThemeProvider from '@/configs/ThemeProvider';
 
 interface ServiceLayoutProps {
   initialTheme: string | undefined;

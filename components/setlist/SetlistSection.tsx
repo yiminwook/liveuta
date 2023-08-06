@@ -1,4 +1,4 @@
-import { useHolodexSearchComment } from '@/hooks/useHolodex';
+import { useHolodexSearchComment } from '@/hooks/api/useHolodex';
 import { useSearchParams } from 'next/navigation';
 import SetlistCard from '@/components/setlist/SetlistCard';
 import setlist from '@/components/setlist/Setlist.module.scss';
