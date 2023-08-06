@@ -11,21 +11,14 @@ class ThemeCookie {
 
   public init() {
     if (typeof window === 'undefined') return;
-    let initialTheme = document.documentElement.getAttribute('color');
-
-    if (initialTheme === undefined || initialTheme === null) {
-      // cookie에 저장된 값이 없을 경우, theme1 쿠키를 생성
-      console.log('create themeCookie', initialTheme);
-      this.setCookie('theme1');
-      initialTheme = 'theme1';
-    }
-
-    this.theme = initialTheme;
+    this.theme = document.documentElement.getAttribute('color') || 'theme1';
+    this.setCookie(this.theme); // 접속시 쿠키를 새로 생성
   }
 
   public setState(nextTheme: string) {
     this.theme = nextTheme;
-    document.documentElement.setAttribute('color', this.theme);
+
+    this.setAttribute(this.theme);
     this.setCookie(this.theme);
   }
 
@@ -37,10 +30,15 @@ class ThemeCookie {
     return this.theme;
   }
 
-  /** this.data를 cookie에 저장 */
+  /** theme를 document에 저장 */
+  private setAttribute(theme: string) {
+    document.documentElement.setAttribute('color', theme);
+  }
+
+  /** theme를 cookie에 저장 */
   private setCookie(theme: string) {
     const themeCookie = new Cookies();
-    themeCookie.set('theme', theme, { path: '/' });
+    themeCookie.set('theme', theme, { path: '/', maxAge: 60 * 60 * 24 * 30 * 3 }); //3개월 저장
   }
 }
 
