@@ -29,22 +29,17 @@
       width: 40rem;
     }
 
-    .inner {
-      width: 100%;
-      padding: 1rem;
-    }
-
-    .close {
+    .close-button {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      @include transition(color, 0.2s, linear);
+      @include transition(all, 0.2s, $bezier-curve);
       color: var(--liveuta-active-color);
+    }
 
-      &:hover {
-        transform: scale(1.02);
-        color: var(--liveuta-hover-color);
-      }
+    .inner {
+      width: 100%;
+      padding: 1rem;
     }
   }
 }

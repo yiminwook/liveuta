@@ -4,7 +4,7 @@ import { InputHTMLAttributes } from 'react';
 import input from '@/components/common/Input.module.scss';
 import { GrFormClose } from 'react-icons/gr';
 import useInput from '@/hooks/useInput';
-import { BsSearchHeart } from 'react-icons/bs';
+import { IoMdMusicalNote } from 'react-icons/io';
 import { combineClassName } from '@/utils/combineClassName';
 
 type OriginalInputProps = InputHTMLAttributes<HTMLInputElement>;
@@ -26,12 +26,12 @@ const Input = ({ className = '', onSubmit, type = 'text', value, onChange, ...pr
       <div>
         <input {...props} type={type} className={input['input']} value={inputValue} onChange={onChangeValue} />
         {inputValue ? (
-          <button type="button" onClick={resetValue} tabIndex={0}>
-            <GrFormClose color={'inherit'} size={'1.5rem'} />
+          <button type="button" onClick={resetValue}>
+            <GrFormClose color="inherit" size="1rem" />
           </button>
         ) : null}
         <button type="submit">
-          <BsSearchHeart color={'inherit'} size={'1.5rem'} />
+          <IoMdMusicalNote color="inherit" size="1.5rem" />
         </button>
       </div>
     </form>

@@ -42,17 +42,7 @@
       justify-content: space-between;
       padding: 0.5rem 1rem 0 1rem;
       align-items: center;
-
-      .close-button {
-        display: flex;
-        padding: 0 0.1rem;
-        color: var(--liveuta-title-color);
-        @include transition(color, 0.3s, $bezier-curve);
-
-        &:hover {
-          color: var(--liveuta-hover-color);
-        }
-      }
+      color: #fff;
     }
 
     section {

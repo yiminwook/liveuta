@@ -8,9 +8,10 @@ import { combineClassName } from '@/utils/combineClassName';
 
 interface ThemeButtonProps {
   className?: string;
+  size?: string;
 }
 
-const ThemeButton = ({ className = '' }: ThemeButtonProps) => {
+const ThemeButton = ({ className = '', size = '1.5rem' }: ThemeButtonProps) => {
   const [showThemeModal, setShowThemeModal] = useState(false);
 
   const openThemeModal = () => setShowThemeModal(true);
@@ -19,7 +20,7 @@ const ThemeButton = ({ className = '' }: ThemeButtonProps) => {
   return (
     <>
       <button onClick={openThemeModal} className={combineClassName(themeButton['wrap'], className)}>
-        <RiBrushLine color="inherit" size="1.5rem" />
+        <RiBrushLine color="inherit" size={size} />
       </button>
       {showThemeModal ? <ThemeModal onClose={closeThemeModal} /> : null}
     </>

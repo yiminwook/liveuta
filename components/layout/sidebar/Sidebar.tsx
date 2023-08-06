@@ -14,8 +14,7 @@ interface SidebarProps {
 const Sidebar = ({ show, onClose }: SidebarProps) => {
   const { stopPropagation } = useStopPropagation();
 
-  const onClick = (e: MouseEvent) => {
-    e.stopPropagation(); //이벤트 버블링 방지
+  const onClick = () => {
     onClose();
   };
 
@@ -24,7 +23,7 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
       <div className={[sidebar['container'], show ? sidebar['show'] : ''].join(' ')} onClick={onClick}>
         <div className={[sidebar['sidebar'], show ? sidebar['show'] : ''].join(' ')} onClick={stopPropagation}>
           <nav>
-            <CloseButton className={sidebar['close-button']} onClose={onClose} />
+            <CloseButton onClose={onClose} />
             <ThemeButton />
           </nav>
           <IndexSection />

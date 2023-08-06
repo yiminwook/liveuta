@@ -1,5 +1,7 @@
 import { MouseEvent } from 'react';
-import { FaWindowClose } from 'react-icons/fa';
+import { GrClose } from 'react-icons/gr';
+import closeButton from '@/components/common/button/CloseButton.module.scss';
+import { combineClassName } from '@/utils/combineClassName';
 
 interface CloseButtonProps {
   className?: string;
@@ -7,16 +9,16 @@ interface CloseButtonProps {
   size?: string;
 }
 
-const CloseButton = ({ className, onClose, size = '2rem' }: CloseButtonProps) => {
+const CloseButton = ({ className = '', onClose, size = '1.5rem' }: CloseButtonProps) => {
   const onClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     onClose();
   };
 
   return (
-    <button className={className} onClick={onClick}>
+    <button className={combineClassName(closeButton['wrap'], className)} onClick={onClick}>
       <span className="blind">닫기</span>
-      <FaWindowClose size={size} color="inherit" />
+      <GrClose size={size} color="inherit" />
     </button>
   );
 };
