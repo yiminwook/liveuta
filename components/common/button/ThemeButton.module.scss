@@ -2,65 +2,19 @@
 @import 'mixin';
 @import 'placeholder';
 
-.darkModeButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+.wrap {
+  width: 3rem;
+  height: 3rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: background-color 0.2s $bezier-curve;
 
-  input[type='checkbox'] {
-    appearance: none;
-    position: relative;
-    border: max(2px, 0.1em) solid var(--liveuta-title-color);
-    border-radius: 1.5em;
-    width: 2.5em;
-    height: 1.25em;
-    cursor: pointer;
-    background-color: var(--liveuta-header-color);
-    transition: background-color 0.2s $bezier-curve, border-color 0.2s $bezier-curve;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
 
-    &:hover {
-      border-color: var(--liveuta-hover-color);
-      &::before {
-        background-color: var(--liveuta-hover-color);
-      }
-    }
-
-    &:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      width: 1em;
-      height: 1em;
-      border-radius: 50%;
-      transform: scale(0.75);
-      background-color: var(--liveuta-title-color);
-      transition: left 250ms linear;
-    }
-
-    &:checked {
-      &:before {
-        left: 1.25em;
-      }
-    }
-
-    &:disabled {
-      border-color: lightgray;
-      opacity: 0.7;
-      cursor: not-allowed;
-
-      &:before {
-        background-color: lightgray;
-      }
-
-      & + span {
-        opacity: 0.7;
-        cursor: not-allowed;
-      }
-    }
-
-    &:focus-visible {
-      outline-offset: max(2px, 0.1em);
-      outline: max(2px, 0.1em) solid tomato;
-    }
+  > svg {
+    width: 100%;
+    height: 100%;
   }
 }

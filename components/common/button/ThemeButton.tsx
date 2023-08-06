@@ -1,12 +1,16 @@
 'use client';
 
 import { memo, useState } from 'react';
-// import ToggleButton from '@/components/common/button/ToggleButton';
-// import themeButton from '@/components/common/button/ThemeButton.module.scss';
+import themeButton from '@/components/common/button/ThemeButton.module.scss';
 import ThemeModal from '@/components/common/modal/ThemeModal';
 import { RiBrushLine } from 'react-icons/ri';
+import { combineClassName } from '@/utils/combineClassName';
 
-const DarkModeButton = () => {
+interface ThemeButtonProps {
+  className?: string;
+}
+
+const ThemeButton = ({ className = '' }: ThemeButtonProps) => {
   const [showThemeModal, setShowThemeModal] = useState(false);
 
   const openThemeModal = () => setShowThemeModal(true);
@@ -14,7 +18,7 @@ const DarkModeButton = () => {
 
   return (
     <>
-      <button onClick={openThemeModal}>
+      <button onClick={openThemeModal} className={combineClassName(themeButton['wrap'], className)}>
         <RiBrushLine color="inherit" size="1.5rem" />
       </button>
       {showThemeModal ? <ThemeModal onClose={closeThemeModal} /> : null}
@@ -22,4 +26,4 @@ const DarkModeButton = () => {
   );
 };
 
-export default memo(DarkModeButton);
+export default memo(ThemeButton);

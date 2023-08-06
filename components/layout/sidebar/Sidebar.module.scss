@@ -43,10 +43,10 @@
       padding: 0.5rem 1rem 0 1rem;
       align-items: center;
 
-      .close {
+      .close-button {
         display: flex;
         padding: 0 0.1rem;
-        color: map-get($colors, light-font);
+        color: var(--liveuta-title-color);
         @include transition(color, 0.3s, $bezier-curve);
 
         &:hover {

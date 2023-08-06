@@ -4,7 +4,7 @@ import ExternalLinksSection from '@/components/layout/sidebar/ExternalLinksSecti
 import IndexSection from '@/components/layout/sidebar/IndexSection';
 import sidebar from '@/components/layout/sidebar/Sidebar.module.scss';
 import CloseButton from '@/components/common/button/CloseButton';
-import DarkModeButton from '@/components/common/button/ThemeButton';
+import ThemeButton from '@/components/common/button/ThemeButton';
 
 interface SidebarProps {
   show: boolean;
@@ -24,8 +24,8 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
       <div className={[sidebar['container'], show ? sidebar['show'] : ''].join(' ')} onClick={onClick}>
         <div className={[sidebar['sidebar'], show ? sidebar['show'] : ''].join(' ')} onClick={stopPropagation}>
           <nav>
-            <CloseButton className={sidebar['close']} onClose={onClose} />
-            <DarkModeButton />
+            <CloseButton className={sidebar['close-button']} onClose={onClose} />
+            <ThemeButton />
           </nav>
           <IndexSection />
           <ExternalLinksSection />

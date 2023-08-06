@@ -2,7 +2,7 @@ import { MouseEvent } from 'react';
 import { FaWindowClose } from 'react-icons/fa';
 
 interface CloseButtonProps {
-  className: string;
+  className?: string;
   onClose: () => void;
   size?: string;
 }
