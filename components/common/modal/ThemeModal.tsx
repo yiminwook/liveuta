@@ -43,7 +43,7 @@ const ThemeModal = ({ onClose }: ThemeModalProps) => {
             <ThemeModalButton primaryColor="#ffc1cc" secondaryColor="#ed4463" />
           </button>
           <button data-theme="theme2">
-            <ThemeModalButton primaryColor="#c9f5d9" secondaryColor="#1fb25f" />
+            <ThemeModalButton primaryColor="#c9f5d9" secondaryColor="#fada28" />
           </button>
           <button data-theme="theme3">
             {/* <ThemeModalButton primaryColor="#dbf0f9" secondaryColor="#ffc0cb" /> */}
