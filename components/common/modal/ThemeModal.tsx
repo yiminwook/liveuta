@@ -46,7 +46,8 @@ const ThemeModal = ({ onClose }: ThemeModalProps) => {
             <ThemeModalButton primaryColor="#c9f5d9" secondaryColor="#1fb25f" />
           </button>
           <button data-theme="theme3">
-            <ThemeModalButton primaryColor="#dbf0f9" secondaryColor="#ffc0cb" />
+            {/* <ThemeModalButton primaryColor="#dbf0f9" secondaryColor="#ffc0cb" /> */}
+            <ThemeModalButton primaryColor="#dbf0f9" secondaryColor="#f8570c" />
           </button>
           <button data-theme="theme4">
             <ThemeModalButton primaryColor="#152238" secondaryColor="#ffd700" />
