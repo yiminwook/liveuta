@@ -19,6 +19,7 @@ const SWR_CONFIG_OPTIONS: Partial<PublicConfiguration> = {
   errorRetryCount: 3,
   errorRetryInterval: 5 * 1000,
   revalidateOnReconnect: true,
+  revalidateOnFocus: true,
 };
 
 const ServiceLayout = ({ initialTheme: theme, children }: ServiceLayoutProps) => {
