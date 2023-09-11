@@ -34,7 +34,9 @@ const Header = () => {
   }, []);
 
   const handleSearch = (_: FormEvent, inputVale: string) => {
-    route.push(`/search?query=${inputVale}`);
+    const trimmedInput = inputVale.trim();
+    if (trimmedInput === '') return;
+    route.push(`/search?query=${trimmedInput}`);
   };
 
   useEffect(() => {
