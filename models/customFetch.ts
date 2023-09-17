@@ -6,10 +6,10 @@ const FETCHOPTION: RequestInit = {
 };
 
 export const customFetchCached = (props: any) => {
-  return fetch(props, FETCHOPTION);
+  return fetch(props, { cache: 'no-store' });
 };
 
 export const customFetchNoCached = (props: any) => {
   //cache: no-store, revalidate: 0 둘중 하나면 설정해야함.
-  return fetch(props, FETCHOPTION);
+  return fetch(props, { cache: 'no-store' });
 };
