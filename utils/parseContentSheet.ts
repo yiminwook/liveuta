@@ -2,7 +2,7 @@ import { ContentsRowType, ContentsDataType, SheetAPIReturntype } from '@/types/i
 import { sheets_v4 } from 'googleapis';
 import { getInterval, stringToTime } from '@/utils/getTime';
 import dayjs from '@/models/dayjs';
-import { deleteParentheses } from '@/utils/regexp';
+import { replaceParentheses } from '@/utils/regexp';
 
 export const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {
   try {
@@ -14,7 +14,7 @@ export const parseSheetData = (value: ContentsRowType): ContentsDataType | undef
         /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
         'mqdefault',
       );
-      let replacedTitle = deleteParentheses(title);
+      let replacedTitle = replaceParentheses(title);
       // if (replacedTitle.length > 40) {
       //   replacedTitle = replacedTitle.substring(0, 40) + "...";
       // }

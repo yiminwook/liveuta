@@ -1,6 +1,6 @@
 'use client';
 /* eslint-disable @next/next/no-html-link-for-pages */
-import { useRef, useEffect, useState, useMemo, FormEvent } from 'react';
+import { useRef, useEffect, useState, useMemo, FormEvent, useCallback } from 'react';
 import Link from 'next/link';
 import Sidebar from '@/components/layout/sidebar/Sidebar';
 import { BiSearchAlt } from 'react-icons/bi';
@@ -9,12 +9,15 @@ import { usePathname, useRouter } from 'next/navigation';
 import HamburgerButton from '@/components/common/button/HamburgerButton';
 import NavigationList from '@/components/layout/NavigationList';
 import Input from '@/components/common/Input';
+import { replaceSpecialCharacters } from '@/utils/regexp';
 
 const Header = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
   const pathname = usePathname();
   const route = useRouter();
   const gnbRef = useRef<HTMLDivElement>(null);
+
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [inputValue, setInputValue] = useState('');
 
   const handleToggleSidebar = () => {
     setShowSidebar((pre) => !pre);
@@ -39,6 +42,16 @@ const Header = () => {
     route.push(`/search?query=${trimmedInput}`);
   };
 
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement> | string) => {
+    const value = typeof e === 'string' ? e : e.target.value;
+    const replacedValue = replaceSpecialCharacters(value);
+    setInputValue(() => replacedValue);
+  }, []);
+
+  const handleReset = useCallback(() => {
+    setInputValue(() => '');
+  }, []);
+
   useEffect(() => {
     setShowSidebar(() => false);
   }, [pathname]);
@@ -60,7 +73,14 @@ const Header = () => {
           </a>
           <div className={header['navigation']}>
             {pathname !== '/search' ? (
-              <Input className={header['search-input']} onSubmit={handleSearch} placeholder="채널명으로 검색" />
+              <Input
+                className={header['search-input']}
+                onSubmit={handleSearch}
+                placeholder="채널명으로 검색"
+                value={inputValue}
+                onChange={handleChange}
+                onReset={handleReset}
+              />
             ) : null}
             <NavigationList />
             <Link href="/search" className={header['search-button']}>

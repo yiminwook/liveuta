@@ -1,6 +1,5 @@
 import { ContentsDataType, ContentsRowType } from '@/types/inSheet';
 import { getSheet } from '@/models/sheet';
-import { SEARCH_ITEMS_SIZE } from '@/consts';
 import { parseSheetData } from '@/utils/parseContentSheet';
 import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
@@ -8,6 +7,8 @@ import { ChannelsDataType } from '@/types/inYoutube';
 import { serverEnvConfig } from '@/configs/envConfig';
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/models/error/handler';
+import { replaceSpecialCharacters } from '@/utils/regexp';
+import { SEARCH_ITEMS_SIZE } from '@/consts';
 
 export interface SearchResponseType {
   contents: ContentsDataType[];
@@ -22,7 +23,19 @@ export const GET = async (req: NextRequest) => {
     const query = searchParams.get('query');
     if (!query) throw new Error('No query');
     const decodeQuery = decodeURIComponent(query);
-    const regex = new RegExp(decodeQuery, 'g');
+    const replacedQuery = replaceSpecialCharacters(decodeQuery);
+
+    if (replacedQuery === '') {
+      return NextResponse.json<SearchResponseType>(
+        {
+          contents: [],
+          channels: [],
+        },
+        { status: 200 },
+      );
+    }
+
+    const regex = new RegExp(replacedQuery);
 
     const contentsSheetData = await getSheet({ spreadsheetId: CONTENTS_SHEET_ID, range: CONTENTS_SHEET_RANGE });
     const contentsSheetDataValue = contentsSheetData.values as ContentsRowType[];
@@ -33,7 +46,8 @@ export const GET = async (req: NextRequest) => {
     contentsSheetDataValue.forEach((value, index) => {
       if (index === 0) return;
       const name = value[2];
-      if (!regex.test(name)) return;
+
+      if (regex.test(name) === false) return;
       const data = parseSheetData(value);
       if (!data) return;
       searchedContents.push(data);
@@ -44,10 +58,11 @@ export const GET = async (req: NextRequest) => {
     const { sheetDataValues } = await parseChannelIDSheet();
 
     const searchData: ChannelSheetDataType = {};
+
     sheetDataValues.forEach(([uid, channelName, url]) => {
       if (Object.keys(searchData).length >= SEARCH_ITEMS_SIZE) return;
       if (searchData[uid]) return;
-      if (!regex.test(channelName)) return;
+      if (regex.test(channelName) === false) return;
       searchData[uid] = { uid, channelName, url };
     });
 

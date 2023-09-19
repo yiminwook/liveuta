@@ -5,16 +5,17 @@ import useInput from '@/hooks/useInput';
 import { usePathname, useRouter } from 'next/navigation';
 import { useSearchQuery } from '@/hooks/api/useSearch';
 import Input from '@/components/common/Input';
+import { replaceSpecialCharacters } from '@/utils/regexp';
 
 const SearchSection = () => {
-  const { inputValue, onChangeValue, setInputValue } = useInput('');
-  const [showErrMsg, setShowErrMsg] = useState(false);
-
   const { push } = useRouter();
   const pathname = usePathname();
   const searchQuery = useSearchQuery();
 
-  const handleOnSubmit = useCallback(
+  const [showErrMsg, setShowErrMsg] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSubmit = useCallback(
     async (e: FormEvent, inputValue: string) => {
       setShowErrMsg(() => false);
       const value = inputValue.trim();
@@ -24,8 +25,18 @@ const SearchSection = () => {
     [inputValue],
   );
 
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement> | string) => {
+    const value = typeof e === 'string' ? e : e.target.value;
+    const replacedValue = replaceSpecialCharacters(value);
+    setInputValue(() => replacedValue);
+  }, []);
+
+  const handleReset = useCallback(() => {
+    setInputValue(() => '');
+  }, []);
+
   useEffect(() => {
-    setInputValue(() => searchQuery);
+    handleChange(searchQuery);
   }, [searchQuery]);
 
   return (
@@ -39,7 +50,9 @@ const SearchSection = () => {
           name="search-input"
           className={search['search-input']}
           type="text"
-          onSubmit={handleOnSubmit}
+          onSubmit={handleSubmit}
+          onChange={handleChange}
+          onReset={handleReset}
           value={inputValue}
           placeholder="채널명으로 검색"
         />

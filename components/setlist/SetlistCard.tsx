@@ -5,7 +5,7 @@ import { DEFAULT_BLUR_BASE64 } from '@/consts';
 import setlist from '@/components/setlist/Setlist.module.scss';
 import dayjs from 'dayjs';
 import { stringToTime } from '@/utils/getTime';
-import { deleteParentheses } from '@/utils/regexp';
+import { replaceParentheses } from '@/utils/regexp';
 
 interface SetlistCardProps {
   item: SearchCommentItemType;
@@ -14,7 +14,7 @@ interface SetlistCardProps {
 const SetlistCard = ({ item }: SetlistCardProps) => {
   const { korTime } = stringToTime(item.published_at);
 
-  const title = deleteParentheses(item.title);
+  const title = replaceParentheses(item.title);
   return (
     <div className={setlist['card']}>
       <div>
