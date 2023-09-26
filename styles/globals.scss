@@ -149,10 +149,12 @@ body {
     background-color: var(--liveuta-hover-color);
     border-radius: 100%;
     border: none;
+    visibility: visible;
+    opacity: 1;
     cursor: pointer;
     @include prevent-user-select();
     @include box-shadow();
-    @include transition(all, 80ms, $bezier-curve);
+    @include transition(all, 0.2s, $bezier-curve);
 
     &.hide {
       visibility: hidden;
