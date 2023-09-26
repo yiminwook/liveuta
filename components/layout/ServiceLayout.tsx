@@ -7,7 +7,6 @@ import { ToastContainer } from 'react-toastify';
 import { PublicConfiguration } from 'swr/_internal';
 import Header from '@/components/layout/Header';
 import ThemeProvider from '@/configs/ThemeProvider';
-import isTop from '@/hooks/useIsTop';
 
 interface ServiceLayoutProps {
   initialTheme: string | undefined;
@@ -31,7 +30,7 @@ const ServiceLayout = ({ initialTheme: theme, children }: ServiceLayoutProps) =>
           <Header />
           <main id="app">{children}</main>
           <Footer />
-          {!isTop() && <FloatButton />}
+          <FloatButton />
         </ThemeProvider>
       </SWRConfig>
       <ToastContainer position="bottom-center" autoClose={1000} />

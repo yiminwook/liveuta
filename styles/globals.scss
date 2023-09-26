@@ -154,6 +154,11 @@ body {
     @include box-shadow();
     @include transition(all, 80ms, $bezier-curve);
 
+    &.hide {
+      visibility: hidden;
+      opacity: 0;
+    }
+
     &:hover {
       color: var(--liveuta-hover-color);
       background-color: map-get($colors, light-font);

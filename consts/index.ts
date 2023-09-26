@@ -5,7 +5,7 @@ export const ITEMS_PER_PAGE = 24;
 export const SCROLL_PER_YOUTUBE_CARD = 60;
 
 /** 채널 검색 갯수 */
-export const SEARCH_ITEMS_SIZE = 50; // 50개이상일때 유투브 에러방생
+export const SEARCH_ITEMS_SIZE = 50; // 50개이상일때 유투브 에러발생
 
 /** reavalidate time(초) */
 export const FETCH_REVALIDATE_TIME = 30;
