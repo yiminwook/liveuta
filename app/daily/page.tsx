@@ -1,7 +1,7 @@
-import HomePage from '@/app/page';
+import Main from '@/app/page.client';
 
 const DailyPage = () => {
-  return <HomePage />;
+  return <Main />;
 };
 
 export default DailyPage;

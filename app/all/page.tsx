@@ -1,7 +1,7 @@
-import HomePage from '@/app/page';
+import Main from '@/app/page.client';
 
 const AllPage = () => {
-  return <HomePage />;
+  return <Main />;
 };
 
 export default AllPage;
