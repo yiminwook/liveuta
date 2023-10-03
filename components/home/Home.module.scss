@@ -28,6 +28,75 @@
       justify-content: space-between;
       min-width: 18.75rem;
 
+      .nav-selectbox {
+        position: relative;
+        border-radius: 5px;
+        background-color: #fff;
+        @include box-shadow();
+
+        > button {
+          padding: 0.5rem;
+          height: 2.4rem;
+          @include transition(background-color, 0.2s, $bezier-curve);
+
+          &:hover {
+            background-color: var(--liveuta-active-color);
+            border-radius: 4px;
+            color: #fff;
+          }
+        }
+
+        .side {
+          position: fixed;
+          top: 4rem;
+          right: -100%;
+          width: 8rem;
+          background-color: #fff;
+          border-radius: 5px;
+          display: flex;
+          overflow: hidden;
+          @include transition(right, 0.2s, $bezier-curve);
+          @include box-shadow();
+
+          @include min-width(map-get($points, sm)) {
+            width: 20%;
+          }
+
+          @include min-width(map-get($points, xl)) {
+            width: 10%;
+          }
+
+          &.active {
+            right: 0;
+          }
+
+          > button {
+            padding: 0.5rem;
+            @include transition(background-color, 0.2s, $bezier-curve);
+
+            &:hover {
+              background-color: var(--liveuta-active-color);
+              color: #fff;
+            }
+          }
+
+          > ul {
+            width: 100%;
+
+            li {
+              padding: 0.5rem;
+              cursor: pointer;
+              @include transition(background-color, 0.2s, $bezier-curve);
+
+              &:hover {
+                background-color: var(--liveuta-default-color);
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+
       .nav-tab {
         display: flex;
         justify-content: space-around;
