@@ -62,19 +62,22 @@ const NavSelectBox = ({ select }: { select: string }) => {
     }
   }, [select]);
 
-  const handleToggle = (e: React.MouseEvent) => {
+  const handleToggle = (e: MouseEvent | React.MouseEvent) => {
     e.stopPropagation();
     setActive((pre) => !pre);
   };
 
   const handleClose = (e: MouseEvent | React.MouseEvent) => {
     e.stopPropagation();
+    const tartget = e.target as HTMLElement;
+    const id = tartget.id;
+    if (id === 'nav-select-button') return;
     setActive(() => false);
   };
 
   return (
     <div className={home['nav-selectbox']}>
-      <button onClick={handleToggle}>
+      <button id="nav-select-button" onClick={handleToggle}>
         <BsSliders size="1.25rem" />
         {selectedText}
       </button>
