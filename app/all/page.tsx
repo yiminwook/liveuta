@@ -1,7 +1,9 @@
 import Main from '@/app/page.client';
+import { getCookies } from '@/utils/getCookie';
 
 const AllPage = () => {
-  return <Main />;
+  const { select } = getCookies();
+  return <Main select={select} />;
 };
 
 export default AllPage;

@@ -7,7 +7,11 @@ import ScheduleSection from '@/components/home/ScheduleSection';
 import Loading from '@/components/common/Loading';
 import { usePathname } from 'next/navigation';
 
-const Main = () => {
+interface MainProps {
+  select: string;
+}
+
+const Main = ({ select }: MainProps) => {
   const pathName = usePathname()?.replace('/', '') || '';
   const filter = useMemo(() => (pathName === '' ? 'scheduled' : pathName) as keyof SheetAPIReturntype, [pathName]);
 
@@ -29,7 +33,7 @@ const Main = () => {
         <Loading />
       ) : (
         <>
-          <NavSection total={contents.length} />
+          <NavSection select={select} />
           <ScheduleSection contents={contents} />
         </>
       )}
