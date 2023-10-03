@@ -47,16 +47,16 @@ ContentsDataTypes: {
 
 ```
 "react": "^18.2.0",
-"next": "^13.4.1",
+"next": "13.4.12",
 "axios": "^1.3.4",
 "swr": "^2.1.3",
-"googleapis": "^112.0.0",
 "react-toastify": "^9.1.2",
 "next-sitemap": "^4.0.9",
 "react-icons": "^4.8.0",
 "sass": "^1.59.2",
-"typescript": "4.9.5"
+"typescript": "4.9.5",
 "dayjs": "^1.11.8",
+"universal-cookie": "^4.0.4"
 ```
 
 ## Environments
@@ -85,7 +85,4 @@ GOOGLE_SECRET_KEY=
 
 ACCESS_SECRET=
 REFRESH_SECRET=
-
-LOCAL_TIME=32400000
-INTERVAL_TIME=3600000
 ```
