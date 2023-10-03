@@ -133,6 +133,11 @@ body {
   .footer {
     height: 5rem;
     padding-bottom: env(safe-area-inset-bottom);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 600;
   }
 
   .foat {

@@ -71,13 +71,13 @@ const NavSelectBox = ({ select }: { select: string }) => {
     e.stopPropagation();
     const tartget = e.target as HTMLElement;
     const id = tartget.id;
-    if (id === 'nav-select-button') return;
+    if (id === 'nav-selectbox-button') return;
     setActive(() => false);
   };
 
   return (
     <div className={home['nav-selectbox']}>
-      <button id="nav-select-button" onClick={handleToggle}>
+      <button id="nav-selectbox-button" onClick={handleToggle}>
         <BsSliders size="1.25rem" />
         {selectedText}
       </button>
