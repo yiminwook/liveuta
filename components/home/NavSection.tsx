@@ -8,6 +8,7 @@ import Cookies from 'universal-cookie';
 import { SheetAPIReturntype } from '@/types/inSheet';
 import { combineClassName } from '@/utils/combineClassName';
 import { BiArrowFromLeft } from 'react-icons/bi';
+import { BsSliders } from 'react-icons/bs';
 
 const NavTapLink = ({ href, text }: { href: string; text: ReactNode }) => {
   return (
@@ -77,15 +78,24 @@ const NavSelectBox = ({ select }: { select: string }) => {
 
   return (
     <div className={home['nav-selectbox']}>
-      <button onClick={handleToggle}>{selectedText}</button>
+      <button onClick={handleToggle}>
+        <BsSliders size="1.25rem" />
+        {selectedText}
+      </button>
       <div className={combineClassName(home['side'], active ? home['active'] : '')}>
         <button>
-          <BiArrowFromLeft width="2rem" />
+          <BiArrowFromLeft size="1.25rem" />
         </button>
         <ul onClick={handleSelect}>
-          <li data-value={'all'}>{totalText}</li>
-          <li data-value={'stream'}>{streamText}</li>
-          <li data-value={'video'}>{videoText}</li>
+          <li className={select === 'all' ? home['active'] : ''} data-value={'all'}>
+            {totalText}
+          </li>
+          <li className={select === 'stream' ? home['active'] : ''} data-value={'stream'}>
+            {streamText}
+          </li>
+          <li className={select === 'video' ? home['active'] : ''} data-value={'video'}>
+            {videoText}
+          </li>
         </ul>
       </div>
     </div>

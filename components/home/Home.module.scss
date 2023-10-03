@@ -35,8 +35,13 @@
         @include box-shadow();
 
         > button {
-          padding: 0.5rem;
+          width: 7.5rem;
           height: 2.4rem;
+          padding: 0.5rem 0.75rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
           @include transition(background-color, 0.2s, $bezier-curve);
 
           &:hover {
@@ -91,6 +96,11 @@
               &:hover {
                 background-color: var(--liveuta-default-color);
                 color: #fff;
+              }
+
+              &.active {
+                color: var(--liveuta-active-color);
+                font-weight: 600;
               }
             }
           }
