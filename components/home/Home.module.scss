@@ -48,7 +48,7 @@
 
         .side {
           position: fixed;
-          top: 4rem;
+          top: calc(env(safe-area-inset-top) + 4rem);
           right: -100%;
           width: 8rem;
           background-color: #fff;
