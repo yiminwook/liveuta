@@ -1,6 +1,6 @@
 import home from '@/components/home/Home.module.scss';
 import NavLink from '@/components/common/NavLink';
-import React, { ReactNode, useEffect, useMemo, useState } from 'react';
+import React, { ReactNode, useMemo, useState } from 'react';
 import HorizonScrollBox from '@/components/common/HorizonScrollBox';
 import useSheet from '@/hooks/api/useSheet';
 import { usePathname, useRouter } from 'next/navigation';
@@ -9,6 +9,7 @@ import { SheetAPIReturntype } from '@/types/inSheet';
 import { combineClassName } from '@/utils/combineClassName';
 import { BiArrowFromLeft } from 'react-icons/bi';
 import { BsSliders } from 'react-icons/bs';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const NavTapLink = ({ href, text }: { href: string; text: ReactNode }) => {
   return (
@@ -66,15 +67,10 @@ const NavSelectBox = ({ select }: { select: string }) => {
     setActive((pre) => !pre);
   };
 
-  const handleClose = (e: MouseEvent) => {
+  const handleClose = (e: MouseEvent | React.MouseEvent) => {
     e.stopPropagation();
     setActive(() => false);
   };
-
-  useEffect(() => {
-    window.addEventListener('click', handleClose);
-    return () => window.removeEventListener('click', handleClose);
-  }, []);
 
   return (
     <div className={home['nav-selectbox']}>
@@ -82,22 +78,24 @@ const NavSelectBox = ({ select }: { select: string }) => {
         <BsSliders size="1.25rem" />
         {selectedText}
       </button>
-      <div className={combineClassName(home['side'], active ? home['active'] : '')}>
-        <button>
-          <BiArrowFromLeft size="1.25rem" />
-        </button>
-        <ul onClick={handleSelect}>
-          <li className={select === 'all' ? home['active'] : ''} data-value={'all'}>
-            {totalText}
-          </li>
-          <li className={select === 'stream' ? home['active'] : ''} data-value={'stream'}>
-            {streamText}
-          </li>
-          <li className={select === 'video' ? home['active'] : ''} data-value={'video'}>
-            {videoText}
-          </li>
-        </ul>
-      </div>
+      <OutsideClickHandler onOutsideClick={handleClose}>
+        <div className={combineClassName(home['side'], active ? home['active'] : '')}>
+          <button onClick={handleClose}>
+            <BiArrowFromLeft size="1.25rem" />
+          </button>
+          <ul onClick={handleSelect}>
+            <li className={select === 'all' ? home['active'] : ''} data-value={'all'}>
+              {totalText}
+            </li>
+            <li className={select === 'stream' ? home['active'] : ''} data-value={'stream'}>
+              {streamText}
+            </li>
+            <li className={select === 'video' ? home['active'] : ''} data-value={'video'}>
+              {videoText}
+            </li>
+          </ul>
+        </div>
+      </OutsideClickHandler>
     </div>
   );
 };

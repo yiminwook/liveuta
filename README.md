@@ -65,6 +65,7 @@ ContentsDataTypes: {
 "typescript": "4.9.5",
 "dayjs": "^1.11.8",
 "universal-cookie": "^4.0.4"
+"react-outside-click-handler": "^1.3.0",
 ```
 
 ## Environments
