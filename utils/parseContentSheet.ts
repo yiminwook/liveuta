@@ -14,14 +14,16 @@ export const parseSheetData = (value: ContentsRowType): ContentsDataType | undef
         /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
         'mqdefault',
       );
-      let replacedTitle = replaceParentheses(title);
+      const videoId = url.replace('https://www.youtube.com/watch?v=', '');
+      const replacedTitle = replaceParentheses(title);
       // if (replacedTitle.length > 40) {
       //   replacedTitle = replacedTitle.substring(0, 40) + "...";
       // }
-      const videoId = url.replace('https://www.youtube.com/watch?v=', '');
+      const replacedUrl = isVideo === 'TRUE' ? `https://youtu.be/${videoId}` : url;
+
       const data: ContentsDataType = {
         title: replacedTitle,
-        url,
+        url: replacedUrl,
         channelName,
         videoId,
         timestamp,
