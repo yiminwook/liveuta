@@ -18,7 +18,7 @@ const ChannelSection = ({ channels }: ChannelSectionProps) => {
           <ChannelCard key={channel.uid} content={channel} />
         ))}
       </section>
-      {channels.length >= SEARCH_ITEMS_SIZE ? <p>*최대 {SEARCH_ITEMS_SIZE}개까지 검색가능합니다</p> : null}
+      {channels.length >= SEARCH_ITEMS_SIZE ? <p>* 최대 {SEARCH_ITEMS_SIZE}개까지 검색가능합니다</p> : null}
     </section>
   );
 };

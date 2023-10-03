@@ -102,4 +102,11 @@
     @extend %channels-channel-section;
     margin: 1.5rem 0;
   }
+
+  > p {
+    color: var(--liveuta-default-color);
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-align: center;
+  }
 }
