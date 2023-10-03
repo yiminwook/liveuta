@@ -47,7 +47,7 @@ const NavSelectBox = ({ select }: { select: string }) => {
   };
 
   const totalText = `전체: ${data?.[filter].length.total}`;
-  const streamText = `실시간: ${data?.[filter].length.stream}`;
+  const streamText = `방송: ${data?.[filter].length.stream}`;
   const videoText = `동영상: ${data?.[filter].length.video}`;
 
   const selectedText = useMemo(() => {
