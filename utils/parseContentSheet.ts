@@ -6,7 +6,7 @@ import { replaceParentheses } from '@/utils/regexp';
 
 export const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {
   try {
-    const [title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream]: ContentsRowType = value;
+    const [title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream, isVideo]: ContentsRowType = value;
     if (scheduledTime.length >= 18) {
       const { timestamp, korTime } = stringToTime(scheduledTime);
       const interval = getInterval(timestamp);
@@ -29,7 +29,9 @@ export const parseSheetData = (value: ContentsRowType): ContentsDataType | undef
         korTime,
         isStream,
         interval,
+        isVideo: isVideo === 'TRUE' ? true : false,
       };
+
       return data;
     }
   } catch (error) {
@@ -47,7 +49,9 @@ export const parseScheduledData = (data: sheets_v4.Schema$ValueRange): ParseSche
   if (!dataValue) throw new Error('No DataValue');
 
   const scheduled: SheetAPIReturntype['scheduled']['contents'] = [];
+  let scheduledVideo = 0;
   const live: SheetAPIReturntype['live']['contents'] = [];
+  let liveVideo = 0;
 
   dataValue.forEach((value) => {
     const isHide = value[5];
@@ -57,18 +61,31 @@ export const parseScheduledData = (data: sheets_v4.Schema$ValueRange): ParseSche
     if (isHide === 'TRUE' && isStream === 'FALSE') return;
     const data = parseSheetData(value);
     if (!data) return;
+    if (data.isVideo === true) scheduledVideo++;
     scheduled.push(data);
-    if (data.isStream === 'TRUE') live.push(data);
+    if (data.isStream === 'TRUE') {
+      // 현재 라이브중이면 라이브 리스트에도 추가
+      if (data.isVideo === true) liveVideo++;
+      live.push(data);
+    }
   });
 
   return {
     scheduled: {
       contents: scheduled,
-      total: scheduled.length,
+      length: {
+        total: scheduled.length,
+        video: scheduledVideo,
+        stream: scheduled.length - scheduledVideo,
+      },
     },
     live: {
       contents: live,
-      total: live.length,
+      length: {
+        total: live.length,
+        video: liveVideo,
+        stream: live.length - liveVideo,
+      },
     },
   };
 };
@@ -83,7 +100,9 @@ export const parseAllData = (data: sheets_v4.Schema$ValueRange): ParseAllDataRet
   if (!dataValue) throw new Error('No DataValue');
 
   const daily: SheetAPIReturntype['daily']['contents'] = [];
+  let dailyVideo = 0;
   const all: SheetAPIReturntype['all']['contents'] = [];
+  let allVideo = 0;
   const yesterday = dayjs().subtract(1, 'day').valueOf();
 
   dataValue.forEach((value) => {
@@ -92,20 +111,32 @@ export const parseAllData = (data: sheets_v4.Schema$ValueRange): ParseAllDataRet
     //숨김처리된 컨텐츠는 지난 컨텐츠로 처리
     if (isHide === 'TRUE' && isStream === 'NULL') value[6] = 'FALSE';
     const data = parseSheetData(value);
-    if (data) {
-      all.push(data);
-      if (data.timestamp >= yesterday) daily.push(data);
+    if (!data) return;
+    if (data.isVideo === true) allVideo++;
+    all.push(data);
+    if (data.timestamp >= yesterday) {
+      //하루가 지나지 않았으면 24시간 리스트에 추가
+      if (data.isVideo === true) dailyVideo++;
+      daily.push(data);
     }
   });
 
   return {
     daily: {
       contents: daily,
-      total: daily.length,
+      length: {
+        total: daily.length,
+        video: dailyVideo,
+        stream: daily.length - dailyVideo,
+      },
     },
     all: {
       contents: all,
-      total: all.length,
+      length: {
+        total: all.length,
+        video: allVideo,
+        stream: all.length - allVideo,
+      },
     },
   };
 };

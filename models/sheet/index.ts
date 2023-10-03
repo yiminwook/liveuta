@@ -26,6 +26,7 @@ export const getSheet = async ({
   const response = await sheetService.spreadsheets.values.get(sheetConfig, {
     fetchImplementation: cache ? customFetchCached : customFetchNoCached,
   });
+
   const data = response.data;
 
   return data;
