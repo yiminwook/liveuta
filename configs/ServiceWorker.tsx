@@ -1,11 +1,12 @@
 'use client';
-
 import { tokenAtom } from '@/atoms';
 import FirebaseClient from '@/models/firebase/client';
 import { MessagePayload, getToken, onMessage } from 'firebase/messaging';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+
+export const SW_ERR_MSG = '토큰을 가져오는데 실패했습니다.';
 
 const ServiceWorker = () => {
   const setTokenAtom = useSetAtom(tokenAtom);
@@ -37,6 +38,7 @@ const ServiceWorker = () => {
       });
     } catch (error) {
       console.error(error);
+      setTokenAtom(() => SW_ERR_MSG);
     }
   };
 

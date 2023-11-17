@@ -1,5 +1,4 @@
 'use client';
-
 import { useAtomValue } from 'jotai';
 import { tokenAtom } from '@/atoms';
 import Settings from '@/components/settings/Settings.module.scss';

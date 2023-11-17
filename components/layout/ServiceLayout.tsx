@@ -1,5 +1,4 @@
 'use client';
-
 import { ReactNode } from 'react';
 import Footer from '@/components/layout/Footer';
 import FloatButton from '@/components/common/button/FlotButton';
