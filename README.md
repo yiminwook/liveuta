@@ -84,6 +84,8 @@ ContentsDataTypes: {
   "firebase": "9.22.0",
   "firebase-admin": "^11.11.0",
   "googleapis": "^128.0.0",
+  "jotai": "^2.5.1",
+  "jotai-devtools": "^0.7.0",
   "next": "13.4.12",
   "pretendard": "^1.3.8",
   "react": "^18.2.0",
@@ -113,10 +115,10 @@ CHANNELS_SHEET_RANGE=reference
 SHORT_URL=http://SHORT_URL.com
 REQUEST_URL=http://REQUEST_URL.com
 
-
 FIREBASE_CLIENT_EMAIL=firebase-adminsdk...
 IREBASE_PROJECT_ID=liveuta-...
 FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\n...
+NEXT_PUBLIC_FIREBASE_VAPID_KEY=BAKlPECfzNhcI_H8FH1
 ```
 
 ```
