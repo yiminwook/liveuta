@@ -22,6 +22,21 @@
   }
 ```
 
+3. POST /api/push
+
+```
+  input {
+    "token": string
+    "title": string
+    "body": string
+    "imageUrl": string
+  }
+
+  return {
+    data: string
+  }
+```
+
 ## Types
 
 ```
