@@ -21,7 +21,6 @@ const ServiceWorker = () => {
         vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
         serviceWorkerRegistration: register,
       });
-      alert(token);
 
       setTokenAtom(() => token);
     } catch (error) {
@@ -32,12 +31,11 @@ const ServiceWorker = () => {
 
   const handleMessage = async () => {
     try {
-      //가장 먼저 서비스워커를 등록해야함.
-      const register = await navigator.serviceWorker.register('/sw.js');
       const permission = await Notification.requestPermission();
-      if (permission !== 'granted') return;
       //알림허용설정을 거절하면 사용자가 직접 크롬에서 설정값을 변경해야함
-
+      if (permission !== 'granted') return;
+      //허용후 등록
+      const register = await navigator.serviceWorker.register('/sw.js');
       const messaging = FirebaseClient.getInstance().message;
 
       await handleToken({ register, messaging });
