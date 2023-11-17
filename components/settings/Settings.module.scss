@@ -1,0 +1,29 @@
+@import 'var';
+@import 'mixin';
+@import 'placeholder';
+
+.section {
+  padding: 0.5rem;
+
+  .token-box {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: var(--liveuta-bg-color-light);
+
+    > label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+      min-height: 2.25rem;
+
+      #token {
+        @include text-line(2, 1.1rem);
+      }
+    }
+  }
+}
