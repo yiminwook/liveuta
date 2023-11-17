@@ -1,9 +1,7 @@
 import { SearchCommentItemType } from '@/types/inHolodex';
-import Comment from '@/components/setlist/Comment';
 import Image from 'next/image';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
 import setlist from '@/components/setlist/Setlist.module.scss';
-import dayjs from 'dayjs';
 import { stringToTime } from '@/utils/getTime';
 import { replaceParentheses } from '@/utils/regexp';
 

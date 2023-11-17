@@ -54,18 +54,23 @@ ContentsDataTypes: {
 ## Packages
 
 ```
-"react": "^18.2.0",
-"next": "13.4.12",
-"axios": "^1.3.4",
-"swr": "^2.1.3",
-"react-toastify": "^9.1.2",
-"next-sitemap": "^4.0.9",
-"react-icons": "^4.8.0",
-"sass": "^1.59.2",
-"typescript": "4.9.5",
-"dayjs": "^1.11.8",
-"universal-cookie": "^4.0.4"
-"react-outside-click-handler": "^1.3.0",
+  "axios": "^1.3.4",
+  "dayjs": "^1.11.8",
+  "firebase": "9.22.0",
+  "firebase-admin": "^11.11.0",
+  "googleapis": "^128.0.0",
+  "next": "13.4.12",
+  "pretendard": "^1.3.8",
+  "react": "^18.2.0",
+  "react-dom": "^18.2.0",
+  "react-html-parser": "^2.0.2",
+  "react-icons": "^4.8.0",
+  "react-outside-click-handler": "^1.3.0",
+  "react-toastify": "^9.1.2",
+  "regexify-string": "^1.0.19",
+  "sharp": "^0.31.3",
+  "swr": "^2.1.3",
+  "universal-cookie": "^4.0.4"
 ```
 
 ## Environments
@@ -83,15 +88,17 @@ CHANNELS_SHEET_RANGE=reference
 SHORT_URL=http://SHORT_URL.com
 REQUEST_URL=http://REQUEST_URL.com
 
+
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk...
+IREBASE_PROJECT_ID=liveuta-...
+FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\n...
+
 ```
 
 ```
-사용중아님
-REDIRECT_URL=
+임시
 
 GOOGLE_CLIENT_ID=
 GOOGLE_SECRET_KEY=
 
-ACCESS_SECRET=
-REFRESH_SECRET=
 ```

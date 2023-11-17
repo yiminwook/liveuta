@@ -9,6 +9,7 @@ import { PAGE_REVALIDATE_TIME } from '@/consts';
 import { cookies } from 'next/headers';
 import { DEFALUT_METADATA } from '@/consts/metaData';
 import DefaultHead from '@/configs/DefaultHead';
+import ServiceWorker from '@/configs/ServiceWorker';
 
 interface CookieType {
   theme: string | undefined;
@@ -28,6 +29,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     <html lang="ko" suppressHydrationWarning={true} color={cookie.theme}>
       <DefaultHead />
       <body>
+        <ServiceWorker />
         <ServiceLayout initialTheme={cookie.theme}>{children}</ServiceLayout>
         <div className="background-left" />
         <div className="background-right" />
