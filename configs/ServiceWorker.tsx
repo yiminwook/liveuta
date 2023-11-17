@@ -9,14 +9,18 @@ import { toast } from 'react-toastify';
 const ServiceWorker = () => {
   const setTokenAtom = useSetAtom(tokenAtom);
 
-  const handleToken = async ({
-    register,
-    messaging,
-  }: {
-    register: ServiceWorkerRegistration;
-    messaging: Messaging;
-  }) => {
+  const handleToken = async () => {
     try {
+      const permission = await Notification.requestPermission();
+      //알림허용설정을 거절하면 사용자가 직접 크롬에서 설정값을 변경해야함
+      if (permission !== 'granted') {
+        throw new Error('알림허용 설정이 되지 않았습니다.');
+      }
+      //허용후 등록
+      const register = await navigator.serviceWorker.register('/sw.js');
+
+      const messaging = FirebaseClient.getInstance().message;
+
       const token = await getToken(messaging, {
         vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
         serviceWorkerRegistration: register,
@@ -31,15 +35,9 @@ const ServiceWorker = () => {
 
   const handleMessage = async () => {
     try {
-      // const permission = await Notification.requestPermission();
-      //알림허용설정을 거절하면 사용자가 직접 크롬에서 설정값을 변경해야함
-      // alert(permission);
-      // if (permission !== 'granted') return;
-      //허용후 등록
-      const register = await navigator.serviceWorker.register('/sw.js');
-      const messaging = FirebaseClient.getInstance().message;
+      await handleToken();
 
-      await handleToken({ register, messaging });
+      const messaging = FirebaseClient.getInstance().message;
 
       //TODO: 토큰을 서버로 전달
       onMessage(messaging, ({ notification, data, fcmOptions, from, collapseKey, messageId }: MessagePayload) => {
