@@ -31,10 +31,10 @@ const ServiceWorker = () => {
 
   const handleMessage = async () => {
     try {
-      const permission = await Notification.requestPermission();
+      // const permission = await Notification.requestPermission();
       //알림허용설정을 거절하면 사용자가 직접 크롬에서 설정값을 변경해야함
-      alert(permission);
-      if (permission !== 'granted') return;
+      // alert(permission);
+      // if (permission !== 'granted') return;
       //허용후 등록
       const register = await navigator.serviceWorker.register('/sw.js');
       const messaging = FirebaseClient.getInstance().message;
