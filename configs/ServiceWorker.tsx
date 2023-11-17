@@ -19,7 +19,7 @@ const ServiceWorker = () => {
       const messaging = FirebaseClient.getInstance().message;
 
       const token = await getToken(messaging, {
-        vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
+        vapidKey: undefined, //ios에서 vapidKey가 있으면 token이 발급되지 않음.
         serviceWorkerRegistration: register,
       });
 
