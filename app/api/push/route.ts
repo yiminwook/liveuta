@@ -3,28 +3,44 @@ import { getMessaging } from 'firebase-admin/messaging';
 import FirebaseAdmin from '@/models/firebase/admin';
 
 interface requestBody {
-  token: string;
+  tokens: string[];
   title: string;
   body: string;
-  imageUrl: string;
+  imageUrl?: string;
+  link?: string;
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const body: requestBody = await request.json();
+    const resquestBody: requestBody = await request.json();
+
+    for (const _key in resquestBody) {
+      const key = _key as keyof requestBody;
+
+      if (key === 'tokens' && Array.isArray(resquestBody[key]) === false) {
+        throw new Error('tokens is not array');
+      }
+
+      if (key !== 'tokens' && typeof resquestBody[key] !== 'string') {
+        throw new Error(`${key} parameter is not string`);
+      }
+    }
 
     FirebaseAdmin.getInstance();
 
-    const response = await getMessaging().send({
-      token: body.token,
+    const response = await getMessaging().sendMulticast({
+      tokens: resquestBody.tokens,
       notification: {
-        title: body.title,
-        body: body.body,
-        imageUrl: body.imageUrl,
+        title: resquestBody.title,
+        body: resquestBody.body,
+        imageUrl: resquestBody.imageUrl,
       },
       webpush: {
+        headers: {
+          TTL: '1800', // 30분후 만료
+        },
         fcmOptions: {
-          link: `${process.env.NEXT_PUBLIC_SITE_URL}/live`,
+          link: resquestBody.link,
         },
       },
     });

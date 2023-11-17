@@ -26,14 +26,24 @@
 
 ```
   input {
-    "token": string
-    "title": string
-    "body": string
-    "imageUrl": string
+    "tokens": string[];
+    "title": string;
+    "body": string;
+    /* imageUrl이 있을때만 push에서 사진을 보여줌 */
+    "imageUrl"?: string;
+    /**
+     * webpush를 눌렀을때 이동할 링크
+     * 이미 liveuta가 켜져있을때는 링크가 있어도 이동없고 내려간 창만 다시 올려줌
+     */
+    "link"?: string;
   }
 
   return {
-    data: string
+    data: {
+      response: { success: string; messageId: string; }[];
+      successCount: number;
+      failureCount: number;
+    }
   }
 ```
 
@@ -107,7 +117,6 @@ REQUEST_URL=http://REQUEST_URL.com
 FIREBASE_CLIENT_EMAIL=firebase-adminsdk...
 IREBASE_PROJECT_ID=liveuta-...
 FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\n...
-
 ```
 
 ```
@@ -115,5 +124,4 @@ FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\n...
 
 GOOGLE_CLIENT_ID=
 GOOGLE_SECRET_KEY=
-
 ```
