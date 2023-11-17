@@ -22,6 +22,11 @@ export async function POST(request: NextRequest) {
         body: body.body,
         imageUrl: body.imageUrl,
       },
+      webpush: {
+        fcmOptions: {
+          link: `${process.env.NEXT_PUBLIC_SITE_URL}/live`,
+        },
+      },
     });
 
     return NextResponse.json({ data: response }, { status: 201 });
