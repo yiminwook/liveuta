@@ -1,7 +1,7 @@
 'use client';
 import { tokenAtom } from '@/atoms';
 import FirebaseClient from '@/models/firebase/client';
-import { MessagePayload, getToken, onMessage } from 'firebase/messaging';
+import { MessagePayload, getToken, onMessage, Messaging } from 'firebase/messaging';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
@@ -9,7 +9,25 @@ import { toast } from 'react-toastify';
 const ServiceWorker = () => {
   const setTokenAtom = useSetAtom(tokenAtom);
 
-  const handleToken = async () => {};
+  const handleToken = async ({
+    register,
+    messaging,
+  }: {
+    register: ServiceWorkerRegistration;
+    messaging: Messaging;
+  }) => {
+    try {
+      const token = await getToken(messaging, {
+        vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
+        serviceWorkerRegistration: register,
+      });
+
+      setTokenAtom(() => token);
+    } catch (error) {
+      console.error(error);
+      setTokenAtom(() => undefined);
+    }
+  };
 
   const handleMessage = async () => {
     try {
@@ -18,19 +36,10 @@ const ServiceWorker = () => {
       const permission = await Notification.requestPermission();
       if (permission !== 'granted') return;
       //알림허용설정을 거절하면 사용자가 직접 크롬에서 설정값을 변경해야함
+
       const messaging = FirebaseClient.getInstance().message;
 
-      try {
-        const token = await getToken(messaging, {
-          vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
-          serviceWorkerRegistration: register,
-        });
-
-        setTokenAtom(() => token);
-      } catch (error) {
-        console.error(error);
-        setTokenAtom(() => undefined);
-      }
+      await handleToken({ register, messaging });
 
       //TODO: 토큰을 서버로 전달
       onMessage(messaging, ({ notification, data, fcmOptions, from, collapseKey, messageId }: MessagePayload) => {
