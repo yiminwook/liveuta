@@ -13,7 +13,6 @@ const ServiceWorker = () => {
     try {
       //가장 먼저 서비스워커를 등록해야함.
       const register = await navigator.serviceWorker.register('/sw.js');
-      throw new Error('test');
       const permission = await Notification.requestPermission();
       if (permission !== 'granted') return;
       //알림허용설정을 거절하면 사용자가 직접 크롬에서 설정값을 변경해야함
