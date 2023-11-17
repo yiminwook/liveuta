@@ -21,6 +21,7 @@ const ServiceWorker = () => {
         vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
         serviceWorkerRegistration: register,
       });
+      alert(token);
 
       setTokenAtom(() => token);
     } catch (error) {
