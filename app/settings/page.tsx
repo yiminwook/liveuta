@@ -1,6 +1,5 @@
 'use client';
-import { useAtomValue } from 'jotai';
-import { tokenAtom, useTokenAtom } from '@/atoms';
+import { useTokenAtom } from '@/atoms';
 import Settings from '@/components/settings/Settings.module.scss';
 import CopyButton from '@/components/common/button/CopyButton';
 import { toast } from 'react-toastify';

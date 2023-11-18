@@ -3,11 +3,12 @@ import { tokenAtom } from '@/atoms';
 import FirebaseClient from '@/models/firebase/client';
 import { MessagePayload, getToken, onMessage } from 'firebase/messaging';
 import { useSetAtom } from 'jotai';
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 const ServiceWorker = ({ children }: PropsWithChildren) => {
   const setToken = useSetAtom(tokenAtom);
+  const [loadSw, setLoadSw] = useState(false);
 
   const handleToken = async () => {
     try {
@@ -30,7 +31,6 @@ const ServiceWorker = ({ children }: PropsWithChildren) => {
     } catch (error) {
       console.error(error);
       const message = error instanceof Error ? error.message : 'Unknown Error';
-      alert(message);
       setToken(() => undefined);
     }
   };
@@ -55,9 +55,19 @@ const ServiceWorker = ({ children }: PropsWithChildren) => {
   };
 
   useEffect(() => {
+    if (loadSw === false) {
+      // DOM이 전부 로드되기전에 실행되는것을 방지
+      setLoadSw(() => true);
+      return;
+    }
+
     handleMessage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [loadSw]);
+
+  // useEffect(() => {
+  //   console.log('effect');
+  // }, []);
 
   return <>{children}</>;
 };
