@@ -1,14 +1,16 @@
+'use client';
 import scheduleCard from '@/components/common/scheduleCard/ScheduleCard.module.scss';
 import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
 import { ContentsDataType } from '@/types/inSheet';
 import { combineClassName } from '@/utils/combineClassName';
 import { generateFcmToken } from '@/models/firebase/generateFcmToken';
-import { MouseEvent, useEffect, useReducer, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { TokenRequestBody } from '@/app/api/push/reserve/route';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { HiBellAlert } from 'react-icons/hi2';
+import ScheduleStatus from '@/components/common/scheduleCard/ScheduleStatus';
 
 interface ScheduleCardDescProps {
   content: ContentsDataType;
@@ -18,7 +20,6 @@ interface ScheduleCardDescProps {
 const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps) => {
   const { title, url, channelName, korTime, interval, isStream, timestamp, thumbnailURL, videoId } = content;
   const [isLoading, setIsLoading] = useState(false);
-  const [viewCount, setViewCount] = useState('-');
 
   const reservePush = async (e: MouseEvent<HTMLButtonElement>) => {
     try {
@@ -56,34 +57,21 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
     }
   };
 
-  const getViewCount = async () => {
-    try {
-      if (isStream !== 'TRUE') return;
-      const res = await axios.get(`/api/crawler?id=${videoId}`);
-      const data = res.data.data;
-      setViewCount(() => data);
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    getViewCount();
-  }, []);
-
   return (
     <div className={scheduleCard['description']}>
       <div className={combineClassName(scheduleCard['channel_name'], addStreamModifier)}>{channelName}</div>
       <div className={combineClassName(scheduleCard['title'], addStreamModifier)}>{title}</div>
       <div className={scheduleCard['time']}>
         <time className={scheduleCard['kor']}>{korTime}</time>
-        <div className={scheduleCard['status']}>{isStream === 'TRUE' ? `LIVE! (${viewCount})` : interval}</div>
+        <ScheduleStatus isStream={isStream} interval={interval} videoId={videoId} />
       </div>
       <div className={scheduleCard['link']}>
         {isStream === 'NULL' ? (
           <button className={scheduleCard['alaram']} onClick={reservePush} disabled={isLoading}>
-            <HiBellAlert color="inherit" size="0.8rem" />
+            <HiBellAlert color="inherit" size="0.75rem" />
           </button>
         ) : null}
-        <CopyButton value={url} size="0.8rem" />
+        <CopyButton value={url} size="0.75rem" />
         <button onClick={() => openWindow(url)}>새 탭으로 열기</button>
       </div>
     </div>

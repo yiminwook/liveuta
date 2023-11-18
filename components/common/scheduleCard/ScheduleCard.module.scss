@@ -108,11 +108,16 @@
         display: flex;
         font-size: 0.6rem;
         margin-bottom: 0.2rem;
+        align-items: center;
         gap: 0.5rem;
 
         .status {
+          display: flex;
+          align-items: center;
           font-weight: 500;
+          gap: 0.125rem;
           color: map-get($colors, highlight-font);
+          vertical-align: middle;
         }
       }
     }

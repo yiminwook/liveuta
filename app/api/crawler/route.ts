@@ -18,7 +18,6 @@ export async function GET(request: NextRequest) {
 
     const pattern = /\{"text"\:"현재 "\},\{"text"\:"(\d+(?:,\d{3})*)"\},\{"text"\:"명 시청 중"\}/;
     const count = res.data.match(pattern)?.[1];
-    console.log('count', count);
 
     if (typeof count !== 'string') {
       return NextResponse.json({ data: '?' });
