@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from 'axios';
-import { toast } from 'react-toastify';
 import addToast from '@/utils/handleToast';
 
 export const fetcher = async (url: string) => {
