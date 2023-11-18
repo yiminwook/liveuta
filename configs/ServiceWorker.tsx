@@ -1,12 +1,14 @@
+// eslint-disable-next-line react-hooks/exhaustive-deps
+
 'use client';
 import { tokenAtom } from '@/atoms';
 import FirebaseClient from '@/models/firebase/client';
 import { MessagePayload, getToken, onMessage } from 'firebase/messaging';
 import { useSetAtom } from 'jotai';
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-const ServiceWorker = ({ children }: PropsWithChildren) => {
+const ServiceWorker = () => {
   const setToken = useSetAtom(tokenAtom);
   const [loadSw, setLoadSw] = useState(false);
 
@@ -61,15 +63,11 @@ const ServiceWorker = ({ children }: PropsWithChildren) => {
       return;
     }
 
-    handleMessage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const timer = setTimeout(() => handleMessage(), 1000);
+    return () => clearTimeout(timer);
   }, [loadSw]);
 
-  // useEffect(() => {
-  //   console.log('effect');
-  // }, []);
-
-  return <>{children}</>;
+  return <></>;
 };
 
 export default ServiceWorker;
