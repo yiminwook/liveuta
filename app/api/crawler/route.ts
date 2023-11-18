@@ -16,11 +16,12 @@ export async function GET(request: NextRequest) {
       url: `https://youtube.com/watch?v=${id}`,
     });
 
-    const pattern = /\{"text"\:"현재 "\},\{"text"\:"(\d+)"\},\{"text"\:"명 시청 중"\}/;
+    const pattern = /\{"text"\:"현재 "\},\{"text"\:"(\d+(?:,\d{3})*)"\},\{"text"\:"명 시청 중"\}/;
     const count = res.data.match(pattern)?.[1];
+    console.log('count', count);
 
     if (typeof count !== 'string') {
-      return NextResponse.json({ data: 0 });
+      return NextResponse.json({ data: '?' });
     }
 
     return NextResponse.json({ data: count });
