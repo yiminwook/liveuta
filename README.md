@@ -36,6 +36,7 @@
      * 이미 liveuta가 켜져있을때는 링크가 있어도 이동없고 내려간 창만 다시 올려줌
      */
     "link"?: string;
+    "timestamp": number;
   }
 
   return {

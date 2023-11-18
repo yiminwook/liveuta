@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { ContentsDataType } from '@/types/inSheet';
 import scheduleCard from '@/components/common/scheduleCard/ScheduleCard.module.scss';
 import SchduleCardImage from '@/components/common/scheduleCard/ScheduleCardImage';

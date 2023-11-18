@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { generateFcmToken } from '@/models/firebase/generateFcmToken';
 import { useAtomValue, useSetAtom } from 'jotai';
+import PostBox from '@/components/settings/PostBox';
 
 const SettingsPage = () => {
   const setToken = useSetAtom(tokenAtom);
@@ -41,7 +42,7 @@ const SettingsPage = () => {
         <div>
           알림허용설정 여부: <b>{permission}</b>
         </div>
-        <button onClick={requerstPermission}>활성요청</button>
+        <button onClick={requerstPermission}>요청</button>
       </div>
       <div className={Settings['token-box']}>
         <label htmlFor="token">SW Token</label>
@@ -49,6 +50,7 @@ const SettingsPage = () => {
           <TokenBox />
         </div>
       </div>
+      <PostBox />
     </section>
   );
 };

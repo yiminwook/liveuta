@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getMessaging } from 'firebase-admin/messaging';
 import FirebaseAdmin from '@/models/firebase/admin';
 
-interface requestBody {
-  tokens: string[];
+export interface TokenRequestBody {
+  token: string;
   title: string;
   body: string;
   imageUrl?: string;
@@ -13,24 +13,12 @@ interface requestBody {
 
 export async function POST(request: NextRequest) {
   try {
-    const resquestBody: requestBody = await request.json();
-
-    for (const _key in resquestBody) {
-      const key = _key as keyof requestBody;
-
-      if (key === 'tokens' && Array.isArray(resquestBody[key]) === false) {
-        throw new Error('tokens is not array');
-      }
-
-      if (key !== 'tokens' && typeof resquestBody[key] !== 'string') {
-        throw new Error(`${key} parameter is not string`);
-      }
-    }
+    const resquestBody: TokenRequestBody = await request.json();
 
     FirebaseAdmin.getInstance();
 
-    const response = await getMessaging().sendEachForMulticast({
-      tokens: resquestBody.tokens,
+    const response = await getMessaging().send({
+      token: resquestBody.token,
       notification: {
         title: resquestBody.title,
         body: resquestBody.body,
