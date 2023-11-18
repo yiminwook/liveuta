@@ -5,7 +5,7 @@ import CopyButton from '@/components/common/button/CopyButton';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { generateFcmToken } from '@/models/firebase/generateFcmToken';
-import { useAtomValue, useSetAtom } from 'jotai/esm/react';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 const SettingsPage = () => {
   const setToken = useSetAtom(tokenAtom);
