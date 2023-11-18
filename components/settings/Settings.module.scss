@@ -5,6 +5,23 @@
 .section {
   padding: 0.5rem;
 
+  .permission-box {
+    background-color: var(--liveuta-bg-color-light);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+
+    > button {
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      background-color: var(--liveuta-active-color);
+      color: var(--liveuta-title-color);
+    }
+  }
+
   .token-box {
     padding: 0.5rem;
     border-radius: 0.25rem;

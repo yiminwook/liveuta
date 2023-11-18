@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 const ServiceWorker = () => {
-  const setTokenAtom = useSetAtom(tokenAtom);
+  const setToken = useSetAtom(tokenAtom);
 
   const handleToken = async () => {
     try {
@@ -26,10 +26,10 @@ const ServiceWorker = () => {
         serviceWorkerRegistration: register,
       });
 
-      setTokenAtom(() => token);
+      setToken(() => token);
     } catch (error) {
       console.error(error);
-      setTokenAtom(() => undefined);
+      setToken(() => undefined);
     }
   };
 
