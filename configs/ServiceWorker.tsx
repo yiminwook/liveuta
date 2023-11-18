@@ -1,12 +1,12 @@
 'use client';
 import { tokenAtom } from '@/atoms';
 import FirebaseClient from '@/models/firebase/client';
-import { MessagePayload, getToken, onMessage, Messaging } from 'firebase/messaging';
+import { MessagePayload, getToken, onMessage } from 'firebase/messaging';
 import { useSetAtom } from 'jotai';
-import { useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-const ServiceWorker = () => {
+const ServiceWorker = ({ children }: PropsWithChildren) => {
   const setToken = useSetAtom(tokenAtom);
 
   const handleToken = async () => {
@@ -29,6 +29,8 @@ const ServiceWorker = () => {
       setToken(() => token);
     } catch (error) {
       console.error(error);
+      const message = error instanceof Error ? error.message : 'Unknown Error';
+      alert(message);
       setToken(() => undefined);
     }
   };
@@ -57,7 +59,7 @@ const ServiceWorker = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <></>;
+  return <>{children}</>;
 };
 
 export default ServiceWorker;

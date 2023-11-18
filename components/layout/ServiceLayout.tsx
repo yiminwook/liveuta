@@ -20,13 +20,14 @@ const ServiceLayout = ({ initialTheme: theme, children }: ServiceLayoutProps) =>
     <JotaiProvider>
       <SWRProvider>
         <ThemeProvider initialTheme={theme}>
-          <ServiceWorker />
-          <Header />
-          <main id="app">{children}</main>
-          <Footer />
-          <FloatButton />
-          <Devtools />
-          <ToastContainer position="bottom-center" autoClose={1000} />
+          <ServiceWorker>
+            <Header />
+            <main id="app">{children}</main>
+            <Footer />
+            <FloatButton />
+            <Devtools />
+            <ToastContainer position="bottom-center" autoClose={1000} />
+          </ServiceWorker>
         </ThemeProvider>
       </SWRProvider>
     </JotaiProvider>
