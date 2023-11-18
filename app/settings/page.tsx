@@ -1,48 +1,25 @@
 'use client';
-import { useTokenAtom } from '@/atoms';
+import { tokenAtom } from '@/atoms';
 import Settings from '@/components/settings/Settings.module.scss';
 import CopyButton from '@/components/common/button/CopyButton';
 import { toast } from 'react-toastify';
-import FirebaseClient from '@/models/firebase/client';
-import { getToken } from 'firebase/messaging';
 import { useEffect, useState } from 'react';
+import { generateFcmToken } from '@/models/firebase/generateFcmToken';
+import { useAtomValue, useSetAtom } from 'jotai/esm/react';
 
 const SettingsPage = () => {
-  const [token, setToken] = useTokenAtom();
+  const setToken = useSetAtom(tokenAtom);
   const [permission, setPermission] = useState('설정을 가져오는 중');
-
-  const renderTokenBox = () => {
-    switch (token) {
-      case null:
-        return <div>토큰을 가져오는 중입니다.</div>;
-      case undefined:
-        return <div>토큰을 가져오는데 실패했습니다.</div>;
-      default:
-        return (
-          <>
-            <div id={Settings['token']}>{token}</div>
-            <CopyButton value={token!} size={'1.5rem'} />
-          </>
-        );
-    }
-  };
 
   const requerstPermission = async () => {
     try {
-      const permission = await Notification.requestPermission();
+      const token = await generateFcmToken();
 
-      if (permission !== 'granted') {
-        throw new Error('브라우저 알림허용 설정이 실패하였습니다.');
+      if (token === undefined) {
+        throw new Error('브라우저 알림허용 설정이 되어있지 않습니다.');
       }
 
-      //허용후 등록
-      const register = await navigator.serviceWorker.register('/sw.js');
-      const messaging = FirebaseClient.getInstance().message;
-      const token = await getToken(messaging, {
-        vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
-        serviceWorkerRegistration: register,
-      });
-      setPermission(() => permission);
+      setPermission(() => 'granted');
       setToken(() => token);
       toast.success('알림허용 설정이 완료되었습니다.');
     } catch (error) {
@@ -68,9 +45,29 @@ const SettingsPage = () => {
       </div>
       <div className={Settings['token-box']}>
         <label htmlFor="token">SW Token</label>
-        <div>{renderTokenBox()}</div>
+        <div>
+          <TokenBox />
+        </div>
       </div>
     </section>
   );
 };
+
 export default SettingsPage;
+
+const TokenBox = () => {
+  const token = useAtomValue(tokenAtom);
+  switch (token) {
+    case null:
+      return <div>토큰을 가져오는 중입니다.</div>;
+    case undefined:
+      return <div>토큰을 가져오는데 실패했습니다.</div>;
+    default:
+      return (
+        <>
+          <div id={Settings['token']}>{token}</div>
+          <CopyButton value={token!} size={'1.5rem'} />
+        </>
+      );
+  }
+};
