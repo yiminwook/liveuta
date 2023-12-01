@@ -1,28 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { google } from 'googleapis';
 import axios, { AxiosError } from 'axios';
-
-const config = {
-  projectId: process.env.FIREBASE_PROJECT_ID!,
-  privateKey: process.env.FIREBASE_PRIVATE_KEY!.replaceAll(/\\n/g, '\n'),
-  clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
-};
-
-const MESSAGING_SCOPE = 'https://www.googleapis.com/auth/firebase.messaging';
-const SCOPES = [MESSAGING_SCOPE];
-
-function getAccessToken() {
-  return new Promise<string>(function (resolve, reject) {
-    const jwtClient = new google.auth.JWT({ email: config.clientEmail, key: config.privateKey, scopes: SCOPES });
-    jwtClient.authorize(function (err, tokens) {
-      const access_token = tokens?.access_token;
-      if (err || access_token === undefined || access_token === null) {
-        return reject(err);
-      }
-      return resolve(access_token);
-    });
-  });
-}
+import { getAccessToken } from '@/models/firebase/admin';
 
 interface requestBody {
   token: string;
@@ -54,7 +32,7 @@ export async function POST(request: NextRequest) {
         Authorization: `Bearer ${token}`,
       },
       method: 'POST',
-      url: `https://fcm.googleapis.com/v1/projects/${config.projectId}/messages:send`,
+      url: `https://fcm.googleapis.com/v1/projects/${process.env.FIREBASE_PROJECT_ID!}/messages:send`,
       data: body,
     });
 

@@ -10,7 +10,14 @@ export interface SheetConfigType {
 
 const { GOOGLE_API_KEY } = serverEnvConfig();
 
-export const sheetService = google.sheets({ version: 'v4' });
+const auth = new google.auth.JWT(
+  process.env.FIREBASE_CLIENT_EMAIL,
+  '',
+  process.env.FIREBASE_PRIVATE_KEY!.replaceAll(/\\n/g, '\n'),
+  ['https://www.googleapis.com/auth/spreadsheets'],
+);
+
+export const sheetService = google.sheets({ version: 'v4', auth });
 
 export const getSheet = async ({
   spreadsheetId,

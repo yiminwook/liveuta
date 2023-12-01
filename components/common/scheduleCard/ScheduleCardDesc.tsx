@@ -6,11 +6,11 @@ import { ContentsDataType } from '@/types/inSheet';
 import { combineClassName } from '@/utils/combineClassName';
 import { generateFcmToken } from '@/models/firebase/generateFcmToken';
 import { MouseEvent, useState } from 'react';
-import { TokenRequestBody } from '@/app/api/push/reserve/route';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { HiBellAlert } from 'react-icons/hi2';
 import ScheduleStatus from '@/components/common/scheduleCard/ScheduleStatus';
+import { PushData } from '@/app/api/push/route';
 
 interface ScheduleCardDescProps {
   content: ContentsDataType;
@@ -31,26 +31,32 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
         throw new Error('토큰을 가져오는데 실패했습니다.');
       }
 
-      const data: TokenRequestBody = {
+      const data: PushData = {
         title: '스케쥴 알림',
         body: `곧 ${channelName}의 방송이 시작됩니다.`,
         token,
-        timestamp: timestamp,
-        imageUrl: thumbnailURL,
+        timestamp: timestamp.toString(),
+        imageUrl: thumbnailURL || 'https://liveuta.vercel.app/assets/meta-image.png',
+        link: url,
       };
 
       setIsLoading(() => true);
 
-      await axios({
+      const sheetData = await axios<{ message: string }>({
         method: 'POST',
-        url: '/api/push/reserve',
+        url: '/api/sheet',
         data,
       });
 
-      toast.success('서버가 없어서 예약안됌.. ㅠㅠ');
+      if (sheetData.status === 226) {
+        toast.warning('이미 예약된 알림입니다.');
+        return;
+      }
+
+      toast.success('알림이 예약되었습니다.');
     } catch (error) {
-      const message = e instanceof Error ? e.message : 'Unknown Error';
-      console.error(e);
+      console.error(error);
+      const message = error instanceof Error ? error.message : 'Unknown Error';
       toast.error(message);
     } finally {
       setIsLoading(() => false);

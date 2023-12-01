@@ -25,19 +25,7 @@
 3. POST /api/push
 
 ```
-  input {
-    "tokens": string[];
-    "title": string;
-    "body": string;
-    /* imageUrl이 있을때만 push에서 사진을 보여줌 */
-    "imageUrl"?: string;
-    /**
-     * webpush를 눌렀을때 이동할 링크
-     * 이미 liveuta가 켜져있을때는 링크가 있어도 이동없고 내려간 창만 다시 올려줌
-     */
-    "link"?: string;
-    "timestamp": number;
-  }
+  body PushData[]
 
   return {
     data: {
@@ -71,15 +59,30 @@ interface contentLength {
   video: number;
 }
 
-ContentsDataTypes: {
+interface ContentsDataTypes: {
   length: contentLength;
   contents: ContentsDataType[];
 }
+
+interface PushData {
+    "token": string;
+    "title": string;
+    "body": string;
+    "imageUrl": string;
+    /**
+     * webpush를 눌렀을때 이동할 링크
+     * 이미 liveuta가 켜져있을때는 링크가 있어도 이동없고 내려간 창만 다시 올려줌
+     */
+    "link": string;
+    "timestamp": string;
+  }
 ```
 
 ## Packages
 
 ```
+ "@emotion/react": "^11.11.1",
+  "@types/jsdom": "^21.1.5",
   "axios": "^1.3.4",
   "dayjs": "^1.11.8",
   "firebase": "9.22.0",
@@ -120,11 +123,4 @@ FIREBASE_CLIENT_EMAIL=firebase-adminsdk...
 IREBASE_PROJECT_ID=liveuta-...
 FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\n...
 NEXT_PUBLIC_FIREBASE_VAPID_KEY=BAKlP...
-```
-
-```
-임시
-
-GOOGLE_CLIENT_ID=
-GOOGLE_SECRET_KEY=
 ```

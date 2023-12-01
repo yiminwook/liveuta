@@ -1,19 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getMessaging } from 'firebase-admin/messaging';
 import FirebaseAdmin from '@/models/firebase/admin';
+import { PushData } from '@/app/api/push/route';
+import dayjs from '@/models/dayjs';
 
-export interface TokenRequestBody {
-  token: string;
-  title: string;
-  body: string;
-  imageUrl?: string;
-  link?: string;
-  timestamp?: number;
-}
-
-export async function POST(request: NextRequest) {
+export const POST = async (request: NextRequest) => {
   try {
-    const resquestBody: TokenRequestBody = await request.json();
+    const resquestBody: PushData = await request.json();
 
     FirebaseAdmin.getInstance();
 
@@ -32,7 +25,7 @@ export async function POST(request: NextRequest) {
           link: resquestBody.link,
         },
         notification: {
-          timestamp: resquestBody.timestamp,
+          timestamp: Number(resquestBody.timestamp) || dayjs().unix(),
           title: resquestBody.title,
           body: resquestBody.body,
           imageUrl: resquestBody.imageUrl,
@@ -51,4 +44,4 @@ export async function POST(request: NextRequest) {
     const message = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json({ data: message }, { status: 500 });
   }
-}
+};

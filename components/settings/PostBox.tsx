@@ -1,11 +1,11 @@
-import { TokenRequestBody } from '@/app/api/push/reserve/route';
 import { tokenAtom } from '@/atoms';
 import Settings from '@/components/settings/Settings.module.scss';
 import axios, { AxiosError } from 'axios';
-import dayjs from 'dayjs';
+import dayjs from '@/models/dayjs';
 import { useAtomValue } from 'jotai';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { PushData } from '@/app/api/push/route';
 
 const PostBox = () => {
   const token = useAtomValue(tokenAtom);
@@ -41,18 +41,17 @@ const PostBox = () => {
       e.preventDefault();
       if (typeof token !== 'string' || isLoading) return;
 
-      const requestBody: TokenRequestBody = {
+      const requestBody: PushData = {
         title,
         body,
         token,
-        timestamp: dayjs().unix(),
+        timestamp: dayjs().unix().toString(),
+        link: 'https://liveuta.vercel.app',
+        imageUrl: imageUrl === '' ? 'https://liveuta.vercel.app/assets/meta-image.png' : imageUrl,
       };
 
-      if (imageUrl !== '') {
-        requestBody.imageUrl = imageUrl;
-      }
-
       setIsLoading(() => true);
+
       const res = await axios({
         method: 'POST',
         url: '/api/push/reserve',

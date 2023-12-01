@@ -1,10 +1,11 @@
 import { SheetAPIReturntype } from '@/types/inSheet';
-import { getSheet } from '@/models/sheet';
+import { getSheet, sheetService } from '@/models/sheet';
 import { parseAllData, parseScheduledData } from '@/utils/parseContentSheet';
 import { serverEnvConfig } from '@/configs/envConfig';
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/models/error/handler';
 import { cookies } from 'next/headers';
+import { PushData } from '@/app/api/push/route';
 
 const { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } = serverEnvConfig();
 
@@ -36,8 +37,61 @@ export const GET = async (_req: NextRequest) => {
 
     return NextResponse.json<SheetAPIReturntype | undefined>({ scheduled, live, daily, all }, { status: 200 });
   } catch (error) {
+    console.error(error);
     const { status, message } = errorHandler(error);
     return NextResponse.json({ error: message }, { status });
+  }
+};
+
+export const POST = async (req: NextRequest) => {
+  try {
+    const PUSH_SHEET_ID = '1OQw6TqZ1Fdwrs1lPgVr-RC0ywXBxlMPv1ghr2UeYNGE';
+    const PUSH_SHEET_RANGE = '시트1';
+
+    const requsetBody: PushData = await req.json();
+
+    const value = [
+      requsetBody.title,
+      requsetBody.body,
+      requsetBody.imageUrl,
+      requsetBody.link,
+      requsetBody.timestamp,
+      requsetBody.token,
+    ];
+
+    const sheetData = await getSheet({
+      spreadsheetId: PUSH_SHEET_ID,
+      range: PUSH_SHEET_RANGE,
+      cache: false,
+    });
+
+    if (sheetData.values === null || sheetData.values === undefined) {
+      throw new Error('sheetData is forbidden');
+    }
+
+    const isSaved = sheetData.values.some((item) => item[5] === requsetBody.token && item[3] === requsetBody.link);
+
+    if (isSaved) {
+      return NextResponse.json({ message: '이미 등록된 알림입니다.' }, { status: 226 });
+    }
+
+    const lastRow = sheetData.values.length + 1;
+    const res = await sheetService.spreadsheets.values.update({
+      spreadsheetId: PUSH_SHEET_ID,
+      range: PUSH_SHEET_RANGE + '!A' + lastRow.toString(),
+      valueInputOption: 'USER_ENTERED',
+      requestBody: {
+        majorDimension: 'rows',
+        values: [value],
+      },
+    });
+
+    const data = res.data;
+    return NextResponse.json({ message: '알림이 성공적으로 등록되었습니다.' }, { status: 201 });
+  } catch (error) {
+    console.error(error);
+    const { status, message } = errorHandler(error);
+    return NextResponse.json({ message: message }, { status });
   }
 };
 

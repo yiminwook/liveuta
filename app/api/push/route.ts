@@ -1,66 +1,59 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getMessaging } from 'firebase-admin/messaging';
+import { getMessaging, Message } from 'firebase-admin/messaging';
 import FirebaseAdmin from '@/models/firebase/admin';
+import errorHandler from '@/models/error/handler';
+import dayjs from '@/models/dayjs';
 
-interface requestBody {
-  tokens: string[];
+export interface PushData {
+  token: string;
   title: string;
   body: string;
-  imageUrl?: string;
-  link?: string;
-  timestamp?: number;
+  imageUrl: string;
+  link: string;
+  timestamp: string;
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const resquestBody: requestBody = await request.json();
+    const resquestBody: PushData[] = await request.json();
 
-    for (const _key in resquestBody) {
-      const key = _key as keyof requestBody;
-
-      if (key === 'tokens' && Array.isArray(resquestBody[key]) === false) {
-        throw new Error('tokens is not array');
-      }
-
-      if (key !== 'tokens' && typeof resquestBody[key] !== 'string') {
-        throw new Error(`${key} parameter is not string`);
-      }
-    }
-
-    FirebaseAdmin.getInstance();
-
-    const response = await getMessaging().sendEachForMulticast({
-      tokens: resquestBody.tokens,
+    const messages = resquestBody.map<Message>((data) => ({
+      token: data.token,
       notification: {
-        title: resquestBody.title,
-        body: resquestBody.body,
-        imageUrl: resquestBody.imageUrl,
+        title: data.title,
+        body: data.body,
+        imageUrl: data.imageUrl,
       },
       webpush: {
         headers: {
           TTL: '1800', // 30분후 만료
         },
         fcmOptions: {
-          link: resquestBody.link,
+          link: data.link,
         },
         notification: {
-          timestamp: resquestBody.timestamp,
-          title: resquestBody.title,
-          body: resquestBody.body,
-          imageUrl: resquestBody.imageUrl,
-        },
-        data: {
-          TTL: '1800', // 30분후 만료
-          timestamp: resquestBody.timestamp?.toString() || '0',
-          link: resquestBody.link || 'https://liveuta.vercel.app',
+          title: data.title,
+          body: data.body,
+          imageUrl: data.imageUrl,
+          timestamp: Number(data.timestamp) || dayjs().unix(),
+          // click_action: data.imageUrl,
         },
       },
-    });
+      data: {
+        TTL: '1800', // 30분후 만료
+        link: data.link,
+        timestamp: data.timestamp,
+      },
+    }));
+    console.log(messages[0]);
+    FirebaseAdmin.getInstance();
 
-    return NextResponse.json({ data: response }, { status: 201 });
+    const response = await getMessaging().sendAll(messages);
+
+    return NextResponse.json(response, { status: 201 });
   } catch (error) {
     console.error(error);
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    return NextResponse.json({ data: message }, { status: 500 });
+    const { status, message } = errorHandler(error);
+    return NextResponse.json({ error: message }, { status });
   }
 }
