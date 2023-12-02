@@ -4,7 +4,7 @@
 import { tokenAtom } from '@/atoms';
 import FirebaseClient from '@/models/firebase/client';
 import { generateFcmToken } from '@/models/firebase/generateFcmToken';
-import { MessagePayload, onMessage } from 'firebase/messaging';
+import { onMessage } from 'firebase/messaging';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
@@ -28,16 +28,16 @@ const ServiceWorker = () => {
       await handleToken();
 
       const messaging = FirebaseClient.getInstance().message;
-      onMessage(messaging, ({ notification, data, fcmOptions, from, collapseKey, messageId }: MessagePayload) => {
-        console.log('notification', notification);
-        console.log('data', data);
-        console.log('fcmOptions', fcmOptions);
-        if (notification?.body === undefined || data === undefined) return;
-        new Notification(notification.title!, {
-          body: notification.body,
-          image: notification.image!,
+      onMessage(messaging, ({ data, from, collapseKey, messageId }) => {
+        if (data === undefined) return;
+        const noti = new Notification(data.title!, {
+          body: data.body,
+          image: data.image!,
           timestamp: Number(data.timestamp),
         });
+        noti.onclick = () => {
+          window.open(data.link);
+        };
         // toast.info(notification.body);
       });
     } catch (error) {

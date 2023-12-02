@@ -19,11 +19,6 @@ export async function POST(request: NextRequest) {
 
     const messages = resquestBody.map<Message>((data) => ({
       token: data.token,
-      notification: {
-        title: data.title,
-        body: data.body,
-        imageUrl: data.imageUrl,
-      },
       webpush: {
         headers: {
           TTL: '1800', // 30분후 만료
@@ -31,21 +26,19 @@ export async function POST(request: NextRequest) {
         fcmOptions: {
           link: data.link,
         },
-        notification: {
-          title: data.title,
-          body: data.body,
-          imageUrl: data.imageUrl,
-          timestamp: Number(data.timestamp) || dayjs().unix(),
-          // click_action: data.imageUrl,
-        },
       },
       data: {
         TTL: '1800', // 30분후 만료
         link: data.link,
+        title: data.title,
+        body: data.body,
+        imageUrl: data.imageUrl,
         timestamp: data.timestamp,
       },
     }));
-    console.log(messages[0]);
+
+    console.log('push FCM!!', messages.length);
+
     FirebaseAdmin.getInstance();
 
     const response = await getMessaging().sendAll(messages);

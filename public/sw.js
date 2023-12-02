@@ -29,14 +29,33 @@ const messaging = firebase.messaging();
 // For more info see:
 // https://firebase.google.com/docs/cloud-messaging/concept-options
 
-// data객체에 notification이 없는 경우에는 onBackgroundMessage가 필요하고
-// firebase에서 알아서 해주기 때문에 필요없다. 오히려 2번 나온다
-// messaging.onBackgroundMessage(function (payload) {
-//   console.log(
-//     "[firebase-messaging-sw.js] Received background message ",
-//     payload
-//   );
-//   // Customize notification here
-//   const notificationTitle = "Background Message Title";
-//   self.registration.showNotification(notificationTitle);
-// });
+messaging.onBackgroundMessage(function ({ data }) {
+  if (data === undefined) return;
+  self.registration.showNotification(data.title, {
+    body: data.body,
+    image: data.image,
+    timestamp: Number(data.timestamp),
+    data: data.link,
+  });
+});
+
+self.addEventListener('notificationclick', function (event) {
+  console.log('background notification', event.notification);
+  const url = event.notification.data;
+  event.notification.close(); // Android needs explicit close
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window' }).then((windowClients) => {
+      for (var i = 0; i < windowClients.length; i++) {
+        const client = windowClients[i];
+        if (client.url === url && 'focus' in client) {
+          return client.focus();
+        }
+      }
+
+      if (clients.openWindow) {
+        return clients.openWindow(url).then((windowClient) => (windowClient ? windowClient.focus() : null));
+      }
+    }),
+  );
+});

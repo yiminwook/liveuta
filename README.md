@@ -39,7 +39,7 @@
 ## Types
 
 ```
-ContentsDataType: {
+interface ContentsDataType {
   title: string;
   url: string;
   channelName: string;
@@ -59,7 +59,7 @@ interface contentLength {
   video: number;
 }
 
-interface ContentsDataTypes: {
+interface ContentsDataTypes {
   length: contentLength;
   contents: ContentsDataType[];
 }
@@ -82,26 +82,26 @@ interface PushData {
 
 ```
  "@emotion/react": "^11.11.1",
-  "@types/jsdom": "^21.1.5",
-  "axios": "^1.3.4",
-  "dayjs": "^1.11.8",
-  "firebase": "9.22.0",
-  "firebase-admin": "^11.11.0",
-  "googleapis": "^128.0.0",
-  "jotai": "^2.5.1",
-  "jotai-devtools": "^0.7.0",
-  "next": "13.4.12",
-  "pretendard": "^1.3.8",
-  "react": "^18.2.0",
-  "react-dom": "^18.2.0",
-  "react-html-parser": "^2.0.2",
-  "react-icons": "^4.8.0",
-  "react-outside-click-handler": "^1.3.0",
-  "react-toastify": "^9.1.2",
-  "regexify-string": "^1.0.19",
-  "sharp": "^0.31.3",
-  "swr": "^2.1.3",
-  "universal-cookie": "^4.0.4"
+ "@types/jsdom": "^21.1.5",
+ "axios": "^1.3.4",
+ "dayjs": "^1.11.8",
+ "firebase": "9.22.0",
+ "firebase-admin": "^11.11.0",
+ "googleapis": "^128.0.0",
+ "jotai": "^2.5.1",
+ "jotai-devtools": "^0.7.0",
+ "next": "13.4.12",
+ "pretendard": "^1.3.8",
+ "react": "^18.2.0",
+ "react-dom": "^18.2.0",
+ "react-html-parser": "^2.0.2",
+ "react-icons": "^4.8.0",
+ "react-outside-click-handler": "^1.3.0",
+ "react-toastify": "^9.1.2",
+ "regexify-string": "^1.0.19",
+ "sharp": "^0.31.3",
+ "swr": "^2.1.3",
+ "universal-cookie": "^4.0.4"
 ```
 
 ## Environments

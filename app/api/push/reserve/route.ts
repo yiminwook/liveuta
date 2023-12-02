@@ -3,6 +3,7 @@ import { getMessaging } from 'firebase-admin/messaging';
 import FirebaseAdmin from '@/models/firebase/admin';
 import { PushData } from '@/app/api/push/route';
 import dayjs from '@/models/dayjs';
+import errorHandler from '@/models/error/handler';
 
 export const POST = async (request: NextRequest) => {
   try {
@@ -29,6 +30,7 @@ export const POST = async (request: NextRequest) => {
           title: resquestBody.title,
           body: resquestBody.body,
           imageUrl: resquestBody.imageUrl,
+          click_action: resquestBody.link,
         },
         data: {
           TTL: '1800', // 30분후 만료
@@ -41,7 +43,7 @@ export const POST = async (request: NextRequest) => {
     return NextResponse.json({ data: response }, { status: 201 });
   } catch (error) {
     console.error(error);
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    return NextResponse.json({ data: message }, { status: 500 });
+    const { status, message } = errorHandler(error);
+    return NextResponse.json({ error: message }, { status });
   }
 };

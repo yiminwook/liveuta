@@ -37,7 +37,7 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
         token,
         timestamp: timestamp.toString(),
         imageUrl: thumbnailURL || 'https://liveuta.vercel.app/assets/meta-image.png',
-        link: url,
+        link: process.env.NEXT_PUBLIC_URL + '/redirect/youtube/' + videoId,
       };
 
       setIsLoading(() => true);

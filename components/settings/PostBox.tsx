@@ -12,6 +12,7 @@ const PostBox = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [link, setLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,14 +27,8 @@ const PostBox = () => {
     setImageUrl(() => e.target.value.trim());
   };
 
-  const resetTitle = () => setTitle(() => '');
-  const resetBody = () => setBody(() => '');
-  const resetImageUrl = () => setImageUrl(() => '');
-
-  const resetForm = () => {
-    resetTitle();
-    resetBody();
-    resetImageUrl();
+  const handleLink = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLink(() => e.target.value.trim());
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -46,7 +41,7 @@ const PostBox = () => {
         body,
         token,
         timestamp: dayjs().unix().toString(),
-        link: 'https://liveuta.vercel.app',
+        link,
         imageUrl: imageUrl === '' ? 'https://liveuta.vercel.app/assets/meta-image.png' : imageUrl,
       };
 
@@ -54,13 +49,12 @@ const PostBox = () => {
 
       const res = await axios({
         method: 'POST',
-        url: '/api/push/reserve',
-        data: requestBody,
+        url: '/api/push',
+        data: [requestBody],
       });
 
       const data = res.data;
       console.log(data);
-      resetForm();
     } catch (error) {
       console.log(error);
       let message = 'Unknown Error';
@@ -99,7 +93,18 @@ const PostBox = () => {
             type="text"
             value={imageUrl}
             onChange={handleImageUrl}
-            placeholder="https://liveuta.vercel.app/assets/meta-image.png"
+            placeholder={`${process.env.NEXT_PUBLIC_SITE_URL}/assets/meta-image.png`}
+          />
+        </div>
+        <div className={Settings['post-input-box']}>
+          <label htmlFor="imageUrl">링크</label>
+          <input
+            disabled={isLoading}
+            id="link"
+            type="text"
+            value={link}
+            onChange={handleLink}
+            placeholder={`/redirect/youtube/{videoId}`}
           />
         </div>
         <div className={Settings['post-button-box']}>
