@@ -40,7 +40,7 @@ const PostBox = () => {
         title,
         body,
         token,
-        timestamp: dayjs().unix().toString(),
+        timestamp: dayjs().toDate().getTime().toString(),
         link,
         imageUrl: imageUrl === '' ? 'https://liveuta.vercel.app/assets/meta-image.png' : imageUrl,
       };

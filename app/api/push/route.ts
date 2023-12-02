@@ -22,9 +22,6 @@ export async function POST(request: NextRequest) {
         headers: {
           TTL: '1800', // 30분후 만료
         },
-        fcmOptions: {
-          link: data.link,
-        },
       },
       data: {
         TTL: '1800', // 30분후 만료

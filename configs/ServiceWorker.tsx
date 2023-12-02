@@ -30,15 +30,20 @@ const ServiceWorker = () => {
       const messaging = FirebaseClient.getInstance().message;
       onMessage(messaging, ({ data, from, collapseKey, messageId }) => {
         if (data === undefined) return;
+
         const noti = new Notification(data.title!, {
           body: data.body,
-          image: data.image!,
+          image: data.imageUrl!,
           timestamp: Number(data.timestamp),
         });
+
         noti.onclick = () => {
-          window.open(data.link);
+          const url = window.location.href;
+          if (url !== data.link) {
+            window.open(data.link);
+          }
+          noti.close();
         };
-        // toast.info(notification.body);
       });
     } catch (error) {
       console.error(error);

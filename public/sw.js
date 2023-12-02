@@ -33,7 +33,7 @@ messaging.onBackgroundMessage(function ({ data }) {
   if (data === undefined) return;
   self.registration.showNotification(data.title, {
     body: data.body,
-    image: data.image,
+    image: data.imageUrl,
     timestamp: Number(data.timestamp),
     data: data.link,
   });
@@ -44,6 +44,7 @@ self.addEventListener('notificationclick', function (event) {
   const url = event.notification.data;
   event.notification.close(); // Android needs explicit close
 
+  if (url === undefined || url === null) return;
   event.waitUntil(
     clients.matchAll({ type: 'window' }).then((windowClients) => {
       for (var i = 0; i < windowClients.length; i++) {
@@ -54,7 +55,7 @@ self.addEventListener('notificationclick', function (event) {
       }
 
       if (clients.openWindow) {
-        return clients.openWindow(url).then((windowClient) => (windowClient ? windowClient.focus() : null));
+        return clients.openWindow(url);
       }
     }),
   );
