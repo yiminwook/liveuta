@@ -1,5 +1,5 @@
 import { SheetAPIReturntype } from '@/types/inSheet';
-import { getSheet, jwtAuth } from '@/models/sheet';
+import { getSheet } from '@/models/sheet';
 import { parseAllData, parseScheduledData } from '@/utils/parseContentSheet';
 import { serverEnvConfig } from '@/configs/envConfig';
 import { NextRequest, NextResponse } from 'next/server';
@@ -7,6 +7,7 @@ import errorHandler from '@/models/error/handler';
 import { cookies } from 'next/headers';
 import { PushData } from '@/app/api/push/route';
 import { google } from 'googleapis';
+import { jwtAuth } from '@/models/firebase/admin';
 
 const { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE, PUSH_SHEET_ID, PUSH_SHEET_RANGE } = serverEnvConfig();
 

@@ -1,6 +1,6 @@
 import Script from 'next/script';
 
-const Analytics = () => {
+const GoogleAnalytics = () => {
   return (
     <>
       {/* Global site tag (gtag.js) - Google Analytics */}
@@ -18,4 +18,4 @@ const Analytics = () => {
   );
 };
 
-export default Analytics;
+export default GoogleAnalytics;

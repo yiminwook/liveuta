@@ -1,29 +1,24 @@
+import { serverEnvConfig } from '@/configs/envConfig';
 import * as admin from 'firebase-admin';
 import { getAuth } from 'firebase-admin/auth';
 import { google } from 'googleapis';
 
-const config = {
-  projectId: process.env.FIREBASE_PROJECT_ID!,
-  privateKey: process.env.FIREBASE_PRIVATE_KEY!.replaceAll(/\\n/g, '\n'),
-  clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
-};
+const { FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY } = serverEnvConfig();
 
 const MESSAGING_SCOPE = 'https://www.googleapis.com/auth/firebase.messaging';
-export const FIREBASE_SCOPES = [MESSAGING_SCOPE];
+const SHEET_SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
+export const FIREBASE_SCOPES = [MESSAGING_SCOPE, SHEET_SCOPE];
+
+export const jwtAuth = new google.auth.JWT(FIREBASE_CLIENT_EMAIL, '', FIREBASE_PRIVATE_KEY, FIREBASE_SCOPES);
 
 export const getAccessToken = () => {
-  return new Promise<string>(function (resolve, reject) {
-    const jwtClient = new google.auth.JWT({
-      email: config.clientEmail,
-      key: config.privateKey,
-      scopes: FIREBASE_SCOPES,
-    });
-    jwtClient.authorize(function (err, tokens) {
-      const access_token = tokens?.access_token;
-      if (err || access_token === undefined || access_token === null) {
-        return reject(err);
+  return new Promise<string>((resolve, reject) => {
+    jwtAuth.authorize((error, tokens) => {
+      const accessToken = tokens?.access_token;
+      if (error || accessToken === undefined || accessToken === null) {
+        return reject(error);
       }
-      return resolve(access_token);
+      return resolve(accessToken);
     });
   });
 };
@@ -50,9 +45,12 @@ export default class FirebaseAdmin {
       return;
     }
 
-    console.log('FirebaseAdmin init!!!');
     admin.initializeApp({
-      credential: admin.credential.cert(config),
+      credential: admin.credential.cert({
+        projectId: FIREBASE_PROJECT_ID,
+        clientEmail: FIREBASE_CLIENT_EMAIL,
+        privateKey: FIREBASE_PRIVATE_KEY,
+      }),
     });
 
     this.init = true;
