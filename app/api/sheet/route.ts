@@ -1,11 +1,12 @@
 import { SheetAPIReturntype } from '@/types/inSheet';
-import { getSheet, sheetService } from '@/models/sheet';
+import { getSheet, jwtAuth } from '@/models/sheet';
 import { parseAllData, parseScheduledData } from '@/utils/parseContentSheet';
 import { serverEnvConfig } from '@/configs/envConfig';
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/models/error/handler';
 import { cookies } from 'next/headers';
 import { PushData } from '@/app/api/push/route';
+import { google } from 'googleapis';
 
 const { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } = serverEnvConfig();
 
@@ -76,7 +77,14 @@ export const POST = async (req: NextRequest) => {
     }
 
     const lastRow = sheetData.values.length + 1;
+
+    const accessToken = await jwtAuth.getAccessToken();
+    if (!accessToken.token) throw new Error('accessToken is not exist');
+
+    const sheetService = google.sheets({ version: 'v4', auth: jwtAuth });
+
     const res = await sheetService.spreadsheets.values.update({
+      access_token: accessToken.token,
       spreadsheetId: PUSH_SHEET_ID,
       range: PUSH_SHEET_RANGE + '!A' + lastRow.toString(),
       valueInputOption: 'USER_ENTERED',
