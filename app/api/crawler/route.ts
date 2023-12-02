@@ -1,7 +1,8 @@
+import errorHandler from '@/models/error/handler';
 import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
+export const GET = async (request: NextRequest) => {
   try {
     const url = new URL(request.nextUrl);
     const searchParams = url.searchParams;
@@ -26,9 +27,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ data: count });
   } catch (error) {
     console.log('error', error);
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    return NextResponse.json({ data: message }, { status: 500 });
+    const { status, message } = errorHandler(error);
+    return NextResponse.json({ data: message }, { status });
   }
-}
+};
 
 export const dynamic = 'force-dynamic';

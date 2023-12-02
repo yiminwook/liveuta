@@ -82,17 +82,3 @@ export const GET = async (req: NextRequest) => {
 };
 
 export const dynamic = 'force-dynamic';
-
-// https://developers.google.com/sheets/api/guides/concepts?hl=ko#cell
-
-// const result = await google
-//     .sheets({ version: "v4" })
-//     .spreadsheets.values.update({
-//       spreadsheetId:
-//       range: "A1",
-//       requestBody: {
-//         values: [["입력"], ["입력2"], [1]],
-//       },
-//       valueInputOption: "RAW",
-//      );
-//   console.log(result.data);

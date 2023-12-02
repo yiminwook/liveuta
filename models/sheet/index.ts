@@ -1,5 +1,9 @@
 import { google } from 'googleapis';
-import { customFetchCached, customFetchNoCached } from '@/models/customFetch';
+import { serverEnvConfig } from '@/configs/envConfig';
+
+const { FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY } = serverEnvConfig();
+const SHEET_SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
+export const SHEET_SCOPES = [SHEET_SCOPE];
 
 export interface SheetConfigType {
   spreadsheetId: string;
@@ -7,18 +11,9 @@ export interface SheetConfigType {
   range: string;
 }
 
-export const jwtAuth = new google.auth.JWT(
-  process.env.FIREBASE_CLIENT_EMAIL,
-  '',
-  process.env.FIREBASE_PRIVATE_KEY!.replaceAll(/\\n/g, '\n'),
-  ['https://www.googleapis.com/auth/spreadsheets'],
-);
+export const jwtAuth = new google.auth.JWT(FIREBASE_CLIENT_EMAIL, '', FIREBASE_PRIVATE_KEY, SHEET_SCOPES);
 
-export const getSheet = async ({
-  spreadsheetId,
-  range,
-  cache = true,
-}: Omit<SheetConfigType, 'key'> & { cache?: boolean }) => {
+export const getSheet = async ({ spreadsheetId, range }: Omit<SheetConfigType, 'key'>) => {
   const accessToken = await jwtAuth.getAccessToken();
 
   if (!accessToken.token) throw new Error('accessToken is not exist');
@@ -32,7 +27,7 @@ export const getSheet = async ({
       range,
     },
     {
-      fetchImplementation: cache ? customFetchCached : customFetchNoCached,
+      fetchImplementation: fetch,
     },
   );
 

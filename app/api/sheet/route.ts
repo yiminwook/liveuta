@@ -8,14 +8,14 @@ import { cookies } from 'next/headers';
 import { PushData } from '@/app/api/push/route';
 import { google } from 'googleapis';
 
-const { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } = serverEnvConfig();
+const { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE, PUSH_SHEET_ID, PUSH_SHEET_RANGE } = serverEnvConfig();
 
 export const GET = async (_req: NextRequest) => {
   try {
     const cookieStore = cookies();
     const cookie = cookieStore.get('select')?.value || 'all';
 
-    const sheetData = await getSheet({ spreadsheetId: CONTENTS_SHEET_ID, range: CONTENTS_SHEET_RANGE, cache: false });
+    const sheetData = await getSheet({ spreadsheetId: CONTENTS_SHEET_ID, range: CONTENTS_SHEET_RANGE });
     let { scheduled, live } = parseScheduledData(sheetData);
     let { daily, all } = parseAllData(sheetData);
 
@@ -46,9 +46,6 @@ export const GET = async (_req: NextRequest) => {
 
 export const POST = async (req: NextRequest) => {
   try {
-    const PUSH_SHEET_ID = '1OQw6TqZ1Fdwrs1lPgVr-RC0ywXBxlMPv1ghr2UeYNGE';
-    const PUSH_SHEET_RANGE = '시트1';
-
     const requsetBody: PushData = await req.json();
 
     const value = [
@@ -63,7 +60,6 @@ export const POST = async (req: NextRequest) => {
     const sheetData = await getSheet({
       spreadsheetId: PUSH_SHEET_ID,
       range: PUSH_SHEET_RANGE,
-      cache: false,
     });
 
     if (sheetData.values === null || sheetData.values === undefined) {

@@ -74,7 +74,7 @@ interface PushData {
      * 이미 liveuta가 켜져있을때는 링크가 있어도 이동없고 내려간 창만 다시 올려줌
      */
     "link": string;
-    "timestamp": string;
+    "timestamp": string; //unix time
   }
 ```
 
@@ -82,7 +82,6 @@ interface PushData {
 
 ```
  "@emotion/react": "^11.11.1",
- "@types/jsdom": "^21.1.5",
  "axios": "^1.3.4",
  "dayjs": "^1.11.8",
  "firebase": "9.22.0",
@@ -108,19 +107,25 @@ interface PushData {
 
 ```
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
+/** 미사용 */
 HOLODEX_API_KEY=
+/** Youtube Data v3 API */
 GOOGLE_API_KEY=AIz...
 
 CONTENTS_SHEET_ID=sheetId
 CHANNELS_SHEET_ID=sheetId
+PUSH_SHEET_ID=sheetId
+
 CONTENTS_SHEET_RANGE=Upcoming
 CHANNELS_SHEET_RANGE=reference
+PUSH_SHEET_RANGE=시트1
 
 SHORT_URL=http://SHORT_URL.com
 REQUEST_URL=http://REQUEST_URL.com
 
+/** Google Sheet v4 API, Firebase Cloud Messaging */
 FIREBASE_CLIENT_EMAIL=firebase-adminsdk...
-IREBASE_PROJECT_ID=liveuta-...
+FIREBASE_PROJECT_ID=liveuta-...
 FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\n...
 NEXT_PUBLIC_FIREBASE_VAPID_KEY=BAKlP...
 ```

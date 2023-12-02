@@ -9,12 +9,15 @@ const config = {
 };
 
 const MESSAGING_SCOPE = 'https://www.googleapis.com/auth/firebase.messaging';
-const SHEET_SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
-export const SCOPES = [MESSAGING_SCOPE, SHEET_SCOPE];
+export const FIREBASE_SCOPES = [MESSAGING_SCOPE];
 
 export const getAccessToken = () => {
   return new Promise<string>(function (resolve, reject) {
-    const jwtClient = new google.auth.JWT({ email: config.clientEmail, key: config.privateKey, scopes: SCOPES });
+    const jwtClient = new google.auth.JWT({
+      email: config.clientEmail,
+      key: config.privateKey,
+      scopes: FIREBASE_SCOPES,
+    });
     jwtClient.authorize(function (err, tokens) {
       const access_token = tokens?.access_token;
       if (err || access_token === undefined || access_token === null) {
