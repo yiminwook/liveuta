@@ -18,27 +18,26 @@ const SettingsPage = () => {
   const [permission, setPermission] = useState('설정을 가져오는 중');
 
   const handleSetToken = async () => {
-    const token = await generateFcmToken();
+    try {
+      const token = await generateFcmToken();
 
-    if (token === undefined) {
-      throw new Error('브라우저 알림허용 설정이 되어있지 않습니다.');
-    }
+      if (token === undefined) {
+        throw new Error('브라우저 알림허용 설정이 되어있지 않습니다.');
+      }
 
-    setPermission(() => 'granted');
-    setToken(() => token);
+      setPermission(() => 'granted');
+      setToken(() => token);
+      } catch (error) {
+        console.error(error);
+        const message = error instanceof Error ? error.message : 'Unknown Error';
+        setPermission(() => 'denied');
+        setToken(() => undefined);
+        toast.error(message);
+     }
   };
 
   const requerstPermission = async () => {
-    try {
-      handleSetToken();
-      toast.success('알림허용 설정이 완료되었습니다.');
-    } catch (error) {
-      console.error(error);
-      const message = error instanceof Error ? error.message : 'Unknown Error';
-      setPermission(() => 'denied');
-      setToken(() => undefined);
-      toast.error(message);
-    }
+    handleSetToken();
   };
 
   useEffect(() => {
