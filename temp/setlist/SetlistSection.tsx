@@ -1,14 +1,18 @@
-import { useHolodexSearchComment } from '@/hooks/api/useHolodex';
 import { useSearchParams } from 'next/navigation';
-import SetlistCard from '@/components/setlist/SetlistCard';
+import SetlistCard from '@/temp/setlist/SetlistCard';
 import setlist from '@/components/setlist/Setlist.module.scss';
 
 const SetlistSection = () => {
   const searchParmas = useSearchParams();
   const query = searchParmas.get('query') || '';
   console.log(query);
-  const { setListItems, setListIsLoading, handlePagination, isOverPagination, totalSize } =
-    useHolodexSearchComment(query);
+  // const { setListItems, setListIsLoading, handlePagination, isOverPagination, totalSize } =
+  //   useHolodexSearchComment(query);
+  const totalSize = 0;
+  const setListItems: any[] = [];
+  const isOverPagination = false;
+  const setListIsLoading = false;
+  const handlePagination = () => {};
 
   return (
     <section className={setlist['section']}>

@@ -1,6 +1,6 @@
 'use client';
 import { useHydrateAtoms } from 'jotai/utils';
-import { themeAtom } from '@/atoms';
+import { themeAtom } from '@/components/atoms';
 import { ThemeType } from '@/hooks/useTheme';
 
 interface GlobalHydrateAtomsProps {

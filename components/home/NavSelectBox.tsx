@@ -1,7 +1,7 @@
 'use client';
 import home from '@/components/home/Home.module.scss';
 import React, { useMemo, useState } from 'react';
-import useSheet from '@/hooks/api/useSheet';
+import useSheet from '@/queries/sheet';
 import { usePathname, useRouter } from 'next/navigation';
 import Cookies from 'universal-cookie';
 import { SheetAPIReturntype } from '@/types/inSheet';
@@ -15,7 +15,7 @@ const NavSelectBox = ({ select }: { select: string }) => {
   const filter = (usePathname()?.split('/')[1] || 'scheduled') as keyof SheetAPIReturntype;
   const router = useRouter();
 
-  const { mutate, data } = useSheet();
+  const { refetchSheet, sheetData } = useSheet();
 
   const handleSelect = async (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
@@ -26,15 +26,15 @@ const NavSelectBox = ({ select }: { select: string }) => {
     } else {
       const selectCookie = new Cookies();
       selectCookie.set('select', li, { path: '/', maxAge: 60 * 60 * 24 * 30 * 3 }); //3개월 저장
-      await mutate();
+      await refetchSheet();
       setActive(() => false);
       router.refresh(); //select 최신화
     }
   };
 
-  const totalText = `전체: ${data?.[filter]?.length?.total || 0}`;
-  const streamText = `방송: ${data?.[filter]?.length?.stream || 0}`;
-  const videoText = `동영상: ${data?.[filter]?.length?.video || 0}`;
+  const totalText = `전체: ${sheetData?.[filter]?.length?.total || 0}`;
+  const streamText = `방송: ${sheetData?.[filter]?.length?.stream || 0}`;
+  const videoText = `동영상: ${sheetData?.[filter]?.length?.video || 0}`;
 
   const selectedText = useMemo(() => {
     switch (select) {

@@ -1,4 +1,4 @@
-import { useThemeAtom } from '@/atoms';
+import { useThemeAtom } from '@/components/atoms';
 import Cookies from 'universal-cookie';
 
 export type ThemeType = 'theme1' | 'theme2' | 'theme3' | 'theme4';

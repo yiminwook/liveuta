@@ -4,18 +4,18 @@ import ChannelSection from '@/components/search/ChannelSection';
 import ContentSection from '@/components/search/ContentSection';
 import SearchSection from '@/components/search/SearchSection';
 import SummarySection from '@/components/search/SummarySection';
-import { useSearch } from '@/hooks/api/useSearch';
+import { useSearch } from '@/queries/search';
 
 const SearchPage = () => {
-  const { data, isLoading } = useSearch();
+  const { searchData, isLoadingSearch } = useSearch();
 
   return (
     <>
-      {isLoading ? <Loading /> : null}
+      {isLoadingSearch ? <Loading /> : null}
       <SearchSection />
       <SummarySection />
-      <ContentSection contents={data.contents} />
-      <ChannelSection channels={data.channels} />
+      <ContentSection contents={searchData.contents} />
+      <ChannelSection channels={searchData.channels} />
     </>
   );
 };

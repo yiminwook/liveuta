@@ -1,5 +1,4 @@
-import { GoogleClient } from '@/temp/auth/googClient';
-// import jwt from 'jsonwebtoken';
+import { jwtAuth } from '@/models/firebase/admin';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 /** GET: 쿠키 저장 */
@@ -8,10 +7,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { code } = req.query;
     if (!code) throw new Error('Fail to get Code');
     const codeQuery = code?.toString();
-    const token = await GoogleClient.getInstance().getToken(codeQuery);
-    const accessToken = token.tokens.access_token;
-    const refreshToken = token.tokens.refresh_token;
-    if (!(accessToken && refreshToken)) throw new Error('Fail to get Tokens');
+    const token = await jwtAuth.getAccessToken();
+    const accessToken = token.token;
+    if (!accessToken) throw new Error('Fail to get Tokens');
     // const encodeAccessToken = jwt.sign(accessToken, 'ACCESS_SECRET');
     // const encodeRefreshToken = jwt.sign(refreshToken, 'REFRESH_SECRET');
     // const expiresIn = 30 * 24 * 60 * 60 * 1000;

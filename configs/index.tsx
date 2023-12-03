@@ -1,9 +1,9 @@
 'use client';
 import { ThemeType } from '@/hooks/useTheme';
 import JotaiProvider from '@/configs/JotaiProvider';
-import SWRProvider from '@/configs/SWRProvider';
 import Devtools from '@/configs/Devtools';
 import ServiceWorker from '@/configs/ServiceWorker';
+import ReacQueryProvider from '@/configs/ReactQueryProvider';
 
 interface ConfigsProps {
   children: React.ReactNode;
@@ -13,9 +13,11 @@ interface ConfigsProps {
 const Configs = ({ children, theme }: ConfigsProps) => {
   return (
     <JotaiProvider theme={theme}>
-      <SWRProvider>{children}</SWRProvider>
-      <ServiceWorker />
-      <Devtools />
+      <ReacQueryProvider>
+        {children}
+        <ServiceWorker />
+        <Devtools />
+      </ReacQueryProvider>
     </JotaiProvider>
   );
 };

@@ -1,10 +1,10 @@
-import { GoogleClient } from '@/temp/auth/googClient';
+import { jwtAuth } from '@/models/firebase/admin';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 /** Authorization URL 반환 */
 const handler = async (_req: NextApiRequest, res: NextApiResponse<{ url: string | undefined; message: string }>) => {
   try {
-    const url = GoogleClient.getInstance().generateAuthUrl({
+    const url = jwtAuth.generateAuthUrl({
       access_type: 'offline', //offline일경우 accessToken, refreshToken 둘다
       include_granted_scopes: true,
       scope: ['openid', 'profile', 'email'],

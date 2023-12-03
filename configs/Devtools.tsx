@@ -1,5 +1,5 @@
 'use client';
-'use client';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { DevTools } from 'jotai-devtools';
 
 const Devtools = () => {
@@ -10,6 +10,7 @@ const Devtools = () => {
   return (
     <>
       <DevTools theme="dark" />
+      <ReactQueryDevtools buttonPosition="bottom-right" position="right" />
     </>
   );
 };
