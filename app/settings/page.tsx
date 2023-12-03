@@ -1,27 +1,36 @@
 'use client';
-import { tokenAtom } from '@/atoms';
 import Settings from '@/components/settings/Settings.module.scss';
-import CopyButton from '@/components/common/button/CopyButton';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { generateFcmToken } from '@/models/firebase/generateFcmToken';
-import { useAtomValue, useSetAtom } from 'jotai';
 import PostBox from '@/components/settings/PostBox';
+import TokenBox from '@/components/settings/TokenBox';
+
+/**
+ * 로딩중 - null
+ * 에러 - undefined
+ * 성공 - string
+ */
+export type TokenType = null | undefined | string;
 
 const SettingsPage = () => {
-  const setToken = useSetAtom(tokenAtom);
+  const [token, setToken] = useState<TokenType>(null);
   const [permission, setPermission] = useState('설정을 가져오는 중');
+
+  const handleSetToken = async () => {
+    const token = await generateFcmToken();
+
+    if (token === undefined) {
+      throw new Error('브라우저 알림허용 설정이 되어있지 않습니다.');
+    }
+
+    setPermission(() => 'granted');
+    setToken(() => token);
+  };
 
   const requerstPermission = async () => {
     try {
-      const token = await generateFcmToken();
-
-      if (token === undefined) {
-        throw new Error('브라우저 알림허용 설정이 되어있지 않습니다.');
-      }
-
-      setPermission(() => 'granted');
-      setToken(() => token);
+      handleSetToken();
       toast.success('알림허용 설정이 완료되었습니다.');
     } catch (error) {
       console.error(error);
@@ -34,6 +43,7 @@ const SettingsPage = () => {
 
   useEffect(() => {
     setPermission(() => Notification.permission);
+    handleSetToken();
   }, []);
 
   return (
@@ -47,29 +57,12 @@ const SettingsPage = () => {
       <div className={Settings['token-box']}>
         <label htmlFor="token">SW Token</label>
         <div>
-          <TokenBox />
+          <TokenBox token={token} />
         </div>
       </div>
-      <PostBox />
+      <PostBox token={token} />
     </section>
   );
 };
 
 export default SettingsPage;
-
-const TokenBox = () => {
-  const token = useAtomValue(tokenAtom);
-  switch (token) {
-    case null:
-      return <div>토큰을 가져오는 중입니다.</div>;
-    case undefined:
-      return <div>토큰을 가져오는데 실패했습니다.</div>;
-    default:
-      return (
-        <>
-          <div id={Settings['token']}>{token}</div>
-          <CopyButton value={token!} size={'1.5rem'} />
-        </>
-      );
-  }
-};

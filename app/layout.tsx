@@ -9,16 +9,16 @@ import { PAGE_REVALIDATE_TIME } from '@/consts';
 import { cookies } from 'next/headers';
 import { DEFALUT_METADATA } from '@/consts/metaData';
 import DefaultHead from '@/configs/DefaultHead';
-
-interface CookieType {
-  theme: string | undefined;
-}
+import { ThemeType } from '@/hooks/useTheme';
+import Configs from '@/configs';
 
 const getCookie = () => {
-  const cookie: CookieType = { theme: 'theme1' };
-  cookie.theme = cookies().get('theme')?.value;
+  const cookieStore = cookies();
+  const theme = cookieStore.get('theme')?.value as ThemeType | undefined;
 
-  return cookie;
+  return {
+    theme: theme || 'theme1',
+  };
 };
 
 const RootLayout = ({ children }: PropsWithChildren) => {
@@ -28,10 +28,12 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     <html lang="ko" suppressHydrationWarning={true} color={cookie.theme}>
       <DefaultHead />
       <body>
-        <ServiceLayout initialTheme={cookie.theme}>{children}</ServiceLayout>
-        <div className="background-left" />
-        <div className="background-right" />
-        <div id="modal-root" />
+        <Configs theme={cookie.theme}>
+          <ServiceLayout>{children}</ServiceLayout>
+          <div className="background-left" />
+          <div className="background-right" />
+          <div id="modal-root" />
+        </Configs>
       </body>
     </html>
   );

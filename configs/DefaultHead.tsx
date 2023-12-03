@@ -1,4 +1,4 @@
-import GoogleAnalytics from '@/configs/Analytics';
+import GoogleAnalytics from '@/configs/GoogleAnalytics';
 import { DEFAULT_ICON, DEFAULT_SITE_URL } from '@/consts/metaData';
 
 const DefaultHead = () => {

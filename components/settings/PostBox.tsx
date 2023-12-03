@@ -1,14 +1,12 @@
-import { tokenAtom } from '@/atoms';
 import Settings from '@/components/settings/Settings.module.scss';
 import axios, { AxiosError } from 'axios';
 import dayjs from '@/models/dayjs';
-import { useAtomValue } from 'jotai';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { PushData } from '@/app/api/push/route';
+import { TokenType } from '@/app/settings/page';
 
-const PostBox = () => {
-  const token = useAtomValue(tokenAtom);
+const PostBox = ({ token }: { token: TokenType }) => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [imageUrl, setImageUrl] = useState('');

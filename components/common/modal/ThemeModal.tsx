@@ -1,9 +1,9 @@
 'use client';
 
 import Modal from '@/components/layout/modal/Modal';
-import { useTheme } from '@/configs/ThemeProvider';
 import { MouseEvent } from 'react';
 import themeModal from '@/components/common/modal/ThemeModal.module.scss';
+import useTheme, { ThemeType } from '@/hooks/useTheme';
 
 interface ThemeModalButtonProps {
   primaryColor: string;
@@ -30,8 +30,8 @@ const ThemeModal = ({ onClose }: ThemeModalProps) => {
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
     const button = target.closest('button');
-    const selectedTheme = button?.dataset.theme || 'theme1';
-    setTheme(selectedTheme);
+    const selectedTheme = button?.dataset.theme as ThemeType | undefined;
+    setTheme(selectedTheme || 'theme1');
   };
 
   return (

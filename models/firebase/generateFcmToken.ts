@@ -1,3 +1,4 @@
+'use client';
 import FirebaseClient from '@/models/firebase/client';
 import { getToken } from 'firebase/messaging';
 
