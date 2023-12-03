@@ -9,11 +9,8 @@ const getRequestUrl = async () => {
 
 const RequestPage = async () => {
   const { url } = await getRequestUrl();
-  return (
-    <>
-      <Iframe url={url} />
-    </>
-  );
+
+  return <Iframe url={url} />;
 };
 
 export default RequestPage;

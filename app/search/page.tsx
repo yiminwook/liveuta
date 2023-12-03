@@ -11,16 +11,11 @@ const SearchPage = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <SearchSection />
-          <SummarySection />
-          <ContentSection contents={data.contents} />
-          <ChannelSection channels={data.channels} />
-        </>
-      )}
+      {isLoading ? <Loading /> : null}
+      <SearchSection />
+      <SummarySection />
+      <ContentSection contents={data.contents} />
+      <ChannelSection channels={data.channels} />
     </>
   );
 };

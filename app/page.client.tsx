@@ -29,14 +29,9 @@ const Main = ({ select }: MainProps) => {
 
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <NavSection select={select} />
-          <ScheduleSection contents={contents} />
-        </>
-      )}
+      {isLoading ? <Loading /> : null}
+      <NavSection select={select} />
+      <ScheduleSection contents={contents} />
     </>
   );
 };

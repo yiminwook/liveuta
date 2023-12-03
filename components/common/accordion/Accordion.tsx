@@ -1,6 +1,7 @@
 import { ReactNode, useCallback, useState } from 'react';
 import { GoTriangleDown } from 'react-icons/go';
 import accordion from '@/components/common/accordion/Accordion.module.scss';
+import { combineClassName } from '@/utils/combineClassName';
 
 interface AccordionProps {
   title: string;
@@ -16,13 +17,13 @@ const Accordion = ({ title, children, buttonSize = '1rem' }: AccordionProps) => 
   }, [show]);
 
   return (
-    <div className={[accordion['accordion'], show ? accordion['active'] : ''].join(' ')}>
-      <header>
+    <div className={combineClassName(accordion['accordion'], show ? accordion['active'] : '')}>
+      <div className={accordion['header']}>
         <button onClick={toggleShow}>
           <h3>{title}</h3>
           <GoTriangleDown size={buttonSize} color="inherit" />
         </button>
-      </header>
+      </div>
       <div>{children}</div>
     </div>
   );

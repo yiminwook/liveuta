@@ -10,11 +10,7 @@ const getShortUrl = async () => {
 const ShortPage = async () => {
   const { url } = await getShortUrl();
 
-  return (
-    <>
-      <Iframe url={url} />
-    </>
-  );
+  return <Iframe url={url} />;
 };
 
 export default ShortPage;

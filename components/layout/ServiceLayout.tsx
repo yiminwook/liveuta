@@ -14,8 +14,11 @@ const ServiceLayout = ({ children }: ServiceLayoutProps) => {
     <>
       <Header />
       <main id="app">{children}</main>
+      <div className="background-left" />
+      <div className="background-right" />
       <Footer />
       <FloatButton />
+      <div id="modal-root" />
       <ToastContainer position="bottom-center" autoClose={1000} />
     </>
   );
