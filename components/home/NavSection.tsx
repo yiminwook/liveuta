@@ -24,16 +24,14 @@ const NavTap = () => {
   );
 };
 
-interface NavSectionProps {
-  select: string;
-}
+interface NavSectionProps {}
 
-const NavSection = ({ select }: NavSectionProps) => {
+const NavSection = ({}: NavSectionProps) => {
   return (
     <section className={home['nav-section']}>
       <HorizonScrollBox className={home['nav-scroll-box']}>
         <NavTap />
-        <NavSelectBox select={select} />
+        <NavSelectBox />
       </HorizonScrollBox>
     </section>
   );

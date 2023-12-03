@@ -1,7 +1,6 @@
-import { useThemeAtom } from '@/components/atoms';
+import { useThemeAtom } from '@/atoms';
+import { ThemeType } from '@/types';
 import Cookies from 'universal-cookie';
-
-export type ThemeType = 'theme1' | 'theme2' | 'theme3' | 'theme4';
 
 const useTheme = () => {
   const [theme, setThemeAtome] = useThemeAtom();

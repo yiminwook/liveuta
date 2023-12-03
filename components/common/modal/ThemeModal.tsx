@@ -3,7 +3,8 @@
 import Modal from '@/components/layout/modal/Modal';
 import { MouseEvent } from 'react';
 import themeModal from '@/components/common/modal/ThemeModal.module.scss';
-import useTheme, { ThemeType } from '@/hooks/useTheme';
+import useTheme from '@/hooks/useTheme';
+import { ThemeType } from '@/types';
 
 interface ThemeModalButtonProps {
   primaryColor: string;

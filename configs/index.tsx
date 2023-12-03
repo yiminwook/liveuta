@@ -1,18 +1,18 @@
 'use client';
-import { ThemeType } from '@/hooks/useTheme';
-import JotaiProvider from '@/configs/JotaiProvider';
+import JotaiProvider from '@/atoms/JotaiProvider';
 import Devtools from '@/configs/Devtools';
 import ServiceWorker from '@/configs/ServiceWorker';
-import ReacQueryProvider from '@/configs/ReactQueryProvider';
+import ReacQueryProvider from '@/queries/ReactQueryProvider';
+import { GetCookiesReturnType } from '@/utils/getCookie';
 
 interface ConfigsProps {
   children: React.ReactNode;
-  theme: ThemeType;
+  cookies: GetCookiesReturnType;
 }
 
-const Configs = ({ children, theme }: ConfigsProps) => {
+const Configs = ({ children, cookies }: ConfigsProps) => {
   return (
-    <JotaiProvider theme={theme}>
+    <JotaiProvider cookies={cookies}>
       <ReacQueryProvider>
         {children}
         <ServiceWorker />

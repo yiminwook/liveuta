@@ -4,13 +4,12 @@ import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
 import { ContentsDataType } from '@/types/inSheet';
 import { combineClassName } from '@/utils/combineClassName';
-import { generateFcmToken } from '@/models/firebase/generateFcmToken';
-import { MouseEvent, useState } from 'react';
-import axios from 'axios';
+import { MouseEvent } from 'react';
 import { toast } from 'react-toastify';
 import { HiBellAlert } from 'react-icons/hi2';
 import ScheduleStatus from '@/components/common/scheduleCard/ScheduleStatus';
-import { PushData } from '@/app/api/push/route';
+import useMutatePush from '@/queries/push';
+import { generateFcmToken } from '@/models/firebase/generateFcmToken';
 
 interface ScheduleCardDescProps {
   content: ContentsDataType;
@@ -19,36 +18,27 @@ interface ScheduleCardDescProps {
 
 const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps) => {
   const { title, url, channelName, korTime, interval, isStream, timestamp, thumbnailURL, videoId } = content;
-  const [isLoading, setIsLoading] = useState(false);
+  const { pushMutateAsync, isPendingPush } = useMutatePush({ key: videoId });
 
-  const reservePush = async (e: MouseEvent<HTMLButtonElement>) => {
+  const handleReserve = async (e: MouseEvent<HTMLButtonElement>) => {
     try {
-      if (isLoading || isStream !== 'NULL') return;
-
+      if (isPendingPush || isStream !== 'NULL') return;
       const token = await generateFcmToken();
 
       if (token === undefined) {
         throw new Error('토큰을 가져오는데 실패했습니다.');
       }
 
-      const data: PushData = {
+      const response = await pushMutateAsync({
         title: '스케쥴 알림',
         body: `곧 ${channelName}의 방송이 시작됩니다.`,
         token,
         timestamp: timestamp.toString(),
         imageUrl: thumbnailURL || 'https://liveuta.vercel.app/assets/meta-image.png',
         link: url,
-      };
-
-      setIsLoading(() => true);
-
-      const sheetData = await axios<{ message: string }>({
-        method: 'POST',
-        url: '/api/sheet',
-        data,
       });
 
-      if (sheetData.status === 226) {
+      if (response.status === 226) {
         toast.warning('이미 예약된 알림입니다.');
         return;
       }
@@ -58,8 +48,6 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
       console.error(error);
       const message = error instanceof Error ? error.message : 'Unknown Error';
       toast.error(message);
-    } finally {
-      setIsLoading(() => false);
     }
   };
 
@@ -73,7 +61,7 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
       </div>
       <div className={scheduleCard['link']}>
         {isStream === 'NULL' ? (
-          <button className={scheduleCard['alaram']} onClick={reservePush} disabled={isLoading}>
+          <button className={scheduleCard['alaram']} onClick={handleReserve} disabled={isPendingPush}>
             <HiBellAlert color="inherit" size="0.75rem" />
           </button>
         ) : null}

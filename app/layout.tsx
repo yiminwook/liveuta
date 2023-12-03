@@ -6,29 +6,19 @@ import '@/styles/theme.scss';
 import { PropsWithChildren } from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
 import { PAGE_REVALIDATE_TIME } from '@/consts';
-import { cookies } from 'next/headers';
 import { DEFALUT_METADATA } from '@/consts/metaData';
 import DefaultHead from '@/configs/DefaultHead';
-import { ThemeType } from '@/hooks/useTheme';
 import Configs from '@/configs';
+import { getCookies } from '@/utils/getCookie';
 
-const getCookie = () => {
-  const cookieStore = cookies();
-  const theme = cookieStore.get('theme')?.value as ThemeType | undefined;
-
-  return {
-    theme: theme || 'theme1',
-  };
-};
-
-const RootLayout = ({ children }: PropsWithChildren) => {
-  const cookie = getCookie();
+const RootLayout = async ({ children }: PropsWithChildren) => {
+  const cookies = await getCookies();
 
   return (
-    <html lang="ko" suppressHydrationWarning={true} color={cookie.theme}>
+    <html lang="ko" color={cookies.theme}>
       <DefaultHead />
       <body>
-        <Configs theme={cookie.theme}>
+        <Configs cookies={cookies}>
           <ServiceLayout>{children}</ServiceLayout>
         </Configs>
       </body>
