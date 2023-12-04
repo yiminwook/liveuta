@@ -20,24 +20,28 @@ const SettingsPage = () => {
       }
       setPermission(() => 'granted');
       setToken(() => token);
+      return true;
     } catch (error) {
       console.error(error);
       const message = error instanceof Error ? error.message : 'Unknown Error';
       setPermission(() => 'denied');
       setToken(() => undefined);
       toast.error(message);
+      return false;
     }
   };
 
   const requerstPermission = async () => {
-    handleSetToken().then(() => {
+    const result = await handleSetToken();
+    if (result) {
       toast.success('알림허용 설정이 완료되었습니다.');
-    });
+    }
   };
 
   useEffect(() => {
     setPermission(() => {
       try {
+        // ios에서 Notification에 접근하면 에러발생
         return Notification.permission;
       } catch (error) {
         console.error(error);
