@@ -1,10 +1,11 @@
+'use client';
 import Settings from '@/components/settings/Settings.module.scss';
 import axios, { AxiosError } from 'axios';
 import dayjs from '@/models/dayjs';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { PushData } from '@/app/api/push/route';
-import { TokenType } from '@/app/settings/page';
+import { TokenType } from '@/types';
 
 const PostBox = ({ token }: { token: TokenType }) => {
   const [title, setTitle] = useState('');
