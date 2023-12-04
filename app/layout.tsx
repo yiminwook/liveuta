@@ -1,6 +1,7 @@
 import 'react-toastify/dist/ReactToastify.css';
 import 'pretendard/dist/web/variable/pretendardvariable.css';
 import '@/styles/reset.css';
+import '@/public/theme.css';
 import '@/styles/globals.scss';
 import '@/styles/theme.scss';
 import { PropsWithChildren } from 'react';
