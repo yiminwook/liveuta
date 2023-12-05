@@ -19,7 +19,7 @@ const ReacQueryProvider = ({ children }: ReacQueryProviderProps) => {
         }),
         defaultOptions: {
           queries: {
-            staleTime: 1000 * 10, //10초
+            staleTime: 0,
             gcTime: 1000 * 10, //10초
             refetchOnWindowFocus: false,
             retry: 3,
