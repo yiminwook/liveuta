@@ -1,16 +1,10 @@
 import Iframe from '@/components/common/Iframe';
 import { serverEnvConfig } from '@/configs/envConfig';
 
-const getShortUrl = async () => {
+const ShortPage = async () => {
   const { SHORT_URL } = serverEnvConfig();
 
-  return { url: SHORT_URL };
-};
-
-const ShortPage = async () => {
-  const { url } = await getShortUrl();
-
-  return <Iframe url={url} />;
+  return <Iframe url={SHORT_URL} />;
 };
 
 export default ShortPage;
