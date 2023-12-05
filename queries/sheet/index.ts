@@ -5,7 +5,7 @@ import { fetcher } from '@/queries';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 
-const SHEET_REFRESH_INTERVAL = 1000 * 60; //1분
+const SHEET_REFRESH_INTERVAL = 1000 * 60 * 3; //3분
 
 const useSheet = () => {
   const filter = (usePathname()?.split('/')[1] || 'scheduled') as keyof SheetAPIReturntype;
@@ -15,7 +15,7 @@ const useSheet = () => {
     queryKey: ['sheet'],
     queryFn: () => fetcher('/api/sheet'),
     refetchInterval: SHEET_REFRESH_INTERVAL,
-    staleTime: SHEET_REFRESH_INTERVAL,
+    staleTime: 1000 * 60, //1분
     gcTime: SHEET_REFRESH_INTERVAL,
     refetchOnReconnect: true,
     refetchOnWindowFocus: true,
