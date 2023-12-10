@@ -3,6 +3,9 @@ import { useSearchParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { fetcher } from '@/queries';
 import { SearchResponseType } from '@/app/api/search/route';
+import { useEffect } from 'react';
+import { useSetAtom } from 'jotai';
+import { isLoadingSearchAtom } from '@/atoms';
 
 export const useSearchQuery = () => {
   const searchParams = useSearchParams();
@@ -12,6 +15,7 @@ export const useSearchQuery = () => {
 
 export const useSearch = () => {
   const searchQuery = useSearchQuery();
+  const setIsLoadingSearchAtom = useSetAtom(isLoadingSearchAtom);
 
   const {
     data = { contents: [], channels: [] },
@@ -22,6 +26,10 @@ export const useSearch = () => {
     queryFn: () => fetcher(`/api/search?query=${searchQuery}`),
     enabled: !!searchQuery,
   });
+
+  useEffect(() => {
+    setIsLoadingSearchAtom(() => isLoading);
+  }, [isLoading]);
 
   return { searchData: data, refetchSearch: refetch, isLoadingSearch: isLoading };
 };

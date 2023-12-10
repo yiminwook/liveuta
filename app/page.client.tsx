@@ -3,16 +3,17 @@
 import useSheet from '@/queries/sheet';
 import NavSection from '@/components/home/NavSection';
 import ScheduleSection from '@/components/home/ScheduleSection';
-import Loading from '@/components/common/Loading';
+import { SheetAPIReturntype } from '@/types/inSheet';
 
-interface MainProps {}
+interface MainProps {
+  filter: keyof SheetAPIReturntype;
+}
 
-const Main = ({}: MainProps) => {
-  const { contents, isLoadingSheet } = useSheet();
+const Main = ({ filter }: MainProps) => {
+  const { contents } = useSheet({ filter });
 
   return (
     <>
-      {isLoadingSheet ? <Loading /> : null}
       <NavSection />
       <ScheduleSection contents={contents} />
     </>

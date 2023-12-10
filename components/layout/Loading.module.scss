@@ -2,15 +2,6 @@
 @import 'mixin';
 @import 'placeholder';
 
-@include keyframe(loading) {
-  0% {
-    transform: rotateZ(-90deg);
-  }
-  100% {
-    transform: rotateZ(270deg);
-  }
-}
-
 .loading {
   position: fixed;
   z-index: 100;

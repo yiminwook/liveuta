@@ -1,9 +1,17 @@
 import Image from 'next/image';
-import loading from '@/components/common/Loading.module.scss';
+import loading from '@/components/layout/Loading.module.scss';
 import { AiOutlineLoading } from 'react-icons/ai';
 import loadingImage from '@/public/loading.png';
+import { useAtomValue } from 'jotai';
+import { isLoadingAtom } from '@/atoms';
 
 const Loading = () => {
+  const isLoading = useAtomValue(isLoadingAtom);
+
+  if (isLoading === false) {
+    return null;
+  }
+
   return (
     <div className={loading['loading']}>
       <div>

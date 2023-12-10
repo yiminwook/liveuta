@@ -3,13 +3,17 @@ import { useEffect, useState } from 'react';
 import { ContentsDataType, SheetAPIReturntype } from '@/types/inSheet';
 import { fetcher } from '@/queries';
 import { useQuery } from '@tanstack/react-query';
-import { usePathname } from 'next/navigation';
+import { useSetAtom } from 'jotai';
+import { isLoadingSheetAtom } from '@/atoms';
 
 const SHEET_REFRESH_INTERVAL = 1000 * 60 * 3; //3분
 
-const useSheet = () => {
-  const filter = (usePathname()?.split('/')[1] || 'scheduled') as keyof SheetAPIReturntype;
+interface UseSheetProps {
+  filter: keyof SheetAPIReturntype;
+}
+const useSheet = ({ filter }: UseSheetProps) => {
   const [contents, setContents] = useState<ContentsDataType[]>([]);
+  const setIsLoadingSheet = useSetAtom(isLoadingSheetAtom);
 
   const { data, dataUpdatedAt, isLoading, refetch } = useQuery<SheetAPIReturntype>({
     queryKey: ['sheet'],
@@ -30,6 +34,10 @@ const useSheet = () => {
   useEffect(() => {
     setData();
   }, [dataUpdatedAt, filter]);
+
+  useEffect(() => {
+    setIsLoadingSheet(() => isLoading);
+  }, [isLoading]);
 
   return {
     /** 필터링된 데이터 */

@@ -22,6 +22,15 @@
   }
 }
 
+@include keyframe(loading) {
+  0% {
+    transform: rotateZ(-90deg);
+  }
+  100% {
+    transform: rotateZ(270deg);
+  }
+}
+
 @mixin animation($keyframe-name, $duration, $delay, $count: infinite) {
   -moz-animation-name: $keyframe-name;
   -moz-animation-duration: $duration;

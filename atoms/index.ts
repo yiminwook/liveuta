@@ -1,5 +1,5 @@
 import { atomWithReset } from 'jotai/utils';
-import { useAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 import { SelectType, ThemeType } from '@/types';
 
 export const themeAtom = atomWithReset<ThemeType>('theme1');
@@ -8,7 +8,22 @@ export const useThemeAtom = () => useAtom(themeAtom);
 export const selectAtom = atomWithReset<SelectType>('all');
 export const useSelectAtom = () => useAtom(selectAtom);
 
+export const isLoadingSheetAtom = atomWithReset(false);
+export const useIsLoadingSheetAtom = () => useAtom(isLoadingSheetAtom);
+
+export const isLoadingSearchAtom = atomWithReset(false);
+export const useIsLoadingSearchAtom = () => useAtom(isLoadingSearchAtom);
+
+export const isLoadingAtom = atom((get) => {
+  const isSheetLoading = get(isLoadingSheetAtom);
+  const isSearchLoading = get(isLoadingSearchAtom);
+  return isSheetLoading || isSearchLoading;
+});
+
 if (process.env.NODE_ENV === 'development') {
   themeAtom.debugLabel = 'themeAtom';
   selectAtom.debugLabel = 'selectAtom';
+  isLoadingAtom.debugLabel = 'isLoadingAtom';
+  isLoadingSheetAtom.debugLabel = 'sheetLoadingAtom';
+  isLoadingSearchAtom.debugLabel = 'searchLoadingAtom';
 }

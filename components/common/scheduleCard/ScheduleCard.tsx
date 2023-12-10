@@ -62,7 +62,7 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
   }, [target, content, lastContentsIndex]);
 
   return (
-    <div className={combineClassName(scheduleCard['card'], addStreamModifier)} key={videoId} ref={target}>
+    <div className={combineClassName('card', scheduleCard['card'], addStreamModifier)} key={videoId} ref={target}>
       <div className={scheduleCard['content']}>
         <a href={url}>
           <SchduleCardImage content={content} />

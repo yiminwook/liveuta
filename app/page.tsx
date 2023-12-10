@@ -1,7 +1,7 @@
 import Main from '@/app/page.client';
 
 const HomePage = async () => {
-  return <Main />;
+  return <Main filter="scheduled" />;
 };
 
 export default HomePage;

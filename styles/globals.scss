@@ -146,7 +146,6 @@ body {
     justify-content: center;
     align-items: center;
     bottom: calc(env(safe-area-inset-bottom) + 1.5rem);
-    right: 1.5rem;
     width: 3.25rem;
     height: 3.25rem;
     padding: 0.125rem;
@@ -156,19 +155,30 @@ body {
     border: none;
     visibility: visible;
     opacity: 1;
-    cursor: pointer;
     @include prevent-user-select();
     @include box-shadow();
     @include transition(all, 0.2s, $bezier-curve);
+
+    &.left {
+      left: 1.5rem;
+    }
+
+    &.right {
+      right: 1.5rem;
+    }
 
     &.hide {
       visibility: hidden;
       opacity: 0;
     }
 
-    &:hover {
-      color: var(--liveuta-hover-color);
-      background-color: map-get($colors, light-font);
+    &.hover {
+      cursor: pointer;
+
+      &:hover {
+        color: var(--liveuta-hover-color);
+        background-color: map-get($colors, light-font);
+      }
     }
   }
 }

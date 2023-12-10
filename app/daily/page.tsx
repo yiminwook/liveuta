@@ -1,7 +1,7 @@
 import Main from '@/app/page.client';
 
 const DailyPage = async () => {
-  return <Main />;
+  return <Main filter="daily" />;
 };
 
 export default DailyPage;

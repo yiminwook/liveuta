@@ -30,7 +30,7 @@ const FloatButton = () => {
 
   return (
     <button
-      className={combineClassName('foat', isTop ? 'hide' : '')}
+      className={combineClassName('foat', 'right', 'hover', isTop ? 'hide' : '')}
       onClick={scrollUp}
       onTouchEnd={scrollUp}
       onTouchStart={scrollUp}
