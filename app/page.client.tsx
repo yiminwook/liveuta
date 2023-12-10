@@ -14,7 +14,7 @@ const Main = ({ filter }: MainProps) => {
 
   return (
     <>
-      <NavSection />
+      <NavSection filter={filter} />
       <ScheduleSection contents={contents} />
     </>
   );

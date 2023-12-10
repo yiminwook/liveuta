@@ -2,7 +2,6 @@
 import home from '@/components/home/Home.module.scss';
 import React, { useState } from 'react';
 import useSheet from '@/queries/sheet';
-import { usePathname } from 'next/navigation';
 import Cookies from 'universal-cookie';
 import { SheetAPIReturntype } from '@/types/inSheet';
 import { combineClassName } from '@/utils/combineClassName';
@@ -12,11 +11,13 @@ import OutsideClickHandler from 'react-outside-click-handler';
 import { useSelectAtom } from '@/atoms';
 import { SelectType } from '@/types';
 
-const NavSelectBox = () => {
-  const [active, setActive] = useState(false);
-  const filter = (usePathname()?.split('/')[1] || 'scheduled') as keyof SheetAPIReturntype;
+interface NavSelectBoxProps {
+  filter: keyof SheetAPIReturntype;
+}
 
-  const { refetchSheet, sheetData } = useSheet();
+const NavSelectBox = ({ filter }: NavSelectBoxProps) => {
+  const [active, setActive] = useState(false);
+  const { refetchSheet, sheetData } = useSheet({ filter });
   const [select, setSelect] = useSelectAtom();
 
   const handleSelect = async (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
