@@ -4,6 +4,7 @@ import Devtools from '@/configs/Devtools';
 import ServiceWorker from '@/configs/ServiceWorker';
 import ReacQueryProvider from '@/queries/ReactQueryProvider';
 import { GetCookiesReturnType } from '@/utils/getCookie';
+import AntdProvider from '@/configs/AntdConfig';
 
 interface ConfigsProps {
   children: React.ReactNode;
@@ -14,9 +15,11 @@ const Configs = ({ children, cookies }: ConfigsProps) => {
   return (
     <JotaiProvider cookies={cookies}>
       <ReacQueryProvider>
-        {children}
-        <ServiceWorker />
-        <Devtools />
+        <AntdProvider>
+          {children}
+          <ServiceWorker />
+          <Devtools />
+        </AntdProvider>
       </ReacQueryProvider>
     </JotaiProvider>
   );
