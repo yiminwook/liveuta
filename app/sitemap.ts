@@ -2,7 +2,7 @@ import { Promised } from '@/types';
 import { MetadataRoute } from 'next';
 
 interface SiteMapProps {
-  id: string;
+  id: number;
 }
 
 type SiteMap = {
@@ -17,7 +17,7 @@ type SiteMap = {
  */
 export async function generateSitemaps(): Promise<SiteMapProps[]> {
   // fetch를 통해 데이터를 가져와서 sitemap을 자동으로 구성하도록 만들수있다.
-  return [{ id: 'index' }];
+  return [{ id: 0 }];
 }
 
 export default function sitemap({ id }: Promised<typeof generateSitemaps>[0]): SiteMap[] {
