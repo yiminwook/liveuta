@@ -1,3 +1,4 @@
+'use client';
 import addToast from './handleToast';
 
 export const clipText = (string: string) => {

@@ -81,9 +81,11 @@ interface PushData {
 ## Packages
 
 ```
+  "@ant-design/cssinjs": "^1.18.1",
   "@emotion/react": "^11.11.1",
   "@tanstack/react-query": "^5.12.2",
   "@tanstack/react-query-devtools": "^5.12.2",
+  "antd": "^5.12.1",
   "axios": "^1.3.4",
   "dayjs": "^1.11.8",
   "firebase": "9.22.0",

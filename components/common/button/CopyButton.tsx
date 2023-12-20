@@ -17,8 +17,8 @@ const CopyButton = ({ value, size = '2rem', className, style }: CopyButtonProps)
 
   const onClick = (e: MouseEvent) => {
     e.stopPropagation();
-    success({ text: '복사되었습니다.' });
     clipText(value);
+    success({ text: '복사되었습니다.' });
   };
 
   return (
