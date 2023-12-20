@@ -6,9 +6,11 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useSearchQuery } from '@/queries/search';
 import Input from '@/components/common/Input';
 import { replaceSpecialCharacters } from '@/utils/regexp';
+import { gtag } from '@/utils/gtag';
+import dayjs from '@/models/dayjs';
 
 const SearchSection = () => {
-  const { push } = useRouter();
+  const route = useRouter();
   const pathname = usePathname();
   const searchQuery = useSearchQuery();
 
@@ -20,7 +22,8 @@ const SearchSection = () => {
       setShowErrMsg(() => false);
       const value = inputValue.trim();
       if (!value) return setShowErrMsg(() => true);
-      push(`${pathname}?query=${value}`);
+      gtag('event', 'search', { channleName: value, time: dayjs().format('YYYY-MM-DD HH:mm:ss') });
+      route.push(`${pathname}?query=${value}`);
     },
     [inputValue],
   );

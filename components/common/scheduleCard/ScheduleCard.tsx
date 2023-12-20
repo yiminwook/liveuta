@@ -1,10 +1,11 @@
 'use client';
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { MouseEvent, useCallback, useEffect, useMemo, useRef } from 'react';
 import { ContentsDataType } from '@/types/inSheet';
 import scheduleCard from '@/components/common/scheduleCard/ScheduleCard.module.scss';
 import SchduleCardImage from '@/components/common/scheduleCard/ScheduleCardImage';
 import ScheduleCardDesc from '@/components/common/scheduleCard/ScheduleCardDesc';
 import { combineClassName } from '@/utils/combineClassName';
+import { gtagClick } from '@/utils/gtag';
 
 interface ScheduleCardProps {
   content: ContentsDataType;
@@ -50,6 +51,19 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
     [target, lastContentsIndex],
   );
 
+  const gtagClickEvent = (e: MouseEvent) => {
+    e.preventDefault(); //a태그 기본이벤트 막기
+
+    gtagClick({
+      target: 'scheduleCard',
+      content: content.channelName,
+      detail: content.title,
+      action: 'atag',
+    });
+
+    window.location.href = url;
+  };
+
   useEffect(() => {
     if (!handleInfinityScroll) return;
     const currentTarget = target.current;
@@ -64,7 +78,7 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
   return (
     <div className={combineClassName('card', scheduleCard['card'], addStreamModifier)} key={videoId} ref={target}>
       <div className={scheduleCard['content']}>
-        <a href={url}>
+        <a href={url} onClick={gtagClickEvent}>
           <SchduleCardImage content={content} />
         </a>
         <ScheduleCardDesc content={content} addStreamModifier={addStreamModifier} />

@@ -3,6 +3,7 @@ import { CSSProperties, MouseEvent } from 'react';
 import { FaCopy } from 'react-icons/fa';
 import copyButton from '@/components/common/button/CopyButton.module.scss';
 import useToast from '@/hooks/useToast';
+import { gtagClick } from '@/utils/gtag';
 
 interface CopyButtonProps {
   value: string;
@@ -18,6 +19,12 @@ const CopyButton = ({ value, size = '2rem', className, style }: CopyButtonProps)
   const onClick = (e: MouseEvent) => {
     e.stopPropagation();
     clipText(value);
+    gtagClick({
+      target: 'copyButton',
+      content: value,
+      detail: '',
+      action: 'copy',
+    });
     success({ text: '복사되었습니다.' });
   };
 

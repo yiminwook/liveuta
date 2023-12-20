@@ -10,6 +10,7 @@ import { HiBellAlert } from 'react-icons/hi2';
 import ScheduleStatus from '@/components/common/scheduleCard/ScheduleStatus';
 import useMutatePush from '@/queries/push';
 import { generateFcmToken } from '@/models/firebase/generateFcmToken';
+import { gtagClick } from '@/utils/gtag';
 
 interface ScheduleCardDescProps {
   content: ContentsDataType;
@@ -43,6 +44,13 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
         return;
       }
 
+      gtagClick({
+        target: 'sheduleAlarm',
+        content: content.channelName,
+        detail: content.title,
+        action: 'alamReserve',
+      });
+
       toast.success('알림이 예약되었습니다.');
     } catch (error) {
       console.error(error);
@@ -66,7 +74,20 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
           </button>
         ) : null}
         <CopyButton value={url} size="0.75rem" />
-        <button onClick={() => openWindow(url)}>새 탭으로 열기</button>
+        <button
+          onClick={() => {
+            gtag('event', 'click', {
+              target: 'scheduleCard',
+              content: content.channelName,
+              detail: content.title,
+              action: 'openWindow',
+            });
+
+            openWindow(url);
+          }}
+        >
+          새 탭으로 열기
+        </button>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
 import { MouseEvent } from 'react';
+import { gtagClick } from '@/utils/gtag';
 
 interface ChannelCardModalProp {
   onClose: (e: MouseEvent) => void;
@@ -27,11 +28,24 @@ const ChannelCardModal = ({
   description,
   onClose,
 }: ChannelCardModalProp) => {
+  const gtagClickEvent = (e: MouseEvent) => {
+    e.preventDefault(); //a태그 기본이벤트 막기
+
+    gtagClick({
+      target: 'channelCardModal',
+      content: channelName,
+      detail: title,
+      action: 'atag',
+    });
+
+    window.location.href = url;
+  };
+
   return (
     <Modal onClose={onClose}>
       <div className={channelCardModal['modal']}>
         <div className={channelCardModal['profile']}>
-          <a href={url}>
+          <a href={url} onClick={gtagClickEvent}>
             <div className={channelCardModal['image-container']}>
               <Image
                 src={imageURL}
@@ -52,7 +66,19 @@ const ChannelCardModal = ({
               <h3 className={channelCardModal['video-count']}>업로드 수 {videoCount} 개</h3>
             </div>
             <div className={channelCardModal['link']}>
-              <button onClick={() => openWindow(url)}>유투브 채널</button>
+              <button
+                onClick={() => {
+                  gtagClick({
+                    target: 'channleCardModal',
+                    content: channelName,
+                    detail: title,
+                    action: 'openWindow',
+                  });
+                  openWindow(url);
+                }}
+              >
+                유투브 채널
+              </button>
               <CopyButton value={url} size={'1rem'} />
             </div>
           </div>

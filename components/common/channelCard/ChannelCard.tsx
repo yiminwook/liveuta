@@ -7,8 +7,8 @@ import { MouseEvent, useState } from 'react';
 import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
 import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
-import useStopPropagation from '@/hooks/useStopPropagation';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
+import { gtagClick } from '@/utils/gtag';
 
 interface ChannelItemProps {
   content: ChannelsDataType;
@@ -16,7 +16,6 @@ interface ChannelItemProps {
 
 const ChannelItem = ({ content }: ChannelItemProps) => {
   const [showModal, setShowModal] = useState(false);
-  const { stopPropagation } = useStopPropagation();
   const { channelName, snippet, url, statistics } = content;
   const title = snippet.title ?? '';
   const imageURL = snippet.thumbnails?.default?.url ?? '/loading.png';
@@ -24,9 +23,34 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
   const subscribe = renderSubscribe(statistics.subscriberCount ?? '비공개');
   const videoCount = statistics.videoCount ?? '비공개';
 
+  const gtagClickEvent = (e: MouseEvent) => {
+    e.preventDefault(); //a태그 기본이벤트 막기
+
+    gtagClick({
+      target: 'channelCard',
+      content: channelName,
+      detail: title,
+      action: 'atag',
+    });
+
+    window.location.href = url;
+  };
+
   const toggleModal = (e: MouseEvent) => {
-    e.stopPropagation();
+    if (showModal === false) {
+      gtagClick({
+        target: 'channelCard',
+        content: channelName,
+        detail: title,
+        action: 'openModal',
+      });
+    }
+
     setShowModal((pre) => !pre);
+  };
+
+  const closeModal = () => {
+    setShowModal(() => false);
   };
 
   const handleOpenWindow = (e: MouseEvent) => {
@@ -37,7 +61,7 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
   return (
     <>
       <div className={channelCard['channel']} onClick={toggleModal}>
-        <a href={url} onClick={stopPropagation}>
+        <a href={url} onClick={gtagClickEvent}>
           <div className={channelCard['image-container']}>
             <Image
               src={imageURL}
@@ -72,7 +96,7 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
           videoCount={videoCount}
           subscribe={subscribe}
           description={description}
-          onClose={toggleModal}
+          onClose={closeModal}
         />
       ) : null}
     </>

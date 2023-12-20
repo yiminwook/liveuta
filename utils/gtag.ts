@@ -11,3 +11,20 @@ export const gtag = <T extends keyof Gtag.GtagCommands>(command: T, ...args: Gta
   if (typeof window === 'undefined') return;
   window.gtag(command, ...args);
 };
+
+interface GtagClickProps {
+  /** 이벤트가 일어나는 곳 */
+  target: string;
+  /** title */
+  content: string;
+  detail: string;
+  /** action 종류 */
+  action: string;
+}
+export const gtagClick = ({ target, content, detail, action }: GtagClickProps) =>
+  gtag('event', 'click', {
+    target,
+    content,
+    detail,
+    action,
+  });

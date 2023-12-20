@@ -5,6 +5,7 @@ import { MouseEvent } from 'react';
 import themeModal from '@/components/common/modal/ThemeModal.module.scss';
 import useTheme from '@/hooks/useTheme';
 import { ThemeType } from '@/types';
+import { gtagClick } from '@/utils/gtag';
 
 interface ThemeModalButtonProps {
   primaryColor: string;
@@ -32,7 +33,16 @@ const ThemeModal = ({ onClose }: ThemeModalProps) => {
     const target = e.target as HTMLDivElement;
     const button = target.closest('button');
     const selectedTheme = button?.dataset.theme as ThemeType | undefined;
-    setTheme(selectedTheme || 'theme1');
+    if (selectedTheme === undefined) return;
+
+    gtagClick({
+      target: 'themeModal',
+      content: selectedTheme,
+      detail: '',
+      action: 'themeChange',
+    });
+
+    setTheme(selectedTheme);
   };
 
   return (

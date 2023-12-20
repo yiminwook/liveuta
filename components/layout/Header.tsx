@@ -10,6 +10,7 @@ import HamburgerButton from '@/components/common/button/HamburgerButton';
 import NavigationList from '@/components/layout/NavigationList';
 import Input from '@/components/common/Input';
 import { replaceSpecialCharacters } from '@/utils/regexp';
+import dayjs from '@/models/dayjs';
 
 const Header = () => {
   const pathname = usePathname();
@@ -19,8 +20,12 @@ const Header = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
-  const handleToggleSidebar = () => {
-    setShowSidebar((pre) => !pre);
+  const openSidebar = () => {
+    setShowSidebar(() => true);
+  };
+
+  const closeSidebar = () => {
+    setShowSidebar(() => false);
   };
 
   const handleScroll = useMemo(() => {
@@ -37,9 +42,10 @@ const Header = () => {
   }, []);
 
   const handleSearch = (_: FormEvent, inputVale: string) => {
-    const trimmedInput = inputVale.trim();
-    if (trimmedInput === '') return;
-    route.push(`/search?query=${trimmedInput}`);
+    const value = inputVale.trim();
+    if (value === '') return;
+    gtag('event', 'search', { channleName: value, time: dayjs().format('YYYY-MM-DD HH:mm:ss') });
+    route.push(`/search?query=${value}`);
   };
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement> | string) => {
@@ -67,7 +73,7 @@ const Header = () => {
     <header>
       <div className={header['inner']} ref={gnbRef}>
         <nav>
-          <HamburgerButton className={header['hamburger']} onClick={handleToggleSidebar} />
+          <HamburgerButton className={header['hamburger']} onClick={openSidebar} />
           <a href="/" className={header['title']}>
             Live Uta
           </a>
@@ -89,7 +95,7 @@ const Header = () => {
           </div>
         </nav>
       </div>
-      <Sidebar show={showSidebar} onClose={handleToggleSidebar} />
+      <Sidebar show={showSidebar} onClose={closeSidebar} />
       <div className={header['blank']} />
     </header>
   );

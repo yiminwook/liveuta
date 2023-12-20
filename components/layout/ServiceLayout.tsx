@@ -21,6 +21,7 @@ const ServiceLayout = ({ children }: ServiceLayoutProps) => {
     console.log('window.location.pathname', pathname + search);
     gtag('event', 'page_view', { page_path: pathname + search });
   }, []);
+
   return (
     <>
       <Header />
