@@ -10,6 +10,7 @@
   font-size: inherit;
   overflow-x: scroll;
   overflow-y: hidden;
+  scrollbar-width: none; //firefox
 
   &::-webkit-scrollbar {
     height: 3px;
