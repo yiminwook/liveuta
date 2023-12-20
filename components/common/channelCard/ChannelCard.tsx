@@ -54,7 +54,7 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
   };
 
   const handleOpenWindow = (e: MouseEvent) => {
-    e.stopPropagation();
+    e.preventDefault();
     openWindow(url);
   };
 

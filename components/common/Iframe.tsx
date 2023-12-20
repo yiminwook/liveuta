@@ -3,7 +3,7 @@ import { themeAtom } from '@/atoms';
 import iframe from '@/components/common/iframe.module.scss';
 import { openWindow } from '@/utils/windowEvent';
 import { useAtomValue } from 'jotai';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, MouseEvent } from 'react';
 
 interface IframeProps {
   url: string;
@@ -14,7 +14,8 @@ const Iframe = ({ url }: IframeProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const theme = useAtomValue(themeAtom);
 
-  const onClick = () => {
+  const onClick = (e: MouseEvent) => {
+    e.preventDefault();
     openWindow(url);
   };
 

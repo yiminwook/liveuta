@@ -75,7 +75,9 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
         ) : null}
         <CopyButton value={url} size="0.75rem" />
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
+
             gtag('event', 'click', {
               target: 'scheduleCard',
               content: content.channelName,

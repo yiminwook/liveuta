@@ -67,13 +67,16 @@ const ChannelCardModal = ({
             </div>
             <div className={channelCardModal['link']}>
               <button
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
+
                   gtagClick({
                     target: 'channleCardModal',
                     content: channelName,
                     detail: title,
                     action: 'openWindow',
                   });
+
                   openWindow(url);
                 }}
               >
