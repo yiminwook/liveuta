@@ -8,7 +8,7 @@
 //  https://developers.google.com/analytics/devguides/collection/ga4/event-parameters?hl=ko&client_type=gtag
 
 export const gtag = <T extends keyof Gtag.GtagCommands>(command: T, ...args: Gtag.GtagCommands[T]) => {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
   window.gtag(command, ...args);
 };
 
