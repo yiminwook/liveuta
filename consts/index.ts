@@ -15,3 +15,6 @@ export const HOME_FILTER = ['live', 'daily', 'all'];
 
 export const DEFAULT_BLUR_BASE64 =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8U9hfDwAGKgJNP3RWxQAAAABJRU5ErkJggg==';
+
+export const GA_TRACKING_ID = 'G-4STJ8NQ029';
+export const GTM_TRACKING_ID = 'GTM-KGJ6HZ4J';

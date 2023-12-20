@@ -6,7 +6,7 @@ import '@/styles/globals.scss';
 import '@/styles/theme.scss';
 import { PropsWithChildren } from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
-import { PAGE_REVALIDATE_TIME } from '@/consts';
+import { GTM_TRACKING_ID, PAGE_REVALIDATE_TIME } from '@/consts';
 import { DEFALUT_METADATA } from '@/consts/metaData';
 import DefaultHead from '@/configs/DefaultHead';
 import Configs from '@/configs';
@@ -17,11 +17,23 @@ const RootLayout = async ({ children }: PropsWithChildren) => {
 
   return (
     <html lang="ko" color={cookies.theme}>
-      <DefaultHead />
+      <head>
+        <DefaultHead />
+      </head>
       <body>
         <Configs cookies={cookies}>
           <ServiceLayout>{children}</ServiceLayout>
         </Configs>
+        {/* <!-- Google Tag Manager (noscript) --> */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_TRACKING_ID}`}
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          ></iframe>
+        </noscript>
+        {/* <!-- End Google Tag Manager (noscript) --> */}
       </body>
     </html>
   );

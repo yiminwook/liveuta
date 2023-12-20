@@ -1,17 +1,26 @@
 'use client';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import Footer from '@/components/layout/Footer';
 import FloatButton from '@/components/common/button/FlotButton';
 import { ToastContainer } from 'react-toastify';
 import Header from '@/components/layout/Header';
 import FetchIndicator from '@/components/layout/FetchIndicator';
 import Loading from '@/components/layout/Loading';
+import { gtag } from '@/utils/gtag';
 
 interface ServiceLayoutProps {
   children: ReactNode;
 }
 
 const ServiceLayout = ({ children }: ServiceLayoutProps) => {
+  useEffect(() => {
+    const location = window.location;
+    const pathname = location.pathname;
+    const search = location.search;
+    console.log('gtag', gtag);
+    console.log('window.location.pathname', pathname + search);
+    gtag('event', 'page_view', { page_path: pathname + search });
+  }, []);
   return (
     <>
       <Header />
