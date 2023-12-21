@@ -21,8 +21,8 @@ const CopyButton = ({ value, size = '2rem', className, style }: CopyButtonProps)
     clipText(value);
     gtagClick({
       target: 'copyButton',
-      content: value,
-      detail: '',
+      content: 'copyButton',
+      detail: value,
       action: 'copy',
     });
     success({ text: '복사되었습니다.' });

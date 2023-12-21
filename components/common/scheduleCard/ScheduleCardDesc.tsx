@@ -78,7 +78,7 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
           onClick={(e) => {
             e.preventDefault();
 
-            gtag('event', 'click', {
+            gtagClick({
               target: 'scheduleCard',
               content: content.channelName,
               detail: content.title,

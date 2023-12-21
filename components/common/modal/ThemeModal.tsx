@@ -38,7 +38,7 @@ const ThemeModal = ({ onClose }: ThemeModalProps) => {
     gtagClick({
       target: 'themeModal',
       content: selectedTheme,
-      detail: '',
+      detail: selectedTheme,
       action: 'themeChange',
     });
 
