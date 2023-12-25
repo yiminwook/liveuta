@@ -44,7 +44,7 @@ const Header = () => {
   const handleSearch = (_: FormEvent, inputVale: string) => {
     const value = inputVale.trim();
     if (value === '') return;
-    gtag('event', 'search', { channleName: value, time: dayjs().format('YYYY-MM-DD HH:mm:ss') });
+    gtag('event', 'search', { channelName: value, time: dayjs().format('YYYY-MM-DD HH:mm:ss') });
     route.push(`/search?query=${value}`);
   };
 

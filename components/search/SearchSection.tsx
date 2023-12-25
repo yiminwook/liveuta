@@ -22,7 +22,7 @@ const SearchSection = () => {
       setShowErrMsg(() => false);
       const value = inputValue.trim();
       if (!value) return setShowErrMsg(() => true);
-      gtag('event', 'search', { channleName: value, time: dayjs().format('YYYY-MM-DD HH:mm:ss') });
+      gtag('event', 'search', { channelName: value, time: dayjs().format('YYYY-MM-DD HH:mm:ss') });
       route.push(`${pathname}?query=${value}`);
     },
     [inputValue],
