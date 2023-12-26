@@ -21,10 +21,4 @@ interface GtagClickProps {
   /** action 종류 */
   action: string;
 }
-export const gtagClick = ({ target, content, detail, action }: GtagClickProps) =>
-  gtag('event', 'click', {
-    target,
-    content,
-    detail,
-    action,
-  });
+export const gtagClick = (props: GtagClickProps) => gtag('event', 'click', props);
