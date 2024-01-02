@@ -8,7 +8,7 @@ import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
 import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
-import { gtagClick } from '@/utils/gtag';
+import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 
 interface ChannelItemProps {
   content: ChannelsDataType;
@@ -23,17 +23,14 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
   const subscribe = renderSubscribe(statistics.subscriberCount ?? '비공개');
   const videoCount = statistics.videoCount ?? '비공개';
 
-  const gtagClickEvent = (e: MouseEvent) => {
-    e.preventDefault(); //a태그 기본이벤트 막기
-
-    gtagClick({
+  const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.stopPropagation();
+    return gtagClickAtag(e, {
       target: 'channelCard',
       content: channelName,
       detail: title,
       action: 'atag',
     });
-
-    window.location.href = url;
   };
 
   const toggleModal = (e: MouseEvent) => {
@@ -61,7 +58,7 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
   return (
     <>
       <div className={channelCard['channel']} onClick={toggleModal}>
-        <a href={url} onClick={gtagClickEvent}>
+        <a href={url} onClick={linkClickEvent}>
           <div className={channelCard['image-container']}>
             <Image
               src={imageURL}

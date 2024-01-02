@@ -1,5 +1,7 @@
 'use client';
 
+import { MouseEvent } from 'react';
+
 //
 //  GA 데이터 수집설정
 //
@@ -22,3 +24,23 @@ interface GtagClickProps {
   action: string;
 }
 export const gtagClick = (props: GtagClickProps) => gtag('event', 'click', props);
+
+/**
+ * atag 기본 이벤트 중지, gtag() 실행후 재실행
+ *
+ * a태그의 target이 _blank일 경우 새창으로 열기
+ */
+export const gtagClickAtag = (e: MouseEvent<HTMLAnchorElement>, props: GtagClickProps) => {
+  e.preventDefault();
+  const href = e.currentTarget.href;
+
+  gtagClick(props);
+
+  if (e.currentTarget.target === '_blank') {
+    //새창으로 열기
+    window.open(href);
+    return;
+  }
+
+  window.location.href = href;
+};

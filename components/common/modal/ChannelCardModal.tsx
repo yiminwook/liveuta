@@ -5,7 +5,7 @@ import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
 import { MouseEvent } from 'react';
-import { gtagClick } from '@/utils/gtag';
+import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 
 interface ChannelCardModalProp {
   onClose: (e: MouseEvent) => void;
@@ -28,24 +28,19 @@ const ChannelCardModal = ({
   description,
   onClose,
 }: ChannelCardModalProp) => {
-  const gtagClickEvent = (e: MouseEvent) => {
-    e.preventDefault(); //a태그 기본이벤트 막기
-
-    gtagClick({
+  const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) =>
+    gtagClickAtag(e, {
       target: 'channelCardModal',
       content: channelName,
       detail: title,
       action: 'atag',
     });
 
-    window.location.href = url;
-  };
-
   return (
     <Modal onClose={onClose}>
       <div className={channelCardModal['modal']}>
         <div className={channelCardModal['profile']}>
-          <a href={url} onClick={gtagClickEvent}>
+          <a href={url} onClick={linkClickEvent}>
             <div className={channelCardModal['image-container']}>
               <Image
                 src={imageURL}
