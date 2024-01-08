@@ -12,8 +12,8 @@ const ReacQueryProvider = ({ children }: ReacQueryProviderProps) => {
     () =>
       new QueryClient({
         queryCache: new QueryCache({
-          onError(error) {
-            console.error(error);
+          onError(error, query) {
+            // console.error(error);
             addToast('error', '통신에러', false);
           },
         }),
@@ -31,10 +31,31 @@ const ReacQueryProvider = ({ children }: ReacQueryProviderProps) => {
           mutations: {
             gcTime: 0,
             retry: false,
+            onError(error, variables, context) {
+              console.log('variables', variables);
+              console.log('context', context);
+            },
+            onSettled(data, error, variables, context) {
+              console.log('data', data);
+              console.log('error', error);
+              console.log('variables', variables);
+              console.log('context', context);
+            },
           },
         },
       }),
   );
+
+  const queryCache = querClient.getQueryCache();
+  queryCache.subscribe(({ type, query }) => {
+    if (type !== 'updated' || query.state.status === 'pending') return;
+    console.log('type', type);
+    console.log('query', query);
+    console.log('queryKey', query?.queryKey);
+    console.log('data', query.state.data);
+    console.log('status', query.state.status);
+    console.log('error', query.state.error);
+  });
 
   return <QueryClientProvider client={querClient}>{children}</QueryClientProvider>;
 };

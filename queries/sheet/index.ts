@@ -17,7 +17,10 @@ const useSheet = ({ filter }: UseSheetProps) => {
 
   const { data, dataUpdatedAt, isLoading, refetch } = useQuery<SheetAPIReturntype>({
     queryKey: ['sheet'],
-    queryFn: () => fetcher('/api/sheet'),
+    queryFn: async () => {
+      // throw new Error('fetcher not defined');
+      return await fetcher('/api/sheet');
+    },
     refetchInterval: SHEET_REFRESH_INTERVAL,
     staleTime: 1000 * 60, //1분
     gcTime: SHEET_REFRESH_INTERVAL,
