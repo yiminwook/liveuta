@@ -3,17 +3,16 @@ import ScheduleCard from '@/app/test/Card';
 import { useEffect, useMemo, useState } from 'react';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/consts';
 import styled from '@emotion/styled';
+import ScheduleCardPlaceHolder from '@/components/common/scheduleCard/CardPlaceHolder';
 
 const Section = styled.section`
   box-sizing: border-box;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  padding: 0.2rem;
-  gap: 0.2rem;
+  padding: 1rem;
+  gap: 1rem;
 `;
-
-const Card = styled.div``;
 
 interface YoutubeSectionProps {
   contents: ContentsDataType[];
@@ -57,6 +56,7 @@ const ScheduleSection = ({ contents }: YoutubeSectionProps) => {
           handleInfinityScroll={handleInfinityScroll}
         />
       ))}
+      <ScheduleCardPlaceHolder />
     </Section>
   );
 };

@@ -7,25 +7,37 @@ import ScheduleCardDesc from '@/app/test/CardDesc';
 import { combineClassName } from '@/utils/combineClassName';
 import { gtagClickAtag } from '@/utils/gtag';
 import styled from '@emotion/styled';
+import { BEZIER_CURVE, COLORS } from '@/styles/var';
+import { css } from '@emotion/react';
 
-const Card = styled.div`
+export const CardBase = css`
   margin: 0;
   flex: 1 0 auto;
   width: 15rem;
   max-width: 50%;
+`;
+
+const Card = styled.div`
+  ${CardBase}
+
   background-color: #fff;
   border-radius: 5px;
-
-  &.closed {
-    background-color: lighten(map-get($colors, light-blue), 3%);
-  }
-
-  &.stream {
-    background-color: map-get($colors, light-yellow);
-  }
+  transition: all 0.2s ${BEZIER_CURVE};
 
   @media (max-width: 640px) {
     max-width: 100%;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &.closed {
+    background-color: ${COLORS['light-blue']};
+  }
+
+  &.stream {
+    background-color: ${COLORS['light-yellow']};
   }
 `;
 
@@ -45,10 +57,10 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
 
     switch (isStream) {
       case 'FALSE':
-        streamModifer = scheduleCard['closed'];
+        streamModifer = 'closed';
         break;
       case 'TRUE':
-        streamModifer = scheduleCard['stream'];
+        streamModifer = 'stream';
         break;
       case 'NULL':
         streamModifer = '';
