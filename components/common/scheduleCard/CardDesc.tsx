@@ -1,5 +1,5 @@
 import CopyButton from '@/components/common/button/CopyButton';
-import ScheduleStatus from '@/components/common/scheduleCard/Status';
+import CardStatus from '@/components/common/scheduleCard/CardStatus';
 import { DescBox } from '@/components/common/scheduleCard/Style';
 import { generateFcmToken } from '@/models/firebase/generateFcmToken';
 import useMutatePush from '@/queries/push';
@@ -11,12 +11,12 @@ import { MouseEvent } from 'react';
 import { HiBellAlert } from 'react-icons/hi2';
 import { toast } from 'react-toastify';
 
-interface ScheduleCardDescProps {
+interface CardDescProps {
   content: ContentsDataType;
   addStreamModifier: string;
 }
 
-const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps) => {
+const CardDesc = ({ content, addStreamModifier }: CardDescProps) => {
   const { title, url, channelName, korTime, interval, isStream, timestamp, thumbnailURL, videoId } = content;
   const { pushMutateAsync, isPendingPush } = useMutatePush({ key: videoId });
 
@@ -75,7 +75,7 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
       <p className={cx('title', addStreamModifier)}>{title}</p>
       <div className={'time'}>
         <time className={'kor'}>{korTime}</time>
-        <ScheduleStatus isStream={isStream} interval={interval} videoId={videoId} />
+        <CardStatus isStream={isStream} interval={interval} videoId={videoId} />
       </div>
       <div className={'link'}>
         {isStream === 'NULL' ? (
@@ -90,4 +90,4 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
   );
 };
 
-export default ScheduleCardDesc;
+export default CardDesc;

@@ -1,21 +1,25 @@
-import { BEZIER_CURVE, boxShadow, COLORS, textLine, WIDTH } from '@/styles/var';
+'use client';
+import { BEZIER_CURVE, boxShadow, COLORS, WIDTH, textLine } from '@/styles/var';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const cardBase = css`
+  box-sizing: border-box;
   margin: 0;
   flex: 1 0 auto;
-  width: 15rem;
+  width: 17rem;
+  min-width: 100%;
   max-width: 100%;
 
   @media (min-width: ${WIDTH.SM}) {
+    min-width: 17rem;
     max-width: 50%;
   }
 `;
 
 export const Card = styled.div`
   ${cardBase}
-  ${boxShadow}
+  ${boxShadow};
   display: flex;
   padding: 0.25rem;
   gap: 0.25rem;
@@ -29,8 +33,6 @@ export const Card = styled.div`
 
   @media (min-width: ${WIDTH.SM}) {
     flex-direction: column;
-    padding: 0.5rem;
-    gap: 0.5rem;
   }
 
   &.closed {
@@ -40,6 +42,10 @@ export const Card = styled.div`
   &.stream {
     background-color: ${COLORS['light-yellow']};
   }
+`;
+
+export const CardPlaceHolderBox = styled.div`
+  ${cardBase}
 `;
 
 export const DescBox = styled.div`
@@ -94,6 +100,7 @@ export const DescBox = styled.div`
 `;
 
 export const ImageBox = styled.a`
+  ${boxShadow};
   position: relative;
   box-sizing: border-box;
   margin: auto;
@@ -121,4 +128,18 @@ export const StatusBox = styled.div`
   gap: 0.125rem;
   color: ${COLORS['highlight-font']};
   vertical-align: middle;
+`;
+
+export const CardSection = styled.section`
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  gap: 0.5rem;
+
+  @media (min-width: ${WIDTH.SM}) {
+    padding: 1rem;
+    gap: 1rem;
+  }
 `;

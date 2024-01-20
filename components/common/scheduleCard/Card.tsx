@@ -1,5 +1,6 @@
-import ScheduleCardDesc from '@/components/common/scheduleCard/CardDesc';
-import SchduleCardImage from '@/components/common/scheduleCard/CardImage';
+'use client';
+import CardDesc from '@/components/common/scheduleCard/CardDesc';
+import CardImage from '@/components/common/scheduleCard/CardImage';
 import { Card } from '@/components/common/scheduleCard/Style';
 import { ContentsDataType } from '@/types/inSheet';
 import { cx } from '@/utils';
@@ -62,8 +63,8 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
 
   return (
     <Card className={cx(addStreamModifier)} key={videoId} ref={target}>
-      <SchduleCardImage content={content} />
-      <ScheduleCardDesc content={content} addStreamModifier={addStreamModifier} />
+      <CardImage content={content} />
+      <CardDesc content={content} addStreamModifier={addStreamModifier} />
     </Card>
   );
 };

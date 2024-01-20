@@ -1,6 +1,8 @@
 import { SearchResponseType } from '@/app/api/search/route';
 import ScheduleCard from '@/components/common/scheduleCard/Card';
 import search from '@/components/search/Search.module.scss';
+import { CardSection } from '@/components/common/scheduleCard/Style';
+import CardPlaceHolder from '@/components/common/scheduleCard/CardPlaceHolder';
 
 interface ContentSectionProps {
   contents: SearchResponseType['contents'];
@@ -13,7 +15,7 @@ const ContentSection = ({ contents }: ContentSectionProps) => {
         <h1>일정 검색</h1>
         <span>{`(${contents.length} 개)`}</span>
       </div>
-      <section>
+      <CardSection>
         {contents.map((content, index) => (
           <ScheduleCard
             key={content.videoId}
@@ -22,7 +24,8 @@ const ContentSection = ({ contents }: ContentSectionProps) => {
             lastContentsIndex={contents.length - 1}
           />
         ))}
-      </section>
+        <CardPlaceHolder />
+      </CardSection>
     </section>
   );
 };

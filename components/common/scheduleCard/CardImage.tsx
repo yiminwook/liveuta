@@ -6,11 +6,11 @@ import { gtagClickAtag } from '@/utils/gtag';
 import Image from 'next/image';
 import { MouseEvent, useCallback, useRef, useState } from 'react';
 
-interface ScheduleCardImageProps {
+interface CardImageProps {
   content: ContentsDataType;
 }
 
-const SchduleCardImage = ({ content }: ScheduleCardImageProps) => {
+const CardImage = ({ content }: CardImageProps) => {
   const { channelName, thumbnailURL, url } = content;
 
   const [imgLoaded, setImgLoaded] = useState(true);
@@ -54,4 +54,4 @@ const SchduleCardImage = ({ content }: ScheduleCardImageProps) => {
   );
 };
 
-export default SchduleCardImage;
+export default CardImage;

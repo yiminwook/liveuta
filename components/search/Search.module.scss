@@ -84,11 +84,6 @@
   & > div {
     @extend %section-header;
   }
-
-  section {
-    @extend %home-contents-section;
-    margin: 1.5rem 0;
-  }
 }
 
 .channel-section {

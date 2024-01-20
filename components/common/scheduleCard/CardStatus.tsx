@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import { FaUsers } from 'react-icons/fa';
 import { StatusBox } from '@/components/common/scheduleCard/Style';
 
-interface ScheduleStatusProps {
+interface CardStatusProps {
   isStream: isStream;
   interval: string;
   videoId: string;
 }
 
-const ScheduleStatus = ({ isStream, interval, videoId }: ScheduleStatusProps) => {
+const CardStatus = ({ isStream, interval, videoId }: CardStatusProps) => {
   const [viewCount, setViewCount] = useState('?');
 
   const getViewCount = async () => {
@@ -38,4 +38,4 @@ const ScheduleStatus = ({ isStream, interval, videoId }: ScheduleStatusProps) =>
   );
 };
 
-export default ScheduleStatus;
+export default CardStatus;
