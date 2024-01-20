@@ -40,7 +40,6 @@ messaging.onBackgroundMessage(function ({ data }) {
 });
 
 self.addEventListener('notificationclick', function (event) {
-  console.log('background notification', event.notification);
   const url = event.notification.data;
   event.notification.close(); // Android needs explicit close
 

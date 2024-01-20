@@ -1,3 +1,4 @@
+'use client';
 import { Provider } from 'jotai';
 import GlobalHydrateAtoms from '@/atoms/GlobalHydrateAtoms';
 import { getCookies } from '@/utils/getCookie';

@@ -6,7 +6,7 @@ import '@/styles/globals.scss';
 import '@/styles/theme.scss';
 import { PropsWithChildren } from 'react';
 import ServiceLayout from '@/components/layout/ServiceLayout';
-import { GTM_TRACKING_ID, PAGE_REVALIDATE_TIME } from '@/consts';
+import { GTM_TRACKING_ID } from '@/consts';
 import { DEFALUT_METADATA } from '@/consts/metaData';
 import DefaultHead from '@/configs/DefaultHead';
 import Configs from '@/configs';
@@ -42,7 +42,6 @@ const RootLayout = async ({ children }: PropsWithChildren) => {
 export default RootLayout;
 
 /** Default Route Segment Config */
-export const revalidate = PAGE_REVALIDATE_TIME;
 export const dynamicParams = true; //fallback
 export const preferredRegion = ['icn1'];
 export const metadata = DEFALUT_METADATA;

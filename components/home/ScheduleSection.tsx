@@ -3,7 +3,7 @@ import ScheduleCard from '@/components/common/scheduleCard/Card';
 import { useEffect, useMemo, useState } from 'react';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/consts';
 import styled from '@emotion/styled';
-import ScheduleCardPlaceHolder from '@/components/common/scheduleCard/CardPlaceHolder';
+import CardPlaceHolder from '@/components/common/scheduleCard/CardPlaceHolder';
 
 const Section = styled.section`
   box-sizing: border-box;
@@ -56,7 +56,7 @@ const ScheduleSection = ({ contents }: YoutubeSectionProps) => {
           handleInfinityScroll={handleInfinityScroll}
         />
       ))}
-      <ScheduleCardPlaceHolder />
+      <CardPlaceHolder />
     </Section>
   );
 };

@@ -2,7 +2,7 @@ import { cardBase } from '@/components/common/scheduleCard/Style';
 
 const ITEMS = Array.from({ length: 10 }, (_, i) => i);
 
-const ScheduleCardPlaceHolder = () => {
+const CardPlaceHolder = () => {
   return (
     <>
       {ITEMS.map((index) => (
@@ -12,4 +12,4 @@ const ScheduleCardPlaceHolder = () => {
   );
 };
 
-export default ScheduleCardPlaceHolder;
+export default CardPlaceHolder;

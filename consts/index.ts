@@ -9,7 +9,6 @@ export const SEARCH_ITEMS_SIZE = 50; // 50개이상일때 유투브 에러발생
 
 /** reavalidate time(초) */
 export const FETCH_REVALIDATE_TIME = 30;
-export const PAGE_REVALIDATE_TIME = 1800;
 
 export const HOME_FILTER = ['live', 'daily', 'all'];
 
