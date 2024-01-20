@@ -62,7 +62,7 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
   }, [target, content, lastContentsIndex]);
 
   return (
-    <Card className={cx(addStreamModifier)} key={videoId} ref={target}>
+    <Card className={cx('scheduleCard', addStreamModifier)} key={videoId} ref={target}>
       <CardImage content={content} />
       <CardDesc content={content} addStreamModifier={addStreamModifier} />
     </Card>
