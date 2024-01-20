@@ -1,67 +1,15 @@
-import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
-import { ContentsDataType } from '@/types/inSheet';
-import { MouseEvent } from 'react';
-import { toast } from 'react-toastify';
-import { HiBellAlert } from 'react-icons/hi2';
-import ScheduleStatus from '@/components/common/scheduleCard/ScheduleStatus';
-import useMutatePush from '@/queries/push';
+import ScheduleStatus from '@/components/common/scheduleCard/Status';
+import { DescBox } from '@/components/common/scheduleCard/Style';
 import { generateFcmToken } from '@/models/firebase/generateFcmToken';
-import { gtagClick } from '@/utils/gtag';
-import styled from '@emotion/styled';
+import useMutatePush from '@/queries/push';
+import { ContentsDataType } from '@/types/inSheet';
 import { cx } from '@/utils';
-import { COLORS, textLine } from '@/styles/var';
-
-const DescBox = styled.div`
-  margin-bottom: 0.2rem;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-flow: column;
-  gap: 0.5rem;
-
-  .channelName {
-    font-weight: 500;
-    font-size: 1.2rem;
-
-    &.stream {
-      font-weight: 600;
-      color: ${COLORS['highlight-font']};
-    }
-  }
-
-  .title {
-    color: ${COLORS.font};
-    ${textLine(2, 1.25)}
-
-    &.stream {
-      font-weight: 500;
-      color: ${COLORS.secondary};
-    }
-  }
-
-  .time {
-    display: flex;
-    font-size: 0.6rem;
-    margin-bottom: 0.2rem;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .link {
-    display: flex;
-    gap: 0.5rem;
-    font-size: 0.75rem;
-    justify-content: flex-end;
-    margin-right: 0.5rem;
-
-    & > button {
-      font-size: inherit;
-      font-weight: 600;
-      color: ${COLORS.salmon};
-    }
-  }
-`;
+import { gtagClick } from '@/utils/gtag';
+import { openWindow } from '@/utils/windowEvent';
+import { MouseEvent } from 'react';
+import { HiBellAlert } from 'react-icons/hi2';
+import { toast } from 'react-toastify';
 
 interface ScheduleCardDescProps {
   content: ContentsDataType;

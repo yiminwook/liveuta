@@ -1,20 +1,9 @@
-'use client';
-import { FaUsers } from 'react-icons/fa';
 import { isStream } from '@/types/inSheet';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
-import scheduleCard from '@/components/common/scheduleCard/ScheduleCard.module.scss';
-import styled from '@emotion/styled';
-import { COLORS } from '@/styles/var';
+import { useEffect, useState } from 'react';
+import { FaUsers } from 'react-icons/fa';
+import { StatusBox } from '@/components/common/scheduleCard/Style';
 
-const StatusBox = styled.div`
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  gap: 0.125rem;
-  color: ${COLORS['highlight-font']};
-  vertical-align: middle;
-`;
 interface ScheduleStatusProps {
   isStream: isStream;
   interval: string;

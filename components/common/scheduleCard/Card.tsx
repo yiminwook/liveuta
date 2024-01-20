@@ -1,52 +1,9 @@
-'use client';
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { ContentsDataType } from '@/types/inSheet';
-import SchduleCardImage from '@/components/common/scheduleCard/CardImage';
 import ScheduleCardDesc from '@/components/common/scheduleCard/CardDesc';
+import SchduleCardImage from '@/components/common/scheduleCard/CardImage';
+import { Card } from '@/components/common/scheduleCard/Style';
+import { ContentsDataType } from '@/types/inSheet';
 import { cx } from '@/utils';
-import styled from '@emotion/styled';
-import { BEZIER_CURVE, boxShadow, COLORS, WIDTH } from '@/styles/var';
-import { css } from '@emotion/react';
-
-export const cardBase = css`
-  margin: 0;
-  flex: 1 0 auto;
-  width: 15rem;
-  max-width: 100%;
-
-  @media (min-width: ${WIDTH.SM}) {
-    max-width: 50%;
-  }
-`;
-
-const Card = styled.div`
-  ${cardBase}
-  ${boxShadow}
-  display: flex;
-  padding: 0.25rem;
-  gap: 0.25rem;
-  background-color: #fff;
-  border-radius: 5px;
-  transition: all 0.2s ${BEZIER_CURVE};
-
-  &:hover {
-    transform: scale(1.02);
-  }
-
-  @media (min-width: ${WIDTH.SM}) {
-    flex-direction: column;
-    padding: 0.5rem;
-    gap: 0.5rem;
-  }
-
-  &.closed {
-    background-color: ${COLORS['light-blue']};
-  }
-
-  &.stream {
-    background-color: ${COLORS['light-yellow']};
-  }
-`;
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 interface ScheduleCardProps {
   content: ContentsDataType;
