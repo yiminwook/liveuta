@@ -1,5 +1,4 @@
 'use client';
-
 import useSheet from '@/queries/sheet';
 import NavSection from '@/components/home/NavSection';
 import ScheduleSection from '@/components/home/ScheduleSection';

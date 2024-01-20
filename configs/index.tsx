@@ -2,7 +2,7 @@
 import JotaiProvider from '@/atoms/JotaiProvider';
 import Devtools from '@/configs/Devtools';
 import ServiceWorker from '@/configs/ServiceWorker';
-import ReacQueryProvider from '@/queries/ReactQueryProvider';
+import ReactQueryProvider from '@/queries/ReactQueryProvider';
 import { GetCookiesReturnType } from '@/utils/getCookie';
 import AntdProvider from '@/configs/AntdConfig';
 
@@ -14,13 +14,13 @@ interface ConfigsProps {
 const Configs = ({ children, cookies }: ConfigsProps) => {
   return (
     <JotaiProvider cookies={cookies}>
-      <ReacQueryProvider>
+      <ReactQueryProvider>
         <AntdProvider>
           {children}
           <ServiceWorker />
           <Devtools />
         </AntdProvider>
-      </ReacQueryProvider>
+      </ReactQueryProvider>
     </JotaiProvider>
   );
 };

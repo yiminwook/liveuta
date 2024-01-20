@@ -3,11 +3,11 @@ import addToast from '@/utils/handleToast';
 import { QueryClientProvider, QueryClient, QueryCache } from '@tanstack/react-query';
 import { useState } from 'react';
 
-interface ReacQueryProviderProps {
+interface ReactQueryProviderProps {
   children: React.ReactNode;
 }
 
-const ReacQueryProvider = ({ children }: ReacQueryProviderProps) => {
+const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
   const [querClient] = useState(
     () =>
       new QueryClient({
@@ -60,4 +60,4 @@ const ReacQueryProvider = ({ children }: ReacQueryProviderProps) => {
   return <QueryClientProvider client={querClient}>{children}</QueryClientProvider>;
 };
 
-export default ReacQueryProvider;
+export default ReactQueryProvider;
