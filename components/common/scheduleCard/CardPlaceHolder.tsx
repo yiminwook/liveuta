@@ -1,8 +1,8 @@
-import { CardBase } from '@/app/test/Card';
+import { cardBase } from '@/components/common/scheduleCard/Card';
 import styled from '@emotion/styled';
 
 const Card = styled.div`
-  ${CardBase}
+  ${cardBase}
 `;
 
 const ITEMS = Array.from({ length: 10 }, (_, i) => i);

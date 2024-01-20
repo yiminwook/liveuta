@@ -1,6 +1,6 @@
 'use client';
 import { isLoadingAtom } from '@/atoms';
-import { combineClassName } from '@/utils/combineClassName';
+import { cx } from '@/utils';
 import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { IoGlobeOutline } from 'react-icons/io5';
@@ -17,7 +17,7 @@ const FetchIndicator = () => {
   }
 
   return (
-    <div className={combineClassName('foat', 'left', fetchIndicator['wrap'])}>
+    <div className={cx('foat', 'left', fetchIndicator['wrap'])}>
       <IoGlobeOutline color="inherit" size={'1.5rem'} />
       <AiOutlineLoading size={'2.25rem'} color="inherit" />
     </div>

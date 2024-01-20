@@ -1,5 +1,5 @@
 import { ContentsDataType } from '@/types/inSheet';
-import ScheduleCard from '@/app/test/Card';
+import ScheduleCard from '@/components/common/scheduleCard/Card';
 import { useEffect, useMemo, useState } from 'react';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/consts';
 import styled from '@emotion/styled';

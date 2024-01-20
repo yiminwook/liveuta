@@ -5,7 +5,7 @@ import input from '@/components/common/Input.module.scss';
 import { GrFormClose } from 'react-icons/gr';
 import useInput from '@/hooks/useInput';
 import { IoMdMusicalNote } from 'react-icons/io';
-import { combineClassName } from '@/utils/combineClassName';
+import { cx } from '@/utils';
 import { replaceSpecialCharacters } from '@/utils/regexp';
 
 type OriginalInputProps = InputHTMLAttributes<HTMLInputElement>;
@@ -23,7 +23,7 @@ const Input = ({ className = '', onSubmit, type = 'text', value = '', onChange, 
   };
 
   return (
-    <form onSubmit={handleSubit} className={combineClassName(input['form'], className)}>
+    <form onSubmit={handleSubit} className={cx(input['form'], className)}>
       <div>
         <input {...props} type={type} className={input['input']} value={value} onChange={onChange} />
         {value ? (

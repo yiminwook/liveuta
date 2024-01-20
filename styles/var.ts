@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+
 export const BEZIER_CURVE = 'cubic-bezier(0.23, 1, 0.32, 1)';
 export const WIDTH = {
   SM: '640px',
@@ -23,3 +25,17 @@ export const COLORS = {
   skyblue: '#00cbfe',
   'light-blue': '#d8f2ff',
 };
+
+export const boxShadow = css`
+  box-shadow: 0px 1px 2px 0 rgba(56, 52, 52, 0.4);
+`;
+
+export const textLine = (lineCount: number, lineHeight: number) => css`
+  word-break: break-all;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: ${lineCount};
+  -webkit-box-orient: vertical;
+  line-height: ${lineHeight}rem;
+  height: ${lineCount * lineHeight}rem;
+`;

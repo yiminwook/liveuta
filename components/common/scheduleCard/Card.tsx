@@ -1,35 +1,42 @@
 'use client';
-import React, { MouseEvent, useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { ContentsDataType } from '@/types/inSheet';
-import scheduleCard from '@/components/common/scheduleCard/ScheduleCard.module.scss';
-import SchduleCardImage from '@/app/test/CardImage';
-import ScheduleCardDesc from '@/app/test/CardDesc';
-import { combineClassName } from '@/utils/combineClassName';
-import { gtagClickAtag } from '@/utils/gtag';
+import SchduleCardImage from '@/components/common/scheduleCard/CardImage';
+import ScheduleCardDesc from '@/components/common/scheduleCard/CardDesc';
+import { cx } from '@/utils';
 import styled from '@emotion/styled';
-import { BEZIER_CURVE, COLORS } from '@/styles/var';
+import { BEZIER_CURVE, boxShadow, COLORS, WIDTH } from '@/styles/var';
 import { css } from '@emotion/react';
 
-export const CardBase = css`
+export const cardBase = css`
   margin: 0;
   flex: 1 0 auto;
   width: 15rem;
-  max-width: 50%;
+  max-width: 100%;
+
+  @media (min-width: ${WIDTH.SM}) {
+    max-width: 50%;
+  }
 `;
 
 const Card = styled.div`
-  ${CardBase}
-
+  ${cardBase}
+  ${boxShadow}
+  display: flex;
+  padding: 0.25rem;
+  gap: 0.25rem;
   background-color: #fff;
   border-radius: 5px;
   transition: all 0.2s ${BEZIER_CURVE};
 
-  @media (max-width: 640px) {
-    max-width: 100%;
+  &:hover {
+    transform: scale(1.02);
   }
 
-  &:hover {
-    transform: scale(1.05);
+  @media (min-width: ${WIDTH.SM}) {
+    flex-direction: column;
+    padding: 0.5rem;
+    gap: 0.5rem;
   }
 
   &.closed {
@@ -49,7 +56,7 @@ interface ScheduleCardProps {
 }
 
 const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinityScroll }: ScheduleCardProps) => {
-  const { url, videoId, isStream } = content;
+  const { videoId, isStream } = content;
   const target = useRef<HTMLDivElement>(null);
 
   const addStreamModifier = useMemo(() => {
@@ -85,14 +92,6 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
     [target, lastContentsIndex],
   );
 
-  const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) =>
-    gtagClickAtag(e, {
-      target: 'scheduleCard',
-      content: content.channelName,
-      detail: content.title,
-      action: 'atag',
-    });
-
   useEffect(() => {
     if (!handleInfinityScroll) return;
     const currentTarget = target.current;
@@ -105,13 +104,9 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
   }, [target, content, lastContentsIndex]);
 
   return (
-    <Card className={combineClassName('card', addStreamModifier)} key={videoId} ref={target}>
-      <div className={scheduleCard['content']}>
-        <a href={url} onClick={linkClickEvent}>
-          <SchduleCardImage content={content} />
-        </a>
-        <ScheduleCardDesc content={content} addStreamModifier={addStreamModifier} />
-      </div>
+    <Card className={cx(addStreamModifier)} key={videoId} ref={target}>
+      <SchduleCardImage content={content} />
+      <ScheduleCardDesc content={content} addStreamModifier={addStreamModifier} />
     </Card>
   );
 };

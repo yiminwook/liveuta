@@ -1,5 +1,5 @@
 import { SearchResponseType } from '@/app/api/search/route';
-import ScheduleCard from '@/components/common/scheduleCard/ScheduleCard';
+import ScheduleCard from '@/components/common/scheduleCard/Card';
 import search from '@/components/search/Search.module.scss';
 
 interface ContentSectionProps {

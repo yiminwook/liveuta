@@ -1,5 +1,5 @@
 'use client';
-import { combineClassName } from '@/utils/combineClassName';
+import { cx } from '@/utils';
 import { useEffect, useMemo, useState } from 'react';
 import { TfiArrowCircleUp } from 'react-icons/tfi';
 
@@ -30,7 +30,7 @@ const FloatButton = () => {
 
   return (
     <button
-      className={combineClassName('foat', 'right', 'hover', isTop ? 'hide' : '')}
+      className={cx('foat', 'right', 'hover', isTop ? 'hide' : '')}
       onClick={scrollUp}
       onTouchEnd={scrollUp}
       onTouchStart={scrollUp}

@@ -4,7 +4,7 @@ import { memo, useState } from 'react';
 import themeButton from '@/components/common/button/ThemeButton.module.scss';
 import ThemeModal from '@/components/common/modal/ThemeModal';
 import { RiBrushLine } from 'react-icons/ri';
-import { combineClassName } from '@/utils/combineClassName';
+import { cx } from '@/utils';
 
 interface ThemeButtonProps {
   className?: string;
@@ -19,7 +19,7 @@ const ThemeButton = ({ className = '', size = '1.5rem' }: ThemeButtonProps) => {
 
   return (
     <>
-      <button onClick={openThemeModal} className={combineClassName(themeButton['wrap'], className)}>
+      <button onClick={openThemeModal} className={cx(themeButton['wrap'], className)}>
         <RiBrushLine color="inherit" size={size} />
       </button>
       {showThemeModal ? <ThemeModal onClose={closeThemeModal} /> : null}
