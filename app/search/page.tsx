@@ -1,5 +1,4 @@
 'use client';
-import Loading from '@/components/layout/Loading';
 import ChannelSection from '@/components/search/ChannelSection';
 import ContentSection from '@/components/search/ContentSection';
 import SearchSection from '@/components/search/SearchSection';

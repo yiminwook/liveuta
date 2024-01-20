@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import horizonScrollBox from '@/components/common/HorizonScrollBox.module.scss';
-import { combineClassName } from '@/utils/combineClassName';
+import { cx } from '@/utils';
 
 interface HorizonScrollBoxProps {
   className?: string;
@@ -31,7 +31,7 @@ const HorizonScrollBox = ({ className = '', children }: HorizonScrollBoxProps) =
   }, []);
 
   return (
-    <div className={combineClassName(horizonScrollBox['wrap'], className)} ref={scrollRef}>
+    <div className={cx(horizonScrollBox['wrap'], className)} ref={scrollRef}>
       <div>{children}</div>
     </div>
   );

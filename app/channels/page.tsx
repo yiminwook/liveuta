@@ -1,45 +1,40 @@
-import { ITEMS_PER_PAGE, PAGE_REVALIDATE_TIME } from '@/consts';
+import { ITEMS_PER_PAGE } from '@/consts';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
 import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
-import ChannelSection from '@/components/channels/ChannelSection';
-import Pagination from '@/components/common/pagination/Pagination';
-import HorizonScrollBox from '@/components/common/HorizonScrollBox';
-import channels from '@/components/channels/Channels.module.scss';
+import Channels from '@/app/channels/page.client';
+import { notFound } from 'next/navigation';
 
 const getChannelData = async () => {
-  /* Google spread sheet API */
-  const { totalLength, sheetDataValues } = await parseChannelIDSheet();
-  const sliceData = sheetDataValues.slice(0, ITEMS_PER_PAGE);
+  try {
+    /* Google spread sheet API */
+    const { totalLength, sheetDataValues } = await parseChannelIDSheet();
+    const sliceData = sheetDataValues.slice(0, ITEMS_PER_PAGE);
 
-  /* Youtube API */
-  const channelSheetData: ChannelSheetDataType = {};
-  sliceData.forEach(([uid, channelName, url]) => {
-    if (channelSheetData[uid]) return;
-    channelSheetData[uid] = { uid, channelName, url };
-  });
+    /* Youtube API */
+    const channelSheetData: ChannelSheetDataType = {};
+    sliceData.forEach(([uid, channelName, url]) => {
+      if (channelSheetData[uid]) return;
+      channelSheetData[uid] = { uid, channelName, url };
+    });
 
-  /* Youtube API */
-  const combinedSearchDataValues = await combineChannelData(channelSheetData);
+    /* Youtube API */
+    const combinedSearchDataValues = await combineChannelData(channelSheetData);
 
-  return {
-    totalLength,
-    contents: combinedSearchDataValues,
-  };
+    return {
+      totalLength,
+      contents: combinedSearchDataValues,
+    };
+  } catch (error) {
+    console.error(error);
+    notFound();
+  }
 };
 
 const ChannelsPage = async () => {
   const { totalLength, contents } = await getChannelData();
-
-  return (
-    <>
-      <ChannelSection contents={contents} />
-      <HorizonScrollBox className={channels['pagination']}>
-        <Pagination totalLength={totalLength} />
-      </HorizonScrollBox>
-    </>
-  );
+  return <Channels totalLength={totalLength} contents={contents} />;
 };
 
 export default ChannelsPage;
 
-export const revalidate = PAGE_REVALIDATE_TIME;
+// export const revalidate = 1800;

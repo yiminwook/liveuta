@@ -1,7 +1,7 @@
 import { memo, MouseEvent, ReactNode, useState } from 'react';
 import { GoTriangleDown } from 'react-icons/go';
 import dropDown from '@/components/common/dropDown/DropDown.module.scss';
-import { combineClassName } from '@/utils/combineClassName';
+import { cx } from '@/utils';
 import OutsideClickHandler from 'react-outside-click-handler';
 
 interface DropDownProps {
@@ -29,7 +29,7 @@ const DropDown = ({ children, width = 'auto', height = '2.5rem', title }: DropDo
   };
 
   return (
-    <div className={combineClassName(dropDown['wrap'], isShow ? dropDown['active'] : '')} onClick={onClick}>
+    <div className={cx(dropDown['wrap'], isShow ? dropDown['active'] : '')} onClick={onClick}>
       <OutsideClickHandler onOutsideClick={onClose}>
         <button onClick={handleToggle} style={{ height, width }}>
           <h3>{title}</h3>
@@ -38,7 +38,7 @@ const DropDown = ({ children, width = 'auto', height = '2.5rem', title }: DropDo
           </span>
         </button>
       </OutsideClickHandler>
-      <div className={combineClassName(dropDown['content'], isShow ? dropDown['active'] : '')}>
+      <div className={cx(dropDown['content'], isShow ? dropDown['active'] : '')}>
         <div>{children}</div>
       </div>
     </div>

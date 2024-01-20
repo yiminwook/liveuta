@@ -10,7 +10,7 @@ import {
 } from '@/components/common/pagination/PaginationChild';
 import { ITEMS_PER_PAGE, PAGINATION_RANGE } from '@/consts';
 import { useParams } from 'next/navigation';
-import { combineClassName } from '@/utils/combineClassName';
+import { cx } from '@/utils';
 
 interface PaginationProps {
   totalLength: number;
@@ -37,7 +37,7 @@ const Pagination = ({ totalLength, className = '' }: PaginationProps) => {
   });
 
   return (
-    <ul className={combineClassName(pagination['pagination'], className)}>
+    <ul className={cx(pagination['pagination'], className)}>
       <FirstLink currentPage={currentPage} />
       <BeforeLink initialPage={pageArray[0]} totalPage={totalPage} />
       {pageArray.map((page, index) => (

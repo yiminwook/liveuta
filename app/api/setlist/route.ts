@@ -18,14 +18,12 @@ export const GET = async (req: NextRequest) => {
     const { searchParams } = new URL(req.url);
     const page = Number(searchParams.get('page')) || 1;
     const query = searchParams.get('query');
-    console.log('요청', page, query);
 
     if (!query) {
       return NextResponse.json<SetListResponseType>({ totalPage: 0, items: [] }, { status: 200 });
     }
 
     const offset = (page - 1) * PAGINATION_LIMIT + 1;
-    console.log('offect', offset);
 
     const body = {
       sort: 'newest',

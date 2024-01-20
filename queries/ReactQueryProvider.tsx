@@ -3,17 +3,17 @@ import addToast from '@/utils/handleToast';
 import { QueryClientProvider, QueryClient, QueryCache } from '@tanstack/react-query';
 import { useState } from 'react';
 
-interface ReacQueryProviderProps {
+interface ReactQueryProviderProps {
   children: React.ReactNode;
 }
 
-const ReacQueryProvider = ({ children }: ReacQueryProviderProps) => {
+const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
   const [querClient] = useState(
     () =>
       new QueryClient({
         queryCache: new QueryCache({
-          onError(error) {
-            console.error(error);
+          onError(error, query) {
+            // console.error(error);
             addToast('error', '통신에러', false);
           },
         }),
@@ -36,7 +36,12 @@ const ReacQueryProvider = ({ children }: ReacQueryProviderProps) => {
       }),
   );
 
+  // const queryCache = querClient.getQueryCache();
+  // queryCache.subscribe(({ type, query }) => {
+  //   if (type !== 'updated' || query.state.status === 'pending') return;
+  // });
+
   return <QueryClientProvider client={querClient}>{children}</QueryClientProvider>;
 };
 
-export default ReacQueryProvider;
+export default ReactQueryProvider;

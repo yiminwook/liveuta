@@ -1,11 +1,10 @@
 'use client';
-import React, { MouseEvent, useCallback, useEffect, useMemo, useRef } from 'react';
+import CardDesc from '@/components/common/scheduleCard/CardDesc';
+import CardImage from '@/components/common/scheduleCard/CardImage';
+import { Card } from '@/components/common/scheduleCard/Style';
 import { ContentsDataType } from '@/types/inSheet';
-import scheduleCard from '@/components/common/scheduleCard/ScheduleCard.module.scss';
-import SchduleCardImage from '@/components/common/scheduleCard/ScheduleCardImage';
-import ScheduleCardDesc from '@/components/common/scheduleCard/ScheduleCardDesc';
-import { combineClassName } from '@/utils/combineClassName';
-import { gtagClickAtag } from '@/utils/gtag';
+import { cx } from '@/utils';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 interface ScheduleCardProps {
   content: ContentsDataType;
@@ -15,7 +14,7 @@ interface ScheduleCardProps {
 }
 
 const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinityScroll }: ScheduleCardProps) => {
-  const { url, videoId, isStream } = content;
+  const { videoId, isStream } = content;
   const target = useRef<HTMLDivElement>(null);
 
   const addStreamModifier = useMemo(() => {
@@ -23,10 +22,10 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
 
     switch (isStream) {
       case 'FALSE':
-        streamModifer = scheduleCard['closed'];
+        streamModifer = 'closed';
         break;
       case 'TRUE':
-        streamModifer = scheduleCard['stream'];
+        streamModifer = 'stream';
         break;
       case 'NULL':
         streamModifer = '';
@@ -51,14 +50,6 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
     [target, lastContentsIndex],
   );
 
-  const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) =>
-    gtagClickAtag(e, {
-      target: 'scheduleCard',
-      content: content.channelName,
-      detail: content.title,
-      action: 'atag',
-    });
-
   useEffect(() => {
     if (!handleInfinityScroll) return;
     const currentTarget = target.current;
@@ -71,14 +62,10 @@ const ScheduleCard = ({ content, currentIndex, lastContentsIndex, handleInfinity
   }, [target, content, lastContentsIndex]);
 
   return (
-    <div className={combineClassName('card', scheduleCard['card'], addStreamModifier)} key={videoId} ref={target}>
-      <div className={scheduleCard['content']}>
-        <a href={url} onClick={linkClickEvent}>
-          <SchduleCardImage content={content} />
-        </a>
-        <ScheduleCardDesc content={content} addStreamModifier={addStreamModifier} />
-      </div>
-    </div>
+    <Card className={cx('scheduleCard', addStreamModifier)} key={videoId} ref={target}>
+      <CardImage content={content} />
+      <CardDesc content={content} addStreamModifier={addStreamModifier} />
+    </Card>
   );
 };
 

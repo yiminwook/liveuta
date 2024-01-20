@@ -1,23 +1,22 @@
-'use client';
-import scheduleCard from '@/components/common/scheduleCard/ScheduleCard.module.scss';
-import { openWindow } from '@/utils/windowEvent';
 import CopyButton from '@/components/common/button/CopyButton';
-import { ContentsDataType } from '@/types/inSheet';
-import { combineClassName } from '@/utils/combineClassName';
-import { MouseEvent } from 'react';
-import { toast } from 'react-toastify';
-import { HiBellAlert } from 'react-icons/hi2';
-import ScheduleStatus from '@/components/common/scheduleCard/ScheduleStatus';
-import useMutatePush from '@/queries/push';
+import CardStatus from '@/components/common/scheduleCard/CardStatus';
+import { DescBox } from '@/components/common/scheduleCard/Style';
 import { generateFcmToken } from '@/models/firebase/generateFcmToken';
+import useMutatePush from '@/queries/push';
+import { ContentsDataType } from '@/types/inSheet';
+import { cx } from '@/utils';
 import { gtagClick } from '@/utils/gtag';
+import { openWindow } from '@/utils/windowEvent';
+import { MouseEvent } from 'react';
+import { HiBellAlert } from 'react-icons/hi2';
+import { toast } from 'react-toastify';
 
-interface ScheduleCardDescProps {
+interface CardDescProps {
   content: ContentsDataType;
   addStreamModifier: string;
 }
 
-const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps) => {
+const CardDesc = ({ content, addStreamModifier }: CardDescProps) => {
   const { title, url, channelName, korTime, interval, isStream, timestamp, thumbnailURL, videoId } = content;
   const { pushMutateAsync, isPendingPush } = useMutatePush({ key: videoId });
 
@@ -59,40 +58,36 @@ const ScheduleCardDesc = ({ content, addStreamModifier }: ScheduleCardDescProps)
     }
   };
 
+  const openStream = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    gtagClick({
+      target: 'scheduleCard',
+      content: content.channelName,
+      detail: content.title,
+      action: 'openWindow',
+    });
+    openWindow(url);
+  };
+
   return (
-    <div className={scheduleCard['description']}>
-      <div className={combineClassName(scheduleCard['channel_name'], addStreamModifier)}>{channelName}</div>
-      <div className={combineClassName(scheduleCard['title'], addStreamModifier)}>{title}</div>
-      <div className={scheduleCard['time']}>
-        <time className={scheduleCard['kor']}>{korTime}</time>
-        <ScheduleStatus isStream={isStream} interval={interval} videoId={videoId} />
+    <DescBox>
+      <div className={cx('channelName', addStreamModifier)}>{channelName}</div>
+      <p className={cx('title', addStreamModifier)}>{title}</p>
+      <div className={'time'}>
+        <time className={'kor'}>{korTime}</time>
+        <CardStatus isStream={isStream} interval={interval} videoId={videoId} />
       </div>
-      <div className={scheduleCard['link']}>
+      <div className={'link'}>
         {isStream === 'NULL' ? (
-          <button className={scheduleCard['alaram']} onClick={handleReserve} disabled={isPendingPush}>
+          <button className={'alaram'} onClick={handleReserve} disabled={isPendingPush}>
             <HiBellAlert color="inherit" size="0.75rem" />
           </button>
         ) : null}
         <CopyButton value={url} size="0.75rem" />
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-
-            gtagClick({
-              target: 'scheduleCard',
-              content: content.channelName,
-              detail: content.title,
-              action: 'openWindow',
-            });
-
-            openWindow(url);
-          }}
-        >
-          새 탭으로 열기
-        </button>
+        <button onClick={openStream}>새 탭으로 열기</button>
       </div>
-    </div>
+    </DescBox>
   );
 };
 
-export default ScheduleCardDesc;
+export default CardDesc;

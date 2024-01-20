@@ -1,17 +1,16 @@
-'use client';
-import { FaUsers } from 'react-icons/fa';
 import { isStream } from '@/types/inSheet';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
-import scheduleCard from '@/components/common/scheduleCard/ScheduleCard.module.scss';
+import { useEffect, useState } from 'react';
+import { FaUsers } from 'react-icons/fa';
+import { StatusBox } from '@/components/common/scheduleCard/Style';
 
-interface ScheduleStatusProps {
+interface CardStatusProps {
   isStream: isStream;
   interval: string;
   videoId: string;
 }
 
-const ScheduleStatus = ({ isStream, interval, videoId }: ScheduleStatusProps) => {
+const CardStatus = ({ isStream, interval, videoId }: CardStatusProps) => {
   const [viewCount, setViewCount] = useState('?');
 
   const getViewCount = async () => {
@@ -28,15 +27,15 @@ const ScheduleStatus = ({ isStream, interval, videoId }: ScheduleStatusProps) =>
   }, []);
 
   if (isStream !== 'TRUE') {
-    return <div className={scheduleCard['status']}>{interval}</div>;
+    return <StatusBox>{interval}</StatusBox>;
   }
 
   return (
-    <div className={scheduleCard['status']}>
+    <StatusBox>
       <FaUsers size={'0.7rem'} />
       {viewCount}
-    </div>
+    </StatusBox>
   );
 };
 
-export default ScheduleStatus;
+export default CardStatus;

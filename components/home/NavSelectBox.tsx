@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import useSheet from '@/queries/sheet';
 import Cookies from 'universal-cookie';
 import { SheetAPIReturntype } from '@/types/inSheet';
-import { combineClassName } from '@/utils/combineClassName';
+import { cx } from '@/utils';
 import { BiArrowFromLeft } from 'react-icons/bi';
 import { BsSliders } from 'react-icons/bs';
 import OutsideClickHandler from 'react-outside-click-handler';
@@ -70,7 +70,7 @@ const NavSelectBox = ({ filter }: NavSelectBoxProps) => {
         {selectedText()}
       </button>
       <OutsideClickHandler onOutsideClick={handleClose}>
-        <div className={combineClassName(home['side'], active ? home['active'] : '')}>
+        <div className={cx(home['side'], active ? home['active'] : '')}>
           <button onClick={handleClose}>
             <BiArrowFromLeft size="1.25rem" />
           </button>

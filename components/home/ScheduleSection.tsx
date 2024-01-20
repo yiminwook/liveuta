@@ -1,8 +1,9 @@
 import { ContentsDataType } from '@/types/inSheet';
-import home from '@/components/home/Home.module.scss';
-import ScheduleCard from '@/components/common/scheduleCard/ScheduleCard';
+import ScheduleCard from '@/components/common/scheduleCard/Card';
 import { useEffect, useMemo, useState } from 'react';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/consts';
+import CardPlaceHolders from '@/components/common/scheduleCard/CardPlaceHolder';
+import { CardSection } from '@/components/common/scheduleCard/Style';
 
 interface YoutubeSectionProps {
   contents: ContentsDataType[];
@@ -36,7 +37,7 @@ const ScheduleSection = ({ contents }: YoutubeSectionProps) => {
   }, [scrollPage]);
 
   return (
-    <section className={home['contents-section']}>
+    <CardSection>
       {loadContents.map((data, index) => (
         <ScheduleCard
           key={data.videoId}
@@ -46,7 +47,8 @@ const ScheduleSection = ({ contents }: YoutubeSectionProps) => {
           handleInfinityScroll={handleInfinityScroll}
         />
       ))}
-    </section>
+      <CardPlaceHolders />
+    </CardSection>
   );
 };
 
