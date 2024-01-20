@@ -2,7 +2,7 @@ import { ContentsDataType } from '@/types/inSheet';
 import ScheduleCard from '@/components/common/scheduleCard/Card';
 import { useEffect, useMemo, useState } from 'react';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/consts';
-import CardPlaceHolder from '@/components/common/scheduleCard/CardPlaceHolder';
+import CardPlaceHolders from '@/components/common/scheduleCard/CardPlaceHolder';
 import { CardSection } from '@/components/common/scheduleCard/Style';
 
 interface YoutubeSectionProps {
@@ -47,7 +47,7 @@ const ScheduleSection = ({ contents }: YoutubeSectionProps) => {
           handleInfinityScroll={handleInfinityScroll}
         />
       ))}
-      <CardPlaceHolder />
+      <CardPlaceHolders />
     </CardSection>
   );
 };

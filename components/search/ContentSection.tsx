@@ -2,7 +2,7 @@ import { SearchResponseType } from '@/app/api/search/route';
 import ScheduleCard from '@/components/common/scheduleCard/Card';
 import search from '@/components/search/Search.module.scss';
 import { CardSection } from '@/components/common/scheduleCard/Style';
-import CardPlaceHolder from '@/components/common/scheduleCard/CardPlaceHolder';
+import CardPlaceHolders from '@/components/common/scheduleCard/CardPlaceHolder';
 
 interface ContentSectionProps {
   contents: SearchResponseType['contents'];
@@ -24,7 +24,7 @@ const ContentSection = ({ contents }: ContentSectionProps) => {
             lastContentsIndex={contents.length - 1}
           />
         ))}
-        <CardPlaceHolder />
+        <CardPlaceHolders />
       </CardSection>
     </section>
   );

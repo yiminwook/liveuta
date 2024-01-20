@@ -1,15 +1,15 @@
-import { cardBase, CardPlaceHolderBox } from '@/components/common/scheduleCard/Style';
+import { CardPlaceHolderBox } from '@/components/common/scheduleCard/Style';
 
 const ITEMS = Array.from({ length: 10 }, (_, i) => i);
 
-const CardPlaceHolder = () => {
+const CardPlaceHolders = () => {
   return (
     <>
       {ITEMS.map((index) => (
-        <CardPlaceHolderBox key={`schedule_card_placeHolder_${index}`} css={cardBase} />
+        <CardPlaceHolderBox key={`schedule_card_placeHolder_${index}`} />
       ))}
     </>
   );
 };
 
-export default CardPlaceHolder;
+export default CardPlaceHolders;
