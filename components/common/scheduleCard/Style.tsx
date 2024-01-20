@@ -49,12 +49,15 @@ export const CardPlaceHolderBox = styled.div`
 `;
 
 export const DescBox = styled.div`
-  margin-bottom: 0.2rem;
   width: 100%;
   height: 100%;
   display: flex;
   flex-flow: column;
-  gap: 0.5rem;
+  gap: 0.1rem;
+
+  @media (min-width: ${WIDTH.SM}) {
+    gap: 0.5rem;
+  }
 
   .channelName {
     font-weight: 500;
@@ -79,7 +82,6 @@ export const DescBox = styled.div`
   .time {
     display: flex;
     font-size: 0.6rem;
-    margin-bottom: 0.2rem;
     align-items: center;
     gap: 0.5rem;
   }
