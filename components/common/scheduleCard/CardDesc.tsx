@@ -24,6 +24,8 @@ const CardDesc = ({ content, addStreamModifier }: CardDescProps) => {
   const handleReserve = async (e: MouseEvent<HTMLButtonElement>) => {
     try {
       if (isPendingPush || isStream !== 'NULL') return;
+      const result = window.confirm('예약후에는 취소할 수 없습니다.');
+      if (result === false) return;
       const token = await generateFcmToken();
 
       if (token === undefined) {

@@ -31,9 +31,7 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
         mutations: {
           gcTime: 0,
           retry: false,
-          onError(error, query) {
-            toast.error({ text: '통신에러' });
-          },
+          onError(error, query) {},
         },
       },
     });
