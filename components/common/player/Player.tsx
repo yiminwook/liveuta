@@ -1,6 +1,6 @@
 import { usePlayerAtom } from '@/atoms/player';
 import { StyledPlayer } from '@/components/common/player/Style';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import ReactPlayer from 'react-player';
 
 const Player = () => {
@@ -10,6 +10,11 @@ const Player = () => {
   const handlePlay = (isPlaying: boolean) => {
     setPlayerValue((pre) => ({ ...pre, isPlaying }));
   };
+
+  useEffect(() => {
+    const current = player.current;
+    if (current === null) return;
+  }, [playerValue.pip]);
 
   if (playerValue.url === '') return null;
 
