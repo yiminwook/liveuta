@@ -1,4 +1,3 @@
-// import { ITEMS_PER_PAGE } from '@/consts';
 import getPaginationRange from '@/utils/getPagenationRange';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
 import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
@@ -21,7 +20,9 @@ const getChannelData = async (page: string) => {
   try {
     /** Params */
     const pageQuery = Number(page);
-    if (Number.isNaN(pageQuery)) throw new Error('PageQuery is not number');
+    if (Number.isNaN(pageQuery)) {
+      throw new Error('PageQuery가 숫자가 아님');
+    }
 
     /* Google spread sheet API */
     const { totalLength, sheetDataValues } = await parseChannelIDSheet();
@@ -35,6 +36,10 @@ const getChannelData = async (page: string) => {
     });
 
     const combinedSearchDataValues = await combineChannelData(channelSheetData);
+
+    if (combinedSearchDataValues.length === 0) {
+      throw new Error('조회된 데이터 없음');
+    }
 
     return {
       totalLength,
