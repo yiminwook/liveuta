@@ -202,5 +202,9 @@ body {
 }
 
 .ant-notification-stack {
-  top: calc(24px + env(safe-area-inset-top)) !important;
+  top: calc(3.5rem + 0.5rem + env(safe-area-inset-top)) !important;
+
+  @include min-width(map-get($points, md)) {
+    top: calc(3.5rem + 1rem + env(safe-area-inset-top)) !important;
+  }
 }

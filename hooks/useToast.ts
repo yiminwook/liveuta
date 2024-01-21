@@ -1,8 +1,11 @@
 import { App } from 'antd';
 
+const DEFAULT_DURATION = 2;
+
 interface ToastApiProps {
   title?: string;
   text: string;
+  /** 1 === 1초 */
   duration?: number;
   onClick?: () => void;
   onClose?: () => void;
@@ -11,7 +14,7 @@ interface ToastApiProps {
 const useToast = () => {
   const { notification } = App.useApp();
 
-  const info = ({ title = 'Info', text, onClick, onClose, duration }: ToastApiProps) => {
+  const info = ({ title = 'Info', text, duration = DEFAULT_DURATION, onClick, onClose }: ToastApiProps) => {
     notification.info({
       message: title,
       description: text,
@@ -22,7 +25,7 @@ const useToast = () => {
     });
   };
 
-  const success = ({ title = 'Success', text, duration, onClick, onClose }: ToastApiProps) => {
+  const success = ({ title = 'Success', text, duration = DEFAULT_DURATION, onClick, onClose }: ToastApiProps) => {
     notification.success({
       message: title,
       description: text,
@@ -33,7 +36,7 @@ const useToast = () => {
     });
   };
 
-  const error = ({ title = 'Error', text, duration, onClick, onClose }: ToastApiProps) => {
+  const error = ({ title = 'Error', text, duration = DEFAULT_DURATION, onClick, onClose }: ToastApiProps) => {
     notification.error({
       message: title,
       description: text,
@@ -44,7 +47,7 @@ const useToast = () => {
     });
   };
 
-  const warning = ({ title = 'Warning', text, duration, onClick, onClose }: ToastApiProps) => {
+  const warning = ({ title = 'Warning', text, duration = DEFAULT_DURATION, onClick, onClose }: ToastApiProps) => {
     notification.warning({
       message: title,
       description: text,
