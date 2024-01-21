@@ -1,4 +1,3 @@
-import 'react-toastify/dist/ReactToastify.css';
 import 'pretendard/dist/web/variable/pretendardvariable.css';
 import '@/styles/reset.css';
 import '@/public/theme.css';
@@ -11,6 +10,7 @@ import { DEFALUT_METADATA } from '@/consts/metaData';
 import DefaultHead from '@/configs/DefaultHead';
 import Configs from '@/configs';
 import { getCookies } from '@/utils/getCookie';
+import type { Viewport } from 'next';
 
 const RootLayout = async ({ children }: PropsWithChildren) => {
   const cookies = await getCookies();
@@ -45,3 +45,10 @@ export default RootLayout;
 export const dynamicParams = true; //fallback
 export const preferredRegion = ['icn1'];
 export const metadata = DEFALUT_METADATA;
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  userScalable: false,
+  maximumScale: 1,
+  viewportFit: 'cover',
+};
