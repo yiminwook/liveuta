@@ -1,4 +1,3 @@
-'use client';
 import home from '@/components/home/Home.module.scss';
 import React, { useState } from 'react';
 import useSheet from '@/queries/sheet';
@@ -8,16 +7,17 @@ import { cx } from '@/utils';
 import { BiArrowFromLeft } from 'react-icons/bi';
 import { BsSliders } from 'react-icons/bs';
 import OutsideClickHandler from 'react-outside-click-handler';
-import { useFilterAtom, useSelectAtom } from '@/atoms';
+import { useSelectAtom } from '@/atoms';
 import { SelectType } from '@/types';
 
-interface NavSelectBoxProps {}
+interface NavSelectBoxProps {
+  filter: keyof SheetAPIReturntype;
+}
 
-const NavSelectBox = ({}: NavSelectBoxProps) => {
+const NavSelectBox = ({ filter }: NavSelectBoxProps) => {
   const [active, setActive] = useState(false);
   const [select, setSelect] = useSelectAtom();
-  const [filter] = useFilterAtom();
-  const { refetchSheet, sheetData } = useSheet();
+  const { refetchSheet, sheetData } = useSheet(filter);
 
   const handleSelect = async (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
     const target = e.target as HTMLElement;

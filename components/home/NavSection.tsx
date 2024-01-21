@@ -1,9 +1,9 @@
-'use client';
 import home from '@/components/home/Home.module.scss';
 import NavLink from '@/components/common/NavLink';
 import React, { ReactNode, memo } from 'react';
 import HorizonScrollBox from '@/components/common/HorizonScrollBox';
 import NavSelectBox from '@/components/home/NavSelectBox';
+import { SheetAPIReturntype } from '@/types/inSheet';
 
 const NavTapLink = ({ href, text }: { href: string; text: ReactNode }) => {
   return (
@@ -24,14 +24,16 @@ const NavTap = () => {
   );
 };
 
-interface NavSectionProps {}
+interface NavSectionProps {
+  filter: keyof SheetAPIReturntype;
+}
 
-const NavSection = ({}: NavSectionProps) => {
+const NavSection = ({ filter }: NavSectionProps) => {
   return (
     <section className={home['nav-section']}>
       <HorizonScrollBox className={home['nav-scroll-box']}>
         <NavTap />
-        <NavSelectBox />
+        <NavSelectBox filter={filter} />
       </HorizonScrollBox>
     </section>
   );

@@ -4,15 +4,15 @@ import { ContentsDataType, SheetAPIReturntype } from '@/types/inSheet';
 import { fetcher } from '@/queries';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
-import { isLoadingSheetAtom, useFilterAtom } from '@/atoms';
+import { isLoadingSheetAtom } from '@/atoms';
 
 const SHEET_REFRESH_INTERVAL = 1000 * 60 * 3; //3분
 
-const useSheet = () => {
+const useSheet = (filter: keyof SheetAPIReturntype) => {
   const [isLoad, setIsLoad] = useState(false);
-  const [filter] = useFilterAtom();
   const [contents, setContents] = useState<ContentsDataType[]>([]);
   const setIsLoadingSheet = useSetAtom(isLoadingSheetAtom);
+
   const { data, dataUpdatedAt, isLoading, refetch, status } = useQuery<SheetAPIReturntype>({
     queryKey: ['sheet'],
     queryFn: async () => {

@@ -6,16 +6,19 @@ import TopSection from '@/components/home/TopSection';
 import Pip from '@/components/common/player/Pip';
 import useResponsive from '@/hooks/useResponsive';
 import clientOnly from '@/models/clientOnly';
+import { SheetAPIReturntype } from '@/types/inSheet';
 
-interface MainProps {}
+interface MainProps {
+  filter: keyof SheetAPIReturntype;
+}
 
-const Main = ({}: MainProps) => {
-  const { contents, isLoad } = useSheet();
+const Main = ({ filter }: MainProps) => {
+  const { contents, isLoad } = useSheet(filter);
   const { isMobile, isTablet } = useResponsive();
 
   return (
     <>
-      <NavSection />
+      <NavSection filter={filter} />
       <TopSection isLoad={isLoad} contents={contents} isMobile={isMobile} isTablet={isTablet} />
       <ScheduleSection contents={contents} isMobile={isMobile} />
       <Pip />
