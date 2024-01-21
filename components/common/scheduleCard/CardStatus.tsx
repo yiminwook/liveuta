@@ -32,7 +32,7 @@ const CardStatus = ({ isStream, interval, videoId }: CardStatusProps) => {
 
   return (
     <StatusBox>
-      <FaUsers size={'0.7rem'} />
+      <FaUsers size={'0.75rem'} />
       {viewCount}
     </StatusBox>
   );

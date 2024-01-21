@@ -153,6 +153,13 @@ export const StatusBox = styled.div`
   gap: 0.125rem;
   color: ${COLORS['highlight-font']};
   vertical-align: middle;
+
+  @media (min-width: ${WIDTH.SM}) {
+    & > svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
 `;
 
 export const CardSection = styled.section`
