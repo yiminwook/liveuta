@@ -1,15 +1,16 @@
 'use client';
 import Settings from '@/components/settings/Settings.module.scss';
-import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { generateFcmToken } from '@/models/firebase/generateFcmToken';
 import PostBox from '@/components/settings/PostBox';
 import TokenBox from '@/components/settings/TokenBox';
 import { TokenType } from '@/types';
+import useToast from '@/hooks/useToast';
 
 const SettingsPage = () => {
   const [token, setToken] = useState<TokenType>(null);
   const [permission, setPermission] = useState('설정을 가져오는 중');
+  const toast = useToast();
 
   const handleSetToken = async () => {
     try {
@@ -26,7 +27,7 @@ const SettingsPage = () => {
       const message = error instanceof Error ? error.message : 'Unknown Error';
       setPermission(() => 'denied');
       setToken(() => undefined);
-      toast.error(message);
+      toast.error({ text: message });
       return false;
     }
   };
@@ -34,7 +35,7 @@ const SettingsPage = () => {
   const requerstPermission = async () => {
     const result = await handleSetToken();
     if (result) {
-      toast.success('알림허용 설정이 완료되었습니다.');
+      toast.success({ text: '알림허용 설정이 완료되었습니다.' });
     }
   };
 

@@ -2,7 +2,6 @@
 import { ReactNode, useEffect } from 'react';
 import Footer from '@/components/layout/Footer';
 import FloatButton from '@/components/common/button/FlotButton';
-import { ToastContainer } from 'react-toastify';
 import Header from '@/components/layout/Header';
 import FetchIndicator from '@/components/layout/FetchIndicator';
 import Loading from '@/components/layout/Loading';
@@ -31,7 +30,6 @@ const ServiceLayout = ({ children }: ServiceLayoutProps) => {
       <div id="modal-root" />
       <FetchIndicator />
       <Loading />
-      <ToastContainer position="bottom-center" autoClose={1000} />
     </>
   );
 };

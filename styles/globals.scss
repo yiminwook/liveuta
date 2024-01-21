@@ -200,3 +200,7 @@ body {
   font-size: 2rem;
   color: #fff;
 }
+
+.ant-notification-stack {
+  top: calc(24px + env(safe-area-inset-top)) !important;
+}

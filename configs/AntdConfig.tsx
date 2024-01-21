@@ -1,17 +1,24 @@
 'use client';
 import { PropsWithChildren } from 'react';
-import { ConfigProvider } from 'antd';
-import theme from '@/configs/ThemeConfig';
-import AntdRegistry from '@/configs/AntdRegistry';
-import ToastProvider from '@/configs/ToastConfigs';
+import { ConfigProvider, App } from 'antd';
 
 const AntdProvider = ({ children }: PropsWithChildren) => {
   return (
-    <AntdRegistry>
-      <ConfigProvider theme={theme}>
-        <ToastProvider>{children}</ToastProvider>
-      </ConfigProvider>
-    </AntdRegistry>
+    <ConfigProvider
+      theme={{
+        components: {},
+      }}
+    >
+      <App
+        notification={{
+          maxCount: 3,
+          placement: 'topRight',
+          // top: global.scss에서 important로 변경중 .ant-notification-stack
+        }}
+      >
+        {children}
+      </App>
+    </ConfigProvider>
   );
 };
 

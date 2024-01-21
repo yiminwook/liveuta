@@ -5,7 +5,6 @@ import ServiceWorker from '@/configs/ServiceWorker';
 import ReactQueryProvider from '@/queries/ReactQueryProvider';
 import { GetCookiesReturnType } from '@/utils/getCookie';
 import AntdProvider from '@/configs/AntdConfig';
-import RootStyleRegistry from '@/styles/RootStyleRegistry';
 
 interface ConfigsProps {
   children: React.ReactNode;
@@ -14,17 +13,15 @@ interface ConfigsProps {
 
 const Configs = ({ children, cookies }: ConfigsProps) => {
   return (
-    <JotaiProvider cookies={cookies}>
-      <ReactQueryProvider>
-        {/* <RootStyleRegistry> */}
-        <AntdProvider>
+    <AntdProvider>
+      <JotaiProvider cookies={cookies}>
+        <ReactQueryProvider>
           {children}
           <ServiceWorker />
           <Devtools />
-        </AntdProvider>
-        {/* </RootStyleRegistry> */}
-      </ReactQueryProvider>
-    </JotaiProvider>
+        </ReactQueryProvider>
+      </JotaiProvider>
+    </AntdProvider>
   );
 };
 

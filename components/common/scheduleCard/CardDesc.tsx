@@ -1,6 +1,7 @@
 import CopyButton from '@/components/common/button/CopyButton';
 import CardStatus from '@/components/common/scheduleCard/CardStatus';
 import { DescBox } from '@/components/common/scheduleCard/Style';
+import useToast from '@/hooks/useToast';
 import { generateFcmToken } from '@/models/firebase/generateFcmToken';
 import useMutatePush from '@/queries/push';
 import { ContentsDataType } from '@/types/inSheet';
@@ -9,7 +10,6 @@ import { gtagClick } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
 import { MouseEvent } from 'react';
 import { HiBellAlert } from 'react-icons/hi2';
-import { toast } from 'react-toastify';
 
 interface CardDescProps {
   content: ContentsDataType;
@@ -18,6 +18,7 @@ interface CardDescProps {
 
 const CardDesc = ({ content, addStreamModifier }: CardDescProps) => {
   const { title, url, channelName, korTime, interval, isStream, timestamp, thumbnailURL, videoId } = content;
+  const toast = useToast();
   const { pushMutateAsync, isPendingPush } = useMutatePush({ key: videoId });
 
   const handleReserve = async (e: MouseEvent<HTMLButtonElement>) => {
@@ -39,7 +40,7 @@ const CardDesc = ({ content, addStreamModifier }: CardDescProps) => {
       });
 
       if (response.status === 226) {
-        toast.warning('이미 예약된 알림입니다.');
+        toast.warning({ text: '이미 예약된 알림입니다.' });
         return;
       }
 
@@ -50,11 +51,11 @@ const CardDesc = ({ content, addStreamModifier }: CardDescProps) => {
         action: 'alamReserve',
       });
 
-      toast.success('알림이 예약되었습니다.');
+      toast.success({ text: '알림이 예약되었습니다.' });
     } catch (error) {
       console.error(error);
       const message = error instanceof Error ? error.message : 'Unknown Error';
-      toast.error(message);
+      toast.error({ text: message });
     }
   };
 
