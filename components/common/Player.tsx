@@ -12,7 +12,8 @@ const PlayerBox = styled.div`
   height: 100%;
   justify-content: center;
 
-  & > iframe {
+  .reactPlayer {
+    aspect-ratio: 16 / 9;
   }
 `;
 
@@ -54,6 +55,9 @@ const Player = () => {
     <>
       <PlayerBox>
         <ReactPlayer
+          className="reactPlayer"
+          width={'100%'}
+          height={'auto'}
           ref={player}
           url={playerValue.url}
           pip={pip}
