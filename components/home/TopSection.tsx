@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import Player from '@/components/common/Player';
+import PlayerWrap from '@/components/common/player/PlayerWrap';
 
 const TopSectionBox = styled.section`
   box-sizing: border-box;
@@ -11,7 +11,7 @@ const TopSectionBox = styled.section`
 const TopSection = () => {
   return (
     <TopSectionBox>
-      <Player />
+      <PlayerWrap />
     </TopSectionBox>
   );
 };

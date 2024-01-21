@@ -6,7 +6,7 @@ import { gtagClick } from '@/utils/gtag';
 import { useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { MouseEvent, useCallback, useRef, useState } from 'react';
-import { playerAtom } from '@/atoms';
+import { playerAtom } from '@/atoms/player';
 import useResponsive from '@/hooks/useResponsive';
 
 interface CardImageProps {

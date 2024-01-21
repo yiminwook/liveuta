@@ -24,22 +24,11 @@ export const isLoadingAtom = atom((get) => {
   return isSheetLoading || isSearchLoading;
 });
 
-export const playerAtom = atom({
-  url: '',
-  videoId: '',
-  isPlaying: false,
-  isMutted: false,
-  pip: false,
-});
-
-export const usePlayerAtom = () => useAtom(playerAtom);
-
 if (process.env.NODE_ENV === 'development') {
   themeAtom.debugLabel = 'themeAtom';
   selectAtom.debugLabel = 'selectAtom';
   isLoadingAtom.debugLabel = 'isLoadingAtom';
   isLoadingSheetAtom.debugLabel = 'sheetLoadingAtom';
   isLoadingSearchAtom.debugLabel = 'searchLoadingAtom';
-  playerAtom.debugLabel = 'playerAtom';
   filterAtom.debugLabel = 'filterAtom';
 }
