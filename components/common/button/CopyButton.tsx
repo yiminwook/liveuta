@@ -25,7 +25,7 @@ const CopyButton = ({ value, size = '2rem', className, style }: CopyButtonProps)
       detail: value,
       action: 'copy',
     });
-    success({ text: '복사되었습니다.' });
+    success({ text: '복사되었습니다.', duration: 1000 });
   };
 
   return (

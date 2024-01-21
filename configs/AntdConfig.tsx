@@ -13,6 +13,9 @@ const AntdProvider = ({ children }: PropsWithChildren) => {
         notification={{
           maxCount: 3,
           placement: 'topRight',
+          stack: {
+            threshold: 2,
+          },
           // top: global.scss에서 important로 변경중 .ant-notification-stack
         }}
       >
