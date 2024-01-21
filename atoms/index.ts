@@ -29,6 +29,7 @@ export const playerAtom = atom({
   videoId: '',
   isPlaying: false,
   isMutted: false,
+  pip: false,
 });
 
 export const usePlayerAtom = () => useAtom(playerAtom);
