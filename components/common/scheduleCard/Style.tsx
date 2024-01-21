@@ -83,18 +83,17 @@ export const DescBox = styled.div`
   gap: 0.1rem;
 
   .channelName {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 1rem;
 
     &.stream {
-      font-weight: 600;
       color: ${COLORS['highlight-font']};
     }
   }
 
   .title {
     color: ${COLORS.font};
-    ${textLine(2, 1.25)}
+    ${textLine(2, 1)}
     font-size: 0.75rem;
 
     &.stream {
@@ -134,6 +133,7 @@ export const DescBox = styled.div`
 
     .title {
       font-size: 1rem;
+      ${textLine(2, 1.25)}
     }
 
     .time {
