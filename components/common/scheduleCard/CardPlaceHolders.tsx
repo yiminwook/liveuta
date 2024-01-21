@@ -2,7 +2,13 @@ import { CardPlaceHolderBox } from '@/components/common/scheduleCard/Style';
 
 const ITEMS = Array.from({ length: 10 }, (_, i) => i);
 
-const CardPlaceHolders = () => {
+interface CardPlaceHolderProps {
+  isMobile: boolean;
+}
+
+const CardPlaceHolders = ({ isMobile }: CardPlaceHolderProps) => {
+  if (isMobile) return null;
+
   return (
     <>
       {ITEMS.map((index) => (

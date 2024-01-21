@@ -1,6 +1,4 @@
 import PlayerWrap from '@/components/common/player/PlayerWrap';
-import useResponsive from '@/hooks/useResponsive';
-import clientOnly from '@/models/clientOnly';
 import { ContentsDataType } from '@/types/inSheet';
 import styled from '@emotion/styled';
 
@@ -14,11 +12,11 @@ const TopSectionBox = styled.section`
 interface TopSectionProps {
   isLoad: boolean;
   contents: ContentsDataType[];
+  isMobile: boolean;
+  isTablet: boolean;
 }
 
-const TopSection = ({ isLoad, contents }: TopSectionProps) => {
-  const { isMobile, isTablet } = useResponsive();
-
+const TopSection = ({ isLoad, isMobile, isTablet, contents }: TopSectionProps) => {
   if (isMobile || isLoad === false) return null;
 
   return (
@@ -28,4 +26,4 @@ const TopSection = ({ isLoad, contents }: TopSectionProps) => {
   );
 };
 
-export default clientOnly(TopSection);
+export default TopSection;

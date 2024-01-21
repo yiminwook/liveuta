@@ -1,7 +1,7 @@
 'use client';
 import home from '@/components/home/Home.module.scss';
 import NavLink from '@/components/common/NavLink';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, memo } from 'react';
 import HorizonScrollBox from '@/components/common/HorizonScrollBox';
 import NavSelectBox from '@/components/home/NavSelectBox';
 
@@ -37,4 +37,4 @@ const NavSection = ({}: NavSectionProps) => {
   );
 };
 
-export default NavSection;
+export default memo(NavSection);
