@@ -27,8 +27,8 @@ const NavLink = ({ href, children, modifier = '', shallow = false }: NavLinkProp
         href={href}
         onClick={onClick}
         className={isActive ? ['active', modifier].join(' ') : ''}
-        shallow={shallow}
-        prefetch={false}
+        // shallow={shallow}
+        // prefetch={false}
       >
         {children}
       </Link>

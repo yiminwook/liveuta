@@ -6,6 +6,7 @@ import Header from '@/components/layout/Header';
 import FetchIndicator from '@/components/layout/FetchIndicator';
 import Loading from '@/components/layout/Loading';
 import { gtag } from '@/utils/gtag';
+import Pip from '@/components/common/player/Pip';
 
 interface ServiceLayoutProps {
   children: ReactNode;
@@ -30,6 +31,7 @@ const ServiceLayout = ({ children }: ServiceLayoutProps) => {
       <div id="modal-root" />
       <FetchIndicator />
       <Loading />
+      <Pip />
     </>
   );
 };
