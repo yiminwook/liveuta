@@ -62,7 +62,7 @@ export const ImageLink = styled.a`
     border-radius: 5px;
     height: 100%;
     overflow: hidden;
-    background-color: #000000;
+    background-color: #fff;
 
     & > img {
       object-fit: cover;
