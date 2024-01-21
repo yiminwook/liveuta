@@ -13,15 +13,15 @@ interface TopSectionProps {
   isLoad: boolean;
   contents: ContentsDataType[];
   isMobile: boolean;
-  isTablet: boolean;
+  isDesktop: boolean;
 }
 
-const TopSection = ({ isLoad, isMobile, isTablet, contents }: TopSectionProps) => {
+const TopSection = ({ isLoad, isMobile, isDesktop, contents }: TopSectionProps) => {
   if (isMobile || isLoad === false) return null;
 
   return (
     <TopSectionBox>
-      <PlayerWrap contents={contents} isTablet={isTablet} />
+      <PlayerWrap contents={contents} isDesktop={isDesktop} />
     </TopSectionBox>
   );
 };

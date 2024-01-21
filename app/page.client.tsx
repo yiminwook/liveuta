@@ -13,12 +13,12 @@ interface MainProps {
 
 const Main = ({ filter }: MainProps) => {
   const { contents, isLoad } = useSheet(filter);
-  const { isMobile, isTablet } = useResponsive();
+  const { isMobile, isDesktop } = useResponsive();
 
   return (
     <>
       <NavSection filter={filter} />
-      <TopSection isLoad={isLoad} contents={contents} isMobile={isMobile} isTablet={isTablet} />
+      <TopSection isLoad={isLoad} contents={contents} isMobile={isMobile} isDesktop={isDesktop} />
       <ScheduleSection contents={contents} isMobile={isMobile} />
     </>
   );

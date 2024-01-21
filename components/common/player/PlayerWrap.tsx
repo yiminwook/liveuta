@@ -8,10 +8,10 @@ import { ContentsDataType } from '@/types/inSheet';
 
 interface PlayerWrapProps {
   contents: ContentsDataType[];
-  isTablet: boolean;
+  isDesktop: boolean;
 }
 
-const PlayerWrap = ({ contents, isTablet }: PlayerWrapProps) => {
+const PlayerWrap = ({ contents, isDesktop }: PlayerWrapProps) => {
   const [playerValue, setPlayerValue] = usePlayerAtom();
   const [_, setIsPip] = useIsPipAtom();
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -56,7 +56,7 @@ const PlayerWrap = ({ contents, isTablet }: PlayerWrapProps) => {
       </PipButton>
       {showPlaceholder ? <PlayerPlaceHolder /> : null}
       {!playerValue.pip ? <Player /> : null}
-      <LiveChat videoId={playerValue.videoId} isTablet={isTablet} />
+      <LiveChat videoId={playerValue.videoId} isDesktop={isDesktop} />
     </PlayerBox>
   );
 };
