@@ -1,13 +1,13 @@
+import { playerAtom } from '@/atoms/player';
 import { ImageLink } from '@/components/common/scheduleCard/Style';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
+import useResponsive from '@/hooks/useResponsive';
 import altImage from '@/images/thumbnail_alt_img.png';
 import { ContentsDataType } from '@/types/inSheet';
 import { gtagClick } from '@/utils/gtag';
 import { useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { MouseEvent, useCallback, useRef, useState } from 'react';
-import { playerAtom } from '@/atoms/player';
-import useResponsive from '@/hooks/useResponsive';
 
 interface CardImageProps {
   content: ContentsDataType;
@@ -15,7 +15,6 @@ interface CardImageProps {
 
 const CardImage = ({ content }: CardImageProps) => {
   const { channelName, thumbnailURL, url, videoId } = content;
-
   const [imgLoaded, setImgLoaded] = useState(true);
   const { isMobile } = useResponsive();
   const setPlayerValue = useSetAtom(playerAtom);

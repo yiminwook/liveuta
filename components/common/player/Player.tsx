@@ -1,7 +1,7 @@
 import { usePlayerAtom } from '@/atoms/player';
+import { StyledPlayer } from '@/components/common/player/Style';
 import { useRef } from 'react';
 import ReactPlayer from 'react-player';
-import { StyledPlayer } from '@/components/common/player/Style';
 
 const Player = () => {
   const player = useRef<ReactPlayer>(null);

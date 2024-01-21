@@ -8,12 +8,12 @@ import Pip from '@/components/common/player/Pip';
 interface MainProps {}
 
 const Main = ({}: MainProps) => {
-  const { contents } = useSheet();
+  const { contents, isLoad } = useSheet();
 
   return (
     <>
       <NavSection />
-      <TopSection />
+      <TopSection isLoad={isLoad} contents={contents} />
       <ScheduleSection contents={contents} />
       <Pip />
     </>

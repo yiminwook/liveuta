@@ -64,7 +64,7 @@ export const StyledPlayer = styled(ReactPlayer)`
   ${PlayerBase}
 `;
 
-export const PlayerPlaceholder = styled.div`
+export const PlayerPlaceholderBox = styled.div`
   ${PlayerBase}
   display: flex;
   justify-content: center;

@@ -1,9 +1,9 @@
+const DOMAIN = 'liveuta.vercel.app';
+
 interface LiveChatProp {
   videoId: string;
   isTablet: boolean;
 }
-
-const DOMAIN = 'liveuta.vercel.app';
 
 const LiveChat = ({ videoId, isTablet }: LiveChatProp) => {
   if (isTablet || videoId === '') return null;

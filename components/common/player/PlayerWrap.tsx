@@ -1,18 +1,19 @@
 import { useIsPipAtom, usePlayerAtom } from '@/atoms/player';
-import { PipButton, PlayerBox, PlayerPlaceholder } from '@/components/common/player/Style';
-import useResponsive from '@/hooks/useResponsive';
-import clientOnly from '@/models/clientOnly';
-import useSheet from '@/queries/sheet';
+import { PipButton, PlayerBox } from '@/components/common/player/Style';
 import { useEffect } from 'react';
 import Player from '@/components/common/player/Player';
-import LiveChat from './LiveChat';
-import Image from 'next/image';
+import LiveChat from '@/components/common/player/LiveChat';
+import PlayerPlaceHolder from '@/components/common/player/PlayerPlaceHolder';
+import { ContentsDataType } from '@/types/inSheet';
 
-const PlayerWrap = () => {
+interface PlayerWrapProps {
+  contents: ContentsDataType[];
+  isTablet: boolean;
+}
+
+const PlayerWrap = ({ contents, isTablet }: PlayerWrapProps) => {
   const [playerValue, setPlayerValue] = usePlayerAtom();
-  const { isMobile, isTablet } = useResponsive();
-  const { isLoad, contents, isLoadingSheet } = useSheet();
-  const [pip, setIsPip] = useIsPipAtom();
+  const [_, setIsPip] = useIsPipAtom();
 
   const getRandomIndex = () => {
     if (contents.length === 0) return null;
@@ -21,30 +22,20 @@ const PlayerWrap = () => {
   };
 
   useEffect(() => {
-    if (!isLoad) return;
     const index = getRandomIndex();
     if (index === null) return;
     setPlayerValue((pre) => ({ ...pre, url: contents[index].url, videoId: contents[index].videoId }));
-  }, [isLoad]);
-
-  if (isMobile || isLoad === false) return null;
+  }, []);
 
   return (
-    <PlayerBox pip={pip}>
-      <PipButton pip={pip} onClick={() => setIsPip(true)}>
+    <PlayerBox pip={playerValue.pip}>
+      <PipButton pip={playerValue.pip} onClick={() => setIsPip(true)}>
         PIP
       </PipButton>
-      {pip ? (
-        <PlayerPlaceholder>
-          <Image src={'/assets/icon-384-384.png'} alt="pip모드가 실행중입니다." width={384} height={384} />
-          <p>현재 PIP 모드가 실행중입니다.</p>
-        </PlayerPlaceholder>
-      ) : (
-        <Player />
-      )}
+      {playerValue.pip ? <PlayerPlaceHolder /> : <Player />}
       <LiveChat videoId={playerValue.videoId} isTablet={isTablet} />
     </PlayerBox>
   );
 };
 
-export default clientOnly(PlayerWrap);
+export default PlayerWrap;
