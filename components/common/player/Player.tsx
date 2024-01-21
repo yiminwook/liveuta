@@ -1,20 +1,17 @@
 import { usePlayerAtom } from '@/atoms/player';
 import { StyledPlayer } from '@/components/common/player/Style';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import ReactPlayer from 'react-player';
 
-const Player = () => {
+interface PlayerProps {}
+
+const Player = ({}: PlayerProps) => {
   const player = useRef<ReactPlayer>(null);
   const [playerValue, setPlayerValue] = usePlayerAtom();
 
   const handlePlay = (isPlaying: boolean) => {
     setPlayerValue((pre) => ({ ...pre, isPlaying }));
   };
-
-  useEffect(() => {
-    const current = player.current;
-    if (current === null) return;
-  }, [playerValue.pip]);
 
   if (playerValue.url === '') return null;
 

@@ -41,14 +41,18 @@ export const PipCloseButton = styled(CloseButton)`
   }
 `;
 
-export const PipBox = styled.div`
-  width: 350px;
+export const PipBase = css`
+  width: 350px !important;
   z-index: 50;
   left: 25px;
   bottom: 25px;
   position: fixed;
   overflow: hidden;
   border-radius: 5px;
+`;
+
+export const PipBox = styled.div`
+  ${PipBase}
 `;
 
 export const PlayerBase = css`
@@ -93,7 +97,7 @@ export const PlayerPlaceholderBox = styled.div`
   }
 `;
 
-export const PlayerBox = styled.div<{ pip: boolean }>`
+export const PlayerBox = styled.div<{ pip: boolean; isShow: boolean }>`
   position: relative;
   display: flex;
   width: 100%;
@@ -101,5 +105,7 @@ export const PlayerBox = styled.div<{ pip: boolean }>`
 
   .reactPlayer {
     ${PlayerBase}
+
+    ${({ isShow }) => isShow === false && PipBase}
   }
 `;
