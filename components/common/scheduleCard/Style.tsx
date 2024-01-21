@@ -48,7 +48,7 @@ export const CardPlaceHolderBox = styled.div`
   ${cardBase}
 `;
 
-export const ImageLink = styled.a`
+export const ImageLink = styled.button`
   display: inline-block;
   width: 50%;
 

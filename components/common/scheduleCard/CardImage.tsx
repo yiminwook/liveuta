@@ -2,9 +2,12 @@ import { ImageLink } from '@/components/common/scheduleCard/Style';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
 import altImage from '@/images/thumbnail_alt_img.png';
 import { ContentsDataType } from '@/types/inSheet';
-import { gtagClickAtag } from '@/utils/gtag';
+import { gtagClick } from '@/utils/gtag';
+import { useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { MouseEvent, useCallback, useRef, useState } from 'react';
+import { playerAtom } from '@/atoms';
+import useResponsive from '@/hooks/useResponsive';
 
 interface CardImageProps {
   content: ContentsDataType;
@@ -14,6 +17,8 @@ const CardImage = ({ content }: CardImageProps) => {
   const { channelName, thumbnailURL, url } = content;
 
   const [imgLoaded, setImgLoaded] = useState(true);
+  const { isMobile } = useResponsive();
+  const setPlayerValue = useSetAtom(playerAtom);
   const imgRef = useRef<HTMLImageElement>(null);
 
   const handleImgValidity = useCallback(() => {
@@ -24,16 +29,23 @@ const CardImage = ({ content }: CardImageProps) => {
     }
   }, [imgRef]);
 
-  const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) =>
-    gtagClickAtag(e, {
+  const linkClickEvent = (e: MouseEvent<HTMLButtonElement>) => {
+    gtagClick({
       target: 'scheduleCard',
       action: 'atag',
       content: content.channelName,
       detail: content.title,
     });
 
+    if (isMobile) {
+      window.location.href = url;
+    } else {
+      setPlayerValue((pre) => ({ ...pre, url }));
+    }
+  };
+
   return (
-    <ImageLink href={url} onClick={linkClickEvent}>
+    <ImageLink onClick={linkClickEvent}>
       <div>
         {imgLoaded ? (
           <Image

@@ -4,7 +4,6 @@ import NavLink from '@/components/common/NavLink';
 import React, { ReactNode } from 'react';
 import HorizonScrollBox from '@/components/common/HorizonScrollBox';
 import NavSelectBox from '@/components/home/NavSelectBox';
-import { SheetAPIReturntype } from '@/types/inSheet';
 
 const NavTapLink = ({ href, text }: { href: string; text: ReactNode }) => {
   return (
@@ -25,16 +24,14 @@ const NavTap = () => {
   );
 };
 
-interface NavSectionProps {
-  filter: keyof SheetAPIReturntype;
-}
+interface NavSectionProps {}
 
-const NavSection = ({ filter }: NavSectionProps) => {
+const NavSection = ({}: NavSectionProps) => {
   return (
     <section className={home['nav-section']}>
       <HorizonScrollBox className={home['nav-scroll-box']}>
         <NavTap />
-        <NavSelectBox filter={filter} />
+        <NavSelectBox />
       </HorizonScrollBox>
     </section>
   );

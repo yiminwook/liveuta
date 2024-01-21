@@ -8,17 +8,16 @@ import { cx } from '@/utils';
 import { BiArrowFromLeft } from 'react-icons/bi';
 import { BsSliders } from 'react-icons/bs';
 import OutsideClickHandler from 'react-outside-click-handler';
-import { useSelectAtom } from '@/atoms';
+import { useFilterAtom, useSelectAtom } from '@/atoms';
 import { SelectType } from '@/types';
 
-interface NavSelectBoxProps {
-  filter: keyof SheetAPIReturntype;
-}
+interface NavSelectBoxProps {}
 
-const NavSelectBox = ({ filter }: NavSelectBoxProps) => {
+const NavSelectBox = ({}: NavSelectBoxProps) => {
   const [active, setActive] = useState(false);
-  const { refetchSheet, sheetData } = useSheet({ filter });
   const [select, setSelect] = useSelectAtom();
+  const [filter] = useFilterAtom();
+  const { refetchSheet, sheetData } = useSheet();
 
   const handleSelect = async (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
     const target = e.target as HTMLElement;

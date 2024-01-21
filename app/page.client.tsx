@@ -2,18 +2,17 @@
 import useSheet from '@/queries/sheet';
 import NavSection from '@/components/home/NavSection';
 import ScheduleSection from '@/components/home/ScheduleSection';
-import { SheetAPIReturntype } from '@/types/inSheet';
+import TopSection from '@/components/home/TopSection';
 
-interface MainProps {
-  filter: keyof SheetAPIReturntype;
-}
+interface MainProps {}
 
-const Main = ({ filter }: MainProps) => {
-  const { contents } = useSheet({ filter });
+const Main = ({}: MainProps) => {
+  const { contents } = useSheet();
 
   return (
     <>
-      <NavSection filter={filter} />
+      <NavSection />
+      <TopSection />
       <ScheduleSection contents={contents} />
     </>
   );

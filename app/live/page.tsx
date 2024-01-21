@@ -1,7 +1,12 @@
 import Main from '@/app/page.client';
+import Hydrate from '@/components/home/Hydrate';
 
 const LivePage = async () => {
-  return <Main filter="live" />;
+  return (
+    <Hydrate filter="live">
+      <Main />
+    </Hydrate>
+  );
 };
 
 export default LivePage;

@@ -4,18 +4,16 @@ import { ContentsDataType, SheetAPIReturntype } from '@/types/inSheet';
 import { fetcher } from '@/queries';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
-import { isLoadingSheetAtom } from '@/atoms';
+import { isLoadingSheetAtom, useFilterAtom } from '@/atoms';
 
 const SHEET_REFRESH_INTERVAL = 1000 * 60 * 3; //3분
 
-interface UseSheetProps {
-  filter: keyof SheetAPIReturntype;
-}
-const useSheet = ({ filter }: UseSheetProps) => {
+const useSheet = () => {
+  const [isLoad, setIsLoad] = useState(false);
+  const [filter] = useFilterAtom();
   const [contents, setContents] = useState<ContentsDataType[]>([]);
   const setIsLoadingSheet = useSetAtom(isLoadingSheetAtom);
-
-  const { data, dataUpdatedAt, isLoading, refetch } = useQuery<SheetAPIReturntype>({
+  const { data, dataUpdatedAt, isLoading, refetch, status } = useQuery<SheetAPIReturntype>({
     queryKey: ['sheet'],
     queryFn: async () => {
       // throw new Error('fetcher not defined');
@@ -31,11 +29,16 @@ const useSheet = ({ filter }: UseSheetProps) => {
 
   const setData = () => {
     if (!data) return;
-    setContents(() => data[filter].contents.slice());
+    const contents = [...data[filter].contents];
+    setContents(() => contents);
   };
 
   useEffect(() => {
-    setData();
+    if (data && status === 'success') {
+      //onSuccess
+      setData();
+      setIsLoad(() => true);
+    }
   }, [dataUpdatedAt, filter]);
 
   useEffect(() => {
@@ -51,6 +54,7 @@ const useSheet = ({ filter }: UseSheetProps) => {
     isLoadingSheet: isLoading,
     refetchSheet: refetch,
     sheetDataUpdatedAt: dataUpdatedAt,
+    isLoad,
   };
 };
 
