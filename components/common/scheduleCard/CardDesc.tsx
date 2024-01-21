@@ -80,10 +80,10 @@ const CardDesc = ({ content, addStreamModifier }: CardDescProps) => {
       <div className={'link'}>
         {isStream === 'NULL' ? (
           <button className={'alaram'} onClick={handleReserve} disabled={isPendingPush}>
-            <HiBellAlert color="inherit" size="0.75rem" />
+            <HiBellAlert color="inherit" size="1.25rem" />
           </button>
         ) : null}
-        <CopyButton value={url} size="0.75rem" />
+        <CopyButton value={url} size="1rem" />
         <button onClick={openStream}>새 탭으로 열기</button>
       </div>
     </DescBox>

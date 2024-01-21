@@ -1,4 +1,4 @@
-import { ImageBox } from '@/components/common/scheduleCard/Style';
+import { ImageLink } from '@/components/common/scheduleCard/Style';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
 import altImage from '@/images/thumbnail_alt_img.png';
 import { ContentsDataType } from '@/types/inSheet';
@@ -33,24 +33,26 @@ const CardImage = ({ content }: CardImageProps) => {
     });
 
   return (
-    <ImageBox href={url} onClick={linkClickEvent}>
-      {imgLoaded ? (
-        <Image
-          src={thumbnailURL ?? altImage}
-          alt={`${channelName}의 라이브방송`}
-          loading="lazy"
-          ref={imgRef}
-          onLoad={handleImgValidity}
-          onError={() => setImgLoaded(false)}
-          placeholder="blur"
-          blurDataURL={DEFAULT_BLUR_BASE64}
-          unoptimized
-          fill
-        />
-      ) : (
-        <Image src={altImage} alt={`${channelName}의 라이브방송`} placeholder="blur" unoptimized fill />
-      )}
-    </ImageBox>
+    <ImageLink href={url} onClick={linkClickEvent}>
+      <div>
+        {imgLoaded ? (
+          <Image
+            src={thumbnailURL ?? altImage}
+            alt={`${channelName}의 라이브방송`}
+            loading="lazy"
+            ref={imgRef}
+            onLoad={handleImgValidity}
+            onError={() => setImgLoaded(false)}
+            placeholder="blur"
+            blurDataURL={DEFAULT_BLUR_BASE64}
+            unoptimized
+            fill
+          />
+        ) : (
+          <Image src={altImage} alt={`${channelName}의 라이브방송`} placeholder="blur" unoptimized fill />
+        )}
+      </div>
+    </ImageLink>
   );
 };
 
