@@ -14,7 +14,7 @@ interface CardImageProps {
 }
 
 const CardImage = ({ content }: CardImageProps) => {
-  const { channelName, thumbnailURL, url } = content;
+  const { channelName, thumbnailURL, url, videoId } = content;
 
   const [imgLoaded, setImgLoaded] = useState(true);
   const { isMobile } = useResponsive();
@@ -40,7 +40,7 @@ const CardImage = ({ content }: CardImageProps) => {
     if (isMobile) {
       window.location.href = url;
     } else {
-      setPlayerValue((pre) => ({ ...pre, url }));
+      setPlayerValue((pre) => ({ ...pre, url, videoId }));
     }
   };
 

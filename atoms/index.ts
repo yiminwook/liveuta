@@ -26,6 +26,7 @@ export const isLoadingAtom = atom((get) => {
 
 export const playerAtom = atom({
   url: '',
+  videoId: '',
   isPlaying: false,
   isMutted: false,
 });
