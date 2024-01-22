@@ -1,8 +1,6 @@
 import { isStream } from '@/types/inSheet';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { FaUsers } from 'react-icons/fa';
 import { StatusBox } from '@/components/common/scheduleCard/Style';
+import CardViewer from '@/components/common/scheduleCard/CardViewer';
 
 interface CardStatusProps {
   isStream: isStream;
@@ -11,31 +9,7 @@ interface CardStatusProps {
 }
 
 const CardStatus = ({ isStream, interval, videoId }: CardStatusProps) => {
-  const [viewCount, setViewCount] = useState('?');
-
-  const getViewCount = async () => {
-    try {
-      if (isStream !== 'TRUE') return;
-      const res = await axios.get(`/api/crawler?id=${videoId}`);
-      const data = res.data.data;
-      setViewCount(() => data);
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    getViewCount();
-  }, []);
-
-  if (isStream !== 'TRUE') {
-    return <StatusBox>{interval}</StatusBox>;
-  }
-
-  return (
-    <StatusBox>
-      <FaUsers size={'0.75rem'} />
-      {viewCount}
-    </StatusBox>
-  );
+  return <StatusBox>{isStream !== 'TRUE' ? interval : <CardViewer videoId={videoId} />}</StatusBox>;
 };
 
 export default CardStatus;

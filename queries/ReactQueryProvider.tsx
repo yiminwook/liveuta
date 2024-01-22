@@ -14,6 +14,8 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
       queryCache: new QueryCache({
         onError(error, query) {
           // console.error(error);
+          const querykey = query.queryKey;
+          if (querykey.includes('ignore')) return;
           toast.error({ text: '통신에러' });
         },
       }),
@@ -31,7 +33,6 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
         mutations: {
           gcTime: 0,
           retry: false,
-          onError(error, query) {},
         },
       },
     });
