@@ -1,4 +1,6 @@
+import popupCenter from '@/utils/popup';
 import { useEffect, useRef, useState } from 'react';
+import { LiveChatBox, PopButton } from '@/components/common/player/Style';
 
 const DOMAIN = 'liveuta.vercel.app';
 
@@ -17,26 +19,33 @@ const LiveChat = ({ videoId, isDesktop }: LiveChatProp) => {
     console.log('reciveFromChild', event.data);
   };
 
+  const openPopup = () => {
+    popupCenter('https://liveuta.vercel.app/', '_blank', 450, 750);
+  };
+
   useEffect(() => {
-    if (isLoaded === false || !isDesktop || videoId === '') return;
+    if (isLoaded === false || !isDesktop) return;
     console.log('liveChat load');
     window.addEventListener('message', resiveMsgFromChild);
     () => window.removeEventListener('message', resiveMsgFromChild);
   }, [isLoaded]);
 
-  if (!isDesktop || videoId === '') return null;
+  if (!isDesktop) return null;
 
   return (
-    <iframe
-      ref={iframeRef}
-      className="liveChat"
-      src={url}
-      // sandbox="allow-scripts allow-same-origin allow-presentation"
-      // seamless
-      onLoad={() => {
-        setIsLoaded(() => true);
-      }}
-    />
+    <LiveChatBox>
+      <PopButton onClick={openPopup}>POP</PopButton>
+      <iframe
+        ref={iframeRef}
+        className="liveChat"
+        src={url}
+        // sandbox="allow-scripts allow-same-origin allow-presentation"
+        // seamless
+        onLoad={() => {
+          setIsLoaded(() => true);
+        }}
+      />
+    </LiveChatBox>
   );
 };
 

@@ -1,58 +1,45 @@
 'use client';
-import CloseButton from '@/components/common/button/CloseButton';
-import { BEZIER_CURVE } from '@/styles/var';
+import { BEZIER_CURVE, displayNone } from '@/styles/var';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import ReactPlayer from 'react-player';
-
-export const PipButton = styled.button<{ pip: boolean }>`
-  position: absolute;
-  box-sizing: border-box;
-  border-radius: 5px;
-  padding: 0.25rem;
-  font-size: 1.25rem;
-  background-color: orange;
-  font-weight: 500;
-  color: #fff;
-  transition: all 0.3s ${BEZIER_CURVE};
-  display: block;
-  top: 0;
-  right: 0;
-
-  &:hover {
-    background-color: #ffae00d2;
-  }
-
-  ${({ pip }) =>
-    pip &&
-    css`
-      display: none;
-    `}
-`;
-
-export const PipCloseButton = styled(CloseButton)`
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: orange;
-
-  &:hover {
-    background-color: #fff;
-  }
-`;
 
 export const PipBase = css`
   width: 350px !important;
   z-index: 50;
+  position: fixed;
   left: 25px;
   bottom: 25px;
-  position: fixed;
-  overflow: hidden;
-  border-radius: 5px;
+  transition: left 0.3s ${BEZIER_CURVE};
+
+  .reactPlayer {
+    overflow: hidden;
+    border-radius: 5px;
+  }
 `;
 
 export const PipBox = styled.div`
   ${PipBase}
+`;
+
+export const PipButton = styled.button`
+  ${displayNone}
+  position: absolute;
+  top: 0;
+  right: -2.5rem;
+  z-index: 10;
+  padding: 0;
+  margin: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0 5px 5px;
+  color: #ff0000;
+  background-color: #fff;
+  transition: color 0.5s ${BEZIER_CURVE}, background-color 1s ${BEZIER_CURVE};
+
+  &:hover {
+    color: #fff;
+    background-color: #ff0000;
+  }
 `;
 
 export const PlayerBase = css`
@@ -61,11 +48,34 @@ export const PlayerBase = css`
   width: 100%;
   height: auto;
   background-color: #424141cf;
-  overflow: hidden;
 `;
 
-export const StyledPlayer = styled(ReactPlayer)`
-  ${PlayerBase}
+export const PlayerDiv = styled.div<{ isShow: boolean; left: boolean }>`
+  position: relative;
+  width: 100%;
+
+  .reactPlayer {
+    ${PlayerBase}
+  }
+
+  ${({ isShow }) => {
+    return (
+      isShow === false &&
+      css`
+        ${PipBase}
+
+        & > .hideButton {
+          display: block;
+        }
+      `
+    );
+  }}
+
+  ${({ left }) =>
+    left &&
+    css`
+      left: -350px;
+    `}
 `;
 
 export const PlayerPlaceholderBox = styled.div`
@@ -97,15 +107,36 @@ export const PlayerPlaceholderBox = styled.div`
   }
 `;
 
-export const PlayerBox = styled.div<{ pip: boolean; isShow: boolean }>`
+export const PlayerBox = styled.div`
   position: relative;
   display: flex;
   width: 100%;
   justify-content: center;
+`;
 
-  .reactPlayer {
-    ${PlayerBase}
+export const PopButton = styled.button`
+  position: absolute;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 0.25rem;
+  font-size: 1.25rem;
+  background-color: orange;
+  font-weight: 500;
+  color: #fff;
+  transition: all 0.3s ${BEZIER_CURVE};
+  display: block;
+  top: 0;
+  right: 0;
 
-    ${({ isShow }) => isShow === false && PipBase}
+  &:hover {
+    background-color: #ffae00d2;
+  }
+`;
+
+export const LiveChatBox = styled.div`
+  .liveChat {
+    width: 250px;
+    height: 100%;
+    background-color: #000000;
   }
 `;

@@ -1,5 +1,5 @@
 import PlayerWrap from '@/components/common/player/PlayerWrap';
-import { ContentsDataType } from '@/types/inSheet';
+import { ContentsDataType, SheetAPIReturntype } from '@/types/inSheet';
 import styled from '@emotion/styled';
 
 const TopSectionBox = styled.section`
@@ -14,14 +14,15 @@ interface TopSectionProps {
   contents: ContentsDataType[];
   isMobile: boolean;
   isDesktop: boolean;
+  filter: keyof SheetAPIReturntype;
 }
 
-const TopSection = ({ isLoad, isMobile, isDesktop, contents }: TopSectionProps) => {
-  if (isMobile || isLoad === false) return null;
+const TopSection = ({ filter, isLoad, isMobile, isDesktop, contents }: TopSectionProps) => {
+  if (filter !== 'live' || isMobile || isLoad === false) return null;
 
   return (
     <TopSectionBox>
-      <PlayerWrap contents={contents} isDesktop={isDesktop} />
+      <PlayerWrap isDesktop={isDesktop} />
     </TopSectionBox>
   );
 };

@@ -1,18 +1,18 @@
 import Player from '@/components/common/player/Player';
-import { useIsPipAtom } from '@/atoms/player';
-import { PipBox, PipCloseButton } from '@/components/common/player/Style';
+import { PipBox } from '@/components/common/player/Style';
+import clientOnly from '@/models/clientOnly';
+import { usePathname } from 'next/navigation';
 
 const Pip = () => {
-  const [isPip, setIsPip] = useIsPipAtom();
+  const isLivePath = usePathname().split('/')[1] === 'live';
 
-  if (isPip === false) return null;
+  if (isLivePath) return null;
 
   return (
     <PipBox>
-      {isPip ? <PipCloseButton onClose={() => setIsPip(false)} /> : null}
-      <Player />
+      <Player isShow={false} />
     </PipBox>
   );
 };
 
-export default Pip;
+export default clientOnly(Pip);

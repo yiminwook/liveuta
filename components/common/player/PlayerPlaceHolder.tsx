@@ -7,7 +7,6 @@ const PlayerPlaceHolder = () => {
       <div>
         <Image src={'/assets/icon-384-384.png'} alt="pip모드가 실행중입니다." unoptimized fill />
       </div>
-      <p>현재 PIP 모드가 실행중입니다.</p>
     </PlayerPlaceholderBox>
   );
 };
