@@ -15,8 +15,8 @@ const useResponsive = () => {
 
   return {
     isMobile: size.width < 640,
-    isTablet: size.width >= 640 && size.width < 768,
-    isDesktop: size.width >= 768,
+    isTablet: size.width < 968 && size.width >= 640,
+    isDesktop: size.width >= 968,
     width: size.width,
     height: size.height,
   };
