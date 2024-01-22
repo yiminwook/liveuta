@@ -134,8 +134,9 @@ export const PopButton = styled.button`
 `;
 
 export const LiveChatBox = styled.div`
+  box-sizing: border-box;
+
   .liveChat {
-    width: 250px;
     height: 100%;
     background-color: #000000;
   }

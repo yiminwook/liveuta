@@ -44,7 +44,7 @@ const CardImage = ({ content }: CardImageProps) => {
   };
 
   return (
-    <ImageLink onClick={linkClickEvent}>
+    <ImageLink onClick={linkClickEvent} className="imageLink">
       <div>
         {imgLoaded ? (
           <Image

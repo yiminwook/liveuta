@@ -20,7 +20,7 @@ const LiveChat = ({ videoId, isDesktop }: LiveChatProp) => {
   };
 
   const openPopup = () => {
-    popupCenter('https://liveuta.vercel.app/', '_blank', 450, 750);
+    popupCenter(url, '_blank', 450, 750);
   };
 
   useEffect(() => {
