@@ -1,12 +1,12 @@
 import Player from '@/components/common/player/Player';
 import { PipBox } from '@/components/common/player/Style';
+import useResponsive from '@/hooks/useResponsive';
 import clientOnly from '@/models/clientOnly';
-import { usePathname } from 'next/navigation';
 
 const Pip = () => {
-  const isLivePath = usePathname().split('/')[1] === 'live';
+  const { isMobile } = useResponsive();
 
-  if (isLivePath) return null;
+  if (isMobile) return null;
 
   return (
     <PipBox>

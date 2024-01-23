@@ -1,4 +1,4 @@
-import Client from '@/app/search/page.client';
+import Client from '@/app/(inner)/(pip)/search/page.client';
 
 const Page = () => {
   return <Client />;

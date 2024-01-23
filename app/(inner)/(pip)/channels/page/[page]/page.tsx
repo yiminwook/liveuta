@@ -1,7 +1,7 @@
 import getPaginationRange from '@/utils/getPagenationRange';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
 import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
-import Channels from '@/app/channels/page.client';
+import Channels from '@/app/(inner)/(pip)/channels/page.client';
 import { notFound } from 'next/navigation';
 
 // export const generateStaticParams = async (): Promise<ChannelsWithPageParams[]> => {

@@ -4,7 +4,6 @@ import '@/public/theme.css';
 import '@/styles/globals.scss';
 import '@/styles/theme.scss';
 import { PropsWithChildren } from 'react';
-import ServiceLayout from '@/components/layout/ServiceLayout';
 import { GTM_TRACKING_ID } from '@/consts';
 import { DEFALUT_METADATA } from '@/consts/metaData';
 import DefaultHead from '@/configs/DefaultHead';
@@ -21,9 +20,7 @@ const RootLayout = async ({ children }: PropsWithChildren) => {
         <DefaultHead />
       </head>
       <body>
-        <Configs cookies={cookies}>
-          <ServiceLayout>{children}</ServiceLayout>
-        </Configs>
+        <Configs cookies={cookies}>{children}</Configs>
         {/* <!-- Google Tag Manager (noscript) --> */}
         <noscript>
           <iframe
