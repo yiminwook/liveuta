@@ -3,7 +3,7 @@ import { PlayerBox } from '@/components/common/player/Style';
 import { useEffect, useRef, useState } from 'react';
 import Player from '@/components/common/player/Player';
 import LiveChat from '@/components/common/player/LiveChat';
-import PlayerPlaceHolder from '@/components/common/player/PlayerPlaceHolder';
+import { PlayerPlaceholder } from '@/components/common/player/Style';
 
 interface PlayerWrapProps {
   isDesktop: boolean;
@@ -31,7 +31,7 @@ const PlayerWrap = ({ isDesktop }: PlayerWrapProps) => {
 
   return (
     <PlayerBox ref={wrapRef}>
-      {showPlaceholder ? <PlayerPlaceHolder /> : null}
+      {showPlaceholder ? <PlayerPlaceholder /> : null}
       <Player isShow={isShow} />
       <LiveChat videoId={playerValue.videoId} isDesktop={isDesktop} />
     </PlayerBox>

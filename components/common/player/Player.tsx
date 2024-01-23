@@ -4,7 +4,7 @@ import useToast from '@/hooks/useToast';
 import { useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { ImYoutube } from 'react-icons/im';
-import PlayerPlaceHolder from '@/components/common/player/PlayerPlaceHolder';
+import { PlayerPlaceholder } from '@/components/common/player/Style';
 
 interface PlayerRefProps {
   showPreview: boolean;
@@ -76,7 +76,7 @@ const Player = ({ isShow }: PlayerProps) => {
         config={{ youtube: { playerVars: { suggestedQuality: 'hd720' } } }}
         controls={true}
         onReady={() => setIsReady(() => true)}
-        fallback={<PlayerPlaceHolder />}
+        fallback={<PlayerPlaceholder />}
       />
       <PipButton className="hideButton" onClick={toggleLeft}>
         <ImYoutube size={'1.87rem'} />

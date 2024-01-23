@@ -75,31 +75,9 @@ export const PlayerDiv = styled.div<{ isShow: boolean; left: boolean }>`
     `}
 `;
 
-export const PlayerPlaceholderBox = styled.div`
+export const PlayerPlaceholder = styled.div`
   ${PlayerBase}
   ${flexCenter}
-  flex-direction: column;
-  gap: 1rem;
-  padding: 0.5rem;
-
-  & > div {
-    position: relative;
-    box-sizing: border-box;
-    margin: auto;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-
-    & > img {
-      object-fit: contain;
-    }
-  }
-
-  & > p {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #fff;
-  }
 `;
 
 export const PlayerBox = styled.div`
