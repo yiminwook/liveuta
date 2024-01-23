@@ -1,4 +1,5 @@
-import { CardPlaceHolderBox } from '@/components/common/scheduleCard/Style';
+/** @jsxImportSource @emotion/react */
+import { cardBase } from '@/components/common/scheduleCard/Style';
 
 const ITEMS = Array.from({ length: 10 }, (_, i) => i);
 
@@ -12,7 +13,7 @@ const CardPlaceHolders = ({ isMobile }: CardPlaceHolderProps) => {
   return (
     <>
       {ITEMS.map((index) => (
-        <CardPlaceHolderBox key={`schedule_card_placeHolder_${index}`} />
+        <div key={`schedule_card_placeHolder_${index}`} css={cardBase} />
       ))}
     </>
   );

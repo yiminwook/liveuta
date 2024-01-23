@@ -21,6 +21,9 @@ const nextConfig = {
     }
     return { ...config };
   },
+  compiler: {
+    emotion: true,
+  },
   // async headers() {
   //   return [
   //     {

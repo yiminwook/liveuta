@@ -1,5 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import Player from '@/components/common/player/Player';
-import { PipBox } from '@/components/common/player/Style';
+import { PipBase } from '@/components/common/player/Style';
 import useResponsive from '@/hooks/useResponsive';
 import clientOnly from '@/models/clientOnly';
 
@@ -9,9 +10,9 @@ const Pip = () => {
   if (isMobile) return null;
 
   return (
-    <PipBox>
+    <div css={PipBase}>
       <Player isShow={false} />
-    </PipBox>
+    </div>
   );
 };
 

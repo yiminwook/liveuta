@@ -18,10 +18,6 @@ export const PipBase = css`
   }
 `;
 
-export const PipBox = styled.div`
-  ${PipBase}
-`;
-
 export const PipButton = styled.button`
   ${displayNone}
   ${flexCenter}
