@@ -20,7 +20,7 @@ const LiveChat = ({ videoId, isDesktop }: LiveChatProp) => {
   };
 
   const openPopup = () => {
-    popupCenter(url, '_blank', 450, 750);
+    popupCenter(url, '_blank', 300, 600);
   };
 
   useEffect(() => {
@@ -41,9 +41,7 @@ const LiveChat = ({ videoId, isDesktop }: LiveChatProp) => {
         src={url}
         // sandbox="allow-scripts allow-same-origin allow-presentation"
         // seamless
-        onLoad={() => {
-          setIsLoaded(() => true);
-        }}
+        onLoad={() => setIsLoaded(() => true)}
       />
     </LiveChatBox>
   );
