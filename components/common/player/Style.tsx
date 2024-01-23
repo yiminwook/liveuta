@@ -1,5 +1,5 @@
 'use client';
-import { BEZIER_CURVE, displayNone } from '@/styles/var';
+import { BEZIER_CURVE, boxShadow, displayNone, flexCenter } from '@/styles/var';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
@@ -12,6 +12,7 @@ export const PipBase = css`
   transition: left 0.3s ${BEZIER_CURVE};
 
   .reactPlayer {
+    ${boxShadow}
     overflow: hidden;
     border-radius: 5px;
   }
@@ -23,6 +24,7 @@ export const PipBox = styled.div`
 
 export const PipButton = styled.button`
   ${displayNone}
+  ${flexCenter}
   position: absolute;
   top: 0;
   right: -2.5rem;
@@ -31,7 +33,7 @@ export const PipButton = styled.button`
   margin: 0;
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: 0 5px 5px;
+  border-radius: 0 5px 5px 0;
   color: #ff0000;
   background-color: #fff;
   transition: color 0.5s ${BEZIER_CURVE}, background-color 1s ${BEZIER_CURVE};
@@ -52,24 +54,23 @@ export const PlayerBase = css`
 
 export const PlayerDiv = styled.div<{ isShow: boolean; left: boolean }>`
   position: relative;
+  box-sizing: border-box;
+  border: none;
   width: 100%;
 
   .reactPlayer {
     ${PlayerBase}
   }
 
-  ${({ isShow }) => {
-    return (
-      isShow === false &&
-      css`
-        ${PipBase}
+  ${({ isShow }) =>
+    isShow === false &&
+    css`
+      ${PipBase}
 
-        & > .hideButton {
-          display: block;
-        }
-      `
-    );
-  }}
+      & > .hideButton {
+        display: block;
+      }
+    `}
 
   ${({ left }) =>
     left &&
@@ -80,10 +81,8 @@ export const PlayerDiv = styled.div<{ isShow: boolean; left: boolean }>`
 
 export const PlayerPlaceholderBox = styled.div`
   ${PlayerBase}
-  display: flex;
-  justify-content: center;
+  ${flexCenter}
   flex-direction: column;
-  align-items: center;
   gap: 1rem;
   padding: 0.5rem;
 
@@ -124,7 +123,6 @@ export const PopButton = styled.button`
   font-weight: 500;
   color: #fff;
   transition: all 0.3s ${BEZIER_CURVE};
-  display: block;
   top: 0;
   right: 0;
 
