@@ -63,7 +63,7 @@ export const PlayerDiv = styled.div<{ isShow: boolean; left: boolean }>`
       ${PipBase}
 
       & > .hideButton {
-        display: block;
+        ${flexCenter}
       }
     `}
 
