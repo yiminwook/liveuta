@@ -20,7 +20,7 @@ const LiveChat = ({ videoId, isDesktop }: LiveChatProp) => {
   };
 
   const openPopup = () => {
-    popupCenter(url, '_blank', 300, 600);
+    popupCenter(url, '_blank', 350, 700);
   };
 
   useEffect(() => {
