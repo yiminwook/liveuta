@@ -20,7 +20,6 @@ export const PipBase = css`
 
 export const PipButton = styled.button`
   ${displayNone}
-  ${flexCenter}
   position: absolute;
   top: 0;
   right: -2.5rem;
