@@ -8,7 +8,7 @@ interface ContentDocument {
     Title: string;
     URL: string;
     ChannelName: string;
-    ScheduledTime: string;
+    ScheduledTime: Date;
     ThumbnailURL: string;
     Hide: string;
     broadcastStatus: string;
@@ -23,7 +23,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | u
   try {
     const { _id, Title, URL, ChannelName, ScheduledTime, ThumbnailURL, broadcastStatus, isVideo } = doc;
     console.log(1);
-    const parsedScheduledTime = ScheduledTime.slice(0, -5) + 'Z';
+    const parsedScheduledTime = new Date(ScheduledTime).toISOString().slice(0, -5) + 'Z';
     console.log(2);
     const { timestamp, korTime } = stringToTime(parsedScheduledTime);
     console.log(parsedScheduledTime);
