@@ -8,7 +8,7 @@ import { isLoadingSheetAtom } from '@/atoms';
 const MONGODB_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
 
 // NOTE: Temporary data types set to 'any'. Modify types after transitioning to MongoDB service.
-const useMongoDB = (filter: keyof any) => {
+const useMongoDB = (filter?: keyof any) => {
   const [isLoad, setIsLoad] = useState(false);
   const [contents, setContents] = useState<any[]>([]);
   const setIsLoadingSheet = useSetAtom(isLoadingSheetAtom);
