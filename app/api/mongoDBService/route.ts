@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/models/error/handler';
-import { readDB, writeDB } from '@/models/mongoDBservice'; 
+import { readDB, writeDB } from '@/models/mongoDBService'; 
 import { parseAllData, parseScheduledData } from '@/utils/parseContentSheet';
 import { SheetAPIReturntype } from '@/types/inSheet';
 
