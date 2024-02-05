@@ -23,8 +23,8 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | u
   try {
     const { _id, Title, URL, ChannelName, ScheduledTime, ThumbnailURL, broadcastStatus, isVideo } = doc;
     console.log(doc);
-    console.log(ScheduledTime);
-    const parsedScheduledTime = new Date(ScheduledTime).toISOString();
+    console.log(doc['ScheduledTime']);
+    const parsedScheduledTime = new Date(doc['ScheduledTime']).toISOString();
     console.log(2);
     const { timestamp, korTime } = stringToTime(parsedScheduledTime);
     console.log(parsedScheduledTime);
