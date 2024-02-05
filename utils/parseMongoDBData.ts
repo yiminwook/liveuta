@@ -12,8 +12,7 @@ export const parseMongoDBData = (documents: any[]): ContentsDataType[] => {
       const { Title, URL, ChannelName, ScheduledTime, ThumbnailURL, Hide, broadcastStatus, isVideo } = doc;
       
       const scheduledTime = new Date(ScheduledTime).toISOString();
-      const timestamp = new Date(ScheduledTime).getTime();
-      const korTime = scheduledTime.toLocaleString('ko-KR');
+      const { timestamp, korTime } = stringToTime(scheduledTime);
       const interval = getInterval(timestamp);
 
       const replacedThumbnailURL = ThumbnailURL.replace(
