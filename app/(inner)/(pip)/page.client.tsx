@@ -7,7 +7,7 @@ import TopSection from '@/components/home/TopSection';
 import useResponsive from '@/hooks/useResponsive';
 import clientOnly from '@/models/clientOnly';
 import { SheetAPIReturntype } from '@/types/inSheet';
-import { useMongoDB } from '@/queries/mongoDBService';
+import useMongoDB from '@/queries/mongoDBService';
 
 interface MainProps {
   filter: keyof SheetAPIReturntype;
