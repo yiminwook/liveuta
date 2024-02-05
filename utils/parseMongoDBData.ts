@@ -20,12 +20,7 @@ export const parseMongoDBData = (documents: any[]): ContentsDataType[] => {
 
   documents.forEach(doc => {
     try {
-      const { _id, Title, URL, 
-             "Channel Name": channelName, 
-             "Scheduled Time": scheduledTime, 
-             "Thumbnail URL": thumbnailURL, 
-             Hide, broadcastStatus, isVideo 
-            } = doc;
+      const { _id, Title, URL, channelName, scheduledTime, thumbnailURL, Hide, broadcastStatus, isVideo} = doc;
       
       const scheduledTime = new Date(ScheduledTime).toISOString();
       const { timestamp, korTime } = stringToTime(scheduledTime);
