@@ -20,12 +20,13 @@ const Main = ({ filter }: MainProps) => {
   const { isMobile, isDesktop } = useResponsive();
 
   return (
-    <>
-      <NavSection filter={filter} />
-      <TopSection isLoad={isLoad} filter={filter} contents={contents} isMobile={isMobile} isDesktop={isDesktop} />
-      <ScheduleSection contents={contents} isMobile={isMobile} />
-    </>
+  <>
+    <NavSection filter={filter} />
+    {/* <TopSection isLoad={isLoad} filter={filter} contents={contents} isMobile={isMobile} isDesktop={isDesktop} /> */}
+    {/* <ScheduleSection contents={contents} isMobile={isMobile} /> */}
+  </>
   );
+
 };
 
 export default clientOnly(Main);
