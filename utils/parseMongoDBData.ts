@@ -22,6 +22,7 @@ interface DocumentList {
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | undefined => {
   try {
     const { _id, Title, URL, ChannelName, ScheduledTime, ThumbnailURL, broadcastStatus, isVideo } = doc;
+    console.log(doc);
     console.log(ScheduledTime);
     const parsedScheduledTime = new Date(ScheduledTime).toISOString();
     console.log(2);
