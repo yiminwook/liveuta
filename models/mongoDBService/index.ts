@@ -45,7 +45,7 @@ export const readDB = async (collection: string, database: string, query?: any):
         collection,
         database,
         dataSource: 'Cluster0',
-        query, // Include the query if provided
+        query, 
     };
 
     return performDatabaseOperation(collection, database, 'find', requestData);
