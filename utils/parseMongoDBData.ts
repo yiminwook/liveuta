@@ -19,15 +19,14 @@ interface DocumentList {
     documents: ContentDocument[];
 }
 
-//export const parseMongoDBData = (documents: any[]): ContentsDataType[] => {
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | null => {
   try {
-    const { _id, Title, URL, channelName, scheduledTime, thumbnailURL, Hide, broadcastStatus, isVideo } = doc;
+    const { _id, Title, URL, ChannelName, ScheduledTime, ThumbnailURL, broadcastStatus, isVideo } = doc;
     
-    const { timestamp, korTime } = stringToTime(scheduledTime);
+    const { timestamp, korTime } = stringToTime(ScheduledTime);
     const interval = getInterval(timestamp);
 
-    const replacedThumbnailURL = thumbnailURL.replace(
+    const replacedThumbnailURL = ThumbnailURL.replace(
       /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
       'mqdefault'
     );
@@ -39,7 +38,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | n
     const data: ContentsDataType = {
       title: replacedTitle,
       url: replacedUrl,
-      channelName: channelName,
+      channelName: ChannelName,
       videoId: videoId,
       timestamp: timestamp,
       thumbnailURL: replacedThumbnailURL,
