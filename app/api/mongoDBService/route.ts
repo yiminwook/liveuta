@@ -19,6 +19,7 @@ export const GET = async (_req: NextRequest) => {
         }
 
         const scheduleData = await readDB(collection, database);
+        console.log(scheduleData);
 
         let { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
         let { daily, all } = parseAllData(scheduleData); // Need to be revised
