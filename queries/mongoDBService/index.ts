@@ -17,7 +17,7 @@ const useMongoDB = () => {
     queryKey: ['mongodb'],
     queryFn: async () => {
       const result = await fetcher('/api/mongoDBService');
-      console.log('Fetcher result:', result); // Logging the result
+      //console.log('Fetcher result:', result); // Logging the result
       return result;
     },
     refetchInterval: MONGODB_REFRESH_INTERVAL,
