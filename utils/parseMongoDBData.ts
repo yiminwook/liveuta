@@ -79,6 +79,7 @@ interface ParseScheduledDataReturnType {
 
 export const parseScheduledData = (documents: any[]): ParseScheduledDataReturnType => {
   console.log(documents);
+  console.log('start parsing');
   if (!documents) throw new Error('No DataValue');
 
   const scheduled: ContentsDataType[] = [];
@@ -86,7 +87,7 @@ export const parseScheduledData = (documents: any[]): ParseScheduledDataReturnTy
   const live: ContentsDataType[] = [];
   let liveVideo = 0;
 
-  documents.forEach(doc => {
+  documents['documents'].forEach(doc => {
     const isHide = doc.Hide;
     const isStream = doc.broadcastStatus;
     // Exclude hidden contents, but include those that are currently streaming
@@ -153,7 +154,7 @@ export const parseAllData = (documents: any[]): ParseAllDataReturnType => {
   let allVideo = 0;
   const yesterday = dayjs().subtract(1, 'day').valueOf();
 
-  documents.forEach(doc => {
+  documents['documents'].forEach(doc => {
     const isHide = doc.Hide;
     const isStream = doc.broadcastStatus;
     // Hidden contents are treated as yesterday's content
