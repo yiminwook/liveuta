@@ -8,7 +8,7 @@ import { isLoadingSheetAtom } from '@/atoms';
 const MONGODB_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
 
 // NOTE: Temporary data types set to 'any'. Modify types after transitioning to MongoDB service.
-const useMongoDB = (filter?: keyof any) => {
+const useMongoDB = () => {
   const [isLoad, setIsLoad] = useState(false);
   const [contents, setContents] = useState<any[]>([]);
   const setIsLoadingSheet = useSetAtom(isLoadingSheetAtom);
@@ -26,33 +26,26 @@ const useMongoDB = (filter?: keyof any) => {
     refetchIntervalInBackground: false,
   });
 
-  const setData = () => {
-    if (!data) return;
-    const contents = [...data[filter].contents];
-    setContents(() => contents);
-  };
-
   useEffect(() => {
     if (data && status === 'success') {
-      // onSuccess
-      setData();
-      setIsLoad(() => true);
+      setContents(data.contents);
+      setIsLoad(true);
     }
-  }, [dataUpdatedAt, filter]);
+  }, [dataUpdatedAt]);
 
   useEffect(() => {
-    setIsLoadingSheet(() => isLoading);
+    setIsLoadingSheet(isLoading);
   }, [isLoading]);
 
   return {
     contents,
     data,
-    filter,
     isLoadingSheet: isLoading,
     refetchSheet: refetch,
     sheetDataUpdatedAt: dataUpdatedAt,
     isLoad,
   };
 };
+
 
 export default useMongoDB;
