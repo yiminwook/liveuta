@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 import useSheet from '@/queries/sheet';
 import NavSection from '@/components/home/NavSection';
 import ScheduleSection from '@/components/home/ScheduleSection';
@@ -6,6 +7,7 @@ import TopSection from '@/components/home/TopSection';
 import useResponsive from '@/hooks/useResponsive';
 import clientOnly from '@/models/clientOnly';
 import { SheetAPIReturntype } from '@/types/inSheet';
+import { useMongoDB } from '@/queries/mongoDBService';
 
 interface MainProps {
   filter: keyof SheetAPIReturntype;
@@ -14,6 +16,12 @@ interface MainProps {
 const Main = ({ filter }: MainProps) => {
   const { contents, isLoad } = useSheet(filter);
   const { isMobile, isDesktop } = useResponsive();
+
+  // Calling useMongoDB and logging its result once
+  useEffect(() => {
+    const mongoDBResult = useMongoDB();
+    console.log('MongoDB Result:', mongoDBResult);
+  }, []);
 
   return (
     <>
