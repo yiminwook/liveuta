@@ -18,7 +18,9 @@ interface ContentDocument {
 export const parseMongoDBData = (documents: any[]): ContentsDataType[] => {
   const parsedData: ContentsDataType[] = [];
 
+  console.log(documents);
   documents.forEach(doc => {
+    console.log(doc);
     try {
       const { _id, Title, URL, channelName, scheduledTime, thumbnailURL, Hide, broadcastStatus, isVideo } = doc;
       
