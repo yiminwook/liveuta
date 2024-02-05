@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import errorHandler from '@/models/error/handler';
 import { readDB, writeDB } from '@/models/mongoDBService'; 
 import { parseAllData, parseScheduledData } from '@/utils/parseContentSheet';
