@@ -16,7 +16,9 @@ const useMongoDB = () => {
   const { data, dataUpdatedAt, isLoading, refetch, status } = useQuery<any>({
     queryKey: ['mongodb'],
     queryFn: async () => {
-      return await fetcher('/api/mongoDBService');
+      const result = await fetcher('/api/mongoDBService');
+      console.log('Fetcher result:', result); // Logging the result
+      return result;
     },
     refetchInterval: MONGODB_REFRESH_INTERVAL,
     staleTime: 1000 * 60, // 1 minute
