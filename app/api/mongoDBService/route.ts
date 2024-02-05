@@ -54,7 +54,7 @@ export const POST = async (req: NextRequest) => {
         const requestBody: PushData = await req.json();
 
         const notiCollection = process.env.MONGODB_NOTI_COLLECTION;
-        const notiDatabase = process.env.MONGODB_NOTI_DATABASE;
+        const notiDatabase = process.env.MONGODB_SCHEDULE_DB;
 
         if (!notiCollection || !notiDatabase) {
             throw new Error('MongoDB collection or database names are not defined in environmental variables.');
