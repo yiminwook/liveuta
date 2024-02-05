@@ -97,9 +97,11 @@ export const parseScheduledData = (documents: DocumentList): ParseScheduledDataR
     if (!data) return;
     if (data.isVideo) scheduledVideo++;
     scheduled.push(data);
-    if (data.isStream) {
-      // If currently streaming, also add to the live list
-      if (data.isVideo) liveVideo++;
+    if (data.isVideo === true) scheduledVideo++;
+    scheduled.push(data);
+    if (data.isStream === 'TRUE') {
+      // 현재 라이브중이면 라이브 리스트에도 추가
+      if (data.isVideo === true) liveVideo++;
       live.push(data);
     }
   });
@@ -161,11 +163,11 @@ export const parseAllData = (documents: DocumentList): ParseAllDataReturnType =>
     if (isHide === 'TRUE' && isStream === 'NULL') doc.broadcastStatus = 'FALSE';
     const data = parseMongoDBDocument(doc); // Assuming parseMongoDBData returns an array
     if (!data) return;
-    if (data.isVideo) allVideo++;
+    if (data.isVideo === true) allVideo++;
     all.push(data);
     if (data.timestamp >= yesterday) {
       // If it's within 24 hours, add to daily list
-      if (data.isVideo) dailyVideo++;
+      if (data.isVideo === true) dailyVideo++;
       daily.push(data);
     }
   });
