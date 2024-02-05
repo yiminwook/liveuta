@@ -23,7 +23,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | n
   try {
     const { _id, Title, URL, ChannelName, ScheduledTime, ThumbnailURL, broadcastStatus, isVideo } = doc;
     
-    const { timestamp, korTime } = stringToTime(ScheduledTime);
+    const { timestamp, korTime } = stringToTime(ScheduledTime.toISOString());
     const interval = getInterval(timestamp);
 
     const replacedThumbnailURL = ThumbnailURL.replace(
