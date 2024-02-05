@@ -43,7 +43,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | n
       timestamp: timestamp,
       thumbnailURL: replacedThumbnailURL,
       korTime: korTime,
-      isStream: broadcastStatus, 
+      isStream: broadcastStatus === 'TRUE', 
       interval: interval,
       isVideo: isVideo === 'TRUE' 
     };
