@@ -46,6 +46,12 @@ export const parseMongoDBData = (documents: any[]): ContentsDataType[] => {
   return parsedData;
 };
 
+
+interface ParseScheduledDataReturnType {
+    scheduled: ContentDocument[];
+    live: ContentDocument[];
+}
+
 export const parseScheduledData = (documents: any[]): ParseScheduledDataReturnType => {
   if (!documents) throw new Error('No DataValue');
 
@@ -91,6 +97,11 @@ export const parseScheduledData = (documents: any[]): ParseScheduledDataReturnTy
   };
 };
 
+
+interface ParseAllDataReturnType {
+    daily: ContentDocument[];
+    all: ContentDocument[];
+}
 
 export const parseAllData = (documents: any[]): ParseAllDataReturnType => {
   if (!documents) throw new Error('No DataValue');
