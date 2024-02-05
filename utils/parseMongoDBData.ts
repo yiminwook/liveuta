@@ -94,7 +94,6 @@ export const parseScheduledData = (documents: DocumentList): ParseScheduledDataR
     if (isHide === 'TRUE' && isStream === 'FALSE') return;
     const data = parseMongoDBDocument(doc); // Assuming parseMongoDBData returns an array
     console.log(data);
-    throw new Error("Execution stopped forcibly");
     if (!data) return;
     if (data.isVideo) scheduledVideo++;
     scheduled.push(data);
