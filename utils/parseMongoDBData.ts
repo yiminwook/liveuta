@@ -1,4 +1,4 @@
-import { ContentsDataType } from '@/types/inSheet';
+import { ContentsDataType } from '@/types/inMongoDB';
 import { getInterval, stringToTime } from '@/utils/getTime';
 import dayjs from '@/models/dayjs';
 import { replaceParentheses } from '@/utils/regexp';
