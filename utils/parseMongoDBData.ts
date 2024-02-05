@@ -20,12 +20,12 @@ export const parseMongoDBData = (documents: any[]): ContentsDataType[] => {
 
   documents.forEach(doc => {
     try {
-      const { _id, Title, URL, channelName, scheduledTime, thumbnailURL, Hide, broadcastStatus, isVideo} = doc;
-      //const scheduledTime = new Date(ScheduledTime).toISOString();
+      const { _id, Title, URL, channelName, scheduledTime, thumbnailURL, Hide, broadcastStatus, isVideo } = doc;
+      
       const { timestamp, korTime } = stringToTime(scheduledTime);
       const interval = getInterval(timestamp);
 
-      const replacedThumbnailURL = ThumbnailURL.replace(
+      const replacedThumbnailURL = thumbnailURL.replace(
         /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
         'mqdefault'
       );
@@ -37,14 +37,14 @@ export const parseMongoDBData = (documents: any[]): ContentsDataType[] => {
       const data: ContentsDataType = {
         title: replacedTitle,
         url: replacedUrl,
-        channelName: ChannelName,
+        channelName: channelName,
         videoId: videoId,
         timestamp: timestamp,
         thumbnailURL: replacedThumbnailURL,
         korTime: korTime,
-        isStream: broadcastStatus,
+        isStream: broadcastStatus, 
         interval: interval,
-        isVideo: isVideo === 'TRUE'
+        isVideo: isVideo === 'TRUE' 
       };
 
       parsedData.push(data);
@@ -55,6 +55,7 @@ export const parseMongoDBData = (documents: any[]): ContentsDataType[] => {
 
   return parsedData;
 };
+
 
 
 interface ParseScheduledDataReturnType {
