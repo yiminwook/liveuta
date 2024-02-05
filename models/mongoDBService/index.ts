@@ -4,7 +4,7 @@ const performDatabaseOperation = async (
     collection: string,
     database: string,
     operation: 'find' | 'insert',
-    data?: any
+    optional_payload?: any
 ): Promise<any> => {
     const apiKey: string | undefined = process.env.MONGODB_API_KEY;
 
@@ -16,7 +16,7 @@ const performDatabaseOperation = async (
         collection,
         database,
         dataSource: 'Cluster0',
-        ...(data && { data }),
+        ...(optional_payload && { optional_payload }),
     };
 
     const config: AxiosRequestConfig = {
@@ -41,14 +41,7 @@ const performDatabaseOperation = async (
 };
 
 export const readDB = async (collection: string, database: string, query?: any): Promise<any> => {
-    const requestData = {
-        collection,
-        database,
-        dataSource: 'Cluster0',
-        query, 
-    };
-
-    return performDatabaseOperation(collection, database, 'find', requestData);
+    return performDatabaseOperation(collection, database, 'find', query);
 };
 
 export const writeDB = async (collection: string, database: string, newData: any): Promise<any> => {
