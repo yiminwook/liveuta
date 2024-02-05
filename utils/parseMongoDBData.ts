@@ -22,8 +22,9 @@ interface DocumentList {
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | undefined => {
   try {
     const { _id, Title, URL, ChannelName, ScheduledTime, ThumbnailURL, broadcastStatus, isVideo } = doc;
-    console.log(ScheduledTime.toISOString());
     const { timestamp, korTime } = stringToTime(ScheduledTime.toISOString());
+    console.log(timestamp);
+    console.log(korTime);
     const interval = getInterval(timestamp);
 
     const replacedThumbnailURL = ThumbnailURL.replace(
@@ -83,17 +84,14 @@ export const parseScheduledData = (documents: DocumentList): ParseScheduledDataR
   let liveVideo = 0;
 
   documents['documents'].forEach(doc => {
-    console.log(doc);
     const isHide = doc.Hide;
     const isStream = doc.broadcastStatus;
-    console.log(isHide);
-    console.log(isStream);
-    
+  
     // Exclude hidden contents, but include those that are currently streaming
     if (isHide === 'TRUE' && isStream === 'NULL') return;
     if (isHide === 'TRUE' && isStream === 'FALSE') return;
     const data = parseMongoDBDocument(doc); // Assuming parseMongoDBData returns an array
-    console.log(data);
+    //console.log(data);
     if (!data) return;
     if (data.isVideo) scheduledVideo++;
     scheduled.push(data);
