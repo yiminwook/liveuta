@@ -19,47 +19,42 @@ interface DocumentList {
     documents: ContentDocument[];
 }
 
-export const parseMongoDBData = (documents: any[]): ContentsDataType[] => {
-  const parsedData: ContentsDataType[] = [];
+//export const parseMongoDBData = (documents: any[]): ContentsDataType[] => {
+export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | null => {
+  try {
+    const { _id, Title, URL, channelName, scheduledTime, thumbnailURL, Hide, broadcastStatus, isVideo } = doc;
+    
+    const { timestamp, korTime } = stringToTime(scheduledTime);
+    const interval = getInterval(timestamp);
 
-  documents.forEach(doc => {
-    try {
-      const { _id, Title, URL, channelName, scheduledTime, thumbnailURL, Hide, broadcastStatus, isVideo } = doc;
-      
-      const { timestamp, korTime } = stringToTime(scheduledTime);
-      const interval = getInterval(timestamp);
+    const replacedThumbnailURL = thumbnailURL.replace(
+      /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
+      'mqdefault'
+    );
 
-      const replacedThumbnailURL = thumbnailURL.replace(
-        /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
-        'mqdefault'
-      );
+    const videoId = URL.replace('https://www.youtube.com/watch?v=', '');
+    const replacedTitle = replaceParentheses(Title);
+    const replacedUrl = isVideo === 'TRUE' ? `https://youtu.be/${videoId}` : URL;
 
-      const videoId = URL.replace('https://www.youtube.com/watch?v=', '');
-      const replacedTitle = replaceParentheses(Title);
-      const replacedUrl = isVideo === 'TRUE' ? `https://youtu.be/${videoId}` : URL;
+    const data: ContentsDataType = {
+      title: replacedTitle,
+      url: replacedUrl,
+      channelName: channelName,
+      videoId: videoId,
+      timestamp: timestamp,
+      thumbnailURL: replacedThumbnailURL,
+      korTime: korTime,
+      isStream: broadcastStatus, 
+      interval: interval,
+      isVideo: isVideo === 'TRUE' 
+    };
 
-      const data: ContentsDataType = {
-        title: replacedTitle,
-        url: replacedUrl,
-        channelName: channelName,
-        videoId: videoId,
-        timestamp: timestamp,
-        thumbnailURL: replacedThumbnailURL,
-        korTime: korTime,
-        isStream: broadcastStatus, 
-        interval: interval,
-        isVideo: isVideo === 'TRUE' 
-      };
-
-      parsedData.push(data);
-    } catch (error) {
-      console.log(error);
-    }
-  });
-
-  return parsedData;
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 };
-
 
 
 interface ParseScheduledDataReturnType {
@@ -99,7 +94,7 @@ export const parseScheduledData = (documents: DocumentList): ParseScheduledDataR
     // Exclude hidden contents, but include those that are currently streaming
     if (isHide === 'TRUE' && isStream === 'NULL') return;
     if (isHide === 'TRUE' && isStream === 'FALSE') return;
-    const data = parseMongoDBData([doc])[0]; // Assuming parseMongoDBData returns an array
+    const data = parseMongoDBDocument(doc); // Assuming parseMongoDBData returns an array
     console.log(data);
     throw new Error("Execution stopped forcibly");
     if (!data) return;
@@ -167,7 +162,7 @@ export const parseAllData = (documents: DocumentList): ParseAllDataReturnType =>
     const isStream = doc.broadcastStatus;
     // Hidden contents are treated as yesterday's content
     if (isHide === 'TRUE' && isStream === 'NULL') doc.broadcastStatus = 'FALSE';
-    const data = parseMongoDBData([doc])[0]; // Assuming parseMongoDBData returns an array
+    const data = parseMongoDBDocument(doc); // Assuming parseMongoDBData returns an array
     if (!data) return;
     if (data.isVideo) allVideo++;
     all.push(data);
