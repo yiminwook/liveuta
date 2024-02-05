@@ -22,7 +22,7 @@ interface DocumentList {
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | undefined => {
   try {
     const { _id, Title, URL, ChannelName, ScheduledTime, ThumbnailURL, broadcastStatus, isVideo } = doc;
-    const { timestamp, korTime } = stringToTime(ScheduledTime);
+    const { timestamp, korTime } = stringToTime(ScheduledTime.slice(0, -5) + 'Z');
     console.log(timestamp);
     console.log(korTime);
     const interval = getInterval(timestamp);
@@ -51,7 +51,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | u
 
     return data;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 };
 
