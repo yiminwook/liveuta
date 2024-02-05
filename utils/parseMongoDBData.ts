@@ -10,9 +10,9 @@ interface ContentDocument {
     ChannelName: string;
     ScheduledTime: Date;
     ThumbnailURL: string;
-    Hide: boolean;
-    broadcastStatus: boolean;
-    isVideo: boolean;
+    Hide: string;
+    broadcastStatus: string;
+    isVideo: string;
 }
 
 interface DocumentList {
