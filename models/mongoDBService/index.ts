@@ -40,8 +40,15 @@ const performDatabaseOperation = async (
     }
 };
 
-export const readDB = async (collection: string, database: string): Promise<any> => {
-    return performDatabaseOperation(collection, database, 'find');
+export const readDB = async (collection: string, database: string, query?: any): Promise<any> => {
+    const requestData = {
+        collection,
+        database,
+        dataSource: 'Cluster0',
+        query, // Include the query if provided
+    };
+
+    return performDatabaseOperation(collection, database, 'find', requestData);
 };
 
 export const writeDB = async (collection: string, database: string, newData: any): Promise<any> => {
