@@ -4,6 +4,7 @@ import errorHandler from '@/models/error/handler';
 import { readDB, writeDB } from '@/models/mongoDBService'; 
 import { parseAllData, parseScheduledData } from '@/utils/parseContentSheet';
 import { SheetAPIReturntype } from '@/types/inSheet';
+import { PushData } from '@/app/api/push/route';
 
 export const GET = async (_req: NextRequest) => {
     try {
@@ -53,6 +54,15 @@ export const GET = async (_req: NextRequest) => {
 export const POST = async (req: NextRequest) => {
     try {
         const requestBody: PushData = await req.json();
+
+        const value = [
+            requsetBody.title,
+            requsetBody.body,
+            requsetBody.imageUrl,
+            requsetBody.link,
+            requsetBody.timestamp,
+            requsetBody.token,
+        ];
 
         const notiCollection = process.env.MONGODB_NOTI_COLLECTION;
         const notiDatabase = process.env.MONGODB_SCHEDULE_DB;
