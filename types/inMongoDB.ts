@@ -5,7 +5,7 @@ export interface ContentsDataType {
   videoId: string;
   timestamp: number;
   thumbnailURL?: string;
-  isStream: isStream;
+  isStream: string;
   korTime: string;
   interval: string;
   isVideo: boolean;
