@@ -15,6 +15,10 @@ interface ContentDocument {
     isVideo: boolean;
 }
 
+interface DocumentList {
+    documents: ContentDocument[];
+}
+
 export const parseMongoDBData = (documents: any[]): ContentsDataType[] => {
   const parsedData: ContentsDataType[] = [];
 
@@ -77,9 +81,7 @@ interface ParseScheduledDataReturnType {
     };
 }
 
-export const parseScheduledData = (documents: any[]): ParseScheduledDataReturnType => {
-  console.log(documents);
-  console.log('start parsing');
+export const parseScheduledData = (documents: DocumentList): ParseScheduledDataReturnType => {
   if (!documents) throw new Error('No DataValue');
 
   const scheduled: ContentsDataType[] = [];
@@ -145,7 +147,7 @@ interface ParseAllDataReturnType {
 }
 
 
-export const parseAllData = (documents: any[]): ParseAllDataReturnType => {
+export const parseAllData = (documents: DocumentList): ParseAllDataReturnType => {
   if (!documents) throw new Error('No DataValue');
 
   const daily: ContentsDataType[] = [];
