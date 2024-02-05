@@ -34,7 +34,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | n
     const videoId = URL.replace('https://www.youtube.com/watch?v=', '');
     const replacedTitle = replaceParentheses(Title);
     const replacedUrl = isVideo === 'TRUE' ? `https://youtu.be/${videoId}` : URL;
-
+      
     const data: ContentsDataType = {
       title: replacedTitle,
       url: replacedUrl,
@@ -43,7 +43,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | n
       timestamp: timestamp,
       thumbnailURL: replacedThumbnailURL,
       korTime: korTime,
-      isStream: broadcastStatus === 'TRUE', 
+      isStream: broadcastStatus, 
       interval: interval,
       isVideo: isVideo === 'TRUE' 
     };
