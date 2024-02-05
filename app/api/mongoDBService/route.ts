@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import errorHandler from '@/models/error/handler';
 import { readDB, writeDB } from '@/models/mongoDBService'; 
-import { parseAllData, parseScheduledData } from '@/utils/parseContentSheet';
+import { parseAllData, parseScheduledData } from '@/utils/parseMongoDBData';
 import { SheetAPIReturntype } from '@/types/inSheet';
 import { PushData } from '@/app/api/push/route';
 
