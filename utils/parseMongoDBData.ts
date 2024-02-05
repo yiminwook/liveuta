@@ -90,6 +90,7 @@ export const parseScheduledData = (documents: DocumentList): ParseScheduledDataR
   let liveVideo = 0;
 
   documents['documents'].forEach(doc => {
+    console.log(doc);
     const isHide = doc.Hide;
     const isStream = doc.broadcastStatus;
     // Exclude hidden contents, but include those that are currently streaming
