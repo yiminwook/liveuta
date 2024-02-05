@@ -19,7 +19,7 @@ interface DocumentList {
     documents: ContentDocument[];
 }
 
-export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | null => {
+export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | undefined => {
   try {
     const { _id, Title, URL, ChannelName, ScheduledTime, ThumbnailURL, broadcastStatus, isVideo } = doc;
     
@@ -51,7 +51,6 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | n
     return data;
   } catch (error) {
     console.log(error);
-    return null;
   }
 };
 
