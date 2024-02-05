@@ -55,15 +55,6 @@ export const POST = async (req: NextRequest) => {
     try {
         const requestBody: PushData = await req.json();
 
-        const value = [
-            requsetBody.title,
-            requsetBody.body,
-            requsetBody.imageUrl,
-            requsetBody.link,
-            requsetBody.timestamp,
-            requsetBody.token,
-        ];
-
         const notiCollection = process.env.MONGODB_NOTI_COLLECTION;
         const notiDatabase = process.env.MONGODB_SCHEDULE_DB;
 
