@@ -1,15 +1,31 @@
-// Import necessary functions and types
 import { ContentsDataType } from '@/types/inSheet';
 import { getInterval, stringToTime } from '@/utils/getTime';
 import dayjs from '@/models/dayjs';
 import { replaceParentheses } from '@/utils/regexp';
+
+interface ContentDocument {
+    _id: string;
+    Title: string;
+    URL: string;
+    ChannelName: string;
+    ScheduledTime: Date;
+    ThumbnailURL: string;
+    Hide: boolean;
+    broadcastStatus: boolean;
+    isVideo: boolean;
+}
 
 export const parseMongoDBData = (documents: any[]): ContentsDataType[] => {
   const parsedData: ContentsDataType[] = [];
 
   documents.forEach(doc => {
     try {
-      const { Title, URL, ChannelName, ScheduledTime, ThumbnailURL, Hide, broadcastStatus, isVideo } = doc;
+      const { _id, Title, URL, 
+             "Channel Name": channelName, 
+             "Scheduled Time": scheduledTime, 
+             "Thumbnail URL": thumbnailURL, 
+             Hide, broadcastStatus, isVideo 
+            } = doc;
       
       const scheduledTime = new Date(ScheduledTime).toISOString();
       const { timestamp, korTime } = stringToTime(scheduledTime);
