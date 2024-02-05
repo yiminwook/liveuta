@@ -14,14 +14,10 @@ interface MainProps {
 }
 
 const Main = ({ filter }: MainProps) => {
+  const mongoDBResult = useMongoDB();
+  console.log('MongoDB Result:', mongoDBResult);
   const { contents, isLoad } = useSheet(filter);
   const { isMobile, isDesktop } = useResponsive();
-
-  // Calling useMongoDB and logging its result once
-  useEffect(() => {
-    const mongoDBResult = useMongoDB();
-    console.log('MongoDB Result:', mongoDBResult);
-  }, []);
 
   return (
     <>
