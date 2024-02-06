@@ -33,7 +33,7 @@ const NavSection = ({ filter }: NavSectionProps) => {
     <section className={home['nav-section']}>
       <HorizonScrollBox className={home['nav-scroll-box']}>
         <NavTap />
-        {// <NavSelectBox filter={filter} />}
+        <NavSelectBox filter={filter} />
       </HorizonScrollBox>
     </section>
   );
