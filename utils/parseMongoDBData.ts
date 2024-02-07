@@ -21,7 +21,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | u
 
     const videoId = doc.URL.replace('https://www.youtube.com/watch?v=', '');
     const replacedTitle = replaceParentheses(doc.Title);
-    const replacedUrl = doc.isVideo === 'TRUE' ? `https://youtu.be/${doc.videoId}` : doc.URL;
+    const replacedUrl = doc.isVideo === 'TRUE' ? `https://youtu.be/${videoId}` : doc.URL;
       
     const data: ContentsDataType = {
       title: replacedTitle,
