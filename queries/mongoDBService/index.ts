@@ -8,8 +8,7 @@ import { ContentsDataType, MongoDBAPIReturntype } from '@/types/inMongoDB';
 
 const MONGODB_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
 
-// NOTE: Temporary data types set to 'any'. Modify types after transitioning to MongoDB service.
-const useMongoDB = () => {
+const useMongoDB = (filter: keyof MongoDBAPIReturntype) => {
   const [isLoad, setIsLoad] = useState(false);
   const [contents, setContents] = useState<ContentsDataType[]>([]);
   const setIsLoadingSheet = useSetAtom(isLoadingSheetAtom);
