@@ -3,7 +3,9 @@ import { ImageLink } from '@/components/common/scheduleCard/Style';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
 import useResponsive from '@/hooks/useResponsive';
 import altImage from '@/images/thumbnail_alt_img.png';
-import { ContentsDataType } from '@/types/inSheet';
+//import { ContentsDataType } from '@/types/inSheet';
+import { ContentsDataType } from '@/types/inMongoDB';
+
 import { gtagClick } from '@/utils/gtag';
 import { useSetAtom } from 'jotai';
 import Image from 'next/image';
