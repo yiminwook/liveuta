@@ -23,7 +23,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | u
   try {
     const Title = doc['Title'];
     const URL = doc['URL'];
-    const ChannelName = doc['Channel Name'];
+    const ChannelName = doc['ChannelName'];
     const ScheduledTime = doc['Scheduled Time'];
     const ThumbnailURL = doc['Thumbnail URL'];
     const broadcastStatus = doc['broadcastStatus'];
