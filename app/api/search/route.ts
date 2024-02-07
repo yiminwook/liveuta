@@ -1,4 +1,4 @@
-import { ContentDocument, ChannelDocument, DocumentList } from '@/types/inMongoDB';
+import { ContentDocument, ChannelDocument, DocumentList, ContentsDataType } from '@/types/inMongoDB';
 import { parseMongoDBDocument } from '@/utils/parseMongoDBData';
 import { readDB } from '@/models/mongoDBService/';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
@@ -11,7 +11,7 @@ import { SEARCH_ITEMS_SIZE } from '@/consts';
 
 export interface SearchResponseType {
   contents: ContentsDataType[];
-  channels: ChannelsDataType[];
+  channels: any; // Set temporarily to accept any type
 }
 
 export const GET = async (req: NextRequest) => {
