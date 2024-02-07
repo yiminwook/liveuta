@@ -11,7 +11,7 @@ import { SEARCH_ITEMS_SIZE } from '@/consts';
 
 export interface SearchResponseType {
   contents: ContentsDataType[];
-  channels: any; // Set temporarily to accept any type
+  channels: ChannelsDataType[];
 }
 
 export const GET = async (req: NextRequest) => {
