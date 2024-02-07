@@ -39,7 +39,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | u
 
     return data;
   } catch (error) {
-    //console.log(error);
+    console.log(error);
   }
 };
 
@@ -61,8 +61,6 @@ export const parseScheduledData = (documents: DocumentList): ParseScheduledDataR
     const data = parseMongoDBDocument(doc); // Assuming parseMongoDBData returns an array
     //console.log(data);
     if (!data) return;
-    if (data.isVideo) scheduledVideo++;
-    scheduled.push(data);
     if (data.isVideo === true) scheduledVideo++;
     scheduled.push(data);
     if (data.isStream === 'TRUE') {
