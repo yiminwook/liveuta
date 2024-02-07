@@ -37,13 +37,11 @@ export const GET = async (req: NextRequest) => {
     const contentResults = await readDB('ScheduleDB', 'upcoming_streams', { "ChannelName": { $regex: regex, $options: "i" } });
 
     const searchedContents: ContentsDataType[] = [];
-    contentResults['documents'].forEach((doc => {
+    contentResults['documents'].forEach(doc => {
       const data = parseMongoDBDocument(doc);
       if (!data) return;
       searchedContents.push(data);
     });
-    searchedContents.sort((a, b) => b.timestamp - a.timestamp); //최신순
-
     const searchData: ChannelSheetDataType = {};
     //channelResults['documents'].forEach(({ _id, channel_id, name_kor, channel_addr, handle_name, waiting }) => {
     //  if (Object.keys(searchData).length >= SEARCH_ITEMS_SIZE) return;
