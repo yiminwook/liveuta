@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import errorHandler from '@/models/error/handler';
 import { readDB, writeDB } from '@/models/mongoDBService'; 
 import { parseAllData, parseScheduledData } from '@/utils/parseMongoDBData';
-import { SheetAPIReturntype } from '@/types/inSheet';
+import { MongoDBAPIReturntype } from '@/types/inMongoDB';
 import { PushData } from '@/app/api/push/route';
 
 export const GET = async (_req: NextRequest) => {
@@ -42,7 +42,7 @@ export const GET = async (_req: NextRequest) => {
         }
 
         // Need to revise SheetAPIReturntype
-        return NextResponse.json<SheetAPIReturntype | undefined>({ scheduled, live, daily, all }, { status: 200 });
+        return NextResponse.json<MongoDBAPIReturntype | undefined>({ scheduled, live, daily, all }, { status: 200 });
     } catch (error) {
         console.error(error);
         const { status, message } = errorHandler(error);
