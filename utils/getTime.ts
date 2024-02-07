@@ -25,7 +25,6 @@ export const getInterval = (scheduledTimeStamp: number): string => {
  * EX: "2016-03-29T06:54:53Z"
  */
 export const stringToTime = (stringTime: string) => {
-  console.log(stringTime);
   const time = dayjs(stringTime);
   const timestamp = time.valueOf();
   const korTime = time.format('M월 DD일 (ddd) A hh:mm');
