@@ -5,7 +5,8 @@ export type {
     DataReturnType,
     ParseAllDataReturnType,
     ParseScheduledDataReturnType,
-    ContentsDataType
+    ContentsDataType,
+    MongoDBAPIReturntype
 };
 
 interface ContentDocument {
@@ -56,4 +57,11 @@ interface ContentsDataType {
     korTime: string;
     interval: string;
     isVideo: boolean;
+}
+
+interface MongoDBAPIReturntype {
+  scheduled: DataReturnType;
+  live: DataReturnType;
+  daily: DataReturnType;
+  all: DataReturnType;
 }
