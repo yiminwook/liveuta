@@ -21,8 +21,8 @@ interface DocumentList {
 
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | undefined => {
   try {
-    console.log(ScheduledTime)
-    const parsedScheduledTime = new Date(ScheduledTime).toISOString();
+    console.log(doc.ScheduledTime)
+    const parsedScheduledTime = new Date(doc.ScheduledTime).toISOString();
     console.log(2);
     const { timestamp, korTime } = stringToTime(parsedScheduledTime);
     console.log(parsedScheduledTime);
@@ -30,24 +30,24 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | u
     console.log(korTime);
     const interval = getInterval(timestamp);
 
-    const replacedThumbnailURL = ThumbnailURL.replace(
+    const replacedThumbnailURL = doc.ThumbnailURL.replace(
       /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
       'mqdefault'
     );
 
-    const videoId = URL.replace('https://www.youtube.com/watch?v=', '');
-    const replacedTitle = replaceParentheses(Title);
-    const replacedUrl = isVideo === 'TRUE' ? `https://youtu.be/${videoId}` : URL;
+    const videoId = doc.URL.replace('https://www.youtube.com/watch?v=', '');
+    const replacedTitle = replaceParentheses(doc.Title);
+    const replacedUrl = doc.isVideo === 'TRUE' ? `https://youtu.be/${doc.videoId}` : doc.URL;
       
     const data: ContentsDataType = {
       title: replacedTitle,
       url: replacedUrl,
-      channelName: ChannelName,
-      videoId: videoId,
+      channelName: doc.ChannelName,
+      videoId: doc.videoId,
       timestamp: timestamp,
       thumbnailURL: replacedThumbnailURL,
       korTime: korTime,
-      isStream: broadcastStatus, 
+      isStream: doc.broadcastStatus, 
       interval: interval,
       isVideo: isVideo === 'TRUE' 
     };
