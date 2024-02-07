@@ -5,15 +5,8 @@ import { replaceParentheses } from '@/utils/regexp';
 
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | undefined => {
   try {
-    console.log("here");
-    console.log(doc);
-    console.log(doc.ScheduledTime);
     const parsedScheduledTime = new Date(doc.ScheduledTime).toISOString();
-    console.log("there");
     const { timestamp, korTime } = stringToTime(parsedScheduledTime);
-    console.log(parsedScheduledTime);
-    console.log(timestamp);
-    console.log(korTime);
     const interval = getInterval(timestamp);
 
     const replacedThumbnailURL = doc.ThumbnailURL.replace(
