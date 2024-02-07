@@ -65,3 +65,5 @@ interface MongoDBAPIReturntype {
   daily: DataReturnType;
   all: DataReturnType;
 }
+
+export type isStream = 'TRUE' | 'NULL' | 'FALSE';
