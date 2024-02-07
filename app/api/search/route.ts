@@ -37,18 +37,18 @@ export const GET = async (req: NextRequest) => {
     const contentResults = await readDB('ScheduleDB', 'upcoming_streams', { "ChannelName": { $regex: regex, $options: "i" } });
 
     const searchedContents: ContentsDataType[] = [];
-    contentResults['documents'].forEach(doc => {
+    contentResults['documents'].forEach((doc:ContentDocument) => {
       const data = parseMongoDBDocument(doc);
       if (!data) return;
       searchedContents.push(data);
     });
     const searchData: ChannelSheetDataType = {};
-    //channelResults['documents'].forEach(({ _id, channel_id, name_kor, channel_addr, handle_name, waiting }) => {
-    //  if (Object.keys(searchData).length >= SEARCH_ITEMS_SIZE) return;
-    //  if (searchData[channel_id]) return;
-    //  searchData[channel_id] = { channel_id, name_kor, channel_addr };
-    //});
-    //const combinedSearchDataValues = await combineChannelData(searchData);
+    channelResults['documents'].forEach(({ _id, channel_id, name_kor, channel_addr, handle_name, waiting }) => {
+      if (Object.keys(searchData).length >= SEARCH_ITEMS_SIZE) return;
+      if (searchData[channel_id]) return;
+      searchData[channel_id] = { channel_id, name_kor, channel_addr };
+    });
+    const combinedSearchDataValues = await combineChannelData(searchData);
 
     
     return NextResponse.json<SearchResponseType>(
