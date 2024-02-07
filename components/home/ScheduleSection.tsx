@@ -1,4 +1,4 @@
-import { ContentsDataType } from '@/types/inSheet';
+import { ContentsDataType } from '@/types/inMongoDB';
 import ScheduleCard from '@/components/common/scheduleCard/Card';
 import { useEffect, useMemo, useState } from 'react';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/consts';
