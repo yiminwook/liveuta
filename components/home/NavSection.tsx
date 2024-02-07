@@ -3,7 +3,8 @@ import NavLink from '@/components/common/NavLink';
 import React, { ReactNode, memo } from 'react';
 import HorizonScrollBox from '@/components/common/HorizonScrollBox';
 import NavSelectBox from '@/components/home/NavSelectBox';
-import { SheetAPIReturntype } from '@/types/inSheet';
+//import { SheetAPIReturntype } from '@/types/inSheet';
+import { MongoDBAPIReturntype  } from '@/types/inMongoDB';
 
 const NavTapLink = ({ href, text }: { href: string; text: ReactNode }) => {
   return (
@@ -25,7 +26,7 @@ const NavTap = () => {
 };
 
 interface NavSectionProps {
-  filter: keyof SheetAPIReturntype;
+  filter: keyof MongoDBAPIReturntype;
 }
 
 const NavSection = ({ filter }: NavSectionProps) => {
