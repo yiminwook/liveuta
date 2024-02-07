@@ -5,9 +5,10 @@ import { replaceParentheses } from '@/utils/regexp';
 
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | undefined => {
   try {
-    console.log(doc.ScheduledTime)
+    console.log("here");
+    console.log(doc.ScheduledTime);
     const parsedScheduledTime = new Date(doc.ScheduledTime).toISOString();
-    console.log(2);
+    console.log("there");
     const { timestamp, korTime } = stringToTime(parsedScheduledTime);
     console.log(parsedScheduledTime);
     console.log(timestamp);
