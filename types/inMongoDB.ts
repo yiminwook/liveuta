@@ -6,8 +6,18 @@ export type {
     ParseAllDataReturnType,
     ParseScheduledDataReturnType,
     ContentsDataType,
-    MongoDBAPIReturntype
+    MongoDBAPIReturntype,
+    ChannelDocument
 };
+
+interface ChannelDocument {
+    _id: string;
+    channel_id: string;
+    name_kor: string;
+    channel_addr: string;
+    handle_name: string;
+    waiting: boolean;
+}
 
 interface ContentDocument {
     _id: string;
