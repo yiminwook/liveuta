@@ -27,7 +27,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | u
       title: replacedTitle,
       url: replacedUrl,
       channelName: doc.ChannelName,
-      videoId: doc.videoId,
+      videoId: videoId,
       timestamp: timestamp,
       thumbnailURL: replacedThumbnailURL,
       korTime: korTime,
@@ -90,26 +90,6 @@ export const parseScheduledData = (documents: DocumentList): ParseScheduledDataR
     },
   };
 };
-
-
-interface ParseAllDataReturnType {
-    daily: {
-        contents: any[];
-        length: {
-            total: number;
-            video: number;
-            stream: number;
-        };
-    };
-    all: {
-        contents: any[];
-        length: {
-            total: number;
-            video: number;
-            stream: number;
-        };
-    };
-}
 
 
 export const parseAllData = (documents: DocumentList): ParseAllDataReturnType => {
