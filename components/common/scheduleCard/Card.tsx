@@ -2,7 +2,8 @@
 import CardDesc from '@/components/common/scheduleCard/CardDesc';
 import CardImage from '@/components/common/scheduleCard/CardImage';
 import { Card } from '@/components/common/scheduleCard/Style';
-import { ContentsDataType } from '@/types/inSheet';
+//import { ContentsDataType } from '@/types/inSheet';
+import { ContentsDataType } from '@/types/inMongoDB';
 import { cx } from '@/utils';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
