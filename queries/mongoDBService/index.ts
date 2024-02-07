@@ -16,7 +16,8 @@ const useMongoDB = (filter: keyof MongoDBAPIReturntype) => {
   const { data, dataUpdatedAt, isLoading, refetch, status } = useQuery<MongoDBAPIReturntype>({
     queryKey: ['mongodb'],
     queryFn: async () => {
-      return result = await fetcher('/api/mongoDBService');
+      const result = await fetcher('/api/mongoDBService');
+      return result as MongoDBAPIReturntype;
     },
     refetchInterval: MONGODB_REFRESH_INTERVAL,
     staleTime: 1000 * 60, // 1 minute
