@@ -40,6 +40,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | u
     return data;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
