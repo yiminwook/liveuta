@@ -72,7 +72,7 @@ export const POST = async (req: NextRequest) => {
 
         return NextResponse.json({ message: '알림이 성공적으로 등록되었습니다.' }, { status: 201 });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         const { status, message } = errorHandler(error);
         return NextResponse.json({ message: message }, { status });
     }
