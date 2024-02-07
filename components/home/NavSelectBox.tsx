@@ -1,23 +1,25 @@
 import home from '@/components/home/Home.module.scss';
 import React, { useState } from 'react';
-import useSheet from '@/queries/sheet';
+//import useSheet from '@/queries/sheet';
 import Cookies from 'universal-cookie';
-import { SheetAPIReturntype } from '@/types/inSheet';
+//import { SheetAPIReturntype } from '@/types/inSheet';
 import { cx } from '@/utils';
 import { BiArrowFromLeft } from 'react-icons/bi';
 import { BsSliders } from 'react-icons/bs';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { useSelectAtom } from '@/atoms';
 import { SelectType } from '@/types';
+import useMongoDB from '@/queries/mongoDBService';
+import { MongoDBAPIReturntype } from '@/types/inMongoDB';
 
 interface NavSelectBoxProps {
-  filter: keyof SheetAPIReturntype;
+  filter: keyof MongoDBAPIReturntype;
 }
 
 const NavSelectBox = ({ filter }: NavSelectBoxProps) => {
   const [active, setActive] = useState(false);
   const [select, setSelect] = useSelectAtom();
-  const { refetchSheet, sheetData } = useSheet(filter);
+  const { refetchSheet, sheetData } = useMongoDB(filter);
 
   const handleSelect = async (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
@@ -34,6 +36,7 @@ const NavSelectBox = ({ filter }: NavSelectBoxProps) => {
     }
   };
 
+  // didnt explicitly change name sheetData in... somewhere
   const totalText = `전체: ${sheetData?.[filter]?.length?.total || 0}`;
   const streamText = `방송: ${sheetData?.[filter]?.length?.stream || 0}`;
   const videoText = `동영상: ${sheetData?.[filter]?.length?.video || 0}`;
