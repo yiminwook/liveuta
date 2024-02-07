@@ -1,4 +1,4 @@
-import { * } from '@/types/inMongoDB';
+import { ContentDocument, DocumentList, ContentsLength, DataReturnType, ParseAllDataReturnType, ParseScheduledDataReturnType, ContentsDataType, isStream  } from '@/types/inMongoDB';
 import { getInterval, stringToTime } from '@/utils/getTime';
 import dayjs from '@/models/dayjs';
 import { replaceParentheses } from '@/utils/regexp';
