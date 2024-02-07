@@ -26,9 +26,9 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | u
       timestamp: timestamp,
       thumbnailURL: replacedThumbnailURL,
       korTime: korTime,
-      isStream: doc.broadcastStatus, 
+      isStream: doc.broadcastStatus as isStream,
       interval: interval,
-      isVideo: doc.isVideo === 'TRUE' 
+      isVideo: doc.isVideo === 'TRUE' ? true : false,
     };
 
     return data;
