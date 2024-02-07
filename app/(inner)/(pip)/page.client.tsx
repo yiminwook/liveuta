@@ -21,8 +21,8 @@ const Main = ({ filter }: MainProps) => {
   return (
   <>
     <NavSection filter={filter} />
-    {/* <TopSection isLoad={isLoad} filter={filter} contents={contents} isMobile={isMobile} isDesktop={isDesktop} /> */}
-    {/* <ScheduleSection contents={contents} isMobile={isMobile} /> */}
+    <TopSection isLoad={isLoad} filter={filter} contents={contents} isMobile={isMobile} isDesktop={isDesktop} />
+    <ScheduleSection contents={contents} isMobile={isMobile} />
   </>
   );
 
