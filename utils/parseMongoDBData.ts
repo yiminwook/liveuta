@@ -6,6 +6,7 @@ import { replaceParentheses } from '@/utils/regexp';
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | undefined => {
   try {
     console.log("here");
+    console.log(doc);
     console.log(doc.ScheduledTime);
     const parsedScheduledTime = new Date(doc.ScheduledTime).toISOString();
     console.log("there");
