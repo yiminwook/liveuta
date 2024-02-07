@@ -53,7 +53,7 @@ interface ContentsDataType {
     videoId: string;
     timestamp: number;
     thumbnailURL?: string;
-    isStream: string;
+    isStream: isStream;
     korTime: string;
     interval: string;
     isVideo: boolean;
