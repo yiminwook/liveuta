@@ -1,4 +1,5 @@
-import { isStream } from '@/types/inSheet';
+//import { isStream } from '@/types/inSheet';
+import { isStream } from '@/types/inMongoDB';
 import { StatusBox } from '@/components/common/scheduleCard/Style';
 import CardViewer from '@/components/common/scheduleCard/CardViewer';
 
