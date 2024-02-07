@@ -13,7 +13,7 @@ interface ContentDocument {
     Title: string;
     URL: string;
     ChannelName: string;
-    ScheduledTime: Date;
+    ScheduledTime: string;
     ThumbnailURL: string;
     Hide: string;
     broadcastStatus: string;
