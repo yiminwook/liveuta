@@ -42,11 +42,12 @@ export const GET = async (req: NextRequest) => {
       if (!data) return;
       searchedContents.push(data);
     });
+    
     const searchData: ChannelSheetDataType = {};
     channelResults['documents'].forEach(({ _id, channel_id, name_kor, channel_addr, handle_name, waiting }:ChannelDocument) => {
       if (Object.keys(searchData).length >= SEARCH_ITEMS_SIZE) return;
       if (searchData[channel_id]) return;
-      searchData[channel_id] = { channel_id, name_kor, channel_addr };
+      searchData[channel_id] = { uid: channel_id, channelName: name_kor, url: channel_addr };
     });
     const combinedSearchDataValues = await combineChannelData(searchData);
 
@@ -54,7 +55,7 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json<SearchResponseType>(
       {
         contents: searchedContents,
-        channels: [],//combinedSearchDataValues,
+        channels: combinedSearchDataValues,
       },
       { status: 200 },
     );
