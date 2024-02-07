@@ -19,15 +19,9 @@ export const GET = async (_req: NextRequest) => {
         }
 
         const scheduleData = await readDB(collection, database);
-        //console.log(scheduleData);
 
         let { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
         let { daily, all } = parseAllData(scheduleData); // Need to be revised
-
-        console.log(scheduled);
-        console.log(live);
-        console.log(daily);
-        console.log(all);
 
         // Not sure, but maybe need to be revised
         switch (cookie) {
