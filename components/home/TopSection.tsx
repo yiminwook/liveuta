@@ -1,5 +1,7 @@
 import PlayerWrap from '@/components/common/player/PlayerWrap';
-import { ContentsDataType, SheetAPIReturntype } from '@/types/inSheet';
+//import { ContentsDataType, SheetAPIReturntype } from '@/types/inSheet';
+import { ContentsDataType, MongoDBAPIReturntype } from '@/types/inMongoDB';
+
 import styled from '@emotion/styled';
 
 const TopSectionBox = styled.section`
