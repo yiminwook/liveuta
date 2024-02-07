@@ -1,23 +1,7 @@
-import { ContentsDataType } from '@/types/inMongoDB';
+import { ContentDocument, DocumentList, ContentsLength, DataReturnType, ParseAllDataReturnType, ParseScheduledDataReturnType, ContentsDataType } from '@/types/inMongoDB';
 import { getInterval, stringToTime } from '@/utils/getTime';
 import dayjs from '@/models/dayjs';
 import { replaceParentheses } from '@/utils/regexp';
-
-interface ContentDocument {
-    _id: string;
-    Title: string;
-    URL: string;
-    ChannelName: string;
-    ScheduledTime: Date;
-    ThumbnailURL: string;
-    Hide: string;
-    broadcastStatus: string;
-    isVideo: string;
-}
-
-interface DocumentList {
-    documents: ContentDocument[];
-}
 
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | undefined => {
   try {
@@ -57,26 +41,6 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | u
     //console.log(error);
   }
 };
-
-
-interface ParseScheduledDataReturnType {
-    scheduled: {
-        contents: any[];
-        length: {
-            total: number;
-            video: number;
-            stream: number;
-        };
-    };
-    live: {
-        contents: any[];
-        length: {
-            total: number;
-            video: number;
-            stream: number;
-        };
-    };
-}
 
 export const parseScheduledData = (documents: DocumentList): ParseScheduledDataReturnType => {
   if (!documents) throw new Error('No DataValue');
