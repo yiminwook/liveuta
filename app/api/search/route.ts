@@ -33,10 +33,10 @@ export const GET = async (req: NextRequest) => {
     }
 
     // Execute both database queries concurrently
-    // const regexforDBQuery = { $regex: replacedQuery, $options: "i" };
+    const regexforDBQuery = { $regex: replacedQuery, $options: "i" };
     const [channelResults, contentResults] = await Promise.all([
-      readDB('channel_id_names', 'ManagementDB', { filter: { "name_kor": replacedQuery } }),
-      readDB('upcoming_streams', 'ScheduleDB', { filter: { "ChannelName": replacedQuery } })
+      readDB('channel_id_names', 'ManagementDB', { filter: { "name_kor": regexforDBQuery } }),
+      readDB('upcoming_streams', 'ScheduleDB', { filter: { "ChannelName": regexforDBQuery } })
     ]);
 
     const searchedContents: ContentsDataType[] = [];
