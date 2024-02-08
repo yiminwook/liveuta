@@ -1,11 +1,22 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-const performDatabaseOperation = async (
-    collection: string,
-    database: string,
-    operation: 'find' | 'insert',
-    optional_payload?: any
-): Promise<any> => {
+interface PerformDatabaseOptions {
+    collection: string;
+    database: string;
+    operation: 'find' | 'insert';
+    filter?: any;
+    projection?: any;
+    document?: any;
+}
+
+const performDatabaseOperation = async ({
+    collection,
+    database,
+    operation,
+    filter,
+    projection,
+    document,
+}: PerformDatabaseOptions): Promise<any> => {
     const apiKey: string | undefined = process.env.MONGODB_API_KEY;
 
     if (!apiKey) {
@@ -16,13 +27,10 @@ const performDatabaseOperation = async (
         collection,
         database,
         dataSource: 'Cluster0',
+        filter,
+        projection,
+        document,
     };
-
-    if (operation === 'find' && optional_payload) {
-        requestData.query = optional_payload; // For find operation, nest the query under 'query'
-    } else if (operation === 'insert' && optional_payload) {
-        requestData = { ...requestData, ...optional_payload }; // For insert operation, merge payloads directly
-    }
 
     const config: AxiosRequestConfig = {
         method: 'post',
@@ -45,10 +53,29 @@ const performDatabaseOperation = async (
     }
 };
 
-export const readDB = async (collection: string, database: string, query?: any): Promise<any> => {
-    return performDatabaseOperation(collection, database, 'find', query);
+export const readDB = async (
+    collection: string,
+    database: string,
+    options?: { filter?: any; projection?: any }
+): Promise<any> => {
+    return performDatabaseOperation({
+        collection,
+        database,
+        operation: 'find',
+        filter: options?.filter,
+        projection: options?.projection,
+    });
 };
 
-export const writeDB = async (collection: string, database: string, newData: any): Promise<any> => {
-    return performDatabaseOperation(collection, database, 'insert', newData);
+export const writeDB = async (
+    collection: string,
+    database: string,
+    options?: { document?: any }
+): Promise<any> => {
+    return performDatabaseOperation({
+        collection,
+        database,
+        operation: 'insert',
+        document: options?.document,
+    });
 };
