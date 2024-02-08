@@ -16,7 +16,7 @@ const performDatabaseOperation = async (
         collection,
         database,
         dataSource: 'Cluster0',
-        ...(optional_payload && { optional_payload }),
+        ...(optional_payload && { ...optional_payload }),
     };
 
     const config: AxiosRequestConfig = {
