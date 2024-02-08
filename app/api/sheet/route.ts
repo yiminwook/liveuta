@@ -1,7 +1,6 @@
 import { SheetAPIReturntype } from '@/types/inSheet';
 import { getSheet } from '@/models/sheet';
 import { parseAllData, parseScheduledData } from '@/utils/parseContentSheet';
-import { serverEnvConfig } from '@/configs/envConfig';
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/models/error/handler';
 import { cookies } from 'next/headers';
@@ -9,14 +8,16 @@ import { PushData } from '@/app/api/push/route';
 import { google } from 'googleapis';
 import { jwtAuth } from '@/models/firebase/admin';
 
-const { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE, PUSH_SHEET_ID, PUSH_SHEET_RANGE } = serverEnvConfig();
-
 export const GET = async (_req: NextRequest) => {
   try {
     const cookieStore = cookies();
     const cookie = cookieStore.get('select')?.value || 'all';
 
-    const sheetData = await getSheet({ spreadsheetId: CONTENTS_SHEET_ID, range: CONTENTS_SHEET_RANGE });
+    const sheetData = await getSheet({
+      spreadsheetId: process.env.CONTENTS_SHEET_ID,
+      range: process.env.CONTENTS_SHEET_RANGE,
+    });
+
     let { scheduled, live } = parseScheduledData(sheetData);
     let { daily, all } = parseAllData(sheetData);
 
@@ -59,8 +60,8 @@ export const POST = async (req: NextRequest) => {
     ];
 
     const sheetData = await getSheet({
-      spreadsheetId: PUSH_SHEET_ID,
-      range: PUSH_SHEET_RANGE,
+      spreadsheetId: process.env.PUSH_SHEET_ID,
+      range: process.env.PUSH_SHEET_RANGE,
     });
 
     if (sheetData.values === null || sheetData.values === undefined) {
@@ -82,8 +83,8 @@ export const POST = async (req: NextRequest) => {
 
     const res = await sheetService.spreadsheets.values.update({
       access_token: accessToken.token,
-      spreadsheetId: PUSH_SHEET_ID,
-      range: PUSH_SHEET_RANGE + '!A' + lastRow.toString(),
+      spreadsheetId: process.env.PUSH_SHEET_ID,
+      range: process.env.PUSH_SHEET_RANGE + '!A' + lastRow.toString(),
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         majorDimension: 'rows',

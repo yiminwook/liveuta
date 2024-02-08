@@ -4,13 +4,14 @@ import { DEFAULT_BLUR_BASE64 } from '@/consts';
 import setlist from '@/components/setlist/Setlist.module.scss';
 import { stringToTime } from '@/utils/getTime';
 import { replaceParentheses } from '@/utils/regexp';
+import dayjs from '@/models/dayjs';
 
 interface SetlistCardProps {
   item: SearchCommentItemType;
 }
 
 const SetlistCard = ({ item }: SetlistCardProps) => {
-  const { korTime } = stringToTime(item.published_at);
+  const { korTime } = stringToTime(dayjs(item.published_at));
 
   const title = replaceParentheses(item.title);
   return (

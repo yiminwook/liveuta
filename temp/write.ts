@@ -20,7 +20,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<SheetAPIReturnt
       valueInputOption: 'RAW',
       access_token: '',
     });
-    console.log(result.data);
   } catch (err) {
     console.error(err);
     return res.status(400).end();

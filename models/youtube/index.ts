@@ -1,8 +1,5 @@
-import { serverEnvConfig } from '@/configs/envConfig';
 import { google } from 'googleapis';
 import { customFetchCached } from '@/models/customFetch';
-
-const { GOOGLE_API_KEY } = serverEnvConfig();
 
 export const youtubeService = google.youtube('v3');
 
@@ -11,7 +8,7 @@ export const getYoutubeChannelsByUid = async (uid: string) => {
     {
       id: [uid],
       part: ['id', 'snippet', 'statistics'],
-      key: GOOGLE_API_KEY,
+      key: process.env.GOOGLE_API_KEY,
     },
     { fetchImplementation: customFetchCached },
   );
@@ -24,7 +21,7 @@ export const getYoutubeChannels = async (idArr: string[]) => {
     {
       id: idArr,
       part: ['id', 'snippet', 'statistics'],
-      key: GOOGLE_API_KEY,
+      key: process.env.GOOGLE_API_KEY,
     },
     { fetchImplementation: customFetchCached },
   );
@@ -39,7 +36,7 @@ export const searchYoutubeChannels = async (channelName: string) => {
       part: ['id', 'snippet', 'statistics'],
       q: channelName,
       type: ['channel'],
-      key: GOOGLE_API_KEY,
+      key: process.env.GOOGLE_API_KEY,
     },
     { fetchImplementation: customFetchCached },
   );

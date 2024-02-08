@@ -8,7 +8,7 @@ export const parseSheetData = (value: ContentsRowType): ContentsDataType | undef
   try {
     const [title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream, isVideo]: ContentsRowType = value;
     if (scheduledTime.length >= 18) {
-      const { timestamp, korTime } = stringToTime(scheduledTime);
+      const { timestamp, korTime } = stringToTime(dayjs(scheduledTime));
       const interval = getInterval(timestamp);
       const replacedThumbnailURL = thumbnailURL.replace(
         /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,

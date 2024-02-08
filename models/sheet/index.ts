@@ -1,5 +1,4 @@
 import { google } from 'googleapis';
-import { serverEnvConfig } from '@/configs/envConfig';
 import { jwtAuth } from '@/models/firebase/admin';
 
 export interface SheetConfigType {

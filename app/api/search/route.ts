@@ -3,7 +3,6 @@ import { parseMongoDBDocument } from '@/utils/parseMongoDBData';
 import { readDB } from '@/models/mongoDBService/';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
 import { ChannelsDataType } from '@/types/inYoutube';
-import { serverEnvConfig } from '@/configs/envConfig';
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/models/error/handler';
 import { replaceSpecialCharacters } from '@/utils/regexp';
@@ -33,28 +32,29 @@ export const GET = async (req: NextRequest) => {
     }
 
     // Execute both database queries concurrently
-    const regexforDBQuery = { $regex: replacedQuery, $options: "i" };
+    const regexforDBQuery = { $regex: replacedQuery, $options: 'i' };
     const [channelResults, contentResults] = await Promise.all([
-      readDB('channel_id_names', 'ManagementDB', { filter: { "name_kor": regexforDBQuery } }),
-      readDB('upcoming_streams', 'ScheduleDB', { filter: { "ChannelName": regexforDBQuery } })
+      readDB('channel_id_names', 'ManagementDB', { filter: { name_kor: regexforDBQuery } }),
+      readDB('upcoming_streams', 'ScheduleDB', { filter: { ChannelName: regexforDBQuery } }),
     ]);
 
     const searchedContents: ContentsDataType[] = [];
-    contentResults['documents'].forEach((doc:ContentDocument) => {
+    contentResults['documents'].forEach((doc: ContentDocument) => {
       const data = parseMongoDBDocument(doc);
       if (!data) return;
       searchedContents.push(data);
     });
-    
+
     const searchData: ChannelSheetDataType = {};
-    channelResults['documents'].forEach(({ _id, channel_id, name_kor, channel_addr, handle_name, waiting }:ChannelDocument) => {
-      if (Object.keys(searchData).length >= SEARCH_ITEMS_SIZE) return;
-      if (searchData[channel_id]) return;
-      searchData[channel_id] = { uid: channel_id, channelName: name_kor, url: channel_addr };
-    });
+    channelResults['documents'].forEach(
+      ({ _id, channel_id, name_kor, channel_addr, handle_name, waiting }: ChannelDocument) => {
+        if (Object.keys(searchData).length >= SEARCH_ITEMS_SIZE) return;
+        if (searchData[channel_id]) return;
+        searchData[channel_id] = { uid: channel_id, channelName: name_kor, url: channel_addr };
+      },
+    );
     const combinedSearchDataValues = await combineChannelData(searchData);
 
-    
     return NextResponse.json<SearchResponseType>(
       {
         contents: searchedContents,

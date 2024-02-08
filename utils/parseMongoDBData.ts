@@ -1,23 +1,31 @@
-import { ContentDocument, DocumentList, ContentsLength, DataReturnType, ParseAllDataReturnType, ParseScheduledDataReturnType, ContentsDataType, isStream  } from '@/types/inMongoDB';
+import {
+  ContentDocument,
+  DocumentList,
+  ContentsLength,
+  DataReturnType,
+  ParseAllDataReturnType,
+  ParseScheduledDataReturnType,
+  ContentsDataType,
+  isStream,
+} from '@/types/inMongoDB';
 import { getInterval, stringToTime } from '@/utils/getTime';
 import dayjs from '@/models/dayjs';
 import { replaceParentheses } from '@/utils/regexp';
 
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | undefined => {
   try {
-    const parsedScheduledTime = new Date(doc.ScheduledTime).toISOString();
-    const { timestamp, korTime } = stringToTime(parsedScheduledTime);
+    const { timestamp, korTime } = stringToTime(doc.ScheduledTime);
     const interval = getInterval(timestamp);
 
     const replacedThumbnailURL = doc.ThumbnailURL.replace(
       /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
-      'mqdefault'
+      'mqdefault',
     );
 
     const videoId = doc.URL.replace('https://www.youtube.com/watch?v=', '');
     const replacedTitle = replaceParentheses(doc.Title);
     const replacedUrl = doc.isVideo === 'TRUE' ? `https://youtu.be/${videoId}` : doc.URL;
-      
+
     const data: ContentsDataType = {
       title: replacedTitle,
       url: replacedUrl,
@@ -38,18 +46,16 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | u
   }
 };
 
-export const parseScheduledData = (documents: DocumentList): ParseScheduledDataReturnType => {
-  if (!documents) throw new Error('No DataValue');
-
+export const parseScheduledData = (documents: ContentDocument[]): ParseScheduledDataReturnType => {
   const scheduled: ContentsDataType[] = [];
   let scheduledVideo = 0;
   const live: ContentsDataType[] = [];
   let liveVideo = 0;
 
-  documents['documents'].forEach(doc => {
+  documents.forEach((doc) => {
     const isHide = doc.Hide;
     const isStream = doc.broadcastStatus;
-  
+
     // Exclude hidden contents, but include those that are currently streaming
     if (isHide === 'TRUE' && isStream === 'NULL') return;
     if (isHide === 'TRUE' && isStream === 'FALSE') return;
@@ -85,8 +91,7 @@ export const parseScheduledData = (documents: DocumentList): ParseScheduledDataR
   };
 };
 
-
-export const parseAllData = (documents: DocumentList): ParseAllDataReturnType => {
+export const parseAllData = (documents: ContentDocument[]): ParseAllDataReturnType => {
   if (!documents) throw new Error('No DataValue');
 
   const daily: ContentsDataType[] = [];
@@ -95,7 +100,7 @@ export const parseAllData = (documents: DocumentList): ParseAllDataReturnType =>
   let allVideo = 0;
   const yesterday = dayjs().subtract(1, 'day').valueOf();
 
-  documents['documents'].forEach(doc => {
+  documents.forEach((doc) => {
     const isHide = doc.Hide;
     const isStream = doc.broadcastStatus;
     // Hidden contents are treated as yesterday's content

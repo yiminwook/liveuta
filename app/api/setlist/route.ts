@@ -1,4 +1,3 @@
-import { serverEnvConfig } from '@/configs/envConfig';
 import errorHandler from '@/models/error/handler';
 import { SearchCommentItemType, SearchCommentResponseType } from '@/types/inHolodex';
 import axios, { AxiosResponse } from 'axios';
@@ -13,7 +12,6 @@ export interface SetListResponseType {
 }
 
 export const GET = async (req: NextRequest) => {
-  const { HOLODEX_API_KEY } = serverEnvConfig();
   try {
     const { searchParams } = new URL(req.url);
     const page = Number(searchParams.get('page')) || 1;
@@ -37,7 +35,7 @@ export const GET = async (req: NextRequest) => {
     };
 
     const response: AxiosResponse<SearchCommentResponseType> = await axios.post(SERCH_COMMENT_ENDPOINT, body, {
-      headers: { 'X-APIKEY': HOLODEX_API_KEY },
+      headers: { 'X-APIKEY': process.env.HOLODEX_API_KEY },
     });
     const totalPage = Math.ceil(response.data.total / PAGINATION_LIMIT);
 

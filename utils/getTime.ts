@@ -20,12 +20,7 @@ export const getInterval = (scheduledTimeStamp: number): string => {
   return '';
 };
 
-/**
- * ISO 8601 -
- * EX: "2016-03-29T06:54:53Z"
- */
-export const stringToTime = (stringTime: string) => {
-  const time = dayjs(stringTime);
+export const stringToTime = (time: dayjs.Dayjs) => {
   const timestamp = time.valueOf();
   const korTime = time.format('M월 DD일 (ddd) A hh:mm');
 

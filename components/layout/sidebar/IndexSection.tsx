@@ -18,7 +18,6 @@ export const IndexLinkList = () => {
       <IndexLink href="/search" text="검색" />
       <IndexLink href="/channels" text="채널조회" />
       <IndexLink href="/sheet/request" text="채널요청" />
-      <IndexLink href="/short" text="단축링크 생성" />
       <IndexLink href="/settings" text="설정" />
     </ul>
   );
