@@ -24,7 +24,7 @@ const reservePush = async ({ title, body, token, timestamp, imageUrl, link }: Re
 
   const response = await axios<{ message: string }>({
     method: 'POST',
-    url: '/api/sheet',
+    url: '/api/mongoDBService',
     data,
   });
 
