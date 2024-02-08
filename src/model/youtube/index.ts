@@ -1,5 +1,5 @@
 import { google } from 'googleapis';
-import { customFetchCached } from '@/model/customFetch';
+import { customFetchNoCached } from '@/model/customFetch';
 
 export const youtubeService = google.youtube('v3');
 
@@ -10,7 +10,7 @@ export const getYoutubeChannelsByUid = async (uid: string) => {
       part: ['id', 'snippet', 'statistics'],
       key: process.env.GOOGLE_API_KEY,
     },
-    { fetchImplementation: customFetchCached },
+    { fetchImplementation: customFetchNoCached },
   );
 
   return response.data;
@@ -23,7 +23,7 @@ export const getYoutubeChannels = async (idArr: string[]) => {
       part: ['id', 'snippet', 'statistics'],
       key: process.env.GOOGLE_API_KEY,
     },
-    { fetchImplementation: customFetchCached },
+    { fetchImplementation: customFetchNoCached },
   );
 
   return response.data;
@@ -38,7 +38,7 @@ export const searchYoutubeChannels = async (channelName: string) => {
       type: ['channel'],
       key: process.env.GOOGLE_API_KEY,
     },
-    { fetchImplementation: customFetchCached },
+    { fetchImplementation: customFetchNoCached },
   );
 
   return response.data;
