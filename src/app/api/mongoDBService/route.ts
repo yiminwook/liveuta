@@ -15,10 +15,6 @@ export const GET = async (_req: NextRequest) => {
     const collection = process.env.MONGODB_SCHEDULE_COLLECTION;
     const database = process.env.MONGODB_SCHEDULE_DB;
 
-    if (!collection || !database) {
-      throw new Error('MongoDB collection or database names are not defined in environmental variables.');
-    }
-
     const response = await readDB(collection, database);
     const scheduleDataRaw: ContentDocumentRaw[] = response.documents;
     if (!scheduleDataRaw) throw new Error('documents is undefined.');
@@ -68,10 +64,6 @@ export const POST = async (req: NextRequest) => {
     const notiCollection = process.env.MONGODB_NOTI_COLLECTION;
     const notiDatabase = process.env.MONGODB_SCHEDULE_DB;
 
-    if (!notiCollection || !notiDatabase) {
-      throw new Error('MongoDB collection or database names are not defined in environmental variables.');
-    }
-
     const existingData: { documents: [] } = await readDB(notiCollection, notiDatabase, {
       filter: { token: requestBody.token, link: requestBody.link },
     });
@@ -90,16 +82,12 @@ export const POST = async (req: NextRequest) => {
   }
 };
 
-export const Delete = async (req: NextRequest) => {
+export const DELETE = async (req: NextRequest) => {
   try {
     const requestBody: PushData = await req.json();
 
     const notiCollection = process.env.MONGODB_NOTI_COLLECTION;
     const notiDatabase = process.env.MONGODB_SCHEDULE_DB;
-
-    if (!notiCollection || !notiDatabase) {
-      throw new Error('MongoDB collection or database names are not defined in environmental variables.');
-    }
 
     const existingData: { documents: [] } = await readDB(notiCollection, notiDatabase, {
       filter: { token: requestBody.token, link: requestBody.link },

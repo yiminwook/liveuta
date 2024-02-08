@@ -18,7 +18,6 @@ import { notFound } from 'next/navigation';
 
 const getChannelData = async (page: string) => {
   try {
-    /** Params */
     const pageQuery = Number(page);
     if (Number.isNaN(pageQuery)) {
       throw new Error('PageQuery가 숫자가 아님');
