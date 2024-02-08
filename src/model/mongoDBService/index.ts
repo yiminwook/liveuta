@@ -52,6 +52,7 @@ const performDatabaseOperation = async ({
   }
 };
 
+// readDB('channel_id_names', 'ManagementDB', { filter: { name_kor: regexforDBQuery } })
 export const readDB = async (
   collection: string,
   database: string,

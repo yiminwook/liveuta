@@ -3,7 +3,7 @@
 import { FirebaseApp, getApps, initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getMessaging } from 'firebase/messaging';
-import firebaseConfig from '~/firebaseClient.json';
+import firebaseConfig from '@/model/firebase/firebaseClient.json';
 
 export default class FirebaseClient {
   private static instance: FirebaseClient;
