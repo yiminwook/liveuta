@@ -1,15 +1,16 @@
-import { ContentsDataType } from '@/types/inSheet';
+import { ContentsDataType } from '@/types/inMongoDB';
 import ScheduleCard from '@/components/common/scheduleCard/Card';
 import { useEffect, useMemo, useState } from 'react';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/consts';
-import CardPlaceHolders from '@/components/common/scheduleCard/CardPlaceHolder';
+import CardPlaceHolders from '@/components/common/scheduleCard/CardPlaceHolders';
 import { CardSection } from '@/components/common/scheduleCard/Style';
 
 interface YoutubeSectionProps {
   contents: ContentsDataType[];
+  isMobile: boolean;
 }
 
-const ScheduleSection = ({ contents }: YoutubeSectionProps) => {
+const ScheduleSection = ({ contents, isMobile }: YoutubeSectionProps) => {
   const [loadContents, setLoadContents] = useState(contents.slice(0, SCROLL_PER_YOUTUBE_CARD));
   const [scrollPage, setScrollPage] = useState(1);
 
@@ -47,7 +48,7 @@ const ScheduleSection = ({ contents }: YoutubeSectionProps) => {
           handleInfinityScroll={handleInfinityScroll}
         />
       ))}
-      <CardPlaceHolders />
+      <CardPlaceHolders isMobile={isMobile} />
     </CardSection>
   );
 };

@@ -14,6 +14,7 @@ export const ExternalLinkList = () => {
     <ul>
       <ExternalLink href="https://gall.dcinside.com/mgallery/board/lists?id=kizunaai" text="키즈나아이 갤러리" />
       <ExternalLink href="https://gall.dcinside.com/mini/board/lists?id=vuta" text="우타와꾸 갤러리" />
+      <ExternalLink href="https://uta-tools.vercel.app" text="UtaTools" />
     </ul>
   );
 };

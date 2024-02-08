@@ -39,3 +39,13 @@ export const textLine = (lineCount: number, lineHeight: number) => css`
   line-height: ${lineHeight}rem;
   height: ${lineCount * lineHeight}rem;
 `;
+
+export const displayNone = css`
+  display: none;
+`;
+
+export const flexCenter = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

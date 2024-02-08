@@ -44,8 +44,31 @@ export const Card = styled.div`
   }
 `;
 
-export const CardPlaceHolderBox = styled.div`
-  ${cardBase}
+export const ImageLink = styled.button`
+  display: inline-block;
+  width: 50%;
+
+  & > div {
+    ${boxShadow};
+    position: relative;
+    box-sizing: border-box;
+    margin: auto;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 5px;
+    height: 100%;
+    overflow: hidden;
+    background-color: #fff;
+
+    & > img {
+      object-fit: cover;
+    }
+  }
+
+  @media (min-width: ${WIDTH.SM}) {
+    width: 100%;
+    height: 120%;
+  }
 `;
 
 export const DescBox = styled.div`
@@ -55,23 +78,19 @@ export const DescBox = styled.div`
   flex-flow: column;
   gap: 0.1rem;
 
-  @media (min-width: ${WIDTH.SM}) {
-    gap: 0.5rem;
-  }
-
   .channelName {
-    font-weight: 500;
-    font-size: 1.2rem;
+    font-weight: 600;
+    font-size: 1rem;
 
     &.stream {
-      font-weight: 600;
       color: ${COLORS['highlight-font']};
     }
   }
 
   .title {
     color: ${COLORS.font};
-    ${textLine(2, 1.25)}
+    ${textLine(2, 1)}
+    font-size: 0.75rem;
 
     &.stream {
       font-weight: 500;
@@ -81,17 +100,18 @@ export const DescBox = styled.div`
 
   .time {
     display: flex;
-    font-size: 0.6rem;
+    font-size: 0.75rem;
     align-items: center;
     gap: 0.5rem;
   }
 
   .link {
+    box-sizing: border-box;
     display: flex;
     gap: 0.5rem;
     font-size: 0.75rem;
     justify-content: flex-end;
-    margin-right: 0.5rem;
+    padding: 0.25rem;
 
     & > button {
       font-size: inherit;
@@ -99,27 +119,26 @@ export const DescBox = styled.div`
       color: ${COLORS.salmon};
     }
   }
-`;
-
-export const ImageBox = styled.a`
-  ${boxShadow};
-  position: relative;
-  box-sizing: border-box;
-  margin: auto;
-  width: 12rem;
-  aspect-ratio: 16 / 9;
-  border-radius: 5px;
-  height: 100%;
-  overflow: hidden;
-  background-color: #fff;
-
-  & > img {
-    object-fit: cover;
-  }
 
   @media (min-width: ${WIDTH.SM}) {
-    width: 100%;
-    flex-basis: 200%;
+    gap: 0.5rem;
+
+    .channelName {
+      font-size: 1.2rem;
+    }
+
+    .title {
+      font-size: 1rem;
+      ${textLine(2, 1.25)}
+    }
+
+    .time {
+      font-size: 1rem;
+    }
+
+    .link {
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -130,6 +149,13 @@ export const StatusBox = styled.div`
   gap: 0.125rem;
   color: ${COLORS['highlight-font']};
   vertical-align: middle;
+
+  @media (min-width: ${WIDTH.SM}) {
+    & > svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
 `;
 
 export const CardSection = styled.section`

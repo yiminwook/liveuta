@@ -14,7 +14,7 @@ interface CopyButtonProps {
 
 /** value 복사할 값 */
 const CopyButton = ({ value, size = '2rem', className, style }: CopyButtonProps) => {
-  const { success } = useToast();
+  const toast = useToast();
 
   const onClick = (e: MouseEvent) => {
     e.stopPropagation();
@@ -25,7 +25,7 @@ const CopyButton = ({ value, size = '2rem', className, style }: CopyButtonProps)
       detail: value,
       action: 'copy',
     });
-    success({ text: '복사되었습니다.' });
+    toast.success({ text: '복사되었습니다.' });
   };
 
   return (

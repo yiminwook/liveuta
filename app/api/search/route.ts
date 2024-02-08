@@ -1,7 +1,6 @@
-import { ContentsDataType, ContentsRowType } from '@/types/inSheet';
-import { getSheet } from '@/models/sheet';
-import { parseSheetData } from '@/utils/parseContentSheet';
-import { parseChannelIDSheet } from '@/utils/parseChannelSheet';
+import { ContentDocument, ChannelDocument, DocumentList, ContentsDataType } from '@/types/inMongoDB';
+import { parseMongoDBDocument } from '@/utils/parseMongoDBData';
+import { readDB } from '@/models/mongoDBService/';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
 import { ChannelsDataType } from '@/types/inYoutube';
 import { serverEnvConfig } from '@/configs/envConfig';
@@ -14,8 +13,6 @@ export interface SearchResponseType {
   contents: ContentsDataType[];
   channels: ChannelsDataType[];
 }
-
-const { CONTENTS_SHEET_ID, CONTENTS_SHEET_RANGE } = serverEnvConfig();
 
 export const GET = async (req: NextRequest) => {
   try {
@@ -35,39 +32,29 @@ export const GET = async (req: NextRequest) => {
       );
     }
 
-    const regex = new RegExp(replacedQuery);
-
-    const contentsSheetData = await getSheet({ spreadsheetId: CONTENTS_SHEET_ID, range: CONTENTS_SHEET_RANGE });
-    const contentsSheetDataValue = contentsSheetData.values as ContentsRowType[];
-    if (!contentsSheetDataValue) throw new Error('No ContentsValues');
+    // Execute both database queries concurrently
+    const regexforDBQuery = { $regex: replacedQuery, $options: "i" };
+    const [channelResults, contentResults] = await Promise.all([
+      readDB('channel_id_names', 'ManagementDB', { filter: { "name_kor": regexforDBQuery } }),
+      readDB('upcoming_streams', 'ScheduleDB', { filter: { "ChannelName": regexforDBQuery } })
+    ]);
 
     const searchedContents: ContentsDataType[] = [];
-
-    contentsSheetDataValue.forEach((value, index) => {
-      if (index === 0) return;
-      const name = value[2];
-
-      if (regex.test(name) === false) return;
-      const data = parseSheetData(value);
+    contentResults['documents'].forEach((doc:ContentDocument) => {
+      const data = parseMongoDBDocument(doc);
       if (!data) return;
       searchedContents.push(data);
     });
-
-    searchedContents.sort((a, b) => b.timestamp - a.timestamp); //최신순
-
-    const { sheetDataValues } = await parseChannelIDSheet();
-
+    
     const searchData: ChannelSheetDataType = {};
-
-    sheetDataValues.forEach(([uid, channelName, url]) => {
+    channelResults['documents'].forEach(({ _id, channel_id, name_kor, channel_addr, handle_name, waiting }:ChannelDocument) => {
       if (Object.keys(searchData).length >= SEARCH_ITEMS_SIZE) return;
-      if (searchData[uid]) return;
-      if (regex.test(channelName) === false) return;
-      searchData[uid] = { uid, channelName, url };
+      if (searchData[channel_id]) return;
+      searchData[channel_id] = { uid: channel_id, channelName: name_kor, url: channel_addr };
     });
-
     const combinedSearchDataValues = await combineChannelData(searchData);
 
+    
     return NextResponse.json<SearchResponseType>(
       {
         contents: searchedContents,

@@ -1,6 +1,6 @@
-'use client';
 import search from '@/components/search/Search.module.scss';
 import { useSearchQuery } from '@/queries/search';
+import { memo } from 'react';
 
 const SummarySection = () => {
   const searchQuery = useSearchQuery();
@@ -18,4 +18,4 @@ const SummarySection = () => {
   );
 };
 
-export default SummarySection;
+export default memo(SummarySection);

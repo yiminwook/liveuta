@@ -3,9 +3,9 @@ import Settings from '@/components/settings/Settings.module.scss';
 import axios, { AxiosError } from 'axios';
 import dayjs from '@/models/dayjs';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 import { PushData } from '@/app/api/push/route';
 import { TokenType } from '@/types';
+import useToast from '@/hooks/useToast';
 
 const PostBox = ({ token }: { token: TokenType }) => {
   const [title, setTitle] = useState('');
@@ -13,6 +13,7 @@ const PostBox = ({ token }: { token: TokenType }) => {
   const [imageUrl, setImageUrl] = useState('');
   const [link, setLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const toast = useToast();
 
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(() => e.target.value.trim());
@@ -62,7 +63,7 @@ const PostBox = ({ token }: { token: TokenType }) => {
       } else if (error instanceof Error) {
         message = error.message;
       }
-      toast.error(message, { autoClose: 3000 });
+      toast.error({ text: message });
     } finally {
       setIsLoading(() => false);
     }

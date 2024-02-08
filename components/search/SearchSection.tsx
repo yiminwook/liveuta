@@ -1,7 +1,6 @@
 'use client';
 import { FormEvent, useCallback, useEffect, useState } from 'react';
 import search from '@/components/search/Search.module.scss';
-import useInput from '@/hooks/useInput';
 import { usePathname, useRouter } from 'next/navigation';
 import { useSearchQuery } from '@/queries/search';
 import Input from '@/components/common/Input';

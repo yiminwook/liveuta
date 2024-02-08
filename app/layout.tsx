@@ -1,16 +1,15 @@
-import 'react-toastify/dist/ReactToastify.css';
 import 'pretendard/dist/web/variable/pretendardvariable.css';
 import '@/styles/reset.css';
 import '@/public/theme.css';
 import '@/styles/globals.scss';
 import '@/styles/theme.scss';
 import { PropsWithChildren } from 'react';
-import ServiceLayout from '@/components/layout/ServiceLayout';
 import { GTM_TRACKING_ID } from '@/consts';
 import { DEFALUT_METADATA } from '@/consts/metaData';
 import DefaultHead from '@/configs/DefaultHead';
 import Configs from '@/configs';
 import { getCookies } from '@/utils/getCookie';
+import type { Viewport } from 'next';
 
 const RootLayout = async ({ children }: PropsWithChildren) => {
   const cookies = await getCookies();
@@ -21,9 +20,7 @@ const RootLayout = async ({ children }: PropsWithChildren) => {
         <DefaultHead />
       </head>
       <body>
-        <Configs cookies={cookies}>
-          <ServiceLayout>{children}</ServiceLayout>
-        </Configs>
+        <Configs cookies={cookies}>{children}</Configs>
         {/* <!-- Google Tag Manager (noscript) --> */}
         <noscript>
           <iframe
@@ -45,3 +42,10 @@ export default RootLayout;
 export const dynamicParams = true; //fallback
 export const preferredRegion = ['icn1'];
 export const metadata = DEFALUT_METADATA;
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  userScalable: false,
+  maximumScale: 1,
+  viewportFit: 'cover',
+};

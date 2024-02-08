@@ -74,9 +74,9 @@ const Header = () => {
       <div className={header['inner']} ref={gnbRef}>
         <nav>
           <HamburgerButton className={header['hamburger']} onClick={openSidebar} />
-          <a href="/" className={header['title']}>
+          <Link href="/" className={header['title']}>
             Live Uta
-          </a>
+          </Link>
           <div className={header['navigation']}>
             {pathname !== '/search' ? (
               <Input

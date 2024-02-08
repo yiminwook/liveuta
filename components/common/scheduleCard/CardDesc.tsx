@@ -1,15 +1,16 @@
 import CopyButton from '@/components/common/button/CopyButton';
 import CardStatus from '@/components/common/scheduleCard/CardStatus';
 import { DescBox } from '@/components/common/scheduleCard/Style';
+import useToast from '@/hooks/useToast';
 import { generateFcmToken } from '@/models/firebase/generateFcmToken';
 import useMutatePush from '@/queries/push';
-import { ContentsDataType } from '@/types/inSheet';
+//import { ContentsDataType } from '@/types/inSheet';
+import { ContentsDataType } from '@/types/inMongoDB';
 import { cx } from '@/utils';
 import { gtagClick } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
 import { MouseEvent } from 'react';
 import { HiBellAlert } from 'react-icons/hi2';
-import { toast } from 'react-toastify';
 
 interface CardDescProps {
   content: ContentsDataType;
@@ -18,11 +19,14 @@ interface CardDescProps {
 
 const CardDesc = ({ content, addStreamModifier }: CardDescProps) => {
   const { title, url, channelName, korTime, interval, isStream, timestamp, thumbnailURL, videoId } = content;
+  const toast = useToast();
   const { pushMutateAsync, isPendingPush } = useMutatePush({ key: videoId });
 
   const handleReserve = async (e: MouseEvent<HTMLButtonElement>) => {
     try {
       if (isPendingPush || isStream !== 'NULL') return;
+      const result = window.confirm('예약후에는 취소할 수 없습니다.');
+      if (result === false) return;
       const token = await generateFcmToken();
 
       if (token === undefined) {
@@ -39,7 +43,7 @@ const CardDesc = ({ content, addStreamModifier }: CardDescProps) => {
       });
 
       if (response.status === 226) {
-        toast.warning('이미 예약된 알림입니다.');
+        toast.warning({ text: '이미 예약된 알림입니다.' });
         return;
       }
 
@@ -50,11 +54,11 @@ const CardDesc = ({ content, addStreamModifier }: CardDescProps) => {
         action: 'alamReserve',
       });
 
-      toast.success('알림이 예약되었습니다.');
+      toast.success({ text: '알림이 예약되었습니다.' });
     } catch (error) {
       console.error(error);
       const message = error instanceof Error ? error.message : 'Unknown Error';
-      toast.error(message);
+      toast.error({ text: message });
     }
   };
 
@@ -80,10 +84,10 @@ const CardDesc = ({ content, addStreamModifier }: CardDescProps) => {
       <div className={'link'}>
         {isStream === 'NULL' ? (
           <button className={'alaram'} onClick={handleReserve} disabled={isPendingPush}>
-            <HiBellAlert color="inherit" size="0.75rem" />
+            <HiBellAlert color="inherit" size="1.25rem" />
           </button>
         ) : null}
-        <CopyButton value={url} size="0.75rem" />
+        <CopyButton value={url} size="1rem" />
         <button onClick={openStream}>새 탭으로 열기</button>
       </div>
     </DescBox>
