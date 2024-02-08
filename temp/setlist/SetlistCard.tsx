@@ -1,10 +1,10 @@
 // @ts-ignore
-import { SearchCommentItemType } from '@/types/inHolodex';
+import { SearchCommentItemType } from '@/type/inHolodex';
 import Image from 'next/image';
-import { DEFAULT_BLUR_BASE64 } from '@/consts';
+import { DEFAULT_BLUR_BASE64 } from '@/const';
 import setlist from '@/components/setlist/Setlist.module.scss';
-import { stringToTime } from '@/utils/getTime';
-import { replaceParentheses } from '@/utils/regexp';
+import { stringToTime } from '@/util/getTime';
+import { replaceParentheses } from '@/util/regexp';
 import dayjs from '@/models/dayjs';
 
 interface SetlistCardProps {

@@ -1,6 +1,6 @@
 // @ts-ignore
 import { useSearchParams } from 'next/navigation';
-import SetlistCard from '@/temp/setlist/SetlistCard';
+import SetlistCard from '~/temp/setlist/SetlistCard';
 import setlist from '@/components/setlist/Setlist.module.scss';
 
 const SetlistSection = () => {

@@ -1,5 +1,5 @@
 import errorHandler from '@/models/error/handler';
-import { SearchCommentItemType, SearchCommentResponseType } from '@/types/inHolodex';
+import { SearchCommentItemType, SearchCommentResponseType } from '@/type/inHolodex';
 import axios, { AxiosResponse } from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 

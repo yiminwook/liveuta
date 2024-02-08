@@ -16,7 +16,8 @@
     "incremental": true,
     "types": ["@types/gtag.js"],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"],
+      "~/*": ["./*"]
     },
     "plugins": [
       {
