@@ -1,10 +1,15 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
+type FindPayload = { query: any };
+type InsertPayload = any;
+
+type OperationPayload = FindPayload | InsertPayload;
+
 const performDatabaseOperation = async (
     collection: string,
     database: string,
     operation: 'find' | 'insert',
-    optional_payload?: any
+    optional_payload?: OperationPayload
 ): Promise<any> => {
     const apiKey: string | undefined = process.env.MONGODB_API_KEY;
 
@@ -12,11 +17,11 @@ const performDatabaseOperation = async (
         throw new Error('API key not found in environment variables');
     }
 
-    const requestData = {
+    const requestData: any = {
         collection,
         database,
         dataSource: 'Cluster0',
-        ...(optional_payload && { ...optional_payload }),
+        ...optional_payload, // Merge the optional payload directly
     };
 
     const config: AxiosRequestConfig = {
@@ -41,7 +46,8 @@ const performDatabaseOperation = async (
 };
 
 export const readDB = async (collection: string, database: string, query?: any): Promise<any> => {
-    return performDatabaseOperation(collection, database, 'find', query);
+    const payload: FindPayload = query ? { query } : {};
+    return performDatabaseOperation(collection, database, 'find', payload);
 };
 
 export const writeDB = async (collection: string, database: string, newData: any): Promise<any> => {
