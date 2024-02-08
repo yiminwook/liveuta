@@ -1,4 +1,4 @@
-import CustomServerError from '@/models/error/customServerError';
+import CustomServerError from '@/model/error/customServerError';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const POST = async (req: NextRequest) => {

@@ -5,7 +5,7 @@ import NavSection from '@/components/home/NavSection';
 import ScheduleSection from '@/components/home/ScheduleSection';
 import TopSection from '@/components/home/TopSection';
 import useResponsive from '@/hook/useResponsive';
-import clientOnly from '@/models/clientOnly';
+import clientOnly from '@/model/clientOnly';
 //import { SheetAPIReturntype } from '@/types/inSheet';
 import useMongoDB from '@/queries/mongoDBService';
 import { MongoDBAPIReturntype } from '@/type/inMongoDB';

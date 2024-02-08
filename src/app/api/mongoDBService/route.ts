@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import errorHandler from '@/models/error/handler';
-import { deleteDB, readDB, writeDB } from '@/models/mongoDBService';
+import errorHandler from '@/model/error/handler';
+import { deleteDB, readDB, writeDB } from '@/model/mongoDBService';
 import { parseAllData, parseScheduledData } from '@/util/parseMongoDBData';
 import { ContentDocumentRaw, MongoDBAPIReturntype } from '@/type/inMongoDB';
 import { PushData } from '@/app/api/push/route';
-import dayjs from '@/models/dayjs';
+import dayjs from '@/model/dayjs';
 
 export const GET = async (_req: NextRequest) => {
   try {

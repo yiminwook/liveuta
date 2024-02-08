@@ -1,4 +1,4 @@
-import { getYoutubeChannels } from '@/models/youtube';
+import { getYoutubeChannels } from '@/model/youtube';
 import { ChannelsDataType } from '@/type/inYoutube';
 import { youtube_v3 } from 'googleapis';
 

@@ -6,7 +6,7 @@ import { useSearchQuery } from '@/queries/search';
 import Input from '@/components/common/Input';
 import { replaceSpecialCharacters } from '@/util/regexp';
 import { gtag } from '@/util/gtag';
-import dayjs from '@/models/dayjs';
+import dayjs from '@/model/dayjs';
 
 const SearchSection = () => {
   const route = useRouter();

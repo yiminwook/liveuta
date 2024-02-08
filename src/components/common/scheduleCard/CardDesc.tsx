@@ -2,7 +2,7 @@ import CopyButton from '@/components/common/button/CopyButton';
 import CardStatus from '@/components/common/scheduleCard/CardStatus';
 import { DescBox } from '@/components/common/scheduleCard/Style';
 import useToast from '@/hook/useToast';
-import { generateFcmToken } from '@/models/firebase/generateFcmToken';
+import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import useMutatePush from '@/queries/push';
 //import { ContentsDataType } from '@/types/inSheet';
 import { ContentsDataType } from '@/type/inMongoDB';

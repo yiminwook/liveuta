@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getMessaging } from 'firebase-admin/messaging';
-import FirebaseAdmin from '@/models/firebase/admin';
+import FirebaseAdmin from '@/model/firebase/admin';
 import { PushData } from '@/app/api/push/route';
-import dayjs from '@/models/dayjs';
-import errorHandler from '@/models/error/handler';
+import dayjs from '@/model/dayjs';
+import errorHandler from '@/model/error/handler';
 
 export const POST = async (request: NextRequest) => {
   try {

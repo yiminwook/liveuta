@@ -1,4 +1,4 @@
-import dayjs from '@/models/dayjs';
+import dayjs from '@/model/dayjs';
 
 export interface ChannelDocument {
   _id: string;

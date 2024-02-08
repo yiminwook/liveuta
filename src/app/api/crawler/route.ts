@@ -1,4 +1,4 @@
-import errorHandler from '@/models/error/handler';
+import errorHandler from '@/model/error/handler';
 import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 

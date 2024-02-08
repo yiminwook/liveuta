@@ -1,5 +1,5 @@
 'use client';
-import FirebaseClient from '@/models/firebase/client';
+import FirebaseClient from '@/model/firebase/client';
 import { getToken } from 'firebase/messaging';
 
 export const generateFcmToken = async () => {

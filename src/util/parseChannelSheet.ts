@@ -1,4 +1,4 @@
-import { getSheet } from '@/models/sheet';
+import { getSheet } from '@/model/sheet';
 import { ChannelRowType } from '@/type/inYoutube';
 
 /** Parse Google spread sheet - reference */

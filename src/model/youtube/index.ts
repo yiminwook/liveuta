@@ -1,5 +1,5 @@
 import { google } from 'googleapis';
-import { customFetchCached } from '@/models/customFetch';
+import { customFetchCached } from '@/model/customFetch';
 
 export const youtubeService = google.youtube('v3');
 

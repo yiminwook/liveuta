@@ -1,6 +1,6 @@
 'use client';
-import FirebaseClient from '@/models/firebase/client';
-import { generateFcmToken } from '@/models/firebase/generateFcmToken';
+import FirebaseClient from '@/model/firebase/client';
+import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import { onMessage } from 'firebase/messaging';
 import { useEffect } from 'react';
 

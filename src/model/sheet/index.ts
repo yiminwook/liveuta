@@ -1,5 +1,5 @@
 import { google } from 'googleapis';
-import { jwtAuth } from '@/models/firebase/admin';
+import { jwtAuth } from '@/model/firebase/admin';
 
 export interface SheetConfigType {
   spreadsheetId: string;

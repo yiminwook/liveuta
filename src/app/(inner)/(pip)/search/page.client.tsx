@@ -4,7 +4,7 @@ import ContentSection from '@/components/search/ContentSection';
 import SearchSection from '@/components/search/SearchSection';
 import SummarySection from '@/components/search/SummarySection';
 import useResponsive from '@/hook/useResponsive';
-import clientOnly from '@/models/clientOnly';
+import clientOnly from '@/model/clientOnly';
 import { useSearch } from '@/queries/search';
 
 const Client = () => {

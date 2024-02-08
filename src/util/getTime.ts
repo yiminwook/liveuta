@@ -1,4 +1,4 @@
-import dayjs from '@/models/dayjs';
+import dayjs from '@/model/dayjs';
 
 export const getInterval = (scheduledTimeStamp: number): string => {
   const nowTimeStamp = dayjs().valueOf();

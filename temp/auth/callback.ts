@@ -1,5 +1,5 @@
 // @ts-ignore
-import { jwtAuth } from '@/models/firebase/admin';
+import { jwtAuth } from '@/model/firebase/admin';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 /** GET: 쿠키 저장 */

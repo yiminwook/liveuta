@@ -1,13 +1,13 @@
 // @ts-ignore
 import { SheetAPIReturntype } from '@/type/inSheet';
-import { getSheet } from '@/models/sheet';
+import { getSheet } from '@/model/sheet';
 import { parseAllData, parseScheduledData } from '@/util/parseContentSheet';
 import { NextRequest, NextResponse } from 'next/server';
-import errorHandler from '@/models/error/handler';
+import errorHandler from '@/model/error/handler';
 import { cookies } from 'next/headers';
 import { PushData } from '@/app/api/push/route';
 import { google } from 'googleapis';
-import { jwtAuth } from '@/models/firebase/admin';
+import { jwtAuth } from '@/model/firebase/admin';
 
 export const GET = async (_req: NextRequest) => {
   try {

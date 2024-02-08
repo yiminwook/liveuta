@@ -8,7 +8,7 @@ import {
   isStream,
 } from '@/type/inMongoDB';
 import { getInterval, stringToTime } from '@/util/getTime';
-import dayjs from '@/models/dayjs';
+import dayjs from '@/model/dayjs';
 import { replaceParentheses } from '@/util/regexp';
 
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => {

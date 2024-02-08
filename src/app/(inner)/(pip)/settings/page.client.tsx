@@ -1,7 +1,7 @@
 'use client';
 import Settings from '@/components/settings/Settings.module.scss';
 import { useEffect, useState } from 'react';
-import { generateFcmToken } from '@/models/firebase/generateFcmToken';
+import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import PostBox from '@/components/settings/PostBox';
 import TokenBox from '@/components/settings/TokenBox';
 import { TokenType } from '@/type';

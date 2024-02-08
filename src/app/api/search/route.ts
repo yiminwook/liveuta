@@ -1,13 +1,13 @@
 import { ChannelDocument, ContentsDataType, ContentDocumentRaw } from '@/type/inMongoDB';
 import { parseMongoDBDocument } from '@/util/parseMongoDBData';
-import { readDB } from '@/models/mongoDBService/';
+import { readDB } from '@/model/mongoDBService/';
 import { ChannelSheetDataType, combineChannelData } from '@/util/combineChannelData';
 import { ChannelsDataType } from '@/type/inYoutube';
 import { NextRequest, NextResponse } from 'next/server';
-import errorHandler from '@/models/error/handler';
+import errorHandler from '@/model/error/handler';
 import { replaceSpecialCharacters } from '@/util/regexp';
 import { SEARCH_ITEMS_SIZE } from '@/const';
-import dayjs from '@/models/dayjs';
+import dayjs from '@/model/dayjs';
 
 export interface SearchResponseType {
   contents: ContentsDataType[];

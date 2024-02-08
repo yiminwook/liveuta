@@ -5,7 +5,7 @@ import { DEFAULT_BLUR_BASE64 } from '@/const';
 import setlist from '@/components/setlist/Setlist.module.scss';
 import { stringToTime } from '@/util/getTime';
 import { replaceParentheses } from '@/util/regexp';
-import dayjs from '@/models/dayjs';
+import dayjs from '@/model/dayjs';
 
 interface SetlistCardProps {
   item: SearchCommentItemType;

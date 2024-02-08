@@ -1,7 +1,7 @@
 import { ContentsRowType, ContentsDataType, SheetAPIReturntype } from '@/type/inSheet';
 import { sheets_v4 } from 'googleapis';
 import { getInterval, stringToTime } from '@/util/getTime';
-import dayjs from '@/models/dayjs';
+import dayjs from '@/model/dayjs';
 import { replaceParentheses } from '@/util/regexp';
 
 export const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {

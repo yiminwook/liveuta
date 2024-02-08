@@ -10,7 +10,7 @@ import HamburgerButton from '@/components/common/button/HamburgerButton';
 import NavigationList from '@/components/layout/NavigationList';
 import Input from '@/components/common/Input';
 import { replaceSpecialCharacters } from '@/util/regexp';
-import dayjs from '@/models/dayjs';
+import dayjs from '@/model/dayjs';
 
 const Header = () => {
   const pathname = usePathname();

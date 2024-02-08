@@ -2,7 +2,7 @@
 import Player from '@/components/common/player/Player';
 import { PipBase } from '@/components/common/player/Style';
 import useResponsive from '@/hook/useResponsive';
-import clientOnly from '@/models/clientOnly';
+import clientOnly from '@/model/clientOnly';
 
 const Pip = () => {
   const { isMobile } = useResponsive();

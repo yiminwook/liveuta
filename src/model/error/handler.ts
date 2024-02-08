@@ -1,4 +1,4 @@
-import CustomServerError from '@/models/error/customServerError';
+import CustomServerError from '@/model/error/customServerError';
 
 interface ErrorHandlerReturnType {
   status: number;

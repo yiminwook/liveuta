@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axios, { AxiosError } from 'axios';
-import { getAccessToken } from '@/models/firebase/admin';
+import { getAccessToken } from '@/model/firebase/admin';
 
 interface requestBody {
   token: string;

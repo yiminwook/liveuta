@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getMessaging, Message } from 'firebase-admin/messaging';
-import FirebaseAdmin from '@/models/firebase/admin';
-import errorHandler from '@/models/error/handler';
+import FirebaseAdmin from '@/model/firebase/admin';
+import errorHandler from '@/model/error/handler';
 
 export interface PushData {
   token: string;
