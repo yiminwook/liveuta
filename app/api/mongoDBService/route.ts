@@ -72,12 +72,12 @@ export const POST = async (req: NextRequest) => {
       throw new Error('MongoDB collection or database names are not defined in environmental variables.');
     }
 
-    const existingData = await readDB(notiCollection, notiDatabase, {
+    const existingData: { documents: [] } = await readDB(notiCollection, notiDatabase, {
       filter: { token: requestBody.token, link: requestBody.link },
     });
 
-    if (existingData && existingData.documents && existingData.documents.length !== 0) {
-        return NextResponse.json({ message: '이미 등록된 알림입니다.' }, { status: 226 });
+    if (existingData?.documents.length !== 0) {
+      return NextResponse.json({ message: '이미 등록된 알림입니다.' }, { status: 226 });
     }
 
     await writeDB(notiCollection, notiDatabase, { document: requestBody });
