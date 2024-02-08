@@ -1,3 +1,4 @@
+// @ts-ignore
 import { jwtAuth } from '@/models/firebase/admin';
 import type { NextApiRequest, NextApiResponse } from 'next';
 

@@ -1,3 +1,4 @@
+// @ts-ignore
 import { SearchCommentType } from '@/types/inHolodex';
 import ReactHtmlParser from 'react-html-parser';
 

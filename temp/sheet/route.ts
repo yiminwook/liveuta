@@ -1,3 +1,4 @@
+// @ts-ignore
 import { SheetAPIReturntype } from '@/types/inSheet';
 import { getSheet } from '@/models/sheet';
 import { parseAllData, parseScheduledData } from '@/utils/parseContentSheet';

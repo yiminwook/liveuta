@@ -1,11 +1,15 @@
-/** @type {import('next').NextConfig} */
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+import NextBundleAnalyzer from '@next/bundle-analyzer';
+import path from 'path';
+
+const __dirname = path.resolve();
+
+const withBundleAnalyzer = NextBundleAnalyzer({
   enabled: false,
 });
-const path = require('path');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   // reactStrictMode: true,
   swcMinify: true,
@@ -39,4 +43,4 @@ const nextConfig = {
   // },
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+export default withBundleAnalyzer(nextConfig);

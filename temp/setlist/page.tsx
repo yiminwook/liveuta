@@ -1,3 +1,4 @@
+// @ts-ignore
 'use client';
 
 import SearchSection from '@/components/search/SearchSection';

@@ -1,3 +1,4 @@
+// @ts-ignore
 import { SearchCommentItemType } from '@/types/inHolodex';
 import Image from 'next/image';
 import { DEFAULT_BLUR_BASE64 } from '@/consts';
