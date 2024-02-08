@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 interface PerformDatabaseOptions {
   collection: string;
   database: string;
-  operation: 'find' | 'insert';
+  operation: 'find' | 'insertOne';
   filter?: any;
   projection?: any;
   document?: any;
@@ -70,7 +70,7 @@ export const writeDB = async (collection: string, database: string, options?: { 
   return performDatabaseOperation({
     collection,
     database,
-    operation: 'insert',
+    operation: 'insertOne',
     document: options?.document,
   });
 };
