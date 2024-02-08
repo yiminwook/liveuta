@@ -18,8 +18,8 @@ export const GET = async (_req: NextRequest) => {
       range: process.env.CONTENTS_SHEET_RANGE,
     });
 
-    let { scheduled, live } = parseScheduledData(sheetData);
-    let { daily, all } = parseAllData(sheetData);
+    const { scheduled, live } = parseScheduledData(sheetData);
+    const { daily, all } = parseAllData(sheetData);
 
     switch (cookie) {
       case 'video':

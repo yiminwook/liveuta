@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import errorHandler from '@/models/error/handler';
 import { readDB, writeDB } from '@/models/mongoDBService';
 import { parseAllData, parseScheduledData } from '@/utils/parseMongoDBData';
-import { ContentDocument, MongoDBAPIReturntype } from '@/types/inMongoDB';
+import { ContentDocumentRaw, MongoDBAPIReturntype } from '@/types/inMongoDB';
 import { PushData } from '@/app/api/push/route';
 import dayjs from 'dayjs';
 
@@ -20,7 +20,7 @@ export const GET = async (_req: NextRequest) => {
     }
 
     const response = await readDB(collection, database);
-    const scheduleDataRaw: (Omit<ContentDocument, 'ScheduledTime'> & { ScheduledTime: string })[] = response.documents;
+    const scheduleDataRaw: ContentDocumentRaw[] = response.documents;
     if (!scheduleDataRaw) throw new Error('documents is undefined.');
 
     const scheduleData = scheduleDataRaw
@@ -30,8 +30,8 @@ export const GET = async (_req: NextRequest) => {
       }))
       .sort((a, b) => (a.ScheduledTime.isBefore(b.ScheduledTime) ? -1 : 1));
 
-    let { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
-    let { daily, all } = parseAllData(scheduleData); // Need to be revised
+    const { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
+    const { daily, all } = parseAllData(scheduleData); // Need to be revised
 
     // Not sure, but maybe need to be revised
     switch (cookie) {

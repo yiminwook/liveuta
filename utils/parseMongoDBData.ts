@@ -1,6 +1,5 @@
 import {
   ContentDocument,
-  DocumentList,
   ContentsLength,
   DataReturnType,
   ParseAllDataReturnType,
@@ -12,7 +11,7 @@ import { getInterval, stringToTime } from '@/utils/getTime';
 import dayjs from '@/models/dayjs';
 import { replaceParentheses } from '@/utils/regexp';
 
-export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType | undefined => {
+export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => {
   try {
     const { timestamp, korTime } = stringToTime(doc.ScheduledTime);
     const interval = getInterval(timestamp);

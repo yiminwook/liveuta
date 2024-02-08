@@ -1,18 +1,6 @@
 import dayjs from '@/models/dayjs';
 
-export type {
-  ContentDocument,
-  DocumentList,
-  ContentsLength,
-  DataReturnType,
-  ParseAllDataReturnType,
-  ParseScheduledDataReturnType,
-  ContentsDataType,
-  MongoDBAPIReturntype,
-  ChannelDocument,
-};
-
-interface ChannelDocument {
+export interface ChannelDocument {
   _id: string;
   channel_id: string;
   name_kor: string;
@@ -21,7 +9,9 @@ interface ChannelDocument {
   waiting: boolean;
 }
 
-interface ContentDocument {
+export type ContentDocumentRaw = Omit<ContentDocument, 'ScheduledTime'> & { ScheduledTime: string };
+
+export interface ContentDocument {
   _id: string;
   Title: string;
   URL: string;
@@ -33,32 +23,28 @@ interface ContentDocument {
   isVideo: string;
 }
 
-interface DocumentList {
-  documents: ContentDocument[];
-}
-
-interface ContentsLength {
+export interface ContentsLength {
   total: number;
   video: number;
   stream: number;
 }
 
-interface DataReturnType {
+export interface DataReturnType {
   contents: any[];
   length: ContentsLength;
 }
 
-interface ParseAllDataReturnType {
+export interface ParseAllDataReturnType {
   daily: DataReturnType;
   all: DataReturnType;
 }
 
-interface ParseScheduledDataReturnType {
+export interface ParseScheduledDataReturnType {
   scheduled: DataReturnType;
   live: DataReturnType;
 }
 
-interface ContentsDataType {
+export interface ContentsDataType {
   title: string;
   url: string;
   channelName: string;
@@ -71,7 +57,7 @@ interface ContentsDataType {
   isVideo: boolean;
 }
 
-interface MongoDBAPIReturntype {
+export interface MongoDBAPIReturntype {
   scheduled: DataReturnType;
   live: DataReturnType;
   daily: DataReturnType;

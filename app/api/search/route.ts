@@ -1,4 +1,4 @@
-import { ContentDocument, ChannelDocument, DocumentList, ContentsDataType } from '@/types/inMongoDB';
+import { ChannelDocument, ContentsDataType, ContentDocumentRaw } from '@/types/inMongoDB';
 import { parseMongoDBDocument } from '@/utils/parseMongoDBData';
 import { readDB } from '@/models/mongoDBService/';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/models/error/handler';
 import { replaceSpecialCharacters } from '@/utils/regexp';
 import { SEARCH_ITEMS_SIZE } from '@/consts';
+import dayjs from '@/models/dayjs';
 
 export interface SearchResponseType {
   contents: ContentsDataType[];
@@ -39,14 +40,14 @@ export const GET = async (req: NextRequest) => {
     ]);
 
     const searchedContents: ContentsDataType[] = [];
-    contentResults['documents'].forEach((doc: ContentDocument) => {
-      const data = parseMongoDBDocument(doc);
+    contentResults.documents.forEach((doc: ContentDocumentRaw) => {
+      const data = parseMongoDBDocument({ ...doc, ScheduledTime: dayjs(doc.ScheduledTime) });
       if (!data) return;
       searchedContents.push(data);
     });
 
     const searchData: ChannelSheetDataType = {};
-    channelResults['documents'].forEach(
+    channelResults.documents.forEach(
       ({ _id, channel_id, name_kor, channel_addr, handle_name, waiting }: ChannelDocument) => {
         if (Object.keys(searchData).length >= SEARCH_ITEMS_SIZE) return;
         if (searchData[channel_id]) return;
