@@ -1,5 +1,5 @@
 'use client';
-import { isLoadingAtom } from '@/atom';
+import { isLoadingAtom } from '@/app/_lib/atom';
 import { cx } from '@/util';
 import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';

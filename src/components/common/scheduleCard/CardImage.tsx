@@ -1,4 +1,4 @@
-import { playerAtom } from '@/atom/player';
+import { playerAtom } from '@/app/(inner)/_lib/atom';
 import { ImageLink } from '@/components/common/scheduleCard/Style';
 import { DEFAULT_BLUR_BASE64 } from '@/const';
 import useResponsive from '@/hook/useResponsive';
@@ -62,7 +62,13 @@ const CardImage = ({ content }: CardImageProps) => {
             fill
           />
         ) : (
-          <Image src={altImage} alt={`${channelName}의 라이브방송`} placeholder="blur" unoptimized fill />
+          <Image
+            src={altImage}
+            alt={`${channelName}의 라이브방송`}
+            placeholder="blur"
+            unoptimized
+            fill
+          />
         )}
       </div>
     </ImageLink>

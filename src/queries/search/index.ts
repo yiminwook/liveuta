@@ -5,7 +5,7 @@ import { fetcher } from '@/queries';
 import { SearchResponseType } from '@/app/api/search/route';
 import { useEffect } from 'react';
 import { useSetAtom } from 'jotai';
-import { isLoadingSearchAtom } from '@/atom';
+import { isLoadingSearchAtom } from '@/app/_lib/atom';
 
 export const useSearchQuery = () => {
   const searchParams = useSearchParams();

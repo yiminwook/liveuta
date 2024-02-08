@@ -1,14 +1,14 @@
 'use client';
 import { useHydrateAtoms } from 'jotai/utils';
-import { selectAtom, themeAtom } from '@/atom';
+import { selectAtom, themeAtom } from '@/app/_lib/atom';
 import { GetCookiesReturnType } from '@/util/getCookie';
 
-interface GlobalHydrateAtomsProps {
+interface GlobalHydrateProps {
   children: React.ReactNode;
   cookies: GetCookiesReturnType;
 }
 
-const GlobalHydrateAtoms = ({ children, cookies }: GlobalHydrateAtomsProps) => {
+const GlobalHydrate = ({ children, cookies }: GlobalHydrateProps) => {
   useHydrateAtoms([
     [themeAtom, cookies.theme],
     [selectAtom, cookies.select],
@@ -17,4 +17,4 @@ const GlobalHydrateAtoms = ({ children, cookies }: GlobalHydrateAtomsProps) => {
   return <>{children}</>;
 };
 
-export default GlobalHydrateAtoms;
+export default GlobalHydrate;

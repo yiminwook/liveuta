@@ -1,4 +1,4 @@
-import { usePlayerAtom } from '@/atom/player';
+import { usePlayerAtom } from '@/app/(inner)/_lib/atom';
 import { PipButton, PlayerDiv } from '@/components/common/player/Style';
 import useToast from '@/hook/useToast';
 import { useEffect, useRef, useState } from 'react';

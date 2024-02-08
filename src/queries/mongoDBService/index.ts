@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { fetcher } from '@/queries';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
-import { isLoadingSheetAtom } from '@/atom';
+import { isLoadingSheetAtom } from '@/app/_lib/atom';
 import { ContentsDataType, MongoDBAPIReturntype } from '@/type/inMongoDB';
 
 const MONGODB_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes

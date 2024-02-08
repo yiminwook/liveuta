@@ -1,19 +1,14 @@
 'use client';
 import useToast from '@/hook/useToast';
 import { QueryClientProvider, QueryClient, QueryCache } from '@tanstack/react-query';
-import { useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 
-interface ReactQueryProviderProps {
-  children: React.ReactNode;
-}
-
-const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
+const ReactQueryProvider = ({ children }: PropsWithChildren) => {
   const toast = useToast();
   const [querClient] = useState(() => {
     return new QueryClient({
       queryCache: new QueryCache({
         onError(error, query) {
-          // console.error(error);
           const querykey = query.queryKey;
           if (querykey.includes('ignore')) return;
           toast.error({ text: '통신에러' });

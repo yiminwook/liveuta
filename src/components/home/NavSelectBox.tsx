@@ -7,7 +7,7 @@ import { cx } from '@/util';
 import { BiArrowFromLeft } from 'react-icons/bi';
 import { BsSliders } from 'react-icons/bs';
 import OutsideClickHandler from 'react-outside-click-handler';
-import { useSelectAtom } from '@/atom';
+import { useSelectAtom } from '@/app/_lib/atom';
 import { SelectType } from '@/type';
 import useMongoDB from '@/queries/mongoDBService';
 import { MongoDBAPIReturntype } from '@/type/inMongoDB';

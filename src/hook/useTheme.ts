@@ -1,4 +1,4 @@
-import { useThemeAtom } from '@/atom';
+import { useThemeAtom } from '@/app/_lib/atom';
 import { ThemeType } from '@/type';
 import Cookies from 'universal-cookie';
 

@@ -4,12 +4,12 @@ import '/public/theme.css';
 import '@/style/globals.scss';
 import '@/style/theme.scss';
 import { PropsWithChildren } from 'react';
-import { GTM_TRACKING_ID } from '@/const';
 import { DEFALUT_METADATA } from '@/const/metaData';
-import DefaultHead from '@/configs/DefaultHead';
-import Configs from '@/configs';
 import { getCookies } from '@/util/getCookie';
 import type { Viewport } from 'next';
+import Configs from './_component';
+import DefaultHead from './_component/DefaultHead';
+import GoogleTagManager from './_component/GoogleTagManager';
 
 const RootLayout = async ({ children }: PropsWithChildren) => {
   const cookies = await getCookies();
@@ -21,16 +21,7 @@ const RootLayout = async ({ children }: PropsWithChildren) => {
       </head>
       <body>
         <Configs cookies={cookies}>{children}</Configs>
-        {/* <!-- Google Tag Manager (noscript) --> */}
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_TRACKING_ID}`}
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          ></iframe>
-        </noscript>
-        {/* <!-- End Google Tag Manager (noscript) --> */}
+        <GoogleTagManager />
       </body>
     </html>
   );

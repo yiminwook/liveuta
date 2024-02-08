@@ -4,7 +4,7 @@ import { ContentsDataType, SheetAPIReturntype } from '@/type/inSheet';
 import { fetcher } from '@/queries';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
-import { isLoadingSheetAtom } from '@/atom';
+import { isLoadingSheetAtom } from '@/app/_lib/atom';
 
 const SHEET_REFRESH_INTERVAL = 1000 * 60 * 3; //3분
 

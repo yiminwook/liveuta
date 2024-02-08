@@ -1,5 +1,5 @@
 'use client';
-import { themeAtom } from '@/atom';
+import { themeAtom } from '@/app/_lib/atom';
 import iframe from '@/components/common/iframe.module.scss';
 import { openWindow } from '@/util/windowEvent';
 import { useAtomValue } from 'jotai';

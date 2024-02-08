@@ -1,4 +1,4 @@
-import { usePlayerAtom } from '@/atom/player';
+import { usePlayerAtom } from '@/app/(inner)/_lib/atom';
 import { PlayerBox } from '@/components/common/player/Style';
 import { useEffect, useRef, useState } from 'react';
 import Player from '@/components/common/player/Player';
