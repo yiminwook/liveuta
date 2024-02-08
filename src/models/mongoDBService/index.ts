@@ -75,11 +75,11 @@ export const writeDB = async (collection: string, database: string, options?: { 
   });
 };
 
-export const deleteDB = async (collection: string, database: string, options?: { document?: any }): Promise<any> => {
+export const deleteDB = async (collection: string, database: string, options?: { filter?: any }): Promise<any> => {
   return performDatabaseOperation({
     collection,
     database,
     operation: 'deleteOne',
-    document: options?.document,
+    filter: options?.filter,
   });
 };

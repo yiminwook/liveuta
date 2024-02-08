@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import errorHandler from '@/models/error/handler';
-import { readDB, writeDB } from '@/models/mongoDBService';
+import { deleteDB, readDB, writeDB } from '@/models/mongoDBService';
 import { parseAllData, parseScheduledData } from '@/util/parseMongoDBData';
 import { ContentDocumentRaw, MongoDBAPIReturntype } from '@/type/inMongoDB';
 import { PushData } from '@/app/api/push/route';
-import dayjs from 'dayjs';
+import dayjs from '@/models/dayjs';
 
 export const GET = async (_req: NextRequest) => {
   try {
@@ -84,7 +84,38 @@ export const POST = async (req: NextRequest) => {
 
     return NextResponse.json({ message: '알림이 성공적으로 등록되었습니다.' }, { status: 201 });
   } catch (error) {
-    // console.error(error);
+    console.error(error);
+    const { status, message } = errorHandler(error);
+    return NextResponse.json({ message: message }, { status });
+  }
+};
+
+export const Delete = async (req: NextRequest) => {
+  try {
+    const requestBody: PushData = await req.json();
+
+    const notiCollection = process.env.MONGODB_NOTI_COLLECTION;
+    const notiDatabase = process.env.MONGODB_SCHEDULE_DB;
+
+    if (!notiCollection || !notiDatabase) {
+      throw new Error('MongoDB collection or database names are not defined in environmental variables.');
+    }
+
+    const existingData: { documents: [] } = await readDB(notiCollection, notiDatabase, {
+      filter: { token: requestBody.token, link: requestBody.link },
+    });
+
+    if (existingData?.documents.length === 0) {
+      return NextResponse.json({ message: '이미 취소된 알림입니다.' }, { status: 226 });
+    }
+
+    await deleteDB(notiCollection, notiDatabase, {
+      filter: { token: requestBody.token, link: requestBody.link },
+    });
+
+    return NextResponse.json({ message: '알림이 성공적으로 취소되었습니다.' }, { status: 201 });
+  } catch (error) {
+    console.error(error);
     const { status, message } = errorHandler(error);
     return NextResponse.json({ message: message }, { status });
   }
