@@ -1,5 +1,5 @@
 import { SCROLL_PER_YOUTUBE_CARD } from '@/const';
-import { ContentsDataType } from '@/type/inMongoDB';
+import { ContentsDataType } from '@/type/api/mongoDB';
 import { useEffect, useMemo, useState } from 'react';
 import ScheduleCard from '../scheduleCard/Card';
 import CardPlaceHolders from '../scheduleCard/CardPlaceHolders';

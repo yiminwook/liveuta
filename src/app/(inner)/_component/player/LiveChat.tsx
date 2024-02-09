@@ -1,4 +1,4 @@
-import popupCenter from '@/util/popup';
+import popupCenter from '@inner/_lib/popup';
 import { useEffect, useRef, useState } from 'react';
 import { LiveChatBox, PopButton } from './Style';
 

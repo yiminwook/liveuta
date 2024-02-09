@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import errorHandler from '@/model/error/handler';
 import { deleteDB, readDB, writeDB } from '@/model/mongoDBService';
-import { parseAllData, parseScheduledData } from '@/util/parseMongoDBData';
-import { ContentDocumentRaw, MongoDBAPIReturntype } from '@/type/inMongoDB';
+import { parseAllData, parseScheduledData } from '@/app/api/_lib/parseMongoDBData';
+import { ContentDocumentRaw, MongoDBAPIReturntype } from '@/type/api/mongoDB';
 import { PushData } from '@/app/api/push/route';
 import dayjs from '@/model/dayjs';
 
@@ -49,7 +49,10 @@ export const GET = async (_req: NextRequest) => {
     }
 
     // Need to revise SheetAPIReturntype
-    return NextResponse.json<MongoDBAPIReturntype | undefined>({ scheduled, live, daily, all }, { status: 200 });
+    return NextResponse.json<MongoDBAPIReturntype | undefined>(
+      { scheduled, live, daily, all },
+      { status: 200 },
+    );
   } catch (error) {
     console.error(error);
     const { status, message } = errorHandler(error);

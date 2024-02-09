@@ -1,5 +1,5 @@
 import { getSheet } from '@/model/sheet';
-import { ChannelRowType } from '@/type/inYoutube';
+import { ChannelRowType } from '@/type/api/youtube';
 
 /** Parse Google spread sheet - reference */
 export const parseChannelIDSheet = async () => {
@@ -8,7 +8,8 @@ export const parseChannelIDSheet = async () => {
     range: process.env.CHANNELS_SHEET_RANGE,
   });
   const sheetDataValues = sheetData.values as ChannelRowType[];
-  if (!(sheetDataValues && sheetDataValues.length >= 2)) throw new Error('sheetData has not values');
+  if (!(sheetDataValues && sheetDataValues.length >= 2))
+    throw new Error('sheetData has not values');
   sheetDataValues.shift();
   const totalLength = sheetDataValues.length;
   return { totalLength, sheetDataValues };

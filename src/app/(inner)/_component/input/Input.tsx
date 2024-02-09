@@ -5,7 +5,7 @@ import input from './input.module.scss';
 import { GrFormClose } from 'react-icons/gr';
 import { IoMdMusicalNote } from 'react-icons/io';
 import cx from 'classnames';
-import { replaceSpecialCharacters } from '@/util/regexp';
+import { replaceSpecialCharacters } from '@inner/_lib/regexp';
 
 type OriginalInputProps = InputHTMLAttributes<HTMLInputElement>;
 

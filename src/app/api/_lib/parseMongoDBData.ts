@@ -6,10 +6,10 @@ import {
   ParseScheduledDataReturnType,
   ContentsDataType,
   isStream,
-} from '@/type/inMongoDB';
-import { getInterval, stringToTime } from '@/util/getTime';
+} from '@/type/api/mongoDB';
+import { getInterval, stringToTime } from '@/app/api/_lib/getTime';
 import dayjs from '@/model/dayjs';
-import { replaceParentheses } from '@/util/regexp';
+import { replaceParentheses } from '@inner/_lib/regexp';
 
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => {
   try {

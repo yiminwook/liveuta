@@ -1,6 +1,6 @@
 'use client';
 import dayjs from '@/model/dayjs';
-import { replaceSpecialCharacters } from '@/util/regexp';
+import { replaceSpecialCharacters } from '@inner/_lib/regexp';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';

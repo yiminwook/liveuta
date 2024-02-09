@@ -3,7 +3,7 @@ import CardDesc from './CardDesc';
 import CardImage from './CardImage';
 import { Card } from './Style';
 //import { ContentsDataType } from '@/types/inSheet';
-import { ContentsDataType } from '@/type/inMongoDB';
+import { ContentsDataType } from '@/type/api/mongoDB';
 import cx from 'classnames';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 

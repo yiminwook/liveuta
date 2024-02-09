@@ -1,5 +1,5 @@
 import { getYoutubeChannels } from '@/model/youtube';
-import { ChannelsDataType } from '@/type/inYoutube';
+import { ChannelsDataType } from '@/type/api/youtube';
 import { youtube_v3 } from 'googleapis';
 
 export interface ChannelSheetDataType {
@@ -11,7 +11,9 @@ export interface ChannelSheetDataType {
 }
 
 /* YoutubeData API + Channel ID Sheet */
-export const combineChannelData = async (sheetData: ChannelSheetDataType): Promise<ChannelsDataType[]> => {
+export const combineChannelData = async (
+  sheetData: ChannelSheetDataType,
+): Promise<ChannelsDataType[]> => {
   const idArr = [...Object.keys(sheetData)];
   if (idArr.length <= 0) return [];
   const youtubeData = await getYoutubeChannels(idArr);

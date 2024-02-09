@@ -1,7 +1,7 @@
 'use client';
 import { themeAtom } from '@/app/_lib/atom';
 import iframe from './iframe.module.scss';
-import { openWindow } from '@/util/windowEvent';
+import { openWindow } from '@inner/_lib/windowEvent';
 import { useAtomValue } from 'jotai';
 import { useRef, useEffect, useState, MouseEvent } from 'react';
 

@@ -5,5 +5,7 @@ export const replaceParentheses = (string: string) => {
 
 /** 특수문자 입력방지, 띄어쓰기는 한번만 */
 export const replaceSpecialCharacters = (string: string) => {
-  return string.replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi, '').replace(/\s{2}/gi, ' ');
+  return string
+    .replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi, '')
+    .replace(/\s{2}/gi, ' ');
 };

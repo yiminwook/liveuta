@@ -1,7 +1,7 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { fetcher } from '@/queries';
+import { fetcher } from '@inner/_lib/fetcher';
 import { SearchResponseType } from '@/app/api/search/route';
 import { useEffect } from 'react';
 import { useSetAtom } from 'jotai';

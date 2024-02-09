@@ -7,8 +7,8 @@ import TopSection from './header/TopSection';
 import useResponsive from '@/hook/useResponsive';
 import clientOnly from '@/model/clientOnly';
 //import { SheetAPIReturntype } from '@/types/inSheet';
-import useMongoDB from '@/queries/mongoDBService';
-import { MongoDBAPIReturntype } from '@/type/inMongoDB';
+import useMongoDB from '@inner/_lib/getMongoDB';
+import { MongoDBAPIReturntype } from '@/type/api/mongoDB';
 
 interface MainProps {
   filter: keyof MongoDBAPIReturntype;

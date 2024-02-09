@@ -1,5 +1,5 @@
 import search from './search.module.scss';
-import { useSearchQuery } from '@/queries/search';
+import { useSearchQuery } from '@inner/_lib/getSheet';
 import { memo } from 'react';
 
 const SummarySection = () => {

@@ -1,5 +1,5 @@
 import { SearchResponseType } from '@/app/api/search/route';
-import ChannelCard from '@/app/(inner)/(pip)/channels/_component/channelCard/ChannelCard';
+import ChannelCard from '@inner/_component/channelCard/ChannelCard';
 import search from './search.module.scss';
 import { SEARCH_ITEMS_SIZE } from '@/const';
 

@@ -1,6 +1,6 @@
-import getPaginationRange from '@/util/getPagenationRange';
-import { ChannelSheetDataType, combineChannelData } from '@/util/combineChannelData';
-import { parseChannelIDSheet } from '@/util/parseChannelSheet';
+import getPaginationRange from '@inner/_lib/getPagenationRange';
+import { ChannelSheetDataType, combineChannelData } from '@inner/_lib/combineChannelData';
+import { parseChannelIDSheet } from '@inner/_lib/parseChannelSheet';
 import Channels from '@/app/(inner)/(pip)/channels/_component/Home';
 import { notFound } from 'next/navigation';
 

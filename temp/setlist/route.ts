@@ -1,5 +1,5 @@
 import errorHandler from '@/model/error/handler';
-import { SearchCommentItemType, SearchCommentResponseType } from '@/type/inHolodex';
+import { SearchCommentItemType, SearchCommentResponseType } from '@/type/api/holodex';
 import axios, { AxiosResponse } from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -34,12 +34,19 @@ export const GET = async (req: NextRequest) => {
       limit: PAGINATION_LIMIT,
     };
 
-    const response: AxiosResponse<SearchCommentResponseType> = await axios.post(SERCH_COMMENT_ENDPOINT, body, {
-      headers: { 'X-APIKEY': process.env.HOLODEX_API_KEY },
-    });
+    const response: AxiosResponse<SearchCommentResponseType> = await axios.post(
+      SERCH_COMMENT_ENDPOINT,
+      body,
+      {
+        headers: { 'X-APIKEY': process.env.HOLODEX_API_KEY },
+      },
+    );
     const totalPage = Math.ceil(response.data.total / PAGINATION_LIMIT);
 
-    return NextResponse.json<SetListResponseType>({ totalPage, items: response.data.items }, { status: 200 });
+    return NextResponse.json<SetListResponseType>(
+      { totalPage, items: response.data.items },
+      { status: 200 },
+    );
   } catch (error) {
     const { status, message } = errorHandler(error);
     return NextResponse.json({ error: message }, { status });

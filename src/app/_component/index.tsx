@@ -2,7 +2,7 @@ import JotaiProvider from './Jotai';
 import Devtools from './Devtools';
 import ServiceWorker from './ServiceWorker';
 import ReactQueryProvider from './ReactQuery';
-import { GetCookiesReturnType } from '@/util/getCookie';
+import { GetCookiesReturnType } from '@inner/_lib/getCookie';
 import AntdProvider from './Antd';
 import GlobalHydrate from './GlobalHydrate';
 

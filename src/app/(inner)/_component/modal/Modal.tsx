@@ -1,9 +1,9 @@
 'use client';
 import { CSSProperties, MouseEvent, ReactNode } from 'react';
 import modal from './modal.module.scss';
-import useStopPropagation from '@/hook/useStopPropagation';
 import ModalPortal from './ModalPortal';
 import CloseButton from '../button/CloseButton';
+import useStopPropagation from '@/hook/useStopPropagation';
 
 interface ModalProps {
   children: ReactNode;
@@ -13,6 +13,7 @@ interface ModalProps {
 
 const Modal = ({ children, style, onClose }: ModalProps) => {
   const { stopPropagation } = useStopPropagation();
+
   return (
     <ModalPortal>
       <div className={modal['container']} onClick={onClose}>

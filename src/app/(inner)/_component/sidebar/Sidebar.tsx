@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import useStopPropagation from '@/hook/useStopPropagation';
 import ExternalLinksSection from './ExternalLinksSection';
 import IndexSection from './IndexSection';
 import sidebar from './sidebar.module.scss';
 import CloseButton from '../button/CloseButton';
 import ThemeButton from '../button/ThemeButton';
+import useStopPropagation from '@/hook/useStopPropagation';
 
 interface SidebarProps {
   show: boolean;

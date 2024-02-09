@@ -1,6 +1,6 @@
-import { SheetAPIReturntype } from '@/type/inSheet';
+import { SheetAPIReturntype } from '@/type/api/sheet';
 import { getSheet } from '@/model/sheet';
-import { parseAllData, parseScheduledData } from '@/util/parseContentSheet';
+import { parseAllData, parseScheduledData } from '@/app/api/_lib/parseContentSheet';
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/model/error/handler';
 import { cookies } from 'next/headers';

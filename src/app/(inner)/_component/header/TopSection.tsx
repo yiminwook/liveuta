@@ -1,4 +1,4 @@
-import { ContentsDataType, MongoDBAPIReturntype } from '@/type/inMongoDB';
+import { ContentsDataType, MongoDBAPIReturntype } from '@/type/api/mongoDB';
 import styled from '@emotion/styled';
 import PlayerWrap from '../player/PlayerWrap';
 

@@ -1,12 +1,21 @@
-import { ContentsRowType, ContentsDataType, SheetAPIReturntype } from '@/type/inSheet';
+import { ContentsRowType, ContentsDataType, SheetAPIReturntype } from '@/type/api/sheet';
 import { sheets_v4 } from 'googleapis';
-import { getInterval, stringToTime } from '@/util/getTime';
+import { getInterval, stringToTime } from '@/app/api/_lib/getTime';
 import dayjs from '@/model/dayjs';
-import { replaceParentheses } from '@/util/regexp';
+import { replaceParentheses } from '@inner/_lib/regexp';
 
 export const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {
   try {
-    const [title, url, channelName, scheduledTime, thumbnailURL, _bool, isStream, isVideo]: ContentsRowType = value;
+    const [
+      title,
+      url,
+      channelName,
+      scheduledTime,
+      thumbnailURL,
+      _bool,
+      isStream,
+      isVideo,
+    ]: ContentsRowType = value;
     if (scheduledTime.length >= 18) {
       const { timestamp, korTime } = stringToTime(dayjs(scheduledTime));
       const interval = getInterval(timestamp);
@@ -46,7 +55,9 @@ interface ParseScheduledDataReturnType {
   live: SheetAPIReturntype['live'];
 }
 /** Parse Google spread sheet - Scheduled & Live */
-export const parseScheduledData = (data: sheets_v4.Schema$ValueRange): ParseScheduledDataReturnType => {
+export const parseScheduledData = (
+  data: sheets_v4.Schema$ValueRange,
+): ParseScheduledDataReturnType => {
   const dataValue = data.values as ContentsRowType[];
   if (!dataValue) throw new Error('No DataValue');
 

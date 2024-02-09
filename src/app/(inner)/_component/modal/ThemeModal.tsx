@@ -5,7 +5,7 @@ import { MouseEvent } from 'react';
 import themeModal from './themeModal.module.scss';
 import useTheme from '@/hook/useTheme';
 import { ThemeType } from '@/type';
-import { gtagClick } from '@/util/gtag';
+import { gtagClick } from '@inner/_lib/gtag';
 
 interface ThemeModalButtonProps {
   primaryColor: string;

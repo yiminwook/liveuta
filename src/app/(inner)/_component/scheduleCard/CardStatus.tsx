@@ -1,5 +1,5 @@
 //import { isStream } from '@/types/inSheet';
-import { isStream } from '@/type/inMongoDB';
+import { isStream } from '@/type/api/mongoDB';
 import { StatusBox } from './Style';
 import CardViewer from './CardViewer';
 

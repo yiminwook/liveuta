@@ -4,7 +4,7 @@ import NavLink from '../NavLink';
 import home from '../home.module.scss';
 import NavSelectBox from './NavSelectBox';
 //import { SheetAPIReturntype } from '@/types/inSheet';
-import { MongoDBAPIReturntype } from '@/type/inMongoDB';
+import { MongoDBAPIReturntype } from '@/type/api/mongoDB';
 
 const NavTapLink = ({ href, text }: { href: string; text: ReactNode }) => {
   return (

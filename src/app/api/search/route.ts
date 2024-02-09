@@ -1,11 +1,11 @@
-import { ChannelDocument, ContentsDataType, ContentDocumentRaw } from '@/type/inMongoDB';
-import { parseMongoDBDocument } from '@/util/parseMongoDBData';
+import { ChannelDocument, ContentsDataType, ContentDocumentRaw } from '@/type/api/mongoDB';
+import { parseMongoDBDocument } from '@/app/api/_lib/parseMongoDBData';
 import { readDB } from '@/model/mongoDBService/';
-import { ChannelSheetDataType, combineChannelData } from '@/util/combineChannelData';
-import { ChannelsDataType } from '@/type/inYoutube';
+import { ChannelSheetDataType, combineChannelData } from '@inner/_lib/combineChannelData';
+import { ChannelsDataType } from '@/type/api/youtube';
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/model/error/handler';
-import { replaceSpecialCharacters } from '@/util/regexp';
+import { replaceSpecialCharacters } from '@inner/_lib/regexp';
 import { SEARCH_ITEMS_SIZE } from '@/const';
 import dayjs from '@/model/dayjs';
 

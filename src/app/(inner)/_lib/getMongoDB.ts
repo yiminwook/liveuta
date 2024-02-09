@@ -1,27 +1,28 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { ContentsDataType, SheetAPIReturntype } from '@/type/inSheet';
-import { fetcher } from '@/queries';
+import { fetcher } from '@inner/_lib/fetcher';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { isLoadingSheetAtom } from '@/app/_lib/atom';
+import { ContentsDataType, MongoDBAPIReturntype } from '@/type/api/mongoDB';
 
-const SHEET_REFRESH_INTERVAL = 1000 * 60 * 3; //3분
+const MONGODB_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
 
-const useSheet = (filter: keyof SheetAPIReturntype) => {
+const useMongoDB = (filter: keyof MongoDBAPIReturntype) => {
   const [isLoad, setIsLoad] = useState(false);
   const [contents, setContents] = useState<ContentsDataType[]>([]);
   const setIsLoadingSheet = useSetAtom(isLoadingSheetAtom);
 
-  const { data, dataUpdatedAt, isLoading, refetch, status } = useQuery<SheetAPIReturntype>({
-    queryKey: ['sheet'],
+  const { data, dataUpdatedAt, isLoading, refetch, status } = useQuery<MongoDBAPIReturntype>({
+    queryKey: ['mongodb'],
     queryFn: async () => {
-      // throw new Error('fetcher not defined');
-      return await fetcher('/api/sheet');
+      // const result = await fetcher('/api/mongoDBService');
+      const result = await fetcher('/api/sheet');
+      return result as MongoDBAPIReturntype;
     },
-    refetchInterval: SHEET_REFRESH_INTERVAL,
-    staleTime: 1000 * 60, //1분
-    gcTime: SHEET_REFRESH_INTERVAL,
+    refetchInterval: MONGODB_REFRESH_INTERVAL,
+    staleTime: 1000 * 60, // 1 minute
+    gcTime: MONGODB_REFRESH_INTERVAL,
     refetchOnReconnect: true,
     refetchOnWindowFocus: true,
     refetchIntervalInBackground: false,
@@ -58,4 +59,4 @@ const useSheet = (filter: keyof SheetAPIReturntype) => {
   };
 };
 
-export default useSheet;
+export default useMongoDB;

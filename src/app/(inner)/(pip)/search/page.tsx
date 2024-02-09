@@ -1,7 +1,7 @@
-import Client from '@/app/(inner)/(pip)/search/page.client';
+import Home from './_component/Home';
 
 const Page = () => {
-  return <Client />;
+  return <Home />;
 };
 
 export default Page;

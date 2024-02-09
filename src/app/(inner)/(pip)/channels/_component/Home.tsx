@@ -1,4 +1,4 @@
-import { ChannelsDataType } from '@/type/inYoutube';
+import { ChannelsDataType } from '@/type/api/youtube';
 import HorizonScrollBox from '@inner/_component/HorizonScrollBox';
 import Pagination from '@inner/_component/pagination/Pagination';
 import ChannelSection from './ChannelSection';

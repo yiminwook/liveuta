@@ -7,7 +7,7 @@ import {
   MdKeyboardDoubleArrowRight,
 } from 'react-icons/md';
 import Link from 'next/link';
-import { useLocation } from '@/hook/useLocation';
+import useLocation from '@/hook/useLocation';
 import { ReactNode } from 'react';
 
 export const FirstLink = ({ currentPage }: { currentPage: number }) => {

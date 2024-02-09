@@ -1,6 +1,6 @@
 'use client';
 import Loading from '@/app/loading';
-import { gtag } from '@/util/gtag';
+import { gtag } from '@inner/_lib/gtag';
 import { PropsWithChildren, useEffect } from 'react';
 import Footer from './_component/Footer';
 import FloatButton from './_component/button/FlotButton';

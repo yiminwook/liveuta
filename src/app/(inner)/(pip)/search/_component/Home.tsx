@@ -1,11 +1,11 @@
 'use client';
-import ChannelSection from '@inner/(pip)/search/_component/ChannelSection';
-import ContentSection from '@inner/(pip)/search/_component/ContentSection';
-import SearchSection from '@inner/(pip)/search/_component/SearchSection';
-import SummarySection from '@inner/(pip)/search/_component/SummarySection';
+import ChannelSection from './ChannelSection';
+import ContentSection from './ContentSection';
+import SearchSection from './SearchSection';
+import SummarySection from './SummarySection';
 import useResponsive from '@/hook/useResponsive';
 import clientOnly from '@/model/clientOnly';
-import { useSearch } from '@/queries/search';
+import { useSearch } from '@inner/_lib/getSheet';
 
 const Client = () => {
   const { searchData } = useSearch();

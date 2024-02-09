@@ -1,9 +1,12 @@
 // @ts-ignore
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { SheetAPIReturntype } from '@/type/inSheet';
+import { SheetAPIReturntype } from '@/type/api/sheet';
 import { google } from 'googleapis';
 
-const handler = async (req: NextApiRequest, res: NextApiResponse<SheetAPIReturntype | undefined>) => {
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse<SheetAPIReturntype | undefined>,
+) => {
   try {
     if (!req.method) throw new Error('invaild method');
 

@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import Modal from '@inner/_component/modal/Modal';
 import channelCardModal from './channelCardModal.module.scss';
-import { openWindow } from '@/util/windowEvent';
+import { openWindow } from '@inner/_lib/windowEvent';
 import CopyButton from '@inner/_component/button/CopyButton';
 import { DEFAULT_BLUR_BASE64 } from '@/const';
 import { MouseEvent } from 'react';
-import { gtagClick, gtagClickAtag } from '@/util/gtag';
+import { gtagClick, gtagClickAtag } from '@inner/_lib/gtag';
 
 interface ChannelCardModalProp {
   onClose: (e: MouseEvent) => void;

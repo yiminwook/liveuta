@@ -1,5 +1,5 @@
 // @ts-ignore
-import { SearchCommentType } from '@/type/inHolodex';
+import { SearchCommentType } from '@/type/api/holodex';
 import ReactHtmlParser from 'react-html-parser';
 
 interface CommentProps {

@@ -1,9 +1,9 @@
-import { clipText } from '@/util/windowEvent';
+import { clipText } from '@inner/_lib/windowEvent';
 import { CSSProperties, MouseEvent } from 'react';
 import { FaCopy } from 'react-icons/fa';
 import copyButton from './copyButton.module.scss';
 import useToast from '@/hook/useToast';
-import { gtagClick } from '@/util/gtag';
+import { gtagClick } from '@inner/_lib/gtag';
 
 interface CopyButtonProps {
   value: string;

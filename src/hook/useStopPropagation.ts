@@ -7,4 +7,5 @@ const useStopPropagation = <T extends UIEvent>() => {
 
   return { stopPropagation };
 };
+
 export default useStopPropagation;

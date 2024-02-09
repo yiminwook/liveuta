@@ -1,13 +1,13 @@
 'use client';
 import { DEFAULT_BLUR_BASE64 } from '@/const';
-import { ChannelsDataType } from '@/type/inYoutube';
-import { gtagClick, gtagClickAtag } from '@/util/gtag';
-import { renderSubscribe } from '@/util/renderSubscribe';
-import { openWindow } from '@/util/windowEvent';
+import { ChannelsDataType } from '@/type/api/youtube';
 import CopyButton from '@inner/_component/button/CopyButton';
+import { gtagClick, gtagClickAtag } from '@inner/_lib/gtag';
+import { renderSubscribe } from '@inner/_lib/renderSubscribe';
+import { openWindow } from '@inner/_lib/windowEvent';
 import Image from 'next/image';
 import { MouseEvent, useState } from 'react';
-import ChannelCardModal from '../ChannelCardModal';
+import ChannelCardModal from '../modal/ChannelCardModal';
 import channelCard from './channelCard.module.scss';
 
 interface ChannelItemProps {
