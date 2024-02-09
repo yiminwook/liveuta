@@ -17,6 +17,7 @@
     "types": ["@types/gtag.js"],
     "paths": {
       "@/*": ["./src/*"],
+      "@inner/*": ["./src/app/(inner)/*"],
       "~/*": ["./*"]
     },
     "plugins": [

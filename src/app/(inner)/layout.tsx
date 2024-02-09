@@ -4,7 +4,7 @@ import Footer from '@/components/layout/Footer';
 import FloatButton from '@/components/common/button/FlotButton';
 import Header from '@/components/layout/Header';
 import FetchIndicator from '@/components/layout/FetchIndicator';
-import Loading from '@/components/layout/Loading';
+import Loading from '@/app/loading';
 import { gtag } from '@/util/gtag';
 
 const Layout = ({ children }: PropsWithChildren) => {

@@ -1,9 +1,9 @@
 'use client';
 import { useEffect } from 'react';
 //import useSheet from '@/queries/sheet';
-import NavSection from '@/components/home/NavSection';
-import ScheduleSection from '@/components/home/ScheduleSection';
-import TopSection from '@/components/home/TopSection';
+import NavSection from '@inner/_copmonent/NavSection';
+import ScheduleSection from '@inner/_copmonent/ScheduleSection';
+import TopSection from '@inner/_copmonent/TopSection';
 import useResponsive from '@/hook/useResponsive';
 import clientOnly from '@/model/clientOnly';
 //import { SheetAPIReturntype } from '@/types/inSheet';
@@ -21,7 +21,13 @@ const Main = ({ filter }: MainProps) => {
   return (
     <>
       <NavSection filter={filter} />
-      <TopSection isLoad={isLoad} filter={filter} contents={contents} isMobile={isMobile} isDesktop={isDesktop} />
+      <TopSection
+        isLoad={isLoad}
+        filter={filter}
+        contents={contents}
+        isMobile={isMobile}
+        isDesktop={isDesktop}
+      />
       <ScheduleSection contents={contents} isMobile={isMobile} />
     </>
   );
