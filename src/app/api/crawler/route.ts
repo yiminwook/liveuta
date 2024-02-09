@@ -2,7 +2,7 @@ import errorHandler from '@/model/error/handler';
 import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
-export const GET = async (request: NextRequest) => {
+export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.nextUrl);
     const searchParams = url.searchParams;
@@ -30,7 +30,6 @@ export const GET = async (request: NextRequest) => {
     const { status, message } = errorHandler(error);
     return NextResponse.json({ data: message }, { status });
   }
-};
+}
 
 export const dynamic = 'force-dynamic';
-// export const runtime = 'edge';

@@ -1,3 +1,4 @@
+'use client';
 import { ChangeEvent, CSSProperties, FormEvent, RefObject, useState } from 'react';
 
 interface SearchInputProps {
@@ -8,7 +9,13 @@ interface SearchInputProps {
   onSearch: (value: string) => void;
 }
 
-const SearchInput = ({ ref, style, placeHolder = '', disabled = false, onSearch }: SearchInputProps) => {
+function SearchInput({
+  ref,
+  style,
+  placeHolder = '',
+  disabled = false,
+  onSearch,
+}: SearchInputProps) {
   const [value, setValue] = useState('');
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +44,6 @@ const SearchInput = ({ ref, style, placeHolder = '', disabled = false, onSearch 
       <button type="submit">검색</button>
     </form>
   );
-};
+}
 
 export default SearchInput;

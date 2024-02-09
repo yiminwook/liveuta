@@ -8,13 +8,11 @@ interface GlobalHydrateProps {
   cookies: GetCookiesReturnType;
 }
 
-const GlobalHydrate = ({ children, cookies }: GlobalHydrateProps) => {
+export default function GlobalHydrate({ children, cookies }: GlobalHydrateProps) {
   useHydrateAtoms([
     [themeAtom, cookies.theme],
     [selectAtom, cookies.select],
   ]);
 
   return <>{children}</>;
-};
-
-export default GlobalHydrate;
+}

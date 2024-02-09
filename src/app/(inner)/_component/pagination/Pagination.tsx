@@ -11,7 +11,7 @@ interface PaginationProps {
   className?: string;
 }
 
-const Pagination = ({ totalLength, className = '' }: PaginationProps) => {
+export default function Pagination({ totalLength, className }: PaginationProps) {
   const params = useParams();
 
   const currentPage = useMemo(() => {
@@ -46,6 +46,4 @@ const Pagination = ({ totalLength, className = '' }: PaginationProps) => {
       <LastLink currentPage={currentPage} totalPage={totalPage} />
     </ul>
   );
-};
-
-export default Pagination;
+}

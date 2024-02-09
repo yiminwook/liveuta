@@ -6,15 +6,15 @@ import NavSelectBox from './NavSelectBox';
 //import { SheetAPIReturntype } from '@/types/inSheet';
 import { MongoDBAPIReturntype } from '@/type/api/mongoDB';
 
-const NavTapLink = ({ href, text }: { href: string; text: ReactNode }) => {
+function NavTapLink({ href, text }: { href: string; text: ReactNode }) {
   return (
     <NavLink modifier={home['active']} href={href} shallow={false}>
       {text}
     </NavLink>
   );
-};
+}
 
-const NavTap = () => {
+function NavTap() {
   return (
     <ul className={home['nav-tab']}>
       <NavTapLink href="/" text="예정" />
@@ -23,13 +23,13 @@ const NavTap = () => {
       <NavTapLink href="/all" text="전체" />
     </ul>
   );
-};
+}
 
 interface NavSectionProps {
   filter: keyof MongoDBAPIReturntype;
 }
 
-const NavSection = ({ filter }: NavSectionProps) => {
+export default function NavSection({ filter }: NavSectionProps) {
   return (
     <section className={home['nav-section']}>
       <HorizonScrollBox className={home['nav-scroll-box']}>
@@ -39,6 +39,4 @@ const NavSection = ({ filter }: NavSectionProps) => {
       </HorizonScrollBox>
     </section>
   );
-};
-
-export default memo(NavSection);
+}

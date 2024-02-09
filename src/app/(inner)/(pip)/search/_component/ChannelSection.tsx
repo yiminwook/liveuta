@@ -6,7 +6,7 @@ import { SEARCH_ITEMS_SIZE } from '@/const';
 interface ChannelSectionProps {
   channels: SearchResponseType['channels'];
 }
-const ChannelSection = ({ channels }: ChannelSectionProps) => {
+export default function ChannelSection({ channels }: ChannelSectionProps) {
   return (
     <section className={search['channel-section']}>
       <div>
@@ -23,6 +23,4 @@ const ChannelSection = ({ channels }: ChannelSectionProps) => {
       ) : null}
     </section>
   );
-};
-
-export default ChannelSection;
+}

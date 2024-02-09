@@ -14,12 +14,12 @@ interface ScheduleCardProps {
   handleInfinityScroll?: () => void;
 }
 
-const ScheduleCard = ({
+export default function ScheduleCard({
   content,
   currentIndex,
   lastContentsIndex,
   handleInfinityScroll,
-}: ScheduleCardProps) => {
+}: ScheduleCardProps) {
   const { videoId, isStream } = content;
   const target = useRef<HTMLDivElement>(null);
 
@@ -73,6 +73,4 @@ const ScheduleCard = ({
       <CardDesc content={content} addStreamModifier={addStreamModifier} />
     </Card>
   );
-};
-
-export default ScheduleCard;
+}

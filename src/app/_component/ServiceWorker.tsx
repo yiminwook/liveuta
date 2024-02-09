@@ -4,10 +4,11 @@ import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import { onMessage } from 'firebase/messaging';
 import { useEffect } from 'react';
 
-const ServiceWorker = () => {
+export default function ServiceWorker() {
   const handleMessage = async () => {
     try {
-      await generateFcmToken();
+      const token = await generateFcmToken();
+      alert(token);
 
       const messaging = FirebaseClient.getInstance().message;
       onMessage(messaging, ({ data, from, collapseKey, messageId }) => {
@@ -37,6 +38,4 @@ const ServiceWorker = () => {
   }, []);
 
   return <></>;
-};
-
-export default ServiceWorker;
+}

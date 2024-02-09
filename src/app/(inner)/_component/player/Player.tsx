@@ -10,7 +10,7 @@ interface PlayerProps {
   isShow: boolean;
 }
 
-const Player = ({ isShow }: PlayerProps) => {
+export default function Player({ isShow }: PlayerProps) {
   const player = useRef<ReactPlayer>(null);
   const [isReady, setIsReady] = useState(false);
   const [playerValue, setPlayerValue] = usePlayerAtom();
@@ -79,6 +79,4 @@ const Player = ({ isShow }: PlayerProps) => {
       </PipButton>
     </PlayerDiv>
   );
-};
-
-export default Player;
+}

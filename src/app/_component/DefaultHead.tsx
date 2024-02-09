@@ -1,7 +1,7 @@
 import GoogleAnalytics from '@/app/_component/GoogleAnalytics';
 import { DEFAULT_ICON, DEFAULT_SITE_URL } from '@/const/metaData';
 
-const DefaultHead = () => {
+export default function DefaultHead() {
   return (
     <>
       <GoogleAnalytics />
@@ -11,6 +11,4 @@ const DefaultHead = () => {
       <link rel="assets" href={`${DEFAULT_SITE_URL}/assets`} />
     </>
   );
-};
-
-export default DefaultHead;
+}

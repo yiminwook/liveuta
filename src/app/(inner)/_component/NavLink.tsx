@@ -10,7 +10,7 @@ interface NavLinkProps {
   shallow?: boolean;
 }
 
-const NavLink = ({ href, children, modifier = '', shallow = false }: NavLinkProps) => {
+export default function NavLink({ href, children, modifier = '', shallow = false }: NavLinkProps) {
   const pathName = usePathname();
   const isActive = pathName === href;
 
@@ -34,6 +34,4 @@ const NavLink = ({ href, children, modifier = '', shallow = false }: NavLinkProp
       </Link>
     </li>
   );
-};
-
-export default NavLink;
+}

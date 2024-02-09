@@ -1,30 +1,30 @@
-import JotaiProvider from './Jotai';
+import Jotai from './Jotai';
 import Devtools from './Devtools';
-import ServiceWorker from './ServiceWorker';
-import ReactQueryProvider from './ReactQuery';
+import ReactQuery from './ReactQuery';
 import { GetCookiesReturnType } from '@inner/_lib/getCookie';
 import AntdProvider from './Antd';
 import GlobalHydrate from './GlobalHydrate';
+import dynamic from 'next/dynamic';
+
+const ServiceWorker = dynamic(() => import('@/app/_component/ServiceWorker'), { ssr: false });
 
 interface ConfigsProps {
   children: React.ReactNode;
   cookies: GetCookiesReturnType;
 }
 
-const Configs = ({ children, cookies }: ConfigsProps) => {
+export default function Configs({ children, cookies }: ConfigsProps) {
   return (
     <AntdProvider>
-      <JotaiProvider>
-        <ReactQueryProvider>
+      <Jotai>
+        <ReactQuery>
           <GlobalHydrate cookies={cookies}>
             {children}
             <ServiceWorker />
             <Devtools />
           </GlobalHydrate>
-        </ReactQueryProvider>
-      </JotaiProvider>
+        </ReactQuery>
+      </Jotai>
     </AntdProvider>
   );
-};
-
-export default Configs;
+}

@@ -12,9 +12,9 @@ export interface PushData {
   timestamp: string;
 }
 
-export const POST = async (request: NextRequest) => {
+export async function POST(req: NextRequest) {
   try {
-    const resquestBody: PushData[] = await request.json();
+    const resquestBody: PushData[] = await req.json();
 
     const messages = resquestBody.map<Message>((data) => ({
       token: data.token,
@@ -45,4 +45,4 @@ export const POST = async (request: NextRequest) => {
     const { status, message } = errorHandler(error);
     return NextResponse.json({ error: message }, { status });
   }
-};
+}

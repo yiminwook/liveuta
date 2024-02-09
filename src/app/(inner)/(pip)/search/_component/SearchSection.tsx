@@ -8,7 +8,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { FormEvent, useCallback, useEffect, useState } from 'react';
 import search from './search.module.scss';
 
-const SearchSection = () => {
+export default function SearchSection() {
   const route = useRouter();
   const pathname = usePathname();
   const searchQuery = useSearchQuery();
@@ -62,6 +62,4 @@ const SearchSection = () => {
       </div>
     </section>
   );
-};
-
-export default SearchSection;
+}

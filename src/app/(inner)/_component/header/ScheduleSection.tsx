@@ -1,3 +1,4 @@
+'use client';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/const';
 import { ContentsDataType } from '@/type/api/mongoDB';
 import { useEffect, useMemo, useState } from 'react';
@@ -10,7 +11,7 @@ interface YoutubeSectionProps {
   isMobile: boolean;
 }
 
-const ScheduleSection = ({ contents, isMobile }: YoutubeSectionProps) => {
+export default function ScheduleSection({ contents, isMobile }: YoutubeSectionProps) {
   const [loadContents, setLoadContents] = useState(contents.slice(0, SCROLL_PER_YOUTUBE_CARD));
   const [scrollPage, setScrollPage] = useState(1);
 
@@ -51,6 +52,4 @@ const ScheduleSection = ({ contents, isMobile }: YoutubeSectionProps) => {
       <CardPlaceHolders isMobile={isMobile} />
     </CardSection>
   );
-};
-
-export default ScheduleSection;
+}

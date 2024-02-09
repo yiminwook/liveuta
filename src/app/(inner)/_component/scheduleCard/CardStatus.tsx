@@ -9,8 +9,6 @@ interface CardStatusProps {
   videoId: string;
 }
 
-const CardStatus = ({ isStream, interval, videoId }: CardStatusProps) => {
+export default function CardStatus({ isStream, interval, videoId }: CardStatusProps) {
   return <StatusBox>{isStream !== 'TRUE' ? interval : <CardViewer videoId={videoId} />}</StatusBox>;
-};
-
-export default CardStatus;
+}

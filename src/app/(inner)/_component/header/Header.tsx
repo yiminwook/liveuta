@@ -11,7 +11,7 @@ import Input from '../input/Input';
 import Sidebar from '../sidebar/Sidebar';
 import header from './header.module.scss';
 
-const Header = () => {
+export default function Header() {
   const pathname = usePathname();
   const route = useRouter();
   const gnbRef = useRef<HTMLDivElement>(null);
@@ -98,6 +98,4 @@ const Header = () => {
       <div className={header['blank']} />
     </header>
   );
-};
-
-export default Header;
+}

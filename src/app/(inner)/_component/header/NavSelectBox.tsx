@@ -1,3 +1,4 @@
+'use client';
 import home from '../home.module.scss';
 import React, { useState } from 'react';
 //import useSheet from '@/queries/sheet';
@@ -16,7 +17,7 @@ interface NavSelectBoxProps {
   filter: keyof MongoDBAPIReturntype;
 }
 
-const NavSelectBox = ({ filter }: NavSelectBoxProps) => {
+export default function NavSelectBox({ filter }: NavSelectBoxProps) {
   const [active, setActive] = useState(false);
   const [select, setSelect] = useSelectAtom();
   const { refetchSheet, sheetData } = useMongoDB(filter);
@@ -91,6 +92,4 @@ const NavSelectBox = ({ filter }: NavSelectBoxProps) => {
       </OutsideClickHandler>
     </div>
   );
-};
-
-export default NavSelectBox;
+}

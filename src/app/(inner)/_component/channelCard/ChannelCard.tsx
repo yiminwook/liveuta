@@ -14,7 +14,7 @@ interface ChannelItemProps {
   content: ChannelsDataType;
 }
 
-const ChannelItem = ({ content }: ChannelItemProps) => {
+export default function ChannelItem({ content }: ChannelItemProps) {
   const [showModal, setShowModal] = useState(false);
   const { channelName, snippet, url, statistics } = content;
   const title = snippet.title ?? '';
@@ -84,7 +84,7 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
           </div>
         </div>
       </div>
-      {showModal ? (
+      {showModal && (
         <ChannelCardModal
           channelName={channelName}
           title={title}
@@ -95,9 +95,7 @@ const ChannelItem = ({ content }: ChannelItemProps) => {
           description={description}
           onClose={closeModal}
         />
-      ) : null}
+      )}
     </>
   );
-};
-
-export default ChannelItem;
+}

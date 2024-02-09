@@ -3,7 +3,7 @@ import DropDown from '../dropDown/DropDown';
 import { ExternalLinkList } from '../sidebar/ExternalLinksSection';
 import { IndexLinkList } from '../sidebar/IndexSection';
 
-const NavigationList = () => {
+export default function NavigationList() {
   return (
     <ul>
       <li>
@@ -21,6 +21,4 @@ const NavigationList = () => {
       </li>
     </ul>
   );
-};
-
-export default NavigationList;
+}

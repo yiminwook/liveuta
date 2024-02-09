@@ -1,4 +1,5 @@
-import { memo, MouseEvent, ReactNode, useState } from 'react';
+'use client';
+import { MouseEvent, ReactNode, useState } from 'react';
 import { GoTriangleDown } from 'react-icons/go';
 import dropDown from './dropDown.module.scss';
 import cx from 'classnames';
@@ -11,7 +12,12 @@ interface DropDownProps {
   height?: string;
 }
 
-const DropDown = ({ children, width = 'auto', height = '2.5rem', title }: DropDownProps) => {
+export default function DropDown({
+  children,
+  width = 'auto',
+  height = '2.5rem',
+  title,
+}: DropDownProps) {
   const [isShow, setIsShow] = useState(false);
 
   const handleToggle = (e: MouseEvent) => {
@@ -29,7 +35,7 @@ const DropDown = ({ children, width = 'auto', height = '2.5rem', title }: DropDo
   };
 
   return (
-    <div className={cx(dropDown['wrap'], isShow ? dropDown['active'] : '')} onClick={onClick}>
+    <div className={cx(dropDown['wrap'], isShow && dropDown['active'])} onClick={onClick}>
       <OutsideClickHandler onOutsideClick={onClose}>
         <button onClick={handleToggle} style={{ height, width }}>
           <h3>{title}</h3>
@@ -43,6 +49,4 @@ const DropDown = ({ children, width = 'auto', height = '2.5rem', title }: DropDo
       </div>
     </div>
   );
-};
-
-export default memo(DropDown);
+}

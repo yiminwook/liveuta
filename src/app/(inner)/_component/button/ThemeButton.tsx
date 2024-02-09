@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useState } from 'react';
+import { useState } from 'react';
 import themeButton from './themeButton.module.scss';
 import ThemeModal from '../modal/ThemeModal';
 import { RiBrushLine } from 'react-icons/ri';
@@ -11,7 +11,7 @@ interface ThemeButtonProps {
   size?: string;
 }
 
-const ThemeButton = ({ className = '', size = '1.5rem' }: ThemeButtonProps) => {
+export default function ThemeButton({ className, size = '1.5rem' }: ThemeButtonProps) {
   const [showThemeModal, setShowThemeModal] = useState(false);
 
   const openThemeModal = () => setShowThemeModal(true);
@@ -25,6 +25,4 @@ const ThemeButton = ({ className = '', size = '1.5rem' }: ThemeButtonProps) => {
       {showThemeModal ? <ThemeModal onClose={closeThemeModal} /> : null}
     </>
   );
-};
-
-export default memo(ThemeButton);
+}

@@ -17,7 +17,13 @@ interface TopSectionProps {
   filter: keyof MongoDBAPIReturntype;
 }
 
-const TopSection = ({ filter, isLoad, isMobile, isDesktop, contents }: TopSectionProps) => {
+export default function TopSection({
+  filter,
+  isLoad,
+  isMobile,
+  isDesktop,
+  contents,
+}: TopSectionProps) {
   if (filter !== 'live' || isMobile || isLoad === false) return null;
 
   return (
@@ -25,6 +31,4 @@ const TopSection = ({ filter, isLoad, isMobile, isDesktop, contents }: TopSectio
       <PlayerWrap isDesktop={isDesktop} />
     </TopSectionBox>
   );
-};
-
-export default TopSection;
+}

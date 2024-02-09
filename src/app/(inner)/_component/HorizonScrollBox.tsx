@@ -10,7 +10,7 @@ interface HorizonScrollBoxProps {
 }
 
 /** 가로방향으로 스크롤 가능한 Div */
-const HorizonScrollBox = ({ className = '', children }: HorizonScrollBoxProps) => {
+export default function HorizonScrollBox({ className, children }: HorizonScrollBoxProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const onScroll = (e: WheelEvent) => {
@@ -35,6 +35,4 @@ const HorizonScrollBox = ({ className = '', children }: HorizonScrollBoxProps) =
       <div>{children}</div>
     </div>
   );
-};
-
-export default HorizonScrollBox;
+}

@@ -1,3 +1,4 @@
+'use client';
 import { usePlayerAtom } from '@/app/(inner)/_lib/atom';
 import { useEffect, useRef, useState } from 'react';
 import LiveChat from './LiveChat';
@@ -8,7 +9,7 @@ interface PlayerWrapProps {
   isDesktop: boolean;
 }
 
-const PlayerWrap = ({ isDesktop }: PlayerWrapProps) => {
+export default function PlayerWrap({ isDesktop }: PlayerWrapProps) {
   const [playerValue] = usePlayerAtom();
   const wrapRef = useRef<HTMLDivElement>(null);
   const [isShow, setIsShow] = useState(false);
@@ -35,6 +36,4 @@ const PlayerWrap = ({ isDesktop }: PlayerWrapProps) => {
       <LiveChat videoId={playerValue.videoId} isDesktop={isDesktop} />
     </PlayerBox>
   );
-};
-
-export default PlayerWrap;
+}

@@ -8,7 +8,7 @@ import { PushData } from '@/app/api/push/route';
 import { google } from 'googleapis';
 import { jwtAuth } from '@/model/firebase/admin';
 
-export const GET = async (_req: NextRequest) => {
+export async function GET(_req: NextRequest) {
   try {
     const cookieStore = cookies();
     const cookie = cookieStore.get('select')?.value || 'all';
@@ -47,7 +47,7 @@ export const GET = async (_req: NextRequest) => {
     const { status, message } = errorHandler(error);
     return NextResponse.json({ error: message }, { status });
   }
-};
+}
 
 export const POST = async (req: NextRequest) => {
   try {

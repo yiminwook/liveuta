@@ -7,7 +7,7 @@ import { ContentDocumentRaw, MongoDBAPIReturntype } from '@/type/api/mongoDB';
 import { PushData } from '@/app/api/push/route';
 import dayjs from '@/model/dayjs';
 
-export const GET = async (_req: NextRequest) => {
+export async function GET(_req: NextRequest) {
   try {
     const cookieStore = cookies();
     const cookie = cookieStore.get('select')?.value || 'all';
@@ -58,9 +58,9 @@ export const GET = async (_req: NextRequest) => {
     const { status, message } = errorHandler(error);
     return NextResponse.json({ error: message }, { status });
   }
-};
+}
 
-export const POST = async (req: NextRequest) => {
+export async function POST(req: NextRequest) {
   try {
     const requestBody: PushData = await req.json();
 
@@ -83,9 +83,9 @@ export const POST = async (req: NextRequest) => {
     const { status, message } = errorHandler(error);
     return NextResponse.json({ message: message }, { status });
   }
-};
+}
 
-export const DELETE = async (req: NextRequest) => {
+export async function DELETE(req: NextRequest) {
   try {
     const requestBody: PushData = await req.json();
 
@@ -110,4 +110,4 @@ export const DELETE = async (req: NextRequest) => {
     const { status, message } = errorHandler(error);
     return NextResponse.json({ message: message }, { status });
   }
-};
+}

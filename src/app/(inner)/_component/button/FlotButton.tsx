@@ -3,7 +3,7 @@ import cx from 'classnames';
 import { useEffect, useMemo, useState } from 'react';
 import { TfiArrowCircleUp } from 'react-icons/tfi';
 
-const FloatButton = () => {
+export default function FloatButton() {
   const [isTop, setIsTop] = useState(true);
 
   const scrollHandler = useMemo(() => {
@@ -38,6 +38,4 @@ const FloatButton = () => {
       <TfiArrowCircleUp size="3rem" color="inherit" />
     </button>
   );
-};
-
-export default FloatButton;
+}

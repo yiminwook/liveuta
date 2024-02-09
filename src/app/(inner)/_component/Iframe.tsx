@@ -9,7 +9,7 @@ interface IframeProps {
   url: string;
 }
 
-const Iframe = ({ url }: IframeProps) => {
+export default function Iframe({ url }: IframeProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const theme = useAtomValue(themeAtom);
@@ -64,6 +64,4 @@ const Iframe = ({ url }: IframeProps) => {
       <button onClick={onClick}>+ 새로 열기</button>
     </section>
   );
-};
-
-export default Iframe;
+}

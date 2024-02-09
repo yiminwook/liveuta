@@ -5,21 +5,19 @@ import cx from 'classnames';
 
 interface CloseButtonProps {
   className?: string;
-  onClose: (e: MouseEvent) => void;
+  onClick: (e: MouseEvent) => void;
   size?: string;
 }
 
-const CloseButton = ({ className = '', onClose, size = '1.5rem' }: CloseButtonProps) => {
-  const onClick = (e: MouseEvent<HTMLButtonElement>) => {
-    onClose(e);
-  };
-
+export default function CloseButton({
+  className = '',
+  onClick,
+  size = '1.5rem',
+}: CloseButtonProps) {
   return (
     <button className={cx(closeButton['wrap'], className)} onClick={onClick}>
       <span className="blind">닫기</span>
       <GrClose size={size} color="inherit" />
     </button>
   );
-};
-
-export default CloseButton;
+}

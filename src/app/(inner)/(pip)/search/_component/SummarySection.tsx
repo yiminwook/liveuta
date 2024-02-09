@@ -1,8 +1,7 @@
 import search from './search.module.scss';
 import { useSearchQuery } from '@inner/_lib/getSheet';
-import { memo } from 'react';
 
-const SummarySection = () => {
+export default function SummarySection() {
   const searchQuery = useSearchQuery();
 
   return (
@@ -16,6 +15,4 @@ const SummarySection = () => {
       ) : null}
     </>
   );
-};
-
-export default memo(SummarySection);
+}

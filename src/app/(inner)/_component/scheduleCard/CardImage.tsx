@@ -1,3 +1,4 @@
+'use client';
 import { playerAtom } from '@inner/_lib/atom';
 import { ImageLink } from './Style';
 import { DEFAULT_BLUR_BASE64 } from '@/const';
@@ -14,7 +15,7 @@ interface CardImageProps {
   content: ContentsDataType;
 }
 
-const CardImage = ({ content }: CardImageProps) => {
+export default function CardImage({ content }: CardImageProps) {
   const { channelName, thumbnailURL, url, videoId } = content;
   const [imgLoaded, setImgLoaded] = useState(true);
   const { isMobile } = useResponsive();
@@ -72,6 +73,4 @@ const CardImage = ({ content }: CardImageProps) => {
       </div>
     </ImageLink>
   );
-};
-
-export default CardImage;
+}

@@ -3,15 +3,15 @@ import { MdOutlineExplore } from 'react-icons/md';
 import NavLink from '../NavLink';
 import sidebar from './sidebar.module.scss';
 
-const IndexLink = ({ href, text }: { href: string; text: ReactNode }) => {
+function IndexLink({ href, text }: { href: string; text: ReactNode }) {
   return (
     <NavLink modifier={sidebar['active']} href={href}>
       {text}
     </NavLink>
   );
-};
+}
 
-export const IndexLinkList = () => {
+export function IndexLinkList() {
   return (
     <ul>
       <IndexLink href="/" text="홈" />
@@ -21,9 +21,9 @@ export const IndexLinkList = () => {
       <IndexLink href="/settings" text="설정" />
     </ul>
   );
-};
+}
 
-const IndexSection = () => {
+export default function IndexSection() {
   return (
     <section>
       <h2>
@@ -33,6 +33,4 @@ const IndexSection = () => {
       <IndexLinkList />
     </section>
   );
-};
-
-export default IndexSection;
+}

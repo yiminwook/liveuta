@@ -6,7 +6,7 @@ interface ChannelSectionProps {
   contents: ChannelsDataType[];
 }
 
-const ChannelSection = ({ contents }: ChannelSectionProps) => {
+export default function ChannelSection({ contents }: ChannelSectionProps) {
   return (
     <section className={channels['channel-section']}>
       {contents.map((content) => (
@@ -17,6 +17,4 @@ const ChannelSection = ({ contents }: ChannelSectionProps) => {
       ) : null}
     </section>
   );
-};
-
-export default ChannelSection;
+}

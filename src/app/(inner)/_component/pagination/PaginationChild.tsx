@@ -1,3 +1,4 @@
+'use client';
 import { PAGINATION_RANGE } from '@/const';
 import pagination from './pagination.module.scss';
 import {
@@ -10,7 +11,7 @@ import Link from 'next/link';
 import useLocation from '@/hook/useLocation';
 import { ReactNode } from 'react';
 
-export const FirstLink = ({ currentPage }: { currentPage: number }) => {
+export function FirstLink({ currentPage }: { currentPage: number }) {
   const disabled = currentPage === 1;
   return (
     <PaginationItem
@@ -20,9 +21,9 @@ export const FirstLink = ({ currentPage }: { currentPage: number }) => {
       value={<MdKeyboardDoubleArrowLeft size="1rem" color="inherit" />}
     />
   );
-};
+}
 
-export const BeforeLink = ({ initialPage }: { initialPage: number | null; totalPage: number }) => {
+export function BeforeLink({ initialPage }: { initialPage: number | null; totalPage: number }) {
   if (initialPage === null) return null;
   const disabled = initialPage === 1;
 
@@ -34,15 +35,15 @@ export const BeforeLink = ({ initialPage }: { initialPage: number | null; totalP
       value={<MdKeyboardArrowLeft size="1rem" color="inherit" />}
     />
   );
-};
+}
 
-export const AfterLink = ({
+export function AfterLink({
   initialPage,
   totalPage,
 }: {
   initialPage: number | null;
   totalPage: number;
-}) => {
+}) {
   if (initialPage === null) return null;
   const disabled = totalPage < initialPage + PAGINATION_RANGE;
 
@@ -54,15 +55,9 @@ export const AfterLink = ({
       value={<MdKeyboardArrowRight size="1rem" color="inherit" />}
     />
   );
-};
+}
 
-export const LastLink = ({
-  currentPage,
-  totalPage,
-}: {
-  currentPage: number;
-  totalPage: number;
-}) => {
+export function LastLink({ currentPage, totalPage }: { currentPage: number; totalPage: number }) {
   const disabled = currentPage === totalPage;
 
   return (
@@ -73,7 +68,7 @@ export const LastLink = ({
       disabled={disabled}
     />
   );
-};
+}
 
 interface PaginationItemProps {
   currentPage: number;
@@ -82,7 +77,7 @@ interface PaginationItemProps {
   disabled?: boolean;
 }
 
-export const PaginationItem = ({ nextPage, currentPage, value, disabled }: PaginationItemProps) => {
+export function PaginationItem({ nextPage, currentPage, value, disabled }: PaginationItemProps) {
   const location = useLocation();
 
   if (nextPage === undefined || nextPage === null) {
@@ -104,4 +99,4 @@ export const PaginationItem = ({ nextPage, currentPage, value, disabled }: Pagin
       </Link>
     </li>
   );
-};
+}

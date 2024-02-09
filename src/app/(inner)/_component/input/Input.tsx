@@ -1,11 +1,9 @@
 'use client';
-
 import { InputHTMLAttributes, useState } from 'react';
 import input from './input.module.scss';
 import { GrFormClose } from 'react-icons/gr';
 import { IoMdMusicalNote } from 'react-icons/io';
 import cx from 'classnames';
-import { replaceSpecialCharacters } from '@inner/_lib/regexp';
 
 type OriginalInputProps = InputHTMLAttributes<HTMLInputElement>;
 
@@ -15,7 +13,7 @@ interface InputProps extends Omit<OriginalInputProps, 'onSubmit' | 'value' | 'on
   onSubmit: (e: React.FormEvent<HTMLFormElement>, inputValue: string) => void;
 }
 
-const Input = ({
+function Input({
   className = '',
   onSubmit,
   type = 'text',
@@ -23,7 +21,7 @@ const Input = ({
   onChange,
   onReset,
   ...props
-}: InputProps) => {
+}: InputProps) {
   const handleSubit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit(e, value);
@@ -50,6 +48,6 @@ const Input = ({
       </div>
     </form>
   );
-};
+}
 
 export default Input;

@@ -1,3 +1,4 @@
+'use client';
 import { useEffect } from 'react';
 import ExternalLinksSection from './ExternalLinksSection';
 import IndexSection from './IndexSection';
@@ -11,7 +12,7 @@ interface SidebarProps {
   onClose: () => void;
 }
 
-const Sidebar = ({ show, onClose }: SidebarProps) => {
+function Sidebar({ show, onClose }: SidebarProps) {
   const { stopPropagation } = useStopPropagation();
 
   const handleClose = () => {
@@ -39,7 +40,7 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
           onClick={stopPropagation}
         >
           <nav>
-            <CloseButton onClose={onClose} />
+            <CloseButton onClick={onClose} />
             <ThemeButton />
           </nav>
           <IndexSection />
@@ -48,6 +49,6 @@ const Sidebar = ({ show, onClose }: SidebarProps) => {
       </div>
     </aside>
   );
-};
+}
 
 export default Sidebar;

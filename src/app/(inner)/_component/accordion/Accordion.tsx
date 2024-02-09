@@ -1,3 +1,4 @@
+'use client';
 import { ReactNode, useCallback, useState } from 'react';
 import { GoTriangleDown } from 'react-icons/go';
 import accordion from './accordion.module.scss';
@@ -9,7 +10,7 @@ interface AccordionProps {
   buttonSize?: string;
 }
 
-const Accordion = ({ title, children, buttonSize = '1rem' }: AccordionProps) => {
+export default function Accordion({ title, children, buttonSize = '1rem' }: AccordionProps) {
   const [show, setShow] = useState(false);
 
   const toggleShow = useCallback(() => {
@@ -27,6 +28,4 @@ const Accordion = ({ title, children, buttonSize = '1rem' }: AccordionProps) => 
       <div>{children}</div>
     </div>
   );
-};
-
-export default Accordion;
+}

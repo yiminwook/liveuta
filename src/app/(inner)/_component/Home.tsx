@@ -12,7 +12,7 @@ interface HomeProps {
   filter: keyof MongoDBAPIReturntype;
 }
 
-const Home = ({ filter }: HomeProps) => {
+export default function Home({ filter }: HomeProps) {
   const { contents, isLoad } = useMongoDB(filter);
   const { isMobile, isDesktop } = useResponsive();
 
@@ -29,6 +29,4 @@ const Home = ({ filter }: HomeProps) => {
       <ScheduleSection contents={contents} isMobile={isMobile} />
     </>
   );
-};
-
-export default Home;
+}

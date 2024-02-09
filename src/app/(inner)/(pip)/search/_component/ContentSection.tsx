@@ -9,7 +9,7 @@ interface ContentSectionProps {
   contents: SearchResponseType['contents'];
 }
 
-const ContentSection = ({ isMobile, contents }: ContentSectionProps) => {
+export default function ContentSection({ isMobile, contents }: ContentSectionProps) {
   return (
     <section className={search['content-section']}>
       <div>
@@ -29,6 +29,4 @@ const ContentSection = ({ isMobile, contents }: ContentSectionProps) => {
       </CardSection>
     </section>
   );
-};
-
-export default ContentSection;
+}

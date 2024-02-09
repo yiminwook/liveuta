@@ -1,3 +1,4 @@
+'use client';
 import popupCenter from '@inner/_lib/popup';
 import { useEffect, useRef, useState } from 'react';
 import { LiveChatBox, PopButton } from './Style';
@@ -9,7 +10,7 @@ interface LiveChatProp {
   isDesktop: boolean;
 }
 
-const LiveChat = ({ videoId, isDesktop }: LiveChatProp) => {
+export default function LiveChat({ videoId, isDesktop }: LiveChatProp) {
   const url = `https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${DOMAIN}&dark_theme=1`;
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -45,6 +46,4 @@ const LiveChat = ({ videoId, isDesktop }: LiveChatProp) => {
       />
     </LiveChatBox>
   );
-};
-
-export default LiveChat;
+}

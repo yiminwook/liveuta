@@ -7,7 +7,7 @@ interface CardPlaceHolderProps {
   isMobile: boolean;
 }
 
-const CardPlaceHolders = ({ isMobile }: CardPlaceHolderProps) => {
+export default function CardPlaceHolders({ isMobile }: CardPlaceHolderProps) {
   if (isMobile) return null;
 
   return (
@@ -17,6 +17,4 @@ const CardPlaceHolders = ({ isMobile }: CardPlaceHolderProps) => {
       ))}
     </>
   );
-};
-
-export default CardPlaceHolders;
+}

@@ -3,10 +3,9 @@ import Script from 'next/script';
 import { GA_TRACKING_ID, GTM_TRACKING_ID } from '@/const';
 
 /**
- * @참조
- * https://tagmanager.google.com/?authuser=1#/home?tab=tags
+ * @document - https://tagmanager.google.com/?authuser=1#/home?tab=tags
  */
-const GoogleAnalytics = () => {
+export default function GoogleAnalytics() {
   return (
     <>
       {/* <!-- Google Tag Manager --> */}
@@ -36,6 +35,4 @@ const GoogleAnalytics = () => {
       </Script>
     </>
   );
-};
-
-export default GoogleAnalytics;
+}

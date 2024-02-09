@@ -1,18 +1,18 @@
 'use client';
-
 import Modal from './Modal';
 import { MouseEvent } from 'react';
 import themeModal from './themeModal.module.scss';
 import useTheme from '@/hook/useTheme';
 import { ThemeType } from '@/type';
 import { gtagClick } from '@inner/_lib/gtag';
+import portal from '@/model/portal';
 
 interface ThemeModalButtonProps {
   primaryColor: string;
   secondaryColor: string;
 }
 
-const ThemeModalButton = ({ primaryColor, secondaryColor }: ThemeModalButtonProps) => {
+function ThemeModalButton({ primaryColor, secondaryColor }: ThemeModalButtonProps) {
   return (
     <div className={themeModal['theme-modal-button']}>
       <div className={themeModal['primary']} style={{ backgroundColor: primaryColor }}>
@@ -20,13 +20,13 @@ const ThemeModalButton = ({ primaryColor, secondaryColor }: ThemeModalButtonProp
       </div>
     </div>
   );
-};
+}
 
 interface ThemeModalProps {
   onClose: (e: MouseEvent) => void;
 }
 
-const ThemeModal = ({ onClose }: ThemeModalProps) => {
+export default portal('themeModal', function ThemeModal({ onClose }: ThemeModalProps) {
   const { setTheme } = useTheme();
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -70,6 +70,4 @@ const ThemeModal = ({ onClose }: ThemeModalProps) => {
       </div>
     </Modal>
   );
-};
-
-export default ThemeModal;
+});

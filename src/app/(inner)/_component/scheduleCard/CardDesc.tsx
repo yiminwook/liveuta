@@ -1,3 +1,4 @@
+'use client';
 import useToast from '@/hook/useToast';
 import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import useMutatePush from '@/app/(inner)/_lib/reservePush';
@@ -17,7 +18,7 @@ interface CardDescProps {
   addStreamModifier: string;
 }
 
-const CardDesc = ({ content, addStreamModifier }: CardDescProps) => {
+export default function CardDesc({ content, addStreamModifier }: CardDescProps) {
   const { title, url, channelName, korTime, interval, isStream, timestamp, thumbnailURL, videoId } =
     content;
   const toast = useToast();
@@ -93,6 +94,4 @@ const CardDesc = ({ content, addStreamModifier }: CardDescProps) => {
       </div>
     </DescBox>
   );
-};
-
-export default CardDesc;
+}

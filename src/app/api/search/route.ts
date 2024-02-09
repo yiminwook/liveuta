@@ -14,7 +14,7 @@ export interface SearchResponseType {
   channels: ChannelsDataType[];
 }
 
-export const GET = async (req: NextRequest) => {
+export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const query = searchParams.get('query');
@@ -67,6 +67,6 @@ export const GET = async (req: NextRequest) => {
     const { status, message } = errorHandler(error);
     return NextResponse.json({ error: message }, { status });
   }
-};
+}
 
 export const dynamic = 'force-dynamic';

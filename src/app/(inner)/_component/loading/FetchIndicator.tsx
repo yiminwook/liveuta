@@ -7,7 +7,7 @@ import { IoGlobeOutline } from 'react-icons/io5';
 import { AiOutlineLoading } from 'react-icons/ai';
 import fetchIndicator from './fetchIndicator.module.scss';
 
-const FetchIndicator = () => {
+export default function FetchIndicator() {
   const isLoading = useAtomValue(isLoadingAtom);
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
@@ -22,6 +22,4 @@ const FetchIndicator = () => {
       <AiOutlineLoading size={'2.25rem'} color="inherit" />
     </div>
   );
-};
-
-export default FetchIndicator;
+}

@@ -6,7 +6,7 @@ interface CardViewerProps {
   videoId: string;
 }
 
-const CardViewer = ({ videoId }: CardViewerProps) => {
+export default function CardViewer({ videoId }: CardViewerProps) {
   const { data } = useQuery({
     queryKey: ['viewCount', videoId, 'ignore'],
     queryFn: async () => {
@@ -30,6 +30,4 @@ const CardViewer = ({ videoId }: CardViewerProps) => {
       {data}
     </>
   );
-};
-
-export default CardViewer;
+}

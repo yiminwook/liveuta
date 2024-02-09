@@ -1,7 +1,5 @@
 import Home from '@inner/_component/Home';
 
-const DailyPage = async () => {
+export default async function Page() {
   return <Home filter="daily" />;
-};
-
-export default DailyPage;
+}
