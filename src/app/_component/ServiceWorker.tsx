@@ -9,6 +9,8 @@ export default function ServiceWorker() {
     try {
       const token = await generateFcmToken();
 
+      alert(token);
+
       const messaging = FirebaseClient.getInstance().message;
       onMessage(messaging, ({ data, from, collapseKey, messageId }) => {
         if (data === undefined) return;
@@ -28,12 +30,14 @@ export default function ServiceWorker() {
         };
       });
     } catch (error) {
+      alert(error);
       console.error(error);
     }
   };
 
   useEffect(() => {
-    handleMessage();
+    window.addEventListener('load', handleMessage);
+    return () => window.removeEventListener('load', handleMessage);
   }, []);
 
   return <></>;
