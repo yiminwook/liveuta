@@ -1,11 +1,12 @@
 'use client';
+import clientOnly from '@/model/clientOnly';
 import FirebaseClient from '@/model/firebase/client';
 import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import { useQuery } from '@tanstack/react-query';
 import { onMessage } from 'firebase/messaging';
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 
-export default function ServiceWorker({ children }: PropsWithChildren) {
+export default clientOnly(function ServiceWorker({ children }: PropsWithChildren) {
   const handleMessage = () => {
     const messaging = FirebaseClient.getInstance().message;
     onMessage(messaging, ({ data, from, collapseKey, messageId }) => {
@@ -56,5 +57,5 @@ export default function ServiceWorker({ children }: PropsWithChildren) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPending]);
 
-  return <>{children}</>;
-}
+  return <></>;
+});

@@ -56,6 +56,7 @@ export default class FirebaseAdmin {
     });
 
     this.init = true;
+    console.log('Firebase Admin initialized!!');
   }
 
   public get auth() {

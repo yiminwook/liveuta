@@ -7,7 +7,6 @@ import useResponsive from '@/hook/useResponsive';
 //import { SheetAPIReturntype } from '@/types/inSheet';
 import useMongoDB from '@inner/_lib/getMongoDB';
 import { MongoDBAPIReturntype } from '@/type/api/mongoDB';
-import ServiceWorker from './ServiceWorker';
 
 interface HomeProps {
   filter: keyof MongoDBAPIReturntype;
@@ -18,7 +17,7 @@ export default function Home({ filter }: HomeProps) {
   const { isMobile, isDesktop } = useResponsive();
 
   return (
-    <ServiceWorker>
+    <>
       <NavSection filter={filter} />
       <TopSection
         isLoad={isLoad}
@@ -28,6 +27,6 @@ export default function Home({ filter }: HomeProps) {
         isDesktop={isDesktop}
       />
       <ScheduleSection contents={contents} isMobile={isMobile} />
-    </ServiceWorker>
+    </>
   );
 }

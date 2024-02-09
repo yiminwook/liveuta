@@ -23,6 +23,7 @@ export default class FirebaseClient {
     if (getApps().length === 0) {
       const app = initializeApp(firebaseConfig);
       this.app = app;
+      console.log('Firebase Client initialized!!');
     }
   }
 
