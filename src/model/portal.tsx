@@ -1,10 +1,12 @@
 'use client';
-import React, { memo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const portal = <T extends object>(position: string, Component: React.FC<T>) => {
-  return memo(function Portal(props: T) {
-    const [wrap, setWrap] = useState<HTMLDivElement | null>(null);
+  let wrap: HTMLDivElement | null = null;
+
+  return function Portal(props: T) {
+    const [_load, setLoad] = useState(false);
 
     useEffect(() => {
       const el = document.createElement('div');
@@ -13,12 +15,15 @@ const portal = <T extends object>(position: string, Component: React.FC<T>) => {
       if (!document.getElementById(position)) {
         // 'current' ID를 가진 요소가 없을 경우에만 추가
         document.body.appendChild(el);
-        setWrap(() => el);
+        wrap = el;
+        setLoad(() => true);
 
         return () => {
+          console.log('unmount');
+          console.log('wrap', wrap);
           if (wrap) {
             document.body.removeChild(wrap);
-            setWrap(() => null);
+            wrap = null;
           }
         };
       }
@@ -28,7 +33,7 @@ const portal = <T extends object>(position: string, Component: React.FC<T>) => {
     if (!wrap) return null;
 
     return createPortal(<Component {...props} />, wrap);
-  });
+  };
 };
 
 export default portal;
