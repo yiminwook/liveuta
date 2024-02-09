@@ -53,6 +53,7 @@ export default function ScheduleCard({
       handleInfinityScroll();
       observer.unobserve(currentTarget);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [target, lastContentsIndex],
   );
 
@@ -65,6 +66,7 @@ export default function ScheduleCard({
     observer.observe(currentTarget);
 
     return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [target, content, lastContentsIndex]);
 
   return (

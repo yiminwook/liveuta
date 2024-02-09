@@ -24,6 +24,7 @@ export default function SearchSection() {
       gtag('event', 'search', { channelName: value, time: dayjs().format('YYYY-MM-DD HH:mm:ss') });
       route.push(`${pathname}?query=${value}`);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [inputValue],
   );
 
@@ -39,6 +40,7 @@ export default function SearchSection() {
 
   useEffect(() => {
     handleChange(searchQuery);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   return (

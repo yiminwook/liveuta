@@ -15,6 +15,7 @@ export default function Accordion({ title, children, buttonSize = '1rem' }: Acco
 
   const toggleShow = useCallback(() => {
     setShow((pre) => !pre);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
 
   return (

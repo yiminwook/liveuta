@@ -39,12 +39,14 @@ export default function Iframe({ url }: IframeProps) {
   useEffect(() => {
     if (isLoaded === false) return;
     window.addEventListener('message', resiveMsgFromChild);
-    () => window.removeEventListener('message', resiveMsgFromChild);
+    return () => window.removeEventListener('message', resiveMsgFromChild);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded]);
 
   useEffect(() => {
     if (isLoaded === false) return;
     postMsgToChild();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded, theme]);
 
   return (

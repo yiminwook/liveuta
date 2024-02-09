@@ -36,6 +36,7 @@ export default function ScheduleSection({ contents, isMobile }: YoutubeSectionPr
     if (loadContents.length >= contents.length) return;
     const nextContents = contents.slice(loadContents.length, SCROLL_PER_YOUTUBE_CARD * scrollPage);
     setLoadContents((pre) => [...pre, ...nextContents]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollPage]);
 
   return (

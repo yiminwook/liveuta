@@ -29,6 +29,7 @@ export default function ServiceWorker() {
         };
       });
     } catch (error) {
+      alert(error);
       console.error(error);
     }
   };

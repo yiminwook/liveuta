@@ -26,6 +26,7 @@ export default function FloatButton() {
     return () => {
       window.removeEventListener('scroll', scrollHandler);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

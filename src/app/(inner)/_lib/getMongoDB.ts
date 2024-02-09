@@ -40,10 +40,12 @@ const useMongoDB = (filter: keyof MongoDBAPIReturntype) => {
       setData();
       setIsLoad(() => true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataUpdatedAt, filter]);
 
   useEffect(() => {
     setIsLoadingSheet(() => isLoading);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   return {

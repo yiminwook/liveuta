@@ -29,6 +29,7 @@ export const useSearch = () => {
 
   useEffect(() => {
     setIsLoadingSearchAtom(() => isLoading);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   return { searchData: data, refetchSearch: refetch, isLoadingSearch: isLoading };

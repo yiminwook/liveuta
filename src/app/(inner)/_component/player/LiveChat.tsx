@@ -28,7 +28,8 @@ export default function LiveChat({ videoId, isDesktop }: LiveChatProp) {
     if (isLoaded === false || !isDesktop) return;
     console.log('liveChat load');
     window.addEventListener('message', resiveMsgFromChild);
-    () => window.removeEventListener('message', resiveMsgFromChild);
+    return () => window.removeEventListener('message', resiveMsgFromChild);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded]);
 
   if (!isDesktop) return null;

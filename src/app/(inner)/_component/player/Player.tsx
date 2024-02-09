@@ -51,6 +51,7 @@ export default function Player({ isShow }: PlayerProps) {
     if (isReady === false) return;
     document.addEventListener('keydown', keyDown);
     return () => document.removeEventListener('keydown', keyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReady]);
 
   const left = isShow === false && playerValue.hide;

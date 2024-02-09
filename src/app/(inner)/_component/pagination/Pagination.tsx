@@ -16,6 +16,7 @@ export default function Pagination({ totalLength, className }: PaginationProps) 
 
   const currentPage = useMemo(() => {
     return Number(params?.page) || 1;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const totalPage = useMemo(() => {
