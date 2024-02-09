@@ -12,17 +12,17 @@ const ServiceWorker = dynamic(() => import('@inner/_component/ServiceWorker'), {
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <PageView>
-      <ServiceWorker>
-        <Header />
-        <main id="app">{children}</main>
-        <div className="background-left" />
-        <div className="background-right" />
-        <Footer />
-        <FloatButton />
-        <div id="modal-root" />
-        <FetchIndicator />
-        <Loading />
-      </ServiceWorker>
+      <Header />
+      <main id="app">
+        <ServiceWorker>{children} </ServiceWorker>
+      </main>
+      <div className="background-left" />
+      <div className="background-right" />
+      <Footer />
+      <FloatButton />
+      <div id="modal-root" />
+      <FetchIndicator />
+      <Loading />
     </PageView>
   );
 }
