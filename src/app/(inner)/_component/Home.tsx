@@ -7,6 +7,7 @@ import useResponsive from '@/hook/useResponsive';
 //import { SheetAPIReturntype } from '@/types/inSheet';
 import useMongoDB from '@inner/_lib/getMongoDB';
 import { MongoDBAPIReturntype } from '@/type/api/mongoDB';
+import ServiceWorker from '@/app/_component/ServiceWorker';
 
 interface HomeProps {
   filter: keyof MongoDBAPIReturntype;
@@ -18,6 +19,7 @@ export default function Home({ filter }: HomeProps) {
 
   return (
     <>
+      <ServiceWorker />
       <NavSection filter={filter} />
       <TopSection
         isLoad={isLoad}

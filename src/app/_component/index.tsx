@@ -18,7 +18,7 @@ export default function Configs({ children, cookies }: ConfigsProps) {
         <ReactQuery>
           <GlobalHydrate cookies={cookies}>
             {children}
-            <ServiceWorker />
+            {/* <ServiceWorker /> */}
             <Devtools />
           </GlobalHydrate>
         </ReactQuery>
