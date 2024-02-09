@@ -4,9 +4,6 @@ import ReactQuery from './ReactQuery';
 import { GetCookiesReturnType } from '@inner/_lib/getCookie';
 import AntdProvider from './Antd';
 import GlobalHydrate from './GlobalHydrate';
-import dynamic from 'next/dynamic';
-
-const ServiceWorker = dynamic(() => import('@/app/_component/ServiceWorker'), { ssr: false });
 
 interface ConfigsProps {
   children: React.ReactNode;
@@ -20,7 +17,6 @@ export default function Configs({ children, cookies }: ConfigsProps) {
         <ReactQuery>
           <GlobalHydrate cookies={cookies}>
             {children}
-            <ServiceWorker />
             <Devtools />
           </GlobalHydrate>
         </ReactQuery>

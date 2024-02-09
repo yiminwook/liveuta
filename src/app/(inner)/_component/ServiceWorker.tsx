@@ -3,9 +3,9 @@ import FirebaseClient from '@/model/firebase/client';
 import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import { useQuery } from '@tanstack/react-query';
 import { onMessage } from 'firebase/messaging';
-import { useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 
-export default function ServiceWorker() {
+export default function ServiceWorker({ children }: PropsWithChildren) {
   const handleMessage = () => {
     const messaging = FirebaseClient.getInstance().message;
     onMessage(messaging, ({ data, from, collapseKey, messageId }) => {
@@ -27,7 +27,7 @@ export default function ServiceWorker() {
     });
   };
 
-  const { status, dataUpdatedAt } = useQuery({
+  const { status, isPending } = useQuery({
     queryKey: ['fcmToken'],
     queryFn: async () => {
       try {
@@ -54,7 +54,7 @@ export default function ServiceWorker() {
       handleMessage();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataUpdatedAt]);
+  }, [isPending]);
 
-  return <></>;
+  return <>{children}</>;
 }
