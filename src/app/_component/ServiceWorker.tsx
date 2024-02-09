@@ -1,20 +1,17 @@
 'use client';
-import useToast from '@/hook/useToast';
-import clientOnly from '@/model/clientOnly';
 import FirebaseClient from '@/model/firebase/client';
 import { generateFcmToken } from '@/model/firebase/generateFcmToken';
-import { TokenType } from '@/type';
 import { onMessage } from 'firebase/messaging';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default clientOnly(function ServiceWorker() {
-  const [token, setToken] = useState<TokenType>(null);
-  const [permission, setPermission] = useState('설정을 가져오는 중');
-
-  const toast = useToast();
+export default function ServiceWorker() {
+  const router = useRouter();
+  const [load, setLoad] = useState(false);
 
   const handleMessage = async () => {
     try {
+      console.log('req');
       const token = await generateFcmToken();
 
       if (token === undefined) {
@@ -22,9 +19,6 @@ export default clientOnly(function ServiceWorker() {
       }
 
       alert(token);
-
-      setPermission(() => 'granted');
-      setToken(() => token);
 
       const messaging = FirebaseClient.getInstance().message;
       onMessage(messaging, ({ data, from, collapseKey, messageId }) => {
@@ -44,33 +38,21 @@ export default clientOnly(function ServiceWorker() {
           noti.close();
         };
       });
-
-      return true;
     } catch (error) {
       console.error('handleMessage', error);
-      const message = error instanceof Error ? error.message : 'Unknown Error';
-      setPermission(() => 'denied');
-      setToken(() => undefined);
-      toast.error({ text: message });
-
-      return false;
+      alert(error);
     }
   };
 
   useEffect(() => {
-    setPermission(() => {
-      try {
-        // ios에서 Notification에 접근하면 에러발생
-        return Notification.permission;
-      } catch (error) {
-        console.error('setPermission', error);
-        return 'denied';
-      }
-    });
-
+    if (!load) {
+      console.log('load');
+      router.refresh();
+      return setLoad(() => true);
+    }
     handleMessage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [load]);
 
   return <></>;
-});
+}
