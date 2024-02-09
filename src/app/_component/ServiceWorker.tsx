@@ -8,7 +8,6 @@ export default function ServiceWorker() {
   const handleMessage = async () => {
     try {
       const token = await generateFcmToken();
-      alert(token);
 
       const messaging = FirebaseClient.getInstance().message;
       onMessage(messaging, ({ data, from, collapseKey, messageId }) => {
