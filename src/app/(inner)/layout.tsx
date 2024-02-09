@@ -1,22 +1,14 @@
-'use client';
 import Loading from '@/app/loading';
-import { gtag } from '@inner/_lib/gtag';
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren } from 'react';
 import Footer from './_component/Footer';
 import FloatButton from './_component/button/FlotButton';
 import Header from './_component/header/Header';
 import FetchIndicator from './_component/loading/FetchIndicator';
+import PageView from './_component/PageView';
 
-const Layout = ({ children }: PropsWithChildren) => {
-  useEffect(() => {
-    const location = window.location;
-    const pathname = location.pathname;
-    const search = location.search;
-    gtag('event', 'page_view', { page_path: pathname + search });
-  }, []);
-
+export default function Layout({ children }: PropsWithChildren) {
   return (
-    <>
+    <PageView>
       <Header />
       <main id="app">{children}</main>
       <div className="background-left" />
@@ -26,8 +18,6 @@ const Layout = ({ children }: PropsWithChildren) => {
       <div id="modal-root" />
       <FetchIndicator />
       <Loading />
-    </>
+    </PageView>
   );
-};
-
-export default Layout;
+}

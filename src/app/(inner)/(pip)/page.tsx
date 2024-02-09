@@ -1,7 +1,5 @@
-import Main from '@inner/_component/Home';
+import Home from '@inner/_component/Home';
 
-const HomePage = async () => {
-  return <Main filter="scheduled" />;
-};
-
-export default HomePage;
+export default async function Page() {
+  return <Home filter="scheduled" />;
+}

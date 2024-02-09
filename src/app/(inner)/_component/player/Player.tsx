@@ -1,3 +1,4 @@
+'use client';
 import { usePlayerAtom } from '@/app/(inner)/_lib/atom';
 import useToast from '@/hook/useToast';
 import { useEffect, useRef, useState } from 'react';
@@ -5,10 +6,6 @@ import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
 import { PipButton, PlayerDiv, PlayerPlaceholder } from './Style';
 
-interface PlayerRefProps {
-  showPreview: boolean;
-  volume: number;
-}
 interface PlayerProps {
   isShow: boolean;
 }

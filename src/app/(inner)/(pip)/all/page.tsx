@@ -1,7 +1,7 @@
-import Main from '@inner/_component/Home';
+import Home from '@inner/_component/Home';
 
 const AllPage = async () => {
-  return <Main filter="all" />;
+  return <Home filter="all" />;
 };
 
 export default AllPage;

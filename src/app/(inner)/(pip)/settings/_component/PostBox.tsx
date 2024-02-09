@@ -7,7 +7,7 @@ import { PushData } from '@/app/api/push/route';
 import { TokenType } from '@/type';
 import useToast from '@/hook/useToast';
 
-const PostBox = ({ token }: { token: TokenType }) => {
+export default function PostBox({ token }: { token: TokenType }) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -115,6 +115,4 @@ const PostBox = ({ token }: { token: TokenType }) => {
       </form>
     </div>
   );
-};
-
-export default PostBox;
+}

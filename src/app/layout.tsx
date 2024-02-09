@@ -13,7 +13,7 @@ import Configs from './_component';
 import DefaultHead from './_component/DefaultHead';
 import GoogleTagManager from './_component/GoogleTagManager';
 
-const RootLayout = async ({ children }: PropsWithChildren) => {
+export default async function RootLayout({ children }: PropsWithChildren) {
   const cookies = await getCookies();
 
   return (
@@ -27,9 +27,7 @@ const RootLayout = async ({ children }: PropsWithChildren) => {
       </body>
     </html>
   );
-};
-
-export default RootLayout;
+}
 
 /** Default Route Segment Config */
 export const dynamicParams = true; //fallback

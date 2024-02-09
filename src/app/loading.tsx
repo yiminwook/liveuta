@@ -6,7 +6,7 @@ import loadingImage from '/public/loading.png';
 import { useAtomValue } from 'jotai';
 import { isLoadingAtom } from '@/app/_lib/atom';
 
-const Loading = () => {
+export default function GlobalLoading() {
   const isLoading = useAtomValue(isLoadingAtom);
 
   if (isLoading === false) {
@@ -31,6 +31,4 @@ const Loading = () => {
       </div>
     </div>
   );
-};
-
-export default Loading;
+}

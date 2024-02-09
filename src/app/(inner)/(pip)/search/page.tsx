@@ -1,7 +1,5 @@
 import Home from './_component/Home';
 
-const Page = () => {
+export default function Page() {
   return <Home />;
-};
-
-export default Page;
+}

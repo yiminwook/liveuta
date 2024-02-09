@@ -1,7 +1,5 @@
-import SettingsPage from '@inner/(pip)/settings/_component/Home';
+import Home from './_component/Home';
 
-const Home = async () => {
-  return <SettingsPage />;
-};
-
-export default Home;
+export default async function Page() {
+  return <Home />;
+}

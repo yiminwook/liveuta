@@ -3,7 +3,7 @@ import { TokenType } from '@/type';
 import CopyButton from '@inner/_component/button/CopyButton';
 import Settings from './settings.module.scss';
 
-const TokenBox = ({ token }: { token: TokenType }) => {
+export default function TokenBox({ token }: { token: TokenType }) {
   switch (typeof token) {
     case 'string':
       return (
@@ -17,6 +17,4 @@ const TokenBox = ({ token }: { token: TokenType }) => {
     default:
       return <div>토큰을 가져오는 중입니다.</div>;
   }
-};
-
-export default TokenBox;
+}

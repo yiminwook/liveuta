@@ -1,8 +1,7 @@
-'use client';
-
 // https://github.com/arye321/nextauth-google-popup-login
 // https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EB%B6%80%EB%AA%A8%EC%B0%BD-%E2%9E%9C-%EC%9E%90%EC%8B%9D%EC%B0%BD%EC%9D%98-%EA%B0%92-%EC%A0%84%EB%8B%AC
 const popupCenter = (url: string, title: string, w: number, h: number) => {
+  if (typeof window === 'undefined') return;
   const dualScreenLeft = window.screenLeft ?? window.screenX;
   const dualScreenTop = window.screenTop ?? window.screenY;
 

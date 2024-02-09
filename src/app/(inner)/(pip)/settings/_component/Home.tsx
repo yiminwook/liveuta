@@ -7,7 +7,7 @@ import TokenBox from '@inner/(pip)/settings/_component/TokenBox';
 import { TokenType } from '@/type';
 import useToast from '@/hook/useToast';
 
-const SettingsPage = () => {
+export default function Home() {
   const [token, setToken] = useState<TokenType>(null);
   const [permission, setPermission] = useState('설정을 가져오는 중');
   const toast = useToast();
@@ -70,6 +70,4 @@ const SettingsPage = () => {
       <PostBox token={token} />
     </section>
   );
-};
-
-export default SettingsPage;
+}

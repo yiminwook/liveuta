@@ -1,10 +1,11 @@
 /** @jsxImportSource @emotion/react */
+'use client';
 import useResponsive from '@/hook/useResponsive';
-import clientOnly from '@/model/clientOnly';
 import Player from './Player';
 import { PipBase } from './Style';
+import portal from '@/model/portal';
 
-const Pip = () => {
+export default portal('pip', function Pip() {
   const { isMobile } = useResponsive();
 
   if (isMobile) return null;
@@ -14,6 +15,4 @@ const Pip = () => {
       <Player isShow={false} />
     </div>
   );
-};
-
-export default clientOnly(Pip);
+});

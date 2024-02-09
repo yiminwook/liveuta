@@ -2,7 +2,7 @@ import { ITEMS_PER_PAGE } from '@/const';
 import { ChannelSheetDataType, combineChannelData } from '@inner/_lib/combineChannelData';
 import { parseChannelIDSheet } from '@inner/_lib/parseChannelSheet';
 import { notFound } from 'next/navigation';
-import Channels from './_component/Home';
+import Home from './_component/Home';
 
 const getChannelData = async () => {
   try {
@@ -30,11 +30,7 @@ const getChannelData = async () => {
   }
 };
 
-const ChannelsPage = async () => {
+export default async function Page() {
   const { totalLength, contents } = await getChannelData();
-  return <Channels totalLength={totalLength} contents={contents} />;
-};
-
-export default ChannelsPage;
-
-// export const revalidate = 1800;
+  return <Home totalLength={totalLength} contents={contents} />;
+}

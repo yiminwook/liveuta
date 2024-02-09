@@ -1,7 +1,7 @@
-import Main from '@inner/_component/Home';
+import Home from '@inner/_component/Home';
 
 const DailyPage = async () => {
-  return <Main filter="daily" />;
+  return <Home filter="daily" />;
 };
 
 export default DailyPage;

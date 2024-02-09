@@ -1,20 +1,8 @@
-import getPaginationRange from '@inner/_lib/getPagenationRange';
 import { ChannelSheetDataType, combineChannelData } from '@inner/_lib/combineChannelData';
+import getPaginationRange from '@inner/_lib/getPagenationRange';
 import { parseChannelIDSheet } from '@inner/_lib/parseChannelSheet';
-import Channels from '@/app/(inner)/(pip)/channels/_component/Home';
 import { notFound } from 'next/navigation';
-
-// export const generateStaticParams = async (): Promise<ChannelsWithPageParams[]> => {
-//   /* Google spread sheet API */
-//   const { totalLength } = await parseChannelIDSheet();
-//   const numberOfPages = Math.ceil(totalLength / ITEMS_PER_PAGE);
-
-//   const paths = Array.from({ length: numberOfPages }, (_, i) => {
-//     return { page: (i + 1).toString() };
-//   });
-
-//   return paths;
-// };
+import Home from '../../_component/Home';
 
 const getChannelData = async (page: string) => {
   try {
@@ -50,18 +38,13 @@ const getChannelData = async (page: string) => {
   }
 };
 
-interface ChannelsWithPageParams {
-  page: string;
-}
-interface ChannelsWithPageProps {
-  params: ChannelsWithPageParams;
+interface PageProps {
+  params: {
+    page: string;
+  };
 }
 
-const ChannelsWithPage = async ({ params }: ChannelsWithPageProps) => {
+export default async function Page({ params }: PageProps) {
   const { totalLength, contents } = await getChannelData(params.page);
-  return <Channels totalLength={totalLength} contents={contents} />;
-};
-
-export default ChannelsWithPage;
-
-// export const revalidate = 1800;
+  return <Home totalLength={totalLength} contents={contents} />;
+}

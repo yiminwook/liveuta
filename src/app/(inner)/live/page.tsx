@@ -1,7 +1,5 @@
-import Main from '@inner/_component/Home';
+import Home from '@inner/_component/Home';
 
-const LivePage = async () => {
-  return <Main filter="live" />;
-};
-
-export default LivePage;
+export default async function Page() {
+  return <Home filter="live" />;
+}

@@ -4,12 +4,12 @@ import Pagination from '@inner/_component/pagination/Pagination';
 import ChannelSection from './ChannelSection';
 import channels from './channels.module.scss';
 
-interface ChannelsProps {
+interface HomeProps {
   totalLength: number;
   contents: ChannelsDataType[];
 }
 
-const Channels = ({ totalLength, contents }: ChannelsProps) => {
+export default function Home({ totalLength, contents }: HomeProps) {
   return (
     <>
       <ChannelSection contents={contents} />
@@ -18,6 +18,4 @@ const Channels = ({ totalLength, contents }: ChannelsProps) => {
       </HorizonScrollBox>
     </>
   );
-};
-
-export default Channels;
+}
