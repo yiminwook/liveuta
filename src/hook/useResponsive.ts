@@ -14,10 +14,11 @@ const useResponsive = () => {
       setSize(() => ({ width: window.innerWidth, height: window.innerHeight }));
       return setIsLoading(() => false);
     }
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLoading]);
 
   return {
     isLoading,
