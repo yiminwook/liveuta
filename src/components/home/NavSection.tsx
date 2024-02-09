@@ -34,6 +34,7 @@ const NavSection = ({ filter }: NavSectionProps) => {
     <section className={home['nav-section']}>
       <HorizonScrollBox className={home['nav-scroll-box']}>
         <NavTap />
+        현재 원복해서 테스트중.. 수시로 변경될 수 있습니다.
         <NavSelectBox filter={filter} />
       </HorizonScrollBox>
     </section>

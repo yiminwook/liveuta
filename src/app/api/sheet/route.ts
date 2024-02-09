@@ -1,4 +1,3 @@
-// @ts-ignore
 import { SheetAPIReturntype } from '@/type/inSheet';
 import { getSheet } from '@/model/sheet';
 import { parseAllData, parseScheduledData } from '@/util/parseContentSheet';
@@ -39,7 +38,10 @@ export const GET = async (_req: NextRequest) => {
         break;
     }
 
-    return NextResponse.json<SheetAPIReturntype | undefined>({ scheduled, live, daily, all }, { status: 200 });
+    return NextResponse.json<SheetAPIReturntype | undefined>(
+      { scheduled, live, daily, all },
+      { status: 200 },
+    );
   } catch (error) {
     console.error(error);
     const { status, message } = errorHandler(error);
@@ -69,7 +71,9 @@ export const POST = async (req: NextRequest) => {
       throw new Error('sheetData is forbidden');
     }
 
-    const isSaved = sheetData.values.some((item) => item[5] === requsetBody.token && item[3] === requsetBody.link);
+    const isSaved = sheetData.values.some(
+      (item) => item[5] === requsetBody.token && item[3] === requsetBody.link,
+    );
 
     if (isSaved) {
       return NextResponse.json({ message: '이미 등록된 알림입니다.' }, { status: 226 });
