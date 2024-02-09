@@ -21,7 +21,10 @@ const GoogleAnalytics = () => {
       </Script>
       {/* <!-- End Google Tag Manager --> */}
       {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-      <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} strategy="beforeInteractive" />
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        strategy="beforeInteractive"
+      />
       <Script id="google-analytics" strategy="beforeInteractive">
         {`
           window.dataLayer = window.dataLayer || [];

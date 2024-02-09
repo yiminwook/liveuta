@@ -1,8 +1,11 @@
+// css 순서변경 금지
 import 'pretendard/dist/web/variable/pretendardvariable.css';
 import '@/style/reset.css';
 import '/public/theme.css';
 import '@/style/globals.scss';
 import '@/style/theme.scss';
+import '@/style/globalTheme.css';
+
 import { PropsWithChildren } from 'react';
 import { DEFALUT_METADATA } from '@/const/metaData';
 import { getCookies } from '@/util/getCookie';

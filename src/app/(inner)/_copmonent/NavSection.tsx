@@ -1,8 +1,8 @@
-import home from '@/components/home/Home.module.scss';
+import home from './home.module.scss';
 import NavLink from '@/components/common/NavLink';
 import React, { ReactNode, memo } from 'react';
 import HorizonScrollBox from '@/components/common/HorizonScrollBox';
-import NavSelectBox from '@inner/_copmonent/NavSelectBox';
+import NavSelectBox from './NavSelectBox';
 //import { SheetAPIReturntype } from '@/types/inSheet';
 import { MongoDBAPIReturntype } from '@/type/inMongoDB';
 

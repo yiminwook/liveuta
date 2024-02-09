@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import loading from '@/components/layout/Loading.module.scss';
 import { AiOutlineLoading } from 'react-icons/ai';

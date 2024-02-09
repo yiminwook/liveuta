@@ -1,4 +1,4 @@
-import home from '@/components/home/Home.module.scss';
+import home from './home.module.scss';
 import React, { useState } from 'react';
 //import useSheet from '@/queries/sheet';
 import Cookies from 'universal-cookie';
