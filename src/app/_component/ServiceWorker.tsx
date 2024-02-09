@@ -1,12 +1,13 @@
 'use client';
 import useToast from '@/hook/useToast';
+import clientOnly from '@/model/clientOnly';
 import FirebaseClient from '@/model/firebase/client';
 import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import { TokenType } from '@/type';
 import { onMessage } from 'firebase/messaging';
 import { useEffect, useState } from 'react';
 
-export default function ServiceWorker() {
+export default clientOnly(function ServiceWorker() {
   const [token, setToken] = useState<TokenType>(null);
   const [permission, setPermission] = useState('설정을 가져오는 중');
 
@@ -72,4 +73,4 @@ export default function ServiceWorker() {
   }, []);
 
   return <></>;
-}
+});
