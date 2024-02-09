@@ -1,11 +1,11 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const portal = <T extends object>(position: string, Component: React.FC<T>) => {
   let wrap: HTMLDivElement | null = null;
 
-  return function Portal(props: T) {
+  return memo(function Portal(props: T) {
     const [_load, setLoad] = useState(false);
 
     useEffect(() => {
@@ -19,8 +19,6 @@ const portal = <T extends object>(position: string, Component: React.FC<T>) => {
         setLoad(() => true);
 
         return () => {
-          console.log('unmount');
-          console.log('wrap', wrap);
           if (wrap) {
             document.body.removeChild(wrap);
             wrap = null;
@@ -33,7 +31,7 @@ const portal = <T extends object>(position: string, Component: React.FC<T>) => {
     if (!wrap) return null;
 
     return createPortal(<Component {...props} />, wrap);
-  };
+  });
 };
 
 export default portal;
