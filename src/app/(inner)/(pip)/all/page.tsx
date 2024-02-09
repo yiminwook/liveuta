@@ -1,4 +1,4 @@
-import Main from '@/app/(inner)/(pip)/page.client';
+import Main from '@inner/_component/Home';
 
 const AllPage = async () => {
   return <Main filter="all" />;

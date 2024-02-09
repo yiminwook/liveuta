@@ -1,7 +1,7 @@
 import { ITEMS_PER_PAGE } from '@/const';
 import { ChannelSheetDataType, combineChannelData } from '@/util/combineChannelData';
 import { parseChannelIDSheet } from '@/util/parseChannelSheet';
-import Channels from '@/app/(inner)/(pip)/channels/page.client';
+import Channels from '@/app/(inner)/(pip)/channels/_component/Home';
 import { notFound } from 'next/navigation';
 
 const getChannelData = async () => {

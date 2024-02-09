@@ -1,11 +1,11 @@
 'use client';
-import { PropsWithChildren, useEffect } from 'react';
-import Footer from '@/components/layout/Footer';
-import FloatButton from '@/components/common/button/FlotButton';
-import Header from '@/components/layout/Header';
-import FetchIndicator from '@/components/layout/FetchIndicator';
 import Loading from '@/app/loading';
 import { gtag } from '@/util/gtag';
+import { PropsWithChildren, useEffect } from 'react';
+import Footer from './_component/Footer';
+import FloatButton from './_component/button/FlotButton';
+import Header from './_component/header/Header';
+import FetchIndicator from './_component/loading/FetchIndicator';
 
 const Layout = ({ children }: PropsWithChildren) => {
   useEffect(() => {

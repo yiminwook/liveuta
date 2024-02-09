@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import loading from '@/components/layout/Loading.module.scss';
+import loading from '@inner/_component/loading/loading.module.scss';
 import { AiOutlineLoading } from 'react-icons/ai';
 import loadingImage from '/public/loading.png';
 import { useAtomValue } from 'jotai';

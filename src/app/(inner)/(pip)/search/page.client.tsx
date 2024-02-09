@@ -1,8 +1,8 @@
 'use client';
-import ChannelSection from '@/components/search/ChannelSection';
-import ContentSection from '@/components/search/ContentSection';
-import SearchSection from '@/components/search/SearchSection';
-import SummarySection from '@/components/search/SummarySection';
+import ChannelSection from '@inner/(pip)/search/_component/ChannelSection';
+import ContentSection from '@inner/(pip)/search/_component/ContentSection';
+import SearchSection from '@inner/(pip)/search/_component/SearchSection';
+import SummarySection from '@inner/(pip)/search/_component/SummarySection';
 import useResponsive from '@/hook/useResponsive';
 import clientOnly from '@/model/clientOnly';
 import { useSearch } from '@/queries/search';

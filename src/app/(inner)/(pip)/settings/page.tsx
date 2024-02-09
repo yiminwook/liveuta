@@ -1,4 +1,4 @@
-import SettingsPage from '@/app/(inner)/(pip)/settings/page.client';
+import SettingsPage from '@inner/(pip)/settings/_component/Home';
 
 const Home = async () => {
   return <SettingsPage />;

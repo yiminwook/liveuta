@@ -1,4 +1,4 @@
-import Main from '@/app/(inner)/(pip)/page.client';
+import Main from '@inner/_component/Home';
 
 const HomePage = async () => {
   return <Main filter="scheduled" />;
