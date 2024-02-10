@@ -1,86 +1,58 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import { MongoClient, Db, Collection } from 'mongodb';
 
-interface PerformDatabaseOptions {
-  collection: string;
-  database: string;
-  operation: 'find' | 'insertOne' | 'deleteOne';
-  filter?: any;
-  projection?: any;
-  document?: any;
-}
+const uri: string = process.env.MONGODB_URI || ''; 
 
-const performDatabaseOperation = async ({
-  collection,
-  database,
-  operation,
-  filter,
-  projection,
-  document,
-}: PerformDatabaseOptions): Promise<any> => {
-  const apiKey: string | undefined = process.env.MONGODB_API_KEY;
-
-  if (!apiKey) {
-    throw new Error('API key not found in environment variables');
-  }
-
-  let requestData: any = {
-    collection,
-    database,
-    dataSource: 'Cluster0',
-    filter,
-    projection,
-    document,
-  };
-
-  const config: AxiosRequestConfig = {
-    method: 'post',
-    url: `https://ap-southeast-1.aws.data.mongodb-api.com/app/data-gtwnf/endpoint/data/v1/action/${operation}`,
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Request-Headers': '*',
-      'api-key': apiKey,
-    },
-    data: JSON.stringify(requestData),
-  };
-
-  try {
-    const response = await axios(config);
-    return response.data;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
+const connectToDatabase = async (dbName: string, collectionName: string): Promise<Collection> => {
+    try {
+        const client = await MongoClient.connect(uri);
+        return client.db(dbName).collection(collectionName);
+    } catch (error) {
+        console.error('Error connecting to MongoDB:', error);
+        throw error;
+    }
 };
 
-// readDB('channel_id_names', 'ManagementDB', { filter: { name_kor: regexforDBQuery } })
 export const readDB = async (
-  collection: string,
-  database: string,
-  options?: { filter?: any; projection?: any },
+    collectionName: string,
+    dbName: string,
+    options: { filter?: any; projection?: any } = { filter: {}, projection: {} }
 ): Promise<any> => {
-  return performDatabaseOperation({
-    collection,
-    database,
-    operation: 'find',
-    filter: options?.filter,
-    projection: options?.projection,
-  });
+    try {
+        const collection = await connectToDatabase(dbName, collectionName);
+        const result = await collection.find(options?.filter).project(options?.projection).toArray();
+        return result;
+    } catch (error) {
+        console.error('Error reading from MongoDB:', error);
+        throw error;
+    }
 };
 
-export const writeDB = async (collection: string, database: string, options?: { document?: any }): Promise<any> => {
-  return performDatabaseOperation({
-    collection,
-    database,
-    operation: 'insertOne',
-    document: options?.document,
-  });
+export const writeDB = async (
+    collectionName: string,
+    dbName: string,
+    options?: { document?: any }
+): Promise<any> => {
+    try {
+        const collection = await connectToDatabase(dbName, collectionName);
+        const result = await collection.insertOne(options?.document);
+        return result;
+    } catch (error) {
+        console.error('Error writing to MongoDB:', error);
+        throw error;
+    }
 };
 
-export const deleteDB = async (collection: string, database: string, options?: { filter?: any }): Promise<any> => {
-  return performDatabaseOperation({
-    collection,
-    database,
-    operation: 'deleteOne',
-    filter: options?.filter,
-  });
+export const deleteDB = async (
+    collectionName: string,
+    dbName: string,
+    filter: any
+): Promise<any> => {
+    try {
+        const collection = await connectToDatabase(dbName, collectionName);
+        const result = await collection.deleteOne(filter);
+        return result;
+    } catch (error) {
+        console.error('Error deleting from MongoDB:', error);
+        throw error;
+    }
 };
