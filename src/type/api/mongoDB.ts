@@ -1,7 +1,5 @@
 import dayjs from '@/model/dayjs';
 
-interface DocumentList<T> extends Array<T> {}
-
 export interface ChannelDocument {
   _id: string;
   channel_id: string;

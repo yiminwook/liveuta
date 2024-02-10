@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import errorHandler from '@/model/error/handler';
 import { deleteDB, readDB, writeDB } from '@/model/mongoDBService';
 import { parseAllData, parseScheduledData } from '@/app/api/_lib/parseMongoDBData';
-import { MongoDBAPIReturntype, ContentDocument, ChannelDocument, DocumentList } from '@/type/api/mongoDB';
+import { MongoDBAPIReturntype, ContentDocumentRaw } from '@/type/api/mongoDB';
 import { PushData } from '@/app/api/push/route';
 import dayjs from '@/model/dayjs';
 
@@ -15,8 +15,7 @@ export async function GET(_req: NextRequest) {
     const collection = process.env.MONGODB_SCHEDULE_COLLECTION;
     const database = process.env.MONGODB_SCHEDULE_DB;
 
-    const response:DocumentList<ContentDocument> = await readDB(collection, database);
-    const scheduleDataRaw: ContentDocumentRaw[] = response.documents;
+    const scheduleDataRaw: ContentDocumentRaw[] = await readDB(collection, database);
     if (!scheduleDataRaw) throw new Error('documents is undefined.');
 
     const scheduleData = scheduleDataRaw
@@ -92,7 +91,7 @@ export async function DELETE(req: NextRequest) {
     const notiCollection = process.env.MONGODB_NOTI_COLLECTION;
     const notiDatabase = process.env.MONGODB_SCHEDULE_DB;
 
-    const existingData: { documents: [] } = await readDB(notiCollection, notiDatabase, {
+    const existingData: any[] = await readDB(notiCollection, notiDatabase, {
       filter: { token: requestBody.token, link: requestBody.link },
     });
 

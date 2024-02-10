@@ -1,4 +1,9 @@
-import { DocumentList, ContentDocument, ChannelDocument, ContentsDataType, ContentDocumentRaw } from '@/type/api/mongoDB';
+import {
+  ContentDocument,
+  ChannelDocument,
+  ContentsDataType,
+  ContentDocumentRaw,
+} from '@/type/api/mongoDB';
 import { parseMongoDBDocument } from '@/app/api/_lib/parseMongoDBData';
 import { readDB } from '@/model/mongoDBService/';
 import { ChannelSheetDataType, combineChannelData } from '@inner/_lib/combineChannelData';
@@ -33,11 +38,12 @@ export async function GET(req: NextRequest) {
     }
 
     // Execute both database queries concurrently
-    const regexforDBQuery = { $regex: replacedQuery, $options: "i" };
-    const [channelResults, contentResults]: [DocumentList<ChannelDocument>, DocumentList<ContentDocument>] = await Promise.all([
-      readDB('channel_id_names', 'ManagementDB', { filter: { "name_kor": regexforDBQuery } }),
-      readDB('upcoming_streams', 'ScheduleDB', { filter: { "ChannelName": regexforDBQuery } })
-    ]);
+    const regexforDBQuery = { $regex: replacedQuery, $options: 'i' };
+    const [channelResults, contentResults]: [ChannelDocument[], ContentDocumentRaw[]] =
+      await Promise.all([
+        readDB('channel_id_names', 'ManagementDB', { filter: { name_kor: regexforDBQuery } }),
+        readDB('upcoming_streams', 'ScheduleDB', { filter: { ChannelName: regexforDBQuery } }),
+      ]);
 
     const searchedContents: ContentsDataType[] = [];
     contentResults.forEach((doc: ContentDocumentRaw) => {

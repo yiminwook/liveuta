@@ -1,5 +1,4 @@
 import {
-  DocumentList,
   ContentDocument,
   ContentsLength,
   DataReturnType,
@@ -46,13 +45,13 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => 
   }
 };
 
-export const parseScheduledData = (documents: DocumentList<ContentDocument>): ParseScheduledDataReturnType => {
+export const parseScheduledData = (documents: ContentDocument[]): ParseScheduledDataReturnType => {
   const scheduled: ContentsDataType[] = [];
   let scheduledVideo = 0;
   const live: ContentsDataType[] = [];
   let liveVideo = 0;
 
-  documents.forEach(doc => {
+  documents.forEach((doc) => {
     const isHide = doc.Hide;
     const isStream = doc.broadcastStatus;
 
@@ -91,7 +90,7 @@ export const parseScheduledData = (documents: DocumentList<ContentDocument>): Pa
   };
 };
 
-export const parseAllData = (documents: DocumentList<ContentDocument>): ParseAllDataReturnType => {
+export const parseAllData = (documents: ContentDocument[]): ParseAllDataReturnType => {
   if (!documents) throw new Error('No DataValue');
 
   const daily: ContentsDataType[] = [];
@@ -100,7 +99,7 @@ export const parseAllData = (documents: DocumentList<ContentDocument>): ParseAll
   let allVideo = 0;
   const yesterday = dayjs().subtract(1, 'day').valueOf();
 
-  documents.forEach(doc => {
+  documents.forEach((doc) => {
     const isHide = doc.Hide;
     const isStream = doc.broadcastStatus;
     // Hidden contents are treated as yesterday's content
