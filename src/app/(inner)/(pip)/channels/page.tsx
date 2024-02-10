@@ -12,9 +12,14 @@ const getChannelData = async () => {
 
     /* Youtube API */
     const channelSheetData: ChannelSheetDataType = {};
-    sliceData.forEach(([uid, channelName, url]) => {
-      if (channelSheetData[uid]) return;
-      channelSheetData[uid] = { uid, channelName, url };
+
+    sliceData.forEach((data) => {
+      if (channelSheetData[data.channel_id]) return;
+      channelSheetData[data.channel_id] = {
+        uid: data.channel_id,
+        channelName: data.name_kor,
+        url: data.channel_addr,
+      };
     });
 
     /* Youtube API */

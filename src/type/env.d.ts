@@ -19,8 +19,11 @@ declare global {
 
       readonly MONGODB_SCHEDULE_COLLECTION: string;
       readonly MONGODB_NOTI_COLLECTION: string;
+      readonly MONGODB_CHANNEL_COLLECTION: string;
       readonly MONGODB_SCHEDULE_DB: string;
+      readonly MONGODB_CHANNEL_DB: string;
       readonly MONGODB_API_KEY: string;
+      readonly MONGODB_URI: string;
 
       readonly CONTENTS_SHEET_RANGE: string;
       readonly CHANNELS_SHEET_RANGE: string;
