@@ -33,21 +33,21 @@ export async function GET(req: NextRequest) {
     }
 
     // Execute both database queries concurrently
-    const regexforDBQuery = { $regex: replacedQuery, $options: 'i' };
-    const [channelResults, contentResults] = await Promise.all([
-      readDB('channel_id_names', 'ManagementDB', { filter: { name_kor: regexforDBQuery } }),
-      readDB('upcoming_streams', 'ScheduleDB', { filter: { ChannelName: regexforDBQuery } }),
+    const regexforDBQuery = { $regex: replacedQuery, $options: "i" };
+    const [channelResults, contentResults]: [DocumentList<ChannelDocument>, DocumentList<ContentDocument>] = await Promise.all([
+      readDB('channel_id_names', 'ManagementDB', { filter: { "name_kor": regexforDBQuery } }),
+      readDB('upcoming_streams', 'ScheduleDB', { filter: { "ChannelName": regexforDBQuery } })
     ]);
 
     const searchedContents: ContentsDataType[] = [];
-    contentResults.documents.forEach((doc: ContentDocumentRaw) => {
+    contentResults.forEach((doc: ContentDocumentRaw) => {
       const data = parseMongoDBDocument({ ...doc, ScheduledTime: dayjs(doc.ScheduledTime) });
       if (!data) return;
       searchedContents.push(data);
     });
 
     const searchData: ChannelSheetDataType = {};
-    channelResults.documents.forEach(
+    channelResults.forEach(
       ({ _id, channel_id, name_kor, channel_addr, handle_name, waiting }: ChannelDocument) => {
         if (Object.keys(searchData).length >= SEARCH_ITEMS_SIZE) return;
         if (searchData[channel_id]) return;
