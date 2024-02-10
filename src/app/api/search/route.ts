@@ -1,4 +1,4 @@
-import { ChannelDocument, ContentsDataType, ContentDocumentRaw } from '@/type/api/mongoDB';
+import { DocumentList, ContentDocument, ChannelDocument, ContentsDataType, ContentDocumentRaw } from '@/type/api/mongoDB';
 import { parseMongoDBDocument } from '@/app/api/_lib/parseMongoDBData';
 import { readDB } from '@/model/mongoDBService/';
 import { ChannelSheetDataType, combineChannelData } from '@inner/_lib/combineChannelData';
