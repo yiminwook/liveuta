@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import errorHandler from '@/model/error/handler';
 import { deleteDB, readDB, writeDB } from '@/model/mongoDBService';
 import { parseAllData, parseScheduledData } from '@/app/api/_lib/parseMongoDBData';
-import { ContentDocumentRaw, MongoDBAPIReturntype } from '@/type/api/mongoDB';
+import { MongoDBAPIReturntype, ContentDocument, ChannelDocument, DocumentList } from '@/type/api/mongoDB';
 import { PushData } from '@/app/api/push/route';
 import dayjs from '@/model/dayjs';
 
@@ -15,7 +15,7 @@ export async function GET(_req: NextRequest) {
     const collection = process.env.MONGODB_SCHEDULE_COLLECTION;
     const database = process.env.MONGODB_SCHEDULE_DB;
 
-    const response = await readDB(collection, database);
+    const response:DocumentList<ContentDocument> = await readDB(collection, database);
     const scheduleDataRaw: ContentDocumentRaw[] = response.documents;
     if (!scheduleDataRaw) throw new Error('documents is undefined.');
 
@@ -67,11 +67,11 @@ export async function POST(req: NextRequest) {
     const notiCollection = process.env.MONGODB_NOTI_COLLECTION;
     const notiDatabase = process.env.MONGODB_SCHEDULE_DB;
 
-    const existingData: { documents: [] } = await readDB(notiCollection, notiDatabase, {
+    const existingData = await readDB(notiCollection, notiDatabase, {
       filter: { token: requestBody.token, link: requestBody.link },
     });
 
-    if (existingData?.documents.length !== 0) {
+    if (existingData && existingData.length !== 0) {
       return NextResponse.json({ message: '이미 등록된 알림입니다.' }, { status: 226 });
     }
 
@@ -96,7 +96,7 @@ export async function DELETE(req: NextRequest) {
       filter: { token: requestBody.token, link: requestBody.link },
     });
 
-    if (existingData?.documents.length === 0) {
+    if (existingData && existingData.length !== 0) {
       return NextResponse.json({ message: '이미 취소된 알림입니다.' }, { status: 226 });
     }
 
