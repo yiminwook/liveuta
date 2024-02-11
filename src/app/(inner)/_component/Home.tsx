@@ -2,7 +2,7 @@
 //import useSheet from '@/queries/sheet';
 import NavSection from './header/NavSection';
 import ScheduleSection from './header/ScheduleSection';
-import TopSection from './header/TopSection';
+import TopSection from './TopSection';
 import useResponsive from '@/hook/useResponsive';
 //import { SheetAPIReturntype } from '@/types/inSheet';
 import useMongoDB from '@inner/_lib/getMongoDB';

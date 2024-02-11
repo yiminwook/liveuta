@@ -16,16 +16,13 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // reactStrictMode: true,
+  reactStrictMode: true,
   swcMinify: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'src/style')],
   },
   images: {
     domains: ['i.ytimg.com'],
-  },
-  compiler: {
-    emotion: true,
   },
   // async headers() {
   //   return [

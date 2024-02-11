@@ -5,7 +5,7 @@ export const playerAtom = atom({
   videoId: 'IiCKMyNuFYc',
   isPlaying: false,
   isMutted: false,
-  hide: false,
+  hide: true,
 });
 
 export const usePlayerAtom = () => useAtom(playerAtom);
