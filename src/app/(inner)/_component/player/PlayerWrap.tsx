@@ -3,7 +3,7 @@ import { usePlayerAtom } from '@/app/(inner)/_lib/atom';
 import { useEffect, useRef, useState } from 'react';
 import LiveChat from './LiveChat';
 import Player from './Player';
-import { PlayerBox, PlayerPlaceholder } from './Style';
+import * as styles from './player.css';
 
 interface PlayerWrapProps {
   isDesktop: boolean;
@@ -30,10 +30,10 @@ export default function PlayerWrap({ isDesktop }: PlayerWrapProps) {
   const showPlaceholder = isShow === false;
 
   return (
-    <PlayerBox ref={wrapRef}>
-      {showPlaceholder ? <PlayerPlaceholder /> : null}
+    <div ref={wrapRef} className={styles.playerBox}>
+      {showPlaceholder ? <div className={styles.playerPlaceholder} /> : null}
       <Player isShow={isShow} />
       <LiveChat videoId={playerValue.videoId} isDesktop={isDesktop} />
-    </PlayerBox>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 import popupCenter from '@inner/_lib/popup';
 import { useEffect, useRef, useState } from 'react';
-import { LiveChatBox, PopButton } from './Style';
+import * as styles from './player.css';
 
 const DOMAIN = 'liveuta.vercel.app';
 
@@ -35,16 +35,18 @@ export default function LiveChat({ videoId, isDesktop }: LiveChatProp) {
   if (!isDesktop) return null;
 
   return (
-    <LiveChatBox>
-      <PopButton onClick={openPopup}>POP</PopButton>
+    <div className={styles.liveChatBox}>
+      <button className={styles.popButton} onClick={openPopup}>
+        POP
+      </button>
       <iframe
         ref={iframeRef}
-        className="liveChat"
+        className={styles.liveChat}
         src={url}
         // sandbox="allow-scripts allow-same-origin allow-presentation"
         // seamless
         onLoad={() => setIsLoaded(() => true)}
       />
-    </LiveChatBox>
+    </div>
   );
 }

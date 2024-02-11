@@ -4,7 +4,8 @@ import useToast from '@/hook/useToast';
 import { useEffect, useRef, useState } from 'react';
 import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
-import { PipButton, PlayerDiv, PlayerPlaceholder } from './Style';
+import * as styles from './player.css';
+import cx from 'classnames';
 
 interface PlayerProps {
   isShow: boolean;
@@ -58,9 +59,9 @@ export default function Player({ isShow }: PlayerProps) {
   console.log('canEnablePIP', ReactPlayer.canEnablePIP(playerValue.url));
 
   return (
-    <PlayerDiv isShow={isShow} left={left}>
+    <div className={cx(isShow === false && styles.pipBase, styles.playerDiv, left && 'left')}>
       <ReactPlayer
-        className={'reactPlayer'}
+        className={cx(styles.playerBase, 'reactPlayer')}
         width={'100%'}
         height={'auto'}
         ref={player}
@@ -73,11 +74,11 @@ export default function Player({ isShow }: PlayerProps) {
         config={{ youtube: { playerVars: { suggestedQuality: 'hd720' } } }}
         controls={true}
         onReady={() => setIsReady(() => true)}
-        fallback={<PlayerPlaceholder />}
+        fallback={<div className={styles.playerPlaceholder} />}
       />
-      <PipButton className="hideButton" onClick={toggleLeft}>
+      <button className={cx(styles.pipButton, isShow === false && 'hide')} onClick={toggleLeft}>
         <ImYoutube size={'1.87rem'} />
-      </PipButton>
-    </PlayerDiv>
+      </button>
+    </div>
   );
 }
