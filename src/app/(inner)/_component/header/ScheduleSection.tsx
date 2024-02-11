@@ -4,7 +4,7 @@ import { ContentsDataType } from '@/type/api/mongoDB';
 import { useEffect, useMemo, useState } from 'react';
 import ScheduleCard from '../scheduleCard/Card';
 import CardPlaceHolders from '../scheduleCard/CardPlaceHolders';
-import { CardSection } from '../scheduleCard/Style';
+import * as cardStyles from '../scheduleCard/card.css';
 
 interface YoutubeSectionProps {
   contents: ContentsDataType[];
@@ -40,7 +40,7 @@ export default function ScheduleSection({ contents, isMobile }: YoutubeSectionPr
   }, [scrollPage]);
 
   return (
-    <CardSection>
+    <section className={cardStyles.cardSection}>
       {loadContents.map((data, index) => (
         <ScheduleCard
           key={data.videoId}
@@ -51,6 +51,6 @@ export default function ScheduleSection({ contents, isMobile }: YoutubeSectionPr
         />
       ))}
       <CardPlaceHolders isMobile={isMobile} />
-    </CardSection>
+    </section>
   );
 }

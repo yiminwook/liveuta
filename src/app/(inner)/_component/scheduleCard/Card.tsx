@@ -1,11 +1,11 @@
 'use client';
 import CardDesc from './CardDesc';
 import CardImage from './CardImage';
-import { Card } from './Style';
 //import { ContentsDataType } from '@/types/inSheet';
 import { ContentsDataType } from '@/type/api/mongoDB';
 import cx from 'classnames';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
+import * as styles from './card.css';
 
 interface ScheduleCardProps {
   content: ContentsDataType;
@@ -70,9 +70,9 @@ export default function ScheduleCard({
   }, [target, content, lastContentsIndex]);
 
   return (
-    <Card className={cx('scheduleCard', addStreamModifier)} key={videoId} ref={target}>
+    <div className={cx('scheduleCard', styles.card, addStreamModifier)} key={videoId} ref={target}>
       <CardImage content={content} />
       <CardDesc content={content} addStreamModifier={addStreamModifier} />
-    </Card>
+    </div>
   );
 }

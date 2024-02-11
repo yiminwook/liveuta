@@ -4,7 +4,6 @@ import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import useMutatePush from '@/app/(inner)/_lib/reservePush';
 import CopyButton from '../button/CopyButton';
 import CardStatus from '../scheduleCard/CardStatus';
-import { DescBox } from '../scheduleCard/Style';
 //import { ContentsDataType } from '@/types/inSheet';
 import { ContentsDataType } from '@/type/api/mongoDB';
 import { gtagClick } from '@inner/_lib/gtag';
@@ -12,6 +11,7 @@ import { openWindow } from '@inner/_lib/windowEvent';
 import cx from 'classnames';
 import { MouseEvent } from 'react';
 import { HiBellAlert } from 'react-icons/hi2';
+import * as styles from './card.css';
 
 interface CardDescProps {
   content: ContentsDataType;
@@ -76,14 +76,14 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
   };
 
   return (
-    <DescBox>
-      <div className={cx('channelName', addStreamModifier)}>{channelName}</div>
-      <p className={cx('title', addStreamModifier)}>{title}</p>
-      <div className={'time'}>
+    <div className={styles.descBox}>
+      <div className={cx(styles.channelName, addStreamModifier)}>{channelName}</div>
+      <p className={cx(styles.title, addStreamModifier)}>{title}</p>
+      <div className={styles.time}>
         <time className={'kor'}>{korTime}</time>
         <CardStatus isStream={isStream} interval={interval} videoId={videoId} />
       </div>
-      <div className={'link'}>
+      <div className={styles.link}>
         {isStream === 'NULL' ? (
           <button className={'alaram'} onClick={handleReserve} disabled={isPendingPush}>
             <HiBellAlert color="inherit" size="1.25rem" />
@@ -92,6 +92,6 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
         <CopyButton value={url} size="1rem" />
         <button onClick={openStream}>새 탭으로 열기</button>
       </div>
-    </DescBox>
+    </div>
   );
 }

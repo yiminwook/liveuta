@@ -25,23 +25,18 @@ export const zIndex = {
   },
 };
 
-export const responsive = (styles: {
-  mobile?: CSSPropertiesWithVars;
-  tablet?: CSSPropertiesWithVars;
-  desktop?: CSSPropertiesWithVars;
-}) => {
+const BreakPoint = { sm: 640, md: 768, lg: 1024, xl: 1280, '2xl': 1536, full: 1900 };
+type ResponsiveArgs = Partial<Record<keyof typeof BreakPoint, CSSPropertiesWithVars>>;
+export const responsive = (styles: ResponsiveArgs) => {
   const mediaStyle: Record<string, CSSPropertiesWithVars> = {};
 
-  if (styles.mobile) {
-    mediaStyle['screen and (min-width: 365px)'] = styles.mobile;
-  }
+  for (const _key in BreakPoint) {
+    const key = _key as keyof typeof BreakPoint;
+    const style = styles[key];
 
-  if (styles.tablet) {
-    mediaStyle['screen and (min-width: 768px)'] = styles.tablet;
-  }
-
-  if (styles.desktop) {
-    mediaStyle['screen and (min-width: 1024px)'] = styles.desktop;
+    if (style) {
+      mediaStyle[`screen and (min-width: ${BreakPoint[key]}px)`] = style;
+    }
   }
 
   return {
@@ -51,7 +46,7 @@ export const responsive = (styles: {
   };
 };
 
-const textLineBase: CSSPropertiesWithVars = {
+export const textLineBase: CSSPropertiesWithVars = {
   wordBreak: 'break-all',
   display: '-webkit-box',
   overflow: 'hidden',
@@ -61,13 +56,13 @@ const textLineBase: CSSPropertiesWithVars = {
 export const textOneLine: CSSPropertiesWithVars = {
   ...textLineBase,
   WebkitLineClamp: 1,
-  lineHeight: 1.25,
-  height: calc.multiply(1 * 1.25),
+  lineHeight: '1rem',
+  height: calc.multiply(1, '1rem'),
 };
 
 export const textTwoLine: CSSPropertiesWithVars = {
   ...textLineBase,
   WebkitLineClamp: 2,
-  lineHeight: 1.25,
-  height: calc.multiply(2 * 1.25),
+  lineHeight: '1rem',
+  height: calc.multiply(2, '1rem'),
 };

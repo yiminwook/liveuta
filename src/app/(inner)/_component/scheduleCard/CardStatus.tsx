@@ -1,7 +1,7 @@
 //import { isStream } from '@/types/inSheet';
 import { isStream } from '@/type/api/mongoDB';
-import { StatusBox } from './Style';
 import CardViewer from './CardViewer';
+import * as styles from './card.css';
 
 interface CardStatusProps {
   isStream: isStream;
@@ -10,5 +10,9 @@ interface CardStatusProps {
 }
 
 export default function CardStatus({ isStream, interval, videoId }: CardStatusProps) {
-  return <StatusBox>{isStream !== 'TRUE' ? interval : <CardViewer videoId={videoId} />}</StatusBox>;
+  return (
+    <div className={styles.statusBox}>
+      {isStream !== 'TRUE' ? interval : <CardViewer videoId={videoId} />}
+    </div>
+  );
 }

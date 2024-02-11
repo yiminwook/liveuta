@@ -1,6 +1,5 @@
 'use client';
 import { playerAtom } from '@inner/_lib/atom';
-import { ImageLink } from './Style';
 import { DEFAULT_BLUR_BASE64 } from '@/const';
 import useResponsive from '@/hook/useResponsive';
 import altImage from '@/asset/image/thumbnail_alt_img.png';
@@ -10,6 +9,7 @@ import { gtagClick } from '@inner/_lib/gtag';
 import { useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { MouseEvent, useCallback, useRef, useState } from 'react';
+import * as styles from './card.css';
 
 interface CardImageProps {
   content: ContentsDataType;
@@ -46,7 +46,7 @@ export default function CardImage({ content }: CardImageProps) {
   };
 
   return (
-    <ImageLink onClick={linkClickEvent} className="imageLink">
+    <button className={styles.imageLink} onClick={linkClickEvent}>
       <div>
         {imgLoaded ? (
           <Image
@@ -71,6 +71,6 @@ export default function CardImage({ content }: CardImageProps) {
           />
         )}
       </div>
-    </ImageLink>
+    </button>
   );
 }

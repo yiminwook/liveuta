@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { FaUsers } from 'react-icons/fa';
+import * as styles from './card.css';
 
 interface CardViewerProps {
   videoId: string;
@@ -26,7 +27,7 @@ export default function CardViewer({ videoId }: CardViewerProps) {
 
   return (
     <>
-      <FaUsers size={'0.75rem'} />
+      <FaUsers className={styles.statusSvg} size={'0.75rem'} />
       {data}
     </>
   );

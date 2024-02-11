@@ -45,7 +45,7 @@ const link = style({
   fontWeight: 500,
   transition: `color 0.3s ${BEZIER_CURVE}`,
   ':hover': {
-    color: global.theme.ButtonColor,
+    color: global.color.bg,
   },
 });
 
