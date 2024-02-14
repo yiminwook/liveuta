@@ -2,10 +2,10 @@
 import { clipText } from '@inner/_lib/windowEvent';
 import { CSSProperties, MouseEvent } from 'react';
 import { FaCopy } from 'react-icons/fa';
-import copyButton from './copyButton.module.scss';
 import useToast from '@/hook/useToast';
 import { gtagClick } from '@inner/_lib/gtag';
 import cx from 'classnames';
+import * as styles from './copyButton.css';
 
 interface CopyButtonProps {
   value: string;
@@ -31,7 +31,7 @@ export default function CopyButton({ value, size = '2rem', className, style }: C
   };
 
   return (
-    <button className={cx(copyButton['copy-button'], className)} onClick={onClick} style={style}>
+    <button className={cx(styles.button, className)} onClick={onClick} style={style}>
       <FaCopy size={size} color="inherit" />
     </button>
   );

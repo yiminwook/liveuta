@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 import { GrClose } from 'react-icons/gr';
-import closeButton from './closeButton.module.scss';
 import cx from 'classnames';
+import * as styles from './closeButton.css';
 
 interface CloseButtonProps {
   className?: string;
@@ -15,7 +15,7 @@ export default function CloseButton({
   size = '1.5rem',
 }: CloseButtonProps) {
   return (
-    <button className={cx(closeButton['wrap'], className)} onClick={onClick}>
+    <button className={cx(styles.closeButton, className)} onClick={onClick}>
       <span className="blind">닫기</span>
       <GrClose size={size} color="inherit" />
     </button>

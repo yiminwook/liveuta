@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import themeButton from './themeButton.module.scss';
 import ThemeModal from '../modal/ThemeModal';
 import { RiBrushLine } from 'react-icons/ri';
 import cx from 'classnames';
+import * as styles from './themeButton.css';
 
 interface ThemeButtonProps {
   className?: string;
@@ -19,7 +19,7 @@ export default function ThemeButton({ className, size = '1.5rem' }: ThemeButtonP
 
   return (
     <>
-      <button onClick={openThemeModal} className={cx(themeButton['wrap'], className)}>
+      <button onClick={openThemeModal} className={cx(styles.button, className)}>
         <RiBrushLine color="inherit" size={size} />
       </button>
       {showThemeModal ? <ThemeModal onClose={closeThemeModal} /> : null}
