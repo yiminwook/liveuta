@@ -33,6 +33,10 @@ const nextConfig = {
   //           key: 'Cache-Control',
   //           value: 'no-store, max-age=0',
   //         },
+  //         {
+  //           key: 'Access-Control-Allow-Origin',
+  //           value: process.env.NEXT_PUBLIC_SITE_URL,
+  //         },
   //       ],
   //     },
   //   ];

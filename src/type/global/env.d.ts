@@ -1,10 +1,14 @@
-import '@types/node/process';
-
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
       readonly NODE_ENV: 'development' | 'production' | 'test';
       readonly TZ?: string;
+
+      //vercel env  - https://vercel.com/docs/projects/environment-variables/system-environment-variables
+      readonly NEXT_PUBLIC_VERCEL_ENV: 'production' | 'preview' | 'development';
+      readonly NEXT_PUBLIC_VERCEL_URL: string; // *.vercel.app
+      readonly NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG: string; // main or dev
+
       readonly NEXT_PUBLIC_SITE_URL: string;
       readonly NEXT_PUBLIC_REQUEST_URL: string;
 
@@ -20,8 +24,10 @@ declare global {
       readonly MONGODB_SCHEDULE_COLLECTION: string;
       readonly MONGODB_NOTI_COLLECTION: string;
       readonly MONGODB_CHANNEL_COLLECTION: string;
+
       readonly MONGODB_SCHEDULE_DB: string;
       readonly MONGODB_CHANNEL_DB: string;
+
       readonly MONGODB_API_KEY: string;
       readonly MONGODB_URI: string;
 
@@ -38,3 +44,5 @@ declare global {
     }
   }
 }
+
+export {};
