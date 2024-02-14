@@ -1,3 +1,5 @@
+### 📢 Pull Request는 dev 브랜치에 부탁드립니다.
+
 ## node v18.19.0
 
 ## Server API docs
