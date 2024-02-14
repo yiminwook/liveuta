@@ -2,6 +2,7 @@
 import cx from 'classnames';
 import { useEffect, useMemo, useState } from 'react';
 import { TfiArrowCircleUp } from 'react-icons/tfi';
+import * as styles from './floatButton.css';
 
 export default function FloatButton() {
   const [isTop, setIsTop] = useState(true);
@@ -31,7 +32,7 @@ export default function FloatButton() {
 
   return (
     <button
-      className={cx('foat', 'right', 'hover', isTop ? 'hide' : '')}
+      className={cx(styles.button, 'right', 'hover', isTop && 'hide')}
       onClick={scrollUp}
       onTouchEnd={scrollUp}
       onTouchStart={scrollUp}

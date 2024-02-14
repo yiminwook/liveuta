@@ -5,7 +5,7 @@ import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { IoGlobeOutline } from 'react-icons/io5';
 import { AiOutlineLoading } from 'react-icons/ai';
-import fetchIndicator from './fetchIndicator.module.scss';
+import * as styles from './floatButton.css';
 
 export default function FetchIndicator() {
   const isLoading = useAtomValue(isLoadingAtom);
@@ -17,9 +17,9 @@ export default function FetchIndicator() {
   }
 
   return (
-    <div className={cx('foat', 'left', fetchIndicator['wrap'])}>
-      <IoGlobeOutline color="inherit" size={'1.5rem'} />
-      <AiOutlineLoading size={'2.25rem'} color="inherit" />
+    <div className={cx(styles.button, 'left')}>
+      <IoGlobeOutline className={styles.networkSvg} color="inherit" size={'1.5rem'} />
+      <AiOutlineLoading className={styles.loadingSvg} size={'2.25rem'} color="inherit" />
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import Loading from '@/app/loading';
 import { PropsWithChildren } from 'react';
 import Footer from './_component/Footer';
-import FloatButton from './_component/button/FlotButton';
-import Header from './_component/header/Header';
-import FetchIndicator from './_component/loading/FetchIndicator';
 import PageView from './_component/PageView';
+import FetchIndicator from './_component/button/FetchIndicator';
+import FloatButton from './_component/button/FloatButton';
+import Header from './_component/header/Header';
 
 export default function Layout({ children }: PropsWithChildren) {
   return (

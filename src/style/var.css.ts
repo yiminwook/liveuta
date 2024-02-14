@@ -14,6 +14,9 @@ export const flexCenter = {
 };
 
 export const zIndex = {
+  float: {
+    zIndex: 100,
+  },
   header: {
     zIndex: 1000,
   },
@@ -65,4 +68,16 @@ export const textTwoLine: CSSPropertiesWithVars = {
   WebkitLineClamp: 2,
   lineHeight: '1rem',
   height: calc.multiply(2, '1rem'),
+};
+
+export const preventUserSelect: CSSPropertiesWithVars = {
+  WebkitUserSelect: 'none',
+  userSelect: 'none',
+};
+
+export const absoulteCenter: CSSPropertiesWithVars = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
 };
