@@ -34,7 +34,6 @@ export default function NavSection({ filter }: NavSectionProps) {
     <section className={home['nav-section']}>
       <HorizonScrollBox className={home['nav-scroll-box']}>
         <NavTap />
-        dev mongoDB 사용중
         <NavSelectBox filter={filter} />
       </HorizonScrollBox>
     </section>
