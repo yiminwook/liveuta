@@ -1,10 +1,8 @@
 'use client';
 import useToast from '@/hook/useToast';
 import { generateFcmToken } from '@/model/firebase/generateFcmToken';
-import useMutatePush from '@/app/(inner)/_lib/reservePush';
 import CopyButton from '../button/CopyButton';
 import CardStatus from '../scheduleCard/CardStatus';
-//import { ContentsDataType } from '@/types/inSheet';
 import { ContentsDataType } from '@/type/api/mongoDB';
 import { gtagClick } from '@inner/_lib/gtag';
 import { openWindow } from '@inner/_lib/windowEvent';
@@ -12,6 +10,8 @@ import cx from 'classnames';
 import { MouseEvent } from 'react';
 import { HiBellAlert } from 'react-icons/hi2';
 import * as styles from './card.css';
+import reservePush from '@/app/(inner)/_lib/reservePush';
+import { useMutation } from '@tanstack/react-query';
 
 interface CardDescProps {
   content: ContentsDataType;
@@ -21,32 +21,15 @@ interface CardDescProps {
 export default function CardDesc({ content, addStreamModifier }: CardDescProps) {
   const { title, url, channelName, korTime, interval, isStream, timestamp, thumbnailURL, videoId } =
     content;
+
   const toast = useToast();
-  const { pushMutateAsync, isPendingPush } = useMutatePush({ key: videoId });
 
-  const handleReserve = async (e: MouseEvent<HTMLButtonElement>) => {
-    try {
-      if (isPendingPush || isStream !== 'NULL') return;
-      const result = window.confirm('예약후에는 취소할 수 없습니다.');
-      if (result === false) return;
-      const token = await generateFcmToken();
-
-      if (token === undefined) {
-        throw new Error('토큰을 가져오는데 실패했습니다.');
-      }
-
-      const response = await pushMutateAsync({
-        title: '스케쥴 알림',
-        body: `곧 ${channelName}의 방송이 시작됩니다.`,
-        token,
-        timestamp: timestamp.toString(),
-        imageUrl: thumbnailURL || 'https://liveuta.vercel.app/assets/meta-image.png',
-        link: url,
-      });
-
+  const mutatePush = useMutation({
+    mutationKey: ['push', videoId],
+    mutationFn: reservePush,
+    onSuccess: (response) => {
       if (response.status === 226) {
-        toast.warning({ text: '이미 예약된 알림입니다.' });
-        return;
+        return toast.warning({ text: '이미 예약된 알림입니다.' });
       }
 
       gtagClick({
@@ -57,21 +40,46 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
       });
 
       toast.success({ text: '알림이 예약되었습니다.' });
-    } catch (error) {
+    },
+    onError: (error) => {
       console.error(error);
-      const message = error instanceof Error ? error.message : 'Unknown Error';
-      toast.error({ text: message });
+      toast.error({ text: error.message });
+    },
+  });
+
+  const handleReserve = async (e: MouseEvent<HTMLButtonElement>) => {
+    if (mutatePush.isPending || isStream !== 'NULL') return;
+
+    const result = window.confirm('예약후에는 취소할 수 없습니다. (미구현)');
+
+    if (result === false) return;
+
+    const token = await generateFcmToken();
+
+    if (token === undefined) {
+      throw new Error('토큰을 가져오는데 실패했습니다.');
     }
+
+    mutatePush.mutate({
+      title: '스케쥴 알림',
+      body: `곧 ${channelName}의 방송이 시작됩니다.`,
+      token,
+      timestamp: timestamp.toString(),
+      imageUrl: thumbnailURL || 'https://liveuta.vercel.app/assets/meta-image.png',
+      link: url,
+    });
   };
 
   const openStream = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
     gtagClick({
       target: 'scheduleCard',
       content: content.channelName,
       detail: content.title,
       action: 'openWindow',
     });
+
     openWindow(url);
   };
 
@@ -85,7 +93,7 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
       </div>
       <div className={styles.link}>
         {isStream === 'NULL' ? (
-          <button className={'alaram'} onClick={handleReserve} disabled={isPendingPush}>
+          <button className={'alaram'} onClick={handleReserve} disabled={mutatePush.isPending}>
             <HiBellAlert color="inherit" size="1.25rem" />
           </button>
         ) : null}

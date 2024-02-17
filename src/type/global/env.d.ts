@@ -13,8 +13,6 @@ declare global {
       readonly NEXT_PUBLIC_REQUEST_URL: string;
 
       readonly GOOGLE_API_KEY: string;
-      // readonly GOOGLE_CLIENT_ID: string;
-      // readonly GOOGLE_SECRET_KEY: string;
 
       readonly FIREBASE_PROJECT_ID: string;
       readonly FIREBASE_PRIVATE_KEY: string;
@@ -31,13 +29,17 @@ declare global {
       readonly MONGODB_API_KEY: string;
       readonly MONGODB_URI: string;
 
-      readonly CONTENTS_SHEET_RANGE: string;
-      readonly CHANNELS_SHEET_RANGE: string;
-      readonly PUSH_SHEET_RANGE: string;
+      /** 폐기 */
+      // readonly GOOGLE_CLIENT_ID: string;
+      // readonly GOOGLE_SECRET_KEY: string;
 
-      readonly CONTENTS_SHEET_ID: string;
-      readonly CHANNELS_SHEET_ID: string;
-      readonly PUSH_SHEET_ID: string;
+      // readonly CONTENTS_SHEET_RANGE: string;
+      // readonly CHANNELS_SHEET_RANGE: string;
+      // readonly PUSH_SHEET_RANGE: string;
+
+      // readonly CONTENTS_SHEET_ID: string;
+      // readonly CHANNELS_SHEET_ID: string;
+      // readonly PUSH_SHEET_ID: string;
 
       /** 미사용 */
       readonly HOLODEX_API_KEY: string;

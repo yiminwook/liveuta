@@ -1,3 +1,4 @@
+//ts-ignore
 import { SheetAPIReturntype } from '@/type/api/sheet';
 import { getSheet } from '@/model/sheet';
 import { parseAllData, parseScheduledData } from '@/app/api/_lib/parseContentSheet';
@@ -14,8 +15,8 @@ export async function GET(_req: NextRequest) {
     const cookie = cookieStore.get('select')?.value || 'all';
 
     const sheetData = await getSheet({
-      spreadsheetId: process.env.CONTENTS_SHEET_ID,
-      range: process.env.CONTENTS_SHEET_RANGE,
+      spreadsheetId: process.env.CONTENTS_SHEET_ID!,
+      range: process.env.CONTENTS_SHEET_RANGE!,
     });
 
     const { scheduled, live } = parseScheduledData(sheetData);
@@ -63,8 +64,8 @@ export const POST = async (req: NextRequest) => {
     ];
 
     const sheetData = await getSheet({
-      spreadsheetId: process.env.PUSH_SHEET_ID,
-      range: process.env.PUSH_SHEET_RANGE,
+      spreadsheetId: process.env.PUSH_SHEET_ID!,
+      range: process.env.PUSH_SHEET_RANGE!,
     });
 
     if (sheetData.values === null || sheetData.values === undefined) {
