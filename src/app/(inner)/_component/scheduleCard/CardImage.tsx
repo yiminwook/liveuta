@@ -41,7 +41,7 @@ export default function CardImage({ content }: CardImageProps) {
     if (isMobile) {
       window.location.href = url;
     } else {
-      setPlayerValue((pre) => ({ ...pre, url, videoId, hide: false }));
+      setPlayerValue((pre) => ({ ...pre, url, videoId, hide: false, isPlaying: true }));
     }
   };
 

@@ -18,13 +18,15 @@ export async function GET(_req: NextRequest) {
     const scheduleDataRaw: ContentDocumentRaw[] = await readDB(collection, database, {
       sort: { ScheduledTime: 1 },
     });
+
     if (!scheduleDataRaw) throw new Error('documents is undefined.');
 
-    const scheduleData = scheduleDataRaw.map((doc) => ({
-      ...doc,
-      ScheduledTime: dayjs(doc.ScheduledTime),
-    }));
-    // .sort((a, b) => (a.ScheduledTime.isBefore(b.ScheduledTime) ? -1 : 1));
+    const scheduleData = scheduleDataRaw
+      .map((doc) => ({
+        ...doc,
+        ScheduledTime: dayjs(doc.ScheduledTime),
+      }))
+      .sort((a, b) => (a.ScheduledTime.isBefore(b.ScheduledTime) ? -1 : 1));
 
     const { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
     const { daily, all } = parseAllData(scheduleData); // Need to be revised
