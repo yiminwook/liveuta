@@ -8,6 +8,23 @@ import { ContentsDataType, MongoDBAPIReturntype } from '@/type/api/mongoDB';
 
 const MONGODB_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
 
+function sortContents(contents: ContentsDataType[]) {
+  return contents.toSorted((a, b) => {
+    const aIsStream = a.isStream === 'TRUE';
+    const bIsStream = b.isStream === 'TRUE';
+
+    if (aIsStream !== bIsStream) {
+      return aIsStream ? -1 : 1;
+    }
+
+    if (a.korTime !== b.korTime) {
+      return a.korTime < b.korTime ? -1 : 1;
+    }
+
+    return a.channelName < b.channelName ? -1 : 1;
+  });
+}
+
 const useMongoDB = (filter: keyof MongoDBAPIReturntype) => {
   const [isLoad, setIsLoad] = useState(false);
   const [contents, setContents] = useState<ContentsDataType[]>([]);
@@ -29,7 +46,8 @@ const useMongoDB = (filter: keyof MongoDBAPIReturntype) => {
 
   const setData = () => {
     if (!data) return;
-    const contents = [...data[filter].contents];
+    const unsortedContents = data[filter].contents as ContentsDataType[];
+    const contents = sortContents(unsortedContents);
     setContents(() => contents);
   };
 
