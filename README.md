@@ -4,6 +4,8 @@ Main - https://liveuta.vercel.app
 
 Dev - https://liveuta-dev.vercel.app
 
+개발현황 - https://github.com/orgs/utawaku/projects/2
+
 ## node v18.19.0
 
 ## Server API docs
