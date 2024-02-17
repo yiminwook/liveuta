@@ -1,5 +1,8 @@
 ### 📢 Pull Request는 dev 브랜치에 부탁드립니다.
 
+Main - https://liveuta.vercel.app
+Dev - https://liveuta-dev.vercel.app
+
 ## node v18.19.0
 
 ## Server API docs
