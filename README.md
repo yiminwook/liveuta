@@ -1,6 +1,7 @@
 ### 📢 Pull Request는 dev 브랜치에 부탁드립니다.
 
 Main - https://liveuta.vercel.app
+
 Dev - https://liveuta-dev.vercel.app
 
 ## node v18.19.0
@@ -91,14 +92,6 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 HOLODEX_API_KEY=
 /** Youtube Data v3 API */
 GOOGLE_API_KEY=AIz...
-
-CONTENTS_SHEET_ID=sheetId
-CHANNELS_SHEET_ID=sheetId
-PUSH_SHEET_ID=sheetId
-
-CONTENTS_SHEET_RANGE=Upcoming
-CHANNELS_SHEET_RANGE=reference
-PUSH_SHEET_RANGE=시트1
 
 NEXT_PUBLIC_REQUEST_URL=http://REQUEST_URL.com
 
