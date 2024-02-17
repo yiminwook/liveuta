@@ -21,8 +21,6 @@ export const DEFALUT_METADATA: Metadata = {
   title: DEFAULT_TITLE,
   description: DEFAULT_DESC,
   manifest: `${DEFAULT_SITE_URL}/manifest.json`,
-  icons:
-    'https://img.icons8.com/external-microdots-premium-microdot-graphic/64/null/external-holiday-christmas-new-year-vol2-microdots-premium-microdot-graphic-4.png',
   // themeColor: DEFAULT_COLOR,
   applicationName: 'Live Uta',
   appleWebApp: {
