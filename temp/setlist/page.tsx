@@ -2,7 +2,7 @@
 'use client';
 
 import SearchSection from '@inner/(pip)/search/_component/SearchSection';
-import SetlistSection from '~/temp/setlist/_component/SetlistSection';
+import SetlistSection from '/temp/setlist/_component/SetlistSection';
 
 const SetListPage = () => {
   return (
