@@ -1,0 +1,102 @@
+'use client';
+import { PAGINATION_RANGE } from '@/const';
+import pagination from './pagination.module.scss';
+import {
+  MdKeyboardArrowLeft,
+  MdKeyboardArrowRight,
+  MdKeyboardDoubleArrowLeft,
+  MdKeyboardDoubleArrowRight,
+} from 'react-icons/md';
+import Link from 'next/link';
+import useLocation from '@/hook/useLocation';
+import { ReactNode } from 'react';
+
+export function FirstLink({ currentPage }: { currentPage: number }) {
+  const disabled = currentPage === 1;
+  return (
+    <PaginationItem
+      currentPage={0}
+      nextPage={1}
+      disabled={disabled}
+      value={<MdKeyboardDoubleArrowLeft size="1rem" color="inherit" />}
+    />
+  );
+}
+
+export function BeforeLink({ initialPage }: { initialPage: number | null; totalPage: number }) {
+  if (initialPage === null) return null;
+  const disabled = initialPage === 1;
+
+  return (
+    <PaginationItem
+      currentPage={0}
+      nextPage={initialPage - PAGINATION_RANGE}
+      disabled={disabled}
+      value={<MdKeyboardArrowLeft size="1rem" color="inherit" />}
+    />
+  );
+}
+
+export function AfterLink({
+  initialPage,
+  totalPage,
+}: {
+  initialPage: number | null;
+  totalPage: number;
+}) {
+  if (initialPage === null) return null;
+  const disabled = totalPage < initialPage + PAGINATION_RANGE;
+
+  return (
+    <PaginationItem
+      currentPage={0}
+      nextPage={initialPage + PAGINATION_RANGE}
+      disabled={disabled}
+      value={<MdKeyboardArrowRight size="1rem" color="inherit" />}
+    />
+  );
+}
+
+export function LastLink({ currentPage, totalPage }: { currentPage: number; totalPage: number }) {
+  const disabled = currentPage === totalPage;
+
+  return (
+    <PaginationItem
+      nextPage={totalPage}
+      currentPage={currentPage}
+      value={<MdKeyboardDoubleArrowRight size="1rem" color="inherit" />}
+      disabled={disabled}
+    />
+  );
+}
+
+interface PaginationItemProps {
+  currentPage: number;
+  nextPage: number | null; //이동할 페이지
+  value: ReactNode;
+  disabled?: boolean;
+}
+
+export function PaginationItem({ nextPage, currentPage, value, disabled }: PaginationItemProps) {
+  const location = useLocation();
+
+  if (nextPage === undefined || nextPage === null) {
+    return null;
+  }
+
+  const isActive = nextPage === currentPage;
+
+  return (
+    <li>
+      <Link
+        href={`${location}/page/${nextPage}`}
+        className={[
+          isActive ? pagination['active'] : '',
+          disabled ? pagination['disabled'] : '',
+        ].join(' ')}
+      >
+        {value}
+      </Link>
+    </li>
+  );
+}

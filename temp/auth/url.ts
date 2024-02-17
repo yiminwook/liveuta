@@ -1,4 +1,5 @@
-import { jwtAuth } from '@/models/firebase/admin';
+// @ts-ignore
+import { jwtAuth } from '@/model/firebase/admin';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 /** Authorization URL 반환 */

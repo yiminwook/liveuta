@@ -1,0 +1,53 @@
+@import 'mixin';
+@import 'var';
+@import 'placeholder';
+
+.pagination {
+  box-sizing: border-box;
+  padding: 0.25rem;
+  display: flex;
+  margin: auto;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+
+  @include min-width($mixin-middle-width) {
+    padding: 0.5rem;
+  }
+
+  li {
+    a {
+      border-radius: 5px;
+      background-color: lighten(map-get($colors, main), 10%);
+      padding: 0.25rem 0.5rem;
+      line-height: 1;
+      font-weight: 600;
+      color: var(--liveuta-default-color);
+      font-size: 1.15rem;
+      text-align: center;
+      @include transition(background-color, 0.2s, linear);
+
+      @include min-width($mixin-middle-width) {
+        padding: 0.5rem 0.75rem;
+        font-size: 1.25rem;
+      }
+
+      &:hover {
+        background-color: var(--liveuta-default-color);
+        color: lighten(map-get($colors, main), 10%);
+      }
+
+      &.active {
+        background-color: var(--liveuta-active-color) !important;
+        color: lighten(map-get($colors, main), 10%) !important;
+        pointer-events: none;
+      }
+
+      &.disabled {
+        background-color: map-get($colors, font) !important;
+        color: map-get($colors, light-font) !important;
+        pointer-events: none;
+      }
+    }
+  }
+}

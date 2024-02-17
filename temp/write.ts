@@ -1,8 +1,12 @@
+// @ts-ignore
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { SheetAPIReturntype } from '@/types/inSheet';
+import { SheetAPIReturntype } from '@/type/api/sheet';
 import { google } from 'googleapis';
 
-const handler = async (req: NextApiRequest, res: NextApiResponse<SheetAPIReturntype | undefined>) => {
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse<SheetAPIReturntype | undefined>,
+) => {
   try {
     if (!req.method) throw new Error('invaild method');
 
@@ -20,7 +24,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<SheetAPIReturnt
       valueInputOption: 'RAW',
       access_token: '',
     });
-    console.log(result.data);
   } catch (err) {
     console.error(err);
     return res.status(400).end();

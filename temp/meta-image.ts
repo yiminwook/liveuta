@@ -1,3 +1,4 @@
+// @ts-ignore
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { readFile } from 'fs/promises';
 import path from 'path';
