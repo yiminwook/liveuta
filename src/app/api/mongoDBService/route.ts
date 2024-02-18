@@ -26,7 +26,15 @@ export async function GET(_req: NextRequest) {
         ...doc,
         ScheduledTime: dayjs(doc.ScheduledTime),
       }))
-      .sort((a, b) => (a.ScheduledTime.isBefore(b.ScheduledTime) ? -1 : 1));
+      .sort((a, b) => {
+        if (a.ScheduledTime.isBefore(b.ScheduledTime)) {
+          return -1;
+        } else if (a.ScheduledTime.isAfter(b.ScheduledTime)) {
+          return 1;
+        }
+
+        return a.ChannelName < b.ChannelName ? -1 : 1;
+      });
 
     const { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
     const { daily, all } = parseAllData(scheduleData); // Need to be revised
