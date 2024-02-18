@@ -9,7 +9,7 @@ export interface ChannelDocument {
   waiting: boolean;
 }
 
-export type ContentDocumentRaw = Omit<ContentDocument, 'ScheduledTime'> & { ScheduledTime: string };
+export type ContentDocumentRaw = Omit<ContentDocument, 'ScheduledTime'> & { ScheduledTime: Date };
 
 export interface ContentDocument {
   _id: string;

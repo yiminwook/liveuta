@@ -29,8 +29,7 @@ const useMongoDB = (filter: keyof MongoDBAPIReturntype) => {
 
   const setData = () => {
     if (!data) return;
-    // const unsortedContents = data[filter].contents as ContentsDataType[];
-    // const contents = sortContents(unsortedContents);
+
     const contents = [...data[filter].contents] as ContentsDataType[];
     setContents(() => contents);
   };

@@ -24,7 +24,7 @@ export async function GET(_req: NextRequest) {
     const scheduleData = scheduleDataRaw
       .map((doc) => ({
         ...doc,
-        ScheduledTime: dayjs(doc.ScheduledTime),
+        ScheduledTime: dayjs.tz(doc.ScheduledTime),
       }))
       .sort((a, b) => {
         if (a.ScheduledTime.isBefore(b.ScheduledTime)) {

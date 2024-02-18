@@ -1,7 +1,7 @@
 import dayjs from '@/model/dayjs';
 
 export const getInterval = (scheduledTimeStamp: number): string => {
-  const nowTimeStamp = dayjs().valueOf();
+  const nowTimeStamp = dayjs.tz().valueOf();
 
   /** 분 */
   const interval = Math.trunc((scheduledTimeStamp - nowTimeStamp) / (1000 * 60));
