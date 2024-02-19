@@ -13,8 +13,9 @@ export const gtag = <T extends keyof Gtag.GtagCommands>(
   command: T,
   ...args: Gtag.GtagCommands[T]
 ) => {
-  if (typeof window === 'undefined') return;
-  window?.gtag(command, ...args);
+  if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
+  // firefox에서 window.gtag가 undefined로 나오는 경우가 있음
+  window.gtag(command, ...args);
 };
 
 interface GtagClickProps {
