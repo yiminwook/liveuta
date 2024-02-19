@@ -9,9 +9,12 @@ import { MouseEvent } from 'react';
 //  https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/lib/gtag.js
 //  https://developers.google.com/analytics/devguides/collection/ga4/event-parameters?hl=ko&client_type=gtag
 
-export const gtag = <T extends keyof Gtag.GtagCommands>(command: T, ...args: Gtag.GtagCommands[T]) => {
-  if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
-  window.gtag(command, ...args);
+export const gtag = <T extends keyof Gtag.GtagCommands>(
+  command: T,
+  ...args: Gtag.GtagCommands[T]
+) => {
+  if (typeof window === 'undefined') return;
+  window?.gtag(command, ...args);
 };
 
 interface GtagClickProps {
