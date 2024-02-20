@@ -10,17 +10,17 @@ export async function POST(req: NextRequest) {
     const notiCollection = process.env.MONGODB_NOTI_COLLECTION;
     const notiDatabase = process.env.MONGODB_SCHEDULE_DB;
 
-    const existingData = await readDB(notiCollection, notiDatabase, {
+    const readResult = await readDB(notiCollection, notiDatabase, {
       filter: { token: requestBody.token, link: requestBody.link },
     });
 
-    if (existingData && existingData.length !== 0) {
-      return NextResponse.json({ message: '이미 등록된 알림입니다.' }, { status: 226 });
+    if (readResult && readResult.length !== 0) {
+      const deleteResult = await deleteDB(notiCollection, notiDatabase, readResult[0]);
+      return NextResponse.json({ message: '알림이 취소되었습니다.' }, { status: 200 });
     }
 
-    await writeDB(notiCollection, notiDatabase, { document: requestBody });
-
-    return NextResponse.json({ message: '알림이 성공적으로 등록되었습니다.' }, { status: 201 });
+    const createResult = await writeDB(notiCollection, notiDatabase, { document: requestBody });
+    return NextResponse.json({ message: '알림이 예약되었습니다.' }, { status: 201 });
   } catch (error) {
     console.error(error);
     const { status, message } = errorHandler(error);
@@ -42,10 +42,6 @@ export async function DELETE(req: NextRequest) {
     if (existingData && existingData.length !== 0) {
       return NextResponse.json({ message: '이미 취소된 알림입니다.' }, { status: 226 });
     }
-
-    await deleteDB(notiCollection, notiDatabase, {
-      filter: { token: requestBody.token, link: requestBody.link },
-    });
 
     return NextResponse.json({ message: '알림이 성공적으로 취소되었습니다.' }, { status: 201 });
   } catch (error) {

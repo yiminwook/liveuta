@@ -28,10 +28,6 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
     mutationKey: ['push', videoId],
     mutationFn: reservePush,
     onSuccess: (response) => {
-      if (response.status === 226) {
-        return toast.warning({ text: '이미 예약된 알림입니다.' });
-      }
-
       gtagClick({
         target: 'sheduleAlarm',
         content: content.channelName,
@@ -39,7 +35,7 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
         action: 'alamReserve',
       });
 
-      toast.success({ text: '알림이 예약되었습니다.' });
+      toast.success({ text: response.data.message });
     },
     onError: (error) => {
       console.error(error);
@@ -49,10 +45,6 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
 
   const handleReserve = async (e: MouseEvent<HTMLButtonElement>) => {
     if (mutatePush.isPending || isStream !== 'NULL') return;
-
-    const result = window.confirm('예약후에는 취소할 수 없습니다. (미구현)');
-
-    if (result === false) return;
 
     const token = await generateFcmToken();
 
