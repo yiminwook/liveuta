@@ -4,7 +4,7 @@ import ContentSection from './ContentSection';
 import SearchSection from './SearchSection';
 import SummarySection from './SummarySection';
 import useResponsive from '@/hook/useResponsive';
-import { useSearch } from '@inner/_lib/getSheet';
+import { useSearch } from '@inner/_lib/getSearch';
 
 export default function Home() {
   const { searchData } = useSearch();

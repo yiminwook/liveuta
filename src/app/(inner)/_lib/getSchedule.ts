@@ -6,6 +6,8 @@ import { useSetAtom } from 'jotai';
 import { isLoadingSheetAtom } from '@/app/_lib/atom';
 import { ContentsDataType, MongoDBAPIReturntype } from '@/type/api/mongoDB';
 
+// TODO: 리팩토링 예정
+
 const MONGODB_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
 
 const useMongoDB = (filter: keyof MongoDBAPIReturntype) => {
@@ -16,7 +18,7 @@ const useMongoDB = (filter: keyof MongoDBAPIReturntype) => {
   const { data, dataUpdatedAt, isLoading, refetch, status } = useQuery<MongoDBAPIReturntype>({
     queryKey: ['mongodb'],
     queryFn: async () => {
-      const result: MongoDBAPIReturntype = await fetcher('/api/mongoDBService');
+      const result: MongoDBAPIReturntype = await fetcher('/api/schedule');
       return result;
     },
     refetchInterval: MONGODB_REFRESH_INTERVAL,

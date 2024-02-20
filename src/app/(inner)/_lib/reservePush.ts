@@ -1,6 +1,8 @@
 import { PushData } from '@/app/api/push/route';
 import axios from 'axios';
 
+// TODO: DeletePush 추가
+
 interface ReservePushArgs {
   title: string;
   body: string;
@@ -22,7 +24,7 @@ const reservePush = async ({ title, body, token, timestamp, imageUrl, link }: Re
 
   const response = await axios<{ message: string }>({
     method: 'POST',
-    url: '/api/mongoDBService',
+    url: '/api/reserve/push',
     data,
   });
 

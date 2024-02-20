@@ -5,7 +5,7 @@ import ScheduleSection from './header/ScheduleSection';
 import TopSection from './TopSection';
 import useResponsive from '@/hook/useResponsive';
 //import { SheetAPIReturntype } from '@/types/inSheet';
-import useMongoDB from '@inner/_lib/getMongoDB';
+import useMongoDB from '@inner/_lib/getSchedule';
 import { MongoDBAPIReturntype } from '@/type/api/mongoDB';
 
 interface HomeProps {

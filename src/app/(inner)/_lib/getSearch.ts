@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import { useSetAtom } from 'jotai';
 import { isLoadingSearchAtom } from '@/app/_lib/atom';
 
+// TODO: 리팩토링 예정
+
 export const useSearchQuery = () => {
   const searchParams = useSearchParams();
   const searchQuery = searchParams?.get('query') ?? '';
