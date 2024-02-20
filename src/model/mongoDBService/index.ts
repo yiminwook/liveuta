@@ -20,7 +20,7 @@ export const readDB = async (
     projection: {},
     sort: {},
   },
-) => {
+): Promise<any> => {
   try {
     const collection = await connectToDatabase(dbName, collectionName);
     const result = await collection
@@ -39,7 +39,7 @@ export const writeDB = async (
   collectionName: string,
   dbName: string,
   options?: { document?: any },
-) => {
+): Promise<any> => {
   try {
     const collection = await connectToDatabase(dbName, collectionName);
     const result = await collection.insertOne(options?.document);
@@ -54,7 +54,7 @@ export const deleteDB = async (
   collectionName: string,
   dbName: string,
   document: Filter<Document>,
-) => {
+): Promise<any> => {
   try {
     const collection = await connectToDatabase(dbName, collectionName);
     console.log('deleted document', document);
