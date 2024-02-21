@@ -5,14 +5,27 @@ import CardImage from './CardImage';
 import { ContentsDataType } from '@/type/api/mongoDB';
 import cx from 'classnames';
 import { useMemo, useRef } from 'react';
+import Motion from '@/model/framer';
 import * as styles from './card.css';
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: (index: number) => ({
+    opacity: 1,
+    transition: {
+      delay: index > 20 ? 0.01 : index * 0.05,
+    },
+  }),
+};
 
 interface ScheduleCardProps {
   content: ContentsDataType;
-  currentIndex: number;
+  index: number;
 }
 
-export default function ScheduleCard({ content, currentIndex }: ScheduleCardProps) {
+export default function ScheduleCard({ content, index }: ScheduleCardProps) {
   const { videoId, isStream } = content;
   const target = useRef<HTMLDivElement>(null);
 
@@ -37,9 +50,20 @@ export default function ScheduleCard({ content, currentIndex }: ScheduleCardProp
   }, [isStream]);
 
   return (
-    <div className={cx('scheduleCard', styles.card, addStreamModifier)} key={videoId} ref={target}>
+    <Motion.div
+      variants={cardVariants}
+      initial="hidden"
+      animate="visible"
+      custom={index}
+      viewport={{
+        once: true,
+      }}
+      className={cx('scheduleCard', styles.card, addStreamModifier)}
+      key={videoId}
+      ref={target}
+    >
       <CardImage content={content} />
       <CardDesc content={content} addStreamModifier={addStreamModifier} />
-    </div>
+    </Motion.div>
   );
 }

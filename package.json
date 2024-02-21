@@ -22,7 +22,7 @@
     "dayjs": "^1.11.8",
     "firebase": "9.22.0",
     "firebase-admin": "^11.11.0",
-    "framer-motion": "^11.0.5",
+    "framer-motion": "11.0.3",
     "googleapis": "128.0.0",
     "jotai": "^2.5.1",
     "jotai-devtools": "^0.7.0",

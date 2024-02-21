@@ -18,7 +18,7 @@ export default function ContentSection({ isMobile, contents }: ContentSectionPro
       </div>
       <section className={cardStyles.cardList}>
         {contents.map((content, index) => (
-          <ScheduleCard key={content.videoId} content={content} currentIndex={index} />
+          <ScheduleCard key={content.videoId} content={content} index={index} />
         ))}
         <CardPlaceHolders isMobile={isMobile} />
       </section>

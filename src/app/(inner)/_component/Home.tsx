@@ -1,7 +1,7 @@
 'use client';
 //import useSheet from '@/queries/sheet';
 import NavSection from './header/NavSection';
-import ScheduleSection from './header/ScheduleSection';
+import ScheduleSection from './ScheduleSection';
 import TopSection from './TopSection';
 import useResponsive from '@/hook/useResponsive';
 //import { SheetAPIReturntype } from '@/types/inSheet';

@@ -2,10 +2,10 @@
 import { SCROLL_PER_YOUTUBE_CARD } from '@/const';
 import { ContentsDataType } from '@/type/api/mongoDB';
 import { useEffect, useState } from 'react';
-import ScheduleCard from '../scheduleCard/Card';
-import CardPlaceHolders from '../scheduleCard/CardPlaceHolders';
-import * as cardStyles from '../scheduleCard/card.css';
-import InterSectionTrigger from '../InterSectionTrigger';
+import ScheduleCard from './scheduleCard/Card';
+import CardPlaceHolders from './scheduleCard/CardPlaceHolders';
+import * as cardStyles from './scheduleCard/card.css';
+import InterSectionTrigger from './InterSectionTrigger';
 
 interface YoutubeSectionProps {
   contents: ContentsDataType[];
@@ -40,7 +40,7 @@ export default function ScheduleSection({ contents, isMobile }: YoutubeSectionPr
     <section>
       <div className={cardStyles.cardList}>
         {loadContents.map((data, index) => (
-          <ScheduleCard key={data.videoId} content={data} currentIndex={index} />
+          <ScheduleCard key={data.videoId} content={data} index={index} />
         ))}
         <CardPlaceHolders isMobile={isMobile} />
       </div>
