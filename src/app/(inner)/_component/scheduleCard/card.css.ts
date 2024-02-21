@@ -188,7 +188,7 @@ export const statusSvg = style([
   }),
 ]);
 
-export const cardSection = style([
+export const cardList = style([
   {
     boxSizing: 'border-box',
     width: '100%',

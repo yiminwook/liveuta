@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import ScheduleCard from '../scheduleCard/Card';
 import CardPlaceHolders from '../scheduleCard/CardPlaceHolders';
 import * as cardStyles from '../scheduleCard/card.css';
+import InterSectionTrigger from '../InterSectionTrigger';
 
 interface YoutubeSectionProps {
   contents: ContentsDataType[];
@@ -40,17 +41,16 @@ export default function ScheduleSection({ contents, isMobile }: YoutubeSectionPr
   }, [scrollPage]);
 
   return (
-    <section className={cardStyles.cardSection}>
-      {loadContents.map((data, index) => (
-        <ScheduleCard
-          key={data.videoId}
-          content={data}
-          currentIndex={index}
-          lastContentsIndex={loadContents.length - 1}
-          handleInfinityScroll={handleInfinityScroll}
-        />
-      ))}
-      <CardPlaceHolders isMobile={isMobile} />
+    <section>
+      <div className={cardStyles.cardList}>
+        {loadContents.map((data, index) => (
+          <ScheduleCard key={data.videoId} content={data} currentIndex={index} />
+        ))}
+        <CardPlaceHolders isMobile={isMobile} />
+      </div>
+      {loadContents.length > 0 && (
+        <InterSectionTrigger done={false} onShow={handleInfinityScroll} />
+      )}
     </section>
   );
 }

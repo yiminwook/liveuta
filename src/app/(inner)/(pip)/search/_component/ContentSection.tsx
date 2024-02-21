@@ -16,14 +16,9 @@ export default function ContentSection({ isMobile, contents }: ContentSectionPro
         <h1>일정 검색</h1>
         <span>{`(${contents.length} 개)`}</span>
       </div>
-      <section className={cardStyles.cardSection}>
+      <section className={cardStyles.cardList}>
         {contents.map((content, index) => (
-          <ScheduleCard
-            key={content.videoId}
-            content={content}
-            currentIndex={index}
-            lastContentsIndex={contents.length - 1}
-          />
+          <ScheduleCard key={content.videoId} content={content} currentIndex={index} />
         ))}
         <CardPlaceHolders isMobile={isMobile} />
       </section>
