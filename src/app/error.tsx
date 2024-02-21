@@ -4,6 +4,7 @@
 import { useEffect } from 'react';
 import styles from '@/style/not-found.css';
 import { FcHighPriority } from 'react-icons/fc';
+import axios from 'axios';
 
 export default function Error({
   error,
@@ -13,10 +14,12 @@ export default function Error({
   reset: () => void; //세그먼트를 다시 렌더링하여 복구 시도
 }) {
   useEffect(() => {
-    if (process.env.NODE_ENV !== 'production') {
-      // 500에러 콘솔은 개발환경에서만 표시됩니다.
-      console.error('Error-Boundary', process.env.NODE_ENV, error);
-    }
+    console.error('Error-Boundary', process.env.NODE_ENV, error);
+    axios({
+      method: 'POST',
+      url: '/api/log/error',
+      data: { message: error.message, stack: error.stack, digest: error.digest },
+    }).then((res) => res.status === 200 && console.log('에러 전송 성공'));
   }, [error]);
 
   return (
