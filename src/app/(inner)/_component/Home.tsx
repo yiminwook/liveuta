@@ -17,7 +17,7 @@ export default function Home({ filter }: HomeProps) {
   const { isMobile, isDesktop } = useResponsive();
 
   return (
-    <>
+    <main id="app">
       <NavSection filter={filter} />
       <TopSection
         isLoad={isLoad}
@@ -27,6 +27,6 @@ export default function Home({ filter }: HomeProps) {
         isDesktop={isDesktop}
       />
       <ScheduleSection contents={contents} isMobile={isMobile} />
-    </>
+    </main>
   );
 }

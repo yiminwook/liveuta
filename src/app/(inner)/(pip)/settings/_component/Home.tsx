@@ -55,20 +55,22 @@ export default function Home() {
   }, []);
 
   return (
-    <section className={Settings['section']}>
-      <div className={Settings['permission-box']}>
-        <div>
-          알림허용설정 여부: <b>{permission}</b>
+    <main id="app">
+      <section className={Settings['section']}>
+        <div className={Settings['permission-box']}>
+          <div>
+            알림허용설정 여부: <b>{permission}</b>
+          </div>
+          <button onClick={requerstPermission}>요청</button>
         </div>
-        <button onClick={requerstPermission}>요청</button>
-      </div>
-      <div className={Settings['token-box']}>
-        <label htmlFor="token">SW Token</label>
-        <div>
-          <TokenBox token={token} />
+        <div className={Settings['token-box']}>
+          <label htmlFor="token">SW Token</label>
+          <div>
+            <TokenBox token={token} />
+          </div>
         </div>
-      </div>
-      <PostBox token={token} />
-    </section>
+        <PostBox token={token} />
+      </section>
+    </main>
   );
 }

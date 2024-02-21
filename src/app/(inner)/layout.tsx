@@ -10,7 +10,7 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <PageView>
       <Header />
-      <main id="app">{children}</main>
+      {children}
       <div className="background-left" />
       <div className="background-right" />
       <Footer />

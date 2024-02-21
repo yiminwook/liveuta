@@ -11,11 +11,11 @@ interface HomeProps {
 
 export default function Home({ totalLength, contents }: HomeProps) {
   return (
-    <>
+    <main id="app">
       <ChannelSection contents={contents} />
       <HorizonScrollBox className={channels['pagination']}>
         <Pagination totalLength={totalLength} />
       </HorizonScrollBox>
-    </>
+    </main>
   );
 }

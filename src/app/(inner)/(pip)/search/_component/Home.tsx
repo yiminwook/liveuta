@@ -11,11 +11,11 @@ export default function Home() {
   const { isMobile } = useResponsive();
 
   return (
-    <>
+    <main id="app">
       <SearchSection />
       <SummarySection />
       <ContentSection contents={searchData.contents} isMobile={isMobile} />
       <ChannelSection channels={searchData.channels} />
-    </>
+    </main>
   );
 }
