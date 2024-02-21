@@ -15,7 +15,8 @@ const cardVariants = {
   visible: (index: number) => ({
     opacity: 1,
     transition: {
-      delay: index > 20 ? 0.01 : index * 0.05,
+      //너무 짧으면 모바일에서 두번 깜빡거림
+      delay: index > 20 ? 0.5 : index * 0.1,
     },
   }),
 };
