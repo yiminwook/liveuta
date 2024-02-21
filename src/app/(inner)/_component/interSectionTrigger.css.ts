@@ -8,7 +8,9 @@ export const wrap = style([
   },
 ]);
 
-export const inner = style({});
+export const inner = style({
+  padding: '1rem',
+});
 
 export const loading = style({
   width: '2rem',
