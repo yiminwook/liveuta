@@ -34,11 +34,11 @@ export default function InterSectionTrigger({ isDone, onShow }: InterSectionTrig
   return (
     <div ref={target} className={styles.wrap}>
       <div className={styles.inner}>
-        {isDone === false && (
+        {
           <SquareToRound className={styles.loading}>
             <LuLoader size="1rem" color="var(--liveuta-loading-color)" />
           </SquareToRound>
-        )}
+        }
       </div>
     </div>
   );
