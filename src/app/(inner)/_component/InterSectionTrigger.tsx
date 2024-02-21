@@ -1,24 +1,25 @@
 import { useEffect, useRef } from 'react';
 import * as styles from './interSectionTrigger.css';
+import SquareToRound from './loading/SquareToRound';
+import { LuLoader } from 'react-icons/lu';
 
 interface InterSectionTriggerProps {
   /** 페이지 끝에 도달여부 */
-  done: boolean;
+  isDone: boolean;
   onShow: () => void;
 }
 
-export default function InterSectionTrigger({ done, onShow }: InterSectionTriggerProps) {
+export default function InterSectionTrigger({ isDone, onShow }: InterSectionTriggerProps) {
   const target = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const currentTarget = target.current;
-    if (done || !currentTarget) return;
+    if (isDone || !currentTarget) return;
 
     const observer = new IntersectionObserver(
       (items, observer) => {
         const currentTarget = target.current;
         const isIntersecting = items[0].isIntersecting;
-        console.log('show', isIntersecting);
         if (!currentTarget || !isIntersecting) return;
         onShow();
         observer.unobserve(currentTarget);
@@ -27,15 +28,18 @@ export default function InterSectionTrigger({ done, onShow }: InterSectionTrigge
     );
     observer.observe(currentTarget);
 
-    return () => {
-      console.log('disconnect');
-      observer.disconnect();
-    };
-  }, [target, done, onShow]);
+    return () => observer.disconnect();
+  }, [isDone, onShow]);
 
   return (
     <div ref={target} className={styles.wrap}>
-      <div className={styles.inner}>로딩...</div>
+      <div className={styles.inner}>
+        {isDone === false && (
+          <SquareToRound className={styles.loading}>
+            <LuLoader size="1rem" color="var(--liveuta-loading-color)" />
+          </SquareToRound>
+        )}
+      </div>
     </div>
   );
 }

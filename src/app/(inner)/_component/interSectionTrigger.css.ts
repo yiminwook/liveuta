@@ -4,9 +4,14 @@ import { style } from '@vanilla-extract/css';
 export const wrap = style([
   flexCenter,
   {
-    height: '1.5rem',
     width: '100%',
   },
 ]);
 
 export const inner = style({});
+
+export const loading = style({
+  width: '2rem',
+  height: '2rem',
+  backgroundColor: '#fff',
+});
