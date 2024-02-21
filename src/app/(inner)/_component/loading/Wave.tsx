@@ -22,7 +22,7 @@ const dotVariants = {
   },
 };
 
-const Loader = ({ count = 5 }) => {
+export default function Wave({ count = 5 }) {
   return (
     <Motion.div
       variants={containerVariants}
@@ -53,6 +53,4 @@ const Loader = ({ count = 5 }) => {
         })}
     </Motion.div>
   );
-};
-
-export default Loader;
+}

@@ -1,18 +1,23 @@
 'use client';
-import { isLoadingAtom } from '@/app/_lib/atom';
 import cx from 'classnames';
-import { useIsFetching, useIsMutating } from '@tanstack/react-query';
-import { useAtomValue } from 'jotai';
+import { useIsFetching, useIsMutating, useQueryClient } from '@tanstack/react-query';
 import { IoGlobeOutline } from 'react-icons/io5';
 import { AiOutlineLoading } from 'react-icons/ai';
 import * as styles from './floatButton.css';
+import GlobalLoading from '@/app/loading';
 
 export default function FetchIndicator() {
-  const isLoading = useAtomValue(isLoadingAtom);
+  const queryClient = useQueryClient();
+  const scheduleStatus = queryClient.getQueryState(['schedule'])?.status;
+
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
 
-  if (isLoading === true || (isFetching === 0 && isMutating === 0)) {
+  if (scheduleStatus === 'pending') {
+    return <GlobalLoading />;
+  }
+
+  if (isFetching === 0 && isMutating === 0) {
     return null;
   }
 

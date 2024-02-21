@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { fetcher } from '@inner/_lib/fetcher';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
-import { isLoadingSheetAtom } from '@/app/_lib/atom';
 import { ContentsDataType, MongoDBAPIReturntype } from '@/type/api/mongoDB';
 
 // TODO: 리팩토링 예정
@@ -13,10 +12,9 @@ const MONGODB_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
 const useMongoDB = (filter: keyof MongoDBAPIReturntype) => {
   const [isLoad, setIsLoad] = useState(false);
   const [contents, setContents] = useState<ContentsDataType[]>([]);
-  const setIsLoadingSheet = useSetAtom(isLoadingSheetAtom);
 
   const { data, dataUpdatedAt, isLoading, refetch, status } = useQuery<MongoDBAPIReturntype>({
-    queryKey: ['mongodb'],
+    queryKey: ['schedule'],
     queryFn: async () => {
       const result: MongoDBAPIReturntype = await fetcher('/api/schedule');
       return result;
@@ -44,11 +42,6 @@ const useMongoDB = (filter: keyof MongoDBAPIReturntype) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataUpdatedAt, filter]);
-
-  useEffect(() => {
-    setIsLoadingSheet(() => isLoading);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading]);
 
   return {
     /** 필터링된 데이터 */

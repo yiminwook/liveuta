@@ -1,13 +1,16 @@
-import Loading from '@/app/loading';
 import { PropsWithChildren } from 'react';
 import Footer from './_component/Footer';
 import PageView from './_component/PageView';
-import FetchIndicator from './_component/button/FetchIndicator';
 import FloatButton from './_component/button/FloatButton';
 import Header from './_component/header/Header';
 import Sidebar from './_component/sidebar/Sidebar';
+import dynamic from 'next/dynamic';
 
-export default function Layout({ children }: PropsWithChildren) {
+const FetchIndicator = dynamic(() => import('./_component/button/FetchIndicator'), {
+  ssr: false,
+});
+
+export default async function Layout({ children }: PropsWithChildren) {
   return (
     <PageView>
       <Header />
@@ -18,7 +21,6 @@ export default function Layout({ children }: PropsWithChildren) {
       <FloatButton />
       <FetchIndicator />
       <Sidebar />
-      <Loading />
     </PageView>
   );
 }
