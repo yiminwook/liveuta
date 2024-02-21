@@ -1,7 +1,7 @@
 //ts-ignore
 import { SheetAPIReturntype } from '@/type/api/sheet';
 import { getSheet } from '@/model/sheet';
-import { parseAllData, parseScheduledData } from '@/app/api/_lib/parseContentSheet';
+import { parseAllData, parseScheduledData } from '/temp/sheet/parseContentSheet';
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/model/error/handler';
 import { cookies } from 'next/headers';

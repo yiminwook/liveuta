@@ -97,7 +97,7 @@ export const parseAllData = (documents: ContentDocument[]): ParseAllDataReturnTy
   let dailyVideo = 0;
   const all: ContentsDataType[] = [];
   let allVideo = 0;
-  const yesterday = dayjs().subtract(1, 'day').valueOf();
+  const yesterday = dayjs.tz().subtract(1, 'day').valueOf();
 
   documents.forEach((doc) => {
     const isHide = doc.Hide;

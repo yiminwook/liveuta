@@ -15,25 +15,15 @@ export async function GET(_req: NextRequest) {
     const database = process.env.MONGODB_SCHEDULE_DB;
 
     const scheduleDataRaw: ContentDocumentRaw[] = await readDB(collection, database, {
-      sort: { ScheduledTime: 1 },
+      sort: { ScheduledTime: 1, ChannelName: 1 },
     });
 
     if (!scheduleDataRaw) throw new Error('documents is undefined.');
 
-    const scheduleData = scheduleDataRaw
-      .map((doc) => ({
-        ...doc,
-        ScheduledTime: dayjs.tz(doc.ScheduledTime),
-      }))
-      .sort((a, b) => {
-        if (a.ScheduledTime.isBefore(b.ScheduledTime)) {
-          return -1;
-        } else if (a.ScheduledTime.isAfter(b.ScheduledTime)) {
-          return 1;
-        }
-
-        return a.ChannelName < b.ChannelName ? -1 : 1;
-      });
+    const scheduleData = scheduleDataRaw.map((doc) => ({
+      ...doc,
+      ScheduledTime: dayjs.tz(doc.ScheduledTime),
+    }));
 
     const { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
     const { daily, all } = parseAllData(scheduleData); // Need to be revised

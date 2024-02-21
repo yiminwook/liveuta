@@ -41,13 +41,22 @@ export async function GET(req: NextRequest) {
     const regexforDBQuery = { $regex: replacedQuery, $options: 'i' };
     const [channelResults, contentResults]: [ChannelDocument[], ContentDocumentRaw[]] =
       await Promise.all([
-        readDB('channel_id_names', 'ManagementDB', { filter: { name_kor: regexforDBQuery } }),
-        readDB('upcoming_streams', 'ScheduleDB', { filter: { ChannelName: regexforDBQuery } }),
+        readDB(process.env.MONGODB_CHANNEL_COLLECTION, process.env.MONGODB_CHANNEL_DB, {
+          filter: { name_kor: regexforDBQuery },
+          sort: { name_kor: 1 },
+        }),
+        readDB(process.env.MONGODB_SCHEDULE_COLLECTION, process.env.MONGODB_SCHEDULE_DB, {
+          filter: { ChannelName: regexforDBQuery },
+          sort: {
+            ScheduledTime: 1,
+            ChannelName: 1,
+          },
+        }),
       ]);
 
     const searchedContents: ContentsDataType[] = [];
     contentResults.forEach((doc: ContentDocumentRaw) => {
-      const data = parseMongoDBDocument({ ...doc, ScheduledTime: dayjs(doc.ScheduledTime) });
+      const data = parseMongoDBDocument({ ...doc, ScheduledTime: dayjs.tz(doc.ScheduledTime) });
       if (!data) return;
       searchedContents.push(data);
     });

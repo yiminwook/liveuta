@@ -26,7 +26,7 @@ export const POST = async (request: NextRequest) => {
           link: resquestBody.link,
         },
         notification: {
-          timestamp: Number(resquestBody.timestamp) || dayjs().unix(),
+          timestamp: Number(resquestBody.timestamp) || dayjs.tz().unix(),
           title: resquestBody.title,
           body: resquestBody.body,
           imageUrl: resquestBody.imageUrl,
