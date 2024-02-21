@@ -45,7 +45,7 @@ dependencies:
     specifier: ^11.11.0
     version: 11.11.1(encoding@0.1.13)
   framer-motion:
-    specifier: ^11.0.3
+    specifier: 11.0.3
     version: 11.0.3(react-dom@18.2.0)(react@18.2.0)
   googleapis:
     specifier: 128.0.0
