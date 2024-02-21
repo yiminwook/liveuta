@@ -5,6 +5,7 @@ import PageView from './_component/PageView';
 import FetchIndicator from './_component/button/FetchIndicator';
 import FloatButton from './_component/button/FloatButton';
 import Header from './_component/header/Header';
+import Sidebar from './_component/sidebar/Sidebar';
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
@@ -15,8 +16,8 @@ export default function Layout({ children }: PropsWithChildren) {
       <div className="background-right" />
       <Footer />
       <FloatButton />
-      <div id="modal-root" />
       <FetchIndicator />
+      <Sidebar />
       <Loading />
     </PageView>
   );

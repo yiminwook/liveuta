@@ -6,28 +6,30 @@ import sidebar from './sidebar.module.scss';
 import CloseButton from '../button/CloseButton';
 import ThemeButton from '../button/ThemeButton';
 import useStopPropagation from '@/hook/useStopPropagation';
+import { useSidebarAtom } from '@inner/_lib/atom';
+import { usePathname } from 'next/navigation';
 
-interface SidebarProps {
-  show: boolean;
-  onClose: () => void;
-}
-
-function Sidebar({ show, onClose }: SidebarProps) {
+export default function Sidebar() {
+  const pathname = usePathname();
   const { stopPropagation } = useStopPropagation();
+  const [show, setShow] = useSidebarAtom();
 
-  const handleClose = () => {
-    onClose();
-  };
+  const handleClose = () => setShow(false);
 
   useEffect(() => {
+    if (show) setShow(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!show) return;
     //window 사이즈가 바뀌면 닫히게
     window.addEventListener('resize', handleClose);
-
     return () => {
       window.removeEventListener('resize', handleClose);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [show]);
 
   return (
     <aside>
@@ -40,7 +42,7 @@ function Sidebar({ show, onClose }: SidebarProps) {
           onClick={stopPropagation}
         >
           <nav>
-            <CloseButton onClick={onClose} />
+            <CloseButton onClick={handleClose} />
             <ThemeButton />
           </nav>
           <IndexSection />
@@ -50,5 +52,3 @@ function Sidebar({ show, onClose }: SidebarProps) {
     </aside>
   );
 }
-
-export default Sidebar;

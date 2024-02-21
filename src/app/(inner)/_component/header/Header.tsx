@@ -8,24 +8,18 @@ import { BiSearchAlt } from 'react-icons/bi';
 import HamburgerButton from '../button/HamburgerButton';
 import NavigationList from '../header/NavigationList';
 import Input from '../input/Input';
-import Sidebar from '../sidebar/Sidebar';
 import header from './header.module.scss';
+import { useSidebarAtom } from '@inner/_lib/atom';
 
 export default function Header() {
   const pathname = usePathname();
   const route = useRouter();
   const gnbRef = useRef<HTMLDivElement>(null);
 
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [, setShow] = useSidebarAtom();
   const [inputValue, setInputValue] = useState('');
 
-  const openSidebar = () => {
-    setShowSidebar(() => true);
-  };
-
-  const closeSidebar = () => {
-    setShowSidebar(() => false);
-  };
+  const openSidebar = () => setShow(true);
 
   const handleScroll = useMemo(() => {
     let timer: NodeJS.Timeout | null = null;
@@ -56,10 +50,6 @@ export default function Header() {
   const handleReset = useCallback(() => {
     setInputValue(() => '');
   }, []);
-
-  useEffect(() => {
-    setShowSidebar(() => false);
-  }, [pathname]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -95,7 +85,6 @@ export default function Header() {
           </div>
         </nav>
       </div>
-      <Sidebar show={showSidebar} onClose={closeSidebar} />
       <div className={header['blank']} />
     </header>
   );
