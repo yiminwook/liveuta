@@ -1,7 +1,5 @@
 'use client';
-import GlobalLoading from '@/app/loading';
 import Motion from '@/model/framer';
-import { useQueryClient } from '@tanstack/react-query';
 import { Variants, useCycle } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import {
@@ -33,7 +31,7 @@ const floatVariants: Variants = {
   }),
   closed: {
     y: 0,
-    clipPath: 'circle(26px at right bottom)',
+    clipPath: 'circle(0px at right bottom)',
     transition: {
       duration: 0.2,
       type: 'spring',
@@ -53,9 +51,6 @@ const floatListVariants: Variants = {
 };
 
 export default function FloatButton() {
-  const queryClient = useQueryClient();
-  const scheduleStatus = queryClient.getQueryState(['schedule'])?.status;
-
   const [isOpen, toggleOpen] = useCycle(false, true);
   const [load, setLoad] = useState(false);
 
@@ -80,10 +75,6 @@ export default function FloatButton() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     toggleOpen(0);
   };
-
-  if (scheduleStatus === 'pending') {
-    return <GlobalLoading />;
-  }
 
   return (
     <OutsideClickHandler onOutsideClick={() => toggleOpen(0)}>
