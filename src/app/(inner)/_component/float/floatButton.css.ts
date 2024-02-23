@@ -1,9 +1,49 @@
-import { BEZIER_CURVE, boxShadow, flexCenter, preventUserSelect, zIndex } from '@/style/var.css';
+import {
+  BEZIER_CURVE,
+  boxShadow,
+  flexCenter,
+  preventUserSelect,
+  responsive,
+  zIndex,
+} from '@/style/var.css';
 import { style } from '@vanilla-extract/css';
 import { global } from '@/style/globalTheme.css';
 import { loading } from '@/style/keyframe.css';
 
-export const button = style([
+export const floatNav = style([
+  {
+    position: 'fixed',
+    right: '24px',
+    bottom: '24px',
+    width: '240px',
+    height: '240px',
+  },
+  responsive({
+    sm: {},
+  }),
+]);
+
+export const floatNavInner = style({
+  background: '#fff',
+  width: '240px',
+  height: '240px',
+  borderRadius: '15px',
+  overflow: 'hidden',
+});
+
+export const floatList = style({
+  padding: '1rem',
+});
+
+export const scrollUpButton = style({
+  position: 'absolute',
+  bottom: '15px',
+  right: '15px',
+  cursor: 'pointer',
+  color: 'var(--liveuta-hover-color)',
+});
+
+export const toggleButton = style([
   zIndex.float,
   flexCenter,
   preventUserSelect,
