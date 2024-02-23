@@ -18,10 +18,12 @@ import ListItem from './ListItem';
 import ToggleButton from './ToggleButton';
 import * as styles from './floatButton.css';
 
+// nav height = 240px
+// circle 0.5r = 26px
 const floatVariants: Variants = {
   open: () => ({
     y: -60,
-    clipPath: `circle(1000px at right bottom)`,
+    clipPath: `circle(1000px at 214px calc(env(safe-area-inset-bottom) + 214px))`,
     transition: {
       duration: 0.2,
       type: 'spring',
@@ -31,7 +33,7 @@ const floatVariants: Variants = {
   }),
   closed: {
     y: 0,
-    clipPath: 'circle(0px at right bottom)',
+    clipPath: `circle(0px at 214px calc(env(safe-area-inset-bottom) + 214px))`,
     transition: {
       duration: 0.2,
       type: 'spring',

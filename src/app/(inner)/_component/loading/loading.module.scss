@@ -9,8 +9,8 @@
   left: 0;
   font-size: 2rem;
   background-color: rgba(0, 0, 0, 0.5);
-  width: 100dvw;
-  height: 100dvh;
+  width: 100lvw; //모바일 최대너비
+  height: 100lvh; //모바일 최대높이
   display: flex;
   align-items: center;
   justify-content: center;
