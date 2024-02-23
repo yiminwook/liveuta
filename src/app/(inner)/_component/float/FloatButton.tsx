@@ -23,7 +23,7 @@ import * as styles from './floatButton.css';
 const floatVariants: Variants = {
   open: () => ({
     y: -60,
-    clipPath: `circle(1000px at 214px 214px)`,
+    clipPath: `circle(1000px at 214px calc(env(safe-area-inset-bottom) + 214px))`,
     transition: {
       duration: 0.2,
       type: 'spring',
@@ -33,7 +33,7 @@ const floatVariants: Variants = {
   }),
   closed: {
     y: 0,
-    clipPath: 'circle(26px at 214px 214px)',
+    clipPath: 'circle(26px at 214px calc(env(safe-area-inset-bottom) + 214px))',
     transition: {
       duration: 0.2,
       type: 'spring',

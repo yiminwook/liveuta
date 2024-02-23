@@ -13,10 +13,10 @@ import { loading } from '@/style/keyframe.css';
 export const floatNav = style([
   {
     position: 'fixed',
-    right: '24px',
-    bottom: '24px',
-    width: '240px',
-    height: '240px',
+    right: 24,
+    bottom: 24,
+    width: 240,
+    height: 240,
   },
   responsive({
     sm: {},
@@ -25,20 +25,20 @@ export const floatNav = style([
 
 export const floatNavInner = style({
   background: '#fff',
-  width: '240px',
-  height: '240px',
-  borderRadius: '15px',
+  width: 240,
+  height: 240,
+  borderRadius: 15,
   overflow: 'hidden',
 });
 
 export const floatList = style({
-  padding: '1rem',
+  padding: 16,
 });
 
 export const scrollUpButton = style({
   position: 'absolute',
-  bottom: '15px',
-  right: '15px',
+  bottom: 15,
+  right: 15,
   cursor: 'pointer',
   color: 'var(--liveuta-hover-color)',
 });
@@ -50,10 +50,10 @@ export const toggleButton = style([
   boxShadow,
   {
     position: 'fixed',
-    bottom: 'calc(env(safe-area-inset-bottom) + 1.5rem)',
-    width: '3.25rem',
-    height: '3.25rem',
-    padding: '0.125rem',
+    bottom: 'calc(env(safe-area-inset-bottom) + 24px)',
+    width: 52,
+    height: 52,
+    padding: 2,
     color: global.color.lightFont,
     backgroundColor: 'var(--liveuta-hover-color)',
     borderRadius: '100%',
@@ -63,10 +63,10 @@ export const toggleButton = style([
     transition: `all 0.2s ${BEZIER_CURVE}`,
     selectors: {
       '&.left': {
-        left: '1.5rem',
+        left: 24,
       },
       '&.right': {
-        right: '1.5rem',
+        right: 24,
       },
       '&.hide': {
         visibility: 'hidden',

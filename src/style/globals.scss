@@ -108,7 +108,9 @@ body {
   #app {
     @extend %home-main;
     max-width: map-get($points, 2xl);
-    min-height: calc(100vh - 3.5rem - 5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    min-height: calc(
+      100dvh - 3.5rem - 5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+    );
     margin: auto;
 
     @include min-width(map-get($points, xl)) {
@@ -197,7 +199,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 3.5rem - 5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  min-height: calc(100dvh - 3.5rem - 5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   font-size: 2rem;
   color: #fff;
 }
