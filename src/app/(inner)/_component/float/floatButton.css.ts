@@ -14,7 +14,7 @@ export const floatNav = style([
   {
     position: 'fixed',
     right: 24,
-    bottom: 24,
+    bottom: 'calc(env(safe-area-inset-bottom) + 24px)',
     width: 240,
     height: 240,
   },
