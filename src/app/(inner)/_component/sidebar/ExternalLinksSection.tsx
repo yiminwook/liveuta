@@ -21,6 +21,7 @@ export function ExternalLinkList() {
         text="우타와꾸 갤러리"
       />
       <ExternalLink href="https://uta-tools.vercel.app" text="UtaTools" />
+      <ExternalLink href="https://ezgif.com" text="EZ GIF" />
     </ul>
   );
 }

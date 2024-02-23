@@ -3,10 +3,11 @@ import CardDesc from './CardDesc';
 import CardImage from './CardImage';
 //import { ContentsDataType } from '@/types/inSheet';
 import { ContentsDataType } from '@/type/api/mongoDB';
-import cx from 'classnames';
+
 import { useMemo, useRef } from 'react';
 import Motion from '@/model/framer';
 import * as styles from './card.css';
+import CardWrap from './CardWrap';
 
 interface ScheduleCardProps {
   content: ContentsDataType;
@@ -14,8 +15,7 @@ interface ScheduleCardProps {
 }
 
 export default function ScheduleCard({ content, index }: ScheduleCardProps) {
-  const { videoId, isStream } = content;
-  const target = useRef<HTMLDivElement>(null);
+  const { isStream } = content;
 
   const addStreamModifier = useMemo(() => {
     let streamModifer: string;
@@ -38,9 +38,9 @@ export default function ScheduleCard({ content, index }: ScheduleCardProps) {
   }, [isStream]);
 
   return (
-    <div className={cx('scheduleCard', styles.card, addStreamModifier)} key={videoId} ref={target}>
+    <CardWrap index={index} className={addStreamModifier}>
       <CardImage content={content} />
       <CardDesc content={content} addStreamModifier={addStreamModifier} />
-    </div>
+    </CardWrap>
   );
 }
