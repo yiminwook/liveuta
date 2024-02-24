@@ -13,10 +13,10 @@ import {
   osVersion,
 } from 'react-device-detect';
 import { RxPinTop } from 'react-icons/rx';
-import OutsideClickHandler from 'react-outside-click-handler';
 import ListItem from './ListItem';
 import ToggleButton from './ToggleButton';
 import * as styles from './floatButton.css';
+import cx from 'classnames';
 
 // nav height = 240px
 // circle 0.5r = 26px
@@ -35,7 +35,7 @@ const floatVariants: Variants = {
     y: 0,
     clipPath: `circle(0px at 214px calc(env(safe-area-inset-bottom) + 214px))`,
     transition: {
-      duration: 0.2,
+      duration: 0.15,
       type: 'spring',
       stiffness: 400,
       damping: 40,
@@ -79,7 +79,8 @@ export default function FloatButton() {
   };
 
   return (
-    <OutsideClickHandler onOutsideClick={() => toggleOpen(0)}>
+    <>
+      <div className={cx(styles.floatBackdrop, isOpen && 'show')} onClick={() => toggleOpen(0)} />
       <Motion.div
         className={styles.floatNav}
         initial={false}
@@ -88,16 +89,16 @@ export default function FloatButton() {
       >
         <Motion.div className={styles.floatNavInner}>
           <Motion.ul variants={floatListVariants} className={styles.floatList}>
+            <ListItem index={0} />
             <ListItem index={1} />
             <ListItem index={2} />
-            <ListItem index={3} />
           </Motion.ul>
         </Motion.div>
         <button className={styles.scrollUpButton} onClick={scrollUp}>
           <RxPinTop size="28px" color="inherit" />
         </button>
       </Motion.div>
-      <ToggleButton onClick={() => toggleOpen()} />
-    </OutsideClickHandler>
+      <ToggleButton isOpen={isOpen} onClick={() => toggleOpen()} />
+    </>
   );
 }

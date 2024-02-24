@@ -6,12 +6,14 @@ import { AiOutlineLoading } from 'react-icons/ai';
 import * as styles from './floatButton.css';
 import { MdMyLocation } from 'react-icons/md';
 import GlobalLoading from '@/app/loading';
+import { IoClose } from 'react-icons/io5';
 
 interface ToggleButtonProps {
+  isOpen: boolean;
   onClick?: () => void;
 }
 
-export default function ToggleButton({ onClick }: ToggleButtonProps) {
+export default function ToggleButton({ isOpen, onClick }: ToggleButtonProps) {
   const queryClient = useQueryClient();
   const scheduleStatus = queryClient.getQueryState(['schedule'])?.status;
   const isFetching = useIsFetching();
@@ -23,16 +25,22 @@ export default function ToggleButton({ onClick }: ToggleButtonProps) {
     return <GlobalLoading />;
   }
 
+  if (unFetching) {
+    return (
+      <button className={cx(styles.toggleButton, 'right', 'hover')} onClick={onClick}>
+        {isOpen ? (
+          <IoClose size="32px" color="inherit" />
+        ) : (
+          <MdMyLocation size="32px" color="inherit" />
+        )}
+      </button>
+    );
+  }
+
   return (
     <button className={cx(styles.toggleButton, 'right', 'hover')} onClick={onClick}>
-      {unFetching ? (
-        <MdMyLocation size="32px" color="inherit" />
-      ) : (
-        <>
-          <IoGlobeOutline className={styles.networkSvg} size="24px" color="inherit" />
-          <AiOutlineLoading className={styles.loadingSvg} size="36px" color="inherit" />
-        </>
-      )}
+      <IoGlobeOutline className={styles.networkSvg} size="24px" color="inherit" />
+      <AiOutlineLoading className={styles.loadingSvg} size="36px" color="inherit" />
     </button>
   );
 }

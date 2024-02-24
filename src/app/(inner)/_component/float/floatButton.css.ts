@@ -1,16 +1,29 @@
-import {
-  BEZIER_CURVE,
-  boxShadow,
-  flexCenter,
-  preventUserSelect,
-  responsive,
-  zIndex,
-} from '@/style/var.css';
+import { BEZIER_CURVE, flexCenter, preventUserSelect, responsive, zIndex } from '@/style/var.css';
 import { style } from '@vanilla-extract/css';
 import { global } from '@/style/globalTheme.css';
 import { loading } from '@/style/keyframe.css';
 
+export const floatBackdrop = style([
+  {
+    zIndex: zIndex.float.zIndex - 1,
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100dvw',
+    height: '100dvh',
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    transition: `visibility 0.2s ${BEZIER_CURVE}`,
+    visibility: 'hidden',
+    selectors: {
+      '&.show': {
+        visibility: 'visible',
+      },
+    },
+  },
+]);
+
 export const floatNav = style([
+  zIndex.float,
   {
     position: 'fixed',
     right: 24,
@@ -25,6 +38,7 @@ export const floatNav = style([
 
 export const floatNavInner = style({
   background: '#fff',
+  boxShadow: '0px 1px 2px 0 rgba(56, 52, 52, 0.8)',
   width: 240,
   height: 240,
   borderRadius: 15,
@@ -47,8 +61,8 @@ export const toggleButton = style([
   zIndex.float,
   flexCenter,
   preventUserSelect,
-  boxShadow,
   {
+    boxShadow: '0px 1px 2px 0 rgba(56, 52, 52, 1)',
     position: 'fixed',
     bottom: 'calc(env(safe-area-inset-bottom) + 24px)',
     width: 52,

@@ -14,11 +14,11 @@ export const flexCenter = {
 };
 
 export const zIndex = {
-  float: {
+  header: {
     zIndex: 100,
   },
-  header: {
-    zIndex: 1000,
+  float: {
+    zIndex: 200,
   },
   modal: {
     zIndex: 9000,
