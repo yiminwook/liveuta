@@ -1,11 +1,6 @@
-import {
-  ContentDocument,
-  ChannelDocument,
-  ContentsDataType,
-  ContentDocumentRaw,
-} from '@/type/api/mongoDB';
+import { ChannelDocument, ContentsDataType, ContentDocumentRaw } from '@/type/api/mongoDB';
 import { parseMongoDBDocument } from '@/app/api/_lib/parseMongoDBData';
-import { readDB } from '@/model/mongoDBService/';
+import { connectDB } from '@/model/mongoDB';
 import { ChannelSheetDataType, combineChannelData } from '@inner/_lib/combineChannelData';
 import { ChannelsDataType } from '@/type/api/youtube';
 import { NextRequest, NextResponse } from 'next/server';
@@ -39,20 +34,26 @@ export async function GET(req: NextRequest) {
 
     // Execute both database queries concurrently
     const regexforDBQuery = { $regex: replacedQuery, $options: 'i' };
-    const [channelResults, contentResults]: [ChannelDocument[], ContentDocumentRaw[]] =
-      await Promise.all([
-        readDB(process.env.MONGODB_CHANNEL_COLLECTION, process.env.MONGODB_CHANNEL_DB, {
-          filter: { name_kor: regexforDBQuery },
-          sort: { name_kor: 1 },
-        }),
-        readDB(process.env.MONGODB_SCHEDULE_COLLECTION, process.env.MONGODB_SCHEDULE_DB, {
-          filter: { ChannelName: regexforDBQuery },
-          sort: {
+
+    const channelDB = process.env.MONGODB_CHANNEL_DB;
+    const channelCollection = process.env.MONGODB_CHANNEL_COLLECTION;
+    const scheduleDB = process.env.MONGODB_SCHEDULE_DB;
+    const scheduleCollection = process.env.MONGODB_SCHEDULE_COLLECTION;
+
+    const [channelResults, contentResults] = await Promise.all([
+      connectDB(channelDB, channelCollection).then((db) =>
+        db.find<ChannelDocument>({ name_kor: regexforDBQuery }).sort({ name_kor: 1 }).toArray(),
+      ),
+      connectDB(scheduleDB, scheduleCollection).then((db) =>
+        db
+          .find<ContentDocumentRaw>({ ChannelName: regexforDBQuery })
+          .sort({
             ScheduledTime: 1,
             ChannelName: 1,
-          },
-        }),
-      ]);
+          })
+          .toArray(),
+      ),
+    ]);
 
     const searchedContents: ContentsDataType[] = [];
     contentResults.forEach((doc: ContentDocumentRaw) => {

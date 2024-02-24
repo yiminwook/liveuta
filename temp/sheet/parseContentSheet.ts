@@ -1,4 +1,4 @@
-import { ContentsRowType, ContentsDataType, SheetAPIReturntype } from '@/type/api/sheet';
+import { ContentsRowType, ContentsDataType, SheetAPIReturntype } from '/temp/sheet/sheet';
 import { sheets_v4 } from 'googleapis';
 import { getInterval, stringToTime } from '@/app/api/_lib/getTime';
 import dayjs from '@/model/dayjs';

@@ -1,6 +1,6 @@
 //ts-ignore
-import { SheetAPIReturntype } from '@/type/api/sheet';
-import { getSheet } from '@/model/sheet';
+import { SheetAPIReturntype } from '/temp/sheet/sheet';
+import { getSheet } from '/temp/sheet';
 import { parseAllData, parseScheduledData } from '/temp/sheet/parseContentSheet';
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/model/error/handler';

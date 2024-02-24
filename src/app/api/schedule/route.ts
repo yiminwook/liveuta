@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import errorHandler from '@/model/error/handler';
-import { readDB } from '@/model/mongoDBService';
 import { parseAllData, parseScheduledData } from '@/app/api/_lib/parseMongoDBData';
 import { MongoDBAPIReturntype, ContentDocumentRaw } from '@/type/api/mongoDB';
 import dayjs from '@/model/dayjs';
+import { connectDB } from '@/model/mongoDB';
 
 export async function GET(_req: NextRequest) {
   try {
@@ -14,9 +14,12 @@ export async function GET(_req: NextRequest) {
     const collection = process.env.MONGODB_SCHEDULE_COLLECTION;
     const database = process.env.MONGODB_SCHEDULE_DB;
 
-    const scheduleDataRaw: ContentDocumentRaw[] = await readDB(collection, database, {
-      sort: { ScheduledTime: 1, ChannelName: 1 },
-    });
+    const db = await connectDB(database, collection);
+
+    const scheduleDataRaw = await db
+      .find<ContentDocumentRaw>({})
+      .sort({ ScheduledTime: 1, ChannelName: 1 })
+      .toArray();
 
     if (!scheduleDataRaw) throw new Error('documents is undefined.');
 

@@ -1,6 +1,6 @@
 // @ts-ignore
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { SheetAPIReturntype } from '@/type/api/sheet';
+import { SheetAPIReturntype } from '/temp/sheet/sheet';
 import { google } from 'googleapis';
 
 const handler = async (
