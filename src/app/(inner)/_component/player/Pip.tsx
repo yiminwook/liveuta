@@ -9,7 +9,7 @@ export default portal('pip', function Pip() {
 
   return (
     <div className={styles.pipBase}>
-      <Player isShow={false} />
+      <Player isShow={false} isLive={false} />
     </div>
   );
 });

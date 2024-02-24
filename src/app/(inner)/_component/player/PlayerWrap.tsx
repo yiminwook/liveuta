@@ -13,12 +13,12 @@ export default function PlayerWrap({}: PlayerWrapProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [isShow, setIsShow] = useState(false);
 
+  const status = useScheduleStatus();
+
   const handleInteresect: IntersectionObserverCallback = (items, observer) => {
     const isIntersecting = items[0].isIntersecting;
     setIsShow(() => isIntersecting);
   };
-
-  const status = useScheduleStatus();
 
   useEffect(() => {
     const current = wrapRef.current;
@@ -26,16 +26,14 @@ export default function PlayerWrap({}: PlayerWrapProps) {
     const observer = new IntersectionObserver(handleInteresect);
     observer.observe(current);
     return () => observer.disconnect();
-  }, []);
-
-  const showPlaceholder = isShow === false;
+  }, [status]);
 
   if (status === 'pending') return null;
 
   return (
     <div ref={wrapRef} className={styles.playerBox}>
-      {showPlaceholder ? <div className={styles.playerPlaceholder} /> : null}
-      <Player isShow={isShow} />
+      {!isShow ? <div className={styles.playerPlaceholder} /> : null}
+      <Player isShow={isShow} isLive={true} />
       <LiveChat videoId={playerValue.videoId} />
     </div>
   );

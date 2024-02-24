@@ -6,12 +6,16 @@ import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
 import * as styles from './player.css';
 import cx from 'classnames';
+import { FaHotjar } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
 interface PlayerProps {
   isShow: boolean;
+  isLive: boolean;
 }
 
-export default function Player({ isShow }: PlayerProps) {
+export default function Player({ isLive, isShow }: PlayerProps) {
+  const router = useRouter();
   const player = useRef<ReactPlayer>(null);
   const [isReady, setIsReady] = useState(false);
   const [playerValue, setPlayerValue] = usePlayerAtom();
@@ -48,6 +52,8 @@ export default function Player({ isShow }: PlayerProps) {
     setPlayerValue((pre) => ({ ...pre, hide: !pre.hide }));
   };
 
+  const navigateLive = () => router.push('/live');
+
   useEffect(() => {
     if (isReady === false) return;
     document.addEventListener('keydown', keyDown);
@@ -56,7 +62,6 @@ export default function Player({ isShow }: PlayerProps) {
   }, [isReady]);
 
   const left = isShow === false && playerValue.hide;
-  console.log('canEnablePIP', ReactPlayer.canEnablePIP(playerValue.url));
 
   return (
     <div className={cx(isShow === false && styles.pipBase, styles.playerDiv, left && 'left')}>
@@ -77,7 +82,14 @@ export default function Player({ isShow }: PlayerProps) {
         fallback={<div className={styles.playerPlaceholder} />}
       />
       <button className={cx(styles.pipButton, isShow === false && 'hide')} onClick={toggleLeft}>
-        <ImYoutube size={'1.87rem'} />
+        <ImYoutube size={28} />
+      </button>
+      <button
+        disabled={isLive}
+        className={cx(styles.liveButton, isShow === false && 'hide')}
+        onClick={navigateLive}
+      >
+        <FaHotjar size={28} />
       </button>
     </div>
   );

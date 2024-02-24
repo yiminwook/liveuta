@@ -75,19 +75,47 @@ export const pipButton = style({
   display: 'none',
   position: 'absolute',
   top: 0,
-  right: '-2.5rem',
+  right: -40,
   zIndex: 10,
   padding: 0,
   margin: 0,
-  width: '2.5rem',
-  height: '2.5rem',
-  borderRadius: '0 5px 5px 0',
+  width: 40,
+  height: 40,
   color: '#ff0000',
   backgroundColor: '#fff',
   transition: `color 0.5s ${BEZIER_CURVE}, background-color 1s ${BEZIER_CURVE}`,
   ':hover': {
     color: '#fff',
     backgroundColor: '#ff0000',
+  },
+  selectors: {
+    '&.hide': {
+      ...flexCenter,
+    },
+  },
+});
+
+export const liveButton = style({
+  display: 'none',
+  position: 'absolute',
+  top: 40,
+  right: -40,
+  zIndex: 10,
+  padding: 0,
+  margin: 0,
+  width: 40,
+  height: 40,
+  color: 'orange',
+  backgroundColor: '#fff',
+  transition: `color 0.5s ${BEZIER_CURVE}, background-color 1s ${BEZIER_CURVE}`,
+  ':hover': {
+    color: '#fff',
+    backgroundColor: 'orange',
+  },
+  ':disabled': {
+    color: '#fff',
+    backgroundColor: 'orange',
+    cursor: 'default',
   },
   selectors: {
     '&.hide': {
