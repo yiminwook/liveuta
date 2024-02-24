@@ -1,15 +1,18 @@
 import { SearchResponseType } from '@/app/api/search/route';
 import ScheduleCard from '@inner/_component/scheduleCard/Card';
-import CardPlaceHolders from '@inner/_component/scheduleCard/CardPlaceHolders';
 import * as cardStyles from '@inner/_component/scheduleCard/card.css';
 import search from './search.module.scss';
+import dynamic from 'next/dynamic';
+
+const CardPlaceHolders = dynamic(() => import('@inner/_component/scheduleCard/CardPlaceHolders'), {
+  ssr: false,
+});
 
 interface ContentSectionProps {
-  isMobile: boolean;
   contents: SearchResponseType['contents'];
 }
 
-export default function ContentSection({ isMobile, contents }: ContentSectionProps) {
+export default function ContentSection({ contents }: ContentSectionProps) {
   return (
     <section className={search['content-section']}>
       <div>
@@ -20,7 +23,7 @@ export default function ContentSection({ isMobile, contents }: ContentSectionPro
         {contents.map((content, index) => (
           <ScheduleCard key={content.videoId} content={content} index={index} />
         ))}
-        <CardPlaceHolders isMobile={isMobile} />
+        <CardPlaceHolders />
       </section>
     </section>
   );
