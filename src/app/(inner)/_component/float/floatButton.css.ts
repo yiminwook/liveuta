@@ -1,4 +1,4 @@
-import { BEZIER_CURVE, flexCenter, preventUserSelect, responsive, zIndex } from '@/style/var.css';
+import { BEZIER_CURVE, flexCenter, preventUserSelect, responsive, zIndex } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 import { global } from '@/style/globalTheme.css';
 import { loading } from '@/style/keyframe.css';
@@ -38,7 +38,6 @@ export const floatNav = style([
 
 export const floatNavInner = style({
   background: '#fff',
-  boxShadow: '0px 1px 2px 0 rgba(56, 52, 52, 0.8)',
   width: 240,
   height: 240,
   borderRadius: 15,
@@ -62,7 +61,7 @@ export const toggleButton = style([
   flexCenter,
   preventUserSelect,
   {
-    boxShadow: '0px 1px 2px 0 rgba(56, 52, 52, 1)',
+    boxShadow: '0px 1px 2px 0 rgba(56, 52, 52, 0.75)',
     position: 'fixed',
     bottom: 'calc(env(safe-area-inset-bottom) + 24px)',
     width: 52,

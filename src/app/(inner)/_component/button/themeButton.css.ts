@@ -1,4 +1,4 @@
-import { BEZIER_CURVE } from '@/style/var.css';
+import { BEZIER_CURVE } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 export const button = style({

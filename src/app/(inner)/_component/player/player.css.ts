@@ -1,4 +1,4 @@
-import { BEZIER_CURVE, boxShadow, flexCenter } from '@/style/var.css';
+import { BEZIER_CURVE, BOX_SHADOW, flexCenter } from '@/style/var';
 import { style, globalStyle } from '@vanilla-extract/css';
 
 export const playerBase = style({
@@ -66,7 +66,7 @@ export const pipBase = style({
 });
 
 globalStyle(`${pipBase} .reactPlayer`, {
-  boxShadow,
+  boxShadow: BOX_SHADOW,
   overflow: 'hidden',
   borderRadius: 5,
 });

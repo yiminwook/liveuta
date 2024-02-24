@@ -1,5 +1,5 @@
 import { global } from '@/style/globalTheme.css';
-import { responsive, boxShadow, BEZIER_CURVE, textTwoLine, textOneLine } from '@/style/var.css';
+import { responsive, BOX_SHADOW, BEZIER_CURVE, textTwoLine } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
@@ -23,7 +23,7 @@ export const cardBase = style([
 export const card = style([
   cardBase,
   {
-    boxShadow,
+    boxShadow: BOX_SHADOW,
     display: 'flex',
     padding: '0.25rem',
     gap: '0.25rem',
@@ -63,7 +63,7 @@ export const imageLink = style([
 ]);
 
 globalStyle(`${imageLink} > div`, {
-  boxShadow,
+  boxShadow: BOX_SHADOW,
   position: 'relative',
   boxSizing: 'border-box',
   margin: 'auto',

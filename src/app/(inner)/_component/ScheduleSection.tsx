@@ -3,16 +3,17 @@ import { SCROLL_PER_YOUTUBE_CARD } from '@/const';
 import { ContentsDataType } from '@/type/api/mongoDB';
 import { useEffect, useState } from 'react';
 import ScheduleCard from './scheduleCard/Card';
-import CardPlaceHolders from './scheduleCard/CardPlaceHolders';
 import * as cardStyles from './scheduleCard/card.css';
 import InterSectionTrigger from './InterSectionTrigger';
+import dynamic from 'next/dynamic';
+
+const CardPlaceHolders = dynamic(() => import('./scheduleCard/CardPlaceHolders'), { ssr: false });
 
 interface YoutubeSectionProps {
   contents: ContentsDataType[];
-  isMobile: boolean;
 }
 
-export default function ScheduleSection({ contents, isMobile }: YoutubeSectionProps) {
+export default function ScheduleSection({ contents }: YoutubeSectionProps) {
   const [loadContents, setLoadContents] = useState(contents.slice(0, SCROLL_PER_YOUTUBE_CARD));
   const [scrollPage, setScrollPage] = useState(1);
 
@@ -42,7 +43,7 @@ export default function ScheduleSection({ contents, isMobile }: YoutubeSectionPr
         {loadContents.map((data, index) => (
           <ScheduleCard key={data.videoId} content={data} index={index} />
         ))}
-        <CardPlaceHolders isMobile={isMobile} />
+        <CardPlaceHolders />
       </div>
       {loadContents.length > 0 && (
         <InterSectionTrigger isDone={isDone} onShow={handleInfinityScroll} />

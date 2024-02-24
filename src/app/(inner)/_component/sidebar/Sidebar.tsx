@@ -8,6 +8,7 @@ import ThemeButton from '../button/ThemeButton';
 import useStopPropagation from '@/hook/useStopPropagation';
 import { useSidebarAtom } from '@inner/_lib/atom';
 import { usePathname } from 'next/navigation';
+import { RemoveScroll } from 'react-remove-scroll';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -32,23 +33,25 @@ export default function Sidebar() {
   }, [show]);
 
   return (
-    <aside>
-      <div
-        className={[sidebar['container'], show ? sidebar['show'] : ''].join(' ')}
-        onClick={handleClose}
-      >
+    <RemoveScroll enabled={show} removeScrollBar={false}>
+      <aside>
         <div
-          className={[sidebar['sidebar'], show ? sidebar['show'] : ''].join(' ')}
-          onClick={stopPropagation}
+          className={[sidebar['container'], show ? sidebar['show'] : ''].join(' ')}
+          onClick={handleClose}
         >
-          <nav>
-            <CloseButton onClick={handleClose} />
-            <ThemeButton />
-          </nav>
-          <IndexSection />
-          <ExternalLinksSection />
+          <div
+            className={[sidebar['sidebar'], show ? sidebar['show'] : ''].join(' ')}
+            onClick={stopPropagation}
+          >
+            <nav>
+              <CloseButton onClick={handleClose} />
+              <ThemeButton />
+            </nav>
+            <IndexSection />
+            <ExternalLinksSection />
+          </div>
         </div>
-      </div>
-    </aside>
+      </aside>
+    </RemoveScroll>
   );
 }

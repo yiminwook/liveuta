@@ -1,12 +1,10 @@
 'use client';
-import useResponsive from '@/hook/useResponsive';
-import Player from './Player';
 import portal from '@/model/portal';
 import * as styles from './player.css';
+import { isMobile } from 'react-device-detect';
+import Player from './Player';
 
 export default portal('pip', function Pip() {
-  const { isMobile } = useResponsive();
-
   if (isMobile) return null;
 
   return (

@@ -1,12 +1,13 @@
 'use client';
 import cx from 'classnames';
-import { useIsFetching, useIsMutating, useQueryClient } from '@tanstack/react-query';
+import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import { IoGlobeOutline } from 'react-icons/io5';
 import { AiOutlineLoading } from 'react-icons/ai';
 import * as styles from './floatButton.css';
 import { MdMyLocation } from 'react-icons/md';
 import GlobalLoading from '@/app/loading';
 import { IoClose } from 'react-icons/io5';
+import useScheduleStatus from '@/hook/useScheduleStatus';
 
 interface ToggleButtonProps {
   isOpen: boolean;
@@ -14,14 +15,13 @@ interface ToggleButtonProps {
 }
 
 export default function ToggleButton({ isOpen, onClick }: ToggleButtonProps) {
-  const queryClient = useQueryClient();
-  const scheduleStatus = queryClient.getQueryState(['schedule'])?.status;
+  const status = useScheduleStatus();
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
 
   const unFetching = isFetching === 0 && isMutating === 0;
 
-  if (scheduleStatus === 'pending') {
+  if (status === 'pending') {
     return <GlobalLoading />;
   }
 

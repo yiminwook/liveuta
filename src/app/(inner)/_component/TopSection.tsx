@@ -1,27 +1,18 @@
-import { ContentsDataType, MongoDBAPIReturntype } from '@/type/api/mongoDB';
+import { MongoDBAPIReturntype } from '@/type/api/mongoDB';
 import PlayerWrap from './player/PlayerWrap';
 import * as styles from './topSection.css';
+import { isMobile } from 'react-device-detect';
 
 interface TopSectionProps {
-  isLoad: boolean;
-  contents: ContentsDataType[];
-  isMobile: boolean;
-  isDesktop: boolean;
   filter: keyof MongoDBAPIReturntype;
 }
 
-export default function TopSection({
-  filter,
-  isLoad,
-  isMobile,
-  isDesktop,
-  contents,
-}: TopSectionProps) {
-  if (filter !== 'live' || isMobile || isLoad === false) return null;
+export default function TopSection({ filter }: TopSectionProps) {
+  if (filter !== 'live' || isMobile) return null;
 
   return (
     <section className={styles.topSection}>
-      <PlayerWrap isDesktop={isDesktop} />
+      <PlayerWrap />
     </section>
   );
 }
