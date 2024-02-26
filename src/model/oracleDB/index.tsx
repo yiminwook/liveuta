@@ -1,5 +1,6 @@
 import oracledb from 'oracledb';
 
+// https://github.com/oracle/node-oracledb/blob/main/examples/example.js
 export const connectOracleDB = async () => {
   let connection: null | oracledb.Connection = null;
   try {

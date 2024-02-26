@@ -56,6 +56,9 @@ dependencies:
   jotai-devtools:
     specifier: ^0.7.0
     version: 0.7.1(@emotion/react@11.11.3)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)(redux@5.0.1)
+  jsonwebtoken:
+    specifier: ^9.0.2
+    version: 9.0.2
   mongodb:
     specifier: ^6.3.0
     version: 6.3.0
