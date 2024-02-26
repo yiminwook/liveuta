@@ -50,6 +50,7 @@
     "@svgr/webpack": "^8.1.0",
     "@tanstack/eslint-plugin-query": "^5.12.1",
     "@types/gtag.js": "^0.0.18",
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "18.19.0",
     "@types/oracledb": "^6.2.1",
     "@types/react": "^18.2.48",

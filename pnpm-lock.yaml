@@ -124,6 +124,9 @@ devDependencies:
   '@types/gtag.js':
     specifier: ^0.0.18
     version: 0.0.18
+  '@types/jsonwebtoken':
+    specifier: ^9.0.5
+    version: 9.0.5
   '@types/node':
     specifier: 18.19.0
     version: 18.19.0
@@ -3437,7 +3440,6 @@ packages:
     resolution: {integrity: sha512-VRLSGzik+Unrup6BsouBeHsf4d1hOEgYWTm/7Nmw1sXoN1+tRly/Gy/po3yeahnP4jfnQWWAhQAqcNfH7ngOkA==}
     dependencies:
       '@types/node': 18.19.0
-    dev: false
 
   /@types/linkify-it@3.0.5:
     resolution: {integrity: sha512-yg6E+u0/+Zjva+buc3EIb+29XEg4wltq7cSmd4Uc2EE/1nUVmxyzpX6gUXD0V8jIrG0r7YeOGVIbYRkxeooCtw==}

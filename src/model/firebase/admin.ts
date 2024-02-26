@@ -6,6 +6,7 @@ const MESSAGING_SCOPE = 'https://www.googleapis.com/auth/firebase.messaging';
 const SHEET_SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
 export const FIREBASE_SCOPES = [MESSAGING_SCOPE, SHEET_SCOPE];
 
+/** firebase-admin */
 export const jwtAuth = new google.auth.JWT(
   process.env.FIREBASE_CLIENT_EMAIL,
   '',

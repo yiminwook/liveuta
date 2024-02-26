@@ -13,7 +13,8 @@ declare global {
       readonly NEXT_PUBLIC_REQUEST_URL: string;
 
       readonly GOOGLE_API_KEY: string;
-      // readonly GOOGLE_CLIENT_ID: string;
+      readonly GOOGLE_CLIENT_ID: string;
+      readonly GOOGLE_CLIENT_SECRET: string;
 
       readonly FIREBASE_PROJECT_ID: string;
       readonly FIREBASE_PRIVATE_KEY: string;

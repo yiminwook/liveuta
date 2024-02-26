@@ -1,11 +1,14 @@
-'use client';
-import { login } from '@/app/_lib/auth';
+import { getSessionInServer } from '@/model/google/auth';
+import Home from './_component/Home';
+import { redirect } from 'next/navigation';
 
-export default function Page() {
-  return (
-    <div>
-      <h1>로그인</h1>
-      <button onClick={() => login()}>로그인</button>
-    </div>
-  );
+export default async function Page() {
+  const session = await getSessionInServer();
+  console.log('session login', session);
+
+  if (session) {
+    redirect('/');
+  }
+
+  return <Home />;
 }

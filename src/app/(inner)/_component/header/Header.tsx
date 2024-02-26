@@ -10,8 +10,12 @@ import NavigationList from '../header/NavigationList';
 import Input from '../input/Input';
 import header from './header.module.scss';
 import { useSidebarAtom } from '@inner/_lib/atom';
+import { Session } from '@/type/api/session';
 
-export default function Header() {
+interface HeaderProps {
+  session: Session | null;
+}
+export default function Header({ session }: HeaderProps) {
   const pathname = usePathname();
   const route = useRouter();
   const gnbRef = useRef<HTMLDivElement>(null);
@@ -79,8 +83,11 @@ export default function Header() {
               />
             ) : null}
             <NavigationList />
-            <Link href="/search" className={header['search-button']}>
-              <BiSearchAlt size="1.6rem" color="inherit" />
+            <Link href="/sessionout" className={header['search-button']}>
+              {'로그아웃'}
+            </Link>
+            <Link href="/login" className={header['search-button']}>
+              {session ? session.name : '로그인'}
             </Link>
           </div>
         </nav>

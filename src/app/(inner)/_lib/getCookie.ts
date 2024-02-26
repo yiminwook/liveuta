@@ -7,9 +7,11 @@ export const getCookies = async () => {
   const cookieStore = cookies();
   const select = cookieStore.get('select')?.value as SelectType | undefined;
   const theme = cookieStore.get('theme')?.value as ThemeType | undefined;
+  const refreshToken = cookieStore.get('refresh_token')?.value;
 
   return {
     theme: theme || 'theme1',
     select: select || 'all',
+    refreshToken,
   };
 };
