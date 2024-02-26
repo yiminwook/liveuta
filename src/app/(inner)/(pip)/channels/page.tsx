@@ -3,6 +3,7 @@ import { ChannelSheetDataType, combineChannelData } from '@inner/_lib/combineCha
 import { parseChannelIDSheet } from '@inner/_lib/parseChannelSheet';
 import { notFound } from 'next/navigation';
 import Home from './_component/Home';
+import { disconnectMongoDB } from '@/model/mongoDB';
 
 const getChannelData = async () => {
   try {
@@ -25,6 +26,7 @@ const getChannelData = async () => {
     /* Youtube API */
     const combinedSearchDataValues = await combineChannelData(channelSheetData);
 
+    disconnectMongoDB();
     return {
       totalLength,
       contents: combinedSearchDataValues,

@@ -1,6 +1,6 @@
 import { ChannelDocument, ContentsDataType, ContentDocumentRaw } from '@/type/api/mongoDB';
 import { parseMongoDBDocument } from '@/app/api/_lib/parseMongoDBData';
-import { connectDB } from '@/model/mongoDB';
+import { connectMongoDB, disconnectMongoDB } from '@/model/mongoDB';
 import { ChannelSheetDataType, combineChannelData } from '@inner/_lib/combineChannelData';
 import { ChannelsDataType } from '@/type/api/youtube';
 import { NextRequest, NextResponse } from 'next/server';
@@ -41,10 +41,10 @@ export async function GET(req: NextRequest) {
     const scheduleCollection = process.env.MONGODB_SCHEDULE_COLLECTION;
 
     const [channelResults, contentResults] = await Promise.all([
-      connectDB(channelDB, channelCollection).then((db) =>
+      connectMongoDB(channelDB, channelCollection).then((db) =>
         db.find<ChannelDocument>({ name_kor: regexforDBQuery }).sort({ name_kor: 1 }).toArray(),
       ),
-      connectDB(scheduleDB, scheduleCollection).then((db) =>
+      connectMongoDB(scheduleDB, scheduleCollection).then((db) =>
         db
           .find<ContentDocumentRaw>({ ChannelName: regexforDBQuery })
           .sort({
@@ -72,6 +72,7 @@ export async function GET(req: NextRequest) {
     );
     const combinedSearchDataValues = await combineChannelData(searchData);
 
+    disconnectMongoDB();
     return NextResponse.json<SearchResponseType>(
       {
         contents: searchedContents,

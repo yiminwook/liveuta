@@ -1,15 +1,16 @@
-import { connectDB } from '@/model/oracleDB';
+import { connectOracleDB } from '@/model/oracleDB';
 import { NextRequest, NextResponse } from 'next/server';
 
-export const GET = async (req: NextRequest) => {
+export async function GET(_request: NextRequest) {
   try {
-    console.log('Connecting to OracleDB...');
-    const connection = await connectDB();
-    console.log('Connected to OracleDB', connection);
+    const connection = await connectOracleDB();
 
     connection.close();
+    console.log('diconnected to OracleDB');
     return NextResponse.json({ message: 'Connected to OracleDB' });
   } catch (error) {
     return NextResponse.json({ message: 'Error connecting to OracleDB' });
   }
-};
+}
+
+export const dynamic = 'force-dynamic';
