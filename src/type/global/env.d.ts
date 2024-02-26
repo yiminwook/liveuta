@@ -29,6 +29,10 @@ declare global {
       readonly MONGODB_API_KEY: string;
       readonly MONGODB_URI: string;
 
+      readonly ORACLEDB_USER: string;
+      readonly ORACLEDB_PASSWORD: string;
+      readonly ORACLEDB_CONNECTSTRING: string;
+
       /** 폐기 */
       // readonly GOOGLE_CLIENT_ID: string;
       // readonly GOOGLE_SECRET_KEY: string;
