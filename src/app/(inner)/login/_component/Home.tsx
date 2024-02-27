@@ -21,8 +21,10 @@ export default function Home() {
   return (
     <div>
       <h1>로그인</h1>
-      <button onClick={() => mutateGoogleLogin.mutate()}>로그인</button>
-      <button onClick={() => router.push('/sessionout')}>세션아웃 페이지</button>
+      <button onClick={() => mutateGoogleLogin.mutate()} disabled={mutateGoogleLogin.isPending}>
+        로그인
+      </button>
+      <button onClick={() => router.push('/logout')}>로그아웃 페이지</button>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { auth } from '@/model/nextAuth';
 
 export default async function Page() {
   const session = await auth();
-  console.log('session sessionout', session);
+  console.log('session logout', session);
 
   if (!session) {
     redirect('/login');

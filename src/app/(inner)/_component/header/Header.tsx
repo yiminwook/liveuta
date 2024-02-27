@@ -83,7 +83,7 @@ export default function Header({ session }: HeaderProps) {
               />
             ) : null}
             <NavigationList />
-            <Link href="/sessionout" className={header['search-button']}>
+            <Link href="/logout" className={header['search-button']}>
               {'로그아웃'}
             </Link>
             <Link href="/login" className={header['search-button']}>

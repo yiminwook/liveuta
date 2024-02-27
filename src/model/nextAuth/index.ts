@@ -14,7 +14,7 @@ export const {
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/login',
-    error: 'sessionout',
+    error: '/error',
   },
   providers: [
     Google<GoogleProfile>({
