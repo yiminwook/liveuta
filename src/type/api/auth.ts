@@ -3,4 +3,5 @@ export type Session = {
   name: string;
   picture: string;
   locale: string;
+  provider: string;
 };

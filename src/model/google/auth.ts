@@ -1,4 +1,4 @@
-import { Session } from '@/type/api/session';
+import { Session } from '@/type/api/auth';
 import { google } from 'googleapis';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';

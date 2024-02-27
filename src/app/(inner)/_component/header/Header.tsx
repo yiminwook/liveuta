@@ -10,7 +10,7 @@ import NavigationList from '../header/NavigationList';
 import Input from '../input/Input';
 import header from './header.module.scss';
 import { useSidebarAtom } from '@inner/_lib/atom';
-import { Session } from '@/type/api/session';
+import { Session } from '@/type/api/auth';
 
 interface HeaderProps {
   session: Session | null;
