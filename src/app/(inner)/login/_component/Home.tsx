@@ -1,8 +1,7 @@
 'use client';
-
+import { signIn } from 'next-auth/react';
 import { useMutation } from '@tanstack/react-query';
 import { App } from 'antd';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
@@ -11,8 +10,7 @@ export default function Home() {
 
   const mutateGoogleLogin = useMutation({
     mutationKey: ['login', 'google'],
-    mutationFn: () => axios.get<{ url: string }>('/api/auth/google'),
-    onSuccess: (res) => (window.location.href = res.data.url),
+    mutationFn: () => signIn('google', { callbackUrl: '/' }),
     onError: (error) =>
       notification.error({
         message: '로그인 실패',

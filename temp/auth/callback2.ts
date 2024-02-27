@@ -1,5 +1,5 @@
 import CustomServerError from '@/model/error/customServerError';
-import { jwtAuth } from '@/model/google/auth';
+import { jwtAuth } from '/temp/auth/auth';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
       provider: 'google',
     };
 
-    const sessionToken = jwt.sign(session, process.env.AUTH_SECRET, {
+    const sessionToken = jwt.sign(session, 'process.env.AUTH_SECRET', {
       expiresIn: threeMonth,
     });
 

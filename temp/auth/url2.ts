@@ -1,5 +1,5 @@
 import errorHandler from '@/model/error/handler';
-import { REDIRECT_URL, jwtAuth } from '@/model/google/auth';
+import { REDIRECT_URL, jwtAuth } from '/temp/auth/auth';
 import { NextRequest, NextResponse } from 'next/server';
 
 // youtube scope 'https://www.googleapis.com/auth/youtube.readonly'

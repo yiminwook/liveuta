@@ -10,7 +10,7 @@ import NavigationList from '../header/NavigationList';
 import Input from '../input/Input';
 import header from './header.module.scss';
 import { useSidebarAtom } from '@inner/_lib/atom';
-import { Session } from '@/type/api/auth';
+import { Session } from 'next-auth';
 
 interface HeaderProps {
   session: Session | null;
@@ -87,7 +87,7 @@ export default function Header({ session }: HeaderProps) {
               {'로그아웃'}
             </Link>
             <Link href="/login" className={header['search-button']}>
-              {session ? session.name : '로그인'}
+              {session ? 'x' : '로그인'}
             </Link>
           </div>
         </nav>

@@ -3,7 +3,8 @@ declare global {
     interface ProcessEnv {
       readonly NODE_ENV: 'development' | 'production' | 'test';
       readonly TZ?: string;
-      readonly AUTH_SECRET: string;
+      readonly NEXTAUTH_SECRET: string;
+      readonly ACCESS_SECRET: string;
 
       //vercel env  - https://vercel.com/docs/projects/environment-variables/system-environment-variables
       readonly NEXT_PUBLIC_VERCEL_ENV: 'production' | 'preview' | 'development';

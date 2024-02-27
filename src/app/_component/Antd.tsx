@@ -2,7 +2,7 @@
 import { PropsWithChildren } from 'react';
 import { ConfigProvider, App } from 'antd';
 
-export default function AntdProvider({ children }: PropsWithChildren) {
+export default function Antd({ children }: PropsWithChildren) {
   return (
     <ConfigProvider
       theme={{
