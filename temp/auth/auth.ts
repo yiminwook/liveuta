@@ -1,7 +1,14 @@
-import { Session } from '@/type/api/auth';
 import { google } from 'googleapis';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+
+type Session = {
+  email: string;
+  name: string;
+  picture: string;
+  locale: string;
+  provider: string;
+};
 
 export const REDIRECT_URL = process.env.NEXT_PUBLIC_SITE_URL + '/api/auth/google/callback';
 

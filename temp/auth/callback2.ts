@@ -3,7 +3,6 @@ import { jwtAuth } from '/temp/auth/auth';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
-import { Session } from '@/type/api/auth';
 
 export async function GET(request: NextRequest) {
   try {
@@ -44,7 +43,7 @@ export async function GET(request: NextRequest) {
 
     const threeMonth = 60 * 60 * 24 * 30 * 3;
 
-    const session: Session = {
+    const session: any = {
       email: userInfo.email,
       name: userInfo.name,
       picture: userInfo.picture,
