@@ -114,10 +114,6 @@
         @include transition(background-color, 80ms, $bezier-curve);
         @include box-shadow();
 
-        @include min-width(map-get($points, md)) {
-          display: none;
-        }
-
         &:hover {
           background-color: var(--liveuta-hover-color);
         }

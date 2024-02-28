@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import dayjs from '@/model/dayjs';
 import { replaceSpecialCharacters } from '@inner/_lib/regexp';
@@ -9,17 +10,25 @@ import HamburgerButton from '../button/HamburgerButton';
 import NavigationList from '../header/NavigationList';
 import Input from '../input/Input';
 import header from './header.module.scss';
-import { useSidebarAtom } from '@inner/_lib/atom';
+import { useAccountSidebarAtom, useSidebarAtom } from '@inner/_lib/atom';
+import { Session } from 'next-auth';
+import { button } from '../button/copyButton.css';
+import * as styles from './header.css';
 
-export default function Header() {
+interface HeaderProps {
+  session: Session | null;
+}
+export default function Header({ session }: HeaderProps) {
   const pathname = usePathname();
   const route = useRouter();
   const gnbRef = useRef<HTMLDivElement>(null);
 
-  const [, setShow] = useSidebarAtom();
+  const [, setShowSidebar] = useSidebarAtom();
+  const [, setShowAccountSidebar] = useAccountSidebarAtom();
   const [inputValue, setInputValue] = useState('');
 
-  const openSidebar = () => setShow(true);
+  const openSidebar = () => setShowSidebar(true);
+  const openAccountSidebar = () => setShowAccountSidebar(true);
 
   const handleScroll = useMemo(() => {
     let timer: NodeJS.Timeout | null = null;
@@ -79,9 +88,15 @@ export default function Header() {
               />
             ) : null}
             <NavigationList />
-            <Link href="/search" className={header['search-button']}>
-              <BiSearchAlt size="1.6rem" color="inherit" />
-            </Link>
+            {session ? (
+              <button className={styles.accountButton} onClick={openAccountSidebar}>
+                <img src={session.user.picture} alt="유저 이미지" width={40} height={40} />
+              </button>
+            ) : (
+              <Link href="/login" className={header['search-button']}>
+                로그인
+              </Link>
+            )}
           </div>
         </nav>
       </div>

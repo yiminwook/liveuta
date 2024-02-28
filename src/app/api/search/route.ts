@@ -1,12 +1,18 @@
 import { ChannelDocument, ContentsDataType, ContentDocumentRaw } from '@/type/api/mongoDB';
 import { parseMongoDBDocument } from '@/app/api/_lib/parseMongoDBData';
-import { connectDB } from '@/model/mongoDB';
+import { connectMongoDB, disconnectMongoDB } from '@/model/mongoDB';
 import { ChannelSheetDataType, combineChannelData } from '@inner/_lib/combineChannelData';
 import { ChannelsDataType } from '@/type/api/youtube';
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/model/error/handler';
 import { replaceSpecialCharacters } from '@inner/_lib/regexp';
-import { SEARCH_ITEMS_SIZE } from '@/const';
+import {
+  MONGODB_CHANNEL_COLLECTION,
+  MONGODB_CHANNEL_DB,
+  MONGODB_SCHEDULE_COLLECTION,
+  MONGODB_SCHEDULE_DB,
+  SEARCH_ITEMS_SIZE,
+} from '@/const';
 import dayjs from '@/model/dayjs';
 
 export interface SearchResponseType {
@@ -35,16 +41,11 @@ export async function GET(req: NextRequest) {
     // Execute both database queries concurrently
     const regexforDBQuery = { $regex: replacedQuery, $options: 'i' };
 
-    const channelDB = process.env.MONGODB_CHANNEL_DB;
-    const channelCollection = process.env.MONGODB_CHANNEL_COLLECTION;
-    const scheduleDB = process.env.MONGODB_SCHEDULE_DB;
-    const scheduleCollection = process.env.MONGODB_SCHEDULE_COLLECTION;
-
     const [channelResults, contentResults] = await Promise.all([
-      connectDB(channelDB, channelCollection).then((db) =>
+      connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION).then((db) =>
         db.find<ChannelDocument>({ name_kor: regexforDBQuery }).sort({ name_kor: 1 }).toArray(),
       ),
-      connectDB(scheduleDB, scheduleCollection).then((db) =>
+      connectMongoDB(MONGODB_SCHEDULE_DB, MONGODB_SCHEDULE_COLLECTION).then((db) =>
         db
           .find<ContentDocumentRaw>({ ChannelName: regexforDBQuery })
           .sort({
@@ -72,6 +73,7 @@ export async function GET(req: NextRequest) {
     );
     const combinedSearchDataValues = await combineChannelData(searchData);
 
+    disconnectMongoDB();
     return NextResponse.json<SearchResponseType>(
       {
         contents: searchedContents,

@@ -4,17 +4,15 @@ import errorHandler from '@/model/error/handler';
 import { parseAllData, parseScheduledData } from '@/app/api/_lib/parseMongoDBData';
 import { MongoDBAPIReturntype, ContentDocumentRaw } from '@/type/api/mongoDB';
 import dayjs from '@/model/dayjs';
-import { connectDB } from '@/model/mongoDB';
+import { connectMongoDB, disconnectMongoDB } from '@/model/mongoDB';
+import { MONGODB_SCHEDULE_COLLECTION, MONGODB_SCHEDULE_DB } from '@/const';
 
 export async function GET(_req: NextRequest) {
   try {
     const cookieStore = cookies();
     const cookie = cookieStore.get('select')?.value || 'all';
 
-    const collection = process.env.MONGODB_SCHEDULE_COLLECTION;
-    const database = process.env.MONGODB_SCHEDULE_DB;
-
-    const db = await connectDB(database, collection);
+    const db = await connectMongoDB(MONGODB_SCHEDULE_DB, MONGODB_SCHEDULE_COLLECTION);
 
     const scheduleDataRaw = await db
       .find<ContentDocumentRaw>({})
@@ -50,7 +48,7 @@ export async function GET(_req: NextRequest) {
         break;
     }
 
-    // Need to revise SheetAPIReturntype
+    disconnectMongoDB();
     return NextResponse.json<MongoDBAPIReturntype | undefined>(
       { scheduled, live, daily, all },
       { status: 200 },

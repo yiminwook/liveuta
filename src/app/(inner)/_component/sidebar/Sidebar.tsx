@@ -2,13 +2,14 @@
 import { useEffect } from 'react';
 import ExternalLinksSection from './ExternalLinksSection';
 import IndexSection from './IndexSection';
-import sidebar from './sidebar.module.scss';
 import CloseButton from '../button/CloseButton';
 import ThemeButton from '../button/ThemeButton';
 import useStopPropagation from '@/hook/useStopPropagation';
 import { useSidebarAtom } from '@inner/_lib/atom';
 import { usePathname } from 'next/navigation';
 import { RemoveScroll } from 'react-remove-scroll';
+import * as styles from './sidebar.css';
+import cx from 'classnames';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -35,15 +36,9 @@ export default function Sidebar() {
   return (
     <RemoveScroll enabled={show} removeScrollBar={false}>
       <aside>
-        <div
-          className={[sidebar['container'], show ? sidebar['show'] : ''].join(' ')}
-          onClick={handleClose}
-        >
-          <div
-            className={[sidebar['sidebar'], show ? sidebar['show'] : ''].join(' ')}
-            onClick={stopPropagation}
-          >
-            <nav>
+        <div className={cx(styles.wrap, 'mobile', show && 'show')} onClick={handleClose}>
+          <div className={cx(styles.inner, 'left', show && 'moveRight')} onClick={stopPropagation}>
+            <nav className={styles.nav}>
               <CloseButton onClick={handleClose} />
               <ThemeButton />
             </nav>

@@ -3,6 +3,7 @@ import getPaginationRange from '@inner/_lib/getPagenationRange';
 import { parseChannelIDSheet } from '@inner/_lib/parseChannelSheet';
 import { notFound } from 'next/navigation';
 import Home from '../../_component/Home';
+import { disconnectMongoDB } from '@/model/mongoDB';
 
 const getChannelData = async (page: string) => {
   try {
@@ -29,6 +30,7 @@ const getChannelData = async (page: string) => {
 
     const combinedSearchDataValues = await combineChannelData(channelSheetData);
 
+    disconnectMongoDB();
     if (combinedSearchDataValues.length === 0) {
       throw new Error('조회된 데이터 없음');
     }

@@ -6,12 +6,21 @@ const MESSAGING_SCOPE = 'https://www.googleapis.com/auth/firebase.messaging';
 const SHEET_SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
 export const FIREBASE_SCOPES = [MESSAGING_SCOPE, SHEET_SCOPE];
 
+/** firebase-admin */
 export const jwtAuth = new google.auth.JWT(
   process.env.FIREBASE_CLIENT_EMAIL,
   '',
   process.env.FIREBASE_PRIVATE_KEY.replaceAll(/\\n/g, '\n'),
   FIREBASE_SCOPES,
 );
+
+// export const jwtAuth = new google.auth.JWT({
+//   email: process.env.FIREBASE_CLIENT_EMAIL,
+//   clientId: process.env.GOOGLE_CLIENT_ID,
+//   scopes: FIREBASE_SCOPES,
+//   clientSecret: process.env.FIREBASE_PRIVATE_KEY.replaceAll(/\\n/g, '\n'),
+//   redirectUri: process.env.NEXT_PUBLIC_SITE_URL + '/api/auth/callback/google',
+// });
 
 export const getAccessToken = () => {
   return new Promise<string>((resolve, reject) => {

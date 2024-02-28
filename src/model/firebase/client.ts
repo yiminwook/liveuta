@@ -4,6 +4,7 @@ import { FirebaseApp, getApps, initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getMessaging } from 'firebase/messaging';
 import firebaseConfig from '@/model/firebase/firebaseClient.json';
+import { getAuth } from 'firebase/auth';
 
 export default class FirebaseClient {
   private static instance: FirebaseClient;
@@ -35,5 +36,9 @@ export default class FirebaseClient {
   public get analytics() {
     if (this.app === null) throw new Error('not initialized');
     return getAnalytics(this.app);
+  }
+
+  public get auth() {
+    return getAuth();
   }
 }
