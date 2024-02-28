@@ -2,15 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { PushData } from '@/app/api/push/route';
 import { connectMongoDB, disconnectMongoDB } from '@/model/mongoDB';
 import errorHandler from '@/model/error/handler';
+import { MONGODB_NOTI_COLLECTION, MONGODB_SCHEDULE_DB } from '@/const';
 
 export async function POST(req: NextRequest) {
   try {
     const requestBody: PushData = await req.json();
 
-    const notiCollection = process.env.MONGODB_NOTI_COLLECTION;
-    const notiDatabase = process.env.MONGODB_SCHEDULE_DB;
-
-    const db = await connectMongoDB(notiDatabase, notiCollection);
+    const db = await connectMongoDB(MONGODB_SCHEDULE_DB, MONGODB_NOTI_COLLECTION);
 
     const readResult = await db.findOne({
       token: requestBody.token,

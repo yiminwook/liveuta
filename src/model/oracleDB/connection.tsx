@@ -1,3 +1,4 @@
+import { ORACLEDB_USER } from '@/const';
 import oracledb from 'oracledb';
 
 // https://github.com/oracle/node-oracledb/blob/main/examples/example.js
@@ -5,7 +6,7 @@ export const connectOracleDB = async () => {
   let connection: null | oracledb.Connection = null;
   try {
     connection = await oracledb.getConnection({
-      user: process.env.ORACLEDB_USER,
+      user: ORACLEDB_USER,
       password: process.env.ORACLEDB_PASSWORD,
       connectString: process.env.ORACLEDB_CONNECTSTRING,
     });
