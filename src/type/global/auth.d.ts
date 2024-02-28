@@ -9,12 +9,14 @@ declare module 'next-auth' {
 
   interface Session {
     user: {
+      userLv: number;
       email: string;
       name: string;
       picture: string;
       provider: string;
       loginAt: string;
       accessToken: string;
+      disabled: boolean;
     };
   }
 }
@@ -22,12 +24,14 @@ declare module 'next-auth' {
 declare module '@auth/core/jwt' {
   interface JWT {
     user: {
+      userLv: number;
       email: string;
       name: string;
       picture: string;
       provider: string;
       loginAt: string;
       accessToken: string;
+      disabled: boolean;
     };
   }
 }
