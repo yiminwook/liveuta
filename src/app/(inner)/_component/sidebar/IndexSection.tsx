@@ -1,11 +1,10 @@
 import { ReactNode } from 'react';
 import { MdOutlineExplore } from 'react-icons/md';
 import NavLink from '../NavLink';
-import sidebar from './sidebar.module.scss';
 
 function IndexLink({ href, text }: { href: string; text: ReactNode }) {
   return (
-    <NavLink modifier={sidebar['active']} href={href}>
+    <NavLink modifier="" href={href}>
       {text}
     </NavLink>
   );

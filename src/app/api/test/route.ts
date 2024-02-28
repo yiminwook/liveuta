@@ -5,7 +5,7 @@ import { login } from '@/model/oracleDB/auth/service';
 export async function GET(request: NextRequest) {
   try {
     if (process.env.NODE_ENV !== 'development') {
-      throw new Error('unknown error');
+      return NextResponse.json({}, { status: 404 });
     }
 
     const email = 'grs0421@gmail.com';
