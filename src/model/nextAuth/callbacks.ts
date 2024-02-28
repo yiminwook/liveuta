@@ -9,7 +9,8 @@ import { getUserInfo } from '../oracleDB/auth/service';
  *  @example - return '/live';
  */
 export const callbackSignIn: CallbacksSignIn = async ({ user }) => {
-  if (user.error) throw new Error(user.error);
+  if (user.error) return `/error?error=${encodeURIComponent(user.error)}`;
+
   return true;
 };
 
