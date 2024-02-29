@@ -17,6 +17,7 @@ export function IndexLinkList() {
       <IndexLink href="/search" text="검색" />
       <IndexLink href="/channels" text="채널조회" />
       <IndexLink href="/request" text="채널요청" />
+      <IndexLink href="/setlist" text="세트리조회" />
       <IndexLink href="/settings" text="설정" />
     </ul>
   );

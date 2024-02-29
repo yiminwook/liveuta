@@ -8,7 +8,6 @@ declare module 'next-auth' {
       provider: string;
       loginAt: string;
       accessToken: string;
-      disabled: boolean;
     };
   }
 }
@@ -23,7 +22,6 @@ declare module '@auth/core/jwt' {
       provider: string;
       loginAt: string;
       accessToken: string;
-      disabled: boolean;
     };
   }
 }
