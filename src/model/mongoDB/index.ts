@@ -10,7 +10,6 @@ export const disconnectMongoDB = () => {
 export const connectMongoDB = async (dbName: string, collectionName: string) => {
   try {
     const client = await mongoDB.connect();
-    console.log('Connected MongoDB');
     return client.db(dbName).collection(collectionName);
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);

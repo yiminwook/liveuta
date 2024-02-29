@@ -10,7 +10,6 @@ export const connectOracleDB = async () => {
       password: process.env.ORACLEDB_PASSWORD,
       connectString: process.env.ORACLEDB_CONNECTSTRING,
     });
-    console.log('Connected OracleDB');
     return connection;
   } catch (error) {
     console.error('Error connecting to OracleDB:', error);
