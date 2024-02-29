@@ -17,10 +17,11 @@ export default function PostForm({ session }: PostFormProps) {
   const { notification } = App.useApp();
 
   const handleDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (e.target.value.length > 100) {
-      return notification.warning({ message: '세트리는 100자 이내로 입력해주세요.' });
+    const value = e.target.value;
+    if (value.length > 1000) {
+      return notification.warning({ message: '세트리는 1000자 이내로 입력해주세요.' });
     }
-    setDesc(e.target.value);
+    setDesc(() => value);
   };
 
   const postWrite = async (e: React.FormEvent) => {
