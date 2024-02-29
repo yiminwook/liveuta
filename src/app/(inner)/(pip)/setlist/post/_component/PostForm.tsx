@@ -16,6 +16,13 @@ export default function PostForm({ session }: PostFormProps) {
 
   const { notification } = App.useApp();
 
+  const handleDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (e.target.value.length > 100) {
+      return notification.warning({ message: '세트리는 100자 이내로 입력해주세요.' });
+    }
+    setDesc(e.target.value);
+  };
+
   const postWrite = async (e: React.FormEvent) => {
     try {
       e.preventDefault();
@@ -73,7 +80,7 @@ export default function PostForm({ session }: PostFormProps) {
             className={styles.textArea}
             value={desc}
             disabled={isPending}
-            onChange={(e) => setDesc(e.target.value)}
+            onChange={handleDesc}
             placeholder={'38:53 노래제목1\n138:54 노래제목2\n238:54 노래제목3\n338:54 노래제목4'}
           />
         </div>
