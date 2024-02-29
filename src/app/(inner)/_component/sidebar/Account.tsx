@@ -11,6 +11,7 @@ import useStopPropagation from '@/hook/useStopPropagation';
 import { useMutation } from '@tanstack/react-query';
 import { signOut } from 'next-auth/react';
 import { App } from 'antd';
+import Avatar from '../Avatar';
 
 interface AccountSidebarProps {
   session: Session;
@@ -49,7 +50,12 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
             <nav className={styles.nav}>
               <div className={styles.logoutButtonBox}>
                 <div className={styles.accountImageBox}>
-                  <img src={session.user.picture} alt="유저 이미지" width={40} height={40} />
+                  <Avatar
+                    email={session.user.email}
+                    src={session.user.image}
+                    alt="유저 이미지"
+                    size={40}
+                  />
                 </div>
                 <button
                   className={styles.logoutButton}

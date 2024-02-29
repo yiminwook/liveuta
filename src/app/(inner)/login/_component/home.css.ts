@@ -19,10 +19,15 @@ export const inner = style({
   padding: '2rem',
   borderTop: '1px solid #e5e5e5',
   flexDirection: 'column',
-  height: '40rem',
+  height: '30rem',
   backgroundColor: 'rgba(255, 255, 255, 0.45)',
   borderRadius: 10,
   boxShadow: BOX_SHADOW,
+});
+
+globalStyle(`${inner} p`, {
+  fontSize: '1.2rem',
+  lineHeight: 1.5,
 });
 
 export const top = style({
@@ -37,20 +42,28 @@ export const title = style({
   marginBottom: '1rem',
 });
 
-export const buttonBox = style({
+export const bottom = style({
   flex: 1,
+  textAlign: 'center',
+});
+
+export const buttonBox = style({
+  display: 'flex',
+  justifyContent: 'center',
+  gap: '1rem',
+  marginTop: '1rem',
 });
 
 export const googleLoginButton = style([
   flexCenter,
   {
+    width: 40,
+    height: 40,
     boxShadow: BOX_SHADOW,
     columnGap: '0.5rem',
     fontSize: '1.25rem',
-    borderRadius: 32,
+    borderRadius: '50%',
     backgroundColor: '#fff',
-    padding: '0.5rem 1rem',
     fontWeight: 600,
-    margin: '0 auto',
   },
 ]);

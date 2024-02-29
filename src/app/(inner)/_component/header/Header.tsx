@@ -14,6 +14,7 @@ import { useAccountSidebarAtom, useSidebarAtom } from '@inner/_lib/atom';
 import { Session } from 'next-auth';
 import { button } from '../button/copyButton.css';
 import * as styles from './header.css';
+import Avatar from '../Avatar';
 
 interface HeaderProps {
   session: Session | null;
@@ -90,7 +91,12 @@ export default function Header({ session }: HeaderProps) {
             <NavigationList />
             {session ? (
               <button className={styles.accountButton} onClick={openAccountSidebar}>
-                <img src={session.user.picture} alt="유저 이미지" width={40} height={40} />
+                <Avatar
+                  src={session.user.image}
+                  email={session.user.email}
+                  size={40}
+                  alt="유저 이미지"
+                />
               </button>
             ) : (
               <Link href="/login" className={header['search-button']}>

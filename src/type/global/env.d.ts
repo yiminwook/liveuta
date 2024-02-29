@@ -17,6 +17,10 @@ declare global {
       readonly GOOGLE_API_KEY: string;
       readonly GOOGLE_CLIENT_ID: string;
       readonly GOOGLE_CLIENT_SECRET: string;
+      // readonly NAVER_CLIENT_ID: string;
+      // readonly NAVER_CLIENT_SECRET: string;
+      readonly KAKAO_CLIENT_ID: string;
+      readonly KAKAO_CLIENT_SECRET: string;
 
       readonly FIREBASE_PROJECT_ID: string;
       readonly FIREBASE_PRIVATE_KEY: string;

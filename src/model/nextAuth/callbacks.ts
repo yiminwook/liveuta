@@ -1,28 +1,39 @@
 import { CallbacksJwt, CallbacksSession, CallbacksSignIn, Payload } from '@/type/nextAuth';
 import { Session } from 'next-auth';
 import jwt from 'jsonwebtoken';
-import { getUserInfo } from '../oracleDB/auth/service';
+import { getUserInfo, login } from '../oracleDB/auth/service';
 
 /**
  *  string을 반환할 경우 해당 path로 이동
  *
  *  @example - return '/live';
  */
-export const callbackSignIn: CallbacksSignIn = async ({ user }) => {
-  if (user.error) return `/error?error=${encodeURIComponent(user.error)}`;
+export const callbackSignIn: CallbacksSignIn = async ({ user, account }) => {
+  try {
+    const email = user.email;
+    const provider = account?.provider;
+    if (!email) throw new Error('email is required');
+    if (!provider) throw new Error('provider is required');
 
-  return true;
+    await login({ email, provider });
+
+    return true;
+  } catch (error) {
+    console.error('callbackSignIn', error);
+    const message = error instanceof Error ? error.message : 'unknown error';
+    return `/error?error=${encodeURIComponent(message)}`;
+  }
 };
 
-export const callbackJwt: CallbacksJwt = async ({ token, user, trigger }) => {
-  if (user) {
+export const callbackJwt: CallbacksJwt = async ({ token, user, trigger, account }) => {
+  if (user && account) {
     //첫 로그인, user는 첫 로그인시만 들어온다.
     token.user = {
-      userLv: 0,
       email: user.email!,
-      name: user.name!,
-      picture: user.picture,
-      provider: user.provider,
+      name: user.name,
+      image: user.image,
+      provider: account.provider!,
+      userLv: 0,
       loginAt: '',
       accessToken: '',
       disabled: false,
@@ -41,7 +52,7 @@ export const callbackJwt: CallbacksJwt = async ({ token, user, trigger }) => {
     userLv: token.user.userLv,
     email: token.user.email,
     name: token.user.name,
-    picture: token.user.picture,
+    image: token.user.image,
     loginAt: token.user.loginAt,
     provider: token.user.provider,
     disabled: token.user.disabled,
