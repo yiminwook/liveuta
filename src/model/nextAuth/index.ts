@@ -53,20 +53,13 @@ export const {
     kakao<KakaoProfile>({
       clientId: process.env.KAKAO_CLIENT_ID,
       clientSecret: process.env.KAKAO_CLIENT_SECRET,
-      authorization: {
-        params: {
-          prompt: 'select_account',
-        },
-      },
+      authorization: 'https://kauth.kakao.com/oauth/authorize?scope&prompt=select_account',
     }),
     Discord<DiscordProfile>({
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
-      authorization: {
-        params: {
-          prompt: 'select_account',
-        },
-      },
+      authorization:
+        'https://discord.com/api/oauth2/authorize?scope=identify+email&prompt=select_account',
     }),
     // expires_in 타입에러, next-auth에서 지원하지 않음
     // naver<NaverProfile>({

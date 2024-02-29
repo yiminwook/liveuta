@@ -8,7 +8,7 @@ import '@/style/globalTheme.css';
 import { PropsWithChildren } from 'react';
 import { DEFALUT_METADATA } from '@/const/metaData';
 import { getCookies } from '@inner/_lib/getCookie';
-import type { Viewport } from 'next';
+import type { Metadata, Viewport } from 'next';
 import Configs from './_component';
 import DefaultHead from './_component/DefaultHead';
 import GoogleTagManager from './_component/GoogleTagManager';
@@ -32,7 +32,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 /** Default Route Segment Config */
 export const dynamicParams = true; //fallback
 export const preferredRegion = ['icn1'];
-export const metadata = DEFALUT_METADATA;
+export const metadata: Metadata = DEFALUT_METADATA;
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,

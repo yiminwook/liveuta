@@ -3,7 +3,7 @@ import { connectOracleDB } from '../connection';
 import { GET_MEMBER, POST_MEMBER, UPDATE_MEMBER } from './sql';
 import dayjs from '@/model/dayjs';
 
-export type UserInfoRow = [number, string, string, 'Y' | 'N', number, Date, Date];
+export type UserInfoRow = [number, string, string, 'Y' | 'N', number, Date, Date, 'Y' | 'N'];
 
 export type UserInfo = {
   id: number;
@@ -30,6 +30,7 @@ export async function getUserInfo({
 
     if (!row) throw new Error('회원 정보가 없습니다.');
     if (row[3] === 'Y') throw new Error('정지된 유저입니다.');
+    if (row[7] === 'Y') throw new Error('DB 로그아웃');
 
     connection.close();
     return {
