@@ -52,6 +52,7 @@ export default function ChannelItem({ content }: ChannelItemProps) {
 
   const handleOpenWindow = (e: MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     openWindow(url);
   };
 
