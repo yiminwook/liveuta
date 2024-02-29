@@ -9,12 +9,17 @@ import { MouseEvent } from 'react';
 //  https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/lib/gtag.js
 //  https://developers.google.com/analytics/devguides/collection/ga4/event-parameters?hl=ko&client_type=gtag
 
+// Define a flag to check if gtag is available
+let gtagAvailable = typeof window !== 'undefined' && typeof window.gtag === 'function';
+
 export const gtag = <T extends keyof Gtag.GtagCommands>(
   command: T,
   ...args: Gtag.GtagCommands[T]
 ) => {
-  if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
-  // firefox에서 window.gtag가 undefined로 나오는 경우가 있음
+  if (!gtagAvailable) {
+    console.warn('Google Analytics gtag function is not available.');
+    return;
+  }
   window.gtag(command, ...args);
 };
 
