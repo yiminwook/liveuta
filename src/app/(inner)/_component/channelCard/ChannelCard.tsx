@@ -10,6 +10,8 @@ import { MouseEvent, useState } from 'react';
 import ChannelCardModal from '../modal/ChannelCardModal';
 import channelCard from './channelCard.module.scss';
 
+import * as styles from './channelCard.css';
+
 interface ChannelItemProps {
   content: ChannelsDataType;
 }
@@ -58,9 +60,9 @@ export default function ChannelItem({ content }: ChannelItemProps) {
 
   return (
     <>
-      <div className={channelCard['channel']} onClick={toggleModal}>
-        <a href={url} onClick={linkClickEvent}>
-          <div className={channelCard['image-container']}>
+      <div className={styles.channelCard} onClick={toggleModal}>
+        <a className={styles.linkToChannel} href={url} onClick={linkClickEvent}>
+          <div className={styles.imageContainer}>
             <Image
               src={imageURL}
               alt=""
@@ -72,13 +74,17 @@ export default function ChannelItem({ content }: ChannelItemProps) {
             />
           </div>
         </a>
-        <div className={channelCard['desc']}>
-          <h1>{channelName}</h1>
-          <div className={channelCard['details']}>
-            <h2>{title}</h2>
-            <p className={channelCard['subscribe']}>구독자 {subscribe}</p>
-            <p className={channelCard['upload-count']}>업로드 수: {videoCount}</p>
-            <div className={channelCard['link']}>
+        <div className={styles.desc}>
+          <h1 className={styles.title}>{channelName}</h1>
+          <div className={styles.details}>
+            {/* <h2 className={styles.originalTitle}>{title}</h2> */}
+            <p className={styles.descContent}>
+              <span className={styles.descContentLabel}>구독자</span> {subscribe}
+            </p>
+            <p className={styles.descContent}>
+              <span className={styles.descContentLabel}>동영상</span> {videoCount}
+            </p>
+            <div className={styles.link}>
               <button onClick={handleOpenWindow}>유투브 채널</button>
               <CopyButton value={url} size={'0.8rem'} />
             </div>
