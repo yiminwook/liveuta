@@ -22,7 +22,9 @@ export default function Home({ session }: HomeProps) {
                 우타툴즈 타임라인으로 이동
               </a>
               <p>우타툴즈에서 작성된 세트리를 등록하세요</p>
-              <Link href="/setlist">조회페이지로 이동</Link>
+              <Link className={styles.backLink} href="/setlist">
+                조회페이지로 이동
+              </Link>
             </div>
             <PostForm session={session} />
           </div>
