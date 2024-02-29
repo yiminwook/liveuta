@@ -36,14 +36,10 @@ export const combineChannelData = async (
       url: youtubeChannelUrl, // Replacing 'url' with the YouTube channel URL
     });
   });
-
-  const combinedSheetDataValues = combinedSearchData.sort((a, b) => {
-    const A = a.channelName;
-    const B = b.channelName;
-    if (A < B) return -1;
-    if (A > B) return 1;
-    else return 0;
-  }) as ChannelsDataType[];
+  
+  // Sorting combined data by channelName
+  const combinedSheetDataValues = combinedSearchData
+    .sort((a, b) => a.channelName.localeCompare(b.channelName)) as ChannelsDataType[];
 
   return combinedSheetDataValues;
 };
