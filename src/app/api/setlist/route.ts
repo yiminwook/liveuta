@@ -10,21 +10,19 @@ export async function POST(request: NextRequest) {
     const accessToken = request.headers.get('Authorization')?.split('Bearer ')[1];
     if (!accessToken) throw new CustomServerError({ statusCode: 401, message: 'Unauthorized' });
     const payload = jwt.verify(accessToken, process.env.ACCESS_SECRET) as Payload;
-    console.log('payload', payload);
 
     const body: {
       videoId: string;
       description: string;
     } = await request.json();
 
-    console.log(body);
     await postSetlist(body.videoId, body.description, payload.id);
 
     return NextResponse.json({ status: 201, message: 'ok' });
   } catch (error) {
     console.error('POST: /setlist', error);
     const { status, message } = errorHandler(error);
-    return NextResponse.json({ status, message });
+    return NextResponse.json({ message }, { status });
   }
 }
 

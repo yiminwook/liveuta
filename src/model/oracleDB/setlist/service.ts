@@ -1,4 +1,4 @@
-import OracleDB from 'oracledb';
+import OracleDB, { DBError } from 'oracledb';
 import { connectOracleDB } from '../connection';
 import {
   DELETE_SETLIST,
@@ -8,6 +8,7 @@ import {
   SEARCH_SETLIST,
   UPDATE_SETLIST,
 } from './sql';
+import CustomServerError from '@/model/error/customServerError';
 
 const PAGE_SIZE = 15;
 export type SetlistRow = [string, string, number, Date, Date, string, number | undefined]; //row[6] RNUM
@@ -95,11 +96,18 @@ export async function postSetlist(videoId: string, description: string, memberId
     await connection.execute(POST_SETLIST, [videoId, description, memberId]);
     await connection.commit();
     await connection.close();
-  } catch (error) {
+  } catch (e) {
+    const error = e as DBError;
+
     if (connection) {
       await connection.rollback();
       await connection.close();
     }
+
+    if (error.code === 'ORA-00001') {
+      throw new CustomServerError({ statusCode: 409, message: '이미 등록된 세트리 입니다.' });
+    }
+
     throw error;
   }
 }

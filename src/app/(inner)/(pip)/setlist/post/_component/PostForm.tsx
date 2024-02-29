@@ -1,7 +1,7 @@
 'use client';
 import { Session } from '@auth/core/types';
 import { App } from 'antd';
-import axios from 'axios';
+import axios, { isAxiosError } from 'axios';
 import { useState } from 'react';
 import * as styles from './postForm.css';
 
@@ -43,7 +43,12 @@ export default function PostForm({ session }: PostFormProps) {
       notification.success({ message: '세트리가 입력 되었습니다.' });
     } catch (error) {
       setIsPending(() => false);
-      const message = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
+      let message = '알 수 없는 오류가 발생했습니다.';
+      if (isAxiosError(error)) {
+        message = error.response?.data.message || message;
+        return notification.error({ message });
+      }
+      message = error instanceof Error ? error.message : message;
       notification.error({ message });
     }
   };
