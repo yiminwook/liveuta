@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import CustomServerError from '@/model/error/customServerError';
 import { Payload } from '@/type/nextAuth';
 import errorHandler from '@/model/error/handler';
+import { getYoutubeChannelsByVideoId } from '@/model/youtube';
 import { postSetlist } from '@/model/oracleDB/setlist/service';
 
 export async function POST(request: NextRequest) {
@@ -15,6 +16,12 @@ export async function POST(request: NextRequest) {
       videoId: string;
       description: string;
     } = await request.json();
+
+    const item = await getYoutubeChannelsByVideoId(body.videoId);
+
+    if (!item) {
+      throw new CustomServerError({ statusCode: 404, message: '채널을 찾을 수 없습니다.' });
+    }
 
     await postSetlist(body.videoId, body.description, payload.id);
 

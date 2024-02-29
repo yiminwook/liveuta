@@ -28,7 +28,7 @@ export default function PostForm({ session }: PostFormProps) {
     try {
       e.preventDefault();
       setIsPending(() => true);
-      const videoId = url.split('?v=')[1];
+      const videoId = url.match(/(?:\?v=|&v=|youtu\.be\/)([^&\n?#]+)/)?.[1];
       const description = desc.trim();
 
       if (!videoId) throw new Error('올바른 유튜브 URL을 입력해주세요.');

@@ -44,4 +44,16 @@ export const searchYoutubeChannels = async (channelName: string) => {
   return response.data;
 };
 
+export const getYoutubeChannelsByVideoId = async (videoId: string) => {
+  const response = await youtubeService.videos.list(
+    {
+      part: ['id', 'snippet', 'statistics'],
+      id: [videoId],
+      key: process.env.GOOGLE_API_KEY,
+    },
+    { fetchImplementation: customFetchNoCached },
+  );
+  return response.data.items?.[0] || null;
+};
+
 // https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q={custom_username}&key={api_key}'
