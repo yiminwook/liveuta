@@ -24,23 +24,22 @@ export const combineChannelData = async (
   youtubeData.items.forEach((data) => {
     const id = data.id;
     if (!(id && sheetData[id])) return;
-    const { uid, channelName, url } = sheetData[id];
-
+    const { uid, channelName } = sheetData[id];
+    
+    // Constructing the YouTube channel URL
+    const youtubeChannelUrl = `https://www.youtube.com/channel/${uid}`;
+    
     combinedSearchData.push({
       ...data,
       uid,
       channelName,
-      url,
+      url: youtubeChannelUrl, // Replacing 'url' with the YouTube channel URL
     });
   });
-
-  const combinedSheetDataValues = combinedSearchData.sort((a, b) => {
-    const A = a.channelName;
-    const B = b.channelName;
-    if (A < B) return -1;
-    if (A > B) return 1;
-    else return 0;
-  }) as ChannelsDataType[];
+  
+  // Sorting combined data by channelName
+  const combinedSheetDataValues = combinedSearchData
+    .sort((a, b) => a.channelName.localeCompare(b.channelName)) as ChannelsDataType[];
 
   return combinedSheetDataValues;
 };
