@@ -29,7 +29,7 @@ export default function List({ searchParams }: ListProps) {
   });
 
   const handlePage = (page: number) => {
-    router.push(`/setlist?query=${searchParams.query}&page=${page}`);
+    router.push(`/setlist?query=${searchParams.query || ''}&page=${page || 1}`);
   };
 
   if (isLoading) return <Loading />;
@@ -48,9 +48,16 @@ export default function List({ searchParams }: ListProps) {
     <div>
       <h2 className={styles.title}>조회 리스트</h2>
       <Table data={data.list} />
-      <div>
-        <div>페이지네이션 테스트중</div>
-        <button onClick={() => handlePage(2)}>2페이지</button>
+      <div className={styles.pagenationBox}>
+        {Array.from({ length: data.maxPage }, (_, i) => i + 1).map((page) => (
+          <button
+            key={`setlist_pagenation_button_${page}`}
+            className={styles.pagenationButton}
+            onClick={() => handlePage(page)}
+          >
+            {page}
+          </button>
+        ))}
       </div>
     </div>
   );

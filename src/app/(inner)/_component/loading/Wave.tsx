@@ -15,7 +15,7 @@ const containerVariants = {
 const dotVariants = {
   initial: {},
   animate: {
-    height: [5, 10, 5],
+    height: [5, 15, 5],
     transition: {
       repeat: Infinity,
     },

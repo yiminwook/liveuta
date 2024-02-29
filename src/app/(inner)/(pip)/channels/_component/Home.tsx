@@ -1,6 +1,6 @@
 import { ChannelsDataType } from '@/type/api/youtube';
 import HorizonScrollBox from '@inner/_component/HorizonScrollBox';
-import Pagination from '@inner/_component/pagination/Pagination';
+import Pagination from '@inner/(pip)/channels/_component/pagination/Pagination';
 import ChannelSection from './ChannelSection';
 import channels from './channels.module.scss';
 
