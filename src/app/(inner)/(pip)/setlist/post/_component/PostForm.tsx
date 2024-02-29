@@ -18,9 +18,6 @@ export default function PostForm({ session }: PostFormProps) {
 
   const handleDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
-    if (value.length > 1000) {
-      return notification.warning({ message: '세트리는 1000자 이내로 입력해주세요.' });
-    }
     setDesc(() => value);
   };
 
