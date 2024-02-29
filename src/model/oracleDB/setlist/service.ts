@@ -11,14 +11,15 @@ import {
   UPDATE_SETLIST,
 } from './sql';
 import CustomServerError from '@/model/error/customServerError';
+import dayjs from '@/model/dayjs';
 
 const PAGE_SIZE = 15;
 export type SetlistRow = [string, string, number, Date, Date, string, number | undefined]; //row[6] RNUM
 export type Setlist = {
   videoId: string;
   description: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   email: string;
 };
 
@@ -35,8 +36,8 @@ export async function getSetlistByVideoId(videoId: number) {
     return {
       videoId: row[0],
       description: row[1],
-      createdAt: row[3],
-      updatedAt: row[4],
+      createdAt: dayjs.tz(row[3]).toISOString(),
+      updatedAt: dayjs.tz(row[4]).toISOString(),
       email: row[5],
     };
   } catch (error) {
@@ -74,8 +75,8 @@ export async function getAllSetlist(pageNumber: number) {
     const list = rows.map((row) => ({
       videoId: row[0],
       description: row[1],
-      createdAt: row[3],
-      updatedAt: row[4],
+      createdAt: dayjs.tz(row[3]).toISOString(),
+      updatedAt: dayjs.tz(row[4]).toISOString(),
       email: row[5],
     }));
 

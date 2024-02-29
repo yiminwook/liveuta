@@ -10,8 +10,8 @@ interface RowProps {
 }
 export default function Row({ data }: RowProps) {
   const url = `https://www.youtube.com/watch?v=${data.videoId}`;
-  const update = dayjs(data.updatedAt).format('YYYY-MM-DD');
-  const create = dayjs(data.createdAt).format('YYYY-MM-DD');
+  const update = dayjs(data.updatedAt).format('YYYY-MM-DD HH:mm:ss');
+  const create = dayjs(data.createdAt).format('YYYY-MM-DD HH:mm:ss');
 
   return (
     <div className={styles.row}>

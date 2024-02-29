@@ -17,7 +17,7 @@ export const GET_ALL_SETLIST = `
       FROM (
           SELECT *
           FROM SETLIST
-          ORDER BY CREATE_AT
+          ORDER BY CREATE_AT DESC
       ) r
       JOIN MEMBER ON r.MEMBER_ID = MEMBER.ID
       WHERE ROWNUM <= :endRow
@@ -39,7 +39,7 @@ export const SEARCH_SETLIST = `
           SELECT *
           FROM SETLIST
           WHERE DESCRIPTION LIKE :pattern
-          ORDER BY CREATE_AT
+          ORDER BY CREATE_AT DESC
       ) r
       JOIN MEMBER ON r.MEMBER_ID = MEMBER.ID
       WHERE ROWNUM <= :endRow
