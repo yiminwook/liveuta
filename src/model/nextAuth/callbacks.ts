@@ -36,15 +36,12 @@ export const callbackJwt: CallbacksJwt = async ({ token, user, trigger, account 
       userLv: 0,
       loginAt: '',
       accessToken: '',
-      disabled: false,
     };
   }
 
   const userInfo = await getUserInfo({ email: token.user.email, provider: token.user.provider });
   token.user.userLv = userInfo.lv;
   token.user.loginAt = userInfo.loginAt.toISOString();
-  token.user.disabled = userInfo.disabled;
-
   const threeDays = 60 * 60 * 24 * 3;
 
   const payload: Payload = {
@@ -55,7 +52,6 @@ export const callbackJwt: CallbacksJwt = async ({ token, user, trigger, account 
     image: token.user.image,
     loginAt: token.user.loginAt,
     provider: token.user.provider,
-    disabled: token.user.disabled,
   };
 
   const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: threeDays });

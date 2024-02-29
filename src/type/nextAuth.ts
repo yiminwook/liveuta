@@ -13,7 +13,6 @@ export type Payload = {
   image: string | null | undefined;
   loginAt: string;
   provider: string;
-  disabled: boolean;
 };
 
 export type Provider = 'google' | 'kakao' | 'discord';

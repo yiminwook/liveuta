@@ -3,13 +3,12 @@ import { connectOracleDB } from '../connection';
 import { GET_MEMBER, POST_MEMBER, UPDATE_MEMBER } from './sql';
 import dayjs from '@/model/dayjs';
 
-export type UserInfoRow = [number, string, string, 'Y' | 'N', number, Date, Date, 'Y' | 'N'];
+export type MemberRow = [number, string, string, 'Y' | 'N', number, Date, Date, 'Y' | 'N'];
 
 export type UserInfo = {
   id: number;
   email: string;
   provider: string;
-  disabled: boolean;
   lv: number;
   createAt: dayjs.Dayjs;
   loginAt: dayjs.Dayjs;
@@ -25,7 +24,7 @@ export async function getUserInfo({
   let connection: OracleDB.Connection | null = null;
   try {
     connection = await connectOracleDB();
-    const getresult = await connection.execute<UserInfoRow>(GET_MEMBER, [email, provider]);
+    const getresult = await connection.execute<MemberRow>(GET_MEMBER, [email, provider]);
     const row = getresult.rows?.[0];
 
     if (!row) throw new Error('회원 정보가 없습니다.');
@@ -37,7 +36,6 @@ export async function getUserInfo({
       id: row[0],
       email: row[1],
       provider: row[2],
-      disabled: row[3] === 'N',
       lv: row[4],
       createAt: dayjs(row[5]),
       loginAt: dayjs(row[6]),
@@ -56,7 +54,7 @@ export async function login({ email, provider }: { email: string; provider: stri
   let connection: OracleDB.Connection | null = null;
   try {
     connection = await connectOracleDB();
-    const getresult = await connection.execute<UserInfoRow>(GET_MEMBER, [email, provider]);
+    const getresult = await connection.execute<MemberRow>(GET_MEMBER, [email, provider]);
     const row = getresult.rows?.[0];
 
     const isDisabled = row?.[3] === 'Y';
