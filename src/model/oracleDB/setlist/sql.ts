@@ -5,7 +5,27 @@ export const GET_SETLIST = `
   WHERE VIDEO_ID = :videoId
 `;
 
-export const SEARCH_MAX_PAGE = `
+export const GET_MAX_COUNT = `
+  SELECT COUNT(*)
+  FROM SETLIST
+`;
+
+export const GET_ALL_SETLIST = `
+  SELECT *
+  FROM (
+      SELECT r.*, MEMBER.EMAIL, ROWNUM AS rnum
+      FROM (
+          SELECT *
+          FROM SETLIST
+          ORDER BY CREATE_AT
+      ) r
+      JOIN MEMBER ON r.MEMBER_ID = MEMBER.ID
+      WHERE ROWNUM <= :endRow
+  )
+  WHERE rnum >= :startRow
+`;
+
+export const SEARCH_MAX_COUNT = `
   SELECT COUNT(*)
   FROM SETLIST
   WHERE DESCRIPTION LIKE :pattern

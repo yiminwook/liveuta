@@ -23,10 +23,9 @@ export default function List({ searchParams }: ListProps) {
       const result = await axios.get<{
         maxPage: number;
         list: Setlist[];
-      }>(`/api/search/setlist?query=${searchParams.query}&page=${searchParams.page || 1}`);
+      }>(`/api/search/setlist?query=${searchParams.query || ''}&page=${searchParams.page || 1}`);
       return result.data;
     },
-    enabled: !!searchParams.query,
   });
 
   const handlePage = (page: number) => {

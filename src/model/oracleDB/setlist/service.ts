@@ -2,9 +2,11 @@ import OracleDB, { DBError } from 'oracledb';
 import { connectOracleDB } from '../connection';
 import {
   DELETE_SETLIST,
+  GET_ALL_SETLIST,
+  GET_MAX_COUNT,
   GET_SETLIST,
   POST_SETLIST,
-  SEARCH_MAX_PAGE,
+  SEARCH_MAX_COUNT,
   SEARCH_SETLIST,
   UPDATE_SETLIST,
 } from './sql';
@@ -20,7 +22,7 @@ export type Setlist = {
   email: string;
 };
 
-export async function getSetlist(videoId: number) {
+export async function getSetlistByVideoId(videoId: number) {
   let connection: OracleDB.Connection | null = null;
   try {
     connection = await connectOracleDB();
@@ -43,12 +45,53 @@ export async function getSetlist(videoId: number) {
   }
 }
 
+export async function getAllSetlist(pageNumber: number) {
+  let connection: OracleDB.Connection | null = null;
+  try {
+    connection = await connectOracleDB();
+    const countResult = await connection.execute<[number]>(GET_MAX_COUNT);
+    const totalCount = countResult.rows?.[0][0] || 0;
+    const maxPage = Math.ceil(totalCount / PAGE_SIZE);
+
+    if (maxPage === 0 || pageNumber > maxPage) {
+      await connection.close();
+      return { maxPage: 0, list: [] };
+    }
+
+    const startRow = (pageNumber - 1) * PAGE_SIZE + 1;
+    const endRow = pageNumber * PAGE_SIZE;
+
+    const searchResult = await connection.execute<SetlistRow>(GET_ALL_SETLIST, [endRow, startRow]);
+
+    await connection.close();
+
+    const rows = searchResult.rows;
+    if (!rows) {
+      await connection.close();
+      return { maxPage: 0, list: [] };
+    }
+
+    const list = rows.map((row) => ({
+      videoId: row[0],
+      description: row[1],
+      createdAt: row[3],
+      updatedAt: row[4],
+      email: row[5],
+    }));
+
+    return { maxPage, list };
+  } catch (error) {
+    if (connection) await connection.close();
+    throw error;
+  }
+}
+
 export async function searchSetlist(query: string, pageNumber: number) {
   let connection: OracleDB.Connection | null = null;
   const pattern = `%${query}%`;
   try {
     connection = await connectOracleDB();
-    const countResult = await connection.execute<[number]>(SEARCH_MAX_PAGE, [pattern]);
+    const countResult = await connection.execute<[number]>(SEARCH_MAX_COUNT, [pattern]);
     const totalCount = countResult.rows?.[0][0] || 0;
     const maxPage = Math.ceil(totalCount / PAGE_SIZE);
 

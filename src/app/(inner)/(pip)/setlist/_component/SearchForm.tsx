@@ -21,7 +21,7 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmedQuery = query.trim();
-    if (trimmedQuery) router.push(`/setlist?query=${query}`);
+    router.push(`/setlist?query=${trimmedQuery}`);
   };
 
   return (

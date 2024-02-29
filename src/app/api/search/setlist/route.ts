@@ -1,6 +1,6 @@
 import BadReqError from '@/model/error/badRequestError';
 import errorHandler from '@/model/error/handler';
-import { searchSetlist } from '@/model/oracleDB/setlist/service';
+import { getAllSetlist, searchSetlist } from '@/model/oracleDB/setlist/service';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -10,10 +10,9 @@ export async function GET(request: NextRequest) {
     const query = searchParams.get('query');
     const page = Number(searchParams.get('page'));
 
-    if (!query) throw new BadReqError('query is required');
-    if (isNaN(page)) throw new BadReqError('page is required');
+    if (isNaN(page)) throw new BadReqError('unexpected query parameter: page');
 
-    const result = await searchSetlist(query, page);
+    const result = query ? await searchSetlist(query, page) : await getAllSetlist(page);
 
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
