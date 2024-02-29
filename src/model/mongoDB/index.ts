@@ -3,7 +3,6 @@ import { MongoClient } from 'mongodb';
 export const mongoDB = new MongoClient(process.env.MONGODB_URI);
 
 export const disconnectMongoDB = () => {
-  console.log('Disconnected MongoDB');
   return mongoDB.close();
 };
 

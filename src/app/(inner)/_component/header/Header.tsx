@@ -15,6 +15,7 @@ import { Session } from 'next-auth';
 import { button } from '../button/copyButton.css';
 import * as styles from './header.css';
 import Avatar from '../Avatar';
+import { gtag } from '@inner/_lib/gtag';
 
 interface HeaderProps {
   session: Session | null;

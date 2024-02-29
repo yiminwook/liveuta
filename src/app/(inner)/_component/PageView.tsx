@@ -1,5 +1,6 @@
 'use client';
 import { PropsWithChildren, useEffect } from 'react';
+import { gtag } from '@inner/_lib/gtag';
 
 export default function PageView({ children }: PropsWithChildren) {
   useEffect(() => {

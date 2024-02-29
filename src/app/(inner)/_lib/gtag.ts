@@ -10,7 +10,7 @@ import { MouseEvent } from 'react';
 //  https://developers.google.com/analytics/devguides/collection/ga4/event-parameters?hl=ko&client_type=gtag
 
 // Define a flag to check if gtag is available
-let gtagAvailable = typeof window !== 'undefined' && typeof window.gtag === 'function';
+const gtagAvailable = typeof window !== 'undefined' && typeof window.gtag === 'function';
 
 export const gtag = <T extends keyof Gtag.GtagCommands>(
   command: T,
@@ -20,6 +20,7 @@ export const gtag = <T extends keyof Gtag.GtagCommands>(
     console.warn('Google Analytics gtag function is not available.');
     return;
   }
+
   window.gtag(command, ...args);
 };
 
