@@ -24,13 +24,16 @@ export const combineChannelData = async (
   youtubeData.items.forEach((data) => {
     const id = data.id;
     if (!(id && sheetData[id])) return;
-    const { uid, channelName, url } = sheetData[id];
-
+    const { uid, channelName } = sheetData[id];
+    
+    // Constructing the YouTube channel URL
+    const youtubeChannelUrl = `https://www.youtube.com/channel/${uid}`;
+    
     combinedSearchData.push({
       ...data,
       uid,
       channelName,
-      url,
+      url: youtubeChannelUrl, // Replacing 'url' with the YouTube channel URL
     });
   });
 
