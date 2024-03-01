@@ -1,21 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
-import CustomServerError from '@/model/error/customServerError';
 import errorHandler from '@/model/error/handler';
-import { getYoutubeChannelsByVideoId } from '@/model/youtube';
-import { postSetlist } from '@/model/oracleDB/setlist/service';
+import { updateSetlist } from '@/model/oracleDB/setlist/service';
 import checkRequestUrl from '@api/_lib/checkRequestUrl';
 import parseAccessToken from '@api/_lib/parseAccessToken';
+import { getYoutubeChannelsByVideoId } from '@/model/youtube';
+import CustomServerError from '@/model/error/customServerError';
 
-export async function POST(request: NextRequest) {
+type PostParams = {
+  params: { id: string };
+};
+export async function POST(request: NextRequest, { params }: PostParams) {
   try {
     await checkRequestUrl();
     const payload = await parseAccessToken();
     const body: {
-      videoId: string;
       description: string;
     } = await request.json();
 
-    const item = await getYoutubeChannelsByVideoId(body.videoId);
+    const item = await getYoutubeChannelsByVideoId(params.id);
     const channelId = item?.snippet?.channelId;
     const broadcastAt = item?.snippet?.publishedAt;
     const title = item?.snippet?.title;
@@ -24,11 +26,11 @@ export async function POST(request: NextRequest) {
       throw new CustomServerError({ statusCode: 404, message: '채널을 찾을 수 없습니다.' });
     }
 
-    await postSetlist(body.videoId, body.description, payload.id, channelId, broadcastAt, title);
+    await updateSetlist(params.id, body.description, payload.id, channelId, broadcastAt, title);
 
-    return NextResponse.json({ status: 201, message: 'ok' });
+    return NextResponse.json({ status: 200, message: 'ok' });
   } catch (error) {
-    console.error('POST: /setlist', error);
+    console.error('POST: /setlist/[id]', error);
     const { status, message } = errorHandler(error);
     return NextResponse.json({ message }, { status });
   }

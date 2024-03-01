@@ -1,10 +1,11 @@
 import { getChannel, parseChannel } from '@/model/mongoDB/getAllChannel';
 import { getSetlistByVideoId } from '@/model/oracleDB/setlist/service';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Desc from './Desc';
 import SetlistPlayer from './SetlistPlayer';
 import * as styles from './home.css';
 import Info from './Info';
+import { auth } from '@/model/nextAuth';
 
 interface HomeProps {
   params: {
@@ -13,6 +14,8 @@ interface HomeProps {
 }
 
 export default async function Home({ params }: HomeProps) {
+  const session = await auth();
+  if (!session) redirect('/login');
   const setlist = await getSetlistByVideoId(params.id);
   if (setlist === null) notFound();
   const document = await getChannel(setlist.channelId);
@@ -30,8 +33,7 @@ export default async function Home({ params }: HomeProps) {
           </div>
         </section>
         <section className={styles.right}>
-          <button>편집</button>
-          <Desc videoId={setlist.videoId} description={setlist.description} />
+          <Desc session={session} videoId={setlist.videoId} description={setlist.description} />
         </section>
       </div>
     </main>

@@ -179,11 +179,28 @@ export async function postSetlist(
   }
 }
 
-export async function updateSetlist(videoId: number, description: string, memberId: number) {
+export async function updateSetlist(
+  videoId: string,
+  description: string,
+  memberId: number,
+  channelId: string,
+  broadcastAt: string | null | undefined,
+  title: string,
+) {
   let connection: OracleDB.Connection | null = null;
   try {
     connection = await connectOracleDB();
-    await connection.execute(UPDATE_SETLIST, [videoId, description, memberId]);
+
+    const nonullableBroadcastAt = dayjs.tz(broadcastAt || undefined).toDate();
+
+    await connection.execute(UPDATE_SETLIST, [
+      title,
+      description,
+      channelId,
+      memberId,
+      nonullableBroadcastAt,
+      videoId,
+    ]);
     await connection.commit();
     await connection.close();
   } catch (error) {

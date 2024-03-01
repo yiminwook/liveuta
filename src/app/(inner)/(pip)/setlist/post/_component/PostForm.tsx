@@ -4,6 +4,7 @@ import { App } from 'antd';
 import axios, { isAxiosError } from 'axios';
 import { useState } from 'react';
 import * as styles from './postForm.css';
+import TextareaAutosize from 'react-textarea-autosize';
 
 interface PostFormProps {
   session: Session;
@@ -74,7 +75,7 @@ export default function PostForm({ session }: PostFormProps) {
       </div>
       <div>
         <div className={styles.textAreaBox}>
-          <textarea
+          <TextareaAutosize
             className={styles.textArea}
             value={desc}
             disabled={isPending}

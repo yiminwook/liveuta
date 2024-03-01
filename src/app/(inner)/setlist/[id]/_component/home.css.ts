@@ -39,6 +39,4 @@ export const right = style({
   flex: 1,
   minHeight: 'calc(100dvh - 3.5rem - 5rem)',
   backgroundColor: '#fff',
-  fontSize: '1.1rem',
-  lineHeight: 1.5,
 });

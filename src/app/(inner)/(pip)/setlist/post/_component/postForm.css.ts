@@ -28,9 +28,7 @@ export const textAreaBox = style({
 
 export const textArea = style({
   flex: 1,
-  backgroundColor: 'transparent',
   padding: '0.5rem',
-  border: 'none',
   height: '20rem',
 });
 

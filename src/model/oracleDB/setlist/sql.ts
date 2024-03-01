@@ -60,7 +60,13 @@ export const POST_SETLIST = `
 
 export const UPDATE_SETLIST = `
   UPDATE SETLIST
-  SET DESCRIPTION = :description, MEMBER_ID = :memberId, UPDATE_AT = CURRENT_TIMESTAMP, CHANNEL_ID = :channelId, BROADCAST_AT = :broadcastAt
+  SET 
+    title = :title,
+    DESCRIPTION = :description, 
+    CHANNEL_ID = :channelId, 
+    MEMBER_ID = :memberId, 
+    UPDATE_AT = CURRENT_TIMESTAMP, 
+    BROADCAST_AT = :broadcastAt 
   WHERE VIDEO_ID = :videoId
 `;
 
