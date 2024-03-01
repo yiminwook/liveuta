@@ -16,11 +16,14 @@ export const GET_ALL_SETLIST = `
       SELECT r.*, MEMBER.EMAIL, ROWNUM AS rnum
       FROM (
           SELECT *
-          FROM SETLIST
-          ORDER BY CREATE_AT DESC
+          FROM (
+              SELECT *
+              FROM SETLIST
+              ORDER BY CREATE_AT DESC
+          )
+          WHERE ROWNUM <= :endRow
       ) r
       JOIN MEMBER ON r.MEMBER_ID = MEMBER.ID
-      WHERE ROWNUM <= :endRow
   )
   WHERE rnum >= :startRow
 `;
@@ -28,7 +31,7 @@ export const GET_ALL_SETLIST = `
 export const SEARCH_MAX_COUNT = `
   SELECT COUNT(*)
   FROM SETLIST
-  WHERE DESCRIPTION LIKE :pattern
+  WHERE LOWER(DESCRIPTION) LIKE LOWER(:pattern)
 `;
 
 export const SEARCH_SETLIST = `
@@ -37,12 +40,15 @@ export const SEARCH_SETLIST = `
       SELECT r.*, MEMBER.EMAIL, ROWNUM AS rnum
       FROM (
           SELECT *
-          FROM SETLIST
-          WHERE DESCRIPTION LIKE :pattern
-          ORDER BY CREATE_AT DESC
+          FROM (
+              SELECT *
+              FROM SETLIST
+              WHERE LOWER(DESCRIPTION) LIKE LOWER(:pattern)
+              ORDER BY CREATE_AT DESC
+          )
+          WHERE ROWNUM <= :endRow
       ) r
       JOIN MEMBER ON r.MEMBER_ID = MEMBER.ID
-      WHERE ROWNUM <= :endRow
   )
   WHERE rnum >= :startRow
 `;
