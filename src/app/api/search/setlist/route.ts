@@ -1,10 +1,13 @@
 import BadReqError from '@/model/error/badRequestError';
 import errorHandler from '@/model/error/handler';
 import { getAllSetlist, searchSetlist } from '@/model/oracleDB/setlist/service';
+import checkRequestUrl from '@api/_lib/checkRequestUrl';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   try {
+    checkRequestUrl();
+
     const url = new URL(request.url);
     const searchParams = url.searchParams;
     const query = searchParams.get('query');
