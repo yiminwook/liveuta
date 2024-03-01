@@ -1,5 +1,5 @@
 'use client';
-import { usePlayerAtom } from '@/app/(inner)/_lib/atom';
+import { usePlayerAtom } from '@inner/_lib/atom';
 import useToast from '@/hook/useToast';
 import { forwardRef, useEffect, useState } from 'react';
 import { ImYoutube } from 'react-icons/im';

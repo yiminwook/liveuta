@@ -1,58 +1,44 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { fetcher } from '@inner/_lib/fetcher';
-import { useQuery } from '@tanstack/react-query';
-import { ContentsDataType, ScheduleAPIReturntype } from '@/type/api/mongoDB';
+import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
+import axios from 'axios';
 
-// TODO: 리팩토링 예정
+// // TODO: 리팩토링 예정
 
-const MONGODB_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
+//
 
-const useMongoDB = (filter: keyof ScheduleAPIReturntype) => {
-  const [isLoad, setIsLoad] = useState(false);
-  const [contents, setContents] = useState<ContentsDataType[]>([]);
+// const useMongoDB = (filter: keyof ScheduleAPIReturntype) => {
+//   const [contents, setContents] = useState<ContentsDataType[]>([]);
 
-  const { data, dataUpdatedAt, isLoading, refetch, status } = useQuery<ScheduleAPIReturntype>({
-    queryKey: ['schedule'],
-    queryFn: async () => {
-      const result: ScheduleAPIReturntype = await fetcher('/api/schedule');
-      return result;
-    },
-    refetchInterval: MONGODB_REFRESH_INTERVAL,
-    staleTime: 1000 * 60, // 1 minute
-    gcTime: MONGODB_REFRESH_INTERVAL,
-    refetchOnReconnect: true,
-    refetchOnWindowFocus: true,
-    refetchIntervalInBackground: false,
-  });
+//   const setData = () => {
+//     if (!data) return;
 
-  const setData = () => {
-    if (!data) return;
+//     const contents = [...data[filter].contents] as ContentsDataType[];
+//     setContents(() => contents);
+//   };
 
-    const contents = [...data[filter].contents] as ContentsDataType[];
-    setContents(() => contents);
-  };
+//   useEffect(() => {
+//     if (data && status === 'success') {
+//       //onSuccess
+//       setData();
+//     }
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, [dataUpdatedAt, filter]);
 
-  useEffect(() => {
-    if (data && status === 'success') {
-      //onSuccess
-      setData();
-      setIsLoad(() => true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataUpdatedAt, filter]);
+//   return {
+//     /** 필터링된 데이터 */
+//     contents,
+//     /** 원본 데이터 */
+//     sheetData: data,
+//     filter,
+//     isLoadingSheet: isLoading,
+//     refetchSheet: refetch,
+//     sheetDataUpdatedAt: dataUpdatedAt,
+//     isLoad,
+//   };
+// };
 
-  return {
-    /** 필터링된 데이터 */
-    contents,
-    /** 원본 데이터 */
-    sheetData: data,
-    filter,
-    isLoadingSheet: isLoading,
-    refetchSheet: refetch,
-    sheetDataUpdatedAt: dataUpdatedAt,
-    isLoad,
-  };
-};
+// export default useMongoDB;
 
-export default useMongoDB;
+export default async function getSchedule() {
+  const response = await axios.get<ScheduleAPIReturntype>('/api/schedule');
+  return response.data;
+}

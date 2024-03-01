@@ -10,7 +10,7 @@ import cx from 'classnames';
 import { MouseEvent } from 'react';
 import { HiBellAlert } from 'react-icons/hi2';
 import * as styles from './card.css';
-import reservePush from '@/app/(inner)/_lib/reservePush';
+import reservePush from '@inner/_lib/reservePush';
 import { useMutation } from '@tanstack/react-query';
 import { generateVideoUrl } from '@/model/youtube/url';
 import { generateThumbnail } from '@/model/youtube/thumbnail';

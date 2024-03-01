@@ -1,23 +1,21 @@
 'use client';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/const';
 import { ContentsDataType } from '@/type/api/mongoDB';
+import { useSelectedScheduleAtom } from '@inner/_lib/atom';
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
+import InterSectionTrigger from './InterSectionTrigger';
 import ScheduleCard from './scheduleCard/Card';
 import * as cardStyles from './scheduleCard/card.css';
-import InterSectionTrigger from './InterSectionTrigger';
-import dynamic from 'next/dynamic';
 
 const CardPlaceHolders = dynamic(() => import('./scheduleCard/CardPlaceHolders'), { ssr: false });
 
-interface YoutubeSectionProps {
-  contents: ContentsDataType[];
-}
-
-export default function ScheduleSection({ contents }: YoutubeSectionProps) {
-  const [loadContents, setLoadContents] = useState(contents.slice(0, SCROLL_PER_YOUTUBE_CARD));
+export default function ScheduleSection() {
+  const [loadContents, setLoadContents] = useState<ContentsDataType[]>([]);
   const [scrollPage, setScrollPage] = useState(1);
+  const [selectedData] = useSelectedScheduleAtom();
 
-  const isDone = loadContents.length >= contents.length;
+  const isDone = loadContents.length >= selectedData.contents.length;
 
   const handleInfinityScroll = () => {
     if (isDone) return;
@@ -25,17 +23,20 @@ export default function ScheduleSection({ contents }: YoutubeSectionProps) {
   };
 
   useEffect(() => {
-    //필터 이동시 리셋
-    setScrollPage(() => 1);
-    setLoadContents(() => contents.slice(0, SCROLL_PER_YOUTUBE_CARD));
-  }, [contents]);
-
-  useEffect(() => {
+    // 페이지가 바뀌면 데이터 추가로 로드
     if (isDone) return;
-    const nextContents = contents.slice(0, SCROLL_PER_YOUTUBE_CARD * scrollPage);
+    const nextContents = selectedData.contents.slice(0, SCROLL_PER_YOUTUBE_CARD * scrollPage);
     setLoadContents(() => [...nextContents]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollPage]);
+
+  useEffect(() => {
+    // 스케쥴 데이터가 바뀌면 리셋
+    const resetContent = selectedData.contents.slice(0, SCROLL_PER_YOUTUBE_CARD);
+    setScrollPage(() => 1);
+    setLoadContents(() => [...resetContent]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedData]);
 
   return (
     <section>

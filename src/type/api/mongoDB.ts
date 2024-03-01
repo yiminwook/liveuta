@@ -42,19 +42,19 @@ export type ContentsDataType = {
   isVideo: boolean;
 };
 
-export type DataReturnType = {
+export type ContentsDataReturnType = {
   contents: ContentsDataType[];
   length: ContentsLength;
 };
 
 export type ParseScheduledDataReturnType = {
-  scheduled: DataReturnType;
-  live: DataReturnType;
+  scheduled: ContentsDataReturnType;
+  live: ContentsDataReturnType;
 };
 
 export type ParseAllDataReturnType = {
-  daily: DataReturnType;
-  all: DataReturnType;
+  daily: ContentsDataReturnType;
+  all: ContentsDataReturnType;
 };
 
 export type ScheduleAPIReturntype = ParseAllDataReturnType & ParseScheduledDataReturnType;

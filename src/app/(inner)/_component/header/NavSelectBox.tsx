@@ -1,26 +1,20 @@
 'use client';
 import home from '../home.module.scss';
 import React, { useState } from 'react';
-//import useSheet from '@/queries/sheet';
 import Cookies from 'universal-cookie';
-//import { SheetAPIReturntype } from '@/types/inSheet';
 import cx from 'classnames';
 import { BiArrowFromLeft } from 'react-icons/bi';
 import { BsSliders } from 'react-icons/bs';
 import OutsideClickHandler from 'react-outside-click-handler';
-import { useSelectAtom } from '@/app/_lib/atom';
 import { SelectType } from '@/type';
-import useMongoDB from '@inner/_lib/getSchedule';
-import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
+import { useSelectAtom, useSelectedScheduleAtom } from '@inner/_lib/atom';
 
-interface NavSelectBoxProps {
-  filter: keyof ScheduleAPIReturntype;
-}
+interface NavSelectBoxProps {}
 
-export default function NavSelectBox({ filter }: NavSelectBoxProps) {
+export default function NavSelectBox({}: NavSelectBoxProps) {
   const [active, setActive] = useState(false);
   const [select, setSelect] = useSelectAtom();
-  const { refetchSheet, sheetData } = useMongoDB(filter);
+  const [selectedSchedule] = useSelectedScheduleAtom();
 
   const handleSelect = async (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
@@ -31,16 +25,14 @@ export default function NavSelectBox({ filter }: NavSelectBoxProps) {
     } else {
       const selectCookie = new Cookies();
       selectCookie.set('select', li, { path: '/', maxAge: 60 * 60 * 24 * 30 * 3 }); //3개월 저장
-      await refetchSheet();
       setSelect(() => li);
       setActive(() => false);
     }
   };
 
-  // didnt explicitly change name sheetData in... somewhere
-  const totalText = `전체: ${sheetData?.[filter]?.length?.total || 0}`;
-  const streamText = `방송: ${sheetData?.[filter]?.length?.stream || 0}`;
-  const videoText = `동영상: ${sheetData?.[filter]?.length?.video || 0}`;
+  const totalText = `전체: ${selectedSchedule.length.total || 0}`;
+  const streamText = `방송: ${selectedSchedule.length?.stream || 0}`;
+  const videoText = `동영상: ${selectedSchedule.length?.video || 0}`;
 
   const selectedText = () => {
     switch (select) {

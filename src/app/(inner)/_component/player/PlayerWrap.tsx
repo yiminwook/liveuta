@@ -1,5 +1,5 @@
 'use client';
-import { usePlayerAtom } from '@/app/(inner)/_lib/atom';
+import { usePlayerAtom } from '@inner/_lib/atom';
 import { useEffect, useRef, useState } from 'react';
 import LiveChat from './LiveChat';
 import Player from './Player';
