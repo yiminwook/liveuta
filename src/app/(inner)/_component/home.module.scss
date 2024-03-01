@@ -106,46 +106,6 @@
           }
         }
       }
-
-      .nav-tab {
-        display: flex;
-        justify-content: space-around;
-        width: 13rem;
-        overflow: hidden;
-        font-family: inherit;
-        font-size: inherit;
-        font-weight: inherit;
-        border: none;
-        border-radius: 5px;
-        @include box-shadow();
-
-        li {
-          width: 100%;
-
-          a {
-            background-color: #fff;
-
-            width: 100%;
-            line-height: 2.4rem;
-            text-align: center;
-            @include transition(background-color, 0.2s, linear);
-
-            &:hover {
-              background-color: var(--liveuta-default-color);
-              color: #fff;
-            }
-
-            &.active {
-              background-color: var(--liveuta-active-color);
-              color: var(--liveuta-bg-color-light);
-            }
-
-            &:focus-visible {
-              outline-offset: -4px;
-            }
-          }
-        }
-      }
     }
 
     .total {
