@@ -9,7 +9,6 @@ export const wrap = style({
 });
 
 export const inputBox = style({
-  backgroundColor: '#fff',
   display: 'inline-flex',
   width: '22rem',
 });
@@ -22,14 +21,29 @@ export const input = style({
 
 export const textAreaBox = style({
   display: 'inline-flex',
-  width: '22rem',
-  backgroundColor: '#fff',
+  width: '100%',
 });
 
 export const textArea = style({
   flex: 1,
   padding: '0.5rem',
   height: '20rem',
+  borderRadius: '0.3rem',
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  borderColor: '#ddd',
+  transitionProperty: 'border-color',
+  transitionDuration: '100ms',
+  transitionTimingFunction: 'ease-in-out',
+  ':hover': {
+    borderColor: '#000',
+  },
+  ':focus-visible': {
+    borderColor: 'var(--liveuta-active-color)',
+  },
+  ':active': {
+    borderColor: 'var(--liveuta-active-color)',
+  },
 });
 
 export const buttonBox = style({
@@ -37,11 +51,30 @@ export const buttonBox = style({
 });
 
 export const button = style({
-  backgroundColor: '#fff',
-  color: '#000',
+  backgroundColor: 'var(--liveuta-default-color)',
+  color: '#fff',
+  borderRadius: '0.3rem',
   padding: '0.5rem',
   width: '5rem',
   cursor: 'pointer',
   margin: '0 auto',
   fontWeight: 500,
+  boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+  transitionProperty: 'background-color, box-shadow, translate',
+  transitionDuration: '100ms',
+  transitionTimingFunction: 'ease-in-out',
+  ':hover': {
+    backgroundColor: 'var(--liveuta-hover-color)',
+    boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+    translate: '0 -2px',
+  },
+  ':focus-visible': {
+    backgroundColor: 'var(--liveuta-active-color)',
+    boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+  },
+  ':active': {
+    backgroundColor: 'var(--liveuta-active-color)',
+    boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+    translate: '0 -2px',
+  },
 });

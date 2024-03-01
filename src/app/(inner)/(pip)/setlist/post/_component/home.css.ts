@@ -23,16 +23,24 @@ export const backLink = style({
 });
 
 export const formBox = style({
-  padding: '0.5rem',
-  backgroundColor: 'rgba(255, 255, 255, 0.35)',
-  display: 'block',
+  maxWidth: '50rem',
+  minHeight: '40rem',
+  padding: '1rem 2rem',
   margin: '0 auto',
-  width: 'min-content',
+  borderRadius: '0.5rem',
+  backgroundColor: '#fff',
+  boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05), inset 0 0 0 1px rgb(0 0 0 / 0.1)',
 });
 
 export const desc = style({
-  width: '22rem',
   margin: '0 auto',
   fontSize: '1.2rem',
   lineHeight: '1.5rem',
+});
+
+export const descTitle = style({
+  fontSize: '1.5rem',
+  fontWeight: 500,
+  marginBottom: '1rem',
+  textAlign: 'center',
 });

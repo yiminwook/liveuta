@@ -15,13 +15,15 @@ export default function Home({ session }: HomeProps) {
         <div>
           <div className={styles.formBox}>
             <div className={styles.desc}>
-              <a
-                className={styles.utaToolsLink}
-                href="https://uta-tools.vercel.app/tools/youtube/timeline"
-              >
-                우타툴즈 타임라인으로 이동
-              </a>
-              <p>우타툴즈에서 작성된 세트리를 등록하세요</p>
+              <h2 className={styles.descTitle}>세트리를 등록하세요</h2>
+              <div>
+                <a
+                  className={styles.utaToolsLink}
+                  href="https://uta-tools.vercel.app/tools/youtube/timeline"
+                >
+                  우타툴즈 타임라인으로 이동
+                </a>
+              </div>
               <Link className={styles.backLink} href="/setlist">
                 조회페이지로 이동
               </Link>

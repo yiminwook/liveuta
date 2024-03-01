@@ -80,6 +80,7 @@ export default function PostForm({ session }: PostFormProps) {
             value={desc}
             disabled={isPending}
             onChange={handleDesc}
+            minRows={18}
             placeholder={'38:53 노래제목1\n138:54 노래제목2\n238:54 노래제목3\n338:54 노래제목4'}
           />
         </div>
