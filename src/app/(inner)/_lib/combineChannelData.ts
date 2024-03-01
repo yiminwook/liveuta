@@ -1,4 +1,5 @@
 import { getYoutubeChannels } from '@/model/youtube';
+import { generateChannelUrl } from '@/model/youtube/url';
 import { ChannelsDataType } from '@/type/api/youtube';
 import { youtube_v3 } from 'googleapis';
 
@@ -25,10 +26,10 @@ export const combineChannelData = async (
     const id = data.id;
     if (!(id && sheetData[id])) return;
     const { uid, channelName } = sheetData[id];
-    
+
     // Constructing the YouTube channel URL
-    const youtubeChannelUrl = `https://www.youtube.com/channel/${uid}`;
-    
+    const youtubeChannelUrl = generateChannelUrl(uid);
+
     combinedSearchData.push({
       ...data,
       uid,
@@ -36,10 +37,11 @@ export const combineChannelData = async (
       url: youtubeChannelUrl, // Replacing 'url' with the YouTube channel URL
     });
   });
-  
+
   // Sorting combined data by channelName
-  const combinedSheetDataValues = combinedSearchData
-    .sort((a, b) => a.channelName.localeCompare(b.channelName)) as ChannelsDataType[];
+  const combinedSheetDataValues = combinedSearchData.sort((a, b) =>
+    a.channelName.localeCompare(b.channelName),
+  ) as ChannelsDataType[];
 
   return combinedSheetDataValues;
 };

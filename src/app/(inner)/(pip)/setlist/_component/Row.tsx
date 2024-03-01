@@ -43,7 +43,7 @@ export default function Row({ setlist, channel }: RowProps) {
             </div>
           </button>
         </div>
-        <div className={styles.cell}>{channel?.name_kor}</div>
+        <div className={styles.cell}>{channel?.nameKor}</div>
         <div className={cx(styles.cell, 'flex2')}>
           <p>{setlist.title}</p>
         </div>

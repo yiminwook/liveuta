@@ -15,6 +15,22 @@ export const title = style([
 export const nav = style({
   display: 'flex',
   justifyContent: 'flex-end',
+  alignItems: 'center',
   gap: '1rem',
   padding: '0.5rem 0',
 });
+
+export const navItem = style({
+  padding: '0.25rem 0.5rem',
+  display: 'inline-flex',
+  height: '100%',
+  alignItems: 'center',
+  gap: '0.5rem',
+  backgroundColor: '#fff',
+  fontWeight: 600,
+  borderRadius: 5,
+});
+
+export const youtubeButton = style({});
+
+export const listLink = style({});

@@ -22,10 +22,10 @@ export const getAllChannel = async () => {
 };
 
 export const parseChannel = (channel: ChannelDocument | null) => ({
-  channel_id: channel?.channel_id || '',
-  channel_addr: channel?.channel_addr || '',
-  name_kor: channel?.name_kor || '',
-  handle_name: channel?.handle_name || '',
+  channelId: channel?.channel_id || '',
+  channelAddr: channel?.channel_addr || '',
+  nameKor: channel?.name_kor || '',
+  // handleName: channel?.handle_name || '',
 });
 
 export const generateChannelObject = (channels: ChannelDocument[]) => {

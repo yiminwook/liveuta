@@ -2,7 +2,7 @@
 import 'pretendard/dist/web/variable/pretendardvariable.css';
 import '@/style/reset.css';
 import '/public/theme.css';
-import '@/style/globals.scss';
+import '@/style/global.scss';
 import '@/style/global.css';
 import '@/style/globalTheme.css';
 

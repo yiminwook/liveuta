@@ -33,6 +33,7 @@ globalStyle('a, h1, h2, h3, h4, p', {
   margin: 0,
   padding: 0,
   border: 'none',
+  lineHeight: 1.5,
 });
 
 globalStyle('button', {
@@ -47,6 +48,7 @@ globalStyle('button', {
   boxSizing: 'border-box',
   margin: 0,
   padding: 0,
+  lineHeight: 1.5,
 });
 
 globalStyle('a', {
@@ -69,6 +71,7 @@ globalStyle('label', {
   boxSizing: 'border-box',
   margin: 0,
   padding: 0,
+  lineHeight: 1.5,
 });
 
 globalStyle(
