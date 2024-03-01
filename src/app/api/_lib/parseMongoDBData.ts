@@ -1,7 +1,6 @@
 import {
   ContentDocument,
   ContentsLength,
-  DataReturnType,
   ParseAllDataReturnType,
   ParseScheduledDataReturnType,
   ContentsDataType,
@@ -16,6 +15,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => 
     const { timestamp, korTime } = stringToTime(doc.ScheduledTime);
     const interval = getInterval(timestamp);
 
+    console.log(doc.ThumbnailURL);
     const replacedThumbnailURL = doc.ThumbnailURL.replace(
       /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
       'mqdefault',

@@ -1,10 +1,10 @@
-import { MongoDBAPIReturntype } from '@/type/api/mongoDB';
+import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
 import PlayerWrap from './player/PlayerWrap';
 import * as styles from './topSection.css';
 import { isMobile } from 'react-device-detect';
 
 interface TopSectionProps {
-  filter: keyof MongoDBAPIReturntype;
+  filter: keyof ScheduleAPIReturntype;
 }
 
 export default function TopSection({ filter }: TopSectionProps) {

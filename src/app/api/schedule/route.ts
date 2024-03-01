@@ -2,10 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import errorHandler from '@/model/error/handler';
 import { parseAllData, parseScheduledData } from '@/app/api/_lib/parseMongoDBData';
-import { MongoDBAPIReturntype, ContentDocumentRaw } from '@/type/api/mongoDB';
+import { ScheduleAPIReturntype, ContentDocumentRaw } from '@/type/api/mongoDB';
 import dayjs from '@/model/dayjs';
 import { connectMongoDB, disconnectMongoDB } from '@/model/mongoDB';
 import { MONGODB_SCHEDULE_COLLECTION, MONGODB_SCHEDULE_DB } from '@/const';
+import CustomServerError from '@/model/error/customServerError';
 
 export async function GET(_req: NextRequest) {
   try {
@@ -19,7 +20,9 @@ export async function GET(_req: NextRequest) {
       .sort({ ScheduledTime: 1, ChannelName: 1 })
       .toArray();
 
-    if (!scheduleDataRaw) throw new Error('documents is undefined.');
+    if (!scheduleDataRaw) {
+      throw new CustomServerError({ statusCode: 404, message: '문서를 찾을 수 없습니다.' });
+    }
 
     const scheduleData = scheduleDataRaw.map((doc) => ({
       ...doc,
@@ -28,6 +31,8 @@ export async function GET(_req: NextRequest) {
 
     const { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
     const { daily, all } = parseAllData(scheduleData); // Need to be revised
+
+    await disconnectMongoDB();
 
     // Not sure, but maybe need to be revised
     switch (cookie) {
@@ -48,8 +53,7 @@ export async function GET(_req: NextRequest) {
         break;
     }
 
-    disconnectMongoDB();
-    return NextResponse.json<MongoDBAPIReturntype | undefined>(
+    return NextResponse.json<ScheduleAPIReturntype | undefined>(
       { scheduled, live, daily, all },
       { status: 200 },
     );

@@ -1,11 +1,11 @@
 import HorizonScrollBox from '../HorizonScrollBox';
 import home from '../home.module.scss';
 import NavSelectBox from './NavSelectBox';
-import { MongoDBAPIReturntype } from '@/type/api/mongoDB';
+import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
 import NavTab from './NavTab';
 
 interface NavSectionProps {
-  filter: keyof MongoDBAPIReturntype;
+  filter: keyof ScheduleAPIReturntype;
 }
 
 export default function NavSection({ filter }: NavSectionProps) {

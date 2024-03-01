@@ -1,5 +1,7 @@
 import dayjs from '@/model/dayjs';
 
+export type isStream = 'TRUE' | 'NULL' | 'FALSE';
+
 export interface ChannelDocument {
   _id: string;
   channel_id: string;
@@ -11,7 +13,7 @@ export interface ChannelDocument {
 
 export type ContentDocumentRaw = Omit<ContentDocument, 'ScheduledTime'> & { ScheduledTime: Date };
 
-export interface ContentDocument {
+export type ContentDocument = {
   _id: string;
   Title: string;
   URL: string;
@@ -21,30 +23,15 @@ export interface ContentDocument {
   Hide: string;
   broadcastStatus: string;
   isVideo: string;
-}
+};
 
-export interface ContentsLength {
+export type ContentsLength = {
   total: number;
   video: number;
   stream: number;
-}
+};
 
-export interface DataReturnType {
-  contents: any[];
-  length: ContentsLength;
-}
-
-export interface ParseAllDataReturnType {
-  daily: DataReturnType;
-  all: DataReturnType;
-}
-
-export interface ParseScheduledDataReturnType {
-  scheduled: DataReturnType;
-  live: DataReturnType;
-}
-
-export interface ContentsDataType {
+export type ContentsDataType = {
   title: string;
   url: string;
   channelName: string;
@@ -55,13 +42,21 @@ export interface ContentsDataType {
   korTime: string;
   interval: string;
   isVideo: boolean;
-}
+};
 
-export interface MongoDBAPIReturntype {
+export type DataReturnType = {
+  contents: ContentsDataType[];
+  length: ContentsLength;
+};
+
+export type ParseScheduledDataReturnType = {
   scheduled: DataReturnType;
   live: DataReturnType;
+};
+
+export type ParseAllDataReturnType = {
   daily: DataReturnType;
   all: DataReturnType;
-}
+};
 
-export type isStream = 'TRUE' | 'NULL' | 'FALSE';
+export type ScheduleAPIReturntype = ParseAllDataReturnType & ParseScheduledDataReturnType;

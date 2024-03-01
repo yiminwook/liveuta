@@ -2,13 +2,13 @@
 import NavSection from './header/NavSection';
 import ScheduleSection from './ScheduleSection';
 import useMongoDB from '@inner/_lib/getSchedule';
-import { MongoDBAPIReturntype } from '@/type/api/mongoDB';
+import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
 import dynamic from 'next/dynamic';
 
 const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 
 interface HomeProps {
-  filter: keyof MongoDBAPIReturntype;
+  filter: keyof ScheduleAPIReturntype;
 }
 
 export default function Home({ filter }: HomeProps) {

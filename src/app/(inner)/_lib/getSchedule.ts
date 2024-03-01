@@ -3,20 +3,20 @@ import { useEffect, useState } from 'react';
 import { fetcher } from '@inner/_lib/fetcher';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
-import { ContentsDataType, MongoDBAPIReturntype } from '@/type/api/mongoDB';
+import { ContentsDataType, ScheduleAPIReturntype } from '@/type/api/mongoDB';
 
 // TODO: 리팩토링 예정
 
 const MONGODB_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
 
-const useMongoDB = (filter: keyof MongoDBAPIReturntype) => {
+const useMongoDB = (filter: keyof ScheduleAPIReturntype) => {
   const [isLoad, setIsLoad] = useState(false);
   const [contents, setContents] = useState<ContentsDataType[]>([]);
 
-  const { data, dataUpdatedAt, isLoading, refetch, status } = useQuery<MongoDBAPIReturntype>({
+  const { data, dataUpdatedAt, isLoading, refetch, status } = useQuery<ScheduleAPIReturntype>({
     queryKey: ['schedule'],
     queryFn: async () => {
-      const result: MongoDBAPIReturntype = await fetcher('/api/schedule');
+      const result: ScheduleAPIReturntype = await fetcher('/api/schedule');
       return result;
     },
     refetchInterval: MONGODB_REFRESH_INTERVAL,

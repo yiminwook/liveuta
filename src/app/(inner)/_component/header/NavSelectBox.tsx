@@ -11,10 +11,10 @@ import OutsideClickHandler from 'react-outside-click-handler';
 import { useSelectAtom } from '@/app/_lib/atom';
 import { SelectType } from '@/type';
 import useMongoDB from '@inner/_lib/getSchedule';
-import { MongoDBAPIReturntype } from '@/type/api/mongoDB';
+import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
 
 interface NavSelectBoxProps {
-  filter: keyof MongoDBAPIReturntype;
+  filter: keyof ScheduleAPIReturntype;
 }
 
 export default function NavSelectBox({ filter }: NavSelectBoxProps) {
