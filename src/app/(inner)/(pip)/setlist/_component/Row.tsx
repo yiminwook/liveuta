@@ -1,19 +1,19 @@
-import { Setlist } from '@/model/oracleDB/setlist/service';
-import dayjs from 'dayjs';
-import Text from './Text';
-import { openWindow } from '@inner/_lib/windowEvent';
-import * as styles from './table.css';
-import cx from 'classnames';
 import { ChannelDataset } from '@/model/mongoDB/getAllChannel';
+import { Setlist } from '@/model/oracleDB/setlist/service';
 import { generateThumbnail } from '@/model/youtube/thumbnail';
-import Image from 'next/image';
 import { generateVideoUrl } from '@/model/youtube/url';
+import cx from 'classnames';
+import dayjs from 'dayjs';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import * as styles from './table.css';
 
 interface RowProps {
   setlist: Setlist;
   channel?: ChannelDataset['channel_id'];
 }
 export default function Row({ setlist, channel }: RowProps) {
+  const router = useRouter();
   const videoUrl = generateVideoUrl(setlist.videoId);
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'default');
   const update = dayjs(setlist.updatedAt).format('YYYY-MM-DD HH:mm:ss');
@@ -22,7 +22,7 @@ export default function Row({ setlist, channel }: RowProps) {
   return (
     <div className={styles.row}>
       <div className={cx(styles.cell, 'flex2')}>
-        <button onClick={() => openWindow(videoUrl)}>
+        <button onClick={() => router.push(`/setlist/${setlist.videoId}`)}>
           <div className={styles.thumbnailBox}>
             <Image src={thumbnailUrl} alt={setlist.title} fill unoptimized={false} />
           </div>

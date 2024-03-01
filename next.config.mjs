@@ -22,7 +22,12 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'src/style')],
   },
   images: {
-    domains: ['i.ytimg.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.ytimg.com',
+      },
+    ],
   },
   // async headers() {
   //   return [
