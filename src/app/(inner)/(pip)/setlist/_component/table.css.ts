@@ -1,4 +1,5 @@
 import { global } from '@/style/globalTheme.css';
+import { BEZIER_CURVE } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 export const wrap = style({
@@ -18,11 +19,15 @@ export const body = style({
 export const row = style({
   display: 'flex',
   borderBottom: '1px solid #ddd',
-});
-
-export const cell = style({
-  flex: 1,
-  padding: '0.5rem',
+  transition: `background-color 0.2s ${BEZIER_CURVE}`,
+  selectors: {
+    '&.hover': {
+      cursor: 'pointer',
+    },
+    '&.hover:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 1)',
+    },
+  },
 });
 
 export const header = style([
@@ -31,6 +36,11 @@ export const header = style([
     borderBottom: '2px solid #ddd',
   },
 ]);
+
+export const cell = style({
+  flex: 1,
+  padding: '0.5rem',
+});
 
 export const headerCell = style([cell, {}]);
 
