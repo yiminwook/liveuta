@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/model/error/handler';
 import { updateSetlist } from '@/model/oracleDB/setlist/service';
-import checkRequestUrl from '@api/_lib/checkRequestUrl';
 import parseAccessToken from '@api/_lib/parseAccessToken';
 import { getYoutubeChannelsByVideoId } from '@/model/youtube';
 import CustomServerError from '@/model/error/customServerError';
@@ -11,7 +10,6 @@ type PostParams = {
 };
 export async function POST(request: NextRequest, { params }: PostParams) {
   try {
-    await checkRequestUrl();
     const payload = await parseAccessToken();
     const body: {
       description: string;

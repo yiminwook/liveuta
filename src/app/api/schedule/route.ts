@@ -6,11 +6,9 @@ import { MongoDBAPIReturntype, ContentDocumentRaw } from '@/type/api/mongoDB';
 import dayjs from '@/model/dayjs';
 import { connectMongoDB, disconnectMongoDB } from '@/model/mongoDB';
 import { MONGODB_SCHEDULE_COLLECTION, MONGODB_SCHEDULE_DB } from '@/const';
-import checkRequestUrl from '@api/_lib/checkRequestUrl';
 
 export async function GET(_req: NextRequest) {
   try {
-    checkRequestUrl();
     const cookieStore = cookies();
     const cookie = cookieStore.get('select')?.value || 'all';
 

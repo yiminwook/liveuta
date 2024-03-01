@@ -3,12 +3,10 @@ import CustomServerError from '@/model/error/customServerError';
 import errorHandler from '@/model/error/handler';
 import { getYoutubeChannelsByVideoId } from '@/model/youtube';
 import { postSetlist } from '@/model/oracleDB/setlist/service';
-import checkRequestUrl from '@api/_lib/checkRequestUrl';
 import parseAccessToken from '@api/_lib/parseAccessToken';
 
 export async function POST(request: NextRequest) {
   try {
-    await checkRequestUrl();
     const payload = await parseAccessToken();
     const body: {
       videoId: string;

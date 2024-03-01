@@ -29,23 +29,19 @@ const nextConfig = {
       },
     ],
   },
-  // async headers() {
-  //   return [
-  //     {
-  //       source: '/api/:path*',
-  //       headers: [
-  //         {
-  //           key: 'Cache-Control',
-  //           value: 'no-store, max-age=0',
-  //         },
-  //         {
-  //           key: 'Access-Control-Allow-Origin',
-  //           value: process.env.NEXT_PUBLIC_SITE_URL,
-  //         },
-  //       ],
-  //     },
-  //   ];
-  // },
+  async headers() {
+    return [
+      {
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: process.env.NEXT_PUBLIC_SITE_URL,
+          },
+        ],
+      },
+    ];
+  },
   webpack: (config, options) => {
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
     config.module.rules.push(
