@@ -14,14 +14,36 @@ import CustomServerError from '@/model/error/customServerError';
 import dayjs from '@/model/dayjs';
 
 const PAGE_SIZE = 15;
-export type SetlistRow = [string, string, number, Date, Date, string, number | undefined]; //row[6] RNUM
+
+export type SetlistRow = [
+  string, //videoId
+  string, //description
+  number, //memberId = 편집자
+  Date, // createAt
+  Date, // updateAt
+  string, // channelId
+  Date, // broadcastAt
+  string, // email = 편집자
+  number | undefined, // RNUM
+];
+
 export type Setlist = {
   videoId: string;
   description: string;
   createdAt: string;
   updatedAt: string;
-  email: string;
+  broadcastAt: string;
+  channelId: string;
 };
+
+const parseSetlistRow = (row: SetlistRow): Setlist => ({
+  channelId: row[5],
+  videoId: row[0],
+  description: row[1],
+  createdAt: dayjs.tz(row[3]).toISOString(),
+  updatedAt: dayjs.tz(row[4]).toISOString(),
+  broadcastAt: dayjs.tz(row[6]).toISOString(),
+});
 
 export async function getSetlistByVideoId(videoId: number) {
   let connection: OracleDB.Connection | null = null;
@@ -33,13 +55,7 @@ export async function getSetlistByVideoId(videoId: number) {
     const row = result.rows?.[0];
     if (!row) return null;
 
-    return {
-      videoId: row[0],
-      description: row[1],
-      createdAt: dayjs.tz(row[3]).toISOString(),
-      updatedAt: dayjs.tz(row[4]).toISOString(),
-      email: row[5],
-    };
+    return parseSetlistRow(row);
   } catch (error) {
     if (connection) await connection.close();
     throw error;
@@ -72,14 +88,7 @@ export async function getAllSetlist(pageNumber: number) {
       return { maxPage: 0, list: [] };
     }
 
-    const list = rows.map((row) => ({
-      videoId: row[0],
-      description: row[1],
-      createdAt: dayjs.tz(row[3]).toISOString(),
-      updatedAt: dayjs.tz(row[4]).toISOString(),
-      email: row[5],
-    }));
-
+    const list = rows.map((row) => parseSetlistRow(row));
     return { maxPage, list };
   } catch (error) {
     if (connection) await connection.close();
@@ -118,14 +127,7 @@ export async function searchSetlist(query: string, pageNumber: number) {
       return { maxPage: 0, list: [] };
     }
 
-    const list = rows.map((row) => ({
-      videoId: row[0],
-      description: row[1],
-      createdAt: row[3],
-      updatedAt: row[4],
-      email: row[5],
-    }));
-
+    const list = rows.map((row) => parseSetlistRow(row));
     return { maxPage, list };
   } catch (error) {
     if (connection) await connection.close();
@@ -133,11 +135,27 @@ export async function searchSetlist(query: string, pageNumber: number) {
   }
 }
 
-export async function postSetlist(videoId: string, description: string, memberId: number) {
+export async function postSetlist(
+  videoId: string,
+  description: string,
+  memberId: number,
+  channelId: string,
+  broadcastAt: string | null | undefined,
+) {
   let connection: OracleDB.Connection | null = null;
   try {
     connection = await connectOracleDB();
-    await connection.execute(POST_SETLIST, [videoId, description, memberId]);
+
+    const nonullableBroadcastAt = dayjs.tz(broadcastAt || undefined).toDate();
+
+    await connection.execute(POST_SETLIST, [
+      videoId,
+      description,
+      memberId,
+      channelId,
+      nonullableBroadcastAt,
+    ]);
+
     await connection.commit();
     await connection.close();
   } catch (e) {

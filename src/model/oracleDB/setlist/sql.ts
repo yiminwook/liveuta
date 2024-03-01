@@ -48,13 +48,13 @@ export const SEARCH_SETLIST = `
 `;
 
 export const POST_SETLIST = `
-  INSERT INTO SETLIST (VIDEO_ID, DESCRIPTION, MEMBER_ID)
-  VALUES (:videoId, :description, :memberId)
+  INSERT INTO SETLIST (VIDEO_ID, DESCRIPTION, MEMBER_ID, CHANNEL_ID, BROADCAST_AT)
+  VALUES (:videoId, :description, :memberId, :channelId, :broadcastAt)
 `;
 
 export const UPDATE_SETLIST = `
   UPDATE SETLIST
-  SET DESCRIPTION = :description, MEMBER_ID = :memberId, UPDATE_AT = CURRENT_TIMESTAMP
+  SET DESCRIPTION = :description, MEMBER_ID = :memberId, UPDATE_AT = CURRENT_TIMESTAMP, CHANNEL_ID = :channelId, BROADCAST_AT = :broadcastAt
   WHERE VIDEO_ID = :videoId
 `;
 

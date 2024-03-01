@@ -18,12 +18,14 @@ export async function POST(request: NextRequest) {
     } = await request.json();
 
     const item = await getYoutubeChannelsByVideoId(body.videoId);
+    const channelId = item?.snippet?.channelId;
+    const broadcastAt = item?.snippet?.publishedAt;
 
-    if (!item) {
+    if (!channelId) {
       throw new CustomServerError({ statusCode: 404, message: '채널을 찾을 수 없습니다.' });
     }
 
-    await postSetlist(body.videoId, body.description, payload.id);
+    await postSetlist(body.videoId, body.description, payload.id, channelId, broadcastAt);
 
     return NextResponse.json({ status: 201, message: 'ok' });
   } catch (error) {
