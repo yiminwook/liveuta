@@ -7,7 +7,6 @@ export const accountSidebarAtom = atom(false);
 export const useAccountSidebarAtom = () => useAtom(accountSidebarAtom);
 
 export const playerAtom = atom({
-  url: 'https://www.youtube.com/watch?v=IiCKMyNuFYc',
   videoId: 'IiCKMyNuFYc',
   isPlaying: false,
   isMutted: false,

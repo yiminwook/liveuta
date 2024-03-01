@@ -1,22 +1,25 @@
 'use client';
 import { usePlayerAtom } from '@/app/(inner)/_lib/atom';
 import useToast from '@/hook/useToast';
-import { useEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
 import * as styles from './player.css';
 import cx from 'classnames';
 import { FaHotjar } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
+import { generateVideoUrl } from '@/model/youtube/url';
 
 interface PlayerProps {
   isShow: boolean;
   isLive: boolean;
 }
 
-export default function Player({ isLive, isShow }: PlayerProps) {
+export default forwardRef(function Player(
+  { isLive, isShow }: PlayerProps,
+  ref: React.Ref<ReactPlayer>,
+) {
   const router = useRouter();
-  const player = useRef<ReactPlayer>(null);
   const [isReady, setIsReady] = useState(false);
   const [playerValue, setPlayerValue] = usePlayerAtom();
   const toast = useToast();
@@ -62,6 +65,7 @@ export default function Player({ isLive, isShow }: PlayerProps) {
   }, [isReady]);
 
   const left = isShow === false && playerValue.hide;
+  const url = generateVideoUrl(playerValue.videoId);
 
   return (
     <div className={cx(isShow === false && styles.pipBase, styles.playerDiv, left && 'left')}>
@@ -69,8 +73,8 @@ export default function Player({ isLive, isShow }: PlayerProps) {
         className={cx(styles.playerBase, 'reactPlayer')}
         width={'100%'}
         height={'auto'}
-        ref={player}
-        url={playerValue.url}
+        ref={ref}
+        url={url}
         muted={playerValue.isMutted}
         autoPlay={playerValue.isPlaying}
         playing={playerValue.isPlaying}
@@ -93,4 +97,4 @@ export default function Player({ isLive, isShow }: PlayerProps) {
       </button>
     </div>
   );
-}
+});

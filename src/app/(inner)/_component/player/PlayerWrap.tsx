@@ -5,6 +5,7 @@ import LiveChat from './LiveChat';
 import Player from './Player';
 import * as styles from './player.css';
 import useScheduleStatus from '@/hook/useScheduleStatus';
+import PlayerPlaceholder from './PlayerPlaceholder';
 
 interface PlayerWrapProps {}
 
@@ -32,7 +33,7 @@ export default function PlayerWrap({}: PlayerWrapProps) {
 
   return (
     <div ref={wrapRef} className={styles.playerBox}>
-      {!isShow ? <div className={styles.playerPlaceholder} /> : null}
+      {!isShow ? <PlayerPlaceholder /> : null}
       <Player isShow={isShow} isLive={true} />
       <LiveChat videoId={playerValue.videoId} />
     </div>

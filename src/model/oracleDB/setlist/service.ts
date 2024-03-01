@@ -48,7 +48,7 @@ const parseSetlistRow = (row: SetlistRow): Setlist => ({
   broadcastAt: dayjs.tz(row[6]).toISOString(),
 });
 
-export async function getSetlistByVideoId(videoId: number) {
+export async function getSetlistByVideoId(videoId: string) {
   let connection: OracleDB.Connection | null = null;
   try {
     connection = await connectOracleDB();
