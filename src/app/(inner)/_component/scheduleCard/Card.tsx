@@ -1,12 +1,8 @@
 'use client';
 import CardDesc from './CardDesc';
 import CardImage from './CardImage';
-//import { ContentsDataType } from '@/types/inSheet';
 import { ContentsDataType } from '@/type/api/mongoDB';
-
-import { useMemo, useRef } from 'react';
-import Motion from '@/model/framer';
-import * as styles from './card.css';
+import { useMemo } from 'react';
 import CardWrap from './CardWrap';
 
 interface ScheduleCardProps {

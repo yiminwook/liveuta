@@ -3,20 +3,24 @@ import { playerAtom } from '@inner/_lib/atom';
 import { DEFAULT_BLUR_BASE64 } from '@/const';
 import useResponsive from '@/hook/useResponsive';
 import altImage from '@/asset/image/thumbnail_alt_img.png';
-//import { ContentsDataType } from '@/types/inSheet';
 import { ContentsDataType } from '@/type/api/mongoDB';
 import { gtagClick } from '@inner/_lib/gtag';
 import { useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { MouseEvent, useCallback, useRef, useState } from 'react';
 import * as styles from './card.css';
+import { generateVideoUrl } from '@/model/youtube/url';
+import { generateThumbnail } from '@/model/youtube/thumbnail';
 
 interface CardImageProps {
   content: ContentsDataType;
 }
 
 export default function CardImage({ content }: CardImageProps) {
-  const { channelName, thumbnailURL, url, videoId } = content;
+  const { channelName, videoId } = content;
+  const videoUrl = generateVideoUrl(videoId);
+  const thumbnailUrl = generateThumbnail(videoId, 'mqdefault');
+
   const [imgLoaded, setImgLoaded] = useState(true);
   const { isMobile } = useResponsive();
   const setPlayerValue = useSetAtom(playerAtom);
@@ -39,9 +43,9 @@ export default function CardImage({ content }: CardImageProps) {
     });
 
     if (isMobile) {
-      window.location.href = url;
+      window.location.href = videoUrl;
     } else {
-      setPlayerValue((pre) => ({ ...pre, url, videoId, hide: false, isPlaying: true }));
+      setPlayerValue((pre) => ({ ...pre, url: videoUrl, videoId, hide: false, isPlaying: true }));
     }
   };
 
@@ -50,7 +54,7 @@ export default function CardImage({ content }: CardImageProps) {
       <div>
         {imgLoaded ? (
           <Image
-            src={thumbnailURL ?? altImage}
+            src={thumbnailUrl ?? altImage}
             alt={`${channelName}의 라이브방송`}
             loading="lazy"
             ref={imgRef}

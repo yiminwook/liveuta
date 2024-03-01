@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { fetcher } from '@inner/_lib/fetcher';
 import { useQuery } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
 import { ContentsDataType, ScheduleAPIReturntype } from '@/type/api/mongoDB';
 
 // TODO: 리팩토링 예정

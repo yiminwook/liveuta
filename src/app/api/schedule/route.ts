@@ -53,7 +53,7 @@ export async function GET(_req: NextRequest) {
         break;
     }
 
-    return NextResponse.json<ScheduleAPIReturntype | undefined>(
+    return NextResponse.json<ScheduleAPIReturntype>(
       { scheduled, live, daily, all },
       { status: 200 },
     );

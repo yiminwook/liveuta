@@ -1,6 +1,5 @@
 import {
   ContentDocument,
-  ContentsLength,
   ParseAllDataReturnType,
   ParseScheduledDataReturnType,
   ContentsDataType,
@@ -15,26 +14,17 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => 
     const { timestamp, korTime } = stringToTime(doc.ScheduledTime);
     const interval = getInterval(timestamp);
 
-    console.log(doc.ThumbnailURL);
-    const replacedThumbnailURL = doc.ThumbnailURL.replace(
-      /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
-      'mqdefault',
-    );
-
     const videoId = doc.URL.replace('https://www.youtube.com/watch?v=', '');
     const replacedTitle = replaceParentheses(doc.Title);
-    const replacedUrl = doc.isVideo === 'TRUE' ? `https://youtu.be/${videoId}` : doc.URL;
 
     const data: ContentsDataType = {
       title: replacedTitle,
-      url: replacedUrl,
       channelName: doc.ChannelName,
       videoId: videoId,
       timestamp: timestamp,
-      thumbnailURL: replacedThumbnailURL,
       korTime: korTime,
       isStream: doc.broadcastStatus as isStream,
-      interval: interval,
+      interval,
       isVideo: doc.isVideo === 'TRUE' ? true : false,
     };
 

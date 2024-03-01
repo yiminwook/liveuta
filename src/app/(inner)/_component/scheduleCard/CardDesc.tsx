@@ -12,6 +12,8 @@ import { HiBellAlert } from 'react-icons/hi2';
 import * as styles from './card.css';
 import reservePush from '@/app/(inner)/_lib/reservePush';
 import { useMutation } from '@tanstack/react-query';
+import { generateVideoUrl } from '@/model/youtube/url';
+import { generateThumbnail } from '@/model/youtube/thumbnail';
 
 interface CardDescProps {
   content: ContentsDataType;
@@ -19,9 +21,10 @@ interface CardDescProps {
 }
 
 export default function CardDesc({ content, addStreamModifier }: CardDescProps) {
-  const { title, url, channelName, korTime, interval, isStream, timestamp, thumbnailURL, videoId } =
-    content;
+  const { title, channelName, korTime, interval, isStream, timestamp, videoId } = content;
 
+  const videoUrl = generateVideoUrl(videoId);
+  const thumbnailUrl = generateThumbnail(videoId, 'mqdefault');
   const toast = useToast();
 
   const mutatePush = useMutation({
@@ -57,8 +60,8 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
       body: `곧 ${channelName}의 방송이 시작됩니다.`,
       token,
       timestamp: timestamp.toString(),
-      imageUrl: thumbnailURL || 'https://liveuta.vercel.app/assets/meta-image.png',
-      link: url,
+      imageUrl: thumbnailUrl,
+      link: videoUrl,
     });
   };
 
@@ -72,7 +75,7 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
       action: 'openWindow',
     });
 
-    openWindow(url);
+    openWindow(videoUrl);
   };
 
   return (
@@ -89,7 +92,7 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
             <HiBellAlert color="inherit" size="1.25rem" />
           </button>
         ) : null}
-        <CopyButton value={url} size="1rem" />
+        <CopyButton value={videoUrl} size="1rem" />
         <button onClick={openStream}>새 탭으로 열기</button>
       </div>
     </div>
