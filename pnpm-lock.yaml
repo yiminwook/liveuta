@@ -59,6 +59,9 @@ dependencies:
   jotai-devtools:
     specifier: ^0.7.0
     version: 0.7.1(@emotion/react@11.11.3)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)(redux@5.0.1)
+  jotai-tanstack-query:
+    specifier: ^0.8.5
+    version: 0.8.5(@tanstack/query-core@5.17.19)(jotai@2.6.2)(wonka@6.3.4)
   jsonwebtoken:
     specifier: ^9.0.2
     version: 9.0.2
@@ -6460,6 +6463,18 @@ packages:
       - redux
     dev: false
 
+  /jotai-tanstack-query@0.8.5(@tanstack/query-core@5.17.19)(jotai@2.6.2)(wonka@6.3.4):
+    resolution: {integrity: sha512-cFq+1sE7Qkt7Kh9Db2KE8LXdbPiGwCiy8S5YSEnjUDxF59A4XhoXTDJBuPiMIA1dD1/yMsNKr1ADfN5CvscYZw==}
+    peerDependencies:
+      '@tanstack/query-core': '*'
+      jotai: '>=2.0.0'
+      wonka: ^6.3.4
+    dependencies:
+      '@tanstack/query-core': 5.17.19
+      jotai: 2.6.2(@types/react@18.2.48)(react@18.2.0)
+      wonka: 6.3.4
+    dev: false
+
   /jotai@2.6.2(@types/react@18.2.48)(react@18.2.0):
     resolution: {integrity: sha512-kl4KguU1Fr+tFiLi3A3h9qPEzhvLTTDA10DO3QZAz6k7BEaQJ+qvSBwolzonnfNI4QzEovyQfUqVgnRxfnnQVQ==}
     engines: {node: '>=12.20.0'}
@@ -9593,6 +9608,10 @@ packages:
     dependencies:
       isexe: 2.0.0
     dev: true
+
+  /wonka@6.3.4:
+    resolution: {integrity: sha512-CjpbqNtBGNAeyNS/9W6q3kSkKE52+FjIj7AkFlLr11s/VWGUu6a2CdYSdGxocIhIVjaW/zchesBQUKPVU69Cqg==}
+    dev: false
 
   /word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}

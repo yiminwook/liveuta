@@ -34,6 +34,13 @@ export const header = style([
 
 export const headerCell = style([cell, {}]);
 
+export const thumbnailBox = style({
+  position: 'relative',
+  objectFit: 'cover',
+  width: 120,
+  height: 90,
+});
+
 // export const button = style({
 //   backgroundColor: global.color.linkFont,
 //   padding: '0.25rem 0.5rem',

@@ -1,8 +1,8 @@
-'use client';
 import Link from 'next/link';
 import SearchForm from './SearchForm';
 import List from './List';
 import * as styles from './home.css';
+import { generateChannelObject, getAllChannel } from '@/model/mongoDB/getAllChannel';
 
 interface HomeProps {
   searchParams: {
@@ -11,7 +11,9 @@ interface HomeProps {
   };
 }
 
-export default function Home({ searchParams }: HomeProps) {
+export default async function Home({ searchParams }: HomeProps) {
+  const channelData = await getAllChannel();
+  const channelDataset = generateChannelObject(channelData.channels);
   return (
     <main id="app">
       <div className={styles.inner}>
@@ -30,7 +32,7 @@ export default function Home({ searchParams }: HomeProps) {
             </div>
           </div>
           <div>
-            <List searchParams={searchParams} />
+            <List searchParams={searchParams} channelDataset={channelDataset} />
           </div>
         </section>
       </div>

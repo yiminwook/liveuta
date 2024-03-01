@@ -6,15 +6,17 @@ import axios from 'axios';
 import Table from './Table';
 import { useRouter } from 'next/navigation';
 import * as styles from './list.css';
+import { ChannelDataset } from '@/model/mongoDB/getAllChannel';
 
 interface ListProps {
   searchParams: {
     query?: string;
     page?: number;
   };
+  channelDataset: ChannelDataset;
 }
 
-export default function List({ searchParams }: ListProps) {
+export default function List({ searchParams, channelDataset }: ListProps) {
   const router = useRouter();
 
   const { data, isLoading } = useQuery({
@@ -47,7 +49,7 @@ export default function List({ searchParams }: ListProps) {
   return (
     <div>
       <h2 className={styles.title}>조회 리스트</h2>
-      <Table data={data.list} />
+      <Table setlistData={data.list} channelDataset={channelDataset} />
       <div className={styles.pagenationBox}>
         {Array.from({ length: data.maxPage }, (_, i) => i + 1).map((page) => (
           <button

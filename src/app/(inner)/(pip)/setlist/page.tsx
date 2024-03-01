@@ -7,6 +7,6 @@ interface Props {
   };
 }
 
-export default function Page({ searchParams }: Props) {
+export default async function Page({ searchParams }: Props) {
   return <Home searchParams={searchParams} />;
 }

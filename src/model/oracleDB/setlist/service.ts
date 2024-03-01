@@ -23,6 +23,7 @@ export type SetlistRow = [
   Date, // updateAt
   string, // channelId
   Date, // broadcastAt
+  string, // title
   string, // email = 편집자
   number | undefined, // RNUM
 ];
@@ -33,12 +34,14 @@ export type Setlist = {
   createdAt: string;
   updatedAt: string;
   broadcastAt: string;
+  title: string;
   channelId: string;
 };
 
 const parseSetlistRow = (row: SetlistRow): Setlist => ({
   channelId: row[5],
   videoId: row[0],
+  title: row[7],
   description: row[1],
   createdAt: dayjs.tz(row[3]).toISOString(),
   updatedAt: dayjs.tz(row[4]).toISOString(),
@@ -141,6 +144,7 @@ export async function postSetlist(
   memberId: number,
   channelId: string,
   broadcastAt: string | null | undefined,
+  title: string,
 ) {
   let connection: OracleDB.Connection | null = null;
   try {
@@ -154,6 +158,7 @@ export async function postSetlist(
       memberId,
       channelId,
       nonullableBroadcastAt,
+      title,
     ]);
 
     await connection.commit();

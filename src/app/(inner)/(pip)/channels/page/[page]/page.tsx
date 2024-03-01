@@ -1,6 +1,9 @@
-import { ChannelSheetDataType, combineChannelData } from '@inner/_lib/combineChannelData';
+import {
+  ChannelSheetDataType as ChannelDataType,
+  combineChannelData,
+} from '@inner/_lib/combineChannelData';
 import getPaginationRange from '@inner/_lib/getPagenationRange';
-import { parseChannelIDSheet } from '@inner/_lib/parseChannelSheet';
+import { getAllChannel } from '@/model/mongoDB/getAllChannel';
 import { notFound } from 'next/navigation';
 import Home from '../../_component/Home';
 import { disconnectMongoDB } from '@/model/mongoDB';
@@ -13,22 +16,22 @@ const getChannelData = async (page: string) => {
     }
 
     /* Google spread sheet API */
-    const { totalLength, sheetDataValues } = await parseChannelIDSheet();
+    const { totalLength, channels: sheetDataValues } = await getAllChannel();
     const sliceData = sheetDataValues.slice(...getPaginationRange(pageQuery));
 
     /* Youtube API */
-    const channelSheetData: ChannelSheetDataType = {};
+    const channelData: ChannelDataType = {};
 
     sliceData.forEach((data) => {
-      if (channelSheetData[data.channel_id]) return;
-      channelSheetData[data.channel_id] = {
+      if (channelData[data.channel_id]) return;
+      channelData[data.channel_id] = {
         uid: data.channel_id,
         channelName: data.name_kor,
         url: data.channel_addr,
       };
     });
 
-    const combinedSearchDataValues = await combineChannelData(channelSheetData);
+    const combinedSearchDataValues = await combineChannelData(channelData);
 
     disconnectMongoDB();
     if (combinedSearchDataValues.length === 0) {
