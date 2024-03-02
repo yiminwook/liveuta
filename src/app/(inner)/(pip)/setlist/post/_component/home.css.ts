@@ -4,6 +4,17 @@ export const inner = style({
   padding: '0.5rem',
 });
 
+export const formHeader = style({
+  display: 'grid',
+  gridTemplateColumns: 'auto 1fr auto',
+  marginTop: '0.5rem',
+  marginBottom: '1rem',
+});
+
+export const headerPlaceholder = style({
+  width: '1.8rem',
+});
+
 export const title = style({
   fontSize: '2rem',
   fontWeight: 500,
@@ -16,10 +27,8 @@ export const utaToolsLink = style({
 });
 
 export const backLink = style({
-  color: 'rgba(100, 100, 100, 1)',
-  fontWeight: 500,
-  fontSize: '1rem',
-  textAlign: 'right',
+  display: 'inline-flex',
+  alignItems: 'center',
 });
 
 export const formBox = style({
@@ -41,6 +50,5 @@ export const desc = style({
 export const descTitle = style({
   fontSize: '1.5rem',
   fontWeight: 500,
-  marginBottom: '1rem',
   textAlign: 'center',
 });
