@@ -25,7 +25,7 @@ export const scheduleAtom = atomWithQuery<ScheduleAPIReturntype>(() => ({
   queryKey: ['schedule'],
   queryFn: () => getSchedule(),
   refetchInterval: SCHEDULE_REFRESH_INTERVAL,
-  staleTime: SCHEDULE_REFRESH_INTERVAL,
+  staleTime: 1000 * 60 * 1, // 1 minute
   gcTime: SCHEDULE_REFRESH_INTERVAL,
   refetchOnReconnect: true,
   refetchOnWindowFocus: true,
