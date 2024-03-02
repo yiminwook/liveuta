@@ -98,7 +98,7 @@ export default function PostForm({ session }: PostFormProps) {
               세트리스트
             </label>
             <div>
-              <button className={styles.textAreaControlButton} onClick={(event) => clear(event)}>
+              <button className={styles.textAreaControlButton} type="button" onClick={(event) => clear(event)}>
                 <svg
                   stroke-width="0"
                   height="1em"
@@ -111,7 +111,7 @@ export default function PostForm({ session }: PostFormProps) {
                   <path d="m10 12.6.7.7 1.6-1.6 1.6 1.6.8-.7L13 11l1.7-1.6-.8-.8-1.6 1.7-1.6-1.7-.7.8 1.6 1.6-1.6 1.6zM1 4h14V3H1v1zm0 3h14V6H1v1zm8 2.5V9H1v1h8v-.5zM9 13v-1H1v1h8z"></path>
                 </svg>
               </button>
-              <button className={styles.textAreaControlButton} onClick={(event) => paste(event)}>
+              <button className={styles.textAreaControlButton} type="button" onClick={(event) => paste(event)}>
                 <svg
                   stroke-width="0"
                   height="1em"
