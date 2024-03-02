@@ -34,7 +34,7 @@ export const input = style({
   transitionDuration: '100ms',
   transitionTimingFunction: 'ease-in-out',
   ':hover': {
-    borderColor: '#000',
+    borderColor: '#999',
   },
   ':focus-visible': {
     borderColor: 'var(--liveuta-active-color)',
@@ -100,7 +100,7 @@ export const textArea = style({
   transitionDuration: '100ms',
   transitionTimingFunction: 'ease-in-out',
   ':hover': {
-    borderColor: '#000',
+    borderColor: '#999',
   },
   ':focus-visible': {
     borderColor: 'var(--liveuta-active-color)',
