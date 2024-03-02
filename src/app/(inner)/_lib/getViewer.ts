@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export async function getViewer(id: string) {
   // const yturl = `https://youtube.com/watch?v=${id}`;
-  const res = await axios<string>({
+  const res = await axios<{ count: string }>({
     method: 'GET',
     url: `https://yt.grs0412.workers.dev/?v=${id}`,
   });
@@ -11,5 +11,5 @@ export async function getViewer(id: string) {
   // const count = res.data.match(pattern)?.[1];
 
   // return typeof count !== 'string' ? '?' : count;
-  return res.data;
+  return res.data.count;
 }
