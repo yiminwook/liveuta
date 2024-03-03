@@ -1,14 +1,6 @@
+import { leftIn } from '@/style/keyframe.css';
 import { BEZIER_CURVE } from '@/style/var';
-import { keyframes, style } from '@vanilla-extract/css';
-
-const leftIn = keyframes({
-  from: {
-    transform: 'translateX(0)',
-  },
-  to: {
-    transform: 'translateX(-100%)',
-  },
-});
+import { style } from '@vanilla-extract/css';
 
 export const wrap = style({
   position: 'relative',

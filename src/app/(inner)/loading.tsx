@@ -4,7 +4,7 @@ import Wave from './_component/loading/Wave';
 
 export default function Loading() {
   return (
-    <div className={styles.loadingBox}>
+    <div className={styles.loadingWrap}>
       <Wave />
     </div>
   );

@@ -7,6 +7,8 @@ import * as styles from './floatButton.css';
 import { MdMyLocation } from 'react-icons/md';
 import { IoClose } from 'react-icons/io5';
 import useScheduleStatus from '@/hook/useScheduleStatus';
+import GlobalLoading from '@/app/loading';
+import MainLoading from '../loading/MainLoading';
 
 interface ToggleButtonProps {
   isOpen: boolean;
@@ -20,7 +22,7 @@ export default function ToggleButton({ isOpen, onClick }: ToggleButtonProps) {
 
   const unFetching = isFetching === 0 && isMutating === 0;
 
-  if (status === 'pending') return null;
+  if (status === 'pending') return <MainLoading backdrop={false} />;
 
   if (unFetching) {
     return (

@@ -8,3 +8,12 @@ export const loading = keyframes({
     transform: 'rotate(270deg)',
   },
 });
+
+export const leftIn = keyframes({
+  from: {
+    transform: 'translateX(0)',
+  },
+  to: {
+    transform: 'translateX(-100%)',
+  },
+});
