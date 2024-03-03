@@ -35,5 +35,5 @@
     "src/app/api/auth/logout",
     "src/app/(inner)/(pip)/setlist/_component/ext.tsxT"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "temp", "src/model/cloudflare/index.js"]
 }

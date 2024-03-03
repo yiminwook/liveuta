@@ -42,6 +42,14 @@ const nextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/proxy/viewer',
+        destination: 'https://yt.grs0412.workers.dev',
+      },
+    ];
+  },
   webpack: (config, options) => {
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
     config.module.rules.push(
