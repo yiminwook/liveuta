@@ -1,10 +1,16 @@
 'use client';
 import { SelectType } from '@/type';
 import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
-import { useFilterAtom, useScheduleAtom, useSelectAtom } from '@inner/_lib/atom';
+import {
+  useFilterAtom,
+  useScheduleAtom,
+  useScheduleKeyAtom,
+  useScheduleOptionAtom,
+  useSelectAtom,
+} from '@inner/_lib/atom';
 import getSchedule from '@inner/_lib/getSchedule';
 import { useQuery } from '@tanstack/react-query';
-import { useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 
 type ScheduleDataProviderProps = {
   children: React.ReactNode;
@@ -17,7 +23,9 @@ export default function ScheduleDataProvider({
   filter,
   select,
 }: ScheduleDataProviderProps) {
-  const [data] = useScheduleAtom();
+  const [key] = useScheduleKeyAtom();
+  const [option] = useScheduleOptionAtom();
+  const [, setSchedule] = useScheduleAtom();
   const [, setSelect] = useSelectAtom();
   const [, setFilter] = useFilterAtom();
 
@@ -31,6 +39,19 @@ export default function ScheduleDataProvider({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
-  if (!data.data) return null;
+  // schedule observer
+  const { data, dataUpdatedAt, status } = useQuery({
+    queryKey: key,
+    queryFn: () => getSchedule(),
+    ...option,
+  });
+
+  useEffect(() => {
+    if (status === 'success') {
+      setSchedule(() => data);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataUpdatedAt]);
+
   return <>{children}</>;
 }

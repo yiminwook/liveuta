@@ -24,9 +24,7 @@ export default function ReactQuery({ children }: PropsWithChildren) {
           refetchOnReconnect: true,
           retry: 3,
           retryDelay: 1000 * 3, //3초
-          meta: {
-            errorMessage: 'failed to fetch',
-          },
+          meta: {},
         },
         mutations: {
           gcTime: 0,

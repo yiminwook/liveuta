@@ -44,7 +44,6 @@ export const parseScheduledData = (documents: ContentDocument[]): ParseScheduled
   documents.forEach((doc) => {
     const isHide = doc.Hide;
     const isStream = doc.broadcastStatus;
-
     // Exclude hidden contents, but include those that are currently streaming
     if (isHide === 'TRUE' && isStream === 'NULL') return;
     if (isHide === 'TRUE' && isStream === 'FALSE') return;

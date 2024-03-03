@@ -5,7 +5,6 @@ import { IoGlobeOutline } from 'react-icons/io5';
 import { AiOutlineLoading } from 'react-icons/ai';
 import * as styles from './floatButton.css';
 import { MdMyLocation } from 'react-icons/md';
-import GlobalLoading from '@/app/loading';
 import { IoClose } from 'react-icons/io5';
 import useScheduleStatus from '@/hook/useScheduleStatus';
 
@@ -21,9 +20,7 @@ export default function ToggleButton({ isOpen, onClick }: ToggleButtonProps) {
 
   const unFetching = isFetching === 0 && isMutating === 0;
 
-  if (status === 'pending') {
-    return <GlobalLoading />;
-  }
+  if (status === 'pending') return null;
 
   if (unFetching) {
     return (
