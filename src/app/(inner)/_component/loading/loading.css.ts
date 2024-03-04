@@ -20,11 +20,6 @@ export const GlobalLoadingWrap = style([
     right: 0,
     bottom: 0,
     fontSize: '2rem',
-    selectors: {
-      '&.backdrop': {
-        backgroundColor: 'rgba(0, 0, 0, 0.2)',
-      },
-    },
   },
 ]);
 

@@ -5,6 +5,7 @@ import loadingImage from '/public/loading.png';
 import { RemoveScroll } from 'react-remove-scroll';
 import * as styles from '@inner/_component/loading/loading.css';
 import cx from 'classnames';
+import Backdrop from '../Backdrop';
 
 type MainLoadingProps = {
   backdrop: boolean;
@@ -12,7 +13,8 @@ type MainLoadingProps = {
 export default function MainLoading({ backdrop }: MainLoadingProps) {
   return (
     <RemoveScroll>
-      <div className={cx(styles.GlobalLoadingWrap, backdrop && 'backdrop')}>
+      <div className={cx(styles.GlobalLoadingWrap)}>
+        <Backdrop />
         <div>
           <div className={styles.GlobalLoadingInner}>
             <Image

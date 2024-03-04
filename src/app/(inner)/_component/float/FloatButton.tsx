@@ -18,6 +18,7 @@ import ToggleButton from './ToggleButton';
 import * as styles from './floatButton.css';
 import cx from 'classnames';
 import { RemoveScroll } from 'react-remove-scroll';
+import Backdrop from '../Backdrop';
 
 // nav height = 240px
 // circle 0.5r = 26px
@@ -80,7 +81,7 @@ export default function FloatButton() {
 
   return (
     <RemoveScroll enabled={isOpen} removeScrollBar={false}>
-      <div className={cx(styles.floatBackdrop, isOpen && 'show')} onClick={() => toggleOpen(0)} />
+      {isOpen && <Backdrop className={cx(styles.floatBackdrop)} onClick={() => toggleOpen(0)} />}
       <Motion.div
         className={styles.floatNav}
         initial={false}

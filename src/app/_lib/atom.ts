@@ -1,5 +1,5 @@
 import { atomWithReset } from 'jotai/utils';
-import { useAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 import { ThemeType } from '@/type';
 
 export const themeAtom = atomWithReset<ThemeType>('theme1');
