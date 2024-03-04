@@ -5,11 +5,10 @@ import { loading } from '@/style/keyframe.css';
 import * as backdropStyles from '../backdrop.css';
 
 export const floatBackdrop = style({
-  zIndex: zIndex.float.zIndex - 1,
-  position: 'fixed',
   selectors: {
     [`&${backdropStyles.wrap}`]: {
       zIndex: zIndex.float.zIndex - 1,
+      position: 'fixed',
     },
     '&.show': {
       visibility: 'visible',
