@@ -1,5 +1,4 @@
 // css 순서변경 금지
-import 'pretendard/dist/web/variable/pretendardvariable.css';
 import '@/style/reset.css';
 import '/public/theme.css';
 import '@/style/global.scss';
