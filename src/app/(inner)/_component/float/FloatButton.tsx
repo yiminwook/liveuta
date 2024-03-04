@@ -16,7 +16,6 @@ import { RxPinTop } from 'react-icons/rx';
 import ListItem from './ListItem';
 import ToggleButton from './ToggleButton';
 import * as styles from './floatButton.css';
-import cx from 'classnames';
 import { RemoveScroll } from 'react-remove-scroll';
 import Backdrop from '../Backdrop';
 
@@ -81,7 +80,7 @@ export default function FloatButton() {
 
   return (
     <RemoveScroll enabled={isOpen} removeScrollBar={false}>
-      {isOpen && <Backdrop className={cx(styles.floatBackdrop)} onClick={() => toggleOpen(0)} />}
+      {isOpen && <Backdrop onClick={() => toggleOpen(0)} />}
       <Motion.div
         className={styles.floatNav}
         initial={false}

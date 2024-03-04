@@ -2,19 +2,6 @@ import { BEZIER_CURVE, flexCenter, preventUserSelect, responsive, zIndex } from 
 import { style } from '@vanilla-extract/css';
 import { global } from '@/style/globalTheme.css';
 import { loading } from '@/style/keyframe.css';
-import * as backdropStyles from '../backdrop.css';
-
-export const floatBackdrop = style({
-  selectors: {
-    [`&${backdropStyles.wrap}`]: {
-      zIndex: zIndex.float.zIndex - 1,
-      position: 'fixed',
-    },
-    '&.show': {
-      visibility: 'visible',
-    },
-  },
-});
 
 export const floatNav = style([
   zIndex.float,

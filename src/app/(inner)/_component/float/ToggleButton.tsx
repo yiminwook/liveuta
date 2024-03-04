@@ -22,7 +22,7 @@ export default function ToggleButton({ isOpen, onClick }: ToggleButtonProps) {
 
   const unFetching = isFetching === 0 && isMutating === 0;
 
-  if (status === 'pending') return <MainLoading backdrop={false} />;
+  if (status === 'pending') return <MainLoading backdrop={true} />;
 
   if (unFetching) {
     return (

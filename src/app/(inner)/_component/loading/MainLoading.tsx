@@ -13,10 +13,10 @@ type MainLoadingProps = {
 export default function MainLoading({ backdrop }: MainLoadingProps) {
   return (
     <RemoveScroll>
-      <div className={cx(styles.GlobalLoadingWrap)}>
-        <Backdrop />
+      {backdrop && <Backdrop />}
+      <div className={cx(styles.MainLoadingWrap)}>
         <div>
-          <div className={styles.GlobalLoadingInner}>
+          <div className={styles.MainLoadingInner}>
             <Image
               src={loadingImage}
               width={100}
@@ -25,9 +25,9 @@ export default function MainLoading({ backdrop }: MainLoadingProps) {
               unoptimized
               priority
             />
-            <AiOutlineLoading className={styles.GlobalLoadingBar} size={130} color="inherit" />
+            <AiOutlineLoading className={styles.MainLoadingBar} size={130} color="inherit" />
           </div>
-          <p className={styles.GlobalLoadingText}>Loading Now!</p>
+          <p className={styles.MainLoadingText}>Loading Now!</p>
         </div>
       </div>
     </RemoveScroll>

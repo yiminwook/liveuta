@@ -10,7 +10,7 @@ export const loadingWrap = style([
   },
 ]);
 
-export const GlobalLoadingWrap = style([
+export const MainLoadingWrap = style([
   flexCenter,
   zIndex.float,
   {
@@ -23,13 +23,13 @@ export const GlobalLoadingWrap = style([
   },
 ]);
 
-export const GlobalLoadingInner = style({
+export const MainLoadingInner = style({
   color: 'var(--liveuta-loading-color)',
   position: 'relative',
   textAlign: 'center',
 });
 
-export const GlobalLoadingBar = style({
+export const MainLoadingBar = style({
   position: 'absolute',
   top: -15,
   left: 0,
@@ -37,7 +37,7 @@ export const GlobalLoadingBar = style({
   animation: `${loading} 1.5s infinite`,
 });
 
-export const GlobalLoadingText = style({
+export const MainLoadingText = style({
   marginTop: '0.5rem',
   fontSize: '1.25rem',
   textAlign: 'center',
