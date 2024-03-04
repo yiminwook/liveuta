@@ -6,7 +6,9 @@ import Antd from './Antd';
 import GlobalHydrate from './GlobalHydrate';
 import ServiceWorker from './ServiceWorker';
 import NextAuth from './NextAuth';
-import ParticleProvider from './ParticleProvider';
+import dynamic from 'next/dynamic';
+
+const ParticleProvider = dynamic(() => import('./ParticleProvider'), { ssr: false });
 
 interface ConfigsProps {
   children: React.ReactNode;
@@ -20,7 +22,8 @@ export default function Configs({ children, cookies }: ConfigsProps) {
         <Jotai>
           <ReactQuery>
             <GlobalHydrate cookies={cookies}>
-              <ParticleProvider>{children}</ParticleProvider>
+              {children}
+              <ParticleProvider />
               <ServiceWorker />
               <Devtools />
             </GlobalHydrate>

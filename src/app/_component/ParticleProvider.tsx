@@ -1,10 +1,10 @@
 'use client';
 import { initParticlesEngine } from '@tsparticles/react';
-import { PropsWithChildren, useEffect } from 'react';
+import { useEffect } from 'react';
 import { loadSlim } from '@tsparticles/slim';
 // import { loadImageShape } from '@tsparticles/shape-image';
 
-export default function ParticleProvider({ children }: PropsWithChildren) {
+export default function ParticleProvider() {
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
@@ -13,5 +13,5 @@ export default function ParticleProvider({ children }: PropsWithChildren) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <>{children}</>;
+  return null;
 }
