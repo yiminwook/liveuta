@@ -8,7 +8,7 @@ export default function ToastBox() {
       position="top-right"
       visibleToasts={3}
       closeButton
-      theme="system"
+      theme="light"
       duration={1200}
       icons={{
         success: '✅',
