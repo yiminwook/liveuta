@@ -13,19 +13,11 @@ export const GET_MAX_COUNT = `
 export const GET_ALL_SETLIST = `
   SELECT *
   FROM (
-      SELECT r.*, MEMBER.EMAIL, ROWNUM AS rnum
-      FROM (
-          SELECT *
-          FROM (
-              SELECT *
-              FROM SETLIST
-              ORDER BY CREATE_AT DESC
-          )
-          WHERE ROWNUM <= :endRow
-      ) r
-      JOIN MEMBER ON r.MEMBER_ID = MEMBER.ID
+    SELECT r.*, MEMBER.EMAIL, row_number() over (order by r.CREATE_AT DESC) as rnum
+    FROM SETLIST r
+    JOIN MEMBER ON r.MEMBER_ID = MEMBER.ID
   )
-  WHERE rnum >= :startRow
+  WHERE rnum BETWEEN :startRow and :endRow
 `;
 
 export const SEARCH_MAX_COUNT = `
@@ -37,20 +29,12 @@ export const SEARCH_MAX_COUNT = `
 export const SEARCH_SETLIST = `
   SELECT *
   FROM (
-      SELECT r.*, MEMBER.EMAIL, ROWNUM AS rnum
-      FROM (
-          SELECT *
-          FROM (
-              SELECT *
-              FROM SETLIST
-              WHERE LOWER(DESCRIPTION) LIKE LOWER(:pattern)
-              ORDER BY CREATE_AT DESC
-          )
-          WHERE ROWNUM <= :endRow
-      ) r
-      JOIN MEMBER ON r.MEMBER_ID = MEMBER.ID
+    SELECT r.*, MEMBER.EMAIL, row_number() over (order by r.CREATE_AT DESC) as rnum
+    FROM SETLIST r
+    JOIN MEMBER ON r.MEMBER_ID = MEMBER.ID
+    WHERE LOWER(DESCRIPTION) LIKE LOWER(:pattern)
   )
-  WHERE rnum >= :startRow
+  WHERE rnum BETWEEN :startRow and :endRow
 `;
 
 export const POST_SETLIST = `

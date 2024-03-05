@@ -48,9 +48,8 @@ const parseSetlistRow = (row: SetlistRow): Setlist => ({
 });
 
 export async function getSetlistByVideoId(videoId: string) {
-  let connection: OracleDB.Connection | null = null;
+  const connection = await connectOracleDB();
   try {
-    connection = await connectOracleDB();
     const result = await connection.execute<SetlistRow>(GET_SETLIST, [videoId]);
     await connection.close();
 
@@ -59,15 +58,14 @@ export async function getSetlistByVideoId(videoId: string) {
 
     return parseSetlistRow(row);
   } catch (error) {
-    if (connection) await connection.close();
+    await connection.close();
     throw error;
   }
 }
 
 export async function getAllSetlist(pageNumber: number) {
-  let connection: OracleDB.Connection | null = null;
+  const connection = await connectOracleDB();
   try {
-    connection = await connectOracleDB();
     const countResult = await connection.execute<[number]>(GET_MAX_COUNT);
     const totalCount = countResult.rows?.[0][0] || 0;
     const maxPage = Math.ceil(totalCount / SETLIST_PAGE_SIZE);
@@ -80,7 +78,7 @@ export async function getAllSetlist(pageNumber: number) {
     const startRow = (pageNumber - 1) * SETLIST_PAGE_SIZE + 1;
     const endRow = pageNumber * SETLIST_PAGE_SIZE;
 
-    const searchResult = await connection.execute<SetlistRow>(GET_ALL_SETLIST, [endRow, startRow]);
+    const searchResult = await connection.execute<SetlistRow>(GET_ALL_SETLIST, [startRow, endRow]);
 
     await connection.close();
 
@@ -93,16 +91,15 @@ export async function getAllSetlist(pageNumber: number) {
     const list = rows.map((row) => parseSetlistRow(row));
     return { maxPage, list };
   } catch (error) {
-    if (connection) await connection.close();
+    await connection.close();
     throw error;
   }
 }
 
 export async function searchSetlist(query: string, pageNumber: number) {
-  let connection: OracleDB.Connection | null = null;
+  const connection = await connectOracleDB();
   const pattern = `%${query}%`;
   try {
-    connection = await connectOracleDB();
     const countResult = await connection.execute<[number]>(SEARCH_MAX_COUNT, [pattern]);
     const totalCount = countResult.rows?.[0][0] || 0;
     const maxPage = Math.ceil(totalCount / SETLIST_PAGE_SIZE);
@@ -117,8 +114,8 @@ export async function searchSetlist(query: string, pageNumber: number) {
 
     const searchResult = await connection.execute<SetlistRow>(SEARCH_SETLIST, [
       pattern,
-      endRow,
       startRow,
+      endRow,
     ]);
 
     await connection.close();
@@ -132,7 +129,7 @@ export async function searchSetlist(query: string, pageNumber: number) {
     const list = rows.map((row) => parseSetlistRow(row));
     return { maxPage, list };
   } catch (error) {
-    if (connection) await connection.close();
+    await connection.close();
     throw error;
   }
 }
@@ -145,10 +142,8 @@ export async function postSetlist(
   broadcastAt: string | null | undefined,
   title: string,
 ) {
-  let connection: OracleDB.Connection | null = null;
+  const connection = await connectOracleDB();
   try {
-    connection = await connectOracleDB();
-
     const nonullableBroadcastAt = dayjs.tz(broadcastAt || undefined).toDate();
 
     await connection.execute(POST_SETLIST, [
@@ -164,11 +159,8 @@ export async function postSetlist(
     await connection.close();
   } catch (e) {
     const error = e as DBError;
-
-    if (connection) {
-      await connection.rollback();
-      await connection.close();
-    }
+    await connection.rollback();
+    await connection.close();
 
     if (error.code === 'ORA-00001') {
       throw new CustomServerError({ statusCode: 409, message: '이미 등록된 세트리 입니다.' });
@@ -186,10 +178,8 @@ export async function updateSetlist(
   broadcastAt: string | null | undefined,
   title: string,
 ) {
-  let connection: OracleDB.Connection | null = null;
+  const connection = await connectOracleDB();
   try {
-    connection = await connectOracleDB();
-
     const nonullableBroadcastAt = dayjs.tz(broadcastAt || undefined).toDate();
 
     await connection.execute(UPDATE_SETLIST, [
@@ -203,26 +193,23 @@ export async function updateSetlist(
     await connection.commit();
     await connection.close();
   } catch (error) {
-    if (connection) {
-      await connection.rollback();
-      await connection.close();
-    }
+    await connection.rollback();
+    await connection.close();
+
     throw error;
   }
 }
 
 export async function deleteSetlist(videoId: number) {
-  let connection: OracleDB.Connection | null = null;
+  const connection = await connectOracleDB();
   try {
-    connection = await connectOracleDB();
     await connection.execute(DELETE_SETLIST, [videoId]);
     await connection.commit();
     await connection.close();
   } catch (error) {
-    if (connection) {
-      await connection.rollback();
-      await connection.close();
-    }
+    await connection.rollback();
+    await connection.close();
+
     throw error;
   }
 }
