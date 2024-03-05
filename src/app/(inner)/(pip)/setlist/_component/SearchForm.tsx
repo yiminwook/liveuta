@@ -5,14 +5,14 @@ import * as styles from './searchForm.css';
 
 interface SearchFormProps {
   searchParams: {
-    query?: string;
-    page?: number;
+    query: string;
+    page: number;
   };
 }
 
 export default function SearchForm({ searchParams }: SearchFormProps) {
   const router = useRouter();
-  const [query, setQuery] = useState(searchParams.query || '');
+  const [query, setQuery] = useState(searchParams.query);
 
   const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);

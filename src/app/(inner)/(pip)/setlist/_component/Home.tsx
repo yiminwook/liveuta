@@ -7,13 +7,19 @@ import { generateChannelObject, getAllChannel } from '@/model/mongoDB/getAllChan
 interface HomeProps {
   searchParams: {
     query?: string;
-    page?: number;
+    page?: string;
   };
 }
 
 export default async function Home({ searchParams }: HomeProps) {
   const channelData = await getAllChannel();
   const channelDataset = generateChannelObject(channelData.channels);
+
+  const parseSearchParams = {
+    query: searchParams.query || '',
+    page: Number(searchParams.page) || 1,
+  };
+
   return (
     <main id="app">
       <div className={styles.inner}>
@@ -25,14 +31,14 @@ export default async function Home({ searchParams }: HomeProps) {
         <section className={styles.bottom}>
           <div className={styles.inputArea}>
             <div>
-              <SearchForm searchParams={searchParams} />
+              <SearchForm searchParams={parseSearchParams} />
             </div>
             <div className={styles.postLinkBox}>
               <Link href="/setlist/post">작성하러 가기</Link>
             </div>
           </div>
           <div>
-            <List searchParams={searchParams} channelDataset={channelDataset} />
+            <List searchParams={parseSearchParams} channelDataset={channelDataset} />
           </div>
         </section>
       </div>

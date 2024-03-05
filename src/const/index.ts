@@ -26,3 +26,5 @@ export const MONGODB_SCHEDULE_DB = 'ScheduleDB';
 export const MONGODB_CHANNEL_DB = 'ManagementDB';
 
 export const ORACLEDB_USER = 'admin';
+
+export const SETLIST_PAGE_SIZE = 15;

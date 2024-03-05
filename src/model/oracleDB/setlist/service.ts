@@ -12,8 +12,7 @@ import {
 } from './sql';
 import CustomServerError from '@/model/error/customServerError';
 import dayjs from '@/model/dayjs';
-
-const PAGE_SIZE = 15;
+import { SETLIST_PAGE_SIZE } from '@/const';
 
 export type SetlistRow = [
   string, //videoId
@@ -71,15 +70,15 @@ export async function getAllSetlist(pageNumber: number) {
     connection = await connectOracleDB();
     const countResult = await connection.execute<[number]>(GET_MAX_COUNT);
     const totalCount = countResult.rows?.[0][0] || 0;
-    const maxPage = Math.ceil(totalCount / PAGE_SIZE);
+    const maxPage = Math.ceil(totalCount / SETLIST_PAGE_SIZE);
 
     if (maxPage === 0 || pageNumber > maxPage) {
       await connection.close();
       return { maxPage: 0, list: [] };
     }
 
-    const startRow = (pageNumber - 1) * PAGE_SIZE + 1;
-    const endRow = pageNumber * PAGE_SIZE;
+    const startRow = (pageNumber - 1) * SETLIST_PAGE_SIZE + 1;
+    const endRow = pageNumber * SETLIST_PAGE_SIZE;
 
     const searchResult = await connection.execute<SetlistRow>(GET_ALL_SETLIST, [endRow, startRow]);
 
@@ -106,15 +105,15 @@ export async function searchSetlist(query: string, pageNumber: number) {
     connection = await connectOracleDB();
     const countResult = await connection.execute<[number]>(SEARCH_MAX_COUNT, [pattern]);
     const totalCount = countResult.rows?.[0][0] || 0;
-    const maxPage = Math.ceil(totalCount / PAGE_SIZE);
+    const maxPage = Math.ceil(totalCount / SETLIST_PAGE_SIZE);
 
     if (maxPage === 0 || pageNumber > maxPage) {
       await connection.close();
       return { maxPage: 0, list: [] };
     }
 
-    const startRow = (pageNumber - 1) * PAGE_SIZE + 1;
-    const endRow = pageNumber * PAGE_SIZE;
+    const startRow = (pageNumber - 1) * SETLIST_PAGE_SIZE + 1;
+    const endRow = pageNumber * SETLIST_PAGE_SIZE;
 
     const searchResult = await connection.execute<SetlistRow>(SEARCH_SETLIST, [
       pattern,

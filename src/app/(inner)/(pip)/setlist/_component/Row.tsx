@@ -6,7 +6,7 @@ import cx from 'classnames';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import * as styles from './table.css';
+import * as styles from './list.css';
 import { MouseEvent } from 'react';
 import { useSetlistModalAtom } from '../_lib/atom';
 import SetlistModal from './SetlistModal';
@@ -21,8 +21,7 @@ export default function Row({ setlist, channel }: RowProps) {
   const [modalValue, setModalValue] = useSetlistModalAtom();
   const videoUrl = generateVideoUrl(setlist.videoId);
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'default');
-  const update = dayjs(setlist.updatedAt).format('YYYY-MM-DD HH:mm:ss');
-  // const create = dayjs(setlist.createdAt).format('YYYY-MM-DD HH:mm:ss');
+  const broad = dayjs(setlist.broadcastAt).format('YYYY년 MM월 DD일');
 
   const handleImageClick = (e: MouseEvent) => {
     e.stopPropagation();
@@ -36,7 +35,7 @@ export default function Row({ setlist, channel }: RowProps) {
   return (
     <>
       <div className={cx(styles.row, 'hover')} onClick={openModal}>
-        <div className={cx(styles.cell, 'flex2')}>
+        <div className={cx(styles.cell)}>
           <button onClick={handleImageClick}>
             <div className={styles.thumbnailBox}>
               <Image src={thumbnailUrl} alt={setlist.title} fill unoptimized={false} />
@@ -47,7 +46,7 @@ export default function Row({ setlist, channel }: RowProps) {
         <div className={cx(styles.cell, 'flex2')}>
           <p>{setlist.title}</p>
         </div>
-        <div className={styles.cell}>{update}</div>
+        <div className={styles.cell}>{broad}</div>
       </div>
       {modalValue && <SetlistModal />}
     </>
