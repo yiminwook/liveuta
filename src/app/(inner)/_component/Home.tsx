@@ -15,12 +15,10 @@ export default async function Home({ filter }: HomeProps) {
   const { select } = await getCookies();
 
   return (
-    <main id="app">
-      <ScheduleDataProvider filter={filter} select={select}>
-        <NavSection />
-        <TopSection filter={filter} />
-        <ScheduleSection />
-      </ScheduleDataProvider>
-    </main>
+    <ScheduleDataProvider filter={filter} select={select}>
+      <NavSection />
+      <TopSection filter={filter} />
+      <ScheduleSection />
+    </ScheduleDataProvider>
   );
 }

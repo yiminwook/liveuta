@@ -16,7 +16,7 @@ export default function Home() {
   });
 
   return (
-    <main id="app">
+    <>
       <div className={styles.wrap}>
         <div className={styles.inner}>
           <div className={styles.top}>
@@ -54,6 +54,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </main>
+    </>
   );
 }

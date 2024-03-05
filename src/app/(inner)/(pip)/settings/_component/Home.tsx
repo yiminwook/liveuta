@@ -54,7 +54,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main id="app">
+    <>
       <section className={Settings['section']}>
         <div className={Settings['permission-box']}>
           <div>
@@ -70,6 +70,6 @@ export default function Home() {
         </div>
         <PostBox token={token} />
       </section>
-    </main>
+    </>
   );
 }

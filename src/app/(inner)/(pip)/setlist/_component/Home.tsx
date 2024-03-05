@@ -21,7 +21,7 @@ export default async function Home({ searchParams }: HomeProps) {
   };
 
   return (
-    <main id="app">
+    <>
       <div className={styles.inner}>
         <section className={styles.top}>
           <h1 className={styles.title}>세트리 검색 Beta.</h1>
@@ -42,6 +42,6 @@ export default async function Home({ searchParams }: HomeProps) {
           </div>
         </section>
       </div>
-    </main>
+    </>
   );
 }

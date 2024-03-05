@@ -1,4 +1,6 @@
-import { globalStyle } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
+import { BREAK_POINT, responsive } from './var';
+import { global } from './globalTheme.css';
 
 globalStyle('::-webkit-scrollbar', {
   width: 7.5,
@@ -103,3 +105,26 @@ globalStyle('textarea', {
   padding: 0,
   resize: 'none',
 });
+
+export const main = style([
+  {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+    maxWidth: BREAK_POINT['2xl'],
+    minHeight:
+      'calc(100dvh - 3.5rem - 5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
+    margin: '0 auto',
+  },
+  responsive({
+    sm: {
+      gap: '0.6rem',
+    },
+    md: {
+      gap: '0.8rem',
+    },
+    xl: {
+      width: '80%',
+    },
+  }),
+]);

@@ -1,6 +1,6 @@
 import { getChannel, parseChannel } from '@/model/mongoDB/getAllChannel';
 import { getSetlistByVideoId } from '@/model/oracleDB/setlist/service';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import Desc from './Desc';
 import SetlistPlayer from './SetlistPlayer';
 import * as styles from './home.css';
@@ -21,7 +21,7 @@ export default async function Home({ params }: HomeProps) {
   const channel = parseChannel(document);
 
   return (
-    <main id="app">
+    <>
       <div className={styles.inner}>
         <section className={styles.left}>
           <div className={styles.playerWrap}>
@@ -35,6 +35,6 @@ export default async function Home({ params }: HomeProps) {
           <Desc session={session} videoId={setlist.videoId} description={setlist.description} />
         </section>
       </div>
-    </main>
+    </>
   );
 }
