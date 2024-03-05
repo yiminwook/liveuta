@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 interface DescProps {
   videoId: string;
   description: string;
-  session: Session;
+  session: Session | null;
 }
 
 export default function Desc({ session, videoId, description }: DescProps) {
@@ -21,7 +21,10 @@ export default function Desc({ session, videoId, description }: DescProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState(description);
 
-  const toggleEditing = () => setIsEditing((pre) => !pre);
+  const toggleEditing = () => {
+    if (!session) return toast.warning('로그인이 필요한 서비스입니다.');
+    setIsEditing((pre) => !pre);
+  };
 
   const handleDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -52,6 +55,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!session) return;
     mutateSetlist.mutate({ session, videoId, desc });
   };
 

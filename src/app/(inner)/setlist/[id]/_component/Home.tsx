@@ -15,7 +15,6 @@ interface HomeProps {
 
 export default async function Home({ params }: HomeProps) {
   const session = await auth();
-  if (!session) redirect('/login');
   const setlist = await getSetlistByVideoId(params.id);
   if (setlist === null) notFound();
   const document = await getChannel(setlist.channelId);
