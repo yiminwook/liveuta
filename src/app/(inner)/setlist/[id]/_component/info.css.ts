@@ -13,11 +13,24 @@ export const title = style([
 ]);
 
 export const nav = style({
+  boxSizing: 'border-box',
   display: 'flex',
-  justifyContent: 'flex-end',
+  justifyContent: 'space-between',
   alignItems: 'center',
   gap: '1rem',
-  padding: '0.5rem 0',
+  padding: '0.5rem 0.25rem',
+});
+
+export const backButton = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+  fontWeight: 500,
+});
+
+export const navRight = style({
+  display: 'flex',
+  gap: '0.5rem',
 });
 
 export const navItem = style({
@@ -29,6 +42,7 @@ export const navItem = style({
   backgroundColor: '#fff',
   fontWeight: 600,
   borderRadius: 5,
+  verticalAlign: 'middle',
 });
 
 export const youtubeButton = style({});

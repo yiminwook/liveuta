@@ -27,20 +27,23 @@ export default function Info({ setlist, channel }: InfoProps) {
   return (
     <div className={styles.wrap}>
       <nav className={styles.nav}>
-        <button onClick={() => router.back()}>
-          <IoArrowBack size={28} /> 뒤로가기
+        <button className={styles.backButton} onClick={() => router.back()}>
+          <IoArrowBack size={28} />
+          <span>Back</span>
         </button>
-        <button
-          className={cx(styles.navItem, styles.youtubeButton)}
-          onClick={() => openWindow(videoUrl)}
-        >
-          <ImYoutube size={28} color="#ff0000" />
-          유투브
-        </button>
-        <Link className={cx(styles.navItem, styles.listLink)} href="/setlist">
-          <BsMusicNoteList />
-          리스트
-        </Link>
+        <div className={styles.navRight}>
+          <button
+            className={cx(styles.navItem, styles.youtubeButton)}
+            onClick={() => openWindow(videoUrl)}
+          >
+            <ImYoutube size={24} color="#ff0000" />
+            유투브
+          </button>
+          <Link className={cx(styles.navItem, styles.listLink)} href="/setlist">
+            <BsMusicNoteList />
+            리스트
+          </Link>
+        </div>
       </nav>
       <h4 className={styles.title}>{setlist.title}</h4>
       <div>
