@@ -66,12 +66,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
         >
           취소
         </button>
-        <button
-          type="submit"
-          className={styles.editButton}
-          onClick={() => mutateSetlist.mutate({ session, videoId, desc })}
-          disabled={mutateSetlist.isPending}
-        >
+        <button type="submit" className={styles.editButton} disabled={mutateSetlist.isPending}>
           저장
         </button>
         <div className={styles.inner}>
