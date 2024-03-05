@@ -1,7 +1,6 @@
 'use client';
 import Text from '@inner/(pip)/setlist/_component/Text';
 import { useMutation } from '@tanstack/react-query';
-import { App } from 'antd';
 import { isAxiosError } from 'axios';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
@@ -9,6 +8,7 @@ import { useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import updateSetlist from '../_lib/updateSetlist';
 import * as styles from './desc.css';
+import { toast } from 'sonner';
 
 interface DescProps {
   videoId: string;
@@ -18,7 +18,6 @@ interface DescProps {
 
 export default function Desc({ session, videoId, description }: DescProps) {
   const router = useRouter();
-  const { notification } = App.useApp();
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState(description);
 
@@ -38,7 +37,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
     mutationKey: ['updateSetlist', videoId],
     mutationFn: updateSetlist,
     onSuccess: () => {
-      notification.success({ message: '수정되었습니다.' });
+      toast.success('수정되었습니다.');
       handleCancel();
       router.refresh();
     },
@@ -47,7 +46,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
       if (isAxiosError(error)) {
         message = error.response?.data.message || message;
       }
-      notification.error({ message: message });
+      toast.error(message);
     },
   });
 

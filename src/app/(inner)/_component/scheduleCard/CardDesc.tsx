@@ -1,5 +1,4 @@
 'use client';
-import useToast from '@/hook/useToast';
 import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import CopyButton from '../button/CopyButton';
 import CardStatus from '../scheduleCard/CardStatus';
@@ -14,6 +13,7 @@ import reservePush from '@inner/_lib/reservePush';
 import { useMutation } from '@tanstack/react-query';
 import { generateVideoUrl } from '@/model/youtube/url';
 import { generateThumbnail } from '@/model/youtube/thumbnail';
+import { toast } from 'sonner';
 
 interface CardDescProps {
   content: ContentsDataType;
@@ -25,7 +25,6 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
 
   const videoUrl = generateVideoUrl(videoId);
   const thumbnailUrl = generateThumbnail(videoId, 'mqdefault');
-  const toast = useToast();
 
   const mutatePush = useMutation({
     mutationKey: ['push', videoId],
@@ -38,11 +37,10 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
         action: 'alamReserve',
       });
 
-      toast.success({ text: response.data.message });
+      toast.success(response.data.message);
     },
     onError: (error) => {
-      console.error(error);
-      toast.error({ text: error.message });
+      toast.error(error.message);
     },
   });
 

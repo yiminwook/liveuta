@@ -5,12 +5,11 @@ import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import PostBox from '@inner/(pip)/settings/_component/PostBox';
 import TokenBox from '@inner/(pip)/settings/_component/TokenBox';
 import { TokenType } from '@/type';
-import useToast from '@/hook/useToast';
+import { toast } from 'sonner';
 
 export default function Home() {
   const [token, setToken] = useState<TokenType>(null);
   const [permission, setPermission] = useState('설정을 가져오는 중');
-  const toast = useToast();
 
   const handleSetToken = async () => {
     try {
@@ -27,7 +26,7 @@ export default function Home() {
       const message = error instanceof Error ? error.message : 'Unknown Error';
       setPermission(() => 'denied');
       setToken(() => undefined);
-      toast.error({ text: message });
+      toast.error(message);
       return false;
     }
   };
@@ -35,7 +34,7 @@ export default function Home() {
   const requerstPermission = async () => {
     const result = await handleSetToken();
     if (result) {
-      toast.success({ text: '알림허용 설정이 완료되었습니다.' });
+      toast.success('알림허용 설정이 완료되었습니다.');
     }
   };
 

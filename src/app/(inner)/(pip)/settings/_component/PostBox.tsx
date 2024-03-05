@@ -5,7 +5,7 @@ import dayjs from '@/model/dayjs';
 import { useState } from 'react';
 import { PushData } from '@/app/api/push/route';
 import { TokenType } from '@/type';
-import useToast from '@/hook/useToast';
+import { toast } from 'sonner';
 
 export default function PostBox({ token }: { token: TokenType }) {
   const [title, setTitle] = useState('');
@@ -13,7 +13,6 @@ export default function PostBox({ token }: { token: TokenType }) {
   const [imageUrl, setImageUrl] = useState('');
   const [link, setLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const toast = useToast();
 
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(() => e.target.value.trim());
@@ -63,7 +62,7 @@ export default function PostBox({ token }: { token: TokenType }) {
       } else if (error instanceof Error) {
         message = error.message;
       }
-      toast.error({ text: message });
+      toast.error(message);
     } finally {
       setIsLoading(() => false);
     }

@@ -1,6 +1,5 @@
 'use client';
 import { usePlayerAtom } from '@inner/_lib/atom';
-import useToast from '@/hook/useToast';
 import { forwardRef, useEffect, useState } from 'react';
 import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
@@ -9,6 +8,7 @@ import cx from 'classnames';
 import { FaHotjar } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { generateVideoUrl } from '@/model/youtube/url';
+import { toast } from 'sonner';
 
 interface PlayerProps {
   isShow: boolean;
@@ -22,7 +22,6 @@ export default forwardRef(function Player(
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
   const [playerValue, setPlayerValue] = usePlayerAtom();
-  const toast = useToast();
 
   const keyDown = (e: KeyboardEvent) => {
     const target = e.target as HTMLElement | null;
@@ -34,13 +33,13 @@ export default forwardRef(function Player(
         e.preventDefault();
         // 스페이스바 이벤트 방지
         setPlayerValue((pre) => {
-          toast.info({ text: `플레이어 ${pre.isPlaying ? '정지' : '재생'}`, duration: 2 });
+          toast.info(`플레이어 ${pre.isPlaying ? '정지' : '재생'}`);
           return { ...pre, isPlaying: !pre.isPlaying };
         });
       }
       if (e.key === 'Escape') {
         setPlayerValue((pre) => {
-          toast.info({ text: `플레이어 ${pre.hide ? '보이기' : '숨기기'}`, duration: 2 });
+          toast.info(`플레이어 ${pre.hide ? '보이기' : '숨기기'}`);
           return { ...pre, hide: !pre.hide };
         });
       }

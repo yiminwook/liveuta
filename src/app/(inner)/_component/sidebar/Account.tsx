@@ -10,14 +10,13 @@ import cx from 'classnames';
 import useStopPropagation from '@/hook/useStopPropagation';
 import { useMutation } from '@tanstack/react-query';
 import { signOut } from 'next-auth/react';
-import { App } from 'antd';
 import Avatar from '../Avatar';
+import { toast } from 'sonner';
 
 interface AccountSidebarProps {
   session: Session;
 }
 export default function AccountSidebar({ session }: AccountSidebarProps) {
-  const { notification } = App.useApp();
   const [show, setShow] = useAccountSidebarAtom();
   const { stopPropagation } = useStopPropagation();
   const handleClose = () => setShow(false);
@@ -25,11 +24,7 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
   const mutateLogout = useMutation({
     mutationKey: ['logout'],
     mutationFn: () => signOut({ callbackUrl: '/' }),
-    onError: (error) =>
-      notification.error({
-        message: '로그아웃 실패',
-        description: error.message,
-      }),
+    onError: (error) => toast.error(error.message),
   });
 
   useEffect(() => {

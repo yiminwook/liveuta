@@ -1,24 +1,18 @@
 'use client';
 import { signIn } from 'next-auth/react';
 import { useMutation } from '@tanstack/react-query';
-import { App } from 'antd';
 import * as styles from './home.css';
 import { FcGoogle } from 'react-icons/fc';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { Provider } from '@/type/nextAuth';
 import { FaDiscord } from 'react-icons/fa';
+import { toast } from 'sonner';
 
 export default function Home() {
-  const { notification } = App.useApp();
-
   const mutateLogin = useMutation({
     mutationKey: ['login'],
     mutationFn: (provider: Provider) => signIn(provider, { callbackUrl: '/' }),
-    onError: (error) =>
-      notification.error({
-        message: '로그인 실패',
-        description: error.message,
-      }),
+    onError: (error) => toast.error(error.message),
   });
 
   return (
