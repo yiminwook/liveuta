@@ -10,29 +10,9 @@ Dev - https://liveuta-dev.vercel.app
 
 ## Server API docs
 
-1. GET /api/search?query={채널명}
+1. POST /api/push
 
-```
-  return {
-   contents: ContentsDataType[];
-   channels: ContentsDataType[];
-  }
-```
-
-2. GET /api/sheet
-
-```
-  return {
-    scheduled: ContentsDataTypes;
-    live: ContentsDataTypes;
-    daily: ContentsDataTypes;
-    all: ContentsDataTypes;
-  }
-```
-
-3. POST /api/push
-
-```
+```typescript
   body PushData[]
 
   return {
@@ -46,44 +26,19 @@ Dev - https://liveuta-dev.vercel.app
 
 ## Types
 
-```
-interface ContentsDataType {
-  title: string;
-  url: string;
-  channelName: string;
-  videoId: string;
-  timestamp: number;
-  thumbnailURL?: string;
-  isStream: isStream;
-  korTime: string;
-  interval: string;
-}
-
-interface contentLength {
-  total: number;
-  /** 스트리밍 영상 */
-  stream: number;
-  /** 커버, 오리지널 영상 */
-  video: number;
-}
-
-interface ContentsDataTypes {
-  length: contentLength;
-  contents: ContentsDataType[];
-}
-
+```typescript
 interface PushData {
-    "token": string;
-    "title": string;
-    "body": string;
-    "imageUrl": string;
-    /**
-     * webpush를 눌렀을때 이동할 링크
-     * 이미 liveuta가 켜져있을때는 링크가 있어도 이동없고 내려간 창만 다시 올려줌
-     */
-    "link": string;
-    "timestamp": string; //unix time
-  }
+  token: string;
+  title: string;
+  body: string;
+  imageUrl: string;
+  /**
+   * webpush를 눌렀을때 이동할 링크
+   * 이미 liveuta가 켜져있을때는 링크가 있어도 이동없고 내려간 창만 다시 올려줌
+   */
+  link: string;
+  timestamp: string; //unix time
+}
 ```
 
 ## Environments
@@ -100,6 +55,10 @@ NEXTAUTH_SECRET=
 ACCESS_SECRET=
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
+KAKAO_CLIENT_ID=8d5844ce926ac62276b23fa3ff96ee57
+KAKAO_CLIENT_SECRET=67g5mtxhr0YJD4nbfTF21pZoD0GjARUF
+DISCORD_CLIENT_ID=1212658245248884756
+DISCORD_CLIENT_SECRET=CXO1wJL5kzEtJbzpuu6pMwU7IFA7DNrk
 
 /** Google Sheet v4 API, Firebase Cloud Messaging */
 FIREBASE_CLIENT_EMAIL=firebase-adminsdk...
@@ -109,6 +68,7 @@ NEXT_PUBLIC_FIREBASE_VAPID_KEY=BAKlP...
 
 MONGODB_API_KEY=
 MONGODB_URI=
+
 ORACLEDB_CONNECTSTRING=
 ORACLEDB_PASSWORD=
 ```
