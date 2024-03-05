@@ -1,19 +1,19 @@
 'use client';
 import { generateFcmToken } from '@/model/firebase/generateFcmToken';
-import CopyButton from '../button/CopyButton';
-import CardStatus from '../scheduleCard/CardStatus';
+import { generateThumbnail } from '@/model/youtube/thumbnail';
+import { generateVideoUrl } from '@/model/youtube/url';
 import { ContentsDataType } from '@/type/api/mongoDB';
 import { gtagClick } from '@inner/_lib/gtag';
+import reservePush from '@inner/_lib/reservePush';
 import { openWindow } from '@inner/_lib/windowEvent';
+import { useMutation } from '@tanstack/react-query';
 import cx from 'classnames';
 import { MouseEvent } from 'react';
 import { HiBellAlert } from 'react-icons/hi2';
-import * as styles from './card.css';
-import reservePush from '@inner/_lib/reservePush';
-import { useMutation } from '@tanstack/react-query';
-import { generateVideoUrl } from '@/model/youtube/url';
-import { generateThumbnail } from '@/model/youtube/thumbnail';
 import { toast } from 'sonner';
+import CopyButton from '../button/CopyButton';
+import CardStatus from '../scheduleCard/CardStatus';
+import * as styles from './card.css';
 
 interface CardDescProps {
   content: ContentsDataType;
@@ -21,7 +21,7 @@ interface CardDescProps {
 }
 
 export default function CardDesc({ content, addStreamModifier }: CardDescProps) {
-  const { title, channelName, korTime, interval, isStream, timestamp, videoId } = content;
+  const { title, channelName, korTime, interval, isStream, timestamp, videoId, viewer } = content;
 
   const videoUrl = generateVideoUrl(videoId);
   const thumbnailUrl = generateThumbnail(videoId, 'mqdefault');
@@ -82,7 +82,7 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
       <p className={cx(styles.title, addStreamModifier)}>{title}</p>
       <div className={styles.time}>
         <time className={'kor'}>{korTime}</time>
-        <CardStatus isStream={isStream} interval={interval} videoId={videoId} />
+        <CardStatus isStream={isStream} interval={interval} viewer={viewer} />
       </div>
       <div className={styles.link}>
         {isStream === 'NULL' ? (

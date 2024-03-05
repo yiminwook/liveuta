@@ -26,6 +26,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => 
       isStream: doc.broadcastStatus as isStream,
       interval,
       isVideo: doc.isVideo === 'TRUE' ? true : false,
+      viewer: doc.concurrentViewers,
     };
 
     return data;
