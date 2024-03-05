@@ -1,6 +1,6 @@
 'use client';
 import PlayerPlaceholder from '@inner/_component/player/PlayerPlaceholder';
-import { usePlayerAtom } from '@inner/_lib/atom';
+import { usePlayerVideoIdAtom } from '@inner/_lib/atom';
 import dynamic from 'next/dynamic';
 import { useLayoutEffect } from 'react';
 
@@ -14,10 +14,10 @@ interface PlayerWrapProps {
 }
 
 export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
-  const [, setPlayer] = usePlayerAtom();
+  const [, setPlayer] = usePlayerVideoIdAtom();
 
   useLayoutEffect(() => {
-    setPlayer((pre) => ({ ...pre, videoId }));
+    setPlayer(() => videoId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

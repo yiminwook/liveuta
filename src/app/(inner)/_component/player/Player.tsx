@@ -1,5 +1,5 @@
 'use client';
-import { usePlayerAtom } from '@inner/_lib/atom';
+import { usePlayerAtom, usePlayerStatusAtom } from '@inner/_lib/atom';
 import { forwardRef, useEffect, useState } from 'react';
 import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
@@ -21,7 +21,8 @@ export default forwardRef(function Player(
 ) {
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
-  const [playerValue, setPlayerValue] = usePlayerAtom();
+  const [playerValue] = usePlayerAtom();
+  const [, setStatus] = usePlayerStatusAtom();
 
   const keyDown = (e: KeyboardEvent) => {
     const target = e.target as HTMLElement | null;
@@ -32,13 +33,13 @@ export default forwardRef(function Player(
       if (e.key === ' ') {
         e.preventDefault();
         // 스페이스바 이벤트 방지
-        setPlayerValue((pre) => {
+        setStatus((pre) => {
           toast.info(`플레이어 ${pre.isPlaying ? '정지' : '재생'}`);
           return { ...pre, isPlaying: !pre.isPlaying };
         });
       }
       if (e.key === 'Escape') {
-        setPlayerValue((pre) => {
+        setStatus((pre) => {
           toast.info(`플레이어 ${pre.hide ? '보이기' : '숨기기'}`);
           return { ...pre, hide: !pre.hide };
         });
@@ -47,11 +48,11 @@ export default forwardRef(function Player(
   };
 
   const handlePlay = (isPlaying: boolean) => {
-    setPlayerValue((pre) => ({ ...pre, isPlaying }));
+    setStatus((pre) => ({ ...pre, isPlaying }));
   };
 
   const toggleLeft = () => {
-    setPlayerValue((pre) => ({ ...pre, hide: !pre.hide }));
+    setStatus((pre) => ({ ...pre, hide: !pre.hide }));
   };
 
   const navigateLive = () => router.push('/live');

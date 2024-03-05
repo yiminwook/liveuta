@@ -9,12 +9,15 @@ import { openWindow } from '@inner/_lib/windowEvent';
 import { BsMusicNoteList } from 'react-icons/bs';
 import { ImYoutube } from 'react-icons/im';
 import cx from 'classnames';
+import { useRouter } from 'next/navigation';
+import { IoArrowBack } from 'react-icons/io5';
 
 interface InfoProps {
   setlist: Setlist;
   channel: ChannleDatesetItem;
 }
 export default function Info({ setlist, channel }: InfoProps) {
+  const router = useRouter();
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
   const broadcast = dayjs(setlist.broadcastAt).format('YYYY-MM-DD HH:mm');
@@ -24,6 +27,9 @@ export default function Info({ setlist, channel }: InfoProps) {
   return (
     <div className={styles.wrap}>
       <nav className={styles.nav}>
+        <button onClick={() => router.back()}>
+          <IoArrowBack size={28} /> 뒤로가기
+        </button>
         <button
           className={cx(styles.navItem, styles.youtubeButton)}
           onClick={() => openWindow(videoUrl)}

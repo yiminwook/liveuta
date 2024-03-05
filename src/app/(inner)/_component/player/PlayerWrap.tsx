@@ -1,5 +1,4 @@
 'use client';
-import { usePlayerAtom } from '@inner/_lib/atom';
 import { useEffect, useRef, useState } from 'react';
 import LiveChat from './LiveChat';
 import Player from './Player';
@@ -10,7 +9,6 @@ import PlayerPlaceholder from './PlayerPlaceholder';
 interface PlayerWrapProps {}
 
 export default function PlayerWrap({}: PlayerWrapProps) {
-  const [playerValue] = usePlayerAtom();
   const wrapRef = useRef<HTMLDivElement>(null);
   const [isShow, setIsShow] = useState(false);
 
@@ -35,7 +33,7 @@ export default function PlayerWrap({}: PlayerWrapProps) {
     <div ref={wrapRef} className={styles.playerBox}>
       {!isShow ? <PlayerPlaceholder /> : null}
       <Player isShow={isShow} isLive={true} />
-      <LiveChat videoId={playerValue.videoId} />
+      <LiveChat />
     </div>
   );
 }

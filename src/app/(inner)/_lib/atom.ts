@@ -1,6 +1,7 @@
 import { SelectType } from '@/type';
 import { ContentsDataReturnType, ScheduleAPIReturntype } from '@/type/api/mongoDB';
 import { atom, useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 
 export const sidebarAtom = atom(false);
 export const useSidebarAtom = () => useAtom(sidebarAtom);
@@ -8,13 +9,20 @@ export const useSidebarAtom = () => useAtom(sidebarAtom);
 export const accountSidebarAtom = atom(false);
 export const useAccountSidebarAtom = () => useAtom(accountSidebarAtom);
 
-export const playerAtom = atom({
-  videoId: 'IiCKMyNuFYc',
+export const playerVideoIdAtom = atomWithStorage('playerVideoId', 'IiCKMyNuFY');
+export const playerStatusAtom = atom({
   isPlaying: false,
   isMutted: false,
   hide: true,
 });
 
+export const playerAtom = atom((get) => ({
+  videoId: get(playerVideoIdAtom),
+  ...get(playerStatusAtom),
+}));
+
+export const usePlayerVideoIdAtom = () => useAtom(playerVideoIdAtom);
+export const usePlayerStatusAtom = () => useAtom(playerStatusAtom);
 export const usePlayerAtom = () => useAtom(playerAtom);
 
 const SCHEDULE_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
@@ -70,6 +78,10 @@ export const useScheduleAtom = () => useAtom(scheduleAtom);
 export const useSelectedScheduleAtom = () => useAtom(selectedScheduleAtom);
 
 if (process.env.NODE_ENV === 'development') {
+  sidebarAtom.debugLabel = 'sidebarAtom';
+  accountSidebarAtom.debugLabel = 'accountSidebarAtom';
+  playerVideoIdAtom.debugLabel = 'playerVideoIdAtom';
+  playerStatusAtom.debugLabel = 'playerStatusAtom';
   playerAtom.debugLabel = 'playerAtom';
   filterAtom.debugLabel = 'filterAtom';
   selectAtom.debugLabel = 'selectAtom';

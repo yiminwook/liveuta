@@ -4,17 +4,17 @@ import { useEffect, useRef, useState } from 'react';
 import * as styles from './player.css';
 import MediaQuery from 'react-responsive';
 import { BREAK_POINT } from '@/style/var';
+import { usePlayerVideoIdAtom } from '@inner/_lib/atom';
 
 const DOMAIN = 'liveuta.vercel.app';
 
-interface LiveChatProp {
-  videoId: string;
-}
+interface LiveChatProp {}
 
-export default function LiveChat({ videoId }: LiveChatProp) {
-  const url = `https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${DOMAIN}&dark_theme=1`;
+export default function LiveChat({}: LiveChatProp) {
+  const [videoId] = usePlayerVideoIdAtom();
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const url = `https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${DOMAIN}&dark_theme=1`;
 
   const resiveMsgFromChild = (event: MessageEvent) => {
     if (event.origin !== url) return;

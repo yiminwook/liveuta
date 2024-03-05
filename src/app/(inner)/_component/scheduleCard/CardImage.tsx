@@ -1,16 +1,15 @@
 'use client';
-import { playerAtom } from '@inner/_lib/atom';
+import altImage from '@/asset/image/thumbnail_alt_img.png';
 import { DEFAULT_BLUR_BASE64 } from '@/const';
 import useResponsive from '@/hook/useResponsive';
-import altImage from '@/asset/image/thumbnail_alt_img.png';
+import { generateThumbnail } from '@/model/youtube/thumbnail';
+import { generateVideoUrl } from '@/model/youtube/url';
 import { ContentsDataType } from '@/type/api/mongoDB';
+import { usePlayerStatusAtom, usePlayerVideoIdAtom } from '@inner/_lib/atom';
 import { gtagClick } from '@inner/_lib/gtag';
-import { useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { MouseEvent, useCallback, useRef, useState } from 'react';
 import * as styles from './card.css';
-import { generateVideoUrl } from '@/model/youtube/url';
-import { generateThumbnail } from '@/model/youtube/thumbnail';
 
 interface CardImageProps {
   content: ContentsDataType;
@@ -23,7 +22,8 @@ export default function CardImage({ content }: CardImageProps) {
 
   const [imgLoaded, setImgLoaded] = useState(true);
   const { isMobile } = useResponsive();
-  const setPlayerValue = useSetAtom(playerAtom);
+  const [, setVideoId] = usePlayerVideoIdAtom();
+  const [, setPlayerStatus] = usePlayerStatusAtom();
   const imgRef = useRef<HTMLImageElement>(null);
 
   const handleImgValidity = useCallback(() => {
@@ -45,7 +45,8 @@ export default function CardImage({ content }: CardImageProps) {
     if (isMobile) {
       window.location.href = videoUrl;
     } else {
-      setPlayerValue((pre) => ({ ...pre, url: videoUrl, videoId, hide: false, isPlaying: true }));
+      setVideoId(() => videoId);
+      setPlayerStatus((pre) => ({ ...pre, hide: false, isPlaying: true }));
     }
   };
 
