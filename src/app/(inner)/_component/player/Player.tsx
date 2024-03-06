@@ -1,6 +1,6 @@
 'use client';
 import { player } from '@inner/_lib/atom/';
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
 import * as styles from './player.css';
@@ -17,14 +17,12 @@ interface PlayerProps {
   isLive: boolean;
 }
 
-export default forwardRef(function Player(
-  { isLive, isShow }: PlayerProps,
-  ref: React.Ref<ReactPlayer>,
-) {
+export default function Player({ isLive, isShow }: PlayerProps) {
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
   const [videoId, setVideoId] = useAtom(player.playerVideoIdAtom);
   const [status, setStatus] = useAtom(player.playerStatusAtom);
+  const playerRef = useRef<ReactPlayer>(null);
 
   const keyDown = (e: KeyboardEvent) => {
     const target = e.target as HTMLElement | null;
@@ -66,6 +64,12 @@ export default forwardRef(function Player(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReady]);
 
+  useEffect(() => {
+    if (isReady === true) {
+      playerRef.current?.seekTo(status.timeline);
+    }
+  }, [isReady, status.timeline]);
+
   const left = isShow === false && status.hide;
   const url = generateVideoUrl(videoId);
 
@@ -75,7 +79,7 @@ export default forwardRef(function Player(
         className={cx(styles.playerBase, 'reactPlayer')}
         width="100%"
         height="auto"
-        ref={ref}
+        ref={playerRef}
         url={url}
         muted={status.isMutted}
         autoPlay={status.isPlaying}
@@ -105,4 +109,4 @@ export default forwardRef(function Player(
       </button>
     </div>
   );
-});
+}

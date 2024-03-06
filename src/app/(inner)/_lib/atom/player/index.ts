@@ -8,6 +8,7 @@ export const playerStatusAtom = atom({
   isPlaying: false,
   isMutted: false,
   hide: true,
+  timeline: 0,
 });
 
 if (process.env.NODE_ENV === 'development') {
