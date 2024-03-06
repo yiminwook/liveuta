@@ -92,7 +92,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
       </button>
       <div className={styles.inner}>
         {description.split('\n').map((line, index) => (
-          <Text key={`${videoId}_row_${index}`} text={line} />
+          <Text key={`${videoId}_row_${index}`} index={index} text={line} videoId={videoId} />
         ))}
       </div>
     </div>

@@ -69,8 +69,14 @@ export const headerCell = style([cell, {}]);
 export const thumbnailBox = style({
   position: 'relative',
   objectFit: 'cover',
-  width: 120,
-  height: 90,
+  aspectRatio: '16 / 9',
+  width: '100%',
+});
+
+globalStyle(`${thumbnailBox} > img`, {
+  objectFit: 'cover',
+  width: '100%',
+  height: '100%',
 });
 
 // export const button = style({

@@ -21,7 +21,12 @@ export default portal('setlistModal', function SetlistModal() {
           <hr />
           <div className={styles.descBox}>
             {modalValue.setlist.description.split('\n').map((line, index) => (
-              <Text key={`${modalValue.setlist.videoId}_row_${index}`} text={line} />
+              <Text
+                key={`${modalValue.setlist.videoId}_row_${index}`}
+                index={index}
+                text={line}
+                videoId={modalValue.setlist.videoId}
+              />
             ))}
           </div>
         </div>

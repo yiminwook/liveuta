@@ -1,10 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 import { ChannelDataset } from '@/model/mongoDB/getAllChannel';
 import { Setlist } from '@/model/oracleDB/setlist/service';
 import { generateThumbnail } from '@/model/youtube/thumbnail';
-import { generateVideoUrl } from '@/model/youtube/url';
 import cx from 'classnames';
 import dayjs from 'dayjs';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import * as styles from './list.css';
 import { MouseEvent } from 'react';
@@ -19,8 +18,7 @@ export type RowProps = {
 export default function Row({ setlist, channel }: RowProps) {
   const router = useRouter();
   const [modalValue, setModalValue] = useSetlistModalAtom();
-  const videoUrl = generateVideoUrl(setlist.videoId);
-  const thumbnailUrl = generateThumbnail(setlist.videoId, 'default');
+  const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
   const broad = dayjs(setlist.broadcastAt).format('YYYY년 MM월 DD일');
 
   const handleImageClick = (e: MouseEvent) => {
@@ -38,7 +36,7 @@ export default function Row({ setlist, channel }: RowProps) {
         <div className={cx(styles.cell)}>
           <button onClick={handleImageClick}>
             <div className={styles.thumbnailBox}>
-              <Image src={thumbnailUrl} alt={setlist.title} fill unoptimized={false} />
+              <img src={thumbnailUrl} alt={setlist.title} />
             </div>
           </button>
         </div>
