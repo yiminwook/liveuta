@@ -50,7 +50,7 @@ export default function List({ searchParams, channelDataset }: ListProps) {
 
   return (
     <div>
-      <h2 className={styles.title}>조회 리스트</h2>
+      <h2 className={styles.title}>조회 리스트 (임시정렬기준: 작성일자)</h2>
       <div className={styles.table}>
         <div className={styles.header}>
           <div className={cx(styles.headerCell)}>썸네일</div>

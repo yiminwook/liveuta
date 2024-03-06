@@ -21,10 +21,6 @@ export default function Home() {
         <div className={styles.inner}>
           <div className={styles.top}>
             <h1 className={styles.title}>로그인 Beta.</h1>
-            <br />
-            <p>유저정보는 초기화 될 수 있습니다.</p>
-            <p>페이지가 정상적으로 작동되지 않을시</p>
-            <p>쿠키를 삭제 해주세요</p>
           </div>
           <div className={styles.bottom}>
             <p>Log in with your social account</p>

@@ -24,9 +24,7 @@ export default async function Home({ searchParams }: HomeProps) {
     <>
       <div className={styles.inner}>
         <section className={styles.top}>
-          <h1 className={styles.title}>세트리 검색 Beta.</h1>
-          <p>테스트 중입니다. 작성된 세트리가 지워질 수 있으니</p>
-          <p>열심히 올리지 말아주세요</p>
+          <h1 className={styles.title}>세트리</h1>
         </section>
         <section className={styles.bottom}>
           <div className={styles.inputArea}>
