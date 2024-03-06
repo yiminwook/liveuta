@@ -2,8 +2,8 @@
 import Settings from './settings.module.scss';
 import { useEffect, useState } from 'react';
 import { generateFcmToken } from '@/model/firebase/generateFcmToken';
-import PostBox from '@inner/(pip)/settings/_component/PostBox';
-import TokenBox from '@inner/(pip)/settings/_component/TokenBox';
+import PostBox from '@inner/(pip)/dev/_component/PostBox';
+import TokenBox from '@inner/(pip)/dev/_component/TokenBox';
 import { TokenType } from '@/type';
 import { toast } from 'sonner';
 

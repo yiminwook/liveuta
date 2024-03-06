@@ -1,4 +1,9 @@
+import { Metadata } from 'next';
 import Home from './_component/Home';
+
+export const metadata: Metadata = {
+  title: '세트리 | Live Uta',
+};
 
 interface Props {
   searchParams: {
