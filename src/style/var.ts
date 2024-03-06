@@ -84,3 +84,11 @@ export const preventUserSelect: CSSPropertiesWithVars = {
   WebkitUserSelect: 'none',
   userSelect: 'none',
 };
+
+export const fixedMaxSize: CSSPropertiesWithVars = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100dvw',
+  height: '100dvh',
+};

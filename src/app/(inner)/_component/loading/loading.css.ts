@@ -1,6 +1,6 @@
 import { global } from '@/style/globalTheme.css';
 import { loading } from '@/style/keyframe.css';
-import { flexCenter, zIndex } from '@/style/var';
+import { fixedMaxSize, flexCenter, zIndex } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 
 export const loadingWrap = style([
@@ -13,12 +13,8 @@ export const loadingWrap = style([
 export const MainLoadingWrap = style([
   flexCenter,
   zIndex.float,
+  fixedMaxSize,
   {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
     fontSize: '2rem',
   },
 ]);

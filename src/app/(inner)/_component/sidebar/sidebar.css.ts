@@ -1,15 +1,11 @@
-import { BEZIER_CURVE, responsive, zIndex } from '@/style/var';
+import { BEZIER_CURVE, fixedMaxSize, responsive, zIndex } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 export const wrap = style([
   zIndex.sidebar,
+  fixedMaxSize,
   {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    bottom: 0,
     visibility: 'hidden',
-    width: '100%',
     color: 'var(--liveuta-default-text-color)',
     transition: 'all 0.3s linear',
     selectors: {
