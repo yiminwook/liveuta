@@ -10,13 +10,7 @@ export const playerStatusAtom = atom({
   hide: true,
 });
 
-export const playerAtom = atom((get) => ({
-  videoId: get(playerVideoIdAtom),
-  ...get(playerStatusAtom),
-}));
-
 if (process.env.NODE_ENV === 'development') {
   playerVideoIdAtom.debugLabel = 'playerVideoIdAtom';
   playerStatusAtom.debugLabel = 'playerStatusAtom';
-  playerAtom.debugLabel = 'playerAtom';
 }

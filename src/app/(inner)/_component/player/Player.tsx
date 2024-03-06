@@ -23,9 +23,8 @@ export default forwardRef(function Player(
 ) {
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
-  const [playerValue] = useAtom(player.playerAtom);
-  const [, setStatus] = useAtom(player.playerStatusAtom);
-  const [, setVideoId] = useAtom(player.playerVideoIdAtom);
+  const [videoId, setVideoId] = useAtom(player.playerVideoIdAtom);
+  const [status, setStatus] = useAtom(player.playerStatusAtom);
 
   const keyDown = (e: KeyboardEvent) => {
     const target = e.target as HTMLElement | null;
@@ -67,8 +66,8 @@ export default forwardRef(function Player(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReady]);
 
-  const left = isShow === false && playerValue.hide;
-  const url = generateVideoUrl(playerValue.videoId);
+  const left = isShow === false && status.hide;
+  const url = generateVideoUrl(videoId);
 
   return (
     <div className={cx(isShow === false && styles.pipBase, styles.playerDiv, left && 'left')}>
@@ -78,9 +77,9 @@ export default forwardRef(function Player(
         height="auto"
         ref={ref}
         url={url}
-        muted={playerValue.isMutted}
-        autoPlay={playerValue.isPlaying}
-        playing={playerValue.isPlaying}
+        muted={status.isMutted}
+        autoPlay={status.isPlaying}
+        playing={status.isPlaying}
         onPlay={() => handlePlay(true)}
         onPause={() => handlePlay(false)}
         config={{ youtube: { playerVars: { suggestedQuality: 'hd720' } } }}
