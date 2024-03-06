@@ -10,5 +10,6 @@ export const wrap = style([
     bottom: 0,
     zIndex: zIndex.float.zIndex - 1,
     backgroundColor: 'var(--liveuta-backdrop-color)',
+    backdropFilter: 'blur(2px)',
   },
 ]);

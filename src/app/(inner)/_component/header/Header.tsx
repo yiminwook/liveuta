@@ -7,7 +7,7 @@ import { replaceSpecialCharacters } from '@inner/_lib/regexp';
 import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Avatar from '../Avatar';
 import HamburgerButton from '../button/HamburgerButton';
@@ -15,12 +15,12 @@ import NavigationList from '../header/NavigationList';
 import Input from '../input/Input';
 import * as styles from './header.css';
 import header from './header.module.scss';
+import cx from 'classnames';
 
-interface HeaderProps {
+type HeaderProps = {
   session: Session | null;
-}
+};
 export default function Header({ session }: HeaderProps) {
-  const pathname = usePathname();
   const route = useRouter();
   const gnbRef = useRef<HTMLDivElement>(null);
 
@@ -39,7 +39,9 @@ export default function Header({ session }: HeaderProps) {
         timer = null;
         const current = gnbRef.current;
         if (!current) return;
-        window.scrollY > 0 ? (current.style.opacity = '0') : (current.style.opacity = '1');
+        window.scrollY > 0
+          ? (current.style.backgroundColor = '#ffffff34')
+          : (current.style.backgroundColor = 'var(--liveuta-header-color)');
       }, 300);
     };
   }, []);
@@ -71,14 +73,14 @@ export default function Header({ session }: HeaderProps) {
 
   return (
     <header>
-      <div className={header['inner']} ref={gnbRef}>
+      <div className={cx(header['inner'], styles.inner)} ref={gnbRef}>
         <nav>
           <HamburgerButton className={header['hamburger']} onClick={openSidebar} />
           <Link href="/" className={header['title']}>
             Live Uta
           </Link>
           <div className={header['navigation']}>
-            {pathname !== '/search' ? (
+            {true && (
               <Input
                 className={header['search-input']}
                 onSubmit={handleSearch}
@@ -87,7 +89,7 @@ export default function Header({ session }: HeaderProps) {
                 onChange={handleChange}
                 onReset={handleReset}
               />
-            ) : null}
+            )}
             <NavigationList />
             {session ? (
               <button className={styles.accountButton} onClick={openAccountSidebar}>
