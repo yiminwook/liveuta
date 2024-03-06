@@ -9,7 +9,7 @@ export const useSidebarAtom = () => useAtom(sidebarAtom);
 export const accountSidebarAtom = atom(false);
 export const useAccountSidebarAtom = () => useAtom(accountSidebarAtom);
 
-export const playerVideoIdAtom = atomWithStorage('playerVideoId', 'IiCKMyNuFY');
+export const playerVideoIdAtom = atomWithStorage('playerVideoId', 'IiCKMyNuFYc');
 export const playerStatusAtom = atom({
   isPlaying: false,
   isMutted: false,
