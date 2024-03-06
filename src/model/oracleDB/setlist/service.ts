@@ -98,7 +98,7 @@ export async function getAllSetlist(pageNumber: number) {
 
 export async function searchSetlist(query: string, pageNumber: number) {
   const connection = await connectOracleDB();
-  const pattern = `%${query}%`;
+  const pattern = query.toLowerCase();
   try {
     const countResult = await connection.execute<[number]>(SEARCH_MAX_COUNT, [pattern]);
     const totalCount = countResult.rows?.[0][0] || 0;
