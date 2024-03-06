@@ -1,5 +1,6 @@
 import { BEZIER_CURVE, BOX_SHADOW, responsive, textOneLine, zIndex } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
+
 export const blank = style({
   height: '3.5rem',
   paddingTop: 'env(safe-area-inset-top)',
