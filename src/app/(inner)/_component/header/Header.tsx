@@ -16,6 +16,8 @@ import Input from '../input/Input';
 import * as styles from './header.css';
 import header from './header.module.scss';
 import cx from 'classnames';
+import { useMediaQuery } from 'react-responsive';
+import { BREAK_POINT } from '@/style/var';
 
 type HeaderProps = {
   session: Session | null;
@@ -27,6 +29,7 @@ export default function Header({ session }: HeaderProps) {
   const [, setShowSidebar] = useAtom(sidebarAtom);
   const [, setShowAccountSidebar] = useAtom(accountSidebarAtom);
   const [inputValue, setInputValue] = useState('');
+  const isMobile = useMediaQuery({ query: `(max-width: ${BREAK_POINT.md}px)` });
 
   const openSidebar = () => setShowSidebar(true);
   const openAccountSidebar = () => setShowAccountSidebar(true);
@@ -64,16 +67,17 @@ export default function Header({ session }: HeaderProps) {
   }, []);
 
   useEffect(() => {
+    if (isMobile) return;
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isMobile]);
 
   return (
     <header>
-      <div className={cx(header['inner'], styles.inner)} ref={gnbRef}>
+      <div className={cx(header['inner'], styles.inner, isMobile && 'mobile')} ref={gnbRef}>
         <nav>
           <HamburgerButton className={header['hamburger']} onClick={openSidebar} />
           <Link href="/" className={header['title']}>
