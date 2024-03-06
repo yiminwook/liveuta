@@ -1,5 +1,20 @@
-import { BEZIER_CURVE, responsive, zIndex } from '@/style/var';
-import { style } from '@vanilla-extract/css';
+import { BEZIER_CURVE, BOX_SHADOW, responsive, textOneLine, zIndex } from '@/style/var';
+import { globalStyle, style } from '@vanilla-extract/css';
+export const blank = style({
+  height: '3.5rem',
+  paddingTop: 'env(safe-area-inset-top)',
+});
+
+export const title = style([
+  textOneLine,
+  {
+    fontSize: '2rem',
+    color: 'var(--liveuta-title-color)',
+    fontWeight: 600,
+    lineHeight: '2.2rem',
+    height: '2.2rem',
+  },
+]);
 
 export const accountButton = style({
   width: 40,
@@ -27,6 +42,48 @@ export const inner = style([
       '&.mobile': {
         backgroundColor: 'var(--liveuta-header-color) !important',
       },
+    },
+  },
+]);
+
+export const nav = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '1rem',
+});
+
+globalStyle(`${nav} > ul`, {
+  display: 'none',
+  alignItems: 'center',
+  gap: '1rem',
+  ...responsive({
+    md: {
+      display: 'flex',
+    },
+  }),
+});
+
+export const searchBox = style({
+  width: '15rem',
+  color: 'black',
+  display: 'none',
+  ...responsive({
+    md: {
+      display: 'block',
+    },
+  }),
+});
+
+export const loginButton = style([
+  {
+    display: 'block',
+    borderRadius: 5,
+    padding: '0.25rem 0.5rem',
+    backgroundColor: 'var(--liveuta-active-color)',
+    transition: `background-color 0.8s ${BEZIER_CURVE}`,
+    boxShadow: BOX_SHADOW,
+    ':hover': {
+      backgroundColor: 'var(--liveuta-hover-color)',
     },
   },
 ]);

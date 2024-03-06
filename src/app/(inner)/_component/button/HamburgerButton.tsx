@@ -1,19 +1,15 @@
 import { RxHamburgerMenu } from 'react-icons/rx';
+import * as styles from './hamburgerButton.css';
 
 interface HamburgerButtonProps {
-  className: string;
   onClick: () => void;
   size?: string;
 }
 
-export default function HamburgerButton({
-  className,
-  size = '2rem',
-  onClick,
-}: HamburgerButtonProps) {
+export default function HamburgerButton({ onClick }: HamburgerButtonProps) {
   return (
-    <button className={className} onClick={onClick}>
-      <RxHamburgerMenu size={size} color="inherit" />
+    <button className={styles.button} onClick={onClick}>
+      <RxHamburgerMenu size="2rem" color="inherit" />
     </button>
   );
 }

@@ -2,15 +2,18 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { MouseEvent, ReactNode } from 'react';
+import cx from 'classnames';
+import * as styles from './navLink.css';
 
-interface NavLinkProps {
+type NavLinkProps = {
   href: string;
+  classname?: string;
   children: ReactNode;
   modifier?: string;
   shallow?: boolean;
-}
+};
 
-export default function NavLink({ href, children, modifier = '', shallow = false }: NavLinkProps) {
+export default function NavLink({ href, children, classname }: NavLinkProps) {
   const pathName = usePathname();
   const isActive = pathName === href;
 
@@ -22,16 +25,12 @@ export default function NavLink({ href, children, modifier = '', shallow = false
   };
 
   return (
-    <li>
-      <Link
-        href={href}
-        onClick={onClick}
-        className={isActive ? ['active', modifier].join(' ') : ''}
-        // shallow={shallow}
-        // prefetch={false}
-      >
-        {children}
-      </Link>
-    </li>
+    <Link
+      href={href}
+      onClick={onClick}
+      className={cx(styles.navLink, isActive && 'active', classname)}
+    >
+      {children}
+    </Link>
   );
 }

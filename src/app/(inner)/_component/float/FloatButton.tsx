@@ -18,6 +18,7 @@ import ToggleButton from './ToggleButton';
 import * as styles from './floatButton.css';
 import { RemoveScroll } from 'react-remove-scroll';
 import Backdrop from '../Backdrop';
+import ThemeButton from '../button/ThemeButton';
 
 // nav height = 240px
 // circle 0.5r = 26px
@@ -89,9 +90,10 @@ export default function FloatButton() {
       >
         <Motion.div className={styles.floatNavInner}>
           <Motion.ul variants={floatListVariants} className={styles.floatList}>
-            <ListItem index={0} />
-            <ListItem index={1} />
-            <ListItem index={2} />
+            {/* <ListItem index={0} /> */}
+            {/* <ListItem index={1} /> */}
+            {/* <ListItem index={2} /> */}
+            <ThemeButton />
           </Motion.ul>
         </Motion.div>
         <button className={styles.scrollUpButton} onClick={scrollUp}>

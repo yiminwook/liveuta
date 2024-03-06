@@ -4,9 +4,9 @@ import NavLink from '../NavLink';
 
 function IndexLink({ href, text }: { href: string; text: ReactNode }) {
   return (
-    <NavLink modifier="" href={href}>
-      {text}
-    </NavLink>
+    <li>
+      <NavLink href={href}>{text}</NavLink>
+    </li>
   );
 }
 

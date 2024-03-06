@@ -24,7 +24,7 @@ globalStyle('::-webkit-scrollbar-button', {
   visibility: 'hidden',
 });
 
-globalStyle('a, h1, h2, h3, h4, p', {
+globalStyle('h1, h2, h3, h4, p', {
   fontFamily: 'inherit',
   fontSize: 'inherit',
   fontWeight: 'inherit',
@@ -46,7 +46,7 @@ globalStyle('button', {
   border: 'none',
   background: 'none',
   cursor: 'pointer',
-  display: 'inline-block',
+  display: 'block',
   boxSizing: 'border-box',
   margin: 0,
   padding: 0,
@@ -60,6 +60,9 @@ globalStyle('a', {
   color: 'inherit',
   background: 'none',
   cursor: 'pointer',
+  lineHeight: 1.5,
+  listStyle: 'none',
+  textDecoration: 'none',
 });
 
 globalStyle('label', {
@@ -76,8 +79,22 @@ globalStyle('label', {
   lineHeight: 1.5,
 });
 
+globalStyle('input', {
+  display: 'block',
+  fontFamily: 'inherit',
+  fontSize: 'inherit',
+  fontWeight: 'inherit',
+  color: 'inherit',
+  listStyle: 'none',
+  textDecoration: 'none',
+  boxSizing: 'border-box',
+  margin: 0,
+  padding: 0,
+  border: 'none',
+});
+
 globalStyle(
-  'button:focus:not(:focus-visible), a:focus:not(:focus-visible), textarea:focus:not(focus-visible)',
+  'button:focus:not(:focus-visible), a:focus:not(:focus-visible), textarea:focus:not(focus-visible), input:focus:not(focus-visible)',
   {
     outline: 'none',
   },
@@ -90,8 +107,13 @@ globalStyle('button:focus-visible, a:focus-visible', {
   zIndex: 10,
 });
 
-globalStyle('button.active, a.active', {
+globalStyle('button.active', {
   backgroundColor: 'var(--liveuta-active-color)',
+  cursor: 'default',
+});
+
+globalStyle('a.active', {
+  color: 'var(--liveuta-active-color)',
   cursor: 'default',
 });
 

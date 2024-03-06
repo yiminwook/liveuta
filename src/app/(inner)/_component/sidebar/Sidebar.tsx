@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import CloseButton from '../button/CloseButton';
-import ThemeButton from '../button/ThemeButton';
 import ExternalLinksSection from './ExternalLinksSection';
 import IndexSection from './IndexSection';
 import * as styles from './sidebar.css';
@@ -41,7 +40,6 @@ export default function Sidebar() {
           <div className={cx(styles.inner, 'left', show && 'moveRight')} onClick={stopPropagation}>
             <nav className={styles.nav}>
               <CloseButton onClick={handleClose} />
-              <ThemeButton />
             </nav>
             <IndexSection />
             <ExternalLinksSection />

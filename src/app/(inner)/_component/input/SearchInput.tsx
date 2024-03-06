@@ -1,25 +1,18 @@
-'use client';
-import { ChangeEvent, CSSProperties, FormEvent, RefObject, useState } from 'react';
+import { ChangeEvent, CSSProperties, FormEvent, useState } from 'react';
+import { IoMdMusicalNote } from 'react-icons/io';
+import * as styles from './searchInput.css';
 
 interface SearchInputProps {
-  ref?: RefObject<HTMLInputElement>;
   style?: CSSProperties;
   placeHolder?: string;
   disabled?: boolean;
   onSearch: (value: string) => void;
 }
 
-function SearchInput({
-  ref,
-  style,
-  placeHolder = '',
-  disabled = false,
-  onSearch,
-}: SearchInputProps) {
+export default function SearchInput({ style, placeHolder, disabled, onSearch }: SearchInputProps) {
   const [value, setValue] = useState('');
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.stopPropagation();
     const value = e.target.value;
     setValue(() => value);
   };
@@ -31,19 +24,19 @@ function SearchInput({
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className={styles.wrap}>
       <input
+        className={styles.input}
         type="text"
-        ref={ref}
         style={style ? { ...style } : {}}
         disabled={disabled}
         placeholder={placeHolder}
         value={value}
         onChange={onChange}
       />
-      <button type="submit">검색</button>
+      <button className={styles.submitButton} type="submit" disabled={disabled}>
+        <IoMdMusicalNote color="inherit" size="1.5rem" />
+      </button>
     </form>
   );
 }
-
-export default SearchInput;
