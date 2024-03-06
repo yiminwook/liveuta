@@ -9,9 +9,9 @@ export const scheduleKeyAtom = atom(['schedule']);
 export const scheduleOptionAtom = atom({
   staleTime: 1000 * 60 * 1, // 1 minute
   gcTime: SCHEDULE_REFRESH_INTERVAL,
-  refetchInterval: SCHEDULE_REFRESH_INTERVAL,
+  refetchInterval: SCHEDULE_REFRESH_INTERVAL as number | false | undefined,
   refetchOnReconnect: true,
-  refetchOnWindowFocus: false,
+  refetchOnWindowFocus: true,
   refetchIntervalInBackground: false,
 });
 
