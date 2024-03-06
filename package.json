@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pm2": "pm2 start start.js --name liveuta"
   },
   "dependencies": {
     "@ark-ui/react": "^2.2.3",
@@ -69,6 +70,7 @@
     "encoding": "^0.1.13",
     "eslint": "8.36.0",
     "eslint-config-next": "^13.4.1",
+    "pm2": "^5.3.1",
     "sass": "^1.70.0",
     "typescript": "^5.3.3"
   },
