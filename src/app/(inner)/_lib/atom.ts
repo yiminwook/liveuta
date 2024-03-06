@@ -1,3 +1,4 @@
+import { IINITIAL_PLAYER_VIDEO_ID } from '@/const';
 import { SelectType } from '@/type';
 import { ContentsDataReturnType, ScheduleAPIReturntype } from '@/type/api/mongoDB';
 import { atom, useAtom } from 'jotai';
@@ -9,7 +10,7 @@ export const useSidebarAtom = () => useAtom(sidebarAtom);
 export const accountSidebarAtom = atom(false);
 export const useAccountSidebarAtom = () => useAtom(accountSidebarAtom);
 
-export const playerVideoIdAtom = atomWithStorage('playerVideoId', 'IiCKMyNuFYc');
+export const playerVideoIdAtom = atomWithStorage('playerVideoId', IINITIAL_PLAYER_VIDEO_ID);
 export const playerStatusAtom = atom({
   isPlaying: false,
   isMutted: false,

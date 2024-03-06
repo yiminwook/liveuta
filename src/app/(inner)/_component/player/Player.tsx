@@ -1,5 +1,5 @@
 'use client';
-import { usePlayerAtom, usePlayerStatusAtom } from '@inner/_lib/atom';
+import { usePlayerAtom, usePlayerStatusAtom, usePlayerVideoIdAtom } from '@inner/_lib/atom';
 import { forwardRef, useEffect, useState } from 'react';
 import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
@@ -9,6 +9,7 @@ import { FaHotjar } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { generateVideoUrl } from '@/model/youtube/url';
 import { toast } from 'sonner';
+import { IINITIAL_PLAYER_VIDEO_ID } from '@/const';
 
 interface PlayerProps {
   isShow: boolean;
@@ -23,6 +24,7 @@ export default forwardRef(function Player(
   const [isReady, setIsReady] = useState(false);
   const [playerValue] = usePlayerAtom();
   const [, setStatus] = usePlayerStatusAtom();
+  const [, setVideoId] = usePlayerVideoIdAtom();
 
   const keyDown = (e: KeyboardEvent) => {
     const target = e.target as HTMLElement | null;
@@ -71,8 +73,8 @@ export default forwardRef(function Player(
     <div className={cx(isShow === false && styles.pipBase, styles.playerDiv, left && 'left')}>
       <ReactPlayer
         className={cx(styles.playerBase, 'reactPlayer')}
-        width={'100%'}
-        height={'auto'}
+        width="100%"
+        height="auto"
         ref={ref}
         url={url}
         muted={playerValue.isMutted}
@@ -84,6 +86,12 @@ export default forwardRef(function Player(
         controls={true}
         onReady={() => setIsReady(() => true)}
         fallback={<div className={styles.playerPlaceholder} />}
+        onError={(e) => {
+          console.error('Player', e);
+          toast.error('실행 할 수 없는 영상입니다.');
+          setVideoId(() => IINITIAL_PLAYER_VIDEO_ID);
+          setStatus((pre) => ({ ...pre, isPlaying: false }));
+        }}
       />
       <button className={cx(styles.pipButton, isShow === false && 'hide')} onClick={toggleLeft}>
         <ImYoutube size={28} />

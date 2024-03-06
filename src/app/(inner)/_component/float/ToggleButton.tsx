@@ -6,9 +6,8 @@ import { AiOutlineLoading } from 'react-icons/ai';
 import * as styles from './floatButton.css';
 import { MdMyLocation } from 'react-icons/md';
 import { IoClose } from 'react-icons/io5';
-import useScheduleStatus from '@/hook/useScheduleStatus';
-import GlobalLoading from '@/app/loading';
 import MainLoading from '../loading/MainLoading';
+import useScheduleStatus from '@/hook/useScheduleStatus';
 
 interface ToggleButtonProps {
   isOpen: boolean;
@@ -16,9 +15,9 @@ interface ToggleButtonProps {
 }
 
 export default function ToggleButton({ isOpen, onClick }: ToggleButtonProps) {
-  const status = useScheduleStatus();
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
+  const status = useScheduleStatus();
 
   const unFetching = isFetching === 0 && isMutating === 0;
 

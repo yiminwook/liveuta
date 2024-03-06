@@ -28,3 +28,5 @@ export const MONGODB_CHANNEL_DB = 'ManagementDB';
 export const ORACLEDB_USER = 'admin';
 
 export const SETLIST_PAGE_SIZE = 15;
+
+export const IINITIAL_PLAYER_VIDEO_ID = 'IiCKMyNuFYc';

@@ -3,15 +3,14 @@ import { useEffect, useRef, useState } from 'react';
 import LiveChat from './LiveChat';
 import Player from './Player';
 import * as styles from './player.css';
-import useScheduleStatus from '@/hook/useScheduleStatus';
 import PlayerPlaceholder from './PlayerPlaceholder';
+import useScheduleStatus from '@/hook/useScheduleStatus';
 
 interface PlayerWrapProps {}
 
 export default function PlayerWrap({}: PlayerWrapProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [isShow, setIsShow] = useState(false);
-
   const status = useScheduleStatus();
 
   const handleInteresect: IntersectionObserverCallback = (items, observer) => {
