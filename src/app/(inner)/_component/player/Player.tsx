@@ -5,12 +5,12 @@ import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
 import * as styles from './player.css';
 import cx from 'classnames';
-import { FaHotjar } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { generateVideoUrl } from '@/model/youtube/url';
 import { toast } from 'sonner';
 import { IINITIAL_PLAYER_VIDEO_ID } from '@/const';
 import { useAtom } from 'jotai';
+import { BsLightningFill } from 'react-icons/bs';
 
 interface PlayerProps {
   isShow: boolean;
@@ -102,7 +102,7 @@ export default forwardRef(function Player(
         className={cx(styles.liveButton, isShow === false && 'hide')}
         onClick={navigateLive}
       >
-        <FaHotjar size={28} />
+        <BsLightningFill size={28} />
       </button>
     </div>
   );
