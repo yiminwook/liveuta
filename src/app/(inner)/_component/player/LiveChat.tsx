@@ -4,14 +4,15 @@ import { useEffect, useRef, useState } from 'react';
 import * as styles from './player.css';
 import MediaQuery from 'react-responsive';
 import { BREAK_POINT } from '@/style/var';
-import { usePlayerVideoIdAtom } from '@inner/_lib/atom';
+import { player } from '@inner/_lib/atom';
+import { useAtom } from 'jotai';
 
 const DOMAIN = 'liveuta.vercel.app';
 
 interface LiveChatProp {}
 
 export default function LiveChat({}: LiveChatProp) {
-  const [videoId] = usePlayerVideoIdAtom();
+  const [videoId] = useAtom(player.playerVideoIdAtom);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const url = `https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${DOMAIN}&dark_theme=1`;

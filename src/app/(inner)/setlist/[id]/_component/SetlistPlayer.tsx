@@ -1,6 +1,7 @@
 'use client';
 import PlayerPlaceholder from '@inner/_component/player/PlayerPlaceholder';
-import { usePlayerVideoIdAtom } from '@inner/_lib/atom';
+import { player } from '@inner/_lib/atom';
+import { useAtom } from 'jotai';
 import dynamic from 'next/dynamic';
 import { useLayoutEffect } from 'react';
 
@@ -14,7 +15,7 @@ interface PlayerWrapProps {
 }
 
 export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
-  const [, setPlayer] = usePlayerVideoIdAtom();
+  const [, setPlayer] = useAtom(player.playerVideoIdAtom);
 
   useLayoutEffect(() => {
     setPlayer(() => videoId);

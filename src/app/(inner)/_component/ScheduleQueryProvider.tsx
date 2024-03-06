@@ -1,15 +1,10 @@
 'use client';
 import { SelectType } from '@/type';
 import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
-import {
-  useFilterAtom,
-  useScheduleAtom,
-  useScheduleKeyAtom,
-  useScheduleOptionAtom,
-  useSelectAtom,
-} from '@inner/_lib/atom';
+import { schedule } from '@inner/_lib/atom';
 import getSchedule from '@inner/_lib/getSchedule';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 import { useEffect, useLayoutEffect } from 'react';
 
 type ScheduleDataProviderProps = {
@@ -23,11 +18,11 @@ export default function ScheduleDataProvider({
   filter,
   select,
 }: ScheduleDataProviderProps) {
-  const [key] = useScheduleKeyAtom();
-  const [option] = useScheduleOptionAtom();
-  const [, setSchedule] = useScheduleAtom();
-  const [, setSelect] = useSelectAtom();
-  const [, setFilter] = useFilterAtom();
+  const [key] = useAtom(schedule.scheduleKeyAtom);
+  const [option] = useAtom(schedule.scheduleOptionAtom);
+  const [, setSchedule] = useAtom(schedule.scheduleAtom);
+  const [, setSelect] = useAtom(schedule.selectAtom);
+  const [, setFilter] = useAtom(schedule.filterAtom);
 
   useLayoutEffect(() => {
     setSelect(() => select);

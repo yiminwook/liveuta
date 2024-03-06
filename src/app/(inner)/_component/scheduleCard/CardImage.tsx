@@ -1,15 +1,16 @@
 'use client';
 import altImage from '@/asset/image/thumbnail_alt_img.png';
 import { DEFAULT_BLUR_BASE64 } from '@/const';
-import useResponsive from '@/hook/useResponsive';
 import { generateThumbnail } from '@/model/youtube/thumbnail';
 import { generateVideoUrl } from '@/model/youtube/url';
 import { ContentsDataType } from '@/type/api/mongoDB';
-import { usePlayerStatusAtom, usePlayerVideoIdAtom } from '@inner/_lib/atom';
+import { player } from '@inner/_lib/atom';
 import { gtagClick } from '@inner/_lib/gtag';
 import Image from 'next/image';
 import { MouseEvent, useCallback, useRef, useState } from 'react';
 import * as styles from './card.css';
+import { useAtom } from 'jotai';
+import { useMediaQuery } from 'react-responsive';
 
 interface CardImageProps {
   content: ContentsDataType;
@@ -19,11 +20,10 @@ export default function CardImage({ content }: CardImageProps) {
   const { channelName, videoId } = content;
   const videoUrl = generateVideoUrl(videoId);
   const thumbnailUrl = generateThumbnail(videoId, 'mqdefault');
-
   const [imgLoaded, setImgLoaded] = useState(true);
-  const { isMobile } = useResponsive();
-  const [, setVideoId] = usePlayerVideoIdAtom();
-  const [, setPlayerStatus] = usePlayerStatusAtom();
+  const isMobile = useMediaQuery({ query: '(max-width: 640px)' });
+  const [, setVideoId] = useAtom(player.playerVideoIdAtom);
+  const [, setPlayerStatus] = useAtom(player.playerStatusAtom);
   const imgRef = useRef<HTMLImageElement>(null);
 
   const handleImgValidity = useCallback(() => {

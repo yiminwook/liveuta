@@ -1,19 +1,20 @@
 'use client';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/const';
 import { ContentsDataType } from '@/type/api/mongoDB';
-import { useSelectedScheduleAtom } from '@inner/_lib/atom';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import InterSectionTrigger from './InterSectionTrigger';
 import ScheduleCard from './scheduleCard/Card';
 import * as cardStyles from './scheduleCard/card.css';
+import { useAtom } from 'jotai';
+import { schedule } from '@inner/_lib/atom';
 
 const CardPlaceHolders = dynamic(() => import('./scheduleCard/CardPlaceHolders'), { ssr: false });
 
 export default function ScheduleSection() {
   const [loadContents, setLoadContents] = useState<ContentsDataType[]>([]);
   const [scrollPage, setScrollPage] = useState(1);
-  const [selectedData] = useSelectedScheduleAtom();
+  const [selectedData] = useAtom(schedule.selectedScheduleAtom);
 
   const isDone = loadContents.length >= selectedData.contents.length;
 

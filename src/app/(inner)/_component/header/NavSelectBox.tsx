@@ -7,15 +7,17 @@ import { BiArrowFromLeft } from 'react-icons/bi';
 import { BsSliders } from 'react-icons/bs';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { SelectType } from '@/type';
+import { schedule } from '@inner/_lib/atom';
 import { useRouter } from 'next/navigation';
+import { useAtom } from 'jotai';
 
 interface NavSelectBoxProps {}
 
 export default function NavSelectBox({}: NavSelectBoxProps) {
   const router = useRouter();
   const [active, setActive] = useState(false);
-  const [select, setSelect] = useSelectAtom();
-  const [selectedSchedule] = useSelectedScheduleAtom();
+  const [select] = useAtom(schedule.selectAtom);
+  const [selectedSchedule] = useAtom(schedule.selectedScheduleAtom);
 
   const handleSelect = async (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
@@ -26,7 +28,6 @@ export default function NavSelectBox({}: NavSelectBoxProps) {
     } else {
       const selectCookie = new Cookies();
       selectCookie.set('select', li, { path: '/', maxAge: 60 * 60 * 24 * 30 * 3 }); //3개월 저장
-      setSelect(() => li);
       setActive(() => false);
       // select cache 삭제
       router.refresh();

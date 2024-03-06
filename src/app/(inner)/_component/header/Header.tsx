@@ -1,21 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import dayjs from '@/model/dayjs';
+import { accountSidebarAtom, sidebarAtom } from '@inner/_lib/atom';
+import { gtag } from '@inner/_lib/gtag';
 import { replaceSpecialCharacters } from '@inner/_lib/regexp';
+import { useAtom } from 'jotai';
+import { Session } from 'next-auth';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { BiSearchAlt } from 'react-icons/bi';
+import Avatar from '../Avatar';
 import HamburgerButton from '../button/HamburgerButton';
 import NavigationList from '../header/NavigationList';
 import Input from '../input/Input';
-import header from './header.module.scss';
-import { useAccountSidebarAtom, useSidebarAtom } from '@inner/_lib/atom';
-import { Session } from 'next-auth';
-import { button } from '../button/copyButton.css';
 import * as styles from './header.css';
-import Avatar from '../Avatar';
-import { gtag } from '@inner/_lib/gtag';
+import header from './header.module.scss';
 
 interface HeaderProps {
   session: Session | null;
@@ -25,8 +24,8 @@ export default function Header({ session }: HeaderProps) {
   const route = useRouter();
   const gnbRef = useRef<HTMLDivElement>(null);
 
-  const [, setShowSidebar] = useSidebarAtom();
-  const [, setShowAccountSidebar] = useAccountSidebarAtom();
+  const [, setShowSidebar] = useAtom(sidebarAtom);
+  const [, setShowAccountSidebar] = useAtom(accountSidebarAtom);
   const [inputValue, setInputValue] = useState('');
 
   const openSidebar = () => setShowSidebar(true);

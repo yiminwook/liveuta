@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import { useAccountSidebarAtom } from '@inner/_lib/atom';
+import { accountSidebarAtom } from '@inner/_lib/atom/common';
 import { Session } from 'next-auth';
 import { useEffect } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
@@ -12,12 +12,13 @@ import { useMutation } from '@tanstack/react-query';
 import { signOut } from 'next-auth/react';
 import Avatar from '../Avatar';
 import { toast } from 'sonner';
+import { useAtom } from 'jotai';
 
 interface AccountSidebarProps {
   session: Session;
 }
 export default function AccountSidebar({ session }: AccountSidebarProps) {
-  const [show, setShow] = useAccountSidebarAtom();
+  const [show, setShow] = useAtom(accountSidebarAtom);
   const { stopPropagation } = useStopPropagation();
   const handleClose = () => setShow(false);
 

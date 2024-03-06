@@ -1,20 +1,21 @@
 'use client';
+import useStopPropagation from '@/hook/useStopPropagation';
+import { sidebarAtom } from '@inner/_lib/atom';
+import cx from 'classnames';
+import { useAtom } from 'jotai';
+import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
-import ExternalLinksSection from './ExternalLinksSection';
-import IndexSection from './IndexSection';
+import { RemoveScroll } from 'react-remove-scroll';
 import CloseButton from '../button/CloseButton';
 import ThemeButton from '../button/ThemeButton';
-import useStopPropagation from '@/hook/useStopPropagation';
-import { useSidebarAtom } from '@inner/_lib/atom';
-import { usePathname } from 'next/navigation';
-import { RemoveScroll } from 'react-remove-scroll';
+import ExternalLinksSection from './ExternalLinksSection';
+import IndexSection from './IndexSection';
 import * as styles from './sidebar.css';
-import cx from 'classnames';
 
 export default function Sidebar() {
   const pathname = usePathname();
   const { stopPropagation } = useStopPropagation();
-  const [show, setShow] = useSidebarAtom();
+  const [show, setShow] = useAtom(sidebarAtom);
 
   const handleClose = () => setShow(false);
 

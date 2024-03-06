@@ -1,5 +1,5 @@
 'use client';
-import { usePlayerAtom, usePlayerStatusAtom, usePlayerVideoIdAtom } from '@inner/_lib/atom';
+import { player } from '@inner/_lib/atom/';
 import { forwardRef, useEffect, useState } from 'react';
 import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { generateVideoUrl } from '@/model/youtube/url';
 import { toast } from 'sonner';
 import { IINITIAL_PLAYER_VIDEO_ID } from '@/const';
+import { useAtom } from 'jotai';
 
 interface PlayerProps {
   isShow: boolean;
@@ -22,9 +23,9 @@ export default forwardRef(function Player(
 ) {
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
-  const [playerValue] = usePlayerAtom();
-  const [, setStatus] = usePlayerStatusAtom();
-  const [, setVideoId] = usePlayerVideoIdAtom();
+  const [playerValue] = useAtom(player.playerAtom);
+  const [, setStatus] = useAtom(player.playerStatusAtom);
+  const [, setVideoId] = useAtom(player.playerVideoIdAtom);
 
   const keyDown = (e: KeyboardEvent) => {
     const target = e.target as HTMLElement | null;
