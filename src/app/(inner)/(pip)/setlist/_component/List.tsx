@@ -30,9 +30,13 @@ export default function List({ searchParams, channelDataset }: ListProps) {
     queryKey: ['searchSetlist', searchParams],
     queryFn: async () => {
       const result = await axios.get<{
-        maxPage: number;
+        total: number;
         list: Setlist[];
-      }>(`/api/search/setlist?query=${searchParams.query}&page=${searchParams.page}`);
+      }>(
+        `/api/search/setlist?q=${searchParams.query}&r=${
+          (searchParams.page - 1) * SETLIST_PAGE_SIZE
+        }`,
+      );
       return result.data;
     },
   });
@@ -65,7 +69,7 @@ export default function List({ searchParams, channelDataset }: ListProps) {
         </div>
         <div className={styles.pagenationBox}>
           <Pagination
-            count={SETLIST_PAGE_SIZE * data.maxPage}
+            count={data.total}
             pageSize={SETLIST_PAGE_SIZE}
             sliblingCount={1}
             currentPage={searchParams.page}

@@ -1,4 +1,4 @@
-import OracleDB, { DBError } from 'oracledb';
+import { DBError } from 'oracledb';
 import { connectOracleDB } from '../connection';
 import {
   DELETE_SETLIST,
@@ -63,20 +63,19 @@ export async function getSetlistByVideoId(videoId: string) {
   }
 }
 
-export async function getAllSetlist(pageNumber: number) {
+export async function getAllSetlist(row: number) {
   const connection = await connectOracleDB();
   try {
+    const startRow = row + 1;
+    const endRow = row + SETLIST_PAGE_SIZE;
+
     const countResult = await connection.execute<[number]>(GET_MAX_COUNT);
-    const totalCount = countResult.rows?.[0][0] || 0;
-    const maxPage = Math.ceil(totalCount / SETLIST_PAGE_SIZE);
+    const total = countResult.rows?.[0][0] || 0;
 
-    if (maxPage === 0 || pageNumber > maxPage) {
+    if (total === 0 || startRow > total) {
       await connection.close();
-      return { maxPage: 0, list: [] };
+      return { total: 0, list: [] };
     }
-
-    const startRow = (pageNumber - 1) * SETLIST_PAGE_SIZE + 1;
-    const endRow = pageNumber * SETLIST_PAGE_SIZE;
 
     const searchResult = await connection.execute<SetlistRow>(GET_ALL_SETLIST, [startRow, endRow]);
 
@@ -85,32 +84,31 @@ export async function getAllSetlist(pageNumber: number) {
     const rows = searchResult.rows;
     if (!rows) {
       await connection.close();
-      return { maxPage: 0, list: [] };
+      return { total: 0, list: [] };
     }
 
     const list = rows.map((row) => parseSetlistRow(row));
-    return { maxPage, list };
+    return { total, list };
   } catch (error) {
     await connection.close();
     throw error;
   }
 }
 
-export async function searchSetlist(query: string, pageNumber: number) {
+export async function searchSetlist(query: string, row: number) {
   const connection = await connectOracleDB();
   const pattern = query.toLowerCase();
   try {
+    const startRow = row + 1;
+    const endRow = row + SETLIST_PAGE_SIZE;
+
     const countResult = await connection.execute<[number]>(SEARCH_MAX_COUNT, [pattern]);
-    const totalCount = countResult.rows?.[0][0] || 0;
-    const maxPage = Math.ceil(totalCount / SETLIST_PAGE_SIZE);
+    const total = countResult.rows?.[0][0] || 0;
 
-    if (maxPage === 0 || pageNumber > maxPage) {
+    if (total === 0 || startRow > total) {
       await connection.close();
-      return { maxPage: 0, list: [] };
+      return { total: 0, list: [] };
     }
-
-    const startRow = (pageNumber - 1) * SETLIST_PAGE_SIZE + 1;
-    const endRow = pageNumber * SETLIST_PAGE_SIZE;
 
     const searchResult = await connection.execute<SetlistRow>(SEARCH_SETLIST, [
       pattern,
@@ -121,13 +119,14 @@ export async function searchSetlist(query: string, pageNumber: number) {
     await connection.close();
 
     const rows = searchResult.rows;
+
     if (!rows) {
       await connection.close();
-      return { maxPage: 0, list: [] };
+      return { total: 0, list: [] };
     }
 
     const list = rows.map((row) => parseSetlistRow(row));
-    return { maxPage, list };
+    return { total, list };
   } catch (error) {
     await connection.close();
     throw error;
