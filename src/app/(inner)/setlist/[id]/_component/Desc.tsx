@@ -1,5 +1,5 @@
 'use client';
-import Text from '@inner/(pip)/setlist/_component/Text';
+import TimelineText from '@inner/_component/TimestampText';
 import { useMutation } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { Session } from 'next-auth';
@@ -9,6 +9,8 @@ import TextareaAutosize from 'react-textarea-autosize';
 import updateSetlist from '../_lib/updateSetlist';
 import * as styles from './desc.css';
 import { toast } from 'sonner';
+import { useSetAtom } from 'jotai';
+import { player } from '@inner/_lib/atom';
 
 interface DescProps {
   videoId: string;
@@ -20,6 +22,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState(description);
+  const setPlayer = useSetAtom(player.playerStatusAtom);
 
   const toggleEditing = () => {
     if (!session) return toast.warning('로그인이 필요한 서비스입니다.');
@@ -59,6 +62,10 @@ export default function Desc({ session, videoId, description }: DescProps) {
     mutateSetlist.mutate({ session, videoId, desc });
   };
 
+  const handleTimestamp = ({ timestamp }: { href: string; timestamp: number }) => {
+    setPlayer((pre) => ({ ...pre, timeline: timestamp, isPlaying: true, hide: false }));
+  };
+
   if (isEditing) {
     return (
       <form className={styles.wrap} onSubmit={handleSubmit}>
@@ -92,7 +99,13 @@ export default function Desc({ session, videoId, description }: DescProps) {
       </button>
       <div className={styles.inner}>
         {description.split('\n').map((line, index) => (
-          <Text key={`${videoId}_row_${index}`} index={index} text={line} videoId={videoId} />
+          <TimelineText
+            key={`${videoId}_row_${index}`}
+            index={index}
+            text={line}
+            videoId={videoId}
+            onClickTimestamp={handleTimestamp}
+          />
         ))}
       </div>
     </div>

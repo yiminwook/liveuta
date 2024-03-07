@@ -4,11 +4,11 @@ import { Setlist } from '@/model/oracleDB/setlist/service';
 import { generateThumbnail } from '@/model/youtube/thumbnail';
 import cx from 'classnames';
 import dayjs from 'dayjs';
+import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
-import * as styles from './list.css';
 import { MouseEvent } from 'react';
-import { useSetlistModalAtom } from '../_lib/atom';
-import SetlistModal from './SetlistModal';
+import { setlistModalAtom } from '../_lib/atom';
+import * as styles from './list.css';
 
 export type RowProps = {
   setlist: Setlist;
@@ -17,7 +17,7 @@ export type RowProps = {
 
 export default function Row({ setlist, channel }: RowProps) {
   const router = useRouter();
-  const [modalValue, setModalValue] = useSetlistModalAtom();
+  const setModalValue = useSetAtom(setlistModalAtom);
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
   const broad = dayjs(setlist.broadcastAt).format('YYYY년 MM월 DD일');
 
@@ -31,22 +31,19 @@ export default function Row({ setlist, channel }: RowProps) {
   };
 
   return (
-    <>
-      <div className={cx(styles.row, 'hover')} onClick={openModal}>
-        <div className={cx(styles.cell)}>
-          <button onClick={handleImageClick}>
-            <div className={styles.thumbnailBox}>
-              <img src={thumbnailUrl} alt={setlist.title} />
-            </div>
-          </button>
-        </div>
-        <div className={styles.cell}>{channel?.nameKor}</div>
-        <div className={cx(styles.cell, 'flex2')}>
-          <p>{setlist.title}</p>
-        </div>
-        <div className={styles.cell}>{broad}</div>
+    <div className={cx(styles.row, 'hover')} onClick={openModal}>
+      <div className={cx(styles.cell)}>
+        <button onClick={handleImageClick}>
+          <div className={styles.thumbnailBox}>
+            <img src={thumbnailUrl} alt={setlist.title} />
+          </div>
+        </button>
       </div>
-      {modalValue && <SetlistModal />}
-    </>
+      <div className={styles.cell}>{channel?.nameKor}</div>
+      <div className={cx(styles.cell, 'flex2')}>
+        <p>{setlist.title}</p>
+      </div>
+      <div className={styles.cell}>{broad}</div>
+    </div>
   );
 }

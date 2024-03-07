@@ -1,31 +1,34 @@
-'use client';
 import wrapTimeWithLink from '@inner/_lib/wrapTimeWithLink';
 import parse from 'react-html-parser';
-import { useSetAtom } from 'jotai';
-import { player } from '@inner/_lib/atom';
 import { useId } from 'react';
 import { generateVideoUrl } from '@/model/youtube/url';
 
-type TextProps = {
+type TimestampTextProps = {
   index: number;
   text: string;
   videoId: string;
+  onClickTimestamp: ({ href, timestamp }: { href: string; timestamp: number }) => void;
 };
 
-export default function Text({ index, text, videoId }: TextProps) {
-  const setPlayer = useSetAtom(player.playerStatusAtom);
+export default function TimelineText({
+  index,
+  text,
+  videoId,
+  onClickTimestamp,
+}: TimestampTextProps) {
   const id = useId();
+
+  const videoUrl = generateVideoUrl(videoId);
+  const replacedText = wrapTimeWithLink({ text, baseUrl: videoUrl });
 
   const onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const href = e.currentTarget.href;
-    const timeline = Number(href.split('&t=')[1]);
-    if (isNaN(timeline)) return;
-    setPlayer((pre) => ({ ...pre, timeline, isPlaying: true, hide: false }));
+    const timestamp = Number(href.split('&t=')[1]);
+    if (isNaN(timestamp)) return;
+    onClickTimestamp({ href, timestamp });
   };
 
-  const videoUrl = generateVideoUrl(videoId);
-  const replacedText = wrapTimeWithLink({ text, baseUrl: videoUrl });
   return (
     <p>
       {parse(replacedText, {
