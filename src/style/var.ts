@@ -12,7 +12,7 @@ export const flexCenter: CSSPropertiesWithVars = {
   alignItems: 'center',
 };
 
-export const absoulteCenter: CSSPropertiesWithVars = {
+export const absoluteCenter: CSSPropertiesWithVars = {
   position: 'absolute',
   top: '50%',
   left: '50%',
