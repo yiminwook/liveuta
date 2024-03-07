@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import * as styles from './searchForm.css';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface SearchFormProps {
   searchParams: {
@@ -11,6 +12,7 @@ interface SearchFormProps {
 }
 
 export default function SearchForm({ searchParams }: SearchFormProps) {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const [query, setQuery] = useState(searchParams.query);
 
@@ -21,7 +23,11 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmedQuery = query.trim();
-    router.push(`/setlist?query=${trimmedQuery}`);
+    if (trimmedQuery === searchParams.query) {
+      queryClient.invalidateQueries({ queryKey: ['searchSetlist', searchParams] });
+    } else {
+      router.push(`/setlist?query=${trimmedQuery}`);
+    }
   };
 
   return (

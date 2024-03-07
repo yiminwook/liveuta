@@ -9,7 +9,6 @@ import { FaDiscord } from 'react-icons/fa';
 import { toast } from 'sonner';
 import Image from 'next/image';
 import logoSrc from '/public/assets/icon-256-256.png';
-import Backdrop from '@inner/_component/Backdrop';
 
 export default function Home() {
   const mutateLogin = useMutation({

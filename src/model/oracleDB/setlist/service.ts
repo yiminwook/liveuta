@@ -66,25 +66,26 @@ export async function getSetlistByVideoId(videoId: string) {
 export async function getAllSetlist(row: number) {
   const connection = await connectOracleDB();
   try {
-    const startRow = row + 1;
-    const endRow = row + SETLIST_PAGE_SIZE;
-
     const countResult = await connection.execute<[number]>(GET_MAX_COUNT);
     const total = countResult.rows?.[0][0] || 0;
 
-    if (total === 0 || startRow > total) {
+    if (total === 0 || row >= total) {
       await connection.close();
-      return { total: 0, list: [] };
+      return { total, list: [] };
     }
 
-    const searchResult = await connection.execute<SetlistRow>(GET_ALL_SETLIST, [startRow, endRow]);
+    const searchResult = await connection.execute<SetlistRow>(GET_ALL_SETLIST, [
+      row,
+      SETLIST_PAGE_SIZE,
+    ]);
 
     await connection.close();
 
     const rows = searchResult.rows;
+
     if (!rows) {
       await connection.close();
-      return { total: 0, list: [] };
+      return { total, list: [] };
     }
 
     const list = rows.map((row) => parseSetlistRow(row));
@@ -99,21 +100,18 @@ export async function searchSetlist(query: string, row: number) {
   const connection = await connectOracleDB();
   const pattern = query.toLowerCase();
   try {
-    const startRow = row + 1;
-    const endRow = row + SETLIST_PAGE_SIZE;
-
     const countResult = await connection.execute<[number]>(SEARCH_MAX_COUNT, [pattern]);
     const total = countResult.rows?.[0][0] || 0;
 
-    if (total === 0 || startRow > total) {
+    if (total === 0 || row >= total) {
       await connection.close();
-      return { total: 0, list: [] };
+      return { total, list: [] };
     }
 
     const searchResult = await connection.execute<SetlistRow>(SEARCH_SETLIST, [
       pattern,
-      startRow,
-      endRow,
+      row,
+      SETLIST_PAGE_SIZE,
     ]);
 
     await connection.close();
@@ -122,7 +120,7 @@ export async function searchSetlist(query: string, row: number) {
 
     if (!rows) {
       await connection.close();
-      return { total: 0, list: [] };
+      return { total, list: [] };
     }
 
     const list = rows.map((row) => parseSetlistRow(row));

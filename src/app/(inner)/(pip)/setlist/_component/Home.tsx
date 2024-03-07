@@ -35,7 +35,7 @@ export default async function Home({ searchParams }: HomeProps) {
               <Link href="/setlist">초기화</Link>
             </div>
             <div className={styles.postLinkBox}>
-              <Link href="/setlist/post">작성하러 가기</Link>
+              <Link href="/setlist/post">작성</Link>
             </div>
           </div>
           <div>
