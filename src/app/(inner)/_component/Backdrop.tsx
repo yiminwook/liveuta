@@ -9,9 +9,10 @@ import * as styles from './backdrop.css';
 type BackdropProps = {
   className?: string;
   onClick?: () => void;
+  activeParticles: boolean;
 };
 
-export default function Backdrop({ className, onClick }: BackdropProps) {
+export default function Backdrop({ className, onClick, activeParticles }: BackdropProps) {
   const options = useMemo<IParticlesProps['options']>(
     () => ({
       fpsLimit: 120,
@@ -61,7 +62,7 @@ export default function Backdrop({ className, onClick }: BackdropProps) {
 
   return (
     <div onClick={onClick} className={cx(styles.wrap, className)}>
-      <Particles options={options} />
+      {activeParticles && <Particles options={options} />}
     </div>
   );
 }

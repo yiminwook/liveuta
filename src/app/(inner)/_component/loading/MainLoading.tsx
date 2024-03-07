@@ -13,7 +13,7 @@ type MainLoadingProps = {
 export default function MainLoading({ backdrop }: MainLoadingProps) {
   return (
     <RemoveScroll>
-      {backdrop && <Backdrop />}
+      {backdrop && <Backdrop activeParticles={true} />}
       <div className={cx(styles.MainLoadingWrap)}>
         <div>
           <div className={styles.MainLoadingInner}>

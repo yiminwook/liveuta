@@ -81,7 +81,7 @@ export default function FloatButton() {
 
   return (
     <RemoveScroll enabled={isOpen} removeScrollBar={false}>
-      {isOpen && <Backdrop onClick={() => toggleOpen(0)} />}
+      {isOpen && <Backdrop onClick={() => toggleOpen(0)} activeParticles={false} />}
       <Motion.div
         className={styles.floatNav}
         initial={false}

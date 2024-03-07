@@ -17,7 +17,7 @@ const Modal = ({ children, style, onClose }: ModalProps) => {
 
   return (
     <RemoveScroll removeScrollBar={false}>
-      <Backdrop />
+      <Backdrop activeParticles={true} />
       <div className={modal['container']} onClick={onClose}>
         <div className={modal['modal']} style={style} onClick={stopPropagation}>
           <CloseButton className={modal['close-button']} onClick={onClose} />
