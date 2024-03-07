@@ -20,19 +20,16 @@ export const inner = style({
   borderTop: '1px solid #e5e5e5',
   flexDirection: 'column',
   height: '30rem',
-  backgroundColor: 'rgba(255, 255, 255, 0.45)',
+  backgroundColor: 'rgba(255, 255, 255, 0.6)',
   borderRadius: 10,
   boxShadow: BOX_SHADOW,
 });
 
-globalStyle(`${inner} p`, {
-  fontSize: '1.2rem',
-  lineHeight: 1.5,
-});
-
-export const top = style({
-  flex: 1,
+globalStyle(`${inner} > p`, {
+  fontSize: '1.5rem',
   textAlign: 'center',
+  lineHeight: 1.5,
+  fontWeight: 500,
 });
 
 export const title = style({
@@ -42,9 +39,12 @@ export const title = style({
   marginBottom: '1rem',
 });
 
-export const bottom = style({
-  flex: 1,
-  textAlign: 'center',
+export const logoBox = style({
+  position: 'relative',
+  width: '100%',
+  aspectRatio: '1/1',
+  maxWidth: 256,
+  margin: '1rem auto',
 });
 
 export const buttonBox = style({

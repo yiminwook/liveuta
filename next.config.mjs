@@ -22,6 +22,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'src/style')],
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

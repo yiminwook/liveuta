@@ -7,6 +7,9 @@ import { RiKakaoTalkFill } from 'react-icons/ri';
 import { Provider } from '@/type/nextAuth';
 import { FaDiscord } from 'react-icons/fa';
 import { toast } from 'sonner';
+import Image from 'next/image';
+import logoSrc from '/public/assets/icon-256-256.png';
+import Backdrop from '@inner/_component/Backdrop';
 
 export default function Home() {
   const mutateLogin = useMutation({
@@ -16,40 +19,45 @@ export default function Home() {
   });
 
   return (
-    <>
-      <div className={styles.wrap}>
-        <div className={styles.inner}>
-          <div className={styles.top}>
-            <h1 className={styles.title}>로그인 Beta.</h1>
-          </div>
-          <div className={styles.bottom}>
-            <p>Log in with your social account</p>
-            <div className={styles.buttonBox}>
-              <button
-                className={styles.googleLoginButton}
-                onClick={() => mutateLogin.mutate('google')}
-                disabled={mutateLogin.isPending}
-              >
-                <FcGoogle size={28} />
-              </button>
-              <button
-                className={styles.googleLoginButton}
-                onClick={() => mutateLogin.mutate('kakao')}
-                disabled={mutateLogin.isPending}
-              >
-                <RiKakaoTalkFill size={28} />
-              </button>
-              <button
-                className={styles.googleLoginButton}
-                onClick={() => mutateLogin.mutate('discord')}
-                disabled={mutateLogin.isPending}
-              >
-                <FaDiscord size={28} />
-              </button>
-            </div>
-          </div>
+    <div className={styles.wrap}>
+      <h1 className="blind">로그인 페이지</h1>
+      <div className={styles.inner}>
+        <div className={styles.logoBox}>
+          <Image
+            src={logoSrc}
+            alt="라이브우타 로고"
+            fill
+            unoptimized={true}
+            style={{
+              objectFit: 'cover',
+            }}
+          />
+        </div>
+        <p>소셜 계정으로 시작</p>
+        <div className={styles.buttonBox}>
+          <button
+            className={styles.googleLoginButton}
+            onClick={() => mutateLogin.mutate('google')}
+            disabled={mutateLogin.isPending}
+          >
+            <FcGoogle size={28} />
+          </button>
+          <button
+            className={styles.googleLoginButton}
+            onClick={() => mutateLogin.mutate('kakao')}
+            disabled={mutateLogin.isPending}
+          >
+            <RiKakaoTalkFill size={28} />
+          </button>
+          <button
+            className={styles.googleLoginButton}
+            onClick={() => mutateLogin.mutate('discord')}
+            disabled={mutateLogin.isPending}
+          >
+            <FaDiscord size={28} />
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
