@@ -1,4 +1,4 @@
-import { BEZIER_CURVE, BOX_SHADOW, flexCenter } from '@/style/var';
+import { BEZIER_CURVE, BOX_SHADOW, flexCenter, responsive, textTwoLine } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 export const wrap = style({});
@@ -34,21 +34,23 @@ export const body = style({
   flexDirection: 'column',
 });
 
-export const row = style({
-  boxSizing: 'border-box',
-  display: 'flex',
-  borderBottom: '1px solid #ddd',
-  transition: `background-color 0.2s ${BEZIER_CURVE}`,
-  padding: '0 0.5rem',
-  selectors: {
-    '&.hover': {
-      cursor: 'pointer',
-    },
-    '&.hover:hover': {
-      backgroundColor: 'rgba(255, 255, 255, 1)',
+export const row = style([
+  {
+    boxSizing: 'border-box',
+    display: 'flex',
+    borderBottom: '1px solid #ddd',
+    transition: `background-color 0.2s ${BEZIER_CURVE}`,
+    padding: '0 0.5rem',
+    selectors: {
+      '&.hover': {
+        cursor: 'pointer',
+      },
+      '&.hover:hover': {
+        backgroundColor: 'rgba(255, 255, 255, 1)',
+      },
     },
   },
-});
+]);
 
 export const header = style([
   row,
@@ -56,8 +58,14 @@ export const header = style([
     borderBottom: '2px solid #ddd',
     height: '3rem',
     alignItems: 'center',
+    display: 'none',
     fontWeight: 500,
   },
+  responsive({
+    md: {
+      display: 'flex',
+    },
+  }),
 ]);
 
 export const footer = style([{}]);
@@ -84,13 +92,6 @@ globalStyle(`${thumbnailBox} > img`, {
   height: '100%',
 });
 
-// export const button = style({
-//   backgroundColor: global.color.linkFont,
-//   padding: '0.25rem 0.5rem',
-//   borderRadius: 5,
-//   color: '#fff',
-// });
-
 globalStyle('.flex2', {
   flex: 2,
 });
@@ -98,3 +99,44 @@ globalStyle('.flex2', {
 globalStyle('.flex3', {
   flex: 3,
 });
+
+export const mobileRow = style([
+  {
+    position: 'relative',
+    display: 'flex',
+    padding: '0.5rem',
+    gap: '0.5rem',
+    transition: `background-color 0.2s ${BEZIER_CURVE}`,
+    selectors: {
+      '&:after': {
+        position: 'absolute',
+        bottom: 0,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '90%',
+        borderBottom: '1px solid #ddd',
+        content: '',
+      },
+      '&.hover': {
+        cursor: 'pointer',
+      },
+      '&.hover:hover': {
+        backgroundColor: 'rgba(255, 255, 255, 1)',
+      },
+    },
+  },
+]);
+
+export const mobileLeft = style([
+  {
+    flex: 1,
+  },
+]);
+
+export const mobileRight = style([
+  {
+    flex: 2,
+  },
+]);
+
+export const mobileTitle = style([textTwoLine, {}]);

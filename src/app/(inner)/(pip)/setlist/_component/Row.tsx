@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import { MouseEvent } from 'react';
 import { setlistModalAtom } from '../_lib/atom';
 import * as styles from './list.css';
+import { useMediaQuery } from 'react-responsive';
+import { BREAK_POINT } from '@/style/var';
 
 export type RowProps = {
   setlist: Setlist;
@@ -16,6 +18,7 @@ export type RowProps = {
 };
 
 export default function Row({ setlist, channel }: RowProps) {
+  const isMobile = useMediaQuery({ query: `(max-width: ${BREAK_POINT.md}px)` });
   const router = useRouter();
   const setModalValue = useSetAtom(setlistModalAtom);
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
@@ -29,6 +32,27 @@ export default function Row({ setlist, channel }: RowProps) {
   const openModal = () => {
     setModalValue(() => ({ setlist, channel }));
   };
+
+  console.log(isMobile);
+
+  if (isMobile) {
+    return (
+      <div className={cx(styles.mobileRow, 'hover')} onClick={openModal}>
+        <div className={cx(styles.mobileLeft)}>
+          <button onClick={handleImageClick}>
+            <div className={styles.thumbnailBox}>
+              <img src={thumbnailUrl} alt={setlist.title} />
+            </div>
+          </button>
+        </div>
+        <div className={styles.mobileRight}>
+          <div>{channel?.nameKor}</div>
+          <p className={styles.mobileTitle}>{setlist.title}</p>
+          <div>{broad}</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={cx(styles.row, 'hover')} onClick={openModal}>
