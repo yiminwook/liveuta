@@ -17,12 +17,12 @@ export default function ReactQuery({ children }: PropsWithChildren) {
       }),
       defaultOptions: {
         queries: {
-          staleTime: 1000 * 3, //3초
-          gcTime: 1000 * 10, //10초
-          refetchOnWindowFocus: false,
+          staleTime: 1000 * 60 * 3, // 3분
+          gcTime: 1000 * 60 * 5, // 5분
+          refetchOnWindowFocus: true,
           refetchOnReconnect: true,
           retry: 3,
-          retryDelay: 1000 * 3, //3초
+          retryDelay: 1000 * 5, //5초
           meta: {},
         },
         mutations: {

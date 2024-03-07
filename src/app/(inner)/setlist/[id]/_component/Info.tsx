@@ -1,29 +1,31 @@
 'use client';
+import dayjs from '@/model/dayjs';
 import { ChannleDatesetItem } from '@/model/mongoDB/getAllChannel';
 import { Setlist } from '@/model/oracleDB/setlist/service';
-import dayjs from '@/model/dayjs';
-import { generateVideoUrl, generateChannelUrl } from '@/model/youtube/url';
-import * as styles from './info.css';
-import Link from 'next/link';
+import { generateChannelUrl, generateVideoUrl } from '@/model/youtube/url';
 import { openWindow } from '@inner/_lib/windowEvent';
+import cx from 'classnames';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { BsMusicNoteList } from 'react-icons/bs';
 import { ImYoutube } from 'react-icons/im';
-import cx from 'classnames';
-import { useRouter } from 'next/navigation';
 import { IoArrowBack } from 'react-icons/io5';
+import * as styles from './info.css';
 
-interface InfoProps {
+type InfoProps = {
   setlist: Setlist;
   channel: ChannleDatesetItem;
-}
+};
+
 export default function Info({ setlist, channel }: InfoProps) {
   const router = useRouter();
+
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
-  const broadcast = dayjs(setlist.broadcastAt).format('YYYY-MM-DD HH:mm');
-  const create = dayjs(setlist.createdAt).format('YYYY-MM-DD HH:mm');
-  const update = dayjs(setlist.updatedAt).format('YYYY-MM-DD HH:mm');
 
+  const broadcast = dayjs(setlist.broadcastAt).format('YYYY년 MM월 DD일');
+  const create = dayjs(setlist.createdAt).format('YYYY년 MM월 DD일');
+  const update = dayjs(setlist.updatedAt).format('YYYY년 MM월 DD일');
   return (
     <div className={styles.wrap}>
       <nav className={styles.nav}>

@@ -7,17 +7,13 @@ import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { useEffect, useLayoutEffect } from 'react';
 
-type ScheduleDataProviderProps = {
+type DataObserver = {
   children: React.ReactNode;
   filter: keyof ScheduleAPIReturntype;
   select: SelectType;
 };
 
-export default function ScheduleDataProvider({
-  children,
-  filter,
-  select,
-}: ScheduleDataProviderProps) {
+export default function DataObserver({ children, filter, select }: DataObserver) {
   const [key] = useAtom(schedule.scheduleKeyAtom);
   const [option] = useAtom(schedule.scheduleOptionAtom);
   const [, setSchedule] = useAtom(schedule.scheduleAtom);

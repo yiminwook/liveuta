@@ -1,20 +1,18 @@
 'use client';
 import wrapTimeWithLink from '@inner/_lib/wrapTimeWithLink';
 import parse from 'react-html-parser';
-import { isMobile } from 'react-device-detect';
-import { openWindow } from '@inner/_lib/windowEvent';
 import { useSetAtom } from 'jotai';
 import { player } from '@inner/_lib/atom';
 import { useId } from 'react';
+import { generateVideoUrl } from '@/model/youtube/url';
 
-interface TextProps {
+type TextProps = {
   index: number;
   text: string;
   videoId: string;
-}
+};
 
 export default function Text({ index, text, videoId }: TextProps) {
-  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   const setPlayer = useSetAtom(player.playerStatusAtom);
   const id = useId();
 
@@ -23,10 +21,10 @@ export default function Text({ index, text, videoId }: TextProps) {
     const href = e.currentTarget.href;
     const timeline = Number(href.split('&t=')[1]);
     if (isNaN(timeline)) return;
-    if (isMobile) return openWindow(href);
     setPlayer((pre) => ({ ...pre, timeline, isPlaying: true, hide: false }));
   };
 
+  const videoUrl = generateVideoUrl(videoId);
   const replacedText = wrapTimeWithLink({ text, baseUrl: videoUrl });
   return (
     <p>
@@ -35,11 +33,11 @@ export default function Text({ index, text, videoId }: TextProps) {
           if (domNode.name === 'a' && domNode.attribs) {
             return (
               <a
+                {...domNode.attribs}
                 style={{
                   color: '#0077b6',
                 }}
                 key={`${videoId}_row_${index}_atag${id}`}
-                {...domNode.attribs}
                 onClick={onClick}
               >
                 {domNode.children?.[0].data}
