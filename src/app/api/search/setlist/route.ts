@@ -10,10 +10,18 @@ export async function GET(request: NextRequest) {
     const searchParams = url.searchParams;
     const query = searchParams.get('q');
     const startRow = Number(searchParams.get('r'));
+    const order = searchParams.get('o') as 'create' | 'broadcast' | undefined;
 
     if (isNaN(startRow)) throw new BadReqError('unexpected query parameter: page');
+    if (!order || !['create', 'broadcast'].includes(order)) {
+      throw new BadReqError('unexpected query parameter: order');
+    }
 
-    const result = query ? await searchSetlist(query, startRow) : await getAllSetlist(startRow);
+    const orderType = order === 'create' ? 'CREATE_AT' : 'BROADCAST_AT';
+
+    const result = query
+      ? await searchSetlist(query, startRow, orderType)
+      : await getAllSetlist(startRow, orderType);
 
     return NextResponse.json(result, { status: 200 });
   } catch (error) {

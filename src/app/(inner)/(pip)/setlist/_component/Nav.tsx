@@ -3,16 +3,21 @@ import SearchForm from './SearchForm';
 import { useRouter } from 'next/navigation';
 import * as styles from './nav.css';
 import { useQueryClient } from '@tanstack/react-query';
+import { BREAK_POINT } from '@/style/var';
+import { useMediaQuery } from 'react-responsive';
+import { FaFilter } from 'react-icons/fa';
 
 type SearchFormProps = {
   searchParams: {
     query: string;
     page: number;
+    order: 'broadcast' | 'create';
   };
 };
 export default function Nav({ searchParams }: SearchFormProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const isMobile = useMediaQuery({ query: `(max-width: ${BREAK_POINT.md}px)` });
 
   const handleReset = () => {
     if (searchParams.query === '' && searchParams.page === 1) {
@@ -25,6 +30,36 @@ export default function Nav({ searchParams }: SearchFormProps) {
   const navigatePost = () => {
     router.push('/setlist/post');
   };
+
+  const toggleOrder = () => {
+    router.push(
+      `/setlist?query=${searchParams.query}&page=${searchParams.page}&order=${
+        searchParams.order === 'broadcast' ? 'create' : 'broadcast'
+      }`,
+    );
+  };
+
+  if (isMobile) {
+    return (
+      <div className={styles.mobileWrap}>
+        <div>
+          <SearchForm searchParams={searchParams} />
+        </div>
+        <div className={styles.mobileNavBox}>
+          <button onClick={toggleOrder} className={styles.navButton} style={{ cursor: 'pointer' }}>
+            <FaFilter size={14} />
+            {searchParams.order === 'create' ? '작성일' : '방송일'}
+          </button>
+          <button className={styles.navButton} type="button" onClick={handleReset}>
+            초기화
+          </button>
+          <button className={styles.navButton} type="button" onClick={navigatePost}>
+            작성
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.wrap}>

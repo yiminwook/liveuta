@@ -33,8 +33,6 @@ export default function Row({ setlist, channel }: RowProps) {
     setModalValue(() => ({ setlist, channel }));
   };
 
-  console.log(isMobile);
-
   if (isMobile) {
     return (
       <div className={cx(styles.mobileRow, 'hover')} onClick={openModal}>

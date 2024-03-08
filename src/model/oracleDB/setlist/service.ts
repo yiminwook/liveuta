@@ -8,6 +8,7 @@ import {
   POST_SETLIST,
   SEARCH_MAX_COUNT,
   SEARCH_SETLIST,
+  SetlistOrderType,
   UPDATE_SETLIST,
 } from './sql';
 import CustomServerError from '@/model/error/customServerError';
@@ -63,8 +64,9 @@ export async function getSetlistByVideoId(videoId: string) {
   }
 }
 
-export async function getAllSetlist(row: number) {
+export async function getAllSetlist(row: number, order: SetlistOrderType) {
   const connection = await connectOracleDB();
+
   try {
     const countResult = await connection.execute<[number]>(GET_MAX_COUNT);
     const total = countResult.rows?.[0][0] || 0;
@@ -74,7 +76,7 @@ export async function getAllSetlist(row: number) {
       return { total, list: [] };
     }
 
-    const searchResult = await connection.execute<SetlistRow>(GET_ALL_SETLIST('CREATE_AT'), [
+    const searchResult = await connection.execute<SetlistRow>(GET_ALL_SETLIST(order), [
       row,
       SETLIST_PAGE_SIZE,
     ]);
@@ -96,7 +98,7 @@ export async function getAllSetlist(row: number) {
   }
 }
 
-export async function searchSetlist(query: string, row: number) {
+export async function searchSetlist(query: string, row: number, order: SetlistOrderType) {
   const connection = await connectOracleDB();
   const pattern = query.toLowerCase();
   try {
@@ -108,7 +110,7 @@ export async function searchSetlist(query: string, row: number) {
       return { total, list: [] };
     }
 
-    const searchResult = await connection.execute<SetlistRow>(SEARCH_SETLIST('CREATE_AT'), [
+    const searchResult = await connection.execute<SetlistRow>(SEARCH_SETLIST(order), [
       pattern,
       row,
       SETLIST_PAGE_SIZE,

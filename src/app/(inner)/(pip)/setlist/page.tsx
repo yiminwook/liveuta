@@ -10,6 +10,7 @@ interface Props {
   searchParams: {
     query?: string;
     page?: string;
+    order?: 'broadcast' | 'create';
   };
 }
 

@@ -10,21 +10,19 @@ import cx from 'classnames';
 import { useRouter } from 'next/navigation';
 import Row from './Row';
 import * as styles from './list.css';
+import { FaFilter } from 'react-icons/fa';
 
 interface ListProps {
   searchParams: {
     query: string;
     page: number;
+    order: 'broadcast' | 'create';
   };
   channelDataset: ChannelDataset;
 }
 
 export default function List({ searchParams, channelDataset }: ListProps) {
   const router = useRouter();
-
-  const handlePage = (page: number) => {
-    router.push(`/setlist?query=${searchParams.query}&page=${page}`);
-  };
 
   const { data, isLoading } = useQuery({
     queryKey: ['searchSetlist', searchParams],
@@ -35,18 +33,29 @@ export default function List({ searchParams, channelDataset }: ListProps) {
       }>(
         `/api/search/setlist?q=${searchParams.query}&r=${
           (searchParams.page - 1) * SETLIST_PAGE_SIZE
-        }`,
+        }&o=${searchParams.order}`,
       );
       return result.data;
     },
   });
+
+  const handlePage = (page: number) => {
+    router.push(`/setlist?query=${searchParams.query}&page=${page}`);
+  };
+
+  const toggleOrder = () => {
+    router.push(
+      `/setlist?query=${searchParams.query}&page=${searchParams.page}&order=${
+        searchParams.order === 'broadcast' ? 'create' : 'broadcast'
+      }`,
+    );
+  };
 
   if (isLoading) return <Loading />;
 
   if (!data) {
     return (
       <div>
-        <h2 className={styles.title}>조회 리스트</h2>
         <div>검색 결과가 없습니다.</div>
       </div>
     );
@@ -54,13 +63,18 @@ export default function List({ searchParams, channelDataset }: ListProps) {
 
   return (
     <div>
-      <h2 className={styles.title}>조회 리스트 (임시정렬기준: 작성일자)</h2>
       <div className={styles.table}>
         <div className={styles.header}>
           <div className={cx(styles.headerCell)}>썸네일</div>
           <div className={styles.headerCell}>채널명</div>
-          <div className={cx(styles.headerCell, 'flex2')}>방송</div>
-          <div className={styles.headerCell}>방송일</div>
+          <div className={cx(styles.headerCell, 'flex2')}>제목</div>
+          <div
+            onClick={toggleOrder}
+            className={cx(styles.headerCell, 'order', 'hover')}
+            style={{ cursor: 'pointer' }}
+          >
+            <FaFilter size={14} /> {searchParams.order === 'create' ? '작성일' : '방송일'}
+          </div>
         </div>
         <div className={styles.body}>
           {data.list.map((data) => (

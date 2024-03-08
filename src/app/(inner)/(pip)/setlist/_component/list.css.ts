@@ -1,12 +1,7 @@
-import { BEZIER_CURVE, BOX_SHADOW, flexCenter, responsive, textTwoLine } from '@/style/var';
+import { BEZIER_CURVE, BOX_SHADOW, responsive, textTwoLine } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 export const wrap = style({});
-
-export const title = style({
-  fontSize: '1.25rem',
-  marginBottom: '0.5rem',
-});
 
 export const pagenationBox = style({
   display: 'flex',
@@ -76,7 +71,20 @@ export const cell = style({
   selectors: {},
 });
 
-export const headerCell = style([cell, {}]);
+export const headerCell = style([
+  cell,
+  {
+    transition: `color 0.2s ${BEZIER_CURVE}`,
+    selectors: {
+      '&.order': {
+        cursor: 'pointer',
+      },
+      '&.hover:hover': {
+        color: 'var(--liveuta-hover-color)',
+      },
+    },
+  },
+]);
 
 export const thumbnailBox = style({
   position: 'relative',
