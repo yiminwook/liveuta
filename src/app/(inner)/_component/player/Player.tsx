@@ -92,9 +92,10 @@ export default function Player({ isLive, isShow }: PlayerProps) {
         fallback={<div className={styles.playerPlaceholder} />}
         onError={(e) => {
           console.error('Player', e);
+          console.log('url', url);
           toast.error('실행 할 수 없는 영상입니다.');
-          setVideoId(() => IINITIAL_PLAYER_VIDEO_ID);
-          setStatus((pre) => ({ ...pre, isPlaying: false }));
+          // setVideoId(() => IINITIAL_PLAYER_VIDEO_ID);
+          // setStatus((pre) => ({ ...pre, isPlaying: false }));
         }}
       />
       <button className={cx(styles.pipButton, isShow === false && 'hide')} onClick={toggleLeft}>
