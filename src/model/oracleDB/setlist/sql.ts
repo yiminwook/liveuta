@@ -1,7 +1,8 @@
+export type SetlistOrderType = 'CREATE_AT' | 'BROADCAST_AT';
+
 export const GET_SETLIST = `
-  SELECT SETLIST.*, MEMBER.EMAIL
-  FROM SETLIST
-  JOIN MEMBER ON MEMBER_ID = MEMBER.ID
+  SELECT T01.*, T02.EMAIL
+  FROM SETLIST T01, MEMBER T02
   WHERE VIDEO_ID = :videoId
 `;
 
@@ -10,11 +11,11 @@ export const GET_MAX_COUNT = `
   FROM SETLIST
 `;
 
-export const GET_ALL_SETLIST = `
-  SELECT T01.*, T02.EMAIL
-  FROM SETLIST T01
-  JOIN MEMBER T02 on T01.MEMBER_ID = T02.ID
-  ORDER BY T01.CREATE_AT DESC    
+export const GET_ALL_SETLIST = (orderType: SetlistOrderType) => `
+  SELECT T01.*, T02.EMAIL, COUNT(*) OVER() AS maxCount
+  FROM SETLIST T01, MEMBER T02
+  WHERE T01.MEMBER_ID = T02.ID
+  ORDER BY T01.${orderType} DESC    
   OFFSET :startRow ROWS FETCH NEXT :pagiSize ROWS ONLY
 `;
 
@@ -24,12 +25,12 @@ export const SEARCH_MAX_COUNT = `
   WHERE LOWER(DESCRIPTION) LIKE '%' || :pattern || '%'
 `;
 
-export const SEARCH_SETLIST = `
-  SELECT T01.*, T02.EMAIL
-  FROM SETLIST T01
-  JOIN MEMBER T02 on T01.MEMBER_ID = T02.ID
-  WHERE LOWER(T01.DESCRIPTION) LIKE '%' || :pattern || '%'
-  ORDER BY T01.CREATE_AT DESC    
+export const SEARCH_SETLIST = (orderType: SetlistOrderType) => `
+  SELECT T01.*, T02.EMAIL, COUNT(*) OVER() AS maxCount
+  FROM SETLIST T01, MEMBER T02
+  WHERE T01.MEMBER_ID = T02.ID 
+    AND LOWER(T01.DESCRIPTION) LIKE '%' || :pattern || '%'
+  ORDER BY T01.${orderType} DESC    
   OFFSET :startRow ROWS FETCH NEXT :pagiSize ROWS ONLY
 `;
 

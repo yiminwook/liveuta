@@ -24,7 +24,7 @@ export type SetlistRow = [
   Date, // broadcastAt
   string, // title
   string, // email = 편집자
-  number | undefined, // RNUM
+  number, // maxCount
 ];
 
 export type Setlist = {
@@ -74,7 +74,7 @@ export async function getAllSetlist(row: number) {
       return { total, list: [] };
     }
 
-    const searchResult = await connection.execute<SetlistRow>(GET_ALL_SETLIST, [
+    const searchResult = await connection.execute<SetlistRow>(GET_ALL_SETLIST('CREATE_AT'), [
       row,
       SETLIST_PAGE_SIZE,
     ]);
@@ -108,7 +108,7 @@ export async function searchSetlist(query: string, row: number) {
       return { total, list: [] };
     }
 
-    const searchResult = await connection.execute<SetlistRow>(SEARCH_SETLIST, [
+    const searchResult = await connection.execute<SetlistRow>(SEARCH_SETLIST('CREATE_AT'), [
       pattern,
       row,
       SETLIST_PAGE_SIZE,
