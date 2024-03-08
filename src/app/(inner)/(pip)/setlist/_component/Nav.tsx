@@ -46,12 +46,12 @@ export default function Nav({ searchParams }: SearchFormProps) {
           <SearchForm searchParams={searchParams} />
         </div>
         <div className={styles.mobileNavBox}>
+          <button className={styles.navButton} type="button" onClick={handleReset}>
+            초기화
+          </button>
           <button onClick={toggleOrder} className={styles.navButton} style={{ cursor: 'pointer' }}>
             <FaFilter size={14} />
             {searchParams.order === 'create' ? '작성일' : '방송일'}
-          </button>
-          <button className={styles.navButton} type="button" onClick={handleReset}>
-            초기화
           </button>
           <button className={styles.navButton} type="button" onClick={navigatePost}>
             작성
@@ -66,6 +66,10 @@ export default function Nav({ searchParams }: SearchFormProps) {
       <SearchForm searchParams={searchParams} />
       <button className={styles.navButton} type="button" onClick={handleReset}>
         초기화
+      </button>
+      <button onClick={toggleOrder} className={styles.navButton} style={{ cursor: 'pointer' }}>
+        <FaFilter size={14} />
+        {searchParams.order === 'create' ? '작성일' : '방송일'}
       </button>
       <button className={styles.navButton} type="button" onClick={navigatePost}>
         작성

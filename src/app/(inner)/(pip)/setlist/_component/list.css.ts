@@ -71,20 +71,7 @@ export const cell = style({
   selectors: {},
 });
 
-export const headerCell = style([
-  cell,
-  {
-    transition: `color 0.2s ${BEZIER_CURVE}`,
-    selectors: {
-      '&.order': {
-        cursor: 'pointer',
-      },
-      '&.hover:hover': {
-        color: 'var(--liveuta-hover-color)',
-      },
-    },
-  },
-]);
+export const headerCell = style([cell, {}]);
 
 export const thumbnailBox = style({
   position: 'relative',

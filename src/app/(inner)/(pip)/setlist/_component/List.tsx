@@ -10,7 +10,6 @@ import cx from 'classnames';
 import { useRouter } from 'next/navigation';
 import Row from './Row';
 import * as styles from './list.css';
-import { FaFilter } from 'react-icons/fa';
 
 interface ListProps {
   searchParams: {
@@ -40,15 +39,7 @@ export default function List({ searchParams, channelDataset }: ListProps) {
   });
 
   const handlePage = (page: number) => {
-    router.push(`/setlist?query=${searchParams.query}&page=${page}`);
-  };
-
-  const toggleOrder = () => {
-    router.push(
-      `/setlist?query=${searchParams.query}&page=${searchParams.page}&order=${
-        searchParams.order === 'broadcast' ? 'create' : 'broadcast'
-      }`,
-    );
+    router.push(`/setlist?query=${searchParams.query}&page=${page}&order=${searchParams.order}`);
   };
 
   if (isLoading) return <Loading />;
@@ -68,17 +59,18 @@ export default function List({ searchParams, channelDataset }: ListProps) {
           <div className={cx(styles.headerCell)}>썸네일</div>
           <div className={styles.headerCell}>채널명</div>
           <div className={cx(styles.headerCell, 'flex2')}>제목</div>
-          <div
-            onClick={toggleOrder}
-            className={cx(styles.headerCell, 'order', 'hover')}
-            style={{ cursor: 'pointer' }}
-          >
-            <FaFilter size={14} /> {searchParams.order === 'create' ? '작성일' : '방송일'}
+          <div className={styles.headerCell}>
+            {searchParams.order === 'create' ? '작성일' : '방송일'}
           </div>
         </div>
         <div className={styles.body}>
           {data.list.map((data) => (
-            <Row key={data.videoId} setlist={data} channel={channelDataset[data.channelId]} />
+            <Row
+              key={data.videoId}
+              setlist={data}
+              channel={channelDataset[data.channelId]}
+              order={searchParams.order}
+            />
           ))}
         </div>
         <div className={styles.pagenationBox}>

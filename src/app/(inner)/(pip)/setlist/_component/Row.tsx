@@ -15,13 +15,15 @@ import { BREAK_POINT } from '@/style/var';
 export type RowProps = {
   setlist: Setlist;
   channel?: ChannelDataset['channel_id'];
+  order: 'broadcast' | 'create';
 };
 
-export default function Row({ setlist, channel }: RowProps) {
+export default function Row({ setlist, channel, order }: RowProps) {
   const isMobile = useMediaQuery({ query: `(max-width: ${BREAK_POINT.md}px)` });
   const router = useRouter();
   const setModalValue = useSetAtom(setlistModalAtom);
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
+  const create = dayjs(setlist.createdAt).format('YYYY년 MM월 DD일');
   const broad = dayjs(setlist.broadcastAt).format('YYYY년 MM월 DD일');
 
   const handleImageClick = (e: MouseEvent) => {
@@ -30,7 +32,7 @@ export default function Row({ setlist, channel }: RowProps) {
   };
 
   const openModal = () => {
-    setModalValue(() => ({ setlist, channel }));
+    setModalValue(() => ({ setlist, channel, order }));
   };
 
   if (isMobile) {
@@ -46,7 +48,7 @@ export default function Row({ setlist, channel }: RowProps) {
         <div className={styles.mobileRight}>
           <div>{channel?.nameKor}</div>
           <p className={styles.mobileTitle}>{setlist.title}</p>
-          <div>{broad}</div>
+          <div>{order === 'broadcast' ? create : broad}</div>
         </div>
       </div>
     );
@@ -65,7 +67,7 @@ export default function Row({ setlist, channel }: RowProps) {
       <div className={cx(styles.cell, 'flex2')}>
         <p>{setlist.title}</p>
       </div>
-      <div className={styles.cell}>{broad}</div>
+      <div className={styles.cell}>{order ? create : broad}</div>
     </div>
   );
 }
