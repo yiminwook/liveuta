@@ -1,9 +1,10 @@
-import { useThemeAtom } from '@/app/_lib/atom';
+import { themeAtom } from '@/app/_lib/atom';
 import { ThemeType } from '@/type';
+import { useAtom } from 'jotai';
 import Cookies from 'universal-cookie';
 
 const useTheme = () => {
-  const [theme, setThemeAtome] = useThemeAtom();
+  const [theme, setThemeAtome] = useAtom(themeAtom);
 
   const setCookie = (theme: ThemeType) => {
     const themeCookie = new Cookies();
