@@ -9,9 +9,9 @@ type HomeProps = {
 
 export default function Home({ session }: HomeProps) {
   return (
-    <main id="app">
+    <>
+      <h1 className="blind">세트리 추가</h1>
       <div className={styles.inner}>
-        <h1 className={styles.title}>세트리 추가</h1>
         <div>
           <div className={styles.formBox}>
             <div className={styles.desc}>
@@ -50,6 +50,6 @@ export default function Home({ session }: HomeProps) {
           </div>
         </div>
       </div>
-    </main>
+    </>
   );
 }

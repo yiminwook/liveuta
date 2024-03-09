@@ -15,11 +15,6 @@ export const headerPlaceholder = style({
   width: '1.8rem',
 });
 
-export const title = style({
-  fontSize: '2rem',
-  fontWeight: 500,
-});
-
 export const utaToolsLink = style({
   color: '#5DADEC',
   fontWeight: 500,
