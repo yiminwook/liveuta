@@ -40,9 +40,6 @@ export const inner = style([
       '&:hover': {
         backgroundColor: 'var(--liveuta-header-color) !important',
       },
-      '&.mobile': {
-        backgroundColor: 'var(--liveuta-header-color) !important',
-      },
     },
   },
 ]);
@@ -69,7 +66,7 @@ export const searchBox = style({
   color: 'black',
   display: 'none',
   ...responsive({
-    md: {
+    lg: {
       display: 'block',
     },
   }),

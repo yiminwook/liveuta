@@ -1,27 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import dayjs from '@/model/dayjs';
-import { BREAK_POINT } from '@/style/var';
 import { accountSidebarAtom, sidebarAtom } from '@inner/_lib/atom';
 import { gtag } from '@inner/_lib/gtag';
-import { replaceSpecialCharacters } from '@inner/_lib/regexp';
 import cx from 'classnames';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { useMediaQuery } from 'react-responsive';
+import { useEffect, useMemo, useRef } from 'react';
+import { toast } from 'sonner';
 import Avatar from '../Avatar';
 import HamburgerButton from '../button/HamburgerButton';
 import NavigationList from '../header/NavigationList';
+import SearchInput from '../input/SearchInput';
 import * as styles from './header.css';
 import header from './header.module.scss';
-import { toast } from 'sonner';
-import { IoMdMusicalNote } from 'react-icons/io';
-import SearchInput from '../input/SearchInput';
-
-const TRANSPARENT_PATH = ['/', '/live', '/daily', '/all'];
+import { isMobile } from 'react-device-detect';
 
 type HeaderProps = {
   session: Session | null;
@@ -31,9 +26,9 @@ export default function Header({ session }: HeaderProps) {
   const gnbRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
-  const [, setShowSidebar] = useAtom(sidebarAtom);
-  const isMobile = useMediaQuery({ query: `(max-width: ${BREAK_POINT.md}px)` });
-  const [, setShowAccountSidebar] = useAtom(accountSidebarAtom);
+  const setShowSidebar = useSetAtom(sidebarAtom);
+  const setShowAccountSidebar = useSetAtom(accountSidebarAtom);
+
   const openAccountSidebar = () => setShowAccountSidebar(true);
 
   const openSidebar = () => setShowSidebar(true);
@@ -64,18 +59,17 @@ export default function Header({ session }: HeaderProps) {
   };
 
   useEffect(() => {
-    if (isMobile || !TRANSPARENT_PATH.includes(pathname)) return;
-    // 모바일이 아니고 TRANSPARENT_PATH 경로일때만 스크롤 이벤트를 등록한다.
+    if (isMobile) return;
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMobile, pathname]);
+  }, [isMobile]);
 
   return (
     <header>
-      <div className={cx(header['inner'], styles.inner, isMobile && 'mobile')} ref={gnbRef}>
+      <div className={cx(header['inner'], styles.inner)} ref={gnbRef}>
         <nav>
           <HamburgerButton onClick={openSidebar} />
           <Link href="/" className={styles.title}>
