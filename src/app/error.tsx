@@ -2,9 +2,10 @@
 //에러 페이지는 클라이언트에서만 렌더링되어야 합니다.
 'use client';
 import { useEffect } from 'react';
-import styles from '@/style/not-found.css';
-import { FcHighPriority } from 'react-icons/fc';
+import * as styles from '@/style/not-found.css';
+import character from '/src/asset/image/character-6.png';
 import axios from 'axios';
+import Image from 'next/image';
 
 export default function Error({
   error,
@@ -23,20 +24,32 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className={styles.wrap}>
+    <>
       <title>500: Server Error</title>
-      <div>
-        <FcHighPriority size={200} />
-      </div>
-      <div className={styles.inner}>
-        <div className={styles.innerTop}>
-          <h1>500</h1>
-          <h2>{error.message}</h2>
+      <div className={styles.wrap}>
+        <div className={styles.inner}>
+          <div className={styles.imgBox}>
+            <Image
+              alt="에러가 발생하였습니다."
+              src={character}
+              width={200}
+              height={300}
+              unoptimized={true}
+            />
+          </div>
+          <div className={styles.desc}>
+            <div className={styles.descTop}>
+              <h1>500: Server Error</h1>
+              <h2>{error.message}</h2>
+            </div>
+            <div className={styles.descBottom}>
+              <button className={styles.button} onClick={reset}>
+                재시도
+              </button>
+            </div>
+          </div>
         </div>
-        <div className={styles.innerBottom}>
-          <button onClick={reset}>ReTry</button>
-        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -69,15 +69,15 @@ export const textLineBase: CSSPropertiesWithVars = {
 export const textOneLine: CSSPropertiesWithVars = {
   ...textLineBase,
   WebkitLineClamp: 1,
-  lineHeight: '1rem',
-  height: calc.multiply(1, '1rem'),
+  lineHeight: '1.6rem',
+  height: calc.multiply(1, '1.6rem'),
 };
 
 export const textTwoLine: CSSPropertiesWithVars = {
   ...textLineBase,
   WebkitLineClamp: 2,
-  lineHeight: '1rem',
-  height: calc.multiply(2, '1rem'),
+  lineHeight: '1.6rem',
+  height: calc.multiply(2, '1.6rem'),
 };
 
 export const preventUserSelect: CSSPropertiesWithVars = {

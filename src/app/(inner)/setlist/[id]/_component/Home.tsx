@@ -6,6 +6,8 @@ import SetlistPlayer from './SetlistPlayer';
 import * as styles from './home.css';
 import Info from './Info';
 import { auth } from '@/model/nextAuth';
+import character from '@/asset/image/character-5-150.png';
+import Image from 'next/image';
 
 interface HomeProps {
   params: {
@@ -24,6 +26,7 @@ export default async function Home({ params }: HomeProps) {
     <>
       <div className={styles.inner}>
         <section className={styles.left}>
+          <Image src={character} alt="캐릭터 이미지" width={150} height={224} unoptimized={true} />
           <div className={styles.playerWrap}>
             <SetlistPlayer videoId={setlist.videoId} />
           </div>

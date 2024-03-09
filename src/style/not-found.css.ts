@@ -1,8 +1,8 @@
-import { BEZIER_CURVE } from '@/style/var';
+import { BEZIER_CURVE, flexCenter, responsive } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 import { global } from './globalTheme.css';
 
-const wrap = style({
+export const wrap = style({
   width: '100dvw',
   height: '100dvh',
   overflow: 'hidden',
@@ -11,50 +11,68 @@ const wrap = style({
   alignItems: 'center',
 });
 
-const inner = style({
-  height: 200,
+export const inner = style([
+  {
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    gap: '1rem',
+    width: '100%',
+    padding: '1rem',
+  },
+  responsive({
+    md: {
+      flexDirection: 'row',
+    },
+  }),
+]);
+
+export const imgBox = style({});
+
+globalStyle(`${imgBox} > img`, {
+  width: '100%',
+  objectFit: 'contain',
+});
+
+export const desc = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  padding: 14,
+  minHeight: '18rem',
+  minWidth: '18rem',
 });
 
-const innerTop = style({
+export const descTop = style({
   display: 'flex',
   flexDirection: 'column',
+  flex: 1,
 });
 
-const innerBottom = style({
-  textAlign: 'center',
-  fontSize: 16,
-  padding: 14,
-});
-
-globalStyle(`${innerTop} > h1`, {
+globalStyle(`${descTop} > h1`, {
   fontSize: 38,
   marginBottom: 14,
 });
 
-globalStyle(`${innerTop} > h2`, {
+globalStyle(`${descTop} > h2`, {
   fontSize: 20,
   fontWeight: 400,
 });
 
-const link = style({
-  margin: '0 auto',
+export const descBottom = style([
+  flexCenter,
+  {
+    margin: '2rem 0',
+  },
+]);
+
+export const button = style({
   fontWeight: 500,
-  transition: `color 0.3s ${BEZIER_CURVE}`,
+  backgroundColor: global.color.salmon,
+  padding: '0.5rem 1rem',
+  color: '#fff',
+  borderRadius: 5,
+  transition: `background-color 0.3s ${BEZIER_CURVE}`,
   ':hover': {
-    color: global.color.bg,
+    backgroundColor: global.color.hoverSalmon,
   },
 });
-
-const styles = {
-  wrap,
-  inner,
-  innerTop,
-  innerBottom,
-  link,
-};
-
-export default styles;

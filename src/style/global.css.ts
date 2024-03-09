@@ -130,6 +130,7 @@ globalStyle('textarea', {
 
 export const main = style([
   {
+    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     gap: '0.5rem',

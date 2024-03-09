@@ -39,12 +39,14 @@ export const title = style({
   marginBottom: '1rem',
 });
 
-export const logoBox = style({
-  position: 'relative',
+export const imgBox = style({
   width: '100%',
-  aspectRatio: '1/1',
-  maxWidth: 256,
   margin: '1rem auto',
+});
+
+globalStyle(`${imgBox} > img`, {
+  objectFit: 'contain',
+  width: '100%',
 });
 
 export const buttonBox = style({
