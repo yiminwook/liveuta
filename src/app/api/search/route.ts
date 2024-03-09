@@ -25,10 +25,9 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const query = searchParams.get('query');
     if (!query) throw new Error('No query');
-    const decodeQuery = decodeURIComponent(query);
-    const replacedQuery = replaceSpecialCharacters(decodeQuery);
+    const decodeQuery = decodeURIComponent(query).trim();
 
-    if (replacedQuery === '') {
+    if (decodeQuery === '') {
       return NextResponse.json<SearchResponseType>(
         {
           contents: [],
@@ -39,7 +38,7 @@ export async function GET(req: NextRequest) {
     }
 
     // Execute both database queries concurrently
-    const regexforDBQuery = { $regex: replacedQuery, $options: 'i' };
+    const regexforDBQuery = { $regex: decodeQuery, $options: 'i' };
 
     const [channelResults, contentResults] = await Promise.all([
       connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION).then((db) =>

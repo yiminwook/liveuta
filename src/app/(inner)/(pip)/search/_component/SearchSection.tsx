@@ -18,6 +18,7 @@ export default function SearchSection() {
 
   const handleSubmit = useCallback(
     async (e: FormEvent, inputValue: string) => {
+      e.preventDefault();
       setShowErrMsg(() => false);
       const value = inputValue.trim();
       if (!value) return setShowErrMsg(() => true);
@@ -30,8 +31,7 @@ export default function SearchSection() {
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement> | string) => {
     const value = typeof e === 'string' ? e : e.target.value;
-    const replacedValue = replaceSpecialCharacters(value);
-    setInputValue(() => replacedValue);
+    setInputValue(() => value);
   }, []);
 
   const handleReset = useCallback(() => {
