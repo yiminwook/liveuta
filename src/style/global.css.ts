@@ -35,7 +35,7 @@ globalStyle('h1, h2, h3, h4, p', {
   margin: 0,
   padding: 0,
   border: 'none',
-  lineHeight: 1.5,
+  lineHeight: 1.6,
 });
 
 globalStyle('button', {
@@ -50,7 +50,7 @@ globalStyle('button', {
   boxSizing: 'border-box',
   margin: 0,
   padding: 0,
-  lineHeight: 1.5,
+  lineHeight: 1.6,
 });
 
 globalStyle('a', {
@@ -60,7 +60,7 @@ globalStyle('a', {
   color: 'inherit',
   background: 'none',
   cursor: 'pointer',
-  lineHeight: 1.5,
+  lineHeight: 1.6,
   listStyle: 'none',
   textDecoration: 'none',
 });
@@ -76,7 +76,7 @@ globalStyle('label', {
   boxSizing: 'border-box',
   margin: 0,
   padding: 0,
-  lineHeight: 1.5,
+  lineHeight: 1.6,
 });
 
 globalStyle('input', {
@@ -121,7 +121,7 @@ globalStyle('textarea', {
   boxSizing: 'border-box',
   background: 'none',
   border: 'none',
-  lineHeight: 1.5,
+  lineHeight: 1.6,
   fontFamily: 'Pretendard Variable Pretendard -apple-system  sans-serif',
   margin: 0,
   padding: 0,

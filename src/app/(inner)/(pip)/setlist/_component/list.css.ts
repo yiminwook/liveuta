@@ -1,4 +1,4 @@
-import { BEZIER_CURVE, BOX_SHADOW, responsive, textTwoLine } from '@/style/var';
+import { BEZIER_CURVE, BOX_SHADOW, responsive, textLine } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 export const wrap = style({});
@@ -134,4 +134,4 @@ export const mobileRight = style([
   },
 ]);
 
-export const mobileTitle = style([textTwoLine, {}]);
+export const mobileTitle = style([textLine('1.6rem', 2), {}]);

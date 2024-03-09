@@ -1,10 +1,10 @@
-import { textOneLine } from '@/style/var';
+import { textLine } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 
 export const wrap = style({});
 
 export const title = style([
-  textOneLine,
+  textLine('1.6rem', 1),
   {
     fontSize: '1.2rem',
     marginBottom: '1rem',

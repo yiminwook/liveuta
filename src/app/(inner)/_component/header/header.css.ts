@@ -1,4 +1,4 @@
-import { BEZIER_CURVE, BOX_SHADOW, responsive, textOneLine, zIndex } from '@/style/var';
+import { BEZIER_CURVE, BOX_SHADOW, responsive, textLine, zIndex } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 export const blank = style({
@@ -7,13 +7,11 @@ export const blank = style({
 });
 
 export const title = style([
-  textOneLine,
+  textLine('2.2rem', 1),
   {
     fontSize: '2rem',
     color: 'var(--liveuta-title-color)',
     fontWeight: 600,
-    lineHeight: '2.2rem',
-    height: '2.2rem',
   },
 ]);
 

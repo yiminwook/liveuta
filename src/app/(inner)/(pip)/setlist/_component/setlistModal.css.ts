@@ -1,4 +1,4 @@
-import { textOneLine } from '@/style/var';
+import { textLine } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 
 export const inner = style([
@@ -8,7 +8,7 @@ export const inner = style([
   },
 ]);
 
-export const title = style([textOneLine, { fontSize: '1.15rem' }]);
+export const title = style([textLine('1.6rem', 1), { fontSize: '1.15rem' }]);
 
 export const descBox = style({
   padding: '0 0.5rem',

@@ -59,26 +59,15 @@ export const responsive = (styles: ResponsiveArgs) => {
   };
 };
 
-export const textLineBase: CSSPropertiesWithVars = {
+export const textLine = (lineHeight: string | number, clamp: number): CSSPropertiesWithVars => ({
   wordBreak: 'break-all',
   display: '-webkit-box',
   overflow: 'hidden',
   WebkitBoxOrient: 'vertical',
-};
-
-export const textOneLine: CSSPropertiesWithVars = {
-  ...textLineBase,
-  WebkitLineClamp: 1,
-  lineHeight: '1.6rem',
-  height: calc.multiply(1, '1.6rem'),
-};
-
-export const textTwoLine: CSSPropertiesWithVars = {
-  ...textLineBase,
-  WebkitLineClamp: 2,
-  lineHeight: '1.6rem',
-  height: calc.multiply(2, '1.6rem'),
-};
+  WebkitLineClamp: clamp,
+  lineHeight,
+  height: calc.multiply(clamp, lineHeight),
+});
 
 export const preventUserSelect: CSSPropertiesWithVars = {
   WebkitUserSelect: 'none',

@@ -1,5 +1,5 @@
 import { global } from '@/style/globalTheme.css';
-import { responsive, BOX_SHADOW, BEZIER_CURVE, textTwoLine } from '@/style/var';
+import { responsive, BOX_SHADOW, BEZIER_CURVE, textLine } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
@@ -113,7 +113,7 @@ export const channelName = style([
 ]);
 
 export const title = style([
-  textTwoLine,
+  textLine('1.2rem', 2),
   {
     color: global.color.font,
     fontSize: '0.75rem',
@@ -126,8 +126,8 @@ export const title = style([
   },
   responsive({
     sm: {
-      lineHeight: '1.25rem',
-      height: calc.multiply(2, '1.25rem'),
+      lineHeight: '1.6rem',
+      height: calc.multiply(2, '1.6rem'),
       fontSize: '1rem',
     },
   }),
