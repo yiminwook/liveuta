@@ -4,7 +4,6 @@ import { CSSProperties, MouseEvent } from 'react';
 import { FaCopy } from 'react-icons/fa';
 import { gtagClick } from '@inner/_lib/gtag';
 import cx from 'classnames';
-import * as styles from './copyButton.css';
 import { toast } from 'sonner';
 
 interface CopyButtonProps {
@@ -29,7 +28,7 @@ export default function CopyButton({ value, size = '2rem', className, style }: C
   };
 
   return (
-    <button className={cx(styles.button, className)} onClick={onClick} style={style}>
+    <button className={cx(className)} onClick={onClick} style={style}>
       <FaCopy size={size} color="inherit" />
     </button>
   );

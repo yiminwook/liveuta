@@ -120,7 +120,7 @@ export const descBox = style([
   },
   responsive({
     sm: {
-      gap: '0.5rem',
+      gap: '0.25rem',
     },
   }),
 ]);
@@ -175,7 +175,7 @@ export const time = style([
   }),
 ]);
 
-export const link = style([
+export const nav = style([
   {
     boxSizing: 'border-box',
     display: 'flex',
@@ -191,11 +191,21 @@ export const link = style([
   }),
 ]);
 
-globalStyle(`${link} > button`, {
-  fontSize: 'inherit',
-  fontWeight: 600,
-  color: global.color.salmon,
-});
+export const navButton = style([
+  flexCenter,
+  {
+    color: global.color.salmon,
+    width: '1.75rem',
+    height: '1.75rem',
+    borderRadius: 5,
+    transition: `background-color 0.5s ${BEZIER_CURVE}`,
+    selectors: {
+      '&:hover': {
+        backgroundColor: 'rgba(100, 100, 100, 0.15)',
+      },
+    },
+  },
+]);
 
 export const statusBox = style([
   {

@@ -25,7 +25,7 @@ export async function GET() {
       ...doc,
       ScheduledTime: dayjs.tz(doc.ScheduledTime),
     }));
-    console.log(scheduleData[0]);
+
     const { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
     const { daily, all } = parseAllData(scheduleData); // Need to be revised
 
