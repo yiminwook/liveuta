@@ -21,7 +21,7 @@ export default function ServiceWorker() {
           body: data.body,
           image: data.imageUrl!,
           timestamp: Number(data.timestamp),
-        });
+        } as any);
 
         noti.onclick = () => {
           const url = window.location.href;
