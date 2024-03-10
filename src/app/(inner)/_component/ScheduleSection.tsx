@@ -8,10 +8,15 @@ import ScheduleCard from './scheduleCard/Card';
 import * as cardStyles from './scheduleCard/card.css';
 import { useAtom } from 'jotai';
 import { schedule } from '@inner/_lib/atom';
+import { Session } from 'next-auth';
 
 const CardPlaceHolders = dynamic(() => import('./scheduleCard/CardPlaceHolders'), { ssr: false });
 
-export default function ScheduleSection() {
+type ScheduleSectionProps = {
+  session: Session | null;
+};
+
+export default function ScheduleSection({ session }: ScheduleSectionProps) {
   const [loadContents, setLoadContents] = useState<ContentsDataType[]>([]);
   const [scrollPage, setScrollPage] = useState(1);
   const [selectedData] = useAtom(schedule.selectedScheduleAtom);
@@ -43,7 +48,7 @@ export default function ScheduleSection() {
     <section>
       <div className={cardStyles.cardList}>
         {loadContents.map((data, index) => (
-          <ScheduleCard key={data.videoId} content={data} index={index} />
+          <ScheduleCard session={session} key={data.videoId} content={data} index={index} />
         ))}
         <CardPlaceHolders />
       </div>

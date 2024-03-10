@@ -8,7 +8,7 @@ import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { MouseEvent } from 'react';
 import { setlistModalAtom } from '../_lib/atom';
-import * as styles from './list.css';
+import * as styles from './table.css';
 import { useMediaQuery } from 'react-responsive';
 import { BREAK_POINT } from '@/style/var';
 

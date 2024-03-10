@@ -14,13 +14,16 @@ import { toast } from 'sonner';
 import CopyButton from '../button/CopyButton';
 import CardStatus from '../scheduleCard/CardStatus';
 import * as styles from './card.css';
+import * as action from '../../_action/blacklist';
+import { Session } from 'next-auth';
 
 interface CardDescProps {
   content: ContentsDataType;
   addStreamModifier: string;
+  session: Session | null;
 }
 
-export default function CardDesc({ content, addStreamModifier }: CardDescProps) {
+export default function CardDesc({ session, content, addStreamModifier }: CardDescProps) {
   const { title, channelName, korTime, interval, isStream, timestamp, videoId, viewer } = content;
 
   const videoUrl = generateVideoUrl(videoId);
@@ -44,6 +47,15 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
     },
   });
 
+  const mutateBlock = useMutation({
+    mutationKey: ['block', videoId],
+    mutationFn: action.POST,
+    onSuccess: (response) => {},
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
   const handleReserve = async (e: MouseEvent<HTMLButtonElement>) => {
     if (mutatePush.isPending || isStream !== 'NULL') return;
 
@@ -60,6 +72,15 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
       timestamp: timestamp.toString(),
       imageUrl: thumbnailUrl,
       link: videoUrl,
+    });
+  };
+
+  const handleBlock = async (e: MouseEvent<HTMLButtonElement>) => {
+    if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
+
+    mutateBlock.mutate({
+      accessToken: session.user.accessToken,
+      channelId: 'UCWCc8tO-uUl_7SJXIKJACMw',
     });
   };
 
@@ -90,6 +111,7 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
             <HiBellAlert color="inherit" size="1.25rem" />
           </button>
         ) : null}
+        <button onClick={handleBlock}>블럭</button>
         <CopyButton value={videoUrl} size="1rem" />
         <button onClick={openStream}>새 탭으로 열기</button>
       </div>

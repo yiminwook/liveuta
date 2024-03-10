@@ -1,41 +1,38 @@
 'use client';
 import { SETLIST_PAGE_SIZE } from '@/const';
 import { ChannelDataset } from '@/model/mongoDB/getAllChannel';
-import { Setlist } from '@/model/oracleDB/setlist/service';
 import Pagination from '@inner/_component/Pagination';
 import Loading from '@inner/loading';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import cx from 'classnames';
 import { useRouter } from 'next/navigation';
 import Row from './Row';
-import * as styles from './list.css';
+import * as styles from './table.css';
+import { GET } from '@inner/_action/setlist';
+import { Session } from 'next-auth';
 
-interface ListProps {
+type TableProps = {
   searchParams: {
     query: string;
     page: number;
     order: 'broadcast' | 'create';
   };
   channelDataset: ChannelDataset;
-}
+  session: Session | null;
+};
 
-export default function List({ searchParams, channelDataset }: ListProps) {
+export default function Table({ session, searchParams, channelDataset }: TableProps) {
   const router = useRouter();
 
   const { data, isLoading } = useQuery({
     queryKey: ['searchSetlist', searchParams],
-    queryFn: async () => {
-      const result = await axios.get<{
-        total: number;
-        list: Setlist[];
-      }>(
-        `/api/search/setlist?q=${searchParams.query}&r=${
-          (searchParams.page - 1) * SETLIST_PAGE_SIZE
-        }&o=${searchParams.order}`,
-      );
-      return result.data;
-    },
+    queryFn: () =>
+      GET({
+        accessToken: session?.user.accessToken || null,
+        query: searchParams.query,
+        startRow: (searchParams.page - 1) * SETLIST_PAGE_SIZE,
+        orderType: searchParams.order === 'create' ? 'CREATE_AT' : 'BROADCAST_AT',
+      }),
   });
 
   const handlePage = (page: number) => {

@@ -1,7 +1,8 @@
 import { generateChannelObject, getAllChannel } from '@/model/mongoDB/getAllChannel';
-import List from './List';
+import Table from './Table';
 import * as styles from './home.css';
 import Nav from './Nav';
+import { auth } from '@/model/nextAuth';
 
 interface HomeProps {
   searchParams: {
@@ -12,6 +13,7 @@ interface HomeProps {
 }
 
 export default async function Home({ searchParams }: HomeProps) {
+  const session = await auth();
   const channelData = await getAllChannel();
   const channelDataset = generateChannelObject(channelData.channels);
 
@@ -26,7 +28,7 @@ export default async function Home({ searchParams }: HomeProps) {
       <div className={styles.inner}>
         <h1 className="blind">세트리</h1>
         <Nav searchParams={parseSearchParams} />
-        <List searchParams={parseSearchParams} channelDataset={channelDataset} />
+        <Table session={session} searchParams={parseSearchParams} channelDataset={channelDataset} />
       </div>
     </>
   );

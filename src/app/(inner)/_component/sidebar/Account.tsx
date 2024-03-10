@@ -13,6 +13,7 @@ import { signOut } from 'next-auth/react';
 import Avatar from '../Avatar';
 import { toast } from 'sonner';
 import { useAtom } from 'jotai';
+import Link from 'next/link';
 
 interface AccountSidebarProps {
   session: Session;
@@ -43,25 +44,28 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
       <aside>
         <div className={cx(styles.wrap, show && 'show')} onClick={handleClose}>
           <div className={cx(styles.inner, 'right', show && 'moveLeft')} onClick={stopPropagation}>
-            <nav className={styles.nav}>
-              <div className={styles.logoutButtonBox}>
-                <div className={styles.accountImageBox}>
-                  <Avatar
-                    email={session.user.email}
-                    src={session.user.image}
-                    alt="유저 이미지"
-                    size={40}
-                  />
-                </div>
-                <button
-                  className={styles.logoutButton}
-                  onClick={() => mutateLogout.mutate()}
-                  disabled={mutateLogout.isPending}
-                >
-                  로그아웃
-                </button>
-              </div>
+            <div className={styles.logoutButtonBox}>
+              <button
+                className={styles.logoutButton}
+                onClick={() => mutateLogout.mutate()}
+                disabled={mutateLogout.isPending}
+              >
+                <Avatar
+                  email={session.user.email}
+                  src={session.user.image}
+                  alt="유저 이미지"
+                  size={40}
+                />
+                로그아웃
+              </button>
               <CloseButton onClick={handleClose} />
+            </div>
+            <nav className={styles.nav}>
+              <ul>
+                <li>
+                  <Link href="/my">마이페이지</Link>
+                </li>
+              </ul>
             </nav>
           </div>
         </div>

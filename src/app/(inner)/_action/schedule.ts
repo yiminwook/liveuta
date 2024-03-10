@@ -6,7 +6,7 @@ import CustomServerError from '@/model/error/customServerError';
 import { connectMongoDB, disconnectMongoDB } from '@/model/mongoDB';
 import { ContentDocumentRaw } from '@/type/api/mongoDB';
 
-export default async function getSchedule() {
+export async function GET() {
   try {
     const db = await connectMongoDB(MONGODB_SCHEDULE_DB, MONGODB_SCHEDULE_COLLECTION);
 
@@ -25,7 +25,7 @@ export default async function getSchedule() {
       ...doc,
       ScheduledTime: dayjs.tz(doc.ScheduledTime),
     }));
-
+    console.log(scheduleData[0]);
     const { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
     const { daily, all } = parseAllData(scheduleData); // Need to be revised
 

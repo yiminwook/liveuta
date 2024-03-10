@@ -3,6 +3,7 @@ import ScheduleCard from '@inner/_component/scheduleCard/Card';
 import * as cardStyles from '@inner/_component/scheduleCard/card.css';
 import search from './search.module.scss';
 import dynamic from 'next/dynamic';
+import { Session } from 'next-auth';
 
 const CardPlaceHolders = dynamic(() => import('@inner/_component/scheduleCard/CardPlaceHolders'), {
   ssr: false,
@@ -10,9 +11,10 @@ const CardPlaceHolders = dynamic(() => import('@inner/_component/scheduleCard/Ca
 
 interface ContentSectionProps {
   contents: SearchResponseType['contents'];
+  session: Session | null;
 }
 
-export default function ContentSection({ contents }: ContentSectionProps) {
+export default function ContentSection({ session, contents }: ContentSectionProps) {
   return (
     <section className={search['content-section']}>
       <div>
@@ -21,7 +23,7 @@ export default function ContentSection({ contents }: ContentSectionProps) {
       </div>
       <section className={cardStyles.cardList}>
         {contents.map((content, index) => (
-          <ScheduleCard key={content.videoId} content={content} index={index} />
+          <ScheduleCard key={content.videoId} session={session} content={content} index={index} />
         ))}
         <CardPlaceHolders />
       </section>

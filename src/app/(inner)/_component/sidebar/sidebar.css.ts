@@ -62,19 +62,18 @@ export const logoutButtonBox = style({
   display: 'flex',
   gap: '0.5rem',
   alignItems: 'center',
-});
-
-export const accountImageBox = style({
-  width: 40,
-  height: 40,
-  borderRadius: '50%',
-  overflow: 'hidden',
+  justifyContent: 'space-between',
+  padding: '0.5rem',
 });
 
 export const logoutButton = style({
   color: 'black',
   fontWeight: 600,
   fontSize: '1rem',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+  padding: '0.5rem',
 });
 
 globalStyle(`${inner} section`, {

@@ -2,7 +2,7 @@
 import { SelectType } from '@/type';
 import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
 import { schedule } from '@inner/_lib/atom';
-import getSchedule from '@inner/_lib/getSchedule';
+import * as action from '@inner/_action/schedule';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { useEffect, useLayoutEffect } from 'react';
@@ -33,7 +33,7 @@ export default function DataObserver({ children, filter, select }: DataObserver)
   // schedule observer
   const { data } = useQuery({
     queryKey: key,
-    queryFn: () => getSchedule(),
+    queryFn: () => action.GET(),
     ...option,
   });
 

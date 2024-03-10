@@ -1,16 +1,6 @@
 import { DBError } from 'oracledb';
 import { connectOracleDB } from '../connection';
-import {
-  DELETE_SETLIST,
-  GET_ALL_SETLIST,
-  GET_MAX_COUNT,
-  GET_SETLIST,
-  POST_SETLIST,
-  SEARCH_MAX_COUNT,
-  SEARCH_SETLIST,
-  SetlistOrderType,
-  UPDATE_SETLIST,
-} from './sql';
+import * as sql from './sql';
 import CustomServerError from '@/model/error/customServerError';
 import dayjs from '@/model/dayjs';
 import { SETLIST_PAGE_SIZE } from '@/const';
@@ -51,7 +41,7 @@ const parseSetlistRow = (row: SetlistRow): Setlist => ({
 export async function getSetlistByVideoId(videoId: string) {
   const connection = await connectOracleDB();
   try {
-    const result = await connection.execute<SetlistRow>(GET_SETLIST, [videoId]);
+    const result = await connection.execute<SetlistRow>(sql.GET_SETLIST, [videoId]);
     await connection.close();
 
     const row = result.rows?.[0];
@@ -64,20 +54,26 @@ export async function getSetlistByVideoId(videoId: string) {
   }
 }
 
-export async function getAllSetlist(row: number, order: SetlistOrderType) {
+export async function getAllSetlist(arg: {
+  startRow: number;
+  /** 세션에서 가져오는 id */
+  memberId: number;
+  orderType: sql.SetlistOrderType;
+}) {
   const connection = await connectOracleDB();
 
   try {
-    const countResult = await connection.execute<[number]>(GET_MAX_COUNT);
+    const countResult = await connection.execute<[number]>(sql.GET_MAX_COUNT, [arg.memberId]);
     const total = countResult.rows?.[0][0] || 0;
 
-    if (total === 0 || row >= total) {
+    if (total === 0 || arg.startRow >= total) {
       await connection.close();
       return { total, list: [] };
     }
 
-    const searchResult = await connection.execute<SetlistRow>(GET_ALL_SETLIST(order), [
-      row,
+    const searchResult = await connection.execute<SetlistRow>(sql.GET_ALL_SETLIST(arg.orderType), [
+      arg.memberId,
+      arg.startRow,
       SETLIST_PAGE_SIZE,
     ]);
 
@@ -98,21 +94,30 @@ export async function getAllSetlist(row: number, order: SetlistOrderType) {
   }
 }
 
-export async function searchSetlist(query: string, row: number, order: SetlistOrderType) {
+export async function searchSetlist(arg: {
+  query: string;
+  startRow: number;
+  memberId: number;
+  orderType: sql.SetlistOrderType;
+}) {
   const connection = await connectOracleDB();
-  const pattern = query.toLowerCase();
+  const pattern = arg.query.toLowerCase();
   try {
-    const countResult = await connection.execute<[number]>(SEARCH_MAX_COUNT, [pattern]);
+    const countResult = await connection.execute<[number]>(sql.SEARCH_MAX_COUNT, [
+      arg.memberId,
+      pattern,
+    ]);
     const total = countResult.rows?.[0][0] || 0;
 
-    if (total === 0 || row >= total) {
+    if (total === 0 || arg.startRow >= total) {
       await connection.close();
       return { total, list: [] };
     }
 
-    const searchResult = await connection.execute<SetlistRow>(SEARCH_SETLIST(order), [
+    const searchResult = await connection.execute<SetlistRow>(sql.SEARCH_SETLIST(arg.orderType), [
+      arg.memberId,
       pattern,
-      row,
+      arg.startRow,
       SETLIST_PAGE_SIZE,
     ]);
 
@@ -145,7 +150,7 @@ export async function postSetlist(
   try {
     const nonullableBroadcastAt = dayjs.tz(broadcastAt || undefined).toDate();
 
-    await connection.execute(POST_SETLIST, [
+    await connection.execute(sql.POST_SETLIST, [
       videoId,
       description,
       memberId,
@@ -181,7 +186,7 @@ export async function updateSetlist(
   try {
     const nonullableBroadcastAt = dayjs.tz(broadcastAt || undefined).toDate();
 
-    await connection.execute(UPDATE_SETLIST, [
+    await connection.execute(sql.UPDATE_SETLIST, [
       title,
       description,
       channelId,
@@ -202,7 +207,7 @@ export async function updateSetlist(
 export async function deleteSetlist(videoId: number) {
   const connection = await connectOracleDB();
   try {
-    await connection.execute(DELETE_SETLIST, [videoId]);
+    await connection.execute(sql.DELETE_SETLIST, [videoId]);
     await connection.commit();
     await connection.close();
   } catch (error) {
