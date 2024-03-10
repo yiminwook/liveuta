@@ -1,4 +1,3 @@
-'use client';
 import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import { generateThumbnail } from '@/model/youtube/thumbnail';
 import { generateVideoUrl } from '@/model/youtube/url';
@@ -21,9 +20,15 @@ interface CardDescProps {
   content: ContentsDataType;
   addStreamModifier: string;
   session: Session | null;
+  onClickBlock: () => void;
 }
 
-export default function CardDesc({ session, content, addStreamModifier }: CardDescProps) {
+export default function CardDesc({
+  session,
+  content,
+  addStreamModifier,
+  onClickBlock,
+}: CardDescProps) {
   const { title, channelName, korTime, interval, isStream, timestamp, videoId, viewer } = content;
 
   const videoUrl = generateVideoUrl(videoId);
@@ -49,8 +54,11 @@ export default function CardDesc({ session, content, addStreamModifier }: CardDe
 
   const mutateBlock = useMutation({
     mutationKey: ['block', videoId],
-    mutationFn: action.POST,
-    onSuccess: (response) => {},
+    // mutationFn: action.POST,
+    mutationFn: async () => 'ok',
+    onSuccess: (response) => {
+      onClickBlock();
+    },
     onError: (error) => {
       toast.error(error.message);
     },
@@ -78,10 +86,11 @@ export default function CardDesc({ session, content, addStreamModifier }: CardDe
   const handleBlock = async (e: MouseEvent<HTMLButtonElement>) => {
     if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
 
-    mutateBlock.mutate({
-      accessToken: session.user.accessToken,
-      channelId: 'UCWCc8tO-uUl_7SJXIKJACMw',
-    });
+    // mutateBlock.mutate({
+    //   accessToken: session.user.accessToken,
+    //   channelId: 'UCWCc8tO-uUl_7SJXIKJACMw',
+    // });
+    mutateBlock.mutate();
   };
 
   const openStream = (e: MouseEvent<HTMLButtonElement>) => {

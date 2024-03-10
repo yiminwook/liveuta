@@ -2,9 +2,10 @@
 import CardDesc from './CardDesc';
 import CardImage from './CardImage';
 import { ContentsDataType } from '@/type/api/mongoDB';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import CardWrap from './CardWrap';
 import { Session } from 'next-auth';
+import cx from 'classnames';
 
 interface ScheduleCardProps {
   content: ContentsDataType;
@@ -13,6 +14,7 @@ interface ScheduleCardProps {
 }
 
 export default function ScheduleCard({ session, content, index }: ScheduleCardProps) {
+  const [isBlock, setIsBlock] = useState(false);
   const { isStream } = content;
 
   const addStreamModifier = useMemo(() => {
@@ -35,10 +37,19 @@ export default function ScheduleCard({ session, content, index }: ScheduleCardPr
     return streamModifer;
   }, [isStream]);
 
+  const handleBlock = () => {
+    setIsBlock(() => true);
+  };
+
   return (
-    <CardWrap index={index} className={addStreamModifier}>
+    <CardWrap index={index} className={cx(addStreamModifier, isBlock && 'block')}>
       <CardImage content={content} />
-      <CardDesc session={session} content={content} addStreamModifier={addStreamModifier} />
+      <CardDesc
+        session={session}
+        content={content}
+        addStreamModifier={addStreamModifier}
+        onClickBlock={handleBlock}
+      />
     </CardWrap>
   );
 }

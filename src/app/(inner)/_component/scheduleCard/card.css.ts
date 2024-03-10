@@ -1,5 +1,5 @@
 import { global } from '@/style/globalTheme.css';
-import { responsive, BOX_SHADOW, BEZIER_CURVE, textLine } from '@/style/var';
+import { responsive, BOX_SHADOW, BEZIER_CURVE, textLine, flexCenter } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
@@ -23,13 +23,16 @@ export const cardBase = style([
 export const card = style([
   cardBase,
   {
+    position: 'relative',
     boxShadow: BOX_SHADOW,
     display: 'flex',
     padding: '0.25rem',
     gap: '0.25rem',
     backgroundColor: '#fff',
     borderRadius: 5,
-    transition: `all 0.2s ${BEZIER_CURVE}`,
+    transformStyle: 'preserve-3d',
+    transformOrigin: 'center',
+    transition: `all 1s ${BEZIER_CURVE}`,
     selectors: {
       '&:hover': {
         transform: 'scale(1.02)',
@@ -40,6 +43,29 @@ export const card = style([
       '&.stream': {
         backgroundColor: global.color.lightYellow,
       },
+      '&.block': {
+        ...responsive({
+          md: {
+            transform: 'rotateY(-180deg)',
+          },
+        }),
+      },
+      '&.block::after': {
+        ...flexCenter,
+        content: 'Blocked',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        fontWeight: 600,
+        backgroundColor: global.color.backdrop,
+        ...responsive({
+          md: {
+            transform: 'rotateY(180deg)',
+          },
+        }),
+      },
     },
   },
   responsive({
@@ -48,6 +74,10 @@ export const card = style([
     },
   }),
 ]);
+
+globalStyle(`${card}.block > *`, {
+  visibility: 'hidden',
+});
 
 export const imageLink = style([
   {
