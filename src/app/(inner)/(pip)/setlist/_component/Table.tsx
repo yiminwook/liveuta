@@ -32,6 +32,7 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
         query: searchParams.query,
         startRow: (searchParams.page - 1) * SETLIST_PAGE_SIZE,
         orderType: searchParams.order === 'create' ? 'CREATE_AT' : 'BROADCAST_AT',
+        isFavorite: false,
       }),
   });
 

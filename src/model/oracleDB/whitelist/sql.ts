@@ -1,36 +1,36 @@
-export const IS_BLACKLIST = `
+export const IS_WHITELIST = `
   SELECT COUNT(*)
-  FROM BLACKLIST
+  FROM WHITELIST
   WHERE MEMBER_ID = :memberId
     AND CHANNEL_ID = :channelId
 `;
 
 export const GET_MAX_COUNT = `
   SELECT COUNT(*)
-  FROM BLACKLIST
+  FROM WHITELIST
   WHERE MEMBER_ID = :memberId
 `;
 
-export const GET_ALL_BLACKLIST = `
-  SELECT *
-  FROM BLACKLIST
+export const GET_ALL_WHITELIST = `
+  SELECT CHANNEL_ID
+  FROM WHITELIST
   WHERE MEMBER_ID = :memberId
 `;
 
-export const POST_BLACKLIST = `
-  INSERT INTO BLACKLIST (MEMBER_ID, CHANNEL_ID)
+export const POST_WHITELIST = `
+  INSERT INTO WHITELIST (MEMBER_ID, CHANNEL_ID)
   SELECT :memberId, :channelId
   FROM DUAL
   WHERE NOT EXISTS (
     SELECT *
-    FROM BLACKLIST
+    FROM WHITELIST
     WHERE MEMBER_ID = :memberId
       AND CHANNEL_ID = :channelId
   )
 `;
 
-export const DELETE_BLACKLIST = `
-  delete from BLACKLIST
-  where MEMBER_ID = :memberId
-    and CHANNEL_ID = :channelId
+export const DELETE_WHITELIST = `
+  DELETE FROM WHITELIST
+  WHERE MEMBER_ID = :memberId
+    AND CHANNEL_ID = :channelId
 `;

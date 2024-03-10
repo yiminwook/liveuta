@@ -3,17 +3,17 @@ import { connectOracleDB } from '../connection';
 import * as sql from './sql';
 import CustomServerError from '@/model/error/customServerError';
 
-export type BlacklistRow = [
+export type WhitelistRow = [
   number, //memberId
   string, //channelId
 ];
 
-export type Blacklist = string[];
+export type Whitelist = string[];
 
-export async function isBlackList(arg: { memberId: number; channelId: string }) {
+export async function isWhiteList(arg: { memberId: number; channelId: string }) {
   const connection = await connectOracleDB();
   try {
-    const result = await connection.execute<[number]>(sql.IS_BLACKLIST, [
+    const result = await connection.execute<[number]>(sql.IS_WHITELIST, [
       arg.memberId,
       arg.channelId,
     ]);
@@ -27,10 +27,10 @@ export async function isBlackList(arg: { memberId: number; channelId: string }) 
   }
 }
 
-export async function getAllBlackList(arg: { memberId: number }) {
+export async function getAllWhiteList(arg: { memberId: number }) {
   const connection = await connectOracleDB();
   try {
-    const result = await connection.execute<BlacklistRow>(sql.GET_ALL_BLACKLIST, [arg.memberId]);
+    const result = await connection.execute<WhitelistRow>(sql.GET_ALL_WHITELIST, [arg.memberId]);
 
     await connection.close();
     const channelList = result.rows?.map((row) => row[1]) || [];
@@ -42,17 +42,17 @@ export async function getAllBlackList(arg: { memberId: number }) {
   }
 }
 
-export async function postBlacklist(arg: { memberId: number; channelId: string }) {
+export async function postWhitelist(arg: { memberId: number; channelId: string }) {
   const connection = await connectOracleDB();
   try {
-    const result = await connection.execute(sql.POST_BLACKLIST, [
+    const result = await connection.execute(sql.POST_WHITELIST, [
       arg.memberId,
       arg.channelId,
       arg.memberId,
       arg.channelId,
     ]);
     if (result.rowsAffected === 0) {
-      throw new CustomServerError({ statusCode: 400, message: '블록된 채널입니다.' });
+      throw new CustomServerError({ statusCode: 400, message: '등록된 채널입니다.' });
     }
     await connection.commit();
     await connection.close();
@@ -64,10 +64,10 @@ export async function postBlacklist(arg: { memberId: number; channelId: string }
   }
 }
 
-export async function deleteBlacklist(arg: { memberId: number; channelId: string }) {
+export async function deleteWhitelist(arg: { memberId: number; channelId: string }) {
   const connection = await connectOracleDB();
   try {
-    const result = await connection.execute(sql.DELETE_BLACKLIST, [arg.memberId, arg.channelId]);
+    const result = await connection.execute(sql.DELETE_WHITELIST, [arg.memberId, arg.channelId]);
     if (result.rowsAffected === 0) {
       throw new CustomServerError({ statusCode: 400, message: '취소된 채널입니다.' });
     }

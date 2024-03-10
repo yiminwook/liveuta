@@ -15,7 +15,6 @@ export type SetlistRow = [
   Date, // broadcastAt
   string, // title
   string, // email = 편집자
-  number, // maxCount
 ];
 
 export type Setlist = {
@@ -59,11 +58,13 @@ export async function getAllSetlist(arg: {
   /** 세션에서 가져오는 id */
   memberId: number;
   orderType: sql.SetlistOrderType;
+  isFavorite: boolean;
 }) {
   const connection = await connectOracleDB();
 
   try {
-    const countResult = await connection.execute<[number]>(sql.GET_MAX_COUNT, [arg.memberId]);
+    const maxCountSql = arg.isFavorite ? sql.GET_MAX_COUNT_WITH_WHITELIST : sql.GET_MAX_COUNT;
+    const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberId]);
     const total = countResult.rows?.[0][0] || 0;
 
     if (total === 0 || arg.startRow >= total) {
@@ -71,7 +72,10 @@ export async function getAllSetlist(arg: {
       return { total, list: [] };
     }
 
-    const searchResult = await connection.execute<SetlistRow>(sql.GET_ALL_SETLIST(arg.orderType), [
+    const searchSql = arg.isFavorite
+      ? sql.GET_ALL_SETLIST_WITH_WHITELIST(arg.orderType)
+      : sql.GET_ALL_SETLIST(arg.orderType);
+    const searchResult = await connection.execute<SetlistRow>(searchSql, [
       arg.memberId,
       arg.startRow,
       SETLIST_PAGE_SIZE,
@@ -99,14 +103,13 @@ export async function searchSetlist(arg: {
   startRow: number;
   memberId: number;
   orderType: sql.SetlistOrderType;
+  isFavorite: boolean;
 }) {
   const connection = await connectOracleDB();
   const pattern = arg.query.toLowerCase();
   try {
-    const countResult = await connection.execute<[number]>(sql.SEARCH_MAX_COUNT, [
-      arg.memberId,
-      pattern,
-    ]);
+    const maxCountSql = arg.isFavorite ? sql.SEARCH_MAX_COUNT_WITH_WHITELIST : sql.SEARCH_MAX_COUNT;
+    const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberId, pattern]);
     const total = countResult.rows?.[0][0] || 0;
 
     if (total === 0 || arg.startRow >= total) {
@@ -114,7 +117,10 @@ export async function searchSetlist(arg: {
       return { total, list: [] };
     }
 
-    const searchResult = await connection.execute<SetlistRow>(sql.SEARCH_SETLIST(arg.orderType), [
+    const searchSql = arg.isFavorite
+      ? sql.SEARCH_SETLIST_WITH_WHITELIST(arg.orderType)
+      : sql.SEARCH_SETLIST(arg.orderType);
+    const searchResult = await connection.execute<SetlistRow>(searchSql, [
       arg.memberId,
       pattern,
       arg.startRow,
