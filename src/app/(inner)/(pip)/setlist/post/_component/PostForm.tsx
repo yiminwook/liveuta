@@ -1,11 +1,11 @@
 'use client';
 import { Session } from '@auth/core/types';
-import axios, { isAxiosError } from 'axios';
 import { MouseEvent, useState } from 'react';
 import * as styles from './postForm.css';
 import TextareaAutosize from 'react-textarea-autosize';
-import { style } from '@vanilla-extract/css';
 import { toast } from 'sonner';
+import { useMutation } from '@tanstack/react-query';
+import * as action from '@inner/_action/setlist';
 
 interface PostFormProps {
   session: Session;
@@ -14,48 +14,33 @@ interface PostFormProps {
 export default function PostForm({ session }: PostFormProps) {
   const [url, setUrl] = useState('');
   const [desc, setDesc] = useState('');
-  const [isPending, setIsPending] = useState(false);
+
+  const mutatePost = useMutation({
+    mutationKey: ['postSetlist'],
+    mutationFn: action.POST,
+    onSuccess: (result) => toast.success('세트리가 입력 되었습니다.'),
+    onError: (error) => toast.error(error.message),
+  });
 
   const handleDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     setDesc(() => value);
   };
 
-  const postWrite = async (e: React.FormEvent) => {
-    try {
-      e.preventDefault();
-      setIsPending(() => true);
-      const videoId = url.match(/(?:\?v=|&v=|youtu\.be\/)([^&\n?#]+)/)?.[1];
-      const description = desc.trim();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const videoId = url.match(/(?:\?v=|&v=|youtu\.be\/)([^&\n?#]+)/)?.[1].trim();
+    const description = desc.trim();
 
-      if (!videoId) throw new Error('올바른 유튜브 URL을 입력해주세요.');
-      if (!description) throw new Error('세트리를 입력해주세요.');
-
-      const result = await axios<{ message: string }>({
-        method: 'POST',
-        url: '/api/setlist',
-        headers: {
-          Authorization: `Bearer ${session.user.accessToken}`,
-        },
-        data: {
-          videoId,
-          description,
-        },
-      });
-
-      console.log(result.data.message);
-      setIsPending(() => false);
-      toast.success('세트리가 입력 되었습니다.');
-    } catch (error) {
-      setIsPending(() => false);
-      let message = '알 수 없는 오류가 발생했습니다.';
-      if (isAxiosError(error)) {
-        message = error.response?.data.message || message;
-        return toast.error(message);
-      }
-      message = error instanceof Error ? error.message : message;
-      toast.error(message);
+    if (!videoId) {
+      return toast.warning('올바른 유튜브 URL을 입력해주세요.');
     }
+
+    if (!description) {
+      return toast.warning('세트리를 입력해주세요.');
+    }
+
+    mutatePost.mutate({ videoId, description, accessToken: session.user.accessToken });
   };
 
   const clear = (event: MouseEvent) => {
@@ -72,7 +57,7 @@ export default function PostForm({ session }: PostFormProps) {
   };
 
   return (
-    <form onSubmit={postWrite} className={styles.wrap}>
+    <form onSubmit={handleSubmit} className={styles.wrap}>
       <div className={styles.formSection}>
         <div className={styles.inputBox}>
           <label className={styles.inputLabel} htmlFor="youtube-url">
@@ -85,7 +70,7 @@ export default function PostForm({ session }: PostFormProps) {
             placeholder="https://www.youtube.com/watch?v=UkPN32C4wzc"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            disabled={isPending}
+            disabled={mutatePost.isPending}
           />
         </div>
       </div>
@@ -137,7 +122,7 @@ export default function PostForm({ session }: PostFormProps) {
               className={styles.textArea}
               id="set-list"
               value={desc}
-              disabled={isPending}
+              disabled={mutatePost.isPending}
               onChange={handleDesc}
               minRows={18}
               placeholder={'38:53 노래제목1\n138:54 노래제목2\n238:54 노래제목3\n338:54 노래제목4'}
@@ -146,7 +131,7 @@ export default function PostForm({ session }: PostFormProps) {
         </div>
       </div>
       <div className={styles.buttonBox}>
-        <button className={styles.button} type="submit" disabled={isPending}>
+        <button className={styles.button} type="submit" disabled={mutatePost.isPending}>
           제출
         </button>
       </div>

@@ -1,4 +1,3 @@
-'use server';
 import { connectOracleDB } from '../connection';
 import * as sql from './sql';
 import CustomServerError from '@/model/error/customServerError';

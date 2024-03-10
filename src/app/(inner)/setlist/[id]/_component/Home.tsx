@@ -18,10 +18,9 @@ interface HomeProps {
 export default async function Home({ params }: HomeProps) {
   const session = await auth();
   const setlist = await getSetlistByVideoId(params.id);
-  if (setlist === null) notFound();
+  if (!setlist) notFound();
   const document = await getChannel(setlist.channelId);
   const channel = parseChannel(document);
-
   return (
     <>
       <div className={styles.inner}>

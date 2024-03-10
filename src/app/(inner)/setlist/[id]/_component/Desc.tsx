@@ -1,16 +1,15 @@
 'use client';
 import TimelineText from '@inner/_component/TimestampText';
 import { useMutation } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import updateSetlist from '../_lib/updateSetlist';
 import * as styles from './desc.css';
 import { toast } from 'sonner';
 import { useSetAtom } from 'jotai';
 import { player } from '@inner/_lib/atom';
+import * as action from '@inner/_action/setlist';
 
 interface DescProps {
   videoId: string;
@@ -21,7 +20,7 @@ interface DescProps {
 export default function Desc({ session, videoId, description }: DescProps) {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
-  const [desc, setDesc] = useState(description);
+  const [desc, setDesc] = useState('');
   const setPlayer = useSetAtom(player.playerStatusAtom);
 
   const toggleEditing = () => {
@@ -40,31 +39,42 @@ export default function Desc({ session, videoId, description }: DescProps) {
   };
 
   const mutateSetlist = useMutation({
-    mutationKey: ['updateSetlist', videoId],
-    mutationFn: updateSetlist,
-    onSuccess: () => {
+    mutationKey: ['updateSetlist'],
+    mutationFn: action.UPDATE,
+    onSuccess: (result) => {
       toast.success('수정되었습니다.');
-      handleCancel();
       router.refresh();
     },
-    onError: (error) => {
-      let message = error.message;
-      if (isAxiosError(error)) {
-        message = error.response?.data.message || message;
-      }
-      toast.error(message);
-    },
+    onError: (error) => toast.error(error.message),
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!session) return;
-    mutateSetlist.mutate({ session, videoId, desc });
+    const description = desc.trim();
+
+    if (!session) {
+      return toast.warning('로그인이 필요한 서비스입니다.');
+    }
+
+    if (!description) {
+      return toast.warning('내용을 입력해주세요.');
+    }
+
+    mutateSetlist.mutate({
+      accessToken: session.user.accessToken,
+      videoId,
+      description,
+    });
   };
 
   const handleTimestamp = ({ timestamp }: { href: string; timestamp: number }) => {
     setPlayer((pre) => ({ ...pre, timeline: timestamp, isPlaying: true, hide: false }));
   };
+
+  useEffect(() => {
+    handleCancel();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [description]);
 
   if (isEditing) {
     return (

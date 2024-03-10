@@ -1,3 +1,4 @@
+'use server';
 import OracleDB from 'oracledb';
 import { connectOracleDB } from '../connection';
 import { GET_MEMBER, POST_MEMBER, UPDATE_MEMBER } from './sql';
