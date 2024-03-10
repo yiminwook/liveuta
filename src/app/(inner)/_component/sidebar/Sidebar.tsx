@@ -13,9 +13,9 @@ import * as styles from './sidebar.css';
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { stopPropagation } = useStopPropagation();
   const [show, setShow] = useAtom(sidebarAtom);
 
+  const { stopPropagation } = useStopPropagation();
   const handleClose = () => setShow(false);
 
   useEffect(() => {

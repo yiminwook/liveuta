@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 import { accountSidebarAtom } from '@inner/_lib/atom/common';
 import { Session } from 'next-auth';
@@ -14,12 +13,15 @@ import Avatar from '../Avatar';
 import { toast } from 'sonner';
 import { useAtom } from 'jotai';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 interface AccountSidebarProps {
   session: Session;
 }
 export default function AccountSidebar({ session }: AccountSidebarProps) {
+  const pathname = usePathname();
   const [show, setShow] = useAtom(accountSidebarAtom);
+
   const { stopPropagation } = useStopPropagation();
   const handleClose = () => setShow(false);
 
@@ -28,6 +30,11 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
     mutationFn: () => signOut({ callbackUrl: '/' }),
     onError: (error) => toast.error(error.message),
   });
+
+  useEffect(() => {
+    if (show) setShow(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   useEffect(() => {
     if (!show) return;
