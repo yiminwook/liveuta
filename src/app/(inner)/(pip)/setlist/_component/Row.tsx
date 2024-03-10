@@ -39,16 +39,16 @@ export default function Row({ setlist, channel, order }: RowProps) {
     return (
       <div className={cx(styles.mobileRow, 'hover')} onClick={openModal}>
         <div className={cx(styles.mobileLeft)}>
-          <button onClick={handleImageClick}>
+          <button className={styles.imageButton} onClick={handleImageClick}>
             <div className={styles.thumbnailBox}>
               <img src={thumbnailUrl} alt={setlist.title} />
             </div>
           </button>
         </div>
         <div className={styles.mobileRight}>
-          <div>{channel?.nameKor}</div>
+          <p className={styles.mobileChannelName}>{channel?.nameKor}</p>
           <p className={styles.mobileTitle}>{setlist.title}</p>
-          <div>{order === 'broadcast' ? create : broad}</div>
+          <time className={styles.mobileTime}>{order === 'broadcast' ? create : broad}</time>
         </div>
       </div>
     );

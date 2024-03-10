@@ -78,6 +78,7 @@ export const thumbnailBox = style({
   objectFit: 'cover',
   aspectRatio: '16 / 9',
   width: '100%',
+  height: '100%',
   overflow: 'hidden',
 });
 
@@ -87,12 +88,9 @@ globalStyle(`${thumbnailBox} > img`, {
   height: '100%',
 });
 
-globalStyle('.flex2', {
-  flex: 2,
-});
-
-globalStyle('.flex3', {
-  flex: 3,
+export const imageButton = style({
+  height: '100%',
+  width: '100%',
 });
 
 export const mobileRow = style([
@@ -131,7 +129,34 @@ export const mobileLeft = style([
 export const mobileRight = style([
   {
     flex: 2,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.25rem',
   },
 ]);
 
-export const mobileTitle = style([textLine('1.6rem', 2), {}]);
+export const mobileChannelName = style([
+  textLine('1.6rem', 1),
+  {
+    fontWeight: 500,
+    fontSize: '1.2rem',
+  },
+]);
+
+export const mobileTitle = style([textLine('1.25rem', 2), {}]);
+
+export const mobileTime = style([
+  {
+    fontSize: '0.85rem',
+    color: '#666',
+    textAlign: 'right',
+  },
+]);
+
+globalStyle('.flex2', {
+  flex: 2,
+});
+
+globalStyle('.flex3', {
+  flex: 3,
+});
