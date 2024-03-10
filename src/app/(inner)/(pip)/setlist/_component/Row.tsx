@@ -11,6 +11,7 @@ import { setlistModalAtom } from '../_lib/atom';
 import * as styles from './table.css';
 import { useMediaQuery } from 'react-responsive';
 import { BREAK_POINT } from '@/style/var';
+import { replaceParentheses } from '@inner/_lib/regexp';
 
 export type RowProps = {
   setlist: Setlist;
@@ -34,6 +35,7 @@ export default function Row({ setlist, channel, order }: RowProps) {
   const openModal = () => {
     setModalValue(() => ({ setlist, channel, order }));
   };
+  const replacedTitle = replaceParentheses(setlist.title);
 
   if (isMobile) {
     return (
@@ -47,7 +49,7 @@ export default function Row({ setlist, channel, order }: RowProps) {
         </div>
         <div className={styles.mobileRight}>
           <p className={styles.mobileChannelName}>{channel?.nameKor}</p>
-          <p className={styles.mobileTitle}>{setlist.title}</p>
+          <p className={styles.mobileTitle}>{replacedTitle}</p>
           <time className={styles.mobileTime}>{order === 'broadcast' ? create : broad}</time>
         </div>
       </div>
@@ -59,13 +61,13 @@ export default function Row({ setlist, channel, order }: RowProps) {
       <div className={cx(styles.cell)}>
         <button onClick={handleImageClick}>
           <div className={styles.thumbnailBox}>
-            <img src={thumbnailUrl} alt={setlist.title} />
+            <img src={thumbnailUrl} alt={replacedTitle} />
           </div>
         </button>
       </div>
       <div className={styles.cell}>{channel?.nameKor}</div>
       <div className={cx(styles.cell, 'flex2')}>
-        <p>{setlist.title}</p>
+        <p>{replacedTitle}</p>
       </div>
       <div className={styles.cell}>{order ? create : broad}</div>
     </div>

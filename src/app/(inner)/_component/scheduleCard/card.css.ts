@@ -179,10 +179,10 @@ export const nav = style([
   {
     boxSizing: 'border-box',
     display: 'flex',
-    gap: '0.5rem',
+    gap: '0.25rem',
     fontSize: '0.75rem',
     justifyContent: 'flex-end',
-    padding: '0.25rem',
+    // padding: '0.25rem',
   },
   responsive({
     sm: {
