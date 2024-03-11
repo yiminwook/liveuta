@@ -8,10 +8,8 @@ import { player } from '@inner/_lib/atom';
 import { useAtom } from 'jotai';
 import { ORIGIN } from '@/const';
 
-interface LiveChatProp {}
-
-export default function LiveChat({}: LiveChatProp) {
-  const [videoId] = useAtom(player.playerStatusAtom);
+export default function LiveChat() {
+  const [videoId] = useAtom(player.playerVideoIdAtom);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const url = `https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${ORIGIN}&dark_theme=1`;
