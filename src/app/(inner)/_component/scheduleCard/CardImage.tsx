@@ -9,7 +9,7 @@ import { gtagClick } from '@inner/_lib/gtag';
 import Image from 'next/image';
 import { MouseEvent, useCallback, useRef, useState } from 'react';
 import * as styles from './card.css';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { useMediaQuery } from 'react-responsive';
 
 interface CardImageProps {
@@ -22,8 +22,8 @@ export default function CardImage({ content }: CardImageProps) {
   const thumbnailUrl = generateThumbnail(videoId, 'mqdefault');
   const [imgLoaded, setImgLoaded] = useState(true);
   const isMobile = useMediaQuery({ query: '(max-width: 640px)' });
-  const [, setVideoId] = useAtom(player.playerVideoIdAtom);
-  const [, setPlayerStatus] = useAtom(player.playerStatusAtom);
+  const setPlayerVideoId = useSetAtom(player.playerVideoIdAtom);
+  const setPlayerStatus = useSetAtom(player.playerStatusAtom);
   const imgRef = useRef<HTMLImageElement>(null);
 
   const handleImgValidity = useCallback(() => {
@@ -45,8 +45,8 @@ export default function CardImage({ content }: CardImageProps) {
     if (isMobile) {
       window.location.href = videoUrl;
     } else {
-      setVideoId(() => videoId);
-      setPlayerStatus((pre) => ({ ...pre, hide: false, isPlaying: true }));
+      setPlayerVideoId(() => videoId);
+      setPlayerStatus((pre) => ({ ...pre, timeline: 0, hide: false, isPlaying: true }));
     }
   };
 

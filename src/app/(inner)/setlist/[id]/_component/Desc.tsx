@@ -21,7 +21,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState('');
-  const setPlayer = useSetAtom(player.playerStatusAtom);
+  const setPlayerStatus = useSetAtom(player.playerStatusAtom);
 
   const toggleEditing = () => {
     if (!session) return toast.warning('로그인이 필요한 서비스입니다.');
@@ -67,8 +67,8 @@ export default function Desc({ session, videoId, description }: DescProps) {
     });
   };
 
-  const handleTimestamp = ({ timestamp }: { href: string; timestamp: number }) => {
-    setPlayer((pre) => ({ ...pre, timeline: timestamp, isPlaying: true, hide: false }));
+  const handleTimestamp = ({ timestamp }: { videoId: string; timestamp: number }) => {
+    setPlayerStatus((pre) => ({ ...pre, timeline: timestamp, isPlaying: true, hide: false }));
   };
 
   useEffect(() => {

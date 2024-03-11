@@ -6,16 +6,15 @@ import MediaQuery from 'react-responsive';
 import { BREAK_POINT } from '@/style/var';
 import { player } from '@inner/_lib/atom';
 import { useAtom } from 'jotai';
-
-const DOMAIN = 'liveuta.vercel.app';
+import { ORIGIN } from '@/const';
 
 interface LiveChatProp {}
 
 export default function LiveChat({}: LiveChatProp) {
-  const [videoId] = useAtom(player.playerVideoIdAtom);
+  const [videoId] = useAtom(player.playerStatusAtom);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const url = `https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${DOMAIN}&dark_theme=1`;
+  const url = `https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${ORIGIN}&dark_theme=1`;
 
   const resiveMsgFromChild = (event: MessageEvent) => {
     if (event.origin !== url) return;

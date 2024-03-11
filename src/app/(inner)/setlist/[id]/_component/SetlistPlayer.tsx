@@ -1,11 +1,12 @@
 'use client';
 import PlayerPlaceholder from '@inner/_component/player/PlayerPlaceholder';
 import { player } from '@inner/_lib/atom';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import * as styles from '@inner/_component/player/player.css';
 import { isMobile } from 'react-device-detect';
+import { useSearchParams } from 'next/navigation';
 
 const Player = dynamic(() => import('@inner/_component/player/Player'), {
   ssr: false,
@@ -18,7 +19,10 @@ type PlayerWrapProps = {
 
 export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const [, setPlayer] = useAtom(player.playerVideoIdAtom);
+  const searchParams = useSearchParams();
+  const timestamp = Number(searchParams.get('t')) || 0;
+  const setPlayerStatus = useSetAtom(player.playerStatusAtom);
+  const setPlayerVideoId = useSetAtom(player.playerVideoIdAtom);
   const [isShow, setIsShow] = useState(true);
 
   const handleInteresect: IntersectionObserverCallback = (items, observer) => {
@@ -27,7 +31,9 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   };
 
   useEffect(() => {
-    setPlayer(() => videoId);
+    // 자동재생 되지 않도록 설정
+    setPlayerStatus((pre) => ({ ...pre, isPlaying: false, timeline: timestamp }));
+    setPlayerVideoId(() => videoId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

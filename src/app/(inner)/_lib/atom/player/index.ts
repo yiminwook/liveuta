@@ -1,8 +1,7 @@
-import { IINITIAL_PLAYER_VIDEO_ID } from '@/const';
+import { INITIAL_PLAYER_VIDEO_ID } from '@/const';
 import { atom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
 
-export const playerVideoIdAtom = atomWithStorage('playerVideoId', IINITIAL_PLAYER_VIDEO_ID);
+export const playerVideoIdAtom = atom(INITIAL_PLAYER_VIDEO_ID);
 
 export const playerStatusAtom = atom({
   isPlaying: false,
@@ -11,7 +10,20 @@ export const playerStatusAtom = atom({
   timeline: 0,
 });
 
+playerStatusAtom.onMount = (set) => {
+  return () => {
+    // 언마운트시 timeline 초기화
+    set((pre) => ({ ...pre, timeline: 0 }));
+  };
+};
+
+export const playerAtom = atom((get) => ({
+  videoId: get(playerVideoIdAtom),
+  ...get(playerStatusAtom),
+}));
+
 if (process.env.NODE_ENV === 'development') {
   playerVideoIdAtom.debugLabel = 'playerVideoIdAtom';
   playerStatusAtom.debugLabel = 'playerStatusAtom';
+  playerAtom.debugLabel = 'playerAtom';
 }

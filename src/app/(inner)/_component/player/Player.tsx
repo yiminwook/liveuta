@@ -1,6 +1,6 @@
 'use client';
 import { player } from '@inner/_lib/atom/';
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
 import * as styles from './player.css';
@@ -8,20 +8,20 @@ import cx from 'classnames';
 import { useRouter } from 'next/navigation';
 import { generateVideoUrl } from '@/model/youtube/url';
 import { toast } from 'sonner';
-import { IINITIAL_PLAYER_VIDEO_ID } from '@/const';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { BsLightningFill } from 'react-icons/bs';
+import { ORIGIN } from '@/const';
 
 interface PlayerProps {
   isShow: boolean;
   isLive: boolean;
 }
 
-export default function Player({ isLive, isShow }: PlayerProps) {
+export default memo(function Player({ isLive, isShow }: PlayerProps) {
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
-  const [videoId, setVideoId] = useAtom(player.playerVideoIdAtom);
-  const [status, setStatus] = useAtom(player.playerStatusAtom);
+  const [playerValue] = useAtom(player.playerAtom);
+  const setStatus = useSetAtom(player.playerStatusAtom);
   const playerRef = useRef<ReactPlayer>(null);
 
   const keyDown = (e: KeyboardEvent) => {
@@ -66,12 +66,14 @@ export default function Player({ isLive, isShow }: PlayerProps) {
 
   useEffect(() => {
     if (isReady === true) {
-      playerRef.current?.seekTo(status.timeline);
+      console.log('timeline', playerValue.timeline);
+      playerRef.current?.seekTo(playerValue.timeline, 'seconds');
     }
-  }, [isReady, status.timeline]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playerValue.timeline]);
 
-  const left = isShow === false && status.hide;
-  const url = generateVideoUrl(videoId);
+  const left = isShow === false && playerValue.hide;
+  const url = generateVideoUrl(playerValue.videoId);
 
   return (
     <div className={cx(isShow === false && styles.pipBase, styles.playerDiv, left && 'left')}>
@@ -81,12 +83,19 @@ export default function Player({ isLive, isShow }: PlayerProps) {
         height="auto"
         ref={playerRef}
         url={url}
-        muted={status.isMutted}
-        autoPlay={status.isPlaying}
-        playing={status.isPlaying}
+        muted={playerValue.isMutted}
+        playing={playerValue.isPlaying}
         onPlay={() => handlePlay(true)}
         onPause={() => handlePlay(false)}
-        config={{ youtube: { playerVars: { suggestedQuality: 'hd720' } } }}
+        config={{
+          youtube: {
+            playerVars: {
+              suggestedQuality: 'hd720',
+              origin: ORIGIN,
+              start: playerValue.timeline, //시작하는 시간
+            },
+          },
+        }}
         controls={true}
         onReady={() => setIsReady(() => true)}
         fallback={<div className={styles.playerPlaceholder} />}
@@ -110,4 +119,4 @@ export default function Player({ isLive, isShow }: PlayerProps) {
       </button>
     </div>
   );
-}
+});

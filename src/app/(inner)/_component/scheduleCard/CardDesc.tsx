@@ -18,7 +18,7 @@ export default function CardDesc({
   addStreamModifier,
   onClickBlock,
 }: CardDescProps) {
-  const { title, channelName, korTime, interval, isStream, videoId, viewer } = content;
+  const { title, channelName, korTime, interval, isStream, viewer } = content;
 
   return (
     <div className={styles.descBox}>

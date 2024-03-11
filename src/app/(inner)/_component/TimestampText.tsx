@@ -7,7 +7,7 @@ type TimestampTextProps = {
   index: number;
   text: string;
   videoId: string;
-  onClickTimestamp: ({ href, timestamp }: { href: string; timestamp: number }) => void;
+  onClickTimestamp: ({ videoId, timestamp }: { videoId: string; timestamp: number }) => void;
 };
 
 export default function TimelineText({
@@ -26,7 +26,7 @@ export default function TimelineText({
     const href = e.currentTarget.href;
     const timestamp = Number(href.split('&t=')[1]);
     if (isNaN(timestamp)) return;
-    onClickTimestamp({ href, timestamp });
+    onClickTimestamp({ videoId, timestamp });
   };
 
   return (
