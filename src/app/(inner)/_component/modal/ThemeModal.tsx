@@ -23,7 +23,7 @@ function ThemeModalButton({ primaryColor, secondaryColor }: ThemeModalButtonProp
 }
 
 interface ThemeModalProps {
-  onClose: (e: MouseEvent) => void;
+  onClose: () => void;
 }
 
 export default portal('themeModal', function ThemeModal({ onClose }: ThemeModalProps) {

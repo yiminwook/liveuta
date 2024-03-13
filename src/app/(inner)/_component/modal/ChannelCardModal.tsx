@@ -9,7 +9,7 @@ import { gtagClick, gtagClickAtag } from '@inner/_lib/gtag';
 import portal from '@/model/portal';
 
 interface ChannelCardModalProp {
-  onClose: (e: MouseEvent) => void;
+  onClose: () => void;
   channelName: string;
   title: string;
   imageURL: string;

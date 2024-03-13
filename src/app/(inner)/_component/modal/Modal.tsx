@@ -1,24 +1,31 @@
 'use client';
-import { CSSProperties, MouseEvent, ReactNode } from 'react';
+import { CSSProperties, ReactNode, useEffect } from 'react';
 import modal from './modal.module.scss';
 import CloseButton from '../button/CloseButton';
 import useStopPropagation from '@/hook/useStopPropagation';
 import { RemoveScroll } from 'react-remove-scroll';
 import Backdrop from '../Backdrop';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 interface ModalProps {
   children: ReactNode;
   style?: CSSProperties;
-  onClose: (e: MouseEvent) => void;
+  onClose: () => void;
 }
 
 const Modal = ({ children, style, onClose }: ModalProps) => {
   const { stopPropagation } = useStopPropagation();
+  const containerRef = useHotkeys<HTMLDivElement>('esc', onClose);
+
+  useEffect(() => {
+    containerRef.current?.focus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <RemoveScroll removeScrollBar={false}>
       <Backdrop activeParticles={true} />
-      <div className={modal['container']} onClick={onClose}>
+      <div ref={containerRef} tabIndex={-1} className={modal['container']} onClick={onClose}>
         <div className={modal['modal']} style={style} onClick={stopPropagation}>
           <CloseButton className={modal['close-button']} onClick={onClose} />
           <div className={modal['inner']}>{children}</div>

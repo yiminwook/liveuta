@@ -11,6 +11,7 @@ import { toast } from 'sonner';
 import { useAtom, useSetAtom } from 'jotai';
 import { BsLightningFill } from 'react-icons/bs';
 import { ORIGIN } from '@/const';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 interface PlayerProps {
   isShow: boolean;
@@ -24,28 +25,28 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
   const setStatus = useSetAtom(player.playerStatusAtom);
   const playerRef = useRef<ReactPlayer>(null);
 
-  const keyDown = (e: KeyboardEvent) => {
-    const target = e.target as HTMLElement | null;
-    if (target === null) return;
-    const tagName = target.tagName;
-    const classList = target.classList;
-    if (tagName === 'BODY' || classList.contains('imageLink')) {
-      if (e.key === ' ') {
-        e.preventDefault();
-        // 스페이스바 이벤트 방지
-        setStatus((pre) => {
-          toast.info(`플레이어 ${pre.isPlaying ? '정지' : '재생'}`);
-          return { ...pre, isPlaying: !pre.isPlaying };
-        });
-      }
-      if (e.key === 'Escape') {
-        setStatus((pre) => {
-          toast.info(`플레이어 ${pre.hide ? '보이기' : '숨기기'}`);
-          return { ...pre, hide: !pre.hide };
-        });
-      }
-    }
-  };
+  useHotkeys(
+    'esc',
+    () => {
+      setStatus((pre) => {
+        toast.info(`플레이어 ${pre.hide ? '보이기' : '숨기기'}`);
+        return { ...pre, hide: !pre.hide };
+      });
+    },
+    { enabled: isReady },
+  );
+
+  useHotkeys(
+    'space',
+    (e) => {
+      e.preventDefault();
+      setStatus((pre) => {
+        toast.info(`플레이어 ${pre.isPlaying ? '정지' : '재생'}`);
+        return { ...pre, isPlaying: !pre.isPlaying };
+      });
+    },
+    { enabled: isReady },
+  );
 
   const handlePlay = (isPlaying: boolean) => {
     setStatus((pre) => ({ ...pre, isPlaying }));
@@ -58,15 +59,7 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
   const navigateLive = () => router.push('/live');
 
   useEffect(() => {
-    if (isReady === false) return;
-    document.addEventListener('keydown', keyDown);
-    return () => document.removeEventListener('keydown', keyDown);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isReady]);
-
-  useEffect(() => {
     if (isReady === true) {
-      console.log('timeline', playerValue.timeline);
       playerRef.current?.seekTo(playerValue.timeline, 'seconds');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
