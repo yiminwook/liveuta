@@ -1,4 +1,3 @@
-'use client';
 import cx from 'classnames';
 import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import { IoGlobeOutline } from 'react-icons/io5';
@@ -8,16 +7,42 @@ import { MdMyLocation } from 'react-icons/md';
 import { IoClose } from 'react-icons/io5';
 import MainLoading from '../loading/MainLoading';
 import useScheduleStatus from '@/hook/useScheduleStatus';
+import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
+import { useEffect } from 'react';
 
 interface ToggleButtonProps {
   isOpen: boolean;
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 export default function ToggleButton({ isOpen, onClick }: ToggleButtonProps) {
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
   const status = useScheduleStatus();
+  const { enableScope, disableScope } = useHotkeysContext();
+
+  useHotkeys(
+    'esc',
+    (e) => {
+      e.stopPropagation();
+      onClick();
+    },
+    {
+      enabled: isOpen,
+      scopes: ['float'],
+    },
+  );
+
+  useHotkeys('space', (e) => {}, {
+    preventDefault: true,
+    enabled: isOpen,
+    scopes: ['float'],
+  });
+
+  useEffect(() => {
+    isOpen ? enableScope('float') : disableScope('float');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   const unFetching = isFetching === 0 && isMutating === 0;
 

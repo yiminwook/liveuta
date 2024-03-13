@@ -33,19 +33,18 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
         return { ...pre, hide: !pre.hide };
       });
     },
-    { enabled: isReady },
+    { enabled: isReady, scopes: ['*'] },
   );
 
   useHotkeys(
     'space',
-    (e) => {
-      e.preventDefault();
+    () => {
       setStatus((pre) => {
         toast.info(`플레이어 ${pre.isPlaying ? '정지' : '재생'}`);
         return { ...pre, isPlaying: !pre.isPlaying };
       });
     },
-    { enabled: isReady },
+    { enabled: isReady, scopes: ['*'], preventDefault: true },
   );
 
   const handlePlay = (isPlaying: boolean) => {

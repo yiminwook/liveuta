@@ -19,8 +19,10 @@ interface ChannelCardModalProp {
   description: string;
 }
 
+const CHANNEL_MODAL_ID = 'channelCardModal';
+
 export default portal(
-  'channelCardModal',
+  CHANNEL_MODAL_ID,
   function ChannelCardModal({
     title,
     channelName,
@@ -33,14 +35,14 @@ export default portal(
   }: ChannelCardModalProp) {
     const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) =>
       gtagClickAtag(e, {
-        target: 'channelCardModal',
+        target: CHANNEL_MODAL_ID,
         content: channelName,
         detail: title,
         action: 'atag',
       });
 
     return (
-      <Modal onClose={onClose}>
+      <Modal id={CHANNEL_MODAL_ID} onClose={onClose}>
         <div className={channelCardModal['modal']}>
           <div className={channelCardModal['profile']}>
             <a href={url} onClick={linkClickEvent}>

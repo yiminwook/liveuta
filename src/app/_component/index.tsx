@@ -7,6 +7,7 @@ import ServiceWorker from './ServiceWorker';
 import NextAuth from './NextAuth';
 import dynamic from 'next/dynamic';
 import ToastBox from './ToastBox';
+import Hotkeys from './Hotkeys';
 
 const ParticleProvider = dynamic(() => import('./ParticleProvider'), { ssr: false });
 
@@ -21,7 +22,7 @@ export default function Configs({ children, cookies }: ConfigsProps) {
       <Jotai>
         <ReactQuery>
           <GlobalHydrate cookies={cookies}>
-            {children}
+            <Hotkeys>{children}</Hotkeys>
             <ToastBox />
             <ParticleProvider />
             <ServiceWorker />

@@ -14,6 +14,7 @@ import { toast } from 'sonner';
 import { useAtom } from 'jotai';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 
 interface AccountSidebarProps {
   session: Session;
@@ -21,9 +22,8 @@ interface AccountSidebarProps {
 export default function AccountSidebar({ session }: AccountSidebarProps) {
   const pathname = usePathname();
   const [show, setShow] = useAtom(accountSidebarAtom);
-
+  const { enableScope, disableScope } = useHotkeysContext();
   const { stopPropagation } = useStopPropagation();
-  const handleClose = () => setShow(false);
 
   const mutateLogout = useMutation({
     mutationKey: ['logout'],
@@ -31,16 +31,38 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
     onError: (error) => toast.error(error.message),
   });
 
+  const handleClose = () => setShow(() => false);
+
+  useHotkeys(
+    'esc',
+    (e) => {
+      e.stopPropagation();
+      handleClose();
+    },
+    {
+      enabled: show,
+      scopes: ['sidebar'],
+    },
+  );
+
+  useHotkeys('space', (e) => {}, {
+    preventDefault: true,
+    enabled: show,
+    scopes: ['sidebar'],
+  });
+
   useEffect(() => {
-    if (show) setShow(false);
+    if (show) handleClose();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   useEffect(() => {
     if (!show) return;
     //window 사이즈가 바뀌면 닫히게
+    enableScope('sidebar');
     window.addEventListener('resize', handleClose);
     return () => {
+      disableScope('sidebar');
       window.removeEventListener('resize', handleClose);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

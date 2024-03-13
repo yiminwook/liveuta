@@ -26,7 +26,9 @@ interface ThemeModalProps {
   onClose: () => void;
 }
 
-export default portal('themeModal', function ThemeModal({ onClose }: ThemeModalProps) {
+const THEME_MODAL_ID = 'themeModal';
+
+export default portal(THEME_MODAL_ID, function ThemeModal({ onClose }: ThemeModalProps) {
   const { setTheme } = useTheme();
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -36,7 +38,7 @@ export default portal('themeModal', function ThemeModal({ onClose }: ThemeModalP
     if (selectedTheme === undefined) return;
 
     gtagClick({
-      target: 'themeModal',
+      target: THEME_MODAL_ID,
       content: selectedTheme,
       detail: selectedTheme,
       action: 'themeChange',
@@ -46,7 +48,7 @@ export default portal('themeModal', function ThemeModal({ onClose }: ThemeModalP
   };
 
   return (
-    <Modal onClose={onClose}>
+    <Modal id={THEME_MODAL_ID} onClose={onClose}>
       <div className={themeModal['wrap']}>
         <h2>테마를 선택 해주세요</h2>
         <div className={themeModal['button-area']} onClick={handleClick}>

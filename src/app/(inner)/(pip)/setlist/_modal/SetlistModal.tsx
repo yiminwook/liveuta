@@ -10,7 +10,9 @@ import { useAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { generateVideoUrl } from '@/model/youtube/url';
 
-export default portal('setlistModal', function SetlistModal() {
+const SETLIST_MODAL_ID = 'setlistModal';
+
+export default portal(SETLIST_MODAL_ID, function SetlistModal() {
   const router = useRouter();
   const [modalValue, setModalValue] = useAtom(setlistModalAtom);
   const onClose = () => setModalValue(null);
@@ -28,7 +30,7 @@ export default portal('setlistModal', function SetlistModal() {
 
   return (
     <RemoveScroll>
-      <Modal onClose={onClose}>
+      <Modal id={SETLIST_MODAL_ID} onClose={onClose}>
         <div className={styles.inner}>
           <div>
             <h4 className={styles.title}>{modalValue.setlist.title}</h4>
