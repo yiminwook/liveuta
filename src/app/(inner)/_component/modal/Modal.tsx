@@ -15,7 +15,10 @@ interface ModalProps {
 
 const Modal = ({ children, style, onClose }: ModalProps) => {
   const { stopPropagation } = useStopPropagation();
-  const containerRef = useHotkeys<HTMLDivElement>('esc', onClose);
+  const containerRef = useHotkeys<HTMLDivElement>('esc', (e) => {
+    e.stopPropagation();
+    onClose();
+  });
 
   useEffect(() => {
     containerRef.current?.focus();
