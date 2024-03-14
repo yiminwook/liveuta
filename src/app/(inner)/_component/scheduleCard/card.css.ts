@@ -145,12 +145,12 @@ export const channelName = style([
 export const title = style([
   textLine('1.2rem', 2),
   {
-    color: global.color.font,
+    color: global.color.text.default,
     fontSize: '0.75rem',
     selectors: {
       '&.stream': {
         fontWeight: 500,
-        color: global.color.secondary,
+        color: global.color.second.default,
       },
     },
   },
