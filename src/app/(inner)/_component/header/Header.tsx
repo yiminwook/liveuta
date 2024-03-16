@@ -1,29 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import dayjs from '@/model/dayjs';
 import { accountSidebarAtom, sidebarAtom } from '@inner/_lib/atom';
-import { gtag } from '@inner/_lib/gtag';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useRef } from 'react';
-import { toast } from 'sonner';
+import { global } from '@/style/globalTheme.css';
+import { isMobile } from 'react-device-detect';
 import Avatar from '../Avatar';
 import HamburgerButton from '../button/HamburgerButton';
-import NavigationList from '../header/NavigationList';
-import SearchInput from '../input/SearchInput';
 import * as styles from './header.css';
-import { isMobile } from 'react-device-detect';
-import { global } from '@/style/globalTheme.css';
+import DesktopNav from './DesktopNav';
 
 type HeaderProps = {
   session: Session | null;
 };
+
 export default function Header({ session }: HeaderProps) {
-  const route = useRouter();
   const gnbRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
 
   const setShowSidebar = useSetAtom(sidebarAtom);
   const setShowAccountSidebar = useSetAtom(accountSidebarAtom);
@@ -47,16 +41,6 @@ export default function Header({ session }: HeaderProps) {
     };
   }, []);
 
-  const handleSearch = (value: string) => {
-    const trimmedValue = value.trim();
-    if (trimmedValue === '') return toast.warning('검색어를 입력해주세요.');
-    gtag('event', 'search', {
-      channelName: trimmedValue,
-      time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-    });
-    route.push(`/search?query=${trimmedValue}`);
-  };
-
   useEffect(() => {
     if (isMobile) return;
     window.addEventListener('scroll', handleScroll);
@@ -75,18 +59,13 @@ export default function Header({ session }: HeaderProps) {
             Live Uta
           </Link>
           <div className={styles.right}>
-            {pathname !== '/search' && (
-              <div className={styles.searchBox}>
-                <SearchInput onSearch={handleSearch} placeHolder="채널명으로 검색" />
-              </div>
-            )}
-            <NavigationList />
+            <DesktopNav />
             {session ? (
               <button className={styles.accountButton} onClick={openAccountSidebar}>
                 <Avatar
                   src={session.user.image}
                   email={session.user.email}
-                  size={40}
+                  size={'40px'}
                   alt="유저 이미지"
                 />
               </button>

@@ -1,19 +1,19 @@
 import { Menu as ArkMenu } from '@ark-ui/react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import * as styles from './headerMenu.css';
 import cx from 'classnames';
 
 type HeaderMenuProps = {
   title: string;
   links: { href: string; text: string }[];
+  onSelect: (value: string) => void;
 };
 
-export default function HeaderMenu({ title, links }: HeaderMenuProps) {
-  const router = useRouter();
+export default function HeaderMenu({ title, links, onSelect }: HeaderMenuProps) {
   const pathname = usePathname();
   return (
     <div className={styles.root}>
-      <ArkMenu.Root open={true} onSelect={({ value }) => router.push(value)}>
+      <ArkMenu.Root open={true} onSelect={({ value }) => onSelect(value)}>
         <ArkMenu.Trigger className={styles.trigger}>{title}</ArkMenu.Trigger>
         <ArkMenu.Positioner
           style={{

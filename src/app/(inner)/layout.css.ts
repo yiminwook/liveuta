@@ -20,7 +20,7 @@ export const main = style([
 ]);
 
 export const background = style({
-  backgroundColor: global.color.first.dark,
+  backgroundColor: global.color.first.default,
   backgroundImage: global.background.patten,
   transition: `background-color 0.2s ${BEZIER_CURVE}, background-image 0.2s ${BEZIER_CURVE}`,
 });

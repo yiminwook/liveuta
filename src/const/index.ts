@@ -32,3 +32,22 @@ export const SETLIST_PAGE_SIZE = 15;
 export const INITIAL_PLAYER_VIDEO_ID = 'bnofYmfKLeo';
 
 export const ORIGIN = 'liveuta.vercel.app';
+
+export const INTERNAL_LINKS = [
+  { href: '/', text: '홈' },
+  { href: '/search', text: '검색' },
+  { href: '/channels', text: '채널조회' },
+  { href: '/request', text: '채널요청' },
+  { href: '/setlist', text: '세트리' },
+  { href: '/dev', text: '개발' },
+];
+
+export const EXTERNAL_LINKS = [
+  {
+    href: 'https://gall.dcinside.com/mgallery/board/lists?id=kizunaai',
+    text: '키즈나아이 갤러리',
+  },
+  { href: 'https://gall.dcinside.com/mini/board/lists?id=vuta', text: '우타와꾸 갤러리' },
+  { href: 'https://uta-tools.vercel.app', text: '우타툴즈' },
+  { href: 'https://ezgif.com', text: 'EZ GIF' },
+];
