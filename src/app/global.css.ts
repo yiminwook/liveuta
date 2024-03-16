@@ -1,5 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { global, theme1 } from './globalTheme.css';
+import { global, theme1 } from '../style/globalTheme.css';
 
 globalStyle(':root', {
   vars: {
@@ -45,6 +45,11 @@ export const body = style({
   fontFamily: 'Pretendard Variable, Pretendard, -apple-system, sans-serif',
   fontSize: 16,
   backgroundColor: 'var(--liveuta-bg-color)',
+  '@media': {
+    '(prefers-color-scheme: dark)': {
+      color: '#fff',
+    },
+  },
 });
 
 globalStyle('h1, h2, h3, h4, p', {

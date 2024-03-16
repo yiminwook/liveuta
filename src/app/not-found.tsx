@@ -1,12 +1,9 @@
 'use client';
-import '@/style/reset.css';
-import '@/style/global.css';
-import '@/style/globalTheme.css';
 import type { Metadata } from 'next';
 import character from '/src/asset/image/character-8.png';
-import * as styles from '@/style/not-found.css';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import * as styles from './not-found.css';
 
 export const metadata: Metadata = {
   title: '404: Not Found',

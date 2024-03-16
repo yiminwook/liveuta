@@ -1,7 +1,6 @@
 // css 순서변경 금지
-import '@/style/reset.css';
-import * as styles from '@/style/global.css';
-import '@/style/globalTheme.css';
+import './reset.css';
+import * as styles from '@/app/global.css';
 
 import { PropsWithChildren } from 'react';
 import { DEFALUT_METADATA } from '@/const/metaData';

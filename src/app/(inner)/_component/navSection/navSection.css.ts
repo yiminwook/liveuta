@@ -14,9 +14,8 @@ export const navSection = style([
   },
   responsive({
     md: {
-      position: 'inherit',
-
       padding: '1rem',
+      position: 'inherit',
     },
   }),
 ]);

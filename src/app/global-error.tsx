@@ -1,10 +1,10 @@
 'use client';
-import * as styles from '@/style/not-found.css';
 import axios from 'axios';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import character from '/src/asset/image/character-6.png';
 import Link from 'next/link';
+import * as styles from './global.css';
 
 export default function GlobalError({
   error,
@@ -25,10 +25,10 @@ export default function GlobalError({
   return (
     <html>
       <title>500: Server Error</title>
-      <body>
-        <div className={styles.wrap}>
-          <div className={styles.inner}>
-            <div className={styles.imgBox}>
+      <body className={styles.body}>
+        <div>
+          <div>
+            <div>
               <Image
                 alt="에러가 발생하였습니다."
                 src={character}
@@ -37,15 +37,13 @@ export default function GlobalError({
                 unoptimized={true}
               />
             </div>
-            <div className={styles.desc}>
-              <div className={styles.descTop}>
+            <div>
+              <div>
                 <h1>500: Server Error</h1>
                 <h2>{error.message}</h2>
               </div>
-              <div className={styles.descBottom}>
-                <Link href="/" className={styles.button}>
-                  홈으로 돌아가기
-                </Link>
+              <div>
+                <Link href="/">홈으로 돌아가기</Link>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
-import { globalStyle, style } from '@vanilla-extract/css';
-import { BEZIER_CURVE, BREAK_POINT, flexCenter, responsive, zIndex } from '@/style/var';
+import { style } from '@vanilla-extract/css';
+import { BEZIER_CURVE, BREAK_POINT, flexCenter, responsive } from '@/style/var';
 import { global } from '@/style/globalTheme.css';
 
 export const main = style([
@@ -10,6 +10,7 @@ export const main = style([
     minHeight:
       'calc(100dvh - 3.5rem - 5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
     margin: '0 auto',
+    color: global.color.text.default,
   },
   responsive({
     xl: {
@@ -19,7 +20,6 @@ export const main = style([
 ]);
 
 export const background = style({
-  overflow: 'hidden',
   backgroundColor: global.color.first.dark,
   backgroundImage: global.background.patten,
   transition: `background-color 0.2s ${BEZIER_CURVE}, background-image 0.2s ${BEZIER_CURVE}`,

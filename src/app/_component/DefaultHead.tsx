@@ -1,4 +1,4 @@
-import GoogleAnalytics from '@/app/_component/GoogleAnalytics';
+import GoogleAnalytics from './GoogleAnalytics';
 import { DEFAULT_ICON, DEFAULT_SITE_URL } from '@/const/metaData';
 
 export default function DefaultHead() {
