@@ -1,69 +1,98 @@
 import { createGlobalThemeContract } from '@vanilla-extract/css';
 import { BACKGROUND_PATTERN } from './var';
 
-export const global = createGlobalThemeContract({
-  color: {
-    lightFont: 'light-font',
-    hightlightFont: 'highlight-font',
-    linkFont: 'link-font',
-    main: 'main',
-    lightYellow: 'light-yellow',
-    bg: 'bg',
-    backdrop: 'backdrop',
-    salmon: 'sanmon',
-    hoverSalmon: 'hover-salmon',
-    cardBg: 'card-bg',
-    skyblue: 'skyblue',
-    lightBlue: 'light-blue',
+export type BrandColor = 'first' | 'second' | 'third' | 'fourth';
+export type BrandColorKey = 'default' | 'light' | 'lighter' | 'dark' | 'darken' | '20' | '50';
+export type GlobalTheme = typeof globalVars;
 
-    first: {
-      default: 'liveuta-color-first-default',
-      light: 'liveuta-color-first-light',
-      dark: 'liveuta-color-first-dark',
-      '10': 'liveuta-color-first-10',
-      '50': 'liveuta-color-first-50',
-    },
-    second: {
-      default: 'liveuta-color-second-default',
-      light: 'liveuta-color-second-light',
-      dark: 'liveuta-color-second-dark',
-    },
-    third: {
-      default: 'liveuta-color-third-default',
-    },
-    fourth: {
-      default: 'liveuta-color-fourth-default',
-      light: 'liveuta-color-fourth-light',
-      dark: 'liveuta-color-fourth-dark',
-    },
+const PREFIX = 'liveuta';
+const createVar = (...v: string[]) => [PREFIX, ...v].join('-');
+const brandColorVar = (color: BrandColor) => {
+  const createBrandVar = (v: BrandColorKey) => createVar([color, v].join('-'));
+  return {
+    /** 기본값 */
+    default: createBrandVar('default'),
+    /** +5% 밝게 */
+    light: createBrandVar('light'),
+    /** +10% 밝게 */
+    lighter: createBrandVar('lighter'),
+    /** -5% 어둡게 */
+    dark: createBrandVar('dark'),
+    /** -10% 어둡게 */
+    darken: createBrandVar('darken'),
+    /** 20% 투명도 */
+    '20': createBrandVar('20'),
+    /** 50% 투명도 */
+    '50': createBrandVar('50'),
+  };
+};
+
+const brandColor = (colors: [string, string, string, string, string, string, string]) => ({
+  default: colors[0],
+  light: colors[1],
+  lighter: colors[2],
+  dark: colors[3],
+  darken: colors[4],
+  '20': colors[5],
+  '50': colors[6],
+});
+
+const globalVars = {
+  color: {
+    // 고정색상
+    lightYellow: createVar('light-yellow'),
+    salmon: createVar('salmon'),
+    hoverSalmon: createVar('hover-salmon'),
+    cardBg: createVar('card-bg'),
+    skyblue: createVar('skyblue'),
+    lightBlue: createVar('light-blue'),
+
+    // 가변색상
+    first: brandColorVar('first'),
+    second: brandColorVar('second'),
+    third: brandColorVar('third'),
+    fourth: brandColorVar('fourth'),
+    backdrop: createVar('backdrop'),
+    title: createVar('title'),
     text: {
-      default: 'liveuta-color-text-default',
-      light: 'liveuta-color-text-light',
-      dark: 'liveuta-color-text-dark',
+      default: createVar('txt', 'default'),
+      light: createVar('txt', 'light'),
+      dark: createVar('txt', 'dark'),
+      active: createVar('txt', 'active'),
     },
   },
   background: {
-    patten: 'liveuta-bg-patten',
+    patten: createVar('bg', 'patten'),
     left: {
-      url: 'liveuta-bg-left-url',
-      position: 'liveuta-bg-left-position',
+      url: createVar('bg', 'left', 'url'),
+      position: createVar('bg', 'left', 'position'),
     },
     right: {
-      url: 'liveuta-bg-right-url',
-      position: 'liveuta-bg-right-position',
+      url: createVar('bg', 'right', 'url'),
+      position: createVar('bg', 'right', 'position'),
     },
   },
-});
+};
 
-export const theme1 = {
+export const global = createGlobalThemeContract(globalVars);
+
+/** 화이트모드시 브랜드 공통 컬러 */
+const whiteBrandColor = brandColor([
+  '#fff',
+  '#fff4f6',
+  '#fff4f6',
+  '#f4f4f5bf',
+  '#f4f4f5bf',
+  '#fff',
+  '#fff',
+]);
+
+/** 다크모드시 브랜드 공통 컬러 */
+const darkBrandColor = brandColor(['#000', '#000', '#000', '#000', '#000', '#000', '#000']);
+
+export const theme1: GlobalTheme = {
   color: {
-    lightFont: '#ffffff',
-    hightlightFont: '#ee526f',
-    linkFont: '#cc718f',
-    main: '#ffc1cc',
     lightYellow: '#fcefc7',
-    bg: '#d8aab1ec',
-    backdrop: '#b9919867',
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
     cardBg: '#f4f4f5',
@@ -71,34 +100,44 @@ export const theme1 = {
     lightBlue: '#d8f2ff',
 
     /** 핑크 */
-    first: {
-      //핑크
-      default: '#ffc1cc', //header
-      light: '#fff4f6',
-      dark: '#d8aab1ec', //bg-color
-      '10': '#b9919867',
-      '50': '#fc9dabaf',
-    },
+    first: brandColor([
+      '#FFC1CC',
+      '#FFCED9',
+      '#FFDBE6',
+      '#F2B4BF',
+      '#E6A8B3',
+      'rgba(255, 193, 204, 0.2)',
+      'rgba(255, 193, 204, 0.5)',
+    ]),
     /** 오렌지 */
-    second: {
-      default: '#fa8072',
-      light: '#fa8672',
-      dark: '#e48378',
-    },
+    second: brandColor([
+      '#FA8072',
+      '#FA8672',
+      '#fa8672',
+      '#e48378',
+      '#e48378',
+      '#e48378',
+      '#e48378',
+    ]),
     /** 레드 */
-    third: {
-      default: '#e45c75', //active
-    },
+    third: brandColor([
+      '#e45c75',
+      '#e45c75',
+      '#e45c75',
+      '#e45c75',
+      '#e45c75',
+      '#e45c75',
+      '#e45c75',
+    ]),
     /** 화이트 */
-    fourth: {
-      default: '#fff',
-      light: '#fff4f6',
-      dark: '#f4f4f5bf',
-    },
+    fourth: whiteBrandColor,
+    backdrop: '#ffffff34',
+    title: '#fff',
     text: {
       default: '#000',
       light: '#fff',
       dark: '#f4f4f5',
+      active: '#e06e61',
     },
   },
   background: {
@@ -114,50 +153,52 @@ export const theme1 = {
   },
 };
 
-export const theme2 = {
+export const theme2: GlobalTheme = {
   color: {
-    lightFont: '#ffffff',
-    hightlightFont: '#ee526f',
-    linkFont: '#cc718f',
-    main: '#ffc1cc',
     lightYellow: '#fcefc7',
-    bg: '#d8aab1ec',
-    backdrop: '#b9919867',
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
     cardBg: '#f4f4f5',
     skyblue: '#00cbfe',
     lightBlue: '#d8f2ff',
 
-    /** 핑크 */
-    first: {
-      //핑크
-      default: '#c8e9ca', //header
-      light: '#f0f8f1',
-      dark: '#c9f5d9', //bg-color
-      '10': '#91b9aa67',
-      '50': '#aad8caaf',
-    },
-    /** 오렌지 */
-    second: {
-      default: '#fa8072',
-      light: '#fa8672',
-      dark: '#e48378',
-    },
+    first: brandColor([
+      '#c8e9ca',
+      '#f0f8f1',
+      '#f0f8f1',
+      '#c9f5d9',
+      '#c9f5d9',
+      'rgba(200, 233, 202, 0.2)',
+      'rgba(200, 233, 202, 0.5)',
+    ]),
+    second: brandColor([
+      '#fa8072',
+      '#FFB3A5',
+      '#FFE6D8',
+      '#e48378',
+      '#e48378',
+      'rgba(200, 233, 202, 0.2)',
+      'rgba(200, 233, 202, 0.5)',
+    ]),
     /** 레드 */
-    third: {
-      default: '#64aa2b', //active
-    },
+    third: brandColor([
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+    ]),
     /** 화이트 */
-    fourth: {
-      default: '#fff',
-      light: '#fff4f6',
-      dark: '#f4f4f5bf',
-    },
+    fourth: whiteBrandColor,
+    backdrop: '#ffffff34',
+    title: '#279e27',
     text: {
       default: '#000',
       light: '#fff',
       dark: '#f4f4f5',
+      active: '#e06e61',
     },
   },
   background: {
@@ -173,45 +214,50 @@ export const theme2 = {
   },
 };
 
-export const theme3 = {
+export const theme3: GlobalTheme = {
   color: {
-    lightFont: '#ffffff',
-    hightlightFont: '#ee526f',
-    linkFont: '#cc718f',
-    main: '#ffc1cc',
     lightYellow: '#fcefc7',
-    bg: '#d8aab1ec',
-    backdrop: '#b9919867',
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
     cardBg: '#f4f4f5',
     skyblue: '#00cbfe',
     lightBlue: '#d8f2ff',
 
-    first: {
-      default: '#c8e9ca', //header
-      light: '#f0f8f1',
-      dark: '#b7e2f3', //bg-color
-      '10': '#91b9aa67',
-      '50': '#aad8caaf',
-    },
-    second: {
-      default: '#fa8072',
-      light: '#fa8672',
-      dark: '#e48378',
-    },
-    third: {
-      default: '#64aa2b', //active
-    },
-    fourth: {
-      default: '#fff',
-      light: '#fff4f6',
-      dark: '#f4f4f5bf',
-    },
+    first: brandColor([
+      '#ace7ff',
+      '#f0f8f1',
+      '#f0f8f1',
+      '#b7e2f3',
+      '#b7e2f3',
+      'rgba(172, 231, 255, 0.2)',
+      'rgba(172, 231, 255, 0.5)',
+    ]),
+    second: brandColor([
+      '#fa8072',
+      '#fa8672',
+      '#fa8672',
+      '#e48378',
+      '#e48378',
+      '#fa8072',
+      '#fa8072',
+    ]),
+    third: brandColor([
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+    ]),
+    fourth: whiteBrandColor,
+    backdrop: '#ffffff34',
+    title: '#ff6e2b',
     text: {
       default: '#000',
       light: '#fff',
       dark: '#f4f4f5',
+      active: '#e06e61',
     },
   },
   background: {
@@ -227,50 +273,51 @@ export const theme3 = {
   },
 };
 
-export const theme4 = {
+export const theme4: GlobalTheme = {
   color: {
-    lightFont: '#ffffff',
-    hightlightFont: '#ee526f',
-    linkFont: '#cc718f',
-    main: '#ffc1cc',
     lightYellow: '#fcefc7',
-    bg: '#d8aab1ec',
-    backdrop: '#b9919867',
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
     cardBg: '#f4f4f5',
     skyblue: '#00cbfe',
     lightBlue: '#d8f2ff',
 
-    /** 핑크 */
-    first: {
-      //핑크
-      default: '#c8e9ca', //header
-      light: '#f0f8f1',
-      dark: '#152238', //bg-color
-      '10': '#91b9aa67',
-      '50': '#aad8caaf',
-    },
-    /** 오렌지 */
-    second: {
-      default: '#fa8072',
-      light: '#fa8672',
-      dark: '#e48378',
-    },
+    first: brandColor([
+      '#0d1524',
+      '#f0f8f1',
+      '#f0f8f1',
+      '#152238',
+      '#152238',
+      'rgba(13, 21, 36, 0.2)',
+      'rgba(13, 21, 36, 0.5)',
+    ]),
+    second: brandColor([
+      '#fa8072',
+      '#fa8072',
+      '#fa8072',
+      '#e48378',
+      '#e48378',
+      '#fa8072',
+      '#fa8072',
+    ]),
     /** 레드 */
-    third: {
-      default: '#64aa2b', //active
-    },
-    /** 화이트 */
-    fourth: {
-      default: '#fff',
-      light: '#fff4f6',
-      dark: '#f4f4f5bf',
-    },
+    third: brandColor([
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+    ]),
+    fourth: darkBrandColor,
+    backdrop: '#ffffff34',
+    title: '#ffd700',
     text: {
       default: '#000',
       light: '#fff',
       dark: '#f4f4f5',
+      active: '#e06e61',
     },
   },
   background: {
@@ -286,50 +333,50 @@ export const theme4 = {
   },
 };
 
-export const theme5 = {
+export const theme5: GlobalTheme = {
   color: {
-    lightFont: '#ffffff',
-    hightlightFont: '#ee526f',
-    linkFont: '#cc718f',
-    main: '#ffc1cc',
     lightYellow: '#fcefc7',
-    bg: '#d8aab1ec',
-    backdrop: '#b9919867',
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
     cardBg: '#f4f4f5',
     skyblue: '#00cbfe',
     lightBlue: '#d8f2ff',
 
-    /** 핑크 */
-    first: {
-      //핑크
-      default: '#c8e9ca', //header
-      light: '#f0f8f1',
-      dark: '#010b13', //bg-color
-      '10': '#91b9aa67',
-      '50': '#aad8caaf',
-    },
-    /** 오렌지 */
-    second: {
-      default: '#fa8072',
-      light: '#fa8672',
-      dark: '#e48378',
-    },
-    /** 레드 */
-    third: {
-      default: '#64aa2b', //active
-    },
-    /** 화이트 */
-    fourth: {
-      default: '#fff',
-      light: '#fff4f6',
-      dark: '#f4f4f5bf',
-    },
+    first: brandColor([
+      '#c8e9ca',
+      '#f0f8f1',
+      '#f0f8f1',
+      '#010b13',
+      '#010b13',
+      '#91b9aa67',
+      '#aad8caaf',
+    ]),
+    second: brandColor([
+      '#fa8072',
+      '#fa8072',
+      '#fa8072',
+      '#e48378',
+      '#e48378',
+      '#fa8072',
+      '#fa8072',
+    ]),
+    third: brandColor([
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+      '#64aa2b',
+    ]),
+    fourth: darkBrandColor,
+    backdrop: '#ffffff34',
+    title: '#ff0000',
     text: {
       default: '#000',
       light: '#fff',
       dark: '#f4f4f5',
+      active: '#e06e61',
     },
   },
   background: {

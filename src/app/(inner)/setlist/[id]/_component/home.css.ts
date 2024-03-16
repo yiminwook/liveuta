@@ -19,7 +19,6 @@ export const left = style([
     display: 'flex',
     flexDirection: 'column',
     flex: 2,
-    backgroundColor: 'var(--liveuta-bg-color)',
   },
   responsive({
     md: {},

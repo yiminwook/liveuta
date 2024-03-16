@@ -6,7 +6,7 @@ import Sidebar from './_component/sidebar/Sidebar';
 import dynamic from 'next/dynamic';
 import { auth } from '@/model/nextAuth';
 import AccountSidebar from './_component/sidebar/Account';
-import * as styles from './layout.css';
+import Background from './_component/Background';
 
 const FloatButton = dynamic(() => import('./_component/float/FloatButton'), {
   ssr: false,
@@ -17,9 +17,7 @@ export default async function Layout({ children }: PropsWithChildren) {
   return (
     <PageView>
       <Header session={session} />
-      <main className={styles.main}>{children}</main>
-      <div className={styles.backgroundLeft} />
-      <div className={styles.backgroundRight} />
+      <Background>{children}</Background>
       <Footer />
       <FloatButton />
       <Sidebar />

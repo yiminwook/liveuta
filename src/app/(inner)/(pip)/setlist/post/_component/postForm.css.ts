@@ -1,4 +1,4 @@
-import { d } from '@tanstack/react-query-devtools/build/legacy/devtools-dKCOqp9Q';
+import { global } from '@/style/globalTheme.css';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 export const wrap = style({
@@ -37,11 +37,11 @@ export const input = style({
     borderColor: '#999',
   },
   ':focus-visible': {
-    borderColor: 'var(--liveuta-active-color)',
+    borderColor: global.color.text.active,
     outline: 'none',
   },
   ':active': {
-    borderColor: 'var(--liveuta-active-color)',
+    borderColor: global.color.text.active,
     outline: 'none',
   },
 });
@@ -103,10 +103,10 @@ export const textArea = style({
     borderColor: '#999',
   },
   ':focus-visible': {
-    borderColor: 'var(--liveuta-active-color)',
+    borderColor: global.color.text.active,
   },
   ':active': {
-    borderColor: 'var(--liveuta-active-color)',
+    borderColor: global.color.text.active,
   },
 });
 
@@ -115,7 +115,7 @@ export const buttonBox = style({
 });
 
 export const button = style({
-  backgroundColor: 'var(--liveuta-default-color)',
+  backgroundColor: global.color.second.default,
   color: '#fff',
   borderRadius: '0.3rem',
   padding: '0.5rem',
@@ -128,16 +128,16 @@ export const button = style({
   transitionDuration: '100ms',
   transitionTimingFunction: 'ease-in-out',
   ':hover': {
-    backgroundColor: 'var(--liveuta-hover-color)',
+    backgroundColor: global.color.second.light,
     boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
     translate: '0 -2px',
   },
   ':focus-visible': {
-    backgroundColor: 'var(--liveuta-active-color)',
+    backgroundColor: global.color.second.light,
     boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
   },
   ':active': {
-    backgroundColor: 'var(--liveuta-active-color)',
+    backgroundColor: global.color.second.dark,
     boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
     translate: '0 -2px',
   },

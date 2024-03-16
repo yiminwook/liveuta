@@ -1,8 +1,9 @@
 'use client';
 import Link from 'next/link';
-import * as styles from './navTab.css';
 import { usePathname } from 'next/navigation';
 import cx from 'classnames';
+
+import * as styles from './navTab.css';
 
 const NAV_LINKS = [
   { herf: '/', text: '예정' },

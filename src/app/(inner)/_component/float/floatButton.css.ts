@@ -34,7 +34,7 @@ export const scrollUpButton = style({
   bottom: 15,
   right: 15,
   cursor: 'pointer',
-  color: 'var(--liveuta-hover-color)',
+  color: global.color.first.dark,
 });
 
 export const toggleButton = style([
@@ -48,8 +48,8 @@ export const toggleButton = style([
     width: 52,
     height: 52,
     padding: 2,
-    color: global.color.lightFont,
-    backgroundColor: 'var(--liveuta-hover-color)',
+    color: global.color.text.light,
+    backgroundColor: global.color.second.default,
     borderRadius: '100%',
     border: 'none',
     visibility: 'visible',
@@ -67,8 +67,7 @@ export const toggleButton = style([
         opacity: 0,
       },
       '&.hover:hover': {
-        color: 'var(--liveuta-hover-color)',
-        backgroundColor: global.color.lightFont,
+        backgroundColor: global.color.second.light,
       },
     },
   },

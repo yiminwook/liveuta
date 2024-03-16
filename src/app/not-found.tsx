@@ -1,7 +1,5 @@
 'use client';
 import '@/style/reset.css';
-import '/public/theme.css';
-import '@/style/global.scss';
 import '@/style/global.css';
 import '@/style/globalTheme.css';
 import type { Metadata } from 'next';

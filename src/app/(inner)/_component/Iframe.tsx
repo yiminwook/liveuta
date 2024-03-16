@@ -1,9 +1,9 @@
 'use client';
 import { themeAtom } from '@/app/_lib/atom';
-import iframe from './iframe.module.scss';
 import { openWindow } from '@inner/_lib/windowEvent';
 import { useAtomValue } from 'jotai';
 import { useRef, useEffect, useState, MouseEvent } from 'react';
+import * as styles from './iframe.css';
 
 interface IframeProps {
   url: string;
@@ -50,11 +50,12 @@ export default function Iframe({ url }: IframeProps) {
   }, [isLoaded, theme]);
 
   return (
-    <section className={iframe['iframe']}>
-      <div>
+    <div className={styles.wrap}>
+      <div className={styles.inner}>
         <iframe
           ref={iframeRef}
           id="liveuta-iframe"
+          className={styles.iframe}
           src={url}
           scrolling="auto"
           allow="clipboard-write;"
@@ -63,7 +64,9 @@ export default function Iframe({ url }: IframeProps) {
           }}
         />
       </div>
-      <button onClick={onClick}>+ 새로 열기</button>
-    </section>
+      <button className={styles.openButton} onClick={onClick}>
+        + 새로 열기
+      </button>
+    </div>
   );
 }

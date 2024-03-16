@@ -131,7 +131,7 @@ export const channelName = style([
     fontSize: '1rem',
     selectors: {
       '&.stream': {
-        color: global.color.hightlightFont,
+        color: global.color.text.active,
       },
     },
   },
@@ -213,7 +213,7 @@ export const statusBox = style([
     alignItems: 'center',
     fontWeight: 500,
     gap: '0.125rem',
-    color: global.color.hightlightFont,
+    color: global.color.text.active,
     verticalAlign: 'middle',
   },
 ]);

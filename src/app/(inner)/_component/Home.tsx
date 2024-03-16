@@ -3,7 +3,7 @@ import { getCookies } from '@inner/_lib/getCookie';
 import dynamic from 'next/dynamic';
 import DataObserver from './DataObserver';
 import ScheduleSection from './ScheduleSection';
-import NavSection from './header/NavSection';
+import NavSection from './navSection/NavSection';
 import { auth } from '@/model/nextAuth';
 
 const TopSection = dynamic(() => import('./TopSection'), { ssr: false });

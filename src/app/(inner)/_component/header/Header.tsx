@@ -3,7 +3,6 @@
 import dayjs from '@/model/dayjs';
 import { accountSidebarAtom, sidebarAtom } from '@inner/_lib/atom';
 import { gtag } from '@inner/_lib/gtag';
-import cx from 'classnames';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import Link from 'next/link';
@@ -15,8 +14,8 @@ import HamburgerButton from '../button/HamburgerButton';
 import NavigationList from '../header/NavigationList';
 import SearchInput from '../input/SearchInput';
 import * as styles from './header.css';
-import header from './header.module.scss';
 import { isMobile } from 'react-device-detect';
+import { global } from '@/style/globalTheme.css';
 
 type HeaderProps = {
   session: Session | null;
@@ -42,8 +41,8 @@ export default function Header({ session }: HeaderProps) {
         const current = gnbRef.current;
         if (!current) return;
         window.scrollY > 0
-          ? (current.style.backgroundColor = '#ffffff34')
-          : (current.style.backgroundColor = 'var(--liveuta-header-color)');
+          ? (current.style.backgroundColor = global.color.backdrop)
+          : (current.style.backgroundColor = global.color.first[50]);
       }, 300);
     };
   }, []);
@@ -69,13 +68,13 @@ export default function Header({ session }: HeaderProps) {
 
   return (
     <header>
-      <div className={cx(header['inner'], styles.inner)} ref={gnbRef}>
-        <nav>
+      <div className={styles.inner} ref={gnbRef}>
+        <nav className={styles.nav}>
           <HamburgerButton onClick={openSidebar} />
           <Link href="/" className={styles.title}>
             Live Uta
           </Link>
-          <div className={styles.nav}>
+          <div className={styles.right}>
             {pathname !== '/search' && (
               <div className={styles.searchBox}>
                 <SearchInput onSearch={handleSearch} placeHolder="채널명으로 검색" />

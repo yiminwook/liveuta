@@ -1,3 +1,4 @@
+import { global } from '@/style/globalTheme.css';
 import { style } from '@vanilla-extract/css';
 
 export const wrap = style({
@@ -9,6 +10,6 @@ export const placeholder = style({
   fontWeight: 600,
   textAlign: 'center',
   backgroundColor: '#fff',
-  color: 'var(--liveuta-bg-color)',
+  color: global.color.text.light,
   fontSize: 14,
 });

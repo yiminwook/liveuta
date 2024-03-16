@@ -1,5 +1,5 @@
-import { style } from '@vanilla-extract/css';
-import { BREAK_POINT, flexCenter, responsive, zIndex } from '@/style/var';
+import { globalStyle, style } from '@vanilla-extract/css';
+import { BEZIER_CURVE, BREAK_POINT, flexCenter, responsive, zIndex } from '@/style/var';
 import { global } from '@/style/globalTheme.css';
 
 export const main = style([
@@ -17,6 +17,13 @@ export const main = style([
     },
   }),
 ]);
+
+export const background = style({
+  overflow: 'hidden',
+  backgroundColor: global.color.first.dark,
+  backgroundImage: global.background.patten,
+  transition: `background-color 0.2s ${BEZIER_CURVE}, background-image 0.2s ${BEZIER_CURVE}`,
+});
 
 export const backgroundBase = style({
   width: '10%',

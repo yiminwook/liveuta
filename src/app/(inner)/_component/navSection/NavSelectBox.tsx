@@ -1,5 +1,4 @@
 'use client';
-import home from '../home.module.scss';
 import React, { useState } from 'react';
 import Cookies from 'universal-cookie';
 import cx from 'classnames';
@@ -10,6 +9,7 @@ import { SelectType } from '@/type';
 import { schedule } from '@inner/_lib/atom';
 import { useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
+import * as styles from './navSection.css';
 
 interface NavSelectBoxProps {}
 
@@ -63,24 +63,30 @@ export default function NavSelectBox({}: NavSelectBoxProps) {
   };
 
   return (
-    <div className={home['nav-selectbox']}>
+    <div className={styles.navSelectBox}>
       <button id="nav-selectbox-button" onClick={handleToggle}>
         <BsSliders size="1.25rem" />
         {selectedText()}
       </button>
       <OutsideClickHandler onOutsideClick={handleClose}>
-        <div className={cx(home['side'], active ? home['active'] : '')}>
-          <button onClick={handleClose}>
+        <div className={cx(styles.side, active && 'active')}>
+          <button className={styles.sideButton} onClick={handleClose}>
             <BiArrowFromLeft size="1.25rem" />
           </button>
-          <ul onClick={handleSelect}>
-            <li className={select === 'all' ? home['active'] : ''} data-value={'all'}>
+          <ul className={styles.sideList} onClick={handleSelect}>
+            <li className={cx(styles.sideItem, select === 'all' && 'active')} data-value={'all'}>
               {totalText}
             </li>
-            <li className={select === 'stream' ? home['active'] : ''} data-value={'stream'}>
+            <li
+              className={cx(styles.sideItem, select === 'stream' && 'active')}
+              data-value={'stream'}
+            >
               {streamText}
             </li>
-            <li className={select === 'video' ? home['active'] : ''} data-value={'video'}>
+            <li
+              className={cx(styles.sideItem, select === 'video' && 'active')}
+              data-value={'video'}
+            >
               {videoText}
             </li>
           </ul>

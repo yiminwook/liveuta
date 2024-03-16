@@ -1,3 +1,4 @@
+import { global } from '@/style/globalTheme.css';
 import { BOX_SHADOW } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 
@@ -22,7 +23,7 @@ export const link = style({
   textAlign: 'center',
   transition: 'background-color 0.2s linear',
   ':hover': {
-    backgroundColor: 'var(--liveuta-default-color)',
+    backgroundColor: global.color.text.light,
     color: '#fff',
   },
   selectors: {
@@ -30,8 +31,8 @@ export const link = style({
       outlineOffset: -4,
     },
     '&.active': {
-      backgroundColor: 'var(--liveuta-active-color)',
-      color: 'var(--liveuta-bg-color-light)',
+      backgroundColor: global.color.text.light,
+      color: global.color.text.default,
     },
   },
 });
