@@ -80,7 +80,7 @@ export default function Header({ session }: HeaderProps) {
                 <SearchInput onSearch={handleSearch} placeHolder="채널명으로 검색" />
               </div>
             )}
-            <NavigationList session={session} />
+            <NavigationList />
             {session ? (
               <button className={styles.accountButton} onClick={openAccountSidebar}>
                 <Avatar
