@@ -24,12 +24,12 @@ export const input = style({
 
 export const submitButton = style({
   display: 'flex',
-  backgroundColor: 'var(--liveuta-default-color)',
+  backgroundColor: global.color.third.default,
   borderRadius: '100%',
   padding: '0.25rem',
-  color: global.color.lightFont,
+  color: '#fff',
   transition: `background-color 0.8s ${BEZIER_CURVE}`,
   ':hover': {
-    backgroundColor: 'var(--liveuta-hover-color)',
+    backgroundColor: global.color.third.lighter,
   },
 });

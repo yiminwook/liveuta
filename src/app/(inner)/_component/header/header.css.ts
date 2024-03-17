@@ -1,23 +1,10 @@
-import { BEZIER_CURVE, BOX_SHADOW, responsive, textLine, zIndex } from '@/style/var';
+import { global } from '@/style/globalTheme.css';
+import { BEZIER_CURVE, BOX_SHADOW, BREAK_POINT, responsive, textLine, zIndex } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 export const blank = style({
   height: '3.5rem',
   paddingTop: 'env(safe-area-inset-top)',
-});
-
-export const title = style([
-  textLine('2.2rem', 1),
-  {
-    fontSize: '2rem',
-    color: 'var(--liveuta-title-color)',
-    fontWeight: 600,
-  },
-]);
-
-export const accountButton = style({
-  width: 40,
-  height: 40,
 });
 
 export const inner = style([
@@ -30,25 +17,57 @@ export const inner = style([
     width: '100%',
     height: '3.5rem',
     position: 'fixed',
-    backgroundColor: 'var(--liveuta-header-color)',
+    backgroundColor: global.color.first[50],
     backdropFilter: 'blur(8px)',
     transition: `background-color 0.5s ${BEZIER_CURVE}`,
     boxShadow: '0px 1px 2px 0 rgba(56, 52, 52, 0.4)',
     selectors: {
       '&:hover': {
-        backgroundColor: 'var(--liveuta-header-color) !important',
+        backgroundColor: `${global.color.first[50]} !important`,
       },
     },
   },
 ]);
 
-export const nav = style({
+export const nav = style([
+  {
+    margin: 'auto',
+    maxWidth: BREAK_POINT['2xl'],
+    height: '3.5rem',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    color: global.color.text.active,
+    padding: '0 0.5rem',
+  },
+  responsive({
+    md: {
+      padding: '0 1.5rem',
+    },
+  }),
+]);
+
+export const title = style([
+  textLine('2.2rem', 1),
+  {
+    fontSize: '2rem',
+    color: global.color.title,
+    fontWeight: 600,
+  },
+]);
+
+export const accountButton = style({
+  width: 40,
+  height: 40,
+});
+
+export const right = style({
   display: 'flex',
   alignItems: 'center',
   gap: '1rem',
 });
 
-globalStyle(`${nav} > ul`, {
+globalStyle(`${right} > ul`, {
   display: 'none',
   alignItems: 'center',
   gap: '1rem',
@@ -75,11 +94,11 @@ export const loginButton = style([
     display: 'block',
     borderRadius: 5,
     padding: '0.25rem 0.5rem',
-    backgroundColor: 'var(--liveuta-active-color)',
+    backgroundColor: global.color.third.default,
     transition: `background-color 0.8s ${BEZIER_CURVE}`,
     boxShadow: BOX_SHADOW,
     ':hover': {
-      backgroundColor: 'var(--liveuta-hover-color)',
+      backgroundColor: global.color.third.light,
     },
   },
 ]);

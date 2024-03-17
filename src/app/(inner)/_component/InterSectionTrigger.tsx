@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as styles from './interSectionTrigger.css';
 import SquareToRound from './loading/SquareToRound';
 import { LuLoader } from 'react-icons/lu';
+import { global } from '@/style/globalTheme.css';
 
 interface InterSectionTriggerProps {
   /** 페이지 끝에 도달여부 */
@@ -36,7 +37,7 @@ export default function InterSectionTrigger({ isDone, onShow }: InterSectionTrig
       <div className={styles.inner}>
         {!isDone && (
           <SquareToRound className={styles.loading}>
-            <LuLoader size="1rem" color="var(--liveuta-loading-color)" />
+            <LuLoader size="1rem" color={global.color.first.light} />
           </SquareToRound>
         )}
       </div>

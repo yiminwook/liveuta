@@ -17,3 +17,25 @@ export const leftIn = keyframes({
     transform: 'translateX(-100%)',
   },
 });
+
+export const openMenu = keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'translateY(-4px)',
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'translateY(0)',
+  },
+});
+
+export const openModal = keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'translateY(64px)',
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'translateY(0)',
+  },
+});

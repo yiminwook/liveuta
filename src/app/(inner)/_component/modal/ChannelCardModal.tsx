@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import Modal from '@inner/_component/modal/Modal';
-import channelCardModal from './channelCardModal.module.scss';
 import { openWindow } from '@inner/_lib/windowEvent';
 import CopyButton from '@inner/_component/button/CopyButton';
 import { DEFAULT_BLUR_BASE64 } from '@/const';
 import { MouseEvent } from 'react';
 import { gtagClick, gtagClickAtag } from '@inner/_lib/gtag';
 import portal from '@/model/portal';
+import * as styles from './channelCardModal.css';
 
-interface ChannelCardModalProp {
+type ChannelCardModalProp = {
   onClose: () => void;
   channelName: string;
   title: string;
@@ -17,7 +17,7 @@ interface ChannelCardModalProp {
   videoCount: string;
   subscribe: string;
   description: string;
-}
+};
 
 const CHANNEL_MODAL_ID = 'channelCardModal';
 
@@ -43,13 +43,13 @@ export default portal(
 
     return (
       <Modal id={CHANNEL_MODAL_ID} onClose={onClose}>
-        <div className={channelCardModal['modal']}>
-          <div className={channelCardModal['profile']}>
+        <div className={styles.content}>
+          <div className={styles.profile}>
             <a href={url} onClick={linkClickEvent}>
-              <div className={channelCardModal['image-container']}>
+              <div className={styles.itemContainer}>
                 <Image
                   src={imageURL}
-                  alt=""
+                  alt={`${channelName}의 채널 이미지`}
                   loading="lazy"
                   placeholder="blur"
                   blurDataURL={DEFAULT_BLUR_BASE64}
@@ -58,14 +58,14 @@ export default portal(
                 />
               </div>
             </a>
-            <div className={channelCardModal['info']}>
-              <h1 className={channelCardModal['channel-name']}>{channelName}</h1>
-              <h2 className={channelCardModal['title']}>{title}</h2>
-              <div className={channelCardModal['detail']}>
-                <h3 className={channelCardModal['subscribe']}>구독자 {subscribe}</h3>
-                <h3 className={channelCardModal['video-count']}>업로드 수 {videoCount} 개</h3>
+            <div className={styles.info}>
+              <h2 className={styles.h2}>{channelName}</h2>
+              <h3 className={styles.h3}>{title}</h3>
+              <div className={styles.detail}>
+                <h4 className={styles.h4}>구독자 {subscribe}</h4>
+                <h4 className={styles.h4}>업로드 수 {videoCount} 개</h4>
               </div>
-              <div className={channelCardModal['link']}>
+              <div className={styles.link}>
                 <button
                   onClick={(e) => {
                     e.preventDefault();
@@ -86,8 +86,8 @@ export default portal(
               </div>
             </div>
           </div>
-          <hr />
-          <pre className={channelCardModal['desc']}>{description}</pre>
+          <hr className={styles.hr} />
+          <pre className={styles.desc}>{description}</pre>
         </div>
       </Modal>
     );

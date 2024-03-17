@@ -1,30 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import dayjs from '@/model/dayjs';
 import { accountSidebarAtom, sidebarAtom } from '@inner/_lib/atom';
-import { gtag } from '@inner/_lib/gtag';
-import cx from 'classnames';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useRef } from 'react';
-import { toast } from 'sonner';
+import { global } from '@/style/globalTheme.css';
+import { isMobile } from 'react-device-detect';
 import Avatar from '../Avatar';
 import HamburgerButton from '../button/HamburgerButton';
-import NavigationList from '../header/NavigationList';
-import SearchInput from '../input/SearchInput';
 import * as styles from './header.css';
-import header from './header.module.scss';
-import { isMobile } from 'react-device-detect';
+import DesktopNav from './DesktopNav';
 
 type HeaderProps = {
   session: Session | null;
 };
+
 export default function Header({ session }: HeaderProps) {
-  const route = useRouter();
   const gnbRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
 
   const setShowSidebar = useSetAtom(sidebarAtom);
   const setShowAccountSidebar = useSetAtom(accountSidebarAtom);
@@ -42,21 +35,11 @@ export default function Header({ session }: HeaderProps) {
         const current = gnbRef.current;
         if (!current) return;
         window.scrollY > 0
-          ? (current.style.backgroundColor = '#ffffff34')
-          : (current.style.backgroundColor = 'var(--liveuta-header-color)');
+          ? (current.style.backgroundColor = global.color.backdrop)
+          : (current.style.backgroundColor = global.color.first[50]);
       }, 300);
     };
   }, []);
-
-  const handleSearch = (value: string) => {
-    const trimmedValue = value.trim();
-    if (trimmedValue === '') return toast.warning('검색어를 입력해주세요.');
-    gtag('event', 'search', {
-      channelName: trimmedValue,
-      time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-    });
-    route.push(`/search?query=${trimmedValue}`);
-  };
 
   useEffect(() => {
     if (isMobile) return;
@@ -69,25 +52,20 @@ export default function Header({ session }: HeaderProps) {
 
   return (
     <header>
-      <div className={cx(header['inner'], styles.inner)} ref={gnbRef}>
-        <nav>
+      <div className={styles.inner} ref={gnbRef}>
+        <nav className={styles.nav}>
           <HamburgerButton onClick={openSidebar} />
           <Link href="/" className={styles.title}>
             Live Uta
           </Link>
-          <div className={styles.nav}>
-            {pathname !== '/search' && (
-              <div className={styles.searchBox}>
-                <SearchInput onSearch={handleSearch} placeHolder="채널명으로 검색" />
-              </div>
-            )}
-            <NavigationList session={session} />
+          <div className={styles.right}>
+            <DesktopNav />
             {session ? (
               <button className={styles.accountButton} onClick={openAccountSidebar}>
                 <Avatar
                   src={session.user.image}
                   email={session.user.email}
-                  size={40}
+                  size={'40px'}
                   alt="유저 이미지"
                 />
               </button>

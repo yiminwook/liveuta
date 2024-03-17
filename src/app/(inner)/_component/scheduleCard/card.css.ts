@@ -30,6 +30,7 @@ export const card = style([
     gap: '0.25rem',
     backgroundColor: '#fff',
     borderRadius: 5,
+    color: '#000000',
     transformStyle: 'preserve-3d',
     transformOrigin: 'center',
     transition: `all 1s ${BEZIER_CURVE}`,
@@ -131,7 +132,7 @@ export const channelName = style([
     fontSize: '1rem',
     selectors: {
       '&.stream': {
-        color: global.color.hightlightFont,
+        color: global.color.hoverSalmon,
       },
     },
   },
@@ -145,12 +146,11 @@ export const channelName = style([
 export const title = style([
   textLine('1.2rem', 2),
   {
-    color: global.color.font,
     fontSize: '0.75rem',
     selectors: {
       '&.stream': {
         fontWeight: 500,
-        color: global.color.secondary,
+        color: global.color.salmon,
       },
     },
   },
@@ -213,7 +213,7 @@ export const statusBox = style([
     alignItems: 'center',
     fontWeight: 500,
     gap: '0.125rem',
-    color: global.color.hightlightFont,
+    color: global.color.salmon,
     verticalAlign: 'middle',
   },
 ]);

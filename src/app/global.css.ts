@@ -1,6 +1,19 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { BREAK_POINT, responsive } from './var';
-import { global } from './globalTheme.css';
+import { global, theme1 } from '../style/globalTheme.css';
+
+globalStyle(':root', {
+  vars: {
+    '--liveuta-bg-color': '#fff',
+    '--liveuta-scroll-color': theme1.color.first.default,
+  },
+  '@media': {
+    '(prefers-color-scheme: dark)': {
+      vars: {
+        '--liveuta-bg-color': '#111111',
+      },
+    },
+  },
+});
 
 globalStyle('::-webkit-scrollbar', {
   width: 7.5,
@@ -11,17 +24,33 @@ globalStyle('::-webkit-scrollbar-track', {
 });
 
 globalStyle('::-webkit-scrollbar-thumb', {
-  backgroundColor: 'var(--liveuta-active-color)',
+  backgroundColor: 'var(--liveuta-scroll-color)',
   borderRadius: 10,
+  cursor: 'pointer',
 });
 
-globalStyle('::-webkit-scrollbar-thumb:hover', {
-  backgroundColor: 'var(--liveuta-hover-color)',
-});
+// globalStyle('::-webkit-scrollbar-thumb:hover', {
+//   backgroundColor: 'var(--liveuta-scroll-color)',
+// });
 
 globalStyle('::-webkit-scrollbar-button', {
   display: 'none',
   visibility: 'hidden',
+});
+
+export const body = style({
+  margin: 0,
+  padding: 0,
+  boxSizing: 'border-box',
+  fontFamily: 'Pretendard Variable, Pretendard, -apple-system, sans-serif',
+  fontSize: 16,
+  backgroundColor: 'var(--liveuta-bg-color)',
+  overflowX: 'hidden',
+  '@media': {
+    '(prefers-color-scheme: dark)': {
+      color: '#fff',
+    },
+  },
 });
 
 globalStyle('h1, h2, h3, h4, p', {
@@ -93,6 +122,24 @@ globalStyle('input', {
   border: 'none',
 });
 
+globalStyle('input:focus', {
+  outline: 'none',
+});
+
+globalStyle('input::placeholder', {
+  fontFamily: 'inherit',
+});
+
+//자동입력 스타일 제거
+globalStyle(
+  'input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active',
+  {
+    WebkitTextFillColor: 'black',
+    WebkitBoxShadow: '0 0 0 0px 1000px #fff inset',
+    boxShadow: '0 0 0 0px 1000px #fff inset',
+  },
+);
+
 globalStyle(
   'button:focus:not(:focus-visible), a:focus:not(:focus-visible), textarea:focus:not(focus-visible), input:focus:not(focus-visible)',
   {
@@ -101,19 +148,19 @@ globalStyle(
 );
 
 globalStyle('button:focus-visible, a:focus-visible', {
-  outline: '3px solid var(--liveuta-active-color)',
+  outline: `3px solid ${global.color.text.active}`,
   borderRadius: 5,
   outlineOffset: 2.5,
   zIndex: 10,
 });
 
 globalStyle('button.active', {
-  backgroundColor: 'var(--liveuta-active-color)',
+  backgroundColor: global.color.text.active,
   cursor: 'default',
 });
 
 globalStyle('a.active', {
-  color: 'var(--liveuta-active-color)',
+  color: global.color.text.active,
   cursor: 'default',
 });
 
@@ -122,24 +169,17 @@ globalStyle('textarea', {
   background: 'none',
   border: 'none',
   lineHeight: 1.6,
-  fontFamily: 'Pretendard Variable Pretendard -apple-system  sans-serif',
+  // fontFamily: 'Pretendard Variable Pretendard -apple-system sans-serif',
   margin: 0,
   padding: 0,
   resize: 'none',
 });
 
-export const main = style([
-  {
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: BREAK_POINT['2xl'],
-    minHeight:
-      'calc(100dvh - 3.5rem - 5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
-    margin: '0 auto',
-  },
-  responsive({
-    xl: {
-      width: '80%',
-    },
-  }),
-]);
+globalStyle('.blind', {
+  position: 'absolute',
+  width: 1,
+  height: 1,
+  margin: -1,
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+});

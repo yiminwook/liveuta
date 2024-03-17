@@ -7,11 +7,11 @@ export const button = style({
   height: '2.5rem',
   padding: '0.5rem',
   borderRadius: 5,
-  backgroundColor: 'var(--liveuta-active-color)',
-  color: global.color.lightFont,
+  backgroundColor: global.color.third.default,
+  color: '#fff',
   transition: `background-color 0.2s ${BEZIER_CURVE}`,
   ':hover': {
-    backgroundColor: 'var(--liveuta-hover-color)',
+    backgroundColor: global.color.third.lighter,
   },
 });
 

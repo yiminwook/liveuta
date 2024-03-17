@@ -1,34 +1,24 @@
-/* eslint-disable @next/next/no-img-element */
 import * as styles from './avatar.css';
-import cx from 'classnames';
+import { Avatar as ArkAvatar } from '@ark-ui/react';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
 
 interface AvartarProps {
-  className?: string;
   email: string;
   src: string | undefined | null;
-  size: number;
+  size: string;
   alt: string;
 }
 
-export default function Avatar({ className, email, src, size, alt }: AvartarProps) {
+export default function Avatar({ email, src, size, alt }: AvartarProps) {
   const initial = email.slice(0, 2).toUpperCase();
 
-  if (!src) {
-    return (
-      <div
-        className={cx(styles.wrap, styles.placeholder, className)}
-        style={{
-          width: `${size}px`,
-          height: `${size}px`,
-          lineHeight: `${size}px`,
-        }}
-      >
-        {initial}
-      </div>
-    );
-  }
-
   return (
-    <img className={cx(styles.wrap, className)} src={src} alt={alt} width={size} height={size} />
+    <ArkAvatar.Root
+      className={styles.wrap}
+      style={assignInlineVars(styles.avatarContract, { size })}
+    >
+      <ArkAvatar.Fallback className={styles.fallback}>{initial}</ArkAvatar.Fallback>
+      {src && <ArkAvatar.Image className={styles.image} src={src} alt={alt} />}
+    </ArkAvatar.Root>
   );
 }

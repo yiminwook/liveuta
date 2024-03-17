@@ -1,3 +1,4 @@
+import { global } from '@/style/globalTheme.css';
 import { responsive } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 
@@ -19,7 +20,6 @@ export const left = style([
     display: 'flex',
     flexDirection: 'column',
     flex: 2,
-    backgroundColor: 'var(--liveuta-bg-color)',
   },
   responsive({
     md: {},
@@ -59,5 +59,6 @@ export const right = style({
   padding: '0.5rem',
   flex: 1,
   minHeight: 'calc(100dvh - 3.5rem - 5rem)',
-  backgroundColor: '#fff',
+  backgroundColor: global.color.fourth.default,
+  color: global.color.text.default,
 });

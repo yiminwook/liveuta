@@ -33,7 +33,13 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
   return (
     <form className={styles.wrap} onSubmit={handleSearch}>
       <div className={styles.inputBox}>
-        <input className={styles.input} type="text" value={query} onChange={handleQuery} />
+        <input
+          className={styles.input}
+          type="text"
+          value={query}
+          onChange={handleQuery}
+          placeholder="세트리로 검색"
+        />
         <button className={styles.button}>검색</button>
       </div>
     </form>

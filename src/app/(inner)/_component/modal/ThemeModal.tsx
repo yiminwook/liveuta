@@ -1,11 +1,10 @@
-'use client';
 import Modal from './Modal';
 import { MouseEvent } from 'react';
-import themeModal from './themeModal.module.scss';
 import useTheme from '@/hook/useTheme';
 import { ThemeType } from '@/type';
 import { gtagClick } from '@inner/_lib/gtag';
 import portal from '@/model/portal';
+import * as styles from './themeModal.css';
 
 interface ThemeModalButtonProps {
   primaryColor: string;
@@ -14,9 +13,9 @@ interface ThemeModalButtonProps {
 
 function ThemeModalButton({ primaryColor, secondaryColor }: ThemeModalButtonProps) {
   return (
-    <div className={themeModal['theme-modal-button']}>
-      <div className={themeModal['primary']} style={{ backgroundColor: primaryColor }}>
-        <div className={themeModal['secondary']} style={{ backgroundColor: secondaryColor }}></div>
+    <div className={styles.themeModalButton}>
+      <div className={styles.primary} style={{ backgroundColor: primaryColor }}>
+        <div className={styles.secondary} style={{ backgroundColor: secondaryColor }}></div>
       </div>
     </div>
   );
@@ -48,27 +47,24 @@ export default portal(THEME_MODAL_ID, function ThemeModal({ onClose }: ThemeModa
   };
 
   return (
-    <Modal id={THEME_MODAL_ID} onClose={onClose}>
-      <div className={themeModal['wrap']}>
-        <h2>테마를 선택 해주세요</h2>
-        <div className={themeModal['button-area']} onClick={handleClick}>
-          <button data-theme="theme1">
-            <ThemeModalButton primaryColor="#ffc1cc" secondaryColor="#ed4463" />
-          </button>
-          <button data-theme="theme2">
-            <ThemeModalButton primaryColor="#c9f5d9" secondaryColor="#fada28" />
-          </button>
-          <button data-theme="theme3">
-            {/* <ThemeModalButton primaryColor="#dbf0f9" secondaryColor="#ffc0cb" /> */}
-            <ThemeModalButton primaryColor="#dbf0f9" secondaryColor="#f8570c" />
-          </button>
-          <button data-theme="theme4">
-            <ThemeModalButton primaryColor="#152238" secondaryColor="#ffd700" />
-          </button>
-          <button data-theme="theme5">
-            <ThemeModalButton primaryColor="#010b13" secondaryColor="#cc2444" />
-          </button>
-        </div>
+    <Modal id={THEME_MODAL_ID} onClose={onClose} title="테마를 선택 해주세요">
+      <div className={styles.content} onClick={handleClick}>
+        <button data-theme="theme1">
+          <ThemeModalButton primaryColor="#ffc1cc" secondaryColor="#ed4463" />
+        </button>
+        <button data-theme="theme2">
+          <ThemeModalButton primaryColor="#c9f5d9" secondaryColor="#fada28" />
+        </button>
+        <button data-theme="theme3">
+          {/* <ThemeModalButton primaryColor="#dbf0f9" secondaryColor="#ffc0cb" /> */}
+          <ThemeModalButton primaryColor="#dbf0f9" secondaryColor="#f8570c" />
+        </button>
+        <button data-theme="theme4">
+          <ThemeModalButton primaryColor="#152238" secondaryColor="#ffd700" />
+        </button>
+        <button data-theme="theme5">
+          <ThemeModalButton primaryColor="#010b13" secondaryColor="#cc2444" />
+        </button>
       </div>
     </Modal>
   );

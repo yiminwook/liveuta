@@ -1,3 +1,4 @@
+import { global } from '@/style/globalTheme.css';
 import { BEZIER_CURVE, BOX_SHADOW, responsive, textLine } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 
@@ -20,7 +21,7 @@ export const table = style({
   display: 'flex',
   flexDirection: 'column',
   boxSizing: 'border-box',
-  backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  backgroundColor: global.color.first.light,
   boxShadow: BOX_SHADOW,
 });
 
@@ -41,7 +42,7 @@ export const row = style([
         cursor: 'pointer',
       },
       '&.hover:hover': {
-        backgroundColor: 'rgba(255, 255, 255, 1)',
+        backgroundColor: global.color.first.lighter,
       },
     },
   },
@@ -50,11 +51,12 @@ export const row = style([
 export const header = style([
   row,
   {
-    borderBottom: '2px solid #ddd',
+    borderBottom: `2px solid ${global.color.third.default}`,
     height: '3rem',
     alignItems: 'center',
     display: 'none',
-    fontWeight: 500,
+    fontWeight: 600,
+    color: global.color.third.dark,
   },
   responsive({
     md: {

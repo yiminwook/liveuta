@@ -20,7 +20,7 @@ export const MainLoadingWrap = style([
 ]);
 
 export const MainLoadingInner = style({
-  color: 'var(--liveuta-loading-color)',
+  color: global.color.third.lighter,
   position: 'relative',
   textAlign: 'center',
 });
@@ -38,5 +38,5 @@ export const MainLoadingText = style({
   fontSize: '1.25rem',
   textAlign: 'center',
   fontWeight: 500,
-  color: global.color.lightFont,
+  color: global.color.text.light,
 });

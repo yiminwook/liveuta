@@ -8,6 +8,8 @@ import NextAuth from './NextAuth';
 import dynamic from 'next/dynamic';
 import ToastBox from './ToastBox';
 import Hotkeys from './Hotkeys';
+import ThemeProvider from './ThemeProvider';
+import { PORTAL_ID } from '@/const';
 
 const ParticleProvider = dynamic(() => import('./ParticleProvider'), { ssr: false });
 
@@ -22,11 +24,14 @@ export default function Configs({ children, cookies }: ConfigsProps) {
       <Jotai>
         <ReactQuery>
           <GlobalHydrate cookies={cookies}>
-            <Hotkeys>{children}</Hotkeys>
-            <ToastBox />
-            <ParticleProvider />
-            <ServiceWorker />
-            <Devtools />
+            <ThemeProvider>
+              <Hotkeys>{children}</Hotkeys>
+              <ToastBox />
+              <ParticleProvider />
+              <ServiceWorker />
+              <Devtools />
+              <div id={PORTAL_ID} />
+            </ThemeProvider>
           </GlobalHydrate>
         </ReactQuery>
       </Jotai>

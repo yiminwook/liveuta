@@ -1,3 +1,4 @@
+import { global } from '@/style/globalTheme.css';
 import { BEZIER_CURVE, fixedMaxSize, responsive, zIndex } from '@/style/var';
 import { globalStyle, style } from '@vanilla-extract/css';
 
@@ -6,7 +7,7 @@ export const wrap = style([
   fixedMaxSize,
   {
     visibility: 'hidden',
-    color: 'var(--liveuta-default-text-color)',
+    color: global.color.text.default,
     transition: 'all 0.3s linear',
     selectors: {
       '&.show': {
@@ -26,7 +27,7 @@ export const wrap = style([
 
 export const inner = style({
   position: 'absolute',
-  backgroundColor: 'var(--liveuta-sidebar-color)',
+  backgroundColor: global.color.first.light,
   width: '18rem',
   top: 0,
   height: '100%',
@@ -98,5 +99,5 @@ globalStyle(`${inner} ul`, {
 
 globalStyle(`${inner} ul li a:hover:not(.active)`, {
   transition: `color 0.05s ${BEZIER_CURVE}`,
-  color: 'var(--liveuta-hover-color)',
+  color: global.color.text.light,
 });

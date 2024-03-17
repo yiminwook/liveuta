@@ -24,7 +24,7 @@ export const input = style({
 });
 
 export const button = style({
-  backgroundColor: global.color.hightlightFont,
+  backgroundColor: global.color.third.default,
   color: '#fff',
   width: '4rem',
 });

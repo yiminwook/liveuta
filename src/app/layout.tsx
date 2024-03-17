@@ -1,9 +1,6 @@
 // css 순서변경 금지
-import '@/style/reset.css';
-import '/public/theme.css';
-import '@/style/global.scss';
-import '@/style/global.css';
-import '@/style/globalTheme.css';
+import './reset.css';
+import * as styles from '@/app/global.css';
 
 import { PropsWithChildren } from 'react';
 import { DEFALUT_METADATA } from '@/const/metaData';
@@ -17,11 +14,11 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   const cookies = await getCookies();
 
   return (
-    <html lang="ko" color={cookies.theme}>
+    <html lang="ko">
       <head>
         <DefaultHead />
       </head>
-      <body>
+      <body className={styles.body}>
         <Configs cookies={cookies}>{children}</Configs>
         <GoogleTagManager />
       </body>

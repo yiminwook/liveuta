@@ -83,7 +83,7 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
                   email={session.user.email}
                   src={session.user.image}
                   alt="유저 이미지"
-                  size={40}
+                  size={'40px'}
                 />
                 로그아웃
               </button>

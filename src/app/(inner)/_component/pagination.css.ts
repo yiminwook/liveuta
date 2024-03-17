@@ -5,6 +5,7 @@ export const wrap = style({
   display: 'flex',
   alignItems: 'center',
   gap: '1rem',
+  color: global.color.text.default,
 });
 
 export const item = style({
@@ -13,7 +14,6 @@ export const item = style({
   padding: '0.25rem',
   lineHeight: 1,
   fontWeight: 600,
-  color: 'black',
   fontSize: '1.15rem',
   textAlign: 'center',
   ':disabled': {
@@ -23,6 +23,6 @@ export const item = style({
 });
 
 export const active = style({
-  color: 'var(--liveuta-active-color)',
+  color: global.color.third.default,
   cursor: 'default',
 });

@@ -1,14 +1,27 @@
-import { style } from '@vanilla-extract/css';
+import { global } from '@/style/globalTheme.css';
+import { BOX_SHADOW } from '@/style/var';
+import { createThemeContract, style } from '@vanilla-extract/css';
+
+export const avatarContract = createThemeContract({
+  size: null,
+});
 
 export const wrap = style({
   borderRadius: '50%',
-  overflow: 'hidden',
+  height: avatarContract.size,
+  width: avatarContract.size,
+  boxShadow: BOX_SHADOW,
 });
 
-export const placeholder = style({
+export const fallback = style({
   fontWeight: 600,
-  textAlign: 'center',
   backgroundColor: '#fff',
-  color: 'var(--liveuta-bg-color)',
-  fontSize: 14,
+  color: global.color.first.default,
+  lineHeight: avatarContract.size,
+});
+
+export const image = style({
+  height: '100%',
+  width: '100%',
+  objectFit: 'cover',
 });
