@@ -7,8 +7,7 @@ export const main = style([
     display: 'flex',
     flexDirection: 'column',
     maxWidth: BREAK_POINT['2xl'],
-    minHeight:
-      'calc(100dvh - 3.5rem - 5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
+    minHeight: 'calc(100dvh - 3.5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
     margin: '0 auto',
     color: global.color.text.default,
   },
@@ -20,7 +19,7 @@ export const main = style([
 ]);
 
 export const background = style({
-  backgroundColor: global.color.first.default,
+  backgroundColor: global.color.first.dark,
   backgroundImage: global.background.patten,
   transition: `background-color 0.2s ${BEZIER_CURVE}, background-image 0.2s ${BEZIER_CURVE}`,
 });

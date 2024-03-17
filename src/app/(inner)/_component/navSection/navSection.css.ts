@@ -1,15 +1,17 @@
 import { global } from '@/style/globalTheme.css';
-import { BEZIER_CURVE, BOX_SHADOW, responsive } from '@/style/var';
+import { BEZIER_CURVE, BOX_SHADOW, BREAK_POINT, responsive } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 
 export const navSection = style([
   {
     position: 'sticky',
-    top: '3.5rem',
+    top: 'calc(3.5rem + env(safe-area-inset-top))',
+    justifyContent: 'space-between',
     zIndex: 2,
     display: 'flex',
-    color: global.color.first.default,
+    color: global.color.second.default,
     fontWeight: 500,
+    maxWidth: BREAK_POINT.full,
     padding: '0.5rem',
   },
   responsive({
@@ -20,22 +22,6 @@ export const navSection = style([
   }),
 ]);
 
-export const navScrollBox = style({
-  width: '100%',
-
-  selectors: {
-    '&::-webkit-scrollbar': {
-      display: 'none',
-    },
-  },
-});
-
-export const navInner = style({
-  display: 'flex',
-  justifyContent: 'space-between',
-  minWidth: '18.75rem',
-});
-
 export const navSelectBox = style({
   position: 'relative',
   borderRadius: 5,
@@ -44,8 +30,9 @@ export const navSelectBox = style({
 });
 
 export const navButton = style({
+  boxSizing: 'border-box',
   width: '7.5rem',
-  height: '2.4rem',
+  height: '2.5rem',
   padding: '0.5rem 0.75rem',
   display: 'flex',
   alignItems: 'center',
@@ -53,7 +40,7 @@ export const navButton = style({
   borderRadius: 5,
   transition: `background-color 0.2s ${BEZIER_CURVE}`,
   ':hover': {
-    backgroundColor: global.color.first.light,
+    backgroundColor: global.color.third.default,
     color: global.color.text.light,
   },
 });
@@ -90,7 +77,7 @@ export const sideButton = style({
   padding: '0.5rem',
   transition: `background-color 0.2s ${BEZIER_CURVE}`,
   ':hover': {
-    backgroundColor: global.color.first.dark,
+    backgroundColor: global.color.third.default,
     color: global.color.text.light,
   },
 });
@@ -105,12 +92,14 @@ export const sideItem = style({
   transition: `background-color 0.2s ${BEZIER_CURVE}`,
   selectors: {
     '&:hover': {
-      backgroundColor: global.color.first.dark,
+      backgroundColor: global.color.third.default,
       color: global.color.text.light,
     },
     '&.active': {
-      color: global.color.first.darken,
+      backgroundColor: global.color.text.light,
+      color: global.color.third.default,
       fontWeight: 600,
+      cursor: 'default',
     },
   },
 });

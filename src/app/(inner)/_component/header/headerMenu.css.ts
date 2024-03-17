@@ -31,6 +31,9 @@ export const content = style({
   padding: '0.25rem 0',
   borderRadius: 5,
   boxShadow: BOX_SHADOW,
+  ':focus': {
+    outline: 'none',
+  },
 });
 
 globalStyle(`${root}:hover ${content}`, {

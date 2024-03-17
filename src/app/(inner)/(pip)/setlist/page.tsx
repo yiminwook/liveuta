@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   title: '세트리 | Live Uta',
 };
 
-interface Props {
+type Props = {
   searchParams: {
     query?: string;
     page?: string;
     order?: 'broadcast' | 'create';
   };
-}
+};
 
 export default async function Page({ searchParams }: Props) {
   return (

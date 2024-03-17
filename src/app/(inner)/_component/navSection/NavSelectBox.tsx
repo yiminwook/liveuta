@@ -64,7 +64,7 @@ export default function NavSelectBox({}: NavSelectBoxProps) {
 
   return (
     <div className={styles.navSelectBox}>
-      <button id="nav-selectbox-button" onClick={handleToggle}>
+      <button className={styles.navButton} id="nav-selectbox-button" onClick={handleToggle}>
         <BsSliders size="1.25rem" />
         {selectedText()}
       </button>
