@@ -25,14 +25,16 @@ export const iframe = style({
 
 export const openButton = style({
   position: 'absolute',
+  boxSizing: 'border-box',
   top: '0.75rem',
   right: '0.75rem',
   fontSize: '1.1rem',
   padding: '0.2rem 0.6rem',
   borderRadius: 100,
-  color: global.color.text.light,
-  backgroundColor: global.color.first.light,
-  border: `1px solid ${global.color.first.light}`,
+  color: '#fff',
+  backgroundColor: global.color.third.default,
+  border: `2px solid #fff`,
+  boxShadow: BOX_SHADOW,
   transition: `background-color 0.8s ${BEZIER_CURVE}`,
   ':hover': {
     backgroundColor: global.color.first.darken,

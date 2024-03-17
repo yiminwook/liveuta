@@ -7,10 +7,10 @@ import { renderSubscribe } from '@inner/_lib/renderSubscribe';
 import { openWindow } from '@inner/_lib/windowEvent';
 import Image from 'next/image';
 import { MouseEvent, useState } from 'react';
-import ChannelCardModal from '../modal/ChannelCardModal';
-import channelCard from './channelCard.module.scss';
-
 import * as styles from './channelCard.css';
+import dynamic from 'next/dynamic';
+
+const ChannelCardModal = dynamic(() => import('../modal/ChannelCardModal'), { ssr: false });
 
 interface ChannelItemProps {
   content: ChannelsDataType;

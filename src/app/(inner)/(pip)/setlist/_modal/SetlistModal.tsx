@@ -29,26 +29,20 @@ export default portal(SETLIST_MODAL_ID, function SetlistModal() {
   };
 
   return (
-    <RemoveScroll>
-      <Modal id={SETLIST_MODAL_ID} onClose={onClose}>
-        <div className={styles.inner}>
-          <div>
-            <h4 className={styles.title}>{modalValue.setlist.title}</h4>
-          </div>
-          <hr />
-          <div className={styles.descBox}>
-            {modalValue.setlist.description.split('\n').map((line, index) => (
-              <TimelineText
-                key={`${modalValue.setlist.videoId}_row_${index}`}
-                index={index}
-                text={line}
-                videoId={modalValue.setlist.videoId}
-                onClickTimestamp={handleTimestamp}
-              />
-            ))}
-          </div>
+    <Modal id={SETLIST_MODAL_ID} onClose={onClose} title={modalValue.setlist.title}>
+      <div className={styles.inner}>
+        <div className={styles.descBox}>
+          {modalValue.setlist.description.split('\n').map((line, index) => (
+            <TimelineText
+              key={`${modalValue.setlist.videoId}_row_${index}`}
+              index={index}
+              text={line}
+              videoId={modalValue.setlist.videoId}
+              onClickTimestamp={handleTimestamp}
+            />
+          ))}
         </div>
-      </Modal>
-    </RemoveScroll>
+      </div>
+    </Modal>
   );
 });

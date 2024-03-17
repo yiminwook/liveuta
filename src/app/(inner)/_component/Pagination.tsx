@@ -11,7 +11,11 @@ type PaginationProps = {
   count: number;
   /** 페이지당 아이템 수 */
   pageSize: number;
-  /** Pagination 버튼 수 */
+  /**
+   * Pagination 버튼 수
+   *
+   * 3이면 현재페이지를 기준으로 앞뒤로 3개씩 보여준다.
+   */
   sliblingCount: number;
 };
 

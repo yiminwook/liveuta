@@ -1,5 +1,6 @@
-import { globalStyle, style } from '@vanilla-extract/css';
-import { responsive } from '../../../../style/var';
+import { style } from '@vanilla-extract/css';
+import { responsive } from '@/style/var';
+import { global } from '@/style/globalTheme.css';
 
 export const channelCard = style([
   {
@@ -12,7 +13,7 @@ export const channelCard = style([
     transitionProperty: 'scale',
     transitionDuration: '0.2s',
     transitionTimingFunction: 'ease-in-out',
-
+    color: '#000',
     ':hover': {
       scale: 1.02,
     },
@@ -68,9 +69,6 @@ export const link = style({
   display: 'flex',
   gap: '0.5rem',
   alignItems: 'center',
-});
-
-globalStyle(link, {
-  color: 'var(--liveuta-active-color)',
+  color: global.color.salmon,
   fontWeight: 600,
 });

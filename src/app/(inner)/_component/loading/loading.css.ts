@@ -20,7 +20,7 @@ export const MainLoadingWrap = style([
 ]);
 
 export const MainLoadingInner = style({
-  color: global.color.first.light,
+  color: global.color.third.lighter,
   position: 'relative',
   textAlign: 'center',
 });

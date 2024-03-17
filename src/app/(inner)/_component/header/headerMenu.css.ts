@@ -1,17 +1,7 @@
 import { global } from '@/style/globalTheme.css';
+import { openMenu } from '@/style/keyframe.css';
 import { BEZIER_CURVE, BOX_SHADOW } from '@/style/var';
-import { globalStyle, keyframes, style } from '@vanilla-extract/css';
-
-const open = keyframes({
-  '0%': {
-    opacity: 0,
-    transform: 'translateY(-4px)',
-  },
-  '100%': {
-    opacity: 1,
-    transform: 'translateY(0)',
-  },
-});
+import { globalStyle, style } from '@vanilla-extract/css';
 
 export const root = style({});
 
@@ -26,7 +16,7 @@ export const trigger = style({
 });
 
 export const content = style({
-  animation: `${open} 0.3s ease-out`,
+  animation: `${openMenu} 0.3s ease-out`,
   backgroundColor: global.color.fourth[95],
   width: '8.5rem',
   display: 'none',

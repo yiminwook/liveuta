@@ -45,6 +45,7 @@ export const body = style({
   fontFamily: 'Pretendard Variable, Pretendard, -apple-system, sans-serif',
   fontSize: 16,
   backgroundColor: 'var(--liveuta-bg-color)',
+  overflowX: 'hidden',
   '@media': {
     '(prefers-color-scheme: dark)': {
       color: '#fff',

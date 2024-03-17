@@ -51,11 +51,12 @@ export const row = style([
 export const header = style([
   row,
   {
-    borderBottom: '2px solid #ddd',
+    borderBottom: `2px solid ${global.color.third.default}`,
     height: '3rem',
     alignItems: 'center',
     display: 'none',
-    fontWeight: 500,
+    fontWeight: 600,
+    color: global.color.third.dark,
   },
   responsive({
     md: {

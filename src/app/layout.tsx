@@ -9,7 +9,6 @@ import type { Metadata, Viewport } from 'next';
 import Configs from './_component';
 import DefaultHead from './_component/DefaultHead';
 import GoogleTagManager from './_component/GoogleTagManager';
-import GlobalLoading from './(inner)/_component/loading/loading';
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   const cookies = await getCookies();

@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 import ToastBox from './ToastBox';
 import Hotkeys from './Hotkeys';
 import ThemeProvider from './ThemeProvider';
+import { PORTAL_ID } from '@/const';
 
 const ParticleProvider = dynamic(() => import('./ParticleProvider'), { ssr: false });
 
@@ -29,6 +30,7 @@ export default function Configs({ children, cookies }: ConfigsProps) {
               <ParticleProvider />
               <ServiceWorker />
               <Devtools />
+              <div id={PORTAL_ID} />
             </ThemeProvider>
           </GlobalHydrate>
         </ReactQuery>

@@ -1,3 +1,4 @@
+import { global } from '@/style/globalTheme.css';
 import { zIndex } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 
@@ -9,7 +10,7 @@ export const wrap = style([
     left: 0,
     bottom: 0,
     zIndex: zIndex.float.zIndex - 1,
-    backgroundColor: 'var(--liveuta-backdrop-color)',
+    backgroundColor: global.color.backdrop,
     backdropFilter: 'blur(2px)',
   },
 ]);

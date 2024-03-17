@@ -51,3 +51,5 @@ export const EXTERNAL_LINKS = [
   { href: 'https://uta-tools.vercel.app', text: '우타툴즈' },
   { href: 'https://ezgif.com', text: 'EZ GIF' },
 ];
+
+export const PORTAL_ID = 'liveuta-portal';

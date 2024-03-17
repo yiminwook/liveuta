@@ -27,7 +27,7 @@ export const wrap = style([
 
 export const inner = style({
   position: 'absolute',
-  backgroundColor: global.color.first.dark,
+  backgroundColor: global.color.first.light,
   width: '18rem',
   top: 0,
   height: '100%',

@@ -18,7 +18,7 @@ export const floatNav = style([
 ]);
 
 export const floatNavInner = style({
-  background: '#fff',
+  background: global.color.fourth.lighter,
   width: 240,
   height: 240,
   borderRadius: 15,
@@ -34,7 +34,7 @@ export const scrollUpButton = style({
   bottom: 15,
   right: 15,
   cursor: 'pointer',
-  color: global.color.first.dark,
+  color: global.color.third.dark,
 });
 
 export const toggleButton = style([

@@ -1,15 +1,18 @@
-import { ITEMS_PER_PAGE } from '@/const';
 import { ChannelSheetDataType, combineChannelData } from '@inner/_lib/combineChannelData';
 import { getAllChannel } from '@/model/mongoDB/getAllChannel';
 import { notFound } from 'next/navigation';
 import Home from './_component/Home';
 import { disconnectMongoDB } from '@/model/mongoDB';
+import getPaginationRange from '@inner/_lib/getPagenationRange';
 
-const getChannelData = async () => {
+const getChannelData = async (page: number) => {
   try {
+    if (Number.isNaN(page)) {
+      throw new Error('searchParams Page가 숫자가 아님');
+    }
     /* Google spread sheet API */
     const { totalLength, channels } = await getAllChannel();
-    const sliceData = channels.slice(0, ITEMS_PER_PAGE);
+    const sliceData = channels.slice(...getPaginationRange(page));
 
     /* Youtube API */
     const channelSheetData: ChannelSheetDataType = {};
@@ -27,6 +30,11 @@ const getChannelData = async () => {
     const combinedSearchDataValues = await combineChannelData(channelSheetData);
 
     disconnectMongoDB();
+
+    if (combinedSearchDataValues.length === 0) {
+      throw new Error('조회된 데이터 없음');
+    }
+
     return {
       totalLength,
       contents: combinedSearchDataValues,
@@ -37,7 +45,14 @@ const getChannelData = async () => {
   }
 };
 
-export default async function Page() {
-  const { totalLength, contents } = await getChannelData();
-  return <Home totalLength={totalLength} contents={contents} />;
+interface Props {
+  searchParams: {
+    page?: string;
+  };
+}
+
+export default async function Page({ searchParams }: Props) {
+  const page = Number(searchParams.page || 1);
+  const { totalLength, contents } = await getChannelData(page);
+  return <Home totalLength={totalLength} contents={contents} currentPage={page} />;
 }
