@@ -62,7 +62,6 @@ const globalVars = {
     salmon: createVar('salmon'),
     hoverSalmon: createVar('hover-salmon'),
     cardBg: createVar('card-bg'),
-    skyblue: createVar('skyblue'),
     lightBlue: createVar('light-blue'),
 
     // 가변색상
@@ -75,7 +74,6 @@ const globalVars = {
     text: {
       default: createVar('txt', 'default'),
       light: createVar('txt', 'light'),
-      dark: createVar('txt', 'dark'),
       active: createVar('txt', 'active'),
     },
   },
@@ -126,7 +124,6 @@ export const theme1: GlobalTheme = {
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
     cardBg: '#f4f4f5',
-    skyblue: '#00cbfe',
     lightBlue: '#d8f2ff',
 
     /** 핑크 */
@@ -172,7 +169,6 @@ export const theme1: GlobalTheme = {
     text: {
       default: '#000',
       light: '#fff',
-      dark: '#f4f4f5',
       active: '#e06e61',
     },
   },
@@ -195,7 +191,6 @@ export const theme2: GlobalTheme = {
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
     cardBg: '#f4f4f5',
-    skyblue: '#00cbfe',
     lightBlue: '#d8f2ff',
 
     /** 연녹색 */
@@ -241,7 +236,6 @@ export const theme2: GlobalTheme = {
     text: {
       default: '#000',
       light: '#fff',
-      dark: '#f4f4f5',
       active: '#279e27',
     },
   },
@@ -264,7 +258,6 @@ export const theme3: GlobalTheme = {
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
     cardBg: '#f4f4f5',
-    skyblue: '#00cbfe',
     lightBlue: '#d8f2ff',
 
     /** 하늘색 */
@@ -309,7 +302,6 @@ export const theme3: GlobalTheme = {
     text: {
       default: '#000',
       light: '#fff',
-      dark: '#f4f4f5',
       active: '#ff6e2b',
     },
   },
@@ -332,8 +324,8 @@ export const theme4: GlobalTheme = {
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
     cardBg: '#f4f4f5',
-    skyblue: '#00cbfe',
     lightBlue: '#d8f2ff',
+
     /** 진한 남색 */
     first: brandColor([
       '#0D1524',
@@ -376,7 +368,6 @@ export const theme4: GlobalTheme = {
     text: {
       default: '#fff',
       light: '#cccccc',
-      dark: '#f4f4f5',
       active: '#FFD700',
     },
   },
@@ -399,9 +390,9 @@ export const theme5: GlobalTheme = {
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
     cardBg: '#f4f4f5',
-    skyblue: '#00cbfe',
     lightBlue: '#d8f2ff',
 
+    /** 검정 */
     first: brandColor([
       '#251C1C',
       '#322929',
@@ -413,6 +404,7 @@ export const theme5: GlobalTheme = {
       'rgba(37, 28, 28, 0.75)',
       'rgba(37, 28, 28, 0.95)',
     ]),
+    /** 진한 갈색 */
     second: brandColor([
       '#341809',
       '#412516',
@@ -442,7 +434,6 @@ export const theme5: GlobalTheme = {
     text: {
       default: '#fff',
       light: '#cccccc',
-      dark: '#f4f4f5',
       active: '#FF0000',
     },
   },
