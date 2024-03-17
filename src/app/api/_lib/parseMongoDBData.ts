@@ -14,13 +14,13 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => 
     const { timestamp, korTime } = stringToTime(doc.ScheduledTime);
     const interval = getInterval(timestamp);
 
-    const videoId = doc.URL.replace('https://www.youtube.com/watch?v=', '');
     const replacedTitle = replaceParentheses(doc.Title);
 
     const data: ContentsDataType = {
       title: replacedTitle,
       channelName: doc.ChannelName,
-      videoId: videoId,
+      videoId: doc.VideoID,
+      channelId: doc.ChannelID,
       timestamp: timestamp,
       korTime: korTime,
       isStream: doc.broadcastStatus as isStream,

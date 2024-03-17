@@ -19,11 +19,12 @@ export type ContentDocument = {
   URL: string;
   ChannelName: string;
   ScheduledTime: dayjs.Dayjs;
-  ThumbnailURL: string;
   broadcastStatus: string;
   Hide: isStream;
   isVideo: 'TRUE' | 'FALSE';
   concurrentViewers: number;
+  VideoID: string;
+  ChannelID: string;
 };
 
 export type ContentsLength = {
@@ -36,6 +37,7 @@ export type ContentsDataType = {
   title: string;
   channelName: string;
   videoId: string;
+  channelId: string;
   timestamp: number;
   isStream: isStream;
   korTime: string;

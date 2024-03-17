@@ -28,7 +28,6 @@ export async function GET() {
 
     const { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
     const { daily, all } = parseAllData(scheduleData); // Need to be revised
-
     return { scheduled, live, daily, all };
   } catch (error) {
     console.error('Schedule ServerAction', error);
