@@ -23,8 +23,8 @@ export type ContentDocument = {
   Hide: isStream;
   isVideo: 'TRUE' | 'FALSE';
   concurrentViewers: number;
-  VideoID: string;
-  ChannelID: string;
+  VideoId: string;
+  ChannelId: string;
 };
 
 export type ContentsLength = {

@@ -19,8 +19,8 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => 
     const data: ContentsDataType = {
       title: replacedTitle,
       channelName: doc.ChannelName,
-      videoId: doc.VideoID,
-      channelId: doc.ChannelID,
+      videoId: doc.VideoId,
+      channelId: doc.ChannelId,
       timestamp: timestamp,
       korTime: korTime,
       isStream: doc.broadcastStatus as isStream,
