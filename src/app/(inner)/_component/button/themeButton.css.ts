@@ -8,10 +8,10 @@ export const button = style({
   padding: '0.5rem',
   borderRadius: 5,
   backgroundColor: global.color.third.default,
-  color: global.color.third.default,
+  color: '#fff',
   transition: `background-color 0.2s ${BEZIER_CURVE}`,
   ':hover': {
-    backgroundColor: global.color.third.light,
+    backgroundColor: global.color.third.lighter,
   },
 });
 

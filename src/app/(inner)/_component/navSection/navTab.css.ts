@@ -29,7 +29,7 @@ export const link = style([
       '&[data-disabled]': {
         cursor: 'default',
         backgroundColor: global.color.third.default,
-        color: global.color.fourth.default,
+        color: '#fff',
       },
     },
   },

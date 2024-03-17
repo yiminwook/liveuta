@@ -37,7 +37,7 @@ export const nav = style([
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    color: global.color.text.light,
+    color: global.color.text.active,
     padding: '0 0.5rem',
   },
   responsive({

@@ -24,12 +24,12 @@ export const input = style({
 
 export const submitButton = style({
   display: 'flex',
-  backgroundColor: global.color.first.default,
+  backgroundColor: global.color.third.default,
   borderRadius: '100%',
   padding: '0.25rem',
-  color: global.color.text.light,
+  color: '#fff',
   transition: `background-color 0.8s ${BEZIER_CURVE}`,
   ':hover': {
-    backgroundColor: global.color.first.light,
+    backgroundColor: global.color.third.lighter,
   },
 });

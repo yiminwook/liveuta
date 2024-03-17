@@ -9,7 +9,7 @@ export const navSection = style([
     justifyContent: 'space-between',
     zIndex: 2,
     display: 'flex',
-    color: global.color.second.default,
+    color: global.color.second.dark,
     fontWeight: 500,
     maxWidth: BREAK_POINT.full,
     padding: '0.5rem',
@@ -41,7 +41,7 @@ export const navButton = style({
   transition: `background-color 0.2s ${BEZIER_CURVE}`,
   ':hover': {
     backgroundColor: global.color.third.default,
-    color: global.color.text.light,
+    color: '#fff',
   },
 });
 
@@ -78,7 +78,7 @@ export const sideButton = style({
   transition: `background-color 0.2s ${BEZIER_CURVE}`,
   ':hover': {
     backgroundColor: global.color.third.default,
-    color: global.color.text.light,
+    color: '#fff',
   },
 });
 
@@ -93,10 +93,10 @@ export const sideItem = style({
   selectors: {
     '&:hover': {
       backgroundColor: global.color.third.default,
-      color: global.color.text.light,
+      color: '#fff',
     },
     '&.active': {
-      backgroundColor: global.color.text.light,
+      backgroundColor: '#fff',
       color: global.color.third.default,
       fontWeight: 600,
       cursor: 'default',

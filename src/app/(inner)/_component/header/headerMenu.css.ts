@@ -18,6 +18,8 @@ export const root = style({});
 export const trigger = style({
   width: '8.5rem',
   height: '3.5rem',
+  fontWeight: 600,
+  fontSize: '1.05rem',
   ':focus': {
     outline: 'none',
   },

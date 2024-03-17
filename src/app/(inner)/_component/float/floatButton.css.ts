@@ -48,7 +48,7 @@ export const toggleButton = style([
     width: 52,
     height: 52,
     padding: 2,
-    color: global.color.text.light,
+    color: '#fff',
     backgroundColor: global.color.second.default,
     borderRadius: '100%',
     border: 'none',

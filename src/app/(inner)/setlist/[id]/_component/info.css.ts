@@ -43,6 +43,7 @@ export const navItem = style({
   fontWeight: 600,
   borderRadius: 5,
   verticalAlign: 'middle',
+  color: '#000',
 });
 
 export const youtubeButton = style({});

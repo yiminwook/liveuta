@@ -63,7 +63,7 @@ export const footer = style([
   {
     height: '5rem',
     paddingBottom: 'env(safe-area-inset-bottom)',
-    color: global.color.fourth.default,
+    color: '#fff',
     fontWeight: 600,
   },
 ]);
