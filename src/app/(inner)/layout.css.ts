@@ -7,7 +7,7 @@ export const main = style([
     display: 'flex',
     flexDirection: 'column',
     maxWidth: BREAK_POINT['2xl'],
-    minHeight: 'calc(100dvh - 3.5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
+    minHeight: 'calc(100dvh - 3.5rem - env(safe-area-inset-top))',
     margin: '0 auto',
     color: global.color.text.default,
   },
@@ -63,7 +63,6 @@ export const footer = style([
   flexCenter,
   {
     height: '5rem',
-    paddingBottom: 'env(safe-area-inset-bottom)',
     color: '#fff',
     fontWeight: 600,
   },
