@@ -24,7 +24,7 @@ export const background = style({
   transition: `background-color 0.2s ${BEZIER_CURVE}, background-image 0.2s ${BEZIER_CURVE}`,
 });
 
-export const backgroundBase = style({
+export const sideBackgroundBase = style({
   width: '10%',
   backgroundSize: 'cover',
   position: 'fixed',
@@ -32,6 +32,7 @@ export const backgroundBase = style({
   height: '100lvh',
   margin: 0,
   opacity: 0,
+  zIndex: -1,
   transition: 'opacity 0.3s linear',
   ...responsive({
     '2xl': {
@@ -41,7 +42,7 @@ export const backgroundBase = style({
 });
 
 export const backgroundRight = style([
-  backgroundBase,
+  sideBackgroundBase,
   {
     right: 0,
     backgroundImage: global.background.right.url,
@@ -50,7 +51,7 @@ export const backgroundRight = style([
 ]);
 
 export const backgroundLeft = style([
-  backgroundBase,
+  sideBackgroundBase,
   {
     left: 0,
     backgroundImage: global.background.left.url,
