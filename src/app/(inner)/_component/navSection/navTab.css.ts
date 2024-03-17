@@ -4,35 +4,31 @@ import { style } from '@vanilla-extract/css';
 
 export const wrap = style({
   display: 'flex',
-  justifyContent: 'space-around',
-  width: '13rem',
   overflow: 'hidden',
   borderRadius: 5,
   boxShadow: BOX_SHADOW,
 });
 
-export const list = style({
-  width: '100%',
-});
-
 export const link = style({
-  display: 'inline-block',
+  position: 'relative',
   backgroundColor: '#fff',
-  width: '100%',
-  lineHeight: 2.4,
+  flex: 1,
+  width: '3.5rem',
+  padding: '0.25rem 0',
   textAlign: 'center',
   transition: 'background-color 0.2s linear',
+  cursor: 'pointer',
   ':hover': {
-    backgroundColor: global.color.text.light,
-    color: '#fff',
+    color: global.color.second.darken,
   },
   selectors: {
     '&:focus-visible': {
       outlineOffset: -4,
     },
-    '&.active': {
-      backgroundColor: global.color.text.light,
-      color: global.color.text.default,
+    '&[data-disabled]': {
+      cursor: 'default',
+      backgroundColor: global.color.third.default,
+      color: global.color.fourth.default,
     },
   },
 });

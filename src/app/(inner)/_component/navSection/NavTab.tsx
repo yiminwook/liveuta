@@ -1,8 +1,6 @@
 'use client';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import cx from 'classnames';
-
+import { SegmentGroup } from '@ark-ui/react';
+import { usePathname, useRouter } from 'next/navigation';
 import * as styles from './navTab.css';
 
 const NAV_LINKS = [
@@ -13,19 +11,26 @@ const NAV_LINKS = [
 ];
 
 export default function NavTab() {
+  const router = useRouter();
   const pathName = usePathname();
   return (
-    <ul className={styles.wrap}>
-      {NAV_LINKS.map((link) => {
-        const isActive = pathName === link.herf;
-        return (
-          <li className={styles.list} key={`navtap_${link.herf}`}>
-            <Link className={cx(styles.link, isActive && 'active')} href={link.herf}>
-              {link.text}
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
+    <SegmentGroup.Root
+      className={styles.wrap}
+      value={pathName}
+      onValueChange={({ value }) => router.push(value)}
+    >
+      {NAV_LINKS.map((link) => (
+        <SegmentGroup.Item
+          tabIndex={0}
+          className={styles.link}
+          key={`nav-tab-${link.text}`}
+          value={link.herf}
+          disabled={pathName === link.herf}
+        >
+          <SegmentGroup.ItemText>{link.text}</SegmentGroup.ItemText>
+          <SegmentGroup.ItemControl />
+        </SegmentGroup.Item>
+      ))}
+    </SegmentGroup.Root>
   );
 }
