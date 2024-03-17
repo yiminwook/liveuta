@@ -34,7 +34,7 @@ export const row = style([
   {
     boxSizing: 'border-box',
     display: 'flex',
-    borderBottom: '1px solid #ddd',
+    borderBottom: '1px solid #fff',
     transition: `background-color 0.2s ${BEZIER_CURVE}`,
     padding: '0 0.5rem',
     selectors: {
@@ -51,7 +51,7 @@ export const row = style([
 export const header = style([
   row,
   {
-    borderBottom: `2px solid ${global.color.third.default}`,
+    borderBottom: '2px solid #fff',
     height: '3rem',
     alignItems: 'center',
     display: 'none',
@@ -108,15 +108,15 @@ export const mobileRow = style([
         bottom: 0,
         left: '50%',
         transform: 'translateX(-50%)',
-        width: '90%',
-        borderBottom: '1px solid #ddd',
+        width: '95%',
+        borderBottom: '1px solid #fff',
         content: '',
       },
       '&.hover': {
         cursor: 'pointer',
       },
       '&.hover:hover': {
-        backgroundColor: 'rgba(255, 255, 255, 1)',
+        backgroundColor: global.color.first.lighter,
       },
     },
   },
