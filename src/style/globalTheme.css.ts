@@ -356,7 +356,7 @@ export const theme4: GlobalTheme = {
       'rgba(70, 109, 182, 0.25)',
       'rgba(70, 109, 182, 0.5)',
       'rgba(70, 109, 182, 0.75)',
-      'rgba(70, 109, 182, 0.95',
+      'rgba(70, 109, 182, 0.95)',
     ]),
     /** 노랑 */
     third: brandColor([
