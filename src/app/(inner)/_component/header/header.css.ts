@@ -95,6 +95,7 @@ export const loginButton = style([
     borderRadius: 5,
     padding: '0.25rem 0.5rem',
     backgroundColor: global.color.third.default,
+    color: '#fff',
     transition: `background-color 0.8s ${BEZIER_CURVE}`,
     boxShadow: BOX_SHADOW,
     ':hover': {

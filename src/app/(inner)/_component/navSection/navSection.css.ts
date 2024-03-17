@@ -48,7 +48,7 @@ export const navButton = style({
 export const side = style([
   {
     position: 'fixed',
-    top: 'calc(env(safe-area-inset-top) + 4.5rem)',
+    top: 'calc(env(safe-area-inset-top) + 4rem)',
     right: '-190%',
     width: '8rem',
     backgroundColor: '#fff',
@@ -66,6 +66,9 @@ export const side = style([
   responsive({
     sm: {
       width: '20%',
+    },
+    md: {
+      top: 'calc(env(safe-area-inset-top) + 4.5rem)',
     },
     xl: {
       width: '10%',
