@@ -59,7 +59,7 @@ export default function Row({ setlist, channel, order }: RowProps) {
   return (
     <div className={cx(styles.row, 'hover')} onClick={openModal}>
       <div className={cx(styles.cell)}>
-        <button onClick={handleImageClick}>
+        <button className={styles.imageButton} onClick={handleImageClick}>
           <div className={styles.thumbnailBox}>
             <img src={thumbnailUrl} alt={replacedTitle} />
           </div>
