@@ -21,6 +21,7 @@ export const inner = style([
     backdropFilter: 'blur(8px)',
     transition: `background-color 0.5s ${BEZIER_CURVE}`,
     boxShadow: '0px 1px 2px 0 rgba(56, 52, 52, 0.4)',
+    willChange: 'background-color',
     selectors: {
       '&:hover': {
         backgroundColor: `${global.color.first[50]} !important`,
