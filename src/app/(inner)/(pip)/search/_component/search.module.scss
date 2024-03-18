@@ -19,7 +19,7 @@
   margin: auto;
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--liveuta-default-text-color);
+  color: var(--liveuta-txt-default);
 
   span {
     font-weight: 500;
@@ -27,7 +27,7 @@
 }
 
 .search-section {
-  background-color: var(--liveuta-half-transparent-color);
+  background-color: var(--liveuta-second-default);
 
   & > div:nth-child(1) {
     margin: 0 auto;
@@ -36,6 +36,7 @@
     padding: 3rem 0;
 
     .search-input {
+      color: #000;
       input {
         &::placeholder {
           font-size: 1.25rem;
@@ -65,7 +66,8 @@
     width: 75%;
     margin: auto;
     padding: 2rem 1rem;
-    background-color: var(--liveuta-half-card-bg-color);
+    color: #000;
+    background-color: var(--liveuta-card-bg);
     border-radius: 10px;
     @include box-shadow();
 
@@ -99,7 +101,7 @@
   }
 
   > p {
-    color: var(--liveuta-default-color);
+    color: var(--liveuta-txt-default);
     font-weight: 600;
     font-size: 1.25rem;
     text-align: center;

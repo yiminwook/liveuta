@@ -33,11 +33,11 @@ function Input({
         <input {...props} type={type} className={styles.input} value={value} onChange={onChange} />
         {value ? (
           <button className={styles.resetButton} type="button" onClick={onReset}>
-            <GrFormClose color="inherit" size="1rem" />
+            <GrFormClose color="#000" size="1rem" />
           </button>
         ) : null}
         <button className={styles.submitButton} type="submit">
-          <IoMdMusicalNote color="inherit" size="1.5rem" />
+          <IoMdMusicalNote color="#fff" size="1.5rem" />
         </button>
       </div>
     </form>

@@ -130,13 +130,13 @@ globalStyle('input::placeholder', {
   fontFamily: 'inherit',
 });
 
-//자동입력 스타일 제거
+//자동입력 스타일 제거, 흰그림자로 스타일을 가린다.
 globalStyle(
   'input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active',
   {
     WebkitTextFillColor: 'black',
-    WebkitBoxShadow: '0 0 0 0px 1000px #fff inset',
-    boxShadow: '0 0 0 0px 1000px #fff inset',
+    WebkitBoxShadow: '0 0 0 1000px #fff inset',
+    boxShadow: '0 0 0 1000px #fff inset',
   },
 );
 
