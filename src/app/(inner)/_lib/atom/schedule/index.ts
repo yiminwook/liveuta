@@ -22,7 +22,7 @@ export const scheduleAtom = atom<ScheduleAPIReturntype>({
   all: { contents: [], length: { total: 0, video: 0, stream: 0 } },
 });
 
-export const filterAtom = atom<keyof ScheduleAPIReturntype>('all');
+export const filterAtom = atom<keyof ScheduleAPIReturntype>('scheduled');
 export const selectAtom = atom<SelectType>('all');
 
 export const selectedScheduleAtom = atom((get): ContentsDataReturnType => {

@@ -1,19 +1,21 @@
 'use client';
 import { SelectType } from '@/type';
 import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
+import { getAllSchedule } from '@inner/_action/schedule';
 import { schedule } from '@inner/_lib/atom';
-import * as action from '@inner/_action/schedule';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
+import { Session } from 'next-auth';
 import { useEffect, useLayoutEffect } from 'react';
 
 type DataObserver = {
+  session: Session | null;
   children: React.ReactNode;
   filter: keyof ScheduleAPIReturntype;
   select: SelectType;
 };
 
-export default function DataObserver({ children, filter, select }: DataObserver) {
+export default function DataObserver({ children, filter, select, session }: DataObserver) {
   const [key] = useAtom(schedule.scheduleKeyAtom);
   const [option] = useAtom(schedule.scheduleOptionAtom);
   const setSchedule = useSetAtom(schedule.scheduleAtom);
@@ -33,7 +35,11 @@ export default function DataObserver({ children, filter, select }: DataObserver)
   // schedule observer
   const { data } = useQuery({
     queryKey: key,
-    queryFn: () => action.GET(),
+    queryFn: () =>
+      getAllSchedule({ accessToken: session?.user.accessToken }).then((res) => {
+        if (!res.result) throw new Error(res.message);
+        return res.result;
+      }),
     ...option,
   });
 

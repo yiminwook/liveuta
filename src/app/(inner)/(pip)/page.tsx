@@ -8,7 +8,7 @@ type Props = {
 export default async function Page({ searchParams }: Props) {
   let filter: keyof ScheduleAPIReturntype = searchParams.tab || 'scheduled';
 
-  if (['scheduled', 'live', 'daily', 'all'].includes(filter) === false) {
+  if (!['scheduled', 'live', 'daily', 'all'].includes(filter)) {
     filter = 'scheduled';
   }
 
