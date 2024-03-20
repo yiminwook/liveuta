@@ -5,8 +5,8 @@ export const GET_MEMBER = `
 `;
 
 export const POST_MEMBER = `
-  INSERT INTO MEMBER (EMAIL, PROVIDER)
-  VALUES (:email, :provider)
+  INSERT INTO MEMBER (ID, EMAIL, PROVIDER)
+  VALUES (ADMIN.MEMBER_SEQ.NEXTVAL, :email, :provider)
 `;
 
 export const UPDATE_MEMBER = `
