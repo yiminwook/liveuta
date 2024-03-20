@@ -27,9 +27,6 @@ export default function ScheduleCard({ session, content, index }: ScheduleCardPr
       case 'TRUE':
         streamModifer = 'stream';
         break;
-      case 'NULL':
-        streamModifer = '';
-        break;
       default:
         streamModifer = '';
     }

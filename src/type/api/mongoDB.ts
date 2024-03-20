@@ -62,3 +62,6 @@ export type ParseAllDataReturnType = {
 };
 
 export type ScheduleAPIReturntype = ParseAllDataReturnType & ParseScheduledDataReturnType;
+
+export type ChannelData = Omit<ChannelDocument, '_id'>;
+export type ChannelsData = Record<string, ChannelData>;

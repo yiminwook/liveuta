@@ -14,6 +14,7 @@ import { MdBlock, MdOpenInNew } from 'react-icons/md';
 import { toast } from 'sonner';
 import CopyButton from '../button/CopyButton';
 import * as styles from './card.css';
+import { postBlacklist } from '@inner/_action/blacklist';
 
 type CardNavProps = {
   content: ContentsDataType;
@@ -42,13 +43,17 @@ export default function CardNav({ content, onClickBlock, session }: CardNavProps
 
   const mutateBlock = useMutation({
     mutationKey: ['block', content.videoId],
-    // mutationFn: action.POST,
-    mutationFn: async () => 'ok',
-    onSuccess: (response) => {
-      onClickBlock();
+    mutationFn: postBlacklist,
+    onSuccess: (res) => {
+      if (!res.result) {
+        toast.error(res.message);
+      } else {
+        toast.success(res.message);
+        onClickBlock();
+      }
     },
-    onError: (error) => {
-      toast.error(error.message);
+    onError: () => {
+      toast.error('서버에러가 발생했습니다. 잠시후 다시 시도해주세요.');
     },
   });
 
@@ -74,14 +79,14 @@ export default function CardNav({ content, onClickBlock, session }: CardNavProps
   };
 
   const handleBlock = async (e: MouseEvent<HTMLButtonElement>) => {
-    return toast.info('서비스 준비중입니다.');
     if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
 
-    // mutateBlock.mutate({
-    //   accessToken: session.user.accessToken,
-    //   channelId: 'UCWCc8tO-uUl_7SJXIKJACMw',
-    // });
-    mutateBlock.mutate();
+    if (confirm('해당 채널을 블럭 하시겠습니까?')) {
+      mutateBlock.mutate({
+        accessToken: session.user.accessToken,
+        channelId: content.channelId,
+      });
+    }
   };
 
   const openStream = (e: MouseEvent<HTMLButtonElement>) => {

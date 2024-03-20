@@ -17,7 +17,7 @@ export default async function Home({ filter }: HomeProps) {
   const session = await auth();
 
   return (
-    <DataObserver filter={filter} select={select}>
+    <DataObserver session={session} filter={filter} select={select}>
       <NavSection />
       <TopSection filter={filter} />
       <ScheduleSection session={session} />
