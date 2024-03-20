@@ -1,6 +1,6 @@
 /** 괄호삭제 */
 export const replaceParentheses = (string: string) => {
-  return string.replace(/\【(.*?)\】|\〖(.*?)\〗|\[(.*?)\]|\((.*?)\)/gi, '');
+  return string.replace(/\【(.*?)\】|\〖(.*?)\〗|\[(.*?)\]|\((.*?)\)/gi, '').trim();
 };
 
 /** 특수문자 입력방지, 띄어쓰기는 한번만 */
