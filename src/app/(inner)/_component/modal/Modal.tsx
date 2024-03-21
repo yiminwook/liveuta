@@ -11,26 +11,21 @@ interface ModalProps {
   title?: string;
   children: ReactNode;
   style?: CSSProperties;
-  onClose: () => void;
+  onClose: (e?: any) => void;
 }
 
 const Modal = ({ id, children, title, onClose }: ModalProps) => {
-  const { enableScope, disableScope } = useHotkeysContext();
+  const { enableScope, disableScope, enabledScopes } = useHotkeysContext();
 
-  useHotkeys(
-    'esc',
-    (e) => {
-      e.stopPropagation();
-      onClose();
-    },
-    {
-      scopes: id,
-    },
-  );
+  useHotkeys('esc', onClose, {
+    enabled: enabledScopes.at(-1) === id,
+    preventDefault: true,
+    scopes: [id],
+  });
 
   useHotkeys('space', (e) => {}, {
     preventDefault: true,
-    scopes: id,
+    scopes: [id],
   });
 
   useEffect(() => {
@@ -40,7 +35,7 @@ const Modal = ({ id, children, title, onClose }: ModalProps) => {
   }, []);
 
   const handleClose = ({ open }: DialogOpenChangeDetails) => {
-    if (!open) onClose();
+    if (!open) onClose(open);
   };
 
   return (
@@ -52,6 +47,7 @@ const Modal = ({ id, children, title, onClose }: ModalProps) => {
         unmountOnExit={true}
         preventScroll={false}
         closeOnInteractOutside={true}
+        closeOnEscapeKeyDown={false}
       >
         <Backdrop activeParticles={false} />
         <Dialog.Positioner className={styles.position}>

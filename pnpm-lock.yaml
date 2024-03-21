@@ -137,6 +137,9 @@ dependencies:
   universal-cookie:
     specifier: ^4.0.4
     version: 4.0.4
+  uuid:
+    specifier: ^9.0.1
+    version: 9.0.1
 
 devDependencies:
   '@next/bundle-analyzer':
@@ -172,6 +175,9 @@ devDependencies:
   '@types/react-outside-click-handler':
     specifier: ^1.3.3
     version: 1.3.3
+  '@types/uuid':
+    specifier: ^9.0.8
+    version: 9.0.8
   '@vanilla-extract/next-plugin':
     specifier: ^2.3.7
     version: 2.3.7(@types/node@18.19.0)(next@14.1.3)(sass@1.71.1)(webpack@5.90.3)
@@ -3974,6 +3980,10 @@ packages:
       '@types/mime': 3.0.4
       '@types/node': 18.19.0
     dev: false
+
+  /@types/uuid@9.0.8:
+    resolution: {integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==}
+    dev: true
 
   /@types/webidl-conversions@7.0.3:
     resolution: {integrity: sha512-CiJJvcRtIgzadHCYXw7dqEnMNRjhGZlYK05Mj9OyktqV8uVT8fD2BFOB7S1uwBE3Kj2Z+4UyPmFw/Ixgw/LAlA==}

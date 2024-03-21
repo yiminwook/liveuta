@@ -1,9 +1,9 @@
-import Modal from './Modal';
-import { MouseEvent } from 'react';
 import useTheme from '@/hook/useTheme';
+import { ModalBaseProps } from '@/model/modal/ModalController';
 import { ThemeType } from '@/type';
 import { gtagClick } from '@inner/_lib/gtag';
-import portal from '@/model/portal';
+import { MouseEvent } from 'react';
+import Modal from './Modal';
 import * as styles from './themeModal.css';
 
 interface ThemeModalButtonProps {
@@ -21,13 +21,9 @@ function ThemeModalButton({ primaryColor, secondaryColor }: ThemeModalButtonProp
   );
 }
 
-interface ThemeModalProps {
-  onClose: () => void;
-}
-
 const THEME_MODAL_ID = 'themeModal';
 
-export default portal(THEME_MODAL_ID, function ThemeModal({ onClose }: ThemeModalProps) {
+export default function ThemeModal({ onClose }: ModalBaseProps) {
   const { setTheme } = useTheme();
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -68,4 +64,4 @@ export default portal(THEME_MODAL_ID, function ThemeModal({ onClose }: ThemeModa
       </div>
     </Modal>
   );
-});
+}

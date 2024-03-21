@@ -19,23 +19,17 @@ export default function ToggleButton({ isOpen, onClick }: ToggleButtonProps) {
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
   const status = useScheduleStatus();
-  const { enableScope, disableScope } = useHotkeysContext();
+  const { enableScope, disableScope, enabledScopes } = useHotkeysContext();
 
-  useHotkeys(
-    'esc',
-    (e) => {
-      e.stopPropagation();
-      onClick();
-    },
-    {
-      enabled: isOpen,
-      scopes: ['float'],
-    },
-  );
+  useHotkeys('esc', onClick, {
+    enabled: enabledScopes.at(-1) === 'float',
+    preventDefault: true,
+    scopes: ['float'],
+  });
 
   useHotkeys('space', (e) => {}, {
-    preventDefault: true,
     enabled: isOpen,
+    preventDefault: true,
     scopes: ['float'],
   });
 

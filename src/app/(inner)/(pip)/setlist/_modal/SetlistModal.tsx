@@ -1,23 +1,28 @@
-'use client';
-import portal from '@/model/portal';
-import Modal from '@inner/_component/modal/Modal';
-import { setlistModalAtom } from '../_lib/atom';
-import TimelineText from '@inner/_component/TimestampText';
-import * as styles from '../_component/setlistModal.css';
-import { RemoveScroll } from 'react-remove-scroll';
-import { isMobile } from 'react-device-detect';
-import { useAtom } from 'jotai';
-import { useRouter } from 'next/navigation';
+import { ModalProps } from '@/model/modal/ModalController';
+import { ChannelDataset } from '@/model/mongoDB/getAllChannel';
+import { Setlist } from '@/model/oracleDB/setlist/service';
 import { generateVideoUrl } from '@/model/youtube/url';
+import TimelineText from '@inner/_component/TimestampText';
+import Modal from '@inner/_component/modal/Modal';
+import { useRouter } from 'next/navigation';
+import { isMobile } from 'react-device-detect';
+import * as styles from '../_component/setlistModal.css';
+
+type SetlistModalProps = {
+  setlist: Setlist;
+  channel?: ChannelDataset['channel_id'];
+  order: 'broadcast' | 'create';
+};
 
 const SETLIST_MODAL_ID = 'setlistModal';
 
-export default portal(SETLIST_MODAL_ID, function SetlistModal() {
+export default function SetlistModal({
+  setlist,
+  channel,
+  order,
+  onClose,
+}: ModalProps<SetlistModalProps>) {
   const router = useRouter();
-  const [modalValue, setModalValue] = useAtom(setlistModalAtom);
-  const onClose = () => setModalValue(null);
-
-  if (!modalValue) return null;
 
   const handleTimestamp = ({ videoId, timestamp }: { videoId: string; timestamp: number }) => {
     if (isMobile) {
@@ -29,15 +34,15 @@ export default portal(SETLIST_MODAL_ID, function SetlistModal() {
   };
 
   return (
-    <Modal id={SETLIST_MODAL_ID} onClose={onClose} title={modalValue.setlist.title}>
+    <Modal id={SETLIST_MODAL_ID} onClose={onClose} title={setlist.title}>
       <div className={styles.inner}>
         <div className={styles.descBox}>
-          {modalValue.setlist.description.split('\n').map((line, index) => (
+          {setlist.description.split('\n').map((line, index) => (
             <TimelineText
-              key={`${modalValue.setlist.videoId}_row_${index}`}
+              key={`${setlist.videoId}_row_${index}`}
               index={index}
               text={line}
-              videoId={modalValue.setlist.videoId}
+              videoId={setlist.videoId}
               onClickTimestamp={handleTimestamp}
             />
           ))}
@@ -45,4 +50,4 @@ export default portal(SETLIST_MODAL_ID, function SetlistModal() {
       </div>
     </Modal>
   );
-});
+}

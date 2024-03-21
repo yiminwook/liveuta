@@ -1,15 +1,14 @@
-import Image from 'next/image';
-import Modal from '@inner/_component/modal/Modal';
-import { openWindow } from '@inner/_lib/windowEvent';
-import CopyButton from '@inner/_component/button/CopyButton';
 import { DEFAULT_BLUR_BASE64 } from '@/const';
-import { MouseEvent } from 'react';
+import { ModalProps } from '@/model/modal/ModalController';
+import CopyButton from '@inner/_component/button/CopyButton';
+import Modal from '@inner/_component/modal/Modal';
 import { gtagClick, gtagClickAtag } from '@inner/_lib/gtag';
-import portal from '@/model/portal';
+import { openWindow } from '@inner/_lib/windowEvent';
+import Image from 'next/image';
+import { MouseEvent } from 'react';
 import * as styles from './channelCardModal.css';
 
 type ChannelCardModalProp = {
-  onClose: () => void;
   channelName: string;
   title: string;
   imageURL: string;
@@ -21,75 +20,72 @@ type ChannelCardModalProp = {
 
 const CHANNEL_MODAL_ID = 'channelCardModal';
 
-export default portal(
-  CHANNEL_MODAL_ID,
-  function ChannelCardModal({
-    title,
-    channelName,
-    imageURL,
-    url,
-    videoCount,
-    subscribe,
-    description,
-    onClose,
-  }: ChannelCardModalProp) {
-    const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) =>
-      gtagClickAtag(e, {
-        target: CHANNEL_MODAL_ID,
-        content: channelName,
-        detail: title,
-        action: 'atag',
-      });
+export default function ChannelCardModal({
+  title,
+  channelName,
+  imageURL,
+  url,
+  videoCount,
+  subscribe,
+  description,
+  onClose,
+}: ModalProps<ChannelCardModalProp>) {
+  const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) =>
+    gtagClickAtag(e, {
+      target: CHANNEL_MODAL_ID,
+      content: channelName,
+      detail: title,
+      action: 'atag',
+    });
 
-    return (
-      <Modal id={CHANNEL_MODAL_ID} onClose={onClose}>
-        <div className={styles.content}>
-          <div className={styles.profile}>
-            <a href={url} onClick={linkClickEvent}>
-              <div className={styles.itemContainer}>
-                <Image
-                  src={imageURL}
-                  alt={`${channelName}의 채널 이미지`}
-                  loading="lazy"
-                  placeholder="blur"
-                  blurDataURL={DEFAULT_BLUR_BASE64}
-                  fill
-                  unoptimized
-                />
-              </div>
-            </a>
-            <div className={styles.info}>
-              <h2 className={styles.h2}>{channelName}</h2>
-              <h3 className={styles.h3}>{title}</h3>
-              <div className={styles.detail}>
-                <h4 className={styles.h4}>구독자 {subscribe}</h4>
-                <h4 className={styles.h4}>업로드 수 {videoCount} 개</h4>
-              </div>
-              <div className={styles.link}>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
+  return (
+    <Modal id={CHANNEL_MODAL_ID} onClose={onClose}>
+      <div className={styles.content}>
+        <div className={styles.profile}>
+          <a href={url} onClick={linkClickEvent}>
+            <div className={styles.itemContainer}>
+              <Image
+                src={imageURL}
+                alt={`${channelName}의 채널 이미지`}
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL={DEFAULT_BLUR_BASE64}
+                fill
+                unoptimized
+              />
+            </div>
+          </a>
+          <div className={styles.info}>
+            <h2 className={styles.h2}>{channelName}</h2>
+            <h3 className={styles.h3}>{title}</h3>
+            <div className={styles.detail}>
+              <h4 className={styles.h4}>구독자 {subscribe}</h4>
+              <h4 className={styles.h4}>업로드 수 {videoCount} 개</h4>
+            </div>
+            <div className={styles.link}>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
 
-                    gtagClick({
-                      target: 'channleCardModal',
-                      content: channelName,
-                      detail: title,
-                      action: 'openWindow',
-                    });
+                  gtagClick({
+                    target: 'channleCardModal',
+                    content: channelName,
+                    detail: title,
+                    action: 'openWindow',
+                  });
 
-                    openWindow(url);
-                  }}
-                >
-                  유투브 채널
-                </button>
-                <CopyButton value={url} size={'1rem'} />
-              </div>
+                  openWindow(url);
+                }}
+              >
+                유투브 채널
+              </button>
+              <CopyButton value={url} size={'1rem'} />
             </div>
           </div>
-          <hr className={styles.hr} />
-          <pre className={styles.desc}>{description}</pre>
         </div>
-      </Modal>
-    );
-  },
-);
+        <hr className={styles.hr} />
+        <pre className={styles.desc}>{description}</pre>
+      </div>
+    </Modal>
+  );
+}

@@ -1,28 +1,25 @@
 'use client';
-
-import { useState } from 'react';
-import ThemeModal from '../modal/ThemeModal';
-import { RiBrushLine } from 'react-icons/ri';
+import useModalStore from '@/hook/useModalStore';
 import cx from 'classnames';
+import { RiBrushLine } from 'react-icons/ri';
+import ThemeModal from '../modal/ThemeModal';
 import * as styles from './themeButton.css';
 
-interface ThemeButtonProps {
+type ThemeButtonProps = {
   className?: string;
   size?: string;
-}
+};
 
 export default function ThemeButton({ className, size = '1.5rem' }: ThemeButtonProps) {
-  const [showThemeModal, setShowThemeModal] = useState(false);
+  const modalStore = useModalStore();
 
-  const openThemeModal = () => setShowThemeModal(true);
-  const closeThemeModal = () => setShowThemeModal(false);
+  const openThemeModal = async () => {
+    await modalStore.push(ThemeModal);
+  };
 
   return (
-    <>
-      <button onClick={openThemeModal} className={cx(styles.button, className)}>
-        <RiBrushLine color="inherit" size={size} />
-      </button>
-      {showThemeModal ? <ThemeModal onClose={closeThemeModal} /> : null}
-    </>
+    <button onClick={openThemeModal} className={cx(styles.button, className)}>
+      <RiBrushLine color="inherit" size={size} />
+    </button>
   );
 }
