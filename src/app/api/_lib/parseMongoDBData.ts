@@ -61,22 +61,8 @@ export const parseScheduledData = (documents: ContentDocument[]): ParseScheduled
   });
 
   return {
-    scheduled: {
-      contents: scheduled,
-      length: {
-        total: scheduled.length,
-        video: scheduledVideo,
-        stream: scheduled.length - scheduledVideo,
-      },
-    },
-    live: {
-      contents: live,
-      length: {
-        total: live.length,
-        video: liveVideo,
-        stream: live.length - liveVideo,
-      },
-    },
+    scheduled: scheduled,
+    live: live,
   };
 };
 
@@ -106,21 +92,7 @@ export const parseAllData = (documents: ContentDocument[]): ParseAllDataReturnTy
   });
 
   return {
-    daily: {
-      contents: daily,
-      length: {
-        total: daily.length,
-        video: dailyVideo,
-        stream: daily.length - dailyVideo,
-      },
-    },
-    all: {
-      contents: all,
-      length: {
-        total: all.length,
-        video: allVideo,
-        stream: all.length - allVideo,
-      },
-    },
+    daily: daily,
+    all: all,
   };
 };

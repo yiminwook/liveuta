@@ -9,15 +9,9 @@ type CardDescProps = {
   content: ContentsDataType;
   addStreamModifier: string;
   session: Session | null;
-  onClickBlock: () => void;
 };
 
-export default function CardDesc({
-  session,
-  content,
-  addStreamModifier,
-  onClickBlock,
-}: CardDescProps) {
+export default function CardDesc({ session, content, addStreamModifier }: CardDescProps) {
   const { title, channelName, korTime, interval, isStream, viewer } = content;
 
   return (
@@ -28,7 +22,7 @@ export default function CardDesc({
         <time className={'kor'}>{korTime}</time>
         <CardStatus isStream={isStream} interval={interval} viewer={viewer} />
       </div>
-      <CardNav content={content} session={session} onClickBlock={onClickBlock} />
+      <CardNav content={content} session={session} />
     </div>
   );
 }

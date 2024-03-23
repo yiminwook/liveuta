@@ -5,11 +5,17 @@ import cx from 'classnames';
 import { BiArrowFromLeft } from 'react-icons/bi';
 import { BsSliders } from 'react-icons/bs';
 import OutsideClickHandler from 'react-outside-click-handler';
-import { SelectType } from '@/type';
+import { VideoType } from '@/type';
 import { schedule } from '@inner/_lib/atom';
 import { useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
 import * as styles from './navSection.css';
+
+enum SelectedText {
+  total = '전체',
+  stream = '방송',
+  video = '동영상',
+}
 
 interface NavSelectBoxProps {}
 
@@ -21,7 +27,7 @@ export default function NavSelectBox({}: NavSelectBoxProps) {
 
   const handleSelect = async (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
-    const li = target.closest('li')?.dataset.value as SelectType;
+    const li = target.closest('li')?.dataset.value as VideoType;
 
     if (!li || li === select) {
       setActive(() => false);
@@ -31,21 +37,6 @@ export default function NavSelectBox({}: NavSelectBoxProps) {
       setActive(() => false);
       // select cache 삭제
       router.refresh();
-    }
-  };
-
-  const totalText = `전체: ${selectedSchedule.length.total || 0}`;
-  const streamText = `방송: ${selectedSchedule.length?.stream || 0}`;
-  const videoText = `동영상: ${selectedSchedule.length?.video || 0}`;
-
-  const selectedText = () => {
-    switch (select) {
-      case 'stream':
-        return streamText;
-      case 'video':
-        return videoText;
-      default:
-        return totalText;
     }
   };
 
@@ -62,11 +53,17 @@ export default function NavSelectBox({}: NavSelectBoxProps) {
     setActive(() => false);
   };
 
+  const selectedText = {
+    all: `${SelectedText.total}: ${selectedSchedule.length.all}`,
+    stream: `${SelectedText.stream}: ${selectedSchedule.length.stream}`,
+    video: `${SelectedText.video}: ${selectedSchedule.length.video}`,
+  };
+
   return (
     <div className={styles.navSelectBox}>
       <button className={styles.navButton} id="nav-selectbox-button" onClick={handleToggle}>
         <BsSliders size="1.25rem" />
-        {selectedText()}
+        {selectedText[select]}
       </button>
       <OutsideClickHandler onOutsideClick={handleClose}>
         <div className={cx(styles.side, active && 'active')}>
@@ -74,20 +71,23 @@ export default function NavSelectBox({}: NavSelectBoxProps) {
             <BiArrowFromLeft size="1.25rem" />
           </button>
           <ul className={styles.sideList} onClick={handleSelect}>
-            <li className={cx(styles.sideItem, select === 'all' && 'active')} data-value={'all'}>
-              {totalText}
+            <li
+              className={cx(styles.sideItem, select === VideoType.all && 'active')}
+              data-value={VideoType.all}
+            >
+              {selectedText.all}
             </li>
             <li
-              className={cx(styles.sideItem, select === 'stream' && 'active')}
-              data-value={'stream'}
+              className={cx(styles.sideItem, select === VideoType.stream && 'active')}
+              data-value={VideoType.stream}
             >
-              {streamText}
+              {selectedText.stream}
             </li>
             <li
-              className={cx(styles.sideItem, select === 'video' && 'active')}
-              data-value={'video'}
+              className={cx(styles.sideItem, select === VideoType.video && 'active')}
+              data-value={VideoType.video}
             >
-              {videoText}
+              {selectedText.video}
             </li>
           </ul>
         </div>

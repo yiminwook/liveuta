@@ -21,8 +21,6 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
   const [scrollPage, setScrollPage] = useState(1);
   const [selectedData] = useAtom(schedule.selectedScheduleAtom);
 
-  const isDone = loadContents.length >= selectedData.contents.length;
-
   const handleInfinityScroll = () => {
     if (isDone) return;
     setScrollPage((pre) => pre + 1);
@@ -31,18 +29,20 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
   useEffect(() => {
     // 페이지가 바뀌면 데이터 추가로 로드
     if (isDone) return;
-    const nextContents = selectedData.contents.slice(0, SCROLL_PER_YOUTUBE_CARD * scrollPage);
+    const nextContents = selectedData.content.slice(0, SCROLL_PER_YOUTUBE_CARD * scrollPage);
     setLoadContents(() => [...nextContents]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollPage]);
 
   useEffect(() => {
     // 스케쥴 데이터가 바뀌면 리셋
-    const resetContent = selectedData.contents.slice(0, SCROLL_PER_YOUTUBE_CARD);
+    const resetContent = selectedData.content.slice(0, SCROLL_PER_YOUTUBE_CARD);
     setScrollPage(() => 1);
     setLoadContents(() => [...resetContent]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedData]);
+
+  const isDone = loadContents.length >= selectedData.content.length;
 
   return (
     <section>

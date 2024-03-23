@@ -5,7 +5,7 @@ import { ContentsDataType } from '@/type/api/mongoDB';
 import { gtagClick } from '@inner/_lib/gtag';
 import reservePush from '@inner/_lib/reservePush';
 import { openWindow } from '@inner/_lib/windowEvent';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Session } from 'next-auth';
 import { MouseEvent } from 'react';
 import { FaStar } from 'react-icons/fa6';
@@ -19,10 +19,11 @@ import { postBlacklist } from '@inner/_action/blacklist';
 type CardNavProps = {
   content: ContentsDataType;
   session: Session | null;
-  onClickBlock: () => void;
 };
 
-export default function CardNav({ content, onClickBlock, session }: CardNavProps) {
+export default function CardNav({ content, session }: CardNavProps) {
+  const queryClient = useQueryClient();
+
   const mutatePush = useMutation({
     mutationKey: ['push', content.videoId],
     mutationFn: reservePush,
@@ -49,7 +50,10 @@ export default function CardNav({ content, onClickBlock, session }: CardNavProps
         toast.error(res.message);
       } else {
         toast.success(res.message);
-        onClickBlock();
+        queryClient.setQueriesData<string[]>({ queryKey: ['blackList'] }, (prev) => {
+          if (!prev) return prev;
+          return [...prev, res.result];
+        });
       }
     },
     onError: () => {

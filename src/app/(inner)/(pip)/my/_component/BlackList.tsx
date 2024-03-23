@@ -1,13 +1,13 @@
 'use client';
 import { deleteBlacklist } from '@inner/_action/blacklist';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Session } from 'next-auth';
 import { toast } from 'sonner';
 import * as styles from './blackList.css';
 import { ChannelData } from '@/type/api/mongoDB';
-import getBlackListData from '../_lib/getBlackListData';
 import { useAtom } from 'jotai';
-import { schedule } from '@inner/_lib/atom';
+import { channelListAtom, schedule } from '@inner/_lib/atom';
+import { blackListAtom } from '@inner/_lib/atom/schedule';
 
 type BlackListProps = {
   session: Session;
@@ -16,20 +16,8 @@ type BlackListProps = {
 export default function BlackList({ session }: BlackListProps) {
   const queryCilent = useQueryClient();
   const [scheduleQueryKey] = useAtom(schedule.scheduleKeyAtom);
-
-  const { data } = useQuery({
-    queryKey: ['blackList'],
-    queryFn: () =>
-      getBlackListData(session).then((res) => {
-        if (!res.result) {
-          throw new Error(res.message);
-        } else {
-          return res.result;
-        }
-      }),
-    staleTime: 5 * 1000, // 5초
-    gcTime: 60 * 3 * 1000, // 3분
-  });
+  const [channelList] = useAtom(channelListAtom);
+  const [blackList] = useAtom(blackListAtom);
 
   const mutationDelete = useMutation({
     mutationKey: ['deleteBlacklist'],
@@ -40,8 +28,8 @@ export default function BlackList({ session }: BlackListProps) {
       } else {
         toast.success(res.message);
         queryCilent.invalidateQueries({ queryKey: scheduleQueryKey });
-        queryCilent.setQueryData<ChannelData[]>(['blackList'], (pre) => {
-          return pre?.filter((item) => item.channel_id !== res.result);
+        queryCilent.setQueryData<string[]>(['blackList'], (pre) => {
+          return pre?.filter((channelId) => channelId !== res.result);
         });
       }
     },
@@ -54,7 +42,9 @@ export default function BlackList({ session }: BlackListProps) {
     }
   };
 
-  if (!data) return <div>로딩중...</div>;
+  const data = [...blackList]
+    .map<ChannelData>((item) => channelList[item])
+    .filter((item) => !!item);
 
   return (
     <ul className={styles.wrap}>

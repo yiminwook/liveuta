@@ -1,9 +1,7 @@
 import { MONGODB_CHANNEL_COLLECTION, MONGODB_CHANNEL_DB } from '@/const';
 import { connectMongoDB } from '@/model/mongoDB';
-import { Promised } from '@/type';
-import { ChannelDocument } from '@/type/api/mongoDB';
+import { ChannelData, ChannelDocument } from '@/type/api/mongoDB';
 
-export type ChannelData = Promised<typeof getAllChannel>;
 export type ChannleDatesetItem = ReturnType<typeof parseChannel>;
 export type ChannelDataset = ReturnType<typeof generateChannelObject>;
 
@@ -16,9 +14,10 @@ export const getChannel = async (channel_id: string) => {
 export const getAllChannel = async () => {
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
   const channels = await db.find<ChannelDocument>({}).sort({ name_kor: 1 }).toArray();
-  channels[0].channel_addr;
-  const totalLength = channels.length;
-  return { totalLength, channels };
+  return channels.map<ChannelData>((channel) => {
+    delete channel._id;
+    return channel;
+  });
 };
 
 export const parseChannel = (channel: ChannelDocument | null) => ({
