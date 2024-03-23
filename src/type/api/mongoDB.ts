@@ -3,7 +3,7 @@ import dayjs from '@/model/dayjs';
 export type isStream = 'TRUE' | 'NULL' | 'FALSE';
 
 export interface ChannelDocument {
-  _id: string;
+  _id?: string;
   channel_id: string;
   name_kor: string;
   channel_addr: string;
@@ -11,10 +11,13 @@ export interface ChannelDocument {
   waiting: boolean;
 }
 
+export type ChannelData = Omit<ChannelDocument, '_id'>;
+export type ChannelListData = Record<string, ChannelData>;
+
 export type ContentDocumentRaw = Omit<ContentDocument, 'ScheduledTime'> & { ScheduledTime: Date };
 
 export type ContentDocument = {
-  _id: string;
+  _id?: string;
   Title: string;
   URL: string;
   ChannelName: string;
@@ -46,10 +49,7 @@ export type ContentsDataType = {
   viewer: number;
 };
 
-export type ContentsDataReturnType = {
-  contents: ContentsDataType[];
-  length: ContentsLength;
-};
+export type ContentsDataReturnType = ContentsDataType[];
 
 export type ParseScheduledDataReturnType = {
   scheduled: ContentsDataReturnType;
@@ -62,6 +62,3 @@ export type ParseAllDataReturnType = {
 };
 
 export type ScheduleAPIReturntype = ParseAllDataReturnType & ParseScheduledDataReturnType;
-
-export type ChannelData = Omit<ChannelDocument, '_id'>;
-export type ChannelsData = Record<string, ChannelData>;

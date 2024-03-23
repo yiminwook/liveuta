@@ -1,7 +1,7 @@
 import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
 import { getCookies } from '@inner/_lib/getCookie';
 import dynamic from 'next/dynamic';
-import DataObserver from './DataObserver';
+import HomeDataObserver from './Home.data';
 import ScheduleSection from './ScheduleSection';
 import NavSection from './navSection/NavSection';
 import { auth } from '@/model/nextAuth';
@@ -17,10 +17,11 @@ export default async function Home({ filter }: HomeProps) {
   const session = await auth();
 
   return (
-    <DataObserver session={session} filter={filter} select={select}>
+    <>
+      <HomeDataObserver session={session} filter={filter} select={select} />
       <NavSection />
       <TopSection filter={filter} />
       <ScheduleSection session={session} />
-    </DataObserver>
+    </>
   );
 }

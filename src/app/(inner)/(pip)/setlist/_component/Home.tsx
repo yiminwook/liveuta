@@ -15,7 +15,7 @@ interface HomeProps {
 export default async function Home({ searchParams }: HomeProps) {
   const session = await auth();
   const channelData = await getAllChannel();
-  const channelDataset = generateChannelObject(channelData.channels);
+  const channelDataset = generateChannelObject(channelData);
 
   const parseSearchParams = {
     query: searchParams.query || '',

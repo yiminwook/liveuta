@@ -1,21 +1,21 @@
 'use client';
-import { SelectType } from '@/type';
+import { VideoType } from '@/type';
 import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
 import { getAllSchedule } from '@inner/_action/schedule';
 import { schedule } from '@inner/_lib/atom';
+import serverActionHandler from '@inner/_lib/serverActionHandler';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { useEffect, useLayoutEffect } from 'react';
 
-type DataObserver = {
+type HomeDataObserverProps = {
   session: Session | null;
-  children: React.ReactNode;
   filter: keyof ScheduleAPIReturntype;
-  select: SelectType;
+  select: VideoType;
 };
 
-export default function DataObserver({ children, filter, select, session }: DataObserver) {
+export default function HomeDataObserver({ filter, select, session }: HomeDataObserverProps) {
   const [key] = useAtom(schedule.scheduleKeyAtom);
   const [option] = useAtom(schedule.scheduleOptionAtom);
   const setSchedule = useSetAtom(schedule.scheduleAtom);
@@ -35,11 +35,7 @@ export default function DataObserver({ children, filter, select, session }: Data
   // schedule observer
   const { data } = useQuery({
     queryKey: key,
-    queryFn: () =>
-      getAllSchedule({ accessToken: session?.user.accessToken }).then((res) => {
-        if (!res.result) throw new Error(res.message);
-        return res.result;
-      }),
+    queryFn: () => serverActionHandler(getAllSchedule()),
     ...option,
   });
 
@@ -48,5 +44,5 @@ export default function DataObserver({ children, filter, select, session }: Data
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  return <>{children}</>;
+  return null;
 }
