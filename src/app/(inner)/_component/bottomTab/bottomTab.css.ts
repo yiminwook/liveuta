@@ -6,6 +6,7 @@ export const wrap = style([
   {
     height: '4rem',
     display: 'block',
+    backgroundColor: global.color.first.darken,
   },
   responsive({
     md: {
