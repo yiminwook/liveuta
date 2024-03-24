@@ -7,6 +7,7 @@ import serverActionHandler from '@inner/_lib/serverActionHandler';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { useEffect, useLayoutEffect } from 'react';
+import MainLoading from './loading/MainLoading';
 
 type HomeDataObserverProps = {
   filter: keyof ScheduleAPIReturntype;
@@ -20,7 +21,7 @@ export default function HomeDataObserver({ filter, select }: HomeDataObserverPro
   const setFilter = useSetAtom(schedule.filterAtom);
 
   // schedule observer
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['schedule'],
     queryFn: () => serverActionHandler(getAllSchedule()),
     ...option,
@@ -41,5 +42,6 @@ export default function HomeDataObserver({ filter, select }: HomeDataObserverPro
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  return null;
+  if (isLoading) return <MainLoading backdrop={true} />;
+  else return null;
 }
