@@ -9,6 +9,7 @@ export const main = style([
     maxWidth: BREAK_POINT['2xl'],
     minHeight: 'calc(100dvh - 3.5rem - env(safe-area-inset-top))',
     color: global.color.text.default,
+    margin: '0 auto',
   },
   responsive({
     xl: {
