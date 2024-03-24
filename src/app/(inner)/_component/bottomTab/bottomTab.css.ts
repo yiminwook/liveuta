@@ -6,7 +6,6 @@ export const wrap = style([
   {
     height: 'calc(4rem + env(safe-area-inset-bottom))',
     display: 'block',
-    backgroundColor: global.color.first.darken,
   },
   responsive({
     md: {
@@ -19,8 +18,8 @@ export const inner = style([
   zIndex.header,
   {
     position: 'fixed',
-    bottom: 'calc(0px + env(safe-area-inset-bottom))',
-    height: '4rem',
+    bottom: 0,
+    height: 'calc(4rem + env(safe-area-inset-bottom))',
     width: '100dvw',
     fontSize: '0.75rem',
     backgroundColor: global.color.first.darken,
@@ -60,7 +59,7 @@ export const list = style({
   justifyContent: 'space-around',
   textAlign: 'center',
   alignItems: 'center',
-  height: '100%',
+  height: '4rem',
   overflow: 'hidden',
 });
 
