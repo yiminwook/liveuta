@@ -7,16 +7,12 @@ export const main = style([
     display: 'flex',
     flexDirection: 'column',
     maxWidth: BREAK_POINT['2xl'],
-    minHeight: 'calc(100dvh - 3.5rem - 4rem - env(safe-area-inset-top))',
-    margin: '0 auto',
+    minHeight: 'calc(100dvh - 3.5rem - env(safe-area-inset-top))',
     color: global.color.text.default,
   },
   responsive({
     xl: {
       width: '80%',
-    },
-    md: {
-      minHeight: 'calc(100dvh - 3.5rem - env(safe-area-inset-top))',
     },
   }),
 ]);
@@ -65,7 +61,7 @@ export const backgroundLeft = style([
 export const footer = style([
   flexCenter,
   {
-    height: '5rem',
+    height: 'calc(4rem + env(safe-area-inset-bottom))',
     color: '#fff',
     fontWeight: 600,
   },
