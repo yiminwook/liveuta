@@ -14,11 +14,8 @@ import serverActionHandler from './_lib/serverActionHandler';
 import LayoutDataObserver from './layout.data';
 import { getAllWhitelist } from './_action/whitelist';
 
-const FloatButton = dynamic(() => import('./_component/float/FloatButton'), {
-  ssr: false,
-});
-
 const Footer = dynamic(() => import('./_component/Footer'), { ssr: false });
+const BottomTab = dynamic(() => import('./_component/bottomTab/BottomTab'), { ssr: false });
 
 export default async function Layout({ children }: PropsWithChildren) {
   const session = await auth();
@@ -54,7 +51,7 @@ export default async function Layout({ children }: PropsWithChildren) {
         <Header session={session} />
         <Background>{children}</Background>
         <Footer />
-        <FloatButton />
+        <BottomTab />
         <Sidebar />
         {session && <AccountSidebar session={session} />}
       </PageView>

@@ -7,13 +7,16 @@ export const main = style([
     display: 'flex',
     flexDirection: 'column',
     maxWidth: BREAK_POINT['2xl'],
-    minHeight: 'calc(100dvh - 3.5rem - env(safe-area-inset-top))',
+    minHeight: 'calc(100dvh - 3.5rem - 4rem - env(safe-area-inset-top))',
     margin: '0 auto',
     color: global.color.text.default,
   },
   responsive({
     xl: {
       width: '80%',
+    },
+    md: {
+      minHeight: 'calc(100dvh - 3.5rem - env(safe-area-inset-top))',
     },
   }),
 ]);

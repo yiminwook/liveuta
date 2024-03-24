@@ -1,4 +1,4 @@
-import { BEZIER_CURVE, BOX_SHADOW, flexCenter } from '@/style/var';
+import { BEZIER_CURVE, BOX_SHADOW, flexCenter, responsive } from '@/style/var';
 import { style, globalStyle } from '@vanilla-extract/css';
 
 export const playerBase = style({
@@ -56,14 +56,21 @@ export const popButton = style({
   },
 });
 
-export const pipBase = style({
-  width: '350px !important',
-  zIndex: 50,
-  position: 'fixed',
-  left: 25,
-  bottom: 25,
-  transition: `left 0.3s ${BEZIER_CURVE}`,
-});
+export const pipBase = style([
+  {
+    width: '350px !important',
+    zIndex: 50,
+    position: 'fixed',
+    left: 25,
+    bottom: 75,
+    transition: `left 0.3s ${BEZIER_CURVE}`,
+  },
+  responsive({
+    md: {
+      bottom: 25,
+    },
+  }),
+]);
 
 globalStyle(`${pipBase} .reactPlayer`, {
   boxShadow: BOX_SHADOW,
