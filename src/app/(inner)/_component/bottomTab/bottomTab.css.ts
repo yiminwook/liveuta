@@ -18,7 +18,7 @@ export const inner = style([
   zIndex.header,
   {
     position: 'fixed',
-    bottom: 'calc(0px - env(safe-area-inset-bottom))',
+    bottom: 'calc(0px + env(safe-area-inset-bottom))',
     height: '4rem',
     width: '100dvw',
     fontSize: '0.75rem',
