@@ -21,7 +21,7 @@ export const fallback = style({
 });
 
 export const image = style({
-  height: '100%',
-  width: '100%',
+  height: avatarContract.size,
+  width: avatarContract.size,
   objectFit: 'cover',
 });
