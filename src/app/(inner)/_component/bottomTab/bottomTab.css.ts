@@ -55,13 +55,9 @@ export const topButton = style([
     borderRadius: 5,
     boxShadow: BOX_SHADOW,
     visibility: 'hidden',
-    opacity: 0,
-    transition: `visibility 0.3s ${BEZIER_CURVE}, opacity 0.3s ${BEZIER_CURVE}`,
-    willChange: 'visibility, opacity',
     selectors: {
       '&.show': {
         visibility: 'visible',
-        opacity: 1,
       },
     },
   },
