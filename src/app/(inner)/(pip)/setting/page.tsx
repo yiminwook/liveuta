@@ -1,3 +1,5 @@
-export default function Page() {
-  return <div>준비중</div>;
+import Home from './_component/Home';
+
+export default async function Page() {
+  return <Home />;
 }

@@ -39,6 +39,7 @@ export const INTERNAL_LINKS = [
   { href: '/channels', text: '채널조회' },
   { href: '/request', text: '채널요청' },
   { href: '/setlist', text: '세트리' },
+  { href: '/setting', text: '설정' },
   { href: '/dev', text: '개발' },
 ];
 

@@ -3,7 +3,7 @@ import { ModalBaseProps } from '@/model/modal/ModalController';
 import { ThemeType } from '@/type';
 import { gtagClick } from '@inner/_lib/gtag';
 import { MouseEvent } from 'react';
-import Modal from './Modal';
+import Modal from '../src/app/(inner)/_component/modal/Modal';
 import * as styles from './themeModal.css';
 
 interface ThemeModalButtonProps {

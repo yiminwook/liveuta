@@ -22,7 +22,7 @@ export const inner = style([
     height: '4rem',
     width: '100dvw',
     fontSize: '0.75rem',
-    backgroundColor: global.color.second[95],
+    backgroundColor: global.color.first.darken,
     color: '#fff',
     visibility: 'visible',
     willChange: 'visibility, opacity',

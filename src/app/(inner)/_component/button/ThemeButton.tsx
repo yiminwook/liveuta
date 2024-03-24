@@ -2,7 +2,7 @@
 import useModalStore from '@/hook/useModalStore';
 import cx from 'classnames';
 import { RiBrushLine } from 'react-icons/ri';
-import ThemeModal from '../modal/ThemeModal';
+import ThemeModal from '../../../../../temp/ThemeModal';
 import * as styles from './themeButton.css';
 
 type ThemeButtonProps = {
