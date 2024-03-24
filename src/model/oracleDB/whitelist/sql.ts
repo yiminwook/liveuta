@@ -12,7 +12,7 @@ export const GET_MAX_COUNT = `
 `;
 
 export const GET_ALL_WHITELIST = `
-  SELECT CHANNEL_ID
+  SELECT *
   FROM WHITELIST
   WHERE MEMBER_ID = :memberId
 `;

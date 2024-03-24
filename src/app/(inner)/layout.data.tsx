@@ -1,13 +1,14 @@
 'use client';
 import { getAllChannelList } from '@inner/_action/channelList';
-import { getAllBlackList } from '@inner/_action/blacklist';
-import { blackListAtom } from '@inner/_lib/atom/schedule';
+import { getAllBlacklist } from '@inner/_action/blacklist';
+import { blacklistAtom, whitelistAtom } from '@inner/_lib/atom/schedule';
 import serverActionHandler from '@inner/_lib/serverActionHandler';
 import { useQueries } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { useLayoutEffect } from 'react';
 import { channelListAtom } from './_lib/atom';
+import { getAllWhitelist } from './_action/whitelist';
 
 type LayoutDataObserverProps = {
   session: Session | null;
@@ -15,9 +16,10 @@ type LayoutDataObserverProps = {
 
 export default function LayoutDataObserver({ session }: LayoutDataObserverProps) {
   const setChannelList = useSetAtom(channelListAtom);
-  const setBlackList = useSetAtom(blackListAtom);
+  const setBlacklist = useSetAtom(blacklistAtom);
+  const setWhitelist = useSetAtom(whitelistAtom);
 
-  const [channelList, blackList] = useQueries({
+  const [channelList, blacklist, whitelist] = useQueries({
     queries: [
       {
         queryKey: ['channelList'],
@@ -25,9 +27,16 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
         gcTime: Infinity,
       },
       {
-        queryKey: ['blackList'],
+        queryKey: ['blacklist'],
         queryFn: () =>
-          serverActionHandler(getAllBlackList({ accessToken: session!.user.accessToken })),
+          serverActionHandler(getAllBlacklist({ accessToken: session!.user.accessToken })),
+        enabled: !!session,
+        gcTime: Infinity,
+      },
+      {
+        queryKey: ['whitelist'],
+        queryFn: () =>
+          serverActionHandler(getAllWhitelist({ accessToken: session!.user.accessToken })),
         enabled: !!session,
         gcTime: Infinity,
       },
@@ -48,9 +57,15 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
   }, [channelList.data]);
 
   useLayoutEffect(() => {
-    setBlackList(() => new Set(blackList.data));
+    setBlacklist(() => new Set(blacklist.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [blackList.data]);
+  }, [blacklist.data]);
+
+  useLayoutEffect(() => {
+    console.log(whitelist.data);
+    setWhitelist(() => new Set(whitelist.data));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [whitelist.data]);
 
   return null;
 }

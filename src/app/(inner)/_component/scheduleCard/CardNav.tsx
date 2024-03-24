@@ -1,11 +1,15 @@
+import useMutateWhitelist from '@/hook/useDeleteWhitelist';
 import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import { generateThumbnail } from '@/model/youtube/thumbnail';
 import { generateVideoUrl } from '@/model/youtube/url';
 import { ContentsDataType } from '@/type/api/mongoDB';
+import { postBlacklist } from '@inner/_action/blacklist';
+import { whitelistAtom } from '@inner/_lib/atom/schedule';
 import { gtagClick } from '@inner/_lib/gtag';
 import reservePush from '@inner/_lib/reservePush';
 import { openWindow } from '@inner/_lib/windowEvent';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { MouseEvent } from 'react';
 import { FaStar } from 'react-icons/fa6';
@@ -14,7 +18,7 @@ import { MdBlock, MdOpenInNew } from 'react-icons/md';
 import { toast } from 'sonner';
 import CopyButton from '../button/CopyButton';
 import * as styles from './card.css';
-import { postBlacklist } from '@inner/_action/blacklist';
+import { postWhitelist } from '@inner/_action/whitelist';
 
 type CardNavProps = {
   content: ContentsDataType;
@@ -23,6 +27,7 @@ type CardNavProps = {
 
 export default function CardNav({ content, session }: CardNavProps) {
   const queryClient = useQueryClient();
+  const [whitelist] = useAtom(whitelistAtom);
 
   const mutatePush = useMutation({
     mutationKey: ['push', content.videoId],
@@ -43,23 +48,47 @@ export default function CardNav({ content, session }: CardNavProps) {
   });
 
   const mutateBlock = useMutation({
-    mutationKey: ['block', content.videoId],
+    mutationKey: ['postBlacklist', content.videoId],
     mutationFn: postBlacklist,
     onSuccess: (res) => {
       if (!res.result) {
         toast.error(res.message);
       } else {
         toast.success(res.message);
-        queryClient.setQueriesData<string[]>({ queryKey: ['blackList'] }, (prev) => {
-          if (!prev) return prev;
-          return [...prev, res.result];
-        });
+        if (queryClient.getQueryData(['blacklist'])) {
+          queryClient.setQueryData(['blacklist'], (prev: string[]) => {
+            return [...prev, res.result];
+          });
+        }
       }
     },
     onError: () => {
       toast.error('서버에러가 발생했습니다. 잠시후 다시 시도해주세요.');
     },
   });
+
+  const mutatePostFavorite = useMutation({
+    mutationKey: ['postWhitelist'],
+    mutationFn: postWhitelist,
+    onSuccess: (res) => {
+      if (!res.result) {
+        toast.error(res.message);
+      } else {
+        toast.success(res.message);
+        if (queryClient.getQueryData(['whitelist'])) {
+          queryClient.setQueryData(['whitelist'], (prev: string[]) => {
+            return [...prev, res.result];
+          });
+        }
+      }
+    },
+    onError: () => {
+      toast.error('서버에러가 발생했습니다. 잠시후 다시 시도해주세요.');
+    },
+  });
+  const mutateDeleteFavorite = useMutateWhitelist();
+
+  const isFavorite = whitelist.has(content.channelId);
 
   const handleReserve = async (e: MouseEvent<HTMLButtonElement>) => {
     const token = await generateFcmToken();
@@ -79,7 +108,19 @@ export default function CardNav({ content, session }: CardNavProps) {
   };
 
   const handleFavorite = (e: MouseEvent<HTMLButtonElement>) => {
-    return toast.info('서비스 준비중입니다.');
+    if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
+
+    if (!isFavorite && confirm('즐겨찾기에 추가하시겠습니까?')) {
+      mutatePostFavorite.mutate({
+        accessToken: session.user.accessToken,
+        channelId: content.channelId,
+      });
+    } else if (isFavorite && confirm('즐겨찾기에서 제거하시겠습니까?')) {
+      mutateDeleteFavorite.mutate({
+        accessToken: session.user.accessToken,
+        channelId: content.channelId,
+      });
+    }
   };
 
   const handleBlock = async (e: MouseEvent<HTMLButtonElement>) => {
@@ -120,10 +161,14 @@ export default function CardNav({ content, session }: CardNavProps) {
           <HiBellAlert color="inherit" size="1.2rem" />
         </button>
       )}
-      <button className={styles.navButton} onClick={handleFavorite}>
-        <FaStar size="1.2rem" color={false ? '#ffbb00' : '#a7a7a7'} />
+      <button
+        className={styles.navButton}
+        onClick={handleFavorite}
+        disabled={mutatePostFavorite.isPending || mutateDeleteFavorite.isPending}
+      >
+        <FaStar size="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
       </button>
-      <button className={styles.navButton} onClick={handleBlock}>
+      <button className={styles.navButton} onClick={handleBlock} disabled={mutateBlock.isPending}>
         <MdBlock size="1.2rem" />
       </button>
       <CopyButton className={styles.navButton} value={videoUrl} size="1.2rem" />

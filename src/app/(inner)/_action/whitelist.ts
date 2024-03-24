@@ -2,50 +2,50 @@
 import errorHandler from '@/model/error/handler';
 import parseAccessToken from '../_lib/parseAccessToken';
 import {
-  getAllBlackList as GET,
-  postBlacklist as POST,
-  deleteBlacklist as DELETE,
-} from '@/model/oracleDB/blacklist/service';
+  getAllWhiteList as GET,
+  postWhitelist as POST,
+  deleteWhitelist as DELETE,
+} from '@/model/oracleDB/whitelist/service';
 
-export async function getAllBlacklist(arg: { accessToken: string }) {
+export async function getAllWhitelist(arg: { accessToken: string }) {
   try {
     const payload = await parseAccessToken(arg.accessToken);
     const result = await GET({
       memberId: payload.id,
     });
-    return { status: 200, message: '블랙리스트를 조회했습니다.', result };
+    return { status: 200, message: '화이트리스트를 조회했습니다.', result };
   } catch (error) {
-    console.error('getAllBlacklist ServerAction', error);
+    console.error('getAllWhitelist ServerAction', error);
     const { status, message } = errorHandler(error);
     return { status, message, result: null };
   }
 }
 
-export async function postBlacklist(arg: { accessToken: string; channelId: string }) {
+export async function postWhitelist(arg: { accessToken: string; channelId: string }) {
   try {
     const payload = await parseAccessToken(arg.accessToken);
     const result = await POST({
       memberId: payload.id,
       channelId: arg.channelId,
     });
-    return { status: 201, message: '블록되었습니다.', result };
+    return { status: 201, message: '등록 되었습니다.', result };
   } catch (error) {
-    console.error('postBlacklist ServerAction', error);
+    console.error('postWhitelist ServerAction', error);
     const { status, message } = errorHandler(error);
     return { status, message, result: null };
   }
 }
 
-export async function deleteBlacklist(arg: { accessToken: string; channelId: string }) {
+export async function deleteWhitelist(arg: { accessToken: string; channelId: string }) {
   try {
     const payload = await parseAccessToken(arg.accessToken);
     const result = await DELETE({
       memberId: payload.id,
       channelId: arg.channelId,
     });
-    return { status: 200, message: '블록이 해제되었습니다.', result };
+    return { status: 200, message: '등록이 해제되었습니다.', result };
   } catch (error) {
-    console.error('deleteBlacklist ServerAction', error);
+    console.error('deleteWhitelist ServerAction', error);
     const { status, message } = errorHandler(error);
     return { status, message, result: null };
   }

@@ -1,6 +1,7 @@
 import { VideoType } from '@/type';
 import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
 import { atom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 
 const SCHEDULE_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
 
@@ -24,18 +25,18 @@ export const scheduleAtom = atom<ScheduleAPIReturntype>({
 
 export const filterAtom = atom<keyof ScheduleAPIReturntype>('scheduled');
 export const selectAtom = atom<VideoType>(VideoType.all);
-export const blackListAtom = atom<Set<string>>(new Set([]));
-export const whiteListAtom = atom<Set<string>>(new Set([]));
+export const blacklistAtom = atom<Set<string>>(new Set([]));
+export const whitelistAtom = atom<Set<string>>(new Set([]));
 /** 블랙리스트를 제외할지, 화이트리스트만 보여줄지 여부 */
-export const toggleBlackListAtom = atom(true);
+export const toggleBlacklistAtom = atom(true);
 
 export const selectedScheduleAtom = atom((get) => {
   const schedule = get(scheduleAtom);
   const filter = get(filterAtom);
   const select = get(selectAtom);
-  const blacklist = get(blackListAtom);
-  const whiteList = get(whiteListAtom);
-  const toggleBlackList = get(toggleBlackListAtom);
+  const blacklist = get(blacklistAtom);
+  const whiteList = get(whitelistAtom);
+  const toggleBlacklist = get(toggleBlacklistAtom);
 
   let allCount = 0;
   let videoCount = 0;
@@ -46,7 +47,7 @@ export const selectedScheduleAtom = atom((get) => {
 
     // 화이트리스트/블랙리스트에 따른 필터링 조건
     let isPassList: Boolean;
-    if (toggleBlackList) {
+    if (toggleBlacklist) {
       // 블랙리스트 모드에서는 블랙리스트에 없어야 함
       isPassList = !inBlacklist;
     } else {
@@ -94,5 +95,6 @@ if (process.env.NODE_ENV === 'development') {
   scheduleKeyAtom.debugLabel = 'scheduleKeyAtom';
   scheduleOptionAtom.debugLabel = 'scheduleOptionAtom';
   selectedScheduleAtom.debugLabel = 'selectedScheduleAtom';
-  blackListAtom.debugLabel = 'blackListAtom';
+  blacklistAtom.debugLabel = 'blackListAtom';
+  whitelistAtom.debugLabel = 'whiteListAtom';
 }

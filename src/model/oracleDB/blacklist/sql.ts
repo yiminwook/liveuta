@@ -30,7 +30,7 @@ export const POST_BLACKLIST = `
 `;
 
 export const DELETE_BLACKLIST = `
-  delete from BLACKLIST
-  where MEMBER_ID = :memberId
-    and CHANNEL_ID = :channelId
+  DELETE FROM BLACKLIST
+  WHERE MEMBER_ID = :memberId
+    AND CHANNEL_ID = :channelId
 `;

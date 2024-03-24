@@ -2,7 +2,7 @@ import { auth } from '@/model/nextAuth';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
 import { PropsWithChildren } from 'react';
-import { getAllBlackList } from './_action/blacklist';
+import { getAllBlacklist } from './_action/blacklist';
 import { getAllChannelList } from './_action/channelList';
 import Background from './_component/Background';
 import Header from './_component/header/Header';
@@ -12,6 +12,7 @@ import Sidebar from './_component/sidebar/Sidebar';
 import { getQueryClient } from './_lib/getQueryClient';
 import serverActionHandler from './_lib/serverActionHandler';
 import LayoutDataObserver from './layout.data';
+import { getAllWhitelist } from './_action/whitelist';
 
 const FloatButton = dynamic(() => import('./_component/float/FloatButton'), {
   ssr: false,
@@ -32,9 +33,14 @@ export default async function Layout({ children }: PropsWithChildren) {
   if (session) {
     await Promise.all([
       queryClient.prefetchQuery({
-        queryKey: ['blackList'],
+        queryKey: ['blacklist'],
         queryFn: () =>
-          serverActionHandler(getAllBlackList({ accessToken: session.user.accessToken })),
+          serverActionHandler(getAllBlacklist({ accessToken: session.user.accessToken })),
+      }),
+      queryClient.prefetchQuery({
+        queryKey: ['whitelist'],
+        queryFn: () =>
+          serverActionHandler(getAllWhitelist({ accessToken: session.user.accessToken })),
       }),
     ]);
   }

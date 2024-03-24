@@ -1,23 +1,22 @@
 'use client';
+import { ChannelData } from '@/type/api/mongoDB';
 import { deleteBlacklist } from '@inner/_action/blacklist';
+import { channelListAtom } from '@inner/_lib/atom';
+import { blacklistAtom } from '@inner/_lib/atom/schedule';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { toast } from 'sonner';
 import * as styles from './blackList.css';
-import { ChannelData } from '@/type/api/mongoDB';
-import { useAtom } from 'jotai';
-import { channelListAtom, schedule } from '@inner/_lib/atom';
-import { blackListAtom } from '@inner/_lib/atom/schedule';
 
-type BlackListProps = {
+type BlacklistProps = {
   session: Session;
 };
 
-export default function BlackList({ session }: BlackListProps) {
+export default function Blacklist({ session }: BlacklistProps) {
   const queryCilent = useQueryClient();
-  const [scheduleQueryKey] = useAtom(schedule.scheduleKeyAtom);
   const [channelList] = useAtom(channelListAtom);
-  const [blackList] = useAtom(blackListAtom);
+  const [blacklist] = useAtom(blacklistAtom);
 
   const mutationDelete = useMutation({
     mutationKey: ['deleteBlacklist'],
@@ -27,10 +26,11 @@ export default function BlackList({ session }: BlackListProps) {
         toast.error(res.message);
       } else {
         toast.success(res.message);
-        queryCilent.invalidateQueries({ queryKey: scheduleQueryKey });
-        queryCilent.setQueryData<string[]>(['blackList'], (pre) => {
-          return pre?.filter((channelId) => channelId !== res.result);
-        });
+        if (queryCilent.getQueryData(['blacklist'])) {
+          queryCilent.setQueryData(['blacklist'], (pre: string[]) => {
+            return pre.filter((channelId) => channelId !== res.result);
+          });
+        }
       }
     },
     onError: (error) => toast.error('서버에 문제가 발생했습니다. 다시 시도해주세요.'),
@@ -42,7 +42,7 @@ export default function BlackList({ session }: BlackListProps) {
     }
   };
 
-  const data = [...blackList]
+  const data = [...blacklist]
     .map<ChannelData>((item) => channelList[item])
     .filter((item) => !!item);
 

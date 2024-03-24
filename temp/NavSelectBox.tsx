@@ -9,7 +9,7 @@ import { VideoType } from '@/type';
 import { schedule } from '@inner/_lib/atom';
 import { useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
-import * as styles from './navSection.css';
+import * as styles from './navSelectBox.css';
 
 enum SelectedText {
   total = '전체',
