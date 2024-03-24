@@ -10,9 +10,23 @@ export enum VideoType {
 }
 
 export enum SelectedText {
-  total = '전체',
+  all = '전체',
   stream = '방송',
   video = '동영상',
+}
+
+export enum FilterType {
+  scheduled = 'scheduled',
+  live = 'live',
+  daily = 'daily',
+  all = 'all',
+}
+
+export enum FilterText {
+  scheduled = '예정',
+  live = '라이브',
+  daily = '24시',
+  all = '전체',
 }
 
 /**

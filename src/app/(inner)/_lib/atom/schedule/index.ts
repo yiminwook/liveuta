@@ -1,11 +1,8 @@
 import { VideoType } from '@/type';
 import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
 import { atom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
 
 const SCHEDULE_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
-
-export const scheduleKeyAtom = atom(['schedule']);
 
 export const scheduleOptionAtom = atom({
   staleTime: SCHEDULE_REFRESH_INTERVAL,
@@ -92,7 +89,6 @@ if (process.env.NODE_ENV === 'development') {
   filterAtom.debugLabel = 'filterAtom';
   selectAtom.debugLabel = 'selectAtom';
   scheduleAtom.debugLabel = 'scheduleAtom';
-  scheduleKeyAtom.debugLabel = 'scheduleKeyAtom';
   scheduleOptionAtom.debugLabel = 'scheduleOptionAtom';
   selectedScheduleAtom.debugLabel = 'selectedScheduleAtom';
   blacklistAtom.debugLabel = 'blackListAtom';

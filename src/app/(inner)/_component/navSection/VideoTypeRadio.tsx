@@ -21,7 +21,7 @@ export default function VideoTypeRadio() {
   };
 
   const selectedText = {
-    all: `${SelectedText.total}: ${selectedSchedule.length.all}`,
+    all: `${SelectedText.all}: ${selectedSchedule.length.all}`,
     stream: `${SelectedText.stream}: ${selectedSchedule.length.stream}`,
     video: `${SelectedText.video}: ${selectedSchedule.length.video}`,
   };

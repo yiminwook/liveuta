@@ -1,6 +1,13 @@
 import { global } from '@/style/globalTheme.css';
-import { BEZIER_CURVE, BOX_SHADOW, flexCenter, responsive, zIndex } from '@/style/var';
-import { style } from '@vanilla-extract/css';
+import {
+  BEZIER_CURVE,
+  BOX_SHADOW,
+  flexCenter,
+  responsive,
+  zIndex,
+  absoluteCenter,
+} from '@/style/var';
+import { globalStyle, style } from '@vanilla-extract/css';
 
 export const wrap = style([
   {
@@ -47,7 +54,7 @@ export const topButton = style([
   {
     position: 'absolute',
     top: -65,
-    right: 40,
+    right: 30,
     width: 40,
     height: 40,
     color: global.color.text.default,
@@ -89,7 +96,26 @@ export const list = style([
   }),
 ]);
 
-export const item = style({
-  display: 'flex',
-  flexDirection: 'column',
+export const item = style([
+  flexCenter,
+  {
+    flexDirection: 'column',
+    transition: `color 0.3s ${BEZIER_CURVE}`,
+    ':hover': {
+      color: global.color.third.lighter,
+    },
+  },
+]);
+
+export const home = style({
+  position: 'relative',
+  '::before': {
+    ...absoluteCenter,
+    content: '',
+    width: '3.5rem',
+    height: '3.5rem',
+    backgroundColor: global.color.first.light,
+    borderRadius: '100%',
+    zIndex: -1,
+  },
 });

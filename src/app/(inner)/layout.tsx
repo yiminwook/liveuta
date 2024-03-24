@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { PropsWithChildren } from 'react';
 import { getAllBlacklist } from './_action/blacklist';
 import { getAllChannelList } from './_action/channelList';
+import { getAllWhitelist } from './_action/whitelist';
 import Background from './_component/Background';
 import Header from './_component/header/Header';
 import PageView from './_component/PageView';
@@ -12,7 +13,6 @@ import Sidebar from './_component/sidebar/Sidebar';
 import { getQueryClient } from './_lib/getQueryClient';
 import serverActionHandler from './_lib/serverActionHandler';
 import LayoutDataObserver from './layout.data';
-import { getAllWhitelist } from './_action/whitelist';
 
 const Footer = dynamic(() => import('./_component/Footer'), { ssr: false });
 const BottomTab = dynamic(() => import('./_component/bottomTab/BottomTab'), { ssr: false });

@@ -23,13 +23,13 @@ export default function VideoTypeSelect() {
   };
 
   const items: Item[] = [
-    { label: SelectedText.total, value: VideoType.all, disabled: select === VideoType.all },
+    { label: SelectedText.all, value: VideoType.all, disabled: select === VideoType.all },
     { label: SelectedText.stream, value: VideoType.stream, disabled: select === VideoType.stream },
     { label: SelectedText.video, value: VideoType.video, disabled: select === VideoType.video },
   ];
 
   const selectedText = {
-    all: `${SelectedText.total}: ${selectedSchedule.length.all}`,
+    all: `${SelectedText.all}: ${selectedSchedule.length.all}`,
     stream: `${SelectedText.stream}: ${selectedSchedule.length.stream}`,
     video: `${SelectedText.video}: ${selectedSchedule.length.video}`,
   };

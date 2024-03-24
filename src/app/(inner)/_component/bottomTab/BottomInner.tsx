@@ -6,7 +6,9 @@ import { FaListOl } from 'react-icons/fa';
 import { LuSettings } from 'react-icons/lu';
 import { MdSavedSearch } from 'react-icons/md';
 import { RxPinTop } from 'react-icons/rx';
+import { TiHomeOutline } from 'react-icons/ti';
 import * as styles from './bottomTab.css';
+import cx from 'classnames';
 
 export default function BottomInner() {
   const innerRef = useRef<HTMLDivElement>(null);
@@ -61,6 +63,14 @@ export default function BottomInner() {
             <div className={styles.item}>
               <CgUserlane size="1.5rem" />
               <span>채널</span>
+            </div>
+          </Link>
+        </li>
+        <li>
+          <Link href="/">
+            <div className={cx(styles.home, styles.item)}>
+              <TiHomeOutline size="1.5rem" />
+              <span>홈</span>
             </div>
           </Link>
         </li>

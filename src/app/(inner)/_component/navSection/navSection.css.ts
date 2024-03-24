@@ -1,5 +1,5 @@
 import { global } from '@/style/globalTheme.css';
-import { BOX_SHADOW, BREAK_POINT, flexCenter, responsive } from '@/style/var';
+import { BEZIER_CURVE, BOX_SHADOW, BREAK_POINT, flexCenter, responsive } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 
 export const navSection = style([
@@ -35,6 +35,10 @@ export const favoriteButton = style([
     borderRadius: 5,
     width: '2.5rem',
     boxShadow: BOX_SHADOW,
+    transition: `background-color 0.3s ${BEZIER_CURVE}`,
+    ':hover': {
+      backgroundColor: global.color.lightYellow,
+    },
   },
 ]);
 
@@ -52,13 +56,19 @@ export const navTabBox = style([
 export const right = style({});
 
 export const mobileNavButton = style([
+  flexCenter,
   {
-    display: 'block',
+    gap: '0.5rem',
     backgroundColor: '#fff',
     borderRadius: 5,
-    width: '2.5rem',
+    width: '8.5rem',
     height: '100%',
     boxShadow: BOX_SHADOW,
+    transition: `color 0.3s ${BEZIER_CURVE}, background-color 0.3s ${BEZIER_CURVE}`,
+    ':hover': {
+      color: '#fff',
+      backgroundColor: global.color.second.dark,
+    },
   },
   responsive({
     sm: {
