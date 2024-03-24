@@ -35,7 +35,7 @@ export const sideBackgroundBase = style({
   zIndex: -1,
   transition: 'opacity 0.3s linear',
   ...responsive({
-    '2xl': {
+    xl: {
       opacity: 1,
     },
   }),
