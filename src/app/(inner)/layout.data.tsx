@@ -77,6 +77,11 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
       toast.loading('서버와 통신중입니다.', {
         id: 'loading',
       });
+      const timer = setTimeout(() => {
+        // 로딩토스트가 7초이상 보이지 않도록 함
+        toast.dismiss('loading');
+      }, 7000);
+      return () => clearTimeout(timer);
     } else {
       toast.dismiss('loading');
     }
