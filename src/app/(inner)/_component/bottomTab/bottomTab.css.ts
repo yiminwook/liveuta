@@ -4,7 +4,7 @@ import { style } from '@vanilla-extract/css';
 
 export const wrap = style([
   {
-    height: '4rem',
+    height: 'calc(4rem + env(safe-area-inset-bottom))',
     display: 'block',
     backgroundColor: global.color.first.darken,
   },
