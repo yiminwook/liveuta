@@ -1,15 +1,16 @@
 'use client';
 import Link from 'next/link';
-import { FaListOl } from 'react-icons/fa';
-import * as styles from './bottomTab.css';
-import { MdSavedSearch } from 'react-icons/md';
-import { CgUserlane } from 'react-icons/cg';
-import { LuSettings } from 'react-icons/lu';
-import { RxPinTop } from 'react-icons/rx';
 import { useEffect, useMemo, useRef } from 'react';
+import { CgUserlane } from 'react-icons/cg';
+import { FaListOl } from 'react-icons/fa';
+import { LuSettings } from 'react-icons/lu';
+import { MdSavedSearch } from 'react-icons/md';
+import { RxPinTop } from 'react-icons/rx';
+import * as styles from './bottomTab.css';
 
 export default function BottomInner() {
   const innerRef = useRef<HTMLDivElement>(null);
+  const topButtonRef = useRef<HTMLButtonElement>(null);
 
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -19,11 +20,17 @@ export default function BottomInner() {
     let timer: NodeJS.Timeout | null = null;
     return () => {
       if (timer) clearTimeout(timer);
-      if (!innerRef.current) return;
-      innerRef.current.classList.add('hidden');
+      innerRef.current?.classList.add('hidden');
+
+      if (document.documentElement.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        topButtonRef.current?.classList.add('show');
+      } else {
+        topButtonRef.current?.classList.remove('show');
+      }
+
       timer = setTimeout(() => {
         innerRef.current?.classList.remove('hidden');
-      }, 300);
+      }, 150);
     };
   }, []);
 
@@ -37,8 +44,8 @@ export default function BottomInner() {
 
   return (
     <div className={styles.inner} ref={innerRef}>
-      <button className={styles.topButton} onClick={scrollUp}>
-        <RxPinTop size="28px" color="inherit" />
+      <button className={styles.topButton} onClick={scrollUp} ref={topButtonRef}>
+        <RxPinTop size="30px" color="inherit" />
       </button>
       <ul className={styles.list}>
         <li>

@@ -9,7 +9,7 @@ export const wrap = style([
   },
   responsive({
     md: {
-      display: 'none',
+      height: 0,
     },
   }),
 ]);
@@ -35,33 +35,63 @@ export const inner = style([
       },
     },
   },
+  responsive({
+    md: {
+      height: 0,
+    },
+  }),
 ]);
 
 export const topButton = style([
   flexCenter,
   {
     position: 'absolute',
-    top: -63,
-    right: 21,
-    width: 42,
-    height: 42,
+    top: -65,
+    right: 40,
+    width: 40,
+    height: 40,
     color: global.color.text.default,
     backgroundColor: global.color.fourth[95],
     borderRadius: 5,
     boxShadow: BOX_SHADOW,
+    visibility: 'hidden',
+    opacity: 0,
+    transition: `visibility 0.3s ${BEZIER_CURVE}, opacity 0.3s ${BEZIER_CURVE}`,
+    willChange: 'visibility, opacity',
+    selectors: {
+      '&.show': {
+        visibility: 'visible',
+        opacity: 1,
+      },
+    },
   },
+  responsive({
+    xl: {
+      top: -100,
+      right: 100,
+      width: 50,
+      height: 50,
+    },
+  }),
 ]);
 
-export const list = style({
-  boxSizing: 'border-box',
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'space-around',
-  textAlign: 'center',
-  alignItems: 'center',
-  height: '4rem',
-  overflow: 'hidden',
-});
+export const list = style([
+  {
+    boxSizing: 'border-box',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-around',
+    textAlign: 'center',
+    alignItems: 'center',
+    height: '4rem',
+    overflow: 'hidden',
+  },
+  responsive({
+    md: {
+      display: 'none',
+    },
+  }),
+]);
 
 export const item = style({
   display: 'flex',
