@@ -53,6 +53,7 @@ export default function CardNav({ content, session }: CardNavProps) {
     onSuccess: (res) => {
       if (!res.result) {
         toast.error(res.message);
+        queryClient.invalidateQueries({ queryKey: ['blacklist'] });
       } else {
         toast.success(res.message);
         if (queryClient.getQueryData(['blacklist'])) {
@@ -73,6 +74,7 @@ export default function CardNav({ content, session }: CardNavProps) {
     onSuccess: (res) => {
       if (!res.result) {
         toast.error(res.message);
+        queryClient.invalidateQueries({ queryKey: ['whitelist'] });
       } else {
         toast.success(res.message);
         if (queryClient.getQueryData(['whitelist'])) {
@@ -86,6 +88,7 @@ export default function CardNav({ content, session }: CardNavProps) {
       toast.error('서버에러가 발생했습니다. 잠시후 다시 시도해주세요.');
     },
   });
+
   const mutateDeleteFavorite = useMutateWhitelist();
 
   const isFavorite = whitelist.has(content.channelId);

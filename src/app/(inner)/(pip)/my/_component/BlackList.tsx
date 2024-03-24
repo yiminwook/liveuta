@@ -24,6 +24,7 @@ export default function Blacklist({ session }: BlacklistProps) {
     onSuccess: (res) => {
       if (!res.result) {
         toast.error(res.message);
+        queryCilent.invalidateQueries({ queryKey: ['blacklist'] });
       } else {
         toast.success(res.message);
         if (queryCilent.getQueryData(['blacklist'])) {

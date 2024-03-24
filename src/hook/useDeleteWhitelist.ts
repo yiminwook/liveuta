@@ -10,6 +10,7 @@ export default function useMutateWhitelist() {
     onSuccess: (res) => {
       if (!res.result) {
         toast.error(res.message);
+        queryClient.invalidateQueries({ queryKey: ['whitelist'] });
       } else {
         toast.success(res.message);
         if (queryClient.getQueryData(['whitelist'])) {
