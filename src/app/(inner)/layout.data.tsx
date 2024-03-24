@@ -78,9 +78,9 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
         id: 'loading',
       });
       const timer = setTimeout(() => {
-        // 로딩토스트가 7초이상 보이지 않도록 함
+        // 로딩토스트가 5초이상 보이지 않도록 함
         toast.dismiss('loading');
-      }, 7000);
+      }, 5000);
       return () => clearTimeout(timer);
     } else {
       toast.dismiss('loading');

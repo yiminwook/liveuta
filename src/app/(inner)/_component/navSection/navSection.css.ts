@@ -1,6 +1,13 @@
 import { global } from '@/style/globalTheme.css';
-import { BEZIER_CURVE, BOX_SHADOW, BREAK_POINT, flexCenter, responsive } from '@/style/var';
-import { style } from '@vanilla-extract/css';
+import {
+  BEZIER_CURVE,
+  BOX_SHADOW,
+  BREAK_POINT,
+  flexCenter,
+  responsive,
+  textLine,
+} from '@/style/var';
+import { globalStyle, style } from '@vanilla-extract/css';
 
 export const navSection = style([
   {
@@ -56,12 +63,14 @@ export const navTabBox = style([
 export const right = style({});
 
 export const mobileNavButton = style([
-  flexCenter,
   {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     gap: '0.5rem',
     backgroundColor: '#fff',
     borderRadius: 5,
-    width: '8.5rem',
+    padding: '0 0.5rem',
     height: '100%',
     boxShadow: BOX_SHADOW,
     transition: `color 0.3s ${BEZIER_CURVE}, background-color 0.3s ${BEZIER_CURVE}`,
@@ -76,3 +85,5 @@ export const mobileNavButton = style([
     },
   }),
 ]);
+
+export const text = style([textLine('1.6rem', 1), {}]);

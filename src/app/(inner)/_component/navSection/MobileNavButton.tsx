@@ -17,12 +17,12 @@ export default function MobileNavButton() {
     await modalStore.push(MobileNavModal);
   };
 
-  const text = `${FilterText[filter]} /${SelectedText[select]}: ${selectedSchedule.length[select]}`;
+  const text = `${FilterText[filter]} / ${SelectedText[select]}: ${selectedSchedule.length[select]}`;
 
   return (
     <button className={styles.mobileNavButton} onClick={handleOpen}>
-      <BsSliders size="1rem" />
-      <span>{text}</span>
+      <BsSliders size="1rem" style={{ minWidth: '1rem' }} />
+      <span className={styles.text}>{text}</span>
     </button>
   );
 }

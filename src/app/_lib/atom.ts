@@ -9,4 +9,5 @@ export const themeStyleAtom = atom(theme1);
 
 if (process.env.NODE_ENV === 'development') {
   themeAtom.debugLabel = 'themeAtom';
+  themeStyleAtom.debugLabel = 'themeStyleAtom';
 }

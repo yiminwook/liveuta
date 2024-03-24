@@ -6,8 +6,7 @@ export const content = style([
     boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
-    height: '30rem',
-    paddingTop: '1.5rem',
+    padding: '1.5rem 0',
     gap: '1rem',
   },
 ]);
