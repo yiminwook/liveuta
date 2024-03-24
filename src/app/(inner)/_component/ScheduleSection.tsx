@@ -2,7 +2,7 @@
 import { SCROLL_PER_YOUTUBE_CARD } from '@/const';
 import { ContentsDataType } from '@/type/api/mongoDB';
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import InterSectionTrigger from './InterSectionTrigger';
 import ScheduleCard from './scheduleCard/Card';
 import * as cardStyles from './scheduleCard/card.css';
@@ -20,6 +20,9 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
   const [loadContents, setLoadContents] = useState<ContentsDataType[]>([]);
   const [scrollPage, setScrollPage] = useState(1);
   const [selectedData] = useAtom(schedule.selectedScheduleAtom);
+  const [filter] = useAtom(schedule.filterAtom);
+
+  const isDone = loadContents.length >= selectedData.content.length;
 
   const handleInfinityScroll = () => {
     if (isDone) return;
@@ -35,14 +38,19 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
   }, [scrollPage]);
 
   useEffect(() => {
-    // 스케쥴 데이터가 바뀌면 리셋
-    const resetContent = selectedData.content.slice(0, SCROLL_PER_YOUTUBE_CARD);
-    setScrollPage(() => 1);
+    // 스케쥴 데이터가 바뀌면 최신화
+    const resetContent = selectedData.content.slice(0, SCROLL_PER_YOUTUBE_CARD * scrollPage);
     setLoadContents(() => [...resetContent]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedData]);
 
-  const isDone = loadContents.length >= selectedData.content.length;
+  useEffect(() => {
+    // 필터가 바뀌면 페이지를 리셋
+    const resetContent = selectedData.content.slice(0, SCROLL_PER_YOUTUBE_CARD);
+    setScrollPage(() => 1);
+    setLoadContents(() => [...resetContent]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter]);
 
   return (
     <section>

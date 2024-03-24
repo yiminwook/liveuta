@@ -62,7 +62,6 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
   }, [blacklist.data]);
 
   useLayoutEffect(() => {
-    console.log(whitelist.data);
     setWhitelist(() => new Set(whitelist.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [whitelist.data]);
