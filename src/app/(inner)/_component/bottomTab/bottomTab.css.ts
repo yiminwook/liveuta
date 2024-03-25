@@ -2,17 +2,16 @@ import { global } from '@/style/globalTheme.css';
 import {
   BEZIER_CURVE,
   BOX_SHADOW,
+  absoluteCenter,
   flexCenter,
   responsive,
   zIndex,
-  absoluteCenter,
 } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 
 export const wrap = style([
   {
     height: 'calc(4rem + env(safe-area-inset-bottom))',
-    backgroundColor: global.color.first.darken,
     display: 'block',
   },
   responsive({

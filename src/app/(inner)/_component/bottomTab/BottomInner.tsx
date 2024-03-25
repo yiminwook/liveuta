@@ -1,4 +1,5 @@
 'use client';
+import cx from 'classnames';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { CgUserlane } from 'react-icons/cg';
@@ -8,7 +9,6 @@ import { MdSavedSearch } from 'react-icons/md';
 import { RxPinTop } from 'react-icons/rx';
 import { TiHomeOutline } from 'react-icons/ti';
 import * as styles from './bottomTab.css';
-import cx from 'classnames';
 
 enum Direction {
   up = 'up',
