@@ -3,17 +3,16 @@ import CardDesc from './CardDesc';
 import CardImage from './CardImage';
 import { ContentsDataType } from '@/type/api/mongoDB';
 import { useMemo } from 'react';
-import CardWrap from './CardWrap';
 import { Session } from 'next-auth';
 import cx from 'classnames';
+import * as styles from './card.css';
 
-interface ScheduleCardProps {
+type ScheduleCardProps = {
   content: ContentsDataType;
-  index: number;
   session: Session | null;
-}
+};
 
-export default function ScheduleCard({ session, content, index }: ScheduleCardProps) {
+export default function ScheduleCard({ session, content }: ScheduleCardProps) {
   const { isStream } = content;
 
   const addStreamModifier = useMemo(() => {
@@ -34,9 +33,9 @@ export default function ScheduleCard({ session, content, index }: ScheduleCardPr
   }, [isStream]);
 
   return (
-    <CardWrap index={index} className={cx(addStreamModifier)}>
+    <div className={cx(styles.card, addStreamModifier)}>
       <CardImage content={content} />
       <CardDesc session={session} content={content} addStreamModifier={addStreamModifier} />
-    </CardWrap>
+    </div>
   );
 }

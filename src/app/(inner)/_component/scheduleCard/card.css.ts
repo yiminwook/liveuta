@@ -244,3 +244,14 @@ export const cardList = style([
     },
   }),
 ]);
+
+export const cardPlaceHolder = style([
+  {
+    display: 'none',
+  },
+  responsive({
+    sm: {
+      display: 'flex',
+    },
+  }),
+]);

@@ -55,13 +55,8 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
   return (
     <section>
       <div className={cardStyles.cardList}>
-        {loadContents.map((data, index) => (
-          <ScheduleCard
-            session={session}
-            key={`scheduleCard_${data.videoId}`}
-            content={data}
-            index={index}
-          />
+        {loadContents.map((data) => (
+          <ScheduleCard session={session} key={`scheduleCard_${data.videoId}`} content={data} />
         ))}
         <CardPlaceHolders />
       </div>

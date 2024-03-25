@@ -1,6 +1,6 @@
 import { isMobile } from 'react-device-detect';
 import cx from 'classnames';
-import * as styles from './card.css';
+import * as styles from '../src/app/(inner)/_component/scheduleCard/card.css';
 import { Variants } from 'framer-motion';
 import Motion from '@/model/framer';
 
