@@ -7,11 +7,12 @@ import {
   zIndex,
   absoluteCenter,
 } from '@/style/var';
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 
 export const wrap = style([
   {
     height: 'calc(4rem + env(safe-area-inset-bottom))',
+    backgroundColor: global.color.first.darken,
     display: 'block',
   },
   responsive({

@@ -10,8 +10,14 @@ import { TiHomeOutline } from 'react-icons/ti';
 import * as styles from './bottomTab.css';
 import cx from 'classnames';
 
+enum Direction {
+  up = 'up',
+  down = 'down',
+  end = 'end',
+}
+
 export default function BottomInner() {
-  const [direction, setDirection] = useState<'up' | 'down'>('up');
+  const [direction, setDirection] = useState<Direction>(Direction.up);
   const [windowY, setWindowY] = useState(0);
 
   const scrollUp = () => {
@@ -25,9 +31,19 @@ export default function BottomInner() {
       if (timer) return;
       timer = setTimeout(() => {
         timer = null;
+        /** 문서 상단부터 뷰포트 상단까지의 높이 */
         const currentScrollY = window.scrollY;
-        const direction = currentScrollY > y ? 'down' : 'up';
+        let direction = currentScrollY > y ? Direction.down : Direction.up;
         y = currentScrollY;
+
+        // 스크롤이 끝까지 내려갔는지 판단
+        /** 현재 뷰포트의 높이 */
+        const windowHeight = window.innerHeight;
+        /** 전체 문서의 높이 */
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrolledToBottom = windowHeight + currentScrollY >= documentHeight;
+        if (scrolledToBottom) direction = Direction.end;
+
         setDirection(() => direction);
         setWindowY(() => currentScrollY);
       }, 300);
@@ -42,9 +58,12 @@ export default function BottomInner() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const hideBottomTab = windowY > 56 && direction === Direction.down;
+  const showTobButton = windowY > 56;
+
   return (
-    <div className={cx(styles.inner, direction === 'down' && 'hidden')}>
-      <button className={cx(styles.topButton, windowY > 100 && 'show')} onClick={scrollUp}>
+    <div className={cx(styles.inner, hideBottomTab && 'hidden')}>
+      <button className={cx(styles.topButton, showTobButton && 'show')} onClick={scrollUp}>
         <RxPinTop size="30px" color="inherit" />
       </button>
       <ul className={styles.list}>
