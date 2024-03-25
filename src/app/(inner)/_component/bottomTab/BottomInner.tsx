@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { CgUserlane } from 'react-icons/cg';
 import { FaListOl } from 'react-icons/fa';
 import { LuSettings } from 'react-icons/lu';
@@ -11,8 +11,8 @@ import * as styles from './bottomTab.css';
 import cx from 'classnames';
 
 export default function BottomInner() {
-  const innerRef = useRef<HTMLDivElement>(null);
-  const topButtonRef = useRef<HTMLButtonElement>(null);
+  const [direction, setDirection] = useState<'up' | 'down'>('up');
+  const [windowY, setWindowY] = useState(0);
 
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -20,19 +20,17 @@ export default function BottomInner() {
 
   const handleScroll = useMemo(() => {
     let timer: NodeJS.Timeout | null = null;
+    let y = 0;
     return () => {
-      if (timer) clearTimeout(timer);
-      innerRef.current?.classList.add('hidden');
-
-      if (document.documentElement.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        topButtonRef.current?.classList.add('show');
-      } else {
-        topButtonRef.current?.classList.remove('show');
-      }
-
+      if (timer) return;
       timer = setTimeout(() => {
-        innerRef.current?.classList.remove('hidden');
-      }, 150);
+        timer = null;
+        const currentScrollY = window.scrollY;
+        const direction = currentScrollY > y ? 'down' : 'up';
+        y = currentScrollY;
+        setDirection(() => direction);
+        setWindowY(() => currentScrollY);
+      }, 300);
     };
   }, []);
 
@@ -45,8 +43,8 @@ export default function BottomInner() {
   }, []);
 
   return (
-    <div className={styles.inner} ref={innerRef}>
-      <button className={styles.topButton} onClick={scrollUp} ref={topButtonRef}>
+    <div className={cx(styles.inner, direction === 'down' && 'hidden')}>
+      <button className={cx(styles.topButton, windowY > 100 && 'show')} onClick={scrollUp}>
         <RxPinTop size="30px" color="inherit" />
       </button>
       <ul className={styles.list}>
