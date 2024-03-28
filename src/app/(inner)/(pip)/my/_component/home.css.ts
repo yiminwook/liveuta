@@ -32,7 +32,6 @@ export const section = style([
   {
     boxSizing: 'border-box',
     padding: '1rem',
-    border: '1px solid #ddd',
     flex: 1,
     backgroundColor: global.color.fourth[75],
     borderRadius: 5,
