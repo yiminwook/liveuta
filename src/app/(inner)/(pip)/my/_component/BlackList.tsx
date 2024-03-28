@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { toast } from 'sonner';
-import * as styles from './blackList.css';
+import * as styles from './list.css';
 
 type BlacklistProps = {
   session: Session;
