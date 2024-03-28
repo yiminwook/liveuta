@@ -1,3 +1,4 @@
+'use client';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import * as styles from './placeholder.css';
 

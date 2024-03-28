@@ -4,7 +4,7 @@ import * as styles from './home.css';
 import dynamic from 'next/dynamic';
 import { FaStar } from 'react-icons/fa6';
 import { MdBlock } from 'react-icons/md';
-import ListPlaceholder from './listPlaceHolder';
+import ListPlaceholder from './ListPlaceholder';
 
 const Blacklist = dynamic(() => import('./Blacklist'), {
   ssr: false,

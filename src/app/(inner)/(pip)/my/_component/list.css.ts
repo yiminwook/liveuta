@@ -1,15 +1,22 @@
 import { global } from '@/style/globalTheme.css';
-import { responsive } from '@/style/var';
+import { responsive, textLine } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 
-export const wrap = style({
+export const wrap = style([
+  {
+    height: '30rem',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+  },
+]);
+
+export const list = style({
   boxSizing: 'border-box',
   display: 'flex',
   flexDirection: 'column',
   padding: '1rem',
   gap: '0.5rem',
   alignItems: 'center',
-  minHeight: '9rem',
 });
 
 export const row = style([
@@ -28,7 +35,11 @@ export const row = style([
   }),
 ]);
 
+export const text = style([textLine(1.6, 1), {}]);
+
 export const button = style({
+  boxSizing: 'border-box',
+  flex: '0 0 3rem',
   backgroundColor: global.color.second.default,
   color: '#fff',
   padding: '0 0.5rem',
