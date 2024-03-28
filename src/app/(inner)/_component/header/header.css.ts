@@ -3,7 +3,7 @@ import { BEZIER_CURVE, BOX_SHADOW, BREAK_POINT, responsive, textLine, zIndex } f
 import { globalStyle, style } from '@vanilla-extract/css';
 
 export const blank = style({
-  height: '3.5rem',
+  height: 'calc(3.5rem + env(safe-area-inset-top))',
   paddingTop: 'env(safe-area-inset-top)',
 });
 
@@ -15,7 +15,7 @@ export const inner = style([
     top: 0,
     left: 0,
     width: '100%',
-    height: '3.5rem',
+    height: 'calc(3.5rem + env(safe-area-inset-top))',
     position: 'fixed',
     backgroundColor: global.color.first[50],
     backdropFilter: 'blur(8px)',
