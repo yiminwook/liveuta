@@ -67,7 +67,6 @@ export const logoutButtonBox = style({
 });
 
 export const logoutButton = style({
-  color: 'black',
   fontWeight: 600,
   fontSize: '1rem',
   display: 'flex',

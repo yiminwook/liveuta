@@ -1,5 +1,5 @@
 import { global } from '@/style/globalTheme.css';
-import { responsive, textLine } from '@/style/var';
+import { BEZIER_CURVE, responsive, textLine } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 
 export const wrap = style([
@@ -11,7 +11,6 @@ export const wrap = style([
 ]);
 
 export const list = style({
-  boxSizing: 'border-box',
   display: 'flex',
   flexDirection: 'column',
   padding: '1rem',
@@ -27,6 +26,11 @@ export const row = style([
     justifyContent: 'space-between',
     width: '100%',
     maxWidth: '20rem',
+    paddingLeft: '0.25rem',
+    borderRadius: 5,
+    ':hover': {
+      backgroundColor: global.color.fourth.light,
+    },
   },
   responsive({
     md: {
@@ -44,7 +48,8 @@ export const button = style({
   color: '#fff',
   padding: '0 0.5rem',
   borderRadius: 5,
+  transition: `background-color 0.3s ${BEZIER_CURVE}`,
   ':hover': {
-    backgroundColor: global.color.second.lighter,
+    backgroundColor: global.color.second.darken,
   },
 });
