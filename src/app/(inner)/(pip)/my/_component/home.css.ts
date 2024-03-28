@@ -4,7 +4,6 @@ import { style } from '@vanilla-extract/css';
 
 export const wrap = style([
   {
-    boxSizing: 'border-box',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -30,7 +29,6 @@ export const sectionTitle = style({
 
 export const section = style([
   {
-    boxSizing: 'border-box',
     padding: '1rem',
     flex: 1,
     backgroundColor: global.color.fourth[75],

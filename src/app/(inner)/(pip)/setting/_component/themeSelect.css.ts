@@ -22,7 +22,6 @@ export const content = style([
 ]);
 
 export const themeModalButton = style({
-  boxSizing: 'border-box',
   width: '3.5rem',
   height: '3.5rem',
   padding: '0.5rem',

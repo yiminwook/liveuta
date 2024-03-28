@@ -20,7 +20,6 @@ export const table = style({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  boxSizing: 'border-box',
   backgroundColor: global.color.first.light,
   boxShadow: BOX_SHADOW,
 });
@@ -32,7 +31,6 @@ export const body = style({
 
 export const row = style([
   {
-    boxSizing: 'border-box',
     display: 'flex',
     borderBottom: '1px solid #fff',
     transition: `background-color 0.2s ${BEZIER_CURVE}`,

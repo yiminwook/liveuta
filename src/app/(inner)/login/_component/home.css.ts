@@ -1,10 +1,8 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { BOX_SHADOW, BREAK_POINT, flexCenter, responsive } from '@/style/var';
-import { global } from '@/style/globalTheme.css';
+import { BOX_SHADOW, BREAK_POINT, flexCenter } from '@/style/var';
 
 export const wrap = style([
   {
-    boxSizing: 'border-box',
     maxWidth: BREAK_POINT.sm,
     margin: '0 auto',
     marginTop: '3.5rem',

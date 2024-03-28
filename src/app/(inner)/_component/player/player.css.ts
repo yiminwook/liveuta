@@ -2,7 +2,6 @@ import { BEZIER_CURVE, BOX_SHADOW, flexCenter, responsive } from '@/style/var';
 import { style, globalStyle } from '@vanilla-extract/css';
 
 export const playerBase = style({
-  boxSizing: 'border-box',
   aspectRatio: '16 / 9',
   width: '100%',
   height: 'auto',
@@ -11,7 +10,6 @@ export const playerBase = style({
 
 export const playerDiv = style({
   position: 'relative',
-  boxSizing: 'border-box',
   border: 'none',
   width: '100%',
   selectors: {
@@ -30,9 +28,7 @@ export const playerBox = style({
   justifyContent: 'center',
 });
 
-export const liveChatBox = style({
-  boxSizing: 'border-box',
-});
+export const liveChatBox = style({});
 
 export const liveChat = style({
   height: '100%',
@@ -41,7 +37,6 @@ export const liveChat = style({
 
 export const popButton = style({
   position: 'absolute',
-  boxSizing: 'border-box',
   borderRadius: 5,
   padding: '0.25rem',
   fontSize: '1.25rem',

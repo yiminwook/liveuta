@@ -15,7 +15,6 @@ export const inner = style({
 
 export const editButton = style({
   position: 'absolute',
-  boxSizing: 'border-box',
   borderRadius: 5,
   padding: '0.25rem 0.5rem',
   fontSize: '1.25rem',

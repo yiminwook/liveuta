@@ -5,7 +5,6 @@ import { calc } from '@vanilla-extract/css-utils';
 
 export const cardBase = style([
   {
-    boxSizing: 'border-box',
     margin: 0,
     flex: '1 0 auto',
     width: '17rem',
@@ -96,7 +95,6 @@ export const imageLink = style([
 globalStyle(`${imageLink} > div`, {
   boxShadow: BOX_SHADOW,
   position: 'relative',
-  boxSizing: 'border-box',
   margin: 'auto',
   width: '100%',
   aspectRatio: '16 / 9',
@@ -177,7 +175,6 @@ export const time = style([
 
 export const nav = style([
   {
-    boxSizing: 'border-box',
     display: 'flex',
     gap: '0.25rem',
     fontSize: '0.75rem',
@@ -230,7 +227,6 @@ export const statusSvg = style([
 
 export const cardList = style([
   {
-    boxSizing: 'border-box',
     width: '100%',
     display: 'flex',
     flexWrap: 'wrap',

@@ -25,7 +25,6 @@ export const iframe = style({
 
 export const openButton = style({
   position: 'absolute',
-  boxSizing: 'border-box',
   top: '0.75rem',
   right: '0.75rem',
   fontSize: '1.1rem',

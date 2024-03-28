@@ -97,7 +97,7 @@ globalStyle(`${link} button:first-of-type`, {
 
 export const hr = style({
   width: '100%',
-  borderBottom: `0.5px solid ${global.color.first.default}`,
+  borderTop: `0.5px solid ${global.color.first.default}`,
 });
 
 export const desc = style([

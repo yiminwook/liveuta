@@ -42,7 +42,6 @@ export const row = style([
 export const text = style([textLine(1.6, 1), {}]);
 
 export const button = style({
-  boxSizing: 'border-box',
   flex: '0 0 3rem',
   backgroundColor: global.color.second.default,
   color: '#fff',

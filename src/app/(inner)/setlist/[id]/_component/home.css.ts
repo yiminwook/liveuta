@@ -55,7 +55,6 @@ export const infoWrap = style({
 
 export const right = style({
   position: 'relative',
-  boxSizing: 'border-box',
   padding: '0.5rem',
   flex: 1,
   minHeight: 'calc(100dvh - 3.5rem - 5rem)',

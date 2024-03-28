@@ -5,7 +5,6 @@ import { style } from '@vanilla-extract/css';
 export const wrap = style({
   boxShadow: BOX_SHADOW,
   display: 'inline-block',
-  boxSizing: 'border-box',
   width: '100%',
   maxWidth: '30rem',
 });

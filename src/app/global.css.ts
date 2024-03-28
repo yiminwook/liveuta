@@ -41,7 +41,6 @@ globalStyle('::-webkit-scrollbar-button', {
 export const body = style({
   margin: 0,
   padding: 0,
-  boxSizing: 'border-box',
   fontFamily: 'Pretendard Variable, Pretendard, -apple-system, sans-serif',
   fontSize: 16,
   backgroundColor: 'var(--liveuta-bg-color)',
@@ -60,7 +59,6 @@ globalStyle('h1, h2, h3, h4, p', {
   color: 'inherit',
   listStyle: 'none',
   textDecoration: 'none',
-  boxSizing: 'border-box',
   margin: 0,
   padding: 0,
   border: 'none',
@@ -76,7 +74,6 @@ globalStyle('button', {
   background: 'none',
   cursor: 'pointer',
   display: 'block',
-  boxSizing: 'border-box',
   margin: 0,
   padding: 0,
   lineHeight: 1.6,
@@ -102,7 +99,6 @@ globalStyle('label', {
   border: 'none',
   background: 'none',
   display: 'inline-block',
-  boxSizing: 'border-box',
   margin: 0,
   padding: 0,
   lineHeight: 1.6,
@@ -116,7 +112,6 @@ globalStyle('input', {
   color: 'inherit',
   listStyle: 'none',
   textDecoration: 'none',
-  boxSizing: 'border-box',
   margin: 0,
   padding: 0,
   border: 'none',
@@ -165,7 +160,6 @@ globalStyle('a.active', {
 });
 
 globalStyle('textarea', {
-  boxSizing: 'border-box',
   background: 'none',
   border: 'none',
   lineHeight: 1.6,
@@ -182,4 +176,8 @@ globalStyle('.blind', {
   margin: -1,
   overflow: 'hidden',
   clip: 'rect(0, 0, 0, 0)',
+});
+
+globalStyle('*', {
+  boxSizing: 'border-box',
 });

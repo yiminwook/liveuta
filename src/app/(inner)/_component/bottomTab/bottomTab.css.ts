@@ -80,7 +80,6 @@ export const topButton = style([
 
 export const list = style([
   {
-    boxSizing: 'border-box',
     width: '100%',
     display: 'flex',
     justifyContent: 'space-around',

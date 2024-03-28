@@ -30,7 +30,6 @@ export const position = style([
 export const content = style([
   {
     position: 'relative',
-    boxSizing: 'border-box',
     width: '100%',
     height: '100%',
     backgroundColor: global.color.fourth.lighter,

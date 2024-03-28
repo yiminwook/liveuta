@@ -13,7 +13,6 @@ export const title = style([
 ]);
 
 export const nav = style({
-  boxSizing: 'border-box',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',

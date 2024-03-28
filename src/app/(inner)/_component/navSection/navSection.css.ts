@@ -20,11 +20,9 @@ export const navSection = style([
     maxWidth: BREAK_POINT.full,
     padding: '0.5rem',
     justifyContent: 'space-between',
-    height: '2.5rem',
   },
   responsive({
     md: {
-      padding: '1rem',
       position: 'inherit',
     },
   }),
@@ -41,6 +39,7 @@ export const favoriteButton = style([
     backgroundColor: '#fff',
     borderRadius: 5,
     width: '2.5rem',
+    height: '2.5rem',
     boxShadow: BOX_SHADOW,
     transition: `background-color 0.3s ${BEZIER_CURVE}`,
     ':hover': {
@@ -71,7 +70,7 @@ export const mobileNavButton = style([
     backgroundColor: '#fff',
     borderRadius: 5,
     padding: '0 0.5rem',
-    height: '100%',
+    height: '2.5rem',
     boxShadow: BOX_SHADOW,
     transition: `color 0.3s ${BEZIER_CURVE}, background-color 0.3s ${BEZIER_CURVE}`,
     ':hover': {

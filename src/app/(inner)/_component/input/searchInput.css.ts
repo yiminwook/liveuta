@@ -4,7 +4,6 @@ import { global } from '@/style/globalTheme.css';
 
 export const wrap = style([
   {
-    boxSizing: 'border-box',
     display: 'flex',
     backgroundColor: '#fff',
     alignItems: 'center',

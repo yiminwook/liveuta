@@ -35,7 +35,6 @@ export const positioner = style({});
 
 export const content = style({
   animation: `${openMenu} 0.3s ease-out`,
-  boxSizing: 'border-box',
   width: '7.5rem',
   backgroundColor: '#fff',
   borderRadius: 5,

@@ -7,6 +7,7 @@ export const main = style([
     display: 'flex',
     flexDirection: 'column',
     maxWidth: BREAK_POINT['2xl'],
+    padding: '0 env(safe-area-inset-right) 0 env(safe-area-inset-left)',
     minHeight: 'calc(100dvh - 3.5rem - env(safe-area-inset-top))',
     color: global.color.text.default,
     margin: '0 auto',

@@ -3,7 +3,6 @@ import { style } from '@vanilla-extract/css';
 
 export const content = style([
   {
-    boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
     padding: '1.5rem 0',

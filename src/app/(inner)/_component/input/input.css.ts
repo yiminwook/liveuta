@@ -3,7 +3,6 @@ import { BEZIER_CURVE, BOX_SHADOW } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 
 export const form = style({
-  boxSizing: 'border-box',
   position: 'relative',
   width: '100%',
   height: '100%',
@@ -25,7 +24,6 @@ export const inner = style({
 });
 
 export const input = style({
-  boxSizing: 'border-box',
   width: '100%',
   height: '100%',
   padding: 0,

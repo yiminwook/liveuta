@@ -12,7 +12,6 @@ export const wrap = style({
 
 export const navButton = style({
   boxShadow: BOX_SHADOW,
-  boxSizing: 'border-box',
   color: '#fff',
   backgroundColor: global.color.third.default,
   width: '4.5rem',
