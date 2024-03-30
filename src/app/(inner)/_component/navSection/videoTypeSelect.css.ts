@@ -8,7 +8,7 @@ export const root = style([
     display: 'none',
   },
   responsive({
-    sm: {
+    md: {
       display: 'block',
     },
   }),

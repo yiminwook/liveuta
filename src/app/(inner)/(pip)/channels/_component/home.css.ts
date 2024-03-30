@@ -28,8 +28,7 @@ export const paginationBox = style([
   {
     width: '100%',
     overflowX: 'auto',
-    padding: '0.5rem',
-
+    padding: '1rem 0',
     '::-webkit-scrollbar': {
       height: 5,
     },

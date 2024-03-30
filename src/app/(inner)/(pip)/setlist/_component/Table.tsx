@@ -37,7 +37,11 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
   });
 
   const handlePage = (page: number) => {
-    router.push(`/setlist?query=${searchParams.query}&page=${page}&order=${searchParams.order}`);
+    const query = new URLSearchParams();
+    query.set('query', searchParams.query);
+    query.set('page', page.toString());
+    query.set('order', searchParams.order);
+    router.push(`/setlist?${query.toString()}`);
   };
 
   if (isLoading) return <Loading />;

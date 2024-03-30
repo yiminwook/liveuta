@@ -85,17 +85,9 @@ export default function BottomInner() {
         </li>
         <li>
           <Link href="/">
-            <div className={cx(styles.home, styles.item)}>
+            <div className={cx(styles.item)}>
               <TiHomeOutline size="1.5rem" />
               <span>홈</span>
-            </div>
-          </Link>
-        </li>
-        <li>
-          <Link href="search">
-            <div className={styles.item}>
-              <MdSavedSearch size="1.5rem" />
-              <span>검색</span>
             </div>
           </Link>
         </li>

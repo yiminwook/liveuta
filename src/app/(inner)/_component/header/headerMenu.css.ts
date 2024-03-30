@@ -6,7 +6,7 @@ import { globalStyle, style } from '@vanilla-extract/css';
 export const root = style({});
 
 export const trigger = style({
-  width: '8.5rem',
+  width: '7.5rem',
   height: '3.5rem',
   fontWeight: 600,
   fontSize: '1.05rem',

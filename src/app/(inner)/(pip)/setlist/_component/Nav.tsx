@@ -32,11 +32,11 @@ export default function Nav({ searchParams }: SearchFormProps) {
   };
 
   const toggleOrder = () => {
-    router.push(
-      `/setlist?query=${searchParams.query}&page=${searchParams.page}&order=${
-        searchParams.order === 'broadcast' ? 'create' : 'broadcast'
-      }`,
-    );
+    const query = new URLSearchParams();
+    query.set('query', searchParams.query);
+    query.set('page', searchParams.page.toString());
+    query.set('order', searchParams.order === 'broadcast' ? 'create' : 'broadcast');
+    router.push(`/setlist?${query.toString()}`);
   };
 
   if (isMobile) {

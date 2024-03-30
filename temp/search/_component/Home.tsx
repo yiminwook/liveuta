@@ -4,7 +4,7 @@ import ChannelSection from './ChannelSection';
 import ContentSection from './ContentSection';
 import SearchSection from './SearchSection';
 import SummarySection from './SummarySection';
-import { useSearch } from '@inner/_lib/getSearch';
+import { useSearch } from '@inner/(pip)/search/getSearch';
 import MainLoading from '@inner/_component/loading/MainLoading';
 
 type HomeProps = {

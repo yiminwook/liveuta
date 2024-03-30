@@ -1,5 +1,5 @@
 import search from './search.module.scss';
-import { useSearchQuery } from '@inner/_lib/getSearch';
+import { useSearchQuery } from '@inner/(pip)/search/getSearch';
 
 export default function SummarySection() {
   const searchQuery = useSearchQuery();

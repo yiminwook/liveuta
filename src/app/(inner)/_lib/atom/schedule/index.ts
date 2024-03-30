@@ -21,6 +21,8 @@ export const scheduleAtom = atom<ScheduleAPIReturntype>({
 });
 
 export const filterAtom = atom<keyof ScheduleAPIReturntype>('scheduled');
+/** 채널 이름으로 검색 */
+export const queryAtom = atom('');
 export const selectAtom = atom<VideoType>(VideoType.all);
 export const blacklistAtom = atom<Set<string>>(new Set([]));
 export const whitelistAtom = atom<Set<string>>(new Set([]));
@@ -43,10 +45,14 @@ export const selectedScheduleAtom = atom((get) => {
   let videoCount = 0;
 
   const filteredContent = schedule[filter].filter((content) => {
+    // 1. 채널 이름 필터링
+    const query = new RegExp(get(queryAtom), 'i');
+    if (!query.test(content.channelName)) return false;
+
     const inBlacklist = blacklist.has(content.channelId);
     const inWhitelist = whiteList.has(content.channelId);
 
-    // 화이트리스트/블랙리스트에 따른 필터링 조건
+    // 2. 화이트리스트/블랙리스트에 따른 필터링 조건
     let isPassList: Boolean;
     if (toggleBlacklist) {
       // 블랙리스트 모드에서는 블랙리스트에 없어야 함
@@ -56,11 +62,7 @@ export const selectedScheduleAtom = atom((get) => {
       isPassList = inWhitelist;
     }
 
-    // 리스트필터링이 적용된 비디오 수를 카운트
-    if (isPassList) allCount++;
-    if (content.isVideo && isPassList) videoCount++;
-
-    // 스트림/비디오/전체 선택에 따른 필터링 조건
+    // 3. 스트림/비디오/전체 선택에 따른 필터링 조건
     let isPassType: Boolean;
     switch (select) {
       case VideoType.stream:
@@ -74,6 +76,10 @@ export const selectedScheduleAtom = atom((get) => {
         isPassType = true;
         break;
     }
+
+    // 리스트필터링이 적용된 비디오 수를 카운트
+    if (isPassList) allCount++;
+    if (content.isVideo && isPassList) videoCount++;
 
     // 모든 필터링 조건을 만족해야 합니다.
     return isPassList && isPassType;
@@ -92,6 +98,7 @@ export const selectedScheduleAtom = atom((get) => {
 if (process.env.NODE_ENV === 'development') {
   filterAtom.debugLabel = 'filterAtom';
   selectAtom.debugLabel = 'selectAtom';
+  queryAtom.debugLabel = 'queryAtom';
   scheduleAtom.debugLabel = 'scheduleAtom';
   scheduleOptionAtom.debugLabel = 'scheduleOptionAtom';
   selectedScheduleAtom.debugLabel = 'selectedScheduleAtom';

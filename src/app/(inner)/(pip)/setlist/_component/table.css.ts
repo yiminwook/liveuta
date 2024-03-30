@@ -9,6 +9,10 @@ export const pagenationBox = style({
   justifyContent: 'center',
   gap: '0.5rem',
   padding: '1rem 0',
+  overflowX: 'auto',
+  '::-webkit-scrollbar': {
+    height: 5,
+  },
 });
 
 export const pagenationButton = style({

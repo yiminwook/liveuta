@@ -13,7 +13,7 @@ export default function HeaderMenu({ title, links, onSelect }: HeaderMenuProps) 
   const pathname = usePathname();
   return (
     <div className={styles.root}>
-      <ArkMenu.Root open={true} onSelect={({ value }) => onSelect(value)}>
+      <ArkMenu.Root open onSelect={({ value }) => onSelect(value)}>
         <ArkMenu.Trigger className={styles.trigger}>{title}</ArkMenu.Trigger>
         <ArkMenu.Positioner
           style={{

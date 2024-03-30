@@ -1,22 +1,30 @@
 'use client';
 import { DEFAULT_BLUR_BASE64 } from '@/const';
+import useMutateWhitelist from '@/hook/useDeleteWhitelist';
 import useModalStore from '@/hook/useModalStore';
+import usePostWhitelist from '@/hook/usePostWhitelist';
 import { ChannelsDataType } from '@/type/api/youtube';
+import { Session } from '@auth/core/types';
+import { whitelistAtom } from '@inner/_lib/atom/schedule';
 import { gtagClick, gtagClickAtag } from '@inner/_lib/gtag';
 import { renderSubscribe } from '@inner/_lib/renderSubscribe';
 import { openWindow } from '@inner/_lib/windowEvent';
+import { useAtom } from 'jotai';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
+import { isDesktop } from 'react-device-detect';
+import { FaStar } from 'react-icons/fa6';
+import { toast } from 'sonner';
 import ChannelCardModal from '../modal/ChannelCardModal';
 import * as styles from './channelCard.css';
-import { isDesktop } from 'react-device-detect';
 
 type ChannelItemProps = {
   content: ChannelsDataType;
+  session: Session | null;
 };
 
-export default function ChannelItem({ content }: ChannelItemProps) {
-  const { channelName, snippet, url, statistics } = content;
+export default function ChannelItem({ content, session }: ChannelItemProps) {
+  const { channelName, snippet, url, statistics, uid } = content;
   const title = snippet.title ?? '';
   const imageURL = snippet.thumbnails?.default?.url ?? '/loading.png';
   const description = snippet.description ?? '비공개';
@@ -24,6 +32,10 @@ export default function ChannelItem({ content }: ChannelItemProps) {
   const videoCount = statistics.videoCount ?? '비공개';
 
   const modalStore = useModalStore();
+  const [whitelist] = useAtom(whitelistAtom);
+
+  const mutatePostFavorite = usePostWhitelist();
+  const mutateDeleteFavorite = useMutateWhitelist();
 
   const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) => {
     e.stopPropagation();
@@ -62,6 +74,24 @@ export default function ChannelItem({ content }: ChannelItemProps) {
     });
   };
 
+  const handleFavorite = (e: MouseEvent<HTMLButtonElement>) => {
+    if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
+
+    if (!isFavorite && confirm('즐겨찾기에 추가하시겠습니까?')) {
+      mutatePostFavorite.mutate({
+        accessToken: session.user.accessToken,
+        channelId: uid,
+      });
+    } else if (isFavorite && confirm('즐겨찾기에서 제거하시겠습니까?')) {
+      mutateDeleteFavorite.mutate({
+        accessToken: session.user.accessToken,
+        channelId: uid,
+      });
+    }
+  };
+
+  const isFavorite = whitelist.has(uid);
+
   return (
     <div className={styles.channelCard}>
       <a className={styles.linkToChannel} href={url} onClick={linkClickEvent}>
@@ -78,7 +108,15 @@ export default function ChannelItem({ content }: ChannelItemProps) {
         </div>
       </a>
       <div className={styles.desc}>
-        <h3 className={styles.title}>{channelName}</h3>
+        <div className={styles.title}>
+          <h3>{channelName}</h3>
+          <button
+            onClick={handleFavorite}
+            disabled={mutatePostFavorite.isPending || mutateDeleteFavorite.isPending}
+          >
+            <FaStar size="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
+          </button>
+        </div>
         <div className={styles.details}>
           <p className={styles.descContent}>
             <span className={styles.descContentLabel}>구독자</span> {subscribe}

@@ -1,6 +1,6 @@
 'use client';
 import dayjs from '@/model/dayjs';
-import { useSearchQuery } from '@inner/_lib/getSearch';
+import { useSearchQuery } from '@inner/(pip)/search/getSearch';
 import { gtag } from '@inner/_lib/gtag';
 import { replaceSpecialCharacters } from '@inner/_lib/regexp';
 import Input from '@inner/_component/input/Input';

@@ -84,7 +84,7 @@ export const searchBox = style({
   color: 'black',
   display: 'none',
   ...responsive({
-    lg: {
+    md: {
       display: 'block',
     },
   }),

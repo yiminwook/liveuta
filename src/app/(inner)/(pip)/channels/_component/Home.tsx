@@ -3,6 +3,7 @@ import ChannelSection from './ChannelSection';
 import PaginationBox from './PaginationBox';
 import * as styles from './home.css';
 import Nav from './Nav';
+import { auth } from '@/model/nextAuth';
 
 type HomeProps = {
   currentPage: number;
@@ -10,12 +11,13 @@ type HomeProps = {
 };
 
 export default async function Home({ currentPage, query }: HomeProps) {
+  const session = await auth();
   const { totalLength, contents } = await getChannelData(currentPage, { query });
 
   return (
     <div className={styles.inner}>
       <Nav />
-      <ChannelSection contents={contents} />
+      <ChannelSection contents={contents} session={session} />
       <PaginationBox totalLength={totalLength} currentPage={currentPage} query={query} />
     </div>
   );

@@ -12,13 +12,15 @@ import MainLoading from './loading/MainLoading';
 type HomeDataObserverProps = {
   filter: keyof ScheduleAPIReturntype;
   select: VideoType;
+  query: string | undefined;
 };
 
-export default function HomeDataObserver({ filter, select }: HomeDataObserverProps) {
+export default function HomeDataObserver({ filter, select, query }: HomeDataObserverProps) {
   const [option] = useAtom(schedule.scheduleOptionAtom);
   const setSchedule = useSetAtom(schedule.scheduleAtom);
   const setSelect = useSetAtom(schedule.selectAtom);
   const setFilter = useSetAtom(schedule.filterAtom);
+  const setQuery = useSetAtom(schedule.queryAtom);
 
   // schedule observer
   const { data, isLoading } = useQuery({
@@ -36,6 +38,11 @@ export default function HomeDataObserver({ filter, select }: HomeDataObserverPro
     setFilter(() => filter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
+
+  useLayoutEffect(() => {
+    setQuery(() => query || '');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
 
   useEffect(() => {
     if (data) setSchedule(() => data);

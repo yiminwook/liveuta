@@ -23,7 +23,7 @@ export const input = style({
 });
 
 export const button = style({
-  backgroundColor: global.color.third.default,
+  backgroundColor: global.color.second.default,
   color: '#fff',
   width: '4rem',
 });

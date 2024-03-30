@@ -18,7 +18,7 @@ import { MdBlock, MdOpenInNew } from 'react-icons/md';
 import { toast } from 'sonner';
 import CopyButton from '../button/CopyButton';
 import * as styles from './card.css';
-import { postWhitelist } from '@inner/_action/whitelist';
+import usePostWhitelist from '@/hook/usePostWhitelist';
 
 type CardNavProps = {
   content: ContentsDataType;
@@ -68,30 +68,8 @@ export default function CardNav({ content, session }: CardNavProps) {
     },
   });
 
-  const mutatePostFavorite = useMutation({
-    mutationKey: ['postWhitelist'],
-    mutationFn: postWhitelist,
-    onSuccess: (res) => {
-      if (!res.result) {
-        toast.error(res.message);
-        queryClient.invalidateQueries({ queryKey: ['whitelist'] });
-      } else {
-        toast.success(res.message);
-        if (queryClient.getQueryData(['whitelist'])) {
-          queryClient.setQueryData(['whitelist'], (prev: string[]) => {
-            return [...prev, res.result];
-          });
-        }
-      }
-    },
-    onError: () => {
-      toast.error('서버에러가 발생했습니다. 잠시후 다시 시도해주세요.');
-    },
-  });
-
+  const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
-
-  const isFavorite = whitelist.has(content.channelId);
 
   const handleReserve = async (e: MouseEvent<HTMLButtonElement>) => {
     const token = await generateFcmToken();
@@ -150,6 +128,7 @@ export default function CardNav({ content, session }: CardNavProps) {
     openWindow(videoUrl);
   };
 
+  const isFavorite = whitelist.has(content.channelId);
   const videoUrl = generateVideoUrl(content.videoId);
   const thumbnailUrl = generateThumbnail(content.videoId, 'mqdefault');
 

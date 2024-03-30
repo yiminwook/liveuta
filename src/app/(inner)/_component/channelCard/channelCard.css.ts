@@ -42,6 +42,8 @@ export const title = style({
   fontSize: '1.25rem',
   fontWeight: 500,
   marginBottom: '0.25rem',
+  display: 'flex',
+  gap: '0.5rem',
 });
 
 export const details = style([

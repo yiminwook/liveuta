@@ -7,7 +7,7 @@ import {
   responsive,
   textLine,
 } from '@/style/var';
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 
 export const navSection = style([
   {
@@ -19,6 +19,7 @@ export const navSection = style([
     fontWeight: 500,
     maxWidth: BREAK_POINT.full,
     padding: '0.5rem',
+    gap: '0.5rem',
     justifyContent: 'space-between',
   },
   responsive({
@@ -59,7 +60,10 @@ export const navTabBox = style([
   }),
 ]);
 
-export const right = style({});
+export const right = style({
+  display: 'flex',
+  gap: '0.5rem',
+});
 
 export const mobileNavButton = style([
   {
@@ -79,7 +83,7 @@ export const mobileNavButton = style([
     },
   },
   responsive({
-    sm: {
+    md: {
       display: 'none',
     },
   }),

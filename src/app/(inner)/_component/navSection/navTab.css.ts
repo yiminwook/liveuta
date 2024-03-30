@@ -20,7 +20,8 @@ export const link = style([
     transition: 'background-color 0.2s linear',
     cursor: 'pointer',
     ':hover': {
-      color: global.color.third.default,
+      backgroundColor: global.color.second.default,
+      color: '#fff',
     },
     selectors: {
       '&:focus-visible': {

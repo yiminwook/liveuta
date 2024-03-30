@@ -13,7 +13,7 @@ export const wrap = style({
 export const navButton = style({
   boxShadow: BOX_SHADOW,
   color: '#fff',
-  backgroundColor: global.color.third.default,
+  backgroundColor: global.color.second.default,
   width: '4.5rem',
   height: '2rem',
   display: 'flex',

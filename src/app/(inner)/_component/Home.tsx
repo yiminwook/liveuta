@@ -10,15 +10,16 @@ const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 
 type HomeProps = {
   filter: keyof ScheduleAPIReturntype;
+  query: string | undefined;
 };
 
-export default async function Home({ filter }: HomeProps) {
+export default async function Home({ filter, query }: HomeProps) {
   const { select } = await getCookies();
   const session = await auth();
 
   return (
     <>
-      <HomeDataObserver filter={filter} select={select} />
+      <HomeDataObserver filter={filter} select={select} query={query} />
       <NavSection />
       <TopSection filter={filter} />
       <ScheduleSection session={session} />

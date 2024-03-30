@@ -4,6 +4,7 @@ import * as styles from './mobileNavModal.css';
 import NavTab from '../navSection/NavTab';
 import VideoTypeRadio from '../navSection/VideoTypeRadio';
 import { useEffect } from 'react';
+import SearchInput from '../header/SearchInput';
 
 const MOBILE_NAV_MODAL_ID = 'mobileNavModal';
 
@@ -22,6 +23,7 @@ export default function MobileNavModal({ onClose }: ModalBaseProps) {
         <div className={styles.navTabBox}>
           <NavTab />
         </div>
+        <SearchInput />
         <VideoTypeRadio />
       </div>
     </Modal>
