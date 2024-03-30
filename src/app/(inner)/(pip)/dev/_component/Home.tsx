@@ -1,11 +1,12 @@
 'use client';
-import Settings from './settings.module.scss';
 import { useEffect, useState } from 'react';
 import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import PostBox from '@inner/(pip)/dev/_component/PostBox';
 import TokenBox from '@inner/(pip)/dev/_component/TokenBox';
 import { TokenType } from '@/type';
 import { toast } from 'sonner';
+import * as styles from './home.css';
+import cx from 'classnames';
 
 export default function Home() {
   const [token, setToken] = useState<TokenType>(null);
@@ -55,16 +56,20 @@ export default function Home() {
 
   return (
     <>
-      <section className={Settings['section']}>
-        <div className={Settings['permission-box']}>
+      <section className={styles.wrap}>
+        <div className={cx(styles.box, styles.permissionBox)}>
           <div>
             알림허용설정 여부: <b>{permission}</b>
           </div>
-          <button onClick={requerstPermission}>요청</button>
+          <button className={styles.button} onClick={requerstPermission}>
+            요청
+          </button>
         </div>
-        <div className={Settings['token-box']}>
-          <label htmlFor="token">SW Token</label>
-          <div>
+        <div className={cx(styles.box)}>
+          <label className={styles.tokenLabel} htmlFor="token">
+            SW Token
+          </label>
+          <div className={styles.tokenBox}>
             <TokenBox token={token} />
           </div>
         </div>
