@@ -2,9 +2,9 @@ import { ChannelsDataType } from '@/type/api/youtube';
 import ChannelCard from '@inner/_component/channelCard/ChannelCard';
 import * as styles from './home.css';
 
-interface ChannelSectionProps {
+type ChannelSectionProps = {
   contents: ChannelsDataType[];
-}
+};
 
 export default function ChannelSection({ contents }: ChannelSectionProps) {
   return (

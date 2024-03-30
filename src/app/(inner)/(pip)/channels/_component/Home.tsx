@@ -1,28 +1,22 @@
-'use client';
-import { ChannelsDataType } from '@/type/api/youtube';
-import Pagination from '@inner/_component/Pagination';
+import getChannelData from '../_lib/getChannelData';
 import ChannelSection from './ChannelSection';
-import { useRouter } from 'next/navigation';
-import { ITEMS_PER_PAGE } from '@/const';
+import PaginationBox from './PaginationBox';
+import * as styles from './home.css';
+import Nav from './Nav';
 
-interface HomeProps {
-  totalLength: number;
-  contents: ChannelsDataType[];
+type HomeProps = {
   currentPage: number;
-}
+  query: string | undefined;
+};
 
-export default function Home({ totalLength, contents, currentPage }: HomeProps) {
-  const router = useRouter();
+export default async function Home({ currentPage, query }: HomeProps) {
+  const { totalLength, contents } = await getChannelData(currentPage, { query });
+
   return (
-    <>
+    <div className={styles.inner}>
+      <Nav />
       <ChannelSection contents={contents} />
-      <Pagination
-        count={totalLength}
-        pageSize={ITEMS_PER_PAGE}
-        sliblingCount={2}
-        currentPage={currentPage}
-        onPageChange={(page) => router.push(`/channels?page=${page}`)}
-      />
-    </>
+      <PaginationBox totalLength={totalLength} currentPage={currentPage} query={query} />
+    </div>
   );
 }

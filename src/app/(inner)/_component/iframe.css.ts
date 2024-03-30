@@ -34,6 +34,7 @@ export const openButton = style({
   backgroundColor: global.color.third.default,
   border: `2px solid #fff`,
   boxShadow: BOX_SHADOW,
+  letterSpacing: 1,
   transition: `background-color 0.8s ${BEZIER_CURVE}`,
   ':hover': {
     backgroundColor: global.color.first.darken,

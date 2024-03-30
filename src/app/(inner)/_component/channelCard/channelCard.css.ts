@@ -7,26 +7,13 @@ export const channelCard = style([
     display: 'flex',
     gap: '0.75rem',
     padding: '0.75rem',
-    borderRadius: '15px',
-    backgroundColor: '#fff',
-    cursor: 'pointer',
     transitionProperty: 'scale',
     transitionDuration: '0.2s',
     transitionTimingFunction: 'ease-in-out',
-    color: '#000',
-    ':hover': {
-      scale: 1.02,
-    },
+    borderBottom: `1px solid #f0f0f0`,
+    ':hover': {},
   },
-  responsive({
-    md: {
-      width: '17rem',
-      margin: '0 auto',
-    },
-    full: {
-      width: '20rem',
-    },
-  }),
+  responsive({}),
 ]);
 
 export const linkToChannel = style({});
@@ -53,12 +40,22 @@ export const descContentLabel = style({
 
 export const title = style({
   fontSize: '1.25rem',
+  fontWeight: 500,
+  marginBottom: '0.25rem',
 });
 
-export const details = style({
-  display: 'flex',
-  flexDirection: 'column',
-});
+export const details = style([
+  {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+  },
+  responsive({
+    sm: {
+      flexDirection: 'row',
+    },
+  }),
+]);
 
 export const originalTitle = style({
   fontSize: '1rem',

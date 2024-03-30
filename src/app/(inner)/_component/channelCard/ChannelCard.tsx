@@ -2,7 +2,6 @@
 import { DEFAULT_BLUR_BASE64 } from '@/const';
 import useModalStore from '@/hook/useModalStore';
 import { ChannelsDataType } from '@/type/api/youtube';
-import CopyButton from '@inner/_component/button/CopyButton';
 import { gtagClick, gtagClickAtag } from '@inner/_lib/gtag';
 import { renderSubscribe } from '@inner/_lib/renderSubscribe';
 import { openWindow } from '@inner/_lib/windowEvent';
@@ -10,10 +9,11 @@ import Image from 'next/image';
 import { MouseEvent } from 'react';
 import ChannelCardModal from '../modal/ChannelCardModal';
 import * as styles from './channelCard.css';
+import { isDesktop } from 'react-device-detect';
 
-interface ChannelItemProps {
+type ChannelItemProps = {
   content: ChannelsDataType;
-}
+};
 
 export default function ChannelItem({ content }: ChannelItemProps) {
   const { channelName, snippet, url, statistics } = content;
@@ -27,12 +27,18 @@ export default function ChannelItem({ content }: ChannelItemProps) {
 
   const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) => {
     e.stopPropagation();
-    return gtagClickAtag(e, {
-      target: 'channelCard',
-      content: channelName,
-      detail: title,
-      action: 'atag',
-    });
+
+    if (isDesktop) {
+      e.preventDefault();
+      return openWindow(url);
+    } else {
+      return gtagClickAtag(e, {
+        target: 'channelCard',
+        content: channelName,
+        detail: title,
+        action: 'atag',
+      });
+    }
   };
 
   const openModal = async (e: MouseEvent) => {
@@ -56,14 +62,8 @@ export default function ChannelItem({ content }: ChannelItemProps) {
     });
   };
 
-  const handleOpenWindow = (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    openWindow(url);
-  };
-
   return (
-    <div className={styles.channelCard} onClick={openModal}>
+    <div className={styles.channelCard}>
       <a className={styles.linkToChannel} href={url} onClick={linkClickEvent}>
         <div className={styles.imageContainer}>
           <Image
@@ -78,18 +78,17 @@ export default function ChannelItem({ content }: ChannelItemProps) {
         </div>
       </a>
       <div className={styles.desc}>
-        <h1 className={styles.title}>{channelName}</h1>
+        <h3 className={styles.title}>{channelName}</h3>
         <div className={styles.details}>
-          {/* <h2 className={styles.originalTitle}>{title}</h2> */}
           <p className={styles.descContent}>
             <span className={styles.descContentLabel}>구독자</span> {subscribe}
           </p>
           <p className={styles.descContent}>
             <span className={styles.descContentLabel}>동영상</span> {videoCount}
+            <span>개</span>
           </p>
           <div className={styles.link}>
-            <button onClick={handleOpenWindow}>유투브 채널</button>
-            <CopyButton value={url} size={'0.8rem'} />
+            <button onClick={openModal}>+ 상세보기</button>
           </div>
         </div>
       </div>

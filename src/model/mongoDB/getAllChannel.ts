@@ -20,6 +20,24 @@ export const getAllChannel = async () => {
   });
 };
 
+export const searchChannel = async (query: string) => {
+  const trimedQuery = query.trim();
+  if (trimedQuery === '') {
+    return [];
+  } else {
+    const regexforDBQuery = { $regex: trimedQuery, $options: 'i' };
+    const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
+    const channels = await db
+      .find<ChannelDocument>({ name_kor: regexforDBQuery })
+      .sort({ name_kor: 1 })
+      .toArray();
+    return channels.map<ChannelData>((channel) => {
+      delete channel._id;
+      return channel;
+    });
+  }
+};
+
 export const parseChannel = (channel: ChannelDocument | null) => ({
   channelId: channel?.channel_id || 'no data',
   channelAddr: channel?.channel_addr || 'no data',
