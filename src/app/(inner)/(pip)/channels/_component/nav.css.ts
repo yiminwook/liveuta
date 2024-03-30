@@ -13,29 +13,32 @@ export const wrap = style({
 export const form = style({
   display: 'flex',
   backgroundColor: '#fff',
+  alignItems: 'center',
   borderRadius: 5,
-  overflow: 'hidden',
   height: '2.5rem',
   width: '12.5rem',
+  padding: '0.25rem',
 });
 
 export const input = style({
-  padding: '0.25rem 1rem',
   width: '100%',
+  background: 'none',
+  paddingLeft: '0.25rem',
+  color: '#000',
 });
 
 export const submitButton = style([
   flexCenter,
   {
-    width: '2.5rem',
-    height: '2.5rem',
-    flex: '0 0 2.5rem',
-    backgroundColor: global.color.second.default,
+    width: '2rem',
+    height: '2rem',
+    flex: '0 0 2rem',
     borderRadius: 5,
+    backgroundColor: global.color.second.default,
     transition: `background-color 0.8s ${BEZIER_CURVE}`,
     letterSpacing: 1,
     ':hover': {
-      backgroundColor: global.color.first.darken,
+      backgroundColor: global.color.second.lighter,
     },
   },
 ]);
@@ -52,6 +55,6 @@ export const button = style({
   transition: `background-color 0.8s ${BEZIER_CURVE}`,
   letterSpacing: 1,
   ':hover': {
-    backgroundColor: global.color.first.darken,
+    backgroundColor: global.color.second.lighter,
   },
 });

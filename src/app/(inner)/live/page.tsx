@@ -1,5 +1,12 @@
 import Home from '@inner/_component/Home';
 
-export default async function Page() {
-  return <Home filter="live" />;
+type Props = {
+  searchParams: {
+    q?: string;
+  };
+};
+
+export default async function Page({ searchParams }: Props) {
+  const query = searchParams.q?.trim();
+  return <Home filter="live" query={query} />;
 }
