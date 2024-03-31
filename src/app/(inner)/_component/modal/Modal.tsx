@@ -7,13 +7,13 @@ import { GrClose } from 'react-icons/gr';
 import * as styles from './modal.css';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-interface ModalProps {
+type ModalProps = {
   id: string;
   title?: string;
   children: ReactNode;
   style?: CSSProperties;
   onClose: (e?: any) => void;
-}
+};
 
 const Modal = ({ id, children, title, onClose }: ModalProps) => {
   const { enableScope, disableScope, enabledScopes } = useHotkeysContext();
@@ -47,16 +47,25 @@ const Modal = ({ id, children, title, onClose }: ModalProps) => {
         onOpenChange={handleClose}
         unmountOnExit={true}
         preventScroll={false}
-        closeOnInteractOutside={false}
+        closeOnInteractOutside={true}
         closeOnEscapeKeyDown={false}
       >
         <Backdrop activeParticles={false} />
-        <OutsideClickHandler onOutsideClick={onClose}>
+        <OutsideClickHandler
+          onOutsideClick={() => {
+            if (confirm('outside')) onClose();
+          }}
+        >
           <Dialog.Positioner className={styles.position}>
             <Dialog.Content className={styles.content}>
               {title && <Dialog.Title className={styles.title}>{title}</Dialog.Title>}
               <Dialog.Description className={styles.desc}>{children}</Dialog.Description>
-              <Dialog.CloseTrigger className={styles.closeTrigger} onClick={onClose}>
+              <Dialog.CloseTrigger
+                className={styles.closeTrigger}
+                onClick={() => {
+                  if (confirm('closebuttonEvent')) onClose();
+                }}
+              >
                 <GrClose size="1.5rem" color="inherit" />
               </Dialog.CloseTrigger>
             </Dialog.Content>
