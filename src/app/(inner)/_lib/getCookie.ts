@@ -1,3 +1,4 @@
+import { GlobalTheme, theme1 } from '@/style/theme';
 import { Promised, VideoType, ThemeType } from '@/type';
 import { cookies } from 'next/headers';
 

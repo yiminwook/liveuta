@@ -95,6 +95,8 @@ export const loginButton = style([
     display: 'block',
     borderRadius: 5,
     padding: '0.25rem 0.5rem',
+    width: '3.75rem',
+    textAlign: 'center',
     backgroundColor: global.color.third.default,
     color: '#fff',
     transition: `background-color 0.8s ${BEZIER_CURVE}`,

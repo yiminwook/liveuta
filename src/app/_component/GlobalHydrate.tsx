@@ -2,17 +2,20 @@
 import { useHydrateAtoms } from 'jotai/utils';
 import { themeAtom, themeStyleAtom } from '@/app/_lib/atom';
 import { GetCookiesReturnType } from '@inner/_lib/getCookie';
-import * as styles from '@/style/globalTheme.css';
+import * as themes from '@/style/theme';
 
-interface GlobalHydrateProps {
+type GlobalHydrateProps = {
   children: React.ReactNode;
   cookies: GetCookiesReturnType;
-}
+};
 
 export default function GlobalHydrate({ children, cookies }: GlobalHydrateProps) {
+  const theme = cookies.theme;
+  const themeStyle = theme === 'theme6' ? themes['theme1'] : themes[theme];
+
   useHydrateAtoms([
-    [themeAtom, cookies.theme],
-    [themeStyleAtom, styles[cookies.theme]],
+    [themeAtom, theme],
+    [themeStyleAtom, themeStyle],
   ]);
 
   return <>{children}</>;

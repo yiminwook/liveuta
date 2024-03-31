@@ -1,9 +1,11 @@
 'use client';
-import * as themeStyles from '@/style/globalTheme.css';
+import { global } from '@/style/globalTheme.css';
+import * as themes from '@/style/theme';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useAtom } from 'jotai';
+import { useEffect } from 'react';
 import { themeAtom, themeStyleAtom } from '../_lib/atom';
-import { useLayoutEffect } from 'react';
+import getCurrentTheme from '../_lib/getCustomTheme';
 
 type Props = {
   children: React.ReactNode;
@@ -11,22 +13,33 @@ type Props = {
 
 export default function ThemeProvider({ children }: Props) {
   const [currTheme] = useAtom(themeAtom);
-  const [currThemeStyle, setCurrTheme] = useAtom(themeStyleAtom);
+  const [currThemeStyle, setCurrThemeStyle] = useAtom(themeStyleAtom);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // :root
     document.documentElement.style.setProperty(
       '--liveuta-bg-color',
-      themeStyles[currTheme].color.first.default,
+      currThemeStyle?.color?.first?.default,
     );
     document.documentElement.style.setProperty(
       '--liveuta-scroll-color',
-      themeStyles[currTheme].color.third.default,
+      currThemeStyle?.color?.third?.default,
     );
-    // div
-    setCurrTheme(() => themeStyles[currTheme]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currThemeStyle]);
+
+  useEffect(() => {
+    setCurrThemeStyle((pre) => {
+      if (currTheme === 'theme6') {
+        const customTheme = getCurrentTheme();
+        if (customTheme) return customTheme;
+        else return pre;
+      } else {
+        return themes[currTheme];
+      }
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currTheme]);
 
-  return <div style={assignInlineVars(themeStyles.global, currThemeStyle)}>{children}</div>;
+  return <div style={assignInlineVars(global, currThemeStyle)}>{children}</div>;
 }
