@@ -5,6 +5,7 @@ import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 import { Dialog, DialogOpenChangeDetails } from '@ark-ui/react';
 import { GrClose } from 'react-icons/gr';
 import * as styles from './modal.css';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 interface ModalProps {
   id: string;
@@ -46,19 +47,21 @@ const Modal = ({ id, children, title, onClose }: ModalProps) => {
         onOpenChange={handleClose}
         unmountOnExit={true}
         preventScroll={false}
-        closeOnInteractOutside={true}
+        closeOnInteractOutside={false}
         closeOnEscapeKeyDown={false}
       >
         <Backdrop activeParticles={false} />
-        <Dialog.Positioner className={styles.position}>
-          <Dialog.Content className={styles.content}>
-            {title && <Dialog.Title className={styles.title}>{title}</Dialog.Title>}
-            <Dialog.Description className={styles.desc}>{children}</Dialog.Description>
-            <Dialog.CloseTrigger className={styles.closeTrigger} onClick={onClose}>
-              <GrClose size="1.5rem" color="inherit" />
-            </Dialog.CloseTrigger>
-          </Dialog.Content>
-        </Dialog.Positioner>
+        <OutsideClickHandler onOutsideClick={onClose}>
+          <Dialog.Positioner className={styles.position}>
+            <Dialog.Content className={styles.content}>
+              {title && <Dialog.Title className={styles.title}>{title}</Dialog.Title>}
+              <Dialog.Description className={styles.desc}>{children}</Dialog.Description>
+              <Dialog.CloseTrigger className={styles.closeTrigger} onClick={onClose}>
+                <GrClose size="1.5rem" color="inherit" />
+              </Dialog.CloseTrigger>
+            </Dialog.Content>
+          </Dialog.Positioner>
+        </OutsideClickHandler>
       </Dialog.Root>
     </RemoveScroll>
   );

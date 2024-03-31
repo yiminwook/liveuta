@@ -10,6 +10,7 @@ export const wrap = style([
     borderRadius: 30,
     boxShadow: 'rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset',
     padding: '0.25rem',
+    border: '1px solid #e0e0e0',
   },
 ]);
 

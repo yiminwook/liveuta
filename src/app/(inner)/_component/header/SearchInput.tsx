@@ -1,9 +1,9 @@
-import { ChangeEvent, CSSProperties, FormEvent, useState } from 'react';
-import { IoMdMusicalNote } from 'react-icons/io';
-import * as styles from '../input/searchInput.css';
 import dayjs from '@/model/dayjs';
 import { gtag } from '@inner/_lib/gtag';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { IoMdMusicalNote } from 'react-icons/io';
+import * as styles from './searchInput.css';
 
 type SearchInputProps = {
   disabled?: boolean;
