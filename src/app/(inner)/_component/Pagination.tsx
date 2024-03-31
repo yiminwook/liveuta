@@ -30,9 +30,11 @@ export default function Pagination({
 
   if (currentPage > Math.ceil(count / pageSize)) {
     return (
-      <div onClick={() => router.back()}>
+      <div>
         <p>조회된 페이지가 없습니다.</p>
-        <p>뒤로 돌아가기</p>
+        <button className={styles.backButton} onClick={() => router.back()}>
+          뒤로 돌아가기
+        </button>
       </div>
     );
   }

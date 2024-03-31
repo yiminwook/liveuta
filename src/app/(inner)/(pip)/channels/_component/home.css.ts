@@ -15,11 +15,7 @@ export const channelSection = style([
 ]);
 
 export const alert = style({
-  position: 'absolute',
-  top: '1rem',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  fontSize: '1.5rem',
+  fontSize: '1.1rem',
   fontWeight: 600,
 });
 

@@ -20,6 +20,7 @@ export const input = style({
   height: '2rem',
   padding: '0.5rem',
   width: '100%',
+  color: '#000',
 });
 
 export const button = style({

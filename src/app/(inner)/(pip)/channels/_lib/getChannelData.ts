@@ -30,10 +30,6 @@ export default async function getChannelData(
 
   disconnectMongoDB();
 
-  if (combinedSearchDataValues.length === 0) {
-    notFound();
-  }
-
   return {
     totalLength: channels.length,
     contents: combinedSearchDataValues,

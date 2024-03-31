@@ -1,4 +1,5 @@
 import { global } from '@/style/globalTheme.css';
+import { BEZIER_CURVE } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 
 export const wrap = style({
@@ -25,4 +26,15 @@ export const item = style({
 export const active = style({
   color: global.color.third.default,
   cursor: 'default',
+});
+
+export const backButton = style({
+  margin: '1rem auto',
+  borderRadius: 5,
+  padding: '0.5rem 1rem',
+  backgroundColor: global.color.second.default,
+  transition: `background-color 0.3s ${BEZIER_CURVE}`,
+  ':hover': {
+    backgroundColor: global.color.second.lighter,
+  },
 });

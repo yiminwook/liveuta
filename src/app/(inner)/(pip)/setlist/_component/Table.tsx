@@ -10,6 +10,7 @@ import Row from './Row';
 import * as styles from './table.css';
 import { GET } from '@inner/_action/setlist';
 import { Session } from 'next-auth';
+import Nodata from '@inner/_component/Nodata';
 
 type TableProps = {
   searchParams: {
@@ -46,13 +47,7 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
 
   if (isLoading) return <Loading />;
 
-  if (!data) {
-    return (
-      <div>
-        <div>검색 결과가 없습니다.</div>
-      </div>
-    );
-  }
+  if (!data) return <Nodata />;
 
   return (
     <div>
@@ -74,6 +69,7 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
               order={searchParams.order}
             />
           ))}
+          {data.list.length === 0 && <Nodata />}
         </div>
         <div className={styles.pagenationBox}>
           <Pagination

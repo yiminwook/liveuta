@@ -1,13 +1,15 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import * as styles from './nav.css';
 import { useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { useMediaQuery } from 'react-responsive';
 import { BREAK_POINT } from '@/style/var';
+
 export default function Nav() {
+  const searchParams = useSearchParams();
   const router = useRouter();
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(searchParams.get('q') || '');
   const isMobile = useMediaQuery({ query: `(max-width: ${BREAK_POINT.sm}px)` });
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
