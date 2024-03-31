@@ -29,10 +29,6 @@ export const whitelistAtom = atom<Set<string>>(new Set([]));
 /** 블랙리스트를 제외할지, 화이트리스트만 보여줄지 여부 */
 export const toggleBlacklistAtom = atom(true);
 
-toggleBlacklistAtom.onMount = (set) => {
-  set(() => localStorage.getItem('favorite') !== 'true');
-};
-
 export const selectedScheduleAtom = atom((get) => {
   const schedule = get(scheduleAtom);
   const filter = get(filterAtom);

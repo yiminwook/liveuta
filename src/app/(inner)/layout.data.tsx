@@ -1,7 +1,7 @@
 'use client';
 import { getAllChannelList } from '@inner/_action/channelList';
 import { getAllBlacklist } from '@inner/_action/blacklist';
-import { blacklistAtom, whitelistAtom } from '@inner/_lib/atom/schedule';
+import { blacklistAtom, toggleBlacklistAtom, whitelistAtom } from '@inner/_lib/atom/schedule';
 import serverActionHandler from '@inner/_lib/serverActionHandler';
 import { useIsFetching, useIsMutating, useQueries } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
@@ -20,6 +20,7 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
   const setChannelList = useSetAtom(channelListAtom);
   const setBlacklist = useSetAtom(blacklistAtom);
   const setWhitelist = useSetAtom(whitelistAtom);
+  const setToggleBlacklist = useSetAtom(toggleBlacklistAtom);
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
   const status = useScheduleStatus();
@@ -86,6 +87,16 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
       toast.dismiss('loading');
     }
   }, [status, isFetching, isMutating]);
+
+  useLayoutEffect(() => {
+    if (session) {
+      // 세션이 있을때만 로컬스토리지에서 즐겨찾기 상태를 가져옴
+      setToggleBlacklist(() => {
+        return localStorage.getItem('favorite') !== 'true';
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return null;
 }
