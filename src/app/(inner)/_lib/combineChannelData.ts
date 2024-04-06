@@ -17,8 +17,13 @@ export const combineChannelData = async (
 ): Promise<ChannelsDataType[]> => {
   const idArr = [...Object.keys(sheetData)];
   if (idArr.length <= 0) return [];
+
   const youtubeData = await getYoutubeChannels(idArr);
-  if (!youtubeData.items) throw new Error('No YoutubeData Items');
+
+  if (!youtubeData.items) {
+    console.warn('youtube api로 조회되지 않는 id', idArr.toString());
+    return [];
+  }
 
   const combinedSearchData: (youtube_v3.Schema$Channel & ChannelSheetDataType[string])[] = [];
 
