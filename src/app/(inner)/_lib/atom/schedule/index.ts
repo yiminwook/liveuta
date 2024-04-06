@@ -100,4 +100,5 @@ if (process.env.NODE_ENV === 'development') {
   selectedScheduleAtom.debugLabel = 'selectedScheduleAtom';
   blacklistAtom.debugLabel = 'blackListAtom';
   whitelistAtom.debugLabel = 'whiteListAtom';
+  toggleBlacklistAtom.debugLabel = 'toggleBlacklistAtom';
 }

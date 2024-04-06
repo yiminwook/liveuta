@@ -16,7 +16,7 @@ export default function ToggleFavorite() {
 
   return (
     <button className={styles.favoriteButton} onClick={handleToggle}>
-      <FaStar size="1.2rem" color={!toggleBlacklist ? '#ffbb00' : '#a7a7a7'} />
+      <FaStar size="1.2rem" color={toggleBlacklist ? '#a7a7a7' : '#ffbb00'} />
     </button>
   );
 }

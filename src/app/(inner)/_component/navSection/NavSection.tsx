@@ -1,10 +1,12 @@
 import { auth } from '@/model/nextAuth';
+import dynamic from 'next/dynamic';
 import MobileNavButton from './MobileNavButton';
 import NavTab from './NavTab';
 import QueryButton from './QueryButton';
-import ToggleFavorite from './ToggleFavorite';
 import VideoTypeSelect from './VideoTypeSelect';
 import * as styles from './navSection.css';
+
+const ToggleFavorite = dynamic(() => import('./ToggleFavorite'), { ssr: false });
 
 export default async function NavSection() {
   const session = await auth();
