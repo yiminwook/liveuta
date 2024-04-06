@@ -1,14 +1,16 @@
 'use client';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/const';
 import { ContentsDataType } from '@/type/api/mongoDB';
-import dynamic from 'next/dynamic';
-import { use, useEffect, useState } from 'react';
-import InterSectionTrigger from './InterSectionTrigger';
-import ScheduleCard from './scheduleCard/Card';
-import * as cardStyles from './scheduleCard/card.css';
-import { useAtom } from 'jotai';
 import { schedule } from '@inner/_lib/atom';
+import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import InterSectionTrigger from './InterSectionTrigger';
+import Nodata from './Nodata';
+import ScheduleCard from './scheduleCard/Card';
+import * as styles from './scheduleCard/card.css';
 
 const CardPlaceHolders = dynamic(() => import('./scheduleCard/CardPlaceHolders'), { ssr: false });
 
@@ -21,6 +23,7 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
   const [scrollPage, setScrollPage] = useState(1);
   const [selectedData] = useAtom(schedule.selectedScheduleAtom);
   const [filter] = useAtom(schedule.filterAtom);
+  const [query] = useAtom(schedule.queryAtom);
 
   const isDone = loadContents.length >= selectedData.content.length;
 
@@ -52,9 +55,23 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
+  if (query && selectedData.content.length === 0) {
+    // 검색 결과가 없을 때
+    return (
+      <section>
+        <Nodata />
+        <div className={styles.nodataLinkBox}>
+          <Link className={styles.nodataLink} href={`/channels?q=${query}`}>
+            {`채널페이지에서 검색`}
+          </Link>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section>
-      <div className={cardStyles.cardList}>
+      <div className={styles.cardList}>
         {loadContents.map((data) => (
           <ScheduleCard session={session} key={`scheduleCard_${data.videoId}`} content={data} />
         ))}

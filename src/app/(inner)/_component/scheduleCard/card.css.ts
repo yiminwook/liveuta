@@ -251,3 +251,13 @@ export const cardPlaceHolder = style([
     },
   }),
 ]);
+
+export const nodataLinkBox = style([flexCenter]);
+
+export const nodataLink = style([
+  {
+    fontSize: '1.25rem',
+    letterSpacing: 1.1,
+    color: global.color.text.active,
+  },
+]);
