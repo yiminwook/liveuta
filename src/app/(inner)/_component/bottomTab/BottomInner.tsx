@@ -76,7 +76,7 @@ export default function BottomInner() {
           </Link>
         </li>
         <li>
-          <Link href="/channels">
+          <Link href="/channel">
             <div className={styles.item}>
               <CgUserlane size="1.5rem" />
               <span>채널</span>
