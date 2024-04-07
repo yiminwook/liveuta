@@ -17,7 +17,7 @@ export default function PaginationBox({ currentPage, totalLength, query }: Pagin
     const searchParams = new URLSearchParams();
     if (query) searchParams.set('q', query);
     searchParams.set('page', page.toString());
-    router.push(`/channels?${searchParams.toString()}`);
+    router.push(`/channel?${searchParams.toString()}`);
   };
 
   return (

@@ -35,7 +35,7 @@ export const ORIGIN = 'liveuta.vercel.app';
 
 export const INTERNAL_LINKS = [
   { href: '/', text: '홈' },
-  { href: '/channels', text: '채널' },
+  { href: '/channel', text: '채널' },
   { href: '/setlist', text: '세트리' },
   { href: '/setting', text: '설정' },
   { href: '/dev', text: '개발' },

@@ -19,7 +19,7 @@ export default function Nav() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const trimmedInput = input.trim();
-    router.push(`/channels?q=${trimmedInput}`);
+    router.push(`/channel?q=${trimmedInput}`);
   };
 
   return (
