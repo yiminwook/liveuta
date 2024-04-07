@@ -19,22 +19,12 @@ export default function NavTab() {
 
   const handleValueChange = ({ value }: SegmentGroupValueChangeDetails) => {
     const query = new URLSearchParams(searchParams);
-    switch (value) {
-      case 'live':
-        router.push('/live');
-        break;
-      case 'daily':
-        query.set('tab', 'daily');
-        router.push(`/?${query.toString()}`);
-        break;
-      case 'all':
-        query.set('tab', 'all');
-        router.push(`/?${query.toString()}`);
-        break;
-      default:
-        query.delete('tab');
-        router.push(`/?${query.toString()}`);
+    if (value === 'scheduled') {
+      query.delete('tab');
+    } else {
+      query.set('tab', value);
     }
+    router.push(`/?${query.toString()}`);
   };
 
   return (

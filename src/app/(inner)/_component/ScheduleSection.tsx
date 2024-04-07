@@ -11,6 +11,7 @@ import InterSectionTrigger from './InterSectionTrigger';
 import Nodata from './Nodata';
 import ScheduleCard from './scheduleCard/Card';
 import * as styles from './scheduleCard/card.css';
+import useScheduleStatus from '@/hook/useScheduleStatus';
 
 const CardPlaceHolders = dynamic(() => import('./scheduleCard/CardPlaceHolders'), { ssr: false });
 
@@ -19,6 +20,7 @@ type ScheduleSectionProps = {
 };
 
 export default function ScheduleSection({ session }: ScheduleSectionProps) {
+  const status = useScheduleStatus();
   const [loadContents, setLoadContents] = useState<ContentsDataType[]>([]);
   const [scrollPage, setScrollPage] = useState(1);
   const [selectedData] = useAtom(schedule.selectedScheduleAtom);
@@ -55,7 +57,7 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
-  if (query && selectedData.content.length === 0) {
+  if (status === 'success' && query && selectedData.content.length === 0) {
     // 검색 결과가 없을 때
     return (
       <section>
@@ -77,9 +79,7 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
         ))}
         <CardPlaceHolders />
       </div>
-      {loadContents.length > 0 && (
-        <InterSectionTrigger isDone={isDone} onShow={handleInfinityScroll} />
-      )}
+      <InterSectionTrigger isDone={isDone} onShow={handleInfinityScroll} />
     </section>
   );
 }

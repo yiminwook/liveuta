@@ -7,12 +7,12 @@ import * as styles from './header.css';
 export default function DesktopNav() {
   const router = useRouter();
   const pathName = usePathname();
-
+  const isHome = '/' === pathName;
   const handleSelect = (value: string) => router.push(value);
 
   return (
     <>
-      {['/', '/live'].includes(pathName) && (
+      {isHome && (
         <div className={styles.searchBox}>
           <SearchInput />
         </div>

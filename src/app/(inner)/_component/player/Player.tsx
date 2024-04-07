@@ -55,7 +55,7 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
     setStatus((pre) => ({ ...pre, hide: !pre.hide }));
   };
 
-  const navigateLive = () => router.push('/live');
+  const navigateLive = () => router.push('/?tab=live');
 
   useEffect(() => {
     if (isReady === true) {

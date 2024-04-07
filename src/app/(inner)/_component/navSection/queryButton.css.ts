@@ -37,7 +37,7 @@ export const content = style({
   padding: '0.5rem',
   marginTop: '0.25rem',
   borderRadius: 5,
-  color: '#fff',
+  color: global.color.text.active,
   '::before': {
     position: 'absolute',
     top: 0,

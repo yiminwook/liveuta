@@ -12,7 +12,7 @@ import MainLoading from './loading/MainLoading';
 type HomeDataObserverProps = {
   filter: keyof ScheduleAPIReturntype;
   select: VideoType;
-  query: string | undefined;
+  query: string;
 };
 
 export default function HomeDataObserver({ filter, select, query }: HomeDataObserverProps) {
@@ -40,7 +40,7 @@ export default function HomeDataObserver({ filter, select, query }: HomeDataObse
   }, [filter]);
 
   useLayoutEffect(() => {
-    setQuery(() => query || '');
+    setQuery(() => query);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 

@@ -10,7 +10,7 @@ const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 
 type HomeProps = {
   filter: keyof ScheduleAPIReturntype;
-  query: string | undefined;
+  query: string;
 };
 
 export default async function Home({ filter, query }: HomeProps) {

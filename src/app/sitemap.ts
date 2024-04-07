@@ -23,7 +23,7 @@ export async function generateSitemaps(): Promise<SiteMapProps[]> {
 export default function sitemap({ id }: Promised<typeof generateSitemaps>[0]): SiteMap[] {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-  const sites = ['/', '/live', '/daily', '/all', '/search', '/channels', '/request', '/settings'];
+  const sites = ['/', '/channel', '/request', 'setlist', '/setting'];
 
   return sites.map((site, index) => {
     return {
