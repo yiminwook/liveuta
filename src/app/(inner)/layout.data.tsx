@@ -1,16 +1,16 @@
 'use client';
-import { getAllChannelList } from '@inner/_action/channelList';
+import useScheduleStatus from '@/hook/useScheduleStatus';
 import { getAllBlacklist } from '@inner/_action/blacklist';
+import { getAllChannelList } from '@inner/_action/channelList';
 import { blacklistAtom, toggleBlacklistAtom, whitelistAtom } from '@inner/_lib/atom/schedule';
 import serverActionHandler from '@inner/_lib/serverActionHandler';
 import { useIsFetching, useIsMutating, useQueries } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { useEffect, useLayoutEffect } from 'react';
-import { channelListAtom } from './_lib/atom';
-import { getAllWhitelist } from './_action/whitelist';
-import useScheduleStatus from '@/hook/useScheduleStatus';
 import { toast } from 'sonner';
+import { getAllWhitelist } from './_action/whitelist';
+import { channelListAtom } from './_lib/atom/common';
 
 type LayoutDataObserverProps = {
   session: Session | null;

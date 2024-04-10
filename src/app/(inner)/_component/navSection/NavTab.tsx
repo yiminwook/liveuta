@@ -1,8 +1,8 @@
 'use client';
 import { SegmentGroup, SegmentGroupValueChangeDetails } from '@ark-ui/react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { filterAtom } from '@inner/_lib/atom/schedule';
 import { useAtom } from 'jotai';
-import { schedule } from '@inner/_lib/atom';
+import { useRouter, useSearchParams } from 'next/navigation';
 import * as styles from './navTab.css';
 
 const NAV_LINKS = [
@@ -15,7 +15,7 @@ const NAV_LINKS = [
 export default function NavTab() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [filter] = useAtom(schedule.filterAtom);
+  const [filter] = useAtom(filterAtom);
 
   const handleValueChange = ({ value }: SegmentGroupValueChangeDetails) => {
     const query = new URLSearchParams(searchParams);

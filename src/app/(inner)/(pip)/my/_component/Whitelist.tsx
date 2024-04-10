@@ -1,12 +1,11 @@
 'use client';
+import useMutateWhitelist from '@/hook/useDeleteWhitelist';
 import { ChannelData } from '@/type/api/mongoDB';
-import { channelListAtom } from '@inner/_lib/atom';
+import { channelListAtom } from '@inner/_lib/atom/common';
 import { whitelistAtom } from '@inner/_lib/atom/schedule';
-import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
 import * as styles from './list.css';
-import useMutateWhitelist from '@/hook/useDeleteWhitelist';
 
 type WhitelistProps = {
   session: Session;

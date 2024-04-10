@@ -1,9 +1,7 @@
 'use server';
-import { notFound } from 'next/navigation';
 import { getAllChannel, searchChannel } from '@/model/mongoDB/getAllChannel';
 import getPaginationRange from '@inner/_lib/getPagenationRange';
 import { ChannelSheetDataType, combineChannelData } from '@inner/_lib/combineChannelData';
-import { disconnectMongoDB } from '@/model/mongoDB';
 
 export default async function getChannelData(
   page: number,
@@ -27,8 +25,6 @@ export default async function getChannelData(
 
   /* Youtube API */
   const combinedSearchDataValues = await combineChannelData(channelSheetData);
-
-  disconnectMongoDB();
 
   return {
     totalLength: channels.length,

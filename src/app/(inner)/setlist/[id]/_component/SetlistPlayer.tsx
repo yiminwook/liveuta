@@ -1,12 +1,12 @@
 'use client';
 import PlayerPlaceholder from '@inner/_component/player/PlayerPlaceholder';
-import { player } from '@inner/_lib/atom';
+import * as styles from '@inner/_component/player/player.css';
+import { playerStatusAtom, playerVideoIdAtom } from '@inner/_lib/atom/player';
 import { useSetAtom } from 'jotai';
 import dynamic from 'next/dynamic';
-import { useEffect, useRef, useState } from 'react';
-import * as styles from '@inner/_component/player/player.css';
-import { isMobile } from 'react-device-detect';
 import { useSearchParams } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
 const Player = dynamic(() => import('@inner/_component/player/Player'), {
   ssr: false,
@@ -21,8 +21,8 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
   const timestamp = Number(searchParams.get('t')) || 0;
-  const setPlayerStatus = useSetAtom(player.playerStatusAtom);
-  const setPlayerVideoId = useSetAtom(player.playerVideoIdAtom);
+  const setPlayerStatus = useSetAtom(playerStatusAtom);
+  const setPlayerVideoId = useSetAtom(playerVideoIdAtom);
   const [isShow, setIsShow] = useState(true);
 
   const handleInteresect: IntersectionObserverCallback = (items, observer) => {

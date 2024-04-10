@@ -1,16 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import { accountSidebarAtom, sidebarAtom } from '@inner/_lib/atom';
+import { global } from '@/style/globalTheme.css';
+import { accountSidebarAtom, sidebarAtom } from '@inner/_lib/atom/common';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef } from 'react';
-import { global } from '@/style/globalTheme.css';
 import { isMobile } from 'react-device-detect';
 import Avatar from '../Avatar';
 import HamburgerButton from '../button/HamburgerButton';
-import * as styles from './header.css';
 import DesktopNav from './DesktopNav';
+import * as styles from './header.css';
 
 type HeaderProps = {
   session: Session | null;

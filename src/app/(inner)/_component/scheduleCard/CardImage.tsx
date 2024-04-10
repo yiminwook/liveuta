@@ -4,13 +4,13 @@ import { DEFAULT_BLUR_BASE64 } from '@/const';
 import { generateThumbnail } from '@/model/youtube/thumbnail';
 import { generateVideoUrl } from '@/model/youtube/url';
 import { ContentsDataType } from '@/type/api/mongoDB';
-import { player } from '@inner/_lib/atom';
+import { playerStatusAtom, playerVideoIdAtom } from '@inner/_lib/atom/player';
 import { gtagClick } from '@inner/_lib/gtag';
+import { useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { MouseEvent, useCallback, useRef, useState } from 'react';
-import * as styles from './card.css';
-import { useSetAtom } from 'jotai';
 import { useMediaQuery } from 'react-responsive';
+import * as styles from './card.css';
 
 interface CardImageProps {
   content: ContentsDataType;
@@ -22,8 +22,8 @@ export default function CardImage({ content }: CardImageProps) {
   const thumbnailUrl = generateThumbnail(videoId, 'mqdefault');
   const [imgLoaded, setImgLoaded] = useState(true);
   const isMobile = useMediaQuery({ query: '(max-width: 640px)' });
-  const setPlayerVideoId = useSetAtom(player.playerVideoIdAtom);
-  const setPlayerStatus = useSetAtom(player.playerStatusAtom);
+  const setPlayerVideoId = useSetAtom(playerVideoIdAtom);
+  const setPlayerStatus = useSetAtom(playerStatusAtom);
   const imgRef = useRef<HTMLImageElement>(null);
 
   const handleImgValidity = useCallback(() => {

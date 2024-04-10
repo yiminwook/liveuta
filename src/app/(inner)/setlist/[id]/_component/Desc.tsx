@@ -1,27 +1,27 @@
 'use client';
+import * as action from '@inner/_action/setlist';
 import TimelineText from '@inner/_component/TimestampText';
+import { playerStatusAtom } from '@inner/_lib/atom/player';
 import { useMutation } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import * as styles from './desc.css';
 import { toast } from 'sonner';
-import { useSetAtom } from 'jotai';
-import { player } from '@inner/_lib/atom';
-import * as action from '@inner/_action/setlist';
+import * as styles from './desc.css';
 
-interface DescProps {
+type DescProps = {
   videoId: string;
   description: string;
   session: Session | null;
-}
+};
 
 export default function Desc({ session, videoId, description }: DescProps) {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState('');
-  const setPlayerStatus = useSetAtom(player.playerStatusAtom);
+  const setPlayerStatus = useSetAtom(playerStatusAtom);
 
   const toggleEditing = () => {
     if (!session) return toast.warning('로그인이 필요한 서비스입니다.');

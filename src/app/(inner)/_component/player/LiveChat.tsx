@@ -1,15 +1,15 @@
 'use client';
-import popupCenter from '@inner/_lib/popup';
-import { useEffect, useRef, useState } from 'react';
-import * as styles from './player.css';
-import MediaQuery from 'react-responsive';
-import { BREAK_POINT } from '@/style/var';
-import { player } from '@inner/_lib/atom';
-import { useAtom } from 'jotai';
 import { ORIGIN } from '@/const';
+import { BREAK_POINT } from '@/style/var';
+import { playerVideoIdAtom } from '@inner/_lib/atom/player';
+import popupCenter from '@inner/_lib/popup';
+import { useAtom } from 'jotai';
+import { useEffect, useRef, useState } from 'react';
+import MediaQuery from 'react-responsive';
+import * as styles from './player.css';
 
 export default function LiveChat() {
-  const [videoId] = useAtom(player.playerVideoIdAtom);
+  const [videoId] = useAtom(playerVideoIdAtom);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const url = `https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${ORIGIN}&dark_theme=1`;

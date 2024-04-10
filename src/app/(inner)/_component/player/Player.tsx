@@ -1,28 +1,28 @@
 'use client';
-import { player } from '@inner/_lib/atom/';
+import { ORIGIN } from '@/const';
+import { generateVideoUrl } from '@/model/youtube/url';
+import { playerAtom, playerStatusAtom } from '@inner/_lib/atom/player';
+import cx from 'classnames';
+import { useAtom, useSetAtom } from 'jotai';
+import { useRouter } from 'next/navigation';
 import { memo, useEffect, useRef, useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
+import { BsLightningFill } from 'react-icons/bs';
 import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
-import * as styles from './player.css';
-import cx from 'classnames';
-import { useRouter } from 'next/navigation';
-import { generateVideoUrl } from '@/model/youtube/url';
 import { toast } from 'sonner';
-import { useAtom, useSetAtom } from 'jotai';
-import { BsLightningFill } from 'react-icons/bs';
-import { ORIGIN } from '@/const';
-import { useHotkeys } from 'react-hotkeys-hook';
+import * as styles from './player.css';
 
-interface PlayerProps {
+type PlayerProps = {
   isShow: boolean;
   isLive: boolean;
-}
+};
 
 export default memo(function Player({ isLive, isShow }: PlayerProps) {
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
-  const [playerValue] = useAtom(player.playerAtom);
-  const setStatus = useSetAtom(player.playerStatusAtom);
+  const [playerValue] = useAtom(playerAtom);
+  const setStatus = useSetAtom(playerStatusAtom);
   const playerRef = useRef<ReactPlayer>(null);
 
   useHotkeys(

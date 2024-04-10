@@ -1,7 +1,7 @@
 'use client';
 import { ChannelData } from '@/type/api/mongoDB';
 import { deleteBlacklist } from '@inner/_action/blacklist';
-import { channelListAtom } from '@inner/_lib/atom';
+import { channelListAtom } from '@inner/_lib/atom/common';
 import { blacklistAtom } from '@inner/_lib/atom/schedule';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';

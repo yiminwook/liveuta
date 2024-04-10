@@ -1,13 +1,13 @@
 'use client';
 import { VideoType } from '@/type';
 import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
-import { getAllSchedule } from '@inner/_action/schedule';
-import { schedule } from '@inner/_lib/atom';
-import serverActionHandler from '@inner/_lib/serverActionHandler';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { useEffect, useLayoutEffect } from 'react';
 import MainLoading from './loading/MainLoading';
+import axios from 'axios';
+import { GetScheduleRes } from '@api/schedule/route';
+import * as schedule from '@inner/_lib/atom/schedule';
 
 type HomeDataObserverProps = {
   filter: keyof ScheduleAPIReturntype;
@@ -25,7 +25,7 @@ export default function HomeDataObserver({ filter, select, query }: HomeDataObse
   // schedule observer
   const { data, isLoading } = useQuery({
     queryKey: ['schedule'],
-    queryFn: () => serverActionHandler(getAllSchedule()),
+    queryFn: () => axios.get<GetScheduleRes>('/api/schedule').then((res) => res.data.data),
     ...option,
   });
 
