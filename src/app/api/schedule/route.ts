@@ -48,3 +48,5 @@ export async function GET() {
     return NextResponse.json({ message: message, data: null }, { status });
   }
 }
+
+export const dynamic = 'force-dynamic';
