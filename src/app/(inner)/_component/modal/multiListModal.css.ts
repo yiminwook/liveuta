@@ -1,5 +1,5 @@
 import { global } from '@/style/globalTheme.css';
-import { textLine } from '@/style/var';
+import { BOX_SHADOW, textLine } from '@/style/var';
 import { style } from '@vanilla-extract/css';
 
 export const wrap = style([
@@ -15,6 +15,7 @@ export const title = style([{ fontSize: '1.1rem', marginBottom: '0.25rem' }]);
 export const link = style([
   {
     color: global.color.text.active,
+    fontWeight: 600,
   },
 ]);
 
@@ -29,9 +30,8 @@ export const input = style([
   {
     width: '100%',
     padding: '0.5rem',
-    backgroundColor: '#fff',
     color: '#000',
-    border: 'none',
+    border: '1px solid #ccc',
     borderRadius: 5,
     outline: 'none',
   },
@@ -44,6 +44,8 @@ export const inputButton = style([
     width: '3.5rem',
     borderRadius: 5,
     fontWeight: 600,
+    color: '#fff',
+    boxShadow: BOX_SHADOW,
   },
 ]);
 

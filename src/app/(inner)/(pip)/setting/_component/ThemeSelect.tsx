@@ -62,7 +62,7 @@ export default function ThemeSelect() {
         </button>
         <button data-theme="theme6">
           <div className={styles.themeModalButton}>
-            <BiSolidColor size="2.5rem" />
+            <BiSolidColor size="2.5rem" color="#ed4463" />
           </div>
         </button>
       </div>
