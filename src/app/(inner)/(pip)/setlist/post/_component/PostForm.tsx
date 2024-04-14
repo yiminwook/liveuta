@@ -1,24 +1,28 @@
 'use client';
 import { Session } from '@auth/core/types';
+import * as action from '@inner/_action/setlist';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { MouseEvent, useState } from 'react';
-import * as styles from './postForm.css';
 import TextareaAutosize from 'react-textarea-autosize';
 import { toast } from 'sonner';
-import { useMutation } from '@tanstack/react-query';
-import * as action from '@inner/_action/setlist';
+import * as styles from './postForm.css';
 
-interface PostFormProps {
+type PostFormProps = {
   session: Session;
-}
+};
 
 export default function PostForm({ session }: PostFormProps) {
   const [url, setUrl] = useState('');
   const [desc, setDesc] = useState('');
+  const queryClient = useQueryClient();
 
   const mutatePost = useMutation({
     mutationKey: ['postSetlist'],
     mutationFn: action.POST,
-    onSuccess: (result) => toast.success('세트리가 입력 되었습니다.'),
+    onSuccess: () => {
+      toast.success('세트리가 입력 되었습니다.');
+      queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
+    },
     onError: (error) => toast.error(error.message),
   });
 
