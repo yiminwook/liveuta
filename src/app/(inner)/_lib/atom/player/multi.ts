@@ -1,8 +1,8 @@
 import { atom } from 'jotai';
 
-export const listAtom = atom<string[]>([]);
+export const multiListAtom = atom<string[]>([]);
 
-listAtom.onMount = (setAtom) => {
+multiListAtom.onMount = (setAtom) => {
   const data = localStorage.getItem('shortList');
   if (data) {
     const list = JSON.parse(data);
@@ -15,5 +15,5 @@ listAtom.onMount = (setAtom) => {
 };
 
 if (process.env.NODE_ENV === 'development') {
-  listAtom.debugLabel = 'listAtom';
+  multiListAtom.debugLabel = 'multiListAtom';
 }

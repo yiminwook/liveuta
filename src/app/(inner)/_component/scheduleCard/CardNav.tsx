@@ -19,6 +19,9 @@ import { toast } from 'sonner';
 import CopyButton from '../button/CopyButton';
 import * as styles from './card.css';
 import usePostWhitelist from '@/hook/usePostWhitelist';
+import { FaPlus } from 'react-icons/fa6';
+import ListModal from '@inner/_component/modal/MultiListModal';
+import useModalStore from '@/hook/useModalStore';
 
 type CardNavProps = {
   content: ContentsDataType;
@@ -28,6 +31,7 @@ type CardNavProps = {
 export default function CardNav({ content, session }: CardNavProps) {
   const queryClient = useQueryClient();
   const [whitelist] = useAtom(whitelistAtom);
+  const modalStore = useModalStore();
 
   const mutatePush = useMutation({
     mutationKey: ['push', content.videoId],
@@ -128,6 +132,14 @@ export default function CardNav({ content, session }: CardNavProps) {
     openWindow(videoUrl);
   };
 
+  const open = async (url: string) => {
+    await modalStore.push(ListModal, {
+      props: {
+        defaultValue: url,
+      },
+    });
+  };
+
   const isFavorite = whitelist.has(content.channelId);
   const videoUrl = generateVideoUrl(content.videoId);
   const thumbnailUrl = generateThumbnail(content.videoId, 'mqdefault');
@@ -143,6 +155,9 @@ export default function CardNav({ content, session }: CardNavProps) {
           <HiBellAlert color="inherit" size="1.2rem" />
         </button>
       )}
+      <button className={styles.navButton} onClick={() => open(videoUrl)}>
+        <FaPlus size="1.2rem" />
+      </button>
       <button
         className={styles.navButton}
         onClick={handleFavorite}

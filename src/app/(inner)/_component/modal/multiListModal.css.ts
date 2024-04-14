@@ -10,6 +10,14 @@ export const wrap = style([
   },
 ]);
 
+export const title = style([{ fontSize: '1.1rem', marginBottom: '0.25rem' }]);
+
+export const link = style([
+  {
+    color: global.color.text.active,
+  },
+]);
+
 export const inputBox = style([
   {
     display: 'flex',

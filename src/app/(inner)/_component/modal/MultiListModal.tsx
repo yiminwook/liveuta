@@ -1,18 +1,21 @@
 import { ModalBaseProps } from '@/model/modal/ModalController';
 import Modal from '@inner/_component/modal/Modal';
 import { useAtom } from 'jotai';
-import { listAtom } from '../_lib/atom';
+import { multiListAtom } from '@inner/_lib/atom/player/multi';
 import { useState } from 'react';
-import * as styles from './listModal.css';
+import * as styles from './multiListModal.css';
 import { toast } from 'sonner';
+import Link from 'next/link';
 
-type ListModalProps = {} & ModalBaseProps;
+type ListModalProps = {
+  defaultValue?: string;
+} & ModalBaseProps;
 
-const ID = 'ListModal';
+const ID = 'multiListModal';
 
-export default function ListModal({ onClose }: ListModalProps) {
-  const [list, setList] = useAtom(listAtom);
-  const [input, setInput] = useState('');
+export default function ListModal({ onClose, defaultValue }: ListModalProps) {
+  const [list, setList] = useAtom(multiListAtom);
+  const [input, setInput] = useState(defaultValue || '');
 
   const pushItem = () => {
     if (input.trim() === '') {
@@ -41,8 +44,12 @@ export default function ListModal({ onClose }: ListModalProps) {
     <Modal id={ID} onClose={onClose}>
       <div className={styles.wrap}>
         <div>
-          <h3>Short List를 입력해주세요</h3>
+          <h3 className={styles.title}>URL를 입력해주세요</h3>
           <p>최대 3개의 영상까지 추가 가능하고, 영상크기는 쇼츠영상에 맞춰져있습니다.</p>
+          <p>모바일 환경에서는 동시에 재생되지 않을 수 있습니다.</p>
+          <Link className={styles.link} href="/multi">
+            멀티뷰 페이지로 이동
+          </Link>
         </div>
         <div>
           <div className={styles.inputBox}>
