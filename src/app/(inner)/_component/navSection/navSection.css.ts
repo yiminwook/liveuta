@@ -60,6 +60,22 @@ export const navTabBox = style([
   }),
 ]);
 
+export const multiLink = style([
+  flexCenter,
+  {
+    height: '2.5rem',
+    width: '2.5rem',
+    borderRadius: 5,
+    backgroundColor: '#fff',
+    boxShadow: BOX_SHADOW,
+    transition: `background-color 0.3s ${BEZIER_CURVE}, color 0.3s ${BEZIER_CURVE}`,
+    ':hover': {
+      backgroundColor: global.color.second.default,
+      color: '#fff',
+    },
+  },
+]);
+
 export const right = style({
   display: 'flex',
   gap: '0.5rem',
