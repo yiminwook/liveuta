@@ -63,7 +63,7 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
       <section>
         <Nodata />
         <div className={styles.nodataLinkBox}>
-          <Link className={styles.nodataLink} href={`/channels?q=${query}`}>
+          <Link className={styles.nodataLink} href={`/channel?q=${query}`}>
             {`채널페이지에서 검색`}
           </Link>
         </div>
