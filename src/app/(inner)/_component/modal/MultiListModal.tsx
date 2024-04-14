@@ -24,7 +24,7 @@ export default function ListModal({ onClose, defaultValue }: ListModalProps) {
       toast.warning('3개까지만 입력가능합니다.');
     } else {
       setList((pre) => {
-        const next = [...pre, input];
+        const next = [...pre, input.trim()];
         localStorage.setItem('shortList', JSON.stringify(next));
         return next;
       });
@@ -36,6 +36,7 @@ export default function ListModal({ onClose, defaultValue }: ListModalProps) {
     setList((pre) => {
       const next = [...pre];
       next.splice(index, 1);
+      localStorage.setItem('shortList', JSON.stringify(next));
       return next;
     });
   };
