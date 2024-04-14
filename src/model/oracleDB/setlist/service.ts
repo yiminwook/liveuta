@@ -39,18 +39,10 @@ const parseSetlistRow = (row: SetlistRow): Setlist => ({
 
 export async function getSetlistByVideoId(videoId: string) {
   const connection = await connectOracleDB();
-  try {
-    const result = await connection.execute<SetlistRow>(sql.GET_SETLIST, [videoId]);
-    await connection.close();
-
-    const row = result.rows?.[0];
-    if (!row) return null;
-
-    return parseSetlistRow(row);
-  } catch (error) {
-    await connection.close();
-    throw error;
-  }
+  const result = await connection.execute<SetlistRow>(sql.GET_SETLIST, [videoId]);
+  const row = result.rows?.[0];
+  if (!row) return null;
+  return parseSetlistRow(row);
 }
 
 export async function getAllSetlist(arg: {
@@ -61,41 +53,31 @@ export async function getAllSetlist(arg: {
   isFavorite: boolean;
 }) {
   const connection = await connectOracleDB();
+  const maxCountSql = arg.isFavorite ? sql.GET_MAX_COUNT_WITH_WHITELIST : sql.GET_MAX_COUNT;
+  const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberId]);
+  const total = countResult.rows?.[0][0] || 0;
 
-  try {
-    const maxCountSql = arg.isFavorite ? sql.GET_MAX_COUNT_WITH_WHITELIST : sql.GET_MAX_COUNT;
-    const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberId]);
-    const total = countResult.rows?.[0][0] || 0;
-
-    if (total === 0 || arg.startRow >= total) {
-      await connection.close();
-      return { total, list: [] };
-    }
-
-    const searchSql = arg.isFavorite
-      ? sql.GET_ALL_SETLIST_WITH_WHITELIST(arg.orderType)
-      : sql.GET_ALL_SETLIST(arg.orderType);
-    const searchResult = await connection.execute<SetlistRow>(searchSql, [
-      arg.memberId,
-      arg.startRow,
-      SETLIST_PAGE_SIZE,
-    ]);
-
-    await connection.close();
-
-    const rows = searchResult.rows;
-
-    if (!rows) {
-      await connection.close();
-      return { total, list: [] };
-    }
-
-    const list = rows.map((row) => parseSetlistRow(row));
-    return { total, list };
-  } catch (error) {
-    await connection.close();
-    throw error;
+  if (total === 0 || arg.startRow >= total) {
+    return { total, list: [] };
   }
+
+  const searchSql = arg.isFavorite
+    ? sql.GET_ALL_SETLIST_WITH_WHITELIST(arg.orderType)
+    : sql.GET_ALL_SETLIST(arg.orderType);
+  const searchResult = await connection.execute<SetlistRow>(searchSql, [
+    arg.memberId,
+    arg.startRow,
+    SETLIST_PAGE_SIZE,
+  ]);
+
+  const rows = searchResult.rows;
+
+  if (!rows) {
+    return { total, list: [] };
+  }
+
+  const list = rows.map((row) => parseSetlistRow(row));
+  return { total, list };
 }
 
 export async function searchSetlist(arg: {
@@ -107,41 +89,28 @@ export async function searchSetlist(arg: {
 }) {
   const connection = await connectOracleDB();
   const pattern = arg.query.toLowerCase();
-  try {
-    const maxCountSql = arg.isFavorite ? sql.SEARCH_MAX_COUNT_WITH_WHITELIST : sql.SEARCH_MAX_COUNT;
-    const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberId, pattern]);
-    const total = countResult.rows?.[0][0] || 0;
-
-    if (total === 0 || arg.startRow >= total) {
-      await connection.close();
-      return { total, list: [] };
-    }
-
-    const searchSql = arg.isFavorite
-      ? sql.SEARCH_SETLIST_WITH_WHITELIST(arg.orderType)
-      : sql.SEARCH_SETLIST(arg.orderType);
-    const searchResult = await connection.execute<SetlistRow>(searchSql, [
-      arg.memberId,
-      pattern,
-      arg.startRow,
-      SETLIST_PAGE_SIZE,
-    ]);
-
-    await connection.close();
-
-    const rows = searchResult.rows;
-
-    if (!rows) {
-      await connection.close();
-      return { total, list: [] };
-    }
-
-    const list = rows.map((row) => parseSetlistRow(row));
-    return { total, list };
-  } catch (error) {
-    await connection.close();
-    throw error;
+  const maxCountSql = arg.isFavorite ? sql.SEARCH_MAX_COUNT_WITH_WHITELIST : sql.SEARCH_MAX_COUNT;
+  const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberId, pattern]);
+  const total = countResult.rows?.[0][0] || 0;
+  if (total === 0 || arg.startRow >= total) {
+    return { total, list: [] };
   }
+  const searchSql = arg.isFavorite
+    ? sql.SEARCH_SETLIST_WITH_WHITELIST(arg.orderType)
+    : sql.SEARCH_SETLIST(arg.orderType);
+  const searchResult = await connection.execute<SetlistRow>(searchSql, [
+    arg.memberId,
+    pattern,
+    arg.startRow,
+    SETLIST_PAGE_SIZE,
+  ]);
+  const rows = searchResult.rows;
+  if (!rows) {
+    return { total, list: [] };
+  }
+
+  const list = rows.map((row) => parseSetlistRow(row));
+  return { total, list };
 }
 
 export async function postSetlist(
@@ -166,11 +135,8 @@ export async function postSetlist(
     ]);
 
     await connection.commit();
-    await connection.close();
   } catch (e) {
     const error = e as DBError;
-    await connection.rollback();
-    await connection.close();
 
     if (error.code === 'ORA-00001') {
       throw new CustomServerError({ statusCode: 409, message: '이미 등록된 세트리 입니다.' });
@@ -189,37 +155,20 @@ export async function updateSetlist(
   title: string,
 ) {
   const connection = await connectOracleDB();
-  try {
-    const nonullableBroadcastAt = dayjs.tz(broadcastAt || undefined).toDate();
-
-    await connection.execute(sql.UPDATE_SETLIST, [
-      title,
-      description,
-      channelId,
-      memberId,
-      nonullableBroadcastAt,
-      videoId,
-    ]);
-    await connection.commit();
-    await connection.close();
-  } catch (error) {
-    await connection.rollback();
-    await connection.close();
-
-    throw error;
-  }
+  const nonullableBroadcastAt = dayjs.tz(broadcastAt || undefined).toDate();
+  await connection.execute(sql.UPDATE_SETLIST, [
+    title,
+    description,
+    channelId,
+    memberId,
+    nonullableBroadcastAt,
+    videoId,
+  ]);
+  await connection.commit();
 }
 
-export async function deleteSetlist(videoId: number) {
+export async function deleteSetlist(videoId: string) {
   const connection = await connectOracleDB();
-  try {
-    await connection.execute(sql.DELETE_SETLIST, [videoId]);
-    await connection.commit();
-    await connection.close();
-  } catch (error) {
-    await connection.rollback();
-    await connection.close();
-
-    throw error;
-  }
+  await connection.execute(sql.DELETE_SETLIST, [videoId]);
+  await connection.commit();
 }

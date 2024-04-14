@@ -30,7 +30,7 @@ export default async function Home({ params }: HomeProps) {
             <SetlistPlayer videoId={setlist.videoId} />
           </div>
           <div className={styles.infoWrap}>
-            <Info setlist={setlist} channel={channel} />
+            <Info setlist={setlist} channel={channel} session={session} />
           </div>
         </section>
         <section className={styles.right}>

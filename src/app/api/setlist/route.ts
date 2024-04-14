@@ -1,16 +1,8 @@
 import errorHandler from '@/model/error/handler';
 import parseAccessToken from '../_lib/parseAccessToken';
 import { NextRequest, NextResponse } from 'next/server';
-import { Setlist, getAllSetlist, searchSetlist } from '@/model/oracleDB/setlist/service';
-import * as validation from './_lib/validation';
-
-export type GetSetlistRes = {
-  message: string;
-  data: {
-    total: number;
-    list: Setlist[];
-  };
-};
+import { getAllSetlist, searchSetlist } from '@/model/oracleDB/setlist/service';
+import * as validation from './validation';
 
 export async function GET(request: NextRequest) {
   try {
