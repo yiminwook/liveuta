@@ -43,7 +43,7 @@ export async function GET() {
       { status: 200 },
     );
   } catch (error) {
-    console.error('getAllSchedule ServerAction', error);
+    console.error(error);
     const { status, message } = errorHandler(error);
     return NextResponse.json({ message: message, data: null }, { status });
   }

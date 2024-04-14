@@ -3,7 +3,6 @@ import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
 import { PropsWithChildren } from 'react';
 import { getAllBlacklist } from './_action/blacklist';
-import { getAllChannelList } from './_action/channelList';
 import { getAllWhitelist } from './_action/whitelist';
 import Background from './_component/Background';
 import Footer from './_component/Footer';
@@ -14,6 +13,8 @@ import Sidebar from './_component/sidebar/Sidebar';
 import { getQueryClient } from './_lib/getQueryClient';
 import serverActionHandler from './_lib/serverActionHandler';
 import LayoutDataObserver from './layout.data';
+import axios from 'axios';
+import { GetChannelRes } from '@api/channel/route';
 
 const BottomTab = dynamic(() => import('./_component/bottomTab/BottomTab'), { ssr: false });
 
@@ -24,7 +25,7 @@ export default async function Layout({ children }: PropsWithChildren) {
 
   await queryClient.prefetchQuery({
     queryKey: ['channelList'],
-    queryFn: () => serverActionHandler(getAllChannelList()),
+    queryFn: () => axios.get<GetChannelRes>('/api/channel').then((res) => res.data.data),
   });
 
   if (session) {

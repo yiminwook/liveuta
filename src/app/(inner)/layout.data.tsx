@@ -1,7 +1,6 @@
 'use client';
 import useScheduleStatus from '@/hook/useScheduleStatus';
 import { getAllBlacklist } from '@inner/_action/blacklist';
-import { getAllChannelList } from '@inner/_action/channelList';
 import { blacklistAtom, toggleBlacklistAtom, whitelistAtom } from '@inner/_lib/atom/schedule';
 import serverActionHandler from '@inner/_lib/serverActionHandler';
 import { useIsFetching, useIsMutating, useQueries } from '@tanstack/react-query';
@@ -11,6 +10,8 @@ import { useEffect, useLayoutEffect } from 'react';
 import { toast } from 'sonner';
 import { getAllWhitelist } from './_action/whitelist';
 import { channelListAtom } from './_lib/atom/common';
+import axios from 'axios';
+import { GetChannelRes } from '@api/channel/route';
 
 type LayoutDataObserverProps = {
   session: Session | null;
@@ -29,7 +30,7 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
     queries: [
       {
         queryKey: ['channelList'],
-        queryFn: () => serverActionHandler(getAllChannelList()),
+        queryFn: () => axios.get<GetChannelRes>('/api/channel').then((res) => res.data.data),
         gcTime: Infinity,
       },
       {
