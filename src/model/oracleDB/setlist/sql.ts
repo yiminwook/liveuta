@@ -1,6 +1,9 @@
 // SELECT T01.*, T02.EMAIL, COUNT(*) OVER() AS maxCount
 
-export type SetlistOrderType = 'CREATE_AT' | 'BROADCAST_AT';
+export enum SetlistOrder {
+  create = 'CREATE_AT',
+  broadcast = 'BROADCAST_AT',
+}
 
 export const GET_SETLIST = `
   SELECT T01.*, T02.EMAIL
@@ -17,7 +20,7 @@ export const GET_MAX_COUNT = `
   WHERE T03.CHANNEL_ID IS NULL
 `;
 
-export const GET_ALL_SETLIST = (orderType: SetlistOrderType) => `
+export const GET_ALL_SETLIST = (orderType: SetlistOrder) => `
   SELECT T01.*, T02.EMAIL
   FROM SETLIST T01
   INNER JOIN MEMBER T02 ON T01.MEMBER_ID = T02.ID
@@ -36,7 +39,7 @@ export const GET_MAX_COUNT_WITH_WHITELIST = `
     AND T03.MEMBER_ID = :memberId
 `;
 
-export const GET_ALL_SETLIST_WITH_WHITELIST = (orderType: SetlistOrderType) => `
+export const GET_ALL_SETLIST_WITH_WHITELIST = (orderType: SetlistOrder) => `
   SELECT T01.*, T02.EMAIL
   FROM SETLIST T01, MEMBER T02, WHITELIST T03
   WHERE T01.MEMBER_ID = T02.ID 
@@ -55,7 +58,7 @@ export const SEARCH_MAX_COUNT = `
     AND LOWER(DESCRIPTION) LIKE '%' || :pattern || '%'
 `;
 
-export const SEARCH_SETLIST = (orderType: SetlistOrderType) => `
+export const SEARCH_SETLIST = (orderType: SetlistOrder) => `
   SELECT T01.*, T02.EMAIL
   FROM SETLIST T01
   INNER JOIN MEMBER T02 ON T01.MEMBER_ID = T02.ID
@@ -76,7 +79,7 @@ export const SEARCH_MAX_COUNT_WITH_WHITELIST = `
     AND LOWER(T01.DESCRIPTION) LIKE '%' || :pattern || '%'
 `;
 
-export const SEARCH_SETLIST_WITH_WHITELIST = (orderType: SetlistOrderType) => `
+export const SEARCH_SETLIST_WITH_WHITELIST = (orderType: SetlistOrder) => `
   SELECT T01.*, T02.EMAIL
   FROM SETLIST T01, MEMBER T02, WHITELIST T03
   WHERE T01.MEMBER_ID = T02.ID 

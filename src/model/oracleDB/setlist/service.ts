@@ -57,7 +57,7 @@ export async function getAllSetlist(arg: {
   startRow: number;
   /** 세션에서 가져오는 id */
   memberId: number;
-  orderType: sql.SetlistOrderType;
+  orderType: sql.SetlistOrder;
   isFavorite: boolean;
 }) {
   const connection = await connectOracleDB();
@@ -102,7 +102,7 @@ export async function searchSetlist(arg: {
   query: string;
   startRow: number;
   memberId: number;
-  orderType: sql.SetlistOrderType;
+  orderType: sql.SetlistOrder;
   isFavorite: boolean;
 }) {
   const connection = await connectOracleDB();

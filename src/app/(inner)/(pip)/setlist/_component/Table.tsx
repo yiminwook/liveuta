@@ -8,9 +8,10 @@ import cx from 'classnames';
 import { useRouter } from 'next/navigation';
 import Row from './Row';
 import * as styles from './table.css';
-import { GET } from '@inner/_action/setlist';
 import { Session } from 'next-auth';
 import Nodata from '@inner/_component/Nodata';
+import axios, { AxiosHeaders } from 'axios';
+import { GetSetlistRes } from '@api/setlist/route';
 
 type TableProps = {
   searchParams: {
@@ -27,14 +28,22 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
 
   const { data, isLoading } = useQuery({
     queryKey: ['searchSetlist', searchParams],
-    queryFn: () =>
-      GET({
-        accessToken: session?.user.accessToken || null,
-        query: searchParams.query,
-        startRow: (searchParams.page - 1) * SETLIST_PAGE_SIZE,
-        orderType: searchParams.order === 'create' ? 'CREATE_AT' : 'BROADCAST_AT',
-        isFavorite: false,
-      }),
+    queryFn: async () => {
+      const query = new URLSearchParams();
+      query.set('query', searchParams.query);
+      query.set('start', ((searchParams.page - 1) * SETLIST_PAGE_SIZE).toString());
+      query.set('order', searchParams.order);
+      query.set('isFavorite', 'false');
+      const headers = new AxiosHeaders();
+      if (session) {
+        headers.set('Authorization', `Bearer ${session.user.accessToken}`);
+      }
+      return axios
+        .get<GetSetlistRes>(`/api/setlist?${query.toString()}`, {
+          headers,
+        })
+        .then((res) => res.data.data);
+    },
   });
 
   const handlePage = (page: number) => {
