@@ -3,6 +3,7 @@ import Table from './Table';
 import * as styles from './home.css';
 import Nav from './Nav';
 import { auth } from '@/model/nextAuth';
+import Background from '@inner/_component/Background';
 
 interface HomeProps {
   searchParams: {
@@ -24,12 +25,12 @@ export default async function Home({ searchParams }: HomeProps) {
   };
 
   return (
-    <>
+    <Background>
       <div className={styles.inner}>
         <h1 className="blind">세트리</h1>
         <Nav searchParams={parseSearchParams} />
         <Table session={session} searchParams={parseSearchParams} channelDataset={channelDataset} />
       </div>
-    </>
+    </Background>
   );
 }

@@ -7,6 +7,7 @@ import { TokenType } from '@/type';
 import { toast } from 'sonner';
 import * as styles from './home.css';
 import cx from 'classnames';
+import Background from '@inner/_component/Background';
 
 export default function Home() {
   const [token, setToken] = useState<TokenType>(null);
@@ -55,7 +56,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <Background>
       <section className={styles.wrap}>
         <div className={cx(styles.box, styles.permissionBox)}>
           <div>
@@ -75,6 +76,6 @@ export default function Home() {
         </div>
         <PostBox token={token} />
       </section>
-    </>
+    </Background>
   );
 }

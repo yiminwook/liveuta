@@ -1,18 +1,15 @@
-'use client';
-import { PropsWithChildren } from 'react';
-import * as styles from '../layout.css';
-import { useSelectedLayoutSegments } from 'next/navigation';
+import * as styles from './background.css';
 import cx from 'classnames';
 
-const PATH = ['(pip)', 'live'];
+type BackgroundProps = {
+  tile?: boolean;
+  children: React.ReactNode;
+};
 
-export default function Background({ children }: PropsWithChildren) {
-  const lastPath = useSelectedLayoutSegments().at(-1) || '(pip)';
-  const isPath = PATH.includes(lastPath);
-
+export default function Background({ tile, children }: BackgroundProps) {
   return (
     <>
-      <main className={cx(styles.main, isPath && styles.background)}>{children}</main>
+      <main className={cx(styles.main, tile && styles.background)}>{children}</main>
       <div className={styles.backgroundLeft} />
       <div className={styles.backgroundRight} />
     </>

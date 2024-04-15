@@ -2,6 +2,7 @@ import { Session } from '@auth/core/types';
 import PostForm from './PostForm';
 import * as styles from './home.css';
 import Link from 'next/link';
+import Background from '@inner/_component/Background';
 
 type HomeProps = {
   session: Session;
@@ -9,7 +10,7 @@ type HomeProps = {
 
 export default function Home({ session }: HomeProps) {
   return (
-    <>
+    <Background>
       <h1 className="blind">세트리 추가</h1>
       <div className={styles.inner}>
         <div>
@@ -50,6 +51,6 @@ export default function Home({ session }: HomeProps) {
           </div>
         </div>
       </div>
-    </>
+    </Background>
   );
 }

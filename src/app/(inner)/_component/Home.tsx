@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import HomeDataObserver from './Home.data';
 import NavSection from './navSection/NavSection';
 import ScheduleSection from './ScheduleSection';
+import Background from './Background';
 
 const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 
@@ -18,11 +19,11 @@ export default async function Home({ filter, query }: HomeProps) {
   const session = await auth();
 
   return (
-    <>
+    <Background tile={true}>
       <HomeDataObserver filter={filter} select={select} query={query} />
       <NavSection />
       <TopSection filter={filter} />
       <ScheduleSection session={session} />
-    </>
+    </Background>
   );
 }

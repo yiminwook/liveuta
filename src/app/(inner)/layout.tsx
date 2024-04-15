@@ -50,7 +50,7 @@ export default async function Layout({ children }: PropsWithChildren) {
       <PageView>
         <LayoutDataObserver session={session} />
         <Header session={session} />
-        <Background>{children}</Background>
+        {children}
         <Footer />
         <BottomTab />
         <Sidebar />
