@@ -6,7 +6,7 @@ import QueryButton from './QueryButton';
 import VideoTypeSelect from './VideoTypeSelect';
 import * as styles from './navSection.css';
 import Link from 'next/link';
-import { TbBoxMultiple3 } from 'react-icons/tb';
+import { TbBoxMultiple4 } from 'react-icons/tb';
 
 const ToggleFavorite = dynamic(() => import('./ToggleFavorite'), { ssr: false });
 
@@ -21,7 +21,7 @@ export default async function NavSection() {
           <NavTab />
         </div>
         <Link className={styles.multiLink} href="/multi">
-          <TbBoxMultiple3 size="1.5rem" />
+          <TbBoxMultiple4 size="1.5rem" />
         </Link>
       </div>
       <div className={styles.right}>
