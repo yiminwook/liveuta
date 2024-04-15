@@ -20,8 +20,8 @@ export default function ListModal({ onClose, defaultValue }: ListModalProps) {
   const pushItem = () => {
     if (input.trim() === '') {
       toast.warning('URL을 입력해주세요.');
-    } else if (list.length >= 3) {
-      toast.warning('3개까지만 입력가능합니다.');
+    } else if (list.length >= 4) {
+      toast.warning('4개까지만 입력가능합니다.');
     } else {
       setList((pre) => {
         const next = [...pre, input.trim()];
@@ -46,7 +46,7 @@ export default function ListModal({ onClose, defaultValue }: ListModalProps) {
       <div className={styles.wrap}>
         <div>
           <h3 className={styles.title}>URL를 입력해주세요</h3>
-          <p>최대 3개의 영상까지 추가 가능하고, 영상크기는 쇼츠영상에 맞춰져있습니다.</p>
+          <p>최대 4개의 영상까지 추가 가능하고, 영상크기는 쇼츠영상에 맞춰져있습니다.</p>
           <p>모바일 환경에서는 동시에 재생되지 않을 수 있습니다.</p>
           <Link className={styles.link} href="/multi">
             멀티뷰 페이지로 이동

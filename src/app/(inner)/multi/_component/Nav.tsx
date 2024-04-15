@@ -2,7 +2,7 @@
 import useModalStore from '@/hook/useModalStore';
 import * as styles from './nav.css';
 import { FaPlus } from 'react-icons/fa6';
-import ListModal from '../../_component/modal/MultiListModal';
+import ListModal from '@inner/_component/modal/MultiListModal';
 
 export default function Nav() {
   const modalStore = useModalStore();
