@@ -16,7 +16,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
 import { toast } from 'sonner';
-import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@api/setlist/[id]/type';
+import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@api/setlist/[videoId]/type';
 import { useResetAtom } from 'jotai/utils';
 import { playerVideoIdAtom } from '@inner/_lib/atom/player';
 
@@ -47,12 +47,9 @@ export default function Info({ setlist, channel, session }: InfoProps) {
 
   const mutateDelete = useMutation({
     mutationKey: ['deleteSetlist'],
-    mutationFn: async () => {
-      if (session === null) throw new Error('로그인이 필요합니다.');
-      const response = await axios.delete<DeleteSetlistRes>(`/api/setlist/${setlist.videoId}`, {
-        headers: {
-          Authorization: `Bearer ${session.user.accessToken}`,
-        },
+    mutationFn: async ({ session, videoId }: { session: Session; videoId: string }) => {
+      const response = await axios.delete<DeleteSetlistRes>(`/api/setlist/${videoId}`, {
+        headers: { Authorization: `Bearer ${session.user.accessToken}` },
       });
       return response.data.data;
     },
@@ -81,11 +78,12 @@ export default function Info({ setlist, channel, session }: InfoProps) {
             <button
               className={cx(styles.navItem, styles.deleteButton)}
               onClick={() => {
-                if (confirm('삭제 하시겠습니까?')) mutateDelete.mutate();
+                if (confirm('삭제 하시겠습니까?'))
+                  mutateDelete.mutate({ session, videoId: setlist.videoId });
               }}
               disabled={mutateDelete.isPending}
             >
-              삭제
+              삭 제
             </button>
           )}
           <button

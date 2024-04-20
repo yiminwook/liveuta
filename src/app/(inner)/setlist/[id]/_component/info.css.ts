@@ -48,7 +48,6 @@ export const navItem = style({
 export const deleteButton = style({
   color: '#fff',
   backgroundColor: '#ff0000',
-  letterSpacing: '0.25rem',
 });
 
 export const youtubeButton = style({});

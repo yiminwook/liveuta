@@ -43,6 +43,6 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error(error);
     const { status, message } = errorHandler(error);
-    return NextResponse.json({ error: message }, { status });
+    return NextResponse.json({ message }, { status });
   }
 }

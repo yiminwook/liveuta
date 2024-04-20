@@ -6,8 +6,8 @@ import { useAtom, useSetAtom } from 'jotai';
 import { useEffect, useLayoutEffect } from 'react';
 import MainLoading from './loading/MainLoading';
 import axios from 'axios';
-import { GetScheduleRes } from '@api/schedule/route';
 import * as schedule from '@inner/_lib/atom/schedule';
+import { GetScheduleRes } from '@api/schedule/type';
 
 type HomeDataObserverProps = {
   filter: keyof ScheduleAPIReturntype;

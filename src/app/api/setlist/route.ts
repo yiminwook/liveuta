@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error(error);
     const { message, status } = errorHandler(error);
-    return NextResponse.json({ message }, { status });
+    return NextResponse.json({ message, data: null }, { status });
   }
 }
 

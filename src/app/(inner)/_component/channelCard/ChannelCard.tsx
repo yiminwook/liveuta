@@ -79,12 +79,12 @@ export default function ChannelItem({ content, session }: ChannelItemProps) {
 
     if (!isFavorite && confirm('즐겨찾기에 추가하시겠습니까?')) {
       mutatePostFavorite.mutate({
-        accessToken: session.user.accessToken,
+        session,
         channelId: uid,
       });
     } else if (isFavorite && confirm('즐겨찾기에서 제거하시겠습니까?')) {
       mutateDeleteFavorite.mutate({
-        accessToken: session.user.accessToken,
+        session,
         channelId: uid,
       });
     }

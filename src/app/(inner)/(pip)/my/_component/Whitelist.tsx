@@ -17,9 +17,9 @@ export default function Whitelist({ session }: WhitelistProps) {
 
   const mutationDelete = useMutateWhitelist();
 
-  const handleClick = (item: string) => {
+  const handleClick = (channelId: string) => {
     if (confirm('즐겨찾기을 취소하시겠습니까?')) {
-      mutationDelete.mutate({ accessToken: session.user.accessToken, channelId: item });
+      mutationDelete.mutate({ session, channelId });
     }
   };
 

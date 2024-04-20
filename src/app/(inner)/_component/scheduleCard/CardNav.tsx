@@ -3,7 +3,6 @@ import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import { generateThumbnail } from '@/model/youtube/thumbnail';
 import { generateVideoUrl } from '@/model/youtube/url';
 import { ContentsDataType } from '@/type/api/mongoDB';
-import { postBlacklist } from '@inner/_action/blacklist';
 import { whitelistAtom } from '@inner/_lib/atom/schedule';
 import { gtagClick } from '@inner/_lib/gtag';
 import reservePush from '@inner/_lib/reservePush';
@@ -22,6 +21,7 @@ import usePostWhitelist from '@/hook/usePostWhitelist';
 import { FaPlus } from 'react-icons/fa6';
 import ListModal from '@inner/_component/modal/MultiListModal';
 import useModalStore from '@/hook/useModalStore';
+import axios from 'axios';
 
 type CardNavProps = {
   content: ContentsDataType;
@@ -53,16 +53,23 @@ export default function CardNav({ content, session }: CardNavProps) {
 
   const mutateBlock = useMutation({
     mutationKey: ['postBlacklist', content.videoId],
-    mutationFn: postBlacklist,
+    mutationFn: async ({ session, channelId }: { session: Session; channelId: string }) => {
+      const response = await axios.post<{ message: string; data: string }>(
+        `/api/blacklist/${channelId}`,
+        {},
+        { headers: { Authorization: `Bearer ${session.user.accessToken}` } },
+      );
+      return response.data;
+    },
     onSuccess: (res) => {
-      if (!res.result) {
+      if (!res.data) {
         toast.error(res.message);
         queryClient.invalidateQueries({ queryKey: ['blacklist'] });
       } else {
         toast.success(res.message);
         if (queryClient.getQueryData(['blacklist'])) {
           queryClient.setQueryData(['blacklist'], (prev: string[]) => {
-            return [...prev, res.result];
+            return [...prev, res.data];
           });
         }
       }
@@ -97,12 +104,12 @@ export default function CardNav({ content, session }: CardNavProps) {
 
     if (!isFavorite && confirm('즐겨찾기에 추가하시겠습니까?')) {
       mutatePostFavorite.mutate({
-        accessToken: session.user.accessToken,
+        session,
         channelId: content.channelId,
       });
     } else if (isFavorite && confirm('즐겨찾기에서 제거하시겠습니까?')) {
       mutateDeleteFavorite.mutate({
-        accessToken: session.user.accessToken,
+        session,
         channelId: content.channelId,
       });
     }
@@ -113,7 +120,7 @@ export default function CardNav({ content, session }: CardNavProps) {
 
     if (confirm('해당 채널을 블럭 하시겠습니까?')) {
       mutateBlock.mutate({
-        accessToken: session.user.accessToken,
+        session,
         channelId: content.channelId,
       });
     }

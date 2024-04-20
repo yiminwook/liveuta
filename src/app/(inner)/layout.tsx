@@ -2,16 +2,12 @@ import { auth } from '@/model/nextAuth';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
 import { PropsWithChildren } from 'react';
-import { getAllBlacklist } from './_action/blacklist';
-import { getAllWhitelist } from './_action/whitelist';
-import Background from './_component/Background';
 import Footer from './_component/Footer';
 import Header from './_component/header/Header';
 import PageView from './_component/PageView';
 import AccountSidebar from './_component/sidebar/Account';
 import Sidebar from './_component/sidebar/Sidebar';
 import { getQueryClient } from './_lib/getQueryClient';
-import serverActionHandler from './_lib/serverActionHandler';
 import LayoutDataObserver from './layout.data';
 import axios from 'axios';
 import { GetChannelRes } from '@api/channel/route';
@@ -33,12 +29,26 @@ export default async function Layout({ children }: PropsWithChildren) {
       queryClient.prefetchQuery({
         queryKey: ['blacklist'],
         queryFn: () =>
-          serverActionHandler(getAllBlacklist({ accessToken: session.user.accessToken })),
+          axios
+            .get<{ message: string; data: string[] }>(
+              `${process.env.NEXT_PUBLIC_SITE_URL}/api/blacklist`,
+              {
+                headers: { Authorization: `Bearer ${session.user.accessToken}` },
+              },
+            )
+            .then((res) => res.data.data),
       }),
       queryClient.prefetchQuery({
         queryKey: ['whitelist'],
         queryFn: () =>
-          serverActionHandler(getAllWhitelist({ accessToken: session.user.accessToken })),
+          axios
+            .get<{ message: string; data: string[] }>(
+              `${process.env.NEXT_PUBLIC_SITE_URL}/api/whitelist`,
+              {
+                headers: { Authorization: `Bearer ${session.user.accessToken}` },
+              },
+            )
+            .then((res) => res.data.data),
       }),
     ]);
   }

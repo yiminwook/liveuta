@@ -2,20 +2,10 @@ import { parseAllData, parseScheduledData } from '@/app/api/_lib/parseMongoDBDat
 import { MONGODB_SCHEDULE_COLLECTION, MONGODB_SCHEDULE_DB } from '@/const';
 import dayjs from '@/model/dayjs';
 import CustomServerError from '@/model/error/customServerError';
-import { connectMongoDB } from '@/model/mongoDB';
-import { ContentDocumentRaw, ContentsDataReturnType } from '@/type/api/mongoDB';
 import errorHandler from '@/model/error/handler';
+import { connectMongoDB } from '@/model/mongoDB';
+import { ContentDocumentRaw } from '@/type/api/mongoDB';
 import { NextResponse } from 'next/server';
-
-export type GetScheduleRes = {
-  message: string;
-  data: {
-    scheduled: ContentsDataReturnType;
-    live: ContentsDataReturnType;
-    daily: ContentsDataReturnType;
-    all: ContentsDataReturnType;
-  };
-};
 
 export async function GET() {
   try {
@@ -38,14 +28,14 @@ export async function GET() {
     const { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
     const { daily, all } = parseAllData(scheduleData); // Need to be revised
 
-    return NextResponse.json(
-      { message: '스케쥴이 조회되었습니다.', data: { scheduled, live, daily, all } },
-      { status: 200 },
-    );
+    return NextResponse.json({
+      message: '스케쥴이 조회되었습니다.',
+      data: { scheduled, live, daily, all },
+    });
   } catch (error) {
     console.error(error);
     const { status, message } = errorHandler(error);
-    return NextResponse.json({ message: message, data: null }, { status });
+    return NextResponse.json({ message, data: null }, { status });
   }
 }
 

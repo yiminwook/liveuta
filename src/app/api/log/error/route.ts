@@ -10,10 +10,10 @@ export async function POST(req: NextRequest) {
     } = await req.json();
     console.error('Front 500 Error', body.message);
     console.log('digest', body.digest);
-    return NextResponse.json({ message: 'ok' }, { status: 200 });
+    return NextResponse.json({ message: 'ok', data: null });
   } catch (error) {
     console.error(error);
     const { status, message } = errorHandler(error);
-    return NextResponse.json({ error: message }, { status });
+    return NextResponse.json({ message, data: null }, { status });
   }
 }

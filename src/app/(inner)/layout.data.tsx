@@ -1,14 +1,11 @@
 'use client';
 import useScheduleStatus from '@/hook/useScheduleStatus';
-import { getAllBlacklist } from '@inner/_action/blacklist';
 import { blacklistAtom, toggleBlacklistAtom, whitelistAtom } from '@inner/_lib/atom/schedule';
-import serverActionHandler from '@inner/_lib/serverActionHandler';
 import { useIsFetching, useIsMutating, useQueries } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { useEffect, useLayoutEffect } from 'react';
 import { toast } from 'sonner';
-import { getAllWhitelist } from './_action/whitelist';
 import { channelListAtom } from './_lib/atom/common';
 import axios from 'axios';
 import { GetChannelRes } from '@api/channel/route';
@@ -36,14 +33,26 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
       {
         queryKey: ['blacklist'],
         queryFn: () =>
-          serverActionHandler(getAllBlacklist({ accessToken: session!.user.accessToken })),
+          axios
+            .get<{ message: string; data: string[] }>('/api/blacklist', {
+              headers: {
+                Authorization: `Bearer ${session?.user.accessToken}`,
+              },
+            })
+            .then((res) => res.data.data),
         enabled: !!session,
         gcTime: Infinity,
       },
       {
         queryKey: ['whitelist'],
         queryFn: () =>
-          serverActionHandler(getAllWhitelist({ accessToken: session!.user.accessToken })),
+          axios
+            .get<{ message: string; data: string[] }>('/api/whitelist', {
+              headers: {
+                Authorization: `Bearer ${session?.user.accessToken}`,
+              },
+            })
+            .then((res) => res.data.data),
         enabled: !!session,
         gcTime: Infinity,
       },

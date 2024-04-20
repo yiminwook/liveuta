@@ -164,10 +164,12 @@ globalStyle('textarea', {
   background: 'none',
   border: 'none',
   lineHeight: 1.6,
-  // fontFamily: 'Pretendard Variable Pretendard -apple-system sans-serif',
   margin: 0,
   padding: 0,
   resize: 'none',
+  color: 'inherit',
+  fontFamily: 'inherit',
+  fontSize: 'inherit',
 });
 
 globalStyle('.blind', {

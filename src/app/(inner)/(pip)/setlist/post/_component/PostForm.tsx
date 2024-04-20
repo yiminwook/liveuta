@@ -1,11 +1,11 @@
 'use client';
-import { Session } from '@auth/core/types';
-import * as action from '@inner/_action/setlist';
+import { Session } from 'next-auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { MouseEvent, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { toast } from 'sonner';
 import * as styles from './postForm.css';
+import axios from 'axios';
 
 type PostFormProps = {
   session: Session;
@@ -18,7 +18,22 @@ export default function PostForm({ session }: PostFormProps) {
 
   const mutatePost = useMutation({
     mutationKey: ['postSetlist'],
-    mutationFn: action.POST,
+    mutationFn: async ({
+      session,
+      videoId,
+      description,
+    }: {
+      session: Session;
+      videoId: string;
+      description: string;
+    }) => {
+      const response = await axios.post<{ message: string; data: null }>(
+        `/api/setlist/${videoId}`,
+        { description },
+        { headers: { Authorization: `Bearer ${session.user.accessToken}` } },
+      );
+      return response.data;
+    },
     onSuccess: () => {
       toast.success('세트리가 입력 되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
@@ -44,16 +59,16 @@ export default function PostForm({ session }: PostFormProps) {
       return toast.warning('세트리를 입력해주세요.');
     }
 
-    mutatePost.mutate({ videoId, description, accessToken: session.user.accessToken });
+    mutatePost.mutate({ videoId, description, session });
   };
 
-  const clear = (event: MouseEvent) => {
-    event.preventDefault();
+  const clear = (e: MouseEvent) => {
+    e.preventDefault();
     setDesc(() => '');
   };
 
-  const paste = (event: MouseEvent) => {
-    event.preventDefault();
+  const paste = (e: MouseEvent) => {
+    e.preventDefault();
 
     navigator.clipboard.readText().then((text) => {
       setDesc(() => text);

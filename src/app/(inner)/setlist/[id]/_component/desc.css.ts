@@ -1,3 +1,4 @@
+import { global } from '@/style/globalTheme.css';
 import { leftIn } from '@/style/keyframe.css';
 import { BEZIER_CURVE } from '@/style/var';
 import { style } from '@vanilla-extract/css';
@@ -7,6 +8,7 @@ export const wrap = style({
   fontSize: '1.1rem',
   lineHeight: 1.5,
   paddingTop: '2rem',
+  color: global.color.text.default,
 });
 
 export const inner = style({
@@ -44,5 +46,4 @@ export const cancelButton = style([
 
 export const textarea = style({
   width: '100%',
-  fontSize: '1.1rem',
 });

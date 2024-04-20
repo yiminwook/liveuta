@@ -1,21 +1,29 @@
-import { postWhitelist } from '@inner/_action/whitelist';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import { Session } from 'next-auth';
 import { toast } from 'sonner';
 
 export default function usePostWhitelist() {
   const queryClient = useQueryClient();
   const mutatePostFavorite = useMutation({
     mutationKey: ['postWhitelist'],
-    mutationFn: postWhitelist,
+    mutationFn: async ({ session, channelId }: { session: Session; channelId: string }) => {
+      const response = await axios.post<{ message: string; data: string }>(
+        `/api/whitelist/${channelId}`,
+        {},
+        { headers: { Authorization: `Bearer ${session.user.accessToken}` } },
+      );
+      return response.data;
+    },
     onSuccess: (res) => {
-      if (!res.result) {
+      if (!res.data) {
         toast.error(res.message);
         queryClient.invalidateQueries({ queryKey: ['whitelist'] });
       } else {
         toast.success(res.message);
         if (queryClient.getQueryData(['whitelist'])) {
           queryClient.setQueryData(['whitelist'], (prev: string[]) => {
-            return [...prev, res.result];
+            return [...prev, res.data];
           });
         }
       }
