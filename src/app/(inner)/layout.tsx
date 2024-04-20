@@ -21,7 +21,10 @@ export default async function Layout({ children }: PropsWithChildren) {
 
   await queryClient.prefetchQuery({
     queryKey: ['channelList'],
-    queryFn: () => axios.get<GetChannelRes>('/api/channel').then((res) => res.data.data),
+    queryFn: () =>
+      axios
+        .get<GetChannelRes>(`${process.env.NEXT_PUBLIC_SITE_URL}/api/channel`)
+        .then((res) => res.data.data),
   });
 
   if (session) {
