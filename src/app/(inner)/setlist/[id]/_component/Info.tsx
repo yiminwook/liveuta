@@ -17,6 +17,8 @@ import axios from 'axios';
 import { Session } from 'next-auth';
 import { toast } from 'sonner';
 import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@api/setlist/[id]/type';
+import { useResetAtom } from 'jotai/utils';
+import { playerVideoIdAtom } from '@inner/_lib/atom/player';
 
 type InfoProps = {
   setlist: Setlist;
@@ -33,6 +35,7 @@ export default function Info({ setlist, channel, session }: InfoProps) {
   const broadcast = dayjs(setlist.broadcastAt).format('YYYY년 MM월 DD일');
   const create = dayjs(setlist.createdAt).format('YYYY년 MM월 DD일');
   const update = dayjs(setlist.updatedAt).format('YYYY년 MM월 DD일');
+  const resetPlayerId = useResetAtom(playerVideoIdAtom);
 
   const handleLocation = (url: string) => {
     if (isMobile) {
@@ -56,6 +59,7 @@ export default function Info({ setlist, channel, session }: InfoProps) {
     onSuccess: () => {
       toast.success('삭제되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
+      resetPlayerId();
       router.back();
     },
     onError: (error) => {

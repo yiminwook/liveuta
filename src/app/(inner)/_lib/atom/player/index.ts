@@ -1,7 +1,8 @@
 import { INITIAL_PLAYER_VIDEO_ID } from '@/const';
 import { atom } from 'jotai';
+import { atomWithReset } from 'jotai/utils';
 
-export const playerVideoIdAtom = atom(INITIAL_PLAYER_VIDEO_ID);
+export const playerVideoIdAtom = atomWithReset(INITIAL_PLAYER_VIDEO_ID);
 
 export const playerStatusAtom = atom({
   isPlaying: false,
