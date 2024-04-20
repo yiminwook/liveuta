@@ -1,16 +1,16 @@
 import { auth } from '@/model/nextAuth';
+import { GetChannelRes } from '@api/channel/route';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { PropsWithChildren } from 'react';
+import getQueryClient from '../_lib/getQueryClient';
 import Footer from './_component/Footer';
 import Header from './_component/header/Header';
 import PageView from './_component/PageView';
 import AccountSidebar from './_component/sidebar/Account';
 import Sidebar from './_component/sidebar/Sidebar';
-import { getQueryClient } from './_lib/getQueryClient';
 import LayoutDataObserver from './layout.data';
-import axios from 'axios';
-import { GetChannelRes } from '@api/channel/route';
 
 const BottomTab = dynamic(() => import('./_component/bottomTab/BottomTab'), { ssr: false });
 
