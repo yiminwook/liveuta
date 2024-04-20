@@ -1,27 +1,26 @@
 import useMutateWhitelist from '@/hook/useDeleteWhitelist';
+import useModalStore from '@/hook/useModalStore';
+import usePostBlacklist from '@/hook/usePostBlacklist';
+import usePostWhitelist from '@/hook/usePostWhitelist';
 import { generateFcmToken } from '@/model/firebase/generateFcmToken';
 import { generateThumbnail } from '@/model/youtube/thumbnail';
 import { generateVideoUrl } from '@/model/youtube/url';
 import { ContentsDataType } from '@/type/api/mongoDB';
+import ListModal from '@inner/_component/modal/MultiListModal';
 import { whitelistAtom } from '@inner/_lib/atom/schedule';
 import { gtagClick } from '@inner/_lib/gtag';
 import reservePush from '@inner/_lib/reservePush';
 import { openWindow } from '@inner/_lib/windowEvent';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { MouseEvent } from 'react';
-import { FaStar } from 'react-icons/fa6';
+import { FaPlus, FaStar } from 'react-icons/fa6';
 import { HiBellAlert } from 'react-icons/hi2';
 import { MdBlock, MdOpenInNew } from 'react-icons/md';
 import { toast } from 'sonner';
 import CopyButton from '../button/CopyButton';
 import * as styles from './card.css';
-import usePostWhitelist from '@/hook/usePostWhitelist';
-import { FaPlus } from 'react-icons/fa6';
-import ListModal from '@inner/_component/modal/MultiListModal';
-import useModalStore from '@/hook/useModalStore';
-import axios from 'axios';
 
 type CardNavProps = {
   content: ContentsDataType;
@@ -29,7 +28,6 @@ type CardNavProps = {
 };
 
 export default function CardNav({ content, session }: CardNavProps) {
-  const queryClient = useQueryClient();
   const [whitelist] = useAtom(whitelistAtom);
   const modalStore = useModalStore();
 
@@ -51,34 +49,7 @@ export default function CardNav({ content, session }: CardNavProps) {
     },
   });
 
-  const mutateBlock = useMutation({
-    mutationKey: ['postBlacklist', content.videoId],
-    mutationFn: async ({ session, channelId }: { session: Session; channelId: string }) => {
-      const response = await axios.post<{ message: string; data: string }>(
-        `/api/blacklist/${channelId}`,
-        {},
-        { headers: { Authorization: `Bearer ${session.user.accessToken}` } },
-      );
-      return response.data;
-    },
-    onSuccess: (res) => {
-      if (!res.data) {
-        toast.error(res.message);
-        queryClient.invalidateQueries({ queryKey: ['blacklist'] });
-      } else {
-        toast.success(res.message);
-        if (queryClient.getQueryData(['blacklist'])) {
-          queryClient.setQueryData(['blacklist'], (prev: string[]) => {
-            return [...prev, res.data];
-          });
-        }
-      }
-    },
-    onError: () => {
-      toast.error('서버에러가 발생했습니다. 잠시후 다시 시도해주세요.');
-    },
-  });
-
+  const mutateBlock = usePostBlacklist();
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
 
