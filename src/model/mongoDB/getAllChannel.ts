@@ -1,3 +1,4 @@
+import { addExcapeCharacter } from '@/app/_lib/regexp';
 import { MONGODB_CHANNEL_COLLECTION, MONGODB_CHANNEL_DB } from '@/const';
 import { connectMongoDB } from '@/model/mongoDB';
 import { ChannelData, ChannelDocument } from '@/type/api/mongoDB';
@@ -21,7 +22,7 @@ export const getAllChannel = async () => {
 };
 
 export const searchChannel = async (query: string) => {
-  const trimedQuery = query.trim();
+  const trimedQuery = addExcapeCharacter(query.trim());
   if (trimedQuery === '') {
     return [];
   } else {

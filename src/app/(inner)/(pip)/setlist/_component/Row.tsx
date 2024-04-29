@@ -9,7 +9,7 @@ import { MouseEvent } from 'react';
 import * as styles from './table.css';
 import { useMediaQuery } from 'react-responsive';
 import { BREAK_POINT } from '@/style/var';
-import { replaceParentheses } from '@inner/_lib/regexp';
+import { replaceParentheses } from '@/app/_lib/regexp';
 import useModalStore from '@/hook/useModalStore';
 import SetlistModal from '../_modal/SetlistModal';
 

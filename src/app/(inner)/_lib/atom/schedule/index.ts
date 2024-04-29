@@ -1,3 +1,4 @@
+import { addExcapeCharacter } from '@/app/_lib/regexp';
 import { VideoType } from '@/type';
 import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
 import { atom } from 'jotai';
@@ -36,13 +37,14 @@ export const selectedScheduleAtom = atom((get) => {
   const blacklist = get(blacklistAtom);
   const whiteList = get(whitelistAtom);
   const toggleBlacklist = get(toggleBlacklistAtom);
+  const queryString = addExcapeCharacter(get(queryAtom));
+  const query = new RegExp(queryString, 'i');
 
   let allCount = 0;
   let videoCount = 0;
 
   const filteredContent = schedule[filter].filter((content) => {
     // 1. 채널 이름 필터링
-    const query = new RegExp(get(queryAtom), 'i');
     if (!query.test(content.channelName)) return false;
 
     const inBlacklist = blacklist.has(content.channelId);

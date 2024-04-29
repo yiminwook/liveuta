@@ -7,7 +7,7 @@ import {
 } from '@/type/api/mongoDB';
 import { getInterval, stringToTime } from '@/app/api/_lib/getTime';
 import dayjs from '@/model/dayjs';
-import { replaceParentheses } from '@inner/_lib/regexp';
+import { replaceParentheses } from '@/app/_lib/regexp';
 
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => {
   try {
