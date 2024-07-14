@@ -55,9 +55,9 @@ export default function Header({ session }: HeaderProps) {
       <div className={styles.inner} ref={gnbRef}>
         <nav className={styles.nav}>
           <HamburgerButton onClick={openSidebar} />
-          <Link href="/" className={styles.title}>
+          <a href="/" className={styles.title}>
             Live Uta
-          </Link>
+          </a>
           <div className={styles.right}>
             <DesktopNav />
             {session ? (

@@ -3,17 +3,6 @@ import { VideoType } from '@/type';
 import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
 import { atom } from 'jotai';
 
-const SCHEDULE_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
-
-export const scheduleOptionAtom = atom({
-  staleTime: SCHEDULE_REFRESH_INTERVAL,
-  gcTime: SCHEDULE_REFRESH_INTERVAL,
-  refetchInterval: SCHEDULE_REFRESH_INTERVAL as number | false | undefined,
-  refetchOnReconnect: true,
-  refetchOnWindowFocus: true,
-  refetchIntervalInBackground: false,
-});
-
 export const scheduleAtom = atom<ScheduleAPIReturntype>({
   scheduled: [],
   live: [],
@@ -98,7 +87,6 @@ if (process.env.NODE_ENV === 'development') {
   selectAtom.debugLabel = 'selectAtom';
   queryAtom.debugLabel = 'queryAtom';
   scheduleAtom.debugLabel = 'scheduleAtom';
-  scheduleOptionAtom.debugLabel = 'scheduleOptionAtom';
   selectedScheduleAtom.debugLabel = 'selectedScheduleAtom';
   blacklistAtom.debugLabel = 'blackListAtom';
   whitelistAtom.debugLabel = 'whiteListAtom';

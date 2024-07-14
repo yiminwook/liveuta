@@ -9,6 +9,8 @@ import axios from 'axios';
 import * as schedule from '@inner/_lib/atom/schedule';
 import { GetScheduleRes } from '@api/schedule/type';
 
+const SCHEDULE_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
+
 type HomeDataObserverProps = {
   filter: keyof ScheduleAPIReturntype;
   select: VideoType;
@@ -16,7 +18,6 @@ type HomeDataObserverProps = {
 };
 
 export default function HomeDataObserver({ filter, select, query }: HomeDataObserverProps) {
-  const [option] = useAtom(schedule.scheduleOptionAtom);
   const setSchedule = useSetAtom(schedule.scheduleAtom);
   const setSelect = useSetAtom(schedule.selectAtom);
   const setFilter = useSetAtom(schedule.filterAtom);
@@ -26,7 +27,12 @@ export default function HomeDataObserver({ filter, select, query }: HomeDataObse
   const { data, isLoading } = useQuery({
     queryKey: ['schedule'],
     queryFn: () => axios.get<GetScheduleRes>('/api/schedule').then((res) => res.data.data),
-    ...option,
+    staleTime: SCHEDULE_REFRESH_INTERVAL,
+    gcTime: SCHEDULE_REFRESH_INTERVAL,
+    refetchInterval: SCHEDULE_REFRESH_INTERVAL as number | false | undefined,
+    refetchOnReconnect: true,
+    refetchOnWindowFocus: true,
+    refetchIntervalInBackground: false,
   });
 
   useLayoutEffect(() => {
