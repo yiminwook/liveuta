@@ -2,8 +2,8 @@
 import { VideoType } from '@/type';
 import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
 import { useQuery } from '@tanstack/react-query';
-import { useAtom, useSetAtom } from 'jotai';
-import { useEffect, useLayoutEffect } from 'react';
+import { useSetAtom } from 'jotai';
+import { useEffect } from 'react';
 import MainLoading from './loading/MainLoading';
 import axios from 'axios';
 import * as schedule from '@inner/_lib/atom/schedule';
@@ -35,17 +35,17 @@ export default function HomeDataObserver({ filter, select, query }: HomeDataObse
     refetchIntervalInBackground: false,
   });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setSelect(() => select);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [select]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setFilter(() => filter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setQuery(() => query);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);

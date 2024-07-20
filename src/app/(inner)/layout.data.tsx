@@ -4,7 +4,7 @@ import { blacklistAtom, toggleBlacklistAtom, whitelistAtom } from '@inner/_lib/a
 import { useIsFetching, useIsMutating, useQueries } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import { toast } from 'sonner';
 import { channelListAtom } from './_lib/atom/common';
 import axios from 'axios';
@@ -59,7 +59,7 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
     ],
   });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!channelList.data) return;
     setChannelList(() => {
       const channelData = Object.fromEntries(
@@ -72,12 +72,12 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [channelList.data]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setBlacklist(() => new Set(blacklist.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blacklist.data]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setWhitelist(() => new Set(whitelist.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [whitelist.data]);
@@ -98,7 +98,7 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
     }
   }, [status, isFetching, isMutating]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (session) {
       // 세션이 있을때만 로컬스토리지에서 즐겨찾기 상태를 가져옴
       setToggleBlacklist(() => {
