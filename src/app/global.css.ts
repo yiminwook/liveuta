@@ -184,3 +184,8 @@ globalStyle('.blind', {
 globalStyle('*', {
   boxSizing: 'border-box',
 });
+
+globalStyle('.caution', {
+  color: 'red',
+  fontSize: 14,
+});
