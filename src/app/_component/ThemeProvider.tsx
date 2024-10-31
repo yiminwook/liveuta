@@ -5,7 +5,6 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { themeAtom, themeStyleAtom } from '../_lib/atom';
-import getCurrentTheme from '../_lib/getCustomTheme';
 
 type Props = {
   children: React.ReactNode;
@@ -16,28 +15,7 @@ export default function ThemeProvider({ children }: Props) {
   const [currThemeStyle, setCurrThemeStyle] = useAtom(themeStyleAtom);
 
   useEffect(() => {
-    // :root
-    document.documentElement.style.setProperty(
-      '--liveuta-bg-color',
-      currThemeStyle?.color?.first?.default,
-    );
-    document.documentElement.style.setProperty(
-      '--liveuta-scroll-color',
-      currThemeStyle?.color?.third?.default,
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currThemeStyle]);
-
-  useEffect(() => {
-    setCurrThemeStyle((pre) => {
-      if (currTheme === 'theme6') {
-        const customTheme = getCurrentTheme();
-        if (customTheme) return customTheme;
-        else return pre;
-      } else {
-        return themes[currTheme];
-      }
-    });
+    setCurrThemeStyle(() => themes[currTheme]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currTheme]);
 

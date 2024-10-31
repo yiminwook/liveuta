@@ -11,7 +11,7 @@ type GlobalHydrateProps = {
 
 export default function GlobalHydrate({ children, cookies }: GlobalHydrateProps) {
   const theme = cookies.theme;
-  const themeStyle = theme === 'theme6' ? themes['theme1'] : themes[theme];
+  const themeStyle = themes?.[theme] || themes.theme1;
 
   useHydrateAtoms([
     [themeAtom, theme],

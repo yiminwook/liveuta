@@ -8,12 +8,6 @@ export default function Home() {
     <Background>
       <div className={styles.wrap}>
         <ThemeSelect />
-        <div className={styles.linkBox}>
-          <Link className={styles.customLink} href="/setting/custom">
-            커스텀테마 작성하러가기
-          </Link>
-        </div>
-        <p className="caution">* 주의! 커스텀테마 삭제예정.</p>
       </div>
     </Background>
   );

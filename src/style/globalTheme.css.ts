@@ -1,4 +1,10 @@
-import { createGlobalThemeContract } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createGlobalTheme,
+  createGlobalThemeContract,
+  globalStyle,
+} from '@vanilla-extract/css';
+import { theme1, theme2, theme3, theme4, theme5 } from './theme';
 
 export type BrandColor = 'first' | 'second' | 'third' | 'fourth';
 export type BrandColorKey =
@@ -75,19 +81,20 @@ export const globalVars = {
 
 export const global = createGlobalThemeContract(globalVars);
 
-// const darkGlobalTheme = {
-//   background: {
-//     color: 'rgb(0, 0, 0)',
-//   },
-//   foreground: {
-//     color: 'rgb(255, 255, 255)',
-//   },
-// };
+createGlobalTheme(':root', global, theme1);
 
-// globalStyle(':root', {
-//   '@media': {
-//     '(prefers-color-scheme: dark)': {
-//       vars: assignVars(global, darkGlobalTheme),
-//     },
-//   },
-// });
+globalStyle(":root[color='theme2']", {
+  vars: assignVars(global, theme2),
+});
+
+globalStyle(":root[color='theme3']", {
+  vars: assignVars(global, theme3),
+});
+
+globalStyle(":root[color='theme4']", {
+  vars: assignVars(global, theme4),
+});
+
+globalStyle(":root[color='theme5']", {
+  vars: assignVars(global, theme5),
+});

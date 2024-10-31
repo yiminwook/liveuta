@@ -1,7 +1,7 @@
 export type Function<T> = (...args: any) => T;
 export type Promised<T extends Function<any>> = Awaited<ReturnType<T>>;
 
-export type ThemeType = 'theme1' | 'theme2' | 'theme3' | 'theme4' | 'theme5' | 'theme6';
+export type ThemeType = 'theme1' | 'theme2' | 'theme3' | 'theme4' | 'theme5';
 
 export enum VideoType {
   all = 'all',

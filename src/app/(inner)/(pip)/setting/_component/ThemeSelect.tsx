@@ -3,7 +3,6 @@ import { ThemeType } from '@/type';
 import { gtagClick } from '@inner/_lib/gtag';
 import { MouseEvent } from 'react';
 import useTheme from '@/hook/useTheme';
-import { BiSolidColor } from 'react-icons/bi';
 import * as styles from './themeSelect.css';
 
 type ThemeModalButtonProps = {
@@ -59,11 +58,6 @@ export default function ThemeSelect() {
         </button>
         <button data-theme="theme5">
           <ThemeModalButton primaryColor="#010b13" secondaryColor="#cc2444" />
-        </button>
-        <button data-theme="theme6">
-          <div className={styles.themeModalButton}>
-            <BiSolidColor size="2.5rem" color="#ed4463" />
-          </div>
         </button>
       </div>
     </div>

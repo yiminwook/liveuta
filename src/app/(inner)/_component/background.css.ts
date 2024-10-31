@@ -35,6 +35,18 @@ export const sideBackgroundBase = style({
   opacity: 0,
   zIndex: -1,
   transition: 'opacity 0.3s linear',
+  selectors: {
+    '&::after': {
+      content: '',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: '100%',
+      /* 그라데이션 높이 조정 */
+      height: '30%',
+      background: `linear-gradient(to bottom, transparent, ${global.color.first.dark})`,
+    },
+  },
   ...responsive({
     xl: {
       opacity: 1,

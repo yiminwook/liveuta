@@ -23,16 +23,16 @@ export default function Configs({ children, cookies }: ConfigsProps) {
       <Jotai>
         <ReactQuery>
           <GlobalHydrate cookies={cookies}>
-            <ThemeProvider>
-              <Hotkeys>
-                <ModalProvider>{children}</ModalProvider>
-                <ToastBox />
-                <ParticleProvider />
-                <ServiceWorker />
-                <Devtools />
-                <div id={PORTAL_ID} />
-              </Hotkeys>
-            </ThemeProvider>
+            {/* <ThemeProvider> */}
+            <Hotkeys>
+              <ModalProvider>{children}</ModalProvider>
+              <ToastBox />
+              <ParticleProvider />
+              <ServiceWorker />
+              <Devtools />
+              <div id={PORTAL_ID} />
+            </Hotkeys>
+            {/* </ThemeProvider> */}
           </GlobalHydrate>
         </ReactQuery>
       </Jotai>

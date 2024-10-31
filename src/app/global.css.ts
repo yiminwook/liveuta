@@ -30,9 +30,9 @@ globalStyle('::-webkit-scrollbar-thumb', {
   cursor: 'pointer',
 });
 
-// globalStyle('::-webkit-scrollbar-thumb:hover', {
-//   backgroundColor: 'var(--liveuta-scroll-color)',
-// });
+globalStyle('::-webkit-scrollbar-thumb:hover', {
+  backgroundColor: 'var(--liveuta-scroll-color)',
+});
 
 globalStyle('::-webkit-scrollbar-button', {
   display: 'none',
@@ -44,7 +44,7 @@ export const body = style({
   padding: 0,
   fontFamily: 'Pretendard Variable, Pretendard, -apple-system, sans-serif',
   fontSize: 16,
-  backgroundColor: 'var(--liveuta-bg-color)',
+  backgroundColor: global.color.first.default,
   overflowX: 'hidden',
   '@media': {
     '(prefers-color-scheme: dark)': {
