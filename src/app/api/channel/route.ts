@@ -1,6 +1,6 @@
-import errorHandler from '@/model/error/handler';
-import { getAllChannel } from '@/model/mongoDB/getAllChannel';
-import { ChannelData } from '@/type/api/mongoDB';
+import errorHandler from '@/libraries/error/handler';
+import { getAllChannel } from '@/libraries/mongoDB/getAllChannel';
+import { ChannelData } from '@/types/api/mongoDB';
 import { NextResponse } from 'next/server';
 
 export type GetChannelRes = {

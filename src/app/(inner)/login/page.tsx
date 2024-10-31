@@ -1,6 +1,6 @@
-import Home from './_component/Home';
+import Home from '@/components/login/Home';
 import { redirect } from 'next/navigation';
-import { auth } from '@/model/nextAuth';
+import { auth } from '@/libraries/nextAuth';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

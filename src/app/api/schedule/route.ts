@@ -1,10 +1,10 @@
-import { parseAllData, parseScheduledData } from '@/app/api/_lib/parseMongoDBData';
-import { MONGODB_SCHEDULE_COLLECTION, MONGODB_SCHEDULE_DB } from '@/const';
-import dayjs from '@/model/dayjs';
-import CustomServerError from '@/model/error/customServerError';
-import errorHandler from '@/model/error/handler';
-import { connectMongoDB } from '@/model/mongoDB';
-import { ContentDocumentRaw } from '@/type/api/mongoDB';
+import { parseAllData, parseScheduledData } from '@/utils/parseMongoDBData';
+import { MONGODB_SCHEDULE_COLLECTION, MONGODB_SCHEDULE_DB } from '@/constants';
+import dayjs from '@/libraries/dayjs';
+import CustomServerError from '@/libraries/error/customServerError';
+import errorHandler from '@/libraries/error/handler';
+import { connectMongoDB } from '@/libraries/mongoDB';
+import { ContentDocumentRaw } from '@/types/api/mongoDB';
 import { NextResponse } from 'next/server';
 
 export async function GET() {

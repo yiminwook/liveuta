@@ -1,15 +1,15 @@
 // css 순서변경 금지
 import './reset.css';
 import * as styles from '@/app/global.css';
-import '@/style/globalTheme.css';
+import '@/styles/globalTheme.css';
 
 import { PropsWithChildren } from 'react';
-import { DEFALUT_METADATA } from '@/const/metaData';
-import { getCookies } from '@inner/_lib/getCookie';
+import { DEFALUT_METADATA } from '@/constants/metaData';
+import { getCookies } from '@/utils/getCookie';
 import type { Metadata, Viewport } from 'next';
-import Configs from './_component';
-import DefaultHead from './_component/DefaultHead';
-import GoogleTagManager from './_component/GoogleTagManager';
+import Configs from '@/components/config';
+import DefaultHead from '@/components/config/DefaultHead';
+import GoogleTagManager from '@/components/config/GoogleTagManager';
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   const cookies = await getCookies();

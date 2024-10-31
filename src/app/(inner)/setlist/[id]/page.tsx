@@ -1,4 +1,4 @@
-import Home from './_component/Home';
+import Home from '@/components/setlistId/Home';
 
 interface Props {
   params: {

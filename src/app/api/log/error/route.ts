@@ -1,4 +1,4 @@
-import errorHandler from '@/model/error/handler';
+import errorHandler from '@/libraries/error/handler';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {

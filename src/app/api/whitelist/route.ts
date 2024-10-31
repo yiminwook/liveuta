@@ -1,7 +1,7 @@
-import CustomServerError from '@/model/error/customServerError';
-import errorHandler from '@/model/error/handler';
-import { getAllWhiteList } from '@/model/oracleDB/whitelist/service';
-import parseAccessToken from '@api/_lib/parseAccessToken';
+import CustomServerError from '@/libraries/error/customServerError';
+import errorHandler from '@/libraries/error/handler';
+import { getAllWhiteList } from '@/libraries/oracleDB/whitelist/service';
+import parseAccessToken from '@/utils/parseAccessToken';
 import { NextResponse } from 'next/server';
 
 export async function GET() {

@@ -1,12 +1,12 @@
 'use client';
-import useScheduleStatus from '@/hook/useScheduleStatus';
-import { blacklistAtom, toggleBlacklistAtom, whitelistAtom } from '@inner/_lib/atom/schedule';
+import useScheduleStatus from '@/hooks/useScheduleStatus';
+import { blacklistAtom, toggleBlacklistAtom, whitelistAtom } from '@/stores/schedule';
 import { useIsFetching, useIsMutating, useQueries } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
-import { channelListAtom } from './_lib/atom/common';
+import { channelListAtom } from '@/stores/common';
 import axios from 'axios';
 import { GetChannelRes } from '@api/channel/route';
 

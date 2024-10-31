@@ -1,11 +1,11 @@
-import CustomServerError from '@/model/error/customServerError';
-import errorHandler from '@/model/error/handler';
-import { deleteSetlist, postSetlist, updateSetlist } from '@/model/oracleDB/setlist/service';
-import parseAccessToken from '@api/_lib/parseAccessToken';
+import CustomServerError from '@/libraries/error/customServerError';
+import errorHandler from '@/libraries/error/handler';
+import { deleteSetlist, postSetlist, updateSetlist } from '@/libraries/oracleDB/setlist/service';
+import parseAccessToken from '@/utils/parseAccessToken';
 import { NextRequest, NextResponse } from 'next/server';
-import { SETLIST_DELETE_LEVEL } from './type';
+import { SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { checkDescription } from './validation';
-import { getYoutubeChannelsByVideoId } from '@/model/youtube';
+import { getYoutubeChannelsByVideoId } from '@/libraries/youtube';
 
 export async function POST(req: NextRequest, { params }: { params: { videoId: string } }) {
   try {

@@ -1,6 +1,6 @@
 'use client';
-import * as styles from './_component/loading/loading.css';
-import Wave from './_component/loading/Wave';
+import * as styles from '@/components/common/loading/loading.css';
+import Wave from '@/components/common/loading/Wave';
 
 export default function Loading() {
   return (

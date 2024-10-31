@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Image from 'next/image';
 import { useEffect } from 'react';
-import character from '/src/asset/image/character-6.png';
+import character from '@/assets/image/character-6.png';
 import Link from 'next/link';
 import * as styles from './global.css';
 

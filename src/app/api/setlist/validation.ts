@@ -1,5 +1,5 @@
-import BadReqError from '@/model/error/badRequestError';
-import { SetlistOrder } from '@/model/oracleDB/setlist/sql';
+import BadReqError from '@/libraries/error/badRequestError';
+import { SetlistOrder } from '@/libraries/oracleDB/setlist/sql';
 
 export const checkQuery = (query: string | null) => {
   if (typeof query !== 'string') {

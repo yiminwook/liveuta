@@ -2,7 +2,7 @@
 //에러 페이지는 클라이언트에서만 렌더링되어야 합니다.
 'use client';
 import { useEffect } from 'react';
-import character from '/src/asset/image/character-6.png';
+import character from '@/assets/image/character-6.png';
 import axios from 'axios';
 import Image from 'next/image';
 import * as styles from './not-found.css';

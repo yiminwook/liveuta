@@ -1,4 +1,4 @@
-import { Promised } from '@/type';
+import { Promised } from '@/types';
 import { MetadataRoute } from 'next';
 
 interface SiteMapProps {

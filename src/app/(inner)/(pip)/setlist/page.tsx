@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import Home from './_component/Home';
+import Home from '@/components/setlist/Home';
 
 export const metadata: Metadata = {
   title: '세트리 | Live Uta',

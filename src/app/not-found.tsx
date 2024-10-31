@@ -1,6 +1,6 @@
 'use client';
 import type { Metadata } from 'next';
-import character from '/src/asset/image/character-8.png';
+import character from '@/assets/image/character-8.png';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import * as styles from './not-found.css';

@@ -1,5 +1,5 @@
-import { auth } from '@/model/nextAuth';
-import Home from './_component/Home';
+import { auth } from '@/libraries/nextAuth';
+import Home from '@/components/setlistPost/Home';
 import { redirect } from 'next/navigation';
 
 export default async function Page() {

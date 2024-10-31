@@ -1,6 +1,6 @@
-import { BEZIER_CURVE, flexCenter, responsive } from '@/style/var';
+import { BEZIER_CURVE, flexCenter, responsive } from '@/styles/var';
 import { globalStyle, style } from '@vanilla-extract/css';
-import { global } from '../style/globalTheme.css';
+import { global } from '@/styles/globalTheme.css';
 
 export const wrap = style({
   width: '100dvw',

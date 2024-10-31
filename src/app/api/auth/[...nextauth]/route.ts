@@ -1,1 +1,1 @@
-export { GET, POST } from '@/model/nextAuth';
+export { GET, POST } from '@/libraries/nextAuth';

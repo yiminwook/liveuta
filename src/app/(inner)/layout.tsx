@@ -1,18 +1,18 @@
-import { auth } from '@/model/nextAuth';
+import { auth } from '@/libraries/nextAuth';
 import { GetChannelRes } from '@api/channel/route';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { PropsWithChildren } from 'react';
-import getQueryClient from '../_lib/getQueryClient';
-import Footer from './_component/Footer';
-import Header from './_component/header/Header';
-import PageView from './_component/PageView';
-import AccountSidebar from './_component/sidebar/Account';
-import Sidebar from './_component/sidebar/Sidebar';
+import getQueryClient from '@/apis/getQueryClient';
+import Footer from '@/components/common/Footer';
+import Header from '@/components/common/header/Header';
+import PageView from '@/components/common/PageView';
+import AccountSidebar from '@/components/common/sidebar/Account';
+import Sidebar from '@/components/common/sidebar/Sidebar';
 import LayoutDataObserver from './layout.data';
 
-const BottomTab = dynamic(() => import('./_component/bottomTab/BottomTab'), { ssr: false });
+const BottomTab = dynamic(() => import('@/components/common/bottomTab/BottomTab'), { ssr: false });
 
 export default async function Layout({ children }: PropsWithChildren) {
   const session = await auth();

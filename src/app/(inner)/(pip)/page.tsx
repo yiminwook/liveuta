@@ -1,5 +1,5 @@
-import { ScheduleAPIReturntype } from '@/type/api/mongoDB';
-import Home from '@inner/_component/Home';
+import { ScheduleAPIReturntype } from '@/types/api/mongoDB';
+import Home from '@/components/common/Home';
 import { notFound } from 'next/navigation';
 
 type Props = {

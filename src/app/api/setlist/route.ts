@@ -1,7 +1,7 @@
-import errorHandler from '@/model/error/handler';
-import parseAccessToken from '../_lib/parseAccessToken';
+import errorHandler from '@/libraries/error/handler';
+import parseAccessToken from '@/utils/parseAccessToken';
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllSetlist, searchSetlist } from '@/model/oracleDB/setlist/service';
+import { getAllSetlist, searchSetlist } from '@/libraries/oracleDB/setlist/service';
 import * as validation from './validation';
 
 export async function GET(request: NextRequest) {

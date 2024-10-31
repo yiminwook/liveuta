@@ -1,4 +1,4 @@
-import BadReqError from '@/model/error/badRequestError';
+import BadReqError from '@/libraries/error/badRequestError';
 
 export const checkDescription = (body: any): string => {
   if (typeof body.description !== 'string') {

@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
-import Home from './_component/Home';
-import { auth } from '@/model/nextAuth';
+import Home from '@/components/logout/Home';
+import { auth } from '@/libraries/nextAuth';
 
 export default async function Page() {
   const session = await auth();
