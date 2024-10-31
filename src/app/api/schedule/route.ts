@@ -1,4 +1,4 @@
-import { parseAllData, parseScheduledData } from '@/utils/parseMongoDBData';
+import { parseAllData, parseScheduledData, parseFeatured } from '@/utils/parseMongoDBData';
 import { MONGODB_SCHEDULE_COLLECTION, MONGODB_SCHEDULE_DB } from '@/constants';
 import dayjs from '@/libraries/dayjs';
 import CustomServerError from '@/libraries/error/customServerError';
@@ -27,10 +27,11 @@ export async function GET() {
 
     const { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
     const { daily, all } = parseAllData(scheduleData); // Need to be revised
+    const { featured } = parseFeatured(scheduleData);
 
     return NextResponse.json({
       message: '스케쥴이 조회되었습니다.',
-      data: { scheduled, live, daily, all },
+      data: { scheduled, live, daily, all, featured },
     });
   } catch (error) {
     console.error(error);

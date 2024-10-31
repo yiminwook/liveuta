@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { value: 'live', text: '라이브' },
   { value: 'daily', text: '24시' },
   { value: 'all', text: '전체' },
+  { value: 'featured', text: '특집' },
 ];
 
 export default function NavTab() {

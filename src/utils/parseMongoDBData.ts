@@ -2,6 +2,7 @@ import {
   ContentDocument,
   ParseAllDataReturnType,
   ParseScheduledDataReturnType,
+  ParseFeaturedDataReturnType,
   ContentsDataType,
   isStream,
 } from '@/types/api/mongoDB';
@@ -27,6 +28,8 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => 
       interval,
       isVideo: doc.isVideo === 'TRUE' ? true : false,
       viewer: doc.concurrentViewers,
+      category: Number.parseInt(doc.category) || 0,
+      tag: doc.tag || '',
     };
 
     return data;
@@ -96,3 +99,34 @@ export const parseAllData = (documents: ContentDocument[]): ParseAllDataReturnTy
     all: all,
   };
 };
+
+export const parseFeatured = (documents: ContentDocument[]): ParseFeaturedDataReturnType => {
+  if (!documents) throw new Error('No DataValue');
+
+  const featured: ContentsDataType[] = [];
+
+  const l = [0, 1, 0, 2, 0, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  documents.forEach(doc => {
+    const isHide = doc.Hide;
+    const isStream = doc.broadcastStatus;
+
+    // Hidden contents are treated as yesterday's content
+    if (isHide === 'TRUE' && isStream === 'NULL') return;
+    if (isHide === 'TRUE' && isStream === 'FALSE') return;
+
+    const data = parseMongoDBDocument(doc); // Assuming parseMongoDBData returns an array
+    if (!data) return;
+
+    const r = l[(Math.floor(Math.random() * l.length))]
+    data.category = r;
+
+    if (data.category !== 0) {
+      featured.push(data);
+    }
+  });
+
+  return {
+    featured: featured,
+  }
+}

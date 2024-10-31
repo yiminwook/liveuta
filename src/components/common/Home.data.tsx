@@ -1,6 +1,6 @@
 'use client';
 import { VideoType } from '@/types';
-import { ScheduleAPIReturntype } from '@/types/api/mongoDB';
+import { ScheduleAPIReturnType } from '@/types/api/mongoDB';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
@@ -12,7 +12,7 @@ import { GetScheduleRes } from '@/types/api/schedule';
 const SCHEDULE_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
 
 type HomeDataObserverProps = {
-  filter: keyof ScheduleAPIReturntype;
+  filter: keyof ScheduleAPIReturnType;
   select: VideoType;
   query: string;
 };

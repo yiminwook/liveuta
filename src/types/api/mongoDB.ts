@@ -28,6 +28,8 @@ export type ContentDocument = {
   concurrentViewers: number;
   VideoId: string;
   ChannelId: string;
+  category: string;
+  tag: string;
 };
 
 export type ContentsLength = {
@@ -47,6 +49,8 @@ export type ContentsDataType = {
   interval: string;
   isVideo: boolean;
   viewer: number;
+  category: number;
+  tag: string;
 };
 
 export type ContentsDataReturnType = ContentsDataType[];
@@ -61,4 +65,8 @@ export type ParseAllDataReturnType = {
   all: ContentsDataReturnType;
 };
 
-export type ScheduleAPIReturntype = ParseAllDataReturnType & ParseScheduledDataReturnType;
+export type ParseFeaturedDataReturnType = {
+  featured: ContentsDataReturnType;
+};
+
+export type ScheduleAPIReturnType = ParseAllDataReturnType & ParseScheduledDataReturnType & ParseFeaturedDataReturnType;

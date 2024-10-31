@@ -1,5 +1,5 @@
 import { auth } from '@/libraries/nextAuth';
-import { ScheduleAPIReturntype } from '@/types/api/mongoDB';
+import { ScheduleAPIReturnType } from '@/types/api/mongoDB';
 import { getCookies } from '@/utils/getCookie';
 import dynamic from 'next/dynamic';
 import Background from './Background';
@@ -10,7 +10,7 @@ import ScheduleSection from './ScheduleSection';
 const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 
 type HomeProps = {
-  filter: keyof ScheduleAPIReturntype;
+  filter: keyof ScheduleAPIReturnType;
   query: string;
 };
 

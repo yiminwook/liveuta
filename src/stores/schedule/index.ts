@@ -1,16 +1,17 @@
 import { addExcapeCharacter } from '@/utils/regexp';
 import { VideoType } from '@/types';
-import { ScheduleAPIReturntype } from '@/types/api/mongoDB';
+import { ScheduleAPIReturnType } from '@/types/api/mongoDB';
 import { atom } from 'jotai';
 
-export const scheduleAtom = atom<ScheduleAPIReturntype>({
+export const scheduleAtom = atom<ScheduleAPIReturnType>({
   scheduled: [],
   live: [],
   daily: [],
   all: [],
+  featured: [],
 });
 
-export const filterAtom = atom<keyof ScheduleAPIReturntype>('scheduled');
+export const filterAtom = atom<keyof ScheduleAPIReturnType>('scheduled');
 /** 채널 이름으로 검색 */
 export const queryAtom = atom('');
 export const selectAtom = atom<VideoType>(VideoType.all);
@@ -40,7 +41,7 @@ export const selectedScheduleAtom = atom((get) => {
     const inWhitelist = whiteList.has(content.channelId);
 
     // 2. 화이트리스트/블랙리스트에 따른 필터링 조건
-    let isPassList: Boolean;
+    let isPassList: boolean;
     if (toggleBlacklist) {
       // 블랙리스트 모드에서는 블랙리스트에 없어야 함
       isPassList = !inBlacklist;
@@ -50,7 +51,7 @@ export const selectedScheduleAtom = atom((get) => {
     }
 
     // 3. 스트림/비디오/전체 선택에 따른 필터링 조건
-    let isPassType: Boolean;
+    let isPassType: boolean;
     switch (select) {
       case VideoType.stream:
         isPassType = !content.isVideo;
@@ -82,12 +83,15 @@ export const selectedScheduleAtom = atom((get) => {
   };
 });
 
+export const selectedFeaturedCategoryAtom = atom(1);
+
 if (process.env.NODE_ENV === 'development') {
   filterAtom.debugLabel = 'filterAtom';
   selectAtom.debugLabel = 'selectAtom';
   queryAtom.debugLabel = 'queryAtom';
   scheduleAtom.debugLabel = 'scheduleAtom';
   selectedScheduleAtom.debugLabel = 'selectedScheduleAtom';
+  selectedFeaturedCategoryAtom.debugLabel = 'selectedFeaturedCategoryAtom';
   blacklistAtom.debugLabel = 'blackListAtom';
   whitelistAtom.debugLabel = 'whiteListAtom';
   toggleBlacklistAtom.debugLabel = 'toggleBlacklistAtom';

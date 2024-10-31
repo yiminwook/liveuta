@@ -11,20 +11,21 @@ import { useEffect, useState } from 'react';
 import InterSectionTrigger from './InterSectionTrigger';
 import Nodata from './Nodata';
 import ScheduleCard from './scheduleCard/Card';
+import Featured from './Featured';
 import * as styles from './scheduleCard/card.css';
 
 const CardPlaceHolders = dynamic(() => import('./scheduleCard/CardPlaceHolders'), { ssr: false });
 
 type ScheduleSectionProps = {
   session: Session | null;
+  filter: string;
 };
 
-export default function ScheduleSection({ session }: ScheduleSectionProps) {
+export function InnerScheduleSection({ session, filter }: ScheduleSectionProps) {
   const status = useScheduleStatus();
   const [loadContents, setLoadContents] = useState<ContentsDataType[]>([]);
   const [scrollPage, setScrollPage] = useState(1);
   const [selectedData] = useAtom(selectedScheduleAtom);
-  const [filter] = useAtom(filterAtom);
   const [query] = useAtom(queryAtom);
 
   const isDone = loadContents.length >= selectedData.content.length;
@@ -81,5 +82,19 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
       </div>
       <InterSectionTrigger isDone={isDone} onShow={handleInfinityScroll} />
     </section>
+  );
+}
+
+export default function ScheduleSection({ session }: { session: Session | null }) {
+  const [filter] = useAtom(filterAtom);
+
+  return (
+    <>
+      {filter === 'featured' ? (
+        <Featured session={session} filter={filter} />
+      ) : (
+        <InnerScheduleSection session={session} filter={filter} />
+      )}
+    </>
   );
 }
