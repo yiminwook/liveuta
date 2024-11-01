@@ -1,4 +1,5 @@
 import { CSSPropertiesWithVars } from '@/types/vanillaExtract';
+import { StyleRule } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 // 재사용 할 수 있는 스타일들을 정의
 
@@ -42,9 +43,9 @@ export const zIndex = {
 
 export const BREAK_POINT = { sm: 640, md: 768, lg: 1024, xl: 1280, '2xl': 1536, full: 1900 };
 
-type ResponsiveArgs = Partial<Record<keyof typeof BREAK_POINT, CSSPropertiesWithVars>>;
+type ResponsiveArgs = Partial<Record<keyof typeof BREAK_POINT, StyleRule>>;
 export const responsive = (styles: ResponsiveArgs) => {
-  const mediaStyle: Record<string, CSSPropertiesWithVars> = {};
+  const mediaStyle: Record<string, StyleRule> = {};
 
   for (const _key in BREAK_POINT) {
     const key = _key as keyof typeof BREAK_POINT;
