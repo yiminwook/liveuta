@@ -25,6 +25,12 @@ export const trigger = style({
   borderRadius: 5,
   boxShadow: BOX_SHADOW,
   padding: '0 0.5rem',
+  ':disabled': {
+    backgroundColor: '#eee',
+    border: '1px solid #eee',
+    cursor: 'default',
+    pointerEvents: 'none',
+  },
 });
 
 globalStyle(`${trigger} > *`, {

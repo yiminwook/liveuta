@@ -10,7 +10,7 @@ import { TbBoxMultiple4 } from 'react-icons/tb';
 
 const ToggleFavorite = dynamic(() => import('./ToggleFavorite'), { ssr: false });
 
-export default async function NavSection() {
+export default async function NavSection({ filter }: { filter: string }) {
   const session = await auth();
 
   return (
@@ -26,7 +26,7 @@ export default async function NavSection() {
       </div>
       <div className={styles.right}>
         <QueryButton />
-        <VideoTypeSelect />
+        <VideoTypeSelect filter={filter} />
         <MobileNavButton />
       </div>
     </section>
