@@ -9,6 +9,7 @@ import {
 import { getInterval, stringToTime } from '@/utils/getTime';
 import dayjs from '@/libraries/dayjs';
 import { replaceParentheses } from '@/utils/regexp';
+import { StreamCategory } from '@/types';
 
 export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => {
   try {
@@ -16,6 +17,16 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => 
     const interval = getInterval(timestamp);
 
     const replacedTitle = replaceParentheses(doc.Title);
+
+    const categoryMap = {
+      '0': StreamCategory.default,
+      '1': StreamCategory.live,
+      '2': StreamCategory.anniversary,
+      '3': StreamCategory.relay,
+      '4': StreamCategory.endurance,
+    };
+
+    const category = doc.category as keyof typeof categoryMap;
 
     const data: ContentsDataType = {
       title: replacedTitle,
@@ -28,7 +39,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => 
       interval,
       isVideo: doc.isVideo === 'TRUE' ? true : false,
       viewer: doc.concurrentViewers,
-      category: Number.parseInt(doc.category) || 0,
+      category: categoryMap[category] || StreamCategory.default,
       tag: doc.tag || '',
     };
 
@@ -105,9 +116,19 @@ export const parseFeatured = (documents: ContentDocument[]): ParseFeaturedDataRe
 
   const featured: ContentsDataType[] = [];
 
-  const l = [0, 1, 0, 2, 0, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  const l = [0, 1, 0, 2, 0, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(
+    (v) => `${v}`,
+  );
+  const categoryMap = {
+    '0': StreamCategory.default,
+    '1': StreamCategory.live,
+    '2': StreamCategory.anniversary,
+    '3': StreamCategory.relay,
+    '4': StreamCategory.endurance,
+  };
+  const tags = ['', '', 'sad', '123', '', '', '', '', '123', '', 'qwer', '', '123'];
 
-  documents.forEach(doc => {
+  documents.forEach((doc) => {
     const isHide = doc.Hide;
     const isStream = doc.broadcastStatus;
 
@@ -118,15 +139,16 @@ export const parseFeatured = (documents: ContentDocument[]): ParseFeaturedDataRe
     const data = parseMongoDBDocument(doc); // Assuming parseMongoDBData returns an array
     if (!data) return;
 
-    const r = l[(Math.floor(Math.random() * l.length))]
-    data.category = r;
+    const r = l[Math.floor(Math.random() * l.length)];
+    data.category = categoryMap[r as keyof typeof categoryMap] || StreamCategory.default;
 
-    if (data.category !== 0) {
+    if (data.category !== StreamCategory.default) {
+      data.tag = tags[Math.floor(Math.random() * tags.length)];
       featured.push(data);
     }
   });
 
   return {
     featured: featured,
-  }
-}
+  };
+};

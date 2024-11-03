@@ -2,22 +2,19 @@ import { useMemo, useState } from 'react';
 import { useAtom } from 'jotai';
 import { LuChevronDown } from 'react-icons/lu';
 import { Session } from 'next-auth';
+import { Tabs } from '@ark-ui/react';
 
 import { ContentsDataType } from '@/types/api/mongoDB';
-import { selectedFeaturedCategoryAtom, selectedScheduleAtom } from '@/stores/schedule';
+import { categoryAtom, featuredAtom } from '@/stores/schedule/featured';
+import { selectedScheduleAtom } from '@/stores/schedule';
+import CardPlaceHolders from '@/components/common/scheduleCard/CardPlaceHolders';
 import Category from './Category';
-import CardPlaceHolders from '../scheduleCard/CardPlaceHolders';
 
 import * as styles from './categories.css';
+import * as sectionStyles from './section.css';
+import { StreamCategory } from '@/types';
 
-const CATEGORY_NAME = new Map([
-  [1, '라이브'],
-  [2, '기념일'],
-  [3, '릴레이'],
-  [4, '내구'],
-]);
-
-type Categories = Record<number, ContentsDataType[]>;
+type Categories = Record<StreamCategory, ContentsDataType[]>;
 
 type CategoriesProps = {
   session: Session | null;
@@ -25,44 +22,29 @@ type CategoriesProps = {
 };
 
 export default function Categories({ session, filter }: CategoriesProps) {
-  const [fold, setFold] = useState(false);
+  const [show] = useAtom(featuredAtom);
+  const expand = useMemo(() => show === 'categories', [show]);
   const [selectedData] = useAtom(selectedScheduleAtom);
-  const [category, setCategory] = useAtom(selectedFeaturedCategoryAtom);
+  const [category] = useAtom(categoryAtom);
   const categories = useMemo<Categories>(() => {
     const categories: Categories = {
-      1: [],
-      2: [],
-      3: [],
-      4: [],
+      default: [], // just for type check
+      live: [],
+      anniversary: [],
+      relay: [],
+      endurance: [],
     };
 
-    for (const data of selectedData.content) {
+    selectedData.content.forEach((data) => {
       categories[data.category].push(data);
-    }
+    });
 
     return categories;
   }, [selectedData]);
+
   return (
-    <div className={styles.categories}>
-      <div style={{ position: 'relative' }}>
-        <ul className={styles.categoryTabs}>
-          {Array.from(CATEGORY_NAME.entries()).map(([key, value]) => (
-            <li key={key}>
-              <button
-                className={styles.categoryTab}
-                onClick={() => setCategory(key)}
-                data-selected={category === key}
-              >
-                {value}
-              </button>
-            </li>
-          ))}
-        </ul>
-        <button className={styles.foldButton} onClick={() => setFold(!fold)} data-fold={fold}>
-          <LuChevronDown />
-        </button>
-      </div>
-      <div className={styles.categoryContainer} data-fold={fold}>
+    <div className={sectionStyles.section} data-show={expand}>
+      <div className={sectionStyles.contents}>
         <Category
           key={`category_${category}`}
           contents={categories[category]}

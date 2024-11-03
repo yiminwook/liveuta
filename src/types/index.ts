@@ -29,6 +29,26 @@ export enum FilterText {
   all = '전체',
 }
 
+export enum StreamCategory {
+  default = 'default',
+  live = 'live',
+  anniversary = 'anniversary',
+  relay = 'relay',
+  endurance = 'endurance',
+}
+
+export type FeaturedCategories = Exclude<StreamCategory, StreamCategory.default>;
+
+export enum StreamCategoryText {
+  default = '기본',
+  live = '라이브',
+  anniversary = '기념일',
+  relay = '릴레이',
+  endurance = '내구',
+}
+
+export type StreamCategoryType = keyof typeof StreamCategory;
+
 /**
  * 로딩중 - null
  * 에러 - undefined

@@ -52,17 +52,22 @@ export const selectedScheduleAtom = atom((get) => {
 
     // 3. 스트림/비디오/전체 선택에 따른 필터링 조건
     let isPassType: boolean;
-    switch (select) {
-      case VideoType.stream:
-        isPassType = !content.isVideo;
-        break;
-      case VideoType.video:
-        isPassType = content.isVideo;
-        break;
-      default:
-        // 'all' 선택 시 모든 타입을 포함
-        isPassType = true;
-        break;
+    if (filter === 'featured') {
+      // featured에서는 모든 타입을 포함
+      isPassType = true;
+    } else {
+      switch (select) {
+        case VideoType.stream:
+          isPassType = !content.isVideo;
+          break;
+        case VideoType.video:
+          isPassType = content.isVideo;
+          break;
+        default:
+          // 'all' 선택 시 모든 타입을 포함
+          isPassType = true;
+          break;
+      }
     }
 
     // 리스트필터링이 적용된 비디오 수를 카운트
@@ -83,15 +88,12 @@ export const selectedScheduleAtom = atom((get) => {
   };
 });
 
-export const selectedFeaturedCategoryAtom = atom(1);
-
 if (process.env.NODE_ENV === 'development') {
   filterAtom.debugLabel = 'filterAtom';
   selectAtom.debugLabel = 'selectAtom';
   queryAtom.debugLabel = 'queryAtom';
   scheduleAtom.debugLabel = 'scheduleAtom';
   selectedScheduleAtom.debugLabel = 'selectedScheduleAtom';
-  selectedFeaturedCategoryAtom.debugLabel = 'selectedFeaturedCategoryAtom';
   blacklistAtom.debugLabel = 'blackListAtom';
   whitelistAtom.debugLabel = 'whiteListAtom';
   toggleBlacklistAtom.debugLabel = 'toggleBlacklistAtom';

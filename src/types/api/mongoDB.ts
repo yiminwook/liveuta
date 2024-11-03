@@ -1,4 +1,5 @@
 import dayjs from '@/libraries/dayjs';
+import { StreamCategory } from '..';
 
 export type isStream = 'TRUE' | 'NULL' | 'FALSE';
 
@@ -49,7 +50,7 @@ export type ContentsDataType = {
   interval: string;
   isVideo: boolean;
   viewer: number;
-  category: number;
+  category: StreamCategory;
   tag: string;
 };
 
@@ -69,4 +70,6 @@ export type ParseFeaturedDataReturnType = {
   featured: ContentsDataReturnType;
 };
 
-export type ScheduleAPIReturnType = ParseAllDataReturnType & ParseScheduledDataReturnType & ParseFeaturedDataReturnType;
+export type ScheduleAPIReturnType = ParseAllDataReturnType &
+  ParseScheduledDataReturnType &
+  ParseFeaturedDataReturnType;
