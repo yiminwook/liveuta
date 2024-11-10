@@ -24,7 +24,7 @@ export const table = style({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: global.color.first.light,
+  backgroundColor: global.color.main,
   boxShadow: BOX_SHADOW,
 });
 

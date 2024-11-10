@@ -51,7 +51,7 @@ export default function CardImage({ content }: CardImageProps) {
   };
 
   return (
-    <button className={styles.imageLink} onClick={linkClickEvent}>
+    <button className={styles.imageButton} onClick={linkClickEvent}>
       <div>
         {imgLoaded ? (
           <Image

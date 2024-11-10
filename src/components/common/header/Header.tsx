@@ -35,8 +35,8 @@ export default function Header({ session }: HeaderProps) {
         const current = gnbRef.current;
         if (!current) return;
         window.scrollY > 0
-          ? (current.style.backgroundColor = global.color.backdrop)
-          : (current.style.backgroundColor = global.color.first[50]);
+          ? (current.style.backgroundColor = 'transparent')
+          : (current.style.backgroundColor = global.color.fourth[50]);
       }, 300);
     };
   }, []);

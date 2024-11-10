@@ -10,8 +10,6 @@ export const wrap = style({
 });
 
 export const box = style({
-  backgroundColor: global.color.first.light,
-  borderRadius: 5,
   padding: '0.5rem',
 });
 

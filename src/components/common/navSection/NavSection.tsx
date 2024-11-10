@@ -1,3 +1,4 @@
+'use client';
 import { auth } from '@/libraries/nextAuth';
 import dynamic from 'next/dynamic';
 import MobileNavButton from './MobileNavButton';
@@ -7,11 +8,18 @@ import VideoTypeSelect from './VideoTypeSelect';
 import * as styles from './navSection.css';
 import Link from 'next/link';
 import { TbBoxMultiple4 } from 'react-icons/tb';
+import { Session } from 'next-auth';
+import { useMediaQuery } from 'react-responsive';
+import { BREAK_POINT } from '@/styles/var';
 
 const ToggleFavorite = dynamic(() => import('./ToggleFavorite'), { ssr: false });
 
-export default async function NavSection() {
-  const session = await auth();
+type NavSectionProps = {
+  session: Session | null;
+};
+
+export default function NavSection({ session }: NavSectionProps) {
+  const isMobile = useMediaQuery({ query: `(max-width: ${BREAK_POINT.sm}px)` });
 
   return (
     <section className={styles.navSection}>

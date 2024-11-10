@@ -4,7 +4,6 @@ import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
 import { GetSetlistRes } from '@/types/api/setlist';
 import Nodata from '@/components/common/Nodata';
 import Pagination from '@/components/common/Pagination';
-import Loading from '@inner/loading';
 import { useQuery } from '@tanstack/react-query';
 import axios, { AxiosHeaders } from 'axios';
 import cx from 'classnames';
@@ -12,6 +11,8 @@ import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
 import Row from './Row';
 import * as styles from './table.css';
+import * as loadingStyles from '@/components/common/loading/loading.css';
+import Wave from '../common/loading/Wave';
 
 type TableProps = {
   searchParams: {
@@ -54,7 +55,12 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
     router.push(`/setlist?${query.toString()}`);
   };
 
-  if (isLoading) return <Loading />;
+  if (isLoading)
+    return (
+      <div className={loadingStyles.loadingWrap}>
+        <Wave />
+      </div>
+    );
 
   if (!data) return <Nodata />;
 

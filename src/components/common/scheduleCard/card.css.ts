@@ -23,7 +23,7 @@ export const card = style([
   cardBase,
   {
     position: 'relative',
-    boxShadow: BOX_SHADOW,
+    boxShadow: '1px 2px 3px 0 rgba(50, 50, 50, 0.75)',
     display: 'flex',
     padding: '0.25rem',
     gap: '0.25rem',
@@ -79,10 +79,10 @@ globalStyle(`${card}.block > *`, {
   visibility: 'hidden',
 });
 
-export const imageLink = style([
+export const imageButton = style([
   {
     display: 'inline-block',
-    width: '50%',
+    width: '35%',
   },
   responsive({
     sm: {
@@ -92,7 +92,7 @@ export const imageLink = style([
   }),
 ]);
 
-globalStyle(`${imageLink} > div`, {
+globalStyle(`${imageButton} > div`, {
   boxShadow: BOX_SHADOW,
   position: 'relative',
   margin: 'auto',
@@ -104,7 +104,7 @@ globalStyle(`${imageLink} > div`, {
   backgroundColor: '#fff',
 });
 
-globalStyle(`${imageLink} > div > img`, {
+globalStyle(`${imageButton} > div > img`, {
   objectFit: 'cover',
 });
 

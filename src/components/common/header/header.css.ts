@@ -17,14 +17,14 @@ export const inner = style([
     width: '100%',
     height: 'calc(3.5rem + env(safe-area-inset-top))',
     position: 'fixed',
-    backgroundColor: global.color.first[50],
+    backgroundColor: 'transparent',
     backdropFilter: 'blur(8px)',
     transition: `background-color 0.5s ${BEZIER_CURVE}`,
     boxShadow: '0px 1px 2px 0 rgba(56, 52, 52, 0.4)',
-    willChange: 'background-color',
+
     selectors: {
       '&:hover': {
-        backgroundColor: `${global.color.first[50]} !important`,
+        backgroundColor: `${global.color.fourth[50]} !important`,
       },
     },
   },
@@ -52,7 +52,7 @@ export const title = style([
   textLine('2.2rem', 1),
   {
     fontSize: '2rem',
-    color: global.color.title,
+    color: global.color.third.lighter,
     fontWeight: 600,
   },
 ]);

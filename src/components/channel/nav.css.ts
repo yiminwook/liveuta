@@ -51,7 +51,6 @@ export const button = style({
   fontWeight: 500,
   color: '#fff',
   backgroundColor: global.color.second.default,
-  border: `2px solid #fff`,
   transition: `background-color 0.8s ${BEZIER_CURVE}`,
   letterSpacing: 1,
   ':hover': {

@@ -1,3 +1,6 @@
 [box-shadow generator](https://box-shadow.dev)
 [box-shadow example](https://www.cssmatic.com/box-shadow)
 [color-picker](https://www.hexcolortool.com)
+[bg-image generator](https://bggenerator.com/)
+[bg-image generator2](https://superdesigner.co/tools/backgrounds?type=side-wave)
+[hero-patterns](https://heropatterns.com)

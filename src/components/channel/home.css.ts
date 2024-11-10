@@ -4,7 +4,7 @@ import { style } from '@vanilla-extract/css';
 
 export const inner = style({
   padding: '0.5rem',
-  backgroundColor: global.color.first.light,
+  backgroundColor: global.color.main,
 });
 
 export const channelSection = style([
