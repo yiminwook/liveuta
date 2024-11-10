@@ -82,7 +82,7 @@ globalStyle(`${card}.block > *`, {
 export const imageButton = style([
   {
     display: 'inline-block',
-    width: '35%',
+    width: 175,
   },
   responsive({
     sm: {
