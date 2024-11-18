@@ -62,11 +62,12 @@ export const parseScheduledData = (documents: ContentDocument[]): ParseScheduled
     // Exclude hidden contents, but include those that are currently streaming
     if (isHide === 'TRUE' && isStream === 'NULL') return;
     if (isHide === 'TRUE' && isStream === 'FALSE') return;
+
     const data = parseMongoDBDocument(doc); // Assuming parseMongoDBData returns an array
-    //console.log(data);
-    if (!data) return;
+
     if (data.isVideo === true) scheduledVideo++;
     scheduled.push(data);
+
     if (data.isStream === 'TRUE') {
       // 현재 라이브중이면 라이브 리스트에도 추가
       if (data.isVideo === true) liveVideo++;
@@ -95,9 +96,10 @@ export const parseAllData = (documents: ContentDocument[]): ParseAllDataReturnTy
     // Hidden contents are treated as yesterday's content
     if (isHide === 'TRUE' && isStream === 'NULL') doc.broadcastStatus = 'FALSE';
     const data = parseMongoDBDocument(doc); // Assuming parseMongoDBData returns an array
-    if (!data) return;
+
     if (data.isVideo === true) allVideo++;
     all.push(data);
+
     if (data.timestamp >= yesterday) {
       // If it's within 24 hours, add to daily list
       if (data.isVideo === true) dailyVideo++;
@@ -112,13 +114,12 @@ export const parseAllData = (documents: ContentDocument[]): ParseAllDataReturnTy
 };
 
 export const parseFeatured = (documents: ContentDocument[]): ParseFeaturedDataReturnType => {
-  if (!documents) throw new Error('No DataValue');
-
   const featured: ContentsDataType[] = [];
 
   const l = [0, 1, 0, 2, 0, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(
     (v) => `${v}`,
   );
+
   const categoryMap = {
     '0': StreamCategory.default,
     '1': StreamCategory.live,
@@ -126,6 +127,7 @@ export const parseFeatured = (documents: ContentDocument[]): ParseFeaturedDataRe
     '3': StreamCategory.relay,
     '4': StreamCategory.endurance,
   };
+
   const tags = ['', '', 'sad', '123', '', '', '', '', '123', '', 'qwer', '', '123'];
 
   documents.forEach((doc) => {

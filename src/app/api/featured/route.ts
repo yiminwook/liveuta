@@ -1,11 +1,11 @@
-import { parseAllData, parseScheduledData } from '@/utils/parseMongoDBData';
 import { MONGODB_SCHEDULE_COLLECTION, MONGODB_SCHEDULE_DB } from '@/constants';
-import dayjs from '@/libraries/dayjs';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
 import { connectMongoDB } from '@/libraries/mongoDB';
 import { ContentDocumentRaw } from '@/types/api/mongoDB';
+import { parseFeatured } from '@/utils/parseMongoDBData';
 import { NextResponse } from 'next/server';
+import dayjs from '@/libraries/dayjs';
 
 export async function GET() {
   try {
@@ -25,12 +25,11 @@ export async function GET() {
       ScheduledTime: dayjs.tz(doc.ScheduledTime),
     }));
 
-    const { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
-    const { daily, all } = parseAllData(scheduleData); // Need to be revised
+    const { featured } = parseFeatured(scheduleData);
 
     return NextResponse.json({
       message: '스케쥴이 조회되었습니다.',
-      data: { scheduled, live, daily, all },
+      data: { featured },
     });
   } catch (error) {
     console.error(error);
