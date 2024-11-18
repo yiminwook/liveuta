@@ -46,6 +46,7 @@ const brandColorVar = (color: BrandColor) => {
 
 export const globalVars = {
   color: {
+    main: createVar('main'),
     // 고정색상
     lightYellow: createVar('light-yellow'),
     salmon: createVar('salmon'),

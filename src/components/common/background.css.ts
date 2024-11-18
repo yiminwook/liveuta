@@ -8,7 +8,7 @@ export const main = style([
     flexDirection: 'column',
     maxWidth: BREAK_POINT['2xl'],
     padding: '0 env(safe-area-inset-right) 0 env(safe-area-inset-left)',
-    minHeight: 'calc(100dvh - 3.5rem - env(safe-area-inset-top))',
+    minHeight: 'calc(100dvh - 7.5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
     color: global.color.text.default,
     margin: '0 auto',
   },
@@ -20,7 +20,7 @@ export const main = style([
 ]);
 
 export const background = style({
-  backgroundColor: global.color.first.dark,
+  backgroundColor: global.color.main,
   backgroundImage: global.background.patten,
   transition: `background-color 0.2s ${BEZIER_CURVE}, background-image 0.2s ${BEZIER_CURVE}`,
 });
@@ -44,7 +44,7 @@ export const sideBackgroundBase = style({
       width: '100%',
       /* 그라데이션 높이 조정 */
       height: '30%',
-      background: `linear-gradient(to bottom, transparent, ${global.color.first.dark})`,
+      background: `linear-gradient(to bottom, transparent, ${global.color.main})`,
     },
   },
   ...responsive({

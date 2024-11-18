@@ -1,11 +1,10 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { global } from '@/styles/globalTheme.css';
-import { theme1 } from '@/styles/theme';
 
 globalStyle(':root', {
   vars: {
     '--liveuta-bg-color': '#fff',
-    '--liveuta-scroll-color': theme1.color.first.default,
+    '--liveuta-scroll-color': global.color.third.default,
   },
   '@media': {
     '(prefers-color-scheme: dark)': {
@@ -44,7 +43,7 @@ export const body = style({
   padding: 0,
   fontFamily: 'Pretendard Variable, Pretendard, -apple-system, sans-serif',
   fontSize: 16,
-  backgroundColor: global.color.first.default,
+  background: global.color.main,
   overflowX: 'hidden',
   '@media': {
     '(prefers-color-scheme: dark)': {

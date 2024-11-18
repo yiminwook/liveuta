@@ -9,8 +9,6 @@ import { categoryAtom, featuredAtom } from '@/stores/schedule/featured';
 import { selectedScheduleAtom } from '@/stores/schedule';
 import CardPlaceHolders from '@/components/common/scheduleCard/CardPlaceHolders';
 import Category from './Category';
-
-import * as styles from './categories.css';
 import * as sectionStyles from './section.css';
 import { StreamCategory } from '@/types';
 
@@ -18,10 +16,9 @@ type Categories = Record<StreamCategory, ContentsDataType[]>;
 
 type CategoriesProps = {
   session: Session | null;
-  filter: string;
 };
 
-export default function Categories({ session, filter }: CategoriesProps) {
+export default function Categories({ session }: CategoriesProps) {
   const [show] = useAtom(featuredAtom);
   const expand = useMemo(() => show === 'categories', [show]);
   const [selectedData] = useAtom(selectedScheduleAtom);
@@ -49,7 +46,6 @@ export default function Categories({ session, filter }: CategoriesProps) {
           key={`category_${category}`}
           contents={categories[category]}
           session={session}
-          filter={filter}
           category={category}
         />
         <CardPlaceHolders />

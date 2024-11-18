@@ -1,9 +1,9 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { BOX_SHADOW, BREAK_POINT, flexCenter } from '@/styles/var';
+import { BOX_SHADOW, flexCenter } from '@/styles/var';
 
 export const wrap = style([
   {
-    maxWidth: BREAK_POINT.sm,
+    maxWidth: 450,
     margin: '0 auto',
     marginTop: '3.5rem',
     width: '100%',
@@ -14,9 +14,8 @@ export const wrap = style([
 export const inner = style({
   display: 'flex',
   justifyContent: 'center',
-  padding: '2rem',
+  padding: '4rem 2rem',
   flexDirection: 'column',
-  height: '30rem',
   backgroundColor: 'rgba(255, 255, 255, 0.5)',
   borderRadius: 10,
   boxShadow: BOX_SHADOW,

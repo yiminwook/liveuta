@@ -20,11 +20,10 @@ import * as cardStyles from '@/components/common/scheduleCard/card.css';
 type CategoryProps = {
   contents: ContentsDataType[];
   session: Session | null;
-  filter: string;
   category: StreamCategory;
 };
 
-export default function Category({ contents, session, filter, category }: CategoryProps) {
+export default function Category({ contents, session, category }: CategoryProps) {
   const status = useScheduleStatus();
   const [query] = useAtom(queryAtom);
   const [loadContents, setLoadContents] = useState<ContentsDataType[]>([]);
@@ -63,7 +62,7 @@ export default function Category({ contents, session, filter, category }: Catego
     setScrollPage(() => 1);
     setLoadContents(() => [...resetContent]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter]);
+  }, []);
 
   useEffect(() => {
     // 카테고리가 바뀌면 페이지를 리셋

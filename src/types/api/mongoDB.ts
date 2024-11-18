@@ -66,10 +66,4 @@ export type ParseAllDataReturnType = {
   all: ContentsDataReturnType;
 };
 
-export type ParseFeaturedDataReturnType = {
-  featured: ContentsDataReturnType;
-};
-
-export type ScheduleAPIReturnType = ParseAllDataReturnType &
-  ParseScheduledDataReturnType &
-  ParseFeaturedDataReturnType;
+export type ScheduleAPIReturnType = ParseAllDataReturnType & ParseScheduledDataReturnType;

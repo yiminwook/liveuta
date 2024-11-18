@@ -2,7 +2,6 @@ import {
   ContentDocument,
   ParseAllDataReturnType,
   ParseScheduledDataReturnType,
-  ParseFeaturedDataReturnType,
   ContentsDataType,
   isStream,
 } from '@/types/api/mongoDB';
@@ -113,7 +112,7 @@ export const parseAllData = (documents: ContentDocument[]): ParseAllDataReturnTy
   };
 };
 
-export const parseFeatured = (documents: ContentDocument[]): ParseFeaturedDataReturnType => {
+export const parseFeatured = (documents: ContentDocument[]) => {
   const featured: ContentsDataType[] = [];
 
   const l = [0, 1, 0, 2, 0, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(
@@ -151,6 +150,6 @@ export const parseFeatured = (documents: ContentDocument[]): ParseFeaturedDataRe
   });
 
   return {
-    featured: featured,
+    featured,
   };
 };

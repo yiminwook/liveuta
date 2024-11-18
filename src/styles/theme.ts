@@ -45,6 +45,7 @@ export const darkBrandColor = brandColor([
 
 export const theme1: GlobalTheme = {
   color: {
+    main: '#ffffff',
     lightYellow: '#fcefc7',
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
@@ -98,7 +99,7 @@ export const theme1: GlobalTheme = {
     },
   },
   background: {
-    patten: BACKGROUND_PATTERN('%23ffffff'),
+    patten: BACKGROUND_PATTERN('%23FFC1CC'),
     left: {
       url: "url('/background/left.jpg')",
       position: '54%',
@@ -112,6 +113,7 @@ export const theme1: GlobalTheme = {
 
 export const theme2: GlobalTheme = {
   color: {
+    main: '#ffffff',
     lightYellow: '#fcefc7',
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
@@ -165,7 +167,7 @@ export const theme2: GlobalTheme = {
     },
   },
   background: {
-    patten: BACKGROUND_PATTERN('%23389738'),
+    patten: BACKGROUND_PATTERN('%2364AA2B'),
     left: {
       url: "url('/background/left2.jpg')",
       position: '60%',
@@ -179,6 +181,7 @@ export const theme2: GlobalTheme = {
 
 export const theme3: GlobalTheme = {
   color: {
+    main: '#ffffff',
     lightYellow: '#fcefc7',
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
@@ -231,7 +234,7 @@ export const theme3: GlobalTheme = {
     },
   },
   background: {
-    patten: BACKGROUND_PATTERN('%23f4feff'),
+    patten: BACKGROUND_PATTERN('%2393CEE6'),
     left: {
       url: "url('/background/left3.png')",
       position: '47%',
@@ -245,6 +248,7 @@ export const theme3: GlobalTheme = {
 
 export const theme4: GlobalTheme = {
   color: {
+    main: '#000000',
     lightYellow: '#fcefc7',
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
@@ -297,7 +301,7 @@ export const theme4: GlobalTheme = {
     },
   },
   background: {
-    patten: BACKGROUND_PATTERN('%23f7eda4'),
+    patten: BACKGROUND_PATTERN('%23FFD700'),
     left: {
       url: "url('/background/left4.jpg')",
       position: '40%',
@@ -311,6 +315,7 @@ export const theme4: GlobalTheme = {
 
 export const theme5: GlobalTheme = {
   color: {
+    main: '#000000',
     lightYellow: '#fcefc7',
     salmon: '#fa8072',
     hoverSalmon: '#e06e61',
@@ -363,7 +368,7 @@ export const theme5: GlobalTheme = {
     },
   },
   background: {
-    patten: BACKGROUND_PATTERN('%23e60000'),
+    patten: BACKGROUND_PATTERN('%23E60000'),
     left: {
       url: "url('/background/left5.jpg')",
       position: '30%',

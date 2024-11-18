@@ -21,7 +21,7 @@ export default async function Home({ filter, query }: HomeProps) {
   return (
     <Background tile={true}>
       <HomeDataObserver filter={filter} select={select} query={query} />
-      <NavSection filter={filter} />
+      <NavSection session={session} />
       <TopSection filter={filter} />
       <ScheduleSection session={session} />
     </Background>

@@ -28,7 +28,6 @@ declare global {
       readonly NEXT_PUBLIC_FIREBASE_VAPID_KEY: string;
 
       readonly MONGODB_URI: string;
-      readonly MONGODB_API_KEY: string;
 
       readonly ORACLEDB_CONNECTSTRING: string;
       readonly ORACLEDB_PASSWORD: string;

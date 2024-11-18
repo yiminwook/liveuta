@@ -6,7 +6,7 @@ export const wrap = style([
   flexCenter,
   {
     position: 'relative',
-    height: 'calc(100dvh - 3.5rem - 5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
+    height: 'calc(100dvh - 7.5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
     textAlign: 'center',
   },
 ]);

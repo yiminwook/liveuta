@@ -1,6 +1,6 @@
 'use client';
 import useModalStore from '@/hooks/useModalStore';
-import { FilterText, SelectedText, StreamCategoryText } from '@/types';
+import { FilterText, SelectedText } from '@/types';
 import { filterAtom, selectAtom, selectedScheduleAtom } from '@/stores/schedule';
 import { useAtom } from 'jotai';
 import { BsSliders } from 'react-icons/bs';
@@ -19,10 +19,7 @@ export default function MobileNavButton() {
     await modalStore.push(MobileNavModal);
   };
 
-  const text =
-    filter === 'featured'
-      ? StreamCategoryText[category]
-      : `${FilterText[filter]} / ${SelectedText[select]}: ${selectedSchedule.length[select]}`;
+  const text = `${FilterText[filter]} / ${SelectedText[select]}: ${selectedSchedule.length[select]}`;
 
   return (
     <button className={styles.mobileNavButton} onClick={handleOpen}>

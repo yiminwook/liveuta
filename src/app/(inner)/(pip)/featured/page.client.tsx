@@ -1,19 +1,18 @@
+'use client';
 import { Session } from 'next-auth';
 import { useAtom } from 'jotai';
 import { Tabs } from '@ark-ui/react';
-
 import { featuredAtom } from '@/stores/schedule/featured';
-import Categories from './featured/Categories';
-import FeaturedVtubers from './featured/FeaturedVtubers';
+import Categories from '@/components/common/featured/Categories';
+import FeaturedVtubers from '@/components/common/featured/FeaturedVtubers';
 
-import * as styles from './featured.css';
+import * as styles from './page.css';
 
-type FeaturedProps = {
+type Props = {
   session: Session | null;
-  filter: string;
 };
 
-export default function Featured({ session, filter }: FeaturedProps) {
+export default function Client({ session }: Props) {
   const [selected, setSelected] = useAtom(featuredAtom);
 
   return (
@@ -42,7 +41,7 @@ export default function Featured({ session, filter }: FeaturedProps) {
         </Tabs.List>
       </Tabs.Root>
       <div className={styles.featured} data-show={selected}>
-        <Categories session={session} filter={filter} />
+        <Categories session={session} />
         <FeaturedVtubers />
       </div>
     </section>
