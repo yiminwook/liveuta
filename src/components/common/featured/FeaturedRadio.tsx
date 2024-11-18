@@ -2,7 +2,7 @@ import { categoryAtom, featuredAtom } from '@/stores/schedule/featured';
 import { StreamCategory, StreamCategoryText } from '@/types';
 import { RadioGroup } from '@ark-ui/react';
 import { useAtom } from 'jotai';
-import * as styles from './videoTypeRadio.css';
+import * as styles from './featuredRadio.css';
 
 export default function FeaturedRadio() {
   const [featuredSelected] = useAtom(featuredAtom);

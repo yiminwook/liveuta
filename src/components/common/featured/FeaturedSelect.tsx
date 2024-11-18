@@ -2,7 +2,7 @@ import { categoryAtom, featuredAtom } from '@/stores/schedule/featured';
 import { StreamCategory, StreamCategoryText } from '@/types';
 import { useAtom } from 'jotai';
 import { Select } from '@ark-ui/react';
-import * as styles from './videoTypeSelect.css';
+import * as styles from './featuredSelect.css';
 import { HiSelector } from 'react-icons/hi';
 
 export default function FeaturedSelect() {

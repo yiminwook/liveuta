@@ -5,7 +5,7 @@ import { Tabs } from '@ark-ui/react';
 import { featuredAtom } from '@/stores/schedule/featured';
 import Categories from '@/components/common/featured/Categories';
 import FeaturedVtubers from '@/components/common/featured/FeaturedVtubers';
-
+import FeaturedSelect from '@/components/common/featured/FeaturedSelect';
 import * as styles from './page.css';
 
 type Props = {
@@ -41,6 +41,9 @@ export default function Client({ session }: Props) {
         </Tabs.List>
       </Tabs.Root>
       <div className={styles.featured} data-show={selected}>
+        <div>
+          <FeaturedSelect />
+        </div>
         <Categories session={session} />
         <FeaturedVtubers />
       </div>
