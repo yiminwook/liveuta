@@ -1,3 +1,5 @@
+import { hr } from '@/components/common/modal/channelCardModal.css';
+
 export const PAGINATION_RANGE = 5;
 
 /** 채널 페이지 카드갯수 */
@@ -35,6 +37,7 @@ export const ORIGIN = 'liveuta.vercel.app';
 
 export const INTERNAL_LINKS = [
   { href: '/', text: '홈' },
+  { href: '/schedule', text: '스케쥴' },
   { href: '/multi', text: '멀티뷰' },
   { href: '/channel', text: '채널' },
   { href: '/setlist', text: '세트리' },

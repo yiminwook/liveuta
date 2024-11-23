@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { CgUserlane } from 'react-icons/cg';
 import { FaListOl } from 'react-icons/fa';
 import { LuSettings } from 'react-icons/lu';
-import { MdSavedSearch } from 'react-icons/md';
+import { MdOutlineSchedule } from 'react-icons/md';
 import { RxPinTop } from 'react-icons/rx';
 import { TiHomeOutline } from 'react-icons/ti';
 import * as styles from './bottomTab.css';
@@ -88,6 +88,14 @@ export default function BottomInner() {
             <div className={cx(styles.item)}>
               <TiHomeOutline size="1.5rem" />
               <span>홈</span>
+            </div>
+          </Link>
+        </li>
+        <li>
+          <Link href="/schedule">
+            <div className={cx(styles.item)}>
+              <MdOutlineSchedule size="1.5rem" />
+              <span>스케쥴</span>
             </div>
           </Link>
         </li>
