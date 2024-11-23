@@ -4,7 +4,7 @@ import * as styles from './featuredVtuber.css';
 import * as sectionStyles from './section.css';
 import { featuredAtom } from '@/stores/schedule/featured';
 import { useMemo } from 'react';
-import Featured from '../../../app/(inner)/(pip)/featured/page.client';
+import Featured from '../../../app/(web)/(pip)/featured/page.client';
 
 export default function FeaturedVtubers() {
   const [show, setShow] = useAtom(featuredAtom);
