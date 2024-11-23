@@ -29,6 +29,7 @@ export default function Configs({ children, cookies }: ConfigsProps) {
               <ParticleProvider />
               <ServiceWorker />
               <Devtools />
+              <div id="pip" />
               <div id={PORTAL_ID} />
             </Hotkeys>
             {/* </ThemeProvider> */}
