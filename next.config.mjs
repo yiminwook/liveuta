@@ -52,7 +52,9 @@ const nextConfig = {
     ];
   },
   webpack: (config, options) => {
+    /** SVGR **/
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
+    fileLoaderRule.exclude = /\.svg$/i;
     config.module.rules.push(
       {
         ...fileLoaderRule,
@@ -66,7 +68,7 @@ const nextConfig = {
         use: ['@svgr/webpack'],
       },
     );
-    fileLoaderRule.exclude = /\.svg$/i;
+
     return config;
   },
   typescript: {
