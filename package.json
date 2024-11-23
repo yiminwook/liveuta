@@ -97,7 +97,6 @@
     "node-gyp-build": "4.6.1"
   },
   "engines": {
-    "node": ">=20",
-    "pnpm": ">=8.0.0"
+    "node": ">=20"
   }
 }
