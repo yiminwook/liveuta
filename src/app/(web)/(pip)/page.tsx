@@ -1,16 +1,12 @@
 import ClientError from '@/libraries/error/clientError';
 import { connectOracleDB } from '@/libraries/oracleDB/connection';
 import { TMetaRow } from '@/types/db';
-import { z } from 'zod';
+import { homeDto } from '@/types/dto';
 import Client from './page.client';
 
 type TProps = {
   searchParams: {};
 };
-
-const homeDto = z.object({
-  coverImgUrl: z.string().url(),
-});
 
 async function getServerSideProps() {
   const connection = await connectOracleDB();
