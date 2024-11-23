@@ -79,17 +79,6 @@ globalStyle(`${right} > ul`, {
   }),
 });
 
-export const searchBox = style({
-  width: '15rem',
-  color: 'black',
-  display: 'none',
-  ...responsive({
-    md: {
-      display: 'block',
-    },
-  }),
-});
-
 export const loginButton = style([
   {
     display: 'block',

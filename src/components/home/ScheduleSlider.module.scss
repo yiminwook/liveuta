@@ -1,0 +1,14 @@
+:global(.swiper-slide).item {
+  border: 1px solid black;
+  width: 450px;
+  @media (min-width: 640px) {
+    width: 300px;
+  }
+
+  & > div {
+    margin: 0 auto;
+    // min-width: unset !important;
+    // max-width: unset !important;
+    // width: 300px !important;
+  }
+}

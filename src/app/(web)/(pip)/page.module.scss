@@ -1,0 +1,102 @@
+.homeMain {
+  max-width: 1200px;
+  min-height: 900px;
+  border: 1px solid red;
+  margin: 0 auto;
+  color: black;
+
+  .heroSection {
+    background-color: rgba(0, 0, 0, 0.85);
+    margin-bottom: 100px;
+
+    .coverImageBox {
+      position: relative;
+      width: min(100%, 550px);
+      aspect-ratio: 11 / 7;
+      margin: 0 auto;
+      object-fit: cover;
+    }
+  }
+
+  .liveSection {
+    padding-inline: 1rem;
+    margin-bottom: 100px;
+
+    .liveNav {
+      display: flex;
+      justify-content: space-between;
+
+      .hightlight {
+        color: var(--liveuta-third-default);
+      }
+    }
+  }
+
+  .favoriteSection {
+    margin-bottom: 100px;
+    padding-inline: 1rem;
+
+    .favoriteNav {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .searchSection {
+    margin-bottom: 100px;
+    padding-inline: 1rem;
+
+    .searchNav {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .searchBox {
+      width: min(100%, 550px);
+      margin: 0 auto;
+    }
+  }
+
+  .recentChannelSection {
+    margin-bottom: 100px;
+    padding: 1rem;
+
+    .recentChannelNav {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .featureSection {
+    border: 1px solid blue;
+    padding: 1rem;
+    padding-inline: 1rem;
+
+    .featureBox {
+      display: flex;
+      width: min(100%, 800px);
+      margin: 0 auto;
+
+      .leftCol {
+        flex: 1;
+        aspect-ratio: 1 / 1;
+        background-color: rosybrown;
+      }
+
+      .rightCol {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background-color: lightcoral;
+
+        .row {
+          flex: 1;
+
+          &:not(:last-of-type) {
+            border-bottom: 1px solid black;
+          }
+        }
+      }
+    }
+  }
+}

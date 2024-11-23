@@ -1,3 +1,4 @@
+'use client';
 import dayjs from '@/libraries/dayjs';
 import { gtag } from '@/utils/gtag';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -13,7 +14,6 @@ export default function SearchInput({ disabled }: SearchInputProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const defaultValue = searchParams.get('q') || '';
-  const pathName = usePathname();
   const [value, setValue] = useState(defaultValue);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +32,7 @@ export default function SearchInput({ disabled }: SearchInputProps) {
 
     const query = new URLSearchParams(searchParams);
     query.set('q', trimmedValue);
-    router.push(`${pathName}?${query.toString()}`);
+    router.push(`/schedule?${query.toString()}`);
   };
 
   return (

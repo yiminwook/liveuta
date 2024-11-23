@@ -3,6 +3,7 @@ import { connectOracleDB } from '@/libraries/oracleDB/connection';
 import { TMetaRow } from '@/types/db';
 import { homeDto } from '@/types/dto';
 import Client from './page.client';
+import '@/styles/swiper/core.scss';
 
 type TProps = {
   searchParams: {};
