@@ -48,7 +48,7 @@ export default function Info({ setlist, channel, session }: InfoProps) {
   const mutateDelete = useMutation({
     mutationKey: ['deleteSetlist'],
     mutationFn: async ({ session, videoId }: { session: Session; videoId: string }) => {
-      const response = await axios.delete<DeleteSetlistRes>(`/api/setlist/${videoId}`, {
+      const response = await axios.delete<DeleteSetlistRes>(`/api/v1/setlist/${videoId}`, {
         headers: { Authorization: `Bearer ${session.user.accessToken}` },
       });
       return response.data.data;

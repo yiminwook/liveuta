@@ -9,7 +9,7 @@ export default function useMutateWhitelist() {
     mutationKey: ['deleteWhitelist'],
     mutationFn: async ({ session, channelId }: { session: Session; channelId: string }) => {
       const response = await axios.delete<{ message: string; data: string }>(
-        `/api/whitelist/${channelId}`,
+        `/api/v1/whitelist/${channelId}`,
         { headers: { Authorization: `Bearer ${session.user.accessToken}` } },
       );
       return response.data; //채널 아이디

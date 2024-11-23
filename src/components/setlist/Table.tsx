@@ -40,7 +40,7 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
         headers.set('Authorization', `Bearer ${session.user.accessToken}`);
       }
       return axios
-        .get<GetSetlistRes>(`/api/setlist?${query.toString()}`, {
+        .get<GetSetlistRes>(`/api/v1/setlist?${query.toString()}`, {
           headers,
         })
         .then((res) => res.data.data);

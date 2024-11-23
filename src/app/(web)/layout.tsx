@@ -1,5 +1,5 @@
 import { auth } from '@/libraries/nextAuth';
-import { GetChannelRes } from '@api/channel/route';
+import { GetChannelRes } from '@api/v1/channel/route';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
@@ -23,7 +23,7 @@ export default async function Layout({ children }: PropsWithChildren) {
     queryKey: ['channelList'],
     queryFn: () =>
       axios
-        .get<GetChannelRes>(`${process.env.NEXT_PUBLIC_SITE_URL}/api/channel`)
+        .get<GetChannelRes>(`${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/channel`)
         .then((res) => res.data.data),
   });
 
@@ -34,7 +34,7 @@ export default async function Layout({ children }: PropsWithChildren) {
         queryFn: () =>
           axios
             .get<{ message: string; data: string[] }>(
-              `${process.env.NEXT_PUBLIC_SITE_URL}/api/blacklist`,
+              `${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/blacklist`,
               {
                 headers: { Authorization: `Bearer ${session.user.accessToken}` },
               },
@@ -46,7 +46,7 @@ export default async function Layout({ children }: PropsWithChildren) {
         queryFn: () =>
           axios
             .get<{ message: string; data: string[] }>(
-              `${process.env.NEXT_PUBLIC_SITE_URL}/api/whitelist`,
+              `${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/whitelist`,
               {
                 headers: { Authorization: `Bearer ${session.user.accessToken}` },
               },

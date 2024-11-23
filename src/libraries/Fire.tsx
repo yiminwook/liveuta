@@ -4,7 +4,7 @@
 import { useState } from 'react';
 
 export const typeErrorAPI = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/test`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/test`);
   const data = await res.json();
   return data.map(() => '');
 };

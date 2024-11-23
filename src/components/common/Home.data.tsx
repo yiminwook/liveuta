@@ -26,7 +26,7 @@ export default function HomeDataObserver({ filter, select, query }: HomeDataObse
   // schedule observer
   const { data, isLoading } = useQuery({
     queryKey: ['schedule'],
-    queryFn: () => axios.get<GetScheduleRes>('/api/schedule').then((res) => res.data.data),
+    queryFn: () => axios.get<GetScheduleRes>('/api/v1/schedule').then((res) => res.data.data),
     staleTime: SCHEDULE_REFRESH_INTERVAL,
     gcTime: SCHEDULE_REFRESH_INTERVAL,
     refetchInterval: SCHEDULE_REFRESH_INTERVAL as number | false | undefined,

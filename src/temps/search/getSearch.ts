@@ -21,7 +21,7 @@ export const useSearch = () => {
     refetch,
   } = useQuery<SearchResponseType>({
     queryKey: [`search_${searchQuery}`],
-    queryFn: () => fetcher(`/api/search?query=${searchQuery}`),
+    queryFn: () => fetcher(`/api/v1/search?query=${searchQuery}`),
     enabled: !!searchQuery,
   });
 

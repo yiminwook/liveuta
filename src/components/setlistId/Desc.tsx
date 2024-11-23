@@ -51,7 +51,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
       description: string;
     }) => {
       const response = await axios.put<{ message: string; data: null }>(
-        `/api/setlist/${videoId}`,
+        `/api/v1/setlist/${videoId}`,
         { description },
         { headers: { Authorization: `Bearer ${session.user.accessToken}` } },
       );

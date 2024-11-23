@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { toast } from 'sonner';
 import { channelListAtom } from '@/stores/common';
 import axios from 'axios';
-import { GetChannelRes } from '@api/channel/route';
+import { GetChannelRes } from '@api/v1/channel/route';
 
 type LayoutDataObserverProps = {
   session: Session | null;
@@ -27,14 +27,14 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
     queries: [
       {
         queryKey: ['channelList'],
-        queryFn: () => axios.get<GetChannelRes>('/api/channel').then((res) => res.data.data),
+        queryFn: () => axios.get<GetChannelRes>('/api/v1/channel').then((res) => res.data.data),
         gcTime: Infinity,
       },
       {
         queryKey: ['blacklist'],
         queryFn: () =>
           axios
-            .get<{ message: string; data: string[] }>('/api/blacklist', {
+            .get<{ message: string; data: string[] }>('/api/v1/blacklist', {
               headers: {
                 Authorization: `Bearer ${session?.user.accessToken}`,
               },
@@ -47,7 +47,7 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
         queryKey: ['whitelist'],
         queryFn: () =>
           axios
-            .get<{ message: string; data: string[] }>('/api/whitelist', {
+            .get<{ message: string; data: string[] }>('/api/v1/whitelist', {
               headers: {
                 Authorization: `Bearer ${session?.user.accessToken}`,
               },

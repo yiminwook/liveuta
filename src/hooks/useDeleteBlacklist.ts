@@ -10,7 +10,7 @@ export default function useDeleteBlacklist() {
     mutationKey: ['deleteBlacklist'],
     mutationFn: async ({ session, channelId }: { session: Session; channelId: string }) => {
       const response = await axios.delete<{ message: string; data: string }>(
-        `/api/blacklist/${channelId}`,
+        `/api/v1/blacklist/${channelId}`,
         { headers: { Authorization: `Bearer ${session.user.accessToken}` } },
       );
       return response.data; //채널 아이디

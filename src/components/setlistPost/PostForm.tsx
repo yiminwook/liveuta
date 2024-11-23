@@ -28,7 +28,7 @@ export default function PostForm({ session }: PostFormProps) {
       description: string;
     }) => {
       const response = await axios.post<{ message: string; data: null }>(
-        `/api/setlist/${videoId}`,
+        `/api/v1/setlist/${videoId}`,
         { description },
         { headers: { Authorization: `Bearer ${session.user.accessToken}` } },
       );

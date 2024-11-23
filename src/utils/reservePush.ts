@@ -24,7 +24,7 @@ const reservePush = async ({ title, body, token, timestamp, imageUrl, link }: Re
 
   const response = await axios<{ message: string }>({
     method: 'POST',
-    url: '/api/reserve/push',
+    url: '/api/v1/reserve/push',
     data,
   });
 
