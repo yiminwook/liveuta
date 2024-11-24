@@ -27,7 +27,7 @@ export const CHANNEL_ORDER_MAP = {
   name_kor: 1, // 이름순
 } as const;
 
-export const getAllChannel = async (dto: TChannelDto) => {
+export const getAllChannel = async (dto: TChannelDto = { order: 'name_kor', size: 0 }) => {
   const direction = CHANNEL_ORDER_MAP[dto.order];
 
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
