@@ -1,16 +1,27 @@
+import BadReqError from '@/libraries/error/badRequestError';
 import errorHandler from '@/libraries/error/handler';
-import { getAllChannel } from '@/libraries/mongoDB/getAllChannel';
+import { CHANNEL_ORDER_MAP, channelDto, getAllChannel } from '@/libraries/mongoDB/getAllChannel';
 import { ChannelData } from '@/types/api/mongoDB';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export type GetChannelRes = {
   message: string;
   data: ChannelData[];
 };
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const searchParams = new URL(req.url).searchParams;
+  const order = searchParams.get('order') as keyof typeof CHANNEL_ORDER_MAP;
+  const size = searchParams.get('size');
+
   try {
-    const data = await getAllChannel();
+    const dto = channelDto.safeParse({ order, size });
+
+    if (dto.error) {
+      throw new BadReqError(dto.error.errors[0].message);
+    }
+
+    const data = await getAllChannel(dto.data);
     return NextResponse.json({ message: '채널 목록을 조회했습니다.', data });
   } catch (error) {
     console.error(error);
