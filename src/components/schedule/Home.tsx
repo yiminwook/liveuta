@@ -2,9 +2,9 @@ import { auth } from '@/libraries/nextAuth';
 import { ScheduleAPIReturnType } from '@/types/api/mongoDB';
 import { getCookies } from '@/utils/getCookie';
 import dynamic from 'next/dynamic';
-import Background from './Background';
+import Background from '../common/Background';
 import HomeDataObserver from './Home.data';
-import NavSection from './navSection/NavSection';
+import NavSection from './NavSection';
 import ScheduleSection from './ScheduleSection';
 
 const TopSection = dynamic(() => import('./TopSection'), { ssr: false });

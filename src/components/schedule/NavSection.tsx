@@ -1,5 +1,4 @@
 'use client';
-import { auth } from '@/libraries/nextAuth';
 import dynamic from 'next/dynamic';
 import MobileNavButton from './MobileNavButton';
 import NavTab from './NavTab';
@@ -28,9 +27,11 @@ export default function NavSection({ session }: NavSectionProps) {
         <div className={styles.navTabBox}>
           <NavTab />
         </div>
-        <Link className={styles.multiLink} href="/multi">
-          <TbBoxMultiple4 size="1.5rem" />
-        </Link>
+        {!isMobile && (
+          <Link className={styles.multiLink} href="/multi">
+            <TbBoxMultiple4 size="1.5rem" />
+          </Link>
+        )}
       </div>
       <div className={styles.right}>
         <QueryButton />

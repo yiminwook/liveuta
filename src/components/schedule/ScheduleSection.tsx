@@ -8,12 +8,14 @@ import { Session } from 'next-auth';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import InterSectionTrigger from './InterSectionTrigger';
-import Nodata from './Nodata';
-import ScheduleCard from './scheduleCard/Card';
-import * as styles from './scheduleCard/card.css';
+import InterSectionTrigger from '../common/InterSectionTrigger';
+import Nodata from '../common/Nodata';
+import ScheduleCard from '../common/scheduleCard/Card';
+import * as styles from '../common/scheduleCard/card.css';
 
-const CardPlaceHolders = dynamic(() => import('./scheduleCard/CardPlaceHolders'), { ssr: false });
+const CardPlaceHolders = dynamic(() => import('../common/scheduleCard/CardPlaceHolders'), {
+  ssr: false,
+});
 
 type ScheduleSectionProps = {
   session: Session | null;

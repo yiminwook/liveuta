@@ -4,9 +4,9 @@ import { FilterText, SelectedText } from '@/types';
 import { filterAtom, selectAtom, selectedScheduleAtom } from '@/stores/schedule';
 import { useAtom } from 'jotai';
 import { BsSliders } from 'react-icons/bs';
-import MobileNavModal from '../modal/MobileNavModal';
-import * as styles from './navSection.css';
+import MobileNavModal from '../common/modal/MobileNavModal';
 import { categoryAtom } from '@/stores/schedule/featured';
+import * as styles from './navSection.css';
 
 export default function MobileNavButton() {
   const modalStore = useModalStore();

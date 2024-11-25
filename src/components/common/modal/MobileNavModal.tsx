@@ -1,8 +1,8 @@
 import { ModalBaseProps } from '@/libraries/modal/ModalController';
 import Modal from './Modal';
 import * as styles from './mobileNavModal.css';
-import NavTab from '@/components/common/navSection/NavTab';
-import VideoTypeRadio from '@/components/common/navSection/VideoTypeRadio';
+import NavTab from '@/components/schedule/NavTab';
+import VideoTypeRadio from '@/components/schedule//VideoTypeRadio';
 import SearchInput from '@/components/common/header/SearchInput';
 
 const MOBILE_NAV_MODAL_ID = 'mobileNavModal';

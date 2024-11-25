@@ -1,5 +1,5 @@
 import { ScheduleAPIReturnType } from '@/types/api/mongoDB';
-import Home from '@/components/common/Home';
+import Home from '@/components/schedule/Home';
 import { notFound } from 'next/navigation';
 
 type Props = {

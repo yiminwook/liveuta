@@ -32,6 +32,7 @@ export const navSection = style([
 export const left = style({
   display: 'flex',
   gap: '0.5rem',
+  transform: 'translateZ(0)', // GPU 가속
 });
 
 export const favoriteButton = style([

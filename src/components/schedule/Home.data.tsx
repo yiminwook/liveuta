@@ -4,7 +4,7 @@ import { ScheduleAPIReturnType } from '@/types/api/mongoDB';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
-import MainLoading from './loading/MainLoading';
+import MainLoading from '../common/loading/MainLoading';
 import axios from 'axios';
 import * as schedule from '@/stores/schedule';
 import { GetScheduleRes } from '@/types/api/schedule';
