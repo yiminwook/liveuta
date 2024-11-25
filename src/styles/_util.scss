@@ -1,0 +1,72 @@
+/* 
+ * 해당 파일은 @mixin,  @function을 정의한 파일입니다.
+ */
+
+@use 'sass:math';
+
+@function rem($value) {
+  @return #{math.div(math.div($value, $value * 0 + 1), 16)}rem;
+}
+
+@mixin light {
+  [data-mantine-color-scheme='light'] & {
+    @content;
+  }
+}
+
+@mixin dark {
+  [data-mantine-color-scheme='dark'] & {
+    @content;
+  }
+}
+
+@mixin hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      @content;
+    }
+  }
+}
+
+@mixin min-width($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin max-width($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+// Add direction mixins if you need rtl support
+@mixin rtl {
+  [dir='rtl'] & {
+    @content;
+  }
+}
+
+@mixin ltr {
+  [dir='ltr'] & {
+    @content;
+  }
+}
+
+@mixin text-line($line-count, $line-height) {
+  overflow: hidden;
+  white-space: pre-line;
+  // text-overflow: ellipsis;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line-count;
+  line-height: $line-height;
+  height: #{$line-height * $line-count}em;
+}

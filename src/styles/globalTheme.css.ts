@@ -4,7 +4,7 @@ import {
   createGlobalThemeContract,
   globalStyle,
 } from '@vanilla-extract/css';
-import { theme1, theme2, theme3, theme4, theme5 } from './theme';
+import { theme1, theme2, theme3, theme4, theme5 } from './themeAsis';
 
 export type BrandColor = 'first' | 'second' | 'third' | 'fourth';
 export type BrandColorKey =

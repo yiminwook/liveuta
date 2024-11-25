@@ -19,7 +19,13 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   sassOptions: {
-    includePaths: [path.join(__dirname, 'src/style')],
+    includePaths: [path.join(__dirname, 'src', 'styles')], // style 폴더에 있는 파일은 이름만으로 import 가능(경로 축약)
+    prependData: `
+      @use "var";
+      @use "util";
+      @use "placeholder";
+    `, // 위 파일은 import 하지 않아도 된다.
+    silenceDeprecations: ['legacy-js-api'], // sass warning 제거
   },
   images: {
     unoptimized: true,

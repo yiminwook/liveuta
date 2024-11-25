@@ -2,7 +2,7 @@
 import { useHydrateAtoms } from 'jotai/utils';
 import { themeAtom, themeStyleAtom } from '@/stores/atom';
 import { GetCookiesReturnType } from '@/utils/getCookie';
-import * as themes from '@/styles/theme';
+import * as themes from '@/styles/themeAsis';
 
 type GlobalHydrateProps = {
   children: React.ReactNode;

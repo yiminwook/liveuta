@@ -2,7 +2,7 @@ import { themeStyleAtom } from '@/stores/atom';
 import { ColorPickerValueChangeDetails } from '@ark-ui/react';
 import ColorPicker from '@/components/common/colorPicker/ColorPicker';
 import { useAtom } from 'jotai';
-import { theme1 } from '@/styles/theme';
+import { theme1 } from '@/styles/themeAsis';
 import getRgb from '@/utils/getRgb';
 import * as styles from './form.css';
 

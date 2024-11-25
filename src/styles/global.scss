@@ -1,0 +1,108 @@
+/* ----- CSS reset ----- */
+*,
+*::before,
+*::after {
+  border: none;
+  box-sizing: border-box;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button {
+  background: none;
+  cursor: pointer;
+}
+
+button svg {
+  display: block;
+}
+
+ul,
+li,
+ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+html {
+  font-size: 16px; // root font-size
+}
+
+/* ----- Global styles ----- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--mantine-font-family);
+  font-size: var(--mantine-font-size-md);
+  line-height: var(--mantine-line-height);
+  background-color: var(--mantine-color-body);
+  color: var(--mantine-color-text);
+
+  -webkit-font-smoothing: var(--mantine-webkit-font-smoothing);
+  -moz-osx-font-smoothing: var(--mantine-moz-font-smoothing);
+}
+
+@media screen and (max-device-width: 31.25em) {
+  body {
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-respect-reduced-motion] [data-reduce-motion] {
+    transition: none;
+    animation: none;
+  }
+}
+
+[data-mantine-color-scheme='light'] .mantine-light-hidden {
+  display: none;
+}
+
+[data-mantine-color-scheme='dark'] .mantine-dark-hidden {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 7.5px;
+  height: 7.5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  visibility: hidden;
+}
+
+.essential {
+  content: '*';
+  color: var(--mantine-color-red);
+}
+
+.blind {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}

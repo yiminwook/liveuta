@@ -1,5 +1,3 @@
-import { hr } from '@/components/common/modal/channelCardModal.css';
-
 export const PAGINATION_RANGE = 5;
 
 /** 채널 페이지 카드갯수 */
@@ -56,3 +54,5 @@ export const EXTERNAL_LINKS = [
 ];
 
 export const PORTAL_ID = 'liveuta-portal';
+
+export const COLOR_SCHEME_KEY = 'color-scheme';

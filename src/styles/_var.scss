@@ -1,0 +1,18 @@
+$mantine-breakpoint-xs: var(--mantine-breakpoint-xs);
+$mantine-breakpoint-sm: var(--mantine-breakpoint-sm);
+$mantine-breakpoint-md: var(--mantine-breakpoint-md);
+$mantine-breakpoint-lg: var(--mantine-breakpoint-lg);
+$mantine-breakpoint-xl: var(--mantine-breakpoint-xl);
+
+$mantine-color-red: var(--mantine-color-red-0);
+
+$z-index: (
+  header: 1000,
+  float: 200,
+  sidebar: 500,
+  modal: 9000,
+  toast: 9999,
+);
+
+$bezier-curve: cubic-bezier(0.23, 1, 0.32, 1);
+$box-shadow: 0px 1px 2px 0 rgba(56, 52, 52, 0.4);

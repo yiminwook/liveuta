@@ -1,7 +1,7 @@
 import { atomWithReset } from 'jotai/utils';
 import { ThemeType } from '@/types';
 import { atom } from 'jotai';
-import { theme1, darkBrandColor, whiteBrandColor } from '@/styles/theme';
+import { theme1, darkBrandColor, whiteBrandColor } from '@/styles/themeAsis';
 
 export const themeAtom = atomWithReset<ThemeType>('theme1');
 

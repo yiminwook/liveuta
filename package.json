@@ -13,6 +13,7 @@
     "@ark-ui/react": "^2.2.3",
     "@auth/core": "^0.27.0",
     "@mantine/core": "^7.14.1",
+    "@mantine/dates": "^7.14.2",
     "@mantine/hooks": "^7.14.1",
     "@mantine/modals": "^7.14.1",
     "@mantine/tiptap": "^7.14.1",
