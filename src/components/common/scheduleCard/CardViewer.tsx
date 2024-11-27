@@ -1,5 +1,5 @@
 import { FaUsers } from 'react-icons/fa';
-import * as styles from './card.css';
+import css from './ScheduleCard.module.scss';
 
 interface CardViewerProps {
   viewer: number;
@@ -8,7 +8,7 @@ interface CardViewerProps {
 export default function CardViewer({ viewer }: CardViewerProps) {
   return (
     <>
-      <FaUsers className={styles.statusSvg} size={'0.75rem'} />
+      <FaUsers className={css.statusSvg} size={'0.75rem'} />
       {viewer?.toString() || '?'}
     </>
   );

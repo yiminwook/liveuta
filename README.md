@@ -1,3 +1,6 @@
+https://sass-lang.com/documentation/modules/meta/#type-of
+react error boundary
+
 ### 📢 Pull Request는 dev 브랜치에 부탁드립니다.
 
 Main - https://liveuta.vercel.app

@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useAtom } from 'jotai';
 import { LuChevronDown } from 'react-icons/lu';
 import { Collapsible } from '@ark-ui/react';
-
 import { ContentsDataType } from '@/types/api/mongoDB';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/constants';
 import useScheduleStatus from '@/hooks/useScheduleStatus';
@@ -12,10 +11,8 @@ import { StreamCategory } from '@/types';
 import { queryAtom } from '@/stores/schedule';
 import Nodata from '@/components/common/Nodata';
 import ScheduleCard from '@/components/common/scheduleCard/Card';
-import CardPlaceHolders from '@/components/common/scheduleCard/CardPlaceHolders';
-
 import * as styles from './category.css';
-import * as cardStyles from '@/components/common/scheduleCard/card.css';
+import { Button } from '@mantine/core';
 
 type CategoryProps = {
   contents: ContentsDataType[];
@@ -77,11 +74,11 @@ export default function Category({ contents, session, category }: CategoryProps)
     return (
       <section>
         <Nodata />
-        <div className={cardStyles.nodataLinkBox}>
-          <Link className={cardStyles.nodataLink} href={`/channel?q=${query}`}>
-            {`채널페이지에서 검색`}
-          </Link>
-        </div>
+        {/* <div className={css.nodataLinkBox}> */}
+        <Button component={Link} href={`/channel?q=${query}`}>
+          채널페이지에서 검색
+        </Button>
+        {/* </div> */}
       </section>
     );
   }
@@ -105,7 +102,6 @@ export default function Category({ contents, session, category }: CategoryProps)
                     content={data}
                   />
                 ))}
-                <CardPlaceHolders />
               </div>
             </Collapsible.Content>
           </Collapsible.Root>

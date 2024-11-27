@@ -10,7 +10,7 @@ import { useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { MouseEvent, useCallback, useRef, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import * as styles from './card.css';
+import css from './ScheduleCard.module.scss';
 
 interface CardImageProps {
   content: ContentsDataType;
@@ -51,7 +51,7 @@ export default function CardImage({ content }: CardImageProps) {
   };
 
   return (
-    <button className={styles.imageButton} onClick={linkClickEvent}>
+    <button className={css.imgBtn} onClick={linkClickEvent}>
       <div>
         {imgLoaded ? (
           <Image

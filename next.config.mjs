@@ -26,6 +26,10 @@ const nextConfig = {
       @use "placeholder";
     `, // 위 파일은 import 하지 않아도 된다.
     silenceDeprecations: ['legacy-js-api'], // sass warning 제거
+    logger: {
+      warn: (message) => console.warn(message),
+      debug: (message) => console.log(message),
+    },
   },
   images: {
     unoptimized: true,

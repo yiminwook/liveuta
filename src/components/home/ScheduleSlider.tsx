@@ -9,8 +9,6 @@ const DUMMY_DATA = new Array(20).fill(null);
 export default function ScheduleSlider() {
   return (
     <Swiper
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
       slidesPerView="auto"
       slidesPerGroup={1}
       width={500}

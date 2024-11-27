@@ -21,40 +21,16 @@ export const theme = createTheme({
     xl: '90em',
   },
   colors: {
-    primary: virtualColor({
-      name: 'primary',
-      dark: 'deep-blue',
-      light: 'deep-orange',
+    main: virtualColor({
+      name: 'main',
+      light: '#fff',
+      dark: '#000',
     }),
-    demo: virtualColor({
-      name: 'demo',
-      dark: 'deep-orange',
-      light: 'deep-blue',
+    text: virtualColor({
+      name: 'text',
+      light: '#000',
+      dark: '#fff',
     }),
-    'deep-blue': [
-      '#e5f3ff',
-      '#cde2ff',
-      '#9ac2ff',
-      '#64a0ff',
-      '#3884fe',
-      '#1d72fe',
-      '#0969ff',
-      '#0058e4',
-      '#004ecd',
-      '#0043b5',
-    ],
-    'deep-orange': [
-      '#fff4e2',
-      '#fee8cf',
-      '#f7cfa2',
-      '#f2b571',
-      '#ed9f48',
-      '#ea912d',
-      '#e98a1d',
-      '#cf770f',
-      '#b96907',
-      '#a15900',
-    ],
   },
 });
 

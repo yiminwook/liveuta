@@ -1,5 +1,15 @@
 // css 순서변경 금지
-import './reset.css';
+// import '@/styles/reset.css';
+
+import '@/styles/swiper/core.scss';
+import 'swiper/css/free-mode';
+import 'swiper/css/grid';
+
+import '@/styles/mantine/core.scss';
+import '@/styles/mantine/theme.scss';
+import '/public/theme-v2.css';
+import '@/styles/global.scss';
+
 import * as styles from '@/app/global.css';
 import '@/styles/globalTheme.css';
 

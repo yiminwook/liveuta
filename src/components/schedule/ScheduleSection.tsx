@@ -5,17 +5,13 @@ import { ContentsDataType } from '@/types/api/mongoDB';
 import { filterAtom, queryAtom, selectedScheduleAtom } from '@/stores/schedule';
 import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import InterSectionTrigger from '../common/InterSectionTrigger';
+import { useEffect, useRef, useState } from 'react';
 import Nodata from '../common/Nodata';
 import ScheduleCard from '../common/scheduleCard/Card';
-import * as styles from '../common/scheduleCard/card.css';
-
-const CardPlaceHolders = dynamic(() => import('../common/scheduleCard/CardPlaceHolders'), {
-  ssr: false,
-});
+import { VirtuosoGrid } from 'react-virtuoso';
+import css from './ScheduleSection.module.scss';
+import { Button } from '@mantine/core';
 
 type ScheduleSectionProps = {
   session: Session | null;
@@ -28,19 +24,27 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
   const [scrollPage, setScrollPage] = useState(1);
   const [selectedData] = useAtom(selectedScheduleAtom);
   const [query] = useAtom(queryAtom);
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
   const isDone = loadContents.length >= selectedData.content.length;
 
   const handleInfinityScroll = () => {
-    if (isDone) return;
-    setScrollPage((pre) => pre + 1);
+    if (debounceRef.current) return;
+    debounceRef.current = setTimeout(() => {
+      if (!isDone) {
+        setScrollPage((pre) => pre + 1);
+      }
+      debounceRef.current = null;
+    }, 200);
   };
 
   useEffect(() => {
     // 페이지가 바뀌면 데이터 추가로 로드
     if (isDone) return;
+
     const nextContents = selectedData.content.slice(0, SCROLL_PER_YOUTUBE_CARD * scrollPage);
-    setLoadContents(() => [...nextContents]);
+    setLoadContents(() => nextContents);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollPage]);
 
@@ -64,24 +68,30 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
     return (
       <section>
         <Nodata />
-        <div className={styles.nodataLinkBox}>
-          <Link className={styles.nodataLink} href={`/channel?q=${query}`}>
-            {`채널페이지에서 검색`}
-          </Link>
+        <div className={css.nodataLinkBox}>
+          <Button component={Link} href={`/channel?q=${query}`}>
+            채널페이지에서 검색
+          </Button>
         </div>
       </section>
     );
   }
 
   return (
-    <section>
-      <div className={styles.cardList}>
-        {loadContents.map((data) => (
+    <section className={css.expand}>
+      <VirtuosoGrid
+        totalCount={selectedData.content.length}
+        data={loadContents}
+        // components={{ Scroller }}
+        listClassName={css.list}
+        itemClassName={css.item}
+        itemContent={(_i, data) => (
           <ScheduleCard session={session} key={`scheduleCard_${data.videoId}`} content={data} />
-        ))}
-        <CardPlaceHolders />
-      </div>
-      <InterSectionTrigger isDone={isDone} onShow={handleInfinityScroll} />
+        )}
+        overscan={10}
+        endReached={handleInfinityScroll}
+        className={css.vertuso}
+      />
     </section>
   );
 }

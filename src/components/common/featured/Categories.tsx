@@ -1,13 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useAtom } from 'jotai';
-import { LuChevronDown } from 'react-icons/lu';
 import { Session } from 'next-auth';
-import { Tabs } from '@ark-ui/react';
-
 import { ContentsDataType } from '@/types/api/mongoDB';
 import { categoryAtom, featuredAtom } from '@/stores/schedule/featured';
 import { selectedScheduleAtom } from '@/stores/schedule';
-import CardPlaceHolders from '@/components/common/scheduleCard/CardPlaceHolders';
 import Category from './Category';
 import * as sectionStyles from './section.css';
 import { StreamCategory } from '@/types';
@@ -48,7 +44,6 @@ export default function Categories({ session }: CategoriesProps) {
           session={session}
           category={category}
         />
-        <CardPlaceHolders />
       </div>
     </div>
   );

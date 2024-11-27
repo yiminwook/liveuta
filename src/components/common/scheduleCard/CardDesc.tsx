@@ -5,7 +5,7 @@ import cx from 'classnames';
 import { Session } from 'next-auth';
 import CardStatus from './CardStatus';
 import CardNav from './CardNav';
-import * as styles from './card.css';
+import css from './ScheduleCard.module.scss';
 
 type CardDescProps = {
   content: ContentsDataType;
@@ -24,16 +24,12 @@ export default function CardDesc({ session, content, addStreamModifier }: CardDe
   };
 
   return (
-    <div className={styles.descBox}>
-      <a
-        className={cx(styles.channelName, addStreamModifier)}
-        href={channelUrl}
-        onClick={openChannel}
-      >
+    <div className={css.descBox}>
+      <a className={cx(css.channelNm, addStreamModifier)} href={channelUrl} onClick={openChannel}>
         {channelName}
       </a>
-      <p className={cx(styles.title, addStreamModifier)}>{title}</p>
-      <div className={styles.time}>
+      <p className={cx(css.title, addStreamModifier)}>{title}</p>
+      <div className={css.time}>
         <time className={'kor'}>{korTime}</time>
         <CardStatus isStream={isStream} interval={interval} viewer={viewer} />
       </div>

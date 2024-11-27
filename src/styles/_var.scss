@@ -1,18 +1,70 @@
-$mantine-breakpoint-xs: var(--mantine-breakpoint-xs);
-$mantine-breakpoint-sm: var(--mantine-breakpoint-sm);
-$mantine-breakpoint-md: var(--mantine-breakpoint-md);
-$mantine-breakpoint-lg: var(--mantine-breakpoint-lg);
-$mantine-breakpoint-xl: var(--mantine-breakpoint-xl);
+$breakpoints: (
+  sm: 30em,
+  xs: 48em,
+  md: 64em,
+  lg: 74em,
+  xl: 90em,
+);
 
-$mantine-color-red: var(--mantine-color-red-0);
-
-$z-index: (
-  header: 1000,
-  float: 200,
-  sidebar: 500,
-  modal: 9000,
-  toast: 9999,
+$z-indexs: (
+  app: 100,
+  modal: 200,
+  popover: 300,
+  overlay: 400,
+  max: 9999,
 );
 
 $bezier-curve: cubic-bezier(0.23, 1, 0.32, 1);
 $box-shadow: 0px 1px 2px 0 rgba(56, 52, 52, 0.4);
+$backdrop-color: #ffffff34;
+
+$first-colors: (
+  default: var(--liveuta-first-default),
+  light: var(--liveuta-first-light),
+  lighter: var(--liveuta-first-lighter),
+  dark: var(--liveuta-first-dark),
+  darken: var(--liveuta-first-darken),
+  25: var(--liveuta-first-25),
+  50: var(--liveuta-first-50),
+  75: var(--liveuta-first-75),
+  95: var(--liveuta-first-95),
+);
+
+$second-colors: (
+  default: var(--liveuta-second-default),
+  light: var(--liveuta-second-light),
+  lighter: var(--liveuta-second-lighter),
+  dark: var(--liveuta-second-dark),
+  darken: var(--liveuta-second-darken),
+  25: var(--liveuta-second-25),
+  50: var(--liveuta-second-50),
+  75: var(--liveuta-second-75),
+  95: var(--liveuta-second-95),
+);
+
+$third-colors: (
+  default: var(--liveuta-third-50),
+  light: var(--liveuta-third-light),
+  lighter: var(--liveuta-third-lighter),
+  dark: var(--liveuta-third-dark),
+  darken: var(--liveuta-third-darken),
+  25: var(--liveuta-third-25),
+  50: var(--liveuta-third-50),
+  75: var(--liveuta-third-75),
+  95: var(--liveuta-third-95),
+);
+
+$colors: (
+  scheme: var(--mantine-color-scheme),
+  bright: var(--mantine-color-bright),
+  text: var(--mantine-color-text),
+  body: var(--mantine-color-body),
+  error: var(--mantine-color-error),
+  placeholder: var(--mantine-color-placeholder),
+  anchor: var(--mantine-color-anchor),
+  default: var(--mantine-color-default),
+  default-hover: var(--mantine-color-default-hover),
+  default-color: var(--mantine-color-default-color),
+  default-border: var(--mantine-color-default-border),
+  dimmed: var(--mantine-color-dimmed),
+);

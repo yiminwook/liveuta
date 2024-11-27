@@ -20,7 +20,7 @@ import { HiBellAlert } from 'react-icons/hi2';
 import { MdBlock, MdOpenInNew } from 'react-icons/md';
 import { toast } from 'sonner';
 import CopyButton from '@/components/common/button/CopyButton';
-import * as styles from './card.css';
+import css from './ScheduleCard.module.scss';
 
 type CardNavProps = {
   content: ContentsDataType;
@@ -123,31 +123,27 @@ export default function CardNav({ content, session }: CardNavProps) {
   const thumbnailUrl = generateThumbnail(content.videoId, 'mqdefault');
 
   return (
-    <div className={styles.nav}>
+    <div className={css.nav}>
       {content.isStream === 'NULL' && (
-        <button
-          className={styles.navButton}
-          onClick={handleReserve}
-          disabled={mutatePush.isPending}
-        >
+        <button className={css.navBtn} onClick={handleReserve} disabled={mutatePush.isPending}>
           <HiBellAlert color="inherit" size="1.2rem" />
         </button>
       )}
-      <button className={styles.navButton} onClick={() => open(videoUrl)}>
+      <button className={css.navBtn} onClick={() => open(videoUrl)}>
         <FaPlus size="1.2rem" />
       </button>
       <button
-        className={styles.navButton}
+        className={css.navBtn}
         onClick={handleFavorite}
         disabled={mutatePostFavorite.isPending || mutateDeleteFavorite.isPending}
       >
         <FaStar size="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
       </button>
-      <button className={styles.navButton} onClick={handleBlock} disabled={mutateBlock.isPending}>
+      <button className={css.navBtn} onClick={handleBlock} disabled={mutateBlock.isPending}>
         <MdBlock size="1.2rem" />
       </button>
-      <CopyButton className={styles.navButton} value={videoUrl} size="1.2rem" />
-      <button className={styles.navButton} onClick={openStream}>
+      <CopyButton className={css.navBtn} value={videoUrl} size="1.2rem" />
+      <button className={css.navBtn} onClick={openStream}>
         <MdOpenInNew size="1.2rem" />
       </button>
     </div>

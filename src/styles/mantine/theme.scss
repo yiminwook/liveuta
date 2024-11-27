@@ -17,12 +17,7 @@
   --mantine-color-white: #fff;
   --mantine-color-black: #000;
   --mantine-line-height: 1.55;
-  --mantine-font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial,
-    sans-serif, Apple Color Emoji, Segoe UI Emoji;
-  --mantine-font-family-monospace: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    Liberation Mono, Courier New, monospace;
-  --mantine-font-family-headings: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
-    Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+
   --mantine-heading-font-weight: 700;
   --mantine-radius-default: calc(0.25rem * var(--mantine-scale));
   --mantine-primary-color-0: var(--mantine-color-blue-0);
@@ -40,11 +35,7 @@
   --mantine-primary-color-light: var(--mantine-color-blue-light);
   --mantine-primary-color-light-hover: var(--mantine-color-blue-light-hover);
   --mantine-primary-color-light-color: var(--mantine-color-blue-light-color);
-  --mantine-breakpoint-xs: 36em;
-  --mantine-breakpoint-sm: 48em;
-  --mantine-breakpoint-md: 62em;
-  --mantine-breakpoint-lg: 75em;
-  --mantine-breakpoint-xl: 88em;
+
   --mantine-spacing-xs: calc(0.625rem * var(--mantine-scale));
   --mantine-spacing-sm: calc(0.75rem * var(--mantine-scale));
   --mantine-spacing-md: calc(1rem * var(--mantine-scale));
@@ -255,7 +246,6 @@
 
 :root[data-mantine-color-scheme='dark'] {
   --mantine-color-scheme: dark;
-  --mantine-primary-color-contrast: var(--mantine-color-white);
   --mantine-color-bright: var(--mantine-color-white);
   --mantine-color-text: var(--mantine-color-dark-0);
   --mantine-color-body: var(--mantine-color-dark-7);
@@ -267,6 +257,8 @@
   --mantine-color-default-color: var(--mantine-color-white);
   --mantine-color-default-border: var(--mantine-color-dark-4);
   --mantine-color-dimmed: var(--mantine-color-dark-2);
+
+  --mantine-primary-color-contrast: var(--mantine-color-white);
   --mantine-color-dark-text: var(--mantine-color-dark-4);
   --mantine-color-dark-filled: var(--mantine-color-dark-8);
   --mantine-color-dark-filled-hover: var(--mantine-color-dark-7);
@@ -386,7 +378,6 @@
   --mantine-color-bright: var(--mantine-color-black);
   --mantine-color-text: var(--mantine-color-black);
   --mantine-color-body: var(--mantine-color-white);
-  --mantine-primary-color-contrast: var(--mantine-color-white);
   --mantine-color-error: var(--mantine-color-red-6);
   --mantine-color-placeholder: var(--mantine-color-gray-5);
   --mantine-color-anchor: var(--mantine-primary-color-filled);
@@ -395,6 +386,8 @@
   --mantine-color-default-color: var(--mantine-color-gray-9);
   --mantine-color-default-border: var(--mantine-color-gray-4);
   --mantine-color-dimmed: var(--mantine-color-gray-6);
+  --mantine-primary-color-contrast: var(--mantine-color-white);
+
   --mantine-color-dark-text: var(--mantine-color-dark-filled);
   --mantine-color-dark-filled: var(--mantine-color-dark-6);
   --mantine-color-dark-filled-hover: var(--mantine-color-dark-7);
