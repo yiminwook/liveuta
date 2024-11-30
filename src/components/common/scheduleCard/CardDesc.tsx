@@ -1,14 +1,13 @@
 import { generateChannelUrl } from '@/libraries/youtube/url';
-import { ContentsDataType } from '@/types/api/mongoDB';
+import { TContentsData } from '@/types/api/mongoDB';
 import { openWindow } from '@/utils/windowEvent';
 import cx from 'classnames';
 import { Session } from 'next-auth';
 import CardStatus from './CardStatus';
-import CardNav from './CardNav';
 import css from './ScheduleCard.module.scss';
 
 type CardDescProps = {
-  content: ContentsDataType;
+  content: TContentsData;
   addStreamModifier: string;
   session: Session | null;
 };
@@ -25,15 +24,16 @@ export default function CardDesc({ session, content, addStreamModifier }: CardDe
 
   return (
     <div className={css.descBox}>
-      <a className={cx(css.channelNm, addStreamModifier)} href={channelUrl} onClick={openChannel}>
-        {channelName}
-      </a>
+      <span>
+        <a className={cx(css.channelNm, addStreamModifier)} href={channelUrl} onClick={openChannel}>
+          {channelName}
+        </a>
+      </span>
       <p className={cx(css.title, addStreamModifier)}>{title}</p>
       <div className={css.time}>
         <time className={'kor'}>{korTime}</time>
         <CardStatus isStream={isStream} interval={interval} viewer={viewer} />
       </div>
-      <CardNav content={content} session={session} />
     </div>
   );
 }

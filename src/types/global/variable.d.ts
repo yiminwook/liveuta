@@ -3,6 +3,7 @@ declare module '@variable' {
   export const boxShadow: string;
 
   export const breakpointSm: string;
+  export const breakpointXs: string;
   export const breakpointMd: string;
   export const breakpointLg: string;
   export const breakpointXl: string;

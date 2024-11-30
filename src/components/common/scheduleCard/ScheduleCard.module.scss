@@ -68,13 +68,26 @@ $active-color2: #e06e61;
       }
     }
   }
+
+  & > :global(.mantine-ActionIcon-root) {
+    --ai-size: 1rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-25%, 25%);
+
+    @include util.min-width(sm) {
+      --ai-size: 1.5rem;
+    }
+  }
 }
 
 .imgBtn {
-  display: inline-block;
-  width: 175px;
+  width: 150px;
+  flex: 0 0 150px;
 
   @include util.min-width(sm) {
+    flex: 1;
     width: 100%;
     height: 120%;
   }
@@ -121,7 +134,7 @@ $active-color2: #e06e61;
 }
 
 .title {
-  @include util.text-line(2, 1.2rem);
+  @include util.text-line(2, 1.2);
   font-size: 0.75rem;
 
   &:global(.stream) {
@@ -130,8 +143,7 @@ $active-color2: #e06e61;
   }
 
   @include util.min-width(sm) {
-    font-size: 1.6rem;
-    height: 2 * 1.6rem;
+    @include util.text-line(2, 1.4);
     font-size: 1rem;
   }
 }
@@ -144,30 +156,6 @@ $active-color2: #e06e61;
 
   @include util.min-width(sm) {
     font-size: 1rem;
-  }
-}
-
-.nav {
-  display: flex;
-  gap: 0.25rem;
-  font-size: 0.75rem;
-  justify-content: flex-end;
-
-  @include util.min-width(sm) {
-    font-size: 1rem;
-  }
-}
-
-.navBtn {
-  @extend %flex-center;
-  color: $active-color1;
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 5px;
-  transition: background-color 0.5s var.$bezier-curve;
-
-  &:hover {
-    background-color: rgba(100, 100, 100, 0.15);
   }
 }
 

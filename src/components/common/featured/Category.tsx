@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useAtom } from 'jotai';
 import { LuChevronDown } from 'react-icons/lu';
 import { Collapsible } from '@ark-ui/react';
-import { ContentsDataType } from '@/types/api/mongoDB';
+import { TContentsData } from '@/types/api/mongoDB';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/constants';
 import useScheduleStatus from '@/hooks/useScheduleStatus';
 import { StreamCategory } from '@/types';
@@ -15,7 +15,7 @@ import * as styles from './category.css';
 import { Button } from '@mantine/core';
 
 type CategoryProps = {
-  contents: ContentsDataType[];
+  contents: TContentsData[];
   session: Session | null;
   category: StreamCategory;
 };
@@ -23,10 +23,10 @@ type CategoryProps = {
 export default function Category({ contents, session, category }: CategoryProps) {
   const status = useScheduleStatus();
   const [query] = useAtom(queryAtom);
-  const [loadContents, setLoadContents] = useState<ContentsDataType[]>([]);
+  const [loadContents, setLoadContents] = useState<TContentsData[]>([]);
   const [scrollPage, setScrollPage] = useState(1);
   const taggedContents = useMemo(() => {
-    const tagged: Record<string, ContentsDataType[]> = { '': [] };
+    const tagged: Record<string, TContentsData[]> = { '': [] };
 
     contents.forEach((data) => {
       if (!tagged[data.tag]) tagged[data.tag] = [];

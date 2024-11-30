@@ -3,16 +3,25 @@ import axios from 'axios';
 
 // TODO: DeletePush 추가
 
-interface ReservePushArgs {
+export interface ReservePushArgs {
   title: string;
   body: string;
   token: string;
   timestamp: string;
   imageUrl: string;
   link: string;
+  channelName: string;
 }
 
-const reservePush = async ({ title, body, token, timestamp, imageUrl, link }: ReservePushArgs) => {
+const reservePush = async ({
+  title,
+  body,
+  token,
+  timestamp,
+  imageUrl,
+  link,
+  channelName,
+}: ReservePushArgs) => {
   const data: PushData = {
     title,
     body,
@@ -28,7 +37,11 @@ const reservePush = async ({ title, body, token, timestamp, imageUrl, link }: Re
     data,
   });
 
-  return response;
+  return {
+    message: response.data.message,
+    channelName,
+    title,
+  };
 };
 
 export default reservePush;

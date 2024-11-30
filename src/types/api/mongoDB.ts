@@ -39,7 +39,7 @@ export type ContentsLength = {
   stream: number;
 };
 
-export type ContentsDataType = {
+export type TContentsData = {
   title: string;
   channelName: string;
   videoId: string;
@@ -54,7 +54,7 @@ export type ContentsDataType = {
   tag: string;
 };
 
-export type ContentsDataReturnType = ContentsDataType[];
+export type ContentsDataReturnType = TContentsData[];
 
 export type ParseScheduledDataReturnType = {
   scheduled: ContentsDataReturnType;

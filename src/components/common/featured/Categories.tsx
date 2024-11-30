@@ -1,14 +1,14 @@
 import { useMemo } from 'react';
 import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
-import { ContentsDataType } from '@/types/api/mongoDB';
+import { TContentsData } from '@/types/api/mongoDB';
 import { categoryAtom, featuredAtom } from '@/stores/schedule/featured';
 import { selectedScheduleAtom } from '@/stores/schedule';
 import Category from './Category';
 import * as sectionStyles from './section.css';
 import { StreamCategory } from '@/types';
 
-type Categories = Record<StreamCategory, ContentsDataType[]>;
+type Categories = Record<StreamCategory, TContentsData[]>;
 
 type CategoriesProps = {
   session: Session | null;

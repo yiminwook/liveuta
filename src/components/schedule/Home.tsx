@@ -1,13 +1,9 @@
 import { auth } from '@/libraries/nextAuth';
 import { ScheduleAPIReturnType } from '@/types/api/mongoDB';
 import { getCookies } from '@/utils/getCookie';
-import dynamic from 'next/dynamic';
 import Background from '../common/Background';
 import HomeDataObserver from './Home.data';
-import NavSection from './NavSection';
 import ScheduleSection from './ScheduleSection';
-
-const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 
 type HomeProps = {
   filter: keyof ScheduleAPIReturnType;
@@ -21,8 +17,6 @@ export default async function Home({ filter, query }: HomeProps) {
   return (
     <Background tile={true}>
       <HomeDataObserver filter={filter} select={select} query={query} />
-      <NavSection session={session} />
-      <TopSection filter={filter} />
       <ScheduleSection session={session} />
     </Background>
   );

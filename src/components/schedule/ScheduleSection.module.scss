@@ -15,6 +15,7 @@
   .item {
     padding: 0.5rem;
     width: 100%;
+    position: relative;
 
     @include util.min-width(sm) {
       width: 50%;

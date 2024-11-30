@@ -69,7 +69,7 @@
 @mixin text-line($line-count, $line-height) {
   overflow: hidden;
   white-space: pre-line;
-  // text-overflow: ellipsis;
+  text-overflow: ellipsis;
   word-break: break-word;
   display: -webkit-box;
   -webkit-box-orient: vertical;

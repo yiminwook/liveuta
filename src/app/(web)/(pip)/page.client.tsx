@@ -54,7 +54,7 @@ export default function Client({ coverImgUrl }: Props) {
         <ChannelSlider />
       </section>
 
-      <section className={css.featureSection}>
+      {/* <section className={css.featureSection}>
         <div className={css.featureBox}>
           <div className={css.leftCol}></div>
           <div className={css.rightCol}>
@@ -63,7 +63,7 @@ export default function Client({ coverImgUrl }: Props) {
             <div className={css.row}></div>
           </div>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }

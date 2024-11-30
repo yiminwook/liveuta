@@ -1,5 +1,7 @@
 https://sass-lang.com/documentation/modules/meta/#type-of
 react error boundary
+react scan
+effect
 
 ### 📢 Pull Request는 dev 브랜치에 부탁드립니다.
 

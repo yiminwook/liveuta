@@ -2,7 +2,7 @@ import {
   ContentDocument,
   ParseAllDataReturnType,
   ParseScheduledDataReturnType,
-  ContentsDataType,
+  TContentsData,
   isStream,
 } from '@/types/api/mongoDB';
 import { getInterval, stringToTime } from '@/utils/getTime';
@@ -10,7 +10,7 @@ import dayjs from '@/libraries/dayjs';
 import { replaceParentheses } from '@/utils/regexp';
 import { StreamCategory } from '@/types';
 
-export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => {
+export const parseMongoDBDocument = (doc: ContentDocument): TContentsData => {
   try {
     const { timestamp, korTime } = stringToTime(doc.ScheduledTime);
     const interval = getInterval(timestamp);
@@ -27,7 +27,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => 
 
     const category = doc.category as keyof typeof categoryMap;
 
-    const data: ContentsDataType = {
+    const data: TContentsData = {
       title: replacedTitle,
       channelName: doc.ChannelName,
       videoId: doc.VideoId,
@@ -50,9 +50,9 @@ export const parseMongoDBDocument = (doc: ContentDocument): ContentsDataType => 
 };
 
 export const parseScheduledData = (documents: ContentDocument[]): ParseScheduledDataReturnType => {
-  const scheduled: ContentsDataType[] = [];
+  const scheduled: TContentsData[] = [];
   let scheduledVideo = 0;
-  const live: ContentsDataType[] = [];
+  const live: TContentsData[] = [];
   let liveVideo = 0;
 
   documents.forEach((doc) => {
@@ -83,9 +83,9 @@ export const parseScheduledData = (documents: ContentDocument[]): ParseScheduled
 export const parseAllData = (documents: ContentDocument[]): ParseAllDataReturnType => {
   if (!documents) throw new Error('No DataValue');
 
-  const daily: ContentsDataType[] = [];
+  const daily: TContentsData[] = [];
   let dailyVideo = 0;
-  const all: ContentsDataType[] = [];
+  const all: TContentsData[] = [];
   let allVideo = 0;
   const yesterday = dayjs.tz().subtract(1, 'day').valueOf();
 
@@ -113,7 +113,7 @@ export const parseAllData = (documents: ContentDocument[]): ParseAllDataReturnTy
 };
 
 export const parseFeatured = (documents: ContentDocument[]) => {
-  const featured: ContentsDataType[] = [];
+  const featured: TContentsData[] = [];
 
   const l = [0, 1, 0, 2, 0, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(
     (v) => `${v}`,

@@ -3,7 +3,7 @@ import altImage from '@/assets/image/thumbnail_alt_img.png';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { ContentsDataType } from '@/types/api/mongoDB';
+import { TContentsData } from '@/types/api/mongoDB';
 import { playerStatusAtom, playerVideoIdAtom } from '@/stores/player';
 import { gtagClick } from '@/utils/gtag';
 import { useSetAtom } from 'jotai';
@@ -13,7 +13,7 @@ import { useMediaQuery } from 'react-responsive';
 import css from './ScheduleCard.module.scss';
 
 interface CardImageProps {
-  content: ContentsDataType;
+  content: TContentsData;
 }
 
 export default function CardImage({ content }: CardImageProps) {

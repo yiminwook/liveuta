@@ -1,14 +1,18 @@
-:global(.swiper-slide).item {
-  border: 1px solid black;
-  width: 450px;
-  @media (min-width: 640px) {
-    width: 300px;
-  }
+.container {
+  :global(.swiper-slide) {
+    width: 85%;
+    padding: 0.25em;
 
-  & > div {
-    margin: 0 auto;
-    // min-width: unset !important;
-    // max-width: unset !important;
-    // width: 300px !important;
+    @include util.min-width(sm) {
+      width: 75%;
+    }
+
+    @include util.min-width(xs) {
+      width: 50%;
+    }
+
+    @include util.min-width(lg) {
+      width: 25%;
+    }
   }
 }

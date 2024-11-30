@@ -2,7 +2,7 @@
 import { SegmentGroup, SegmentGroupValueChangeDetails } from '@ark-ui/react';
 import { filterAtom } from '@/stores/schedule';
 import { useAtom } from 'jotai';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import * as styles from './navTab.css';
 
 const NAV_LINKS = [
@@ -15,6 +15,7 @@ const NAV_LINKS = [
 export default function NavTab() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [filter] = useAtom(filterAtom);
 
   const handleValueChange = ({ value }: SegmentGroupValueChangeDetails) => {
@@ -24,7 +25,7 @@ export default function NavTab() {
     } else {
       query.set('tab', value);
     }
-    router.push(`/?${query.toString()}`);
+    router.push(`${pathname}?${query.toString()}`);
   };
 
   return (
