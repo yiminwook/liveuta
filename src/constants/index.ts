@@ -53,6 +53,16 @@ export const EXTERNAL_LINKS = [
   { href: 'https://ezgif.com', text: 'EZ GIF' },
 ];
 
+export const ROUTES = [
+  { href: '/schedule', text: '스케쥴', subRoutes: [] },
+  { href: '/multi', text: '멀티뷰', subRoutes: [] },
+  { href: '/channel', text: '채널', subRoutes: [] },
+  { href: '/request', text: '채널 등록', subRoutes: [] },
+  { href: '/setlist', text: '세트리', subRoutes: [{ href: '/setlist/post', text: '세트리 등록' }] },
+  { href: '/setting', text: '설정', subRoutes: [] },
+  { href: '/dev', text: '개발', subRoutes: [] },
+];
+
 export const PORTAL_ID = 'liveuta-portal';
 
 export const COLOR_SCHEME_KEY = 'color-scheme';

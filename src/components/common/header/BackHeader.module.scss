@@ -20,4 +20,27 @@
       margin-right: 0.5rem;
     }
   }
+
+  .breadcrumbItem {
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: background-color 0.1s var.$bezier-curve;
+  
+    &:hover {
+      background-color: #F4F4F5;
+    }
+  }
 }
+
+.breadcrumbMenuItem {
+  padding-right: 2rem;
+
+  &[data-current=true] {
+    background-color: var(--liveuta-third-default);
+    color: var(--liveuta-txt-light);
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+
