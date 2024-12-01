@@ -4,13 +4,13 @@ import MobileNavButton from './MobileNavButton';
 import NavTab from './NavTab';
 import QueryButton from './QueryButton';
 import VideoTypeSelect from './VideoTypeSelect';
-import * as styles from './navSection.css';
 import Link from 'next/link';
 import { TbBoxMultiple4 } from 'react-icons/tb';
 import { Session } from 'next-auth';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
 import { TScheduleDto } from '@/types/dto';
+import css from './ScheduleNav.module.scss';
 
 const ToggleFavorite = dynamic(() => import('./ToggleFavorite'), { ssr: false });
 
@@ -25,27 +25,27 @@ type NavSectionProps = {
   isFavorite: boolean;
 };
 
-export default function NavSection({ session, scheduleDto, length, isFavorite }: NavSectionProps) {
+export default function ScheduleNav({ session, scheduleDto, length, isFavorite }: NavSectionProps) {
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
 
   return (
-    <section className={styles.navSection}>
-      <div className={styles.left}>
+    <nav className={css.wrap}>
+      <div className={css.left}>
         {session && <ToggleFavorite isFavorite={isFavorite} />}
-        <div className={styles.navTabBox}>
+        <div className={css.navTabBox}>
           <NavTab filter={scheduleDto.filter} />
         </div>
         {isDesktop && (
-          <Link className={styles.multiLink} href="/multi">
+          <Link className={css.multiLink} href="/multi">
             <TbBoxMultiple4 size="1.5rem" />
           </Link>
         )}
       </div>
-      <div className={styles.right}>
+      <div className={css.right}>
         <QueryButton query={scheduleDto.query} />
         <VideoTypeSelect select={scheduleDto.select} length={length} />
         <MobileNavButton scheduleDto={scheduleDto} length={length} />
       </div>
-    </section>
+    </nav>
   );
 }

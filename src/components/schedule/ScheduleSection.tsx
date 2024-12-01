@@ -1,6 +1,4 @@
 'use client';
-import { whitelistAtom } from '@/stores/schedule';
-import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
 import Link from 'next/link';
 import Nodata from '../common/Nodata';
@@ -23,10 +21,13 @@ import ListModal from '../common/modal/MultiListModal';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { openWindow } from '@/utils/windowEvent';
-import NavSection from './NavSection';
+import ScheduleNav from './ScheduleNav';
 import dynamic from 'next/dynamic';
 import { TScheduleDto } from '@/types/dto';
 import variable from '@variable';
+import BackHeader from '../common/header/BackHeader';
+import TopBtn from './TopBtn';
+import { useRef } from 'react';
 
 const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 
@@ -39,6 +40,7 @@ type ScheduleSectionProps = {
     video: number;
   };
   scheduleDto: TScheduleDto;
+  whiteList: Set<string>;
 };
 
 export default function ScheduleSection({
@@ -46,9 +48,10 @@ export default function ScheduleSection({
   content,
   length,
   scheduleDto,
+  whiteList,
 }: ScheduleSectionProps) {
-  const [whiteList] = useAtom(whitelistAtom);
   const modalStore = useModalStore();
+  const scrollerRef = useRef<HTMLElement | null>(null);
 
   const { loadContents, isLoading, handleInfinityScroll } = useInfiniteScheduleData({
     rawData: content,
@@ -162,20 +165,31 @@ export default function ScheduleSection({
         context={{
           isLoading,
         }}
+        scrollerRef={(ref) => {
+          if (ref) {
+            scrollerRef.current = ref;
+          }
+        }}
         components={{
           Header: () => (
             <>
-              <NavSection
-                session={session}
-                scheduleDto={scheduleDto}
-                length={length}
-                isFavorite={false}
-              />
+              <div className={css.position}>
+                <div className={css.inner}>
+                  <BackHeader />
+                  <ScheduleNav
+                    session={session}
+                    scheduleDto={scheduleDto}
+                    length={length}
+                    isFavorite={false}
+                  />
+                </div>
+              </div>
+              <TopBtn />
               <TopSection filter={scheduleDto.filter} />
             </>
           ),
           Footer: ({ context }) => (
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: 'center', height: '3.5rem' }}>
               {context?.isLoading && <Loader color={variable.secondColorDefault} />}
             </div>
           ),
@@ -184,6 +198,7 @@ export default function ScheduleSection({
         data={loadContents}
         listClassName={css.list}
         itemClassName={css.item}
+        useWindowScroll
         itemContent={(_i, data) => (
           <ScheduleCard
             session={session}

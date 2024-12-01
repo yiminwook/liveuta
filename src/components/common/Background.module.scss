@@ -1,0 +1,61 @@
+$max-width: 1536px;
+
+.main {
+  display: flex;
+  flex-direction: column;
+  max-width: $max-width;
+  padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
+  margin: 0 auto;
+  min-height: calc(100dvh - 7.5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+
+  @include util.min-width(lg) {
+    width: 80%;
+  }
+
+  &:global(.expand) {
+    min-height: calc(100svh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  }
+
+  &:global(.tile) {
+    background-color: var(--liveuta-main);
+    background-image: var(--liveuta-bg-patten);
+    transition: background-color 0.2s var.$bezier-curve, background-image 0.2s var.$bezier-curve;
+  }
+}
+
+.sideBg {
+  display: none;
+  width: 10%;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  height: 100lvh;
+  margin: 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* 그라데이션 높이 조정 */
+    height: 30%;
+    background: linear-gradient(to bottom, transparent, var(--liveuta-main));
+  }
+
+  @include util.min-width(lg) {
+    display: block;
+  }
+
+  &:global(.left) {
+    left: 0;
+    background-image: var(--liveuta-bg-left-url);
+    background-position: var(--liveuta-bg-left-position);
+  }
+
+  &:global(.right) {
+    right: 0;
+    background-image: var(--liveuta-bg-right-url);
+    background-position: var(--liveuta-bg-right-position);
+  }
+}

@@ -1,6 +1,6 @@
 import { getYoutubeChannels } from '@/libraries/youtube';
 import { generateChannelUrl } from '@/libraries/youtube/url';
-import { ChannelsDataType } from '@/types/api/youtube';
+import { TChannelsData } from '@/types/api/youtube';
 import { youtube_v3 } from 'googleapis';
 
 export interface ChannelSheetDataType {
@@ -14,7 +14,7 @@ export interface ChannelSheetDataType {
 /* YoutubeData API + Channel ID Sheet */
 export const combineChannelData = async (
   sheetData: ChannelSheetDataType,
-): Promise<ChannelsDataType[]> => {
+): Promise<TChannelsData[]> => {
   const idArr = [...Object.keys(sheetData)];
   if (idArr.length <= 0) return [];
 
@@ -46,7 +46,7 @@ export const combineChannelData = async (
   // Sorting combined data by channelName
   const combinedSheetDataValues = combinedSearchData.sort((a, b) =>
     a.channelName.localeCompare(b.channelName),
-  ) as ChannelsDataType[];
+  ) as TChannelsData[];
 
   return combinedSheetDataValues;
 };

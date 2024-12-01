@@ -3,13 +3,11 @@ import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import useModalStore from '@/hooks/useModalStore';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
-import { ChannelsDataType } from '@/types/api/youtube';
+import { TChannelsData } from '@/types/api/youtube';
 import { Session } from '@auth/core/types';
-import { whitelistAtom } from '@/stores/schedule';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import { openWindow } from '@/utils/windowEvent';
-import { useAtom } from 'jotai';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
 import { isDesktop } from 'react-device-detect';
@@ -19,11 +17,12 @@ import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
 import * as styles from './channelCard.css';
 
 type ChannelItemProps = {
-  content: ChannelsDataType;
+  content: TChannelsData;
   session: Session | null;
+  isFavorite: boolean;
 };
 
-export default function ChannelItem({ content, session }: ChannelItemProps) {
+export default function ChannelItem({ content, session, isFavorite }: ChannelItemProps) {
   const { channelName, snippet, url, statistics, uid } = content;
   const title = snippet.title ?? '';
   const imageURL = snippet.thumbnails?.default?.url ?? '/loading.png';
@@ -32,7 +31,6 @@ export default function ChannelItem({ content, session }: ChannelItemProps) {
   const videoCount = statistics.videoCount ?? '비공개';
 
   const modalStore = useModalStore();
-  const [whitelist] = useAtom(whitelistAtom);
 
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
@@ -89,8 +87,6 @@ export default function ChannelItem({ content, session }: ChannelItemProps) {
       });
     }
   };
-
-  const isFavorite = whitelist.has(uid);
 
   return (
     <div className={styles.channelCard}>

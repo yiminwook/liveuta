@@ -1,20 +1,16 @@
 'use client';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import { ChannelData } from '@/types/api/mongoDB';
-import { channelListAtom } from '@/stores/common';
-import { whitelistAtom } from '@/stores/schedule';
-import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
 import * as styles from './list.css';
 
 type WhitelistProps = {
   session: Session;
+  whiteList: Set<string>;
+  channelList: Record<string, ChannelData>;
 };
 
-export default function Whitelist({ session }: WhitelistProps) {
-  const [channelList] = useAtom(channelListAtom);
-  const [whitelist] = useAtom(whitelistAtom);
-
+export default function Whitelist({ session, whiteList, channelList }: WhitelistProps) {
   const mutationDelete = useMutateWhitelist();
 
   const handleClick = (channelId: string) => {
@@ -23,7 +19,7 @@ export default function Whitelist({ session }: WhitelistProps) {
     }
   };
 
-  const data = [...whitelist]
+  const data = [...whiteList]
     .map<ChannelData>((item) => channelList[item])
     .filter((item) => !!item)
     .sort((a, b) => a.name_kor.localeCompare(b.name_kor));

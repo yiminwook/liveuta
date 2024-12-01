@@ -2,17 +2,10 @@ import { auth } from '@/libraries/nextAuth';
 import { GetChannelRes } from '@api/v1/channel/route';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import axios from 'axios';
-import dynamic from 'next/dynamic';
 import { PropsWithChildren } from 'react';
 import getQueryClient from '@/apis/getQueryClient';
-import Footer from '@/components/common/Footer';
-import Header from '@/components/common/header/Header';
 import PageView from '@/components/common/PageView';
-import AccountSidebar from '@/components/common/sidebar/Account';
-import Sidebar from '@/components/common/sidebar/Sidebar';
-import LayoutDataObserver from './layout.data';
-
-const BottomTab = dynamic(() => import('@/components/common/bottomTab/BottomTab'), { ssr: false });
+import DataFetchingObserver from '@/components/common/DataFetchingObserver';
 
 export default async function Layout({ children }: PropsWithChildren) {
   const session = await auth();
@@ -60,15 +53,8 @@ export default async function Layout({ children }: PropsWithChildren) {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <PageView>
-        <LayoutDataObserver session={session} />
-        <Header session={session} />
-        {children}
-        <Footer />
-        <BottomTab />
-        <Sidebar />
-        {session && <AccountSidebar session={session} />}
-      </PageView>
+      <DataFetchingObserver />
+      <PageView>{children}</PageView>
     </HydrationBoundary>
   );
 }

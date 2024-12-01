@@ -2,7 +2,7 @@
 import useModalStore from '@/hooks/useModalStore';
 import { BsSliders } from 'react-icons/bs';
 import MobileNavModal from '../common/modal/MobileNavModal';
-import * as styles from './navSection.css';
+import css from './ScheduleNav.module.scss';
 import { FilterText, SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 
@@ -32,9 +32,9 @@ export default function MobileNavButton({ length, scheduleDto }: MobileNavButton
   }`;
 
   return (
-    <button className={styles.mobileNavButton} onClick={handleOpen}>
+    <button className={css.mobileNavBtn} onClick={handleOpen}>
       <BsSliders size="1rem" style={{ minWidth: '1rem' }} />
-      <span className={styles.text}>{text}</span>
+      <span className={css.text}>{text}</span>
     </button>
   );
 }

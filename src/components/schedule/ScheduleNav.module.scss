@@ -1,0 +1,110 @@
+.wrap {
+  display: flex;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  gap: 0.5rem;
+  transform: translateZ(0);
+}
+
+.favoriteBtn {
+  @extend %flex-center;
+  background-color: #fff;
+  border-radius: 5px;
+  width: 2.5rem;
+  height: 2.5rem;
+  box-shadow: var.$box-shadow;
+  transition: background-color 0.3s var.$bezier-curve;
+}
+
+.navTabBox {
+  display: none;
+
+  @include util.min-width(sm) {
+    display: block;
+  }
+}
+
+.multiLink {
+  @extend %flex-center;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: var.$box-shadow;
+  transition: background-color 0.3s var.$bezier-curve, color 0.3s var.$bezier-curve;
+  &:hover {
+    background-color: util.palette(second, default);
+    color: #fff;
+  }
+}
+
+.right {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mobileNavBtn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 0 0.5rem;
+  height: 2.5rem;
+  box-shadow: var.$box-shadow;
+  transition: color 0.3s var.$bezier-curve, background-color 0.3s var.$bezier-curve;
+  &:hover {
+    color: #fff;
+    background-color: util.palette(second, dark);
+  }
+
+  @include util.min-width(md) {
+    display: none;
+  }
+}
+
+.text {
+  @include util.text-line(1, 1.6);
+}
+
+.select {
+  display: none;
+  border-radius: 5px;
+  font-size: inherit;
+
+  :global(.m_8fb7ebe7) {
+    // input
+    padding: 0 0.5rem;
+    box-shadow: var.$box-shadow;
+
+    &:hover {
+      color: #fff;
+      background-color: util.palette(second, dark);
+    }
+  }
+
+  @include util.min-width(md) {
+    display: block;
+  }
+
+  :global(.m_82577fc2[data-position='right']) {
+    // right-section
+    --section-size: 1.5rem;
+  }
+}
+
+.topBtn {
+  z-index: 1;
+  background-color: var(--liveuta-main);
+  border-radius: 9999px;
+  position: fixed;
+  right: 3.5rem;
+  bottom: calc(3.5rem + env(safe-area-inset-bottom));
+  box-shadow: var.$box-shadow;
+}

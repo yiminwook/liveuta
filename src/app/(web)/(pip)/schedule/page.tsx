@@ -22,7 +22,7 @@ export default async function Page({ searchParams }: Props) {
   });
 
   return (
-    <Background tile>
+    <Background tile expand>
       <Home scheduleDto={dto} session={session} />
     </Background>
   );

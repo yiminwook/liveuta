@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import { ComboboxItem, ComboboxItemGroup, Select } from '@mantine/core';
+import css from './ScheduleNav.module.scss';
 
 type VideoTypeSelectProps = {
   select: TScheduleDto['select'];
@@ -43,5 +44,15 @@ export default function VideoTypeSelect({ select, length }: VideoTypeSelectProps
     },
   ];
 
-  return <Select w={140} value={select} data={data} onChange={handleSelect} />;
+  return (
+    <Select
+      w={140}
+      size="md"
+      variant="unstyled"
+      className={css.select}
+      value={select}
+      data={data}
+      onChange={handleSelect}
+    />
+  );
 }

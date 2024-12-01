@@ -1,3 +1,23 @@
+$max-width: 1536px;
+
+.position {
+  height: calc(7.5rem + env(safe-area-inset-top));
+  position: relative;
+  z-index: 1;
+
+  .inner {
+    transform: translateZ(0); // GPU 가속
+    background-color: var(--liveuta-main);
+    position: fixed;
+    top: env(safe-area-inset-top);
+    width: 100%;
+
+    @include util.min-width(lg) {
+      width: 80%;
+    }
+  }
+}
+
 .expand {
   flex: 1;
   display: flex;

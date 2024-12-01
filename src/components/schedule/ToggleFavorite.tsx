@@ -1,6 +1,6 @@
 'use client';
 import { FaStar } from 'react-icons/fa';
-import * as styles from './navSection.css';
+import css from './ScheduleNav.module.scss';
 
 type ToggleFavoriteProps = {
   isFavorite: boolean;
@@ -8,7 +8,7 @@ type ToggleFavoriteProps = {
 
 export default function ToggleFavorite({ isFavorite }: ToggleFavoriteProps) {
   return (
-    <button className={styles.favoriteButton} onClick={() => {}}>
+    <button className={css.favoriteBtn} onClick={() => {}}>
       <FaStar size="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
     </button>
   );

@@ -1,20 +1,16 @@
 'use client';
 import useDeleteBlacklist from '@/hooks/useDeleteBlacklist';
 import { ChannelData } from '@/types/api/mongoDB';
-import { channelListAtom } from '@/stores/common';
-import { blacklistAtom } from '@/stores/schedule';
-import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
 import * as styles from './list.css';
 
 type BlacklistProps = {
   session: Session;
+  channelList: Record<string, ChannelData>;
+  blacklist: Set<string>;
 };
 
-export default function Blacklist({ session }: BlacklistProps) {
-  const [channelList] = useAtom(channelListAtom);
-  const [blacklist] = useAtom(blacklistAtom);
-
+export default function Blacklist({ session, channelList, blacklist }: BlacklistProps) {
   const mutationDelete = useDeleteBlacklist();
 
   const handleClick = (channelId: string) => {

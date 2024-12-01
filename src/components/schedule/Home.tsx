@@ -6,10 +6,9 @@ import { Session } from 'next-auth';
 import axios from 'axios';
 import { GetScheduleRes } from '@/types/api/schedule';
 import { useMemo } from 'react';
-import { useAtomValue } from 'jotai';
-import { blacklistAtom, whitelistAtom } from '@/stores/schedule';
 import { addExcapeCharacter } from '@/utils/regexp';
 import MainLoading from '../common/loading/MainLoading';
+import useCachedData from '@/hooks/useCachedData';
 
 const SCHEDULE_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
 
@@ -20,9 +19,7 @@ type HomeProps = {
 };
 
 export default function Home({ scheduleDto, session, isFavorite = false }: HomeProps) {
-  const whiteList = useAtomValue(whitelistAtom);
-  const blackList = useAtomValue(blacklistAtom);
-
+  const { whiteList, blackList } = useCachedData({ session });
   const { data, isPending } = useQuery({
     queryKey: ['schedule'],
     queryFn: () => axios.get<GetScheduleRes>('/api/v1/schedule').then((res) => res.data.data),
@@ -100,6 +97,7 @@ export default function Home({ scheduleDto, session, isFavorite = false }: HomeP
         content={proceedScheduleData.content}
         length={proceedScheduleData.length}
         scheduleDto={scheduleDto}
+        whiteList={whiteList}
       />
       {isPending && <MainLoading backdrop />}
     </>
