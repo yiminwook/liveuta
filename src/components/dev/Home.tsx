@@ -3,14 +3,14 @@ import Background from '@/components/common/Background';
 import PostBox from '@/components/dev/PostBox';
 import TokenBox from '@/components/dev/TokenBox';
 import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
-import { TokenType } from '@/types';
+import { TToken } from '@/types';
 import cx from 'classnames';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import * as styles from './home.css';
 
 export default function Home() {
-  const [token, setToken] = useState<TokenType>(null);
+  const [token, setToken] = useState<TToken>(null);
   const [permission, setPermission] = useState('설정을 가져오는 중');
 
   const handleSetToken = async () => {

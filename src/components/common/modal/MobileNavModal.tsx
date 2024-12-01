@@ -4,18 +4,28 @@ import * as styles from './mobileNavModal.css';
 import NavTab from '@/components/schedule/NavTab';
 import VideoTypeRadio from '@/components/schedule//VideoTypeRadio';
 import SearchInput from '@/components/common/header/SearchInput';
+import { TScheduleDto } from '@/types/dto';
 
 const MOBILE_NAV_MODAL_ID = 'mobileNavModal';
 
-export default function MobileNavModal({ onClose }: ModalBaseProps) {
+type MobileNavModalProps = {
+  scheduleDto: TScheduleDto;
+  length: {
+    all: number;
+    stream: number;
+    video: number;
+  };
+} & ModalBaseProps;
+
+export default function MobileNavModal({ onClose, scheduleDto, length }: MobileNavModalProps) {
   return (
     <Modal id={MOBILE_NAV_MODAL_ID} onClose={onClose}>
       <div className={styles.content}>
         <div className={styles.navTabBox}>
-          <NavTab />
+          <NavTab filter={scheduleDto.filter} />
         </div>
         <SearchInput />
-        <VideoTypeRadio />
+        <VideoTypeRadio select={scheduleDto.select} length={length} />
       </div>
     </Modal>
   );

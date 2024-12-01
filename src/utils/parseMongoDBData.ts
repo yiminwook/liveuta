@@ -1,7 +1,7 @@
 import {
   ContentDocument,
-  ParseAllDataReturnType,
-  ParseScheduledDataReturnType,
+  TParseAllDataReturn,
+  TParseScheduledDataReturn,
   TContentsData,
   isStream,
 } from '@/types/api/mongoDB';
@@ -49,7 +49,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): TContentsData => {
   }
 };
 
-export const parseScheduledData = (documents: ContentDocument[]): ParseScheduledDataReturnType => {
+export const parseScheduledData = (documents: ContentDocument[]): TParseScheduledDataReturn => {
   const scheduled: TContentsData[] = [];
   let scheduledVideo = 0;
   const live: TContentsData[] = [];
@@ -80,7 +80,7 @@ export const parseScheduledData = (documents: ContentDocument[]): ParseScheduled
   };
 };
 
-export const parseAllData = (documents: ContentDocument[]): ParseAllDataReturnType => {
+export const parseAllData = (documents: ContentDocument[]): TParseAllDataReturn => {
   if (!documents) throw new Error('No DataValue');
 
   const daily: TContentsData[] = [];

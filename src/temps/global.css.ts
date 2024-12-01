@@ -1,56 +1,5 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { globalStyle } from '@vanilla-extract/css';
 import { global } from '@/styles/globalTheme.css';
-
-globalStyle(':root', {
-  vars: {
-    '--liveuta-bg-color': '#fff',
-    '--liveuta-scroll-color': global.color.third.default,
-  },
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      vars: {
-        '--liveuta-bg-color': '#111111',
-      },
-    },
-  },
-});
-
-globalStyle('::-webkit-scrollbar', {
-  width: 7.5,
-});
-
-globalStyle('::-webkit-scrollbar-track', {
-  backgroundColor: 'rgba(0, 0, 0, 0.1)',
-});
-
-globalStyle('::-webkit-scrollbar-thumb', {
-  backgroundColor: 'var(--liveuta-scroll-color)',
-  borderRadius: 10,
-  cursor: 'pointer',
-});
-
-globalStyle('::-webkit-scrollbar-thumb:hover', {
-  backgroundColor: 'var(--liveuta-scroll-color)',
-});
-
-globalStyle('::-webkit-scrollbar-button', {
-  display: 'none',
-  visibility: 'hidden',
-});
-
-export const body = style({
-  margin: 0,
-  padding: 0,
-  fontFamily: 'Pretendard Variable, Pretendard, -apple-system, sans-serif',
-  fontSize: 16,
-  background: global.color.main,
-  overflowX: 'hidden',
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      color: '#fff',
-    },
-  },
-});
 
 globalStyle('h1, h2, h3, h4, p', {
   fontFamily: 'inherit',

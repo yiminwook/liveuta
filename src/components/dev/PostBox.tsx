@@ -3,12 +3,12 @@ import axios, { AxiosError } from 'axios';
 import dayjs from '@/libraries/dayjs';
 import { useState } from 'react';
 import { PushData } from '@/app/api/push/route';
-import { TokenType } from '@/types';
+import { TToken } from '@/types';
 import { toast } from 'sonner';
 import * as styles from './home.css';
 import cx from 'classnames';
 
-export default function PostBox({ token }: { token: TokenType }) {
+export default function PostBox({ token }: { token: TToken }) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [imageUrl, setImageUrl] = useState('');

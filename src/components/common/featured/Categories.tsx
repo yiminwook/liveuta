@@ -3,7 +3,6 @@ import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { TContentsData } from '@/types/api/mongoDB';
 import { categoryAtom, featuredAtom } from '@/stores/schedule/featured';
-import { selectedScheduleAtom } from '@/stores/schedule';
 import Category from './Category';
 import * as sectionStyles from './section.css';
 import { StreamCategory } from '@/types';
@@ -17,7 +16,6 @@ type CategoriesProps = {
 export default function Categories({ session }: CategoriesProps) {
   const [show] = useAtom(featuredAtom);
   const expand = useMemo(() => show === 'categories', [show]);
-  const [selectedData] = useAtom(selectedScheduleAtom);
   const [category] = useAtom(categoryAtom);
   const categories = useMemo<Categories>(() => {
     const categories: Categories = {
@@ -28,12 +26,12 @@ export default function Categories({ session }: CategoriesProps) {
       endurance: [],
     };
 
-    selectedData.content.forEach((data) => {
-      categories[data.category].push(data);
-    });
+    // selectedData.content.forEach((data) => {
+    //   categories[data.category].push(data);
+    // });
 
     return categories;
-  }, [selectedData]);
+  }, []);
 
   return (
     <div className={sectionStyles.section} data-show={expand}>

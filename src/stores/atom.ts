@@ -1,9 +1,9 @@
 import { atomWithReset } from 'jotai/utils';
-import { ThemeType } from '@/types';
+import { TTheme } from '@/types';
 import { atom } from 'jotai';
 import { theme1, darkBrandColor, whiteBrandColor } from '@/styles/themeAsis';
 
-export const themeAtom = atomWithReset<ThemeType>('theme1');
+export const themeAtom = atomWithReset<TTheme>('theme1');
 
 export const themeStyleAtom = atom(theme1);
 

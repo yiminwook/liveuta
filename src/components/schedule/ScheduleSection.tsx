@@ -1,7 +1,5 @@
 'use client';
-
-import useScheduleStatus from '@/hooks/useScheduleStatus';
-import { filterAtom, queryAtom, selectedScheduleAtom, whitelistAtom } from '@/stores/schedule';
+import { whitelistAtom } from '@/stores/schedule';
 import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
 import Link from 'next/link';
@@ -9,7 +7,7 @@ import Nodata from '../common/Nodata';
 import ScheduleCard from '../common/scheduleCard/Card';
 import { VirtuosoGrid } from 'react-virtuoso';
 import css from './ScheduleSection.module.scss';
-import { Button } from '@mantine/core';
+import { Button, Loader } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import { gtagClick } from '@/utils/gtag';
 import { toast } from 'sonner';
@@ -27,24 +25,33 @@ import { generateVideoUrl } from '@/libraries/youtube/url';
 import { openWindow } from '@/utils/windowEvent';
 import NavSection from './NavSection';
 import dynamic from 'next/dynamic';
+import { TScheduleDto } from '@/types/dto';
+import variable from '@variable';
 
 const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 
 type ScheduleSectionProps = {
   session: Session | null;
+  content: TContentsData[];
+  length: {
+    all: number;
+    stream: number;
+    video: number;
+  };
+  scheduleDto: TScheduleDto;
 };
 
-export default function ScheduleSection({ session }: ScheduleSectionProps) {
-  const [filter] = useAtom(filterAtom);
-  const status = useScheduleStatus();
-  const [selectedData] = useAtom(selectedScheduleAtom);
-  const [query] = useAtom(queryAtom);
+export default function ScheduleSection({
+  session,
+  content,
+  length,
+  scheduleDto,
+}: ScheduleSectionProps) {
   const [whiteList] = useAtom(whitelistAtom);
   const modalStore = useModalStore();
 
   const { loadContents, isLoading, handleInfinityScroll } = useInfiniteScheduleData({
-    rawData: selectedData.content,
-    filter,
+    rawData: content,
   });
 
   const mutateBlock = usePostBlacklist();
@@ -135,13 +142,13 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
     openWindow(generateVideoUrl(content.videoId));
   };
 
-  if (status === 'success' && query && selectedData.content.length === 0) {
+  if (content.length === 0 && scheduleDto.query.trim() !== '') {
     // 검색 결과가 없을 때
     return (
       <section>
         <Nodata />
         <div className={css.nodataLinkBox}>
-          <Button component={Link} href={`/channel?q=${query}`}>
+          <Button component={Link} href={`/channel?q=${scheduleDto.query}`}>
             채널페이지에서 검색
           </Button>
         </div>
@@ -158,22 +165,22 @@ export default function ScheduleSection({ session }: ScheduleSectionProps) {
         components={{
           Header: () => (
             <>
-              <NavSection session={session} />
-              <TopSection filter={filter} />
+              <NavSection
+                session={session}
+                scheduleDto={scheduleDto}
+                length={length}
+                isFavorite={false}
+              />
+              <TopSection filter={scheduleDto.filter} />
             </>
           ),
           Footer: ({ context }) => (
-            <div
-              style={{
-                textAlign: 'center',
-                color: '#ff0000',
-              }}
-            >
-              {context?.isLoading ? '로딩중..' : ''}
+            <div style={{ textAlign: 'center' }}>
+              {context?.isLoading && <Loader color={variable.secondColorDefault} />}
             </div>
           ),
         }}
-        totalCount={selectedData.content.length}
+        totalCount={content.length}
         data={loadContents}
         listClassName={css.list}
         itemClassName={css.item}

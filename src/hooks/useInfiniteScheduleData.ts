@@ -1,14 +1,13 @@
-import { ScheduleAPIReturnType, TContentsData } from '@/types/api/mongoDB';
+import { TContentsData } from '@/types/api/mongoDB';
 import { useEffect, useState } from 'react';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/constants';
 import { waitfor } from '@/utils/helper';
 
 type UseInfiniteScheduleDataArgs = {
   rawData: TContentsData[];
-  filter: keyof ScheduleAPIReturnType;
 };
 
-const useInfiniteScheduleData = ({ rawData, filter }: UseInfiniteScheduleDataArgs) => {
+const useInfiniteScheduleData = ({ rawData }: UseInfiniteScheduleDataArgs) => {
   const [loadContents, setLoadContents] = useState<TContentsData[]>([]);
   const [scrollPage, setScrollPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +18,7 @@ const useInfiniteScheduleData = ({ rawData, filter }: UseInfiniteScheduleDataArg
     if (isLoading || isDone) return;
     setIsLoading(() => true);
 
-    await waitfor(1000); // 성능 최적화를 위한 딜레이
+    await waitfor(500); // 성능 최적화를 위한 딜레이
 
     setScrollPage((pre) => pre + 1);
     setIsLoading(() => false);
@@ -42,13 +41,13 @@ const useInfiniteScheduleData = ({ rawData, filter }: UseInfiniteScheduleDataArg
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rawData]);
 
-  useEffect(() => {
-    // 필터가 바뀌면 페이지를 리셋
-    const resetContent = rawData.slice(0, SCROLL_PER_YOUTUBE_CARD);
-    setScrollPage(() => 1);
-    setLoadContents(() => [...resetContent]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter]);
+  // useEffect(() => {
+  //   // 필터가 바뀌면 페이지를 리셋
+  //   const resetContent = rawData.slice(0, SCROLL_PER_YOUTUBE_CARD);
+  //   setScrollPage(() => 1);
+  //   setLoadContents(() => [...resetContent]);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [filter]);
 
   return {
     handleInfinityScroll,

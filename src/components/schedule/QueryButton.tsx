@@ -1,13 +1,15 @@
 'use client';
-import { queryAtom } from '@/stores/schedule';
-import { useAtom } from 'jotai';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FaFilter } from 'react-icons/fa';
 import { Popover } from '@ark-ui/react';
 import * as styles from './queryButton.css';
+import { TScheduleDto } from '@/types/dto';
 
-export default function QueryButton() {
-  const [query] = useAtom(queryAtom);
+type QueryButtonProps = {
+  query: TScheduleDto['query'];
+};
+
+export default function QueryButton({ query }: QueryButtonProps) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();

@@ -1,18 +1,25 @@
 'use client';
-import { useAtom } from 'jotai';
+
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/navigation';
 import { RadioGroup, RadioGroupValueChangeDetails } from '@ark-ui/react';
-import { SelectedText, VideoType } from '@/types';
-import { selectAtom, selectedScheduleAtom } from '@/stores/schedule';
+import { SelectedText } from '@/types';
 import * as styles from './videoTypeRadio.css';
+import { TScheduleDto } from '@/types/dto';
 
-const Items = [VideoType.all, VideoType.stream, VideoType.video];
+const Items = ['all', 'stream', 'video'] as const;
 
-export default function VideoTypeRadio() {
+type VideoTypeRadioProps = {
+  select: TScheduleDto['select'];
+  length: {
+    all: number;
+    stream: number;
+    video: number;
+  };
+};
+
+export default function VideoTypeRadio({ select, length }: VideoTypeRadioProps) {
   const router = useRouter();
-  const [select] = useAtom(selectAtom);
-  const [selectedSchedule] = useAtom(selectedScheduleAtom);
 
   const handleSelect = ({ value }: RadioGroupValueChangeDetails) => {
     const selectCookie = new Cookies();
@@ -21,9 +28,9 @@ export default function VideoTypeRadio() {
   };
 
   const selectedText = {
-    all: `${SelectedText.all}: ${selectedSchedule.length.all}`,
-    stream: `${SelectedText.stream}: ${selectedSchedule.length.stream}`,
-    video: `${SelectedText.video}: ${selectedSchedule.length.video}`,
+    all: `${SelectedText.all}: ${length.all}`,
+    stream: `${SelectedText.stream}: ${length.stream}`,
+    video: `${SelectedText.video}: ${length.video}`,
   };
 
   return (

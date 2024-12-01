@@ -54,16 +54,16 @@ export type TContentsData = {
   tag: string;
 };
 
-export type ContentsDataReturnType = TContentsData[];
+export type TContentsDataReturn = TContentsData[];
 
-export type ParseScheduledDataReturnType = {
-  scheduled: ContentsDataReturnType;
-  live: ContentsDataReturnType;
+export type TParseScheduledDataReturn = {
+  scheduled: TContentsDataReturn;
+  live: TContentsDataReturn;
 };
 
-export type ParseAllDataReturnType = {
-  daily: ContentsDataReturnType;
-  all: ContentsDataReturnType;
+export type TParseAllDataReturn = {
+  daily: TContentsDataReturn;
+  all: TContentsDataReturn;
 };
 
-export type ScheduleAPIReturnType = ParseAllDataReturnType & ParseScheduledDataReturnType;
+export type TScheduleAPIReturn = TParseAllDataReturn & TParseScheduledDataReturn;

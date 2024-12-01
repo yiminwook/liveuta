@@ -9,8 +9,6 @@ import '@/styles/mantine/core.scss';
 import '@/styles/mantine/theme.scss';
 import '/public/theme-v2.css';
 import '@/styles/global.scss';
-
-import * as styles from '@/app/global.css';
 import '@/styles/globalTheme.css';
 
 import { PropsWithChildren } from 'react';
@@ -29,7 +27,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
       <head>
         <DefaultHead />
       </head>
-      <body className={styles.body}>
+      <body>
         <Configs cookies={cookies}>{children}</Configs>
         <GoogleTagManager />
       </body>

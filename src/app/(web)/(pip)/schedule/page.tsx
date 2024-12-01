@@ -1,17 +1,29 @@
-import { ScheduleAPIReturnType } from '@/types/api/mongoDB';
 import Home from '@/components/schedule/Home';
-import { notFound } from 'next/navigation';
+import { scheduleDto } from '@/types/dto';
+import { getCookies } from '@/utils/getCookie';
+import { auth } from '@/libraries/nextAuth';
+import Background from '@/components/common/Background';
 
 type Props = {
-  searchParams: { tab?: 'daily' | 'all' | 'live'; q?: string };
+  searchParams: {
+    t?: string; // tab
+    q?: string; // query
+  };
 };
 
-const TAB_LIST = ['scheduled', 'live', 'daily', 'all'];
-
 export default async function Page({ searchParams }: Props) {
-  const filter: keyof ScheduleAPIReturnType = searchParams.tab || 'scheduled';
-  const query = searchParams.q?.trim() || '';
-  if (!TAB_LIST.includes(filter)) notFound();
+  const { select } = await getCookies();
+  const session = await auth();
 
-  return <Home filter={filter} query={query} />;
+  const dto = scheduleDto.parse({
+    query: searchParams.q,
+    filter: searchParams.t,
+    select,
+  });
+
+  return (
+    <Background tile>
+      <Home scheduleDto={dto} session={session} />
+    </Background>
+  );
 }

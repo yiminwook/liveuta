@@ -1,5 +1,5 @@
 'use client';
-import { ThemeType } from '@/types';
+import { TTheme } from '@/types';
 import { gtagClick } from '@/utils/gtag';
 import { MouseEvent } from 'react';
 import useTheme from '@/hooks/useTheme';
@@ -26,7 +26,7 @@ export default function ThemeSelect() {
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
     const button = target.closest('button');
-    const selectedTheme = button?.dataset.theme as ThemeType | undefined;
+    const selectedTheme = button?.dataset.theme as TTheme | undefined;
     if (selectedTheme === undefined) return;
 
     gtagClick({

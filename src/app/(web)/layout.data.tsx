@@ -1,6 +1,6 @@
 'use client';
 import useScheduleStatus from '@/hooks/useScheduleStatus';
-import { blacklistAtom, toggleBlacklistAtom, whitelistAtom } from '@/stores/schedule';
+import { blacklistAtom, whitelistAtom } from '@/stores/schedule';
 import { useIsFetching, useIsMutating, useQueries } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
@@ -18,7 +18,7 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
   const setChannelList = useSetAtom(channelListAtom);
   const setBlacklist = useSetAtom(blacklistAtom);
   const setWhitelist = useSetAtom(whitelistAtom);
-  const setToggleBlacklist = useSetAtom(toggleBlacklistAtom);
+
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
   const status = useScheduleStatus();
@@ -97,16 +97,6 @@ export default function LayoutDataObserver({ session }: LayoutDataObserverProps)
       toast.dismiss('loading');
     }
   }, [status, isFetching, isMutating]);
-
-  useEffect(() => {
-    if (session) {
-      // 세션이 있을때만 로컬스토리지에서 즐겨찾기 상태를 가져옴
-      setToggleBlacklist(() => {
-        return localStorage.getItem('favorite') !== 'true';
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return null;
 }

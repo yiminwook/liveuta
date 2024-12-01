@@ -8,7 +8,6 @@ import { TContentsData } from '@/types/api/mongoDB';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/constants';
 import useScheduleStatus from '@/hooks/useScheduleStatus';
 import { StreamCategory } from '@/types';
-import { queryAtom } from '@/stores/schedule';
 import Nodata from '@/components/common/Nodata';
 import ScheduleCard from '@/components/common/scheduleCard/Card';
 import * as styles from './category.css';
@@ -22,7 +21,6 @@ type CategoryProps = {
 
 export default function Category({ contents, session, category }: CategoryProps) {
   const status = useScheduleStatus();
-  const [query] = useAtom(queryAtom);
   const [loadContents, setLoadContents] = useState<TContentsData[]>([]);
   const [scrollPage, setScrollPage] = useState(1);
   const taggedContents = useMemo(() => {
@@ -69,19 +67,19 @@ export default function Category({ contents, session, category }: CategoryProps)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
-  if (status === 'success' && query && contents.length === 0) {
-    // 검색 결과가 없을 때
-    return (
-      <section>
-        <Nodata />
-        {/* <div className={css.nodataLinkBox}> */}
-        <Button component={Link} href={`/channel?q=${query}`}>
-          채널페이지에서 검색
-        </Button>
-        {/* </div> */}
-      </section>
-    );
-  }
+  // if (status === 'success' && query && contents.length === 0) {
+  //   // 검색 결과가 없을 때
+  //   return (
+  //     <section>
+  //       <Nodata />
+  //       {/* <div className={css.nodataLinkBox}> */}
+  //       <Button component={Link} href={`/channel?q=${query}`}>
+  //         채널페이지에서 검색
+  //       </Button>
+  //       {/* </div> */}
+  //     </section>
+  //   );
+  // }
 
   return (
     <div>

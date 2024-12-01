@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import character from '@/assets/image/character-6.png';
 import Link from 'next/link';
-import * as styles from './global.css';
 
 export default function GlobalError({
   error,
@@ -25,7 +24,7 @@ export default function GlobalError({
   return (
     <html>
       <title>500: Server Error</title>
-      <body className={styles.body}>
+      <body>
         <div>
           <div>
             <div>

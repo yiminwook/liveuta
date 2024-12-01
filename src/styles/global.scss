@@ -58,6 +58,20 @@ body {
   }
 }
 
+textarea {
+  background: none;
+  border: none;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  resize: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-respect-reduced-motion] [data-reduce-motion] {
     transition: none;
@@ -83,7 +97,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: var(--liveuta-second-default);
   border-radius: 10px;
   cursor: pointer;
 }
@@ -105,4 +119,9 @@ body {
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
+}
+
+.ring-loader {
+  --loader-size: 3.5rem;
+  --loader-color: var(--liveuta-third-default);
 }

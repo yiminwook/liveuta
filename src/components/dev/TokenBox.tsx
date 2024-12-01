@@ -1,9 +1,9 @@
 'use client';
-import { TokenType } from '@/types';
+import { TToken } from '@/types';
 import CopyButton from '@/components/common/button/CopyButton';
 import * as styles from './home.css';
 
-export default function TokenBox({ token }: { token: TokenType }) {
+export default function TokenBox({ token }: { token: TToken }) {
   switch (typeof token) {
     case 'string':
       return (

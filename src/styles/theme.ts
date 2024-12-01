@@ -1,4 +1,5 @@
 'use client';
+import RingLoader from '@/components/common/loading/RingLoader';
 import { COLOR_SCHEME_KEY } from '@/constants';
 import {
   createTheme,
@@ -7,6 +8,7 @@ import {
   MantineColorScheme,
   MantineColorSchemeManager,
   LocalStorageColorSchemeManagerOptions,
+  Loader,
 } from '@mantine/core';
 
 export const theme = createTheme({
