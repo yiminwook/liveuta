@@ -97,6 +97,7 @@ export default function ScheduleSlider() {
         return (
           <SwiperSlide key={`announce_${index}`} className={css.item}>
             <ScheduleCard
+              classname={css.card}
               session={null}
               content={{ ...item, isStream: 'TRUE', viewer: 0, category: StreamCategory.default }}
             />

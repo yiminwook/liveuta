@@ -1,5 +1,3 @@
-$max-width: 1536px;
-
 .position {
   height: calc(7.5rem + env(safe-area-inset-top));
   position: relative;
@@ -13,7 +11,7 @@ $max-width: 1536px;
     width: 100%;
 
     @include util.min-width(lg) {
-      width: 80%;
+      width: 80vw;
     }
   }
 }
@@ -42,15 +40,15 @@ $max-width: 1536px;
       padding: 0.5rem;
     }
 
-    @include util.min-width(md) {
+    @include util.min-width(xs) {
       width: 33.33%;
     }
 
-    @include util.min-width(lg) {
+    @include util.min-width(md) {
       width: 25%;
     }
 
-    @include util.min-width(100em) {
+    @include util.min-width(xl) {
       width: 20%;
     }
   }

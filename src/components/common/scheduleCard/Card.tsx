@@ -9,6 +9,7 @@ import css from './ScheduleCard.module.scss';
 import CardMenu from './CardMenu';
 
 type ScheduleCardProps = {
+  classname?: string;
   content: TContentsData;
   session: Session | null;
   isFavorite?: boolean;
@@ -21,6 +22,7 @@ type ScheduleCardProps = {
 };
 
 export default function ScheduleCard({
+  classname,
   session,
   content,
   isFavorite,
@@ -66,7 +68,7 @@ export default function ScheduleCard({
   };
 
   return (
-    <div className={cx(css.card, addStreamModifier)}>
+    <div className={cx(css.card, addStreamModifier, classname)}>
       <CardImage content={content} />
       <CardDesc session={session} content={content} addStreamModifier={addStreamModifier} />
       {showMenu && (

@@ -21,6 +21,7 @@ $active-color2: #e06e61;
   background-color: #fff;
   border-radius: 5px;
   color: #000000;
+  container-type: inline-size;
 
   // block 효과를 위한 설정
   transform-style: preserve-3d;
@@ -69,7 +70,8 @@ $active-color2: #e06e61;
     }
   }
 
-  & > :global(.mantine-ActionIcon-root) {
+  :global(.mantine-ActionIcon-root) {
+    // menu target 
     --ai-size: 1rem;
     position: absolute;
     top: 0;
@@ -80,32 +82,35 @@ $active-color2: #e06e61;
       --ai-size: 1.5rem;
     }
   }
-}
 
-.imgBtn {
-  width: 150px;
-  flex: 0 0 150px;
-
-  @include util.min-width(sm) {
-    flex: 1;
-    width: 100%;
-    height: 120%;
-  }
-
-  & > div {
+  :global(.imgBtn) {
     position: relative;
-    width: 100%;
-    height: 100%;
     aspect-ratio: 16 / 9;
-    margin: auto;
-    border-radius: 5px;
+    width: 150px;
+    padding: 0px;
+    flex: 0 0 150px;
     box-shadow: var.$box-shadow;
+    border-radius: 5px;
+
+
+    @include util.min-width(sm) {
+      flex: 1;
+      width: 100%;
+    }
 
     & > img {
       object-fit: cover;
     }
   }
 }
+
+
+/* 
+ * 카드 높이가 일정해야해서 말줄임표시 필수 
+ * 채널 1줄 
+ * 제목 2줄
+ * 시간 1줄
+ */
 
 .descBox {
   display: flex;
@@ -121,8 +126,9 @@ $active-color2: #e06e61;
 }
 
 .channelNm {
-  font-weight: 600;
+  @include util.text-line(1, 1.2);
   font-size: 1rem;
+  font-weight: 600;
 
   &:global(.stream) {
     color: $active-color2;
@@ -130,10 +136,12 @@ $active-color2: #e06e61;
 
   @include util.min-width(sm) {
     font-size: 1.2rem;
+    @include util.text-line(1, 1.4);
   }
 }
 
 .title {
+  // 줄높이를 좀 더 여유롭게
   @include util.text-line(2, 1.2);
   font-size: 0.75rem;
 
@@ -152,10 +160,11 @@ $active-color2: #e06e61;
   display: flex;
   font-size: 0.75rem;
   align-items: center;
-  gap: 0.5rem;
 
-  @include util.min-width(sm) {
-    font-size: 1rem;
+
+  time {
+    @include util.text-line(1, 1);
+
   }
 }
 
@@ -166,6 +175,12 @@ $active-color2: #e06e61;
   gap: 0.125rem;
   color: $active-color1;
   vertical-align: middle;
+  padding: 0 0.5rem;
+  margin-left: auto;
+
+  // 줄변경 방지
+  word-break: keep-all;
+  white-space: nowrap;
 }
 
 .statusSvg {

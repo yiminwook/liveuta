@@ -1,15 +1,13 @@
-$max-width: 1536px;
 
 .main {
   display: flex;
   flex-direction: column;
-  max-width: $max-width;
   padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
   margin: 0 auto;
   min-height: calc(100dvh - 7.5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
 
   @include util.min-width(lg) {
-    width: 80%;
+    width: 80vw;
   }
 
   &:global(.expand) {
@@ -25,12 +23,13 @@ $max-width: 1536px;
 
 .sideBg {
   display: none;
-  width: 10%;
-  background-size: cover;
+  width: 10vw;
   position: fixed;
   top: 0;
   height: 100lvh;
   margin: 0;
+  z-index: -1; // 배경이 main 보다 뒤
+  background-size: cover;
 
   &::after {
     content: '';
@@ -39,7 +38,7 @@ $max-width: 1536px;
     left: 0;
     width: 100%;
     /* 그라데이션 높이 조정 */
-    height: 30%;
+    height: 30lvh;
     background: linear-gradient(to bottom, transparent, var(--liveuta-main));
   }
 
