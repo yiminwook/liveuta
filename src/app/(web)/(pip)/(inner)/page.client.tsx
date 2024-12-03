@@ -13,6 +13,7 @@ export default function Client({ coverImgUrl }: Props) {
     <main className={css.homeMain}>
       <section className={css.heroSection}>
         <div className={css.coverImageBox}>
+          <Image className='blur' src={coverImgUrl} alt="blur-image" fill />
           <Image src={coverImgUrl} alt="cover-image" fill />
         </div>
       </section>

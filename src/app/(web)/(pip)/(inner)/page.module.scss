@@ -1,12 +1,11 @@
 .homeMain {
-  max-width: 1200px;
-  min-height: 900px;
-  border: 1px solid red;
-  margin: 0 auto;
 
   .heroSection {
     background-color: rgba(0, 0, 0, 0.85);
     margin-bottom: 100px;
+    position: relative;
+    padding: min(10vw, 3rem);
+
 
     .coverImageBox {
       position: relative;
@@ -14,10 +13,16 @@
       aspect-ratio: 11 / 7;
       margin: 0 auto;
       object-fit: cover;
+
+      :global(.blur) {
+        filter: blur(120px);
+      }
     }
   }
 
   .liveSection {
+    max-width: 1200px;
+    margin: 0 auto;
     padding-inline: 1rem;
     margin-bottom: 100px;
 
@@ -32,6 +37,8 @@
   }
 
   .favoriteSection {
+    max-width: 1200px;
+    margin: 0 auto;
     margin-bottom: 100px;
     padding-inline: 1rem;
 
@@ -42,6 +49,8 @@
   }
 
   .searchSection {
+    max-width: 1200px;
+    margin: 0 auto;
     margin-bottom: 100px;
     padding-inline: 1rem;
 
@@ -57,6 +66,8 @@
   }
 
   .recentChannelSection {
+    max-width: 1200px;
+    margin: 0 auto;
     margin-bottom: 100px;
     padding: 1rem;
 
@@ -67,6 +78,8 @@
   }
 
   .featureSection {
+    max-width: 1200px;
+    margin: 0 auto;
     border: 1px solid blue;
     padding: 1rem;
     padding-inline: 1rem;
