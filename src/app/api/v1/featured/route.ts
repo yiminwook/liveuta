@@ -28,7 +28,7 @@ export async function GET() {
     const { featured } = parseFeatured(scheduleData);
 
     return NextResponse.json({
-      message: '스케쥴이 조회되었습니다.',
+      message: '스케줄이 조회되었습니다.',
       data: { featured },
     });
   } catch (error) {

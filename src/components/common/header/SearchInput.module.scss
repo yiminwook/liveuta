@@ -1,0 +1,28 @@
+.wrap {
+  display: flex;
+  background-color: #fff;
+  align-items: center;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  padding: 0.25rem 1rem;
+  border: 1px solid #e0e0e0;
+}
+
+.input {
+  flex: 1;
+  background: none;
+  margin-right: 0.5rem;
+  color: black;
+}
+
+.submitButton {
+  display: flex;
+  background-color: util.palette(third, default);
+  border-radius: 100%;
+  padding: 0.25rem;
+  color: #fff;
+  transition: background-color 0.8s var.$bezier-curve;
+  &:hover {
+    background-color: util.palette(third, lighter);
+  }
+}

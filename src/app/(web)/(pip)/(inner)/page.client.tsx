@@ -1,19 +1,37 @@
+'use client';
 import Image from 'next/image';
 import css from './page.module.scss';
 import ChannelSlider from '@/components/home/ChannelSlider';
 import ScheduleSlider from '@/components/home/ScheduleSlider';
 import SearchInput from '@/components/common/header/SearchInput';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   coverImgUrl: string;
 };
 
 export default function Client({ coverImgUrl }: Props) {
+  const [query, setQuery] = useState('');
+  const router = useRouter();
+
+  const onChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(() => e.target.value);
+  };
+
+  const onSearch = () => {
+    const trimmedQuery = query.trim();
+    const params = new URLSearchParams();
+    params.set('q', trimmedQuery);
+    params.set('t', 'all');
+    router.push(`/schedule?${params.toString()}`);
+  };
+
   return (
     <main className={css.homeMain}>
       <section className={css.heroSection}>
         <div className={css.coverImageBox}>
-          <Image className='blur' src={coverImgUrl} alt="blur-image" fill />
+          <Image className="blur" src={coverImgUrl} alt="blur-image" fill />
           <Image src={coverImgUrl} alt="cover-image" fill />
         </div>
       </section>
@@ -43,7 +61,12 @@ export default function Client({ coverImgUrl }: Props) {
           <a href="/schedule">more</a>
         </div>
         <div className={css.searchBox}>
-          <SearchInput />
+          <SearchInput
+            placeholder="채널명으로 검색"
+            value={query}
+            onChange={onChangeQuery}
+            onEnterPress={onSearch}
+          />
         </div>
       </section>
 

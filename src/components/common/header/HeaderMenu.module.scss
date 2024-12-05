@@ -1,0 +1,21 @@
+$w: 7.5rem;
+
+.trigger {
+  width: $w;
+  height: 3.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.dropdown {
+  min-width: $w;
+
+  :global(.mantine-Menu-item) {
+    font-size: 0.9rem;
+
+    &[data-current='true'] {
+      color: var(--liveuta-txt-active);
+    }
+  }
+}

@@ -87,7 +87,7 @@ export default function ScheduleSection({
     }
 
     mutatePush.mutate({
-      title: '스케쥴 알림',
+      title: '스케줄 알림',
       body: `곧 ${content.channelName}의 방송이 시작됩니다.`,
       token,
       timestamp: content.timestamp.toString(),

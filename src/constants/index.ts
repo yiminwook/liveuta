@@ -35,7 +35,7 @@ export const ORIGIN = 'liveuta.vercel.app';
 
 export const INTERNAL_LINKS = [
   { href: '/', text: '홈' },
-  { href: '/schedule', text: '스케쥴' },
+  { href: '/schedule', text: '스케줄' },
   { href: '/multi', text: '멀티뷰' },
   { href: '/channel', text: '채널' },
   { href: '/setlist', text: '세트리' },
@@ -54,7 +54,7 @@ export const EXTERNAL_LINKS = [
 ];
 
 export const ROUTES = [
-  { href: '/schedule', text: '스케쥴', subRoutes: [] },
+  { href: '/schedule', text: '스케줄', subRoutes: [] },
   { href: '/multi', text: '멀티뷰', subRoutes: [] },
   { href: '/channel', text: '채널', subRoutes: [] },
   { href: '/request', text: '채널 등록', subRoutes: [] },

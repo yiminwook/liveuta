@@ -14,7 +14,7 @@ export function IndexLinkList() {
   return (
     <ul>
       <IndexLink href="/" text="홈" />
-      <IndexLink href="/schedule" text="스케쥴" />
+      <IndexLink href="/schedule" text="스케줄" />
       <IndexLink href="/multi" text="멀티뷰" />
       <IndexLink href="/channel" text="채널" />
       <IndexLink href="/setlist" text="세트리" />

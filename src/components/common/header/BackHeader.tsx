@@ -4,6 +4,7 @@ import variable from '@variable';
 import { IconArrowNarrowLeft } from '@tabler/icons-react';
 import { ROUTES } from '@/constants';
 import css from './BackHeader.module.scss';
+import Link from 'next/link';
 
 export default function BackHeader() {
   const router = useRouter();
@@ -29,9 +30,9 @@ export default function BackHeader() {
         <span>돌아가기</span>
       </UnstyledButton>
       <Breadcrumbs separatorMargin="md" color={variable.thirdColorDefault}>
-        <a href={home.href} className={css.breadcrumbItem}>
+        <Link href={home.href} className={css.breadcrumbItem}>
           {home.text}
-        </a>
+        </Link>
         <Menu trigger="hover" closeDelay={100}>
           <Menu.Target>
             <UnstyledButton className={css.breadcrumbItem}>{items[0].text}</UnstyledButton>
@@ -39,7 +40,7 @@ export default function BackHeader() {
           <Menu.Dropdown>
             {ROUTES.map((link) => (
               <Menu.Item
-                component="a"
+                component={Link}
                 href={link.href}
                 key={link.href}
                 className={css.breadcrumbMenuItem}

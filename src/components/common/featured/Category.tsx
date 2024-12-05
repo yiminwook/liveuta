@@ -45,7 +45,7 @@ export default function Category({ contents, session, category }: CategoryProps)
   }, [scrollPage]);
 
   useEffect(() => {
-    // 스케쥴 데이터가 바뀌면 최신화
+    // 스케줄 데이터가 바뀌면 최신화
     const resetContent = contents.slice(0, SCROLL_PER_YOUTUBE_CARD * scrollPage);
     setLoadContents(() => [...resetContent]);
     // eslint-disable-next-line react-hooks/exhaustive-deps

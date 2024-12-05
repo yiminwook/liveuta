@@ -7,10 +7,11 @@ import { Session } from 'next-auth';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
-import Avatar from '@/components/common/Avatar';
+import { Avatar, Text } from '@mantine/core';
 import HamburgerButton from '@/components/common/button/HamburgerButton';
 import DesktopNav from './DesktopNav';
-import * as styles from './header.css';
+import css from './Header.module.scss';
+import variable from '@variable';
 
 type HeaderProps = {
   session: Session | null;
@@ -52,32 +53,44 @@ export default function Header({ session }: HeaderProps) {
 
   return (
     <header>
-      <div className={styles.inner} ref={gnbRef}>
-        <nav className={styles.nav}>
+      <div className={css.inner} ref={gnbRef}>
+        <nav className={css.nav}>
           <HamburgerButton onClick={openSidebar} />
-          <a href="/" className={styles.title}>
+          <Text
+            component="a"
+            href="/"
+            className={css.title}
+            variant="gradient"
+            gradient={{
+              from: variable.firstColorDarken,
+              to: variable.secondColorLighter,
+              deg: 45,
+            }}
+          >
             Live Uta
-          </a>
-          <div className={styles.right}>
+          </Text>
+          <div className={css.right}>
             <DesktopNav />
             {session ? (
-              <button className={styles.accountButton} onClick={openAccountSidebar}>
+              <button className={css.accountButton} onClick={openAccountSidebar}>
                 <Avatar
                   src={session.user.image}
-                  email={session.user.email}
-                  size={'40px'}
+                  w={40}
+                  h={40}
+                  radius="xl"
                   alt="유저 이미지"
+                  name={session.user.email}
                 />
               </button>
             ) : (
-              <Link href="/login" className={styles.loginButton}>
+              <Link href="/login" className={css.loginBtn}>
                 로그인
               </Link>
             )}
           </div>
         </nav>
       </div>
-      <div className={styles.blank} />
+      <div className={css.blank} />
     </header>
   );
 }

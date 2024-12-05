@@ -29,7 +29,7 @@ export async function GET() {
     const { daily, all } = parseAllData(scheduleData); // Need to be revised
 
     return NextResponse.json({
-      message: '스케쥴이 조회되었습니다.',
+      message: '스케줄이 조회되었습니다.',
       data: { scheduled, live, daily, all },
     });
   } catch (error) {

@@ -95,7 +95,7 @@ export default function BottomInner() {
           <Link href="/schedule">
             <div className={cx(styles.item)}>
               <MdOutlineSchedule size="1.5rem" />
-              <span>스케쥴</span>
+              <span>스케줄</span>
             </div>
           </Link>
         </li>
