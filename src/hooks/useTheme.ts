@@ -1,5 +1,6 @@
 import { themeAtom } from '@/stores/atom';
 import { TTheme } from '@/types';
+import { isDarkModeEnabled } from '@/utils/helper';
 import { useAtom } from 'jotai';
 import Cookies from 'universal-cookie';
 
@@ -12,7 +13,12 @@ const useTheme = () => {
   };
 
   const setAttribute = (theme: TTheme) => {
+    const isDarkMode = isDarkModeEnabled(theme);
     document.documentElement.setAttribute('color', theme);
+    document.documentElement.setAttribute(
+      'data-mantine-color-scheme',
+      isDarkMode ? 'dark' : 'light',
+    );
   };
 
   const setTheme = (theme: TTheme) => {

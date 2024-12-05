@@ -1,7 +1,7 @@
 import { Promised, TTheme } from '@/types';
 import { cookies } from 'next/headers';
 
-export type GetCookiesReturnType = Promised<typeof getCookies>;
+export type TGetCookiesReturn = Promised<typeof getCookies>;
 export const getCookies = async () => {
   'use server';
   const cookieStore = cookies();
