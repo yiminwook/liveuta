@@ -189,7 +189,14 @@ export default function ScheduleSection({
             </>
           ),
           Footer: ({ context }) => (
-            <div style={{ textAlign: 'center', height: '3.5rem' }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '4rem',
+              }}
+            >
               {context?.isLoading && <Loader color={variable.secondColorDefault} />}
             </div>
           ),

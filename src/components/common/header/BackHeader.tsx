@@ -9,9 +9,9 @@ export default function BackHeader() {
   const router = useRouter();
   const pathname = usePathname();
   const pathArr = pathname.split('/').filter((item) => item !== '');
-  const route = ROUTES.find((item) => item.href === '/' + pathArr[0]);
 
-  const home = { title: 'home', href: '/' };
+  const home = { text: 'home', href: '/' };
+
   const items = pathArr.map((item, index) => {
     const href = '/' + pathArr.slice(0, index + 1).join('/');
     return { text: item, href: href };
@@ -30,7 +30,7 @@ export default function BackHeader() {
       </UnstyledButton>
       <Breadcrumbs separatorMargin="md" color={variable.thirdColorDefault}>
         <a href={home.href} className={css.breadcrumbItem}>
-          {home.title}
+          {home.text}
         </a>
         <Menu trigger="hover" closeDelay={100}>
           <Menu.Target>

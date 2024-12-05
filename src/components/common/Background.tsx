@@ -10,9 +10,9 @@ type BackgroundProps = {
 export default function Background({ children, expand = false, tile = false }: BackgroundProps) {
   return (
     <>
+      <main className={classnames(css.main, { tile }, { expand })}>{children}</main>
       <div className={classnames(css.sideBg, 'left')} />
       <div className={classnames(css.sideBg, 'right')} />
-      <main className={classnames(css.main, { tile }, { expand })}>{children}</main>
     </>
   );
 }

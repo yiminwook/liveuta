@@ -11,7 +11,7 @@
     width: 100%;
 
     @include util.min-width(lg) {
-      width: 80vw;
+      width: 80%;
     }
   }
 }
