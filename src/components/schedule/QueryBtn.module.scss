@@ -1,0 +1,52 @@
+// import { global } from '@/styles/globalTheme.css';
+// import { openMenu } from '@/styles/keyframe.css';
+// import { textLine } from '@/styles/var';
+// import { globalStyle, style } from '@vanilla-extract/css';
+
+// export const root = style([]);
+
+// export const trigger = style([
+//   {
+//     height: '2.5rem',
+//     padding: '0 0.5rem',
+//     backgroundColor: '#fff',
+//     borderRadius: 5,
+//     display: 'flex',
+//     alignItems: 'center',
+//     gap: '0.5rem',
+//     ':hover': {
+//       color: '#fff',
+//       backgroundColor: global.color.second.dark,
+//     },
+//   },
+// ]);
+
+.target {
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 0.5rem;
+  }
+}
+
+.text {
+  @include util.text-line(1, 1.6);
+}
+
+// export const positioner = style([
+//   {
+//     display: 'none',
+//   },
+// ]);
+
+.content {
+  text-align: center;
+}
+.description {
+}
+// globalStyle(`${root}:hover ${positioner}`, {
+//   display: 'block',
+// });
+
+// export const description = style([textLine('1.6rem', 1), {}]);

@@ -1,5 +1,5 @@
 import { PORTAL_ID } from '@/constants';
-import { GetCookiesReturnType } from '@/utils/getCookie';
+import { TGetCookiesReturn } from '@/utils/getCookie';
 import Devtools from './Devtools';
 import GlobalHydrate from './GlobalHydrate';
 import Hotkeys from './Hotkeys';
@@ -12,22 +12,22 @@ import ServiceWorker from './ServiceWorker';
 import ToastBox from './ToastBox';
 import AppProvider from './AppProvider';
 import MantineProvider from './MantineProvider';
+import { isDarkModeEnabled } from '@/utils/helper';
 
 type ConfigsProps = {
   children: React.ReactNode;
-  cookies: GetCookiesReturnType;
+  cookies: TGetCookiesReturn;
 };
 
 export default function Configs({ children, cookies }: ConfigsProps) {
-  const themeIndex = Number(cookies.theme.replace('theme', '')) || 1;
-
+  const isDarkMode = isDarkModeEnabled(cookies.theme);
   return (
     <NextAuth>
       <AppProvider>
         <Jotai>
           <ReactQuery>
             <GlobalHydrate cookies={cookies}>
-              <MantineProvider defaultColorScheme={themeIndex > 3 ? 'dark' : 'light'}>
+              <MantineProvider defaultColorScheme={isDarkMode ? 'dark' : 'light'}>
                 <Hotkeys>
                   <ModalProvider>{children}</ModalProvider>
                   <ToastBox />

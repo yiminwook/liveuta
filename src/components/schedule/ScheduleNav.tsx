@@ -2,7 +2,7 @@
 import dynamic from 'next/dynamic';
 import MobileNavButton from './MobileNavButton';
 import NavTab from './NavTab';
-import QueryButton from './QueryButton';
+import QueryButton from './QueryBtn';
 import VideoTypeSelect from './VideoTypeSelect';
 import Link from 'next/link';
 import { TbBoxMultiple4 } from 'react-icons/tb';

@@ -1,0 +1,12 @@
+.wrap {
+  box-shadow: var.$box-shadow;
+  background-color: #fff;
+
+  :global(.m_1738fcb2):not([data-active='true']) {
+    color: #000;
+
+    &:hover {
+      color: util.palette(second, default);
+    }
+  }
+}

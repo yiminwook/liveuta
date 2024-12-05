@@ -48,7 +48,7 @@ export default function VideoTypeSelect({ select, length }: VideoTypeSelectProps
     <Select
       w={140}
       size="md"
-      variant="unstyled"
+      h={40}
       className={css.select}
       value={select}
       data={data}

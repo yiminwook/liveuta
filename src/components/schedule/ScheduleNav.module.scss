@@ -75,22 +75,22 @@
 
 .select {
   display: none;
-  border-radius: 5px;
-  font-size: inherit;
-
-  :global(.m_8fb7ebe7) {
-    // input
-    padding: 0 0.5rem;
-    box-shadow: var.$box-shadow;
-
-    &:hover {
-      color: #fff;
-      background-color: util.palette(second, dark);
-    }
-  }
+  color: #000;
 
   @include util.min-width(md) {
     display: block;
+  }
+
+  :global(.m_6c018570) {
+    // input-wrap
+    --input-bg: #fff !important;
+    --input-color: #000 !important;
+  }
+
+  :global(.m_8fb7ebe7) {
+    // input
+    border: none;
+    box-shadow: var.$box-shadow;
   }
 
   :global(.m_82577fc2[data-position='right']) {
