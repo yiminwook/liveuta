@@ -21,6 +21,7 @@ select {
 button {
   background: none;
   cursor: pointer;
+  color: inherit; // apple-system-blue override
 }
 
 button svg {
