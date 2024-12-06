@@ -9,8 +9,7 @@ import { useMemo } from 'react';
 import { addExcapeCharacter } from '@/utils/regexp';
 import MainLoading from '../common/loading/MainLoading';
 import useCachedData from '@/hooks/useCachedData';
-
-const SCHEDULE_REFRESH_INTERVAL = 1000 * 60 * 3; // 3 minutes
+import { useLocalStorage } from '@mantine/hooks';
 
 type HomeProps = {
   scheduleDto: TScheduleDto;
@@ -19,15 +18,20 @@ type HomeProps = {
 };
 
 export default function Home({ scheduleDto, session, isFavorite = false }: HomeProps) {
+  const [useAutoSync] = useLocalStorage<boolean>({ key: 'auto-sync' });
+  const [refreshInterval] = useLocalStorage<number>({ key: 'auto-sync-refresh-interval' });
   const { whiteList, blackList } = useCachedData({ session });
   const { data, isPending } = useQuery({
     queryKey: ['schedule'],
     queryFn: () => axios.get<GetScheduleRes>('/api/v1/schedule').then((res) => res.data.data),
-    staleTime: SCHEDULE_REFRESH_INTERVAL,
-    gcTime: SCHEDULE_REFRESH_INTERVAL,
-    refetchInterval: SCHEDULE_REFRESH_INTERVAL as number | false | undefined,
-    refetchOnReconnect: true,
-    refetchOnWindowFocus: true,
+    staleTime: refreshInterval * 60 * 1000,
+    gcTime: refreshInterval * 60 * 1000,
+    refetchInterval: (useAutoSync ? useAutoSync : refreshInterval * 60 * 1000) as
+      | number
+      | false
+      | undefined,
+    refetchOnReconnect: useAutoSync,
+    refetchOnWindowFocus: useAutoSync,
     refetchIntervalInBackground: false,
   });
 
