@@ -64,5 +64,3 @@ export const ROUTES = [
 ];
 
 export const PORTAL_ID = 'liveuta-portal';
-
-export const COLOR_SCHEME_KEY = 'color-scheme';

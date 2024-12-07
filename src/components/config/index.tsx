@@ -1,18 +1,18 @@
 import { PORTAL_ID } from '@/constants';
 import { TGetCookiesReturn } from '@/utils/getCookie';
+import { isDarkModeEnabled } from '@/utils/helper';
+import AppProvider from './AppProvider';
 import Devtools from './Devtools';
 import GlobalHydrate from './GlobalHydrate';
 import Hotkeys from './Hotkeys';
 import Jotai from './Jotai';
+import MantineProvider from './MantineProvider';
 import ModalProvider from './ModalProvider';
 import NextAuth from './NextAuth';
 import ParticleProvider from './ParticleProvider';
 import ReactQuery from './ReactQuery';
 import ServiceWorker from './ServiceWorker';
 import ToastBox from './ToastBox';
-import AppProvider from './AppProvider';
-import MantineProvider from './MantineProvider';
-import { isDarkModeEnabled } from '@/utils/helper';
 
 type ConfigsProps = {
   children: React.ReactNode;
