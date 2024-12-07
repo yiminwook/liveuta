@@ -16,13 +16,13 @@ type PaginationProps = {
    *
    * 3이면 현재페이지를 기준으로 앞뒤로 3개씩 보여준다.
    */
-  sliblingCount: number;
+  siblingCount: number;
 };
 
 export default function Pagination({
   count,
   pageSize,
-  sliblingCount,
+  siblingCount,
   currentPage,
   onPageChange,
 }: PaginationProps) {
@@ -44,7 +44,7 @@ export default function Pagination({
       className={styles.wrap}
       count={count}
       pageSize={pageSize}
-      siblingCount={sliblingCount}
+      siblingCount={siblingCount}
       page={currentPage}
       onPageChange={(details) => onPageChange(details.page)}
     >

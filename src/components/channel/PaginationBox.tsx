@@ -25,7 +25,7 @@ export default function PaginationBox({ currentPage, totalLength, query }: Pagin
       <Pagination
         count={totalLength}
         pageSize={ITEMS_PER_PAGE}
-        sliblingCount={2}
+        siblingCount={2}
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />
