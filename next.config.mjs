@@ -21,6 +21,14 @@ const nextConfig = {
     // your project has ESLint errors.
     // ignoreDuringBuilds: true, // biome 에러발생시 주석 해제
   },
+  typescript: {
+    // !! WARN !!
+    // ts빌드 에러를 무시하고 싶다면 아래 옵션을 true로 변경하세요.
+    ignoreBuildErrors: false,
+  },
+  // experimental: {
+  //   optimizePackageImports: ["@mantine/core", "@mantine/hooks"], // tree shaking, 제대로 작동하지 않음.
+  // },
   reactStrictMode: true,
   swcMinify: true,
   sassOptions: {
@@ -91,11 +99,7 @@ const nextConfig = {
 
     return config;
   },
-  typescript: {
-    // !! WARN !!
-    // ts빌드 에러를 무시하고 싶다면 아래 옵션을 true로 변경하세요.
-    ignoreBuildErrors: false,
-  },
+
 };
 
 export default withBundleAnalyzer(withVanillaExtract(nextConfig));
