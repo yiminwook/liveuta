@@ -1,12 +1,12 @@
+import TimelineText from '@/components/common/TimestampText';
+import Modal from '@/components/common/modal/Modal';
 import { ModalProps } from '@/libraries/modal/ModalController';
 import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import TimelineText from '@/components/common/TimestampText';
-import Modal from '@/components/common/modal/Modal';
 import { useRouter } from 'next/navigation';
 import { isMobile } from 'react-device-detect';
-import * as styles from './setlistModal.css';
+import css from './SetListModal.module.scss';
 
 type SetlistModalProps = {
   setlist: Setlist;
@@ -35,8 +35,8 @@ export default function SetlistModal({
 
   return (
     <Modal id={SETLIST_MODAL_ID} onClose={onClose} title={setlist.title}>
-      <div className={styles.inner}>
-        <div className={styles.descBox}>
+      <div className={css.inner}>
+        <div className={css.descBox}>
           {setlist.description.split('\n').map((line, index) => (
             <TimelineText
               key={`${setlist.videoId}_row_${index}`}

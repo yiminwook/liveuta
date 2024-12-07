@@ -3,6 +3,7 @@ import PostForm from './PostForm';
 import * as styles from './home.css';
 import Link from 'next/link';
 import Background from '@/components/common/Background';
+import css from './Home.module.scss';
 
 type HomeProps = {
   session: Session;
@@ -12,9 +13,9 @@ export default function Home({ session }: HomeProps) {
   return (
     <Background>
       <h1 className="blind">세트리 추가</h1>
-      <div className={styles.inner}>
+      <div className={css.inner}>
         <div>
-          <div className={styles.formBox}>
+          <div className={css.formBox}>
             <div className={styles.desc}>
               <div className={styles.formHeader}>
                 <div className={styles.headerPlaceholder} />

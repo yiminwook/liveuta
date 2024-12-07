@@ -1,8 +1,9 @@
 'use client';
+import { TextInput } from '@mantine/core';
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import * as styles from './searchForm.css';
-import { useQueryClient } from '@tanstack/react-query';
+import css from './SearchForm.module.scss';
 
 interface SearchFormProps {
   searchParams: {
@@ -31,17 +32,16 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
   };
 
   return (
-    <form className={styles.wrap} onSubmit={handleSearch}>
-      <div className={styles.inputBox}>
-        <input
-          className={styles.input}
-          type="text"
-          value={query}
-          onChange={handleQuery}
-          placeholder="세트리로 검색"
-        />
-        <button className={styles.button}>검색</button>
-      </div>
+    <form className={css.wrap} onSubmit={handleSearch}>
+      <TextInput
+        className={css.input}
+        value={query}
+        onChange={handleQuery}
+        placeholder="세트리 검색"
+      />
+      <button className={css.submit} type="submit">
+        검색
+      </button>
     </form>
   );
 }

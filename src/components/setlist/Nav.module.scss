@@ -1,0 +1,39 @@
+.wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+
+  @include util.min-width(md) {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .navButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    width: 4.5rem;
+    height: 2rem;
+    background-color: util.palette(second, default);
+    color: var(--liveuta-txt-light);
+    box-shadow: 0px 1px 2px 0 rgba(56, 52, 52, 0.4);
+    transition: background-color 0.3s var.$bezier-curve;
+
+    &:hover {
+      background-color: util.palette(second, light);
+    }
+
+    &:active {
+      background-color: util.palette(second, dark);
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+}

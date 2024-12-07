@@ -1,17 +1,17 @@
+import useModalStore from '@/hooks/useModalStore';
 /* eslint-disable @next/next/no-img-element */
 import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
+import { BREAK_POINT } from '@/styles/var';
+import { replaceParentheses } from '@/utils/regexp';
 import cx from 'classnames';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
 import { MouseEvent } from 'react';
-import * as styles from './table.css';
 import { useMediaQuery } from 'react-responsive';
-import { BREAK_POINT } from '@/styles/var';
-import { replaceParentheses } from '@/utils/regexp';
-import useModalStore from '@/hooks/useModalStore';
 import SetlistModal from './SetlistModal';
+import css from './Table.module.scss';
 
 export type RowProps = {
   setlist: Setlist;
@@ -46,37 +46,37 @@ export default function Row({ setlist, channel, order }: RowProps) {
 
   if (isMobile) {
     return (
-      <div className={cx(styles.mobileRow, 'hover')} onClick={openModal}>
-        <div className={cx(styles.mobileLeft)}>
-          <button className={styles.imageButton} onClick={handleImageClick}>
-            <div className={styles.thumbnailBox}>
+      <div className={css.mobileRow} onClick={openModal}>
+        <div className={css.mobileLeft}>
+          <button className={css.imageButton} onClick={handleImageClick}>
+            <div className={css.thumbnailBox}>
               <img src={thumbnailUrl} alt={setlist.title} />
             </div>
           </button>
         </div>
-        <div className={styles.mobileRight}>
-          <p className={styles.mobileChannelName}>{channel?.nameKor}</p>
-          <p className={styles.mobileTitle}>{replacedTitle}</p>
-          <time className={styles.mobileTime}>{order === 'broadcast' ? create : broad}</time>
+        <div className={css.mobileRight}>
+          <p className={css.mobileChannelName}>{channel?.nameKor}</p>
+          <p className={css.mobileTitle}>{replacedTitle}</p>
+          <time className={css.mobileTime}>{order === 'broadcast' ? create : broad}</time>
         </div>
       </div>
     );
   }
 
   return (
-    <div className={cx(styles.row, 'hover')} onClick={openModal}>
-      <div className={cx(styles.cell)}>
-        <button className={styles.imageButton} onClick={handleImageClick}>
-          <div className={styles.thumbnailBox}>
+    <div className={css.row} onClick={openModal}>
+      <div className={css.cell}>
+        <button className={css.imageButton} onClick={handleImageClick}>
+          <div className={css.thumbnailBox}>
             <img src={thumbnailUrl} alt={replacedTitle} />
           </div>
         </button>
       </div>
-      <div className={styles.cell}>{channel?.nameKor}</div>
-      <div className={cx(styles.cell, 'flex2')}>
+      <div className={css.cell}>{channel?.nameKor}</div>
+      <div className={cx(css.cell, css.flex2)}>
         <p>{replacedTitle}</p>
       </div>
-      <div className={styles.cell}>{order ? create : broad}</div>
+      <div className={css.cell}>{order ? create : broad}</div>
     </div>
   );
 }

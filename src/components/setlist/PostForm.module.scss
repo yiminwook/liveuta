@@ -1,0 +1,62 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5rem;
+  gap: 1rem;
+  text-align: center;
+
+  .formSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  
+    .inputBox {
+      display: grid;
+
+      .input {
+        text-align: left;
+      }
+    }
+  }
+
+  .textAreaSection {
+    .textAreaHeader {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: self-end;
+
+      .textAreaLabel {
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-align: left;
+      }
+
+      .textAreaControlButton {
+        display: inline-grid;
+        place-items: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 0.4rem;
+        transition: background-color 0.1s var.$bezier-curve;
+
+        &:hover {
+          background-color: util.palette(monochrome, 0);
+        }
+      }
+    }
+  }
+
+  .submit {
+    display: grid;
+    place-items: center;
+    padding-block: 0.5rem;
+    border-radius: 0.4rem;
+    background-color: util.palette(second, default);
+    color: var(--liveuta-txt-light);
+    transition: background-color 0.3s var.$bezier-curve;
+
+    &:hover {
+      background-color: util.palette(second, light);
+    }
+  }
+}

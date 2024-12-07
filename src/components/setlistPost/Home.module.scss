@@ -1,0 +1,12 @@
+.inner {
+  padding: 0.5rem;
+
+  .formBox {
+    max-width: 50rem;
+    min-height: 40rem;
+    padding: 1rem 2rem;
+    margin: 0 auto;
+    border: 1px solid util.palette(monochrome, 2);
+    border-radius: 0.5rem;
+  }
+}

@@ -1,11 +1,11 @@
 'use client';
-import SearchForm from './SearchForm';
-import { useRouter } from 'next/navigation';
-import * as styles from './nav.css';
 import { useQueryClient } from '@tanstack/react-query';
-import { BREAK_POINT } from '@/styles/var';
-import { useMediaQuery } from 'react-responsive';
+import { Session } from 'next-auth';
+import { useRouter } from 'next/navigation';
 import { FaFilter } from 'react-icons/fa';
+import css from './Nav.module.scss';
+import PostDrawer from './PostDrawer';
+import SearchForm from './SearchForm';
 
 type SearchFormProps = {
   searchParams: {
@@ -13,11 +13,11 @@ type SearchFormProps = {
     page: number;
     order: 'broadcast' | 'create';
   };
+  session: Session | null;
 };
-export default function Nav({ searchParams }: SearchFormProps) {
+export default function Nav({ searchParams, session }: SearchFormProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const isMobile = useMediaQuery({ query: `(max-width: ${BREAK_POINT.md}px)` });
 
   const handleReset = () => {
     if (searchParams.query === '' && searchParams.page === 1) {
@@ -25,10 +25,6 @@ export default function Nav({ searchParams }: SearchFormProps) {
     } else {
       router.push('/setlist');
     }
-  };
-
-  const navigatePost = () => {
-    router.push('/setlist/post');
   };
 
   const toggleOrder = () => {
@@ -39,41 +35,19 @@ export default function Nav({ searchParams }: SearchFormProps) {
     router.push(`/setlist?${query.toString()}`);
   };
 
-  if (isMobile) {
-    return (
-      <div className={styles.mobileWrap}>
-        <div>
-          <SearchForm searchParams={searchParams} />
-        </div>
-        <div className={styles.mobileNavBox}>
-          <button className={styles.navButton} type="button" onClick={handleReset}>
-            초기화
-          </button>
-          <button onClick={toggleOrder} className={styles.navButton} style={{ cursor: 'pointer' }}>
-            <FaFilter size={14} />
-            {searchParams.order === 'create' ? '작성일' : '방송일'}
-          </button>
-          <button className={styles.navButton} type="button" onClick={navigatePost}>
-            작성
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className={styles.wrap}>
+    <div className={css.wrap}>
       <SearchForm searchParams={searchParams} />
-      <button className={styles.navButton} type="button" onClick={handleReset}>
-        초기화
-      </button>
-      <button onClick={toggleOrder} className={styles.navButton} style={{ cursor: 'pointer' }}>
-        <FaFilter size={14} />
-        {searchParams.order === 'create' ? '작성일' : '방송일'}
-      </button>
-      <button className={styles.navButton} type="button" onClick={navigatePost}>
-        작성
-      </button>
+      <div className={css.buttons}>
+        <button className={css.navButton} type="button" onClick={handleReset}>
+          초기화
+        </button>
+        <button onClick={toggleOrder} className={css.navButton} style={{ cursor: 'pointer' }}>
+          <FaFilter size={14} />
+          {searchParams.order === 'create' ? '작성일' : '방송일'}
+        </button>
+        <PostDrawer session={session} />
+      </div>
     </div>
   );
 }
