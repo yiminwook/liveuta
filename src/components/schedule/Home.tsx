@@ -21,8 +21,8 @@ export default function Home({ scheduleDto, session, isFavorite = false }: HomeP
   const { isActive, refreshInterval } = useAutoSync();
   const { whiteList, blackList } = useCachedData({ session });
 
-  const DEFAULT_CACHE_TIME = 3 * 60 * 100; // 3분
-  const cacheTime = isActive ? refreshInterval * 60 * 100 : false;
+  const DEFAULT_CACHE_TIME = 3 * 60 * 1000; // 3분
+  const cacheTime = isActive ? refreshInterval * 60 * 1000 : false;
 
   // a tag, window.location.href, window.location.reload() 등을 사용하여 페이지 이동시 캐시가 무효화됨
   const { data, isPending } = useQuery({
