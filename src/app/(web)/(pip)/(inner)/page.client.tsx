@@ -1,11 +1,11 @@
 'use client';
-import Image from 'next/image';
-import css from './page.module.scss';
+import SearchInput from '@/components/common/input/SearchInput';
 import ChannelSlider from '@/components/home/ChannelSlider';
 import ScheduleSlider from '@/components/home/ScheduleSlider';
-import SearchInput from '@/components/common/header/SearchInput';
-import { useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import css from './page.module.scss';
 
 type Props = {
   coverImgUrl: string;

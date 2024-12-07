@@ -1,8 +1,6 @@
 import { EXTERNAL_LINKS, INTERNAL_LINKS } from '@/constants';
 import { usePathname, useRouter } from 'next/navigation';
-import SearchInput from './SearchInput';
 import HeaderMenu from './HeaderMenu';
-import css from './Header.module.scss';
 
 export default function DesktopNav() {
   const router = useRouter();

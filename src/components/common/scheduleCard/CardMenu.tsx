@@ -1,9 +1,9 @@
-import { Menu, ActionIcon } from '@mantine/core';
+import { ActionIcon, Menu } from '@mantine/core';
+import { IconDotsVertical } from '@tabler/icons-react';
+import variable from '@variable';
 import { FaPlus, FaStar } from 'react-icons/fa6';
 import { HiBellAlert } from 'react-icons/hi2';
 import { MdBlock, MdOpenInNew } from 'react-icons/md';
-import variable from '@variable';
-import { IconDotsVertical } from '@tabler/icons-react';
 
 type CardMenuProps = {
   isFavorite?: boolean;
@@ -25,7 +25,7 @@ export default function CardMenu({
   return (
     <Menu position="bottom-end" withArrow withinPortal arrowPosition="center" trigger="hover">
       <Menu.Target>
-        <ActionIcon radius="lg" color={variable.thirdColorDefault}>
+        <ActionIcon radius="lg">
           <IconDotsVertical size="1.2rem" />
         </ActionIcon>
       </Menu.Target>

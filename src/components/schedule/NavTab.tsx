@@ -1,10 +1,8 @@
 'use client';
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { TScheduleDto } from '@/types/dto';
 import { SegmentedControl, SegmentedControlItem } from '@mantine/core';
-import css from './NavTab.module.scss';
-import variable from '@variable';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const NAV_LINKS: SegmentedControlItem[] = [
   { value: 'scheduled', label: '예정' },
@@ -35,8 +33,6 @@ export default function NavTab({ filter }: NavTabProps) {
   return (
     <SegmentedControl
       withItemsBorders={false}
-      className={css.wrap}
-      color={variable.thirdColorDefault}
       value={filter}
       onChange={handleValueChange}
       data={NAV_LINKS}

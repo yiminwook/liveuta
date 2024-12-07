@@ -1,17 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import { global } from '@/styles/globalTheme.css';
+import HamburgerButton from '@/components/common/button/HamburgerButton';
 import { accountSidebarAtom, sidebarAtom } from '@/stores/common';
+import { global } from '@/styles/globalTheme.css';
+import { Avatar, Text } from '@mantine/core';
+import variable from '@variable';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
-import { Avatar, Text } from '@mantine/core';
-import HamburgerButton from '@/components/common/button/HamburgerButton';
 import DesktopNav from './DesktopNav';
 import css from './Header.module.scss';
-import variable from '@variable';
 
 type HeaderProps = {
   session: Session | null;
@@ -72,7 +72,7 @@ export default function Header({ session }: HeaderProps) {
           <div className={css.right}>
             <DesktopNav />
             {session ? (
-              <button className={css.accountButton} onClick={openAccountSidebar}>
+              <button className={css.accountBtn} onClick={openAccountSidebar}>
                 <Avatar
                   src={session.user.image}
                   w={40}

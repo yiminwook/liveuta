@@ -1,16 +1,16 @@
 'use client';
 import useStopPropagation from '@/hooks/useStopPropagation';
 import { sidebarAtom } from '@/stores/common';
+import { CloseButton } from '@mantine/core';
 import cx from 'classnames';
 import { useAtom } from 'jotai';
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 import { RemoveScroll } from 'react-remove-scroll';
-import CloseButton from '../button/CloseButton';
 import ExternalLinksSection from './ExternalLinksSection';
 import IndexSection from './IndexSection';
-import * as styles from './sidebar.css';
+import css from './Sidebar.module.scss';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -58,10 +58,10 @@ export default function Sidebar() {
   return (
     <RemoveScroll enabled={show} removeScrollBar={false}>
       <aside>
-        <div className={cx(styles.wrap, 'mobile', show && 'show')} onClick={handleClose}>
-          <div className={cx(styles.inner, 'left', show && 'moveRight')} onClick={stopPropagation}>
-            <nav className={styles.nav}>
-              <CloseButton onClick={handleClose} />
+        <div className={cx(css.wrap, 'mobile', show && 'show')} onClick={handleClose}>
+          <div className={cx(css.inner, 'left', show && 'moveRight')} onClick={stopPropagation}>
+            <nav className={css.nav}>
+              <CloseButton w={40} h={40} onClick={handleClose} />
             </nav>
             <IndexSection />
             <ExternalLinksSection />

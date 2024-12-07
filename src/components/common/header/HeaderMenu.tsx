@@ -1,7 +1,7 @@
-import { usePathname } from 'next/navigation';
-import css from './HeaderMenu.module.scss';
 import { Menu, UnstyledButton } from '@mantine/core';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import css from './HeaderMenu.module.scss';
 
 type HeaderMenuProps = {
   title: string;
@@ -12,18 +12,7 @@ type HeaderMenuProps = {
 export default function HeaderMenu({ title, links, onSelect }: HeaderMenuProps) {
   const pathname = usePathname();
   return (
-    <Menu
-      trigger="hover"
-      transitionProps={{
-        transition: {
-          out: { opacity: 0, transform: 'translateY(-4px)' },
-          in: { opacity: 1, transform: 'translateY(0px)' },
-          transitionProperty: 'opacity, transform',
-        },
-        timingFunction: 'ease-out',
-        duration: 300,
-      }}
-    >
+    <Menu trigger="hover">
       <Menu.Target>
         <UnstyledButton className={css.trigger}>{title}</UnstyledButton>
       </Menu.Target>

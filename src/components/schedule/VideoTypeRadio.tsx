@@ -1,11 +1,11 @@
 'use client';
-import Cookies from 'universal-cookie';
-import { useRouter } from 'next/navigation';
 import { SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import { Group, Radio } from '@mantine/core';
-import { useState } from 'react';
 import variable from '@variable';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import Cookies from 'universal-cookie';
 
 type VideoTypeRadioProps = {
   select: TScheduleDto['select'];
@@ -43,12 +43,7 @@ export default function VideoTypeRadio({ select, length }: VideoTypeRadioProps) 
     <Radio.Group label="와꾸종류" value={value} onChange={handleSelect}>
       <Group mt={14}>
         {items.map((item) => (
-          <Radio
-            key={`radio_${item.value}`}
-            color={variable.thirdColorDefault}
-            value={item.value}
-            label={item.label}
-          />
+          <Radio key={`radio_${item.value}`} value={item.value} label={item.label} />
         ))}
       </Group>
     </Radio.Group>

@@ -1,9 +1,9 @@
 'use client';
-import Cookies from 'universal-cookie';
-import { useRouter } from 'next/navigation';
 import { SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import { ComboboxItem, ComboboxItemGroup, Select } from '@mantine/core';
+import { useRouter } from 'next/navigation';
+import Cookies from 'universal-cookie';
 import css from './ScheduleNav.module.scss';
 
 type VideoTypeSelectProps = {

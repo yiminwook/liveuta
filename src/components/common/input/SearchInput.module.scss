@@ -22,6 +22,7 @@
   padding: 0.25rem;
   color: #fff;
   transition: background-color 0.8s var.$bezier-curve;
+
   &:hover {
     background-color: util.palette(third, lighter);
   }

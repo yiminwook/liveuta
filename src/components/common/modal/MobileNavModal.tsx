@@ -1,12 +1,12 @@
+import SearchInput from '@/components/common/input/SearchInput';
+import VideoTypeRadio from '@/components/schedule//VideoTypeRadio';
+import NavTab from '@/components/schedule/NavTab';
 import { ModalBaseProps } from '@/libraries/modal/ModalController';
+import { TScheduleDto } from '@/types/dto';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 import Modal from './Modal';
 import * as styles from './mobileNavModal.css';
-import NavTab from '@/components/schedule/NavTab';
-import VideoTypeRadio from '@/components/schedule//VideoTypeRadio';
-import SearchInput from '@/components/common/header/SearchInput';
-import { TScheduleDto } from '@/types/dto';
-import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
 
 const MOBILE_NAV_MODAL_ID = 'mobileNavModal';
 

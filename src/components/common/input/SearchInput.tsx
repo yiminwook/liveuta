@@ -1,7 +1,7 @@
-import { ChangeEventHandler } from 'react';
-import { IoMdMusicalNote } from 'react-icons/io';
 import { ActionIcon, Input } from '@mantine/core';
-import { getHotkeyHandler } from '@mantine/hooks';
+import { ChangeEventHandler } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
+import { IoMdMusicalNote } from 'react-icons/io';
 import css from './SearchInput.module.scss';
 
 type SearchInputProps = {
@@ -19,8 +19,12 @@ export default function SearchInput({
   onEnterPress = () => {},
   disabled,
 }: SearchInputProps) {
+  const hotkeyRef = useHotkeys<HTMLDivElement>('enter', onEnterPress, {
+    enableOnFormTags: ['INPUT'],
+  });
+
   return (
-    <Input.Wrapper className={css.wrap} onKeyDown={getHotkeyHandler([['enter', onEnterPress]])}>
+    <Input.Wrapper className={css.wrap} ref={hotkeyRef}>
       <Input
         variant="unstyled"
         className={css.input}
@@ -30,14 +34,7 @@ export default function SearchInput({
         value={value}
         onChange={onChange}
       />
-
-      <ActionIcon
-        className={css.submitButton}
-        variant="filled"
-        radius="xl"
-        type="submit"
-        disabled={disabled}
-      >
+      <ActionIcon className={css.submitButton} variant="filled" radius="xl" disabled={disabled}>
         <IoMdMusicalNote color="#fff" size="1.5rem" />
       </ActionIcon>
     </Input.Wrapper>
