@@ -1,10 +1,11 @@
 'use client';
 import { useRouter, useSearchParams } from 'next/navigation';
-import * as styles from './nav.css';
 import { useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { useMediaQuery } from 'react-responsive';
+import { TextInput, UnstyledButton } from '@mantine/core';
 import { BREAK_POINT } from '@/styles/var';
+import css from './Nav.module.scss';
 
 export default function Nav() {
   const searchParams = useSearchParams();
@@ -23,21 +24,20 @@ export default function Nav() {
   };
 
   return (
-    <div className={styles.wrap}>
-      <button className={styles.button} onClick={() => router.push('/request')}>
+    <div className={css.wrap}>
+      <button className={css.requestChannelButton} onClick={() => router.push('/request')}>
         {isMobile ? '등록' : '+ 채널등록'}
       </button>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <input
-          className={styles.input}
-          type="text"
+      <form className={css.form} onSubmit={handleSubmit}>
+        <TextInput
+          classNames={{ input: css.input }}
           value={input}
           onChange={handleInput}
           placeholder="채널명으로 검색"
         />
-        <button className={styles.submitButton} type="submit">
+        <UnstyledButton className={css.submit} type="submit">
           <IoSearch color="#fff" size="1.75rem" />
-        </button>
+        </UnstyledButton>
       </form>
     </div>
   );

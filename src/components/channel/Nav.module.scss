@@ -1,0 +1,51 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 0.5rem;
+
+  .requestChannelButton {
+    height: 2.5rem;
+    padding: 0.2rem 0.6rem;
+    flex-shrink: 0;
+    border-radius: 5px;
+    font-weight: 500;
+    color: var(--liveuta-txt-light);
+    background-color: util.palette(second, default);
+    transition: background-color 0.3s var.$bezier-curve;
+    letter-spacing: 1px;
+
+    &:hover {
+      background-color: util.palette(second, light);
+    }
+  }
+
+  .form {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    height: 2.5rem;
+    width: 12.5rem;
+    padding: 0.25rem;
+
+    .input {
+      border-radius: 5px 0 0 5px;
+      border-right: none;
+    }
+
+    .submit {
+      display: grid;
+      place-items: center;
+      width: 3rem;
+      height: calc(100% + 4px);
+      border-radius: 0 5px 5px 0;
+      background-color: util.palette(second, default);
+      transition: background-color 0.3s var.$bezier-curve;
+
+      &:hover {
+        background-color: util.palette(second, light);
+      }
+    }
+  }
+}

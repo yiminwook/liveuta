@@ -2,7 +2,7 @@
 import Pagination from '@/components/common/Pagination';
 import { ITEMS_PER_PAGE } from '@/constants';
 import { useRouter } from 'next/navigation';
-import * as styles from './home.css';
+import css from './Home.module.scss';
 
 type PaginationBoxProps = {
   currentPage: number;
@@ -21,7 +21,7 @@ export default function PaginationBox({ currentPage, totalLength, query }: Pagin
   };
 
   return (
-    <div className={styles.paginationBox}>
+    <div className={css.paginationBox}>
       <Pagination
         count={totalLength}
         pageSize={ITEMS_PER_PAGE}

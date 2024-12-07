@@ -1,0 +1,25 @@
+.inner {
+  padding: 0.5rem;
+  background-color: var(--liveuta-main);
+}
+
+.channelSection {
+  position: relative;
+}
+
+.alert {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.paginationBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow-x: auto;
+  padding-block: 1rem;
+  ::-webkit-scrollbar {
+    height: 5px;
+  }
+}

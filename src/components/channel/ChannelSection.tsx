@@ -3,8 +3,8 @@ import { TChannelsData as TChannelsData } from '@/types/api/youtube';
 import { Session } from '@auth/core/types';
 import Nodata from '@/components/common/Nodata';
 import ChannelCard from '@/components/common/channelCard/ChannelCard';
-import * as styles from './home.css';
 import useCachedData from '@/hooks/useCachedData';
+import css from './Home.module.scss';
 
 type ChannelSectionProps = {
   contents: TChannelsData[];
@@ -14,7 +14,7 @@ type ChannelSectionProps = {
 export default function ChannelSection({ contents, session }: ChannelSectionProps) {
   const { whiteList } = useCachedData({ session });
   return (
-    <section className={styles.channelSection}>
+    <section className={css.channelSection}>
       {contents.map((content) => (
         <ChannelCard
           key={content.uid}
