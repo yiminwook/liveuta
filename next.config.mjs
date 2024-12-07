@@ -1,5 +1,5 @@
+import path from 'node:path';
 import NextBundleAnalyzer from '@next/bundle-analyzer';
-import path from 'path';
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
 
 const __dirname = path.resolve();
@@ -16,6 +16,11 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    // ignoreDuringBuilds: true, // biome 에러발생시 주석 해제
+  },
   reactStrictMode: true,
   swcMinify: true,
   sassOptions: {

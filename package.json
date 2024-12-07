@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "check": "biome check .",
     "pm2": "pm2 start start.js --name liveuta"
   },
   "dependencies": {
@@ -79,6 +80,7 @@
     "zustand": "^5.0.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "@next/bundle-analyzer": "^13.5.6",
     "@svgr/webpack": "^8.1.0",
     "@tanstack/eslint-plugin-query": "^5.28.11",
