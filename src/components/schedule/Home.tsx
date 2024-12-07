@@ -28,8 +28,8 @@ export default function Home({ scheduleDto, session, isFavorite = false }: HomeP
   const { data, isPending } = useQuery({
     queryKey: ['schedule'],
     queryFn: () => axios.get<GetScheduleRes>('/api/v1/schedule').then((res) => res.data.data),
-    staleTime: DEFAULT_CACHE_TIME, // 페이지 이동시 DEFAULT_CACHE_TIME 동안은 캐시를 사용, data feching이 발생하지 않음
-    gcTime: DEFAULT_CACHE_TIME, // stale time이 지나지 않으면 로딩중에 stale된 data를 대신 보여줌, isPending과 관계가 있음
+    staleTime: DEFAULT_CACHE_TIME, // 페이지 이동시 DEFAULT_CACHE_TIME 동안은 캐시를 사용, data-fetching이 발생하지 않음
+    gcTime: DEFAULT_CACHE_TIME, // stale time이 지나지 않으면 data-fetch 중에 stale된 data를 대신 보여줌, isPending과 관계가 있음
     refetchInterval: cacheTime, // 페이지내 동기화 주기, 같은 페이지내에서 주기적으로 호출
     refetchOnReconnect: isActive,
     refetchOnWindowFocus: isActive,
