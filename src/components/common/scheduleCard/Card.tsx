@@ -1,12 +1,12 @@
 'use client';
+import { TContentsData } from '@/types/api/mongoDB';
+import cx from 'classnames';
+import { Session } from 'next-auth';
+import { useMemo } from 'react';
 import CardDesc from './CardDesc';
 import CardImage from './CardImage';
-import { TContentsData } from '@/types/api/mongoDB';
-import { useMemo } from 'react';
-import { Session } from 'next-auth';
-import cx from 'classnames';
-import css from './ScheduleCard.module.scss';
 import CardMenu from './CardMenu';
+import css from './ScheduleCard.module.scss';
 
 type ScheduleCardProps = {
   classname?: string;
@@ -21,6 +21,7 @@ type ScheduleCardProps = {
   showMenu?: boolean;
 };
 
+/** 카드 높이가 항상 일정하도록 해야함!! */
 export default function ScheduleCard({
   classname,
   session,

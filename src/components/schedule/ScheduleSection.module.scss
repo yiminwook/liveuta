@@ -4,11 +4,12 @@
   z-index: 1;
 
   .inner {
-    transform: translateZ(0); // GPU 가속
-    background-color: var(--liveuta-main);
     position: fixed;
-    top: env(safe-area-inset-top);
+    top: 0; 
+    padding-top: env(safe-area-inset-top); // 회피영역
     width: 100%;
+    background-color: var(--liveuta-main);
+    transform: translateZ(0); // GPU 가속
 
     @include util.min-width(lg) {
       width: 80%;
@@ -35,12 +36,12 @@
     width: 100%;
     position: relative;
 
-    @include util.min-width(sm) {
+    @include util.min-width(xs) {
       width: 50%;
       padding: 0.5rem;
     }
 
-    @include util.min-width(xs) {
+    @include util.min-width(sm) {
       width: 33.33%;
     }
 
