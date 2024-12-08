@@ -1,14 +1,14 @@
+import character from '@/assets/image/character-5-150.png';
+import Background from '@/components/common/Background';
 import { getChannel, parseChannel } from '@/libraries/mongoDB/getAllChannel';
+import { auth } from '@/libraries/nextAuth';
 import { getSetlistByVideoId } from '@/libraries/oracleDB/setlist/service';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Desc from './Desc';
-import SetlistPlayer from './SetlistPlayer';
-import * as styles from './home.css';
+import css from './Home.module.scss';
 import Info from './Info';
-import { auth } from '@/libraries/nextAuth';
-import character from '@/assets/image/character-5-150.png';
-import Image from 'next/image';
-import Background from '@/components/common/Background';
+import SetlistPlayer from './SetlistPlayer';
 
 interface HomeProps {
   params: {
@@ -24,17 +24,17 @@ export default async function Home({ params }: HomeProps) {
   const channel = parseChannel(document);
   return (
     <Background>
-      <div className={styles.inner}>
-        <section className={styles.left}>
+      <div className={css.inner}>
+        <section className={css.left}>
           <Image src={character} alt="캐릭터 이미지" width={150} height={224} unoptimized={true} />
-          <div className={styles.playerWrap}>
+          <div className={css.playerWrap}>
             <SetlistPlayer videoId={setlist.videoId} />
           </div>
-          <div className={styles.infoWrap}>
+          <div className={css.infoWrap}>
             <Info setlist={setlist} channel={channel} session={session} />
           </div>
         </section>
-        <section className={styles.right}>
+        <section className={css.right}>
           <Desc session={session} videoId={setlist.videoId} description={setlist.description} />
         </section>
       </div>
