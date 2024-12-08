@@ -16,10 +16,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  overflow-x: auto;
   padding-block: 1rem;
-  ::-webkit-scrollbar {
-    height: 5px;
-  }
 }

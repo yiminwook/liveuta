@@ -1,6 +1,5 @@
 import { categoryAtom, featuredAtom } from '@/stores/schedule/featured';
 import { StreamCategory, StreamCategoryText } from '@/types';
-import { RadioGroup } from '@ark-ui/react';
 import { useAtom } from 'jotai';
 import * as styles from './featuredRadio.css';
 
@@ -17,7 +16,7 @@ export default function FeaturedRadio() {
 
   return (
     <div>
-      <RadioGroup.Root
+      {/* <RadioGroup.Root
         className={styles.root}
         defaultValue={select}
         onValueChange={(e) => setSelect(e.value as StreamCategory)}
@@ -39,7 +38,7 @@ export default function FeaturedRadio() {
             </RadioGroup.Item>
           ))}
         </div>
-      </RadioGroup.Root>
+      </RadioGroup.Root> */}
     </div>
   );
 }

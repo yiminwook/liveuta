@@ -3,6 +3,8 @@ import {
   ActionIcon,
   MantineTransition,
   Menu,
+  Modal,
+  Pagination,
   Radio,
   SegmentedControl,
   Select,
@@ -77,5 +79,12 @@ export const theme = createTheme({
         },
       },
     }),
+    Pagination: Pagination.extend({
+      defaultProps: {
+        color: variable.thirdColorDefault,
+        siblings: 2,
+      },
+    }),
+    Modal: Modal.extend({}),
   },
 });

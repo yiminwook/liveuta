@@ -5,8 +5,8 @@ import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
-import * as styles from './channelCardModal.css';
 import Modal from './Modal';
+import * as styles from './channelCardModal.css';
 
 type ChannelCardModalProp = {
   channelName: string;

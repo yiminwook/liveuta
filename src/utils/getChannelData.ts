@@ -1,7 +1,8 @@
 'use server';
+import { ITEMS_PER_PAGE } from '@/constants';
 import { getAllChannel, searchChannel } from '@/libraries/mongoDB/getAllChannel';
-import getPaginationRange from '@/utils/getPagenationRange';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
+import getPaginationRange from '@/utils/getPagenationRange';
 
 export default async function getChannelData(
   page: number,
@@ -26,7 +27,10 @@ export default async function getChannelData(
   /* Youtube API */
   const combinedSearchDataValues = await combineChannelData(channelSheetData);
 
+  const totalPage = Math.ceil(channels.length / ITEMS_PER_PAGE);
+
   return {
+    totalPage,
     totalLength: channels.length,
     contents: combinedSearchDataValues,
   };

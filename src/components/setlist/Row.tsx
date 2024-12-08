@@ -1,15 +1,15 @@
-import useModalStore from '@/hooks/useModalStore';
 /* eslint-disable @next/next/no-img-element */
+import useModalStore from '@/hooks/useModalStore';
 import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
-import { BREAK_POINT } from '@/styles/var';
 import { replaceParentheses } from '@/utils/regexp';
+import { useMediaQuery } from '@mantine/hooks';
+import variable from '@variable';
 import cx from 'classnames';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
 import { MouseEvent } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import SetlistModal from './SetlistModal';
 import css from './Table.module.scss';
 
@@ -20,7 +20,7 @@ export type RowProps = {
 };
 
 export default function Row({ setlist, channel, order }: RowProps) {
-  const isMobile = useMediaQuery({ query: `(max-width: ${BREAK_POINT.md}px)` });
+  const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
   const router = useRouter();
   const modalStore = useModalStore();
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
@@ -44,7 +44,7 @@ export default function Row({ setlist, channel, order }: RowProps) {
 
   const replacedTitle = replaceParentheses(setlist.title);
 
-  if (isMobile) {
+  if (!isDesktop) {
     return (
       <div className={css.mobileRow} onClick={openModal}>
         <div className={css.mobileLeft}>

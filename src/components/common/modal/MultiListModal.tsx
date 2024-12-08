@@ -1,11 +1,13 @@
-import { ModalBaseProps } from '@/libraries/modal/ModalController';
 import Modal from '@/components/common/modal/Modal';
-import { useAtom } from 'jotai';
+import { useTransition } from '@/hooks/useTransition';
+import { ModalBaseProps } from '@/libraries/modal/ModalController';
 import { multiListAtom } from '@/stores/player/multi';
-import { useState } from 'react';
-import * as styles from './multiListModal.css';
-import { toast } from 'sonner';
+import classNames from 'classnames';
+import { useAtom } from 'jotai';
 import Link from 'next/link';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import * as styles from './multiListModal.css';
 
 type ListModalProps = {
   defaultValue?: string;
@@ -16,6 +18,7 @@ const ID = 'multiListModal';
 export default function ListModal({ onClose, defaultValue }: ListModalProps) {
   const [list, setList] = useAtom(multiListAtom);
   const [input, setInput] = useState(defaultValue || '');
+  const { modifier, onAnimationEnd, exit } = useTransition();
 
   const pushItem = () => {
     if (input.trim() === '') {
@@ -41,11 +44,21 @@ export default function ListModal({ onClose, defaultValue }: ListModalProps) {
     });
   };
 
+  const onCloseWithExit = () => {
+    exit(() => onClose());
+  };
+
   return (
-    <Modal id={ID} onClose={onClose}>
+    <Modal
+      id={ID}
+      className={classNames(modifier)}
+      onClose={onCloseWithExit}
+      onAnimationEnd={onAnimationEnd}
+      width={750}
+      title="URL를 입력해주세요"
+    >
       <div className={styles.wrap}>
         <div>
-          <h3 className={styles.title}>URL를 입력해주세요</h3>
           <p>최대 4개의 영상까지 추가 가능하고, 영상크기는 쇼츠영상에 맞춰져있습니다.</p>
           <p>모바일 환경에서는 동시에 재생되지 않을 수 있습니다.</p>
           <Link className={styles.link} href="/multi">

@@ -1,17 +1,16 @@
-import { Session } from 'next-auth';
-import { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
-import { useAtom } from 'jotai';
-import { LuChevronDown } from 'react-icons/lu';
-import { Collapsible } from '@ark-ui/react';
-import { TContentsData } from '@/types/api/mongoDB';
+import Nodata from '@/components/common/Nodata';
+import ScheduleCard from '@/components/common/scheduleCard/Card';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/constants';
 import useScheduleStatus from '@/hooks/useScheduleStatus';
 import { StreamCategory } from '@/types';
-import Nodata from '@/components/common/Nodata';
-import ScheduleCard from '@/components/common/scheduleCard/Card';
-import * as styles from './category.css';
+import { TContentsData } from '@/types/api/mongoDB';
 import { Button } from '@mantine/core';
+import { useAtom } from 'jotai';
+import { Session } from 'next-auth';
+import Link from 'next/link';
+import { useEffect, useMemo, useState } from 'react';
+import { LuChevronDown } from 'react-icons/lu';
+import * as styles from './category.css';
 
 type CategoryProps = {
   contents: TContentsData[];
@@ -85,25 +84,27 @@ export default function Category({ contents, session, category }: CategoryProps)
     <div>
       {Object.keys(taggedContents)
         .sort((a, b) => (a === '' ? -1 : b === '' ? 1 : a.localeCompare(b)))
-        .map((tag) => (
-          <Collapsible.Root key={tag} defaultOpen className={styles.collapsible}>
-            <Collapsible.Trigger className={styles.trigger}>
-              <LuChevronDown />
-              <h3>{tag || '기본'}</h3>
-            </Collapsible.Trigger>
-            <Collapsible.Content className={styles.content}>
-              <div className={styles.cardList}>
-                {taggedContents[tag].map((data) => (
-                  <ScheduleCard
-                    session={session}
-                    key={`scheduleCard_${data.videoId}`}
-                    content={data}
-                  />
-                ))}
-              </div>
-            </Collapsible.Content>
-          </Collapsible.Root>
-        ))}
+        .map(
+          (tag) =>
+            // <Collapsible.Root key={tag} defaultOpen className={styles.collapsible}>
+            //   <Collapsible.Trigger className={styles.trigger}>
+            //     <LuChevronDown />
+            //     <h3>{tag || '기본'}</h3>
+            //   </Collapsible.Trigger>
+            //   <Collapsible.Content className={styles.content}>
+            //     <div className={styles.cardList}>
+            //       {taggedContents[tag].map((data) => (
+            //         <ScheduleCard
+            //           session={session}
+            //           key={`scheduleCard_${data.videoId}`}
+            //           content={data}
+            //         />
+            //       ))}
+            //     </div>
+            //   </Collapsible.Content>
+            // </Collapsible.Root>
+            null,
+        )}
     </div>
   );
 }

@@ -1,10 +1,10 @@
 'use client';
 import Nodata from '@/components/common/Nodata';
-import Pagination from '@/components/common/Pagination';
 import * as loadingStyles from '@/components/common/loading/loading.css';
 import { SETLIST_PAGE_SIZE } from '@/constants';
 import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
 import { GetSetlistRes } from '@/types/api/setlist';
+import { Pagination } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import axios, { AxiosHeaders } from 'axios';
 import cx from 'classnames';
@@ -39,11 +39,16 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
       if (session) {
         headers.set('Authorization', `Bearer ${session.user.accessToken}`);
       }
-      return axios
-        .get<GetSetlistRes>(`/api/v1/setlist?${query.toString()}`, {
-          headers,
-        })
-        .then((res) => res.data.data);
+
+      const res = await axios.get<GetSetlistRes>(`/api/v1/setlist?${query.toString()}`, {
+        headers,
+      });
+
+      const data = res.data.data;
+      return {
+        list: data.list,
+        totalPage: Math.ceil(data.total / SETLIST_PAGE_SIZE),
+      };
     },
   });
 
@@ -88,11 +93,10 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
         </div>
         <div className={css.paginationBox}>
           <Pagination
-            count={data.total}
-            pageSize={SETLIST_PAGE_SIZE}
-            siblingCount={1}
-            currentPage={searchParams.page}
-            onPageChange={handlePage}
+            total={data.totalPage}
+            siblings={1}
+            value={searchParams.page}
+            onChange={handlePage}
           />
         </div>
       </div>

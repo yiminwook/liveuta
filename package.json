@@ -11,7 +11,6 @@
     "pm2": "pm2 start start.js --name liveuta"
   },
   "dependencies": {
-    "@ark-ui/react": "^2.2.3",
     "@auth/core": "^0.27.0",
     "@mantine/core": "^7.14.1",
     "@mantine/dates": "^7.14.2",

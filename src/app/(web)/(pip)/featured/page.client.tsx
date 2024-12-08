@@ -1,11 +1,10 @@
 'use client';
-import { Session } from 'next-auth';
-import { useAtom } from 'jotai';
-import { Tabs } from '@ark-ui/react';
-import { featuredAtom } from '@/stores/schedule/featured';
 import Categories from '@/components/common/featured/Categories';
-import FeaturedVtubers from '@/components/common/featured/FeaturedVtubers';
 import FeaturedSelect from '@/components/common/featured/FeaturedSelect';
+import FeaturedVtubers from '@/components/common/featured/FeaturedVtubers';
+import { featuredAtom } from '@/stores/schedule/featured';
+import { useAtom } from 'jotai';
+import { Session } from 'next-auth';
 import * as styles from './page.css';
 
 type Props = {
@@ -17,7 +16,7 @@ export default function Client({ session }: Props) {
 
   return (
     <section className={styles.featuredContainer}>
-      <Tabs.Root
+      {/* <Tabs.Root
         lazyMount
         unmountOnExit
         value={selected}
@@ -39,7 +38,7 @@ export default function Client({ session }: Props) {
             <span>버튜버 특집</span>
           </Tabs.Trigger>
         </Tabs.List>
-      </Tabs.Root>
+      </Tabs.Root> */}
       <div className={styles.featured} data-show={selected}>
         <div>
           <FeaturedSelect />

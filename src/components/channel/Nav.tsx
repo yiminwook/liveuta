@@ -1,17 +1,17 @@
 'use client';
+import { TextInput, UnstyledButton } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
+import variable from '@variable';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
-import { useMediaQuery } from 'react-responsive';
-import { TextInput, UnstyledButton } from '@mantine/core';
-import { BREAK_POINT } from '@/styles/var';
 import css from './Nav.module.scss';
 
 export default function Nav() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [input, setInput] = useState(searchParams.get('q') || '');
-  const isMobile = useMediaQuery({ query: `(max-width: ${BREAK_POINT.sm}px)` });
+  const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(() => e.target.value);
@@ -26,7 +26,7 @@ export default function Nav() {
   return (
     <div className={css.wrap}>
       <button className={css.requestChannelButton} onClick={() => router.push('/request')}>
-        {isMobile ? '등록' : '+ 채널등록'}
+        {isDesktop ? '+ 채널등록' : '등록'}
       </button>
       <form className={css.form} onSubmit={handleSubmit}>
         <TextInput
