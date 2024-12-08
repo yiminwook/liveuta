@@ -4,6 +4,7 @@ import {
   MantineTransition,
   Menu,
   Modal,
+  ModalContent,
   Pagination,
   Radio,
   SegmentedControl,
@@ -17,6 +18,12 @@ const OPEN_MENU_TRANSITION: MantineTransition = {
   out: { opacity: 0, transform: 'translateY(-4px)' },
   in: { opacity: 1, transform: 'translateY(0px)' },
   transitionProperty: 'opacity, transform',
+};
+
+const BLANK_TRANSITION: MantineTransition = {
+  out: {},
+  in: {},
+  transitionProperty: '',
 };
 
 export const theme = createTheme({
@@ -85,6 +92,23 @@ export const theme = createTheme({
         siblings: 2,
       },
     }),
-    Modal: Modal.extend({}),
+    Modal: Modal.extend({
+      defaultProps: {
+        transitionProps: {
+          transition: BLANK_TRANSITION,
+          duration: 0,
+          timingFunction: '',
+        },
+      },
+    }),
+    ModalContent: ModalContent.extend({
+      defaultProps: {
+        transitionProps: {
+          transition: BLANK_TRANSITION,
+          duration: 0,
+          timingFunction: '',
+        },
+      },
+    }),
   },
 });

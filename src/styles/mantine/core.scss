@@ -3745,11 +3745,15 @@ fieldset:disabled .m_d3ea56bb,
 }
 
 .m_54c44539 {
-  flex: var(--modal-content-flex, 0 0 var(--modal-size));
+  flex: var(--modal-content-flex, 0 0 100%);
   max-width: 100%;
   max-height: var(--modal-content-max-height, calc(100dvh - var(--modal-y-offset) * 2));
   height: var(--modal-content-height, auto);
   overflow-y: auto;
+
+  @include util.min-width(sm){
+    flex: var(--modal-content-flex, 0 0 var(--modal-size));
+  }
 }
 
 .m_54c44539[data-full-screen] {
