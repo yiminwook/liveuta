@@ -1,9 +1,9 @@
 'use client';
 import Particles from '@tsparticles/react';
-import { useMemo } from 'react';
 import { IParticlesProps } from '@tsparticles/react';
 import cx from 'classnames';
-import * as styles from './backdrop.css';
+import { useMemo } from 'react';
+import css from './Backdrop.module.scss';
 
 // https://vincentgarreau.com/particles.js
 type BackdropProps = {
@@ -61,7 +61,7 @@ export default function Backdrop({ className, onClick, activeParticles }: Backdr
   );
 
   return (
-    <div onClick={onClick} className={cx(styles.wrap, className)}>
+    <div onClick={onClick} className={cx(css.wrap, className)}>
       {activeParticles && <Particles options={options} />}
     </div>
   );
