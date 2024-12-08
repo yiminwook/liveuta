@@ -1,6 +1,5 @@
 'use client';
-
-import { TScheduleDto } from '@/types/dto';
+import { scheduleDto } from '@/types/dto';
 import { SegmentedControl, SegmentedControlItem } from '@mantine/core';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
@@ -11,14 +10,14 @@ const NAV_LINKS: SegmentedControlItem[] = [
   { value: 'all', label: '전체' },
 ];
 
-type NavTabProps = {
-  filter: TScheduleDto['filter'];
-};
+type NavTabProps = {};
 
-export default function NavTab({ filter }: NavTabProps) {
+export default function NavTab({}: NavTabProps) {
+  const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const pathname = usePathname();
+  const filterQuery = searchParams.get('t');
+  const { filter } = scheduleDto.pick({ filter: true }).parse({ filter: filterQuery });
 
   const handleValueChange = (value: string) => {
     const query = new URLSearchParams(searchParams);

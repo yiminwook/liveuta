@@ -25,7 +25,7 @@ export default function CardMenu({
   return (
     <Menu position="bottom-end" withArrow withinPortal arrowPosition="center" trigger="hover">
       <Menu.Target>
-        <ActionIcon radius="lg" size="md">
+        <ActionIcon radius="lg" size={25}>
           <IconDots />
         </ActionIcon>
       </Menu.Target>

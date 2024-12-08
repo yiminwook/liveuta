@@ -31,11 +31,11 @@ export const theme = createTheme({
   fontFamily:
     'Pretendard Variable, Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif',
   breakpoints: {
-    xs: '30em',
-    sm: '48em',
-    md: '64em',
-    lg: '74em',
-    xl: '90em',
+    xs: '30rem',
+    sm: '48rem',
+    md: '64rem',
+    lg: '74rem',
+    xl: '90rem',
   },
   colors: {},
   components: {

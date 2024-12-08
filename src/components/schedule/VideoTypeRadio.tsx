@@ -2,7 +2,6 @@
 import { SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import { Group, Radio } from '@mantine/core';
-import variable from '@variable';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Cookies from 'universal-cookie';

@@ -3751,7 +3751,7 @@ fieldset:disabled .m_d3ea56bb,
   height: var(--modal-content-height, auto);
   overflow-y: auto;
 
-  @include util.min-width(sm){
+  @include util.min-width(xs){
     flex: var(--modal-content-flex, 0 0 var(--modal-size));
   }
 }

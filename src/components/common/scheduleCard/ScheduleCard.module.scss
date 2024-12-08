@@ -28,7 +28,7 @@ $active-color2: #e06e61;
   transform-origin: center;
   transition: all 1s #{var.$bezier-curve};
 
-  @include util.min-width(sm) {
+  @include util.min-width(xs) {
     flex-direction: column;
   }
 
@@ -36,7 +36,7 @@ $active-color2: #e06e61;
     transform: scale(1.01);
   }
 
-  &:global(.close) {
+  &:global(.closed) {
     background-color: $closed-color;
   }
 
@@ -45,7 +45,7 @@ $active-color2: #e06e61;
   }
 
   &:global(.block) {
-    @include util.min-width(md) {
+    @include util.min-width(xs) {
       transform: rotateY(-180deg);
     }
 
@@ -64,7 +64,7 @@ $active-color2: #e06e61;
       font-weight: 600;
       background-color: var.$backdrop-color;
 
-      @include util.min-width(md) {
+      @include util.min-width(xs) {
         transform: rotateY(180deg);
       }
     }
@@ -78,7 +78,7 @@ $active-color2: #e06e61;
     right: 0;
     transform: translate(-25%, 25%);
 
-    @include util.min-width(sm) {
+    @include util.min-width(xs) {
       --ai-size: 1.5rem;
     }
   }
@@ -93,7 +93,7 @@ $active-color2: #e06e61;
     border-radius: 5px;
 
 
-    @include util.min-width(sm) {
+    @include util.min-width(xs) {
       flex: 1;
       width: 100%;
     }
@@ -157,11 +157,11 @@ $active-color2: #e06e61;
   display: flex;
   font-size: 0.75rem;
   align-items: center;
-
+  height: 1.25rem; // 높이를 맞추기 위해 고정, 20px
+  overflow: hidden;
 
   time {
-    @include util.text-line(1, 1);
-
+    @include util.text-line(1, 1.2);
   }
 }
 

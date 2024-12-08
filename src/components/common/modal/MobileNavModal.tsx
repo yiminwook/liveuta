@@ -54,7 +54,7 @@ export default function MobileNavModal({ onClose, scheduleDto, length }: MobileN
     >
       <div className={css.content}>
         <div className={css.navTabBox}>
-          <NavTab filter={scheduleDto.filter} />
+          <NavTab />
           <CloseButton w={40} h={40} onClick={onCloseWithExit} />
         </div>
         <SearchInput
