@@ -1,0 +1,54 @@
+.wrap {
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  margin-block-start: 3.5rem;
+  padding: 1rem;
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 2rem;
+    border-radius: 10px;
+    box-shadow: var.$box-shadow;
+
+    .imgBox {
+      width: 100%;
+      margin: 1rem auto;
+
+      img {
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+
+    p {
+      font-size: 1.5rem;
+      text-align: center;
+      line-height: 1.5rem;
+      font-weight: 500;
+    }
+
+    .buttonBox {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-block-start: 1rem;
+      color: #000;
+
+      .socialLoginButton {
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        column-gap: 0.5rem;
+        border-radius: 50%;
+        background-color: #fff;
+        box-shadow: var.$box-shadow;
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+    }
+  }
+}
