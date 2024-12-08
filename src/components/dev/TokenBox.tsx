@@ -1,14 +1,14 @@
 'use client';
-import { TToken } from '@/types';
 import CopyButton from '@/components/common/button/CopyButton';
-import * as styles from './home.css';
+import { TToken } from '@/types';
+import css from './Home.module.scss';
 
 export default function TokenBox({ token }: { token: TToken }) {
   switch (typeof token) {
     case 'string':
       return (
         <>
-          <div className={styles.token}>{token}</div>
+          <div className={css.token}>{token}</div>
           <CopyButton value={token!} size={'1.5rem'} />
         </>
       );
