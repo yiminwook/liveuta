@@ -1,0 +1,20 @@
+.nodataBox {
+  padding: 1rem 0.5rem;
+
+  .nodataImageBox {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+
+    .nodataImage {
+      object-fit: contain;
+    }
+  }
+
+  .nodataText {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
