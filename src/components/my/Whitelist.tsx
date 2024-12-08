@@ -2,7 +2,7 @@
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import { ChannelData } from '@/types/api/mongoDB';
 import { Session } from 'next-auth';
-import * as styles from './list.css';
+import css from './List.module.scss';
 
 type WhitelistProps = {
   session: Session;
@@ -25,13 +25,13 @@ export default function Whitelist({ session, whiteList, channelList }: Whitelist
     .sort((a, b) => a.name_kor.localeCompare(b.name_kor));
 
   return (
-    <div className={styles.wrap}>
-      <ul className={styles.list}>
+    <div className={css.wrap}>
+      <ul className={css.list}>
         {data.map((item) => (
-          <li key={item.channel_id} className={styles.row}>
-            <span className={styles.text}>{item.name_kor}</span>
+          <li key={item.channel_id} className={css.row}>
+            <span className={css.text}>{item.name_kor}</span>
             <button
-              className={styles.button}
+              className={css.button}
               onClick={() => handleClick(item.channel_id)}
               disabled={mutationDelete.isPending}
             >

@@ -1,0 +1,49 @@
+.wrap {
+  height: 30rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 20rem;
+    padding-inline-start: 0.25rem;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: util.palette(first, lighter);
+    }
+
+    @include util.min-width(md) {
+      width: 20rem;
+    }
+
+    .text {
+      @include util.text-line(1, 1.6);
+    }
+
+    .button {
+      flex: 0 0 3rem;
+      padding: 0 0.5rem;
+      border-radius: 5px;
+      background-color: util.palette(second, default);
+      color: var(--liveuta-txt-light);
+      transition: background-color 0.2s var.$bezier-curve;
+
+      &:hover {
+        background-color: util.palette(second, dark);
+      }
+    }
+  }
+}

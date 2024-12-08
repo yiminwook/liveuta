@@ -1,16 +1,16 @@
 import PlaceHolder from '@/components/common/input/Placeholder';
 import { useId } from 'react';
-import * as styles from './list.css';
+import css from './List.module.scss';
 
 const COUNT = Array.from({ length: 5 });
 
 export default function ListPlaceholder() {
   const id = useId();
   return (
-    <div className={styles.wrap}>
-      <ul className={styles.list}>
+    <div className={css.wrap}>
+      <ul className={css.list}>
         {COUNT.map((_, index) => (
-          <li key={`listPlaceHolder_${index}_${id}`} className={styles.row}>
+          <li key={`listPlaceHolder_${index}_${id}`} className={css.row}>
             <PlaceHolder height="1.6rem" />
           </li>
         ))}
