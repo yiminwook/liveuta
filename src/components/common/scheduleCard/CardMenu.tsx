@@ -1,5 +1,5 @@
 import { ActionIcon, Menu } from '@mantine/core';
-import { IconDotsVertical } from '@tabler/icons-react';
+import { IconDots } from '@tabler/icons-react';
 import variable from '@variable';
 import { FaPlus, FaStar } from 'react-icons/fa6';
 import { HiBellAlert } from 'react-icons/hi2';
@@ -25,8 +25,8 @@ export default function CardMenu({
   return (
     <Menu position="bottom-end" withArrow withinPortal arrowPosition="center" trigger="hover">
       <Menu.Target>
-        <ActionIcon radius="lg">
-          <IconDotsVertical size="1.2rem" />
+        <ActionIcon radius="lg" size="md">
+          <IconDots />
         </ActionIcon>
       </Menu.Target>
 

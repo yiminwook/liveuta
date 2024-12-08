@@ -118,17 +118,13 @@ $active-color2: #e06e61;
   height: 100%;
   flex-direction: column;
   justify-content: space-between;
-  gap: 0.1rem;
-
-  @include util.min-width(sm) {
-    gap: 0.25rem;
-  }
 }
 
 .channelNm {
   @include util.text-line(1, 1.2);
   font-size: 1rem;
   font-weight: 600;
+  margin-right: 40px; // 버튼과 겹치지 않도록
 
   &:global(.stream) {
     color: $active-color2;
@@ -137,6 +133,7 @@ $active-color2: #e06e61;
   @include util.min-width(sm) {
     font-size: 1.2rem;
     @include util.text-line(1, 1.4);
+    margin-right: 0px;
   }
 }
 
