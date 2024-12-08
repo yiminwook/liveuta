@@ -1,9 +1,9 @@
 'use client';
+import cx from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { MouseEvent, ReactNode } from 'react';
-import cx from 'classnames';
-import * as styles from './navLink.css';
+import css from './NavLink.module.scss';
 
 type NavLinkProps = {
   href: string;
@@ -28,7 +28,7 @@ export default function NavLink({ href, children, classname }: NavLinkProps) {
     <Link
       href={href}
       onClick={onClick}
-      className={cx(styles.navLink, isActive && 'active', classname)}
+      className={cx(css.navLink, isActive && 'active', classname)}
     >
       {children}
     </Link>
