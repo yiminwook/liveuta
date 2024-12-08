@@ -5,6 +5,7 @@ import { IoMdMusicalNote } from 'react-icons/io';
 import css from './SearchInput.module.scss';
 
 type SearchInputProps = {
+  defaultValue?: string;
   value?: string;
   placeholder?: string;
   onChange?: ChangeEventHandler;
@@ -13,6 +14,7 @@ type SearchInputProps = {
 };
 
 export default function SearchInput({
+  defaultValue,
   value,
   placeholder,
   onChange,
@@ -33,6 +35,7 @@ export default function SearchInput({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        defaultValue={defaultValue}
       />
       <ActionIcon className={css.submitButton} variant="filled" radius="xl" disabled={disabled}>
         <IoMdMusicalNote color="#fff" size="1.5rem" />

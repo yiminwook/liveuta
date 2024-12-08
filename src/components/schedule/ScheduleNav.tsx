@@ -1,16 +1,16 @@
 'use client';
+import { TScheduleDto } from '@/types/dto';
+import { useMediaQuery } from '@mantine/hooks';
+import variable from '@variable';
+import { Session } from 'next-auth';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { TbBoxMultiple4 } from 'react-icons/tb';
 import MobileNavButton from './MobileNavButton';
 import NavTab from './NavTab';
 import QueryButton from './QueryBtn';
-import VideoTypeSelect from './VideoTypeSelect';
-import Link from 'next/link';
-import { TbBoxMultiple4 } from 'react-icons/tb';
-import { Session } from 'next-auth';
-import { useMediaQuery } from '@mantine/hooks';
-import variable from '@variable';
-import { TScheduleDto } from '@/types/dto';
 import css from './ScheduleNav.module.scss';
+import VideoTypeSelect from './VideoTypeSelect';
 
 const ToggleFavorite = dynamic(() => import('./ToggleFavorite'), { ssr: false });
 
@@ -33,7 +33,7 @@ export default function ScheduleNav({ session, scheduleDto, length, isFavorite }
       <div className={css.left}>
         {session && <ToggleFavorite isFavorite={isFavorite} />}
         <div className={css.navTabBox}>
-          <NavTab filter={scheduleDto.filter} />
+          <NavTab />
         </div>
         {isDesktop && (
           <Link className={css.multiLink} href="/multi">
