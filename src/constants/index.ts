@@ -58,7 +58,7 @@ export const ROUTES = [
   { href: '/multi', text: '멀티뷰', subRoutes: [] },
   { href: '/channel', text: '채널', subRoutes: [] },
   { href: '/request', text: '채널 등록', subRoutes: [] },
-  { href: '/setlist', text: '세트리', subRoutes: [{ href: '/setlist/post', text: '세트리 등록' }] },
+  { href: '/setlist', text: '세트리', subRoutes: [] },
   { href: '/setting', text: '설정', subRoutes: [] },
   { href: '/dev', text: '개발', subRoutes: [] },
 ];
