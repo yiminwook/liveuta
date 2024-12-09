@@ -11,27 +11,30 @@ import '/public/theme-v2.css';
 import '@/styles/global.scss';
 import '@/styles/globalTheme.css';
 
-import { PropsWithChildren } from 'react';
-import { DEFALUT_METADATA } from '@/constants/metaData';
-import { getCookies } from '@/utils/getCookie';
-import type { Metadata, Viewport } from 'next';
 import Configs from '@/components/config';
 import DefaultHead from '@/components/config/DefaultHead';
 import GoogleTagManager from '@/components/config/GoogleTagManager';
+import { DEFALUT_METADATA } from '@/constants/metaData';
+import { getCookies } from '@/utils/getCookie';
+import type { Metadata, Viewport } from 'next';
+import { ViewTransitions } from 'next-view-transitions';
+import { PropsWithChildren } from 'react';
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   const cookies = await getCookies();
 
   return (
-    <html lang="ko" color={cookies.theme}>
-      <head>
-        <DefaultHead />
-      </head>
-      <body>
-        <Configs cookies={cookies}>{children}</Configs>
-        <GoogleTagManager />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="ko" color={cookies.theme}>
+        <head>
+          <DefaultHead />
+        </head>
+        <body>
+          <Configs cookies={cookies}>{children}</Configs>
+          <GoogleTagManager />
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }
 

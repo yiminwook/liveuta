@@ -1,6 +1,6 @@
 'use client';
 import cx from 'classnames';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { usePathname } from 'next/navigation';
 import { MouseEvent, ReactNode } from 'react';
 import css from './NavLink.module.scss';

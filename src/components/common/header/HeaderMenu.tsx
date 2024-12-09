@@ -1,5 +1,6 @@
 import { Menu, UnstyledButton } from '@mantine/core';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
+import { useTransitionRouter } from 'next-view-transitions';
 import { usePathname } from 'next/navigation';
 import css from './HeaderMenu.module.scss';
 
@@ -11,6 +12,8 @@ type HeaderMenuProps = {
 
 export default function HeaderMenu({ title, links, onSelect }: HeaderMenuProps) {
   const pathname = usePathname();
+  const router = useTransitionRouter();
+
   return (
     <Menu trigger="hover">
       <Menu.Target>
@@ -19,10 +22,10 @@ export default function HeaderMenu({ title, links, onSelect }: HeaderMenuProps) 
       <Menu.Dropdown className={css.dropdown}>
         {links.map((link) => (
           <Menu.Item
-            component={Link}
-            href={link.href}
             key={`headerMenu-${link.text}`}
             data-current={pathname === link.href}
+            onClick={() => router.push(link.href)}
+            className={css.dropdownItem}
           >
             {link.text}
           </Menu.Item>

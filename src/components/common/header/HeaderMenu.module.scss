@@ -11,7 +11,7 @@ button.trigger {
 .dropdown {
   min-width: $w;
 
-  :global(.mantine-Menu-item) {
+  .dropdownItem {
     font-size: 0.9rem;
 
     &[data-current='true'] {
