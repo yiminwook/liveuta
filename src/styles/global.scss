@@ -134,9 +134,9 @@ a {
 
 .os-scrollbar {
   --os-size: 8px;
-  --os-handle-bg: var(--liveuta-second-default);
-  --os-handle-bg-hover: var(--liveuta-second-light);
-  --os-handle-bg-active: var(--liveuta-second-dark);
+  --os-handle-bg: util.palette(second, default);
+  --os-handle-bg-hover: util.palette(second, light);
+  --os-handle-bg-active: util.palette(second, dark);
 
   @include util.min-width(md) {
     --os-size: 10px;
