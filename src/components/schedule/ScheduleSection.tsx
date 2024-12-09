@@ -1,33 +1,33 @@
 'use client';
-import { Session } from 'next-auth';
-import Link from 'next/link';
-import Nodata from '../common/Nodata';
-import ScheduleCard from '../common/scheduleCard/Card';
-import { VirtuosoGrid } from 'react-virtuoso';
-import css from './ScheduleSection.module.scss';
-import { Button, Loader } from '@mantine/core';
-import { useMutation } from '@tanstack/react-query';
-import { gtagClick } from '@/utils/gtag';
-import { toast } from 'sonner';
-import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
-import reservePush from '@/utils/reservePush';
+import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import useInfiniteScheduleData from '@/hooks/useInfiniteScheduleData';
 import useModalStore from '@/hooks/useModalStore';
 import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
-import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
-import { TContentsData } from '@/types/api/mongoDB';
-import ListModal from '../common/modal/MultiListModal';
+import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { openWindow } from '@/utils/windowEvent';
-import ScheduleNav from './ScheduleNav';
-import dynamic from 'next/dynamic';
+import { TContentsData } from '@/types/api/mongoDB';
 import { TScheduleDto } from '@/types/dto';
+import { gtagClick } from '@/utils/gtag';
+import reservePush from '@/utils/reservePush';
+import { openWindow } from '@/utils/windowEvent';
+import { Button, Loader } from '@mantine/core';
+import { useMutation } from '@tanstack/react-query';
 import variable from '@variable';
-import BackHeader from '../common/header/BackHeader';
-import TopBtn from './TopBtn';
+import { Session } from 'next-auth';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { useRef } from 'react';
+import { VirtuosoGrid } from 'react-virtuoso';
+import { toast } from 'sonner';
+import Nodata from '../common/Nodata';
+import Header from '../common/header/Header';
+import ListModal from '../common/modal/MultiListModal';
+import ScheduleCard from '../common/scheduleCard/Card';
+import ScheduleNav from './ScheduleNav';
+import css from './ScheduleSection.module.scss';
+import TopBtn from './TopBtn';
 
 const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 
@@ -173,9 +173,9 @@ export default function ScheduleSection({
         components={{
           Header: () => (
             <>
+              <Header session={session} />
               <div className={css.position}>
                 <div className={css.inner}>
-                  <BackHeader />
                   <ScheduleNav
                     session={session}
                     scheduleDto={scheduleDto}
@@ -185,6 +185,7 @@ export default function ScheduleSection({
                 </div>
               </div>
               <TopBtn />
+              {/* live player */}
               <TopSection filter={scheduleDto.filter} />
             </>
           ),

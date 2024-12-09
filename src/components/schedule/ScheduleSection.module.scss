@@ -1,18 +1,23 @@
+$padding-top: calc(3.5rem + env(safe-area-inset-top)); // 회피영역
+
 .position {
-  height: calc(7.5rem + env(safe-area-inset-top));
+  height: $padding-top;
   position: relative;
   z-index: 1;
 
   .inner {
     position: fixed;
-    top: 0; 
-    padding-top: env(safe-area-inset-top); // 회피영역
+    top: $padding-top; 
     width: 100%;
-    background-color: var(--liveuta-main);
     transform: translateZ(0); // GPU 가속
 
+    @include util.min-width(sm) {
+      position: relative;
+      top: unset;
+    }
+
     @include util.min-width(lg) {
-      width: 80%;
+      // width: 80%;
     }
   }
 }
