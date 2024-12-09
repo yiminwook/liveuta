@@ -1,10 +1,10 @@
 import character from '@/assets/image/character-5-150.png';
-import Background from '@/components/common/Background';
 import { getChannel, parseChannel } from '@/libraries/mongoDB/getAllChannel';
 import { auth } from '@/libraries/nextAuth';
 import { getSetlistByVideoId } from '@/libraries/oracleDB/setlist/service';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import Background from '../common/background/Background';
 import Desc from './Desc';
 import css from './Home.module.scss';
 import Info from './Info';

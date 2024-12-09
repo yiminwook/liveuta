@@ -1,7 +1,7 @@
+import Background from '@/components/common/background/Background';
 import AutoSync from './AutoSync';
-import ThemeSelect from './ThemeSelect';
-import Background from '@/components/common/Background';
 import css from './Home.module.scss';
+import ThemeSelect from './ThemeSelect';
 
 export default function Home() {
   return (

@@ -1,4 +1,4 @@
-import Background from '@/components/common/Background';
+import Background from '@/components/common/background/Background';
 import { auth } from '@/libraries/nextAuth';
 import getChannelData from '@/utils/getChannelData';
 import ChannelSection from './ChannelSection';

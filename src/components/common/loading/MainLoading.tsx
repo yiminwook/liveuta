@@ -1,11 +1,11 @@
 'use client';
-import Image from 'next/image';
-import { AiOutlineLoading } from 'react-icons/ai';
-import loadingImage from '/public/loading.png';
-import { RemoveScroll } from 'react-remove-scroll';
 import * as styles from '@/components/common/loading/loading.css';
 import cx from 'classnames';
-import Backdrop from '../Backdrop';
+import Image from 'next/image';
+import { AiOutlineLoading } from 'react-icons/ai';
+import { RemoveScroll } from 'react-remove-scroll';
+import loadingImage from '/public/loading.png';
+import Backdrop from '../background/Backdrop';
 
 type MainLoadingProps = {
   backdrop: boolean;

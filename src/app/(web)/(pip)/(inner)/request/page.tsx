@@ -1,5 +1,5 @@
-import Background from '@/components/common/Background';
 import Iframe from '@/components/common/Iframe';
+import Background from '@/components/common/background/Background';
 
 export default async function Page() {
   return (

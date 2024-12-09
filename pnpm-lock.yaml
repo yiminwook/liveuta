@@ -173,12 +173,6 @@ importers:
       react-resizable-panels:
         specifier: ^2.1.7
         version: 2.1.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      react-responsive:
-        specifier: ^9.0.2
-        version: 9.0.2(react@18.2.0)
-      react-transition-group:
-        specifier: ^4.4.5
-        version: 4.4.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-virtuoso:
         specifier: ^4.12.1
         version: 4.12.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -3277,9 +3271,6 @@ packages:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
 
-  css-mediaquery@0.1.2:
-    resolution: {integrity: sha512-COtn4EROW5dBGlE/4PiKnh6rZpAPxDeFLaEEwt4i10jpDMFt2EhQGS79QmmrO+iKCHv0PU/HrOWEhijFd1x99Q==}
-
   css-select@5.1.0:
     resolution: {integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==}
 
@@ -3423,9 +3414,6 @@ packages:
 
   document.contains@1.0.2:
     resolution: {integrity: sha512-YcvYFs15mX8m3AO1QNQy3BlIpSMfNRj3Ujk2BEJxsZG+HZf7/hZ6jr7mDpXrF8q+ff95Vef5yjhiZxm8CGJr6Q==}
-
-  dom-helpers@5.2.1:
-    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
 
   dom-serializer@0.2.2:
     resolution: {integrity: sha512-2/xPb3ORsQ42nHYiSunXkDjPLBaEj/xTwUO4B7XCZQTRk7EBtTOPaygh10YAAh2OI1Qrp6NWfpAhzswj0ydt9g==}
@@ -4052,9 +4040,6 @@ packages:
     resolution: {integrity: sha512-wlwpilI7YdjSkWaQ/7omYBMTliDcmCN8OLihO6I9B86g06lMyAoqgoDpV0XqoaPOKj+0DIdAvnsWfyAAhmimcg==}
     engines: {node: '>= 14'}
 
-  hyphenate-style-name@1.0.4:
-    resolution: {integrity: sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==}
-
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
     engines: {node: '>=0.10.0'}
@@ -4514,9 +4499,6 @@ packages:
     resolution: {integrity: sha512-PRsaiG84bK+AMvxziE/lCFss8juXjNaWzVbN5tXAm4XjeaS9NAHhop+PjQxz2A9h8Q4M/xGmzP8vqNwy6JeK0A==}
     engines: {node: '>= 12'}
     hasBin: true
-
-  matchmediaquery@0.3.1:
-    resolution: {integrity: sha512-Hlk20WQHRIm9EE9luN1kjRjYXAQToHOIAHPJn9buxBwuhfTHoKUcX+lXBbxc85DVQfXYbEQ4HcwQdd128E3qHQ==}
 
   mdn-data@2.0.28:
     resolution: {integrity: sha512-aylIc7Z9y4yzHYAJNuESG3hfhC+0Ibp/MAMiaOZgNv4pmEdFyfZhhhny4MNiAfWdBQ1RQ2mfDWmM1x8SvGyp8g==}
@@ -5227,12 +5209,6 @@ packages:
       react: ^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
       react-dom: ^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
 
-  react-responsive@9.0.2:
-    resolution: {integrity: sha512-+4CCab7z8G8glgJoRjAwocsgsv6VA2w7JPxFWHRc7kvz8mec1/K5LutNC2MG28Mn8mu6+bu04XZxHv5gyfT7xQ==}
-    engines: {node: '>=0.10'}
-    peerDependencies:
-      react: '>=16.8.0'
-
   react-style-singleton@2.2.1:
     resolution: {integrity: sha512-ZWj0fHEMyWkHzKYUr2Bs/4zU6XLmq9HsgBURm7g5pAVfyn49DgUiNgY2d4lXRlYSiCif9YBGpQleewkcqddc7g==}
     engines: {node: '>=10'}
@@ -5254,12 +5230,6 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
-
-  react-transition-group@4.4.5:
-    resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
-    peerDependencies:
-      react: '>=16.6.0'
-      react-dom: '>=16.6.0'
 
   react-virtuoso@4.12.1:
     resolution: {integrity: sha512-v+jwMrF6L5q2k9n00mqdow3Kp1wxBfkrfKWP/waJmQ8BkE4xv0uY99arrmeHYxchgqqB9ttSbxkGd+i7sxALeg==}
@@ -5444,9 +5414,6 @@ packages:
   set-function-name@2.0.2:
     resolution: {integrity: sha512-7PGFlmtwsEADb0WYyvCMa1t+yke6daIG4Wirafur5kcf+MhUnPms1UeR0CKQdTZD81yESwMHbtn+TR+dMviakQ==}
     engines: {node: '>= 0.4'}
-
-  shallow-equal@1.2.1:
-    resolution: {integrity: sha512-S4vJDjHHMBaiZuT9NPb616CSmLf618jawtv3sufLl6ivK8WocjAo58cXwbRV1cgqxH0Qbv+iUt6m05eqEa2IRA==}
 
   sharp@0.31.3:
     resolution: {integrity: sha512-XcR4+FCLBFKw1bdB+GEhnUNXNXvnt0tDo4WsBsraKymuo/IAuPuCBVAL2wIkUw2r/dwFW5Q5+g66Kwl2dgDFVg==}
@@ -9574,8 +9541,6 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  css-mediaquery@0.1.2: {}
-
   css-select@5.1.0:
     dependencies:
       boolbase: 1.0.0
@@ -9705,11 +9670,6 @@ snapshots:
   document.contains@1.0.2:
     dependencies:
       define-properties: 1.2.1
-
-  dom-helpers@5.2.1:
-    dependencies:
-      '@babel/runtime': 7.24.4
-      csstype: 3.1.3
 
   dom-serializer@0.2.2:
     dependencies:
@@ -10687,8 +10647,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  hyphenate-style-name@1.0.4: {}
-
   iconv-lite@0.4.24:
     dependencies:
       safer-buffer: 2.1.2
@@ -11169,10 +11127,6 @@ snapshots:
 
   marked@4.3.0:
     optional: true
-
-  matchmediaquery@0.3.1:
-    dependencies:
-      css-mediaquery: 0.1.2
 
   mdn-data@2.0.28: {}
 
@@ -12031,14 +11985,6 @@ snapshots:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
-  react-responsive@9.0.2(react@18.2.0):
-    dependencies:
-      hyphenate-style-name: 1.0.4
-      matchmediaquery: 0.3.1
-      prop-types: 15.8.1
-      react: 18.2.0
-      shallow-equal: 1.2.1
-
   react-style-singleton@2.2.1(@types/react@18.2.79)(react@18.2.0):
     dependencies:
       get-nonce: 1.0.1
@@ -12065,15 +12011,6 @@ snapshots:
       use-latest: 1.2.1(@types/react@18.2.79)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
-
-  react-transition-group@4.4.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
-    dependencies:
-      '@babel/runtime': 7.24.4
-      dom-helpers: 5.2.1
-      loose-envify: 1.4.0
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
 
   react-virtuoso@4.12.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
@@ -12298,8 +12235,6 @@ snapshots:
       es-errors: 1.3.0
       functions-have-names: 1.2.3
       has-property-descriptors: 1.0.2
-
-  shallow-equal@1.2.1: {}
 
   sharp@0.31.3:
     dependencies:
