@@ -12,7 +12,7 @@ import '/public/theme-v2.css';
 import '@/styles/global.scss';
 import '@/styles/globalTheme.css';
 
-import GlobalScrollbar from '@/components/common/OverlayScrollbar';
+import GlobalScrollbar from '@/components/config/GlobalScrollbar';
 import Configs from '@/components/config';
 import DefaultHead from '@/components/config/DefaultHead';
 import GoogleTagManager from '@/components/config/GoogleTagManager';
