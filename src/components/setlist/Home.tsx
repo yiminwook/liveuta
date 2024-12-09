@@ -1,4 +1,4 @@
-import Background from '@/components/common/Background';
+import Background from '@/components/common/background/Background';
 import { generateChannelObject, getAllChannel } from '@/libraries/mongoDB/getAllChannel';
 import { auth } from '@/libraries/nextAuth';
 import css from './Home.module.scss';

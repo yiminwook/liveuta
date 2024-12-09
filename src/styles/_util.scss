@@ -91,3 +91,8 @@
     @return map-get(var.$gray-colors, $color);
   }
 }
+
+@function calc-inner-height($height) {
+  $header-and-footer: var.$header-height + var.$footer-height;
+  @return calc($height - #{$header-and-footer} - #{var.$env-top} - #{var.$env-bottom});
+}

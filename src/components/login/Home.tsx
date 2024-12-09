@@ -1,6 +1,5 @@
 'use client';
 import character from '@/assets/image/character-3.png';
-import Background from '@/components/common/Background';
 import { Provider } from '@/types/nextAuth';
 import { useMutation } from '@tanstack/react-query';
 import { signIn } from 'next-auth/react';
@@ -9,6 +8,7 @@ import { FaDiscord } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { toast } from 'sonner';
+import Background from '../common/background/Background';
 import css from './Home.module.scss';
 
 export default function Home() {

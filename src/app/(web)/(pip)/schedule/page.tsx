@@ -1,8 +1,8 @@
+import Background from '@/components/common/background/Background';
 import Home from '@/components/schedule/Home';
+import { auth } from '@/libraries/nextAuth';
 import { scheduleDto } from '@/types/dto';
 import { getCookies } from '@/utils/getCookie';
-import { auth } from '@/libraries/nextAuth';
-import Background from '@/components/common/Background';
 
 type Props = {
   searchParams: {
@@ -22,7 +22,7 @@ export default async function Page({ searchParams }: Props) {
   });
 
   return (
-    <Background tile expand>
+    <Background tile>
       <Home scheduleDto={dto} session={session} />
     </Background>
   );

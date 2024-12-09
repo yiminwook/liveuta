@@ -1,3 +1,12 @@
+$header-height: 3.5rem;
+$footer-height: 4rem;
+
+$env-top: env(safe-area-inset-top);
+$env-bottom: env(safe-area-inset-bottom);
+$env-left: env(safe-area-inset-left);
+$env-right: env(safe-area-inset-right);
+
+
 $breakpoints: (
   xs: 30rem,
   sm: 48rem,

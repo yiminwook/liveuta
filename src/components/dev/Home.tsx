@@ -1,5 +1,5 @@
 'use client';
-import Background from '@/components/common/Background';
+import Background from '@/components/common/background/Background';
 import PostBox from '@/components/dev/PostBox';
 import TokenBox from '@/components/dev/TokenBox';
 import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';

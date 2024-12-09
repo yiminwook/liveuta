@@ -1,10 +1,10 @@
 'use client';
-import Background from '@/components/common/Background';
 import useCachedData from '@/hooks/useCachedData';
 import { Session } from 'next-auth';
 import dynamic from 'next/dynamic';
 import { FaStar } from 'react-icons/fa6';
 import { MdBlock } from 'react-icons/md';
+import Background from '../common/background/Background';
 import css from './Home.module.scss';
 import ListPlaceholder from './ListPlaceholder';
 
