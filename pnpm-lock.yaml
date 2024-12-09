@@ -131,6 +131,9 @@ importers:
       oracledb:
         specifier: 6.4.0
         version: 6.4.0
+      overlayscrollbars:
+        specifier: ^2.10.1
+        version: 2.10.1
       react:
         specifier: ~18.2.0
         version: 18.2.0
@@ -4803,6 +4806,9 @@ packages:
 
   outdent@0.8.0:
     resolution: {integrity: sha512-KiOAIsdpUTcAXuykya5fnVVT+/5uS0Q1mrkRHcF89tpieSmY33O/tmc54CqwA+bfhbtEfZUNLHaPUiB9X3jt1A==}
+
+  overlayscrollbars@2.10.1:
+    resolution: {integrity: sha512-BQoUAaw533ZbqBIE8LzKtsIiOKzB3pkhA6oS2ol+8THB5b2VO91myEXPlKrQqXQRYHG53f/169fFBNrGZ9tzag==}
 
   p-limit@3.1.0:
     resolution: {integrity: sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ==}
@@ -11395,6 +11401,8 @@ snapshots:
   orderedmap@2.1.1: {}
 
   outdent@0.8.0: {}
+
+  overlayscrollbars@2.10.1: {}
 
   p-limit@3.1.0:
     dependencies:
