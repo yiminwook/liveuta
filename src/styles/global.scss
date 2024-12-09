@@ -131,3 +131,14 @@ a {
   --loader-size: 3.5rem;
   --loader-color: util.palette(third, default);
 }
+
+.os-scrollbar {
+  --os-size: 8px;
+  --os-handle-bg: var(--liveuta-second-default);
+  --os-handle-bg-hover: var(--liveuta-second-light);
+  --os-handle-bg-active: var(--liveuta-second-dark);
+
+  @include util.min-width(md) {
+    --os-size: 10px;
+  }
+}
