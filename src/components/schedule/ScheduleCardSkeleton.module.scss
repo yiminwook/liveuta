@@ -1,6 +1,6 @@
 .wrap {
   width: 100%;
-  z-index: 100;
+  z-index: 49;
 
   @include util.min-width(xs) {
     width: 50%;
@@ -29,7 +29,7 @@
     background-color: #fff;
     box-shadow: 1px 2px 3px 0 rgba(50, 50, 50, 0.75);
     container-type: inline-size;
-    z-index: 500;
+    z-index: 49;
 
 
     .image {
