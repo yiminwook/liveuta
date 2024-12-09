@@ -8,8 +8,13 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
 import { useMemo } from 'react';
-import MainLoading from '../common/loading/MainLoading';
+import Header from '../common/header/Header';
+import css from './Home.module.scss';
+import ScheduleCardSkeleton from './ScheduleCardSkeleton';
+import ScheduleNav from './ScheduleNav';
 import ScheduleSection from './ScheduleSection';
+import TopBtn from './TopBtn';
+import TopSection from './TopSection';
 
 type HomeProps = {
   scheduleDto: TScheduleDto;
@@ -97,6 +102,31 @@ export default function Home({ scheduleDto, session, isFavorite = false }: HomeP
 
   return (
     <>
+      <Header session={session} />
+      <div className={css.position}>
+        <div className={css.inner}>
+          <ScheduleNav
+            session={session}
+            scheduleDto={scheduleDto}
+            length={proceedScheduleData.length}
+            isFavorite={false}
+          />
+        </div>
+      </div>
+      <TopBtn />
+      {/* live player */}
+      <TopSection filter={scheduleDto.filter} />
+      {isPending && (
+        <div className={css.skeleton}>
+          <ScheduleCardSkeleton />
+          <ScheduleCardSkeleton />
+          <ScheduleCardSkeleton />
+          <ScheduleCardSkeleton />
+          <ScheduleCardSkeleton />
+          <ScheduleCardSkeleton />
+          <ScheduleCardSkeleton />
+        </div>
+      )}
       <ScheduleSection
         session={session}
         content={proceedScheduleData.content}
@@ -104,7 +134,7 @@ export default function Home({ scheduleDto, session, isFavorite = false }: HomeP
         scheduleDto={scheduleDto}
         whiteList={whiteList}
       />
-      {isPending && <MainLoading backdrop />}
+      {/* {isPending && <MainLoading backdrop />} */}
     </>
   );
 }
