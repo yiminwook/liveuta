@@ -53,7 +53,12 @@ export const EXTERNAL_LINKS = [
   { href: 'https://ezgif.com', text: 'EZ GIF' },
 ];
 
-export const ROUTES = [
+type TRoute = {
+  href: string;
+  text: string;
+};
+
+export const ROUTES: (TRoute & { subRoutes: TRoute[] })[] = [
   { href: '/schedule', text: '스케줄', subRoutes: [] },
   { href: '/multi', text: '멀티뷰', subRoutes: [] },
   { href: '/channel', text: '채널', subRoutes: [] },

@@ -1,7 +1,6 @@
 import css from './Home.module.scss';
 import Nav from './Nav';
 import ShortsSection from './ShortsSection';
-import * as styles from './home.css';
 
 export default async function Home() {
   return (
