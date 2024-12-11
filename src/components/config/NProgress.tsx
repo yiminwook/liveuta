@@ -11,8 +11,7 @@ const NProgressProviders = ({ children }: PropsWithChildren) => {
       <ProgressBar
         options={{
           showSpinner: false,
-          // template:
-          // '<div class="bar" role="bar"><div class="peg"></div></div><div class="spinner" role="spinner"><div class="spinner-icon"></div></div>', Default template
+          template: '<div class="bar" role="bar"><div class="peg"></div></div></div>',
         }}
         shallowRouting
       />
