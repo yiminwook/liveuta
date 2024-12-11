@@ -1,7 +1,7 @@
 'use client';
 import { useQueryClient } from '@tanstack/react-query';
 import { Session } from 'next-auth';
-import { useRouter } from 'next/navigation';
+import { useTransitionRouter } from 'next-view-transitions';
 import { FaFilter } from 'react-icons/fa';
 import css from './Nav.module.scss';
 import PostDrawer from './PostDrawer';
@@ -16,7 +16,7 @@ type SearchFormProps = {
   session: Session | null;
 };
 export default function Nav({ searchParams, session }: SearchFormProps) {
-  const router = useRouter();
+  const router = useTransitionRouter();
   const queryClient = useQueryClient();
 
   const handleReset = () => {

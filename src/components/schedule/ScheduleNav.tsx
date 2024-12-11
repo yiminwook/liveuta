@@ -4,7 +4,7 @@ import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
 import { Session } from 'next-auth';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { TbBoxMultiple4 } from 'react-icons/tb';
 import MobileNavButton from './MobileNavButton';
 import NavTab from './NavTab';

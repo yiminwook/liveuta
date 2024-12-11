@@ -4,7 +4,7 @@ import { generateVideoUrl } from '@/libraries/youtube/url';
 import { playerAtom, playerStatusAtom } from '@/stores/player';
 import cx from 'classnames';
 import { useAtom, useSetAtom } from 'jotai';
-import { useRouter } from 'next/navigation';
+import { useTransitionRouter } from 'next-view-transitions';
 import { memo, useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { BsLightningFill } from 'react-icons/bs';
@@ -19,7 +19,7 @@ type PlayerProps = {
 };
 
 export default memo(function Player({ isLive, isShow }: PlayerProps) {
-  const router = useRouter();
+  const router = useTransitionRouter();
   const [isReady, setIsReady] = useState(false);
   const [playerValue] = useAtom(playerAtom);
   const setStatus = useSetAtom(playerStatusAtom);

@@ -2,7 +2,7 @@
 import { SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import { Group, Radio } from '@mantine/core';
-import { useRouter } from 'next/navigation';
+import { useTransitionRouter } from 'next-view-transitions';
 import { useState } from 'react';
 import Cookies from 'universal-cookie';
 
@@ -16,7 +16,7 @@ type VideoTypeRadioProps = {
 };
 
 export default function VideoTypeRadio({ select, length }: VideoTypeRadioProps) {
-  const router = useRouter();
+  const router = useTransitionRouter();
   const [value, setValue] = useState<TScheduleDto['select']>(select);
 
   const handleSelect = (value: string) => {

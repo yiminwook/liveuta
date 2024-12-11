@@ -1,6 +1,6 @@
 'use client';
 import cx from 'classnames';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { useEffect, useMemo, useState } from 'react';
 import { CgUserlane } from 'react-icons/cg';
 import { FaListOl } from 'react-icons/fa';

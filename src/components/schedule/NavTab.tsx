@@ -1,7 +1,8 @@
 'use client';
 import { scheduleDto } from '@/types/dto';
 import { SegmentedControl, SegmentedControlItem } from '@mantine/core';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useTransitionRouter } from 'next-view-transitions';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 const NAV_LINKS: SegmentedControlItem[] = [
   { value: 'scheduled', label: '예정' },
@@ -14,7 +15,7 @@ type NavTabProps = {};
 
 export default function NavTab({}: NavTabProps) {
   const pathname = usePathname();
-  const router = useRouter();
+  const router = useTransitionRouter();
   const searchParams = useSearchParams();
   const filterQuery = searchParams.get('t');
   const { filter } = scheduleDto.pick({ filter: true }).parse({ filter: filterQuery });

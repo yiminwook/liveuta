@@ -2,8 +2,8 @@
 import SearchInput from '@/components/common/input/SearchInput';
 import ChannelSlider from '@/components/home/ChannelSlider';
 import ScheduleSlider from '@/components/home/ScheduleSlider';
+import { useTransitionRouter } from 'next-view-transitions';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import css from './page.module.scss';
 
@@ -13,7 +13,7 @@ type Props = {
 
 export default function Client({ coverImgUrl }: Props) {
   const [query, setQuery] = useState('');
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   const onChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(() => e.target.value);

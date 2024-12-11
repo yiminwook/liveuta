@@ -1,7 +1,7 @@
 'use client';
-import type { Metadata } from 'next';
 import character from '@/assets/image/character-8.png';
-import { useRouter } from 'next/navigation';
+import type { Metadata } from 'next';
+import { useTransitionRouter } from 'next-view-transitions';
 import Image from 'next/image';
 import css from './not-found.module.scss';
 
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function NotFound() {
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   return (
     <div className={css.wrap}>
