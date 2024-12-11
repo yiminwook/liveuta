@@ -12,15 +12,14 @@ import '/public/theme-v2.css';
 import '@/styles/global.scss';
 import '@/styles/globalTheme.css';
 
-import GlobalScrollbar from '@/components/config/GlobalScrollbar';
 import Configs from '@/components/config';
 import DefaultHead from '@/components/config/DefaultHead';
+import GlobalScrollbar from '@/components/config/GlobalScrollbar';
 import GoogleTagManager from '@/components/config/GoogleTagManager';
 import { DEFALUT_METADATA } from '@/constants/metaData';
 import { getCookies } from '@/utils/getCookie';
 import type { Metadata, Viewport } from 'next';
 import { ViewTransitions } from 'next-view-transitions';
-import Script from 'next/script';
 import { PropsWithChildren } from 'react';
 
 export default async function RootLayout({ children }: PropsWithChildren) {
@@ -31,7 +30,6 @@ export default async function RootLayout({ children }: PropsWithChildren) {
       <html lang="ko" color={cookies.theme} data-overlayscrollbars-initialize>
         <head>
           <DefaultHead />
-          <Script src="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/2.10.1/browser/overlayscrollbars.browser.es6.min.js" />
         </head>
         <body data-overlayscrollbars-initialize>
           <Configs cookies={cookies}>{children}</Configs>
