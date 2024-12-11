@@ -142,3 +142,42 @@ a {
     --os-size: 10px;
   }
 }
+
+// View Transitions Animation
+@keyframes view-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(5rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes view-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-5rem);
+  }
+}
+
+// https://developer.chrome.com/docs/web-platform/view-transitions/same-document?hl=ko
+
+.view-swap {
+  view-transition-name: view-swap;
+}
+
+::view-transition-old(view-swap) {
+  animation: view-exit 0.3s util.easing(expo-in-out);
+}
+
+::view-transition-new(view-swap) {
+  animation: view-enter 0.3s util.easing(expo-in-out);
+}
