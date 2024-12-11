@@ -7,7 +7,8 @@ export default function GlobalScrollbar() {
   useEffect(() => {
     OverlayScrollbars(document.body, {
       scrollbars: {
-        autoHide: 'scroll',
+        autoHide: 'leave',
+        autoHideSuspend: true,
       },
     });
   }, []);
