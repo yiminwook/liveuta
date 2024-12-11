@@ -8,6 +8,7 @@ import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
 import cx from 'classnames';
 import dayjs from 'dayjs';
+import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
 import { MouseEvent } from 'react';
 import SetlistModal from './SetlistModal';
@@ -21,7 +22,7 @@ export type RowProps = {
 
 export default function Row({ setlist, channel, order }: RowProps) {
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
-  const router = useTransitionRouter();
+  const router = useRouter(useTransitionRouter);
   const modalStore = useModalStore();
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
   const create = dayjs(setlist.createdAt).format('YYYY년 MM월 DD일');

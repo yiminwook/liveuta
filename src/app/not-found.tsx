@@ -1,6 +1,7 @@
 'use client';
 import character from '@/assets/image/character-8.png';
 import type { Metadata } from 'next';
+import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
 import Image from 'next/image';
 import css from './not-found.module.scss';
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function NotFound() {
-  const router = useTransitionRouter();
+  const router = useRouter(useTransitionRouter);
 
   return (
     <div className={css.wrap}>

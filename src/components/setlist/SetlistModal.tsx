@@ -4,6 +4,7 @@ import { ModalProps } from '@/libraries/modal/ModalController';
 import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateVideoUrl } from '@/libraries/youtube/url';
+import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
 import { isMobile } from 'react-device-detect';
 import css from './SetListModal.module.scss';
@@ -22,7 +23,7 @@ export default function SetlistModal({
   order,
   onClose,
 }: ModalProps<SetlistModalProps>) {
-  const router = useTransitionRouter();
+  const router = useRouter(useTransitionRouter);
 
   const handleTimestamp = ({ videoId, timestamp }: { videoId: string; timestamp: number }) => {
     if (isMobile) {

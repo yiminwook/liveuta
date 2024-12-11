@@ -1,6 +1,7 @@
 'use client';
 import { scheduleDto } from '@/types/dto';
 import { SegmentedControl, SegmentedControlItem } from '@mantine/core';
+import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
 import { usePathname, useSearchParams } from 'next/navigation';
 
@@ -15,7 +16,7 @@ type NavTabProps = {};
 
 export default function NavTab({}: NavTabProps) {
   const pathname = usePathname();
-  const router = useTransitionRouter();
+  const router = useRouter(useTransitionRouter);
   const searchParams = useSearchParams();
   const filterQuery = searchParams.get('t');
   const { filter } = scheduleDto.pick({ filter: true }).parse({ filter: filterQuery });
