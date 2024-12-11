@@ -79,7 +79,7 @@
 }
 
 @function palette($variant, $color) {
-    @if $variant == 'first' {
+  @if $variant == 'first' {
     @return map-get(var.$first-colors, $color);
   } @else if $variant == 'second' {
     @return map-get(var.$second-colors, $color);
@@ -95,4 +95,8 @@
 @function calc-inner-height($height) {
   $header-and-footer: var.$header-height + var.$footer-height;
   @return calc($height - #{$header-and-footer} - #{var.$env-top} - #{var.$env-bottom});
+}
+
+@function easing($curve) {
+  @return map-get(var.$easing, $curve);
 }
