@@ -29,11 +29,7 @@ import { signOut } from './events';
 //   return appleToken;
 // };
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-} = NextAuth({
+export const { handlers, auth, signIn } = NextAuth({
   trustHost: true,
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
