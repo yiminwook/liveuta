@@ -2,14 +2,12 @@ import { generateChannelUrl } from '@/libraries/youtube/url';
 import { TContentsData } from '@/types/api/mongoDB';
 import { openWindow } from '@/utils/windowEvent';
 import cx from 'classnames';
-import { Session } from 'next-auth';
 import CardStatus from './CardStatus';
 import css from './ScheduleCard.module.scss';
 
 type CardDescProps = {
   content: TContentsData;
   addStreamModifier: string;
-  session: Session | null;
 };
 
 /*
@@ -17,7 +15,7 @@ type CardDescProps = {
  *
  * 채널명 1줄, 제목 2줄, 시간 1줄
  */
-export default function CardDesc({ session, content, addStreamModifier }: CardDescProps) {
+export default function CardDesc({ content, addStreamModifier }: CardDescProps) {
   const { title, channelName, korTime, interval, isStream, viewer, channelId } = content;
 
   const channelUrl = generateChannelUrl(channelId);

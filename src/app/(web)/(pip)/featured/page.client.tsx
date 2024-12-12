@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function Client({ session }: Props) {
-  const [selected, setSelected] = useAtom(featuredAtom);
+  const [selected] = useAtom(featuredAtom);
 
   return (
     <section className={styles.featuredContainer}>

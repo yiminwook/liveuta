@@ -2,7 +2,6 @@ import { Menu, UnstyledButton } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
 import { usePathname } from 'next/navigation';
-import { useRef } from 'react';
 import css from './HeaderMenu.module.scss';
 
 type HeaderMenuProps = {
@@ -11,7 +10,7 @@ type HeaderMenuProps = {
   onSelect: (value: string) => void;
 };
 
-export default function HeaderMenu({ title, links, onSelect }: HeaderMenuProps) {
+export default function HeaderMenu({ title, links }: HeaderMenuProps) {
   const pathname = usePathname();
   const router = useRouter(useTransitionRouter);
 

@@ -6,9 +6,9 @@ export type ModalBaseProps = {
   onClose: () => void;
 };
 
-export type ModalProps<T = {}> = T & ModalBaseProps;
+export type ModalProps<T> = T & ModalBaseProps;
 
-export type ModalInfo<T = {}> = {
+export type ModalInfo<T = Record<string, unknown>> = {
   /** 유니크한 값, id */
   key: string;
   Component: React.FC<ModalProps<T>>;
@@ -24,6 +24,7 @@ export default class ModalController {
   }
 
   private reRender() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_, setState] = this.renderState;
     // state가 1000을 넘어갈경우 1로 초기화
     setState((pre) => (pre + 1 > 1000 ? 1 : pre + 1));

@@ -62,7 +62,6 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
     if (isReady === true) {
       playerRef.current?.seekTo(playerValue.timeline, 'seconds');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playerValue.timeline]);
 
   const left = isShow === false && playerValue.hide;

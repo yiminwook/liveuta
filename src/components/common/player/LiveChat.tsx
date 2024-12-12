@@ -29,7 +29,6 @@ export default function LiveChat() {
     console.log('liveChat load');
     window.addEventListener('message', resiveMsgFromChild);
     return () => window.removeEventListener('message', resiveMsgFromChild);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded]);
 
   if (!isDesktop) return null;

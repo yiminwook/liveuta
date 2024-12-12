@@ -12,9 +12,7 @@ const NAV_LINKS: SegmentedControlItem[] = [
   { value: 'all', label: '전체' },
 ];
 
-type NavTabProps = {};
-
-export default function NavTab({}: NavTabProps) {
+export default function NavTab() {
   const pathname = usePathname();
   const router = useRouter(useTransitionRouter);
   const searchParams = useSearchParams();

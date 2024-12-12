@@ -1,7 +1,5 @@
 import css from './Background.module.scss';
 
-type TileProps = {};
-
-export default function Tile({}: TileProps) {
+export default function Tile() {
   return <div className={css.tile} />;
 }

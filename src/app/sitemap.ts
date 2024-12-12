@@ -20,12 +20,12 @@ export async function generateSitemaps(): Promise<SiteMapProps[]> {
   return [{ id: 0 }];
 }
 
-export default function sitemap({ id }: Promised<typeof generateSitemaps>[0]): SiteMap[] {
+export default function sitemap({}: Promised<typeof generateSitemaps>[0]): SiteMap[] {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
   const sites = ['/', '/channel', '/request', 'setlist', '/setting'];
 
-  return sites.map((site, index) => {
+  return sites.map((site) => {
     return {
       url: site !== '/' ? `${baseUrl}${site}` : `${baseUrl}`,
       lastModified: new Date(),

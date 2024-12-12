@@ -8,6 +8,7 @@ const portal = <T extends object>(position: string, Component: React.FC<T>) => {
   const provider = document.getElementById(PORTAL_ID) as HTMLDivElement;
 
   return memo(function Portal(props: T) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_load, setLoad] = useState(false);
 
     useEffect(() => {
@@ -27,7 +28,6 @@ const portal = <T extends object>(position: string, Component: React.FC<T>) => {
           }
         };
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (!provider || !wrap) return null;

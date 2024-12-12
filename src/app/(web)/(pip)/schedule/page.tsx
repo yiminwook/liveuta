@@ -6,13 +6,14 @@ import { scheduleDto } from '@/types/dto';
 import { getCookies } from '@/utils/getCookie';
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     t?: string; // tab
     q?: string; // query
-  };
+  }>;
 };
 
-export default async function Page({ searchParams }: Props) {
+export default async function Page(props: Props) {
+  const searchParams = await props.searchParams;
   const { select } = await getCookies();
   const session = await auth();
 

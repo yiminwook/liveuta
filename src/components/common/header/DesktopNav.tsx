@@ -1,13 +1,10 @@
 import { EXTERNAL_LINKS, INTERNAL_LINKS } from '@/constants';
-import { useTransitionRouter } from 'next-view-transitions';
-import { usePathname } from 'next/navigation';
-import HeaderMenu from './HeaderMenu';
 import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
+import HeaderMenu from './HeaderMenu';
 
 export default function DesktopNav() {
   const router = useRouter(useTransitionRouter);
-  const pathName = usePathname();
-  const isHome = '/' === pathName;
   const handleSelect = (value: string) => router.push(value);
 
   return (

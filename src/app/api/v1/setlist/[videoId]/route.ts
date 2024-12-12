@@ -7,7 +7,8 @@ import { SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { checkDescription } from './validation';
 import { getYoutubeChannelsByVideoId } from '@/libraries/youtube';
 
-export async function POST(req: NextRequest, { params }: { params: { videoId: string } }) {
+export async function POST(req: NextRequest, props: { params: Promise<{ videoId: string }> }) {
+  const params = await props.params;
   try {
     const payload = await parseAccessToken();
 
@@ -36,7 +37,8 @@ export async function POST(req: NextRequest, { params }: { params: { videoId: st
   }
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { videoId: string } }) {
+export async function PUT(req: NextRequest, props: { params: Promise<{ videoId: string }> }) {
+  const params = await props.params;
   try {
     const payload = await parseAccessToken();
 
@@ -65,7 +67,8 @@ export async function PUT(req: NextRequest, { params }: { params: { videoId: str
   }
 }
 
-export async function DELETE(_req: NextRequest, { params }: { params: { videoId: string } }) {
+export async function DELETE(_req: NextRequest, props: { params: Promise<{ videoId: string }> }) {
+  const params = await props.params;
   try {
     const payload = await parseAccessToken();
     if (!payload || payload.userLv < SETLIST_DELETE_LEVEL) {

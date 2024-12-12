@@ -17,12 +17,7 @@ type SetlistModalProps = {
 
 const SETLIST_MODAL_ID = 'setlistModal';
 
-export default function SetlistModal({
-  setlist,
-  channel,
-  order,
-  onClose,
-}: ModalProps<SetlistModalProps>) {
+export default function SetlistModal({ setlist, onClose }: ModalProps<SetlistModalProps>) {
   const router = useRouter(useTransitionRouter);
 
   const handleTimestamp = ({ videoId, timestamp }: { videoId: string; timestamp: number }) => {

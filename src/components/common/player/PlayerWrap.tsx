@@ -1,19 +1,17 @@
 'use client';
+import useScheduleStatus from '@/hooks/useScheduleStatus';
 import { useEffect, useRef, useState } from 'react';
 import LiveChat from './LiveChat';
 import Player from './Player';
-import * as styles from './player.css';
 import PlayerPlaceholder from './PlayerPlaceholder';
-import useScheduleStatus from '@/hooks/useScheduleStatus';
+import * as styles from './player.css';
 
-interface PlayerWrapProps {}
-
-export default function PlayerWrap({}: PlayerWrapProps) {
+export default function PlayerWrap() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [isShow, setIsShow] = useState(false);
   const status = useScheduleStatus();
 
-  const handleInteresect: IntersectionObserverCallback = (items, observer) => {
+  const handleInteresect: IntersectionObserverCallback = (items) => {
     const isIntersecting = items[0].isIntersecting;
     setIsShow(() => isIntersecting);
   };

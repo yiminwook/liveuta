@@ -24,7 +24,6 @@ type ScheduleCardProps = {
 /** 카드 높이가 항상 일정하도록 해야함!! */
 export default function ScheduleCard({
   classname,
-  session,
   content,
   isFavorite,
   addAlarm,
@@ -71,7 +70,7 @@ export default function ScheduleCard({
   return (
     <div className={cx(css.card, addStreamModifier, classname)}>
       <CardImage content={content} />
-      <CardDesc session={session} content={content} addStreamModifier={addStreamModifier} />
+      <CardDesc content={content} addStreamModifier={addStreamModifier} />
       {showMenu && (
         <CardMenu
           isFavorite={isFavorite}

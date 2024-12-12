@@ -39,7 +39,7 @@ export const getSession = async (refreshToken: string) => {
 };
 
 export const getSessionInServer = async () => {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   try {
     const refreshToken = cookieStore.get('refresh_token')?.value;
     if (!refreshToken) return null;

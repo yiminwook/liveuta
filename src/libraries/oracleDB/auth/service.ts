@@ -1,8 +1,8 @@
 'use server';
+import dayjs from '@/libraries/dayjs';
 import OracleDB from 'oracledb';
 import { connectOracleDB } from '../connection';
 import { GET_MEMBER, POST_MEMBER, UPDATE_MEMBER } from './sql';
-import dayjs from '@/libraries/dayjs';
 
 export type MemberRow = [number, string, string, 'Y' | 'N', number, Date, Date, 'Y' | 'N'];
 
@@ -63,10 +63,10 @@ export async function login({ email, provider }: { email: string; provider: stri
 
     if (row) {
       // 이미 가입된 회원이면 로그인 시간을 업데이트
-      const updateResult = await connection.execute(UPDATE_MEMBER, [email, provider]);
+      await connection.execute(UPDATE_MEMBER, [email, provider]);
     } else {
       // 가입되지 않은 회원이면 회원가입
-      const postResult = await connection.execute(POST_MEMBER, [email, provider]);
+      await connection.execute(POST_MEMBER, [email, provider]);
     }
 
     await connection.commit();

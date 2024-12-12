@@ -6,13 +6,14 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     query?: string;
     page?: string;
     order?: 'broadcast' | 'create';
-  };
+  }>;
 };
 
-export default async function Page({ searchParams }: Props) {
+export default async function Page(props: Props) {
+  const searchParams = await props.searchParams;
   return <Home searchParams={searchParams} />;
 }

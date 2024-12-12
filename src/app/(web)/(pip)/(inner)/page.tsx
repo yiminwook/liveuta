@@ -5,10 +5,6 @@ import { homeDto } from '@/types/dto';
 import Client from './page.client';
 import '@/styles/swiper/core.scss';
 
-type TProps = {
-  searchParams: {};
-};
-
 async function getServerSideProps() {
   const connection = await connectOracleDB();
   const [coverImgUrlQuery] = await Promise.all([
@@ -26,7 +22,7 @@ async function getServerSideProps() {
   return dto.data;
 }
 
-export default async function Page({ searchParams }: TProps) {
+export default async function Page() {
   const { coverImgUrl } = await getServerSideProps();
   return <Client coverImgUrl={coverImgUrl} />;
 }

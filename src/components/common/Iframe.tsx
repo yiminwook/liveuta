@@ -40,13 +40,11 @@ export default function Iframe({ url }: IframeProps) {
     if (isLoaded === false) return;
     window.addEventListener('message', receiveMsgFromChild);
     return () => window.removeEventListener('message', receiveMsgFromChild);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded]);
 
   useEffect(() => {
     if (isLoaded === false) return;
     postMsgToChild();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded, theme]);
 
   return (

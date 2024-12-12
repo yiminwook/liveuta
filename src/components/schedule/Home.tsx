@@ -7,13 +7,15 @@ import { addExcapeCharacter } from '@/utils/regexp';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
+import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 import css from './Home.module.scss';
 import ScheduleCardSkeleton from './ScheduleCardSkeleton';
 import ScheduleNav from './ScheduleNav';
 import ScheduleSection from './ScheduleSection';
 import TopBtn from './TopBtn';
-import TopSection from './TopSection';
+
+const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 
 type HomeProps = {
   scheduleDto: TScheduleDto;

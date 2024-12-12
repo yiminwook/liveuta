@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 'use client';
 import HamburgerButton from '@/components/common/button/HamburgerButton';
 import { accountSidebarAtom, sidebarAtom } from '@/stores/common';
@@ -48,7 +48,6 @@ export default function Header({ session }: HeaderProps) {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMobile]);
 
   return (

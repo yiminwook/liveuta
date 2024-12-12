@@ -1,14 +1,14 @@
+import dayjs from '@/libraries/dayjs';
+import { StreamCategory } from '@/types';
 import {
   ContentDocument,
+  TContentsData,
   TParseAllDataReturn,
   TParseScheduledDataReturn,
-  TContentsData,
   isStream,
 } from '@/types/api/mongoDB';
 import { getInterval, stringToTime } from '@/utils/getTime';
-import dayjs from '@/libraries/dayjs';
 import { replaceParentheses } from '@/utils/regexp';
-import { StreamCategory } from '@/types';
 
 export const parseMongoDBDocument = (doc: ContentDocument): TContentsData => {
   try {
@@ -51,9 +51,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): TContentsData => {
 
 export const parseScheduledData = (documents: ContentDocument[]): TParseScheduledDataReturn => {
   const scheduled: TContentsData[] = [];
-  let scheduledVideo = 0;
   const live: TContentsData[] = [];
-  let liveVideo = 0;
 
   documents.forEach((doc) => {
     const isHide = doc.Hide;
@@ -64,12 +62,10 @@ export const parseScheduledData = (documents: ContentDocument[]): TParseSchedule
 
     const data = parseMongoDBDocument(doc); // Assuming parseMongoDBData returns an array
 
-    if (data.isVideo === true) scheduledVideo++;
     scheduled.push(data);
 
     if (data.isStream === 'TRUE') {
       // 현재 라이브중이면 라이브 리스트에도 추가
-      if (data.isVideo === true) liveVideo++;
       live.push(data);
     }
   });
@@ -84,9 +80,7 @@ export const parseAllData = (documents: ContentDocument[]): TParseAllDataReturn 
   if (!documents) throw new Error('No DataValue');
 
   const daily: TContentsData[] = [];
-  let dailyVideo = 0;
   const all: TContentsData[] = [];
-  let allVideo = 0;
   const yesterday = dayjs.tz().subtract(1, 'day').valueOf();
 
   documents.forEach((doc) => {
@@ -96,12 +90,10 @@ export const parseAllData = (documents: ContentDocument[]): TParseAllDataReturn 
     if (isHide === 'TRUE' && isStream === 'NULL') doc.broadcastStatus = 'FALSE';
     const data = parseMongoDBDocument(doc); // Assuming parseMongoDBData returns an array
 
-    if (data.isVideo === true) allVideo++;
     all.push(data);
 
     if (data.timestamp >= yesterday) {
       // If it's within 24 hours, add to daily list
-      if (data.isVideo === true) dailyVideo++;
       daily.push(data);
     }
   });

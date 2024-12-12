@@ -1,5 +1,5 @@
 import { ROUTES } from '@/constants';
-import { Anchor, Breadcrumbs, Menu, UnstyledButton } from '@mantine/core';
+import { Breadcrumbs, Menu, UnstyledButton } from '@mantine/core';
 import { IconArrowNarrowLeft } from '@tabler/icons-react';
 import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';

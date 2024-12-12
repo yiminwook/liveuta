@@ -8,7 +8,7 @@ import { TContentsData } from '@/types/api/mongoDB';
 import { gtagClick } from '@/utils/gtag';
 import { useSetAtom } from 'jotai';
 import Image from 'next/image';
-import { MouseEvent, useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 interface CardImageProps {
@@ -32,7 +32,7 @@ export default function CardImage({ content }: CardImageProps) {
     }
   }, [imgRef]);
 
-  const linkClickEvent = (e: MouseEvent<HTMLButtonElement>) => {
+  const linkClickEvent = () => {
     gtagClick({
       target: 'scheduleCard',
       action: 'atag',

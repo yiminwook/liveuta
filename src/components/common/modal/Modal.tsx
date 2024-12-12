@@ -41,7 +41,6 @@ export default function Modal({
   useEffect(() => {
     enableScope(id);
     return () => disableScope(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

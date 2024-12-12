@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(_request: NextRequest) {
   try {
-    const refreshToken = headers().get('token');
+    const refreshToken = (await headers()).get('token');
 
     if (!refreshToken) {
       return NextResponse.json({ session: null }, { status: 200 });

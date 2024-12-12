@@ -1,7 +1,7 @@
 'use client';
 import { SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
-import { ComboboxItem, ComboboxItemGroup, Select } from '@mantine/core';
+import { ComboboxItemGroup, Select } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
 import Cookies from 'universal-cookie';
@@ -19,7 +19,7 @@ type VideoTypeSelectProps = {
 export default function VideoTypeSelect({ select, length }: VideoTypeSelectProps) {
   const router = useRouter(useTransitionRouter);
 
-  const handleSelect = (value: string | null, _option: ComboboxItem) => {
+  const handleSelect = (value: string | null) => {
     if (value === null) return;
     const selectCookie = new Cookies();
     selectCookie.set('select', value, { path: '/', maxAge: 60 * 60 * 24 * 30 * 3 }); //3개월 저장

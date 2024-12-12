@@ -1,4 +1,4 @@
-import { globalStyle, keyframes, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 
 import { global } from '@/styles/globalTheme.css';
 // import { BEZIER_CURVE, BOX_SHADOW, flexCenter } from '@/style/var';

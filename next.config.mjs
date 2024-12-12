@@ -12,7 +12,7 @@ const withVanillaExtract = createVanillaExtractPlugin({
   identifiers: ({ hash }) => `uta_${hash}`,
 });
 
-const isDevelopment = process.env.NODE_ENV !== 'production';
+// const isDevelopment = process.env.NODE_ENV !== 'production';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -30,7 +30,11 @@ const nextConfig = {
   //   optimizePackageImports: ["@mantine/core", "@mantine/hooks"], // tree shaking, 제대로 작동하지 않음.
   // },
   reactStrictMode: true,
-  swcMinify: true,
+  compiler: {
+    removeConsole: {
+      // exclude: ['error', 'warn'],
+    },
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'src', 'styles')], // style 폴더에 있는 파일은 이름만으로 import 가능(경로 축약)
     prependData: `
@@ -79,7 +83,7 @@ const nextConfig = {
       },
     ];
   },
-  webpack: (config, options) => {
+  webpack: (config) => {
     /** SVGR **/
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
     fileLoaderRule.exclude = /\.svg$/i;
@@ -99,7 +103,18 @@ const nextConfig = {
 
     return config;
   },
-
+  experimental: {
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+        },
+        '*.scss': {
+          loaders: ['sass-loader'],
+        },
+      },
+    },
+  },
 };
 
 export default withBundleAnalyzer(withVanillaExtract(nextConfig));

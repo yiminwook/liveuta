@@ -16,20 +16,14 @@ import { Button, Loader } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import variable from '@variable';
 import { Session } from 'next-auth';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRef } from 'react';
 import { VirtuosoGrid } from 'react-virtuoso';
 import { toast } from 'sonner';
 import Nodata from '../common/Nodata';
-import Header from '../common/header/Header';
 import ListModal from '../common/modal/MultiListModal';
 import ScheduleCard from '../common/scheduleCard/Card';
-import ScheduleNav from './ScheduleNav';
 import css from './ScheduleSection.module.scss';
-import TopBtn from './TopBtn';
-
-const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 
 type ScheduleSectionProps = {
   session: Session | null;
@@ -46,7 +40,6 @@ type ScheduleSectionProps = {
 export default function ScheduleSection({
   session,
   content,
-  length,
   scheduleDto,
   whiteList,
 }: ScheduleSectionProps) {

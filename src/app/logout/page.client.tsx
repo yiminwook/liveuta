@@ -8,7 +8,6 @@ export default function Client() {
     signOut({
       callbackUrl: '/',
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;

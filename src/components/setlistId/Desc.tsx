@@ -58,7 +58,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
       );
       return response.data;
     },
-    onSuccess: (result) => {
+    onSuccess: () => {
       toast.success('수정되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
       router.refresh();
@@ -91,7 +91,6 @@ export default function Desc({ session, videoId, description }: DescProps) {
 
   useEffect(() => {
     handleCancel();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [description]);
 
   if (isEditing) {

@@ -49,7 +49,7 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
     },
   );
 
-  useHotkeys('space', (e) => {}, {
+  useHotkeys('space', () => {}, {
     preventDefault: true,
     enabled: show,
     scopes: ['sidebar'],
@@ -57,7 +57,6 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
 
   useEffect(() => {
     if (show) handleClose();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   useEffect(() => {
@@ -69,7 +68,6 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
       disableScope('sidebar');
       window.removeEventListener('resize', handleClose);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
 
   return (

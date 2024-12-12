@@ -25,7 +25,7 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   const setPlayerVideoId = useSetAtom(playerVideoIdAtom);
   const [isShow, setIsShow] = useState(true);
 
-  const handleInteresect: IntersectionObserverCallback = (items, observer) => {
+  const handleInteresect: IntersectionObserverCallback = (items) => {
     const isIntersecting = items[0].isIntersecting;
     setIsShow(() => isIntersecting);
   };
@@ -34,7 +34,6 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
     // 자동재생 되지 않도록 설정
     setPlayerStatus((pre) => ({ ...pre, isPlaying: false, timeline: timestamp }));
     setPlayerVideoId(() => videoId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

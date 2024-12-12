@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
 import { PushData } from '@/app/api/push/route';
-import { connectMongoDB } from '@/libraries/mongoDB';
-import errorHandler from '@/libraries/error/handler';
 import { MONGODB_NOTI_COLLECTION, MONGODB_SCHEDULE_DB } from '@/constants';
+import errorHandler from '@/libraries/error/handler';
+import { connectMongoDB } from '@/libraries/mongoDB';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,11 +16,11 @@ export async function POST(req: NextRequest) {
     });
 
     if (readResult) {
-      const deleteResult = await db.deleteOne(readResult);
+      await db.deleteOne(readResult);
       return NextResponse.json({ message: '알림이 취소되었습니다.', data: null });
     }
 
-    const createResult = await db.insertOne(requestBody);
+    await db.insertOne(requestBody);
     return NextResponse.json({ message: '알림이 예약되었습니다.', data: null }, { status: 201 });
   } catch (error) {
     console.error(error);

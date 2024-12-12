@@ -1,19 +1,10 @@
 import { useCallback, useState } from 'react';
 
-type transitionOptions = {};
-
-const DEFAULT_OPTIONS: transitionOptions = {};
-
 /**
  * class: enter => show => show exit
  *
  */
-export const useTransition = (arg?: transitionOptions) => {
-  const options: transitionOptions = {
-    ...DEFAULT_OPTIONS,
-    ...arg,
-  };
-
+export const useTransition = () => {
   const [modifier, setModifier] = useState<string[]>(['enter']);
 
   const onAnimationEnd = useCallback((e: React.AnimationEvent) => {

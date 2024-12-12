@@ -6,12 +6,11 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(
   _req: NextRequest,
-  {
-    params,
-  }: {
-    params: { channelId: string };
-  },
+  props: {
+    params: Promise<{ channelId: string }>;
+  }
 ) {
+  const params = await props.params;
   try {
     const payload = await parseAccessToken();
 
@@ -34,12 +33,11 @@ export async function POST(
 
 export async function DELETE(
   _req: NextRequest,
-  {
-    params,
-  }: {
-    params: { channelId: string };
-  },
+  props: {
+    params: Promise<{ channelId: string }>;
+  }
 ) {
+  const params = await props.params;
   try {
     const payload = await parseAccessToken();
     if (!payload) {

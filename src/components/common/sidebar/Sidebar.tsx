@@ -32,7 +32,7 @@ export default function Sidebar() {
     },
   );
 
-  useHotkeys('space', (e) => {}, {
+  useHotkeys('space', () => {}, {
     preventDefault: true,
     enabled: show,
     scopes: ['sidebar'],
@@ -40,7 +40,6 @@ export default function Sidebar() {
 
   useEffect(() => {
     if (show) handleClose();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   useEffect(() => {
@@ -52,7 +51,6 @@ export default function Sidebar() {
       disableScope('sidebar');
       window.removeEventListener('resize', handleClose);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
 
   return (

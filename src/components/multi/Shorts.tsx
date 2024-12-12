@@ -1,6 +1,6 @@
 'use client';
-import ReactPlayer from 'react-player';
 import { ORIGIN } from '@/constants';
+import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
 
 type ShortsProps = {
@@ -22,7 +22,7 @@ export default function Shorts({ url }: ShortsProps) {
         },
       }}
       controls={true}
-      onError={(e) => {
+      onError={() => {
         toast.error('실행 할 수 없는 영상입니다.');
         // setVideoId(() => IINITIAL_PLAYER_VIDEO_ID);
         // setStatus((pre) => ({ ...pre, isPlaying: false }));

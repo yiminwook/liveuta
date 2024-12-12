@@ -1,6 +1,6 @@
 import { CallbacksJwt, CallbacksSession, CallbacksSignIn, Payload } from '@/types/nextAuth';
-import { Session } from 'next-auth';
 import jwt from 'jsonwebtoken';
+import { Session } from 'next-auth';
 import { getUserInfo, login } from '../oracleDB/auth/service';
 
 /**
@@ -25,7 +25,7 @@ export const callbackSignIn: CallbacksSignIn = async ({ user, account }) => {
   }
 };
 
-export const callbackJwt: CallbacksJwt = async ({ token, user, trigger, account }) => {
+export const callbackJwt: CallbacksJwt = async ({ token, user, account }) => {
   if (user && account) {
     //첫 로그인, user는 첫 로그인시만 들어온다.
     token.user = {

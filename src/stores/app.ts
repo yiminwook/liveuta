@@ -1,16 +1,16 @@
 import { createContext, useContext } from 'react';
 import { createStore, useStore } from 'zustand';
 
-type State = {};
+type State = Record<string, unknown>;
 
 type Action = {
-  actions: {};
+  actions: Record<string, unknown>;
 };
 
 type AppStore = ReturnType<typeof createAppStore>;
 
 export const createAppStore = (initState: State) => {
-  return createStore<State & Action>((set, get) => ({
+  return createStore<State & Action>(() => ({
     ...initState,
     actions: {},
   }));

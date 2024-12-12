@@ -1,19 +1,19 @@
 'use client';
+import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import useModalStore from '@/hooks/useModalStore';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
 import { TChannelsData } from '@/types/api/youtube';
-import { Session } from '@auth/core/types';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import { openWindow } from '@/utils/windowEvent';
+import { Session } from '@auth/core/types';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
 import { isDesktop } from 'react-device-detect';
 import { FaStar } from 'react-icons/fa6';
 import { toast } from 'sonner';
-import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
 import * as styles from './channelCard.css';
 
 type ChannelItemProps = {
@@ -51,7 +51,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
     }
   };
 
-  const openModal = async (e: MouseEvent) => {
+  const openModal = async () => {
     gtagClick({
       target: 'channelCard',
       content: channelName,
@@ -72,7 +72,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
     });
   };
 
-  const handleFavorite = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleFavorite = () => {
     if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
 
     if (!isFavorite && confirm('즐겨찾기에 추가하시겠습니까?')) {

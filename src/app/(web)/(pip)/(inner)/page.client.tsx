@@ -4,6 +4,7 @@ import ChannelSlider from '@/components/home/ChannelSlider';
 import ScheduleSlider from '@/components/home/ScheduleSlider';
 import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
+import { Link } from 'next-view-transitions';
 import Image from 'next/image';
 import { useState } from 'react';
 import css from './page.module.scss';
@@ -74,7 +75,7 @@ export default function Client({ coverImgUrl }: Props) {
       <section className={css.recentChannelSection}>
         <div className={css.recentChannelNav}>
           <h2>최근 추가된 채널</h2>
-          <a href="/">more</a>
+          <Link href="/">more</Link>
         </div>
         <ChannelSlider />
       </section>
