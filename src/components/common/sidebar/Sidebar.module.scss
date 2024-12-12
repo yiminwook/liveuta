@@ -1,6 +1,6 @@
 .wrap {
   @extend %fixed-max-size;
-  z-index: map-get(var.$z-indexs, modal) - 1;
+  z-index: map-get(var.$z-indexes, modal) - 1;
   visibility: hidden;
   color: var(--liveuta-txt-default);
   transition: all 0.3s linear;
@@ -40,14 +40,14 @@
   &:global(.moveLeft) {
     transform: translateX(-18rem);
   }
-  
+
   section {
     padding: 3rem 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   h2 {
     display: flex;
     align-items: center;
