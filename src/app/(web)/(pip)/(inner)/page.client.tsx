@@ -1,19 +1,49 @@
 'use client';
 import SearchInput from '@/components/common/input/SearchInput';
+import ListModal from '@/components/common/modal/MultiListModal';
 import ChannelSlider from '@/components/home/ChannelSlider';
 import ScheduleSlider from '@/components/home/ScheduleSlider';
+import { SCHEDULE_CACHE_TIME } from '@/constants';
+import useCachedData from '@/hooks/useCachedData';
+import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
+import useModalStore from '@/hooks/useModalStore';
+import usePostBlacklist from '@/hooks/usePostBlacklist';
+import usePostWhitelist from '@/hooks/usePostWhitelist';
+import { useAutoSync } from '@/hooks/useStorage';
+import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
+import { generateThumbnail } from '@/libraries/youtube/thumbnail';
+import { generateVideoUrl } from '@/libraries/youtube/url';
+import { TContentsData } from '@/types/api/mongoDB';
+import { GetScheduleRes } from '@/types/api/schedule';
+import { gtagClick } from '@/utils/gtag';
+import reservePush from '@/utils/reservePush';
+import { openWindow } from '@/utils/windowEvent';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { Session } from 'next-auth';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { toast } from 'sonner';
 import css from './page.module.scss';
 
 type Props = {
   coverImgUrl: string;
+  session: Session | null;
 };
 
-export default function Client({ coverImgUrl }: Props) {
+export default function Client({ coverImgUrl, session }: Props) {
   const [query, setQuery] = useState('');
   const router = useRouter();
+  const modalStore = useModalStore();
+  const { whiteList, blackList } = useCachedData({ session });
+
+  const { data, isPending } = useQuery({
+    queryKey: ['schedule'],
+    queryFn: () => axios.get<GetScheduleRes>('/api/v1/schedule').then((res) => res.data.data),
+    staleTime: SCHEDULE_CACHE_TIME,
+    gcTime: SCHEDULE_CACHE_TIME,
+  });
 
   const onChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(() => e.target.value);
@@ -26,6 +56,114 @@ export default function Client({ coverImgUrl }: Props) {
     params.set('t', 'all');
     router.push(`/schedule?${params.toString()}`);
   };
+
+  const mutateBlock = usePostBlacklist();
+  const mutatePostFavorite = usePostWhitelist();
+  const mutateDeleteFavorite = useMutateWhitelist();
+
+  const mutatePush = useMutation({
+    mutationFn: reservePush,
+    onSuccess: (response) => {
+      gtagClick({
+        target: 'sheduleAlarm',
+        content: response.channelName,
+        detail: response.title,
+        action: 'alamReserve',
+      });
+
+      toast.success(response.message);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const handleReserve = async (content: TContentsData) => {
+    if (mutatePush.isPending) return;
+    const token = await generateFcmToken();
+
+    if (token === undefined) {
+      throw new Error('토큰을 가져오는데 실패했습니다.');
+    }
+
+    mutatePush.mutate({
+      title: '스케줄 알림',
+      body: `곧 ${content.channelName}의 방송이 시작됩니다.`,
+      token,
+      timestamp: content.timestamp.toString(),
+      imageUrl: generateThumbnail(content.videoId, 'mqdefault'),
+      link: generateVideoUrl(content.videoId),
+      channelName: content.channelName,
+    });
+  };
+
+  const openMutiViewModal = async (content: TContentsData) => {
+    await modalStore.push(ListModal, {
+      id: 'multiViewModal',
+      props: {
+        defaultValue: generateVideoUrl(content.videoId),
+      },
+    });
+  };
+
+  const handleFavorite = (content: TContentsData) => {
+    if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
+    const isFavorite = whiteList.has(content.channelId);
+
+    if (!isFavorite && confirm('즐겨찾기에 추가하시겠습니까?')) {
+      mutatePostFavorite.mutate({
+        session,
+        channelId: content.channelId,
+      });
+    } else if (isFavorite && confirm('즐겨찾기에서 제거하시겠습니까?')) {
+      mutateDeleteFavorite.mutate({
+        session,
+        channelId: content.channelId,
+      });
+    }
+  };
+
+  const handleBlock = async (content: TContentsData) => {
+    if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
+
+    if (confirm('해당 채널을 블럭 하시겠습니까?')) {
+      mutateBlock.mutate({
+        session,
+        channelId: content.channelId,
+      });
+    }
+  };
+
+  const openStream = (content: TContentsData) => {
+    gtagClick({
+      target: 'scheduleCard',
+      content: content.channelName,
+      detail: content.title,
+      action: 'openWindow',
+    });
+
+    openWindow(generateVideoUrl(content.videoId));
+  };
+
+  const proceedScheduleData = useMemo(() => {
+    if (!data) {
+      return {
+        liveContent: [],
+        favoriteContent: [],
+      };
+    }
+
+    const liveContent = data.live.slice(0, 19);
+
+    const favoriteContent = [...data.all.reverse()]
+      .filter((i) => whiteList.has(i.channelId))
+      .slice(0, 19);
+
+    return {
+      liveContent,
+      favoriteContent,
+    };
+  }, [data, whiteList, blackList]);
 
   return (
     <main className={css.homeMain}>
@@ -43,16 +181,22 @@ export default function Client({ coverImgUrl }: Props) {
           </h2>
           <a href="/live">more</a>
         </div>
-        <ScheduleSlider />
+        <ScheduleSlider isLoading={isPending} contents={proceedScheduleData.liveContent} />
       </section>
 
-      <section className={css.favoriteSection}>
-        <div className={css.favoriteNav}>
-          <h2>즐겨찾기</h2>
-          <a href="/favorite">more</a>
-        </div>
-        <ScheduleSlider />
-      </section>
+      {session && (
+        <section className={css.favoriteSection}>
+          <div className={css.favoriteNav}>
+            <h2>즐겨찾기</h2>
+            <a href="/favorite">more</a>
+          </div>
+          <ScheduleSlider
+            isLoading={isPending}
+            contents={proceedScheduleData.favoriteContent}
+            isFavorite
+          />
+        </section>
+      )}
 
       <section className={css.searchSection}>
         <div className={css.searchNav}>

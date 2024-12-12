@@ -4,6 +4,7 @@ import { TMetaRow } from '@/types/db';
 import { homeDto } from '@/types/dto';
 import Client from './page.client';
 import '@/styles/swiper/core.scss';
+import { auth } from '@/libraries/nextAuth';
 
 type TProps = {
   searchParams: {};
@@ -28,5 +29,6 @@ async function getServerSideProps() {
 
 export default async function Page({ searchParams }: TProps) {
   const { coverImgUrl } = await getServerSideProps();
-  return <Client coverImgUrl={coverImgUrl} />;
+  const session = await auth();
+  return <Client coverImgUrl={coverImgUrl} session={session} />;
 }
