@@ -130,6 +130,8 @@ export default function Client({ coverImgUrl, session }: Props) {
   return (
     <main className={css.homeMain}>
       <section className={css.heroSection}>
+        {/* 임시대문 */}
+        {/* TODO: Admin에서 대문 이미지 변경 기능 추가 */}
         <div className={css.coverImageBox}>
           <Image className="blur" src={coverImgUrl} alt="blur-image" fill />
           <Image src={coverImgUrl} alt="cover-image" fill />
