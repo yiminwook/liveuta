@@ -78,6 +78,10 @@
   height: #{$line-height * $line-count}em;
 }
 
+@function color($color) {
+  @return map-get(var.$colors, $color);
+}
+
 @function palette($variant, $color) {
   @if $variant == 'first' {
     @return map-get(var.$first-colors, $color);
