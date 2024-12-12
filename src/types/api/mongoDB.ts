@@ -12,8 +12,8 @@ export interface ChannelDocument {
   waiting: boolean;
 }
 
-export type ChannelData = Omit<ChannelDocument, '_id'>;
-export type ChannelListData = Record<string, ChannelData>;
+export type TChannelData = Omit<ChannelDocument, '_id'>;
+export type TChannelListData = Record<string, TChannelData>;
 
 export type ContentDocumentRaw = Omit<ContentDocument, 'ScheduledTime'> & { ScheduledTime: Date };
 

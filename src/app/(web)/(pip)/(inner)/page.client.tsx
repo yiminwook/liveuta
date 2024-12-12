@@ -11,7 +11,7 @@ import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { TContentsData } from '@/types/api/mongoDB';
+import { TChannelData, TContentsData } from '@/types/api/mongoDB';
 import { GetScheduleRes } from '@/types/api/schedule';
 import { gtagClick } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
@@ -27,6 +27,7 @@ import css from './page.module.scss';
 type Props = {
   coverImgUrl: string;
   session: Session | null;
+  recentChannels: TChannelData[];
 };
 
 export default function Client({ coverImgUrl, session }: Props) {

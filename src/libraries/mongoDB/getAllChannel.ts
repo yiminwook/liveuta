@@ -1,8 +1,8 @@
-import { addExcapeCharacter } from '@/utils/regexp';
 import { MONGODB_CHANNEL_COLLECTION, MONGODB_CHANNEL_DB } from '@/constants';
-import { connectMongoDB } from './';
-import { ChannelData, ChannelDocument } from '@/types/api/mongoDB';
+import { ChannelDocument, TChannelData } from '@/types/api/mongoDB';
+import { addExcapeCharacter } from '@/utils/regexp';
 import { z } from 'zod';
+import { connectMongoDB } from './';
 
 export type ChannleDatesetItem = ReturnType<typeof parseChannel>;
 export type ChannelDataset = ReturnType<typeof generateChannelObject>;
@@ -36,7 +36,7 @@ export const getAllChannel = async (dto: TChannelDto = { order: 'name_kor', size
     .sort(dto.order, direction)
     .limit(dto.size)
     .toArray();
-  return channels.map<ChannelData>((channel) => {
+  return channels.map<TChannelData>((channel) => {
     delete channel._id;
     return channel;
   });
@@ -53,7 +53,7 @@ export const searchChannel = async (query: string) => {
       .find<ChannelDocument>({ name_kor: regexforDBQuery })
       .sort({ name_kor: 1 })
       .toArray();
-    return channels.map<ChannelData>((channel) => {
+    return channels.map<TChannelData>((channel) => {
       delete channel._id;
       return channel;
     });

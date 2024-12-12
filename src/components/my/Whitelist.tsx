@@ -1,13 +1,13 @@
 'use client';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
-import { ChannelData } from '@/types/api/mongoDB';
+import { TChannelData } from '@/types/api/mongoDB';
 import { Session } from 'next-auth';
 import css from './List.module.scss';
 
 type WhitelistProps = {
   session: Session;
   whiteList: Set<string>;
-  channelList: Record<string, ChannelData>;
+  channelList: Record<string, TChannelData>;
 };
 
 export default function Whitelist({ session, whiteList, channelList }: WhitelistProps) {
@@ -20,7 +20,7 @@ export default function Whitelist({ session, whiteList, channelList }: Whitelist
   };
 
   const data = [...whiteList]
-    .map<ChannelData>((item) => channelList[item])
+    .map<TChannelData>((item) => channelList[item])
     .filter((item) => !!item)
     .sort((a, b) => a.name_kor.localeCompare(b.name_kor));
 

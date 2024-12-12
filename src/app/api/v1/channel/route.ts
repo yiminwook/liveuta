@@ -1,12 +1,12 @@
 import BadReqError from '@/libraries/error/badRequestError';
 import errorHandler from '@/libraries/error/handler';
 import { CHANNEL_ORDER_MAP, channelDto, getAllChannel } from '@/libraries/mongoDB/getAllChannel';
-import { ChannelData } from '@/types/api/mongoDB';
+import { TChannelData } from '@/types/api/mongoDB';
 import { NextRequest, NextResponse } from 'next/server';
 
-export type GetChannelRes = {
+export type TGetChannelRes = {
   message: string;
-  data: ChannelData[];
+  data: TChannelData[];
 };
 
 export async function GET(req: NextRequest) {
@@ -30,4 +30,4 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;

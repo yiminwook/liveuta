@@ -5,12 +5,13 @@ import { homeDto } from '@/types/dto';
 import Client from './page.client';
 import '@/styles/swiper/core.scss';
 import { auth } from '@/libraries/nextAuth';
+import { TGetChannelRes } from '@api/v1/channel/route';
 
 type TProps = {
   searchParams: {};
 };
 
-async function getServerSideProps() {
+async function getMetadata() {
   const connection = await connectOracleDB();
   const [coverImgUrlQuery] = await Promise.all([
     connection.execute<TMetaRow>("SELECT * FROM META WHERE key = 'cover_image_url'"),
@@ -28,7 +29,19 @@ async function getServerSideProps() {
 }
 
 export default async function Page({ searchParams }: TProps) {
-  const { coverImgUrl } = await getServerSideProps();
-  const session = await auth();
-  return <Client coverImgUrl={coverImgUrl} session={session} />;
+  const [session, metadata, recentChannelRes] = await Promise.all([
+    auth(),
+    getMetadata(),
+    fetch(process.env.NEXT_PUBLIC_SITE_URL + '/api/v1/channel?order=name_kor&size=20', {
+      next: { revalidate: 60, tags: ['channel'] }, // 1분간 캐시
+    }).then((res) => res.json() as Promise<TGetChannelRes>),
+  ]);
+
+  return (
+    <Client
+      coverImgUrl={metadata.coverImgUrl}
+      session={session}
+      recentChannels={recentChannelRes.data}
+    />
+  );
 }
