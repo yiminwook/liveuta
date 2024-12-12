@@ -1,0 +1,85 @@
+$height: calc(4rem + env(safe-area-inset-bottom));
+
+@keyframes slide-up {
+  0% {
+    display: none;
+    height: 0;
+  }
+  100% {
+    display: block;
+    height: $height;
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    display: block;
+    height: $height;
+  }
+  100% {
+    display: none;
+    height: 0;
+  }
+}
+
+.inner {
+  position: fixed;
+  bottom: 0;
+  width: 100dvw;
+  height: $height;
+  z-index: map-get(var.$z-indexes, app);
+  background-color: util.palette(first, darken);
+  font-size: 0.75rem;
+  color: var(--liveuta-txt-light);
+
+  &[data-hidden='true'] {
+    animation: slide-down 0.3s util.easing(expo-in-out);
+    display: none;
+    height: 0;
+  }
+
+  &[data-hidden='false'] {
+    animation: slide-up 0.3s util.easing(expo-in-out);
+    display: block;
+    height: $height;
+  }
+
+  .topButton {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: -65px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    box-shadow: var.$box-shadow;
+    background-color: util.color(body);
+    color: util.color(text);
+    visibility: hidden;
+
+    &[data-show='true'] {
+      visibility: visible;
+    }
+  }
+
+  .list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 4rem;
+    overflow: hidden;
+    text-align: center;
+
+    .item {
+      display: grid;
+      place-items: center;
+      transition: color 0.2s util.easing(default);
+
+      &:hover {
+        color: util.palette(third, lighter);
+      }
+    }
+  }
+}
