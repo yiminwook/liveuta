@@ -13,6 +13,7 @@ import useReservePush from '@/hooks/useReservePush';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { TChannelData, TContentsData } from '@/types/api/mongoDB';
 import { GetScheduleRes } from '@/types/api/schedule';
+import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
 import { useQuery } from '@tanstack/react-query';
@@ -27,10 +28,10 @@ import css from './page.module.scss';
 type Props = {
   coverImgUrl: string;
   session: Session | null;
-  recentChannels: TChannelData[];
+  recentChannels: TYChannelsData[];
 };
 
-export default function Client({ coverImgUrl, session }: Props) {
+export default function Client({ session, coverImgUrl, recentChannels }: Props) {
   const [query, setQuery] = useState('');
   const router = useRouter();
   const modalStore = useModalStore();
@@ -142,7 +143,7 @@ export default function Client({ coverImgUrl, session }: Props) {
       <section className={css.liveSection}>
         <div className={css.liveNav}>
           <h2>
-            현재 <span className={css.hightlight}>라이브</span> 중
+            🎤 현재 <span className={css.hightlight}>라이브</span> 중
           </h2>
           <a href="/schedule?t=live">more</a>
         </div>
@@ -161,7 +162,7 @@ export default function Client({ coverImgUrl, session }: Props) {
       {session && (
         <section className={css.favoriteSection}>
           <div className={css.favoriteNav}>
-            <h2>즐겨찾기</h2>
+            <h2>🌟 즐겨찾기</h2>
             <a href="/favorite">more</a>
           </div>
           <ScheduleSlider
@@ -195,10 +196,10 @@ export default function Client({ coverImgUrl, session }: Props) {
 
       <section className={css.recentChannelSection}>
         <div className={css.recentChannelNav}>
-          <h2>최근 추가된 채널</h2>
+          <h2>🚚 최근 추가된 채널</h2>
           <a href="/">more</a>
         </div>
-        <ChannelSlider />
+        <ChannelSlider recentChannels={recentChannels} />
       </section>
 
       {/* <section className={css.featureSection}>
