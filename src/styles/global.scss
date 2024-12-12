@@ -134,9 +134,9 @@ a {
 
 .os-scrollbar {
   --os-size: 8px;
-  --os-handle-bg: var(--liveuta-second-default);
-  --os-handle-bg-hover: var(--liveuta-second-light);
-  --os-handle-bg-active: var(--liveuta-second-dark);
+  --os-handle-bg: #{util.palette(second, default)};
+  --os-handle-bg-hover: #{util.palette(second, light)};
+  --os-handle-bg-active: #{util.palette(second, dark)};
 
   @include util.min-width(md) {
     --os-size: 10px;
@@ -185,7 +185,7 @@ a {
 // css specificity required
 body #nprogress {
   .bar {
-    background: #0a2fff;
+    background: var(--liveuta-nprogress);
 
     position: fixed;
     z-index: 99999;
@@ -193,9 +193,8 @@ body #nprogress {
     left: 0;
 
     width: 100%;
-    height: 2px;
+    height: 4px;
 
-    // Fancy Blue Effect
     .peg {
       display: block;
       position: absolute;
@@ -203,8 +202,8 @@ body #nprogress {
       width: 100px;
       height: 100%;
       box-shadow:
-        0 0 10px #0a2fff,
-        0 0 5px #0a2fff;
+        0 0 10px var(--liveuta-nprogress),
+        0 0 5px var(--liveuta-nprogress);
       opacity: 1;
 
       -webkit-transform: rotate(3deg) translate(0px, -4px);
