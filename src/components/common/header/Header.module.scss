@@ -4,6 +4,7 @@
 }
 
 .inner {
+  view-transition-name: header;
   z-index: map-get(var.$z-indexes, modal) - 2;
   margin: 0px;
   padding-top: env(safe-area-inset-top);
@@ -19,6 +20,10 @@
 
   &:hover {
     background-color: var(--liveuta-fourth-50) !important;
+  }
+
+  &::view-transition-group {
+    z-index: 2;
   }
 }
 

@@ -158,13 +158,11 @@ a {
 
 @keyframes view-exit {
   0% {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 0.3;
   }
 
   100% {
     opacity: 0;
-    transform: translateY(-5rem);
   }
 }
 
@@ -175,10 +173,12 @@ a {
 }
 
 ::view-transition-old(view-swap) {
-  animation: view-exit 0.3s util.easing(expo-in-out);
+  z-index: 0;
+  opacity: 0.3;
 }
 
 ::view-transition-new(view-swap) {
+  z-index: 1;
   animation: view-enter 0.3s util.easing(expo-in-out);
 }
 

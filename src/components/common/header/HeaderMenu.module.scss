@@ -9,6 +9,7 @@ button.trigger {
 }
 
 .dropdown {
+  view-transition-name: header-dropdown;
   min-width: $w;
 
   .dropdownItem {
@@ -17,5 +18,9 @@ button.trigger {
     &[data-current='true'] {
       color: var(--liveuta-txt-active);
     }
+  }
+
+  &::view-transition-group {
+    z-index: 3;
   }
 }

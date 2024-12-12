@@ -14,22 +14,18 @@ type HeaderMenuProps = {
 export default function HeaderMenu({ title, links, onSelect }: HeaderMenuProps) {
   const pathname = usePathname();
   const router = useRouter(useTransitionRouter);
-  const ref = useRef<HTMLDivElement>(null);
 
   return (
     <Menu trigger="hover">
       <Menu.Target>
         <UnstyledButton className={css.trigger}>{title}</UnstyledButton>
       </Menu.Target>
-      <Menu.Dropdown className={css.dropdown} ref={ref}>
+      <Menu.Dropdown className={css.dropdown}>
         {links.map((link) => (
           <Menu.Item
             key={`headerMenu-${link.text}`}
             data-current={pathname === link.href}
-            onClick={() => {
-              ref.current?.style.setProperty('display', 'none');
-              router.push(link.href);
-            }}
+            onClick={() => router.push(link.href)}
             className={css.dropdownItem}
           >
             {link.text}
