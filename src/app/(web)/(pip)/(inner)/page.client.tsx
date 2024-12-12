@@ -9,16 +9,13 @@ import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import useModalStore from '@/hooks/useModalStore';
 import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
-import { useAutoSync } from '@/hooks/useStorage';
-import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
-import { generateThumbnail } from '@/libraries/youtube/thumbnail';
+import useReservePush from '@/hooks/useReservePush';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { TContentsData } from '@/types/api/mongoDB';
 import { GetScheduleRes } from '@/types/api/schedule';
 import { gtagClick } from '@/utils/gtag';
-import reservePush from '@/utils/reservePush';
 import { openWindow } from '@/utils/windowEvent';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
 import Image from 'next/image';
@@ -60,42 +57,7 @@ export default function Client({ coverImgUrl, session }: Props) {
   const mutateBlock = usePostBlacklist();
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
-
-  const mutatePush = useMutation({
-    mutationFn: reservePush,
-    onSuccess: (response) => {
-      gtagClick({
-        target: 'sheduleAlarm',
-        content: response.channelName,
-        detail: response.title,
-        action: 'alamReserve',
-      });
-
-      toast.success(response.message);
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    },
-  });
-
-  const handleReserve = async (content: TContentsData) => {
-    if (mutatePush.isPending) return;
-    const token = await generateFcmToken();
-
-    if (token === undefined) {
-      throw new Error('토큰을 가져오는데 실패했습니다.');
-    }
-
-    mutatePush.mutate({
-      title: '스케줄 알림',
-      body: `곧 ${content.channelName}의 방송이 시작됩니다.`,
-      token,
-      timestamp: content.timestamp.toString(),
-      imageUrl: generateThumbnail(content.videoId, 'mqdefault'),
-      link: generateVideoUrl(content.videoId),
-      channelName: content.channelName,
-    });
-  };
+  const { reservePush } = useReservePush();
 
   const openMutiViewModal = async (content: TContentsData) => {
     await modalStore.push(ListModal, {
@@ -179,9 +141,18 @@ export default function Client({ coverImgUrl, session }: Props) {
           <h2>
             현재 <span className={css.hightlight}>라이브</span> 중
           </h2>
-          <a href="/live">more</a>
+          <a href="/schedule?t=live">more</a>
         </div>
-        <ScheduleSlider isLoading={isPending} contents={proceedScheduleData.liveContent} />
+        <ScheduleSlider
+          isLoading={isPending}
+          contents={proceedScheduleData.liveContent}
+          whiteList={whiteList}
+          addAlarm={reservePush}
+          openNewTab={openStream}
+          addMultiView={openMutiViewModal}
+          addBlock={handleBlock}
+          toggleFavorite={handleFavorite}
+        />
       </section>
 
       {session && (
@@ -193,7 +164,12 @@ export default function Client({ coverImgUrl, session }: Props) {
           <ScheduleSlider
             isLoading={isPending}
             contents={proceedScheduleData.favoriteContent}
-            isFavorite
+            whiteList={whiteList}
+            addAlarm={reservePush}
+            openNewTab={openStream}
+            addMultiView={openMutiViewModal}
+            addBlock={handleBlock}
+            toggleFavorite={handleFavorite}
           />
         </section>
       )}
