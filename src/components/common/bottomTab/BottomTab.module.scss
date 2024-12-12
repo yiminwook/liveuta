@@ -1,5 +1,5 @@
 .wrap {
-  // view-transition-name: bottom-tab; TODO bug fit
+  // view-transition-name: bottom-tab; // TODO: Bug fix
   display: block;
   height: calc(4rem + env(safe-area-inset-bottom));
 
@@ -9,7 +9,7 @@
     height: 0;
   }
 
-  &::transition-group {
+  &::view-transition-group {
     z-index: 2;
   }
 }
