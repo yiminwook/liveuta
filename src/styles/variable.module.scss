@@ -8,11 +8,11 @@
   breakpointLg: #{map-get(var.$breakpoints, lg)};
   breakpointXl: #{map-get(var.$breakpoints, xl)};
 
-  zIndexApp: #{map-get(var.$z-indexs, app)};
-  zIndexModal: #{map-get(var.$z-indexs, modal)};
-  zIndexPopover: #{map-get(var.$z-indexs, popover)};
-  zIndexOverlay: #{map-get(var.$z-indexs, overlay)};
-  zIndexMax: #{map-get(var.$z-indexs, max)};
+  zIndexApp: #{map-get(var.$z-indexes, app)};
+  zIndexModal: #{map-get(var.$z-indexes, modal)};
+  zIndexPopover: #{map-get(var.$z-indexes, popover)};
+  zIndexOverlay: #{map-get(var.$z-indexes, overlay)};
+  zIndexMax: #{map-get(var.$z-indexes, max)};
 
   firstColorDefault: #{map-get(var.$first-colors, default)};
   firstColorLight: #{map-get(var.$first-colors, light)};

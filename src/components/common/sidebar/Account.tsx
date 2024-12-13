@@ -7,7 +7,7 @@ import cx from 'classnames';
 import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';

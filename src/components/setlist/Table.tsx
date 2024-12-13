@@ -9,7 +9,8 @@ import { useQuery } from '@tanstack/react-query';
 import axios, { AxiosHeaders } from 'axios';
 import cx from 'classnames';
 import { Session } from 'next-auth';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
 import Wave from '../common/loading/Wave';
 import Row from './Row';
 import css from './Table.module.scss';
@@ -25,7 +26,7 @@ type TableProps = {
 };
 
 export default function Table({ session, searchParams, channelDataset }: TableProps) {
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
 
   const { data, isLoading } = useQuery({
     queryKey: ['searchSetlist', searchParams],

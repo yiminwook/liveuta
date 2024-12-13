@@ -1,7 +1,8 @@
 'use client';
 import { TextInput } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
 import { useState } from 'react';
 import css from './SearchForm.module.scss';
 
@@ -14,7 +15,7 @@ interface SearchFormProps {
 
 export default function SearchForm({ searchParams }: SearchFormProps) {
   const queryClient = useQueryClient();
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
   const [query, setQuery] = useState(searchParams.query);
 
   const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {

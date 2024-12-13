@@ -1,0 +1,15 @@
+.wrap {
+  // view-transition-name: bottom-tab; // TODO: Bug fix
+  display: block;
+  height: calc(4rem + env(safe-area-inset-bottom));
+
+  @include util.min-width(md) {
+    display: none;
+    visibility: hidden;
+    height: 0;
+  }
+
+  &::view-transition-group {
+    z-index: 2;
+  }
+}

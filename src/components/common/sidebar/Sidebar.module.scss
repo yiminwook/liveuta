@@ -1,6 +1,7 @@
 .wrap {
   @extend %fixed-max-size;
-  z-index: map-get(var.$z-indexs, modal) - 1;
+  view-transition-name: sidebar;
+  z-index: map-get(var.$z-indexes, modal) - 1;
   visibility: hidden;
   color: var(--liveuta-txt-default);
   transition: all 0.3s linear;
@@ -14,6 +15,10 @@
     @include util.min-width(md) {
       display: none !important;
     }
+  }
+
+  &::view-transition-group {
+    z-index: 2;
   }
 }
 
@@ -40,14 +45,14 @@
   &:global(.moveLeft) {
     transform: translateX(-18rem);
   }
-  
+
   section {
     padding: 3rem 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   h2 {
     display: flex;
     align-items: center;
@@ -55,15 +60,15 @@
     font-weight: 600;
   }
 
-  ul {
+  .links {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-  }
 
-  ul li a:hover:not(:global(.active)) {
-    transition: color 0.05s var.$bezier-curve;
-    color: var(--liveuta-txt-light);
+    li a:hover:not(:global(.active)) {
+      transition: color 0.05s var.$bezier-curve;
+      color: var(--liveuta-txt-light);
+    }
   }
 }
 

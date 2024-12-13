@@ -4,7 +4,7 @@ import { ModalBaseProps } from '@/libraries/modal/ModalController';
 import { multiListAtom } from '@/stores/player/multi';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import * as styles from './multiListModal.css';

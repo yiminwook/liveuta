@@ -2,12 +2,14 @@ import { ROUTES } from '@/constants';
 import { Anchor, Breadcrumbs, Menu, UnstyledButton } from '@mantine/core';
 import { IconArrowNarrowLeft } from '@tabler/icons-react';
 import variable from '@variable';
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
+import { Link } from 'next-view-transitions';
+import { usePathname } from 'next/navigation';
 import css from './BackHeader.module.scss';
 
 export default function BackHeader() {
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
   const pathname = usePathname();
   const pathArr = pathname.split('/').filter((item) => item !== '');
 

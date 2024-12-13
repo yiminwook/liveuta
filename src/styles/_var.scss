@@ -6,26 +6,30 @@ $env-bottom: env(safe-area-inset-bottom);
 $env-left: env(safe-area-inset-left);
 $env-right: env(safe-area-inset-right);
 
-
 $breakpoints: (
   xs: 30rem,
   sm: 48rem,
   md: 64rem,
   lg: 74rem,
-  xl: 90rem,
+  xl: 90rem
 );
 
-$z-indexs: (
+$z-indexes: (
   app: 100,
   modal: 200,
   popover: 300,
   overlay: 400,
-  max: 9999,
+  max: 9999
 );
 
 $bezier-curve: cubic-bezier(0.23, 1, 0.32, 1);
 $box-shadow: 0px 1px 2px 0 rgba(56, 52, 52, 0.4);
 $backdrop-color: #ffffff34;
+
+$easing: (
+  default: cubic-bezier(0.23, 1, 0.32, 1),
+  expo-in-out: cubic-bezier(0.87, 0, 0.13, 1)
+);
 
 $first-colors: (
   default: var(--liveuta-first-default),
@@ -36,7 +40,7 @@ $first-colors: (
   25: var(--liveuta-first-25),
   50: var(--liveuta-first-50),
   75: var(--liveuta-first-75),
-  95: var(--liveuta-first-95),
+  95: var(--liveuta-first-95)
 );
 
 $second-colors: (
@@ -48,7 +52,7 @@ $second-colors: (
   25: var(--liveuta-second-25),
   50: var(--liveuta-second-50),
   75: var(--liveuta-second-75),
-  95: var(--liveuta-second-95),
+  95: var(--liveuta-second-95)
 );
 
 $third-colors: (
@@ -60,7 +64,7 @@ $third-colors: (
   25: var(--liveuta-third-25),
   50: var(--liveuta-third-50),
   75: var(--liveuta-third-75),
-  95: var(--liveuta-third-95),
+  95: var(--liveuta-third-95)
 );
 
 $gray-colors: (
@@ -74,7 +78,7 @@ $gray-colors: (
   7: var(--mantine-color-gray-7),
   8: var(--mantine-color-gray-8),
   9: var(--mantine-color-gray-9),
-  10: var(--mantine-color-gray-10),
+  10: var(--mantine-color-gray-10)
 );
 
 $dark-colors: (
@@ -88,7 +92,7 @@ $dark-colors: (
   7: var(--mantine-color-dark-7),
   8: var(--mantine-color-dark-8),
   9: var(--mantine-color-dark-9),
-  10: var(--mantine-color-dark-10),
+  10: var(--mantine-color-dark-10)
 );
 
 $colors: (
@@ -103,5 +107,5 @@ $colors: (
   default-hover: var(--mantine-color-default-hover),
   default-color: var(--mantine-color-default-color),
   default-border: var(--mantine-color-default-border),
-  dimmed: var(--mantine-color-dimmed),
+  dimmed: var(--mantine-color-dimmed)
 );
