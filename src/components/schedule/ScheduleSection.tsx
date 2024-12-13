@@ -4,16 +4,13 @@ import useInfiniteScheduleData from '@/hooks/useInfiniteScheduleData';
 import useModalStore from '@/hooks/useModalStore';
 import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
-import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
-import { generateThumbnail } from '@/libraries/youtube/thumbnail';
+import useReservePush from '@/hooks/useReservePush';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { TContentsData } from '@/types/api/mongoDB';
 import { TScheduleDto } from '@/types/dto';
 import { gtagClick } from '@/utils/gtag';
-import reservePush from '@/utils/reservePush';
 import { openWindow } from '@/utils/windowEvent';
 import { Button, Loader } from '@mantine/core';
-import { useMutation } from '@tanstack/react-query';
 import variable from '@variable';
 import { Session } from 'next-auth';
 import dynamic from 'next/dynamic';
@@ -60,42 +57,7 @@ export default function ScheduleSection({
   const mutateBlock = usePostBlacklist();
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
-
-  const mutatePush = useMutation({
-    mutationFn: reservePush,
-    onSuccess: (response) => {
-      gtagClick({
-        target: 'sheduleAlarm',
-        content: response.channelName,
-        detail: response.title,
-        action: 'alamReserve',
-      });
-
-      toast.success(response.message);
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    },
-  });
-
-  const handleReserve = async (content: TContentsData) => {
-    if (mutatePush.isPending) return;
-    const token = await generateFcmToken();
-
-    if (token === undefined) {
-      throw new Error('토큰을 가져오는데 실패했습니다.');
-    }
-
-    mutatePush.mutate({
-      title: '스케줄 알림',
-      body: `곧 ${content.channelName}의 방송이 시작됩니다.`,
-      token,
-      timestamp: content.timestamp.toString(),
-      imageUrl: generateThumbnail(content.videoId, 'mqdefault'),
-      link: generateVideoUrl(content.videoId),
-      channelName: content.channelName,
-    });
-  };
+  const { reservePush } = useReservePush();
 
   const openMutiViewModal = async (content: TContentsData) => {
     await modalStore.push(ListModal, {
@@ -197,7 +159,7 @@ export default function ScheduleSection({
             showMenu
             isFavorite={whiteList.has(data.channelId)}
             openNewTab={openStream}
-            addAlarm={handleReserve}
+            addAlarm={reservePush}
             addMultiView={openMutiViewModal}
             toggleFavorite={handleFavorite}
             addBlock={handleBlock}

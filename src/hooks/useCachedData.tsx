@@ -1,9 +1,9 @@
 'use client';
+import { TGetChannelRes } from '@api/v1/channel/route';
 import { useQueries } from '@tanstack/react-query';
+import axios from 'axios';
 import { Session } from 'next-auth';
 import { useMemo } from 'react';
-import axios from 'axios';
-import { GetChannelRes } from '@api/v1/channel/route';
 
 type LayoutDataObserverProps = {
   session: Session | null;
@@ -13,7 +13,7 @@ const useCachedData = ({ session }: LayoutDataObserverProps) => {
     queries: [
       {
         queryKey: ['channelList'],
-        queryFn: () => axios.get<GetChannelRes>('/api/v1/channel').then((res) => res.data.data),
+        queryFn: () => axios.get<TGetChannelRes>('/api/v1/channel').then((res) => res.data.data),
         gcTime: Infinity,
       },
       {

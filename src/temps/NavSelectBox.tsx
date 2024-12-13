@@ -1,14 +1,15 @@
 'use client';
-import React, { useState } from 'react';
-import Cookies from 'universal-cookie';
+import { schedule } from '@/stores/atom';
+import { VideoType } from '@/types';
 import cx from 'classnames';
+import { useAtom } from 'jotai';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
+import React, { use, useState } from 'react';
 import { BiArrowFromLeft } from 'react-icons/bi';
 import { BsSliders } from 'react-icons/bs';
 import OutsideClickHandler from 'react-outside-click-handler';
-import { VideoType } from '@/types';
-import { schedule } from '@/stores/atom';
-import { useRouter } from 'next/navigation';
-import { useAtom } from 'jotai';
+import Cookies from 'universal-cookie';
 import * as styles from './navSelectBox.css';
 
 enum SelectedText {
@@ -20,7 +21,7 @@ enum SelectedText {
 interface NavSelectBoxProps {}
 
 export default function NavSelectBox({}: NavSelectBoxProps) {
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
   const [active, setActive] = useState(false);
   const [select] = useAtom(schedule.selectAtom);
   const [selectedSchedule] = useAtom(schedule.selectedScheduleAtom);

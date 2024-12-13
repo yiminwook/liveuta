@@ -1,23 +1,23 @@
 'use client';
+import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import useModalStore from '@/hooks/useModalStore';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
-import { TChannelsData } from '@/types/api/youtube';
-import { Session } from '@auth/core/types';
+import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import { openWindow } from '@/utils/windowEvent';
+import { Session } from '@auth/core/types';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
 import { isDesktop } from 'react-device-detect';
 import { FaStar } from 'react-icons/fa6';
 import { toast } from 'sonner';
-import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
 import * as styles from './channelCard.css';
 
 type ChannelItemProps = {
-  content: TChannelsData;
+  content: TYChannelsData;
   session: Session | null;
   isFavorite: boolean;
 };
