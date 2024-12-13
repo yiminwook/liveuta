@@ -1,8 +1,8 @@
 import { youtube_v3 } from 'googleapis';
 
-export type TChannelRow = [string, string, string];
+export type TYChannelRow = [string, string, string];
 
-export interface TChannelsData extends youtube_v3.Schema$Channel {
+export interface TYChannelsData extends youtube_v3.Schema$Channel {
   uid: string;
   channelName: string;
   url: string;
@@ -10,12 +10,12 @@ export interface TChannelsData extends youtube_v3.Schema$Channel {
   statistics: youtube_v3.Schema$ChannelStatistics;
 }
 
-export interface TChannelsDataList extends youtube_v3.Schema$Channel {
-  channels: TChannelsData[];
+export interface TYChannelsDataList extends youtube_v3.Schema$Channel {
+  channels: TYChannelsData[];
   total: number;
 }
 
-export interface TChannelAPIReturn {
+export interface TYChannelAPIReturn {
   total: number;
-  contents: TChannelsData[];
+  contents: TYChannelsData[];
 }

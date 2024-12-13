@@ -1,7 +1,8 @@
 import { google } from 'googleapis';
-import { customFetchNoCached } from '@/libraries/customFetch';
 
 export const youtubeService = google.youtube('v3');
+
+const fetcher = (input: any) => fetch(input, { next: { revalidate: 60, tags: ['channel'] } });
 
 export const getYoutubeChannelsByUid = async (uid: string) => {
   const response = await youtubeService.channels.list(
@@ -10,7 +11,7 @@ export const getYoutubeChannelsByUid = async (uid: string) => {
       part: ['id', 'snippet', 'statistics'],
       key: process.env.GOOGLE_API_KEY,
     },
-    { fetchImplementation: customFetchNoCached },
+    { fetchImplementation: fetcher },
   );
 
   return response.data;
@@ -23,7 +24,7 @@ export const getYoutubeChannels = async (idArr: string[]) => {
       part: ['id', 'snippet', 'statistics'],
       key: process.env.GOOGLE_API_KEY,
     },
-    { fetchImplementation: customFetchNoCached },
+    { fetchImplementation: fetcher },
   );
 
   return response.data;
@@ -38,7 +39,7 @@ export const searchYoutubeChannels = async (channelName: string) => {
       type: ['channel'],
       key: process.env.GOOGLE_API_KEY,
     },
-    { fetchImplementation: customFetchNoCached },
+    { fetchImplementation: fetcher },
   );
 
   return response.data;
@@ -51,8 +52,9 @@ export const getYoutubeChannelsByVideoId = async (videoId: string) => {
       id: [videoId],
       key: process.env.GOOGLE_API_KEY,
     },
-    { fetchImplementation: customFetchNoCached },
+    { fetchImplementation: fetcher },
   );
+
   return response.data.items?.[0] || null;
 };
 

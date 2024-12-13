@@ -4,7 +4,7 @@ import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import useModalStore from '@/hooks/useModalStore';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
-import { TChannelsData } from '@/types/api/youtube';
+import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import { openWindow } from '@/utils/windowEvent';
@@ -17,7 +17,7 @@ import { toast } from 'sonner';
 import * as styles from './channelCard.css';
 
 type ChannelItemProps = {
-  content: TChannelsData;
+  content: TYChannelsData;
   session: Session | null;
   isFavorite: boolean;
 };

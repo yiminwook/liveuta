@@ -2,12 +2,12 @@
 import Nodata from '@/components/common/Nodata';
 import ChannelCard from '@/components/common/channelCard/ChannelCard';
 import useCachedData from '@/hooks/useCachedData';
-import { TChannelsData as TChannelsData } from '@/types/api/youtube';
+import { TYChannelsData } from '@/types/api/youtube';
 import { Session } from 'next-auth';
 import css from './Home.module.scss';
 
 type ChannelSectionProps = {
-  contents: TChannelsData[];
+  contents: TYChannelsData[];
   session: Session | null;
 };
 

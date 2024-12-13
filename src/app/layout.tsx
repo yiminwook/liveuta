@@ -3,6 +3,7 @@
 
 import 'overlayscrollbars/overlayscrollbars.css';
 import '@/styles/swiper/core.scss';
+import '@/styles/swiper/pagination.scss';
 import 'swiper/css/free-mode';
 import 'swiper/css/grid';
 

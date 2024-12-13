@@ -69,3 +69,5 @@ export const ROUTES: (TRoute & { subRoutes: TRoute[] })[] = [
 ];
 
 export const PORTAL_ID = 'liveuta-portal';
+
+export const SCHEDULE_CACHE_TIME = 3 * 60 * 1000;

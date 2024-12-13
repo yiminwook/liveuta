@@ -1,12 +1,12 @@
 'use client';
 import useDeleteBlacklist from '@/hooks/useDeleteBlacklist';
-import { ChannelData } from '@/types/api/mongoDB';
+import { TChannelData } from '@/types/api/mongoDB';
 import { Session } from 'next-auth';
 import css from './List.module.scss';
 
 type BlacklistProps = {
   session: Session;
-  channelList: Record<string, ChannelData>;
+  channelList: Record<string, TChannelData>;
   blacklist: Set<string>;
 };
 
@@ -20,7 +20,7 @@ export default function Blacklist({ session, channelList, blacklist }: Blacklist
   };
 
   const data = [...blacklist]
-    .map<ChannelData>((item) => channelList[item])
+    .map<TChannelData>((item) => channelList[item])
     .filter((item) => !!item)
     .sort((a, b) => a.name_kor.localeCompare(b.name_kor));
 

@@ -36,14 +36,14 @@ export default function CardMenu({
           leftSection={<HiBellAlert color={variable.thirdColorDefault} size="1.2rem" />}
           onClick={onClickAlarm}
         >
-          알림 설정
+          알림설정
         </Menu.Item>
         <Menu.Item
           component="button"
           leftSection={<FaPlus color={variable.thirdColorDefault} size="1.2rem" />}
           onClick={onClickAddMultiView}
         >
-          멀티뷰 추가
+          멀티뷰추가
         </Menu.Item>
         <Menu.Item
           component="button"
@@ -57,7 +57,7 @@ export default function CardMenu({
           leftSection={<MdBlock color={variable.thirdColorDefault} size="1.2rem" />}
           onClick={onClickBlock}
         >
-          채널 블럭
+          채널블럭
         </Menu.Item>
         <Menu.Item
           component="button"

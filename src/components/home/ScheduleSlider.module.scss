@@ -18,15 +18,5 @@
     @include util.min-width(lg) {
       width: 20%;
     }
-
-    .card {
-      // 세로방향 카드
-      flex-direction: column;
-
-      & > :global(.imgBtn) {
-        flex: 1;
-        width: 100%;
-      }
-    }
   }
 }

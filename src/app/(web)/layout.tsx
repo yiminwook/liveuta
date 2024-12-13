@@ -1,11 +1,11 @@
+import getQueryClient from '@/apis/getQueryClient';
+import DataFetchingObserver from '@/components/common/DataFetchingObserver';
+import PageView from '@/components/common/PageView';
 import { auth } from '@/libraries/nextAuth';
-import { GetChannelRes } from '@api/v1/channel/route';
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { TGetChannelRes } from '@api/v1/channel/route';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import axios from 'axios';
 import { PropsWithChildren } from 'react';
-import getQueryClient from '@/apis/getQueryClient';
-import PageView from '@/components/common/PageView';
-import DataFetchingObserver from '@/components/common/DataFetchingObserver';
 
 export default async function Layout({ children }: PropsWithChildren) {
   const session = await auth();
@@ -15,9 +15,11 @@ export default async function Layout({ children }: PropsWithChildren) {
   await queryClient.prefetchQuery({
     queryKey: ['channelList'],
     queryFn: () =>
-      axios
-        .get<GetChannelRes>(`${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/channel`)
-        .then((res) => res.data.data),
+      fetch(process.env.NEXT_PUBLIC_SITE_URL + '/api/v1/channel', {
+        next: { revalidate: 60, tags: ['channel'] }, // 1분간 캐시
+      })
+        .then((res) => res.json() as Promise<TGetChannelRes>)
+        .then((res) => res.data),
   });
 
   if (session) {
