@@ -1,6 +1,7 @@
 import { Pagination as ArkPagination } from '@ark-ui/react';
 import cx from 'classnames';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import * as styles from './pagination.css';
 
@@ -26,7 +27,7 @@ export default function Pagination({
   currentPage,
   onPageChange,
 }: PaginationProps) {
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
 
   if (currentPage > Math.ceil(count / pageSize)) {
     return (

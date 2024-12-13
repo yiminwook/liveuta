@@ -3,7 +3,8 @@ import { TYChannelsData } from '@/types/api/youtube';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
 import variable from '@variable';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import css from './ChannelSlider.module.scss';
 
@@ -12,7 +13,7 @@ type ChannelSliderProps = {
 };
 
 export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
 
   const navigationChannel = (channelName: string) => {
     router.push(`/channel?q=${channelName}`);

@@ -133,24 +133,6 @@ export default function ScheduleSection({
           }
         }}
         components={{
-          Header: () => (
-            <>
-              <Header session={session} />
-              <div className={css.position}>
-                <div className={css.inner}>
-                  <ScheduleNav
-                    session={session}
-                    scheduleDto={scheduleDto}
-                    length={length}
-                    isFavorite={false}
-                  />
-                </div>
-              </div>
-              <TopBtn />
-              {/* live player */}
-              <TopSection filter={scheduleDto.filter} />
-            </>
-          ),
           Footer: ({ context }) => (
             <div
               style={{

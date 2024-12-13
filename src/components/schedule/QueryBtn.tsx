@@ -1,9 +1,11 @@
 'use client';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FaFilter } from 'react-icons/fa';
-import { Button, Popover, UnstyledButton } from '@mantine/core';
-import css from './QueryBtn.module.scss';
 import { TScheduleDto } from '@/types/dto';
+import { Button, Popover, UnstyledButton } from '@mantine/core';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { FaFilter } from 'react-icons/fa';
+import css from './QueryBtn.module.scss';
 
 type QueryButtonProps = {
   query: TScheduleDto['query'];
@@ -11,7 +13,7 @@ type QueryButtonProps = {
 
 export default function QueryButton({ query }: QueryButtonProps) {
   const pathname = usePathname();
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
   const searchParams = useSearchParams();
 
   const handleReset = () => {

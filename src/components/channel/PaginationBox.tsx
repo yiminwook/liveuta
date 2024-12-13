@@ -2,7 +2,8 @@
 import { Pagination } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
 import css from './Home.module.scss';
 
 type PaginationBoxProps = {
@@ -12,7 +13,7 @@ type PaginationBoxProps = {
 };
 
 export default function PaginationBox({ currentPage, totalPage, query }: PaginationBoxProps) {
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
 
   const handlePageChange = (page: number) => {

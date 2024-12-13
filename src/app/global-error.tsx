@@ -1,9 +1,9 @@
 'use client';
+import character from '@/assets/image/character-6.png';
 import axios from 'axios';
+import { Link } from 'next-view-transitions';
 import Image from 'next/image';
 import { useEffect } from 'react';
-import character from '@/assets/image/character-6.png';
-import Link from 'next/link';
 
 export default function GlobalError({
   error,

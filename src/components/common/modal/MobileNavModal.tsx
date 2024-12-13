@@ -6,7 +6,9 @@ import { ModalBaseProps } from '@/libraries/modal/ModalController';
 import { TScheduleDto } from '@/types/dto';
 import { CloseButton } from '@mantine/core';
 import classNames from 'classnames';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import css from './MobileNavModal.module.scss';
 import Modal from './Modal';
@@ -26,7 +28,7 @@ export default function MobileNavModal({ onClose, scheduleDto, length }: MobileN
   const [query, setQuery] = useState(scheduleDto.query);
   const searchParams = useSearchParams();
   const { modifier, onAnimationEnd, exit } = useTransition();
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
 
   const onChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(() => e.target.value);

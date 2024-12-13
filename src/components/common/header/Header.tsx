@@ -7,7 +7,7 @@ import { Avatar, Text } from '@mantine/core';
 import variable from '@variable';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 import DesktopNav from './DesktopNav';
@@ -57,7 +57,7 @@ export default function Header({ session }: HeaderProps) {
         <nav className={css.nav}>
           <HamburgerButton onClick={openSidebar} />
           <Text
-            component="a"
+            component={Link}
             href="/"
             className={css.title}
             variant="gradient"

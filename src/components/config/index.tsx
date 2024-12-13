@@ -8,6 +8,7 @@ import Hotkeys from './Hotkeys';
 import Jotai from './Jotai';
 import MantineProvider from './MantineProvider';
 import ModalProvider from './ModalProvider';
+import NProgressProviders from './NProgress';
 import NextAuth from './NextAuth';
 import ParticleProvider from './ParticleProvider';
 import ReactQuery from './ReactQuery';
@@ -27,17 +28,19 @@ export default function Configs({ children, cookies }: ConfigsProps) {
         <Jotai>
           <ReactQuery>
             <GlobalHydrate cookies={cookies}>
-              <MantineProvider defaultColorScheme={isDarkMode ? 'dark' : 'light'}>
-                <Hotkeys>
-                  <ModalProvider>{children}</ModalProvider>
-                  <ToastBox />
-                  <ParticleProvider />
-                  <ServiceWorker />
-                  <Devtools />
-                  <div id="pip" />
-                  <div id={PORTAL_ID} />
-                </Hotkeys>
-              </MantineProvider>
+              <NProgressProviders>
+                <MantineProvider defaultColorScheme={isDarkMode ? 'dark' : 'light'}>
+                  <Hotkeys>
+                    <ModalProvider>{children}</ModalProvider>
+                    <ToastBox />
+                    <ParticleProvider />
+                    <ServiceWorker />
+                    <Devtools />
+                    <div id="pip" />
+                    <div id={PORTAL_ID} />
+                  </Hotkeys>
+                </MantineProvider>
+              </NProgressProviders>
             </GlobalHydrate>
           </ReactQuery>
         </Jotai>

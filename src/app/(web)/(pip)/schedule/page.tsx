@@ -1,4 +1,5 @@
 import Background from '@/components/common/background/Background';
+import Header from '@/components/common/header/Header';
 import Home from '@/components/schedule/Home';
 import { auth } from '@/libraries/nextAuth';
 import { scheduleDto } from '@/types/dto';
@@ -22,8 +23,11 @@ export default async function Page({ searchParams }: Props) {
   });
 
   return (
-    <Background tile>
-      <Home scheduleDto={dto} session={session} />
-    </Background>
+    <>
+      <Header session={session} />
+      <Background tile>
+        <Home scheduleDto={dto} session={session} />
+      </Background>
+    </>
   );
 }

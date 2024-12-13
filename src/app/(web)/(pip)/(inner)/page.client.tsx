@@ -19,8 +19,9 @@ import { openWindow } from '@/utils/windowEvent';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import css from './page.module.scss';
@@ -33,7 +34,7 @@ type Props = {
 
 export default function Client({ session, coverImgUrl, recentChannels }: Props) {
   const [query, setQuery] = useState('');
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
   const modalStore = useModalStore();
   const { whiteList, blackList } = useCachedData({ session });
 

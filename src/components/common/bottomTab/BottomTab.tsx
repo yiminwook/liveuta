@@ -1,9 +1,9 @@
 import BottomInner from './BottomInner';
-import * as styles from './bottomTab.css';
+import css from './BottomTab.module.scss';
 
 export default function BottomTab() {
   return (
-    <div className={styles.wrap}>
+    <div className={css.wrap}>
       <BottomInner />
     </div>
   );

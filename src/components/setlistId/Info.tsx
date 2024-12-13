@@ -8,11 +8,10 @@ import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { openWindow } from '@/utils/windowEvent';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import cx from 'classnames';
 import { useResetAtom } from 'jotai/utils';
 import { Session } from 'next-auth';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
+import { Link, useTransitionRouter } from 'next-view-transitions';
 import { isMobile } from 'react-device-detect';
 import { BsMusicNoteList } from 'react-icons/bs';
 import { ImYoutube } from 'react-icons/im';
@@ -27,7 +26,7 @@ type InfoProps = {
 };
 
 export default function Info({ setlist, channel, session }: InfoProps) {
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
   const queryClient = useQueryClient();
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
