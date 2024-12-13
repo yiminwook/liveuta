@@ -1,9 +1,8 @@
-import { CredentialsConfig, ProfileCallback } from '@auth/core/providers';
-import { Account, CallbacksOptions, EventCallbacks, Profile } from '@auth/core/types';
-import { GoogleProfile } from 'next-auth/providers/google';
-import { NaverProfile } from 'next-auth/providers/naver';
-import { KakaoProfile } from 'next-auth/providers/kakao';
+import { ProfileCallback } from '@auth/core/providers';
 import { DiscordProfile } from '@auth/core/providers/discord';
+import { GoogleProfile } from 'next-auth/providers/google';
+import { KakaoProfile } from 'next-auth/providers/kakao';
+import { NaverProfile } from 'next-auth/providers/naver';
 
 export type Payload = {
   id: number;
@@ -20,9 +19,3 @@ export type GoogleProvider = ProfileCallback<GoogleProfile>;
 export type NaverProvider = ProfileCallback<NaverProfile>;
 export type KakaoProvider = ProfileCallback<KakaoProfile>;
 export type DiscordProvider = ProfileCallback<DiscordProfile>;
-
-export type CredentialAuthorize = CredentialsConfig<any>['authorize'];
-export type SignOut = EventCallbacks['signOut'];
-export type CallbacksSignIn = CallbacksOptions<Profile, Account>['signIn'];
-export type CallbacksSession = CallbacksOptions<Profile, Account>['session'];
-export type CallbacksJwt = CallbacksOptions<Profile, Account>['jwt'];

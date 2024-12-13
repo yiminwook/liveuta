@@ -12,7 +12,10 @@ declare module 'next-auth' {
   }
 }
 
-declare module '@auth/core/jwt' {
+// The `JWT` interface can be found in the `next-auth/jwt` submodule
+import { JWT } from 'next-auth/jwt';
+
+declare module 'next-auth/jwt' {
   interface JWT {
     user: {
       userLv: number;

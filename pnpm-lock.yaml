@@ -13,8 +13,8 @@ importers:
   .:
     dependencies:
       '@auth/core':
-        specifier: ^0.27.0
-        version: 0.27.0
+        specifier: 0.37.4
+        version: 0.37.4
       '@mantine/core':
         specifier: 7.15.1
         version: 7.15.1(@mantine/hooks@7.15.1(react@19.0.0))(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -290,8 +290,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@auth/core@0.27.0':
-    resolution: {integrity: sha512-3bydnRJIM/Al6mkYmb53MsC+6G8ojw3lLPzwgVnX4dCo6N2lrib6Wq6r0vxZIhuHGjLObqqtUfpeaEj5aeTHFg==}
+  '@auth/core@0.37.2':
+    resolution: {integrity: sha512-kUvzyvkcd6h1vpeMAojK2y7+PAV5H+0Cc9+ZlKYDFhDY31AlvsB+GW5vNO4qE3Y07KeQgvNO9U0QUx/fN62kBw==}
     peerDependencies:
       '@simplewebauthn/browser': ^9.0.1
       '@simplewebauthn/server': ^9.0.2
@@ -304,8 +304,8 @@ packages:
       nodemailer:
         optional: true
 
-  '@auth/core@0.37.2':
-    resolution: {integrity: sha512-kUvzyvkcd6h1vpeMAojK2y7+PAV5H+0Cc9+ZlKYDFhDY31AlvsB+GW5vNO4qE3Y07KeQgvNO9U0QUx/fN62kBw==}
+  '@auth/core@0.37.4':
+    resolution: {integrity: sha512-HOXJwXWXQRhbBDHlMU0K/6FT1v+wjtzdKhsNg0ZN7/gne6XPsIrjZ4daMcFnbq0Z/vsAbYBinQhhua0d77v7qw==}
     peerDependencies:
       '@simplewebauthn/browser': ^9.0.1
       '@simplewebauthn/server': ^9.0.2
@@ -2002,9 +2002,6 @@ packages:
     resolution: {integrity: sha512-PffXX2AL8Sh0VHQ52jJC4u3T0H6wDK6N/4bg7xh4ngMYOIi13aR1kzVvX1sVDBgfGwDOkMbl4c54Xm3tlPx/+A==}
     engines: {node: '>=6.0'}
 
-  '@panva/hkdf@1.1.1':
-    resolution: {integrity: sha512-dhPeilub1NuIG0X5Kvhh9lH4iW3ZsHlnzwgwbOlgwQ2wG1IqFzsgHqmKPk3WzsdWAeaxKJxgM0+W433RmN45GA==}
-
   '@panva/hkdf@1.2.1':
     resolution: {integrity: sha512-6oclG6Y3PiDFcoyk8srjLfVKyMfVCKJ27JwNPViuXziFpmdz+MZnZN/aKY0JGXgYuO/VghU0jcOAZgWXZ1Dmrw==}
 
@@ -3489,10 +3486,6 @@ packages:
     resolution: {integrity: sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==}
     engines: {node: '>= 0.6'}
 
-  cookie@0.6.0:
-    resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
-    engines: {node: '>= 0.6'}
-
   cookie@0.7.1:
     resolution: {integrity: sha512-6DnInpx7SJ2AK3+CTUE/ZM0vWTUboZCegxhC2xiIydHR9jNuTAASBrfEpHhiGOZw/nX51bHt6YQl8jsGo4y/0w==}
     engines: {node: '>= 0.6'}
@@ -4572,9 +4565,6 @@ packages:
   jose@4.15.5:
     resolution: {integrity: sha512-jc7BFxgKPKi94uOvEmzlSWFFe2+vASyXaKUpdQKatWAESU2MWjDfFf0fdfc83CDKcA5QecabZeNLyfhe3yKNkg==}
 
-  jose@5.2.4:
-    resolution: {integrity: sha512-6ScbIk2WWCeXkmzF6bRPmEuaqy1m8SbsRFMa/FLrSCkGIhj8OLVG/IH+XHVmNMx/KUo8cVWEE6oKR4dJ+S0Rkg==}
-
   jose@5.9.6:
     resolution: {integrity: sha512-AMlnetc9+CV9asI19zHmrgS/WYsWUwCn2R7RzlbJWD7F9eWYUTGyBmU9o6PxngtLGOiDGPRu+Uc4fhKzbpteZQ==}
 
@@ -5091,9 +5081,6 @@ packages:
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
 
-  oauth4webapi@2.10.4:
-    resolution: {integrity: sha512-DSoj8QoChzOCQlJkRmYxAJCIpnXFW32R0Uq7avyghIeB6iJq0XAblOD7pcq3mx4WEBDwMuKr0Y1qveCBleG2Xw==}
-
   oauth4webapi@3.1.4:
     resolution: {integrity: sha512-eVfN3nZNbok2s/ROifO0UAc5G8nRoLSbrcKJ09OqmucgnhXEfdIQOR4gq1eJH1rN3gV7rNw62bDEgftsgFtBEg==}
 
@@ -5282,8 +5269,16 @@ packages:
     peerDependencies:
       preact: '>=10'
 
+  preact-render-to-string@6.5.11:
+    resolution: {integrity: sha512-ubnauqoGczeGISiOh6RjX0/cdaF8v/oDXIjO85XALCQjwQP+SB4RDXXtvZ6yTYSjG+PC1QRP2AhPgCEsM2EvUw==}
+    peerDependencies:
+      preact: '>=10'
+
   preact@10.11.3:
     resolution: {integrity: sha512-eY93IVpod/zG3uMF22Unl8h9KkrcKIRs2EGar8hwLZZDU1lkjph303V9HZBwufh2s736U6VXuhD109LYqPoffg==}
+
+  preact@10.24.3:
+    resolution: {integrity: sha512-Z2dPnBnMUfyQfSQ+GBdsGa16hz35YmLmtTLhM169uW944hYL6xzTYkJjC07j+Wosz733pMWx0fgON3JNw1jJQA==}
 
   prebuild-install@7.1.2:
     resolution: {integrity: sha512-UnNke3IQb6sgarcZIDU3gbMeTp/9SSU1DAIkil7PrqG1vZlBtY5msYccSKSHDqa3hNg436IXK+SNImReuA1wEQ==}
@@ -6491,16 +6486,6 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@auth/core@0.27.0':
-    dependencies:
-      '@panva/hkdf': 1.1.1
-      '@types/cookie': 0.6.0
-      cookie: 0.6.0
-      jose: 5.2.4
-      oauth4webapi: 2.10.4
-      preact: 10.11.3
-      preact-render-to-string: 5.2.3(preact@10.11.3)
-
   '@auth/core@0.37.2':
     dependencies:
       '@panva/hkdf': 1.2.1
@@ -6510,6 +6495,14 @@ snapshots:
       oauth4webapi: 3.1.4
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
+
+  '@auth/core@0.37.4':
+    dependencies:
+      '@panva/hkdf': 1.2.1
+      jose: 5.9.6
+      oauth4webapi: 3.1.4
+      preact: 10.24.3
+      preact-render-to-string: 6.5.11(preact@10.24.3)
 
   '@babel/code-frame@7.24.2':
     dependencies:
@@ -8363,8 +8356,6 @@ snapshots:
       '@opencensus/core': 0.0.8
       uuid: 3.4.0
 
-  '@panva/hkdf@1.1.1': {}
-
   '@panva/hkdf@1.2.1': {}
 
   '@pm2/agent@2.0.3':
@@ -10122,8 +10113,6 @@ snapshots:
 
   cookie@0.4.2: {}
 
-  cookie@0.6.0: {}
-
   cookie@0.7.1: {}
 
   core-js-compat@3.37.0:
@@ -11542,8 +11531,6 @@ snapshots:
 
   jose@4.15.5: {}
 
-  jose@5.2.4: {}
-
   jose@5.9.6: {}
 
   jotai-devtools@0.7.1(@emotion/react@11.11.4(@types/react@19.0.1)(react@19.0.0))(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(redux@5.0.1):
@@ -11682,7 +11669,7 @@ snapshots:
     dependencies:
       '@types/express': 4.17.21
       '@types/jsonwebtoken': 9.0.6
-      debug: 4.3.4
+      debug: 4.4.0
       jose: 4.15.5
       limiter: 1.1.5
       lru-memoizer: 2.2.0
@@ -12038,8 +12025,6 @@ snapshots:
     dependencies:
       boolbase: 1.0.0
 
-  oauth4webapi@2.10.4: {}
-
   oauth4webapi@3.1.4: {}
 
   object-assign@4.1.1: {}
@@ -12289,7 +12274,13 @@ snapshots:
       preact: 10.11.3
       pretty-format: 3.8.0
 
+  preact-render-to-string@6.5.11(preact@10.24.3):
+    dependencies:
+      preact: 10.24.3
+
   preact@10.11.3: {}
+
+  preact@10.24.3: {}
 
   prebuild-install@7.1.2:
     dependencies:
@@ -12506,7 +12497,7 @@ snapshots:
   proxy-agent@6.3.1:
     dependencies:
       agent-base: 7.1.1
-      debug: 4.3.4
+      debug: 4.4.0
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.4
       lru-cache: 7.18.3
