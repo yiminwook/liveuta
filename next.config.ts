@@ -1,8 +1,7 @@
 import path from 'node:path';
 import NextBundleAnalyzer from '@next/bundle-analyzer';
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
-
-const __dirname = path.resolve();
+import type { NextConfig } from 'next';
 
 const withBundleAnalyzer = NextBundleAnalyzer({
   enabled: false,
@@ -14,8 +13,7 @@ const withVanillaExtract = createVanillaExtractPlugin({
 
 // const isDevelopment = process.env.NODE_ENV !== 'production';
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
@@ -44,8 +42,8 @@ const nextConfig = {
     `, // 위 파일은 import 하지 않아도 된다.
     silenceDeprecations: ['legacy-js-api'], // sass warning 제거
     logger: {
-      warn: (message) => console.warn(message),
-      debug: (message) => console.log(message),
+      warn: (message: any) => console.warn(message),
+      debug: (message: any) => console.log(message),
     },
   },
   images: {
@@ -85,7 +83,7 @@ const nextConfig = {
   },
   webpack: (config) => {
     /** SVGR **/
-    const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
+    const fileLoaderRule = config.module.rules.find((rule: any) => rule.test?.test?.('.svg'));
     fileLoaderRule.exclude = /\.svg$/i;
     config.module.rules.push(
       {
