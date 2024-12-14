@@ -1,13 +1,3 @@
-.expand {
-  flex: 1;
-  display: flex;
-}
-
-.vertuso {
-  width: 100%;
-  height: auto !important; // 요소의 높이를 추론할 수 있도록 설정
-}
-
 .list {
   display: flex;
   flex-wrap: wrap;
@@ -38,4 +28,9 @@
 
 .nodataLinkBox {
   @extend %flex-center;
+}
+
+.scrollFooter {
+  @extend %flex-center;
+  height: 4rem;
 }

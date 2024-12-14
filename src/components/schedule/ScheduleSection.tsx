@@ -14,12 +14,12 @@ import { Button, Loader } from '@mantine/core';
 import variable from '@variable';
 import { Session } from 'next-auth';
 import Link from 'next/link';
-import { useRef } from 'react';
-import { VirtuosoGrid } from 'react-virtuoso';
+import { GridComponents, VirtuosoGrid } from 'react-virtuoso';
 import { toast } from 'sonner';
 import Nodata from '../common/Nodata';
 import ListModal from '../common/modal/MultiListModal';
 import ScheduleCard from '../common/scheduleCard/Card';
+import ScheduleCardSkeleton from '../common/scheduleCard/ScheduleCardSkeleton';
 import css from './ScheduleSection.module.scss';
 
 type ScheduleSectionProps = {
@@ -32,6 +32,7 @@ type ScheduleSectionProps = {
   };
   scheduleDto: TScheduleDto;
   whiteList: Set<string>;
+  isLoading?: boolean;
 };
 
 export default function ScheduleSection({
@@ -39,11 +40,15 @@ export default function ScheduleSection({
   content,
   scheduleDto,
   whiteList,
+  isLoading = false,
 }: ScheduleSectionProps) {
   const modalStore = useModalStore();
-  const scrollerRef = useRef<HTMLElement | null>(null);
 
-  const { loadContents, isLoading, handleInfinityScroll } = useInfiniteScheduleData({
+  const {
+    loadContents,
+    isLoading: isLoadingScroll,
+    handleInfinityScroll,
+  } = useInfiniteScheduleData({
     rawData: content,
   });
 
@@ -100,6 +105,20 @@ export default function ScheduleSection({
     openWindow(generateVideoUrl(content.videoId));
   };
 
+  if (isLoading) {
+    return (
+      <section>
+        <div className={css.list}>
+          {new Array(10).fill(null).map((_, i) => (
+            <div key={`placeholder_${i}`} className={css.item}>
+              <ScheduleCardSkeleton />
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
   if (content.length === 0 && scheduleDto.query.trim() !== '') {
     // 검색 결과가 없을 때
     return (
@@ -115,29 +134,13 @@ export default function ScheduleSection({
   }
 
   return (
-    <section className={css.expand}>
+    <section>
       <VirtuosoGrid
         context={{
-          isLoading,
-        }}
-        scrollerRef={(ref) => {
-          if (ref) {
-            scrollerRef.current = ref;
-          }
+          isLoading: isLoadingScroll,
         }}
         components={{
-          Footer: ({ context }) => (
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: '4rem',
-              }}
-            >
-              {context?.isLoading && <Loader color={variable.secondColorDefault} />}
-            </div>
-          ),
+          Footer: ScrollFooter,
         }}
         totalCount={content.length}
         data={loadContents}
@@ -160,8 +163,15 @@ export default function ScheduleSection({
         )}
         overscan={0} // 0이상일시 maximum call stack size exceeded 에러 발생
         endReached={handleInfinityScroll}
-        className={css.vertuso}
       />
     </section>
   );
 }
+
+const ScrollFooter: GridComponents<{ isLoading: boolean }>['Footer'] = ({ context }) => {
+  return (
+    <div className={css.scrollFooter}>
+      {context?.isLoading && <Loader color={variable.secondColorDefault} />}
+    </div>
+  );
+};

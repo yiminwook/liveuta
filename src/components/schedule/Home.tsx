@@ -10,12 +10,9 @@ import axios from 'axios';
 import { Session } from 'next-auth';
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
-import ScheduleCardSkeleton from '../common/scheduleCard/ScheduleCardSkeleton';
 import css from './Home.module.scss';
 import ScheduleNav from './ScheduleNav';
 import ScheduleSection from './ScheduleSection';
-import scheduleSectionCss from './ScheduleSection.module.scss';
-import TopBtn from './TopBtn';
 
 const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 
@@ -67,6 +64,7 @@ export default function Home({ scheduleDto, session, isFavorite = false }: HomeP
       const inWhitelist = whiteList.has(content.channelId);
 
       let isPassList: boolean;
+
       if (isFavorite) {
         isPassList = inWhitelist;
       } else {
@@ -114,26 +112,16 @@ export default function Home({ scheduleDto, session, isFavorite = false }: HomeP
           />
         </div>
       </div>
-      <TopBtn />
       {/* live player */}
       <TopSection filter={scheduleDto.filter} />
-      {isPending && (
-        <div className={scheduleSectionCss.list}>
-          {new Array(10).fill(null).map((_, i) => (
-            <div key={`placeholder_${i}`} className={scheduleSectionCss.item}>
-              <ScheduleCardSkeleton />
-            </div>
-          ))}
-        </div>
-      )}
       <ScheduleSection
         session={session}
         content={proceedScheduleData.content}
         length={proceedScheduleData.length}
         scheduleDto={scheduleDto}
         whiteList={whiteList}
+        isLoading={isPending}
       />
-      {/* {isPending && <MainLoading backdrop />} */}
     </>
   );
 }
