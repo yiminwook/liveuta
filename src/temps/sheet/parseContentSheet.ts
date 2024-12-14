@@ -1,10 +1,10 @@
-import { ContentsRowType, ContentsDataType, SheetAPIReturntype } from '@/temps/sheet/sheet';
+import { ContentsRowType, TContentsData, SheetAPIReturntype } from '@/temps/sheet/sheet';
 import { sheets_v4 } from 'googleapis';
 import { getInterval, stringToTime } from '@/utils/getTime';
 import dayjs from '@/libraries/dayjs';
 import { replaceParentheses } from '@/utils/regexp';
 
-export const parseSheetData = (value: ContentsRowType): ContentsDataType | undefined => {
+export const parseSheetData = (value: ContentsRowType): TContentsData | undefined => {
   try {
     const [
       title,
@@ -30,7 +30,7 @@ export const parseSheetData = (value: ContentsRowType): ContentsDataType | undef
       // }
       const replacedUrl = isVideo === 'TRUE' ? `https://youtu.be/${videoId}` : url;
 
-      const data: ContentsDataType = {
+      const data: TContentsData = {
         title: replacedTitle,
         url: replacedUrl,
         channelName,

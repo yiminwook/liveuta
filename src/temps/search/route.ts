@@ -1,4 +1,4 @@
-import { ChannelDocument, ContentsDataType, ContentDocumentRaw } from '@/types/api/mongoDB';
+import { ChannelDocument, TContentsData, ContentDocumentRaw } from '@/types/api/mongoDB';
 import { parseMongoDBDocument } from '@/utils/parseMongoDBData';
 import { connectMongoDB, disconnectMongoDB } from '@/libraries/mongoDB';
 import { ChannelSheetDataType, combineChannelData } from '@/utils/combineChannelData';
@@ -16,7 +16,7 @@ import {
 import dayjs from '@/libraries/dayjs';
 
 export interface SearchResponseType {
-  contents: ContentsDataType[];
+  contents: TContentsData[];
   channels: ChannelsDataType[];
 }
 
@@ -55,7 +55,7 @@ export async function GET(req: NextRequest) {
       ),
     ]);
 
-    const searchedContents: ContentsDataType[] = [];
+    const searchedContents: TContentsData[] = [];
     contentResults.forEach((doc: ContentDocumentRaw) => {
       const data = parseMongoDBDocument({ ...doc, ScheduledTime: dayjs.tz(doc.ScheduledTime) });
       if (!data) return;

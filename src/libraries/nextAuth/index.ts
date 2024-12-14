@@ -1,9 +1,10 @@
+import { Payload } from '@/types/nextAuth';
 import Discord, { DiscordProfile } from '@auth/core/providers/discord';
-import NextAuth from 'next-auth';
+import jwt from 'jsonwebtoken';
+import NextAuth, { Session } from 'next-auth';
 import Google, { GoogleProfile } from 'next-auth/providers/google';
 import kakao, { KakaoProfile } from 'next-auth/providers/kakao';
-import { callbackJwt, callbackSession, callbackSignIn } from './callbacks';
-import { signOut } from './events';
+import { getUserInfo, login } from '../oracleDB/auth/service';
 
 // 애플 개발자 계정이 없음..
 // const key = process.env.APPLE_KEY_SECRET!.replaceAll(/\\n/g, "\n");
@@ -29,11 +30,7 @@ import { signOut } from './events';
 //   return appleToken;
 // };
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-} = NextAuth({
+export const { handlers, auth, signIn } = NextAuth({
   trustHost: true,
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
@@ -79,11 +76,66 @@ export const {
     // }),
   ],
   events: {
-    signOut,
+    async signOut() {},
   },
   callbacks: {
-    signIn: callbackSignIn,
-    jwt: callbackJwt,
-    session: callbackSession,
+    async signIn({ user, account }) {
+      try {
+        const email = user.email;
+        const provider = account?.provider;
+        if (!email) throw new Error('email is required');
+        if (!provider) throw new Error('provider is required');
+
+        await login({ email, provider });
+
+        return true;
+      } catch (error) {
+        console.error('callbackSignIn', error);
+        const message = error instanceof Error ? error.message : 'unknown error';
+        return `/error?error=${encodeURIComponent(message)}`;
+      }
+    },
+    async jwt({ token, user, account }) {
+      if (user && account) {
+        //첫 로그인, user는 첫 로그인시만 들어온다.
+        token.user = {
+          email: user.email!,
+          name: user.name,
+          image: user.image,
+          provider: account.provider!,
+          userLv: 0,
+          loginAt: '',
+          accessToken: '',
+        };
+      }
+
+      const userInfo = await getUserInfo({
+        email: token.user.email,
+        provider: token.user.provider,
+      });
+      token.user.userLv = userInfo.lv;
+      token.user.loginAt = userInfo.loginAt.toISOString();
+      const threeDays = 60 * 60 * 24 * 3;
+
+      const payload: Payload = {
+        id: userInfo.id,
+        userLv: token.user.userLv,
+        email: token.user.email,
+        name: token.user.name,
+        image: token.user.image,
+        loginAt: token.user.loginAt,
+        provider: token.user.provider,
+      };
+
+      const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: threeDays });
+      token.user.accessToken = accessToken;
+      return token;
+    },
+    async session({ session: _session, token }) {
+      const session = _session as Session;
+      if (!session) return session;
+      session.user = { ...token.user };
+      return session;
+    },
   },
 });

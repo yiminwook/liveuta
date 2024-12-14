@@ -1,15 +1,16 @@
 'use client';
 import TimelineText from '@/components/common/TimestampText';
 import { playerStatusAtom } from '@/stores/player';
+import { Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
 import { useEffect, useState } from 'react';
-import TextareaAutosize from 'react-textarea-autosize';
 import { toast } from 'sonner';
-import * as styles from './desc.css';
-import axios from 'axios';
+import css from './Desc.module.scss';
 
 type DescProps = {
   videoId: string;
@@ -18,7 +19,7 @@ type DescProps = {
 };
 
 export default function Desc({ session, videoId, description }: DescProps) {
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState('');
   const setPlayerStatus = useSetAtom(playerStatusAtom);
@@ -51,13 +52,13 @@ export default function Desc({ session, videoId, description }: DescProps) {
       description: string;
     }) => {
       const response = await axios.put<{ message: string; data: null }>(
-        `/api/setlist/${videoId}`,
+        `/api/v1/setlist/${videoId}`,
         { description },
         { headers: { Authorization: `Bearer ${session.user.accessToken}` } },
       );
       return response.data;
     },
-    onSuccess: (result) => {
+    onSuccess: () => {
       toast.success('수정되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
       router.refresh();
@@ -90,27 +91,34 @@ export default function Desc({ session, videoId, description }: DescProps) {
 
   useEffect(() => {
     handleCancel();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [description]);
 
   if (isEditing) {
     return (
-      <form className={styles.wrap} onSubmit={handleSubmit}>
-        <button
-          type="button"
-          className={styles.cancelButton}
-          onClick={handleCancel}
-          disabled={mutateSetlist.isPending}
-        >
-          취소
-        </button>
-        <button type="submit" className={styles.editButton} disabled={mutateSetlist.isPending}>
-          저장
-        </button>
-        <div className={styles.inner}>
-          <TextareaAutosize
+      <form className={css.wrap} onSubmit={handleSubmit}>
+        <div className={css.buttons}>
+          <button
+            type="button"
+            className={css.button}
+            data-variant="cancel"
+            onClick={handleCancel}
             disabled={mutateSetlist.isPending}
-            className={styles.textarea}
+          >
+            취소
+          </button>
+          <button
+            type="submit"
+            className={css.button}
+            data-variant="save"
+            disabled={mutateSetlist.isPending}
+          >
+            저장
+          </button>
+        </div>
+        <div className={css.inner}>
+          <Textarea
+            autosize
+            disabled={mutateSetlist.isPending}
             value={desc}
             onChange={handleDesc}
           />
@@ -120,11 +128,11 @@ export default function Desc({ session, videoId, description }: DescProps) {
   }
 
   return (
-    <div className={styles.wrap}>
-      <button type="button" className={styles.editButton} onClick={toggleEditing}>
+    <div className={css.wrap}>
+      <button type="button" className={css.button} data-variant="edit" onClick={toggleEditing}>
         편집
       </button>
-      <div className={styles.inner}>
+      <div className={css.inner}>
         {description.split('\n').map((line, index) => (
           <TimelineText
             key={`${videoId}_row_${index}`}

@@ -2,16 +2,17 @@
 import { ORIGIN } from '@/constants';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { playerAtom, playerStatusAtom } from '@/stores/player';
-import cx from 'classnames';
+import classnames from 'classnames';
 import { useAtom, useSetAtom } from 'jotai';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
 import { memo, useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { BsLightningFill } from 'react-icons/bs';
 import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
-import * as styles from './player.css';
+import css from './Player.module.scss';
 
 type PlayerProps = {
   isShow: boolean;
@@ -19,7 +20,7 @@ type PlayerProps = {
 };
 
 export default memo(function Player({ isLive, isShow }: PlayerProps) {
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
   const [isReady, setIsReady] = useState(false);
   const [playerValue] = useAtom(playerAtom);
   const setStatus = useSetAtom(playerStatusAtom);
@@ -61,16 +62,20 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
     if (isReady === true) {
       playerRef.current?.seekTo(playerValue.timeline, 'seconds');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playerValue.timeline]);
 
   const left = isShow === false && playerValue.hide;
   const url = generateVideoUrl(playerValue.videoId);
 
   return (
-    <div className={cx(isShow === false && styles.pipBase, styles.playerDiv, left && 'left')}>
+    <div
+      className={classnames(css.playerDiv, {
+        left,
+        [css.pipBase]: !isShow,
+      })}
+    >
       <ReactPlayer
-        className={cx(styles.playerBase, 'reactPlayer')}
+        className={classnames(css.playerBase, 'reactPlayer')}
         width="100%"
         height="auto"
         ref={playerRef}
@@ -90,7 +95,7 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
         }}
         controls={true}
         onReady={() => setIsReady(() => true)}
-        fallback={<div className={styles.playerPlaceholder} />}
+        fallback={<div className={css.playerPlaceholder} />}
         onError={(e) => {
           console.error('Player', e);
           console.log('url', url);
@@ -99,12 +104,12 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
           // setStatus((pre) => ({ ...pre, isPlaying: false }));
         }}
       />
-      <button className={cx(styles.pipButton, isShow === false && 'hide')} onClick={toggleLeft}>
+      <button className={classnames(css.pipBtn, { hide: !isShow })} onClick={toggleLeft}>
         <ImYoutube size={28} />
       </button>
       <button
         disabled={isLive}
-        className={cx(styles.liveButton, isShow === false && 'hide')}
+        className={classnames(css.liveBtn, { hide: !isShow })}
         onClick={navigateLive}
       >
         <BsLightningFill size={28} />

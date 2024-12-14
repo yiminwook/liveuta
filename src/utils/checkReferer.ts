@@ -1,8 +1,8 @@
 import BadReqError from '@/libraries/error/badRequestError';
-import { headers } from 'next/headers';
+import { headers, type UnsafeUnwrappedHeaders } from 'next/headers';
 
 export default function checkReferer() {
-  const referer = headers().get('referer') || '';
+  const referer = (headers() as unknown as UnsafeUnwrappedHeaders).get('referer') || '';
   const domain = process.env.NEXT_PUBLIC_SITE_URL;
   const regExp = new RegExp(domain);
   const result = regExp.test(referer);

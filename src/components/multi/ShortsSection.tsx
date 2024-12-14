@@ -1,8 +1,8 @@
 'use client';
-import dynamic from 'next/dynamic';
-import * as styles from './home.css';
-import { useAtom } from 'jotai';
 import { multiListAtom } from '@/stores/player/multi';
+import { useAtom } from 'jotai';
+import dynamic from 'next/dynamic';
+import css from './Home.module.scss';
 
 const Shorts = dynamic(() => import('./Shorts'), { ssr: false });
 
@@ -13,7 +13,7 @@ export default function ShortsSection() {
     <>
       {urls.map((url, index) => {
         return (
-          <div className={styles.playerBox} key={index}>
+          <div className={css.playerBox} key={index}>
             <Shorts url={url} />
           </div>
         );

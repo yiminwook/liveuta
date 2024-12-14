@@ -1,6 +1,6 @@
-import { GoogleProvider, NaverProvider } from '@/types/nextAuth';
-import { User } from 'next-auth';
-import { login } from '../oracleDB/auth/service';
+// import { GoogleProvider, NaverProvider } from '@/types/nextAuth';
+// import { User } from 'next-auth';
+// import { login } from '../oracleDB/auth/service';
 
 // export const googleProfile: GoogleProvider = async (profile, tokens): Promise<User> => {
 //   try {

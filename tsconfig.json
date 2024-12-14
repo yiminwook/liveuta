@@ -9,14 +9,15 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
     "types": ["@types/gtag.js"],
     "paths": {
-      "@inner/*": ["./src/app/(inner)/*"],
+      "@variable": ["./src/styles/variable.module.scss"],
+      "@web/*": ["./src/app/(web)/*"],
       "@api/*": ["./src/app/api/*"],
       "@/*": ["./src/*"],
       "/*": ["./*"]
@@ -27,13 +28,6 @@
       }
     ]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/app/api/auth/logout",
-    "src/components/setlist/ext.tsxT"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/common/modal/ChannelCardModal.module.scs"],
   "exclude": ["node_modules", "src/temps", "src/libraries/cloudflare/index.js"]
 }

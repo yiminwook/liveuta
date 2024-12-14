@@ -1,10 +1,10 @@
+import Background from '@/components/common/background/Background';
+import { auth } from '@/libraries/nextAuth';
 import getChannelData from '@/utils/getChannelData';
 import ChannelSection from './ChannelSection';
-import PaginationBox from './PaginationBox';
-import * as styles from './home.css';
+import css from './Home.module.scss';
 import Nav from './Nav';
-import { auth } from '@/libraries/nextAuth';
-import Background from '@/components/common/Background';
+import PaginationBox from './PaginationBox';
 
 type HomeProps = {
   currentPage: number;
@@ -13,14 +13,14 @@ type HomeProps = {
 
 export default async function Home({ currentPage, query }: HomeProps) {
   const session = await auth();
-  const { totalLength, contents } = await getChannelData(currentPage, { query });
+  const { totalPage, contents } = await getChannelData(currentPage, { query });
 
   return (
     <Background>
-      <div className={styles.inner}>
+      <div className={css.inner}>
         <Nav />
         <ChannelSection contents={contents} session={session} />
-        <PaginationBox totalLength={totalLength} currentPage={currentPage} query={query} />
+        <PaginationBox totalPage={totalPage} currentPage={currentPage} query={query} />
       </div>
     </Background>
   );

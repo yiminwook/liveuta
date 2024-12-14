@@ -1,0 +1,85 @@
+.wrap {
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0.25rem;
+
+    .backButton {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: background-color 0.2s var.$bezier-curve;
+
+      &:hover {
+        background-color: util.palette(monochrome, 1);
+      }
+
+      &:active {
+        background-color: util.palette(monochrome, 2);
+      }
+    }
+
+    .navRight {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .navItem {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        height: 100%;
+        padding: 0.5rem 1rem;
+        vertical-align: middle;
+        font-weight: 600;
+        border-radius: 5px;
+        transition-property: background-color, color;
+        transition-duration: 200ms;
+        transition-timing-function: var.$bezier-curve;
+
+        &[data-variant=delete] {
+          color: var(--liveuta-txt-light);
+          background-color: red;
+        }
+
+        &[data-variant=youtube] {
+          &:hover {
+            background-color: util.palette(monochrome, 1);
+          }
+
+          &:active {
+            background-color: util.palette(monochrome, 2);
+          }
+        }
+
+        &[data-variant=list] {
+          &:hover {
+            background-color: util.palette(monochrome, 1);
+          }
+
+          &:active {
+            background-color: util.palette(monochrome, 2);
+          }
+        }
+      }
+    }
+  }
+
+  .title {
+    @include util.text-line(1, 1.6);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+  }
+
+  .letterWide {
+    letter-spacing: 0.1em;
+  }
+}

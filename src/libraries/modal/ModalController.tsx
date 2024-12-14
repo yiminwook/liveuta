@@ -6,9 +6,9 @@ export type ModalBaseProps = {
   onClose: () => void;
 };
 
-export type ModalProps<T = {}> = T & ModalBaseProps;
+export type ModalProps<T> = T & ModalBaseProps;
 
-export type ModalInfo<T = {}> = {
+export type ModalInfo<T = Record<string, unknown>> = {
   /** 유니크한 값, id */
   key: string;
   Component: React.FC<ModalProps<T>>;

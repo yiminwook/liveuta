@@ -1,16 +1,19 @@
 'use client';
-import { useRouter, useSearchParams } from 'next/navigation';
-import * as styles from './nav.css';
+import { TextInput, UnstyledButton } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
+import variable from '@variable';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
-import { useMediaQuery } from 'react-responsive';
-import { BREAK_POINT } from '@/styles/var';
+import css from './Nav.module.scss';
 
 export default function Nav() {
   const searchParams = useSearchParams();
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
   const [input, setInput] = useState(searchParams.get('q') || '');
-  const isMobile = useMediaQuery({ query: `(max-width: ${BREAK_POINT.sm}px)` });
+  const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(() => e.target.value);
@@ -23,21 +26,20 @@ export default function Nav() {
   };
 
   return (
-    <div className={styles.wrap}>
-      <button className={styles.button} onClick={() => router.push('/request')}>
-        {isMobile ? '등록' : '+ 채널등록'}
+    <div className={css.wrap}>
+      <button className={css.requestChannelButton} onClick={() => router.push('/request')}>
+        {isDesktop ? '+ 채널등록' : '등록'}
       </button>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <input
-          className={styles.input}
-          type="text"
+      <form className={css.form} onSubmit={handleSubmit}>
+        <TextInput
+          classNames={{ input: css.input }}
           value={input}
           onChange={handleInput}
           placeholder="채널명으로 검색"
         />
-        <button className={styles.submitButton} type="submit">
+        <UnstyledButton className={css.submit} type="submit">
           <IoSearch color="#fff" size="1.75rem" />
-        </button>
+        </UnstyledButton>
       </form>
     </div>
   );

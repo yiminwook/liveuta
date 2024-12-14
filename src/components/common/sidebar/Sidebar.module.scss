@@ -1,0 +1,97 @@
+.wrap {
+  @extend %fixed-max-size;
+  view-transition-name: sidebar;
+  z-index: map-get(var.$z-indexes, modal) - 1;
+  visibility: hidden;
+  color: var(--liveuta-txt-default);
+  transition: all 0.3s linear;
+
+  &:global(.show) {
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+
+  &:global(.mobile) {
+    @include util.min-width(md) {
+      display: none !important;
+    }
+  }
+
+  &::view-transition-group {
+    z-index: 2;
+  }
+}
+
+.inner {
+  position: absolute;
+  background-color: util.palette(first, light);
+  width: 18rem;
+  top: 0;
+  height: 100%;
+  overflow-y: auto;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  transition: transform 0.3s cubic-bezier(0.8, 0.05, 0.2, 0.95);
+
+  &:global(.left) {
+    left: -18rem;
+  }
+  &:global(.right) {
+    right: -18rem;
+  }
+  &:global(.moveRight) {
+    transform: translateX(18rem);
+  }
+  &:global(.moveLeft) {
+    transform: translateX(-18rem);
+  }
+
+  section {
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  h2 {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    li a:hover:not(:global(.active)) {
+      transition: color 0.05s var.$bezier-curve;
+      color: var(--liveuta-txt-light);
+    }
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem 0 1rem;
+  align-items: center;
+}
+
+.logoutBtnBox {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+}
+
+.logoutBtn {
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}

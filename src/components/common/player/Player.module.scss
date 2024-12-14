@@ -1,0 +1,129 @@
+
+.playerBase { 
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+  background-color: #424141cf;
+}
+
+.playerDiv {
+  position: relative;
+  border: none;
+  width: 100%;
+
+  &:global(.left) {
+    left: -350px;
+  }
+}
+
+.playerPlaceholder {
+  @extend .playerBase;  
+  @extend %flex-center;
+}
+
+.playerBox {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.liveChatBox {
+
+}
+
+.liveChat {
+  height: 100%;
+  background-color: #000000;
+}
+
+.popBtn {
+  position: absolute;
+  border-radius: 5px;
+  padding: 0.25rem;
+  font-size: 1.25rem;
+  background-color: orange;
+  font-weight: 500;
+  color: #fff;
+  transition: all 0.3s var.$bezier-curve;
+  top: 0px;
+  right: 0px;
+
+  &:hover {
+    background-color: #ffae00d2;
+  }
+}
+
+.pipBase {
+  width: 350px !important;
+  z-index: 50;
+  position: fixed;
+  left: 25px;
+  bottom: 75px;
+  transition: left 0.3s var.$bezier-curve;
+
+  @include util.min-width(md) {
+    bottom: 25px;
+  }
+
+  :global(.reactPlayer) {
+    box-shadow: var.$box-shadow;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+}
+
+
+.pipBtn {
+  display: none;
+  position: absolute;
+  top: 0px;
+  right: -40px;
+  z-index: 10px;
+  padding: 0px;
+  margin: 0px;
+  width: 40px;
+  height: 40px;
+  color: #ff0000;
+  background-color: #fff;
+  transition: color 0.5s var.$bezier-curve, background-color 1s var.$bezier-curve;
+ 
+  &:hover {
+    color: #fff;
+    background-color: #ff0000;
+  }
+
+  &:global(.hide) {
+    @extend %flex-center;
+  }
+}
+
+.liveBtn {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: -40px;
+  z-index: 10;
+  padding: 0px;
+  margin: 0px;
+  width: 40px;
+  height: 40px;
+  color: orange;
+  background-color: #fff;
+  transition: color 0.5s var.$bezier-curve, background-color 1s var.$bezier-curve;
+  
+  &:hover {
+    color: #fff;
+    background-color: orange;
+  }
+  
+  &:disabled {
+    color: #fff;
+    background-color: orange;
+    cursor: default;
+  }
+
+  &:global(.hide) {
+    @extend %flex-center;
+  } 
+}

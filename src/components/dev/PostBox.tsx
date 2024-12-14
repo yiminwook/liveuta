@@ -1,14 +1,14 @@
 'use client';
-import axios, { AxiosError } from 'axios';
-import dayjs from '@/libraries/dayjs';
-import { useState } from 'react';
 import { PushData } from '@/app/api/push/route';
-import { TokenType } from '@/types';
-import { toast } from 'sonner';
-import * as styles from './home.css';
+import dayjs from '@/libraries/dayjs';
+import { TToken } from '@/types';
+import axios, { AxiosError } from 'axios';
 import cx from 'classnames';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import css from './Home.module.scss';
 
-export default function PostBox({ token }: { token: TokenType }) {
+export default function PostBox({ token }: { token: TToken }) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -74,28 +74,28 @@ export default function PostBox({ token }: { token: TokenType }) {
   }
 
   return (
-    <div className={cx(styles.box)}>
-      <label className={styles.postLabel}>알림테스트</label>
-      <form className={styles.postForm} onSubmit={handleSubmit}>
-        <div className={styles.postInputBox}>
-          <label className={styles.postInputLabel} htmlFor="title">
+    <div className={cx(css.box)}>
+      <label className={css.postLabel}>알림테스트</label>
+      <form className={css.postForm} onSubmit={handleSubmit}>
+        <div className={css.postInputBox}>
+          <label className={css.postInputLabel} htmlFor="title">
             제목
           </label>
           <input
             id="title"
-            className={styles.postInput}
+            className={css.postInput}
             disabled={isLoading}
             type="text"
             value={title}
             onChange={handleTitle}
           />
         </div>
-        <div className={styles.postInputBox}>
-          <label className={styles.postInputLabel} htmlFor="body">
+        <div className={css.postInputBox}>
+          <label className={css.postInputLabel} htmlFor="body">
             내용
           </label>
           <input
-            className={styles.postInput}
+            className={css.postInput}
             id="body"
             disabled={isLoading}
             type="text"
@@ -103,13 +103,13 @@ export default function PostBox({ token }: { token: TokenType }) {
             onChange={handleBody}
           />
         </div>
-        <div className={styles.postInputBox}>
-          <label className={styles.postInputLabel} htmlFor="imageUrl">
+        <div className={css.postInputBox}>
+          <label className={css.postInputLabel} htmlFor="imageUrl">
             이미지 URL
           </label>
           <input
             id="imageUrl"
-            className={styles.postInput}
+            className={css.postInput}
             disabled={isLoading}
             type="text"
             value={imageUrl}
@@ -117,13 +117,13 @@ export default function PostBox({ token }: { token: TokenType }) {
             placeholder={`${process.env.NEXT_PUBLIC_SITE_URL}/assets/meta-image.png`}
           />
         </div>
-        <div className={styles.postInputBox}>
-          <label className={styles.postInputLabel} htmlFor="link">
+        <div className={css.postInputBox}>
+          <label className={css.postInputLabel} htmlFor="link">
             링크
           </label>
           <input
             id="link"
-            className={styles.postInput}
+            className={css.postInput}
             disabled={isLoading}
             type="text"
             value={link}
@@ -131,8 +131,8 @@ export default function PostBox({ token }: { token: TokenType }) {
             placeholder={`/redirect/youtube/{videoId}`}
           />
         </div>
-        <div className={styles.postButtonBox}>
-          <button className={styles.postButton} type="submit" disabled={isLoading}>
+        <div className={css.postButtonBox}>
+          <button className={css.button} data-variant="post" type="submit" disabled={isLoading}>
             Send
           </button>
         </div>

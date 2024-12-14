@@ -1,18 +1,19 @@
 'use client';
+import Nodata from '@/components/common/Nodata';
+import loadingCss from '@/components/common/loading/Loading.module.scss';
 import { SETLIST_PAGE_SIZE } from '@/constants';
 import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
 import { GetSetlistRes } from '@/types/api/setlist';
-import Nodata from '@/components/common/Nodata';
-import Pagination from '@/components/common/Pagination';
+import { Pagination } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import axios, { AxiosHeaders } from 'axios';
 import cx from 'classnames';
 import { Session } from 'next-auth';
-import { useRouter } from 'next/navigation';
-import Row from './Row';
-import * as styles from './table.css';
-import * as loadingStyles from '@/components/common/loading/loading.css';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
 import Wave from '../common/loading/Wave';
+import Row from './Row';
+import css from './Table.module.scss';
 
 type TableProps = {
   searchParams: {
@@ -25,7 +26,7 @@ type TableProps = {
 };
 
 export default function Table({ session, searchParams, channelDataset }: TableProps) {
-  const router = useRouter();
+  const router = useRouter(useTransitionRouter);
 
   const { data, isLoading } = useQuery({
     queryKey: ['searchSetlist', searchParams],
@@ -39,11 +40,16 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
       if (session) {
         headers.set('Authorization', `Bearer ${session.user.accessToken}`);
       }
-      return axios
-        .get<GetSetlistRes>(`/api/setlist?${query.toString()}`, {
-          headers,
-        })
-        .then((res) => res.data.data);
+
+      const res = await axios.get<GetSetlistRes>(`/api/v1/setlist?${query.toString()}`, {
+        headers,
+      });
+
+      const data = res.data.data;
+      return {
+        list: data.list,
+        totalPage: Math.ceil(data.total / SETLIST_PAGE_SIZE),
+      };
     },
   });
 
@@ -57,7 +63,7 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
 
   if (isLoading)
     return (
-      <div className={loadingStyles.loadingWrap}>
+      <div className={loadingCss.loadingWrap}>
         <Wave />
       </div>
     );
@@ -66,16 +72,16 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
 
   return (
     <div>
-      <div className={styles.table}>
-        <div className={styles.header}>
-          <div className={cx(styles.headerCell)}>썸네일</div>
-          <div className={styles.headerCell}>채널명</div>
-          <div className={cx(styles.headerCell, 'flex2')}>제목</div>
-          <div className={styles.headerCell}>
+      <div className={css.table}>
+        <div className={css.header}>
+          <div className={css.headerCell}>썸네일</div>
+          <div className={css.headerCell}>채널명</div>
+          <div className={cx(css.headerCell, css.flex2)}>제목</div>
+          <div className={css.headerCell}>
             {searchParams.order === 'create' ? '작성일' : '방송일'}
           </div>
         </div>
-        <div className={styles.body}>
+        <div className={css.body}>
           {data.list.map((data) => (
             <Row
               key={data.videoId}
@@ -86,13 +92,12 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
           ))}
           {data.list.length === 0 && <Nodata />}
         </div>
-        <div className={styles.pagenationBox}>
+        <div className={css.paginationBox}>
           <Pagination
-            count={data.total}
-            pageSize={SETLIST_PAGE_SIZE}
-            sliblingCount={1}
-            currentPage={searchParams.page}
-            onPageChange={handlePage}
+            total={data.totalPage}
+            siblings={1}
+            value={searchParams.page}
+            onChange={handlePage}
           />
         </div>
       </div>

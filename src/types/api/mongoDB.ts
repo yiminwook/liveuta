@@ -1,4 +1,5 @@
 import dayjs from '@/libraries/dayjs';
+import { StreamCategory } from '..';
 
 export type isStream = 'TRUE' | 'NULL' | 'FALSE';
 
@@ -11,8 +12,8 @@ export interface ChannelDocument {
   waiting: boolean;
 }
 
-export type ChannelData = Omit<ChannelDocument, '_id'>;
-export type ChannelListData = Record<string, ChannelData>;
+export type TChannelData = Omit<ChannelDocument, '_id'>;
+export type TChannelListData = Record<string, TChannelData>;
 
 export type ContentDocumentRaw = Omit<ContentDocument, 'ScheduledTime'> & { ScheduledTime: Date };
 
@@ -28,6 +29,8 @@ export type ContentDocument = {
   concurrentViewers: number;
   VideoId: string;
   ChannelId: string;
+  category: string;
+  tag: string;
 };
 
 export type ContentsLength = {
@@ -36,7 +39,7 @@ export type ContentsLength = {
   stream: number;
 };
 
-export type ContentsDataType = {
+export type TContentsData = {
   title: string;
   channelName: string;
   videoId: string;
@@ -47,18 +50,20 @@ export type ContentsDataType = {
   interval: string;
   isVideo: boolean;
   viewer: number;
+  category: StreamCategory;
+  tag: string;
 };
 
-export type ContentsDataReturnType = ContentsDataType[];
+export type TContentsDataReturn = TContentsData[];
 
-export type ParseScheduledDataReturnType = {
-  scheduled: ContentsDataReturnType;
-  live: ContentsDataReturnType;
+export type TParseScheduledDataReturn = {
+  scheduled: TContentsDataReturn;
+  live: TContentsDataReturn;
 };
 
-export type ParseAllDataReturnType = {
-  daily: ContentsDataReturnType;
-  all: ContentsDataReturnType;
+export type TParseAllDataReturn = {
+  daily: TContentsDataReturn;
+  all: TContentsDataReturn;
 };
 
-export type ScheduleAPIReturntype = ParseAllDataReturnType & ParseScheduledDataReturnType;
+export type TScheduleAPIReturn = TParseAllDataReturn & TParseScheduledDataReturn;

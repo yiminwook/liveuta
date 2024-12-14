@@ -1,17 +1,20 @@
 'use client';
-import Pagination from '@/components/common/Pagination';
-import { ITEMS_PER_PAGE } from '@/constants';
-import { useRouter } from 'next/navigation';
-import * as styles from './home.css';
+import { Pagination } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
+import variable from '@variable';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
+import css from './Home.module.scss';
 
 type PaginationBoxProps = {
   currentPage: number;
-  totalLength: number;
+  totalPage: number;
   query: string | undefined;
 };
 
-export default function PaginationBox({ currentPage, totalLength, query }: PaginationBoxProps) {
-  const router = useRouter();
+export default function PaginationBox({ currentPage, totalPage, query }: PaginationBoxProps) {
+  const router = useRouter(useTransitionRouter);
+  const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
 
   const handlePageChange = (page: number) => {
     const searchParams = new URLSearchParams();
@@ -21,13 +24,13 @@ export default function PaginationBox({ currentPage, totalLength, query }: Pagin
   };
 
   return (
-    <div className={styles.paginationBox}>
+    <div className={css.paginationBox}>
       <Pagination
-        count={totalLength}
-        pageSize={ITEMS_PER_PAGE}
-        sliblingCount={2}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
+        total={totalPage}
+        siblings={2}
+        size={isDesktop ? 'md' : 'sm'}
+        value={currentPage}
+        onChange={handlePageChange}
       />
     </div>
   );

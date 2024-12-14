@@ -1,0 +1,150 @@
+.table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .header {
+    display: none;
+    align-items: center;
+    transition: background-color 0.2s var.$bezier-curve;
+    padding-inline: 0.5rem;
+    height: 3rem;
+    color: util.palette(third, dark);
+    font-weight: 600;
+    border-block-end: 2px solid white;
+
+    @include util.min-width(md) {
+      display: flex;
+    }
+
+    .headerCell {
+      flex: 1;
+      padding: 0.5rem;
+    }
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+
+    .row {
+      display: flex;
+      padding-inline: 0.5rem;
+      border-block-end: 1px solid white;
+      transition: background-color 0.2s var.$bezier-curve;
+
+      &:hover {
+        cursor: pointer;
+        background-color: util.palette(first, lighter);
+      }
+
+      .cell {
+        flex: 1;
+        padding: 0.5rem;
+      }
+    }
+
+    .mobileRow {
+      position: relative;
+      display: flex;
+      padding: 0.5rem;
+      gap: 0.5rem;
+      transition: background-color 0.2s var.$bezier-curve;
+
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 95%;
+        border-bottom: 1px solid white;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: util.palette(first, lighter);
+      }
+
+      .mobileLeft {
+        flex: 1;
+      }
+
+      .mobileRight {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        .mobileChannelName {
+          @include util.text-line(1, 1.6);
+          font-weight: 500;
+          font-size: 1.2rem;
+          line-height: 1.6rem;
+          height: 1.6rem;
+        }
+
+        .mobileTitle {
+          @include util.text-line(2, 1.25);
+        }
+
+        .mobileTime {
+          font-size: 0.85rem;
+          color: util.palette(monochrome, 6);
+          line-height: 0.85rem;
+          height: 0.85rem;
+        }
+      }
+    }
+  }
+
+  .paginationBox {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-block: 1rem;
+    overflow-x: auto;
+    ::-webkit-scrollbar {
+      height: 5px;
+    }
+
+    .paginationButton {
+      padding: 0.5rem;
+      font-weight: 500;
+    }
+  }
+
+  .imageButton {
+    width: 100%;
+    height: 100%;
+
+    .thumbnailBox {
+      position: relative;
+      object-fit: cover;
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
+      img {
+        aspect-ratio: 16 / 9;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .flex2 {
+    flex: 2 !important;
+  }
+
+  .flex3 {
+    flex: 3 !important;
+  }
+}

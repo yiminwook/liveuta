@@ -1,0 +1,22 @@
+.container {
+  :global(.swiper-slide) {
+    width: 75%;
+    padding: 0.25em;
+
+    @include util.min-width(xs) {
+      width: 50%;
+    }
+
+    @include util.min-width(sm) {
+      width: 33.33%;
+    }
+
+    @include util.min-width(md) {
+      width: 25%;
+    }
+
+    @include util.min-width(lg) {
+      width: 20%;
+    }
+  }
+}

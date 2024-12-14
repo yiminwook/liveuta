@@ -1,29 +1,39 @@
-import { CSSProperties, ReactNode, useEffect } from 'react';
-import { RemoveScroll } from 'react-remove-scroll';
-import Backdrop from '../Backdrop';
+import { Modal as MantineModal, MantineSize } from '@mantine/core';
+import { AnimationEventHandler, ReactNode, useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
-import { Dialog, DialogOpenChangeDetails } from '@ark-ui/react';
-import { GrClose } from 'react-icons/gr';
-import * as styles from './modal.css';
 
 type ModalProps = {
   id: string;
+  className?: string;
   title?: string;
   children: ReactNode;
-  style?: CSSProperties;
+  width?: number | 'auto' | MantineSize;
+  /** 모달이 열려있을때는 스크롤 동작은 방지되나, 스크롤을 화면에서까지 안보이게 할지 여부 */
+  hideScroll?: boolean;
+  overlay?: boolean;
+  centered?: boolean;
+  withCloseButton?: boolean;
+  onAnimationEnd?: AnimationEventHandler;
   onClose: (e?: any) => void;
 };
 
-const Modal = ({ id, children, title, onClose }: ModalProps) => {
+export default function Modal({
+  id,
+  className,
+  children,
+  title,
+  width = 'auto',
+  hideScroll = false,
+  overlay = true,
+  centered = true,
+  withCloseButton = true,
+  onAnimationEnd,
+  onClose,
+}: ModalProps) {
   const { enableScope, disableScope, enabledScopes } = useHotkeysContext();
 
   useHotkeys('esc', onClose, {
-    enabled: enabledScopes.at(-1) === id,
-    preventDefault: true,
-    scopes: [id],
-  });
-
-  useHotkeys('space', (e) => {}, {
+    enabled: enabledScopes.at(-1) === id, //모달이 위에서부터 하나씩 닫히게 컨트롤
     preventDefault: true,
     scopes: [id],
   });
@@ -31,37 +41,33 @@ const Modal = ({ id, children, title, onClose }: ModalProps) => {
   useEffect(() => {
     enableScope(id);
     return () => disableScope(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleClose = ({ open }: DialogOpenChangeDetails) => {
-    if (!open) onClose(open);
-  };
-
   return (
-    <RemoveScroll removeScrollBar={false}>
-      <Dialog.Root
-        id={id}
-        open={true}
-        onOpenChange={handleClose}
-        unmountOnExit={true}
-        preventScroll={false}
-        closeOnInteractOutside={true}
-        closeOnEscapeKeyDown={false}
-      >
-        <Backdrop activeParticles={false} />
-        <Dialog.Positioner className={styles.position}>
-          <Dialog.Content className={styles.content}>
-            {title && <Dialog.Title className={styles.title}>{title}</Dialog.Title>}
-            <Dialog.Description className={styles.desc}>{children}</Dialog.Description>
-            <Dialog.CloseTrigger className={styles.closeTrigger} onClick={onClose}>
-              <GrClose size="1.5rem" color="inherit" />
-            </Dialog.CloseTrigger>
-          </Dialog.Content>
-        </Dialog.Positioner>
-      </Dialog.Root>
-    </RemoveScroll>
+    <MantineModal
+      className={className}
+      removeScrollProps={{ removeScrollBar: hideScroll }}
+      onAnimationEnd={onAnimationEnd} //transtion 효과용
+      id={id}
+      opened
+      onClose={onClose}
+      title={title}
+      size={width}
+      closeButtonProps={{ w: 40, h: 40 }}
+      overlayProps={
+        overlay
+          ? {
+              blur: '2px',
+              opacity: 0.25,
+            }
+          : undefined
+      }
+      centered={centered}
+      withCloseButton={withCloseButton}
+      transitionProps={{}}
+      closeOnEscape={false} //직접 제어
+    >
+      {children}
+    </MantineModal>
   );
-};
-
-export default Modal;
+}

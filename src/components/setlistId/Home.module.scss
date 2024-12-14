@@ -1,0 +1,48 @@
+.inner {
+  display: flex;
+  flex-direction: column;
+
+  @include util.min-width(md) {
+    flex-direction: row;
+  }
+
+  .left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+
+    img {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      display: none;
+      transform: translate(-10%, 40%);
+
+      @include util.min-width(sm) {
+        display: block;
+      }
+
+      @include util.min-width(md) {
+        transform: translate(0, 0);
+      }
+    }
+
+    .playerWrap {
+      position: relative;
+    }
+
+    .infoWrap {
+      position: relative;
+      padding: 0.5rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  .right {
+    flex: 1;
+    position: relative;
+    padding: 0.5rem;
+    min-height: calc(100dvh - 3.5rem - 5rem);
+  }
+}

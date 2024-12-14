@@ -1,9 +1,10 @@
 'use client';
-import { ThemeType } from '@/types';
+import { TTheme } from '@/types';
 import { gtagClick } from '@/utils/gtag';
 import { MouseEvent } from 'react';
 import useTheme from '@/hooks/useTheme';
-import * as styles from './themeSelect.css';
+import settingCss from './Setting.module.scss';
+import css from './ThemeSelect.module.scss';
 
 type ThemeModalButtonProps = {
   primaryColor: string;
@@ -12,9 +13,9 @@ type ThemeModalButtonProps = {
 
 function ThemeModalButton({ primaryColor, secondaryColor }: ThemeModalButtonProps) {
   return (
-    <div className={styles.themeModalButton}>
-      <div className={styles.primary} style={{ backgroundColor: primaryColor }}>
-        <div className={styles.secondary} style={{ backgroundColor: secondaryColor }}></div>
+    <div className={css.modalButton}>
+      <div className={css.primary} style={{ backgroundColor: primaryColor }}>
+        <div className={css.secondary} style={{ backgroundColor: secondaryColor }}></div>
       </div>
     </div>
   );
@@ -26,7 +27,7 @@ export default function ThemeSelect() {
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
     const button = target.closest('button');
-    const selectedTheme = button?.dataset.theme as ThemeType | undefined;
+    const selectedTheme = button?.dataset.theme as TTheme | undefined;
     if (selectedTheme === undefined) return;
 
     gtagClick({
@@ -40,9 +41,9 @@ export default function ThemeSelect() {
   };
 
   return (
-    <div className={styles.wrap}>
-      <label className={styles.label}>테마선택</label>
-      <div className={styles.content} onClick={handleClick}>
+    <div className={settingCss.wrap}>
+      <label className={settingCss.settingLabel}>테마선택</label>
+      <div className={css.content} onClick={handleClick}>
         <button data-theme="theme1">
           <ThemeModalButton primaryColor="#ffc1cc" secondaryColor="#ed4463" />
         </button>

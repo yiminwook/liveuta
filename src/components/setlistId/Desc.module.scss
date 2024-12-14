@@ -1,0 +1,59 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+
+  .buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .inner {
+    margin-block-start: 1rem;
+  }
+
+  .button {
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.2s var.$bezier-curve;
+
+    &[data-variant=edit] {
+      color: var(--liveuta-txt-light);
+      background-color: util.palette(second, default);
+
+      &:hover {
+        background-color: util.palette(second, light);
+      }
+
+      &:active {
+        background-color: util.palette(second, dark);
+      }
+    }
+
+    &[data-variant=save] {
+      color: #fff;
+      background-color: util.palette(second, default);
+
+      &:hover {
+        background-color: util.palette(second, light);
+      }
+
+      &:active {
+        background-color: util.palette(second, dark);
+      }
+    }
+
+    &[data-variant=cancel] {
+      border: 1px solid util.palette(monochrome, 3);
+
+      &:hover {
+        background-color: util.palette(monochrome, 1);
+      }
+
+      &:active {
+        background-color: util.palette(monochrome, 2);
+      }
+    }
+  }
+}

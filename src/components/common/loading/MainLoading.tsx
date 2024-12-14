@@ -1,22 +1,23 @@
 'use client';
+import classnames from 'classnames';
 import Image from 'next/image';
 import { AiOutlineLoading } from 'react-icons/ai';
-import loadingImage from '/public/loading.png';
 import { RemoveScroll } from 'react-remove-scroll';
-import * as styles from '@/components/common/loading/loading.css';
-import cx from 'classnames';
-import Backdrop from '../Backdrop';
+import loadingImage from '/public/loading.png';
+import Backdrop from '../background/Backdrop';
+import css from './Loading.module.scss';
 
 type MainLoadingProps = {
   backdrop: boolean;
 };
+
 export default function MainLoading({ backdrop }: MainLoadingProps) {
   return (
     <RemoveScroll>
       {backdrop && <Backdrop activeParticles={true} />}
-      <div className={cx(styles.MainLoadingWrap)}>
+      <div className={classnames(css.mainLoadingWrap)}>
         <div>
-          <div className={styles.MainLoadingInner}>
+          <div className={css.MainLoadingInner}>
             <Image
               src={loadingImage}
               width={100}
@@ -25,9 +26,9 @@ export default function MainLoading({ backdrop }: MainLoadingProps) {
               unoptimized
               priority
             />
-            <AiOutlineLoading className={styles.MainLoadingBar} size={130} color="inherit" />
+            <AiOutlineLoading className={css.mainLoadingBar} size={130} color="inherit" />
           </div>
-          <p className={styles.MainLoadingText}>Loading Now!</p>
+          <p className={css.mainLoadingText}>Loading Now!</p>
         </div>
       </div>
     </RemoveScroll>

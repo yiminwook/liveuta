@@ -35,6 +35,7 @@ export const ORIGIN = 'liveuta.vercel.app';
 
 export const INTERNAL_LINKS = [
   { href: '/', text: '홈' },
+  { href: '/schedule', text: '스케줄' },
   { href: '/multi', text: '멀티뷰' },
   { href: '/channel', text: '채널' },
   { href: '/setlist', text: '세트리' },
@@ -52,4 +53,21 @@ export const EXTERNAL_LINKS = [
   { href: 'https://ezgif.com', text: 'EZ GIF' },
 ];
 
+type TRoute = {
+  href: string;
+  text: string;
+};
+
+export const ROUTES: (TRoute & { subRoutes: TRoute[] })[] = [
+  { href: '/schedule', text: '스케줄', subRoutes: [] },
+  { href: '/multi', text: '멀티뷰', subRoutes: [] },
+  { href: '/channel', text: '채널', subRoutes: [] },
+  { href: '/request', text: '채널 등록', subRoutes: [] },
+  { href: '/setlist', text: '세트리', subRoutes: [] },
+  { href: '/setting', text: '설정', subRoutes: [] },
+  { href: '/dev', text: '개발', subRoutes: [] },
+];
+
 export const PORTAL_ID = 'liveuta-portal';
+
+export const SCHEDULE_CACHE_TIME = 3 * 60 * 1000;

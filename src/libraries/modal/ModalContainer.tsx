@@ -20,12 +20,10 @@ export default function ModalContainer() {
     containerRef.current = portal;
 
     return () => modalStore.clear();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     modalStore.clear();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   if (isEmpty || !containerRef.current) return null;

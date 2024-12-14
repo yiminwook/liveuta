@@ -1,0 +1,26 @@
+$w: 7.5rem;
+
+button.trigger {
+  width: $w;
+  height: 3.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.dropdown {
+  view-transition-name: header-dropdown;
+  min-width: $w;
+
+  .dropdownItem {
+    font-size: 0.9rem;
+
+    &[data-current='true'] {
+      color: var(--liveuta-txt-active);
+    }
+  }
+
+  &::view-transition-group {
+    z-index: 3;
+  }
+}

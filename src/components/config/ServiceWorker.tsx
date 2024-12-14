@@ -14,7 +14,7 @@ export default function ServiceWorker() {
       }
 
       const messaging = FirebaseClient.getInstance().message;
-      onMessage(messaging, ({ data, from, collapseKey, messageId }) => {
+      onMessage(messaging, ({ data }) => {
         if (data === undefined) return;
 
         const noti = new Notification(data.title!, {
@@ -38,7 +38,6 @@ export default function ServiceWorker() {
 
   useEffect(() => {
     handleMessage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <></>;

@@ -1,16 +1,16 @@
 'use client';
-import Background from '@/components/common/Background';
+import Background from '@/components/common/background/Background';
 import PostBox from '@/components/dev/PostBox';
 import TokenBox from '@/components/dev/TokenBox';
 import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
-import { TokenType } from '@/types';
+import { TToken } from '@/types';
 import cx from 'classnames';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import * as styles from './home.css';
+import css from './Home.module.scss';
 
 export default function Home() {
-  const [token, setToken] = useState<TokenType>(null);
+  const [token, setToken] = useState<TToken>(null);
   const [permission, setPermission] = useState('설정을 가져오는 중');
 
   const handleSetToken = async () => {
@@ -52,25 +52,24 @@ export default function Home() {
     });
 
     handleSetToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Background>
-      <section className={styles.wrap}>
-        <div className={cx(styles.box, styles.permissionBox)}>
+      <section className={css.wrap}>
+        <div className={cx(css.box, css.permissionBox)}>
           <div>
             알림허용설정 여부: <b>{permission}</b>
           </div>
-          <button className={styles.button} onClick={requerstPermission}>
+          <button className={css.button} data-variant="request" onClick={requerstPermission}>
             요청
           </button>
         </div>
-        <div className={cx(styles.box)}>
-          <label className={styles.tokenLabel} htmlFor="token">
+        <div className={cx(css.box)}>
+          <label className={css.tokenLabel} htmlFor="token">
             SW Token
           </label>
-          <div className={styles.tokenBox}>
+          <div className={css.tokenBox}>
             <TokenBox token={token} />
           </div>
         </div>

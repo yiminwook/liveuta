@@ -1,0 +1,41 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .autoSyncOn {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+
+    &[data-show=true] {
+      display: flex;
+    }
+
+    .autoSyncSubSetting {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding-block: 1rem;
+    }
+
+    .autoSyncRefreshInterval {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+
+      label {
+        padding-inline-start: 0.5rem;
+      }
+      
+      @include util.min-width(md) {
+        flex-direction: row;
+        gap: 2rem;
+
+        label {
+          padding-inline-start: 1rem;
+        }
+      }
+    }
+  }
+}

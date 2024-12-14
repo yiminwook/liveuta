@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import character from '@/assets/image/character-6.png';
 import axios from 'axios';
 import Image from 'next/image';
-import * as styles from './not-found.css';
+import css from './not-found.module.scss';
 
 export default function Error({
   error,
@@ -24,32 +24,25 @@ export default function Error({
   }, [error]);
 
   return (
-    <>
-      <title>500: Server Error</title>
-      <div className={styles.wrap}>
-        <div className={styles.inner}>
-          <div className={styles.imgBox}>
-            <Image
-              alt="에러가 발생하였습니다."
-              src={character}
-              width={200}
-              height={300}
-              unoptimized={true}
-            />
+    <div className={css.wrap}>
+      <div className={css.box}>
+        <Image
+          alt="에러가 발생하였습니다."
+          src={character}
+          width={200}
+          height={300}
+          unoptimized={true}
+        />
+        <div className={css.desc}>
+          <div className={css.descTop}>
+            <h1>500: Server Error</h1>
+            <h2>{error.message}</h2>
           </div>
-          <div className={styles.desc}>
-            <div className={styles.descTop}>
-              <h1>500: Server Error</h1>
-              <h2>{error.message}</h2>
-            </div>
-            <div className={styles.descBottom}>
-              <button className={styles.button} onClick={reset}>
-                재시도
-              </button>
-            </div>
+          <div className={css.descBottom}>
+            <button onClick={reset}>재시도</button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

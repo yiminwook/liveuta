@@ -1,20 +1,19 @@
 'use client';
-import { accountSidebarAtom } from '@/stores/common';
-import { Session } from 'next-auth';
-import { useEffect } from 'react';
-import { RemoveScroll } from 'react-remove-scroll';
-import CloseButton from '../button/CloseButton';
-import * as styles from './sidebar.css';
-import cx from 'classnames';
 import useStopPropagation from '@/hooks/useStopPropagation';
+import { accountSidebarAtom } from '@/stores/common';
+import { Avatar, CloseButton } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
-import { signOut } from 'next-auth/react';
-import Avatar from '../Avatar';
-import { toast } from 'sonner';
+import cx from 'classnames';
 import { useAtom } from 'jotai';
-import Link from 'next/link';
+import { Session } from 'next-auth';
+import { signOut } from 'next-auth/react';
+import { Link } from 'next-view-transitions';
 import { usePathname } from 'next/navigation';
+import { useCallback, useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
+import { RemoveScroll } from 'react-remove-scroll';
+import { toast } from 'sonner';
+import css from './Sidebar.module.scss';
 
 interface AccountSidebarProps {
   session: Session;
@@ -31,7 +30,12 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
     onError: (error) => toast.error(error.message),
   });
 
-  const handleClose = () => setShow(() => false);
+  const handleClose = useCallback(() => setShow(() => false), [setShow]);
+
+  const logout = () => {
+    if (mutateLogout.isPending) return;
+    mutateLogout.mutate();
+  };
 
   useHotkeys(
     'esc',
@@ -45,7 +49,7 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
     },
   );
 
-  useHotkeys('space', (e) => {}, {
+  useHotkeys('space', () => {}, {
     preventDefault: true,
     enabled: show,
     scopes: ['sidebar'],
@@ -53,7 +57,6 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
 
   useEffect(() => {
     if (show) handleClose();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   useEffect(() => {
@@ -65,31 +68,28 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
       disableScope('sidebar');
       window.removeEventListener('resize', handleClose);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
 
   return (
     <RemoveScroll enabled={show} removeScrollBar={false}>
       <aside>
-        <div className={cx(styles.wrap, show && 'show')} onClick={handleClose}>
-          <div className={cx(styles.inner, 'right', show && 'moveLeft')} onClick={stopPropagation}>
-            <div className={styles.logoutButtonBox}>
-              <button
-                className={styles.logoutButton}
-                onClick={() => mutateLogout.mutate()}
-                disabled={mutateLogout.isPending}
-              >
+        <div className={cx(css.wrap, show && 'show')} onClick={handleClose}>
+          <div className={cx(css.inner, 'right', show && 'moveLeft')} onClick={stopPropagation}>
+            <div className={css.logoutBtnBox}>
+              <button className={css.logoutBtn} onClick={logout} disabled={mutateLogout.isPending}>
                 <Avatar
-                  email={session.user.email}
                   src={session.user.image}
+                  w={40}
+                  h={40}
+                  radius="xl"
                   alt="유저 이미지"
-                  size={'40px'}
+                  name={session.user.email}
                 />
                 로그아웃
               </button>
-              <CloseButton onClick={handleClose} />
+              <CloseButton w={40} h={40} onClick={handleClose} />
             </div>
-            <nav className={styles.nav}>
+            <nav className={css.nav}>
               <ul>
                 <li>
                   <Link href="/my">마이페이지</Link>

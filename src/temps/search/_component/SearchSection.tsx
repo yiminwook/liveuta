@@ -1,15 +1,17 @@
 'use client';
-import dayjs from '@/libraries/dayjs';
+import Input from '@/components/common/input/Input';
 import { useSearchQuery } from '@/components/common/search/getSearch';
+import dayjs from '@/libraries/dayjs';
 import { gtag } from '@/utils/gtag';
 import { replaceSpecialCharacters } from '@/utils/regexp';
-import Input from '@/components/common/input/Input';
-import { usePathname, useRouter } from 'next/navigation';
-import { FormEvent, useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next-nprogress-bar';
+import { useTransitionRouter } from 'next-view-transitions';
+import { usePathname } from 'next/navigation';
+import { FormEvent, use, useCallback, useEffect, useState } from 'react';
 import search from './search.module.scss';
 
 export default function SearchSection() {
-  const route = useRouter();
+  const route = useRouter(useTransitionRouter);
   const pathname = usePathname();
   const searchQuery = useSearchQuery();
 

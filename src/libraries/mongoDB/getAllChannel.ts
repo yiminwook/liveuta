@@ -1,7 +1,8 @@
-import { addExcapeCharacter } from '@/utils/regexp';
 import { MONGODB_CHANNEL_COLLECTION, MONGODB_CHANNEL_DB } from '@/constants';
+import { ChannelDocument, TChannelData } from '@/types/api/mongoDB';
+import { addExcapeCharacter } from '@/utils/regexp';
+import { z } from 'zod';
 import { connectMongoDB } from './';
-import { ChannelData, ChannelDocument } from '@/types/api/mongoDB';
 
 export type ChannleDatesetItem = ReturnType<typeof parseChannel>;
 export type ChannelDataset = ReturnType<typeof generateChannelObject>;
@@ -12,10 +13,30 @@ export const getChannel = async (channel_id: string) => {
   return channel;
 };
 
-export const getAllChannel = async () => {
+export type TChannelDto = z.infer<typeof channelDto>;
+export const channelDto = z.object({
+  order: z
+    .enum(['createdAt', 'name_kor'])
+    .nullish()
+    .transform((value) => value || 'name_kor'),
+  size: z.preprocess((input) => Number(input ?? 0), z.number().int()),
+});
+
+export const CHANNEL_ORDER_MAP = {
+  createdAt: -1, // 최신순
+  name_kor: 1, // 이름순
+} as const;
+
+export const getAllChannel = async (dto: TChannelDto = { order: 'name_kor', size: 0 }) => {
+  const direction = CHANNEL_ORDER_MAP[dto.order];
+
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
-  const channels = await db.find<ChannelDocument>({}).sort({ name_kor: 1 }).toArray();
-  return channels.map<ChannelData>((channel) => {
+  const channels = await db
+    .find<ChannelDocument>({})
+    .sort(dto.order, direction)
+    .limit(dto.size)
+    .toArray();
+  return channels.map<TChannelData>((channel) => {
     delete channel._id;
     return channel;
   });
@@ -32,7 +53,7 @@ export const searchChannel = async (query: string) => {
       .find<ChannelDocument>({ name_kor: regexforDBQuery })
       .sort({ name_kor: 1 })
       .toArray();
-    return channels.map<ChannelData>((channel) => {
+    return channels.map<TChannelData>((channel) => {
       delete channel._id;
       return channel;
     });

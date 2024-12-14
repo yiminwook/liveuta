@@ -1,11 +1,11 @@
-import { ContentsDataReturnType } from '@/types/api/mongoDB';
+import { TContentsDataReturn } from '@/types/api/mongoDB';
 
 export type GetScheduleRes = {
   message: string;
   data: {
-    scheduled: ContentsDataReturnType;
-    live: ContentsDataReturnType;
-    daily: ContentsDataReturnType;
-    all: ContentsDataReturnType;
+    scheduled: TContentsDataReturn;
+    live: TContentsDataReturn;
+    daily: TContentsDataReturn;
+    all: TContentsDataReturn;
   };
 };

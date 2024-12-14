@@ -1,0 +1,95 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-height: 90%;
+}
+
+.profile {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.itemContainer {
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  width: 88px;
+  height: 88px;
+  box-shadow: var.$box-shadow;
+}
+
+.info {
+  flex-shrink: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.h2 {
+  font-size: 1rem;
+  word-break: keep-all;
+
+  @include util.min-width(lg) {
+    font-size: 1.25rem;
+  }
+}
+
+
+.h3 {
+  font-weight: 500;
+  font-size: 0.7rem;
+  word-break: keep-all;
+
+  @include util.min-width(lg) {
+    font-size: 1.25rem;
+  }
+}
+
+.h4 {
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+.detail{
+  display: flex;
+  flex-direction: column;
+
+  @include util.min-width(md) {
+    gap: 1rem;
+    flex-direction: row;
+  }
+}
+
+.link {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  button {
+    font-weight: 500;
+
+    &:first-of-type {
+      font-weight: 600;
+    }
+  }
+}
+
+.hr {
+  width: 100%;
+  border-top: 0.5px solid util.palette(first, default);
+}
+
+.desc {
+  white-space: pre-line;
+  word-break: break-word;
+  overflow-y: auto;
+  height: 30rem;
+  padding-right: 1rem;
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+}
+
