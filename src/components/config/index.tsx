@@ -1,6 +1,5 @@
 import { PORTAL_ID } from '@/constants';
 import { TGetCookiesReturn } from '@/utils/getCookie';
-import { isDarkModeEnabled } from '@/utils/helper';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
 import GlobalHydrate from './GlobalHydrate';
@@ -18,10 +17,10 @@ import ToastBox from './ToastBox';
 type ConfigsProps = {
   children: React.ReactNode;
   cookies: TGetCookiesReturn;
+  colorScheme: 'light' | 'dark';
 };
 
-export default function Configs({ children, cookies }: ConfigsProps) {
-  const isDarkMode = isDarkModeEnabled(cookies.theme);
+export default function Configs({ children, cookies, colorScheme }: ConfigsProps) {
   return (
     <NextAuth>
       <AppProvider>
@@ -29,7 +28,7 @@ export default function Configs({ children, cookies }: ConfigsProps) {
           <ReactQuery>
             <GlobalHydrate cookies={cookies}>
               <NProgressProviders>
-                <MantineProvider defaultColorScheme={isDarkMode ? 'dark' : 'light'}>
+                <MantineProvider defaultColorScheme={colorScheme}>
                   <Hotkeys>
                     <ModalProvider>{children}</ModalProvider>
                     <ToastBox />

@@ -18,21 +18,31 @@ import GlobalScrollbar from '@/components/config/GlobalScrollbar';
 import GoogleTagManager from '@/components/config/GoogleTagManager';
 import { DEFALUT_METADATA } from '@/constants/metaData';
 import { getCookies } from '@/utils/getCookie';
+import { isDarkModeEnabled } from '@/utils/helper';
 import type { Metadata, Viewport } from 'next';
 import { ViewTransitions } from 'next-view-transitions';
 import { PropsWithChildren } from 'react';
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   const cookies = await getCookies();
+  const isDarkMode = isDarkModeEnabled(cookies.theme);
+  const colorScheme = isDarkMode ? 'dark' : 'light';
 
   return (
     <ViewTransitions>
-      <html lang="ko" color={cookies.theme} data-overlayscrollbars-initialize>
+      <html
+        lang="ko"
+        color={cookies.theme}
+        data-overlayscrollbars-initialize
+        data-mantine-color-scheme={colorScheme} // mantine-theme-ssr
+      >
         <head>
           <DefaultHead />
         </head>
         <body data-overlayscrollbars-initialize>
-          <Configs cookies={cookies}>{children}</Configs>
+          <Configs cookies={cookies} colorScheme={colorScheme}>
+            {children}
+          </Configs>
           <GoogleTagManager />
           <GlobalScrollbar />
         </body>

@@ -12,6 +12,7 @@ type MantineProviderProps = {
 export default function MantineProvider({ children, defaultColorScheme }: MantineProviderProps) {
   return (
     <Provider
+      classNamesPrefix="app" // ex) app-Button-root
       theme={theme}
       defaultColorScheme={defaultColorScheme}
       withCssVariables={false} // css variable 동적으로 추가되지 않도록

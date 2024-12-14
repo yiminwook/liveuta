@@ -89,7 +89,7 @@ export default function SliderCard({
 
         {content.isStream === 'TRUE' && (
           <Badge
-            size="xs"
+            size="sm"
             color={variable.thirdColorDefault}
             leftSection={<BsBroadcast color="#fff" />}
           >

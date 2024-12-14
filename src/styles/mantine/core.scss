@@ -3711,16 +3711,16 @@ fieldset:disabled .m_d3ea56bb,
   --modal-x-offset: 5vw;
 
   // modal transition
-  &.enter .mantine-Modal-content {
+  &.enter .app-Modal-content {
     animation: open-modal 0.3s forwards;
   }
 
-  &.show .mantine-Modal-content {
+  &.show .app-Modal-content {
     opacity: 1;
     transform: translateY(0px);
   }
 
-  &.exit .mantine-Modal-content {
+  &.exit .app-Modal-content {
     animation: open-modal 0.3s forwards;
     animation-direction: reverse;
   }
