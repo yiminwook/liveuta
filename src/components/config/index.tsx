@@ -1,8 +1,6 @@
 import { PORTAL_ID } from '@/constants';
-import { modals } from '@/libraries/modal/modals';
 import { TGetCookiesReturn } from '@/utils/getCookie';
 import { isDarkModeEnabled } from '@/utils/helper';
-import { ModalsProvider } from '@mantine/modals';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
 import GlobalHydrate from './GlobalHydrate';
@@ -33,9 +31,7 @@ export default function Configs({ children, cookies }: ConfigsProps) {
               <NProgressProviders>
                 <MantineProvider defaultColorScheme={isDarkMode ? 'dark' : 'light'}>
                   <Hotkeys>
-                    <ModalsProvider modals={modals}>
-                      <ModalProvider>{children}</ModalProvider>
-                    </ModalsProvider>
+                    <ModalProvider>{children}</ModalProvider>
                     <ToastBox />
                     <ParticleProvider />
                     <ServiceWorker />
