@@ -11,7 +11,6 @@ import '@/styles/mantine/core.scss';
 import '@/styles/mantine/theme.scss';
 import '/public/theme-v2.css';
 import '@/styles/global.scss';
-import '@/styles/globalTheme.css';
 
 import Configs from '@/components/config';
 import DefaultHead from '@/components/config/DefaultHead';

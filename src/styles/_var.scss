@@ -15,10 +15,11 @@ $breakpoints: (
 );
 
 $z-indexes: (
-  app: 100,
-  modal: 200,
-  popover: 300,
-  overlay: 400,
+  app: 100,      // mantine default
+  float: 150,    
+  modal: 200,    // mantine default
+  popover: 300,  // mantine default
+  overlay: 400,  // mantine default
   max: 9999
 );
 

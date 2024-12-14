@@ -1,14 +1,8 @@
-import { categoryAtom, featuredAtom } from '@/stores/schedule/featured';
 import { StreamCategory, StreamCategoryText } from '@/types';
-import { useAtom } from 'jotai';
 import { HiSelector } from 'react-icons/hi';
-// import { Select } from '@ark-ui/react';
-import * as styles from './featuredSelect.css';
+import css from './FeaturedSelect.module.scss';
 
 export default function FeaturedSelect() {
-  const [featureSelected] = useAtom(featuredAtom);
-  const [select, setSelect] = useAtom(categoryAtom);
-
   const items = [
     { label: StreamCategoryText.live, value: StreamCategory.live },
     { label: StreamCategoryText.anniversary, value: StreamCategory.anniversary },

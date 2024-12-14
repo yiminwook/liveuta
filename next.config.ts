@@ -1,14 +1,9 @@
 import path from 'node:path';
 import NextBundleAnalyzer from '@next/bundle-analyzer';
-import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
 import type { NextConfig } from 'next';
 
 const withBundleAnalyzer = NextBundleAnalyzer({
   enabled: false,
-});
-
-const withVanillaExtract = createVanillaExtractPlugin({
-  identifiers: ({ hash }) => `uta_${hash}`,
 });
 
 // const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -115,4 +110,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withBundleAnalyzer(withVanillaExtract(nextConfig));
+export default withBundleAnalyzer(nextConfig);

@@ -1,0 +1,67 @@
+.channelCard {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  transition-property: scale;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  border-bottom: 1px solid #f0f0f0;
+};
+
+
+.linkToChannel {
+
+}
+
+.imageContainer {
+  position: relative;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.desc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.descContent {
+
+};
+
+.descContentLabel {
+  color: #888;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @include util.min-width(sm) {
+    flex-direction: row;
+  }
+}
+
+
+.originalTitle {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.link {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-weight: 600;
+}

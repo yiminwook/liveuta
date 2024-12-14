@@ -1,4 +1,4 @@
-import * as styles from './player.css';
+import css from './Player.module.scss';
 export default function PlayerPlaceholder() {
-  return <div className={styles.playerPlaceholder} />;
+  return <div className={css.playerPlaceholder} />;
 }

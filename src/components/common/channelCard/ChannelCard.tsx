@@ -14,7 +14,7 @@ import { MouseEvent } from 'react';
 import { isDesktop } from 'react-device-detect';
 import { FaStar } from 'react-icons/fa6';
 import { toast } from 'sonner';
-import * as styles from './channelCard.css';
+import css from './ChannelCard.module.scss';
 
 type ChannelItemProps = {
   content: TYChannelsData;
@@ -89,9 +89,9 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
   };
 
   return (
-    <div className={styles.channelCard}>
-      <a className={styles.linkToChannel} href={url} onClick={linkClickEvent}>
-        <div className={styles.imageContainer}>
+    <div className={css.channelCard}>
+      <a className={css.linkToChannel} href={url} onClick={linkClickEvent}>
+        <div className={css.imageContainer}>
           <Image
             src={imageURL}
             alt=""
@@ -103,8 +103,8 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
           />
         </div>
       </a>
-      <div className={styles.desc}>
-        <div className={styles.title}>
+      <div className={css.desc}>
+        <div className={css.title}>
           <h3>{channelName}</h3>
           <button
             onClick={handleFavorite}
@@ -113,15 +113,15 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
             <FaStar size="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
           </button>
         </div>
-        <div className={styles.details}>
-          <p className={styles.descContent}>
-            <span className={styles.descContentLabel}>구독자</span> {subscribe}
+        <div className={css.details}>
+          <p className={css.descContent}>
+            <span className={css.descContentLabel}>구독자</span> {subscribe}
           </p>
-          <p className={styles.descContent}>
-            <span className={styles.descContentLabel}>동영상</span> {videoCount}
+          <p className={css.descContent}>
+            <span className={css.descContentLabel}>동영상</span> {videoCount}
             <span>개</span>
           </p>
-          <div className={styles.link}>
+          <div className={css.link}>
             <button onClick={openModal}>+ 상세보기</button>
           </div>
         </div>

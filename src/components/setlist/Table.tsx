@@ -1,6 +1,6 @@
 'use client';
 import Nodata from '@/components/common/Nodata';
-import * as loadingStyles from '@/components/common/loading/loading.css';
+import loadingCss from '@/components/common/loading/Loading.module.scss';
 import { SETLIST_PAGE_SIZE } from '@/constants';
 import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
 import { GetSetlistRes } from '@/types/api/setlist';
@@ -63,7 +63,7 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
 
   if (isLoading)
     return (
-      <div className={loadingStyles.loadingWrap}>
+      <div className={loadingCss.loadingWrap}>
         <Wave />
       </div>
     );

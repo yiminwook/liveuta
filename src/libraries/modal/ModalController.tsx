@@ -24,7 +24,6 @@ export default class ModalController {
   }
 
   private reRender() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_, setState] = this.renderState;
     // state가 1000을 넘어갈경우 1로 초기화
     setState((pre) => (pre + 1 > 1000 ? 1 : pre + 1));

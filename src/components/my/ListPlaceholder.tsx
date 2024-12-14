@@ -1,4 +1,4 @@
-import PlaceHolder from '@/components/common/input/Placeholder';
+import { Skeleton } from '@mantine/core';
 import { useId } from 'react';
 import css from './List.module.scss';
 
@@ -11,7 +11,7 @@ export default function ListPlaceholder() {
       <ul className={css.list}>
         {COUNT.map((_, index) => (
           <li key={`listPlaceHolder_${index}_${id}`} className={css.row}>
-            <PlaceHolder height="1.6rem" />
+            <Skeleton height="1.6rem" />
           </li>
         ))}
       </ul>

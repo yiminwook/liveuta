@@ -5,8 +5,8 @@ import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
+import css from './ChannelCardModal.module.scss';
 import Modal from './Modal';
-import * as styles from './channelCardModal.css';
 
 type ChannelCardModalProp = {
   channelName: string;
@@ -40,10 +40,10 @@ export default function ChannelCardModal({
 
   return (
     <Modal id={CHANNEL_MODAL_ID} onClose={onClose}>
-      <div className={styles.content}>
-        <div className={styles.profile}>
+      <div className={css.content}>
+        <div className={css.profile}>
           <a href={url} onClick={linkClickEvent}>
-            <div className={styles.itemContainer}>
+            <div className={css.itemContainer}>
               <Image
                 src={imageURL}
                 alt={`${channelName}의 채널 이미지`}
@@ -55,14 +55,14 @@ export default function ChannelCardModal({
               />
             </div>
           </a>
-          <div className={styles.info}>
-            <h2 className={styles.h2}>{channelName}</h2>
-            <h3 className={styles.h3}>{title}</h3>
-            <div className={styles.detail}>
-              <h4 className={styles.h4}>구독자 {subscribe}</h4>
-              <h4 className={styles.h4}>업로드 수 {videoCount} 개</h4>
+          <div className={css.info}>
+            <h2 className={css.h2}>{channelName}</h2>
+            <h3 className={css.h3}>{title}</h3>
+            <div className={css.detail}>
+              <h4 className={css.h4}>구독자 {subscribe}</h4>
+              <h4 className={css.h4}>업로드 수 {videoCount} 개</h4>
             </div>
-            <div className={styles.link}>
+            <div className={css.link}>
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -83,8 +83,8 @@ export default function ChannelCardModal({
             </div>
           </div>
         </div>
-        <hr className={styles.hr} />
-        <pre className={styles.desc}>{description}</pre>
+        <hr className={css.hr} />
+        <pre className={css.desc}>{description}</pre>
       </div>
     </Modal>
   );

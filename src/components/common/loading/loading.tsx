@@ -1,15 +1,14 @@
 import loadingImage from '@/assets/image/character-13.png';
-import cx from 'classnames';
 import Image from 'next/image';
-import * as styles from './globalLoading.css';
+import css from './GlobalLoading.module.scss';
 
 export default function GlobalLoading() {
   return (
-    <div className={cx(styles.wrap)}>
+    <div className={css.wrap}>
       <div>
-        <div className={styles.inner}>
+        <div className={css.inner}>
           <Image
-            className={styles.image}
+            className={css.image}
             src={loadingImage}
             alt="loading_img"
             fill

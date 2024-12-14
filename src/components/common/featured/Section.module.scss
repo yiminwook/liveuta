@@ -1,22 +1,16 @@
-import { keyframes, style } from '@vanilla-extract/css';
+.section {
 
-import { responsive } from '@/styles/var';
-import { global } from '@/styles/globalTheme.css';
+  @include util.min-width(xl) { 
+    [data-show="false"] & {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}
 
-export const section = style([
-  responsive({
-    '2xl': {
-      selectors: {
-        '[data-show="false"] &': {
-          display: 'none',
-          visibility: 'hidden',
-        },
-      },
-    },
-  }),
-]);
-
-export const contents = style([]);
+.contents {
+  
+};
 
 // const expand = keyframes({
 //   '0%': {
