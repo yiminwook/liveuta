@@ -2,8 +2,7 @@
 'use client';
 import HamburgerBtn from '@/components/common/button/HamburgerBtn';
 import { accountSidebarAtom, sidebarAtom } from '@/stores/common';
-import { Avatar, Text } from '@mantine/core';
-import variable from '@variable';
+import { Avatar } from '@mantine/core';
 import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { Link } from 'next-view-transitions';
@@ -50,23 +49,13 @@ export default function Header({ session }: HeaderProps) {
   }, [isMobile]);
 
   return (
-    <header>
+    <header className={css.header}>
       <div className={css.inner} ref={gnbRef}>
         <nav className={css.nav}>
-          <HamburgerBtn onClick={openSidebar} />
-          <Text
-            component={Link}
-            href="/"
-            className={css.title}
-            variant="gradient"
-            gradient={{
-              from: variable.firstColorDarken,
-              to: variable.secondColorLighter,
-              deg: 45,
-            }}
-          >
+          <HamburgerBtn className={css.hamburger} onClick={openSidebar} />
+          <Link href="/" className={css.title}>
             Live Uta
-          </Text>
+          </Link>
           <div className={css.right}>
             <DesktopNav />
             {session ? (
@@ -88,7 +77,6 @@ export default function Header({ session }: HeaderProps) {
           </div>
         </nav>
       </div>
-      <div className={css.blank} />
     </header>
   );
 }

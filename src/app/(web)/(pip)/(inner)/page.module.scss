@@ -5,19 +5,28 @@
     margin-bottom: 100px;
     position: relative;
 
-    @include util.min-width(xs) {
+    @include util.min-width(var.$mobile-boundary) {
       padding: min(10vw, 3rem);
     }
 
     .coverImageBox {
       position: relative;
-      width: min(100%, 550px);
+      width: 100%;
       aspect-ratio: 11 / 7;
       margin: 0 auto;
       object-fit: cover;
 
+      @include util.min-width(var.$mobile-boundary) {
+        width: 550px;
+      }
+
       :global(.blur) {
+        display: none;
         filter: blur(120px);
+
+        @include util.min-width(var.$mobile-boundary) {
+          display: block;
+        }
       }
     }
   }

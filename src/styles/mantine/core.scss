@@ -695,9 +695,15 @@ fieldset:disabled .mantine-active:active {
   margin-inline-start: auto;
 }
 
+
+// modal-body
 .m_5df29311 {
   padding: var(--mb-padding, var(--mantine-spacing-md));
-  padding-top: var(--mb-padding, var(--mantine-spacing-md));
+  padding-bottom: calc(var(--mb-padding, var(--mantine-spacing-md)) + var.$env-bottom + 1em);
+
+  @include util.min-width(var.$mobile-boundary) {
+    padding-bottom: var(--mb-padding, var(--mantine-spacing-md));
+  }
 }
 
 .m_5df29311:where(:not(:only-child)) {

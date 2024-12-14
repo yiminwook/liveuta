@@ -1,9 +1,9 @@
 .wrap {
   // view-transition-name: bottom-tab; // TODO: Bug fix
   display: block;
-  height: calc(4rem + env(safe-area-inset-bottom));
+  height: var.$safe-footer-height;
 
-  @include util.min-width(md) {
+  @include util.min-width(var.$mobile-boundary) {
     display: none;
     visibility: hidden;
     height: 0;

@@ -1,10 +1,13 @@
-$header-height: 3.5rem;
-$footer-height: 4rem;
-
 $env-top: env(safe-area-inset-top);
 $env-bottom: env(safe-area-inset-bottom);
 $env-left: env(safe-area-inset-left);
 $env-right: env(safe-area-inset-right);
+
+$header-height: 3.5rem;
+$footer-height: 4rem;
+
+$safe-header-height: calc($header-height + $env-top);
+$safe-footer-height: calc($footer-height + $env-bottom);
 
 $breakpoints: (
   xs: 30rem,
@@ -14,9 +17,12 @@ $breakpoints: (
   xl: 90rem
 );
 
+$mobile-boundary: sm; // breakpoint for mobile devices
+
 $z-indexes: (
   app: 100,      // mantine default
   float: 150,    
+  header: 180,   
   modal: 200,    // mantine default
   popover: 300,  // mantine default
   overlay: 400,  // mantine default

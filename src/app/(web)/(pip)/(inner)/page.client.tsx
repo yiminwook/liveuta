@@ -11,7 +11,7 @@ import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { TChannelData, TContentsData } from '@/types/api/mongoDB';
+import { TContentsData } from '@/types/api/mongoDB';
 import { GetScheduleRes } from '@/types/api/schedule';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick } from '@/utils/gtag';

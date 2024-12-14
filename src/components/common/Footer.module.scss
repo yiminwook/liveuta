@@ -1,6 +1,4 @@
 .footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(4rem + env(safe-area-inset-bottom));
+  @extend %flex-center;
+  height: var.$safe-footer-height;
 }
