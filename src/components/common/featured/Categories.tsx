@@ -1,11 +1,9 @@
-import { useMemo } from 'react';
-import { useAtom } from 'jotai';
-import { Session } from 'next-auth';
-import { TContentsData } from '@/types/api/mongoDB';
-import { categoryAtom, featuredAtom } from '@/stores/schedule/featured';
-import Category from './Category';
-import * as sectionStyles from './section.css';
 import { StreamCategory } from '@/types';
+import { TContentsData } from '@/types/api/mongoDB';
+import { Session } from 'next-auth';
+import { useMemo } from 'react';
+import Category from './Category';
+import sectionCss from './Section.module.scss';
 
 type Categories = Record<StreamCategory, TContentsData[]>;
 
@@ -14,9 +12,6 @@ type CategoriesProps = {
 };
 
 export default function Categories({ session }: CategoriesProps) {
-  const [show] = useAtom(featuredAtom);
-  const expand = useMemo(() => show === 'categories', [show]);
-  const [category] = useAtom(categoryAtom);
   const categories = useMemo<Categories>(() => {
     const categories: Categories = {
       default: [], // just for type check
@@ -34,15 +29,16 @@ export default function Categories({ session }: CategoriesProps) {
   }, []);
 
   return (
-    <div className={sectionStyles.section} data-show={expand}>
-      <div className={sectionStyles.contents}>
-        <Category
-          key={`category_${category}`}
-          contents={categories[category]}
-          session={session}
-          category={category}
-        />
-      </div>
-    </div>
+    // <div className={sectionCss.section} data-show={expand}>
+    //   <div className={sectionCss.contents}>
+    //     <Category
+    //       key={`category_${category}`}
+    //       contents={categories[category]}
+    //       session={session}
+    //       category={category}
+    //     />
+    //   </div>
+    // </div>
+    null
   );
 }

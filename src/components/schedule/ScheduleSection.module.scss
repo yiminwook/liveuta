@@ -6,33 +6,33 @@
 .vertuso {
   width: 100%;
   height: auto !important; // 요소의 높이를 추론할 수 있도록 설정
+}
 
-  .list {
-    display: flex;
-    flex-wrap: wrap;
+.list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  padding: 0.25rem;
+  width: 100%;
+  position: relative;
+
+  @include util.min-width(xs) {
+    width: 50%;
+    padding: 0.5rem;
   }
 
-  .item {
-    padding: 0.25rem;
-    width: 100%;
-    position: relative;
+  @include util.min-width(sm) {
+    width: 33.33%;
+  }
 
-    @include util.min-width(xs) {
-      width: 50%;
-      padding: 0.5rem;
-    }
+  @include util.min-width(md) {
+    width: 25%;
+  }
 
-    @include util.min-width(sm) {
-      width: 33.33%;
-    }
-
-    @include util.min-width(md) {
-      width: 25%;
-    }
-
-    @include util.min-width(xl) {
-      width: 20%;
-    }
+  @include util.min-width(xl) {
+    width: 20%;
   }
 }
 

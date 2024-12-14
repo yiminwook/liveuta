@@ -3,8 +3,8 @@ import useScheduleStatus from '@/hooks/useScheduleStatus';
 import { useEffect, useRef, useState } from 'react';
 import LiveChat from './LiveChat';
 import Player from './Player';
+import css from './Player.module.scss';
 import PlayerPlaceholder from './PlayerPlaceholder';
-import * as styles from './player.css';
 
 export default function PlayerWrap() {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -27,8 +27,8 @@ export default function PlayerWrap() {
   if (status === 'pending') return null;
 
   return (
-    <div ref={wrapRef} className={styles.playerBox}>
-      {!isShow ? <PlayerPlaceholder /> : null}
+    <div ref={wrapRef} className={css.playerBox}>
+      {!isShow && <PlayerPlaceholder />}
       <Player isShow={isShow} isLive={true} />
       <LiveChat />
     </div>

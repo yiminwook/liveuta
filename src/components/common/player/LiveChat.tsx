@@ -6,7 +6,7 @@ import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
 import { useAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
-import * as styles from './player.css';
+import css from './Player.module.scss';
 
 export default function LiveChat() {
   const [videoId] = useAtom(playerVideoIdAtom);
@@ -34,13 +34,13 @@ export default function LiveChat() {
   if (!isDesktop) return null;
 
   return (
-    <div className={styles.liveChatBox}>
-      <button className={styles.popButton} onClick={openPopup}>
+    <div className={css.liveChatBox}>
+      <button className={css.popBtn} onClick={openPopup}>
         POP
       </button>
       <iframe
         ref={iframeRef}
-        className={styles.liveChat}
+        className={css.liveChat}
         src={url}
         // sandbox="allow-scripts allow-same-origin allow-presentation"
         // seamless

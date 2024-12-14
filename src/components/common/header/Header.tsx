@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 'use client';
-import HamburgerButton from '@/components/common/button/HamburgerButton';
+import HamburgerBtn from '@/components/common/button/HamburgerBtn';
 import { accountSidebarAtom, sidebarAtom } from '@/stores/common';
-import { global } from '@/styles/globalTheme.css';
 import { Avatar, Text } from '@mantine/core';
 import variable from '@variable';
 import { useSetAtom } from 'jotai';
@@ -37,7 +36,7 @@ export default function Header({ session }: HeaderProps) {
         if (!current) return;
         window.scrollY > 0
           ? (current.style.backgroundColor = 'transparent')
-          : (current.style.backgroundColor = global.color.fourth[50]);
+          : (current.style.backgroundColor = 'var(--liveuta-fourth-50)');
       }, 300);
     };
   }, []);
@@ -54,7 +53,7 @@ export default function Header({ session }: HeaderProps) {
     <header>
       <div className={css.inner} ref={gnbRef}>
         <nav className={css.nav}>
-          <HamburgerButton onClick={openSidebar} />
+          <HamburgerBtn onClick={openSidebar} />
           <Text
             component={Link}
             href="/"

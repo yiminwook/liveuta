@@ -10,7 +10,7 @@ import { Session } from 'next-auth';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { LuChevronDown } from 'react-icons/lu';
-import * as styles from './category.css';
+import css from './Categories.module.scss';
 
 type CategoryProps = {
   contents: TContentsData[];

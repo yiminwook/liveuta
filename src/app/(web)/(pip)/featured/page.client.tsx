@@ -2,20 +2,16 @@
 import Categories from '@/components/common/featured/Categories';
 import FeaturedSelect from '@/components/common/featured/FeaturedSelect';
 import FeaturedVtubers from '@/components/common/featured/FeaturedVtubers';
-import { featuredAtom } from '@/stores/schedule/featured';
-import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
-import * as styles from './page.css';
+import css from './page.module.scss';
 
 type Props = {
   session: Session | null;
 };
 
 export default function Client({ session }: Props) {
-  const [selected] = useAtom(featuredAtom);
-
   return (
-    <section className={styles.featuredContainer}>
+    <section className={css.featuredContainer}>
       {/* <Tabs.Root
         lazyMount
         unmountOnExit
@@ -39,7 +35,7 @@ export default function Client({ session }: Props) {
           </Tabs.Trigger>
         </Tabs.List>
       </Tabs.Root> */}
-      <div className={styles.featured} data-show={selected}>
+      <div className={css.featured} data-show={true}>
         <div>
           <FeaturedSelect />
         </div>

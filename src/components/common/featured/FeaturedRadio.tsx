@@ -1,12 +1,8 @@
-import { categoryAtom, featuredAtom } from '@/stores/schedule/featured';
 import { StreamCategory, StreamCategoryText } from '@/types';
 import { useAtom } from 'jotai';
-import * as styles from './featuredRadio.css';
+import css from './FeaturedRadio.module.scss';
 
 export default function FeaturedRadio() {
-  const [featuredSelected] = useAtom(featuredAtom);
-  const [select, setSelect] = useAtom(categoryAtom);
-
   const items = [
     { label: StreamCategoryText.live, value: StreamCategory.live },
     { label: StreamCategoryText.anniversary, value: StreamCategory.anniversary },

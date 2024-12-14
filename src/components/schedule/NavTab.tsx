@@ -2,7 +2,6 @@
 import { scheduleDto } from '@/types/dto';
 import { SegmentedControl, SegmentedControlItem } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
-import { useTransitionRouter } from 'next-view-transitions';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 const NAV_LINKS: SegmentedControlItem[] = [
@@ -14,7 +13,7 @@ const NAV_LINKS: SegmentedControlItem[] = [
 
 export default function NavTab() {
   const pathname = usePathname();
-  const router = useRouter(useTransitionRouter);
+  const router = useRouter(); // transition 효과 제외
   const searchParams = useSearchParams();
   const filterQuery = searchParams.get('t');
   const { filter } = scheduleDto.pick({ filter: true }).parse({ filter: filterQuery });

@@ -10,10 +10,11 @@ import axios from 'axios';
 import { Session } from 'next-auth';
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
+import ScheduleCardSkeleton from '../common/scheduleCard/ScheduleCardSkeleton';
 import css from './Home.module.scss';
-import ScheduleCardSkeleton from './ScheduleCardSkeleton';
 import ScheduleNav from './ScheduleNav';
 import ScheduleSection from './ScheduleSection';
+import scheduleSectionCss from './ScheduleSection.module.scss';
 import TopBtn from './TopBtn';
 
 const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
@@ -117,14 +118,12 @@ export default function Home({ scheduleDto, session, isFavorite = false }: HomeP
       {/* live player */}
       <TopSection filter={scheduleDto.filter} />
       {isPending && (
-        <div className={css.skeleton}>
-          <ScheduleCardSkeleton />
-          <ScheduleCardSkeleton />
-          <ScheduleCardSkeleton />
-          <ScheduleCardSkeleton />
-          <ScheduleCardSkeleton />
-          <ScheduleCardSkeleton />
-          <ScheduleCardSkeleton />
+        <div className={scheduleSectionCss.list}>
+          {new Array(10).fill(null).map((_, i) => (
+            <div key={`placeholder_${i}`} className={scheduleSectionCss.item}>
+              <ScheduleCardSkeleton />
+            </div>
+          ))}
         </div>
       )}
       <ScheduleSection

@@ -1,0 +1,49 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.radioLabel {
+  font-weight: 500;
+}
+
+.itemBox {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.item {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.25rem;
+
+  &[data-disabled=true] {
+    color: #ddd;
+  }
+}
+
+.itemControl {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid #cccccc;
+  border-radius: 50%;
+  
+  &:disabled {
+    pointer-events: none;
+  }
+
+  &[data-state=checked] {
+    border-color: util.palette(third, default);
+    outline-offset: -5px;
+    outline-width: 4px;
+    background-color: util.palette(third, default);
+    outline-color: #fff;
+    outline-style: solid;
+  }
+
+  &[data-state=checked][data-disabled=true] {
+    border-color: #ddd;
+    background-color: #ddd;
+  }
+}

@@ -1,6 +1,6 @@
 'use client';
+import css from '@/components/common/player/Player.module.scss';
 import PlayerPlaceholder from '@/components/common/player/PlayerPlaceholder';
-import * as styles from '@/components/common/player/player.css';
 import { playerStatusAtom, playerVideoIdAtom } from '@/stores/player';
 import { useSetAtom } from 'jotai';
 import dynamic from 'next/dynamic';
@@ -45,8 +45,8 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   }, []);
 
   return (
-    <div ref={wrapRef} className={styles.playerBox}>
-      {!isShow ? <PlayerPlaceholder /> : null}
+    <div ref={wrapRef} className={css.playerBox}>
+      {!isShow && <PlayerPlaceholder />}
       <Player isLive={false} isShow={isShow} />
     </div>
   );

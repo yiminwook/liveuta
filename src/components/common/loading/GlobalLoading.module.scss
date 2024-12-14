@@ -1,0 +1,20 @@
+
+.wrap {
+  @extend %flex-center;
+  @extend %fixed-max-size;
+  z-index: map-get($z-indexes, max);
+  font-size: 2rem;
+}
+
+.inner {
+  @extend %absolute-center;
+  color: util.palette(first, default);
+  text-align: center;
+  width: 75%;
+  aspect-ratio: 1 / 1;
+  max-width: map-get(breakpoints, xs);
+}
+
+.image {
+  object-fit: cover;
+}
