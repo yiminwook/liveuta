@@ -5,6 +5,7 @@ import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
 import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
+import { IoIosMore } from 'react-icons/io';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import css from './ChannelSlider.module.scss';
 
@@ -26,26 +27,33 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
           const subscribe = renderSubscribe(item.statistics.subscriberCount ?? '비공개');
           const videoCount = item.statistics.videoCount ?? '비공개';
           return (
-            <SwiperSlide
-              key={`recentChannel_${item.uid}`}
-              style={{ width: '75px', height: '75px' }}
-            >
-              <HoverCard withArrow width={200}>
+            <SwiperSlide key={`recentChannel_${item.uid}`} style={{ width: '75px' }}>
+              <Avatar
+                radius="md"
+                styles={{
+                  root: {
+                    borderColor: variable.thirdColorDefault,
+                    borderWidth: '2px',
+                    borderStyle: 'solid',
+                    width: '100%',
+                    height: '100%',
+                  },
+                }}
+                color={variable.firstColorDefault}
+                src={item.snippet.thumbnails?.default?.url}
+              />
+              <HoverCard withArrow width={200} offset={0} arrowOffset={0}>
                 <HoverCard.Target>
-                  <Avatar
-                    radius="md"
-                    styles={{
-                      root: {
-                        borderColor: variable.thirdColorDefault,
-                        borderWidth: '2px',
-                        borderStyle: 'solid',
-                        width: '100%',
-                        height: '100%',
-                      },
-                    }}
-                    color={variable.firstColorDefault}
-                    src={item.snippet.thumbnails?.default?.url}
-                  />
+                  <Center>
+                    <Button
+                      variant="transparent"
+                      size="compact-xs"
+                      className="swiper-no-swiping" // 슬라이드 이동 방지해야 hover 가능
+                      w="100%"
+                    >
+                      <IoIosMore size="1.2rem" />
+                    </Button>
+                  </Center>
                 </HoverCard.Target>
                 <HoverCard.Dropdown>
                   <Box>
