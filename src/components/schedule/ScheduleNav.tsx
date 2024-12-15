@@ -3,8 +3,10 @@ import { TScheduleDto } from '@/types/dto';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
 import { Session } from 'next-auth';
-import dynamic from 'next/dynamic';
+import { useRouter } from 'next-nprogress-bar';
 import { Link } from 'next-view-transitions';
+import dynamic from 'next/dynamic';
+import { useSearchParams } from 'next/navigation';
 import { TbBoxMultiple4 } from 'react-icons/tb';
 import MobileNavButton from './MobileNavButton';
 import NavTab from './NavTab';
@@ -27,11 +29,18 @@ type NavSectionProps = {
 
 export default function ScheduleNav({ session, scheduleDto, length, isFavorite }: NavSectionProps) {
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
+  const searchParams = useSearchParams();
+  const router = useRouter(); // transition 예외처리
+
+  const clickFavorite = () => {
+    const url = `/${isFavorite ? 'schedule' : 'favorite'}?${searchParams.toString()}`;
+    router.push(url);
+  };
 
   return (
     <nav className={css.wrap}>
       <div className={css.left}>
-        {session && <ToggleFavorite isFavorite={isFavorite} />}
+        {session && <ToggleFavorite isFavorite={isFavorite} onClick={clickFavorite} />}
         <div className={css.navTabBox}>
           <NavTab />
         </div>

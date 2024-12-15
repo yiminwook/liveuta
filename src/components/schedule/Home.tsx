@@ -108,7 +108,7 @@ export default function Home({ scheduleDto, session, isFavorite = false }: HomeP
             session={session}
             scheduleDto={scheduleDto}
             length={proceedScheduleData.length}
-            isFavorite={false}
+            isFavorite={isFavorite}
           />
         </div>
       </div>
