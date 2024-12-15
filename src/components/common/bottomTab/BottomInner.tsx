@@ -1,4 +1,5 @@
 'use client';
+import { UnstyledButton } from '@mantine/core';
 import cx from 'classnames';
 import { Link } from 'next-view-transitions';
 import { useEffect, useMemo, useState } from 'react';
@@ -62,9 +63,15 @@ export default function BottomInner() {
 
   return (
     <div className={css.inner} data-hidden={hideBottomTab}>
-      <button className={css.topButton} data-show={showTobButton} onClick={scrollUp}>
-        <RxPinTop size="30px" color="inherit" />
-      </button>
+      <UnstyledButton
+        size="input-md"
+        variant="transparent"
+        className={css.topButton}
+        data-show={showTobButton}
+        onClick={scrollUp}
+      >
+        <RxPinTop color="#fff" size="2em" />
+      </UnstyledButton>
       <ul className={css.list}>
         <li>
           <Link href="/setlist">
@@ -84,7 +91,7 @@ export default function BottomInner() {
         </li>
         <li>
           <Link href="/">
-            <div className={cx(css.item)}>
+            <div className={css.item}>
               <TiHomeOutline size="1.5rem" />
               <span>홈</span>
             </div>
@@ -92,7 +99,7 @@ export default function BottomInner() {
         </li>
         <li>
           <Link href="/schedule">
-            <div className={cx(css.item)}>
+            <div className={css.item}>
               <MdOutlineSchedule size="1.5rem" />
               <span>스케줄</span>
             </div>
