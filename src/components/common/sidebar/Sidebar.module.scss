@@ -1,6 +1,6 @@
 .wrap {
   @extend %fixed-max-size;
-  view-transition-name: sidebar;
+  // view-transition-name: sidebar;
   z-index: map-get(var.$z-indexes, modal) - 1;
   visibility: hidden;
   color: var(--liveuta-txt-default);
@@ -17,9 +17,9 @@
     }
   }
 
-  &::view-transition-group {
-    z-index: 2;
-  }
+  // &::view-transition-group {
+  //   z-index: 2;
+  // }
 }
 
 .inner {

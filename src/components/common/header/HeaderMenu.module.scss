@@ -9,7 +9,7 @@ button.trigger {
 }
 
 .dropdown {
-  view-transition-name: header-dropdown;
+  // view-transition-name: header-dropdown;
   min-width: $w;
 
   .dropdownItem {
@@ -20,7 +20,7 @@ button.trigger {
     }
   }
 
-  &::view-transition-group {
-    z-index: 3;
-  }
+  // &::view-transition-group {
+  //   z-index: 3;
+  // }
 }

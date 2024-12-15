@@ -4,7 +4,7 @@
 }
 
 .inner {
-  view-transition-name: header;
+  // view-transition-name: header;
   z-index: map-get(var.$z-indexes, header);
   margin: 0px;
   padding-top: var.$env-top;
@@ -22,9 +22,9 @@
     background-color: var(--liveuta-fourth-50) !important;
   }
 
-  &::view-transition-group {
-    z-index: 2;
-  }
+  // &::view-transition-group {
+  //   z-index: 2;
+  // }
 }
 
 .nav {
