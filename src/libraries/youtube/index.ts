@@ -17,6 +17,7 @@ export const getYoutubeChannelsByUid = async (uid: string) => {
   return response.data;
 };
 
+/** 조회시 순서가 뒤섞임 */
 export const getYoutubeChannels = async (idArr: string[]) => {
   const response = await youtubeService.channels.list(
     {

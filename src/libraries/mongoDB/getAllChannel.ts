@@ -36,6 +36,7 @@ export const getAllChannel = async (dto: TChannelDto = { order: 'name_kor', size
     .sort(dto.order, direction)
     .limit(dto.size)
     .toArray();
+
   return channels.map<TChannelData>((channel) => {
     delete channel._id;
     return channel;

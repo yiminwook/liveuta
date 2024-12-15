@@ -9,7 +9,9 @@ export interface ChannelDocument {
   name_kor: string;
   channel_addr: string;
   handle_name: string;
+  createdAt: string;
   waiting: boolean;
+  alive: boolean;
 }
 
 export type TChannelData = Omit<ChannelDocument, '_id'>;
