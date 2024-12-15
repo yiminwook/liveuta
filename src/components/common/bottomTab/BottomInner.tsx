@@ -1,6 +1,5 @@
 'use client';
 import { UnstyledButton } from '@mantine/core';
-import cx from 'classnames';
 import { Link } from 'next-view-transitions';
 import { useEffect, useMemo, useState } from 'react';
 import { CgUserlane } from 'react-icons/cg';
@@ -70,7 +69,7 @@ export default function BottomInner() {
         data-show={showTobButton}
         onClick={scrollUp}
       >
-        <RxPinTop color="#fff" size="2em" />
+        <RxPinTop size="2em" />
       </UnstyledButton>
       <ul className={css.list}>
         <li>
