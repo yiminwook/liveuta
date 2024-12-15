@@ -42,10 +42,10 @@
       height: 100%;
       
       .item {
+        @extend %flex-center;
         height: 100%;
         padding: 0.5em;        
-        display: grid;
-        place-items: center;
+        flex-direction: column;
         transition: color 0.2s util.easing(default);
 
         &:hover {
