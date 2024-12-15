@@ -45,5 +45,15 @@ export default function VideoTypeSelect({ select, length }: VideoTypeSelectProps
     },
   ];
 
-  return <Select w={140} size="md" h={40} value={select} data={data} onChange={handleSelect} />;
+  return (
+    <Select
+      w={140}
+      size="md"
+      h={40}
+      className={css.select}
+      value={select}
+      data={data}
+      onChange={handleSelect}
+    />
+  );
 }

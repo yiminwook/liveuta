@@ -77,6 +77,14 @@
   @include util.text-line(1, 1.6);
 }
 
+.select {
+  display: none;
+
+  @include util.min-width(var.$mobile-boundary) {
+    display: block;
+  }
+}
+
 button.topBtn {
   z-index: 1;
   background-color: var(--liveuta-main);
