@@ -168,19 +168,19 @@ a {
 
 // https://developer.chrome.com/docs/web-platform/view-transitions/same-document?hl=ko
 
-.view-swap {
-  view-transition-name: view-swap;
-}
+// .view-swap {
+//   view-transition-name: view-swap;
+// }
 
-::view-transition-old(view-swap) {
-  z-index: 0;
-  opacity: 0.3;
-}
+// ::view-transition-old(view-swap) {
+//   z-index: 0;
+//   opacity: 0.3;
+// }
 
-::view-transition-new(view-swap) {
-  z-index: 1;
-  animation: view-enter 0.3s util.easing(expo-in-out);
-}
+// ::view-transition-new(view-swap) {
+//   z-index: 1;
+//   animation: view-enter 0.3s util.easing(expo-in-out);
+// }
 
 // css specificity required
 body #nprogress {
