@@ -1,20 +1,19 @@
-
 .toast {
   top: calc(2.5rem + env(safe-area-inset-top)) !important;
   padding: 14px;
-  border: 1px solid var(--normal-border);
-
+  border: 1px solid map-get(var.$colors, default-border);
+  background-color: map-get(var.$colors, body);
+  color: map-get(var.$colors, text);
 
   li {
     padding-left: 16px;
   }
-  
-  > button[aria-label="Close toast"] {
+
+  > button[aria-label='Close toast'] {
     left: unset;
     right: 0;
     transform: translate(50%, -50%);
-    border: 1px solid var(--gray4);
-    background: var(--gray1);
+    border: 1px solid map-get(var.$colors, default-border);
+    background-color: map-get(var.$colors, body);
   }
 }
-
