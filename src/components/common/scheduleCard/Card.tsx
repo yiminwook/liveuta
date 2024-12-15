@@ -34,20 +34,20 @@ export default function ScheduleCard({
   showMenu = false,
 }: ScheduleCardProps) {
   const addStreamModifier = useMemo(() => {
-    let streamModifer: string;
+    let streamModifier: string;
 
     switch (content.isStream) {
       case 'FALSE':
-        streamModifer = 'closed';
+        streamModifier = 'closed';
         break;
       case 'TRUE':
-        streamModifer = 'stream';
+        streamModifier = 'stream';
         break;
       default:
-        streamModifer = '';
+        streamModifier = '';
     }
 
-    return streamModifer;
+    return streamModifier;
   }, [content.isStream]);
 
   const onClickAddMultiView = () => {
