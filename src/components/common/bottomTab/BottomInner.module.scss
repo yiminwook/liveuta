@@ -1,47 +1,20 @@
-$height: calc(4rem + env(safe-area-inset-bottom));
-
-@keyframes slide-up {
-  0% {
-    display: none;
-    height: 0;
-  }
-  100% {
-    display: block;
-    height: $height;
-  }
-}
-
-@keyframes slide-down {
-  0% {
-    display: block;
-    height: $height;
-  }
-  100% {
-    display: none;
-    height: 0;
-  }
-}
-
 .inner {
+  width: 100dvw;
+  height: calc(4rem + env(safe-area-inset-bottom));
   position: fixed;
   bottom: 0;
-  width: 100dvw;
-  height: $height;
   z-index: map-get(var.$z-indexes, app);
   background-color: util.palette(first, darken);
   font-size: 0.75rem;
   color: var(--liveuta-txt-light);
+  transition: height 0.3s util.easing(default);
 
   &[data-hidden='true'] {
-    animation: slide-down 0.3s util.easing(expo-in-out);
-    display: none;
     height: 0;
   }
 
   &[data-hidden='false'] {
-    animation: slide-up 0.3s util.easing(expo-in-out);
-    display: block;
-    height: $height;
+    height: calc(4rem + env(safe-area-inset-bottom));
   }
 
   .topButton {
