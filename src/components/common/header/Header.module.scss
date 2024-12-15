@@ -73,7 +73,7 @@ a.title {
     align-items: center;
     gap: 1rem;
 
-    @include util.min-width(md) {
+    @include util.min-width(var.$mobile-boundary) {
       display: flex;
     }
   }
