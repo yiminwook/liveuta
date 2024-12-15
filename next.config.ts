@@ -25,7 +25,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   compiler: {
     removeConsole: {
-      // exclude: ['error', 'warn'],
+      exclude: ['error', 'warn', 'log', 'info'],
     },
   },
   sassOptions: {
