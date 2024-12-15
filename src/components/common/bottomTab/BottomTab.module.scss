@@ -2,6 +2,7 @@
   // view-transition-name: bottom-tab; // TODO: Bug fix
   display: block;
   height: var.$safe-footer-height;
+  z-index: 9999;
 
   @include util.min-width(var.$mobile-boundary) {
     display: none;
