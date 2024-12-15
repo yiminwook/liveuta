@@ -1,8 +1,8 @@
 .inner {
   width: 100dvw;
-  height: var.$safe-footer-height;
   position: fixed;
   bottom: 0;
+  height: var.$safe-footer-height;
   z-index: map-get(var.$z-indexes, float);
   background-color: util.palette(first, darken);
   font-size: 0.75rem;
@@ -13,10 +13,14 @@
     height: 0;
   }
 
+  @include util.min-width(var.$mobile-boundary) {
+    height: 0;
+  }
+
   .topButton {
     position: absolute;
     top: -65px;
-    right: 30px;
+    right: 16px;
     padding: 0.5em;
     border-radius: 5px;
     box-shadow: var.$box-shadow;
@@ -27,6 +31,10 @@
     &[data-show='true'] {
       visibility: visible;
     }
+
+    @include util.min-width(var.$mobile-boundary) {
+      right: 32px;
+    }
   }
 
   .list {
@@ -36,16 +44,21 @@
     height: 100%;
     overflow: hidden;
     text-align: center;
+    padding-bottom: var.$env-bottom;
+
+    @include util.min-width(var.$mobile-boundary) {
+      display: none; // tab 선택 안되게 방지
+    }
  
     li {
       flex: 1;
       height: 100%;
       
       .item {
-        @extend %flex-center;
+        display: grid;
+        place-items: center;
         height: 100%;
         padding: 0.5em;        
-        flex-direction: column;
         transition: color 0.2s util.easing(default);
 
         &:hover {
