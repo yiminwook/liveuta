@@ -71,6 +71,11 @@ export const theme = createTheme({
       },
     }),
     SegmentedControl: SegmentedControl.extend({
+      styles: {
+        root: {
+          backgroundColor: variable.colorBody,
+        },
+      },
       defaultProps: {
         color: variable.thirdColorDefault,
         transitionTimingFunction: 'ease-out',

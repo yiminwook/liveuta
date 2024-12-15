@@ -39,6 +39,7 @@
   --liveuta-backdrop: #ffffff34;
   --liveuta-title: #fff;
   --liveuta-txt-default: #000;
+  --liveuta-txt-invert: #fff;
   --liveuta-txt-light: #fff;
   --liveuta-txt-active: #e06e61;
   
@@ -51,6 +52,11 @@
   --liveuta-bg-left-position: 54%;
   --liveuta-bg-right-url: url(/background/right.jpg);
   --liveuta-bg-right-position: 40%;
+
+  --liveuta-schedule-closed: #d8f2ff;
+  --liveuta-schedule-stream: #fcefc7;
+  --liveuta-schedule-stream-text1: #fa8072;
+  --liveuta-schedule-stream-text2: #e06e61;
 }
 
 :root[color='theme2'] {
@@ -94,6 +100,7 @@
   --liveuta-backdrop: #ffffff34;
   --liveuta-title: #279e27;
   --liveuta-txt-default: #000;
+  --liveuta-txt-invert: #fff;
   --liveuta-txt-light: #fff;
   --liveuta-txt-active: #279e27;
 
@@ -106,6 +113,11 @@
   --liveuta-bg-left-position: 60%;
   --liveuta-bg-right-url: url(/background/right2.jpg);
   --liveuta-bg-right-position: 50%;
+
+  --liveuta-schedule-closed: #d8f2ff;
+  --liveuta-schedule-stream: #fcefc7;
+  --liveuta-schedule-stream-text1: #fa8072;
+  --liveuta-schedule-stream-text2: #e06e61;
 }
 
 :root[color='theme3'] {
@@ -149,6 +161,7 @@
   --liveuta-backdrop: #ffffff34;
   --liveuta-title: #ff6e2b;
   --liveuta-txt-default: #000;
+  --liveuta-txt-invert: #fff;
   --liveuta-txt-light: #fff;
   --liveuta-txt-active: #ff6e2b;
 
@@ -161,6 +174,11 @@
   --liveuta-bg-left-position: 47%;
   --liveuta-bg-right-url: url(/background/right3.png);
   --liveuta-bg-right-position: 46%;
+
+  --liveuta-schedule-closed: #d8f2ff;
+  --liveuta-schedule-stream: #fcefc7;
+  --liveuta-schedule-stream-text1: #fa8072;
+  --liveuta-schedule-stream-text2: #e06e61;
 }
 
 :root[color='theme4'] {
@@ -204,6 +222,7 @@
   --liveuta-backdrop: #ffffff34;
   --liveuta-title: gold;
   --liveuta-txt-default: #fff;
+  --liveuta-txt-invert: #000;
   --liveuta-txt-light: #ccc;
   --liveuta-txt-active: gold;
 
@@ -216,6 +235,11 @@
   --liveuta-bg-left-position: 40%;
   --liveuta-bg-right-url: url(/background/right4.jpg);
   --liveuta-bg-right-position: 28%;
+
+  --liveuta-schedule-closed: hsl(200, 40%, 18%);
+  --liveuta-schedule-stream: hsl(45, 35%, 16%);
+  --liveuta-schedule-stream-text1: var(--mantine-color-text);
+  --liveuta-schedule-stream-text2: var(--mantine-color-text);
 }
 
 :root[color='theme5'] {
@@ -259,6 +283,7 @@
   --liveuta-backdrop: #ffffff34;
   --liveuta-title: red;
   --liveuta-txt-default: #fff;
+  --liveuta-txt-invert: #000;
   --liveuta-txt-light: #ccc;
   --liveuta-txt-active: red;
 
@@ -271,4 +296,9 @@
   --liveuta-bg-left-position: 30%;
   --liveuta-bg-right-url: url(/background/right5.jpg);
   --liveuta-bg-right-position: 47%;
+
+  --liveuta-schedule-closed: hsl(200, 40%, 18%);
+  --liveuta-schedule-stream: hsl(45, 35%, 16%);
+  --liveuta-schedule-stream-text1: var(--mantine-color-text);
+  --liveuta-schedule-stream-text2: var(--mantine-color-text);
 }
