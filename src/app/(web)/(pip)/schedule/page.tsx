@@ -1,8 +1,4 @@
 import Background from '@/components/common/background/Background';
-import BottomTab from '@/components/common/bottomTab/BottomTab';
-import Header from '@/components/common/header/Header';
-import AccountSidebar from '@/components/common/sidebar/Account';
-import Sidebar from '@/components/common/sidebar/Sidebar';
 import Home from '@/components/schedule/Home';
 import { auth } from '@/libraries/nextAuth';
 import { scheduleDto } from '@/types/dto';
@@ -27,14 +23,8 @@ export default async function Page(props: Props) {
   });
 
   return (
-    <>
-      <Header session={session} />
-      <Background tile>
-        <Home scheduleDto={dto} session={session} />
-      </Background>
-      <BottomTab />
-      <Sidebar />
-      {session && <AccountSidebar session={session} />}
-    </>
+    <Background tile>
+      <Home scheduleDto={dto} session={session} />
+    </Background>
   );
 }

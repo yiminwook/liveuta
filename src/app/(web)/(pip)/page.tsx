@@ -4,6 +4,7 @@ import { TMetaRow } from '@/types/db';
 import { homeDto } from '@/types/dto';
 import Client from './page.client';
 import '@/styles/swiper/core.scss';
+import Footer from '@/components/common/Footer';
 import { auth } from '@/libraries/nextAuth';
 import { TMongoDBChannelData, combineChannelData } from '@/utils/combineChannelData';
 import { TGetChannelRes } from '@api/v1/channel/route';
@@ -59,10 +60,13 @@ export default async function Page() {
   ]);
 
   return (
-    <Client
-      coverImgUrl={metadata.coverImgUrl}
-      session={session}
-      recentChannels={recentChannelData}
-    />
+    <>
+      <Client
+        coverImgUrl={metadata.coverImgUrl}
+        session={session}
+        recentChannels={recentChannelData}
+      />
+      <Footer />
+    </>
   );
 }
