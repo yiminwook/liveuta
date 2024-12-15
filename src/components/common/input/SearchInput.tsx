@@ -29,7 +29,7 @@ export default function SearchInput({
     <Input.Wrapper className={css.wrap} ref={hotkeyRef}>
       <Input
         variant="unstyled"
-        className={css.input}
+        className={css.inputBox}
         type="text"
         disabled={disabled}
         placeholder={placeholder}
@@ -38,7 +38,7 @@ export default function SearchInput({
         defaultValue={defaultValue}
       />
       <ActionIcon className={css.submitButton} variant="filled" radius="xl" disabled={disabled}>
-        <IoMdMusicalNote color="#fff" size="1.5rem" />
+        <IoMdMusicalNote color="#fff" />
       </ActionIcon>
     </Input.Wrapper>
   );

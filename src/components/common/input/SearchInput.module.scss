@@ -8,11 +8,14 @@
   border: 1px solid #e0e0e0;
 }
 
-.input {
+.inputBox {
   flex: 1;
   background: none;
   margin-right: 0.5rem;
-  color: black;
+  
+  input {
+    color: #000;
+  }
 }
 
 .submitButton {
