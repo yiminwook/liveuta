@@ -27,7 +27,6 @@ export default function PaginationBox({ currentPage, totalPage, query }: Paginat
     <div className={css.paginationBox}>
       <Pagination
         total={totalPage}
-        siblings={2}
         size={isDesktop ? 'md' : 'sm'}
         value={currentPage}
         onChange={handlePageChange}

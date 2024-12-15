@@ -90,6 +90,7 @@ export const theme = createTheme({
       defaultProps: {
         color: variable.thirdColorDefault,
         siblings: 2,
+        withEdges: true, // Show first/last controls
       },
     }),
     Modal: Modal.extend({
