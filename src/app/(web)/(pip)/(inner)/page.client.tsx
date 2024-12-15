@@ -1,4 +1,5 @@
 'use client';
+import MoreButton from '@/components/common/button/MoreButton';
 import SearchInput from '@/components/common/input/SearchInput';
 import ListModal from '@/components/common/modal/MultiListModal';
 import ChannelSlider from '@/components/home/ChannelSlider';
@@ -21,7 +22,6 @@ import axios from 'axios';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
-import { Link } from 'next-view-transitions';
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
@@ -147,7 +147,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
           <h2>
             🎤 현재 <span className={css.hightlight}>라이브</span> 중
           </h2>
-          <Link href="/schedule?t=live">more</Link>
+          <MoreButton href="/schedule?t=live" />
         </div>
         <ScheduleSlider
           isLoading={isPending}
@@ -165,7 +165,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
         <section className={css.favoriteSection}>
           <div className={css.favoriteNav}>
             <h2>🌟 즐겨찾기</h2>
-            <Link href="/favorite">more</Link>
+            <MoreButton href="/favorite" />
           </div>
           <ScheduleSlider
             isLoading={isPending}
@@ -184,7 +184,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
         <div className={css.searchNav}>
           <div />
           <h2>스케줄을 검색해보세요</h2>
-          <Link href="/schedule">more</Link>
+          <MoreButton href="/schedule" />
         </div>
         <div className={css.searchBox}>
           <SearchInput
@@ -199,7 +199,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
       <section className={css.recentChannelSection}>
         <div className={css.recentChannelNav}>
           <h2>🚚 최근 추가된 채널</h2>
-          <Link href="/channel">more</Link>
+          <MoreButton href="/channel" />
         </div>
         <ChannelSlider recentChannels={recentChannels} />
       </section>

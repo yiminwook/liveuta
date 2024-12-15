@@ -40,6 +40,13 @@
     .liveNav {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1em;
+
+
+      h2 {
+        margin: 0;
+      }
 
       .hightlight {
         color: var(--liveuta-third-default);
@@ -56,6 +63,12 @@
     .favoriteNav {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1em;
+
+      h2 {
+        margin: 0;
+      }
     }
   }
 
@@ -68,6 +81,11 @@
     .searchNav {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+
+      h2 {
+        font-weight: 500;
+      }
     }
 
     .searchBox {
@@ -85,6 +103,12 @@
     .recentChannelNav {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1em;
+
+      h2 {
+        margin: 0;
+      }
     }
   }
 
