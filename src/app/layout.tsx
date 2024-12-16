@@ -21,30 +21,37 @@ import { getCookies } from '@/utils/getCookie';
 import { isDarkModeEnabled } from '@/utils/helper';
 import type { Metadata, Viewport } from 'next';
 import { ViewTransitions } from 'next-view-transitions';
+import { headers } from 'next/headers';
+import { userAgent } from 'next/server';
 import { PropsWithChildren } from 'react';
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   const cookies = await getCookies();
   const isDarkMode = isDarkModeEnabled(cookies.theme);
   const colorScheme = isDarkMode ? 'dark' : 'light';
+  const { device, browser } = userAgent({ headers: await headers() });
+  const isMobile = device.type === 'mobile';
+
+  console.log(browser);
+  console.log(device);
 
   return (
     <ViewTransitions>
       <html
         lang="ko"
         color={cookies.theme}
-        data-overlayscrollbars-initialize
+        data-overlayscrollbars-initialize={!isMobile}
         data-mantine-color-scheme={colorScheme} // mantine-theme-ssr
       >
         <head>
           <DefaultHead />
         </head>
-        <body data-overlayscrollbars-initialize>
+        <body data-overlayscrollbars-initialize={!isMobile}>
           <Configs cookies={cookies} colorScheme={colorScheme}>
             {children}
           </Configs>
           <GoogleTagManager />
-          <GlobalScrollbar />
+          <GlobalScrollbar disable={isMobile} />
         </body>
       </html>
     </ViewTransitions>
