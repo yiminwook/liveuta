@@ -29,14 +29,11 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   const cookies = await getCookies();
   const isDarkMode = isDarkModeEnabled(cookies.theme);
   const colorScheme = isDarkMode ? 'dark' : 'light';
-  const { device, browser, os } = userAgent({ headers: await headers() });
+  const { os } = userAgent({ headers: await headers() });
   const isIos = os.name === 'iOS' || os.name === 'iPadOS';
   const overlayScrollbarInitialize = {
     'data-overlayscrollbars-initialize': true,
   };
-
-  console.log(browser);
-  console.log(device);
 
   return (
     <ViewTransitions>

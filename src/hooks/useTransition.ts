@@ -8,7 +8,6 @@ export const useTransition = () => {
   const [modifier, setModifier] = useState<string[]>(['enter']);
 
   const onAnimationEnd = useCallback((e: React.AnimationEvent) => {
-    console.log(e.animationName);
     setModifier((pre) => (pre.includes('enter') ? ['show'] : pre));
   }, []);
 

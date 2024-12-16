@@ -1,9 +1,8 @@
 import Modal from '@/components/common/modal/Modal';
 import { useTransition } from '@/hooks/useTransition';
 import { ModalBaseProps } from '@/libraries/modal/ModalController';
-import { multiListAtom } from '@/stores/player/multi';
+import { useMultiViewStore } from '@/stores/multiView';
 import classNames from 'classnames';
-import { useAtom } from 'jotai';
 import { Link } from 'next-view-transitions';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -16,32 +15,23 @@ type ListModalProps = {
 const ID = 'multiListModal';
 
 export default function ListModal({ onClose, defaultValue }: ListModalProps) {
-  const [list, setList] = useAtom(multiListAtom);
+  const multiViewStore = useMultiViewStore();
   const [input, setInput] = useState(defaultValue || '');
   const { modifier, onAnimationEnd, exit } = useTransition();
 
   const pushItem = () => {
     if (input.trim() === '') {
       toast.warning('URL을 입력해주세요.');
-    } else if (list.length >= 4) {
+    } else if (multiViewStore.list.length >= 4) {
       toast.warning('4개까지만 입력가능합니다.');
     } else {
-      setList((pre) => {
-        const next = [...pre, input.trim()];
-        localStorage.setItem('shortList', JSON.stringify(next));
-        return next;
-      });
+      multiViewStore.actions.add(input);
       setInput(() => '');
     }
   };
 
   const deleteItem = (index: number) => {
-    setList((pre) => {
-      const next = [...pre];
-      next.splice(index, 1);
-      localStorage.setItem('shortList', JSON.stringify(next));
-      return next;
-    });
+    multiViewStore.actions.removeByIdx(index);
   };
 
   const onCloseWithExit = () => {
@@ -79,7 +69,7 @@ export default function ListModal({ onClose, defaultValue }: ListModalProps) {
             </button>
           </div>
           <ul className={css.list}>
-            {list.map((url, index) => (
+            {multiViewStore.list.map((url, index) => (
               <li key={index} className={css.item}>
                 <span className={css.itemText}>{`${index + 1}. ${url}`}</span>
                 <button className={css.itemBtn} onClick={() => deleteItem(index)}>
