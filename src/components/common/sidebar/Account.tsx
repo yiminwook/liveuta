@@ -1,10 +1,9 @@
 'use client';
 import useStopPropagation from '@/hooks/useStopPropagation';
-import { accountSidebarAtom } from '@/stores/common';
+import { useAppCtx } from '@/stores/app';
 import { Avatar, CloseButton } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
-import cx from 'classnames';
-import { useAtom } from 'jotai';
+import classnames from 'classnames';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import { Link } from 'next-view-transitions';
@@ -13,6 +12,7 @@ import { useCallback, useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 import { RemoveScroll } from 'react-remove-scroll';
 import { toast } from 'sonner';
+import { useStore } from 'zustand';
 import css from './Sidebar.module.scss';
 
 interface AccountSidebarProps {
@@ -20,7 +20,10 @@ interface AccountSidebarProps {
 }
 export default function AccountSidebar({ session }: AccountSidebarProps) {
   const pathname = usePathname();
-  const [show, setShow] = useAtom(accountSidebarAtom);
+  const appCtx = useAppCtx();
+  const isShow = useStore(appCtx, (state) => state.isShowAcctSidebar);
+  const setIsShow = useStore(appCtx, (state) => state.actions.setIsShowAcctSidebar);
+
   const { enableScope, disableScope } = useHotkeysContext();
   const { stopPropagation } = useStopPropagation();
 
@@ -30,7 +33,7 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
     onError: (error) => toast.error(error.message),
   });
 
-  const handleClose = useCallback(() => setShow(() => false), [setShow]);
+  const handleClose = useCallback(() => setIsShow(false), [setIsShow]);
 
   const logout = () => {
     if (mutateLogout.isPending) return;
@@ -44,23 +47,23 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
       handleClose();
     },
     {
-      enabled: show,
+      enabled: isShow,
       scopes: ['sidebar'],
     },
   );
 
   useHotkeys('space', () => {}, {
     preventDefault: true,
-    enabled: show,
+    enabled: isShow,
     scopes: ['sidebar'],
   });
 
   useEffect(() => {
-    if (show) handleClose();
+    if (isShow) handleClose();
   }, [pathname]);
 
   useEffect(() => {
-    if (!show) return;
+    if (!isShow) return;
     //window 사이즈가 바뀌면 닫히게
     enableScope('sidebar');
     window.addEventListener('resize', handleClose);
@@ -68,13 +71,16 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
       disableScope('sidebar');
       window.removeEventListener('resize', handleClose);
     };
-  }, [show]);
+  }, [isShow]);
 
   return (
-    <RemoveScroll enabled={show} removeScrollBar={false}>
+    <RemoveScroll enabled={isShow} removeScrollBar={false}>
       <aside>
-        <div className={cx(css.wrap, show && 'show')} onClick={handleClose}>
-          <div className={cx(css.inner, 'right', show && 'moveLeft')} onClick={stopPropagation}>
+        <div className={classnames(css.wrap, { show: isShow })} onClick={handleClose}>
+          <div
+            className={classnames(css.inner, 'right', { moveLeft: isShow })}
+            onClick={stopPropagation}
+          >
             <div className={css.logoutBtnBox}>
               <button className={css.logoutBtn} onClick={logout} disabled={mutateLogout.isPending}>
                 <Avatar

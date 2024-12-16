@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 'use client';
 import HamburgerBtn from '@/components/common/button/HamburgerBtn';
-import { accountSidebarAtom, sidebarAtom } from '@/stores/common';
+import { useSetAppStore } from '@/stores/app';
 import { Avatar } from '@mantine/core';
-import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { Link } from 'next-view-transitions';
 import { useEffect, useMemo, useRef } from 'react';
@@ -17,13 +16,11 @@ type HeaderProps = {
 
 export default function Header({ session }: HeaderProps) {
   const gnbRef = useRef<HTMLDivElement>(null);
+  const actions = useSetAppStore();
 
-  const setShowSidebar = useSetAtom(sidebarAtom);
-  const setShowAccountSidebar = useSetAtom(accountSidebarAtom);
+  const openAccountSidebar = () => actions.setIsShowAcctSidebar(true);
 
-  const openAccountSidebar = () => setShowAccountSidebar(true);
-
-  const openSidebar = () => setShowSidebar(true);
+  const openSidebar = () => actions.setIsShowSidebar(true);
 
   const handleScroll = useMemo(() => {
     let timer: NodeJS.Timeout | null = null;

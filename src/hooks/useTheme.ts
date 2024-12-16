@@ -1,11 +1,13 @@
-import { themeAtom } from '@/stores/atom';
+import { useAppCtx } from '@/stores/app';
 import { TTheme } from '@/types';
 import { isDarkModeEnabled } from '@/utils/helper';
-import { useAtom } from 'jotai';
 import Cookies from 'universal-cookie';
+import { useStore } from 'zustand';
 
 const useTheme = () => {
-  const [theme, setThemeAtome] = useAtom(themeAtom);
+  const appCtx = useAppCtx();
+  const theme = useStore(appCtx, (state) => state.theme);
+  const setThemeStore = useStore(appCtx, (state) => state.actions.setTheme);
 
   const setCookie = (theme: TTheme) => {
     const themeCookie = new Cookies();
@@ -24,7 +26,7 @@ const useTheme = () => {
   const setTheme = (theme: TTheme) => {
     setCookie(theme);
     setAttribute(theme);
-    setThemeAtome(() => theme);
+    setThemeStore(theme);
   };
 
   const resetTheme = () => {

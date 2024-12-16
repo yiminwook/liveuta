@@ -2,7 +2,6 @@ import { PORTAL_ID } from '@/constants';
 import { TGetCookiesReturn } from '@/utils/getCookie';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
-import GlobalHydrate from './GlobalHydrate';
 import Hotkeys from './Hotkeys';
 import Jotai from './Jotai';
 import MantineProvider from './MantineProvider';
@@ -23,24 +22,28 @@ type ConfigsProps = {
 export default function Configs({ children, cookies, colorScheme }: ConfigsProps) {
   return (
     <NextAuth>
-      <AppProvider>
+      <AppProvider
+        initState={{
+          theme: cookies.theme,
+          isShowSidebar: false,
+          isShowAcctSidebar: false,
+        }}
+      >
         <Jotai>
           <ReactQuery>
-            <GlobalHydrate cookies={cookies}>
-              <NProgressProviders>
-                <MantineProvider defaultColorScheme={colorScheme}>
-                  <Hotkeys>
-                    <ModalProvider>{children}</ModalProvider>
-                    <ToastBox />
-                    <ParticleProvider />
-                    <ServiceWorker />
-                    <Devtools />
-                    <div id="pip" />
-                    <div id={PORTAL_ID} />
-                  </Hotkeys>
-                </MantineProvider>
-              </NProgressProviders>
-            </GlobalHydrate>
+            <NProgressProviders>
+              <MantineProvider defaultColorScheme={colorScheme}>
+                <Hotkeys>
+                  <ModalProvider>{children}</ModalProvider>
+                  <ToastBox />
+                  <ParticleProvider />
+                  <ServiceWorker />
+                  <Devtools />
+                  <div id="pip" />
+                  <div id={PORTAL_ID} />
+                </Hotkeys>
+              </MantineProvider>
+            </NProgressProviders>
           </ReactQuery>
         </Jotai>
       </AppProvider>
