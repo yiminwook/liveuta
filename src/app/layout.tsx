@@ -29,8 +29,11 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   const cookies = await getCookies();
   const isDarkMode = isDarkModeEnabled(cookies.theme);
   const colorScheme = isDarkMode ? 'dark' : 'light';
-  const { device, browser } = userAgent({ headers: await headers() });
-  const isMobile = device.type === 'mobile';
+  const { device, browser, os } = userAgent({ headers: await headers() });
+  const isIos = os.name === 'iOS' || os.name === 'iPadOS';
+  const overlayScrollbarInitialize = {
+    'data-overlayscrollbars-initialize': true,
+  };
 
   console.log(browser);
   console.log(device);
@@ -40,18 +43,18 @@ export default async function RootLayout({ children }: PropsWithChildren) {
       <html
         lang="ko"
         color={cookies.theme}
-        data-overlayscrollbars-initialize={!isMobile}
+        {...(isIos ? {} : overlayScrollbarInitialize)}
         data-mantine-color-scheme={colorScheme} // mantine-theme-ssr
       >
         <head>
           <DefaultHead />
         </head>
-        <body data-overlayscrollbars-initialize={!isMobile}>
+        <body {...(isIos ? {} : overlayScrollbarInitialize)}>
           <Configs cookies={cookies} colorScheme={colorScheme}>
             {children}
           </Configs>
           <GoogleTagManager />
-          <GlobalScrollbar disable={isMobile} />
+          {!isIos && <GlobalScrollbar />}
         </body>
       </html>
     </ViewTransitions>
