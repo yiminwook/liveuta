@@ -7,11 +7,11 @@ import ScheduleSlider from '@/components/home/ScheduleSlider';
 import { SCHEDULE_CACHE_TIME } from '@/constants';
 import useCachedData from '@/hooks/useCachedData';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
-import useModalStore from '@/hooks/useModalStore';
 import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
 import { generateVideoUrl } from '@/libraries/youtube/url';
+import { useSetModalStore } from '@/stores/modal';
 import { TContentsData } from '@/types/api/mongoDB';
 import { GetScheduleRes } from '@/types/api/schedule';
 import { TYChannelsData } from '@/types/api/youtube';
@@ -36,7 +36,7 @@ type Props = {
 export default function Client({ session, coverImgUrl, recentChannels }: Props) {
   const [query, setQuery] = useState('');
   const router = useRouter(useTransitionRouter);
-  const modalStore = useModalStore();
+  const modalStore = useSetModalStore();
   const { whiteList, blackList } = useCachedData({ session });
 
   const { data, isPending } = useQuery({

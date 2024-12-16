@@ -1,6 +1,6 @@
 import CopyButton from '@/components/common/button/CopyButton';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
-import { ModalProps } from '@/libraries/modal/ModalController';
+import { ModalProps } from '@/stores/modal';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
 import Image from 'next/image';

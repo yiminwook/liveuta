@@ -1,11 +1,11 @@
 'use client';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import useInfiniteScheduleData from '@/hooks/useInfiniteScheduleData';
-import useModalStore from '@/hooks/useModalStore';
 import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
 import { generateVideoUrl } from '@/libraries/youtube/url';
+import { useSetModalStore } from '@/stores/modal';
 import { TContentsData } from '@/types/api/mongoDB';
 import { TScheduleDto } from '@/types/dto';
 import { gtagClick } from '@/utils/gtag';
@@ -42,7 +42,7 @@ export default function ScheduleSection({
   whiteList,
   isLoading = false,
 }: ScheduleSectionProps) {
-  const modalStore = useModalStore();
+  const modalStore = useSetModalStore();
 
   const {
     loadContents,

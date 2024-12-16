@@ -1,6 +1,6 @@
 import Modal from '@/components/common/modal/Modal';
 import { useTransition } from '@/hooks/useTransition';
-import { ModalBaseProps } from '@/libraries/modal/ModalController';
+import { ModalProps } from '@/stores/modal';
 import { useMultiViewStore } from '@/stores/multiView';
 import classNames from 'classnames';
 import { Link } from 'next-view-transitions';
@@ -10,11 +10,11 @@ import css from './MultiListModal.module.scss';
 
 type ListModalProps = {
   defaultValue?: string;
-} & ModalBaseProps;
+};
 
 const ID = 'multiListModal';
 
-export default function ListModal({ onClose, defaultValue }: ListModalProps) {
+export default function ListModal({ onClose, defaultValue }: ModalProps<ListModalProps>) {
   const multiViewStore = useMultiViewStore();
   const [input, setInput] = useState(defaultValue || '');
   const { modifier, onAnimationEnd, exit } = useTransition();

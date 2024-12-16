@@ -1,5 +1,5 @@
 'use client';
-import ModalContainer from '@/libraries/modal/ModalContainer';
+import ModalContainer from '@/libraries/ModalContainer';
 import ModalContext from '@/libraries/modal/ModalContext';
 import ModalController from '@/libraries/modal/ModalController';
 import { PropsWithChildren, useState } from 'react';

@@ -2,7 +2,7 @@ import SearchInput from '@/components/common/input/SearchInput';
 import VideoTypeRadio from '@/components/schedule//VideoTypeRadio';
 import NavTab from '@/components/schedule/NavTab';
 import { useTransition } from '@/hooks/useTransition';
-import { ModalBaseProps } from '@/libraries/modal/ModalController';
+import { ModalProps } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
 import { CloseButton } from '@mantine/core';
 import classNames from 'classnames';
@@ -21,9 +21,13 @@ type MobileNavModalProps = {
     stream: number;
     video: number;
   };
-} & ModalBaseProps;
+};
 
-export default function MobileNavModal({ onClose, scheduleDto, length }: MobileNavModalProps) {
+export default function MobileNavModal({
+  onClose,
+  scheduleDto,
+  length,
+}: ModalProps<MobileNavModalProps>) {
   const [query, setQuery] = useState(scheduleDto.query);
   const searchParams = useSearchParams();
   const { modifier, onAnimationEnd, exit } = useTransition();

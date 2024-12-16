@@ -1,9 +1,9 @@
 import TimelineText from '@/components/common/TimestampText';
 import Modal from '@/components/common/modal/Modal';
-import { ModalProps } from '@/libraries/modal/ModalController';
 import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateVideoUrl } from '@/libraries/youtube/url';
+import { ModalProps } from '@/stores/modal';
 import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
 import { isMobile } from 'react-device-detect';

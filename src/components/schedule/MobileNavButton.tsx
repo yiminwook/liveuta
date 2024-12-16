@@ -1,10 +1,10 @@
 'use client';
-import useModalStore from '@/hooks/useModalStore';
+import { useSetModalStore } from '@/stores/modal';
+import { FilterText, SelectedText } from '@/types';
+import { TScheduleDto } from '@/types/dto';
 import { BsSliders } from 'react-icons/bs';
 import MobileNavModal from '../common/modal/MobileNavModal';
 import css from './ScheduleNav.module.scss';
-import { FilterText, SelectedText } from '@/types';
-import { TScheduleDto } from '@/types/dto';
 
 type MobileNavButtonProps = {
   length: {
@@ -16,7 +16,7 @@ type MobileNavButtonProps = {
 };
 
 export default function MobileNavButton({ length, scheduleDto }: MobileNavButtonProps) {
-  const modalStore = useModalStore();
+  const modalStore = useSetModalStore();
 
   const handleOpen = async () => {
     await modalStore.push(MobileNavModal, {

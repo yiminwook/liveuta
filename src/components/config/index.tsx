@@ -1,11 +1,10 @@
-import { PORTAL_ID } from '@/constants';
 import { TGetCookiesReturn } from '@/utils/getCookie';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
 import Hotkeys from './Hotkeys';
 import Jotai from './Jotai';
 import MantineProvider from './MantineProvider';
-import ModalProvider from './ModalProvider';
+import ModalContainer from './ModalContainer';
 import NProgressProviders from './NProgress';
 import NextAuth from './NextAuth';
 import ParticleProvider from './ParticleProvider';
@@ -34,13 +33,13 @@ export default function Configs({ children, cookies, colorScheme }: ConfigsProps
             <NProgressProviders>
               <MantineProvider defaultColorScheme={colorScheme}>
                 <Hotkeys>
-                  <ModalProvider>{children}</ModalProvider>
+                  {children}
                   <ToastBox />
                   <ParticleProvider />
                   <ServiceWorker />
                   <Devtools />
                   <div id="pip" />
-                  <div id={PORTAL_ID} />
+                  <ModalContainer />
                 </Hotkeys>
               </MantineProvider>
             </NProgressProviders>

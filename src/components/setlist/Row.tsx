@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import useModalStore from '@/hooks/useModalStore';
 import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
+import { useSetModalStore } from '@/stores/modal';
 import { replaceParentheses } from '@/utils/regexp';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
@@ -23,7 +23,7 @@ export type RowProps = {
 export default function Row({ setlist, channel, order }: RowProps) {
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
   const router = useRouter(useTransitionRouter);
-  const modalStore = useModalStore();
+  const modalStore = useSetModalStore();
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
   const create = dayjs(setlist.createdAt).format('YYYY년 MM월 DD일');
   const broad = dayjs(setlist.broadcastAt).format('YYYY년 MM월 DD일');

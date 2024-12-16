@@ -2,8 +2,8 @@
 import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
-import useModalStore from '@/hooks/useModalStore';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
+import { useSetModalStore } from '@/stores/modal';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { renderSubscribe } from '@/utils/renderSubscribe';
@@ -30,7 +30,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
   const subscribe = renderSubscribe(statistics.subscriberCount ?? '비공개');
   const videoCount = statistics.videoCount ?? '비공개';
 
-  const modalStore = useModalStore();
+  const modalStore = useSetModalStore();
 
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
