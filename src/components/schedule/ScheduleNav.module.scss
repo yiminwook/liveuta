@@ -11,16 +11,6 @@
   transform: translateZ(0);
 }
 
-.favoriteBtn {
-  @extend %flex-center;
-  background-color: #fff;
-  border-radius: 5px;
-  width: 2.5rem;
-  height: 2.5rem;
-  box-shadow: var.$box-shadow;
-  transition: background-color 0.3s var.$bezier-curve;
-}
-
 .navTabBox {
   display: none;
 
@@ -29,21 +19,13 @@
   }
 }
 
-.multiLink {
-  @extend %flex-center;
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 5px;
-  background-color: map-get(var.$colors, body);
-  box-shadow: var.$box-shadow;
-  transition:
-    background-color 0.3s var.$bezier-curve,
-    color 0.3s var.$bezier-curve;
-  &:hover {
-    background-color: util.palette(second, default);
-    color: #fff;
-  }
-}
+:global(#{var.$theme-light-selector}) .multiLink {
+  color: var(--mantine-color-gray-7);
+} 
+
+:global(#{var.$theme-dark-selector}) .multiLink {
+  color: var(--mantine-color-text);
+} 
 
 .right {
   display: flex;

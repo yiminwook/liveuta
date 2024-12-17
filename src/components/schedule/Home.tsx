@@ -19,10 +19,9 @@ const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 type HomeProps = {
   scheduleDto: TScheduleDto;
   session: Session | null;
-  isFavorite?: boolean;
 };
 
-export default function Home({ scheduleDto, session, isFavorite = false }: HomeProps) {
+export default function Home({ scheduleDto, session }: HomeProps) {
   const { isActive, refreshInterval } = useAutoSync();
   const { whiteList, blackList } = useCachedData({ session });
 
@@ -65,7 +64,7 @@ export default function Home({ scheduleDto, session, isFavorite = false }: HomeP
 
       let isPassList: boolean;
 
-      if (isFavorite) {
+      if (scheduleDto.isFavorite) {
         isPassList = inWhitelist;
       } else {
         isPassList = !inBlacklist;
@@ -98,7 +97,7 @@ export default function Home({ scheduleDto, session, isFavorite = false }: HomeP
         video: videoCount,
       },
     };
-  }, [data, scheduleDto, whiteList, blackList, isFavorite]);
+  }, [data, scheduleDto, whiteList, blackList]);
 
   return (
     <>
@@ -108,7 +107,6 @@ export default function Home({ scheduleDto, session, isFavorite = false }: HomeP
             session={session}
             scheduleDto={scheduleDto}
             length={proceedScheduleData.length}
-            isFavorite={isFavorite}
           />
         </div>
       </div>
