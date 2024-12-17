@@ -2,34 +2,82 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  width: 100%;
 
-  @include util.min-width(md) {
-    max-width: 30rem;
-  }
+  .inputBox {
+    position: relative;
 
-  .input {
-    width: 100%;
-  }
-
-  .submit {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.25rem;
-    width: 4.5rem;
-    height: 2rem;
-    background-color: util.palette(second, default);
-    color: var(--liveuta-txt-light);
-    box-shadow: 0px 1px 2px 0 rgba(56, 52, 52, 0.4);
-    transition: background-color 0.3s var.$bezier-curve;
-
-    &:hover {
-      background-color: util.palette(second, light);
+    &:has(.input:placeholder-shown) .searchIcon,
+    &:has(.input:not(:placeholder-shown)) .clearButton {
+      visibility: visible;
+      opacity: 1;
+      rotate: 0deg;
+      pointer-events: auto;
     }
 
-    &:active {
-      background-color: util.palette(second, dark);
+    .input {
+      width: 12rem;
+      border-radius: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid map-get(var.$colors, default-border);
+      outline: none;
+      transition-property: border-color, width;
+      transition-duration: 0.2s;
+      transition-timing-function: map-get(var.$easing, default);
+      font-size: 0.875rem;
+
+      &:focus,
+      &:not(:placeholder-shown) {
+        width: 15rem;
+      }
+
+      &:focus-visible {
+        border-color: util.palette(second, default);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+
+        &:focus,
+        &:not(:placeholder-shown) {
+          width: 12rem;
+        }
+      }
+    }
+
+    .icon {
+      visibility: hidden;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 0.25rem;
+      position: absolute;
+      top: 50%;
+      right: 0.4rem;
+      translate: 0 -50%;
+      opacity: 0;
+      pointer-events: none;
+      transition-property: opacity, rotate, visibility;
+      transition-duration: 0.3s;
+      transition-timing-function: map-get(var.$easing, default);
+      transition-behavior: discrete;
+
+      &:hover {
+        background-color: map-get(var.$colors, default-hover);
+      }
+
+      &:focus-visible {
+        box-shadow: 0 0 0 0.125rem util.palette(second, default);
+      }
+    }
+
+    .searchIcon {
+      rotate: 90deg;
+    }
+
+    .clearButton {
+      rotate: -90deg;
     }
   }
 }

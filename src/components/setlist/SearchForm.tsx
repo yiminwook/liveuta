@@ -1,9 +1,11 @@
 'use client';
-import { TextInput } from '@mantine/core';
+import { Button, Input, TextInput } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
+import cx from 'classnames';
 import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
 import { useState } from 'react';
+import { TbSearch, TbX } from 'react-icons/tb';
 import css from './SearchForm.module.scss';
 
 interface SearchFormProps {
@@ -34,15 +36,27 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
 
   return (
     <form className={css.wrap} onSubmit={handleSearch}>
-      <TextInput
-        className={css.input}
-        value={query}
-        onChange={handleQuery}
-        placeholder="세트리 검색"
-      />
-      <button className={css.submit} type="submit">
+      <div className={css.inputBox}>
+        <input
+          className={css.input}
+          value={query}
+          onChange={handleQuery}
+          placeholder="세트리 검색"
+        />
+        <div className={cx(css.icon, css.searchIcon)}>
+          <TbSearch />
+        </div>
+        <button
+          className={cx(css.icon, css.clearButton)}
+          type="button"
+          onClick={() => setQuery('')}
+        >
+          <TbX className={css.clearIcon} />
+        </button>
+      </div>
+      <Button className={css.submit} size="compact-md">
         검색
-      </button>
+      </Button>
     </form>
   );
 }

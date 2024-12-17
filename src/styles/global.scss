@@ -212,3 +212,8 @@ body #nprogress {
     }
   }
 }
+
+.hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
