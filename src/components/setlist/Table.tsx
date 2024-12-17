@@ -3,17 +3,21 @@ import Nodata from '@/components/common/Nodata';
 import loadingCss from '@/components/common/loading/Loading.module.scss';
 import { SETLIST_PAGE_SIZE } from '@/constants';
 import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
+import { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { GetSetlistRes } from '@/types/api/setlist';
 import { Pagination } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import axios, { AxiosHeaders } from 'axios';
 import cx from 'classnames';
+import { Cause, Data, Effect } from 'effect';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
 import Wave from '../common/loading/Wave';
 import Row from './Row';
 import css from './Table.module.scss';
+
+class AxiosFetchError extends Data.Error<{ cause: Error }> {}
 
 type TableProps = {
   searchParams: {
@@ -25,31 +29,74 @@ type TableProps = {
   session: Session | null;
 };
 
+function getSetListByQuery(query: string, headers: AxiosHeaders) {
+  return Effect.tryPromise({
+    try: () =>
+      axios.get<GetSetlistRes>(`/api/v1/setlist?${query}`, {
+        headers,
+      }),
+    catch: () =>
+      new AxiosFetchError({
+        cause: new Error('Cannot fetch set list'),
+      }),
+  });
+}
+
+type DataType = {
+  list: Setlist[];
+  totalPage: number;
+};
+
 export default function Table({ session, searchParams, channelDataset }: TableProps) {
   const router = useRouter(useTransitionRouter);
 
   const { data, isLoading } = useQuery({
     queryKey: ['searchSetlist', searchParams],
     queryFn: async () => {
-      const query = new URLSearchParams();
-      query.set('query', searchParams.query);
-      query.set('start', ((searchParams.page - 1) * SETLIST_PAGE_SIZE).toString());
-      query.set('order', searchParams.order);
-      query.set('isFavorite', 'false');
-      const headers = new AxiosHeaders();
-      if (session) {
-        headers.set('Authorization', `Bearer ${session.user.accessToken}`);
-      }
+      const program = Effect.gen(function* (_) {
+        const query = new URLSearchParams();
+        query.set('query', searchParams.query);
+        query.set('start', ((searchParams.page - 1) * SETLIST_PAGE_SIZE).toString());
+        query.set('order', searchParams.order);
+        query.set('isFavorite', 'false');
+        const headers = new AxiosHeaders();
 
-      const res = await axios.get<GetSetlistRes>(`/api/v1/setlist?${query.toString()}`, {
-        headers,
-      });
+        if (session) {
+          headers.set('Authorization', `Bearer ${session.user.accessToken}`);
+        }
 
-      const data = res.data.data;
-      return {
-        list: data.list,
-        totalPage: Math.ceil(data.total / SETLIST_PAGE_SIZE),
-      };
+        const res = yield* _(getSetListByQuery(query.toString(), headers));
+
+        const data = res.data.data;
+
+        const returnValue: DataType = {
+          list: data.list,
+          totalPage: Math.ceil(data.total / SETLIST_PAGE_SIZE),
+        };
+
+        return returnValue;
+      }).pipe(
+        Effect.catchAllCause((cause) => {
+          const isFailure = Cause.isFailType(cause);
+
+          if (isFailure) {
+            console.error(cause.error.message);
+          } else {
+            console.error('Unknown error occurred');
+          }
+
+          const returnValue: DataType = {
+            list: [],
+            totalPage: 0,
+          };
+
+          return Effect.succeed(returnValue);
+        }),
+      );
+
+      const result = await Effect.runPromise(program);
+
+      return result;
     },
   });
 
@@ -68,7 +115,7 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
       </div>
     );
 
-  if (!data) return <Nodata />;
+  if (!data || data.list.length === 0) return <Nodata />;
 
   return (
     <div>
