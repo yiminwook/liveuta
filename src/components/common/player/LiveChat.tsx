@@ -1,17 +1,16 @@
 'use client';
 import { ORIGIN } from '@/constants';
-import { playerVideoIdAtom } from '@/stores/player';
+import { usePlayerStore } from '@/stores/player';
 import popupCenter from '@/utils/popup';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
-import { useAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import css from './Player.module.scss';
 
 export default function LiveChat() {
-  const [videoId] = useAtom(playerVideoIdAtom);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const videoId = usePlayerStore((state) => state.videoId);
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointLg})`);
   const url = `https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${ORIGIN}&dark_theme=1`;
 

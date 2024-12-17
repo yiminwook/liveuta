@@ -1,10 +1,9 @@
 'use client';
 import TimelineText from '@/components/common/TimestampText';
-import { playerStatusAtom } from '@/stores/player';
+import { usePlayerStore } from '@/stores/player';
 import { Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { useSetAtom } from 'jotai';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
@@ -22,7 +21,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
   const router = useRouter(useTransitionRouter);
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState('');
-  const setPlayerStatus = useSetAtom(playerStatusAtom);
+  const setTimeline = usePlayerStore((state) => state.actions.setTimeline);
   const queryClient = useQueryClient();
 
   const toggleEditing = () => {
@@ -86,7 +85,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
   };
 
   const handleTimestamp = ({ timestamp }: { videoId: string; timestamp: number }) => {
-    setPlayerStatus((pre) => ({ ...pre, timeline: timestamp, isPlaying: true, hide: false }));
+    setTimeline(timestamp);
   };
 
   useEffect(() => {

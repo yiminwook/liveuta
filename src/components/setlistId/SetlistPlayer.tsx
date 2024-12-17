@@ -1,8 +1,7 @@
 'use client';
 import css from '@/components/common/player/Player.module.scss';
 import PlayerPlaceholder from '@/components/common/player/PlayerPlaceholder';
-import { playerStatusAtom, playerVideoIdAtom } from '@/stores/player';
-import { useSetAtom } from 'jotai';
+import { usePlayerStore } from '@/stores/player';
 import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -21,8 +20,7 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
   const timestamp = Number(searchParams.get('t')) || 0;
-  const setPlayerStatus = useSetAtom(playerStatusAtom);
-  const setPlayerVideoId = useSetAtom(playerVideoIdAtom);
+  const prepareSetlist = usePlayerStore((state) => state.actions.prepareSetlist);
   const [isShow, setIsShow] = useState(true);
 
   const handleInteresect: IntersectionObserverCallback = (items) => {
@@ -31,9 +29,7 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   };
 
   useEffect(() => {
-    // 자동재생 되지 않도록 설정
-    setPlayerStatus((pre) => ({ ...pre, isPlaying: false, timeline: timestamp }));
-    setPlayerVideoId(() => videoId);
+    prepareSetlist(videoId, timestamp);
   }, []);
 
   useEffect(() => {
@@ -42,7 +38,7 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
     const observer = new IntersectionObserver(handleInteresect);
     requestAnimationFrame(() => {
       // 요소 랜더링 후 옵저버 시작
-    observer.observe(current);
+      observer.observe(current);
     });
     return () => {
       observer.disconnect();
@@ -52,7 +48,7 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   return (
     <div ref={wrapRef} className={css.playerBox}>
       {!isShow && <PlayerPlaceholder />}
-      <Player isLive={false} isShow={isShow} />
+      <Player isShow={isShow} isLive={false} />
     </div>
   );
 }

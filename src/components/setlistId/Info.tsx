@@ -3,12 +3,11 @@ import dayjs from '@/libraries/dayjs';
 import { ChannleDatesetItem } from '@/libraries/mongoDB/getAllChannel';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
-import { playerVideoIdAtom } from '@/stores/player';
+import { usePlayerStore } from '@/stores/player';
 import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { openWindow } from '@/utils/windowEvent';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { useResetAtom } from 'jotai/utils';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
 import { Link, useTransitionRouter } from 'next-view-transitions';
@@ -34,7 +33,7 @@ export default function Info({ setlist, channel, session }: InfoProps) {
   const broadcast = dayjs(setlist.broadcastAt).format('YYYY년 MM월 DD일');
   const create = dayjs(setlist.createdAt).format('YYYY년 MM월 DD일');
   const update = dayjs(setlist.updatedAt).format('YYYY년 MM월 DD일');
-  const resetPlayerId = useResetAtom(playerVideoIdAtom);
+  const resetPlayer = usePlayerStore((state) => state.actions.reset);
 
   const handleLocation = (url: string) => {
     if (isMobile) {
@@ -55,7 +54,7 @@ export default function Info({ setlist, channel, session }: InfoProps) {
     onSuccess: () => {
       toast.success('삭제되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
-      resetPlayerId();
+      resetPlayer();
       router.back();
     },
     onError: (error) => {

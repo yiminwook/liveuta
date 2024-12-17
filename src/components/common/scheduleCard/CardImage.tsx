@@ -3,10 +3,9 @@ import altImage from '@/assets/image/thumbnail_alt_img.png';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { playerStatusAtom, playerVideoIdAtom } from '@/stores/player';
+import { usePlayerStore } from '@/stores/player';
 import { TContentsData } from '@/types/api/mongoDB';
 import { gtagClick } from '@/utils/gtag';
-import { useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { useCallback, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -20,8 +19,7 @@ export default function CardImage({ content }: CardImageProps) {
   const videoUrl = generateVideoUrl(videoId);
   const thumbnailUrl = generateThumbnail(videoId, 'mqdefault');
   const [imgLoaded, setImgLoaded] = useState(true);
-  const setPlayerVideoId = useSetAtom(playerVideoIdAtom);
-  const setPlayerStatus = useSetAtom(playerStatusAtom);
+  const setVideo = usePlayerStore((state) => state.actions.setVideo);
   const imgRef = useRef<HTMLImageElement>(null);
 
   const handleImgValidity = useCallback(() => {
@@ -43,8 +41,7 @@ export default function CardImage({ content }: CardImageProps) {
     if (isMobile) {
       window.location.href = videoUrl;
     } else {
-      setPlayerVideoId(() => videoId);
-      setPlayerStatus((pre) => ({ ...pre, timeline: 0, hide: false, isPlaying: true }));
+      setVideo(videoId);
     }
   };
 
