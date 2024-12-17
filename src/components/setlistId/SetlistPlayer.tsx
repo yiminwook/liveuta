@@ -40,9 +40,14 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
     const current = wrapRef.current;
     if (current === null || isMobile) return;
     const observer = new IntersectionObserver(handleInteresect);
+    requestAnimationFrame(() => {
+      // 요소 랜더링 후 옵저버 시작
     observer.observe(current);
-    return () => observer.disconnect();
-  }, []);
+    });
+    return () => {
+      observer.disconnect();
+    };
+  }, [isMobile]);
 
   return (
     <div ref={wrapRef} className={css.playerBox}>
