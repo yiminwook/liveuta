@@ -1,5 +1,4 @@
 import { StreamCategory, StreamCategoryText } from '@/types';
-import { useAtom } from 'jotai';
 import css from './FeaturedRadio.module.scss';
 
 export default function FeaturedRadio() {

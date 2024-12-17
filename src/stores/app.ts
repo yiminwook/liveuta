@@ -22,9 +22,9 @@ export const createAppStore = (initState: TAppState) => {
   return createStore<TAppState & { actions: TAppAction }>((set, _get, _prev) => ({
     ...initState,
     actions: {
-      setTheme: (theme) => set((state) => ({ ...state, theme })),
-      setIsShowSidebar: (isShow) => set((state) => ({ ...state, isShowSidebar: isShow })),
-      setIsShowAcctSidebar: (isShow) => set((state) => ({ ...state, isShowAcctSidebar: isShow })),
+      setTheme: (theme) => set(() => ({ theme })),
+      setIsShowSidebar: (isShow) => set(() => ({ isShowSidebar: isShow })),
+      setIsShowAcctSidebar: (isShow) => set(() => ({ isShowAcctSidebar: isShow })),
     },
   }));
 };

@@ -5,7 +5,6 @@ import useScheduleStatus from '@/hooks/useScheduleStatus';
 import { StreamCategory } from '@/types';
 import { TContentsData } from '@/types/api/mongoDB';
 import { Button } from '@mantine/core';
-import { useAtom } from 'jotai';
 import { Session } from 'next-auth';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';

@@ -2,12 +2,11 @@ import { TGetCookiesReturn } from '@/utils/getCookie';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
 import Hotkeys from './Hotkeys';
-import Jotai from './Jotai';
 import MantineProvider from './MantineProvider';
 import ModalContainer from './ModalContainer';
 import NProgressProviders from './NProgress';
 import NextAuth from './NextAuth';
-import ParticleProvider from './ParticleProvider';
+import Particle from './Particle';
 import ReactQuery from './ReactQuery';
 import ServiceWorker from './ServiceWorker';
 import ToastBox from './ToastBox';
@@ -28,23 +27,21 @@ export default function Configs({ children, cookies, colorScheme }: ConfigsProps
           isShowAcctSidebar: false,
         }}
       >
-        <Jotai>
-          <ReactQuery>
-            <NProgressProviders>
-              <MantineProvider defaultColorScheme={colorScheme}>
-                <Hotkeys>
-                  {children}
-                  <ToastBox />
-                  <ParticleProvider />
-                  <ServiceWorker />
-                  <Devtools />
-                  <div id="pip" />
-                  <ModalContainer />
-                </Hotkeys>
-              </MantineProvider>
-            </NProgressProviders>
-          </ReactQuery>
-        </Jotai>
+        <ReactQuery>
+          <NProgressProviders>
+            <MantineProvider defaultColorScheme={colorScheme}>
+              <Hotkeys>
+                {children}
+                <ToastBox />
+                <Particle />
+                <ServiceWorker />
+                <Devtools />
+                <div id="pip" />
+                <ModalContainer />
+              </Hotkeys>
+            </MantineProvider>
+          </NProgressProviders>
+        </ReactQuery>
       </AppProvider>
     </NextAuth>
   );
