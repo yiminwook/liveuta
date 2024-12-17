@@ -1,7 +1,13 @@
-'use client';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/common/Vaul';
 import { Anchor } from '@mantine/core';
 import { Session } from 'next-auth';
-import { Drawer } from 'vaul';
+import { useEffect, useState } from 'react';
 import css from './PostDrawer.module.scss';
 import PostForm from './PostForm';
 
@@ -10,28 +16,34 @@ type PostDrawerProps = {
 };
 
 export default function PostDrawer({ session }: PostDrawerProps) {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (open === true) {
+      document.documentElement.querySelector('.os-scrollbar-vertical')?.classList.add('hidden');
+    } else {
+      document.documentElement.querySelector('.os-scrollbar-vertical')?.classList.remove('hidden');
+    }
+  }, [open]);
+
   return (
-    <Drawer.Root>
-      <Drawer.Trigger className={css.trigger}>작성</Drawer.Trigger>
-      <Drawer.Portal>
-        <Drawer.Overlay className={css.overlay} />
-        <Drawer.Content className={css.content}>
-          <div className={css.handle}></div>
-          <div className={css.setListWrap}>
-            <div className={css.setList}>
-              <Drawer.Title className={css.title}>세트리스트 작성</Drawer.Title>
-              <Anchor
-                href="https://uta-tools.vercel.app/ko/tools/youtube/timeline"
-                className={css.utaToolsLink}
-                size="lg"
-              >
-                우타툴즈 타임라인으로 이동
-              </Anchor>
-              <PostForm session={session} />
-            </div>
-          </div>
-        </Drawer.Content>
-      </Drawer.Portal>
-    </Drawer.Root>
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger className={css.trigger}>세트리스트 작성</DrawerTrigger>
+      <DrawerContent className={css.contentWrapper}>
+        <div className={css.content}>
+          <DrawerHeader className={css.header}>
+            <DrawerTitle className={css.title}>세트리스트 작성</DrawerTitle>
+          </DrawerHeader>
+          <Anchor
+            href="https://uta-tools.vercel.app/ko/tools/youtube/timeline"
+            className={css.utaToolsLink}
+            size="lg"
+          >
+            우타툴즈 타임라인으로 이동
+          </Anchor>
+          <PostForm session={session} />
+        </div>
+      </DrawerContent>
+    </Drawer>
   );
 }

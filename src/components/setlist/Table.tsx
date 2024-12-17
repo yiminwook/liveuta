@@ -1,19 +1,22 @@
 'use client';
 import Nodata from '@/components/common/Nodata';
 import loadingCss from '@/components/common/loading/Loading.module.scss';
+import Wave from '@/components/common/loading/Wave';
 import { SETLIST_PAGE_SIZE } from '@/constants';
-import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
-import { Setlist } from '@/libraries/oracleDB/setlist/service';
-import { GetSetlistRes } from '@/types/api/setlist';
-import { Pagination } from '@mantine/core';
+import type { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
+import type { Setlist } from '@/libraries/oracleDB/setlist/service';
+import type { GetSetlistRes } from '@/types/api/setlist';
+import { Pagination, Table } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import axios, { AxiosHeaders } from 'axios';
 import cx from 'classnames';
 import { Cause, Data, Effect } from 'effect';
-import { Session } from 'next-auth';
+import type { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
-import Wave from '../common/loading/Wave';
+import { useRef } from 'react';
+import SetlistDrawer from './Drawer';
+import { DrawerProvider } from './DrawerContext';
 import Row from './Row';
 import css from './Table.module.scss';
 
@@ -47,8 +50,9 @@ type DataType = {
   totalPage: number;
 };
 
-export default function Table({ session, searchParams, channelDataset }: TableProps) {
+export default function SetlistTable({ session, searchParams, channelDataset }: TableProps) {
   const router = useRouter(useTransitionRouter);
+  const drawerRef = useRef<HTMLDivElement>(null);
 
   const { data, isLoading } = useQuery({
     queryKey: ['searchSetlist', searchParams],
@@ -85,12 +89,7 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
             console.error('Unknown error occurred');
           }
 
-          const returnValue: DataType = {
-            list: [],
-            totalPage: 0,
-          };
-
-          return Effect.succeed(returnValue);
+          return Effect.fail(cause);
         }),
       );
 
@@ -118,36 +117,38 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
   if (!data || data.list.length === 0) return <Nodata />;
 
   return (
-    <div>
-      <div className={css.table}>
-        <div className={css.header}>
-          <div className={css.headerCell}>썸네일</div>
-          <div className={css.headerCell}>채널명</div>
-          <div className={cx(css.headerCell, css.flex2)}>제목</div>
-          <div className={css.headerCell}>
-            {searchParams.order === 'create' ? '작성일' : '방송일'}
-          </div>
-        </div>
-        <div className={css.body}>
-          {data.list.map((data) => (
+    <DrawerProvider>
+      <Table className={css.table} highlightOnHover>
+        <Table.Thead className={css.head}>
+          <Table.Tr className={css.headRow}>
+            <Table.Td className={cx(css.headCell, css.thumbnail)} />
+            <Table.Td className={cx(css.headCell, css.channel)}>채널명</Table.Td>
+            <Table.Td className={cx(css.headCell, css.title)}>제목</Table.Td>
+            <Table.Td className={cx(css.headCell, css.time)}>
+              {searchParams.order === 'create' ? '작성일' : '방송일'}
+            </Table.Td>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody className={css.body}>
+          {data.list.map((setlist) => (
             <Row
-              key={data.videoId}
-              setlist={data}
-              channel={channelDataset[data.channelId]}
-              order={searchParams.order}
+              key={setlist.videoId}
+              setlist={setlist}
+              channel={channelDataset[setlist.channelId]}
             />
           ))}
-          {data.list.length === 0 && <Nodata />}
-        </div>
-        <div className={css.paginationBox}>
-          <Pagination
-            total={data.totalPage}
-            siblings={1}
-            value={searchParams.page}
-            onChange={handlePage}
-          />
-        </div>
+        </Table.Tbody>
+      </Table>
+      <div className={css.paginationBox}>
+        <Pagination
+          total={data.totalPage}
+          siblings={1}
+          value={searchParams.page}
+          onChange={handlePage}
+        />
       </div>
-    </div>
+      {/* TODO - 데스크탑에서는 Modal 사용 */}
+      <SetlistDrawer />
+    </DrawerProvider>
   );
 }

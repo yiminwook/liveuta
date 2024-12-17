@@ -1,150 +1,102 @@
 .table {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  .head {
+    .headRow {
+      .time {
+        display: none;
+        visibility: hidden;
 
-  * {
-    margin: 0;
-    padding: 0;
-  }
-
-  .header {
-    display: none;
-    align-items: center;
-    transition: background-color 0.2s var.$bezier-curve;
-    padding-inline: 0.5rem;
-    height: 3rem;
-    color: util.palette(third, dark);
-    font-weight: 600;
-    border-block-end: 2px solid white;
-
-    @include util.min-width(md) {
-      display: flex;
-    }
-
-    .headerCell {
-      flex: 1;
-      padding: 0.5rem;
+        @include util.min-width(var.$mobile-boundary) {
+          display: block;
+          visibility: visible;
+        }
+      }
     }
   }
 
   .body {
-    display: flex;
-    flex-direction: column;
-
     .row {
-      display: flex;
-      padding-inline: 0.5rem;
-      border-block-end: 1px solid white;
-      transition: background-color 0.2s var.$bezier-curve;
-
-      &:hover {
-        cursor: pointer;
-        background-color: util.palette(first, lighter);
-      }
+      transition: background-color 0.2s map-get(var.$easing, default);
 
       .cell {
-        flex: 1;
-        padding: 0.5rem;
-      }
-    }
+        vertical-align: middle;
 
-    .mobileRow {
-      position: relative;
-      display: flex;
-      padding: 0.5rem;
-      gap: 0.5rem;
-      transition: background-color 0.2s var.$bezier-curve;
+        p {
+          min-width: 8ch;
+          padding: 0;
+          margin: 0;
 
-      &:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 95%;
-        border-bottom: 1px solid white;
-      }
-
-      &:hover {
-        cursor: pointer;
-        background-color: util.palette(first, lighter);
-      }
-
-      .mobileLeft {
-        flex: 1;
-      }
-
-      .mobileRight {
-        flex: 2;
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-
-        .mobileChannelName {
-          @include util.text-line(1, 1.6);
-          font-weight: 500;
-          font-size: 1.2rem;
-          line-height: 1.6rem;
-          height: 1.6rem;
-        }
-
-        .mobileTitle {
-          @include util.text-line(2, 1.25);
-        }
-
-        .mobileTime {
-          font-size: 0.85rem;
-          color: util.palette(monochrome, 6);
-          line-height: 0.85rem;
-          height: 0.85rem;
+          @include util.text-line(2, 1.3);
+          height: auto;
+          max-height: #{1.3 * 2}em;
         }
       }
-    }
-  }
 
-  .paginationBox {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    padding-block: 1rem;
-    overflow-x: auto;
-    ::-webkit-scrollbar {
-      height: 5px;
-    }
+      .thumbnail {
+        .thumbnailButton {
+          display: grid;
+          place-items: center;
+          width: 100%;
 
-    .paginationButton {
-      padding: 0.5rem;
-      font-weight: 500;
-    }
-  }
+          .thumbnailBox {
+            display: grid;
+            place-items: center;
+            width: 100%;
+            min-width: 6rem;
+            max-width: 6rem;
+            border-radius: 5px;
+            overflow: hidden;
 
-  .imageButton {
-    width: 100%;
-    height: 100%;
+            @include util.min-width(lg) {
+              max-width: 7rem;
+            }
 
-    .thumbnailBox {
-      position: relative;
-      object-fit: cover;
-      aspect-ratio: 16 / 9;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
+            @include util.min-width(xl) {
+              max-width: 8rem;
+            }
 
-      img {
-        aspect-ratio: 16 / 9;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+
+      .channel {
+        max-width: 8ch;
+
+        @include util.min-width(var.$mobile-boundary) {
+          max-width: auto;
+        }
+      }
+
+      .time {
+        display: none;
+        visibility: hidden;
+
+        @include util.min-width(var.$mobile-boundary) {
+          display: table-cell;
+          visibility: visible;
+        }
       }
     }
   }
+}
 
-  .flex2 {
-    flex: 2 !important;
+.paginationBox {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-block: 1rem;
+  overflow-x: auto;
+
+  ::-webkit-scrollbar {
+    height: 5px;
   }
 
-  .flex3 {
-    flex: 3 !important;
+  .paginationButton {
+    padding: 0.5rem;
+    font-weight: 500;
   }
 }
