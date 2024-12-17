@@ -9,7 +9,7 @@ import { Pagination } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import axios, { AxiosHeaders } from 'axios';
 import cx from 'classnames';
-import { Cause, Data, Effect } from 'effect';
+import { Data, Effect } from 'effect';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
 import { useTransitionRouter } from 'next-view-transitions';
@@ -75,24 +75,25 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
         };
 
         return returnValue;
-      }).pipe(
-        Effect.catchAllCause((cause) => {
-          const isFailure = Cause.isFailType(cause);
+      });
+      // .pipe(
+      //   Effect.catchAllCause((cause) => {
+      //     const isFailure = Cause.isFailType(cause);
 
-          if (isFailure) {
-            console.error(cause.error.message);
-          } else {
-            console.error('Unknown error occurred');
-          }
+      //     if (isFailure) {
+      //       console.error(cause.error.message);
+      //     } else {
+      //       console.error('Unknown error occurred');
+      //     }
 
-          const returnValue: DataType = {
-            list: [],
-            totalPage: 0,
-          };
+      //     const returnValue: DataType = {
+      //       list: [],
+      //       totalPage: 0,
+      //     };
 
-          return Effect.succeed(returnValue);
-        }),
-      );
+      //     return Effect.succeed(returnValue);
+      //   }),
+      // );
 
       const result = await Effect.runPromise(program);
 
