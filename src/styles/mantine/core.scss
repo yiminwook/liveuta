@@ -4976,7 +4976,6 @@ fieldset:disabled .m_d3ea56bb,
   border-radius: var(--sc-radius, var(--mantine-radius-default));
   overflow: hidden;
   padding: calc(0.25rem * var(--mantine-scale));
-  box-shadow: var.$box-shadow;
 }
 
 .m_cf365364:where([data-full-width]) {
@@ -4994,11 +4993,11 @@ fieldset:disabled .m_d3ea56bb,
 }
 
 :where([data-mantine-color-scheme='light']) .m_cf365364 {
-  background-color: #fff;
+  background-color: var(--mantine-color-white);
 }
 
 :where([data-mantine-color-scheme='dark']) .m_cf365364 {
-  background-color: #fff;
+  background-color: var(--mantine-color-dark-6);
 }
 
 .m_9e182ccd {

@@ -1,3 +1,4 @@
+import { is } from 'effect/ParseResult';
 import { z } from 'zod';
 
 export const homeDto = z.object({
@@ -18,4 +19,8 @@ export const scheduleDto = z.object({
     .enum(['all', 'video', 'stream'])
     .nullish()
     .transform((v) => v || 'all'),
+  isFavorite: z
+    .string()
+    .nullish()
+    .transform((v) => v === 'true'),
 });

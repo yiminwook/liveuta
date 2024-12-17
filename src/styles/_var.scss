@@ -9,6 +9,10 @@ $footer-height: 4rem;
 $safe-header-height: calc($header-height + $env-top);
 $safe-footer-height: calc($footer-height + $env-bottom);
 
+// #{} interpolation과 함께 사용
+$theme-light-selector: ":where([data-mantine-color-scheme='light'])";
+$theme-dark-selector: ":where([data-mantine-color-scheme='dark'])";
+
 $breakpoints: (
   xs: 30rem,
   sm: 48rem,

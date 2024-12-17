@@ -1,5 +1,5 @@
+import { ActionIcon } from '@mantine/core';
 import { FaStar } from 'react-icons/fa';
-import css from './ScheduleNav.module.scss';
 
 type ToggleFavoriteProps = {
   isFavorite: boolean;
@@ -8,8 +8,8 @@ type ToggleFavoriteProps = {
 
 export default function ToggleFavorite({ isFavorite, onClick }: ToggleFavoriteProps) {
   return (
-    <button className={css.favoriteBtn} onClick={onClick}>
-      <FaStar size="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
-    </button>
+    <ActionIcon onClick={onClick} size="lg" w={40} h={40} variant="default">
+      <FaStar color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
+    </ActionIcon>
   );
 }

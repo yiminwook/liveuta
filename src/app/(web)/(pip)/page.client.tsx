@@ -165,7 +165,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
         <section className={css.favoriteSection}>
           <div className={css.favoriteNav}>
             <h2>🌟 즐겨찾기</h2>
-            <MoreButton href="/favorite" />
+            <MoreButton href="/schedule?isFavorite=true" />
           </div>
           <ScheduleSlider
             isLoading={isPending}
