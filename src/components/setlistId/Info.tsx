@@ -10,6 +10,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
+import Link from 'next/link';
 import { isMobile } from 'react-device-detect';
 import { BsMusicNoteList } from 'react-icons/bs';
 import { ImYoutube } from 'react-icons/im';
