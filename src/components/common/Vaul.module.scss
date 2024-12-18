@@ -5,33 +5,39 @@
   background-color: #00000060;
 }
 
-.contentWrapper {
+.contentComponent {
   position: fixed;
   inset-inline: 0;
   bottom: 0;
   display: flex;
   flex-direction: column;
   height: auto;
-  align-items: center;
   margin-block-start: 6rem;
   z-index: map-get(var.$z-indexes, max);
   border: 1px solid map-get(var.$colors, default-border);
   border-radius: 0.5rem 0.5rem 0 0;
   background-color: map-get(var.$colors, body);
+}
 
-  .handle {
-    width: 100px;
-    height: 0.5rem;
-    margin-inline: auto;
-    margin-block-start: 0.5rem;
-    border-radius: 100px;
-    background-color: map-get(var.$colors, dimmed);
-  }
+.handle {
+  width: 100px;
+  height: 0.5rem;
+  margin-inline: auto;
+  margin-block-start: 0.5rem;
+  border-radius: 100px;
+  background-color: map-get(var.$colors, dimmed);
+}
 
-  .content {
-    width: 100%;
-    max-width: map-get(var.$breakpoints, sm);
-  }
+.contentWrapper {
+  display: flex;
+  justify-content: center;
+  max-height: 50svh;
+}
+
+.content {
+  width: 100%;
+  max-width: map-get(var.$breakpoints, sm);
+  padding-inline: 0.5rem;
 }
 
 .header {
