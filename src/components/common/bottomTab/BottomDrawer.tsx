@@ -47,7 +47,7 @@ export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
 
   return (
     <Drawer open={isOpen} onClose={onClose}>
-      <DrawerContent style={{ maxWidth: variable.breakpointSm }}>
+      <DrawerContent>
         <DrawerHeader className="blind">
           <DrawerTitle>사이트 맵</DrawerTitle>
           <DrawerDescription>링크를 선택해주세요</DrawerDescription>
