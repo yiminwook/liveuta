@@ -112,21 +112,18 @@ const withBundleAnalyzer = NextBundleAnalyzer({
   enabled: false,
 });
 
+const isEnableSentry = !!process.env.NEXT_PUBLIC_SENTRY_DSN && !!process.env.SENTRY_AUTH_TOKEN;
+
 const SENTRY_BUILD_OPTIONS: SentryBuildOptions = {
+  silent: !isEnableSentry, // Can be used to suppress logs
   org: 'yisp',
   project: 'liveuta',
   authToken: process.env.SENTRY_AUTH_TOKEN,
-  silent: false, // Can be used to suppress logs
   autoInstrumentMiddleware: false,
   sourcemaps: {
     disable: true,
   },
 };
 
-const isEnableSentry = !!process.env.NEXT_PUBLIC_SENTRY_DSN && !!process.env.SENTRY_AUTH_TOKEN;
-
 // turbopack 호환 안될시 롤백
-export default () =>
-  isEnableSentry
-    ? withSentryConfig(withBundleAnalyzer(nextConfig), SENTRY_BUILD_OPTIONS)
-    : withBundleAnalyzer(nextConfig);
+export default withSentryConfig(withBundleAnalyzer(nextConfig), SENTRY_BUILD_OPTIONS);
