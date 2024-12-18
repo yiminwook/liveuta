@@ -5,13 +5,14 @@
   background-color: #00000060;
 }
 
-.content {
+.contentWrapper {
   position: fixed;
   inset-inline: 0;
   bottom: 0;
   display: flex;
   flex-direction: column;
-  height:auto;
+  height: auto;
+  align-items: center;
   margin-block-start: 6rem;
   z-index: map-get(var.$z-indexes, max);
   border: 1px solid map-get(var.$colors, default-border);
@@ -22,9 +23,14 @@
     width: 100px;
     height: 0.5rem;
     margin-inline: auto;
-    margin-block-start: 1rem;
+    margin-block-start: 0.5rem;
     border-radius: 100px;
     background-color: map-get(var.$colors, dimmed);
+  }
+
+  .content {
+    width: 100%;
+    max-width: map-get(var.$breakpoints, sm);
   }
 }
 

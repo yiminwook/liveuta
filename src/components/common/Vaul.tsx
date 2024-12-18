@@ -24,6 +24,7 @@ import css from './Vaul.module.scss';
  *   </DrawerContent>
  * </Drawer>
  * ```
+ * 기본 Content 너비는 sm(48rem)
  */
 const Drawer = ({
   shouldScaleBackground = true,
@@ -48,17 +49,32 @@ const DrawerOverlay = ({
 );
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
-const DrawerContent = ({
-  className,
-  children,
-  ref,
-  ...props
-}: ComponentProps<typeof DrawerPrimitive.Content>) => (
+type DrawerContentProps = ComponentProps<typeof DrawerPrimitive.Content> & {
+  classNames?: {
+    wrapper?: string;
+    handle?: string;
+  };
+  height?: string;
+};
+
+/**
+ * DrawerContent 스타일링
+ * ```
+ * <DrawerContent className={css.content} classNames={{ wrapper: css.wrapper, handle: css.handle }}>
+ *   ...
+ * </DrawerContent>
+ * ```
+ */
+const DrawerContent = ({ className, classNames, children, ref, ...props }: DrawerContentProps) => (
   <DrawerPortal>
     <DrawerOverlay />
-    <DrawerPrimitive.Content ref={ref} className={cx(css.content, className)} {...props}>
-      <div className={css.handle} />
-      {children}
+    <DrawerPrimitive.Content
+      ref={ref}
+      className={cx(css.contentWrapper, classNames?.wrapper)}
+      {...props}
+    >
+      <div className={cx(css.handle, classNames?.handle)} />
+      <div className={cx(css.content, className)}>{children}</div>
     </DrawerPrimitive.Content>
   </DrawerPortal>
 );
