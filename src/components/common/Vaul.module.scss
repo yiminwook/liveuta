@@ -32,12 +32,13 @@
   display: flex;
   justify-content: center;
   max-height: 50svh;
+  padding-inline: 0.5rem;
+  padding-block-end: 0.5rem;
 }
 
 .content {
-  width: 100%;
   max-width: map-get(var.$breakpoints, sm);
-  padding-inline: 0.5rem;
+  width: 100%;
 }
 
 .header {
