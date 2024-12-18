@@ -1,5 +1,6 @@
 import path from 'node:path';
 import NextBundleAnalyzer from '@next/bundle-analyzer';
+import { withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
 
 const withBundleAnalyzer = NextBundleAnalyzer({
@@ -111,4 +112,14 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withBundleAnalyzer(nextConfig);
+// turbopack 호환 안될시 롤백
+export default withSentryConfig(withBundleAnalyzer(nextConfig), {
+  org: 'yisp',
+  project: 'liveuta',
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  silent: false, // Can be used to suppress logs
+  autoInstrumentMiddleware: false,
+  sourcemaps: {
+    disable: true,
+  },
+});

@@ -12,10 +12,10 @@ export const typeErrorAPI = async () => {
 export default function Fire() {
   const [fire, setFire] = useState(false);
 
-  if (process.env.NODE_ENV === 'production') {
-    console.log('빌드 에러테스트!!!', fire);
-    throw new Error('에러테스트!!!');
-  }
+  // if (process.env.NODE_ENV === 'production') {
+  //   console.log('빌드 에러테스트!!!', fire);
+  //   throw new Error('에러테스트!!!');
+  // }
 
   if (fire) throw new Error('에러테스트!!!');
 

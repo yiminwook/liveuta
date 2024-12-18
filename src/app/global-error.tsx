@@ -1,8 +1,9 @@
 'use client';
 import character from '@/assets/image/character-6.png';
+import * as Sentry from '@sentry/nextjs';
 import axios from 'axios';
-import { Link } from 'next-view-transitions';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect } from 'react';
 
 export default function GlobalError({
@@ -12,12 +13,16 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error('Error-Boundary', process.env.NODE_ENV, error);
+    console.error('Global-Error-Boundary', process.env.NODE_ENV, error);
     axios({
       method: 'POST',
-      url: '/api/log/error',
+      url: '/api/v1/log/error',
       data: { message: error.message, stack: error.stack, digest: error.digest },
     }).then((res) => res.status === 200 && console.log('에러 전송 성공'));
+  }, [error]);
+
+  useEffect(() => {
+    Sentry.captureException(error);
   }, [error]);
 
   return (
@@ -41,6 +46,7 @@ export default function GlobalError({
                 <h2>{error.message}</h2>
               </div>
               <div>
+                {/* next/link 사용 */}
                 <Link href="/">홈으로 돌아가기</Link>
               </div>
             </div>

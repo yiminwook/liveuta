@@ -6,27 +6,13 @@ Main - https://liveuta.vercel.app
 
 Dev - https://liveuta-dev.vercel.app
 
-개발현황 - https://github.com/orgs/utawaku/projects/2
+## node v20.14.0
+## pnpm v9.15
 
-## node v18.19.0
 
 ## Server API docs
 
 1. POST /api/push
-
-```typescript
-  body PushData[]
-
-  return {
-    data: {
-      response: { success: string; messageId: string; }[];
-      successCount: number;
-      failureCount: number;
-    }
-  }
-```
-
-## Types
 
 ```typescript
 interface PushData {
@@ -43,16 +29,28 @@ interface PushData {
 }
 ```
 
+```
+  @body PushData[]
+
+  @return {
+    data: {
+      response: { success: string; messageId: string; }[];
+      successCount: number;
+      failureCount: number;
+    }
+  }
+```
+
 ## Environments
 
 ```
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
-/** 미사용 */
+# 미사용
 HOLODEX_API_KEY=
-/** Youtube Data v3 API */
+# Youtube Data v3 API
 GOOGLE_API_KEY=AIz...
 
-/** Auth */
+# Auth 
 NEXTAUTH_SECRET=
 ACCESS_SECRET=
 GOOGLE_CLIENT_ID=
@@ -62,7 +60,7 @@ KAKAO_CLIENT_SECRET=
 DISCORD_CLIENT_ID=
 DISCORD_CLIENT_SECRET=
 
-/** Google Sheet v4 API, Firebase Cloud Messaging */
+# Google Sheet v4 API, Firebase Cloud Messaging
 FIREBASE_CLIENT_EMAIL=firebase-adminsdk...
 FIREBASE_PROJECT_ID=liveuta-...
 FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\n...
@@ -72,4 +70,8 @@ MONGODB_URI=
 
 ORACLEDB_CONNECTSTRING=
 ORACLEDB_PASSWORD=
+
+# optional
+NEXT_PUBLIC_SENTRY_DSN=
+SENTRY_AUTH_TOKEN=
 ```

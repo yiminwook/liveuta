@@ -1,10 +1,11 @@
 // https://nextjs.org/docs/app/building-your-application/routing/error-handling
 //에러 페이지는 클라이언트에서만 렌더링되어야 합니다.
 'use client';
-import { useEffect } from 'react';
 import character from '@/assets/image/character-6.png';
+import * as Sentry from '@sentry/nextjs';
 import axios from 'axios';
 import Image from 'next/image';
+import { useEffect } from 'react';
 import css from './not-found.module.scss';
 
 export default function Error({
@@ -18,9 +19,13 @@ export default function Error({
     console.error('Error-Boundary', process.env.NODE_ENV, error);
     axios({
       method: 'POST',
-      url: '/api/log/error',
+      url: '/api/v1/log/error',
       data: { message: error.message, stack: error.stack, digest: error.digest },
     }).then((res) => res.status === 200 && console.log('에러 전송 성공'));
+  }, [error]);
+
+  useEffect(() => {
+    Sentry.captureException(error);
   }, [error]);
 
   return (

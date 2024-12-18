@@ -1,6 +1,6 @@
+import { DEFAULT_ICON, DEFAULT_SITE_URL } from '@/constants/metaData';
 import Script from 'next/script';
 import GoogleAnalytics from './GoogleAnalytics';
-import { DEFAULT_ICON, DEFAULT_SITE_URL } from '@/constants/metaData';
 
 export default function DefaultHead() {
   const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
