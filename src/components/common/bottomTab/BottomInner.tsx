@@ -1,5 +1,5 @@
 import { UnstyledButton } from '@mantine/core';
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { CgUserlane } from 'react-icons/cg';
 import { FaListOl } from 'react-icons/fa';

@@ -8,7 +8,6 @@ import { Table } from '@mantine/core';
 import cx from 'classnames';
 import dayjs from 'dayjs';
 import { useRouter } from 'next-nprogress-bar';
-import { useTransitionRouter } from 'next-view-transitions';
 import { type MouseEvent } from 'react';
 import { useDrawerActions } from './DrawerContext';
 import css from './Table.module.scss';
@@ -20,7 +19,7 @@ type RowProps = {
 };
 
 export default function Row({ setlist, channel, order }: RowProps) {
-  const router = useRouter(useTransitionRouter);
+  const router = useRouter();
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
   const title = replaceParentheses(setlist.title);
   const create = dayjs(setlist.createdAt).format('YYYY년 MM월 DD일');

@@ -10,7 +10,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
-import { Link, useTransitionRouter } from 'next-view-transitions';
 import { isMobile } from 'react-device-detect';
 import { BsMusicNoteList } from 'react-icons/bs';
 import { ImYoutube } from 'react-icons/im';
@@ -25,7 +24,7 @@ type InfoProps = {
 };
 
 export default function Info({ setlist, channel, session }: InfoProps) {
-  const router = useRouter(useTransitionRouter);
+  const router = useRouter();
   const queryClient = useQueryClient();
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);

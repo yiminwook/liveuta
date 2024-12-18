@@ -13,7 +13,6 @@ import cx from 'classnames';
 import { Cause, Data, Effect } from 'effect';
 import type { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
-import { useTransitionRouter } from 'next-view-transitions';
 import { useRef } from 'react';
 import SetlistDrawer from './Drawer';
 import { DrawerProvider } from './DrawerContext';

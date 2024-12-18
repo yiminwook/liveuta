@@ -6,7 +6,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
-import { useTransitionRouter } from 'next-view-transitions';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import css from './Desc.module.scss';
@@ -18,7 +17,7 @@ type DescProps = {
 };
 
 export default function Desc({ session, videoId, description }: DescProps) {
-  const router = useRouter(useTransitionRouter);
+  const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState('');
   const setTimeline = usePlayerStore((state) => state.actions.setTimeline);

@@ -1,4 +1,4 @@
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { MdOutlineExplore } from 'react-icons/md';
 import css from './Sidebar.module.scss';

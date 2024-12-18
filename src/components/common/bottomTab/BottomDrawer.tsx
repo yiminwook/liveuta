@@ -1,7 +1,7 @@
 import { ActionIcon, SimpleGrid } from '@mantine/core';
 import variable from '@variable';
 import classNames from 'classnames';
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 import { JSX, useState } from 'react';
 import { GrTest } from 'react-icons/gr';
 import { LiaExchangeAltSolid, LiaMicrophoneAltSolid, LiaToolsSolid } from 'react-icons/lia';

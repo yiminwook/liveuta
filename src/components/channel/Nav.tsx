@@ -3,7 +3,6 @@ import { TextInput, UnstyledButton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
-import { useTransitionRouter } from 'next-view-transitions';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
@@ -11,7 +10,7 @@ import css from './Nav.module.scss';
 
 export default function Nav() {
   const searchParams = useSearchParams();
-  const router = useRouter(useTransitionRouter);
+  const router = useRouter();
   const [input, setInput] = useState(searchParams.get('q') || '');
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
 

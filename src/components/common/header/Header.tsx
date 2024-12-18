@@ -4,7 +4,7 @@ import HamburgerBtn from '@/components/common/button/HamburgerBtn';
 import { useSetAppStore } from '@/stores/app';
 import { Avatar } from '@mantine/core';
 import { Session } from 'next-auth';
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 import { useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 import DesktopNav from './DesktopNav';

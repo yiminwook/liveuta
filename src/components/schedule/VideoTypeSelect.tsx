@@ -3,7 +3,6 @@ import { SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import { ComboboxItemGroup, Select } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
-import { useTransitionRouter } from 'next-view-transitions';
 import Cookies from 'universal-cookie';
 import css from './ScheduleNav.module.scss';
 
@@ -17,7 +16,7 @@ type VideoTypeSelectProps = {
 };
 
 export default function VideoTypeSelect({ select, length }: VideoTypeSelectProps) {
-  const router = useRouter(useTransitionRouter);
+  const router = useRouter();
 
   const handleSelect = (value: string | null) => {
     if (value === null) return;

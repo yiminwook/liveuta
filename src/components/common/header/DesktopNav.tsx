@@ -1,10 +1,9 @@
 import { EXTERNAL_LINKS, INTERNAL_LINKS } from '@/constants';
 import { useRouter } from 'next-nprogress-bar';
-import { useTransitionRouter } from 'next-view-transitions';
 import HeaderMenu from './HeaderMenu';
 
 export default function DesktopNav() {
-  const router = useRouter(useTransitionRouter);
+  const router = useRouter();
   const handleSelect = (value: string) => router.push(value);
 
   return (

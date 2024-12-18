@@ -1,6 +1,5 @@
 import { Menu, UnstyledButton } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
-import { useTransitionRouter } from 'next-view-transitions';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import css from './HeaderMenu.module.scss';
@@ -13,7 +12,7 @@ type HeaderMenuProps = {
 
 export default function HeaderMenu({ title, links }: HeaderMenuProps) {
   const pathname = usePathname();
-  const router = useRouter(useTransitionRouter);
+  const router = useRouter();
   const [opened, setOpened] = useState(false);
 
   return (

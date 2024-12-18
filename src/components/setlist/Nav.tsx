@@ -2,7 +2,6 @@
 import { SegmentedControl } from '@mantine/core';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
-import { useTransitionRouter } from 'next-view-transitions';
 import css from './Nav.module.scss';
 import PostDrawer from './PostDrawer';
 import SearchForm from './SearchForm';
@@ -19,7 +18,7 @@ type SearchFormProps = {
 };
 
 export default function Nav({ searchParams, session }: SearchFormProps) {
-  const router = useRouter(useTransitionRouter);
+  const router = useRouter();
 
   function handleOrderChange(value: OrderType) {
     const query = new URLSearchParams();

@@ -1,12 +1,11 @@
 'use client';
 import character from '@/assets/image/character-8.png';
 import { useRouter } from 'next-nprogress-bar';
-import { useTransitionRouter } from 'next-view-transitions';
 import Image from 'next/image';
 import css from './not-found.module.scss';
 
 export default function Client() {
-  const router = useRouter(useTransitionRouter);
+  const router = useRouter();
 
   return (
     <div className={css.wrap}>
