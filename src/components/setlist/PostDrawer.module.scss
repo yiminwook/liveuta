@@ -14,13 +14,6 @@
   }
 }
 
-.contentWrapper {
-  display: grid;
-  place-items: center;
-  height: 70svh;
-
-  .content {
-    width: 100%;
-    max-width: 50rem;
-  }
+.wrapper {
+  max-height: none;
 }

@@ -29,20 +29,18 @@ export default function PostDrawer({ session }: PostDrawerProps) {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger className={css.trigger}>세트리스트 작성</DrawerTrigger>
-      <DrawerContent className={css.contentWrapper}>
-        <div className={css.content}>
-          <DrawerHeader className={css.header}>
-            <DrawerTitle className={css.title}>세트리스트 작성</DrawerTitle>
-          </DrawerHeader>
-          <Anchor
-            href="https://uta-tools.vercel.app/ko/tools/youtube/timeline"
-            className={css.utaToolsLink}
-            size="lg"
-          >
-            우타툴즈 타임라인으로 이동
-          </Anchor>
-          <PostForm session={session} />
-        </div>
+      <DrawerContent className={css.content} classNames={{ wrapper: css.wrapper }}>
+        <DrawerHeader className={css.header}>
+          <DrawerTitle className={css.title}>세트리스트 작성</DrawerTitle>
+        </DrawerHeader>
+        <Anchor
+          href="https://uta-tools.vercel.app/ko/tools/youtube/timeline"
+          className={css.utaToolsLink}
+          size="lg"
+        >
+          우타툴즈 타임라인으로 이동
+        </Anchor>
+        <PostForm session={session} />
       </DrawerContent>
     </Drawer>
   );
