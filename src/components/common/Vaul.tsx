@@ -1,6 +1,6 @@
 'use client';
 import cx from 'classnames';
-import { ComponentPropsWithoutRef, ComponentRef, HTMLAttributes, forwardRef } from 'react';
+import { ComponentProps, HTMLAttributes } from 'react';
 import { Drawer as DrawerPrimitive } from 'vaul';
 import css from './Vaul.module.scss';
 
@@ -39,18 +39,21 @@ const DrawerPortal = DrawerPrimitive.Portal;
 
 const DrawerClose = DrawerPrimitive.Close;
 
-const DrawerOverlay = forwardRef<
-  ComponentRef<typeof DrawerPrimitive.Overlay>,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
->(({ className, ...props }, ref) => (
+const DrawerOverlay = ({
+  className,
+  ref,
+  ...props
+}: ComponentProps<typeof DrawerPrimitive.Overlay>) => (
   <DrawerPrimitive.Overlay ref={ref} className={cx(css.overlay, className)} {...props} />
-));
+);
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
-const DrawerContent = forwardRef<
-  ComponentRef<typeof DrawerPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+const DrawerContent = ({
+  className,
+  children,
+  ref,
+  ...props
+}: ComponentProps<typeof DrawerPrimitive.Content>) => (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content ref={ref} className={cx(css.content, className)} {...props}>
@@ -58,7 +61,7 @@ const DrawerContent = forwardRef<
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>
-));
+);
 DrawerContent.displayName = 'DrawerContent';
 
 const DrawerHeader = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
@@ -71,20 +74,22 @@ const DrawerFooter = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) =
 );
 DrawerFooter.displayName = 'DrawerFooter';
 
-const DrawerTitle = forwardRef<
-  ComponentRef<typeof DrawerPrimitive.Title>,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>
->(({ className, ...props }, ref) => (
+const DrawerTitle = ({
+  className,
+  ref,
+  ...props
+}: ComponentProps<typeof DrawerPrimitive.Title>) => (
   <DrawerPrimitive.Title ref={ref} className={cx(css.title, className)} {...props} />
-));
+);
 DrawerTitle.displayName = DrawerPrimitive.Title.displayName;
 
-const DrawerDescription = forwardRef<
-  ComponentRef<typeof DrawerPrimitive.Description>,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>
->(({ className, ...props }, ref) => (
+const DrawerDescription = ({
+  className,
+  ref,
+  ...props
+}: ComponentProps<typeof DrawerPrimitive.Description>) => (
   <DrawerPrimitive.Description ref={ref} className={cx(css.description, className)} {...props} />
-));
+);
 DrawerDescription.displayName = DrawerPrimitive.Description.displayName;
 
 export {

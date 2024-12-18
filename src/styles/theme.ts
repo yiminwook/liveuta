@@ -73,7 +73,7 @@ export const theme = createTheme({
     SegmentedControl: SegmentedControl.extend({
       styles: {
         root: {
-          backgroundColor: variable.colorBody,
+          boxShadow: '0px 0px 0px 1px var(--mantine-color-default-border)',
         },
       },
       defaultProps: {

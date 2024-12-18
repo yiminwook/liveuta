@@ -57,9 +57,9 @@ export function DrawerProvider({ children }: { children: ReactNode }) {
   }, [drawerContext]);
 
   return (
-    <DrawerActionContext.Provider value={actions}>
-      <DrawerContext.Provider value={drawerContext}>{children}</DrawerContext.Provider>
-    </DrawerActionContext.Provider>
+    <DrawerActionContext value={actions}>
+      <DrawerContext value={drawerContext}>{children}</DrawerContext>
+    </DrawerActionContext>
   );
 }
 

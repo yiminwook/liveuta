@@ -30,7 +30,6 @@ export default function NavTab() {
 
   return (
     <SegmentedControl
-      styles={{ root: { boxShadow: '0px 0px 0px 1px var(--mantine-color-default-border)' } }}
       value={filter}
       withItemsBorders={false}
       onChange={handleValueChange}
