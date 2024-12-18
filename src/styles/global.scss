@@ -54,10 +54,6 @@ body {
   -moz-osx-font-smoothing: var(--mantine-moz-font-smoothing);
 }
 
-.bg {
-  background-color: var(--mantine-color-body);
-}
-
 @media screen and (max-device-width: 31.25em) {
   body {
     -webkit-text-size-adjust: 100%;
