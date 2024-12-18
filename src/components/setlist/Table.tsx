@@ -50,7 +50,7 @@ type DataType = {
 };
 
 export default function SetlistTable({ session, searchParams, channelDataset }: TableProps) {
-  const router = useRouter(useTransitionRouter);
+  const router = useRouter();
   const drawerRef = useRef<HTMLDivElement>(null);
 
   const { data, isLoading } = useQuery({
