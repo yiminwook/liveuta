@@ -1,11 +1,7 @@
 import path from 'node:path';
 import NextBundleAnalyzer from '@next/bundle-analyzer';
-import { withSentryConfig } from '@sentry/nextjs';
+import { SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
-
-const withBundleAnalyzer = NextBundleAnalyzer({
-  enabled: false,
-});
 
 // const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -112,8 +108,11 @@ const nextConfig: NextConfig = {
   },
 };
 
-// turbopack 호환 안될시 롤백
-export default withSentryConfig(withBundleAnalyzer(nextConfig), {
+const withBundleAnalyzer = NextBundleAnalyzer({
+  enabled: false,
+});
+
+const SENTRY_BUILD_OPTIONS: SentryBuildOptions = {
   org: 'yisp',
   project: 'liveuta',
   authToken: process.env.SENTRY_AUTH_TOKEN,
@@ -122,4 +121,12 @@ export default withSentryConfig(withBundleAnalyzer(nextConfig), {
   sourcemaps: {
     disable: true,
   },
-});
+};
+
+const isEnableSentry = !!process.env.NEXT_PUBLIC_SENTRY_DSN && !!process.env.SENTRY_AUTH_TOKEN;
+
+// turbopack 호환 안될시 롤백
+export default () =>
+  isEnableSentry
+    ? withSentryConfig(withBundleAnalyzer(nextConfig), SENTRY_BUILD_OPTIONS)
+    : withBundleAnalyzer(nextConfig);
