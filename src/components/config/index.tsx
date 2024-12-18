@@ -23,7 +23,6 @@ export default function Configs({ children, cookies, colorScheme }: ConfigsProps
       <AppProvider
         initState={{
           theme: cookies.theme,
-          isShowSidebar: false,
           isShowAcctSidebar: false,
         }}
       >

@@ -7,7 +7,7 @@ import { GrTest } from 'react-icons/gr';
 import { LiaExchangeAltSolid, LiaMicrophoneAltSolid, LiaToolsSolid } from 'react-icons/lia';
 import { LuSettings } from 'react-icons/lu';
 import { TiStarOutline } from 'react-icons/ti';
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '../Vaul';
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../Vaul';
 import css from './BottomTab.module.scss';
 
 type DrawerItem = {
@@ -48,15 +48,15 @@ export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
   return (
     <Drawer open={isOpen} onClose={onClose}>
       <DrawerContent style={{ maxWidth: variable.breakpointSm }}>
-        <DrawerHeader>
-          <DrawerTitle className="blind">사이트 맵</DrawerTitle>
+        <DrawerHeader className="blind">
+          <DrawerTitle>사이트 맵</DrawerTitle>
+          <DrawerDescription>링크를 선택해주세요</DrawerDescription>
         </DrawerHeader>
         <SimpleGrid cols={3} className={css.drawerGrid}>
           {(isExternal ? EXTERNAL_ITEMS : INTERNAL_ITEMS).map(({ icon, href, text }) => (
-            <div className={css.item}>
+            <div className={css.item} key={`bottomDrawer_${text}`}>
               <ActionIcon
                 variant="default"
-                key={`bottomDrawer_${text}`}
                 className={classNames(css.roundBtn)}
                 component={(isExternal ? 'a' : Link) as 'a'}
                 href={href}
@@ -66,7 +66,7 @@ export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
               </ActionIcon>
             </div>
           ))}
-          <div className={css.item}>
+          <div className={css.item} key="bottomDrawer_converter">
             <ActionIcon
               variant="default"
               className={classNames(css.roundBtn, 'converter')}

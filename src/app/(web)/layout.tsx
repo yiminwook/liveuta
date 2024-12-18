@@ -1,11 +1,9 @@
 import getQueryClient from '@/apis/getQueryClient';
 import DataFetchingObserver from '@/components/common/DataFetchingObserver';
-import Footer from '@/components/common/Footer';
 import PageView from '@/components/common/PageView';
 import BottomTab from '@/components/common/bottomTab/BottomTab';
 import Header from '@/components/common/header/Header';
 import AccountSidebar from '@/components/common/sidebar/Account';
-import Sidebar from '@/components/common/sidebar/Sidebar';
 import { auth } from '@/libraries/nextAuth';
 import { TGetChannelRes } from '@api/v1/channel/route';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
@@ -65,7 +63,6 @@ export default async function Layout({ children }: PropsWithChildren) {
         <Header session={session} />
         {children}
         <BottomTab />
-        <Sidebar />
         {session && <AccountSidebar session={session} />}
       </PageView>
     </HydrationBoundary>
