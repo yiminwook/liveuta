@@ -34,7 +34,7 @@ import css from './Vaul.module.scss';
  * wrapper의 최대 높이 제거
  * ```scss
  * .wrapper {
- *   max-height: auto;
+ *   max-height: none;
  * }
  * ```
  */
@@ -87,7 +87,7 @@ type DrawerContentProps = ComponentProps<typeof DrawerPrimitive.Content> & {
  * wrapper의 최대 높이 제거
  * ```scss
  * .wrapper {
- *   max-height: auto;
+ *   max-height: none;
  * }
  * ```
  */
