@@ -3,6 +3,12 @@ import { StreamCategory } from '..';
 
 export type isStream = 'TRUE' | 'NULL' | 'FALSE';
 
+export const STAT_MAPPER = {
+  TRUE: 'stream',
+  FALSE: 'closed',
+  NULL: 'scheduled',
+} as const;
+
 export interface ChannelDocument {
   _id?: string;
   channel_id: string;

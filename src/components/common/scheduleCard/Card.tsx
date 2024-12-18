@@ -1,8 +1,7 @@
 'use client';
-import { TContentsData } from '@/types/api/mongoDB';
+import { STAT_MAPPER, TContentsData } from '@/types/api/mongoDB';
 import cx from 'classnames';
 import { Session } from 'next-auth';
-import { useMemo } from 'react';
 import CardDesc from './CardDesc';
 import CardImage from './CardImage';
 import CardMenu from './CardMenu';
@@ -33,23 +32,6 @@ export default function ScheduleCard({
   addBlock,
   showMenu = false,
 }: ScheduleCardProps) {
-  const addStreamModifier = useMemo(() => {
-    let streamModifier: string;
-
-    switch (content.isStream) {
-      case 'FALSE':
-        streamModifier = 'closed';
-        break;
-      case 'TRUE':
-        streamModifier = 'stream';
-        break;
-      default:
-        streamModifier = '';
-    }
-
-    return streamModifier;
-  }, [content.isStream]);
-
   const onClickAddMultiView = () => {
     addMultiView?.(content);
   };
@@ -67,6 +49,7 @@ export default function ScheduleCard({
     addBlock?.(content);
   };
 
+  const addStreamModifier = STAT_MAPPER[content.isStream];
   return (
     <div className={cx(css.card, addStreamModifier, classname)}>
       <CardImage content={content} />

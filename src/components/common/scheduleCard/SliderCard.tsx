@@ -1,4 +1,4 @@
-import { TContentsData } from '@/types/api/mongoDB';
+import { STAT_MAPPER, TContentsData } from '@/types/api/mongoDB';
 import { ActionIcon, Badge, Card, Text, Tooltip } from '@mantine/core';
 import variable from '@variable';
 import { BsBroadcast } from 'react-icons/bs';
@@ -87,15 +87,15 @@ export default function SliderCard({
           </Tooltip>
         </div>
 
-        {content.isStream === 'TRUE' && (
-          <Badge
-            size="sm"
-            color={variable.thirdColorDefault}
-            leftSection={<BsBroadcast color="#fff" />}
-          >
-            {content.viewer}
-          </Badge>
-        )}
+        <Badge
+          className={css.status}
+          size="md"
+          data-status={STAT_MAPPER[content.isStream]}
+          color={variable.thirdColorDefault}
+          leftSection={content.isStream === 'TRUE' && <BsBroadcast color="#fff" />}
+        >
+          {content.isStream === 'TRUE' ? content.viewer : STAT_MAPPER[content.isStream]}
+        </Badge>
       </div>
     </Card>
   );
