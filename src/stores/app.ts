@@ -5,11 +5,14 @@ import { createStore, useStore } from 'zustand';
 export type TAppState = {
   theme: TTheme;
   isShowAcctSidebar: boolean;
+  removeElIds: string[];
 };
 
 export type TAppAction = {
   setTheme: (theme: TTheme) => void;
   setIsShowAcctSidebar: (isShow: boolean) => void;
+  addRemoveElId: (id: string) => void;
+  removeRemoveElId: (id: string) => void;
 };
 
 export type TAppStore = TAppState & { actions: TAppAction };
@@ -22,6 +25,10 @@ export const createAppStore = (initState: TAppState) => {
     actions: {
       setTheme: (theme) => set(() => ({ theme })),
       setIsShowAcctSidebar: (isShow) => set(() => ({ isShowAcctSidebar: isShow })),
+      addRemoveElId: (id) => set((state) => ({ removeElIds: [...state.removeElIds, id] })),
+      removeRemoveElId: (id) => {
+        set((state) => ({ removeElIds: state.removeElIds.filter((elId) => elId !== id) }));
+      },
     },
   }));
 };

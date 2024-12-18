@@ -1,5 +1,4 @@
 'use client';
-
 import { OverlayScrollbars } from 'overlayscrollbars';
 import { useEffect } from 'react';
 
@@ -24,5 +23,6 @@ export default function GlobalScrollbar({ disable = false }: GlobalScrollbarProp
       },
     );
   }, []);
+
   return null;
 }

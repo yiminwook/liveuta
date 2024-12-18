@@ -8,6 +8,7 @@ import NProgressProviders from './NProgress';
 import NextAuth from './NextAuth';
 import Particle from './Particle';
 import ReactQuery from './ReactQuery';
+import ScrollbarObserver from './ScrollbarObserver';
 import ServiceWorker from './ServiceWorker';
 import ToastBox from './ToastBox';
 
@@ -24,6 +25,7 @@ export default function Configs({ children, cookies, colorScheme }: ConfigsProps
         initState={{
           theme: cookies.theme,
           isShowAcctSidebar: false,
+          removeElIds: [],
         }}
       >
         <ReactQuery>
@@ -37,6 +39,7 @@ export default function Configs({ children, cookies, colorScheme }: ConfigsProps
                 <Devtools />
                 <div id="pip" />
                 <ModalContainer />
+                <ScrollbarObserver />
               </Hotkeys>
             </MantineProvider>
           </NProgressProviders>

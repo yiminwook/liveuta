@@ -13,7 +13,7 @@ export default function BottomTab() {
   return (
     <div className={css.wrap}>
       <BottomInner openDrawer={openDrawer} />
-      <BottomDrawer isOpen={isOpen} onClose={closeDrawer} />
+      {isOpen && <BottomDrawer isOpen={isOpen} onClose={closeDrawer} />}
     </div>
   );
 }

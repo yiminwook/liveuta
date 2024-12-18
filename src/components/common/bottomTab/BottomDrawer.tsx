@@ -7,6 +7,7 @@ import { GrTest } from 'react-icons/gr';
 import { LiaExchangeAltSolid, LiaMicrophoneAltSolid, LiaToolsSolid } from 'react-icons/lia';
 import { LuSettings } from 'react-icons/lu';
 import { TiStarOutline } from 'react-icons/ti';
+import RemoveScroll from '../RemoveScroll';
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../Vaul';
 import css from './BottomTab.module.scss';
 
@@ -40,44 +41,46 @@ type BottomDrawerProps = {
   isOpen: boolean;
 };
 
-export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
+export default function BottomDrawer({ onClose }: BottomDrawerProps) {
   const [isExternal, setIsExternal] = useState(false);
 
   const toggleExternal = () => setIsExternal((prev) => !prev);
 
   return (
-    <Drawer open={isOpen} onClose={onClose}>
-      <DrawerContent style={{ maxWidth: variable.breakpointSm }}>
-        <DrawerHeader className="blind">
-          <DrawerTitle>사이트 맵</DrawerTitle>
-          <DrawerDescription>링크를 선택해주세요</DrawerDescription>
-        </DrawerHeader>
-        <SimpleGrid cols={3} className={css.drawerGrid}>
-          {(isExternal ? EXTERNAL_ITEMS : INTERNAL_ITEMS).map(({ icon, href, text }) => (
-            <div className={css.item} key={`bottomDrawer_${text}`}>
+    <RemoveScroll>
+      <Drawer open={true} onClose={onClose}>
+        <DrawerContent style={{ maxWidth: variable.breakpointSm }}>
+          <DrawerHeader className="blind">
+            <DrawerTitle>사이트 맵</DrawerTitle>
+            <DrawerDescription>링크를 선택해주세요</DrawerDescription>
+          </DrawerHeader>
+          <SimpleGrid cols={3} className={css.drawerGrid}>
+            {(isExternal ? EXTERNAL_ITEMS : INTERNAL_ITEMS).map(({ icon, href, text }) => (
+              <div className={css.item} key={`bottomDrawer_${text}`}>
+                <ActionIcon
+                  variant="default"
+                  className={classNames(css.roundBtn)}
+                  component={(isExternal ? 'a' : Link) as 'a'}
+                  href={href}
+                >
+                  {icon}
+                  <span>{text}</span>
+                </ActionIcon>
+              </div>
+            ))}
+            <div className={css.item} key="bottomDrawer_converter">
               <ActionIcon
                 variant="default"
-                className={classNames(css.roundBtn)}
-                component={(isExternal ? 'a' : Link) as 'a'}
-                href={href}
+                className={classNames(css.roundBtn, 'converter')}
+                onClick={toggleExternal}
               >
-                {icon}
-                <span>{text}</span>
+                <LiaExchangeAltSolid size="1.5rem" />
+                <span>전환</span>
               </ActionIcon>
             </div>
-          ))}
-          <div className={css.item} key="bottomDrawer_converter">
-            <ActionIcon
-              variant="default"
-              className={classNames(css.roundBtn, 'converter')}
-              onClick={toggleExternal}
-            >
-              <LiaExchangeAltSolid size="1.5rem" />
-              <span>전환</span>
-            </ActionIcon>
-          </div>
-        </SimpleGrid>
-      </DrawerContent>
-    </Drawer>
+          </SimpleGrid>
+        </DrawerContent>
+      </Drawer>
+    </RemoveScroll>
   );
 }
