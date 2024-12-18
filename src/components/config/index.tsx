@@ -1,5 +1,4 @@
 import { TGetCookiesReturn } from '@/utils/getCookie';
-import { ViewTransitions } from 'next-view-transitions';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
 import Hotkeys from './Hotkeys';
@@ -32,7 +31,7 @@ export default function Configs({ children, cookies, colorScheme }: ConfigsProps
           <NProgressProviders>
             <MantineProvider defaultColorScheme={colorScheme}>
               <Hotkeys>
-                <ViewTransitions>{children}</ViewTransitions>
+                {children}
                 <ToastBox />
                 <Particle />
                 <ServiceWorker />

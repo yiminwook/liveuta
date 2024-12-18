@@ -20,6 +20,7 @@ import { DEFAULT_METADATA } from '@/constants/metaData';
 import { getCookies } from '@/utils/getCookie';
 import { isDarkModeEnabled } from '@/utils/helper';
 import type { Metadata, Viewport } from 'next';
+import { ViewTransitions } from 'next-view-transitions';
 import { headers } from 'next/headers';
 import { userAgent } from 'next/server';
 import { PropsWithChildren } from 'react';
@@ -35,23 +36,25 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   };
 
   return (
-    <html
-      lang="ko"
-      color={cookies.theme}
-      {...(isIos ? {} : overlayScrollbarInitialize)}
-      data-mantine-color-scheme={colorScheme} // mantine-theme-ssr
-    >
-      <head>
-        <DefaultHead />
-      </head>
-      <body {...(isIos ? {} : overlayScrollbarInitialize)}>
-        <Configs cookies={cookies} colorScheme={colorScheme}>
-          {children}
-        </Configs>
-        <GoogleTagManager />
-        {!isIos && <GlobalScrollbar />}
-      </body>
-    </html>
+    <ViewTransitions>
+      <html
+        lang="ko"
+        color={cookies.theme}
+        {...(isIos ? {} : overlayScrollbarInitialize)}
+        data-mantine-color-scheme={colorScheme} // mantine-theme-ssr
+      >
+        <head>
+          <DefaultHead />
+        </head>
+        <body {...(isIos ? {} : overlayScrollbarInitialize)}>
+          <Configs cookies={cookies} colorScheme={colorScheme}>
+            {children}
+          </Configs>
+          <GoogleTagManager />
+          {!isIos && <GlobalScrollbar />}
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }
 
