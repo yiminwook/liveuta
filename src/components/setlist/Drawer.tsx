@@ -19,9 +19,11 @@ export default function Setlist() {
 
   useEffect(() => {
     if (drawer.open === true) {
-      document.documentElement.querySelector('.os-scrollbar-vertical')?.classList.add('hidden');
+      document.body.classList.add('overflow-hidden');
+      document.documentElement.classList.add('overflow-hidden');
     } else {
-      document.documentElement.querySelector('.os-scrollbar-vertical')?.classList.remove('hidden');
+      document.body.classList.remove('overflow-hidden');
+      document.documentElement.classList.remove('overflow-hidden');
     }
   }, [drawer.open]);
 

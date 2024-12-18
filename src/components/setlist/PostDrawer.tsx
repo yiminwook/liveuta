@@ -1,6 +1,7 @@
 import {
   Drawer,
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -20,9 +21,11 @@ export default function PostDrawer({ session }: PostDrawerProps) {
 
   useEffect(() => {
     if (open === true) {
-      document.documentElement.querySelector('.os-scrollbar-vertical')?.classList.add('hidden');
+      document.body.classList.add('overflow-hidden');
+      document.documentElement.classList.add('overflow-hidden');
     } else {
-      document.documentElement.querySelector('.os-scrollbar-vertical')?.classList.remove('hidden');
+      document.body.classList.remove('overflow-hidden');
+      document.documentElement.classList.remove('overflow-hidden');
     }
   }, [open]);
 
@@ -32,14 +35,16 @@ export default function PostDrawer({ session }: PostDrawerProps) {
       <DrawerContent className={css.content} classNames={{ wrapper: css.wrapper }}>
         <DrawerHeader className={css.header}>
           <DrawerTitle className={css.title}>세트리스트 작성</DrawerTitle>
+          <DrawerDescription className={css.description}>
+            <Anchor
+              href="https://uta-tools.vercel.app/ko/tools/youtube/timeline"
+              className={css.utaToolsLink}
+              size="lg"
+            >
+              우타툴즈 타임라인으로 이동
+            </Anchor>
+          </DrawerDescription>
         </DrawerHeader>
-        <Anchor
-          href="https://uta-tools.vercel.app/ko/tools/youtube/timeline"
-          className={css.utaToolsLink}
-          size="lg"
-        >
-          우타툴즈 타임라인으로 이동
-        </Anchor>
         <PostForm session={session} />
       </DrawerContent>
     </Drawer>
