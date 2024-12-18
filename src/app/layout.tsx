@@ -44,12 +44,14 @@ export default async function RootLayout({ children }: PropsWithChildren) {
       <head>
         <DefaultHead />
       </head>
-      <body {...(isIos ? {} : overlayScrollbarInitialize)}>
-        <Configs cookies={cookies} colorScheme={colorScheme}>
-          {children}
-        </Configs>
-        <GoogleTagManager />
-        {!isIos && <GlobalScrollbar />}
+      <body {...(isIos ? {} : overlayScrollbarInitialize)} data-vaul-drawer-wrapper>
+        <div className="bg">
+          <Configs cookies={cookies} colorScheme={colorScheme}>
+            {children}
+          </Configs>
+          <GoogleTagManager />
+          {!isIos && <GlobalScrollbar />}
+        </div>
       </body>
     </html>
   );
