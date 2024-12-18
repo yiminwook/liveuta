@@ -46,12 +46,6 @@
   }
 }
 
-button.hamburger {
-  @include util.min-width(var.$mobile-boundary) {
-    display: none;
-  }
-}
-
 a.title {
   @include util.text-line(1, 1.2);
   font-size: 2rem;

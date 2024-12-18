@@ -57,6 +57,7 @@
       .item {
         display: grid;
         place-items: center;
+        width: 100%;
         height: 100%;
         padding: 0.5em;        
         transition: color 0.2s util.easing(default);

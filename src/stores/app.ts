@@ -4,13 +4,11 @@ import { createStore, useStore } from 'zustand';
 
 export type TAppState = {
   theme: TTheme;
-  isShowSidebar: boolean;
   isShowAcctSidebar: boolean;
 };
 
 export type TAppAction = {
   setTheme: (theme: TTheme) => void;
-  setIsShowSidebar: (isShow: boolean) => void;
   setIsShowAcctSidebar: (isShow: boolean) => void;
 };
 
@@ -23,7 +21,6 @@ export const createAppStore = (initState: TAppState) => {
     ...initState,
     actions: {
       setTheme: (theme) => set(() => ({ theme })),
-      setIsShowSidebar: (isShow) => set(() => ({ isShowSidebar: isShow })),
       setIsShowAcctSidebar: (isShow) => set(() => ({ isShowAcctSidebar: isShow })),
     },
   }));

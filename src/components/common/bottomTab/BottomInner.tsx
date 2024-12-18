@@ -1,10 +1,9 @@
-'use client';
 import { UnstyledButton } from '@mantine/core';
 import { Link } from 'next-view-transitions';
 import { useEffect, useMemo, useState } from 'react';
 import { CgUserlane } from 'react-icons/cg';
 import { FaListOl } from 'react-icons/fa';
-import { LuSettings } from 'react-icons/lu';
+import { IoIosMore } from 'react-icons/io';
 import { MdOutlineSchedule } from 'react-icons/md';
 import { RxPinTop } from 'react-icons/rx';
 import { TiHomeOutline } from 'react-icons/ti';
@@ -16,7 +15,11 @@ enum Direction {
   end = 'end',
 }
 
-export default function BottomInner() {
+type BottomInnerProps = {
+  openDrawer: () => void;
+};
+
+export default function BottomInner({ openDrawer }: BottomInnerProps) {
   const [direction, setDirection] = useState<Direction>(Direction.up);
   const [windowY, setWindowY] = useState(0);
 
@@ -73,44 +76,34 @@ export default function BottomInner() {
       </UnstyledButton>
       <ul className={css.list}>
         <li>
-          <Link href="/setlist">
-            <div className={css.item}>
-              <FaListOl size="1.25rem" />
-              <span>세트리</span>
-            </div>
-          </Link>
+          <UnstyledButton component={Link} href="/setlist" className={css.item}>
+            <FaListOl size="1.25rem" />
+            <span>세트리</span>
+          </UnstyledButton>
         </li>
         <li>
-          <Link href="/channel">
-            <div className={css.item}>
-              <CgUserlane size="1.5rem" />
-              <span>채널</span>
-            </div>
-          </Link>
+          <UnstyledButton component={Link} href="/channel" className={css.item}>
+            <CgUserlane size="1.5rem" />
+            <span>채널</span>
+          </UnstyledButton>
         </li>
         <li>
-          <Link href="/">
-            <div className={css.item}>
-              <TiHomeOutline size="1.5rem" />
-              <span>홈</span>
-            </div>
-          </Link>
+          <UnstyledButton component={Link} href="/" className={css.item}>
+            <TiHomeOutline size="1.5rem" />
+            <span>홈</span>
+          </UnstyledButton>
         </li>
         <li>
-          <Link href="/schedule">
-            <div className={css.item}>
-              <MdOutlineSchedule size="1.5rem" />
-              <span>스케줄</span>
-            </div>
-          </Link>
+          <UnstyledButton component={Link} href="/schedule" className={css.item}>
+            <MdOutlineSchedule size="1.5rem" />
+            <span>스케줄</span>
+          </UnstyledButton>
         </li>
         <li>
-          <Link href="setting">
-            <div className={css.item}>
-              <LuSettings size="1.5rem" />
-              <span>설정</span>
-            </div>
-          </Link>
+          <UnstyledButton className={css.item} onClick={openDrawer}>
+            <IoIosMore size="1.5rem" />
+            <span>더보기</span>
+          </UnstyledButton>
         </li>
       </ul>
     </div>

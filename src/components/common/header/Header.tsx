@@ -20,8 +20,6 @@ export default function Header({ session }: HeaderProps) {
 
   const openAccountSidebar = () => actions.setIsShowAcctSidebar(true);
 
-  const openSidebar = () => actions.setIsShowSidebar(true);
-
   const handleScroll = useMemo(() => {
     let timer: NodeJS.Timeout | null = null;
     return () => {
@@ -49,7 +47,6 @@ export default function Header({ session }: HeaderProps) {
     <header className={css.header}>
       <div className={css.inner} ref={gnbRef}>
         <nav className={css.nav}>
-          <HamburgerBtn className={css.hamburger} onClick={openSidebar} />
           <Link href="/" className={css.title}>
             Live Uta
           </Link>
