@@ -144,7 +144,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
       <section className={css.liveSection}>
         <div className={css.liveNav}>
           <h2>
-            🎤 현재 <span className={css.hightlight}>라이브</span> 중
+            🎤 현재 <span className={css.highlight}>라이브</span> 중
           </h2>
           <MoreButton href="/schedule?t=live" />
         </div>
