@@ -1,17 +1,25 @@
 .channelCard {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   gap: 0.75rem;
   padding: 0.75rem;
   transition-property: scale;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   border-bottom: 1px solid #f0f0f0;
-};
 
+  * {
+    padding: 0;
+    margin: 0;
+  }
 
-.linkToChannel {
-
+  @include util.min-width(md) {
+    border: 1px solid map-get(var.$colors, default-border);
+    border-radius: 5px;
+  }
 }
+
+.linkToChannel {}
 
 .imageContainer {
   position: relative;
@@ -24,12 +32,16 @@
 .desc {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  justify-content: space-around;
+
+  // @include util.min-width(var.$mobile-boundary) {
+  //   justify-content: flex-start;
+  // }
 }
 
-.descContent {
+.descContent {}
 
-};
+;
 
 .descContentLabel {
   color: #888;
@@ -38,21 +50,24 @@
 .title {
   font-size: 1.25rem;
   font-weight: 500;
-  margin-bottom: 0.25rem;
   display: flex;
   gap: 0.5rem;
 }
 
 .details {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  flex-direction: row;
+  justify-content: space-between;
 
-  @include util.min-width(sm) {
-    flex-direction: row;
-  }
+  // @include util.min-width(var.$mobile-boundary) {
+  //   flex-direction: column;
+  // }
 }
 
+.channelInfo {
+  display: flex;
+  gap: 1rem;
+}
 
 .originalTitle {
   font-size: 1rem;

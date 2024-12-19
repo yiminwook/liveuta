@@ -114,13 +114,15 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
           </button>
         </div>
         <div className={css.details}>
-          <p className={css.descContent}>
-            <span className={css.descContentLabel}>구독자</span> {subscribe}
-          </p>
-          <p className={css.descContent}>
-            <span className={css.descContentLabel}>동영상</span> {videoCount}
-            <span>개</span>
-          </p>
+          <div className={css.channelInfo}>
+            <p className={css.descContent}>
+              <span className={css.descContentLabel}>구독자</span> {subscribe}
+            </p>
+            <p className={css.descContent}>
+              <span className={css.descContentLabel}>동영상</span> {videoCount}
+              <span>개</span>
+            </p>
+          </div>
           <div className={css.link}>
             <button onClick={openModal}>+ 상세보기</button>
           </div>
