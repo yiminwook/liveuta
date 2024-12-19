@@ -1,5 +1,5 @@
 'use client';
-import { Button, Input, TextInput } from '@mantine/core';
+import { Button } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
 import cx from 'classnames';
 import { useRouter } from 'next-nprogress-bar';

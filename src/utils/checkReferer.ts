@@ -1,5 +1,5 @@
 import BadReqError from '@/libraries/error/badRequestError';
-import { headers, type UnsafeUnwrappedHeaders } from 'next/headers';
+import { type UnsafeUnwrappedHeaders, headers } from 'next/headers';
 
 export default function checkReferer() {
   const referer = (headers() as unknown as UnsafeUnwrappedHeaders).get('referer') || '';

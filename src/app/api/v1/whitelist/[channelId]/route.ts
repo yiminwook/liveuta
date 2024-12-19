@@ -8,7 +8,7 @@ export async function POST(
   _req: NextRequest,
   props: {
     params: Promise<{ channelId: string }>;
-  }
+  },
 ) {
   const params = await props.params;
   try {
@@ -35,7 +35,7 @@ export async function DELETE(
   _req: NextRequest,
   props: {
     params: Promise<{ channelId: string }>;
-  }
+  },
 ) {
   const params = await props.params;
   try {
