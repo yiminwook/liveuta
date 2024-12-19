@@ -6,8 +6,7 @@
   gap: 0.5rem;
 
   .requestChannelButton {
-    height: 2.5rem;
-    padding: 0.2rem 0.6rem;
+    padding: 0.3rem 0.6rem;
     flex-shrink: 0;
     border-radius: 5px;
     font-weight: 500;
@@ -22,23 +21,84 @@
   }
 
   .form {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 2.5rem;
+    justify-content: flex-end;
     border-radius: 5px;
     height: 2.5rem;
     width: 12.5rem;
     padding: 0.25rem;
 
-    .input {
-      border-radius: 5px 0 0 5px;
-      border-right: none;
+    .inputBox {
+      position: relative;
+
+      &:has(.input:not(:placeholder-shown)) .clearButton {
+        visibility: visible;
+        opacity: 1;
+        rotate: 0deg;
+        pointer-events: auto;
+      }
+
+      .input {
+        width: 12rem;
+        border-radius: 5px 0 0 5px;
+        border-right: none;
+        transition-property: border-color, width;
+        transition-duration: 0.2s;
+        transition-timing-function: map-get(var.$easing, default);
+
+        &:focus,
+        &:not(:placeholder-shown) {
+          width: 15rem;
+        }
+
+        &:focus-visible {
+          border-color: util.palette(second, default);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          transition: none;
+
+          &:focus,
+          &:not(:placeholder-shown) {
+            width: 12rem;
+          }
+        }
+      }
+
+      .clearButton {
+        visibility: hidden;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 0.25rem;
+        position: absolute;
+        top: 50%;
+        right: 0.4rem;
+        translate: 0 -50%;
+        rotate: -90deg;
+        opacity: 0;
+        pointer-events: none;
+        transition-property: opacity, rotate, visibility;
+        transition-duration: 0.3s;
+        transition-timing-function: map-get(var.$easing, default);
+        transition-behavior: discrete;
+
+        &:hover {
+          background-color: map-get(var.$colors, default-hover);
+        }
+
+        &:focus-visible {
+          box-shadow: 0 0 0 0.125rem util.palette(second, default);
+        }
+      }
     }
 
     .submit {
       display: grid;
       place-items: center;
-      width: 3rem;
-      height: calc(100% + 4px);
       border-radius: 0 5px 5px 0;
       background-color: util.palette(second, default);
       transition: background-color 0.3s var.$bezier-curve;

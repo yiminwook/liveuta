@@ -6,6 +6,7 @@ import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
+import { TbX } from 'react-icons/tb';
 import css from './Nav.module.scss';
 
 export default function Nav() {
@@ -30,12 +31,17 @@ export default function Nav() {
         {isDesktop ? '+ 채널등록' : '등록'}
       </button>
       <form className={css.form} onSubmit={handleSubmit}>
-        <TextInput
-          classNames={{ input: css.input }}
-          value={input}
-          onChange={handleInput}
-          placeholder="채널명으로 검색"
-        />
+        <div className={css.inputBox}>
+          <TextInput
+            classNames={{ input: css.input }}
+            value={input}
+            onChange={handleInput}
+            placeholder="채널명으로 검색"
+          />
+          <button className={css.clearButton} type="button" onClick={() => setInput('')}>
+            <TbX />
+          </button>
+        </div>
         <UnstyledButton className={css.submit} type="submit">
           <IoSearch color="#fff" size="1.75rem" />
         </UnstyledButton>
