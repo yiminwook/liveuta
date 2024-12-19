@@ -71,14 +71,6 @@
       transition-duration: 0.3s;
       transition-timing-function: map-get(var.$easing, default);
       transition-behavior: discrete;
-
-      &:hover {
-        background-color: map-get(var.$colors, default-hover);
-      }
-
-      &:focus-visible {
-        box-shadow: 0 0 0 0.125rem util.palette(second, default);
-      }
     }
 
     .searchIcon {
@@ -87,6 +79,14 @@
 
     .clearButton {
       rotate: -90deg;
+
+      &:hover {
+        background-color: map-get(var.$colors, default-hover);
+      }
+
+      &:focus-visible {
+        box-shadow: 0 0 0 0.125rem util.palette(second, default);
+      }
     }
   }
 }
