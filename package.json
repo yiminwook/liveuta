@@ -95,6 +95,7 @@
     "eslint": "9.16.0",
     "eslint-config-biome": "^1.9.4",
     "eslint-config-next": "15.1.0",
+    "lefthook": "^1.9.3",
     "pm2": "^5.3.1",
     "sass": "^1.75.0",
     "sass-loader": "^16.0.4",
