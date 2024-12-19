@@ -20,21 +20,26 @@
     }
 
     .autoSyncRefreshInterval {
-      display: flex;
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
 
       label {
         padding-inline-start: 0.5rem;
       }
-      
-      @include util.min-width(md) {
-        flex-direction: row;
+
+      @include util.min-width(var.$mobile-boundary) {
+        display: flex;
         gap: 2rem;
 
         label {
           padding-inline-start: 1rem;
         }
+      }
+
+      .autoSyncRefreshIntervalLabel {
+        display: inline-block;
+        width: max-content
       }
     }
   }

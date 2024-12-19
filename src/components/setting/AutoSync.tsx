@@ -32,6 +32,9 @@ export default function AutoSync() {
                   value={interval}
                   checked={refreshInterval === interval}
                   onChange={(e) => setRefreshInterval(Number(e.currentTarget.value))}
+                  classNames={{
+                    label: css.autoSyncRefreshIntervalLabel,
+                  }}
                 />
               ))}
             </div>
