@@ -54,6 +54,11 @@ body {
   -moz-osx-font-smoothing: var(--mantine-moz-font-smoothing);
 }
 
+*::selection {
+  background-color: util.palette(third, default);
+  color: map-get(var.$colors, textInvert);
+}
+
 @media screen and (max-device-width: 31.25em) {
   body {
     -webkit-text-size-adjust: 100%;
