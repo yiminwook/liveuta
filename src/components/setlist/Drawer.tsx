@@ -9,23 +9,12 @@ import {
   DrawerTitle,
 } from '@/components/common/Vaul';
 import Link from 'next/link';
-import { useEffect } from 'react';
 import css from './Drawer.module.scss';
 import { useDrawer, useDrawerActions } from './DrawerContext';
 
 export default function Setlist() {
   const drawer = useDrawer();
   const drawerActions = useDrawerActions();
-
-  useEffect(() => {
-    if (drawer.open === true) {
-      document.body.classList.add('overflow-hidden');
-      document.documentElement.classList.add('overflow-hidden');
-    } else {
-      document.body.classList.remove('overflow-hidden');
-      document.documentElement.classList.remove('overflow-hidden');
-    }
-  }, [drawer.open]);
 
   return (
     <Drawer open={drawer.open} onOpenChange={drawerActions.onOpenChange}>

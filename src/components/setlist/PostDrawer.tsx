@@ -8,7 +8,6 @@ import {
 } from '@/components/common/Vaul';
 import { Anchor } from '@mantine/core';
 import { Session } from 'next-auth';
-import { useEffect, useState } from 'react';
 import css from './PostDrawer.module.scss';
 import PostForm from './PostForm';
 
@@ -17,20 +16,8 @@ type PostDrawerProps = {
 };
 
 export default function PostDrawer({ session }: PostDrawerProps) {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (open === true) {
-      document.body.classList.add('overflow-hidden');
-      document.documentElement.classList.add('overflow-hidden');
-    } else {
-      document.body.classList.remove('overflow-hidden');
-      document.documentElement.classList.remove('overflow-hidden');
-    }
-  }, [open]);
-
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer>
       <DrawerTrigger className={css.trigger}>세트리스트 작성</DrawerTrigger>
       <DrawerContent className={css.content} classNames={{ wrapper: css.wrapper }}>
         <DrawerHeader className={css.header}>
