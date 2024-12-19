@@ -94,7 +94,11 @@ export default function SliderCard({
           color={variable.thirdColorDefault}
           leftSection={content.isStream === 'TRUE' && <BsBroadcast color="#fff" />}
         >
-          {content.isStream === 'TRUE' ? content.viewer : STAT_MAPPER[content.isStream]}
+          {content.isStream === 'TRUE'
+            ? new Intl.NumberFormat('kr', { notation: 'compact' })
+                .format(content.viewer)
+                .toLowerCase()
+            : STAT_MAPPER[content.isStream]}
         </Badge>
       </div>
     </Card>

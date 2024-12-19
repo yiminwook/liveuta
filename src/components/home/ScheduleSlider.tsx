@@ -46,7 +46,7 @@ export default function ScheduleSlider({
           },
         }}
       >
-        {new Array(6).fill(null).map((item, index) => {
+        {Array.from({ length: 6 }).map((item, index) => {
           return (
             <SwiperSlide key={`announce_placeholder_${index}`} className={css.item}>
               <SliderCardPlaceholder />
