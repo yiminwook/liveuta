@@ -53,7 +53,6 @@ export default function Setlist() {
             .filter((value) => value !== '')
             .map((line, index) => (
               <div key={`${drawer.setlist!.videoId}_row_${index}`} className={css.row}>
-                <span className={css.index}>{index}.</span>
                 <p className={css.line}>{line}</p>
               </div>
             ))}
