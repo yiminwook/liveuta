@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 'use client';
-import HamburgerBtn from '@/components/common/button/HamburgerBtn';
 import { useSetAppStore } from '@/stores/app';
 import { Avatar } from '@mantine/core';
 import { Session } from 'next-auth';

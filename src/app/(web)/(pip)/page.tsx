@@ -11,9 +11,9 @@ import { TGetChannelRes } from '@api/v1/channel/route';
 
 async function getMetadata() {
   const connection = await connectOracleDB();
-  const [coverImgUrlQuery] = await Promise.all([
-    connection.execute<TMetaRow>("SELECT * FROM META WHERE key = 'cover_image_url'"),
-  ]);
+  const coverImgUrlQuery = await connection.execute<TMetaRow>(
+    "SELECT * FROM META WHERE key = 'cover_image_url'",
+  );
 
   const coverImgUrl = coverImgUrlQuery.rows?.[0][2];
 

@@ -13,7 +13,6 @@ import cx from 'classnames';
 import { Cause, Data, Effect } from 'effect';
 import type { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
-import { useRef } from 'react';
 import SetlistDrawer from './Drawer';
 import { DrawerProvider } from './DrawerContext';
 import Row from './Row';
@@ -51,7 +50,6 @@ type DataType = {
 
 export default function SetlistTable({ session, searchParams, channelDataset }: TableProps) {
   const router = useRouter();
-  const drawerRef = useRef<HTMLDivElement>(null);
 
   const { data, isLoading } = useQuery({
     queryKey: ['searchSetlist', searchParams],

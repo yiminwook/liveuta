@@ -19,7 +19,7 @@ export const combineChannelData = async (
   mongoDBData: TMongoDBChannelData,
   option: { sort?: 'createAt' | 'name_kor' } = { sort: 'name_kor' },
 ): Promise<TYChannelsData[]> => {
-  const idArr = [...Object.keys(mongoDBData)];
+  const idArr = Object.keys(mongoDBData);
   if (idArr.length <= 0) return [];
 
   const youtubeData = await getYoutubeChannels(idArr);

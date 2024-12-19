@@ -7,7 +7,7 @@ import { useCallback, useState } from 'react';
 export const useTransition = () => {
   const [modifier, setModifier] = useState<string[]>(['enter']);
 
-  const onAnimationEnd = useCallback((e: React.AnimationEvent) => {
+  const onAnimationEnd = useCallback(() => {
     setModifier((pre) => (pre.includes('enter') ? ['show'] : pre));
   }, []);
 
