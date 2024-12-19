@@ -1,8 +1,8 @@
 .trigger {
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   background-color: util.palette(second, default);
-  color: map-get(var.$colors, textInvert);
+  color: #fff;
   transition: background-color 0.2s map-get(var.$easing, default);
 
   &:hover {

@@ -1,11 +1,20 @@
 .wrap {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column-reverse;
+  gap: 0.5rem;
 
-  .right {
+  @include util.min-width(var.$mobile-boundary) {
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .left {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    justify-content: space-between;
+
+    @include util.min-width(var.$mobile-boundary) {
+      display: grid;
+      gap: 0.5rem;
+    }
   }
 }

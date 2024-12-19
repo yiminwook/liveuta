@@ -39,11 +39,9 @@ export default function Nav({ searchParams, session }: SearchFormProps) {
             { label: '작성일', value: 'create' },
           ]}
         />
-      </div>
-      <div className={css.right}>
-        <SearchForm searchParams={searchParams} />
         <PostDrawer session={session} />
       </div>
+      <SearchForm searchParams={searchParams} />
     </div>
   );
 }

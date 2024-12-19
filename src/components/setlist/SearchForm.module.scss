@@ -1,7 +1,12 @@
 .wrap {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 0.5rem;
+
+  @include util.min-width(var.$mobile-boundary) {
+    display: flex;
+    align-items: center;
+  }
 
   .inputBox {
     position: relative;
@@ -15,7 +20,7 @@
     }
 
     .input {
-      width: 12rem;
+      width: 100%;
       border-radius: 0.25rem;
       padding: 0.25rem 0.5rem;
       border: 1px solid map-get(var.$colors, default-border);
@@ -25,21 +30,25 @@
       transition-timing-function: map-get(var.$easing, default);
       font-size: 0.875rem;
 
-      &:focus,
-      &:not(:placeholder-shown) {
-        width: 15rem;
-      }
-
-      &:focus-visible {
-        border-color: util.palette(second, default);
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        transition: none;
+      @include util.min-width(var.$mobile-boundary) {
+        width: 12rem;
 
         &:focus,
         &:not(:placeholder-shown) {
-          width: 12rem;
+          width: 15rem;
+        }
+
+        &:focus-visible {
+          border-color: util.palette(second, default);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          transition: none;
+
+          &:focus,
+          &:not(:placeholder-shown) {
+            width: 12rem;
+          }
         }
       }
     }
