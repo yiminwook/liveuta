@@ -45,11 +45,7 @@
   display: grid;
   gap: 0.4rem;
   padding: 0.25rem;
-  text-align: center;
-
-  @include util.min-width(var.$mobile-boundary) {
-    text-align: left;
-  }
+  text-align: left;
 }
 
 .footer {
