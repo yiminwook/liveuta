@@ -107,7 +107,6 @@ export default function PostForm({ session }: PostFormProps) {
                 onClick={(event) => clear(event)}
               >
                 <svg
-                  stroke-width="0"
                   height="1em"
                   width="1em"
                   xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +123,6 @@ export default function PostForm({ session }: PostFormProps) {
                 onClick={(event) => paste(event)}
               >
                 <svg
-                  stroke-width="0"
                   height="1em"
                   width="1em"
                   xmlns="http://www.w3.org/2000/svg"
