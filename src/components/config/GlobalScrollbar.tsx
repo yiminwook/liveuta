@@ -29,9 +29,11 @@ export default function GlobalScrollbar({ disable = false }: GlobalScrollbarProp
       if (typeof shouldLock === 'string' && shouldLock === '1') {
         document.body.classList.add('overflow-hidden');
         document.documentElement.classList.add('overflow-hidden');
+        document.querySelector('.os-scrollbar-vertical')?.classList.add('hidden');
       } else {
         document.body.classList.remove('overflow-hidden');
         document.documentElement.classList.remove('overflow-hidden');
+        document.querySelector('.os-scrollbar-vertical')?.classList.remove('hidden');
       }
     });
 
