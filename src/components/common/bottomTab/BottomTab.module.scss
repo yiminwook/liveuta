@@ -12,9 +12,18 @@
   }
 }
 
+.contentComponent {
+  height: 100%;
+}
+
+.wrapper {
+  max-height: none;
+  overflow: hidden;
+  position: relative;
+}
+
 .drawerGrid {
-  padding: 2rem 1rem;
-  padding-bottom: calc(2rem + var.$env-bottom);
+  padding: 1rem 1rem;
 
   .item {
     margin: 0 auto;
@@ -24,7 +33,7 @@
       width: 80px;
       height: 80px;
       margin: 0 auto;
-      padding: 0.5em;        
+      padding: 0.5em;
       transition: color 0.2s util.easing(default);
 
       &:global(.converter) {
@@ -40,5 +49,20 @@
         }
       }
     }
+  }
+}
+
+.expandIcon {
+  display: grid;
+  place-items: center;
+
+  &[data-hidden=true] {
+    display: none;
+    visibility: hidden;
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }

@@ -1,10 +1,12 @@
+'use client';
 import { ActionIcon, SimpleGrid } from '@mantine/core';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { JSX, useState } from 'react';
 import { GrTest } from 'react-icons/gr';
-import { LiaExchangeAltSolid, LiaMicrophoneAltSolid, LiaToolsSolid } from 'react-icons/lia';
+import { LiaMicrophoneAltSolid, LiaToolsSolid } from 'react-icons/lia';
 import { LuSettings } from 'react-icons/lu';
+import { TbChevronsDown } from 'react-icons/tb';
 import { TiStarOutline } from 'react-icons/ti';
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../Vaul';
 import css from './BottomTab.module.scss';
@@ -39,25 +41,36 @@ type BottomDrawerProps = {
   isOpen: boolean;
 };
 
-export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
-  const [isExternal, setIsExternal] = useState(false);
+const snapPoints = ['180px', '540px'];
 
-  const toggleExternal = () => setIsExternal((prev) => !prev);
+export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
+  const [snap, setSnap] = useState<number | string | null>(snapPoints[0]);
 
   return (
-    <Drawer open={isOpen} onClose={onClose}>
-      <DrawerContent>
+    <Drawer
+      open={isOpen}
+      onClose={onClose}
+      snapPoints={snapPoints}
+      activeSnapPoint={snap}
+      setActiveSnapPoint={setSnap}
+    >
+      <DrawerContent
+        classNames={{
+          contentComponent: css.contentComponent,
+          wrapper: css.overflowHidden,
+        }}
+      >
         <DrawerHeader className="blind">
           <DrawerTitle>사이트 맵</DrawerTitle>
           <DrawerDescription>링크를 선택해주세요</DrawerDescription>
         </DrawerHeader>
         <SimpleGrid cols={3} className={css.drawerGrid}>
-          {(isExternal ? EXTERNAL_ITEMS : INTERNAL_ITEMS).map(({ icon, href, text }) => (
+          {INTERNAL_ITEMS.map(({ icon, href, text }) => (
             <div className={css.item} key={`bottomDrawer_${text}`}>
               <ActionIcon
                 variant="default"
                 className={classNames(css.roundBtn)}
-                component={(isExternal ? 'a' : Link) as 'a'}
+                component={Link}
                 href={href}
               >
                 {icon}
@@ -65,16 +78,24 @@ export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
               </ActionIcon>
             </div>
           ))}
-          <div className={css.item} key="bottomDrawer_converter">
-            <ActionIcon
-              variant="default"
-              className={classNames(css.roundBtn, 'converter')}
-              onClick={toggleExternal}
-            >
-              <LiaExchangeAltSolid size="1.5rem" />
-              <span>전환</span>
-            </ActionIcon>
-          </div>
+        </SimpleGrid>
+        <div className={css.expandIcon} data-hidden={snap !== snapPoints[0]}>
+          <TbChevronsDown />
+        </div>
+        <SimpleGrid cols={3} className={css.drawerGrid}>
+          {EXTERNAL_ITEMS.map(({ icon, href, text }) => (
+            <div className={css.item} key={`bottomDrawer_${text}`}>
+              <ActionIcon
+                variant="default"
+                className={classNames(css.roundBtn)}
+                component={'a'}
+                href={href}
+              >
+                {icon}
+                <span>{text}</span>
+              </ActionIcon>
+            </div>
+          ))}
         </SimpleGrid>
       </DrawerContent>
     </Drawer>
