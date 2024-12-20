@@ -65,6 +65,7 @@ type DrawerContentProps = ComponentProps<typeof DrawerPrimitive.Content> & {
   classNames?: {
     wrapper?: string;
     handle?: string;
+    contentComponent?: string;
   };
   height?: string;
 };
@@ -94,7 +95,11 @@ type DrawerContentProps = ComponentProps<typeof DrawerPrimitive.Content> & {
 const DrawerContent = ({ className, classNames, children, ref, ...props }: DrawerContentProps) => (
   <DrawerPortal>
     <DrawerOverlay />
-    <DrawerPrimitive.Content ref={ref} className={cx(css.contentComponent)} {...props}>
+    <DrawerPrimitive.Content
+      ref={ref}
+      className={cx(css.contentComponent, classNames?.contentComponent)}
+      {...props}
+    >
       <div className={cx(css.handle, classNames?.handle)} />
       <div className={cx(css.contentWrapper, classNames?.wrapper)}>
         <div className={cx(css.content, className)}>{children}</div>
