@@ -52,6 +52,16 @@ body {
 
   -webkit-font-smoothing: var(--mantine-webkit-font-smoothing);
   -moz-osx-font-smoothing: var(--mantine-moz-font-smoothing);
+
+  &[data-scroll-locked] {
+    overflow: hidden !important;
+
+    .os-scrollbar-vertical {
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+  }
+
 }
 
 *::selection {
@@ -216,13 +226,4 @@ body #nprogress {
       transform: rotate(3deg) translate(0px, -4px);
     }
   }
-}
-
-.hidden {
-  opacity: 0 !important;
-  visibility: hidden !important;
-}
-
-.overflow-hidden {
-  overflow: hidden !important;
 }
