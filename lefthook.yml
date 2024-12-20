@@ -38,7 +38,7 @@ pre-push:
   parallel: true
   commands:
     format:
-      run: pnpm biome format --write "{push_files}"
+      run: pnpm biome format --no-errors-on-unmatched --write {push_files}
     lint:
       glob: "*.{js,ts,jsx,tsx}"
       run: pnpm next lint --file "{push_files}"
