@@ -52,10 +52,6 @@ export function DrawerProvider({ children }: { children: ReactNode }) {
     [],
   );
 
-  useEffect(() => {
-    console.log(drawerContext);
-  }, [drawerContext]);
-
   return (
     <DrawerActionContext value={actions}>
       <DrawerContext value={drawerContext}>{children}</DrawerContext>
