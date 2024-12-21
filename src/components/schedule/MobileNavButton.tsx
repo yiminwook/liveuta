@@ -2,6 +2,7 @@
 import { useSetModalStore } from '@/stores/modal';
 import { FilterText, SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
+import { Button } from '@mantine/core';
 import { BsSliders } from 'react-icons/bs';
 import MobileNavModal from '../common/modal/MobileNavModal';
 import css from './ScheduleNav.module.scss';
@@ -32,9 +33,16 @@ export default function MobileNavButton({ length, scheduleDto }: MobileNavButton
   }`;
 
   return (
-    <button className={css.mobileNavBtn} onClick={handleOpen}>
+    <Button
+      className={css.mobileNavBtn}
+      classNames={{
+        label: css.mobileNavBtnLabel,
+      }}
+      variant="default"
+      onClick={handleOpen}
+    >
       <BsSliders size="1rem" style={{ minWidth: '1rem' }} />
       <span className={css.text}>{text}</span>
-    </button>
+    </Button>
   );
 }
