@@ -27,9 +27,6 @@ export default function Nav() {
 
   return (
     <div className={css.wrap}>
-      {/* <button className={css.requestChannelButton} onClick={() => router.push('/request')}>
-        {isDesktop ? '+ 채널등록' : '등록'}
-      </button> */}
       <Button color="second" variant="filled" onClick={() => router.push('/request')}>
         {isDesktop ? '+ 채널등록' : '등록'}
       </Button>
