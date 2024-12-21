@@ -41,7 +41,7 @@ type BottomDrawerProps = {
   isOpen: boolean;
 };
 
-const snapPoints = ['180px', '540px'];
+const snapPoints = ['170px', '260px'];
 
 export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
   const [snap, setSnap] = useState<number | string | null>(snapPoints[0]);
@@ -82,7 +82,7 @@ export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
         <div className={css.expandIcon} data-hidden={snap !== snapPoints[0]}>
           <TbChevronsDown />
         </div>
-        <SimpleGrid cols={3} className={css.drawerGrid}>
+        <SimpleGrid cols={3} className={css.drawerGrid} data-hidden={snap !== snapPoints[1]}>
           {EXTERNAL_ITEMS.map(({ icon, href, text }) => (
             <div className={css.item} key={`bottomDrawer_${text}`}>
               <ActionIcon

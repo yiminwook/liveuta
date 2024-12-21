@@ -25,6 +25,12 @@
 .drawerGrid {
   padding: 1rem 1rem;
 
+
+  &[data-hidden=true] {
+    opacity: 0;
+    visibility: hidden;
+  }
+
   .item {
     margin: 0 auto;
 
