@@ -29,8 +29,6 @@ export const ORACLEDB_USER = 'admin';
 
 export const SETLIST_PAGE_SIZE = 15;
 
-export const INITIAL_PLAYER_VIDEO_ID = 'bnofYmfKLeo';
-
 export const ORIGIN = 'liveuta.vercel.app';
 
 export const INTERNAL_LINKS = [

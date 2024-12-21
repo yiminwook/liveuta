@@ -1,4 +1,5 @@
 import { auth } from '@/libraries/nextAuth';
+import { METADATA } from '@/types';
 import { TGetCookiesReturn } from '@/utils/getCookie';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
@@ -19,13 +20,19 @@ type ConfigsProps = {
 };
 
 export default async function Configs({ children, cookies, colorScheme }: ConfigsProps) {
-  const session = await auth();
+  const [session, metadata] = await Promise.all([
+    auth(),
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/metadata`, {
+      next: { revalidate: 3600, tags: ['metadata', 'video'] },
+    }).then((res) => res.json() as Promise<METADATA>),
+  ]);
+
   return (
     <NextAuth session={session}>
       <AppProvider
         initState={{
           theme: cookies.theme,
-          isShowAcctSidebar: false,
+          defaultVideoId: metadata.default_video_id,
         }}
       >
         <ReactQuery>

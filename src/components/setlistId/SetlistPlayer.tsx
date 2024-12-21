@@ -1,7 +1,7 @@
 'use client';
 import css from '@/components/common/player/Player.module.scss';
 import PlayerPlaceholder from '@/components/common/player/PlayerPlaceholder';
-import { usePlayerStore } from '@/stores/player';
+import { useSetPlayerStore } from '@/stores/player';
 import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -20,8 +20,8 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
   const timestamp = Number(searchParams.get('t')) || 0;
-  const prepareSetlist = usePlayerStore((state) => state.actions.prepareSetlist);
   const [isShow, setIsShow] = useState(true);
+  const actions = useSetPlayerStore();
 
   const handleInteresect: IntersectionObserverCallback = (items) => {
     const isIntersecting = items[0].isIntersecting;
@@ -29,7 +29,7 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   };
 
   useEffect(() => {
-    prepareSetlist(videoId, timestamp);
+    actions.prepareSetlist(videoId, timestamp);
   }, []);
 
   useEffect(() => {

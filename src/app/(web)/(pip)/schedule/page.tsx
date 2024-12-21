@@ -14,14 +14,16 @@ type Props = {
 };
 
 export default async function Page(props: Props) {
-  const searchParams = await props.searchParams;
-  const { select } = await getCookies();
-  const session = await auth();
+  const [searchParams, cookies, session] = await Promise.all([
+    props.searchParams,
+    getCookies(),
+    auth(),
+  ]);
 
   const dto = scheduleDto.parse({
     query: searchParams.q,
     filter: searchParams.t,
-    select,
+    select: cookies.select,
     isFavorite: searchParams.isFavorite,
   });
 

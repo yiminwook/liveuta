@@ -1,7 +1,7 @@
 'use client';
 import { ORIGIN } from '@/constants';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { usePlayerStore } from '@/stores/player';
+import { usePlayerCtx } from '@/stores/player';
 import classnames from 'classnames';
 import { useRouter } from 'next-nprogress-bar';
 import { memo, useEffect, useRef, useState } from 'react';
@@ -10,6 +10,7 @@ import { BsLightningFill } from 'react-icons/bs';
 import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
+import { useStore } from 'zustand';
 import css from './Player.module.scss';
 
 type PlayerProps = {
@@ -21,7 +22,8 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
   const playerRef = useRef<ReactPlayer>(null);
-  const store = usePlayerStore();
+  const playerCtx = usePlayerCtx();
+  const store = useStore(playerCtx);
 
   useHotkeys(
     'esc',

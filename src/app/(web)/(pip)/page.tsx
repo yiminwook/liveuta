@@ -1,30 +1,9 @@
-import ClientError from '@/libraries/error/clientError';
-import { connectOracleDB } from '@/libraries/oracleDB/connection';
-import { TMetaRow } from '@/types/db';
-import { homeDto } from '@/types/dto';
-import Client from './page.client';
-import '@/styles/swiper/core.scss';
 import Footer from '@/components/common/Footer';
 import { auth } from '@/libraries/nextAuth';
+import { METADATA } from '@/types';
 import { TMongoDBChannelData, combineChannelData } from '@/utils/combineChannelData';
 import { TGetChannelRes } from '@api/v1/channel/route';
-
-async function getMetadata() {
-  const connection = await connectOracleDB();
-  const coverImgUrlQuery = await connection.execute<TMetaRow>(
-    "SELECT * FROM META WHERE key = 'cover_image_url'",
-  );
-
-  const coverImgUrl = coverImgUrlQuery.rows?.[0][2];
-
-  const dto = homeDto.safeParse({ coverImgUrl });
-
-  if (dto.error) {
-    throw new ClientError(dto.error.errors[0].message);
-  }
-
-  return dto.data;
-}
+import Client from './page.client';
 
 async function getRecentChannel() {
   const res = await fetch(
@@ -55,14 +34,16 @@ async function getRecentChannel() {
 export default async function Page() {
   const [session, metadata, recentChannelData] = await Promise.all([
     auth(),
-    getMetadata(),
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/metadata`, {
+      next: { revalidate: 3600, tags: ['metadata', 'cover'] },
+    }).then((res) => res.json() as Promise<METADATA>),
     getRecentChannel(),
   ]);
 
   return (
     <>
       <Client
-        coverImgUrl={metadata.coverImgUrl}
+        coverImgUrl={metadata.cover_image_url}
         session={session}
         recentChannels={recentChannelData}
       />

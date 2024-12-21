@@ -1,15 +1,35 @@
 'use client';
-import { AppContext, TAppState, createAppStore } from '@/stores/app';
+import { AppContext, createAppStore } from '@/stores/app';
 import { useMultiViewStore } from '@/stores/multiView';
+import { PlayerContext, createPlayerStore } from '@/stores/player';
+import { TTheme } from '@/types';
 import { useEffect, useRef } from 'react';
 
 type AppProviderProps = {
   children: React.ReactNode;
-  initState: TAppState;
+  initState: {
+    theme: TTheme;
+    defaultVideoId: string;
+  };
 };
 
 export default function AppProvider({ children, initState }: AppProviderProps) {
-  const store = useRef(createAppStore(initState));
+  const appStore = useRef(
+    createAppStore({
+      theme: initState.theme,
+      isShowAcctSidebar: false,
+    }),
+  );
+
+  const playerStore = useRef(
+    createPlayerStore({
+      videoId: initState.defaultVideoId,
+      isPlaying: false,
+      isMutted: false,
+      isHide: true,
+      timeline: 0,
+    }),
+  );
 
   useEffect(() => {
     useMultiViewStore.persist.rehydrate();
@@ -17,5 +37,9 @@ export default function AppProvider({ children, initState }: AppProviderProps) {
 
   // useStorageDOMEvents(useMultiViewStore);
 
-  return <AppContext.Provider value={store.current}>{children}</AppContext.Provider>;
+  return (
+    <AppContext value={appStore.current}>
+      <PlayerContext value={playerStore.current}>{children}</PlayerContext>
+    </AppContext>
+  );
 }

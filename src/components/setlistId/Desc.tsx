@@ -1,6 +1,6 @@
 'use client';
 import TimelineText from '@/components/common/TimestampText';
-import { usePlayerStore } from '@/stores/player';
+import { useSetPlayerStore } from '@/stores/player';
 import { Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
@@ -20,7 +20,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState('');
-  const setTimeline = usePlayerStore((state) => state.actions.setTimeline);
+  const actions = useSetPlayerStore();
   const queryClient = useQueryClient();
 
   const toggleEditing = () => {
@@ -84,7 +84,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
   };
 
   const handleTimestamp = ({ timestamp }: { videoId: string; timestamp: number }) => {
-    setTimeline(timestamp);
+    actions.setTimeline(timestamp);
   };
 
   useEffect(() => {

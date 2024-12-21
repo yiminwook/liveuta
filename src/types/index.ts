@@ -55,3 +55,8 @@ export type ServerActionResponse<T> = {
   message: string;
   result: T;
 };
+
+export type METADATA = {
+  cover_image_url: string;
+  default_video_id: string;
+};

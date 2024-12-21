@@ -3,7 +3,7 @@ import altImage from '@/assets/image/thumbnail_alt_img.png';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { usePlayerStore } from '@/stores/player';
+import { useSetPlayerStore } from '@/stores/player';
 import { TContentsData } from '@/types/api/mongoDB';
 import { gtagClick } from '@/utils/gtag';
 import Image from 'next/image';
@@ -19,7 +19,7 @@ export default function CardImage({ content }: CardImageProps) {
   const videoUrl = generateVideoUrl(videoId);
   const thumbnailUrl = generateThumbnail(videoId, 'mqdefault');
   const [imgLoaded, setImgLoaded] = useState(true);
-  const setVideo = usePlayerStore((state) => state.actions.setVideo);
+  const actions = useSetPlayerStore();
   const imgRef = useRef<HTMLImageElement>(null);
 
   const handleImgValidity = useCallback(() => {
@@ -41,7 +41,7 @@ export default function CardImage({ content }: CardImageProps) {
     if (isMobile) {
       window.location.href = videoUrl;
     } else {
-      setVideo(videoId);
+      actions.setVideo(videoId);
     }
   };
 
