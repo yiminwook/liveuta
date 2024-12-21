@@ -2510,10 +2510,6 @@ fieldset:disabled .m_d3ea56bb,
 }
 
 :where([data-mantine-color-scheme='light']) {
-  // .m_77c9d27d {
-  //   color: var(--button-color, var(--mantine-color-dark-1));
-  // }
-
   .m_77c9d27d:where(:disabled:not([data-loading]), [data-disabled]:not([data-loading])) {
     color: var(--mantine-color-gray-5);
     background: var(--mantine-color-gray-1);
@@ -2521,10 +2517,6 @@ fieldset:disabled .m_d3ea56bb,
 }
 
 :where([data-mantine-color-scheme='dark']) {
-  // .m_77c9d27d {
-  //   color: var(--button-color, var(--mantine-color-gray-7));
-  // }
-
   .m_77c9d27d:where(:disabled:not([data-loading]), [data-disabled]:not([data-loading])) {
     color: var(--mantine-color-dark-3);
     background: var(--mantine-color-dark-6);
