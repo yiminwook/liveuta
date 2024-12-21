@@ -14,11 +14,12 @@ $active-color2: #e06e61;
 .card {
   @extend %card-base;
   position: relative;
-  box-shadow: 1px 2px 3px 0 rgba(50, 50, 50, 0.75);
+  box-shadow: var.$box-shadow;
   display: flex;
   padding: 0.25rem;
   gap: 0.25rem;
   background-color: map-get(var.$colors, body);
+  border: 1px solid #00000010;
   border-radius: 5px;
   color: map-get(var.$colors, text);
   container-type: inline-size;
@@ -34,6 +35,11 @@ $active-color2: #e06e61;
 
   &:hover {
     transform: scale(1.01);
+  }
+
+  [data-mantine-color-scheme='dark'] {
+    box-shadow: none;
+    border: 1px solid map-get(var.$colors, default-border);
   }
 
   &:global(.closed) {
@@ -211,6 +217,5 @@ $active-color2: #e06e61;
   }
 
   .status {
-    
   }
 }
