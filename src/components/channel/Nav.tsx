@@ -27,7 +27,7 @@ export default function Nav() {
 
   return (
     <div className={css.wrap}>
-      <Button color="second" variant="filled" onClick={() => router.push('/request')}>
+      <Button color="third" variant="filled" onClick={() => router.push('/request')}>
         {isDesktop ? '+ 채널등록' : '등록'}
       </Button>
       <form className={css.form} onSubmit={handleSubmit}>
