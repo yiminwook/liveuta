@@ -17,6 +17,8 @@ import {
 } from '@mantine/core';
 import variable from '@variable';
 
+// https://mantine.dev/styles/variants-sizes
+
 const OPEN_MENU_TRANSITION: MantineTransition = {
   out: { opacity: 0, transform: 'translateY(-4px)' },
   in: { opacity: 1, transform: 'translateY(0px)' },
@@ -64,6 +66,18 @@ export const theme = createTheme({
       },
     }),
     Button: {
+      vars: (theme: any, props: any) => ({
+        root: {
+          '--button-color': 'var(--mantine-color-text)',
+        },
+      }),
+      // styles: (theme: any, props: any) => {
+      //   return {
+      //     root: {
+      //       color: 'red',
+      //     },
+      //   };
+      // },
       defaultProps: {
         color: variable.thirdColorDefault,
       },

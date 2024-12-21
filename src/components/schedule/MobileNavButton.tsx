@@ -38,11 +38,12 @@ export default function MobileNavButton({ length, scheduleDto }: MobileNavButton
       classNames={{
         label: css.mobileNavBtnLabel,
       }}
+      h={40}
+      leftSection={<BsSliders />}
       variant="default"
       onClick={handleOpen}
     >
-      <BsSliders size="1rem" style={{ minWidth: '1rem' }} />
-      <span className={css.text}>{text}</span>
+      {text}
     </Button>
   );
 }

@@ -757,6 +757,8 @@ fieldset:disabled .mantine-active:active {
 
   --right-section-end: calc(0.0625rem * var(--mantine-scale));
   --right-section-border-radius: 0 var(--input-radius) var(--input-radius) 0;
+
+  height: 100%;
 }
 
 .m_6c018570[data-variant='unstyled'] {
@@ -865,7 +867,8 @@ fieldset:disabled .mantine-active:active {
   border: calc(0.0625rem * var(--mantine-scale)) solid var(--input-bd);
   background-color: var(--input-bg);
   font-family: var(--input-font-family, var(--mantine-font-family));
-  height: var(--input-size);
+  // height: var(--input-size);
+  height: 100%;
   min-height: var(--input-height);
   line-height: var(--input-line-height);
   font-size: var(--input-fz, var(--input-fz, var(--mantine-font-size-sm)));
@@ -2465,10 +2468,10 @@ fieldset:disabled .m_d3ea56bb,
 
   --button-height: var(--button-height-sm);
   --button-padding-x: var(--button-padding-x-sm);
-  --button-color: var(--mantine-color-white);
+  --button-color: var(--mantine-color-text);
 
   user-select: none;
-  font-weight: 600;
+  font-weight: 500;
   position: relative;
   line-height: 1;
   text-align: center;
@@ -2481,8 +2484,8 @@ fieldset:disabled .m_d3ea56bb,
   font-size: var(--button-fz, var(--mantine-font-size-sm));
   background: var(--button-bg, var(--mantine-primary-color-filled));
   border: var(--button-bd, calc(0.0625rem * var(--mantine-scale)) solid transparent);
-  color: var(--button-color, var(--mantine-color-white));
   height: var(--button-height, var(--button-height-sm));
+  color: var(--button-color);
   padding-inline: var(--button-padding-x, var(--button-padding-x-sm));
   vertical-align: middle;
 }
@@ -2506,16 +2509,26 @@ fieldset:disabled .m_d3ea56bb,
   transform: none;
 }
 
-:where([data-mantine-color-scheme='light'])
+:where([data-mantine-color-scheme='light']) {
+  // .m_77c9d27d {
+  //   color: var(--button-color, var(--mantine-color-dark-1));
+  // }
+
   .m_77c9d27d:where(:disabled:not([data-loading]), [data-disabled]:not([data-loading])) {
-  color: var(--mantine-color-gray-5);
-  background: var(--mantine-color-gray-1);
+    color: var(--mantine-color-gray-5);
+    background: var(--mantine-color-gray-1);
+  }
 }
 
-:where([data-mantine-color-scheme='dark'])
+:where([data-mantine-color-scheme='dark']) {
+  // .m_77c9d27d {
+  //   color: var(--button-color, var(--mantine-color-gray-7));
+  // }
+
   .m_77c9d27d:where(:disabled:not([data-loading]), [data-disabled]:not([data-loading])) {
-  color: var(--mantine-color-dark-3);
-  background: var(--mantine-color-dark-6);
+    color: var(--mantine-color-dark-3);
+    background: var(--mantine-color-dark-6);
+  }
 }
 
 .m_77c9d27d::before {
