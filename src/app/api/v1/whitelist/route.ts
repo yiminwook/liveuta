@@ -13,7 +13,7 @@ export async function GET() {
     }
 
     const data = await getAllWhiteList({
-      memberId: payload.id,
+      memberId: payload.userId,
     });
 
     return NextResponse.json({ message: '화이트리스트를 조회했습니다.', data });

@@ -1,14 +1,18 @@
+import { Payload } from '../nextAuth';
+
+declare module '@auth/core/types' {
+  interface User extends Payload {
+    errorMessage?: string;
+  }
+}
+
 declare module 'next-auth' {
+  interface User extends Payload {
+    errorMessage?: string;
+  }
+
   interface Session {
-    user: {
-      userLv: number;
-      email: string;
-      name: string | null | undefined;
-      image: string | null | undefined;
-      provider: string;
-      loginAt: string;
-      accessToken: string;
-    };
+    user: Payload & { accessToken: string };
   }
 }
 
@@ -17,15 +21,7 @@ import { JWT } from 'next-auth/jwt';
 
 declare module 'next-auth/jwt' {
   interface JWT {
-    user: {
-      userLv: number;
-      email: string;
-      name: string | null | undefined;
-      image: string | null | undefined;
-      provider: string;
-      loginAt: string;
-      accessToken: string;
-    };
+    user: Payload;
   }
 }
 

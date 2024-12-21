@@ -1,6 +1,6 @@
 import { Payload } from '@/types/nextAuth';
-import { headers } from 'next/headers';
 import jwt from 'jsonwebtoken';
+import { headers } from 'next/headers';
 
 export default async function parseAccessToken() {
   const headerList = await headers();

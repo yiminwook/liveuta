@@ -19,7 +19,7 @@ export async function POST(
     }
 
     const data = await postWhitelist({
-      memberId: payload.id,
+      memberId: payload.userId,
       channelId: params.channelId,
     });
 
@@ -46,7 +46,7 @@ export async function DELETE(
     }
 
     const data = await deleteWhitelist({
-      memberId: payload.id,
+      memberId: payload.userId,
       channelId: params.channelId,
     });
 

@@ -1,11 +1,11 @@
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
 import { deleteSetlist, postSetlist, updateSetlist } from '@/libraries/oracleDB/setlist/service';
+import { getYoutubeChannelsByVideoId } from '@/libraries/youtube';
+import { SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import parseAccessToken from '@/utils/parseAccessToken';
 import { NextRequest, NextResponse } from 'next/server';
-import { SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { checkDescription } from './validation';
-import { getYoutubeChannelsByVideoId } from '@/libraries/youtube';
 
 export async function POST(req: NextRequest, props: { params: Promise<{ videoId: string }> }) {
   const params = await props.params;
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest, props: { params: Promise<{ videoId:
       throw new CustomServerError({ statusCode: 404, message: '채널을 찾을 수 없습니다.' });
     }
 
-    await postSetlist(params.videoId, description, payload.id, channelId, broadcastAt, title);
+    await postSetlist(params.videoId, description, payload.userId, channelId, broadcastAt, title);
     return NextResponse.json({ message: '등록되었습니다.', data: null }, { status: 201 });
   } catch (error) {
     console.error(error);
@@ -58,7 +58,7 @@ export async function PUT(req: NextRequest, props: { params: Promise<{ videoId: 
       throw new CustomServerError({ statusCode: 404, message: '채널을 찾을 수 없습니다.' });
     }
 
-    await updateSetlist(params.videoId, description, payload.id, channelId, broadcastAt, title);
+    await updateSetlist(params.videoId, description, payload.userId, channelId, broadcastAt, title);
     return NextResponse.json({ message: '수정되었습니다.', data: null });
   } catch (error) {
     console.error(error);

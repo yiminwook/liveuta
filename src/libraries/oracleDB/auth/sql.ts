@@ -1,7 +1,8 @@
-export const GET_MEMBER = `
+export const GET_ONE_MEMBER = `
   SELECT * 
   FROM MEMBER
   WHERE EMAIL = :email AND PROVIDER = :provider
+  FETCH FIRST 1 ROW ONLY
 `;
 
 export const POST_MEMBER = `

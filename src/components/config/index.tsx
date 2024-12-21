@@ -1,3 +1,4 @@
+import { auth } from '@/libraries/nextAuth';
 import { TGetCookiesReturn } from '@/utils/getCookie';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
@@ -17,9 +18,10 @@ type ConfigsProps = {
   colorScheme: 'light' | 'dark';
 };
 
-export default function Configs({ children, cookies, colorScheme }: ConfigsProps) {
+export default async function Configs({ children, cookies, colorScheme }: ConfigsProps) {
+  const session = await auth();
   return (
-    <NextAuth>
+    <NextAuth session={session}>
       <AppProvider
         initState={{
           theme: cookies.theme,

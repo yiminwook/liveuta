@@ -119,7 +119,10 @@ const SENTRY_BUILD_OPTIONS: SentryBuildOptions = {
   org: 'yisp',
   project: 'liveuta',
   authToken: process.env.SENTRY_AUTH_TOKEN,
+  telemetry: true,
   autoInstrumentMiddleware: false,
+  autoInstrumentAppDirectory: true,
+  autoInstrumentServerFunctions: true,
   sourcemaps: {
     disable: true,
   },

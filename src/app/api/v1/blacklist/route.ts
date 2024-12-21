@@ -13,7 +13,7 @@ export async function GET() {
     }
 
     const data = await getAllBlackList({
-      memberId: payload.id,
+      memberId: payload.userId,
     });
 
     return NextResponse.json({ message: '블랙리스트를 조회했습니다.', data });
