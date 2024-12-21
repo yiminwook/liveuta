@@ -1,5 +1,5 @@
 'use client';
-import { TextInput, UnstyledButton } from '@mantine/core';
+import { Button, TextInput, UnstyledButton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
@@ -27,9 +27,12 @@ export default function Nav() {
 
   return (
     <div className={css.wrap}>
-      <button className={css.requestChannelButton} onClick={() => router.push('/request')}>
+      {/* <button className={css.requestChannelButton} onClick={() => router.push('/request')}>
         {isDesktop ? '+ 채널등록' : '등록'}
-      </button>
+      </button> */}
+      <Button color="second" variant="filled" onClick={() => router.push('/request')}>
+        {isDesktop ? '+ 채널등록' : '등록'}
+      </Button>
       <form className={css.form} onSubmit={handleSubmit}>
         <div className={css.inputBox}>
           <TextInput
