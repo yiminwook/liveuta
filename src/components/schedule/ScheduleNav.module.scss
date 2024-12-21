@@ -21,11 +21,11 @@
 
 :global(#{var.$theme-light-selector}) .multiLink {
   color: var(--mantine-color-gray-7);
-} 
+}
 
 :global(#{var.$theme-dark-selector}) .multiLink {
   color: var(--mantine-color-text);
-} 
+}
 
 .right {
   display: flex;
@@ -33,25 +33,16 @@
 }
 
 .mobileNavBtn {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: #fff;
-  border-radius: 5px;
   padding: 0 0.5rem;
   height: 2.5rem;
-  box-shadow: var.$box-shadow;
-  transition:
-    color 0.3s var.$bezier-curve,
-    background-color 0.3s var.$bezier-curve;
-  &:hover {
-    color: #fff;
-    background-color: util.palette(second, dark);
-  }
 
   @include util.min-width(md) {
     display: none;
+  }
+
+  .mobileNavBtnLabel {
+    display: flex;
+    gap: 0.5rem;
   }
 }
 

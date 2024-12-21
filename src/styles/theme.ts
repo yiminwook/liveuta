@@ -10,7 +10,10 @@ import {
   SegmentedControl,
   Select,
   Switch,
+  VariantColorsResolver,
   createTheme,
+  defaultVariantColorsResolver,
+  parseThemeColor,
 } from '@mantine/core';
 import variable from '@variable';
 
@@ -116,5 +119,37 @@ export const theme = createTheme({
         },
       },
     }),
+  },
+  variantColorResolver(input) {
+    const defaultResolvedColors = defaultVariantColorsResolver(input);
+
+    if (input.color === 'first') {
+      return {
+        background: 'var(--liveuta-first-default)',
+        hover: 'var(--liveuta-first-light)',
+        color: 'var(--mantine-color-white)',
+        border: 'none',
+      };
+    }
+
+    if (input.color === 'second') {
+      return {
+        background: 'var(--liveuta-second-default)',
+        hover: 'var(--liveuta-second-light)',
+        color: 'var(--mantine-color-white)',
+        border: 'none',
+      };
+    }
+
+    if (input.color === 'third') {
+      return {
+        background: 'var(--liveuta-third-default)',
+        hover: 'var(--liveuta-third-light)',
+        color: 'var(--mantine-color-white)',
+        border: 'none',
+      };
+    }
+
+    return defaultResolvedColors;
   },
 });

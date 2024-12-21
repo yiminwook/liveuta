@@ -1,5 +1,5 @@
 'use client';
-import { TextInput, Textarea } from '@mantine/core';
+import { Button, TextInput, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
@@ -147,9 +147,9 @@ export default function PostForm({ session }: PostFormProps) {
           />
         </div>
       </div>
-      <button className={css.submit} type="submit" disabled={mutatePost.isPending}>
+      <Button type="submit" color="third" variant="filled" disabled={mutatePost.isPending}>
         제출
-      </button>
+      </Button>
     </form>
   );
 }

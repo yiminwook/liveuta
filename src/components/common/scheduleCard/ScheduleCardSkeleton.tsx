@@ -16,7 +16,6 @@ export default function ScheduleCardSkeleton() {
       <div className={css.footerBox}>
         <Skeleton className={css.footer1} />
         <div className={css.status}>
-          <FaUsers className={css.statusSvg} size={'0.75rem'} />
           <Skeleton className={css.footer2} />
         </div>
       </div>

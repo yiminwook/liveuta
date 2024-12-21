@@ -6,18 +6,7 @@
   gap: 0.5rem;
 
   .requestChannelButton {
-    padding: 0.3rem 0.6rem;
     flex-shrink: 0;
-    border-radius: 5px;
-    font-weight: 500;
-    color: var(--liveuta-txt-light);
-    background-color: util.palette(second, default);
-    transition: background-color 0.3s var.$bezier-curve;
-    letter-spacing: 1px;
-
-    &:hover {
-      background-color: util.palette(second, light);
-    }
   }
 
   .form {
@@ -36,28 +25,32 @@
       }
 
       .input {
-        width: 12rem;
+        width: 100%;
         border-radius: 5px 0 0 5px;
         border-right: none;
         transition-property: border-color, width;
         transition-duration: 0.2s;
         transition-timing-function: map-get(var.$easing, default);
 
-        &:focus,
-        &:not(:placeholder-shown) {
-          width: 15rem;
-        }
-
         &:focus-visible {
-          border-color: util.palette(second, default);
+          border-color: util.palette(third, default);
         }
 
-        @media (prefers-reduced-motion: reduce) {
-          transition: none;
+        @include util.min-width(var.$mobile-boundary) {
+          width: 12rem;
 
           &:focus,
           &:not(:placeholder-shown) {
-            width: 12rem;
+            width: 15rem;
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            transition: none;
+
+            &:focus,
+            &:not(:placeholder-shown) {
+              width: 12rem;
+            }
           }
         }
       }
@@ -87,7 +80,7 @@
         }
 
         &:focus-visible {
-          box-shadow: 0 0 0 0.125rem util.palette(second, default);
+          box-shadow: 0 0 0 0.125rem util.palette(third, default);
         }
       }
     }
@@ -96,11 +89,11 @@
       display: grid;
       place-items: center;
       border-radius: 0 5px 5px 0;
-      background-color: util.palette(second, default);
+      background-color: util.palette(third, default);
       transition: background-color 0.3s var.$bezier-curve;
 
       &:hover {
-        background-color: util.palette(second, light);
+        background-color: util.palette(third, light);
       }
     }
   }

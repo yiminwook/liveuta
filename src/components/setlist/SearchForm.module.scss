@@ -1,91 +1,93 @@
-.wrap {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.5rem;
+.form {
+  display: flex;
+  justify-content: flex-end;
 
-  @include util.min-width(var.$mobile-boundary) {
-    display: flex;
-    align-items: center;
-  }
+  .wrap {
+    display: grid;
+    grid-template-columns: 1fr 2.5rem;
+    justify-content: flex-end;
+    width: 100%;
 
-  .inputBox {
-    position: relative;
+    .inputBox {
+      position: relative;
 
-    &:has(.input:placeholder-shown) .searchIcon,
-    &:has(.input:not(:placeholder-shown)) .clearButton {
-      visibility: visible;
-      opacity: 1;
-      rotate: 0deg;
-      pointer-events: auto;
-    }
+      &:has(.input:not(:placeholder-shown)) .clearButton {
+        visibility: visible;
+        opacity: 1;
+        rotate: 0deg;
+        pointer-events: auto;
+      }
 
-    .input {
-      width: 100%;
-      border-radius: 0.25rem;
-      padding: 0.25rem 0.5rem;
-      border: 1px solid map-get(var.$colors, default-border);
-      outline: none;
-      transition-property: border-color, width;
-      transition-duration: 0.2s;
-      transition-timing-function: map-get(var.$easing, default);
-      font-size: 0.875rem;
-
-      @include util.min-width(var.$mobile-boundary) {
-        width: 12rem;
-
-        &:focus,
-        &:not(:placeholder-shown) {
-          width: 15rem;
-        }
+      .input {
+        width: 100%;
+        border-radius: 5px 0 0 5px;
+        border-right: none;
+        transition-property: border-color, width;
+        transition-duration: 0.2s;
+        transition-timing-function: map-get(var.$easing, default);
 
         &:focus-visible {
-          border-color: util.palette(second, default);
+          border-color: util.palette(third, default);
         }
 
-        @media (prefers-reduced-motion: reduce) {
-          transition: none;
+        @include util.min-width(var.$mobile-boundary) {
+          width: 12rem;
 
           &:focus,
           &:not(:placeholder-shown) {
-            width: 12rem;
+            width: 15rem;
           }
+
+          @media (prefers-reduced-motion: reduce) {
+            transition: none;
+
+            &:focus,
+            &:not(:placeholder-shown) {
+              width: 12rem;
+            }
+          }
+        }
+      }
+
+      .clearButton {
+        visibility: hidden;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 0.25rem;
+        position: absolute;
+        top: 50%;
+        right: 0.4rem;
+        translate: 0 -50%;
+        rotate: -90deg;
+        opacity: 0;
+        pointer-events: none;
+        transition-property: opacity, rotate, visibility;
+        transition-duration: 0.3s;
+        transition-timing-function: map-get(var.$easing, default);
+        transition-behavior: discrete;
+
+        &:hover {
+          background-color: map-get(var.$colors, default-hover);
+        }
+
+        &:focus-visible {
+          box-shadow: 0 0 0 0.125rem util.palette(third, default);
         }
       }
     }
 
-    .icon {
-      visibility: hidden;
+    .submit {
       display: grid;
-      justify-content: center;
-      align-items: center;
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 0.25rem;
-      position: absolute;
-      top: 50%;
-      right: 0.4rem;
-      translate: 0 -50%;
-      opacity: 0;
-      pointer-events: none;
-      transition-property: opacity, rotate, visibility;
-      transition-duration: 0.3s;
-      transition-timing-function: map-get(var.$easing, default);
-      transition-behavior: discrete;
-    }
-
-    .searchIcon {
-      rotate: 90deg;
-    }
-
-    .clearButton {
-      rotate: -90deg;
+      place-items: center;
+      border-radius: 0 5px 5px 0;
+      background-color: util.palette(third, default);
+      transition: background-color 0.3s var.$bezier-curve;
 
       &:hover {
-        background-color: map-get(var.$colors, default-hover);
-      }
-
-      &:focus-visible {
-        box-shadow: 0 0 0 0.125rem util.palette(second, default);
+        background-color: util.palette(third, light);
       }
     }
   }
