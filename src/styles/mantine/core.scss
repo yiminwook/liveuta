@@ -3764,6 +3764,7 @@ fieldset:disabled .m_d3ea56bb,
 
   @include util.min-width(xs){
     flex: var(--modal-content-flex, 0 0 var(--modal-size));
+    min-width: map-get(var.$breakpoints, xs);
   }
 }
 

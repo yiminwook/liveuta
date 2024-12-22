@@ -13,6 +13,7 @@ type ModalProps = {
   overlay?: boolean;
   centered?: boolean;
   withCloseButton?: boolean;
+  closeOnClickOutside?: boolean;
   onAnimationEnd?: AnimationEventHandler;
   onClose: (e?: any) => void;
 };
@@ -27,6 +28,7 @@ export default function Modal({
   overlay = true,
   centered = true,
   withCloseButton = true,
+  closeOnClickOutside = true,
   onAnimationEnd,
   onClose,
 }: ModalProps) {
@@ -66,6 +68,7 @@ export default function Modal({
       withCloseButton={withCloseButton}
       transitionProps={{}}
       closeOnEscape={false} //직접 제어
+      closeOnClickOutside={closeOnClickOutside}
     >
       {children}
     </MantineModal>

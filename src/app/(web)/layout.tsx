@@ -9,6 +9,7 @@ import { TGetChannelRes } from '@api/v1/channel/route';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import axios from 'axios';
 import { PropsWithChildren } from 'react';
+import Client from './layout.client';
 
 export default async function Layout({ children }: PropsWithChildren) {
   const session = await auth();
@@ -61,7 +62,7 @@ export default async function Layout({ children }: PropsWithChildren) {
       <DataFetchingObserver />
       <PageView>
         <Header session={session} />
-        {children}
+        <Client session={session}>{children}</Client>
         <BottomTab />
         {session && <AccountSidebar session={session} />}
       </PageView>
