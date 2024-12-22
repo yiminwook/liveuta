@@ -1,6 +1,8 @@
 'use client';
 import {
   ActionIcon,
+  ButtonProps,
+  MantineTheme,
   MantineTransition,
   Menu,
   Modal,
@@ -66,12 +68,16 @@ export const theme = createTheme({
       },
     }),
     Button: {
-      vars: (theme: any, props: any) => ({
-        root: {
-          '--button-color': 'var(--mantine-color-text)',
-        },
-      }),
-      // styles: (theme: any, props: any) => {
+      vars: (theme: MantineTheme, props: ButtonProps) => {
+        if (props.variant === 'default') {
+          return {
+            root: {
+              '--button-color': 'var(--mantine-color-text)',
+            },
+          };
+        }
+      },
+      // styles: (theme: MantineTheme, props: ButtonProps) => {
       //   return {
       //     root: {
       //       color: 'red',

@@ -1,7 +1,7 @@
 'use client';
 import { TYChannelsData } from '@/types/api/youtube';
 import { renderSubscribe } from '@/utils/renderSubscribe';
-import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
+import { Avatar, Box, Button, Center, HoverCard, Text, useMantineTheme } from '@mantine/core';
 import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
 import { IoIosMore } from 'react-icons/io';
@@ -14,6 +14,7 @@ type ChannelSliderProps = {
 
 export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
   const router = useRouter();
+  const theme = useMantineTheme();
 
   const navigationChannel = (channelName: string) => {
     router.push(`/channel?q=${channelName}`);
@@ -50,7 +51,7 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
                       className="swiper-no-swiping" // 슬라이드 이동 방지해야 hover 가능
                       w="100%"
                     >
-                      <IoIosMore size="1.2rem" />
+                      <IoIosMore size="1.5rem" />
                     </Button>
                   </Center>
                 </HoverCard.Target>
@@ -69,7 +70,11 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
 
                   <Box mt="xs">
                     <Center>
-                      <Button size="xs" onClick={() => navigationChannel(item.channelName)}>
+                      <Button
+                        variant="light"
+                        size="xs"
+                        onClick={() => navigationChannel(item.channelName)}
+                      >
                         채널로 검색하기
                       </Button>
                     </Center>
