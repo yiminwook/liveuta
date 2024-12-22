@@ -90,7 +90,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
 
   return (
     <div className={css.channelCard}>
-      <a className={css.linkToChannel} href={url} onClick={linkClickEvent}>
+      <a href={url} onClick={linkClickEvent}>
         <div className={css.imageContainer}>
           <Image
             src={imageURL}
@@ -104,21 +104,21 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
         </div>
       </a>
       <div className={css.desc}>
-        <div className={css.title}>
-          <h3>{channelName}</h3>
+        <div className={css.titleBox}>
           <button
             onClick={handleFavorite}
             disabled={mutatePostFavorite.isPending || mutateDeleteFavorite.isPending}
           >
             <FaStar size="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
           </button>
+          <h3>{channelName}</h3>
         </div>
         <div className={css.details}>
           <div className={css.channelInfo}>
-            <p className={css.descContent}>
+            <p>
               <span className={css.descContentLabel}>구독자</span> {subscribe}
             </p>
-            <p className={css.descContent}>
+            <p>
               <span className={css.descContentLabel}>동영상</span> {videoCount}
               <span>개</span>
             </p>
