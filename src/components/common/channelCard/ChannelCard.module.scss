@@ -19,8 +19,6 @@
   }
 }
 
-.linkToChannel {}
-
 .imageContainer {
   position: relative;
   width: 5.5rem;
@@ -32,41 +30,51 @@
 .desc {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
 
-  // @include util.min-width(var.$mobile-boundary) {
-  //   justify-content: flex-start;
-  // }
+  @include util.min-width(var.$mobile-boundary) {
+    justify-content: space-around;
+  }
 }
-
-.descContent {}
-
-;
 
 .descContentLabel {
   color: #888;
 }
 
-.title {
-  font-size: 1.25rem;
-  font-weight: 500;
+.titleBox {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 500;
+
+  @include util.text-line(1, 1rem);
+  @include util.min-width(var.$mobile-boundary) {
+    font-size: 1.25rem;
+  }
 }
 
 .details {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
 
-  // @include util.min-width(var.$mobile-boundary) {
-  //   flex-direction: column;
-  // }
+  @include util.min-width(var.$mobile-boundary) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 .channelInfo {
   display: flex;
   gap: 1rem;
+  font-size: 0.875rem;
+
+  @include util.min-width(var.$mobile-boundary) {
+    font-size: 1rem;
+  }
 }
 
 .originalTitle {
