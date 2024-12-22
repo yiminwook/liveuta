@@ -100,6 +100,11 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
                 <li>
                   <Link href="/my">마이페이지</Link>
                 </li>
+                {session.user.userLv >= 3 && (
+                  <li>
+                    <Link href="/admin">관리자페이지</Link>
+                  </li>
+                )}
               </ul>
             </nav>
           </div>

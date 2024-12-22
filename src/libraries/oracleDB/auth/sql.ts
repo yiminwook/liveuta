@@ -15,3 +15,9 @@ export const UPDATE_MEMBER = `
   SET LOGIN_AT = CURRENT_TIMESTAMP, DISCONNECT = 'N'
   WHERE EMAIL = :email AND PROVIDER = :provider
 `;
+
+export const DICONNECT_ALL_MEMBER = `
+  UPDATE MEMBER
+    SET DISCONNECT = 'Y'
+    WHERE DISCONNECT = 'N';
+ `;
