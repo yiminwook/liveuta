@@ -94,6 +94,7 @@ const nextConfig: NextConfig = {
     return config;
   },
   experimental: {
+    authInterrupts: true, // 401, 403
     reactCompiler: true,
     turbo: {
       rules: {
