@@ -12,24 +12,8 @@
   }
 }
 
-.contentComponent {
-  height: 100%;
-}
-
-.wrapper {
-  max-height: none;
-  overflow: hidden;
-  position: relative;
-}
-
 .drawerGrid {
   padding: 1rem 1rem;
-
-
-  &[data-hidden=true] {
-    opacity: 0;
-    visibility: hidden;
-  }
 
   .item {
     margin: 0 auto;
@@ -55,20 +39,5 @@
         }
       }
     }
-  }
-}
-
-.expandIcon {
-  display: grid;
-  place-items: center;
-
-  &[data-hidden=true] {
-    display: none;
-    visibility: hidden;
-  }
-
-  svg {
-    width: 1.5rem;
-    height: 1.5rem;
   }
 }
