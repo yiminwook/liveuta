@@ -1,5 +1,6 @@
 import { UnstyledButton } from '@mantine/core';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { CgUserlane } from 'react-icons/cg';
 import { FaListOl } from 'react-icons/fa';
@@ -22,6 +23,7 @@ type BottomInnerProps = {
 export default function BottomInner({ openDrawer }: BottomInnerProps) {
   const [direction, setDirection] = useState<Direction>(Direction.up);
   const [windowY, setWindowY] = useState(0);
+  const pathname = usePathname();
 
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -76,25 +78,45 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
       </UnstyledButton>
       <ul className={css.list}>
         <li>
-          <UnstyledButton component={Link} href="/setlist" className={css.item}>
+          <UnstyledButton
+            component={Link}
+            href="/setlist"
+            className={css.item}
+            data-current={pathname === '/setlist'}
+          >
             <FaListOl size="1.25rem" />
             <span>세트리</span>
           </UnstyledButton>
         </li>
         <li>
-          <UnstyledButton component={Link} href="/channel" className={css.item}>
+          <UnstyledButton
+            component={Link}
+            href="/channel"
+            className={css.item}
+            data-current={pathname === '/channel'}
+          >
             <CgUserlane size="1.5rem" />
             <span>채널</span>
           </UnstyledButton>
         </li>
         <li>
-          <UnstyledButton component={Link} href="/" className={css.item}>
+          <UnstyledButton
+            component={Link}
+            href="/"
+            className={css.item}
+            data-current={pathname === '/'}
+          >
             <TiHomeOutline size="1.5rem" />
             <span>홈</span>
           </UnstyledButton>
         </li>
         <li>
-          <UnstyledButton component={Link} href="/schedule" className={css.item}>
+          <UnstyledButton
+            component={Link}
+            href="/schedule"
+            className={css.item}
+            data-current={pathname === '/schedule'}
+          >
             <MdOutlineSchedule size="1.5rem" />
             <span>스케줄</span>
           </UnstyledButton>
