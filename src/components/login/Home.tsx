@@ -1,6 +1,7 @@
 'use client';
 import character from '@/assets/image/character-3.png';
 import { Provider } from '@/types/nextAuth';
+import { ActionIcon } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
@@ -34,27 +35,36 @@ export default function Home() {
           </div>
           <p>소셜 계정으로 시작</p>
           <div className={css.buttonBox}>
-            <button
+            <ActionIcon
+              variant="white"
+              radius="lg"
+              size="lg"
               className={css.socialLoginButton}
               onClick={() => mutateLogin.mutate('google')}
               disabled={mutateLogin.isPending}
             >
               <FcGoogle size={28} />
-            </button>
-            <button
+            </ActionIcon>
+            <ActionIcon
+              variant="white"
+              radius="lg"
+              size="lg"
               className={css.socialLoginButton}
               onClick={() => mutateLogin.mutate('kakao')}
               disabled={mutateLogin.isPending}
             >
               <RiKakaoTalkFill size={28} />
-            </button>
-            <button
+            </ActionIcon>
+            <ActionIcon
+              variant="white"
+              radius="lg"
+              size="lg"
               className={css.socialLoginButton}
               onClick={() => mutateLogin.mutate('discord')}
               disabled={mutateLogin.isPending}
             >
               <FaDiscord size={28} />
-            </button>
+            </ActionIcon>
           </div>
         </div>
       </div>
