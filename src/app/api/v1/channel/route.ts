@@ -12,10 +12,9 @@ export type TGetChannelRes = {
 export async function GET(req: NextRequest) {
   const searchParams = new URL(req.url).searchParams;
   const order = searchParams.get('order') as keyof typeof CHANNEL_ORDER_MAP;
-  const size = searchParams.get('size');
 
   try {
-    const dto = channelDto.safeParse({ order, size });
+    const dto = channelDto.safeParse({ order });
 
     if (dto.error) {
       throw new BadReqError(dto.error.errors[0].message);

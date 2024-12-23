@@ -34,11 +34,7 @@ export const getAllChannel = async (dto: TChannelDto) => {
   const direction = CHANNEL_ORDER_MAP[dto.sort];
 
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
-  const channels = await db
-    .find<TChannelDocument>({})
-    .sort(dto.sort, direction)
-    .limit(dto.size)
-    .toArray();
+  const channels = await db.find<TChannelDocument>({}).sort(dto.sort, direction).toArray();
 
   return channels.map<TChannelData>((channel) => {
     delete channel._id;
