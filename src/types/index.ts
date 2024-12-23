@@ -56,7 +56,7 @@ export type ServerActionResponse<T> = {
   result: T;
 };
 
-export type METADATA = {
+export type TMetadata = {
   cover_image_url: string;
   default_video_id: string;
 };

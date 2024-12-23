@@ -9,7 +9,7 @@ export const STAT_MAPPER = {
   NULL: 'scheduled',
 } as const;
 
-export interface ChannelDocument {
+export interface TChannelDocument {
   _id?: string;
   channel_id: string;
   name_kor: string;
@@ -20,7 +20,7 @@ export interface ChannelDocument {
   alive: boolean;
 }
 
-export type TChannelData = Omit<ChannelDocument, '_id'>;
+export type TChannelData = Omit<TChannelDocument, '_id'>;
 export type TChannelListData = Record<string, TChannelData>;
 
 export type ContentDocumentRaw = Omit<ContentDocument, 'ScheduledTime'> & { ScheduledTime: Date };

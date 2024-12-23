@@ -1,5 +1,5 @@
 import character from '@/assets/image/character-5-150.png';
-import { getChannel, parseChannel } from '@/libraries/mongoDB/getAllChannel';
+import { getChannelById, parseChannel } from '@/libraries/mongoDB/getAllChannel';
 import { auth } from '@/libraries/nextAuth';
 import { getSetlistByVideoId } from '@/libraries/oracleDB/setlist/service';
 import { Divider } from '@mantine/core';
@@ -23,7 +23,7 @@ export default async function Home({ params }: HomeProps) {
   if (!data) notFound();
   const setlist = data.setlist;
   const icon = data.channelIcon;
-  const document = await getChannel(setlist.channelId);
+  const document = await getChannelById(setlist.channelId);
   const channel = parseChannel(document);
   return (
     <Background>

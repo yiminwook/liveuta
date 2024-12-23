@@ -1,5 +1,5 @@
-import { notFound } from 'next/navigation';
 import Home from '@/components/channel/Home';
+import { notFound } from 'next/navigation';
 
 type Props = {
   searchParams: Promise<{

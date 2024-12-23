@@ -2,7 +2,7 @@ import { google } from 'googleapis';
 
 export const youtubeService = google.youtube('v3');
 
-const fetcher = (input: any) => fetch(input, { next: { revalidate: 60, tags: ['channel'] } });
+const fetcher = (input: any) => fetch(input, { next: { revalidate: 1800, tags: ['channel'] } });
 
 export const getYoutubeChannelsByUid = async (uid: string) => {
   const response = await youtubeService.channels.list(
