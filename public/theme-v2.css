@@ -236,8 +236,8 @@
   --liveuta-bg-right-url: url(/background/right4.jpg);
   --liveuta-bg-right-position: 28%;
 
-  --liveuta-schedule-closed: hsl(200, 40%, 18%);
-  --liveuta-schedule-stream: hsl(45, 35%, 16%);
+  --liveuta-schedule-closed: hsl(200, 50%, 25%);
+  --liveuta-schedule-stream: hsl(45, 50%, 20%);
   --liveuta-schedule-stream-text1: var(--mantine-color-text);
   --liveuta-schedule-stream-text2: var(--mantine-color-text);
 }
@@ -297,8 +297,8 @@
   --liveuta-bg-right-url: url(/background/right5.jpg);
   --liveuta-bg-right-position: 47%;
 
-  --liveuta-schedule-closed: hsl(200, 40%, 18%);
-  --liveuta-schedule-stream: hsl(45, 35%, 16%);
+  --liveuta-schedule-closed: hsl(200, 50%, 25%);
+  --liveuta-schedule-stream: hsl(45, 50%, 20%);
   --liveuta-schedule-stream-text1: var(--mantine-color-text);
   --liveuta-schedule-stream-text2: var(--mantine-color-text);
 }
