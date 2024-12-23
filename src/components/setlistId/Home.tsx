@@ -2,6 +2,7 @@ import character from '@/assets/image/character-5-150.png';
 import { getChannel, parseChannel } from '@/libraries/mongoDB/getAllChannel';
 import { auth } from '@/libraries/nextAuth';
 import { getSetlistByVideoId } from '@/libraries/oracleDB/setlist/service';
+import { Divider } from '@mantine/core';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Background from '../common/background/Background';
@@ -34,6 +35,7 @@ export default async function Home({ params }: HomeProps) {
             <Info setlist={setlist} channel={channel} session={session} />
           </div>
         </section>
+        <Divider className={css.divider} orientation="horizontal" />
         <section className={css.right}>
           <Desc session={session} videoId={setlist.videoId} description={setlist.description} />
         </section>

@@ -34,8 +34,15 @@
 
     .infoWrap {
       position: relative;
-      padding: 0.5rem;
-      font-size: 1.1rem;
+    }
+  }
+
+  .divider {
+    margin-block: 0.5rem;
+
+    @include util.min-width(md) {
+      display: none;
+      visibility: hidden;
     }
   }
 

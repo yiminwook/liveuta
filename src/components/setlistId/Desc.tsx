@@ -1,7 +1,7 @@
 'use client';
 import TimelineText from '@/components/common/TimestampText';
 import { useSetPlayerStore } from '@/stores/player';
-import { Textarea } from '@mantine/core';
+import { Button, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
@@ -95,26 +95,27 @@ export default function Desc({ session, videoId, description }: DescProps) {
     return (
       <form className={css.wrap} onSubmit={handleSubmit}>
         <div className={css.buttons}>
-          <button
+          <Button
             type="button"
-            className={css.button}
-            data-variant="cancel"
+            variant="filled"
+            color="red"
             onClick={handleCancel}
             disabled={mutateSetlist.isPending}
           >
             취소
-          </button>
-          <button
+          </Button>
+          <Button
             type="submit"
-            className={css.button}
+            variant="default"
             data-variant="save"
             disabled={mutateSetlist.isPending}
           >
             저장
-          </button>
+          </Button>
         </div>
         <div className={css.inner}>
           <Textarea
+            className={css.textarea}
             autosize
             disabled={mutateSetlist.isPending}
             value={desc}
@@ -127,19 +128,22 @@ export default function Desc({ session, videoId, description }: DescProps) {
 
   return (
     <div className={css.wrap}>
-      <button type="button" className={css.button} data-variant="edit" onClick={toggleEditing}>
+      <Button type="button" color="third" onClick={toggleEditing}>
         편집
-      </button>
+      </Button>
       <div className={css.inner}>
-        {description.split('\n').map((line, index) => (
-          <TimelineText
-            key={`${videoId}_row_${index}`}
-            index={index}
-            text={line}
-            videoId={videoId}
-            onClickTimestamp={handleTimestamp}
-          />
-        ))}
+        {description
+          .split('\n')
+          .filter((item) => item !== '')
+          .map((line, index) => (
+            <TimelineText
+              key={`${videoId}_row_${index}`}
+              index={index}
+              text={line}
+              videoId={videoId}
+              onClickTimestamp={handleTimestamp}
+            />
+          ))}
       </div>
     </div>
   );
