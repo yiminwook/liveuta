@@ -24,11 +24,11 @@ type ChannelItemProps = {
 
 export default function ChannelItem({ content, session, isFavorite }: ChannelItemProps) {
   const { channelName, snippet, url, statistics, uid } = content;
-  const title = snippet.title ?? '';
-  const imageURL = snippet.thumbnails?.default?.url ?? '/loading.png';
-  const description = snippet.description ?? '비공개';
-  const subscribe = renderSubscribe(statistics.subscriberCount ?? '비공개');
-  const videoCount = statistics.videoCount ?? '비공개';
+  const title = snippet?.title ?? '';
+  const imageURL = snippet?.thumbnails?.default?.url ?? '/loading.png';
+  const description = snippet?.description ?? '비공개';
+  const subscribe = renderSubscribe(statistics?.subscriberCount ?? '비공개');
+  const videoCount = statistics?.videoCount ?? '비공개';
 
   const modalStore = useSetModalStore();
 

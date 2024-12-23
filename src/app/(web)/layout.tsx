@@ -9,7 +9,6 @@ import { TGetChannelRes } from '@api/v1/channel/route';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import axios from 'axios';
 import { PropsWithChildren } from 'react';
-import Client from './layout.client';
 
 export default async function Layout({ children }: PropsWithChildren) {
   const session = await auth();
@@ -20,7 +19,7 @@ export default async function Layout({ children }: PropsWithChildren) {
     queryKey: ['channelList'],
     queryFn: () =>
       fetch(process.env.NEXT_PUBLIC_SITE_URL + '/api/v1/channel', {
-        next: { revalidate: 60, tags: ['channel'] }, // 1분간 캐시
+        next: { revalidate: 1800, tags: ['channel'] },
       })
         .then((res) => res.json() as Promise<TGetChannelRes>)
         .then((res) => res.data),
@@ -59,10 +58,10 @@ export default async function Layout({ children }: PropsWithChildren) {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <DataFetchingObserver />
+      <DataFetchingObserver session={session} />
       <PageView>
         <Header session={session} />
-        <Client session={session}>{children}</Client>
+        <>{children}</>
         <BottomTab />
         {session && <AccountSidebar session={session} />}
       </PageView>

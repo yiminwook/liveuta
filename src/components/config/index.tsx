@@ -1,5 +1,5 @@
 import { auth } from '@/libraries/nextAuth';
-import { METADATA } from '@/types';
+import { TMetadata } from '@/types';
 import { TGetCookiesReturn } from '@/utils/getCookie';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
@@ -23,8 +23,10 @@ export default async function Configs({ children, cookies, colorScheme }: Config
   const [session, metadata] = await Promise.all([
     auth(),
     fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/metadata`, {
-      next: { revalidate: 3600, tags: ['metadata', 'video'] },
-    }).then((res) => res.json() as Promise<METADATA>),
+      next: { revalidate: 3600, tags: ['metadata'] },
+    })
+      .then((res) => res.json() as Promise<{ data: TMetadata }>)
+      .then((json) => json.data),
   ]);
 
   return (

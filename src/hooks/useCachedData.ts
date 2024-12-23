@@ -13,7 +13,12 @@ const useCachedData = ({ session }: LayoutDataObserverProps) => {
     queries: [
       {
         queryKey: ['channelList'],
-        queryFn: () => axios.get<TGetChannelRes>('/api/v1/channel').then((res) => res.data.data),
+        queryFn: () =>
+          fetch('/api/v1/channel', {
+            next: { revalidate: 1800, tags: ['channel'] }, // 1분간 캐시
+          })
+            .then((res) => res.json() as Promise<TGetChannelRes>)
+            .then((res) => res.data),
         gcTime: Infinity,
       },
       {

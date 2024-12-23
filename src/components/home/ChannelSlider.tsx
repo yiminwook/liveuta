@@ -24,8 +24,8 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
     <div className={css.wrap}>
       <Swiper slidesPerGroup={1} slidesPerView={'auto'} centeredSlides={false} spaceBetween={14}>
         {recentChannels.map((item) => {
-          const subscribe = renderSubscribe(item.statistics.subscriberCount ?? '비공개');
-          const videoCount = item.statistics.videoCount ?? '비공개';
+          const subscribe = renderSubscribe(item.statistics?.subscriberCount ?? '비공개');
+          const videoCount = item.statistics?.videoCount ?? '비공개';
           return (
             <SwiperSlide key={`recentChannel_${item.uid}`} style={{ width: '75px' }}>
               <Avatar
@@ -40,7 +40,7 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
                   },
                 }}
                 color={variable.firstColorDefault}
-                src={item.snippet.thumbnails?.default?.url}
+                src={item.snippet?.thumbnails?.default?.url}
               />
               <HoverCard withArrow width={200} offset={0} arrowOffset={0}>
                 <HoverCard.Target>
@@ -59,7 +59,7 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
                   <Box>
                     <Text size="sm">{item.channelName}</Text>
                     <Text size="sm" c="dimmed">
-                      {item.snippet.title}
+                      {item.snippet?.title}
                     </Text>
                   </Box>
 

@@ -1,8 +1,8 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
-import type { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
 import type { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
+import { TChannelData } from '@/types/api/mongoDB';
 import { replaceParentheses } from '@/utils/regexp';
 import { Table } from '@mantine/core';
 import cx from 'classnames';
@@ -14,7 +14,7 @@ import css from './Table.module.scss';
 
 type RowProps = {
   setlist: Setlist;
-  channel?: ChannelDataset['channel_id'];
+  channel?: TChannelData;
   order?: 'broadcast' | 'create';
 };
 
@@ -45,7 +45,7 @@ export default function Row({ setlist, channel, order }: RowProps) {
         </button>
       </Table.Td>
       <Table.Td className={cx(css.cell, css.channel)}>
-        <p>{channel?.nameKor}</p>
+        <p>{channel?.name_kor}</p>
       </Table.Td>
       <Table.Td className={cx(css.cell, css.title)}>
         <p>{title}</p>

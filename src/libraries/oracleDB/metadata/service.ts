@@ -1,4 +1,4 @@
-import { METADATA } from '@/types';
+import { TMetadata } from '@/types';
 import { withOracleConnection } from '../connection';
 import * as sql from './sql';
 
@@ -16,5 +16,5 @@ export const getAllMetadata = withOracleConnection(async (connection) => {
     return acc;
   }, {});
 
-  return metadata as METADATA;
+  return metadata as TMetadata;
 });

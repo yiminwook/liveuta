@@ -1,18 +1,18 @@
 'use client';
-import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
-import { ReactNode, createContext, use, useEffect, useMemo, useState } from 'react';
+import { TChannelData } from '@/types/api/mongoDB';
+import { ReactNode, createContext, use, useMemo, useState } from 'react';
 
 type SetlistDrawerActionContext = {
   onOpenChange: (value: boolean) => void;
-  open: (setlist: Setlist, thumbnailUrl: string, channel?: ChannelDataset['channel_id']) => void;
+  open: (setlist: Setlist, thumbnailUrl: string, channel?: TChannelData) => void;
 };
 
 type SetlistDrawerContext = {
   open: boolean;
   setlist?: Setlist;
   thumbnailUrl?: string;
-  channel?: ChannelDataset['channel_id'];
+  channel?: TChannelData;
 };
 
 // @ts-expect-error empty context
@@ -40,7 +40,7 @@ export function DrawerProvider({ children }: { children: ReactNode }) {
           open: value,
         });
       },
-      open: (setlist: Setlist, thumbnailUrl: string, channel?: ChannelDataset['channel_id']) => {
+      open: (setlist: Setlist, thumbnailUrl: string, channel?: TChannelData) => {
         setDrawerContext({
           open: true,
           setlist,

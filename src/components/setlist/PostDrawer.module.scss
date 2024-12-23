@@ -3,6 +3,9 @@
   border-radius: 0.25rem;
   background-color: util.palette(third, default);
   color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: var(--mantine-line-height);
   transition: background-color 0.2s map-get(var.$easing, default);
 
   &:hover {

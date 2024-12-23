@@ -3,7 +3,7 @@ import Nodata from '@/components/common/Nodata';
 import loadingCss from '@/components/common/loading/Loading.module.scss';
 import Wave from '@/components/common/loading/Wave';
 import { SETLIST_PAGE_SIZE } from '@/constants';
-import type { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
+import useCachedData from '@/hooks/useCachedData';
 import type { Setlist } from '@/libraries/oracleDB/setlist/service';
 import type { GetSetlistRes } from '@/types/api/setlist';
 import { Pagination, Table } from '@mantine/core';
@@ -26,7 +26,6 @@ type TableProps = {
     page: number;
     order: 'broadcast' | 'create';
   };
-  channelDataset: ChannelDataset;
   session: Session | null;
 };
 
@@ -48,7 +47,8 @@ type DataType = {
   totalPage: number;
 };
 
-export default function SetlistTable({ session, searchParams, channelDataset }: TableProps) {
+export default function SetlistTable({ session, searchParams }: TableProps) {
+  const { channelList } = useCachedData({ session });
   const router = useRouter();
 
   const { data, isLoading } = useQuery({
@@ -128,11 +128,7 @@ export default function SetlistTable({ session, searchParams, channelDataset }: 
         </Table.Thead>
         <Table.Tbody className={css.body}>
           {data.list.map((setlist) => (
-            <Row
-              key={setlist.videoId}
-              setlist={setlist}
-              channel={channelDataset[setlist.channelId]}
-            />
+            <Row key={setlist.videoId} setlist={setlist} channel={channelList[setlist.channelId]} />
           ))}
         </Table.Tbody>
       </Table>

@@ -1,5 +1,4 @@
 import Background from '@/components/common/background/Background';
-import { generateChannelObject, getAllChannel } from '@/libraries/mongoDB/getAllChannel';
 import { auth } from '@/libraries/nextAuth';
 import css from './Home.module.scss';
 import Nav from './Nav';
@@ -15,8 +14,6 @@ interface HomeProps {
 
 export default async function Home({ searchParams }: HomeProps) {
   const session = await auth();
-  const channelData = await getAllChannel();
-  const channelDataset = generateChannelObject(channelData);
 
   const parseSearchParams = {
     query: searchParams.query || '',
@@ -29,7 +26,7 @@ export default async function Home({ searchParams }: HomeProps) {
       <div className={css.inner}>
         <h1 className="blind">세트리</h1>
         <Nav searchParams={parseSearchParams} session={session} />
-        <Table session={session} searchParams={parseSearchParams} channelDataset={channelDataset} />
+        <Table session={session} searchParams={parseSearchParams} />
       </div>
     </Background>
   );

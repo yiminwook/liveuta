@@ -1,5 +1,5 @@
 import character from '@/assets/image/character-5-150.png';
-import { getChannel, parseChannel } from '@/libraries/mongoDB/getAllChannel';
+import { getChannelById, parseChannel } from '@/libraries/mongoDB/getAllChannel';
 import { auth } from '@/libraries/nextAuth';
 import { getSetlistByVideoId } from '@/libraries/oracleDB/setlist/service';
 import Image from 'next/image';
@@ -20,7 +20,7 @@ export default async function Home({ params }: HomeProps) {
   const session = await auth();
   const setlist = await getSetlistByVideoId(params.id);
   if (!setlist) notFound();
-  const document = await getChannel(setlist.channelId);
+  const document = await getChannelById(setlist.channelId);
   const channel = parseChannel(document);
   return (
     <Background>
