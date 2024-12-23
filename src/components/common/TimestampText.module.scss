@@ -1,0 +1,6 @@
+.index {
+  -webkit-user-select: none;
+  user-select: none;
+
+  color: map-get(var.$colors, dimmed);
+}

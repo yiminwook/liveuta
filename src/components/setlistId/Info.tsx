@@ -6,8 +6,10 @@ import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
 import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { openWindow } from '@/utils/windowEvent';
+import { Button } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import cx from 'classnames';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
@@ -67,15 +69,20 @@ export default function Info({ setlist, channel, session }: InfoProps) {
   return (
     <div className={css.wrap}>
       <nav className={css.nav}>
-        <button className={css.backButton} onClick={() => router.back()}>
-          <IoArrowBack size={28} />
+        <Button
+          className={css.backButton}
+          classNames={{ label: css.buttonLabel }}
+          variant="transparent"
+          onClick={() => router.back()}
+        >
+          <IoArrowBack size={24} />
           <span>Back</span>
-        </button>
+        </Button>
         <div className={css.navRight}>
           {deletePermission && (
-            <button
+            <Button
               className={css.navItem}
-              data-variant="delete"
+              color="red"
               onClick={() => {
                 if (confirm('삭제 하시겠습니까?'))
                   mutateDelete.mutate({ session, videoId: setlist.videoId });
@@ -83,23 +90,30 @@ export default function Info({ setlist, channel, session }: InfoProps) {
               disabled={mutateDelete.isPending}
             >
               <span className={css.letterWide}>삭제</span>
-            </button>
+            </Button>
           )}
-          <button
-            className={css.navItem}
-            data-variant="youtube"
+          <Button
+            className={cx(css.navItem, css.hoverButton)}
+            classNames={{ label: css.buttonLabel }}
+            variant="transparent"
             onClick={() => handleLocation(videoUrl)}
           >
             <ImYoutube size={24} color="#ff0000" />
             유튜브
-          </button>
-          <Link className={css.navItem} data-variant="list" href="/setlist">
+          </Button>
+          <Button
+            component={Link}
+            className={cx(css.navItem, css.hoverButton)}
+            classNames={{ label: css.buttonLabel }}
+            variant="transparent"
+            href="/setlist"
+          >
             <BsMusicNoteList />
             리스트
-          </Link>
+          </Button>
         </div>
       </nav>
-      <h4 className={css.title}>{setlist.title}</h4>
+      <h2 className={css.title}>{setlist.title}</h2>
       <div>
         <button onClick={() => handleLocation(channelUrl)}>{channel.nameKor}</button>
         <br />

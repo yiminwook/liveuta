@@ -2,6 +2,7 @@ import { generateVideoUrl } from '@/libraries/youtube/url';
 import wrapTimeWithLink from '@/utils/wrapTimeWithLink';
 import { useId } from 'react';
 import parse from 'react-html-parser';
+import css from './TimestampText.module.scss';
 
 type TimestampTextProps = {
   index: number;
@@ -10,7 +11,7 @@ type TimestampTextProps = {
   onClickTimestamp: ({ videoId, timestamp }: { videoId: string; timestamp: number }) => void;
 };
 
-export default function TimelineText({
+export default function TimestampText({
   index,
   text,
   videoId,
@@ -31,6 +32,7 @@ export default function TimelineText({
 
   return (
     <p>
+      <span className={css.index}>{index + 1}. </span>
       {parse(replacedText, {
         transform: (domNode) => {
           if (domNode.name === 'a' && domNode.attribs) {
