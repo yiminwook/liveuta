@@ -4,7 +4,7 @@ import { addExcapeCharacter } from '@/utils/regexp';
 import { z } from 'zod';
 import { connectMongoDB } from './';
 
-export type ChannleDatesetItem = ReturnType<typeof parseChannel>;
+export type ChannelDatesetItem = ReturnType<typeof parseChannel>;
 export type ChannelDataset = ReturnType<typeof generateChannelObject>;
 
 export const getChannel = async (channel_id: string) => {

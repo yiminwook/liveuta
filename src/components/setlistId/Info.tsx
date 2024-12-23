@@ -1,6 +1,6 @@
 'use client';
 import dayjs from '@/libraries/dayjs';
-import { ChannleDatesetItem } from '@/libraries/mongoDB/getAllChannel';
+import { ChannelDatesetItem } from '@/libraries/mongoDB/getAllChannel';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
@@ -20,7 +20,7 @@ import css from './Info.module.scss';
 
 type InfoProps = {
   setlist: Setlist;
-  channel: ChannleDatesetItem;
+  channel: ChannelDatesetItem;
   session: Session | null;
 };
 
