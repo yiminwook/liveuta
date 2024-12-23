@@ -22,7 +22,7 @@ export const CHANNEL_ORDER_MAP = {
 
 export type TChannelDto = z.infer<typeof channelDto>;
 export type TYChannelReturn = ReturnType<typeof getChannelWithYoutube>;
-export type ChannleDatesetItem = ReturnType<typeof parseChannel>;
+export type ChannelDatesetItem = ReturnType<typeof parseChannel>;
 
 export const getChannelById = async (channel_id: string) => {
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
