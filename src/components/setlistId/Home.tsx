@@ -19,8 +19,10 @@ interface HomeProps {
 
 export default async function Home({ params }: HomeProps) {
   const session = await auth();
-  const setlist = await getSetlistByVideoId(params.id);
-  if (!setlist) notFound();
+  const data = await getSetlistByVideoId(params.id);
+  if (!data) notFound();
+  const setlist = data.setlist;
+  const icon = data.channelIcon;
   const document = await getChannel(setlist.channelId);
   const channel = parseChannel(document);
   return (
@@ -32,7 +34,7 @@ export default async function Home({ params }: HomeProps) {
             <SetlistPlayer videoId={setlist.videoId} />
           </div>
           <div className={css.infoWrap}>
-            <Info setlist={setlist} channel={channel} session={session} />
+            <Info setlist={setlist} channel={channel} icon={icon} session={session} />
           </div>
         </section>
         <Divider className={css.divider} orientation="horizontal" />

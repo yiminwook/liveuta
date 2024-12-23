@@ -6,12 +6,13 @@ import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
 import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { openWindow } from '@/utils/windowEvent';
-import { Button } from '@mantine/core';
+import { Avatar, Button } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import cx from 'classnames';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
+import Image from 'next/image';
 import Link from 'next/link';
 import { isMobile } from 'react-device-detect';
 import { BsMusicNoteList } from 'react-icons/bs';
@@ -23,10 +24,11 @@ import css from './Info.module.scss';
 type InfoProps = {
   setlist: Setlist;
   channel: ChannelDatesetItem;
+  icon: string;
   session: Session | null;
 };
 
-export default function Info({ setlist, channel, session }: InfoProps) {
+export default function Info({ setlist, channel, icon, session }: InfoProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const videoUrl = generateVideoUrl(setlist.videoId);
@@ -113,9 +115,20 @@ export default function Info({ setlist, channel, session }: InfoProps) {
           </Button>
         </div>
       </nav>
-      <h2 className={css.title}>{setlist.title}</h2>
-      <div>
-        <button onClick={() => handleLocation(channelUrl)}>{channel.nameKor}</button>
+      <div className={css.infoSection}>
+        <h2 className={css.title}>{setlist.title}</h2>
+        <button className={css.channel} onClick={() => handleLocation(channelUrl)}>
+          <Avatar className={css.avatar}>
+            <Image
+              className={css.channelIcon}
+              src={icon}
+              alt="채널 아이콘"
+              width={38}
+              height={38}
+            />
+          </Avatar>
+          <p className={css.channelName}>{channel.nameKor}</p>
+        </button>
         <br />
         <div>방송일: {broadcast}</div>
         <div>작성일: {create}</div>

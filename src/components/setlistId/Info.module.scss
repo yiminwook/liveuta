@@ -36,17 +36,36 @@
       }
     }
   }
+  .infoSection {
+    margin-block-start: 0.5rem;
 
-  .title {
-    @include util.text-line(1, 1.6);
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
-    letter-spacing: 0.025em;
-  }
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-  .letterWide {
-    letter-spacing: 0.1em;
+    .title {
+      @include util.text-line(1, 1.6);
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 0.025em;
+    }
+
+    .channel {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-block-start: 0.5rem;
+
+      .channelName {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+    }
+
+    .letterWide {
+      letter-spacing: 0.1em;
+    }
   }
 }
 

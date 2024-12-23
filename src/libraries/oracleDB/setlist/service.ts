@@ -1,6 +1,7 @@
 import { SETLIST_PAGE_SIZE } from '@/constants';
 import dayjs from '@/libraries/dayjs';
 import CustomServerError from '@/libraries/error/customServerError';
+import { getYoutubeChannelsByUid } from '@/libraries/youtube';
 import { DBError } from 'oracledb';
 import { withOracleConnection } from '../connection';
 import * as sql from './sql';
@@ -41,7 +42,13 @@ export const getSetlistByVideoId = withOracleConnection(async (connection, video
   const result = await connection.execute<SetlistRow>(sql.GET_SETLIST, [videoId]);
   const row = result.rows?.[0];
   if (!row) return null;
-  return parseSetlistRow(row);
+  const youtubeData = await getYoutubeChannelsByUid(row[5]);
+  const parsed = parseSetlistRow(row);
+
+  return {
+    setlist: parsed,
+    channelIcon: youtubeData.items?.[0].snippet?.thumbnails?.default?.url ?? '/loading.png',
+  };
 });
 
 export const getAllSetlist = withOracleConnection(
