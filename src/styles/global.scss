@@ -61,12 +61,11 @@ body {
       visibility: hidden !important;
     }
   }
-
 }
 
 *::selection {
   background-color: util.palette(third, default);
-  color: map-get(var.$colors, textInvert);
+  color: white;
 }
 
 @media screen and (max-device-width: 31.25em) {
