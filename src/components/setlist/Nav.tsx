@@ -12,7 +12,7 @@ type SearchFormProps = {
   searchParams: {
     query: string;
     page: number;
-    order: 'broadcast' | 'create';
+    sort: 'broadcast' | 'create';
   };
   session: Session | null;
 };
@@ -24,7 +24,7 @@ export default function Nav({ searchParams, session }: SearchFormProps) {
     const query = new URLSearchParams();
     query.set('query', searchParams.query);
     query.set('page', searchParams.page.toString());
-    query.set('order', value);
+    query.set('sort', value);
     router.push(`/setlist?${query.toString()}`);
   }
 
@@ -32,7 +32,7 @@ export default function Nav({ searchParams, session }: SearchFormProps) {
     <div className={css.wrap}>
       <div className={css.left}>
         <SegmentedControl
-          value={searchParams.order}
+          value={searchParams.sort}
           onChange={(value) => handleOrderChange(value as OrderType)}
           data={[
             { label: '방송일', value: 'broadcast' },

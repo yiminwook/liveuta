@@ -3,23 +3,25 @@ import { Pagination } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
+import { useSearchParams } from 'next/navigation';
 import css from './Home.module.scss';
 
 type PaginationBoxProps = {
   currentPage: number;
   totalPage: number;
-  query: string | undefined;
+  query: string;
 };
 
 export default function PaginationBox({ currentPage, totalPage, query }: PaginationBoxProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
 
   const handlePageChange = (page: number) => {
-    const searchParams = new URLSearchParams();
-    if (query) searchParams.set('q', query);
-    searchParams.set('page', page.toString());
-    router.push(`/channel?${searchParams.toString()}`);
+    const params = new URLSearchParams(searchParams);
+    params.set('q', query);
+    params.set('page', page.toString());
+    router.push(`/channel?${params.toString()}`);
   };
 
   return (

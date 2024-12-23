@@ -1,5 +1,6 @@
 'use client';
-import { Button, TextInput, UnstyledButton } from '@mantine/core';
+import { TChannelDto } from '@/libraries/mongoDB/getAllChannel';
+import { Button, Flex, SegmentedControl, TextInput, UnstyledButton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
@@ -21,15 +22,36 @@ export default function Nav() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const params = new URLSearchParams(searchParams);
     const trimmedInput = input.trim();
-    router.push(`/channel?q=${trimmedInput}`);
+    params.set('q', trimmedInput);
+    params.set('page', '1');
+    router.push(`/channel?${params.toString()}`);
   };
+
+  function handleOrderChange(value: TChannelDto['sort']) {
+    const params = new URLSearchParams(searchParams);
+    params.set('sort', value);
+    router.push(`/channel?${params.toString()}`);
+  }
 
   return (
     <div className={css.wrap}>
-      <Button color="third" variant="filled" onClick={() => router.push('/request')}>
-        {isDesktop ? '+ 채널등록' : '등록'}
-      </Button>
+      <Flex align="center">
+        <SegmentedControl
+          h={40}
+          mr={14}
+          value={searchParams.get('sort') || 'name_kor'}
+          onChange={(value) => handleOrderChange(value as TChannelDto['sort'])}
+          data={[
+            { label: '사전순', value: 'name_kor' },
+            { label: '등록순', value: 'createdAt' },
+          ]}
+        />
+        <Button h={40} color="third" variant="filled" onClick={() => router.push('/request')}>
+          {isDesktop ? '+ 채널등록' : '등록'}
+        </Button>
+      </Flex>
       <form className={css.form} onSubmit={handleSubmit}>
         <div className={css.inputBox}>
           <TextInput

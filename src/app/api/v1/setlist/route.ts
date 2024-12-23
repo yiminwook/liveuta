@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const query = validation.checkQuery(searchParams.get('query'));
     const start = validation.checkStart(searchParams.get('start'));
-    const orderType = validation.checkOrderType(searchParams.get('order'));
+    const orderType = validation.checkOrderType(searchParams.get('sort'));
     const isFavorite = validation.checkIsFavorite(searchParams.get('isFavorite'));
 
     const data = query

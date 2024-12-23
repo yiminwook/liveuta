@@ -198,7 +198,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
       <section className={css.recentChannelSection}>
         <div className={css.recentChannelNav}>
           <h2>🚚 최근 추가된 채널</h2>
-          <MoreButton href="/channel" />
+          <MoreButton href="/channel?sort=createdAt" />
         </div>
         <ChannelSlider recentChannels={recentChannels} />
       </section>

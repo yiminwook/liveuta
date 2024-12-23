@@ -1,17 +1,17 @@
 'use client';
-import { Button, TextInput, UnstyledButton } from '@mantine/core';
+import { TextInput, UnstyledButton } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
-import cx from 'classnames';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
-import { TbSearch, TbX } from 'react-icons/tb';
+import { TbX } from 'react-icons/tb';
 import css from './SearchForm.module.scss';
 
 interface SearchFormProps {
   searchParams: {
     query: string;
     page: number;
+    sort: 'broadcast' | 'create';
   };
 }
 
@@ -30,7 +30,11 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
     if (trimmedQuery === searchParams.query) {
       queryClient.invalidateQueries({ queryKey: ['searchSetlist', searchParams] });
     } else {
-      router.push(`/setlist?query=${trimmedQuery}`);
+      const params = new URLSearchParams();
+      params.set('query', trimmedQuery);
+      params.set('page', '1');
+      params.set('sort', searchParams.sort);
+      router.push(`/setlist?${params.toString()}`);
     }
   };
 

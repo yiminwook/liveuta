@@ -8,7 +8,7 @@ interface HomeProps {
   searchParams: {
     query?: string;
     page?: string;
-    order?: 'broadcast' | 'create';
+    sort?: 'broadcast' | 'create';
   };
 }
 
@@ -18,7 +18,7 @@ export default async function Home({ searchParams }: HomeProps) {
   const parseSearchParams = {
     query: searchParams.query || '',
     page: Number(searchParams.page) || 1,
-    order: searchParams.order || 'create',
+    sort: searchParams.sort || 'create',
   };
 
   return (

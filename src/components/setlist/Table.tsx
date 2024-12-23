@@ -24,7 +24,7 @@ type TableProps = {
   searchParams: {
     query: string;
     page: number;
-    order: 'broadcast' | 'create';
+    sort: 'broadcast' | 'create';
   };
   session: Session | null;
 };
@@ -58,7 +58,7 @@ export default function SetlistTable({ session, searchParams }: TableProps) {
         const query = new URLSearchParams();
         query.set('query', searchParams.query);
         query.set('start', ((searchParams.page - 1) * SETLIST_PAGE_SIZE).toString());
-        query.set('order', searchParams.order);
+        query.set('sort', searchParams.sort);
         query.set('isFavorite', 'false');
         const headers = new AxiosHeaders();
 
@@ -100,7 +100,7 @@ export default function SetlistTable({ session, searchParams }: TableProps) {
     const query = new URLSearchParams();
     query.set('query', searchParams.query);
     query.set('page', page.toString());
-    query.set('order', searchParams.order);
+    query.set('sort', searchParams.sort);
     router.push(`/setlist?${query.toString()}`);
   };
 
@@ -122,7 +122,7 @@ export default function SetlistTable({ session, searchParams }: TableProps) {
             <Table.Td className={cx(css.headCell, css.channel)}>채널명</Table.Td>
             <Table.Td className={cx(css.headCell, css.title)}>제목</Table.Td>
             <Table.Td className={cx(css.headCell, css.time)}>
-              {searchParams.order === 'create' ? '작성일' : '방송일'}
+              {searchParams.sort === 'create' ? '작성일' : '방송일'}
             </Table.Td>
           </Table.Tr>
         </Table.Thead>
