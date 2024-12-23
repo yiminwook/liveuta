@@ -41,25 +41,10 @@ type BottomDrawerProps = {
   isOpen: boolean;
 };
 
-const snapPoints = ['170px', '260px'];
-
 export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
-  const [snap, setSnap] = useState<number | string | null>(snapPoints[0]);
-
   return (
-    <Drawer
-      open={isOpen}
-      onClose={onClose}
-      snapPoints={snapPoints}
-      activeSnapPoint={snap}
-      setActiveSnapPoint={setSnap}
-    >
-      <DrawerContent
-        classNames={{
-          contentComponent: css.contentComponent,
-          wrapper: css.overflowHidden,
-        }}
-      >
+    <Drawer open={isOpen} onClose={onClose}>
+      <DrawerContent>
         <DrawerHeader className="blind">
           <DrawerTitle>사이트 맵</DrawerTitle>
           <DrawerDescription>링크를 선택해주세요</DrawerDescription>
@@ -79,10 +64,7 @@ export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
             </div>
           ))}
         </SimpleGrid>
-        <div className={css.expandIcon} data-hidden={snap !== snapPoints[0]}>
-          <TbChevronsDown />
-        </div>
-        <SimpleGrid cols={3} className={css.drawerGrid} data-hidden={snap !== snapPoints[1]}>
+        <SimpleGrid cols={3} className={css.drawerGrid}>
           {EXTERNAL_ITEMS.map(({ icon, href, text }) => (
             <div className={css.item} key={`bottomDrawer_${text}`}>
               <ActionIcon
