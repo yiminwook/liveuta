@@ -118,11 +118,15 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
       };
     }
 
-    const liveContent = data.live.slice(0, 19);
+    const liveContent = data.live
+      .filter((i) => !blackList.has(i.channelId))
+      .slice(0, 19)
+      .map((i) => ({ ...i, isFavorite: whiteList.has(i.channelId) }));
 
     const favoriteContent = [...data.all.reverse()]
       .filter((i) => whiteList.has(i.channelId))
-      .slice(0, 19);
+      .slice(0, 19)
+      .map((i) => ({ ...i, isFavorite: true }));
 
     return {
       liveContent,
@@ -151,7 +155,6 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
         <ScheduleSlider
           isLoading={isPending}
           contents={proceedScheduleData.liveContent}
-          whiteList={whiteList}
           addAlarm={reservePush}
           openNewTab={openStream}
           addMultiView={openMutiViewModal}
@@ -169,7 +172,6 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
           <ScheduleSlider
             isLoading={isPending}
             contents={proceedScheduleData.favoriteContent}
-            whiteList={whiteList}
             addAlarm={reservePush}
             openNewTab={openStream}
             addMultiView={openMutiViewModal}
