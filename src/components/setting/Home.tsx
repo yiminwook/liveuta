@@ -1,12 +1,14 @@
+import Background from '@/components/common/background/Background';
+import AutoSync from './AutoSync';
+import css from './Home.module.scss';
 import ThemeSelect from './ThemeSelect';
-import * as styles from './home.css';
-import Background from '@/components/common/Background';
 
 export default function Home() {
   return (
     <Background>
-      <div className={styles.wrap}>
+      <div className={css.wrap}>
         <ThemeSelect />
+        <AutoSync />
       </div>
     </Background>
   );

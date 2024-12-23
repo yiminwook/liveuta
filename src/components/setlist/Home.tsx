@@ -1,35 +1,32 @@
-import { generateChannelObject, getAllChannel } from '@/libraries/mongoDB/getAllChannel';
-import Table from './Table';
-import * as styles from './home.css';
-import Nav from './Nav';
+import Background from '@/components/common/background/Background';
 import { auth } from '@/libraries/nextAuth';
-import Background from '@/components/common/Background';
+import css from './Home.module.scss';
+import Nav from './Nav';
+import Table from './Table';
 
 interface HomeProps {
   searchParams: {
     query?: string;
     page?: string;
-    order?: 'broadcast' | 'create';
+    sort?: 'broadcast' | 'create';
   };
 }
 
 export default async function Home({ searchParams }: HomeProps) {
   const session = await auth();
-  const channelData = await getAllChannel();
-  const channelDataset = generateChannelObject(channelData);
 
   const parseSearchParams = {
     query: searchParams.query || '',
     page: Number(searchParams.page) || 1,
-    order: searchParams.order || 'create',
+    sort: searchParams.sort || 'create',
   };
 
   return (
     <Background>
-      <div className={styles.inner}>
+      <div className={css.inner}>
         <h1 className="blind">세트리</h1>
-        <Nav searchParams={parseSearchParams} />
-        <Table session={session} searchParams={parseSearchParams} channelDataset={channelDataset} />
+        <Nav searchParams={parseSearchParams} session={session} />
+        <Table session={session} searchParams={parseSearchParams} />
       </div>
     </Background>
   );

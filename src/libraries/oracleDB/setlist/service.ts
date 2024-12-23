@@ -1,9 +1,10 @@
-import { DBError } from 'oracledb';
-import { connectOracleDB } from '../connection';
-import * as sql from './sql';
-import CustomServerError from '@/libraries/error/customServerError';
-import dayjs from '@/libraries/dayjs';
 import { SETLIST_PAGE_SIZE } from '@/constants';
+import dayjs from '@/libraries/dayjs';
+import CustomServerError from '@/libraries/error/customServerError';
+import { getYoutubeChannelsByUid } from '@/libraries/youtube';
+import { DBError } from 'oracledb';
+import { withOracleConnection } from '../connection';
+import * as sql from './sql';
 
 export type SetlistRow = [
   string, //videoId
@@ -37,138 +38,176 @@ const parseSetlistRow = (row: SetlistRow): Setlist => ({
   broadcastAt: dayjs.tz(row[6]).toISOString(),
 });
 
-export async function getSetlistByVideoId(videoId: string) {
-  const connection = await connectOracleDB();
+export const getSetlistByVideoId = withOracleConnection(async (connection, videoId: string) => {
   const result = await connection.execute<SetlistRow>(sql.GET_SETLIST, [videoId]);
   const row = result.rows?.[0];
   if (!row) return null;
-  return parseSetlistRow(row);
-}
+  const youtubeData = await getYoutubeChannelsByUid(row[5]);
+  const parsed = parseSetlistRow(row);
 
-export async function getAllSetlist(arg: {
-  startRow: number;
-  /** 세션에서 가져오는 id */
-  memberId: number;
-  orderType: sql.SetlistOrder;
-  isFavorite: boolean;
-}) {
-  const connection = await connectOracleDB();
-  const maxCountSql = arg.isFavorite ? sql.GET_MAX_COUNT_WITH_WHITELIST : sql.GET_MAX_COUNT;
-  const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberId]);
-  const total = countResult.rows?.[0][0] || 0;
+  return {
+    setlist: parsed,
+    channelIcon: youtubeData.items?.[0].snippet?.thumbnails?.default?.url ?? '/loading.png',
+  };
+});
 
-  if (total === 0 || arg.startRow >= total) {
-    return { total, list: [] };
-  }
+export const getAllSetlist = withOracleConnection(
+  async (
+    connection,
+    arg: {
+      startRow: number;
+      /** 세션에서 가져오는 id */
+      memberId: number;
+      orderType: sql.SetlistOrder;
+      isFavorite: boolean;
+    },
+  ) => {
+    const maxCountSql = arg.isFavorite ? sql.GET_MAX_COUNT_WITH_WHITELIST : sql.GET_MAX_COUNT;
+    const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberId]);
+    const total = countResult.rows?.[0][0] || 0;
 
-  const searchSql = arg.isFavorite
-    ? sql.GET_ALL_SETLIST_WITH_WHITELIST(arg.orderType)
-    : sql.GET_ALL_SETLIST(arg.orderType);
-  const searchResult = await connection.execute<SetlistRow>(searchSql, [
-    arg.memberId,
-    arg.startRow,
-    SETLIST_PAGE_SIZE,
-  ]);
-
-  const rows = searchResult.rows;
-
-  if (!rows) {
-    return { total, list: [] };
-  }
-
-  const list = rows.map((row) => parseSetlistRow(row));
-  return { total, list };
-}
-
-export async function searchSetlist(arg: {
-  query: string;
-  startRow: number;
-  memberId: number;
-  orderType: sql.SetlistOrder;
-  isFavorite: boolean;
-}) {
-  const connection = await connectOracleDB();
-  const pattern = arg.query.toLowerCase();
-  const maxCountSql = arg.isFavorite ? sql.SEARCH_MAX_COUNT_WITH_WHITELIST : sql.SEARCH_MAX_COUNT;
-  const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberId, pattern]);
-  const total = countResult.rows?.[0][0] || 0;
-  if (total === 0 || arg.startRow >= total) {
-    return { total, list: [] };
-  }
-  const searchSql = arg.isFavorite
-    ? sql.SEARCH_SETLIST_WITH_WHITELIST(arg.orderType)
-    : sql.SEARCH_SETLIST(arg.orderType);
-  const searchResult = await connection.execute<SetlistRow>(searchSql, [
-    arg.memberId,
-    pattern,
-    arg.startRow,
-    SETLIST_PAGE_SIZE,
-  ]);
-  const rows = searchResult.rows;
-  if (!rows) {
-    return { total, list: [] };
-  }
-
-  const list = rows.map((row) => parseSetlistRow(row));
-  return { total, list };
-}
-
-export async function postSetlist(
-  videoId: string,
-  description: string,
-  memberId: number,
-  channelId: string,
-  broadcastAt: string | null | undefined,
-  title: string,
-) {
-  const connection = await connectOracleDB();
-  try {
-    const nonullableBroadcastAt = dayjs.tz(broadcastAt || undefined).toDate();
-
-    await connection.execute(sql.POST_SETLIST, [
-      videoId,
-      description,
-      memberId,
-      channelId,
-      nonullableBroadcastAt,
-      title,
-    ]);
-
-    await connection.commit();
-  } catch (e) {
-    const error = e as DBError;
-
-    if (error.code === 'ORA-00001') {
-      throw new CustomServerError({ statusCode: 409, message: '이미 등록된 세트리 입니다.' });
+    if (total === 0 || arg.startRow >= total) {
+      return { total, list: [] };
     }
 
+    const searchSql = arg.isFavorite
+      ? sql.GET_ALL_SETLIST_WITH_WHITELIST(arg.orderType)
+      : sql.GET_ALL_SETLIST(arg.orderType);
+    const searchResult = await connection.execute<SetlistRow>(searchSql, [
+      arg.memberId,
+      arg.startRow,
+      SETLIST_PAGE_SIZE,
+    ]);
+
+    const rows = searchResult.rows;
+
+    if (!rows) {
+      return { total, list: [] };
+    }
+
+    const list = rows.map((row) => parseSetlistRow(row));
+    return { total, list };
+  },
+);
+
+export const searchSetlist = withOracleConnection(
+  async (
+    connection,
+    arg: {
+      query: string;
+      startRow: number;
+      memberId: number;
+      orderType: sql.SetlistOrder;
+      isFavorite: boolean;
+    },
+  ) => {
+    const pattern = arg.query.toLowerCase();
+    const maxCountSql = arg.isFavorite ? sql.SEARCH_MAX_COUNT_WITH_WHITELIST : sql.SEARCH_MAX_COUNT;
+    const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberId, pattern]);
+    const total = countResult.rows?.[0][0] || 0;
+
+    if (total === 0 || arg.startRow >= total) {
+      return { total, list: [] };
+    }
+
+    const searchSql = arg.isFavorite
+      ? sql.SEARCH_SETLIST_WITH_WHITELIST(arg.orderType)
+      : sql.SEARCH_SETLIST(arg.orderType);
+
+    const searchResult = await connection.execute<SetlistRow>(searchSql, [
+      arg.memberId,
+      pattern,
+      arg.startRow,
+      SETLIST_PAGE_SIZE,
+    ]);
+
+    const rows = searchResult.rows;
+
+    if (!rows) {
+      return { total, list: [] };
+    }
+
+    const list = rows.map((row) => parseSetlistRow(row));
+    return { total, list };
+  },
+);
+
+export const postSetlist = withOracleConnection(
+  async (
+    connection,
+    arg: {
+      videoId: string;
+      description: string;
+      memberId: number;
+      channelId: string;
+      broadcastAt: string | null | undefined;
+      title: string;
+    },
+  ) => {
+    try {
+      const nonullableBroadcastAt = dayjs.tz(arg.broadcastAt || undefined).toDate();
+
+      await connection.execute(sql.POST_SETLIST, [
+        arg.videoId,
+        arg.description,
+        arg.memberId,
+        arg.channelId,
+        nonullableBroadcastAt,
+        arg.title,
+      ]);
+
+      await connection.commit();
+    } catch (e) {
+      const error = e as DBError;
+      connection.rollback();
+
+      if (error.code === 'ORA-00001') {
+        throw new CustomServerError({ statusCode: 409, message: '이미 등록된 세트리 입니다.' });
+      }
+
+      throw error;
+    }
+  },
+);
+
+export const updateSetlist = withOracleConnection(
+  async (
+    connection,
+    arg: {
+      videoId: string;
+      description: string;
+      memberId: number;
+      channelId: string;
+      broadcastAt: string | null | undefined;
+      title: string;
+    },
+  ) => {
+    try {
+      const nonullableBroadcastAt = dayjs.tz(arg.broadcastAt || undefined).toDate();
+
+      await connection.execute(sql.UPDATE_SETLIST, [
+        arg.title,
+        arg.description,
+        arg.channelId,
+        arg.memberId,
+        nonullableBroadcastAt,
+        arg.videoId,
+      ]);
+
+      await connection.commit();
+    } catch (error) {
+      connection.rollback();
+      throw error;
+    }
+  },
+);
+
+export const deleteSetlist = withOracleConnection(async (connection, videoId: string) => {
+  try {
+    await connection.execute(sql.DELETE_SETLIST, [videoId]);
+    await connection.commit();
+  } catch (error) {
+    await connection.rollback();
     throw error;
   }
-}
-
-export async function updateSetlist(
-  videoId: string,
-  description: string,
-  memberId: number,
-  channelId: string,
-  broadcastAt: string | null | undefined,
-  title: string,
-) {
-  const connection = await connectOracleDB();
-  const nonullableBroadcastAt = dayjs.tz(broadcastAt || undefined).toDate();
-  await connection.execute(sql.UPDATE_SETLIST, [
-    title,
-    description,
-    channelId,
-    memberId,
-    nonullableBroadcastAt,
-    videoId,
-  ]);
-  await connection.commit();
-}
-
-export async function deleteSetlist(videoId: string) {
-  const connection = await connectOracleDB();
-  await connection.execute(sql.DELETE_SETLIST, [videoId]);
-  await connection.commit();
-}
+});

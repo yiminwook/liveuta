@@ -13,7 +13,7 @@ export const DEFAULT_IMAGE = {
   type: 'image/png',
 };
 
-export const DEFALUT_METADATA: Metadata = {
+export const DEFAULT_METADATA: Metadata = {
   metadataBase: new URL(DEFAULT_SITE_URL),
   alternates: {
     canonical: DEFAULT_SITE_URL, //컨텐츠 중복방지

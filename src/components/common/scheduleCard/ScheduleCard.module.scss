@@ -1,0 +1,221 @@
+@use 'sass:math';
+
+$closed-color: #d8f2ff;
+$stream-color: #fcefc7;
+
+$active-color1: #fa8072;
+$active-color2: #e06e61;
+
+%card-base {
+  width: 100%;
+  height: 100%;
+}
+
+.card {
+  @extend %card-base;
+  position: relative;
+  box-shadow: var.$box-shadow;
+  display: flex;
+  padding: 0.25rem;
+  gap: 0.25rem;
+  background-color: map-get(var.$colors, body);
+  border: 1px solid #00000010;
+  border-radius: 5px;
+  color: map-get(var.$colors, text);
+  container-type: inline-size;
+
+  // block 효과를 위한 설정
+  transform-style: preserve-3d;
+  transform-origin: center;
+  transition: all 1s #{var.$bezier-curve};
+
+  @include util.min-width(xs) {
+    flex-direction: column;
+  }
+
+  &:hover {
+    transform: scale(1.01);
+  }
+
+  [data-mantine-color-scheme='dark'] {
+    box-shadow: none;
+    border: 1px solid map-get(var.$colors, default-border);
+  }
+
+  &:global(.closed) {
+    background-color: var(--liveuta-schedule-closed);
+  }
+
+  &:global(.stream) {
+    background-color: var(--liveuta-schedule-stream);
+  }
+
+  &:global(.block) {
+    @include util.min-width(xs) {
+      transform: rotateY(-180deg);
+    }
+
+    & > * {
+      visibility: hidden;
+    }
+
+    &::after {
+      @extend %flex-center;
+      content: 'BLOCKED';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-weight: 600;
+      background-color: var.$backdrop-color;
+
+      @include util.min-width(xs) {
+        transform: rotateY(180deg);
+      }
+    }
+  }
+
+  :global(.app-ActionIcon-root) {
+    // menu target
+    --ai-size: 1rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-25%, 25%);
+
+    @include util.min-width(xs) {
+      --ai-size: 1.5rem;
+    }
+  }
+
+  :global(.imgBtn) {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    width: 150px;
+    padding: 0px;
+    flex: 0 0 150px;
+    box-shadow: var.$box-shadow;
+    border-radius: 5px;
+
+    @include util.min-width(xs) {
+      flex: 1;
+      width: 100%;
+    }
+
+    & > img {
+      object-fit: cover;
+    }
+  }
+}
+
+/* 
+ * 카드 높이가 일정해야해서 말줄임표시 필수 
+ * 채널 1줄 
+ * 제목 2줄
+ * 시간 1줄
+ */
+
+.descBox {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.channelNm {
+  @include util.text-line(1, 1.2);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-right: 40px; // 버튼과 겹치지 않도록
+
+  &:global(.stream) {
+    color: var(--liveuta-schedule-stream-text2);
+  }
+
+  @include util.min-width(sm) {
+    font-size: 1.2rem;
+    @include util.text-line(1, 1.4);
+    margin-right: 0px;
+  }
+}
+
+.title {
+  // 줄높이를 좀 더 여유롭게
+  @include util.text-line(2, 1.2);
+  font-size: 0.75rem;
+
+  &:global(.stream) {
+    color: var(--liveuta-schedule-stream-text1);
+    font-weight: 500;
+  }
+
+  @include util.min-width(sm) {
+    @include util.text-line(2, 1.4);
+    font-size: 1rem;
+  }
+}
+
+.time {
+  display: flex;
+  font-size: 0.75rem;
+  align-items: center;
+  height: 1.25rem; // 높이를 맞추기 위해 고정, 20px
+  overflow: hidden;
+
+  time {
+    @include util.text-line(1, 1.2);
+  }
+}
+
+.statusBox {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  gap: 0.125rem;
+  color: var(--liveuta-schedule-stream-text1);
+  vertical-align: middle;
+  padding: 0 0.5rem;
+  margin-left: auto;
+
+  // 줄변경 방지
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.statusSvg {
+  @include util.min-width(sm) {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.sliderCard {
+  :global(.imgBtn) {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    padding: 0px;
+    border-radius: 5px;
+    width: 100%;
+
+    & > img {
+      object-fit: cover;
+    }
+  }
+
+  .navBox {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button:hover {
+      transition: background-color 0.3s;
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .status {
+  }
+}

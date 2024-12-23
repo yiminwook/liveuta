@@ -1,14 +1,13 @@
-'use client';
-import cx from 'classnames';
+import { UnstyledButton } from '@mantine/core';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { CgUserlane } from 'react-icons/cg';
 import { FaListOl } from 'react-icons/fa';
-import { LuSettings } from 'react-icons/lu';
-import { MdSavedSearch } from 'react-icons/md';
+import { IoIosMore } from 'react-icons/io';
+import { MdOutlineSchedule } from 'react-icons/md';
 import { RxPinTop } from 'react-icons/rx';
 import { TiHomeOutline } from 'react-icons/ti';
-import * as styles from './bottomTab.css';
+import css from './BottomInner.module.scss';
 
 enum Direction {
   up = 'up',
@@ -16,7 +15,11 @@ enum Direction {
   end = 'end',
 }
 
-export default function BottomInner() {
+type BottomInnerProps = {
+  openDrawer: () => void;
+};
+
+export default function BottomInner({ openDrawer }: BottomInnerProps) {
   const [direction, setDirection] = useState<Direction>(Direction.up);
   const [windowY, setWindowY] = useState(0);
 
@@ -55,49 +58,52 @@ export default function BottomInner() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const hideBottomTab = windowY > 56 && direction === Direction.down;
   const showTobButton = windowY > 56;
 
   return (
-    <div className={cx(styles.inner, hideBottomTab && 'hidden')}>
-      <button className={cx(styles.topButton, showTobButton && 'show')} onClick={scrollUp}>
-        <RxPinTop size="30px" color="inherit" />
-      </button>
-      <ul className={styles.list}>
+    <div className={css.inner} data-hidden={hideBottomTab}>
+      <UnstyledButton
+        size="input-md"
+        variant="transparent"
+        className={css.topButton}
+        data-show={showTobButton}
+        onClick={scrollUp}
+      >
+        <RxPinTop size="2em" />
+      </UnstyledButton>
+      <ul className={css.list}>
         <li>
-          <Link href="/setlist">
-            <div className={styles.item}>
-              <FaListOl size="1.25rem" />
-              <span>세트리</span>
-            </div>
-          </Link>
+          <UnstyledButton component={Link} href="/setlist" className={css.item}>
+            <FaListOl size="1.25rem" />
+            <span>세트리</span>
+          </UnstyledButton>
         </li>
         <li>
-          <Link href="/channel">
-            <div className={styles.item}>
-              <CgUserlane size="1.5rem" />
-              <span>채널</span>
-            </div>
-          </Link>
+          <UnstyledButton component={Link} href="/channel" className={css.item}>
+            <CgUserlane size="1.5rem" />
+            <span>채널</span>
+          </UnstyledButton>
         </li>
         <li>
-          <Link href="/">
-            <div className={cx(styles.item)}>
-              <TiHomeOutline size="1.5rem" />
-              <span>홈</span>
-            </div>
-          </Link>
+          <UnstyledButton component={Link} href="/" className={css.item}>
+            <TiHomeOutline size="1.5rem" />
+            <span>홈</span>
+          </UnstyledButton>
         </li>
         <li>
-          <Link href="setting">
-            <div className={styles.item}>
-              <LuSettings size="1.5rem" />
-              <span>설정</span>
-            </div>
-          </Link>
+          <UnstyledButton component={Link} href="/schedule" className={css.item}>
+            <MdOutlineSchedule size="1.5rem" />
+            <span>스케줄</span>
+          </UnstyledButton>
+        </li>
+        <li>
+          <UnstyledButton className={css.item} onClick={openDrawer}>
+            <IoIosMore size="1.5rem" />
+            <span>더보기</span>
+          </UnstyledButton>
         </li>
       </ul>
     </div>

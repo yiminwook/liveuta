@@ -1,0 +1,46 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .autoSyncOn {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+
+    &[data-show=true] {
+      display: flex;
+    }
+
+    .autoSyncSubSetting {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding-block: 1rem;
+    }
+
+    .autoSyncRefreshInterval {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+
+      label {
+        padding-inline-start: 0.5rem;
+      }
+
+      @include util.min-width(var.$mobile-boundary) {
+        display: flex;
+        gap: 2rem;
+
+        label {
+          padding-inline-start: 1rem;
+        }
+      }
+
+      .autoSyncRefreshIntervalLabel {
+        display: inline-block;
+        width: max-content
+      }
+    }
+  }
+}

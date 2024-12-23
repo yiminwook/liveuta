@@ -1,1 +1,3 @@
-export { GET, POST } from '@/libraries/nextAuth';
+import { handlers } from '@/libraries/nextAuth';
+
+export const { GET, POST } = handlers;

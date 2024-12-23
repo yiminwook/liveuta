@@ -1,6 +1,6 @@
 'use client';
 import { Toaster } from 'sonner';
-import * as styles from './toastBox.css';
+import css from './ToastBox.module.scss';
 
 export default function ToastBox() {
   return (
@@ -18,7 +18,7 @@ export default function ToastBox() {
         loading: '⏳',
       }}
       toastOptions={{
-        className: styles.toast,
+        className: css.toast,
       }}
     />
   );

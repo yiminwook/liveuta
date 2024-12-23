@@ -4,10 +4,10 @@ const corsHeaders = {
   // 'Access-Control-Allow-Headers': '*',
 };
 
-async function handler(request, env, ctx) {
+async function handler(request) {
   try {
     if (request.method === 'OPTIONS') {
-      return handleOptions(request);
+      return handleOptions();
     } else if (request.method === 'GET') {
       // Pass-through to origin.
       return handleGet(request);
@@ -23,7 +23,7 @@ async function handler(request, env, ctx) {
   }
 }
 
-async function handleOptions(request) {
+async function handleOptions() {
   return new Response(null, {
     headers: corsHeaders,
   });
@@ -42,7 +42,7 @@ async function handleGet(request) {
   let reqhead = new Headers(request.headers);
 
   // discard real ip
-  for (let [key, val] of reqhead) {
+  for (let [key] of reqhead) {
     if (key.startsWith('cf-') || key.startsWith('x-forwarded-')) {
       reqhead.delete(key);
     }
@@ -78,14 +78,6 @@ async function handleGet(request) {
 
   return response;
 }
-
-const debugHeaders = (reqhead) => {
-  const debug = {};
-  for (let [key, val] of reqhead) {
-    debug[key] = val;
-  }
-  return debug;
-};
 
 const worker = {
   fetch: handler,

@@ -1,20 +1,16 @@
 'use client';
 import useDeleteBlacklist from '@/hooks/useDeleteBlacklist';
-import { ChannelData } from '@/types/api/mongoDB';
-import { channelListAtom } from '@/stores/common';
-import { blacklistAtom } from '@/stores/schedule';
-import { useAtom } from 'jotai';
+import { TChannelData } from '@/types/api/mongoDB';
 import { Session } from 'next-auth';
-import * as styles from './list.css';
+import css from './List.module.scss';
 
 type BlacklistProps = {
   session: Session;
+  channelList: Record<string, TChannelData>;
+  blacklist: Set<string>;
 };
 
-export default function Blacklist({ session }: BlacklistProps) {
-  const [channelList] = useAtom(channelListAtom);
-  const [blacklist] = useAtom(blacklistAtom);
-
+export default function Blacklist({ session, channelList, blacklist }: BlacklistProps) {
   const mutationDelete = useDeleteBlacklist();
 
   const handleClick = (channelId: string) => {
@@ -24,18 +20,18 @@ export default function Blacklist({ session }: BlacklistProps) {
   };
 
   const data = [...blacklist]
-    .map<ChannelData>((item) => channelList[item])
+    .map<TChannelData>((item) => channelList[item])
     .filter((item) => !!item)
     .sort((a, b) => a.name_kor.localeCompare(b.name_kor));
 
   return (
-    <div className={styles.wrap}>
-      <ul className={styles.list}>
+    <div className={css.wrap}>
+      <ul className={css.list}>
         {data.map((item) => (
-          <li key={item.channel_id} className={styles.row}>
-            <span className={styles.text}>{item.name_kor}</span>
+          <li key={item.channel_id} className={css.row}>
+            <span className={css.text}>{item.name_kor}</span>
             <button
-              className={styles.button}
+              className={css.button}
               onClick={() => handleClick(item.channel_id)}
               disabled={mutationDelete.isPending}
             >

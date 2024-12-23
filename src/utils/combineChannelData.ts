@@ -1,21 +1,16 @@
+import dayjs from '@/libraries/dayjs';
+import { TChannelDto } from '@/libraries/mongoDB/getAllChannel';
 import { getYoutubeChannels } from '@/libraries/youtube';
 import { generateChannelUrl } from '@/libraries/youtube/url';
-import { ChannelsDataType } from '@/types/api/youtube';
-import { youtube_v3 } from 'googleapis';
+import { TChannelData } from '@/types/api/mongoDB';
+import { TYChannelsData } from '@/types/api/youtube';
 
-export interface ChannelSheetDataType {
-  [key: string]: {
-    uid: string;
-    channelName: string;
-    url: string;
-  };
-}
-
-/* YoutubeData API + Channel ID Sheet */
+/* YoutubeData API + MongoDB Channel Data */
 export const combineChannelData = async (
-  sheetData: ChannelSheetDataType,
-): Promise<ChannelsDataType[]> => {
-  const idArr = [...Object.keys(sheetData)];
+  mongoDBData: Record<string, TChannelData>,
+  option: { sort: TChannelDto['sort'] },
+): Promise<TYChannelsData[]> => {
+  const idArr = Object.keys(mongoDBData);
   if (idArr.length <= 0) return [];
 
   const youtubeData = await getYoutubeChannels(idArr);
@@ -25,28 +20,35 @@ export const combineChannelData = async (
     return [];
   }
 
-  const combinedSearchData: (youtube_v3.Schema$Channel & ChannelSheetDataType[string])[] = [];
-
-  youtubeData.items.forEach((data) => {
-    const id = data.id;
-    if (!(id && sheetData[id])) return;
-    const { uid, channelName } = sheetData[id];
+  const combinedSearchData = youtubeData.items.reduce<TYChannelsData[]>((acc, curr) => {
+    const id = curr.id;
+    if (!(id && mongoDBData[id])) return acc;
+    const { channel_id, name_kor, createdAt, alive } = mongoDBData[id];
 
     // Constructing the YouTube channel URL
-    const youtubeChannelUrl = generateChannelUrl(uid);
+    const youtubeChannelUrl = generateChannelUrl(channel_id);
 
-    combinedSearchData.push({
-      ...data,
-      uid,
-      channelName,
+    acc.push({
+      ...curr,
+      uid: channel_id,
+      channelName: name_kor,
+      createdAt,
       url: youtubeChannelUrl, // Replacing 'url' with the YouTube channel URL
+      alive,
     });
+
+    return acc;
+  }, []);
+
+  const sortedChannelData = combinedSearchData.sort((a, b) => {
+    if (option.sort === 'createdAt') {
+      // Sorting combined data by createdAt
+      return dayjs(b.createdAt).diff(dayjs(a.createdAt));
+    }
+
+    // Sorting combined data by channelName with English locale
+    return a.channelName.localeCompare(b.channelName, 'en', { sensitivity: 'base' });
   });
 
-  // Sorting combined data by channelName
-  const combinedSheetDataValues = combinedSearchData.sort((a, b) =>
-    a.channelName.localeCompare(b.channelName),
-  ) as ChannelsDataType[];
-
-  return combinedSheetDataValues;
+  return sortedChannelData;
 };

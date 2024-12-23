@@ -1,27 +1,29 @@
 'use client';
-import { accountSidebarAtom } from '@/stores/common';
-import { Session } from 'next-auth';
-import { useEffect } from 'react';
-import { RemoveScroll } from 'react-remove-scroll';
-import CloseButton from '../button/CloseButton';
-import * as styles from './sidebar.css';
-import cx from 'classnames';
 import useStopPropagation from '@/hooks/useStopPropagation';
+import { useAppCtx } from '@/stores/app';
+import { Avatar, CloseButton } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
+import classnames from 'classnames';
+import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
-import Avatar from '../Avatar';
-import { toast } from 'sonner';
-import { useAtom } from 'jotai';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useCallback, useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
+import { RemoveScroll } from 'react-remove-scroll';
+import { toast } from 'sonner';
+import { useStore } from 'zustand';
+import css from './Sidebar.module.scss';
 
 interface AccountSidebarProps {
   session: Session;
 }
 export default function AccountSidebar({ session }: AccountSidebarProps) {
   const pathname = usePathname();
-  const [show, setShow] = useAtom(accountSidebarAtom);
+  const appCtx = useAppCtx();
+  const isShow = useStore(appCtx, (state) => state.isShowAcctSidebar);
+  const setIsShow = useStore(appCtx, (state) => state.actions.setIsShowAcctSidebar);
+
   const { enableScope, disableScope } = useHotkeysContext();
   const { stopPropagation } = useStopPropagation();
 
@@ -31,7 +33,12 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
     onError: (error) => toast.error(error.message),
   });
 
-  const handleClose = () => setShow(() => false);
+  const handleClose = useCallback(() => setIsShow(false), [setIsShow]);
+
+  const logout = () => {
+    if (mutateLogout.isPending) return;
+    mutateLogout.mutate();
+  };
 
   useHotkeys(
     'esc',
@@ -40,24 +47,23 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
       handleClose();
     },
     {
-      enabled: show,
+      enabled: isShow,
       scopes: ['sidebar'],
     },
   );
 
-  useHotkeys('space', (e) => {}, {
+  useHotkeys('space', () => {}, {
     preventDefault: true,
-    enabled: show,
+    enabled: isShow,
     scopes: ['sidebar'],
   });
 
   useEffect(() => {
-    if (show) handleClose();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (isShow) handleClose();
   }, [pathname]);
 
   useEffect(() => {
-    if (!show) return;
+    if (!isShow) return;
     //window 사이즈가 바뀌면 닫히게
     enableScope('sidebar');
     window.addEventListener('resize', handleClose);
@@ -65,35 +71,40 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
       disableScope('sidebar');
       window.removeEventListener('resize', handleClose);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [show]);
+  }, [isShow]);
 
   return (
-    <RemoveScroll enabled={show} removeScrollBar={false}>
+    <RemoveScroll enabled={isShow} removeScrollBar={false}>
       <aside>
-        <div className={cx(styles.wrap, show && 'show')} onClick={handleClose}>
-          <div className={cx(styles.inner, 'right', show && 'moveLeft')} onClick={stopPropagation}>
-            <div className={styles.logoutButtonBox}>
-              <button
-                className={styles.logoutButton}
-                onClick={() => mutateLogout.mutate()}
-                disabled={mutateLogout.isPending}
-              >
+        <div className={classnames(css.wrap, { show: isShow })} onClick={handleClose}>
+          <div
+            className={classnames(css.inner, 'right', { moveLeft: isShow })}
+            onClick={stopPropagation}
+          >
+            <div className={css.logoutBtnBox}>
+              <button className={css.logoutBtn} onClick={logout} disabled={mutateLogout.isPending}>
                 <Avatar
-                  email={session.user.email}
                   src={session.user.image}
+                  w={40}
+                  h={40}
+                  radius="xl"
                   alt="유저 이미지"
-                  size={'40px'}
+                  name={session.user.email}
                 />
                 로그아웃
               </button>
-              <CloseButton onClick={handleClose} />
+              <CloseButton w={40} h={40} onClick={handleClose} />
             </div>
-            <nav className={styles.nav}>
+            <nav className={css.nav}>
               <ul>
                 <li>
                   <Link href="/my">마이페이지</Link>
                 </li>
+                {session.user.userLv >= 3 && (
+                  <li>
+                    <Link href="/admin">관리자페이지</Link>
+                  </li>
+                )}
               </ul>
             </nav>
           </div>

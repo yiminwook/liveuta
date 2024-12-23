@@ -1,40 +1,58 @@
-import { PORTAL_ID } from '@/constants';
-import { GetCookiesReturnType } from '@/utils/getCookie';
+import { auth } from '@/libraries/nextAuth';
+import { TMetadata } from '@/types';
+import { TGetCookiesReturn } from '@/utils/getCookie';
+import AppProvider from './AppProvider';
 import Devtools from './Devtools';
-import GlobalHydrate from './GlobalHydrate';
 import Hotkeys from './Hotkeys';
-import Jotai from './Jotai';
-import ModalProvider from './ModalProvider';
+import MantineProvider from './MantineProvider';
+import ModalContainer from './ModalContainer';
+import NProgressProviders from './NProgress';
 import NextAuth from './NextAuth';
-import ParticleProvider from './ParticleProvider';
+import Particle from './Particle';
 import ReactQuery from './ReactQuery';
 import ServiceWorker from './ServiceWorker';
 import ToastBox from './ToastBox';
 
 type ConfigsProps = {
   children: React.ReactNode;
-  cookies: GetCookiesReturnType;
+  cookies: TGetCookiesReturn;
+  colorScheme: 'light' | 'dark';
 };
 
-export default function Configs({ children, cookies }: ConfigsProps) {
+export default async function Configs({ children, cookies, colorScheme }: ConfigsProps) {
+  const [session, metadata] = await Promise.all([
+    auth(),
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/metadata`, {
+      next: { revalidate: 3600, tags: ['metadata'] },
+    })
+      .then((res) => res.json() as Promise<{ data: TMetadata }>)
+      .then((json) => json.data),
+  ]);
+
   return (
-    <NextAuth>
-      <Jotai>
+    <NextAuth session={session}>
+      <AppProvider
+        initState={{
+          theme: cookies.theme,
+          defaultVideoId: metadata.default_video_id,
+        }}
+      >
         <ReactQuery>
-          <GlobalHydrate cookies={cookies}>
-            {/* <ThemeProvider> */}
-            <Hotkeys>
-              <ModalProvider>{children}</ModalProvider>
-              <ToastBox />
-              <ParticleProvider />
-              <ServiceWorker />
-              <Devtools />
-              <div id={PORTAL_ID} />
-            </Hotkeys>
-            {/* </ThemeProvider> */}
-          </GlobalHydrate>
+          <NProgressProviders>
+            <MantineProvider defaultColorScheme={colorScheme}>
+              <Hotkeys>
+                {children}
+                <ToastBox />
+                <Particle />
+                <ServiceWorker />
+                <Devtools />
+                <div id="pip" />
+                <ModalContainer />
+              </Hotkeys>
+            </MantineProvider>
+          </NProgressProviders>
         </ReactQuery>
-      </Jotai>
+      </AppProvider>
     </NextAuth>
   );
 }

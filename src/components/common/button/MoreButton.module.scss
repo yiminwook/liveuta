@@ -1,0 +1,21 @@
+@keyframes move-right {
+  0% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(5px);
+  }
+}
+
+
+.button {
+  transition: background-color 0.3s var.$bezier-curve;
+  
+  &:hover{
+    background-color: rgba(0, 0, 0, 0.15);
+
+    svg {
+      animation: move-right 1.5s infinite;
+    }
+  }
+}

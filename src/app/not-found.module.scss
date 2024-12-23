@@ -1,0 +1,64 @@
+@use "sass:map";
+
+.wrap {
+  display: grid;
+  place-items: center;
+  width: 100dvw;
+  height: 100dvh;
+  overflow: hidden;
+
+  .box {
+    display: grid;
+    align-items: center;
+    gap: 2rem;
+
+    @include util.min-width(md) {
+      grid-template-columns: 1fr auto;
+    }
+    
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+    
+    .desc {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      
+      .descTop {
+        display: grid;
+        text-align: center;
+        
+        h1 {
+          margin: 0;
+          font-size: 2.5rem;
+        }
+        
+        h2 {
+          margin: 0;
+          font-size: 1.25rem;
+          font-weight: 400;
+        }
+      }
+      
+      .descBottom {
+        display: grid;
+        place-items: center;
+        
+        button {
+          font-weight: 500;
+          background-color: util.palette(second, default);
+          padding: 0.5rem 1rem;
+          border-radius: 0.25rem;
+          transition: background-color 0.3s var.$bezier-curve;
+          color: var(--liveuta-txt-light);
+          
+          &:hover {
+            background-color: util.palette(second, light);
+          }
+        }
+      }
+    }
+  }
+}

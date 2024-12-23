@@ -10,7 +10,7 @@ export default function usePostBlacklist() {
     mutationKey: ['postBlacklist'],
     mutationFn: async ({ session, channelId }: { session: Session; channelId: string }) => {
       const response = await axios.post<{ message: string; data: string }>(
-        `/api/blacklist/${channelId}`,
+        `/api/v1/blacklist/${channelId}`,
         {},
         { headers: { Authorization: `Bearer ${session.user.accessToken}` } },
       );

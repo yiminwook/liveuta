@@ -1,0 +1,75 @@
+.wrap {
+  padding: 0.5rem 1rem;
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    .backButton {
+      color: map-get(var.$colors, text);
+      font-weight: 500;
+
+      transition: background-color 0.2s map-get(var.$easing, default);
+
+      &:hover {
+        background-color: map-get(var.$colors, default-hover);
+      }
+    }
+
+    .navRight {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .navItem {
+        font-weight: 600;
+        transition: background-color 0.2s map-get(var.$easing, default);
+      }
+
+      .hoverButton {
+        color: map-get(var.$colors, text);
+        &:hover {
+          background-color: map-get(var.$colors, default-hover);
+        }
+      }
+    }
+  }
+  .infoSection {
+    margin-block-start: 0.5rem;
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .title {
+      @include util.text-line(1, 1.6);
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 0.025em;
+    }
+
+    .channel {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-block-start: 0.5rem;
+
+      .channelName {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+    }
+
+    .letterWide {
+      letter-spacing: 0.1em;
+    }
+  }
+}
+
+.buttonLabel {
+  display: flex;
+  gap: 0.5rem;
+}

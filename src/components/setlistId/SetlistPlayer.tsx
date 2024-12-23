@@ -1,8 +1,7 @@
 'use client';
+import css from '@/components/common/player/Player.module.scss';
 import PlayerPlaceholder from '@/components/common/player/PlayerPlaceholder';
-import * as styles from '@/components/common/player/player.css';
-import { playerStatusAtom, playerVideoIdAtom } from '@/stores/player';
-import { useSetAtom } from 'jotai';
+import { useSetPlayerStore } from '@/stores/player';
 import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -21,34 +20,35 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
   const timestamp = Number(searchParams.get('t')) || 0;
-  const setPlayerStatus = useSetAtom(playerStatusAtom);
-  const setPlayerVideoId = useSetAtom(playerVideoIdAtom);
   const [isShow, setIsShow] = useState(true);
+  const actions = useSetPlayerStore();
 
-  const handleInteresect: IntersectionObserverCallback = (items, observer) => {
+  const handleInteresect: IntersectionObserverCallback = (items) => {
     const isIntersecting = items[0].isIntersecting;
     setIsShow(() => isIntersecting);
   };
 
   useEffect(() => {
-    // 자동재생 되지 않도록 설정
-    setPlayerStatus((pre) => ({ ...pre, isPlaying: false, timeline: timestamp }));
-    setPlayerVideoId(() => videoId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    actions.prepareSetlist(videoId, timestamp);
   }, []);
 
   useEffect(() => {
     const current = wrapRef.current;
     if (current === null || isMobile) return;
     const observer = new IntersectionObserver(handleInteresect);
-    observer.observe(current);
-    return () => observer.disconnect();
-  }, []);
+    requestAnimationFrame(() => {
+      // 요소 랜더링 후 옵저버 시작
+      observer.observe(current);
+    });
+    return () => {
+      observer.disconnect();
+    };
+  }, [isMobile]);
 
   return (
-    <div ref={wrapRef} className={styles.playerBox}>
-      {!isShow ? <PlayerPlaceholder /> : null}
-      <Player isLive={false} isShow={isShow} />
+    <div ref={wrapRef} className={css.playerBox}>
+      {!isShow && <PlayerPlaceholder />}
+      <Player isShow={isShow} isLive={false} />
     </div>
   );
 }

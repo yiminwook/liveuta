@@ -1,0 +1,34 @@
+.categoryTabs {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  font-size: 1.25rem;
+}
+
+.categoryTab {
+  // padding: 0.8rem 0.4rem;
+  transition: transform 0.15s cubic-bezier(0.87, 0, 0.13, 1);
+
+  &[data-selected="true"] {
+    font-weight: 700;
+    position: relative;
+    z-index: 500;
+  }
+
+  &[data-selected="true"]:after {
+    content: '';
+    width: 100%;
+    height: 50%;
+    display: inline-block;
+    background-color: #D9FCDBaa;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20%;
+    z-index: -1;
+  }
+  
+  &[data-selected="false"]:hover {
+    transform: translateY(-0.2rem);
+  }
+}

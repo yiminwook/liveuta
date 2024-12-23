@@ -1,16 +1,13 @@
-/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 'use client';
-import { global } from '@/styles/globalTheme.css';
-import { accountSidebarAtom, sidebarAtom } from '@/stores/common';
-import { useSetAtom } from 'jotai';
+import { useSetAppStore } from '@/stores/app';
+import { Avatar } from '@mantine/core';
 import { Session } from 'next-auth';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
-import Avatar from '@/components/common/Avatar';
-import HamburgerButton from '@/components/common/button/HamburgerButton';
 import DesktopNav from './DesktopNav';
-import * as styles from './header.css';
+import css from './Header.module.scss';
 
 type HeaderProps = {
   session: Session | null;
@@ -18,13 +15,9 @@ type HeaderProps = {
 
 export default function Header({ session }: HeaderProps) {
   const gnbRef = useRef<HTMLDivElement>(null);
+  const actions = useSetAppStore();
 
-  const setShowSidebar = useSetAtom(sidebarAtom);
-  const setShowAccountSidebar = useSetAtom(accountSidebarAtom);
-
-  const openAccountSidebar = () => setShowAccountSidebar(true);
-
-  const openSidebar = () => setShowSidebar(true);
+  const openAccountSidebar = () => actions.setIsShowAcctSidebar(true);
 
   const handleScroll = useMemo(() => {
     let timer: NodeJS.Timeout | null = null;
@@ -36,7 +29,7 @@ export default function Header({ session }: HeaderProps) {
         if (!current) return;
         window.scrollY > 0
           ? (current.style.backgroundColor = 'transparent')
-          : (current.style.backgroundColor = global.color.fourth[50]);
+          : (current.style.backgroundColor = 'var(--liveuta-fourth-50)');
       }, 300);
     };
   }, []);
@@ -47,37 +40,36 @@ export default function Header({ session }: HeaderProps) {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMobile]);
 
   return (
-    <header>
-      <div className={styles.inner} ref={gnbRef}>
-        <nav className={styles.nav}>
-          <HamburgerButton onClick={openSidebar} />
-          <a href="/" className={styles.title}>
+    <header className={css.header}>
+      <div className={css.inner} ref={gnbRef}>
+        <nav className={css.nav}>
+          <Link href="/" className={css.title}>
             Live Uta
-          </a>
-          <div className={styles.right}>
+          </Link>
+          <div className={css.right}>
             <DesktopNav />
             {session ? (
-              <button className={styles.accountButton} onClick={openAccountSidebar}>
+              <button className={css.accountBtn} onClick={openAccountSidebar}>
                 <Avatar
                   src={session.user.image}
-                  email={session.user.email}
-                  size={'40px'}
+                  w={40}
+                  h={40}
+                  radius="xl"
                   alt="유저 이미지"
+                  name={session.user.email}
                 />
               </button>
             ) : (
-              <Link href="/login" className={styles.loginButton}>
+              <Link href="/login" className={css.loginBtn}>
                 로그인
               </Link>
             )}
           </div>
         </nav>
       </div>
-      <div className={styles.blank} />
     </header>
   );
 }

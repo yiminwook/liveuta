@@ -1,0 +1,4 @@
+.footer {
+  @extend %flex-center;
+  height: var.$safe-footer-height;
+}

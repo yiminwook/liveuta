@@ -1,15 +1,14 @@
 'use client';
 import TimelineText from '@/components/common/TimestampText';
-import { playerStatusAtom } from '@/stores/player';
+import { useSetPlayerStore } from '@/stores/player';
+import { Button, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
-import { Session } from 'next-auth';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import TextareaAutosize from 'react-textarea-autosize';
-import { toast } from 'sonner';
-import * as styles from './desc.css';
 import axios from 'axios';
+import { Session } from 'next-auth';
+import { useRouter } from 'next-nprogress-bar';
+import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
+import css from './Desc.module.scss';
 
 type DescProps = {
   videoId: string;
@@ -21,7 +20,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState('');
-  const setPlayerStatus = useSetAtom(playerStatusAtom);
+  const actions = useSetPlayerStore();
   const queryClient = useQueryClient();
 
   const toggleEditing = () => {
@@ -51,13 +50,13 @@ export default function Desc({ session, videoId, description }: DescProps) {
       description: string;
     }) => {
       const response = await axios.put<{ message: string; data: null }>(
-        `/api/setlist/${videoId}`,
+        `/api/v1/setlist/${videoId}`,
         { description },
         { headers: { Authorization: `Bearer ${session.user.accessToken}` } },
       );
       return response.data;
     },
-    onSuccess: (result) => {
+    onSuccess: () => {
       toast.success('수정되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
       router.refresh();
@@ -85,32 +84,40 @@ export default function Desc({ session, videoId, description }: DescProps) {
   };
 
   const handleTimestamp = ({ timestamp }: { videoId: string; timestamp: number }) => {
-    setPlayerStatus((pre) => ({ ...pre, timeline: timestamp, isPlaying: true, hide: false }));
+    actions.setTimeline(timestamp);
   };
 
   useEffect(() => {
     handleCancel();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [description]);
 
   if (isEditing) {
     return (
-      <form className={styles.wrap} onSubmit={handleSubmit}>
-        <button
-          type="button"
-          className={styles.cancelButton}
-          onClick={handleCancel}
-          disabled={mutateSetlist.isPending}
-        >
-          취소
-        </button>
-        <button type="submit" className={styles.editButton} disabled={mutateSetlist.isPending}>
-          저장
-        </button>
-        <div className={styles.inner}>
-          <TextareaAutosize
+      <form className={css.wrap} onSubmit={handleSubmit}>
+        <div className={css.buttons}>
+          <Button
+            type="button"
+            variant="filled"
+            color="red"
+            onClick={handleCancel}
             disabled={mutateSetlist.isPending}
-            className={styles.textarea}
+          >
+            취소
+          </Button>
+          <Button
+            type="submit"
+            variant="default"
+            data-variant="save"
+            disabled={mutateSetlist.isPending}
+          >
+            저장
+          </Button>
+        </div>
+        <div className={css.inner}>
+          <Textarea
+            className={css.textarea}
+            autosize
+            disabled={mutateSetlist.isPending}
             value={desc}
             onChange={handleDesc}
           />
@@ -120,20 +127,23 @@ export default function Desc({ session, videoId, description }: DescProps) {
   }
 
   return (
-    <div className={styles.wrap}>
-      <button type="button" className={styles.editButton} onClick={toggleEditing}>
+    <div className={css.wrap}>
+      <Button type="button" color="third" onClick={toggleEditing}>
         편집
-      </button>
-      <div className={styles.inner}>
-        {description.split('\n').map((line, index) => (
-          <TimelineText
-            key={`${videoId}_row_${index}`}
-            index={index}
-            text={line}
-            videoId={videoId}
-            onClickTimestamp={handleTimestamp}
-          />
-        ))}
+      </Button>
+      <div className={css.inner}>
+        {description
+          .split('\n')
+          .filter((item) => item !== '')
+          .map((line, index) => (
+            <TimelineText
+              key={`${videoId}_row_${index}`}
+              index={index}
+              text={line}
+              videoId={videoId}
+              onClickTimestamp={handleTimestamp}
+            />
+          ))}
       </div>
     </div>
   );

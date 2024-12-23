@@ -1,0 +1,74 @@
+.wrap {
+  // view-transition-name: bottom-tab; // TODO: Bug fix
+  display: block;
+  height: var.$safe-footer-height;
+
+  @include util.min-width(var.$mobile-boundary) {
+    height: 0;
+  }
+
+  &::view-transition-group {
+    z-index: 2;
+  }
+}
+
+.contentComponent {
+  height: 100%;
+}
+
+.wrapper {
+  max-height: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.drawerGrid {
+  padding: 1rem 1rem;
+
+
+  &[data-hidden=true] {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .item {
+    margin: 0 auto;
+
+    .roundBtn {
+      border-radius: 9999px;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+      padding: 0.5em;
+      transition: color 0.2s util.easing(default);
+
+      &:global(.converter) {
+        background-color: #a8a8a8;
+        color: #eeeeee;
+      }
+
+      :global(.m_8d3afb97) {
+        flex-direction: column;
+
+        svg {
+          margin-bottom: 0.25em;
+        }
+      }
+    }
+  }
+}
+
+.expandIcon {
+  display: grid;
+  place-items: center;
+
+  &[data-hidden=true] {
+    display: none;
+    visibility: hidden;
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}

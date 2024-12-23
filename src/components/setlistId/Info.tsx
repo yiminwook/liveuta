@@ -1,32 +1,34 @@
 'use client';
 import dayjs from '@/libraries/dayjs';
-import { ChannleDatesetItem } from '@/libraries/mongoDB/getAllChannel';
+import { ChannelDatesetItem } from '@/libraries/mongoDB/getAllChannel';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
+import { useSetPlayerStore } from '@/stores/player';
+import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { openWindow } from '@/utils/windowEvent';
+import { Avatar, Button } from '@mantine/core';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 import cx from 'classnames';
+import { Session } from 'next-auth';
+import { useRouter } from 'next-nprogress-bar';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { isMobile } from 'react-device-detect';
 import { BsMusicNoteList } from 'react-icons/bs';
 import { ImYoutube } from 'react-icons/im';
 import { IoArrowBack } from 'react-icons/io5';
-import * as styles from './info.css';
-import { isMobile } from 'react-device-detect';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
-import { Session } from 'next-auth';
 import { toast } from 'sonner';
-import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
-import { useResetAtom } from 'jotai/utils';
-import { playerVideoIdAtom } from '@/stores/player';
+import css from './Info.module.scss';
 
 type InfoProps = {
   setlist: Setlist;
-  channel: ChannleDatesetItem;
+  channel: ChannelDatesetItem;
+  icon: string;
   session: Session | null;
 };
 
-export default function Info({ setlist, channel, session }: InfoProps) {
+export default function Info({ setlist, channel, icon, session }: InfoProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const videoUrl = generateVideoUrl(setlist.videoId);
@@ -35,7 +37,7 @@ export default function Info({ setlist, channel, session }: InfoProps) {
   const broadcast = dayjs(setlist.broadcastAt).format('YYYY년 MM월 DD일');
   const create = dayjs(setlist.createdAt).format('YYYY년 MM월 DD일');
   const update = dayjs(setlist.updatedAt).format('YYYY년 MM월 DD일');
-  const resetPlayerId = useResetAtom(playerVideoIdAtom);
+  const actions = useSetPlayerStore();
 
   const handleLocation = (url: string) => {
     if (isMobile) {
@@ -48,7 +50,7 @@ export default function Info({ setlist, channel, session }: InfoProps) {
   const mutateDelete = useMutation({
     mutationKey: ['deleteSetlist'],
     mutationFn: async ({ session, videoId }: { session: Session; videoId: string }) => {
-      const response = await axios.delete<DeleteSetlistRes>(`/api/setlist/${videoId}`, {
+      const response = await axios.delete<DeleteSetlistRes>(`/api/v1/setlist/${videoId}`, {
         headers: { Authorization: `Bearer ${session.user.accessToken}` },
       });
       return response.data.data;
@@ -56,7 +58,7 @@ export default function Info({ setlist, channel, session }: InfoProps) {
     onSuccess: () => {
       toast.success('삭제되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
-      resetPlayerId();
+      actions.reset();
       router.back();
     },
     onError: (error) => {
@@ -67,41 +69,66 @@ export default function Info({ setlist, channel, session }: InfoProps) {
   const deletePermission = session && session.user.userLv >= SETLIST_DELETE_LEVEL;
 
   return (
-    <div className={styles.wrap}>
-      <nav className={styles.nav}>
-        <button className={styles.backButton} onClick={() => router.back()}>
-          <IoArrowBack size={28} />
+    <div className={css.wrap}>
+      <nav className={css.nav}>
+        <Button
+          className={css.backButton}
+          classNames={{ label: css.buttonLabel }}
+          variant="transparent"
+          onClick={() => router.back()}
+        >
+          <IoArrowBack size={24} />
           <span>Back</span>
-        </button>
-        <div className={styles.navRight}>
+        </Button>
+        <div className={css.navRight}>
           {deletePermission && (
-            <button
-              className={cx(styles.navItem, styles.deleteButton)}
+            <Button
+              className={css.navItem}
+              color="red"
               onClick={() => {
                 if (confirm('삭제 하시겠습니까?'))
                   mutateDelete.mutate({ session, videoId: setlist.videoId });
               }}
               disabled={mutateDelete.isPending}
             >
-              삭 제
-            </button>
+              <span className={css.letterWide}>삭제</span>
+            </Button>
           )}
-          <button
-            className={cx(styles.navItem, styles.youtubeButton)}
+          <Button
+            className={cx(css.navItem, css.hoverButton)}
+            classNames={{ label: css.buttonLabel }}
+            variant="transparent"
             onClick={() => handleLocation(videoUrl)}
           >
             <ImYoutube size={24} color="#ff0000" />
-            유투브
-          </button>
-          <Link className={cx(styles.navItem, styles.listLink)} href="/setlist">
+            유튜브
+          </Button>
+          <Button
+            component={Link}
+            className={cx(css.navItem, css.hoverButton)}
+            classNames={{ label: css.buttonLabel }}
+            variant="transparent"
+            href="/setlist"
+          >
             <BsMusicNoteList />
             리스트
-          </Link>
+          </Button>
         </div>
       </nav>
-      <h4 className={styles.title}>{setlist.title}</h4>
-      <div>
-        <button onClick={() => handleLocation(channelUrl)}>{channel.nameKor}</button>
+      <div className={css.infoSection}>
+        <h2 className={css.title}>{setlist.title}</h2>
+        <button className={css.channel} onClick={() => handleLocation(channelUrl)}>
+          <Avatar className={css.avatar}>
+            <Image
+              className={css.channelIcon}
+              src={icon}
+              alt="채널 아이콘"
+              width={38}
+              height={38}
+            />
+          </Avatar>
+          <p className={css.channelName}>{channel.nameKor}</p>
+        </button>
         <br />
         <div>방송일: {broadcast}</div>
         <div>작성일: {create}</div>

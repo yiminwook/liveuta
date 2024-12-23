@@ -1,0 +1,90 @@
+.header {
+  height: var.$safe-header-height;
+  padding-top: var.$env-top;
+}
+
+.inner {
+  // view-transition-name: header;
+  z-index: map-get(var.$z-indexes, header);
+  margin: 0px;
+  padding-top: var.$env-top;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: var.$safe-header-height;
+  position: fixed;
+  background-color: transparent;
+  backdrop-filter: blur(8px);
+  transition: background-color 0.5s var.$bezier-curve;
+  box-shadow: 0px 1px 2px 0 rgba(56, 52, 52, 0.4);
+
+  &:hover {
+    background-color: var(--liveuta-fourth-50) !important;
+  }
+
+  // &::view-transition-group {
+  //   z-index: 2;
+  // }
+}
+
+.nav {
+  margin: auto;
+  width: 100%;
+  height: var.$header-height;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--liveuta-txt-active);
+  padding: 0 0.5rem;
+
+  @include util.min-width(md) {
+    padding: 0 1.5rem;
+  }
+
+  @include util.min-width(xl) {
+    width: 80vw;
+  }
+}
+
+a.title {
+  @include util.text-line(1, 1.2);
+  font-size: 2rem;
+  color: util.palette(third, lighter);
+  font-weight: 600;
+}
+
+.accountBtn {
+  padding: 0;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  & > ul {
+    display: none;
+    align-items: center;
+    gap: 1rem;
+
+    @include util.min-width(var.$mobile-boundary) {
+      display: flex;
+    }
+  }
+}
+
+.loginBtn {
+  display: block;
+  border-radius: 5px;
+  padding: 0.25rem 0.5rem;
+  width: 3.75rem;
+  text-align: center;
+  background-color: util.palette(third, default);
+  color: #fff;
+  transition: background-color 0.2s var.$bezier-curve;
+  box-shadow: var.$box-shadow;
+
+  &:hover {
+    background-color: util.palette(third, light);
+  }
+}

@@ -1,0 +1,59 @@
+:export {
+  bezierCurve: var.$bezier-curve;
+  boxShadow: var.$box-shadow;
+
+  breakpointSm: #{map-get(var.$breakpoints, sm)};
+  breakpointXs: #{map-get(var.$breakpoints, xs)};
+  breakpointMd: #{map-get(var.$breakpoints, md)};
+  breakpointLg: #{map-get(var.$breakpoints, lg)};
+  breakpointXl: #{map-get(var.$breakpoints, xl)};
+
+  zIndexApp: #{map-get(var.$z-indexes, app)};
+  zIndexModal: #{map-get(var.$z-indexes, modal)};
+  zIndexPopover: #{map-get(var.$z-indexes, popover)};
+  zIndexOverlay: #{map-get(var.$z-indexes, overlay)};
+  zIndexMax: #{map-get(var.$z-indexes, max)};
+
+  firstColorDefault: #{map-get(var.$first-colors, default)};
+  firstColorLight: #{map-get(var.$first-colors, light)};
+  firstColorLighter: #{map-get(var.$first-colors, lighter)};
+  firstColorDark: #{map-get(var.$first-colors, dark)};
+  firstColorDarken: #{map-get(var.$first-colors, darken)};
+  firstColor25: #{map-get(var.$first-colors, 25)};
+  firstColor50: #{map-get(var.$first-colors, 50)};
+  firstColor75: #{map-get(var.$first-colors, 75)};
+  firstColor95: #{map-get(var.$first-colors, 95)};
+
+  secondColorDefault: #{map-get(var.$second-colors, default)};
+  secondColorLight: #{map-get(var.$second-colors, light)};
+  secondColorLighter: #{map-get(var.$second-colors, lighter)};
+  secondColorDark: #{map-get(var.$second-colors, dark)};
+  secondColorDarken: #{map-get(var.$second-colors, darken)};
+  secondColor25: #{map-get(var.$second-colors, 25)};
+  secondColor50: #{map-get(var.$second-colors, 50)};
+  secondColor75: #{map-get(var.$second-colors, 75)};
+  secondColor95: #{map-get(var.$second-colors, 95)};
+
+  thirdColorDefault: #{map-get(var.$third-colors, default)};
+  thirdColorLight: #{map-get(var.$third-colors, light)};
+  thirdColorLighter: #{map-get(var.$third-colors, lighter)};
+  thirdColorDark: #{map-get(var.$third-colors, dark)};
+  thirdColorDarken: #{map-get(var.$third-colors, darken)};
+  thirdColor25: #{map-get(var.$third-colors, 25)};
+  thirdColor50: #{map-get(var.$third-colors, 50)};
+  thirdColor75: #{map-get(var.$third-colors, 75)};
+  thirdColor95: #{map-get(var.$third-colors, 95)};
+
+  colorScheme: #{map-get(var.$colors, scheme)};
+  colorBright: #{map-get(var.$colors, bright)};
+  colorText: #{map-get(var.$colors, text)};
+  colorBody: #{map-get(var.$colors, body)};
+  colorError: #{map-get(var.$colors, error)};
+  colorPlaceholder: #{map-get(var.$colors, placeholder)};
+  colorAnchor: #{map-get(var.$colors, anchor)};
+  colorDefault: #{map-get(var.$colors, default)};
+  colorDefaultHover: #{map-get(var.$colors, default-hover)};
+  colorDefaultColor: #{map-get(var.$colors, default-color)};
+  colorDefaultBorder: #{map-get(var.$colors, default-border)};
+  colorDimmed: #{map-get(var.$colors, dimmed)};
+}

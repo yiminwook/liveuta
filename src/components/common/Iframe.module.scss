@@ -1,0 +1,38 @@
+.wrap {
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: calc(100dvh - 7.5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  text-align: center;
+
+  .inner {
+    width: 100%;
+    height: 100%;
+
+    .iframe {
+      width: 100%;
+      height: 100%;
+      background-color: var.$backdrop-color;
+      box-shadow: var.$box-shadow;
+    }
+  }
+
+  .openButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+    background-color: util.palette(third, default);
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 1.1rem;
+    letter-spacing: 0.025em;
+    box-shadow: var.$box-shadow;
+    transition: background-color 0.2s var.$bezier-curve;
+
+    &:hover {
+      background-color: util.palette(third, dark);
+    }
+  }
+}

@@ -27,7 +27,6 @@ const portal = <T extends object>(position: string, Component: React.FC<T>) => {
           }
         };
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (!provider || !wrap) return null;

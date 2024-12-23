@@ -1,19 +1,27 @@
-import { ChannelsDataType } from '@/types/api/youtube';
-import { Session } from '@auth/core/types';
+'use client';
 import Nodata from '@/components/common/Nodata';
 import ChannelCard from '@/components/common/channelCard/ChannelCard';
-import * as styles from './home.css';
+import useCachedData from '@/hooks/useCachedData';
+import { TYChannelsData } from '@/types/api/youtube';
+import { Session } from 'next-auth';
+import css from './Home.module.scss';
 
 type ChannelSectionProps = {
-  contents: ChannelsDataType[];
+  contents: TYChannelsData[];
   session: Session | null;
 };
 
 export default function ChannelSection({ contents, session }: ChannelSectionProps) {
+  const { whiteList } = useCachedData({ session });
   return (
-    <section className={styles.channelSection}>
+    <section className={css.channelSection}>
       {contents.map((content) => (
-        <ChannelCard key={content.uid} content={content} session={session} />
+        <ChannelCard
+          key={content.uid}
+          content={content}
+          session={session}
+          isFavorite={whiteList.has(content.uid)}
+        />
       ))}
       {contents.length === 0 && <Nodata />}
     </section>

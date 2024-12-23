@@ -1,79 +1,47 @@
 'use client';
+import { SegmentedControl } from '@mantine/core';
+import { Session } from 'next-auth';
+import { useRouter } from 'next-nprogress-bar';
+import css from './Nav.module.scss';
+import PostDrawer from './PostDrawer';
 import SearchForm from './SearchForm';
-import { useRouter } from 'next/navigation';
-import * as styles from './nav.css';
-import { useQueryClient } from '@tanstack/react-query';
-import { BREAK_POINT } from '@/styles/var';
-import { useMediaQuery } from 'react-responsive';
-import { FaFilter } from 'react-icons/fa';
+
+type OrderType = 'broadcast' | 'create';
 
 type SearchFormProps = {
   searchParams: {
     query: string;
     page: number;
-    order: 'broadcast' | 'create';
+    sort: 'broadcast' | 'create';
   };
+  session: Session | null;
 };
-export default function Nav({ searchParams }: SearchFormProps) {
+
+export default function Nav({ searchParams, session }: SearchFormProps) {
   const router = useRouter();
-  const queryClient = useQueryClient();
-  const isMobile = useMediaQuery({ query: `(max-width: ${BREAK_POINT.md}px)` });
 
-  const handleReset = () => {
-    if (searchParams.query === '' && searchParams.page === 1) {
-      queryClient.invalidateQueries({ queryKey: ['searchSetlist', searchParams] });
-    } else {
-      router.push('/setlist');
-    }
-  };
-
-  const navigatePost = () => {
-    router.push('/setlist/post');
-  };
-
-  const toggleOrder = () => {
+  function handleOrderChange(value: OrderType) {
     const query = new URLSearchParams();
     query.set('query', searchParams.query);
     query.set('page', searchParams.page.toString());
-    query.set('order', searchParams.order === 'broadcast' ? 'create' : 'broadcast');
+    query.set('sort', value);
     router.push(`/setlist?${query.toString()}`);
-  };
-
-  if (isMobile) {
-    return (
-      <div className={styles.mobileWrap}>
-        <div>
-          <SearchForm searchParams={searchParams} />
-        </div>
-        <div className={styles.mobileNavBox}>
-          <button className={styles.navButton} type="button" onClick={handleReset}>
-            초기화
-          </button>
-          <button onClick={toggleOrder} className={styles.navButton} style={{ cursor: 'pointer' }}>
-            <FaFilter size={14} />
-            {searchParams.order === 'create' ? '작성일' : '방송일'}
-          </button>
-          <button className={styles.navButton} type="button" onClick={navigatePost}>
-            작성
-          </button>
-        </div>
-      </div>
-    );
   }
 
   return (
-    <div className={styles.wrap}>
+    <div className={css.wrap}>
+      <div className={css.left}>
+        <SegmentedControl
+          value={searchParams.sort}
+          onChange={(value) => handleOrderChange(value as OrderType)}
+          data={[
+            { label: '방송일', value: 'broadcast' },
+            { label: '작성일', value: 'create' },
+          ]}
+        />
+        <PostDrawer session={session} />
+      </div>
       <SearchForm searchParams={searchParams} />
-      <button className={styles.navButton} type="button" onClick={handleReset}>
-        초기화
-      </button>
-      <button onClick={toggleOrder} className={styles.navButton} style={{ cursor: 'pointer' }}>
-        <FaFilter size={14} />
-        {searchParams.order === 'create' ? '작성일' : '방송일'}
-      </button>
-      <button className={styles.navButton} type="button" onClick={navigatePost}>
-        작성
-      </button>
     </div>
   );
 }

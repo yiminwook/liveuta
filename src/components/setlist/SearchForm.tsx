@@ -1,13 +1,17 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import * as styles from './searchForm.css';
+import { TextInput, UnstyledButton } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next-nprogress-bar';
+import { useState } from 'react';
+import { IoSearch } from 'react-icons/io5';
+import { TbX } from 'react-icons/tb';
+import css from './SearchForm.module.scss';
 
 interface SearchFormProps {
   searchParams: {
     query: string;
     page: number;
+    sort: 'broadcast' | 'create';
   };
 }
 
@@ -26,21 +30,31 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
     if (trimmedQuery === searchParams.query) {
       queryClient.invalidateQueries({ queryKey: ['searchSetlist', searchParams] });
     } else {
-      router.push(`/setlist?query=${trimmedQuery}`);
+      const params = new URLSearchParams();
+      params.set('query', trimmedQuery);
+      params.set('page', '1');
+      params.set('sort', searchParams.sort);
+      router.push(`/setlist?${params.toString()}`);
     }
   };
 
   return (
-    <form className={styles.wrap} onSubmit={handleSearch}>
-      <div className={styles.inputBox}>
-        <input
-          className={styles.input}
-          type="text"
-          value={query}
-          onChange={handleQuery}
-          placeholder="세트리로 검색"
-        />
-        <button className={styles.button}>검색</button>
+    <form className={css.form} onSubmit={handleSearch}>
+      <div className={css.wrap}>
+        <div className={css.inputBox}>
+          <TextInput
+            classNames={{ input: css.input }}
+            value={query}
+            onChange={handleQuery}
+            placeholder="채널명으로 검색"
+          />
+          <button className={css.clearButton} type="button" onClick={() => setQuery('')}>
+            <TbX />
+          </button>
+        </div>
+        <UnstyledButton className={css.submit} type="submit">
+          <IoSearch color="#fff" size="1.75rem" />
+        </UnstyledButton>
       </div>
     </form>
   );

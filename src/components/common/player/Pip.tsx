@@ -1,19 +1,26 @@
 'use client';
-import portal from '@/libraries/portal';
 import { useSearchParams } from 'next/navigation';
 import { isMobile } from 'react-device-detect';
+import { createPortal } from 'react-dom';
 import Player from './Player';
-import * as styles from './player.css';
+import css from './Player.module.scss';
 
-export default portal('pip', function Pip() {
+export default function Pip() {
   const searchParams = useSearchParams();
-  const isLive = searchParams.get('tab') === 'live';
+  const isLive = searchParams.get('t') === 'live';
+
+  const $wrapper = document.getElementById('pip');
+
+  if (!$wrapper) {
+    throw new Error('pip wrapper not exist');
+  }
 
   if (isMobile || isLive) return null;
 
-  return (
-    <div className={styles.pipBase}>
+  return createPortal(
+    <div className={css.pipBase}>
       <Player isShow={false} isLive={false} />
-    </div>
+    </div>,
+    $wrapper,
   );
-});
+}

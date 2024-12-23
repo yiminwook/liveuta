@@ -11,7 +11,7 @@ import { jwtAuth } from '@/libraries/firebase/admin';
 
 export async function GET(_req: NextRequest) {
   try {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const cookie = cookieStore.get('select')?.value || 'all';
 
     const sheetData = await getSheet({

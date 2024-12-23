@@ -1,0 +1,20 @@
+.target {
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 0.5rem;
+  }
+}
+
+.text {
+  @include util.text-line(1, 1.6);
+}
+
+
+.content {
+  text-align: center;
+}
+
+.description {
+}

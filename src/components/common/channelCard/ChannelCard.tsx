@@ -1,38 +1,36 @@
 'use client';
+import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
-import useModalStore from '@/hooks/useModalStore';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
-import { ChannelsDataType } from '@/types/api/youtube';
-import { Session } from '@auth/core/types';
-import { whitelistAtom } from '@/stores/schedule';
+import { useSetModalStore } from '@/stores/modal';
+import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import { openWindow } from '@/utils/windowEvent';
-import { useAtom } from 'jotai';
+import { Session } from 'next-auth';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
 import { isDesktop } from 'react-device-detect';
 import { FaStar } from 'react-icons/fa6';
 import { toast } from 'sonner';
-import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
-import * as styles from './channelCard.css';
+import css from './ChannelCard.module.scss';
 
 type ChannelItemProps = {
-  content: ChannelsDataType;
+  content: TYChannelsData;
   session: Session | null;
+  isFavorite: boolean;
 };
 
-export default function ChannelItem({ content, session }: ChannelItemProps) {
+export default function ChannelItem({ content, session, isFavorite }: ChannelItemProps) {
   const { channelName, snippet, url, statistics, uid } = content;
-  const title = snippet.title ?? '';
-  const imageURL = snippet.thumbnails?.default?.url ?? '/loading.png';
-  const description = snippet.description ?? '비공개';
-  const subscribe = renderSubscribe(statistics.subscriberCount ?? '비공개');
-  const videoCount = statistics.videoCount ?? '비공개';
+  const title = snippet?.title ?? '';
+  const imageURL = snippet?.thumbnails?.default?.url ?? '/loading.png';
+  const description = snippet?.description ?? '비공개';
+  const subscribe = renderSubscribe(statistics?.subscriberCount ?? '비공개');
+  const videoCount = statistics?.videoCount ?? '비공개';
 
-  const modalStore = useModalStore();
-  const [whitelist] = useAtom(whitelistAtom);
+  const modalStore = useSetModalStore();
 
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
@@ -53,7 +51,7 @@ export default function ChannelItem({ content, session }: ChannelItemProps) {
     }
   };
 
-  const openModal = async (e: MouseEvent) => {
+  const openModal = async () => {
     gtagClick({
       target: 'channelCard',
       content: channelName,
@@ -74,7 +72,7 @@ export default function ChannelItem({ content, session }: ChannelItemProps) {
     });
   };
 
-  const handleFavorite = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleFavorite = () => {
     if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
 
     if (!isFavorite && confirm('즐겨찾기에 추가하시겠습니까?')) {
@@ -90,12 +88,10 @@ export default function ChannelItem({ content, session }: ChannelItemProps) {
     }
   };
 
-  const isFavorite = whitelist.has(uid);
-
   return (
-    <div className={styles.channelCard}>
-      <a className={styles.linkToChannel} href={url} onClick={linkClickEvent}>
-        <div className={styles.imageContainer}>
+    <div className={css.channelCard}>
+      <a href={url} onClick={linkClickEvent}>
+        <div className={css.imageContainer}>
           <Image
             src={imageURL}
             alt=""
@@ -107,25 +103,27 @@ export default function ChannelItem({ content, session }: ChannelItemProps) {
           />
         </div>
       </a>
-      <div className={styles.desc}>
-        <div className={styles.title}>
-          <h3>{channelName}</h3>
+      <div className={css.desc}>
+        <div className={css.titleBox}>
           <button
             onClick={handleFavorite}
             disabled={mutatePostFavorite.isPending || mutateDeleteFavorite.isPending}
           >
             <FaStar size="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
           </button>
+          <h3>{channelName}</h3>
         </div>
-        <div className={styles.details}>
-          <p className={styles.descContent}>
-            <span className={styles.descContentLabel}>구독자</span> {subscribe}
-          </p>
-          <p className={styles.descContent}>
-            <span className={styles.descContentLabel}>동영상</span> {videoCount}
-            <span>개</span>
-          </p>
-          <div className={styles.link}>
+        <div className={css.details}>
+          <div className={css.channelInfo}>
+            <p>
+              <span className={css.descContentLabel}>구독자</span> {subscribe}
+            </p>
+            <p>
+              <span className={css.descContentLabel}>동영상</span> {videoCount}
+              <span>개</span>
+            </p>
+          </div>
+          <div className={css.link}>
             <button onClick={openModal}>+ 상세보기</button>
           </div>
         </div>

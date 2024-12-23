@@ -1,0 +1,90 @@
+.channelCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  transition-property: scale;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  border-bottom: 1px solid #f0f0f0;
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  @include util.min-width(md) {
+    border: 1px solid map-get(var.$colors, default-border);
+    border-radius: 5px;
+  }
+}
+
+.imageContainer {
+  position: relative;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @include util.min-width(var.$mobile-boundary) {
+    justify-content: space-around;
+  }
+}
+
+.descContentLabel {
+  color: #888;
+}
+
+.titleBox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 500;
+
+  @include util.text-line(1, 1rem);
+  @include util.min-width(var.$mobile-boundary) {
+    font-size: 1.25rem;
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+
+  @include util.min-width(var.$mobile-boundary) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.channelInfo {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+
+  @include util.min-width(var.$mobile-boundary) {
+    font-size: 1rem;
+  }
+}
+
+.originalTitle {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.link {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-weight: 600;
+}

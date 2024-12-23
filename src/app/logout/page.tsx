@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import Home from '@/components/logout/Home';
+import Client from '@/app/logout/page.client';
 import { auth } from '@/libraries/nextAuth';
 
 export default async function Page() {
@@ -10,5 +10,5 @@ export default async function Page() {
     redirect('/login');
   }
 
-  return <Home />;
+  return <Client />;
 }

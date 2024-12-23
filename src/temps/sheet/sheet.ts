@@ -7,11 +7,11 @@ export type ContentsRowType = [
   string,
   string,
   'TRUE' | 'FALSE',
-  ContentsDataType['isStream'],
+  TContentsData['isStream'],
   string,
 ];
 
-export interface ContentsDataType {
+export interface TContentsData {
   title: string;
   url: string;
   channelName: string;
@@ -31,14 +31,14 @@ export interface contentLength {
   /** 커버, 오리지널 영상 */
   video: number;
 }
-export interface ContentsDataTypes {
+export interface TContentsDatas {
   length: contentLength;
-  contents: ContentsDataType[];
+  contents: TContentsData[];
 }
 
 export interface SheetAPIReturntype {
-  scheduled: ContentsDataTypes;
-  live: ContentsDataTypes;
-  daily: ContentsDataTypes;
-  all: ContentsDataTypes;
+  scheduled: TContentsDatas;
+  live: TContentsDatas;
+  daily: TContentsDatas;
+  all: TContentsDatas;
 }

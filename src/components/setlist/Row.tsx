@@ -1,82 +1,58 @@
+'use client';
 /* eslint-disable @next/next/no-img-element */
-import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
-import { Setlist } from '@/libraries/oracleDB/setlist/service';
+import type { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
+import { TChannelData } from '@/types/api/mongoDB';
+import { replaceParentheses } from '@/utils/regexp';
+import { Table } from '@mantine/core';
 import cx from 'classnames';
 import dayjs from 'dayjs';
-import { useRouter } from 'next/navigation';
-import { MouseEvent } from 'react';
-import * as styles from './table.css';
-import { useMediaQuery } from 'react-responsive';
-import { BREAK_POINT } from '@/styles/var';
-import { replaceParentheses } from '@/utils/regexp';
-import useModalStore from '@/hooks/useModalStore';
-import SetlistModal from './SetlistModal';
+import { useRouter } from 'next-nprogress-bar';
+import { type MouseEvent } from 'react';
+import { useDrawerActions } from './DrawerContext';
+import css from './Table.module.scss';
 
-export type RowProps = {
+type RowProps = {
   setlist: Setlist;
-  channel?: ChannelDataset['channel_id'];
-  order: 'broadcast' | 'create';
+  channel?: TChannelData;
+  order?: 'broadcast' | 'create';
 };
 
 export default function Row({ setlist, channel, order }: RowProps) {
-  const isMobile = useMediaQuery({ query: `(max-width: ${BREAK_POINT.md}px)` });
   const router = useRouter();
-  const modalStore = useModalStore();
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
+  const title = replaceParentheses(setlist.title);
   const create = dayjs(setlist.createdAt).format('YYYY년 MM월 DD일');
   const broad = dayjs(setlist.broadcastAt).format('YYYY년 MM월 DD일');
+  const drawerActions = useDrawerActions();
 
-  const handleImageClick = (e: MouseEvent) => {
+  function handleImageClick(e: MouseEvent) {
     e.stopPropagation();
     router.push(`/setlist/${setlist.videoId}`);
-  };
+  }
 
-  const openModal = async () => {
-    await modalStore.push(SetlistModal, {
-      props: {
-        setlist,
-        channel,
-        order,
-      },
-    });
-  };
-
-  const replacedTitle = replaceParentheses(setlist.title);
-
-  if (isMobile) {
-    return (
-      <div className={cx(styles.mobileRow, 'hover')} onClick={openModal}>
-        <div className={cx(styles.mobileLeft)}>
-          <button className={styles.imageButton} onClick={handleImageClick}>
-            <div className={styles.thumbnailBox}>
-              <img src={thumbnailUrl} alt={setlist.title} />
-            </div>
-          </button>
-        </div>
-        <div className={styles.mobileRight}>
-          <p className={styles.mobileChannelName}>{channel?.nameKor}</p>
-          <p className={styles.mobileTitle}>{replacedTitle}</p>
-          <time className={styles.mobileTime}>{order === 'broadcast' ? create : broad}</time>
-        </div>
-      </div>
-    );
+  function handleRowClick() {
+    drawerActions.open(setlist, thumbnailUrl, channel);
   }
 
   return (
-    <div className={cx(styles.row, 'hover')} onClick={openModal}>
-      <div className={cx(styles.cell)}>
-        <button className={styles.imageButton} onClick={handleImageClick}>
-          <div className={styles.thumbnailBox}>
-            <img src={thumbnailUrl} alt={replacedTitle} />
+    <Table.Tr className={css.row} onClick={handleRowClick}>
+      <Table.Td className={cx(css.cell, css.thumbnail)}>
+        <button className={css.thumbnailButton} onClick={handleImageClick}>
+          <div className={css.thumbnailBox}>
+            <img src={thumbnailUrl} alt={setlist.title} loading="lazy" />
           </div>
         </button>
-      </div>
-      <div className={styles.cell}>{channel?.nameKor}</div>
-      <div className={cx(styles.cell, 'flex2')}>
-        <p>{replacedTitle}</p>
-      </div>
-      <div className={styles.cell}>{order ? create : broad}</div>
-    </div>
+      </Table.Td>
+      <Table.Td className={cx(css.cell, css.channel)}>
+        <p>{channel?.name_kor}</p>
+      </Table.Td>
+      <Table.Td className={cx(css.cell, css.title)}>
+        <p>{title}</p>
+      </Table.Td>
+      <Table.Td className={cx(css.cell, css.time)}>
+        <p>{order ? create : broad}</p>
+      </Table.Td>
+    </Table.Tr>
   );
 }

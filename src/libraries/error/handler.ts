@@ -1,10 +1,11 @@
 import CustomServerError from './customServerError';
 
-interface ErrorHandlerReturnType {
+interface TErrorHandlerReturn {
   status: number;
   message: string;
 }
-const errorHandler = (error: unknown): ErrorHandlerReturnType => {
+
+const errorHandler = (error: unknown): TErrorHandlerReturn => {
   console.error(error);
   let unknownErr = error;
 

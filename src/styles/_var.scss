@@ -1,0 +1,125 @@
+$env-top: env(safe-area-inset-top);
+$env-bottom: env(safe-area-inset-bottom);
+$env-left: env(safe-area-inset-left);
+$env-right: env(safe-area-inset-right);
+
+$header-height: 3.5rem;
+$footer-height: 4rem;
+
+$safe-header-height: calc($header-height + $env-top);
+$safe-footer-height: calc($footer-height + $env-bottom);
+
+// #{} interpolation과 함께 사용
+$theme-light-selector: ":where([data-mantine-color-scheme='light'])";
+$theme-dark-selector: ":where([data-mantine-color-scheme='dark'])";
+
+$breakpoints: (
+  xs: 30rem,
+  sm: 48rem,
+  md: 64rem,
+  lg: 74rem,
+  xl: 90rem,
+  2xl: 120rem
+);
+
+$mobile-boundary: sm; // breakpoint for mobile devices
+
+$z-indexes: (
+  app: 100,      // mantine default
+  float: 150,    
+  header: 180,   
+  modal: 200,    // mantine default
+  popover: 300,  // mantine default
+  overlay: 400,  // mantine default
+  max: 9999
+);
+
+$bezier-curve: cubic-bezier(0.23, 1, 0.32, 1);
+$box-shadow: 0px 1px 2px 0 rgba(56, 52, 52, 0.4);
+$backdrop-color: #ffffff34;
+
+$easing: (
+  default: cubic-bezier(0.23, 1, 0.32, 1),
+  expo-in-out: cubic-bezier(0.87, 0, 0.13, 1)
+);
+
+$first-colors: (
+  default: var(--liveuta-first-default),
+  light: var(--liveuta-first-light),
+  lighter: var(--liveuta-first-lighter),
+  dark: var(--liveuta-first-dark),
+  darken: var(--liveuta-first-darken),
+  25: var(--liveuta-first-25),
+  50: var(--liveuta-first-50),
+  75: var(--liveuta-first-75),
+  95: var(--liveuta-first-95)
+);
+
+$second-colors: (
+  default: var(--liveuta-second-default),
+  light: var(--liveuta-second-light),
+  lighter: var(--liveuta-second-lighter),
+  dark: var(--liveuta-second-dark),
+  darken: var(--liveuta-second-darken),
+  25: var(--liveuta-second-25),
+  50: var(--liveuta-second-50),
+  75: var(--liveuta-second-75),
+  95: var(--liveuta-second-95)
+);
+
+$third-colors: (
+  default: var(--liveuta-third-default),
+  light: var(--liveuta-third-light),
+  lighter: var(--liveuta-third-lighter),
+  dark: var(--liveuta-third-dark),
+  darken: var(--liveuta-third-darken),
+  25: var(--liveuta-third-25),
+  50: var(--liveuta-third-50),
+  75: var(--liveuta-third-75),
+  95: var(--liveuta-third-95)
+);
+
+$gray-colors: (
+  0: var(--mantine-color-gray-0),
+  1: var(--mantine-color-gray-1),
+  2: var(--mantine-color-gray-2),
+  3: var(--mantine-color-gray-3),
+  4: var(--mantine-color-gray-4),
+  5: var(--mantine-color-gray-5),
+  6: var(--mantine-color-gray-6),
+  7: var(--mantine-color-gray-7),
+  8: var(--mantine-color-gray-8),
+  9: var(--mantine-color-gray-9),
+  10: var(--mantine-color-gray-10)
+);
+
+$dark-colors: (
+  0: var(--mantine-color-dark-0),
+  1: var(--mantine-color-dark-1),
+  2: var(--mantine-color-dark-2),
+  3: var(--mantine-color-dark-3),
+  4: var(--mantine-color-dark-4),
+  5: var(--mantine-color-dark-5),
+  6: var(--mantine-color-dark-6),
+  7: var(--mantine-color-dark-7),
+  8: var(--mantine-color-dark-8),
+  9: var(--mantine-color-dark-9),
+  10: var(--mantine-color-dark-10)
+);
+
+$colors: (
+  scheme: var(--mantine-color-scheme),
+  bright: var(--mantine-color-bright),
+  text: var(--mantine-color-text),
+  textInvert: var(--mantine-color-body),
+  body: var(--mantine-color-body),
+  bodyInvert: var(--mantine-color-text),
+  error: var(--mantine-color-error),
+  placeholder: var(--mantine-color-placeholder),
+  anchor: var(--mantine-color-anchor),
+  default: var(--mantine-color-default),
+  default-hover: var(--mantine-color-default-hover),
+  default-color: var(--mantine-color-default-color),
+  default-border: var(--mantine-color-default-border),
+  dimmed: var(--mantine-color-dimmed)
+);

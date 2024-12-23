@@ -1,7 +1,8 @@
-import { Menu as ArkMenu } from '@ark-ui/react';
+import { Menu, UnstyledButton } from '@mantine/core';
+import { useRouter } from 'next-nprogress-bar';
 import { usePathname } from 'next/navigation';
-import * as styles from './headerMenu.css';
-import cx from 'classnames';
+import { useState } from 'react';
+import css from './HeaderMenu.module.scss';
 
 type HeaderMenuProps = {
   title: string;
@@ -9,31 +10,28 @@ type HeaderMenuProps = {
   onSelect: (value: string) => void;
 };
 
-export default function HeaderMenu({ title, links, onSelect }: HeaderMenuProps) {
+export default function HeaderMenu({ title, links }: HeaderMenuProps) {
   const pathname = usePathname();
+  const router = useRouter();
+  const [opened, setOpened] = useState(false);
+
   return (
-    <div className={styles.root}>
-      <ArkMenu.Root open onSelect={({ value }) => onSelect(value)}>
-        <ArkMenu.Trigger className={styles.trigger}>{title}</ArkMenu.Trigger>
-        <ArkMenu.Positioner
-          style={{
-            top: -10,
-            paddingTop: 10,
-          }}
-        >
-          <ArkMenu.Content className={styles.content}>
-            {links.map((link) => (
-              <ArkMenu.Item
-                key={`headerMenu-${link.text}`}
-                className={cx(styles.item, pathname === link.href && 'active')}
-                id={link.href}
-              >
-                {link.text}
-              </ArkMenu.Item>
-            ))}
-          </ArkMenu.Content>
-        </ArkMenu.Positioner>
-      </ArkMenu.Root>
-    </div>
+    <Menu trigger="hover" opened={opened} onChange={setOpened}>
+      <Menu.Target>
+        <UnstyledButton className={css.trigger}>{title}</UnstyledButton>
+      </Menu.Target>
+      <Menu.Dropdown className={css.dropdown}>
+        {links.map((link) => (
+          <Menu.Item
+            key={`headerMenu-${link.text}`}
+            data-current={pathname === link.href}
+            onClick={() => router.push(link.href)}
+            className={css.dropdownItem}
+          >
+            {link.text}
+          </Menu.Item>
+        ))}
+      </Menu.Dropdown>
+    </Menu>
   );
 }

@@ -12,8 +12,8 @@ export const FETCH_REVALIDATE_TIME = 30;
 
 export const HOME_FILTER = ['live', 'daily', 'all'];
 
-export const DEFAULT_BLUR_BASE64 =
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8U9hfDwAGKgJNP3RWxQAAAABJRU5ErkJggg==';
+export const DEFAULT_BLUR_BASE64 = // #a0a0a0 alpha(0.5)
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNcUA8AAcUBIa+1gC8AAAAASUVORK5CYII=';
 
 export const GA_TRACKING_ID = 'G-4STJ8NQ029';
 export const GTM_TRACKING_ID = 'GTM-KGJ6HZ4J';
@@ -29,12 +29,11 @@ export const ORACLEDB_USER = 'admin';
 
 export const SETLIST_PAGE_SIZE = 15;
 
-export const INITIAL_PLAYER_VIDEO_ID = 'bnofYmfKLeo';
-
 export const ORIGIN = 'liveuta.vercel.app';
 
 export const INTERNAL_LINKS = [
   { href: '/', text: '홈' },
+  { href: '/schedule', text: '스케줄' },
   { href: '/multi', text: '멀티뷰' },
   { href: '/channel', text: '채널' },
   { href: '/setlist', text: '세트리' },
@@ -52,4 +51,21 @@ export const EXTERNAL_LINKS = [
   { href: 'https://ezgif.com', text: 'EZ GIF' },
 ];
 
+type TRoute = {
+  href: string;
+  text: string;
+};
+
+export const ROUTES: (TRoute & { subRoutes: TRoute[] })[] = [
+  { href: '/schedule', text: '스케줄', subRoutes: [] },
+  { href: '/multi', text: '멀티뷰', subRoutes: [] },
+  { href: '/channel', text: '채널', subRoutes: [] },
+  { href: '/request', text: '채널 등록', subRoutes: [] },
+  { href: '/setlist', text: '세트리', subRoutes: [] },
+  { href: '/setting', text: '설정', subRoutes: [] },
+  { href: '/dev', text: '개발', subRoutes: [] },
+];
+
 export const PORTAL_ID = 'liveuta-portal';
+
+export const SCHEDULE_CACHE_TIME = 3 * 60 * 1000;

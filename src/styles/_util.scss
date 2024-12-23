@@ -1,0 +1,106 @@
+/* 
+ * 해당 파일은 @mixin,  @function을 정의한 파일입니다.
+ */
+
+@use 'sass:math';
+@use 'var';
+
+@function rem($value) {
+  @return #{math.div(math.div($value, $value * 0 + 1), 16)}rem;
+}
+
+@mixin light {
+  [data-mantine-color-scheme='light'] & {
+    @content;
+  }
+}
+
+@mixin dark {
+  [data-mantine-color-scheme='dark'] & {
+    @content;
+  }
+}
+
+@mixin hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      @content;
+    }
+  }
+}
+
+@mixin min-width($breakpoint) {
+  $value: map-get(var.$breakpoints, $breakpoint);
+  $query-value: if($value, $value, $breakpoint);
+
+  @media screen and (min-width: #{$query-value}) {
+    @content;
+  }
+}
+
+@mixin max-width($breakpoint) {
+  $value: map-get(var.$breakpoints, $breakpoint);
+  $query-value: if($value, $value, $breakpoint);
+
+  @media screen and (max-width: #{$query-value}) {
+    @content;
+  }
+}
+
+// Add direction mixins if you need rtl support
+@mixin rtl {
+  [dir='rtl'] & {
+    @content;
+  }
+}
+
+@mixin ltr {
+  [dir='ltr'] & {
+    @content;
+  }
+}
+
+@mixin text-line($line-count, $line-height) {
+  overflow: hidden;
+  white-space: pre-line;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line-count;
+  line-height: $line-height;
+  height: #{$line-height * $line-count}em;
+}
+
+@function color($color) {
+  @return map-get(var.$colors, $color);
+}
+
+@function palette($variant, $color) {
+  @if $variant == 'first' {
+    @return map-get(var.$first-colors, $color);
+  } @else if $variant == 'second' {
+    @return map-get(var.$second-colors, $color);
+  } @else if $variant == 'third' {
+    @return map-get(var.$third-colors, $color);
+  } @else if $variant == 'dark' {
+    @return map-get(var.$dark-colors, $color);
+  } @else if $variant == 'monochrome' {
+    @return map-get(var.$gray-colors, $color);
+  }
+}
+
+@function calc-inner-height($height) {
+  $header-and-footer: var.$header-height + var.$footer-height;
+  @return calc($height - #{$header-and-footer} - #{var.$env-top} - #{var.$env-bottom});
+}
+
+@function easing($curve) {
+  @return map-get(var.$easing, $curve);
+}

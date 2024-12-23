@@ -1,12 +1,38 @@
+import { Provider } from '@/types/nextAuth';
 import Discord, { DiscordProfile } from '@auth/core/providers/discord';
-import NextAuth from 'next-auth';
+import * as Sentry from '@sentry/nextjs';
+import jwt from 'jsonwebtoken';
+import NextAuth, { User } from 'next-auth';
 import Google, { GoogleProfile } from 'next-auth/providers/google';
 import kakao, { KakaoProfile } from 'next-auth/providers/kakao';
-import { callbackJwt, callbackSession, callbackSignIn } from './callbacks';
-import { signOut } from './events';
+import { loginAndFindone } from '../oracleDB/auth/service';
+
+const generateErrorObj = (provider: Provider, error: unknown): User => ({
+  userId: -1,
+  userLv: -1,
+  email: 'error',
+  name: 'error',
+  image: '',
+  loginAt: '',
+  provider,
+  errorMessage: error instanceof Error ? error.message : 'unknown error',
+});
+
+const generateDiscordImageUrl = (profile: DiscordProfile) => {
+  if (profile.avatar === null) {
+    const defaultAvatarNumber =
+      profile.discriminator === '0'
+        ? Number(BigInt(profile.id) >> BigInt(22)) % 6
+        : parseInt(profile.discriminator) % 5;
+    return `https://cdn.discordapp.com/embed/avatars/${defaultAvatarNumber}.png`;
+  } else {
+    const format = profile.avatar.startsWith('a_') ? 'gif' : 'png';
+    return `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.${format}`;
+  }
+};
 
 // 애플 개발자 계정이 없음..
-// const key = process.env.APPLE_KEY_SECRET!.replaceAll(/\\n/g, "\n");
+// const key = process.env.APPLE_KEY_SECRET!.replaceAll(/\\n/g, "\n");π
 // const generateAppleToken = () => {
 //   const today = dayjs.tz();
 //   // https://support.cafe24.com/hc/ko/articles/8467351594649
@@ -29,11 +55,7 @@ import { signOut } from './events';
 //   return appleToken;
 // };
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-} = NextAuth({
+export const { handlers, auth, signIn } = NextAuth({
   trustHost: true,
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
@@ -49,17 +71,109 @@ export const {
           prompt: 'select_account',
         },
       },
+      async profile(profile, _tokens) {
+        try {
+          const provider = 'google';
+          const email = profile.email;
+          const name = profile.name;
+          const image = profile.picture;
+
+          const userInfo = await loginAndFindone({
+            email,
+            provider,
+          });
+
+          const payload: User = {
+            email,
+            name,
+            image,
+            userId: userInfo.id,
+            userLv: userInfo.lv,
+            loginAt: userInfo.loginAt.toISOString(),
+            provider,
+          };
+
+          return payload;
+        } catch (e) {
+          Sentry.captureException(e);
+          return generateErrorObj('google', e);
+        }
+      },
     }),
     kakao<KakaoProfile>({
       clientId: process.env.KAKAO_CLIENT_ID,
       clientSecret: process.env.KAKAO_CLIENT_SECRET,
       authorization: 'https://kauth.kakao.com/oauth/authorize?scope&prompt=select_account',
+      async profile(profile, _tokens) {
+        try {
+          const provider = 'kakao';
+          const id = profile.id.toString();
+          const email = profile.kakao_account?.email;
+          const image = profile.kakao_account?.profile?.profile_image_url;
+          const name = profile.kakao_account?.profile?.nickname;
+
+          if (!email) throw new Error('email is undefined');
+
+          const userInfo = await loginAndFindone({
+            email,
+            provider,
+          });
+
+          const payload: User = {
+            id, //nextAuth에서 type를 강제함. 필수
+            email,
+            name,
+            image,
+            userId: userInfo.id,
+            userLv: userInfo.lv,
+            loginAt: userInfo.loginAt.toISOString(),
+            provider,
+          };
+
+          return payload;
+        } catch (e) {
+          Sentry.captureException(e);
+          return generateErrorObj('kakao', e);
+        }
+      },
     }),
     Discord<DiscordProfile>({
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
       authorization:
         'https://discord.com/api/oauth2/authorize?scope=identify+email&prompt=select_account',
+      async profile(profile, _tokens) {
+        try {
+          const provider = 'discord';
+          const id = profile.id;
+          const email = profile.email;
+          const name = profile.global_name ?? profile.username;
+          const image = generateDiscordImageUrl(profile);
+
+          if (!email) throw new Error('email is undefined');
+
+          const userInfo = await loginAndFindone({
+            email,
+            provider,
+          });
+
+          const payload: User = {
+            id,
+            email,
+            image,
+            name,
+            userId: userInfo.id,
+            userLv: userInfo.lv,
+            loginAt: userInfo.loginAt.toISOString(),
+            provider,
+          };
+
+          return payload;
+        } catch (e) {
+          Sentry.captureException(e);
+          return generateErrorObj('discord', e);
+        }
+      },
     }),
     // expires_in 타입에러, next-auth에서 지원하지 않음
     // naver<NaverProfile>({
@@ -79,11 +193,38 @@ export const {
     // }),
   ],
   events: {
-    signOut,
+    async signOut() {},
   },
   callbacks: {
-    signIn: callbackSignIn,
-    jwt: callbackJwt,
-    session: callbackSession,
+    async signIn({ user, account }) {
+      try {
+        const email = user.email;
+        if (!email) throw new Error('email is required');
+        if (user.errorMessage) throw new Error(user.errorMessage);
+        return true;
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'unknown error';
+        return `/error?error=${encodeURIComponent(message)}`;
+      }
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        //첫 로그인, user는 첫 로그인시만 들어온다.
+        token.user = { ...user, email: user.email! };
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (!session) return session;
+      const threeDays = 60 * 60 * 24 * 3;
+      const accessToken = jwt.sign(token.user, process.env.ACCESS_SECRET, { expiresIn: threeDays });
+      session.user = {
+        ...token.user,
+        accessToken,
+        emailVerified: null, // type-error 방지
+        id: token.user.id!, // type-error 방지
+      };
+      return session;
+    },
   },
 });

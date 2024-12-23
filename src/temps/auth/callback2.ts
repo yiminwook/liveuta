@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 
 export async function GET(request: NextRequest) {
   try {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const url = new URL(request.nextUrl);
     const code = url.searchParams.get('code');
 

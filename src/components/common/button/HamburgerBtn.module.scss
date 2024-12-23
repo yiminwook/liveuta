@@ -1,0 +1,15 @@
+.btn {
+  display: flex;
+  padding: 0.3rem;
+  border-radius: 5px;
+  transition: background-color 0.8s var.$bezier-curve;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+
+  @include util.min-width(md) {
+    display: none;
+  }
+}
+

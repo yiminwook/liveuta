@@ -1,49 +1,98 @@
 'use client';
-import { SETLIST_PAGE_SIZE } from '@/constants';
-import { ChannelDataset } from '@/libraries/mongoDB/getAllChannel';
-import { GetSetlistRes } from '@/types/api/setlist';
 import Nodata from '@/components/common/Nodata';
-import Pagination from '@/components/common/Pagination';
+import loadingCss from '@/components/common/loading/Loading.module.scss';
+import Wave from '@/components/common/loading/Wave';
+import { SETLIST_PAGE_SIZE } from '@/constants';
+import useCachedData from '@/hooks/useCachedData';
+import type { Setlist } from '@/libraries/oracleDB/setlist/service';
+import type { GetSetlistRes } from '@/types/api/setlist';
+import { Pagination, Table } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import axios, { AxiosHeaders } from 'axios';
 import cx from 'classnames';
-import { Session } from 'next-auth';
-import { useRouter } from 'next/navigation';
+import { Cause, Data, Effect } from 'effect';
+import type { Session } from 'next-auth';
+import { useRouter } from 'next-nprogress-bar';
+import SetlistDrawer from './Drawer';
+import { DrawerProvider } from './DrawerContext';
 import Row from './Row';
-import * as styles from './table.css';
-import * as loadingStyles from '@/components/common/loading/loading.css';
-import Wave from '../common/loading/Wave';
+import css from './Table.module.scss';
+
+class AxiosFetchError extends Data.Error<{ cause: Error }> {}
 
 type TableProps = {
   searchParams: {
     query: string;
     page: number;
-    order: 'broadcast' | 'create';
+    sort: 'broadcast' | 'create';
   };
-  channelDataset: ChannelDataset;
   session: Session | null;
 };
 
-export default function Table({ session, searchParams, channelDataset }: TableProps) {
+function getSetListByQuery(query: string, headers: AxiosHeaders) {
+  return Effect.tryPromise({
+    try: () =>
+      axios.get<GetSetlistRes>(`/api/v1/setlist?${query}`, {
+        headers,
+      }),
+    catch: () =>
+      new AxiosFetchError({
+        cause: new Error('Cannot fetch set list'),
+      }),
+  });
+}
+
+type DataType = {
+  list: Setlist[];
+  totalPage: number;
+};
+
+export default function SetlistTable({ session, searchParams }: TableProps) {
+  const { channelList } = useCachedData({ session });
   const router = useRouter();
 
   const { data, isLoading } = useQuery({
     queryKey: ['searchSetlist', searchParams],
     queryFn: async () => {
-      const query = new URLSearchParams();
-      query.set('query', searchParams.query);
-      query.set('start', ((searchParams.page - 1) * SETLIST_PAGE_SIZE).toString());
-      query.set('order', searchParams.order);
-      query.set('isFavorite', 'false');
-      const headers = new AxiosHeaders();
-      if (session) {
-        headers.set('Authorization', `Bearer ${session.user.accessToken}`);
-      }
-      return axios
-        .get<GetSetlistRes>(`/api/setlist?${query.toString()}`, {
-          headers,
-        })
-        .then((res) => res.data.data);
+      const program = Effect.gen(function* (_) {
+        const query = new URLSearchParams();
+        query.set('query', searchParams.query);
+        query.set('start', ((searchParams.page - 1) * SETLIST_PAGE_SIZE).toString());
+        query.set('sort', searchParams.sort);
+        query.set('isFavorite', 'false');
+        const headers = new AxiosHeaders();
+
+        if (session) {
+          headers.set('Authorization', `Bearer ${session.user.accessToken}`);
+        }
+
+        const res = yield* _(getSetListByQuery(query.toString(), headers));
+
+        const data = res.data.data;
+
+        const returnValue: DataType = {
+          list: data.list,
+          totalPage: Math.ceil(data.total / SETLIST_PAGE_SIZE),
+        };
+
+        return returnValue;
+      }).pipe(
+        Effect.catchAllCause((cause) => {
+          const isFailure = Cause.isFailType(cause);
+
+          if (isFailure) {
+            console.error(cause.error.message);
+          } else {
+            console.error('Unknown error occurred');
+          }
+
+          return Effect.fail(cause);
+        }),
+      );
+
+      const result = await Effect.runPromise(program);
+
+      return result;
     },
   });
 
@@ -51,51 +100,48 @@ export default function Table({ session, searchParams, channelDataset }: TablePr
     const query = new URLSearchParams();
     query.set('query', searchParams.query);
     query.set('page', page.toString());
-    query.set('order', searchParams.order);
+    query.set('sort', searchParams.sort);
     router.push(`/setlist?${query.toString()}`);
   };
 
   if (isLoading)
     return (
-      <div className={loadingStyles.loadingWrap}>
+      <div className={loadingCss.loadingWrap}>
         <Wave />
       </div>
     );
 
-  if (!data) return <Nodata />;
+  if (!data || data.list.length === 0) return <Nodata />;
 
   return (
-    <div>
-      <div className={styles.table}>
-        <div className={styles.header}>
-          <div className={cx(styles.headerCell)}>썸네일</div>
-          <div className={styles.headerCell}>채널명</div>
-          <div className={cx(styles.headerCell, 'flex2')}>제목</div>
-          <div className={styles.headerCell}>
-            {searchParams.order === 'create' ? '작성일' : '방송일'}
-          </div>
-        </div>
-        <div className={styles.body}>
-          {data.list.map((data) => (
-            <Row
-              key={data.videoId}
-              setlist={data}
-              channel={channelDataset[data.channelId]}
-              order={searchParams.order}
-            />
+    <DrawerProvider>
+      <Table className={css.table} highlightOnHover>
+        <Table.Thead className={css.head}>
+          <Table.Tr className={css.headRow}>
+            <Table.Td className={cx(css.headCell, css.thumbnail)} />
+            <Table.Td className={cx(css.headCell, css.channel)}>채널명</Table.Td>
+            <Table.Td className={cx(css.headCell, css.title)}>제목</Table.Td>
+            <Table.Td className={cx(css.headCell, css.time)}>
+              {searchParams.sort === 'create' ? '작성일' : '방송일'}
+            </Table.Td>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody className={css.body}>
+          {data.list.map((setlist) => (
+            <Row key={setlist.videoId} setlist={setlist} channel={channelList[setlist.channelId]} />
           ))}
-          {data.list.length === 0 && <Nodata />}
-        </div>
-        <div className={styles.pagenationBox}>
-          <Pagination
-            count={data.total}
-            pageSize={SETLIST_PAGE_SIZE}
-            sliblingCount={1}
-            currentPage={searchParams.page}
-            onPageChange={handlePage}
-          />
-        </div>
+        </Table.Tbody>
+      </Table>
+      <div className={css.paginationBox}>
+        <Pagination
+          total={data.totalPage}
+          siblings={1}
+          value={searchParams.page}
+          onChange={handlePage}
+        />
       </div>
-    </div>
+      {/* TODO - 데스크탑에서는 Modal 사용 */}
+      <SetlistDrawer />
+    </DrawerProvider>
   );
 }

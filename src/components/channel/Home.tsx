@@ -1,26 +1,37 @@
-import getChannelData from '@/utils/getChannelData';
-import ChannelSection from './ChannelSection';
-import PaginationBox from './PaginationBox';
-import * as styles from './home.css';
-import Nav from './Nav';
+import Background from '@/components/common/background/Background';
+import { ITEMS_PER_PAGE } from '@/constants';
+import { TChannelDto, TYChannelReturn } from '@/libraries/mongoDB/getAllChannel';
 import { auth } from '@/libraries/nextAuth';
-import Background from '@/components/common/Background';
+import ChannelSection from './ChannelSection';
+import css from './Home.module.scss';
+import Nav from './Nav';
+import PaginationBox from './PaginationBox';
 
 type HomeProps = {
-  currentPage: number;
-  query: string | undefined;
+  channelDto: TChannelDto;
 };
 
-export default async function Home({ currentPage, query }: HomeProps) {
-  const session = await auth();
-  const { totalLength, contents } = await getChannelData(currentPage, { query });
+export default async function Home({ channelDto }: HomeProps) {
+  const [session, YChannelData] = await Promise.all([
+    auth(),
+    fetch(
+      `${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/youtube-channel?page=${channelDto.page}&query=${channelDto.query || ''}&size=${ITEMS_PER_PAGE}&sort=${channelDto.sort}`,
+      { next: { revalidate: 1800, tags: ['channel'] } },
+    )
+      .then((res) => res.json() as Promise<{ data: TYChannelReturn }>)
+      .then((json) => json.data),
+  ]);
 
   return (
     <Background>
-      <div className={styles.inner}>
+      <div className={css.inner}>
         <Nav />
-        <ChannelSection contents={contents} session={session} />
-        <PaginationBox totalLength={totalLength} currentPage={currentPage} query={query} />
+        <ChannelSection contents={YChannelData.contents} session={session} />
+        <PaginationBox
+          totalPage={YChannelData.totalPage}
+          currentPage={channelDto.page}
+          query={channelDto.query || ''}
+        />
       </div>
     </Background>
   );

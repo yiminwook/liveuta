@@ -1,0 +1,35 @@
+.wrap {
+  display: flex;
+  flex-direction: column-reverse;
+
+  @include util.min-width(var.$mobile-boundary) {
+    flex-direction: column;
+  }
+
+  .buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .inner {
+    @include util.min-width(var.$mobile-boundary) {
+      margin-block-start: 1rem;
+    }
+  }
+
+  .button {
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.2s var.$bezier-curve;
+  }
+}
+
+.textarea {
+  margin-block-end: 0.5rem;
+
+  @include util.min-width(var.$mobile-boundary) {
+    margin-block-end: 0;
+  }
+}

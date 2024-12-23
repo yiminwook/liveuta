@@ -1,7 +1,8 @@
-export const GET_MEMBER = `
+export const GET_ONE_MEMBER = `
   SELECT * 
   FROM MEMBER
   WHERE EMAIL = :email AND PROVIDER = :provider
+  FETCH FIRST 1 ROW ONLY
 `;
 
 export const POST_MEMBER = `
@@ -14,3 +15,9 @@ export const UPDATE_MEMBER = `
   SET LOGIN_AT = CURRENT_TIMESTAMP, DISCONNECT = 'N'
   WHERE EMAIL = :email AND PROVIDER = :provider
 `;
+
+export const DICONNECT_ALL_MEMBER = `
+  UPDATE MEMBER
+    SET DISCONNECT = 'Y'
+    WHERE DISCONNECT = 'N';
+ `;

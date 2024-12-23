@@ -32,6 +32,9 @@ declare global {
       readonly ORACLEDB_CONNECTSTRING: string;
       readonly ORACLEDB_PASSWORD: string;
 
+      readonly NEXT_PUBLIC_SENTRY_DSN?: string;
+      readonly SENTRY_AUTH_TOKEN?: string;
+
       /** 폐기 */
       // readonly GOOGLE_CLIENT_ID: string;
       // readonly GOOGLE_SECRET_KEY: string;

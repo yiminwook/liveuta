@@ -1,0 +1,70 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var.$env-right 0 var.$env-left;
+  margin: 0 auto;
+  min-height: util.calc-inner-height(100dvh);
+
+  @include util.min-width(lg) {
+    width: 80vw;
+  }
+}
+
+.tile {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  
+  &::after {
+    display: block;
+    content: '';
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    background-color: var(--liveuta-main);
+    background-image: var(--liveuta-bg-patten);
+    transition: background-color 0.2s var.$bezier-curve, background-image 0.2s var.$bezier-curve;
+
+    @include util.min-width(lg) {
+      width: 80vw;
+    }
+  }
+}
+
+.sideBg {
+  display: none;
+  position: fixed;
+  top: 0;
+  height: 100lvh;
+  margin: 0;
+  background-size: cover;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* 그라데이션 높이 조정 */
+    height: 30lvh;
+    background: linear-gradient(to bottom, transparent, var(--liveuta-main));
+  }
+
+  @include util.min-width(lg) {
+    display: block;
+  }
+
+  &:global(.left) {
+    left: 0;
+    background-image: var(--liveuta-bg-left-url);
+    background-position: var(--liveuta-bg-left-position);
+  }
+
+  &:global(.right) {
+    right: 0;
+    background-image: var(--liveuta-bg-right-url);
+    background-position: var(--liveuta-bg-right-position);
+  }
+}

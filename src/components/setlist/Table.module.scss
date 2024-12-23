@@ -1,0 +1,102 @@
+.table {
+  .head {
+    .headRow {
+      .time {
+        display: none;
+        visibility: hidden;
+
+        @include util.min-width(var.$mobile-boundary) {
+          display: block;
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  .body {
+    .row {
+      transition: background-color 0.2s map-get(var.$easing, default);
+
+      .cell {
+        vertical-align: middle;
+
+        p {
+          min-width: 8ch;
+          padding: 0;
+          margin: 0;
+
+          @include util.text-line(2, 1.3);
+          height: auto;
+          max-height: #{1.3 * 2}em;
+        }
+      }
+
+      .thumbnail {
+        .thumbnailButton {
+          display: grid;
+          place-items: center;
+          width: 100%;
+
+          .thumbnailBox {
+            display: grid;
+            place-items: center;
+            width: 100%;
+            min-width: 6rem;
+            max-width: 6rem;
+            border-radius: 5px;
+            overflow: hidden;
+
+            @include util.min-width(lg) {
+              max-width: 7rem;
+            }
+
+            @include util.min-width(xl) {
+              max-width: 8rem;
+            }
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+
+      .channel {
+        max-width: 8ch;
+
+        @include util.min-width(var.$mobile-boundary) {
+          max-width: auto;
+        }
+      }
+
+      .time {
+        display: none;
+        visibility: hidden;
+
+        @include util.min-width(var.$mobile-boundary) {
+          display: table-cell;
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+
+.paginationBox {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-block: 1rem;
+  overflow-x: auto;
+
+  ::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  .paginationButton {
+    padding: 0.5rem;
+    font-weight: 500;
+  }
+}
