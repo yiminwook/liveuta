@@ -9,7 +9,7 @@ import CardImage from './CardImage';
 import css from './ScheduleCard.module.scss';
 
 type SliderCardProps = {
-  content: TContentsData;
+  content: TContentsData & { isFavorite: boolean };
   isFavorite?: boolean;
   addAlarm?: (item: TContentsData) => void;
   openNewTab?: (item: TContentsData) => void;

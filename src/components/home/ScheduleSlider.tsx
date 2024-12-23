@@ -8,9 +8,8 @@ import SliderCardPlaceholder from '../common/scheduleCard/SliderCardPlaceholder'
 import css from './ScheduleSlider.module.scss';
 
 type ScheduleSliderProps = {
-  contents: TContentsData[];
+  contents: (TContentsData & { isFavorite: boolean })[];
   isLoading?: boolean;
-  whiteList?: Set<string>;
   addAlarm?: (item: TContentsData) => void;
   openNewTab?: (item: TContentsData) => void;
   addMultiView?: (item: TContentsData) => void;
@@ -26,7 +25,6 @@ export default function ScheduleSlider({
   toggleFavorite,
   addBlock,
   isLoading,
-  whiteList,
 }: ScheduleSliderProps) {
   if (isLoading) {
     return (
@@ -84,7 +82,7 @@ export default function ScheduleSlider({
               addMultiView={addMultiView}
               addBlock={addBlock}
               toggleFavorite={toggleFavorite}
-              isFavorite={whiteList?.has(item.channelId)}
+              isFavorite={item.isFavorite}
             />
           </SwiperSlide>
         );
