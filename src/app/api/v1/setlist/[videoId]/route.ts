@@ -28,7 +28,15 @@ export async function POST(req: NextRequest, props: { params: Promise<{ videoId:
       throw new CustomServerError({ statusCode: 404, message: '채널을 찾을 수 없습니다.' });
     }
 
-    await postSetlist(params.videoId, description, payload.userId, channelId, broadcastAt, title);
+    await postSetlist({
+      videoId: params.videoId,
+      description,
+      memberId: payload.userId,
+      channelId,
+      broadcastAt,
+      title,
+    });
+
     return NextResponse.json({ message: '등록되었습니다.', data: null }, { status: 201 });
   } catch (error) {
     console.error(error);
@@ -58,7 +66,15 @@ export async function PUT(req: NextRequest, props: { params: Promise<{ videoId: 
       throw new CustomServerError({ statusCode: 404, message: '채널을 찾을 수 없습니다.' });
     }
 
-    await updateSetlist(params.videoId, description, payload.userId, channelId, broadcastAt, title);
+    await updateSetlist({
+      videoId: params.videoId,
+      description,
+      memberId: payload.userId,
+      channelId,
+      broadcastAt,
+      title,
+    });
+
     return NextResponse.json({ message: '수정되었습니다.', data: null });
   } catch (error) {
     console.error(error);
