@@ -11,3 +11,15 @@ export const replaceSpecialCharacters = (string: string) => {
 export const addEscapeCharacter = (string: string) => {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 };
+
+/**
+ * 유투브 URL인지 검사
+ * https://regexr.com/8abui
+ * @param {string} url 유튜브 URL
+ * @returns {boolean} 유효한 유튜브 URL인지 여부
+ */
+export const testYoutubeUrl = (url: string) => {
+  return /^((?:https?:)?(?:\/\/)?)?((?:www|m)\.)?((?:youtube\.com|youtu.be))\/(?:embed\/|v\/|live\/|shorts\/|feeds\/api\/videos\/|watch\?v=|watch\?.+&v=)?([\w\-]{11})(\S+)?$/.test(
+    url,
+  );
+};
