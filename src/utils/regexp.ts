@@ -8,6 +8,6 @@ export const replaceSpecialCharacters = (string: string) => {
   return string.replace(/[{}[\]/?.,;:|)*~`!^-_+<>@#$%&\\=('"]/gi, '').replace(/\s{2}/gi, ' ');
 };
 
-export const addExcapeCharacter = (string: string) => {
+export const addEscapeCharacter = (string: string) => {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 };
