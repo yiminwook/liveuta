@@ -12,10 +12,8 @@ import {
   SegmentedControl,
   Select,
   Switch,
-  VariantColorsResolver,
   createTheme,
   defaultVariantColorsResolver,
-  parseThemeColor,
 } from '@mantine/core';
 import variable from '@variable';
 
