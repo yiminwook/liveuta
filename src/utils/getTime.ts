@@ -26,3 +26,15 @@ export const stringToTime = (time: dayjs.Dayjs) => {
 
   return { timestamp, korTime };
 };
+
+export const secondsToHMS = (seconds: number) => {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = Math.floor(seconds % 60);
+
+  return { h, m, s };
+};
+
+export const hmsToSeconds = (h: number, m: number, s: number) => {
+  return h * 3600 + m * 60 + s;
+};
