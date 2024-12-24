@@ -4,7 +4,7 @@ import useCachedData from '@/hooks/useCachedData';
 import { useAutoSync } from '@/hooks/useStorage';
 import { GetScheduleRes } from '@/types/api/schedule';
 import { TScheduleDto } from '@/types/dto';
-import { addExcapeCharacter } from '@/utils/regexp';
+import { addEscapeCharacter } from '@/utils/regexp';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
@@ -51,7 +51,7 @@ export default function Home({ scheduleDto, session }: HomeProps) {
       };
     }
 
-    const queryString = addExcapeCharacter(scheduleDto.query);
+    const queryString = addEscapeCharacter(scheduleDto.query);
     const queryReg = new RegExp(queryString, 'i');
 
     let allCount = 0;

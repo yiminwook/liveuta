@@ -1,0 +1,31 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .inputBox {
+    display: flex;
+    gap: 0.5rem;
+
+    .input {
+      flex: 1;
+    }
+
+    .addButton {
+      width: 2.25rem;
+      height: 2.25rem;
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+
+  .controlBox {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+  }
+}
