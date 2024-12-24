@@ -143,6 +143,15 @@ export const theme = createTheme({
   variantColorResolver(input) {
     const defaultResolvedColors = defaultVariantColorsResolver(input);
 
+    if (input.variant === 'ghost') {
+      return {
+        background: 'transparent',
+        hover: 'var(--mantine-color-default-hover)',
+        color: 'var(--mantine-color-text)',
+        border: 'none',
+      };
+    }
+
     if (input.color === 'first') {
       return {
         background: 'var(--liveuta-first-default)',
@@ -150,18 +159,14 @@ export const theme = createTheme({
         color: 'var(--mantine-color-white)',
         border: 'none',
       };
-    }
-
-    if (input.color === 'second') {
+    } else if (input.color === 'second') {
       return {
         background: 'var(--liveuta-second-default)',
         hover: 'var(--liveuta-second-light)',
         color: 'var(--mantine-color-white)',
         border: 'none',
       };
-    }
-
-    if (input.color === 'third') {
+    } else if (input.color === 'third') {
       return {
         background: 'var(--liveuta-third-default)',
         hover: 'var(--liveuta-third-light)',
