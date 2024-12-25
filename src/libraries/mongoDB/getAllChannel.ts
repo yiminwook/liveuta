@@ -46,7 +46,7 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
   const { sort, size, page, query } = dto;
   const direction = CHANNEL_ORDER_MAP[sort];
   const safeQuery = addEscapeCharacter((query || '').trim());
-  const regexforDBQuery = { name_kor: { $regex: safeQuery, $options: 'i' } };
+  const regexforDBQuery = { names: { $regex: safeQuery, $options: 'i' } };
   const skip = (page - 1) * size;
 
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
