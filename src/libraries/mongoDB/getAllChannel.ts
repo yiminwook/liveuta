@@ -74,6 +74,6 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
 export const parseChannel = (channel: TChannelDocument | null) => ({
   channelId: channel?.channel_id || 'no data',
   channelAddr: channel?.channel_addr || 'no data',
-  nameKor: channel?.names || 'no data',
+  nameKor: channel?.name_kor || 'no data',
   // handleName: channel?.handle_name || '',
 });
