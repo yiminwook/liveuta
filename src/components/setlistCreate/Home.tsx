@@ -14,7 +14,9 @@ export default function Home() {
             <UrlInput />
           </div>
           <div className={css.playerBox}>
-            <Player />
+            <div className={css.playerWrapper}>
+              <Player />
+            </div>
           </div>
           <div className={css.videoSectionInner}>
             <SetlistControlSection />

@@ -3,14 +3,6 @@
   gap: 0.5rem;
   padding-block-start: 1rem;
 
-  @include util.min-width(md) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @include util.min-width(lg) {
-    grid-template-columns: auto;
-  }
-
   @include util.min-width(xl) {
     grid-template-columns: 1fr 1fr;
   }
@@ -24,9 +16,19 @@
     }
 
     .playerBox {
-      position: relative;
-      width: 100%;
-      padding-block-start: 56.25%;
+      @include util.min-width(xl) {
+        padding-inline: 1rem;
+      }
+
+      .playerWrapper {
+        position: relative;
+        width: 100%;
+        padding-block-start: 56.25%;
+      }
     }
+  }
+
+  .tableSection {
+    padding-inline: 1rem;
   }
 }

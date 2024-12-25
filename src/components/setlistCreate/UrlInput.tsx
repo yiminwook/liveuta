@@ -4,7 +4,6 @@ import { testYoutubeUrl } from '@/utils/regexp';
 import { TextInput } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { usePlayerStore } from './Context';
-import css from './UrlInput.module.scss';
 
 export default function UrlInput() {
   const [input, setInput] = useState('');
@@ -20,7 +19,6 @@ export default function UrlInput() {
   return (
     <div>
       <TextInput
-        className={css.urlInput}
         label="YouTube URL"
         placeholder="https://www.youtube.com/watch?v=pgXpM4l_MwI"
         type="url"

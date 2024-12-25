@@ -1,6 +1,6 @@
 'use client';
 import type { HMS } from '@/types/time';
-import { hmsToSeconds } from '@/utils/getTime';
+import { hmsToSeconds, hmsToString } from '@/utils/getTime';
 import { createRef } from 'react';
 import ReactPlayer from 'react-player';
 import { create } from 'zustand';
@@ -39,6 +39,7 @@ export const usePlayerStore = create<PlayerStore>((set) => ({
       })),
   },
 }));
+export const usePlayerActions = () => usePlayerStore((state) => state.actions);
 
 type SetlistStates = {
   setlist: SetlistItem[];
@@ -47,8 +48,8 @@ type SetlistStates = {
 };
 
 type SetlistActions = {
-  addSetlist: (time: HMS, value: string) => void;
-  removeSetlist: (id: number) => void;
+  addItem: (time: HMS, value: string) => void;
+  removeItem: (id: number) => void;
   setSetlist: (setlist: SetlistItem[]) => void;
   clearSetlist: () => void;
   checkAll: (checked: boolean) => void;
@@ -57,6 +58,8 @@ type SetlistActions = {
   setItemTime: (id: number, time: { h: number; m: number; s: number }) => void;
   setItemValue: (id: number, value: string) => void;
   setItemChecked: (id: number, checked: boolean) => void;
+  clearChecked: () => void;
+  removeChecked: () => void;
 };
 
 type SetlistStore = SetlistStates & {
@@ -79,7 +82,7 @@ export const useSetlistStore = create<SetlistStore>((set) => ({
   setlistAllChecked: false,
   autoSort: false,
   actions: {
-    addSetlist: (time: HMS, value) =>
+    addItem: (time: HMS, value) =>
       set((state) => {
         const setlist = [
           ...state.setlist,
@@ -100,7 +103,7 @@ export const useSetlistStore = create<SetlistStore>((set) => ({
           setlistAllChecked: false,
         };
       }),
-    removeSetlist: (id) =>
+    removeItem: (id) =>
       set((state) => {
         const setlist = state.setlist.filter((item) => item.id !== id);
         const setlistAllChecked = setlist.every((item) => item.checked);
@@ -155,5 +158,27 @@ export const useSetlistStore = create<SetlistStore>((set) => ({
 
         return { setlist, setlistAllChecked };
       }),
+    clearChecked: () =>
+      set((state) => {
+        const setlist = [...state.setlist];
+
+        for (const item of setlist) {
+          if (item.checked) {
+            item.value = '';
+          }
+        }
+
+        return { setlist };
+      }),
+    removeChecked: () =>
+      set((state) => {
+        const setlist = state.setlist.filter((item) => !item.checked);
+        return { setlist, setlistAllChecked: false };
+      }),
   },
 }));
+export const useSetlistActions = () => useSetlistStore((state) => state.actions);
+
+export function setlistItemToString(item: SetlistItem) {
+  return `${hmsToString(item.time)} ${item.value}`;
+}
