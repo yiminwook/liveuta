@@ -1,5 +1,5 @@
 import { ITEMS_PER_PAGE, MONGODB_CHANNEL_COLLECTION, MONGODB_CHANNEL_DB } from '@/constants';
-import { TChannelData, TChannelDataWithoutNames, TChannelDocument } from '@/types/api/mongoDB';
+import { TChannelData, TChannelDocument } from '@/types/api/mongoDB';
 import { combineChannelData } from '@/utils/combineChannelData';
 import { addExcapeCharacter } from '@/utils/regexp';
 import { z } from 'zod';
@@ -10,14 +10,14 @@ export const channelDto = z.object({
   page: z.preprocess((input) => Number(input ?? 1), z.number().int().min(1)),
   size: z.preprocess((input) => Number(input ?? 1), z.number().int().min(1).max(ITEMS_PER_PAGE)),
   sort: z
-    .enum(['createdAt', 'names'])
+    .enum(['createdAt', 'name_kor'])
     .nullish()
-    .transform((value) => value || 'names'),
+    .transform((value) => value || 'name_kor'),
 });
 
 export const CHANNEL_ORDER_MAP = {
   createdAt: -1, // 최신순
-  names: 1, // 이름순
+  name_kor: 1, // 이름순
 } as const;
 
 export type TChannelDto = z.infer<typeof channelDto>;
@@ -34,12 +34,12 @@ export const getAllChannel = async (dto: TChannelDto) => {
   const direction = CHANNEL_ORDER_MAP[dto.sort];
 
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
-  const channels = await db
-    .find<TChannelData>({}, { projection: { _id: 0 } })
-    .sort(dto.sort, direction)
-    .toArray();
+  const channels = await db.find<TChannelDocument>({}).sort(dto.sort, direction).toArray();
 
-  return channels;
+  return channels.map<TChannelData>((channel) => {
+    delete channel._id;
+    return channel;
+  });
 };
 
 export const getChannelWithYoutube = async (dto: TChannelDto) => {
@@ -51,9 +51,7 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
 
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
   const channels = await db
-    .find<TChannelDataWithoutNames>(!!query ? regexforDBQuery : {}, {
-      projection: { _id: 0, names: 0 },
-    })
+    .find<TChannelDocument>(!!query ? regexforDBQuery : {})
     .sort(sort, direction)
     .skip(skip)
     .limit(size)
@@ -62,7 +60,8 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
   const total = await db.countDocuments(!!query ? regexforDBQuery : {});
   const totalPage = Math.ceil(total / size);
 
-  const channelRecord = channels.reduce<Record<string, TChannelDataWithoutNames>>((acc, curr) => {
+  const channelRecord = channels.reduce<Record<string, TChannelData>>((acc, curr) => {
+    delete curr._id;
     acc[curr.channel_id] = { ...curr };
     return acc;
   }, {});

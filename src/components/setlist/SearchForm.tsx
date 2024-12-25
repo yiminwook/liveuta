@@ -46,7 +46,7 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
             classNames={{ input: css.input }}
             value={query}
             onChange={handleQuery}
-            placeholder="채널명으로 검색"
+            placeholder="세트리스트로 검색"
           />
           <button className={css.clearButton} type="button" onClick={() => setQuery('')}>
             <TbX />

@@ -45,7 +45,7 @@ export default function Row({ setlist, channel, order }: RowProps) {
         </button>
       </Table.Td>
       <Table.Td className={cx(css.cell, css.channel)}>
-        <p>{channel?.names}</p>
+        <p>{channel?.name_kor}</p>
       </Table.Td>
       <Table.Td className={cx(css.cell, css.title)}>
         <p>{title}</p>
