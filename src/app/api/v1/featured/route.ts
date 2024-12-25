@@ -1,18 +1,18 @@
 import { MONGODB_SCHEDULE_COLLECTION, MONGODB_SCHEDULE_DB } from '@/constants';
+import dayjs from '@/libraries/dayjs';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
 import { connectMongoDB } from '@/libraries/mongoDB';
-import { ContentDocumentRaw } from '@/types/api/mongoDB';
+import { ContentDocumentWithDayjs } from '@/types/api/mongoDB';
 import { parseFeatured } from '@/utils/parseMongoDBData';
 import { NextResponse } from 'next/server';
-import dayjs from '@/libraries/dayjs';
 
 export async function GET() {
   try {
     const db = await connectMongoDB(MONGODB_SCHEDULE_DB, MONGODB_SCHEDULE_COLLECTION);
 
     const scheduleDataRaw = await db
-      .find<ContentDocumentRaw>({})
+      .find<ContentDocumentWithDayjs>({})
       .sort({ ScheduledTime: 1, ChannelName: 1 })
       .toArray();
 

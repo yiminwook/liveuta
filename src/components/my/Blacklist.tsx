@@ -22,7 +22,7 @@ export default function Blacklist({ session, channelList, blacklist }: Blacklist
   const data = [...blacklist]
     .map<TChannelData>((item) => channelList[item])
     .filter((item) => !!item)
-    .sort((a, b) => a.name_kor.localeCompare(b.name_kor));
+    .sort((a, b) => a.name_kor.localeCompare(b.name_kor)); //TODO: 점검필요
 
   return (
     <div className={css.wrap}>

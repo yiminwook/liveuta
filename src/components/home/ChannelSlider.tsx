@@ -57,7 +57,7 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
                 </HoverCard.Target>
                 <HoverCard.Dropdown>
                   <Box>
-                    <Text size="sm">{item.channelName}</Text>
+                    <Text size="sm">{item.nameKor}</Text>
                     <Text size="sm" c="dimmed">
                       {item.snippet?.title}
                     </Text>
@@ -73,7 +73,7 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
                       <Button
                         variant="light"
                         size="xs"
-                        onClick={() => navigationChannel(item.channelName)}
+                        onClick={() => navigationChannel(item.nameKor)}
                       >
                         채널로 검색하기
                       </Button>

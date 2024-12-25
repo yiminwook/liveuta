@@ -6,7 +6,6 @@ import { GetScheduleRes } from '@/types/api/schedule';
 import { TScheduleDto } from '@/types/dto';
 import { addEscapeCharacter } from '@/utils/regexp';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { Session } from 'next-auth';
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
@@ -23,7 +22,7 @@ type HomeProps = {
 
 export default function Home({ scheduleDto, session }: HomeProps) {
   const { isActive, refreshInterval } = useAutoSync();
-  const { whiteList, blackList } = useCachedData({ session });
+  const { whiteList, channelList, blackList } = useCachedData({ session });
 
   const cacheTime = isActive ? refreshInterval * 60 * 1000 : false;
 
@@ -61,7 +60,8 @@ export default function Home({ scheduleDto, session }: HomeProps) {
     let videoCount = 0;
 
     const filteredContent = data[scheduleDto.filter].filter((content) => {
-      if (!queryReg.test(content.channelName)) return false;
+      const channelNames = channelList[content.channelId]?.names.join(' ') || '';
+      if (!queryReg.test(channelNames)) return false;
       const inBlacklist = blackList.has(content.channelId);
       const inWhitelist = whiteList.has(content.channelId);
 

@@ -1,5 +1,4 @@
 import SearchInput from '@/components/common/input/SearchInput';
-import AlertModal from '@/components/common/modal/AlertModal';
 import Modal from '@/components/common/modal/Modal';
 import { useTransition } from '@/hooks/useTransition';
 import { ModalProps, useSetModalStore } from '@/stores/modal';
@@ -110,7 +109,7 @@ export default function ScheduleNavModal({
             placeholder="채널명으로 검색"
             value={query}
             onChange={onChangeQuery}
-            onEnterPress={onSearch}
+            onSubmit={onSearch}
           />
         </div>
 

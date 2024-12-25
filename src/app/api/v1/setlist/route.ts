@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     const payload = await parseAccessToken();
     const memberId = payload?.userId || 0;
     const searchParams = request.nextUrl.searchParams;
-    const query = validation.checkQuery(searchParams.get('query'));
+    const query = validation.checkQuery(searchParams.get('query')); // DESCRIPTION query
     const start = validation.checkStart(searchParams.get('start'));
     const orderType = validation.checkOrderType(searchParams.get('sort'));
     const isFavorite = validation.checkIsFavorite(searchParams.get('isFavorite'));

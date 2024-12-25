@@ -2,12 +2,12 @@ import dayjs from '@/libraries/dayjs';
 import { TChannelDto } from '@/libraries/mongoDB/getAllChannel';
 import { getYoutubeChannels } from '@/libraries/youtube';
 import { generateChannelUrl } from '@/libraries/youtube/url';
-import { TChannelData } from '@/types/api/mongoDB';
+import { TChannelListData } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
 
 /* YoutubeData API + MongoDB Channel Data */
 export const combineChannelData = async (
-  mongoDBData: Record<string, TChannelData>,
+  mongoDBData: TChannelListData,
   option: { sort: TChannelDto['sort'] },
 ): Promise<TYChannelsData[]> => {
   const idArr = Object.keys(mongoDBData);
@@ -31,7 +31,7 @@ export const combineChannelData = async (
     acc.push({
       ...curr,
       uid: channel_id,
-      channelName: name_kor,
+      nameKor: name_kor,
       createdAt,
       url: youtubeChannelUrl, // Replacing 'url' with the YouTube channel URL
       alive,
@@ -47,7 +47,7 @@ export const combineChannelData = async (
     }
 
     // Sorting combined data by channelName with English locale
-    return a.channelName.localeCompare(b.channelName, 'en', { sensitivity: 'base' });
+    return a.nameKor.localeCompare(b.nameKor, 'en', { sensitivity: 'base' });
   });
 
   return sortedChannelData;

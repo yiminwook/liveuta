@@ -35,7 +35,7 @@ export default function Client({}: Props) {
       <Divider mb={32} />
 
       <Box>
-        <Text fw="bold">채널정보</Text>
+        <Text fw="bold">메타데이터</Text>
         <p>revalidate-time 3600초</p>
         <p>API - GET: https://liveuta.vercel.app/api/v1/revalidate?tag=metadata</p>
         <Button loading={mutation.isPending} onClick={onClick('metadata')}>
