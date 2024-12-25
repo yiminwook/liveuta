@@ -22,8 +22,7 @@ export interface TChannelDocument {
 }
 
 export type TChannelData = Omit<TChannelDocument, '_id'>;
-export type TChannelDataWithoutNames = Omit<TChannelData, 'names'>;
-export type TChannelListData = Record<string, TChannelDataWithoutNames>;
+export type TChannelListData = Record<string, TChannelData>;
 
 export type ContentDocument = {
   _id?: string;
