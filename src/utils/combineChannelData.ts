@@ -23,7 +23,7 @@ export const combineChannelData = async (
   const combinedSearchData = youtubeData.items.reduce<TYChannelsData[]>((acc, curr) => {
     const id = curr.id;
     if (!(id && mongoDBData[id])) return acc;
-    const { channel_id, name_kor, createdAt, alive } = mongoDBData[id];
+    const { channel_id, names, createdAt, alive } = mongoDBData[id];
 
     // Constructing the YouTube channel URL
     const youtubeChannelUrl = generateChannelUrl(channel_id);
@@ -31,7 +31,7 @@ export const combineChannelData = async (
     acc.push({
       ...curr,
       uid: channel_id,
-      channelName: name_kor,
+      channelName: names,
       createdAt,
       url: youtubeChannelUrl, // Replacing 'url' with the YouTube channel URL
       alive,

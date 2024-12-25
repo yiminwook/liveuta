@@ -22,14 +22,14 @@ export default function Blacklist({ session, channelList, blacklist }: Blacklist
   const data = [...blacklist]
     .map<TChannelData>((item) => channelList[item])
     .filter((item) => !!item)
-    .sort((a, b) => a.name_kor.localeCompare(b.name_kor));
+    .sort((a, b) => a.names.localeCompare(b.names));
 
   return (
     <div className={css.wrap}>
       <ul className={css.list}>
         {data.map((item) => (
           <li key={item.channel_id} className={css.row}>
-            <span className={css.text}>{item.name_kor}</span>
+            <span className={css.text}>{item.names}</span>
             <button
               className={css.button}
               onClick={() => handleClick(item.channel_id)}

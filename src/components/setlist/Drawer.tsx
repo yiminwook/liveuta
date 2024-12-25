@@ -31,7 +31,7 @@ export default function Setlist() {
               <img src={drawer.thumbnailUrl} alt="setlist thumbnail"></img>
             </div>
             <div className={css.descriptionBox}>
-              <div className={css.channelName}>{drawer.channel?.name_kor}</div>
+              <div className={css.channelName}>{drawer.channel?.names}</div>
             </div>
           </div>
           <DrawerClose />

@@ -10,14 +10,14 @@ export const channelDto = z.object({
   page: z.preprocess((input) => Number(input ?? 1), z.number().int().min(1)),
   size: z.preprocess((input) => Number(input ?? 1), z.number().int().min(1).max(ITEMS_PER_PAGE)),
   sort: z
-    .enum(['createdAt', 'name_kor'])
+    .enum(['createdAt', 'names'])
     .nullish()
-    .transform((value) => value || 'name_kor'),
+    .transform((value) => value || 'names'),
 });
 
 export const CHANNEL_ORDER_MAP = {
   createdAt: -1, // 최신순
-  name_kor: 1, // 이름순
+  names: 1, // 이름순
 } as const;
 
 export type TChannelDto = z.infer<typeof channelDto>;
@@ -46,7 +46,7 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
   const { sort, size, page, query } = dto;
   const direction = CHANNEL_ORDER_MAP[sort];
   const safeQuery = addExcapeCharacter((query || '').trim());
-  const regexforDBQuery = { name_kor: { $regex: safeQuery, $options: 'i' } };
+  const regexforDBQuery = { names: { $regex: safeQuery, $options: 'i' } };
   const skip = (page - 1) * size;
 
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
@@ -74,6 +74,6 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
 export const parseChannel = (channel: TChannelDocument | null) => ({
   channelId: channel?.channel_id || 'no data',
   channelAddr: channel?.channel_addr || 'no data',
-  nameKor: channel?.name_kor || 'no data',
+  nameKor: channel?.names || 'no data',
   // handleName: channel?.handle_name || '',
 });

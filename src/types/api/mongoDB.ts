@@ -12,7 +12,7 @@ export const STAT_MAPPER = {
 export interface TChannelDocument {
   _id?: string;
   channel_id: string;
-  name_kor: string;
+  names: string;
   channel_addr: string;
   handle_name: string;
   createdAt: string;

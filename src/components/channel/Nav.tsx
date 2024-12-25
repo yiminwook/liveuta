@@ -41,10 +41,10 @@ export default function Nav() {
         <SegmentedControl
           h={40}
           mr={14}
-          value={searchParams.get('sort') || 'name_kor'}
+          value={searchParams.get('sort') || 'names'}
           onChange={(value) => handleOrderChange(value as TChannelDto['sort'])}
           data={[
-            { label: '사전순', value: 'name_kor' },
+            { label: '사전순', value: 'names' },
             { label: '등록순', value: 'createdAt' },
           ]}
         />

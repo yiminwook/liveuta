@@ -6,7 +6,7 @@ type Props = {
   searchParams: Promise<{
     page?: string;
     q?: string;
-    sort?: 'createAt' | 'name_kor';
+    sort?: 'createAt' | 'names';
   }>;
 };
 

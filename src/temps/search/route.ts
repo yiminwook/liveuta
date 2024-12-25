@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
 
     const [channelResults, contentResults] = await Promise.all([
       connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION).then((db) =>
-        db.find<ChannelDocument>({ name_kor: regexforDBQuery }).sort({ name_kor: 1 }).toArray(),
+        db.find<ChannelDocument>({ names: regexforDBQuery }).sort({ names: 1 }).toArray(),
       ),
       connectMongoDB(MONGODB_SCHEDULE_DB, MONGODB_SCHEDULE_COLLECTION).then((db) =>
         db
@@ -64,10 +64,10 @@ export async function GET(req: NextRequest) {
 
     const searchData: ChannelSheetDataType = {};
     channelResults.forEach(
-      ({ _id, channel_id, name_kor, channel_addr, handle_name, waiting }: ChannelDocument) => {
+      ({ _id, channel_id, names, channel_addr, handle_name, waiting }: ChannelDocument) => {
         if (Object.keys(searchData).length >= SEARCH_ITEMS_SIZE) return;
         if (searchData[channel_id]) return;
-        searchData[channel_id] = { uid: channel_id, channelName: name_kor, url: channel_addr };
+        searchData[channel_id] = { uid: channel_id, channelName: names, url: channel_addr };
       },
     );
     const combinedSearchDataValues = await combineChannelData(searchData);
