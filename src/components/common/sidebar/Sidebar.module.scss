@@ -45,38 +45,6 @@
   &:global(.moveLeft) {
     transform: translateX(-18rem);
   }
-
-  section {
-    padding: 3rem 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  h2 {
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  .links {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-
-    li a:hover:not(:global(.active)) {
-      transition: color 0.05s var.$bezier-curve;
-      color: var(--liveuta-txt-light);
-    }
-  }
-}
-
-.nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 1rem 0 1rem;
-  align-items: center;
 }
 
 .logoutBtnBox {
@@ -95,3 +63,11 @@
   gap: 0.5rem;
   padding: 0.5rem;
 }
+
+.nav {
+  // display: flex;
+  // justify-content: space-between;
+  padding: 0.5rem 1rem 0 1rem;
+  // align-items: center;
+}
+

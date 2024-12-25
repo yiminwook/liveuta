@@ -1,3 +1,8 @@
+:root {
+  --app-shell-header-height: #{var.$safe-header-height};
+  --app-shell-header-offset: #{var.$safe-header-height};
+}
+
 .mantine-focus-auto:focus-visible {
   outline: 2px solid util.palette(third, default);
   outline-offset: calc(0.125rem * var(--mantine-scale));
@@ -3964,25 +3969,34 @@ fieldset:disabled .m_d3ea56bb,
   width: 100%;
   padding: 8px var(--mantine-spacing-sm);
   user-select: none;
+  transition: background-color 150ms ease, color 150ms ease;
 }
 
 @media (hover: hover) {
-  :where([data-mantine-color-scheme='light']) .m_f0824112:hover {
-    background-color: var(--mantine-color-gray-0);
-  }
+  // :where([data-mantine-color-scheme='light']) .m_f0824112:hover {
+  //   background-color: var(--mantine-color-gray-0);
+  // }
 
-  :where([data-mantine-color-scheme='dark']) .m_f0824112:hover {
-    background-color: var(--mantine-color-dark-6);
+  // :where([data-mantine-color-scheme='dark']) .m_f0824112:hover {
+  //   background-color: var(--mantine-color-dark-6);
+  // }
+
+  .m_f0824112:hover {
+    background-color: util.palette(second, 25)
   }
 }
 
 @media (hover: none) {
-  :where([data-mantine-color-scheme='light']) .m_f0824112:active {
-    background-color: var(--mantine-color-gray-0);
-  }
+  // :where([data-mantine-color-scheme='light']) .m_f0824112:active {
+  //   background-color: var(--mantine-color-gray-0);
+  // }
 
-  :where([data-mantine-color-scheme='dark']) .m_f0824112:active {
-    background-color: var(--mantine-color-dark-6);
+  // :where([data-mantine-color-scheme='dark']) .m_f0824112:active {
+  //   background-color: var(--mantine-color-dark-6);
+  // }
+
+  .m_f0824112:active {
+    background-color: util.palette(third, 25)
   }
 }
 
@@ -3992,19 +4006,20 @@ fieldset:disabled .m_d3ea56bb,
 }
 
 .m_f0824112:where([data-active], [aria-current='page']) {
-  background-color: var(--nl-bg);
-  color: var(--nl-color);
+  background-color: util.palette(third, 25);
+  color: util.palette(third, default);
+  font-weight: 600;
 }
 
 @media (hover: hover) {
   .m_f0824112:where([data-active], [aria-current='page']):hover {
-    background-color: var(--nl-hover);
+    background-color: util.palette(second, 50)
   }
 }
 
 @media (hover: none) {
   .m_f0824112:where([data-active], [aria-current='page']):active {
-    background-color: var(--nl-hover);
+    background-color: util.palette(second, 25)
   }
 }
 

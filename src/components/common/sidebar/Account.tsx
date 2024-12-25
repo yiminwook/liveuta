@@ -6,13 +6,13 @@ import { useMutation } from '@tanstack/react-query';
 import classnames from 'classnames';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 import { RemoveScroll } from 'react-remove-scroll';
 import { toast } from 'sonner';
 import { useStore } from 'zustand';
+import NavItem from './NavItem';
 import css from './Sidebar.module.scss';
 
 interface AccountSidebarProps {
@@ -95,17 +95,12 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
               </button>
               <CloseButton w={40} h={40} onClick={handleClose} />
             </div>
+
             <nav className={css.nav}>
-              <ul>
-                <li>
-                  <Link href="/my">마이페이지</Link>
-                </li>
-                {session.user.userLv >= 3 && (
-                  <li>
-                    <Link href="/admin">관리자페이지</Link>
-                  </li>
-                )}
-              </ul>
+              <NavItem direction="ltr" label="마이페이지" href="/my" />
+              {session.user.userLv >= 3 && (
+                <NavItem direction="ltr" label="관리자페이지" href="/admin" />
+              )}
             </nav>
           </div>
         </div>

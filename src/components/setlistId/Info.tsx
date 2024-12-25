@@ -12,7 +12,6 @@ import axios from 'axios';
 import cx from 'classnames';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
-import Image from 'next/image';
 import Link from 'next/link';
 import { isMobile } from 'react-device-detect';
 import { BsMusicNoteList } from 'react-icons/bs';
@@ -118,15 +117,7 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
       <div className={css.infoSection}>
         <h2 className={css.title}>{setlist.title}</h2>
         <button className={css.channel} onClick={() => handleLocation(channelUrl)}>
-          <Avatar className={css.avatar}>
-            <Image
-              className={css.channelIcon}
-              src={icon}
-              alt="채널 아이콘"
-              width={38}
-              height={38}
-            />
-          </Avatar>
+          <Avatar className={css.avatar} src={icon} alt="채널 아이콘" size="md" />
           <p className={css.channelName}>{channel.nameKor}</p>
         </button>
         <br />

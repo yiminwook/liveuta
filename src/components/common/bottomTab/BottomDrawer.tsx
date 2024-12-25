@@ -1,7 +1,7 @@
-'use client';
 import { ActionIcon, SimpleGrid } from '@mantine/core';
 import classNames from 'classnames';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { JSX, useState } from 'react';
 import { GrTest } from 'react-icons/gr';
 import { LiaMicrophoneAltSolid, LiaToolsSolid } from 'react-icons/lia';
@@ -42,6 +42,7 @@ type BottomDrawerProps = {
 };
 
 export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
+  const pathname = usePathname();
   return (
     <Drawer open={isOpen} onClose={onClose}>
       <DrawerContent>
@@ -57,6 +58,7 @@ export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
                 className={classNames(css.roundBtn)}
                 component={Link}
                 href={href}
+                data-active={pathname === href}
               >
                 {icon}
                 <span>{text}</span>

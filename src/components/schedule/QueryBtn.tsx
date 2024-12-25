@@ -1,9 +1,12 @@
 'use client';
+import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
-import { Button, Popover, UnstyledButton } from '@mantine/core';
+import { Button, Popover } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { FaFilter } from 'react-icons/fa';
+import AlertModal from '../common/modal/AlertModal';
+import ConfirmModal from '../common/modal/ConfirmModal';
 import css from './QueryBtn.module.scss';
 
 type QueryButtonProps = {
@@ -14,13 +17,20 @@ export default function QueryButton({ query }: QueryButtonProps) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const modalActions = useSetModalStore();
 
-  const handleReset = () => {
-    if (confirm('검색 필터링을 초기화하시겠습니까?')) {
-      const query = new URLSearchParams(searchParams);
-      query.delete('q');
-      router.push(`${pathname}?${query.toString()}`);
-    }
+  const handleReset = async () => {
+    const result: true | undefined = await modalActions.push(ConfirmModal, {
+      id: 'reset-schedule-query',
+      props: {
+        message: '검색 필터링을 초기화하시겠습니까?',
+      },
+    });
+
+    if (!result) return;
+    const query = new URLSearchParams(searchParams);
+    query.delete('q');
+    router.push(`${pathname}?${query.toString()}`);
   };
 
   if (query === '') return null;
@@ -28,10 +38,14 @@ export default function QueryButton({ query }: QueryButtonProps) {
   return (
     <Popover withArrow arrowPosition="center">
       <Popover.Target>
-        <UnstyledButton className={css.target}>
-          <FaFilter size="1rem" />
-          <span className={css.text}>검색 필터링 중</span>
-        </UnstyledButton>
+        <Button
+          h={40}
+          bg="var(--mantine-color-body)"
+          variant="outline"
+          leftSection={<FaFilter size="1rem" />}
+        >
+          검색 필터링 중
+        </Button>
       </Popover.Target>
       <Popover.Dropdown>
         <div className={css.content}>

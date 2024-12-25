@@ -1,7 +1,7 @@
 'use client';
-import { AppShell, Burger, Button, Flex, NavLink, Text, Title } from '@mantine/core';
+import NavItem from '@/components/common/sidebar/NavItem';
+import { AppShell, Burger, Button, Flex, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconChevronRight } from '@tabler/icons-react';
 import varialble from '@variable';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -16,7 +16,6 @@ export default function Client({ children }: Props) {
 
   return (
     <AppShell
-      header={{ height: 60 }}
       navbar={{
         width: 200,
         breakpoint: 'sm',
@@ -39,25 +38,11 @@ export default function Client({ children }: Props) {
           </Flex>
         </Flex>
       </AppShell.Header>
-      <AppShell.Navbar p="md">
-        <NavLink
-          component={Link}
-          href="/admin"
-          label="관리자 홈"
-          active={pathname === '/admin'}
-          rightSection={
-            <IconChevronRight size="0.8rem" stroke={1.5} className="mantine-rotate-rtl" />
-          }
-        />
-        <NavLink
-          component={Link}
-          href="/admin/metadata"
-          label="메타데이터"
-          active={pathname === '/admin/metadata'}
-          rightSection={
-            <IconChevronRight size="0.8rem" stroke={1.5} className="mantine-rotate-rtl" />
-          }
-        />
+      <AppShell.Navbar p="xs">
+        <NavItem direction="rtl" href="/admin" label="관리자 홈" />
+        <NavItem direction="rtl" href="/admin/revalidate" label="캐시검증" />
+        <NavItem direction="rtl" href="/admin/metadata" label="메타데이터" />
+        <NavItem direction="rtl" href="/admin/member" label="멤버관리" />
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
     </AppShell>

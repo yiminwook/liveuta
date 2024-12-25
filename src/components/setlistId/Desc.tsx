@@ -120,6 +120,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
             disabled={mutateSetlist.isPending}
             value={desc}
             onChange={handleDesc}
+            minRows={5}
           />
         </div>
       </form>

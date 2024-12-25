@@ -1,4 +1,5 @@
 import { TMetadata } from '@/types';
+import { TUpdateMetadataDto } from '@/types/dto';
 import { withOracleConnection } from '../connection';
 import * as sql from './sql';
 
@@ -18,3 +19,22 @@ export const getAllMetadata = withOracleConnection(async (connection) => {
 
   return metadata as TMetadata;
 });
+
+export const updateMetadataValue = withOracleConnection(
+  async (connection, dto: TUpdateMetadataDto) => {
+    try {
+      const result = await connection.execute(sql.UPDATE_METADATA_VALUE, [dto.value, dto.key]);
+
+      if (result.rowsAffected !== 1) {
+        throw new Error('메타데이터 업데이트에 실패했습니다.');
+      }
+
+      connection.commit();
+
+      return true;
+    } catch (error) {
+      connection.rollback();
+      throw error;
+    }
+  },
+);
