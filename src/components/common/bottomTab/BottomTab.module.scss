@@ -26,6 +26,11 @@
       padding: 0.5em;
       transition: color 0.2s util.easing(default);
 
+      &[data-active='true'] {
+        color: util.palette(third, lighter);
+        border-color: util.palette(third, lighter);
+      }
+
       &:global(.converter) {
         background-color: #a8a8a8;
         color: #eeeeee;
