@@ -6,6 +6,7 @@ import { useRouter } from 'next-nprogress-bar';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { FaFilter } from 'react-icons/fa';
 import AlertModal from '../common/modal/AlertModal';
+import ConfirmModal from '../common/modal/ConfirmModal';
 import css from './QueryBtn.module.scss';
 
 type QueryButtonProps = {
@@ -19,7 +20,7 @@ export default function QueryButton({ query }: QueryButtonProps) {
   const modalActions = useSetModalStore();
 
   const handleReset = async () => {
-    const result: true | undefined = await modalActions.push(AlertModal, {
+    const result: true | undefined = await modalActions.push(ConfirmModal, {
       id: 'reset-schedule-query',
       props: {
         message: '검색 필터링을 초기화하시겠습니까?',

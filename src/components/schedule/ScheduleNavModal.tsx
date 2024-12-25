@@ -12,6 +12,7 @@ import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { FaFilter } from 'react-icons/fa';
+import ConfirmModal from '../common/modal/ConfirmModal';
 import NavTab from './NavTab';
 import css from './ScheduleNavModal.module.scss';
 import ToggleFavorite from './ToggleFavorite';
@@ -45,7 +46,7 @@ export default function ScheduleNavModal({
   };
 
   const onResetSearch = async () => {
-    const result: true | undefined = await modalActions.push(AlertModal, {
+    const result: true | undefined = await modalActions.push(ConfirmModal, {
       id: 'reset-schedule-query',
       props: {
         message: '검색 필터링을 초기화하시겠습니까?',
@@ -59,9 +60,8 @@ export default function ScheduleNavModal({
   };
 
   const onSearch = () => {
-    const trimmedQuery = query.trim();
     const params = new URLSearchParams(searchParams);
-    params.set('q', trimmedQuery);
+    params.set('q', query.trim());
     router.push(`/schedule?${params.toString()}`);
   };
 
