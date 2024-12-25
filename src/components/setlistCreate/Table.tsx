@@ -8,15 +8,19 @@ export default function Table() {
     <table className={css.table}>
       <thead>
         <tr>
-          <th className={css.headCheck}>
-            <div>
+          <th>
+            <div className={css.headCheck}>
               <CheckAll />
             </div>
           </th>
-          <th className={css.headTime}>시간</th>
-          <th>텍스트</th>
           <th>
-            <TableHeadActions />
+            <div className={css.headTime}>시간</div>
+          </th>
+          <th className={css.headValue}>텍스트</th>
+          <th>
+            <div className={css.headActions}>
+              <TableHeadActions />
+            </div>
           </th>
         </tr>
       </thead>

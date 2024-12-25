@@ -1,4 +1,5 @@
 import Background from '@/components/common/background/Background';
+import { Divider } from '@mantine/core';
 import css from './Home.module.scss';
 import Player from './Player';
 import SetlistControlSection from './SetlistControlSection';
@@ -22,6 +23,8 @@ export default function Home() {
             <SetlistControlSection />
           </div>
         </div>
+        <Divider orientation="vertical" className={css.verticalDivider} />
+        <Divider orientation="horizontal" className={css.horizontalDivider} />
         <div className={css.tableSection}>
           <Table />
         </div>

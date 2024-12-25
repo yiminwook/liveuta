@@ -1,13 +1,17 @@
 .wrap {
-  display: grid;
-  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
   padding-block-start: 1rem;
+  padding-block-end: 10rem;
 
   @include util.min-width(xl) {
-    grid-template-columns: 1fr 1fr;
+    flex-direction: row;
+    padding-block-end: unset;
   }
 
   .videoSection {
+    flex: 1;
     display: grid;
     gap: 1rem;
 
@@ -28,7 +32,25 @@
     }
   }
 
+  .horizontalDivider {
+    @include util.min-width(xl) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  .verticalDivider {
+    display: none;
+    visibility: hidden;
+
+    @include util.min-width(xl) {
+      display: block;
+      visibility: visible;
+    }
+  }
+
   .tableSection {
+    flex: 1;
     padding-inline: 1rem;
   }
 }

@@ -73,12 +73,7 @@ function sortItem(a: SetlistItem, b: SetlistItem) {
 let id = 0;
 
 export const useSetlistStore = create<SetlistStore>((set) => ({
-  setlist: [
-    { id: -1, checked: false, time: { h: 0, m: 0, s: 0 }, value: '첫 번째 곡' },
-    { id: -2, checked: false, time: { h: 0, m: 1, s: 0 }, value: '두 번째 곡' },
-    { id: -3, checked: false, time: { h: 0, m: 2, s: 0 }, value: '세 번째 곡' },
-    { id: -4, checked: false, time: { h: 3, m: 3, s: 0 }, value: '네 번째 곡' },
-  ],
+  setlist: [],
   setlistAllChecked: false,
   autoSort: false,
   actions: {
