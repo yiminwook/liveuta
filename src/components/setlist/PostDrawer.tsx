@@ -18,17 +18,13 @@ type PostDrawerProps = {
 export default function PostDrawer({ session }: PostDrawerProps) {
   return (
     <Drawer>
-      <DrawerTrigger className={css.trigger}>세트리스트 작성</DrawerTrigger>
+      <DrawerTrigger className={css.trigger}>세트리스트 업로드</DrawerTrigger>
       <DrawerContent className={css.content} classNames={{ wrapper: css.wrapper }}>
         <DrawerHeader className={css.header}>
-          <DrawerTitle className={css.title}>세트리스트 작성</DrawerTitle>
+          <DrawerTitle className={css.title}>세트리스트 업로드</DrawerTitle>
           <DrawerDescription className={css.description}>
-            <Anchor
-              href="https://uta-tools.vercel.app/ko/tools/youtube/timeline"
-              className={css.utaToolsLink}
-              size="lg"
-            >
-              우타툴즈 타임라인으로 이동
+            <Anchor href="/setlist/create" className={css.utaToolsLink} size="lg">
+              세트리스트 작성하러 가기
             </Anchor>
           </DrawerDescription>
         </DrawerHeader>
