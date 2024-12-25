@@ -22,17 +22,16 @@ export interface TChannelDocument {
 }
 
 export type TChannelData = Omit<TChannelDocument, '_id'>;
-export type TChannelListData = Record<string, TChannelData>;
-
-export type ContentDocumentRaw = Omit<ContentDocument, 'ScheduledTime'> & { ScheduledTime: Date };
+export type TChannelDataWithoutNames = Omit<TChannelData, 'names'>;
+export type TChannelListData = Record<string, TChannelDataWithoutNames>;
 
 export type ContentDocument = {
   _id?: string;
   Title: string;
   URL: string;
   ChannelName: string;
-  ScheduledTime: dayjs.Dayjs;
-  broadcastStatus: string;
+  ScheduledTime: Date;
+  broadcastStatus: isStream;
   Hide: isStream;
   isVideo: 'TRUE' | 'FALSE';
   concurrentViewers: number;
@@ -40,6 +39,10 @@ export type ContentDocument = {
   ChannelId: string;
   category: string;
   tag: string;
+};
+
+export type ContentDocumentWithDayjs = Omit<ContentDocument, '_id' | 'ScheduledTime'> & {
+  ScheduledTime: dayjs.Dayjs;
 };
 
 export type ContentsLength = {

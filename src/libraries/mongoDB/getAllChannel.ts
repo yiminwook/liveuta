@@ -1,5 +1,5 @@
 import { ITEMS_PER_PAGE, MONGODB_CHANNEL_COLLECTION, MONGODB_CHANNEL_DB } from '@/constants';
-import { TChannelData, TChannelDocument } from '@/types/api/mongoDB';
+import { TChannelData, TChannelDataWithoutNames, TChannelDocument } from '@/types/api/mongoDB';
 import { combineChannelData } from '@/utils/combineChannelData';
 import { addExcapeCharacter } from '@/utils/regexp';
 import { z } from 'zod';
@@ -34,12 +34,12 @@ export const getAllChannel = async (dto: TChannelDto) => {
   const direction = CHANNEL_ORDER_MAP[dto.sort];
 
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
-  const channels = await db.find<TChannelDocument>({}).sort(dto.sort, direction).toArray();
+  const channels = await db
+    .find<TChannelData>({}, { projection: { _id: 0 } })
+    .sort(dto.sort, direction)
+    .toArray();
 
-  return channels.map<TChannelData>((channel) => {
-    delete channel._id;
-    return channel;
-  });
+  return channels;
 };
 
 export const getChannelWithYoutube = async (dto: TChannelDto) => {
@@ -51,7 +51,9 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
 
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
   const channels = await db
-    .find<TChannelDocument>(!!query ? regexforDBQuery : {})
+    .find<TChannelDataWithoutNames>(!!query ? regexforDBQuery : {}, {
+      projection: { _id: 0, names: 0 },
+    })
     .sort(sort, direction)
     .skip(skip)
     .limit(size)
@@ -60,8 +62,7 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
   const total = await db.countDocuments(!!query ? regexforDBQuery : {});
   const totalPage = Math.ceil(total / size);
 
-  const channelRecord = channels.reduce<Record<string, TChannelData>>((acc, curr) => {
-    delete curr._id;
+  const channelRecord = channels.reduce<Record<string, TChannelDataWithoutNames>>((acc, curr) => {
     acc[curr.channel_id] = { ...curr };
     return acc;
   }, {});

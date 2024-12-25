@@ -1,10 +1,10 @@
-import { parseAllData, parseScheduledData } from '@/utils/parseMongoDBData';
 import { MONGODB_SCHEDULE_COLLECTION, MONGODB_SCHEDULE_DB } from '@/constants';
 import dayjs from '@/libraries/dayjs';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
 import { connectMongoDB } from '@/libraries/mongoDB';
-import { ContentDocumentRaw } from '@/types/api/mongoDB';
+import { ContentDocument } from '@/types/api/mongoDB';
+import { parseAllData, parseScheduledData } from '@/utils/parseMongoDBData';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
@@ -12,7 +12,7 @@ export async function GET() {
     const db = await connectMongoDB(MONGODB_SCHEDULE_DB, MONGODB_SCHEDULE_COLLECTION);
 
     const scheduleDataRaw = await db
-      .find<ContentDocumentRaw>({})
+      .find<Omit<ContentDocument, '_id'>>({}, { projection: { _id: 0 } })
       .sort({ ScheduledTime: 1, ChannelName: 1 })
       .toArray();
 

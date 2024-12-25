@@ -2,12 +2,12 @@ import dayjs from '@/libraries/dayjs';
 import { TChannelDto } from '@/libraries/mongoDB/getAllChannel';
 import { getYoutubeChannels } from '@/libraries/youtube';
 import { generateChannelUrl } from '@/libraries/youtube/url';
-import { TChannelData } from '@/types/api/mongoDB';
+import { TChannelListData } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
 
 /* YoutubeData API + MongoDB Channel Data */
 export const combineChannelData = async (
-  mongoDBData: Record<string, TChannelData>,
+  mongoDBData: TChannelListData,
   option: { sort: TChannelDto['sort'] },
 ): Promise<TYChannelsData[]> => {
   const idArr = Object.keys(mongoDBData);

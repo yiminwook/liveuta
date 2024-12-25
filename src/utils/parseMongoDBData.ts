@@ -1,16 +1,15 @@
 import dayjs from '@/libraries/dayjs';
 import { StreamCategory } from '@/types';
 import {
-  ContentDocument,
+  ContentDocumentWithDayjs,
   TContentsData,
   TParseAllDataReturn,
   TParseScheduledDataReturn,
-  isStream,
 } from '@/types/api/mongoDB';
 import { getInterval, stringToTime } from '@/utils/getTime';
 import { replaceParentheses } from '@/utils/regexp';
 
-export const parseMongoDBDocument = (doc: ContentDocument): TContentsData => {
+export const parseMongoDBDocument = (doc: ContentDocumentWithDayjs): TContentsData => {
   try {
     const { timestamp, korTime } = stringToTime(doc.ScheduledTime);
     const interval = getInterval(timestamp);
@@ -34,7 +33,7 @@ export const parseMongoDBDocument = (doc: ContentDocument): TContentsData => {
       channelId: doc.ChannelId,
       timestamp: timestamp,
       korTime: korTime,
-      isStream: doc.broadcastStatus as isStream,
+      isStream: doc.broadcastStatus,
       interval,
       isVideo: doc.isVideo === 'TRUE' ? true : false,
       viewer: doc.concurrentViewers,
@@ -49,7 +48,9 @@ export const parseMongoDBDocument = (doc: ContentDocument): TContentsData => {
   }
 };
 
-export const parseScheduledData = (documents: ContentDocument[]): TParseScheduledDataReturn => {
+export const parseScheduledData = (
+  documents: ContentDocumentWithDayjs[],
+): TParseScheduledDataReturn => {
   const scheduled: TContentsData[] = [];
   const live: TContentsData[] = [];
 
@@ -76,7 +77,7 @@ export const parseScheduledData = (documents: ContentDocument[]): TParseSchedule
   };
 };
 
-export const parseAllData = (documents: ContentDocument[]): TParseAllDataReturn => {
+export const parseAllData = (documents: ContentDocumentWithDayjs[]): TParseAllDataReturn => {
   if (!documents) throw new Error('No DataValue');
 
   const daily: TContentsData[] = [];
@@ -104,7 +105,7 @@ export const parseAllData = (documents: ContentDocument[]): TParseAllDataReturn 
   };
 };
 
-export const parseFeatured = (documents: ContentDocument[]) => {
+export const parseFeatured = (documents: ContentDocumentWithDayjs[]) => {
   const featured: TContentsData[] = [];
 
   const l = [0, 1, 0, 2, 0, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(
