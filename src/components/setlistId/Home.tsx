@@ -21,7 +21,6 @@ export default async function Home({ params }: HomeProps) {
   const session = await auth();
   const data = await getSetlistByVideoId(params.id);
   if (!data) notFound();
-  console.log(data);
   const setlist = data.setlist;
   const icon = data.channelIcon;
   const document = await getChannelById(setlist.channelId);

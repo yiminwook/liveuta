@@ -1,7 +1,7 @@
 'use client';
-import { AppShell, Burger, Button, Flex, NavLink, Text, Title } from '@mantine/core';
+import NavItem from '@/components/common/sidebar/NavItem';
+import { AppShell, Burger, Button, Flex, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconChevronRight } from '@tabler/icons-react';
 import varialble from '@variable';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -39,33 +39,12 @@ export default function Client({ children }: Props) {
         </Flex>
       </AppShell.Header>
       <AppShell.Navbar p="xs">
-        <AppShellNavItem href="/admin" label="관리자 홈" />
-        <AppShellNavItem href="/admin/revalidate" label="캐시검증" />
-        <AppShellNavItem href="/admin/metadata" label="메타데이터" />
-        <AppShellNavItem href="/admin/member" label="멤버관리" />
+        <NavItem direction="rtl" href="/admin" label="관리자 홈" />
+        <NavItem direction="rtl" href="/admin/revalidate" label="캐시검증" />
+        <NavItem direction="rtl" href="/admin/metadata" label="메타데이터" />
+        <NavItem direction="rtl" href="/admin/member" label="멤버관리" />
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
     </AppShell>
-  );
-}
-
-type AppShellNavItemProps = {
-  label: string;
-  href: string;
-  children?: React.ReactNode;
-};
-
-function AppShellNavItem({ label, href, children }: AppShellNavItemProps) {
-  const pathname = usePathname();
-  return (
-    <NavLink
-      component={Link}
-      href={href}
-      label={label}
-      active={pathname === href}
-      rightSection={<IconChevronRight size="0.8rem" stroke={1.5} className="mantine-rotate-rtl" />}
-    >
-      {children}
-    </NavLink>
   );
 }
