@@ -60,7 +60,7 @@ export default function Home({ scheduleDto, session }: HomeProps) {
     let videoCount = 0;
 
     const filteredContent = data[scheduleDto.filter].filter((content) => {
-      const channelNames = channelList[content.channelId]?.names.join(' ') || '';
+      const channelNames = channelList[content.channelId]?.names?.join(' ') || '';
       if (!queryReg.test(channelNames)) return false;
       const inBlacklist = blackList.has(content.channelId);
       const inWhitelist = whiteList.has(content.channelId);
@@ -100,7 +100,7 @@ export default function Home({ scheduleDto, session }: HomeProps) {
         video: videoCount,
       },
     };
-  }, [data, scheduleDto, whiteList, blackList]);
+  }, [data, scheduleDto, whiteList, blackList, channelList]);
 
   return (
     <>
