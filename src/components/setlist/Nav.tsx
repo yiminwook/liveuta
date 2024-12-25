@@ -1,7 +1,8 @@
 'use client';
-import { SegmentedControl } from '@mantine/core';
+import { Button, SegmentedControl } from '@mantine/core';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
+import Link from 'next/link';
 import css from './Nav.module.scss';
 import PostDrawer from './PostDrawer';
 import SearchForm from './SearchForm';
@@ -39,7 +40,17 @@ export default function Nav({ searchParams, session }: SearchFormProps) {
             { label: '작성일', value: 'create' },
           ]}
         />
-        <PostDrawer session={session} />
+        <div className={css.setlist}>
+          <PostDrawer session={session} />
+          <Button
+            className={css.createLink}
+            variant="gradient"
+            component={Link}
+            href="/setlist/create"
+          >
+            세트리스트 작성
+          </Button>
+        </div>
       </div>
       <SearchForm searchParams={searchParams} />
     </div>

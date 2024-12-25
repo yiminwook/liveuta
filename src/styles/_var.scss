@@ -123,3 +123,10 @@ $colors: (
   default-border: var(--mantine-color-default-border),
   dimmed: var(--mantine-color-dimmed)
 );
+
+$fonts: (
+  sans: var(--mantine-font-family),
+  mono: var(--font-mono),
+  serif: var(--font-serif),
+  headings: var(--mantine-font-family-headings)
+);

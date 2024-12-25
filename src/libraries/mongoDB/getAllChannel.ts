@@ -1,7 +1,7 @@
 import { ITEMS_PER_PAGE, MONGODB_CHANNEL_COLLECTION, MONGODB_CHANNEL_DB } from '@/constants';
 import { TChannelData, TChannelDocument } from '@/types/api/mongoDB';
 import { combineChannelData } from '@/utils/combineChannelData';
-import { addExcapeCharacter } from '@/utils/regexp';
+import { addEscapeCharacter } from '@/utils/regexp';
 import { z } from 'zod';
 import { connectMongoDB } from './';
 
@@ -45,8 +45,8 @@ export const getAllChannel = async (dto: TChannelDto) => {
 export const getChannelWithYoutube = async (dto: TChannelDto) => {
   const { sort, size, page, query } = dto;
   const direction = CHANNEL_ORDER_MAP[sort];
-  const safeQuery = addExcapeCharacter((query || '').trim());
-  const regexforDBQuery = { names: { $regex: safeQuery, $options: 'i' } };
+  const safeQuery = addEscapeCharacter((query || '').trim());
+  const regexforDBQuery = { name_kor: { $regex: safeQuery, $options: 'i' } };
   const skip = (page - 1) * size;
 
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);

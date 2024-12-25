@@ -2,6 +2,7 @@
 import {
   ActionIcon,
   ButtonProps,
+  Checkbox,
   MantineTheme,
   MantineTransition,
   Menu,
@@ -12,10 +13,8 @@ import {
   SegmentedControl,
   Select,
   Switch,
-  VariantColorsResolver,
   createTheme,
   defaultVariantColorsResolver,
-  parseThemeColor,
 } from '@mantine/core';
 import variable from '@variable';
 
@@ -46,25 +45,9 @@ export const theme = createTheme({
   },
   colors: {},
   components: {
-    Radio: Radio.extend({
+    ActionIcon: ActionIcon.extend({
       defaultProps: {
         color: variable.thirdColorDefault,
-      },
-    }),
-    Switch: Switch.extend({
-      defaultProps: {
-        color: variable.thirdColorDefault,
-      },
-    }),
-    Select: Select.extend({
-      defaultProps: {
-        comboboxProps: {
-          transitionProps: {
-            transition: OPEN_MENU_TRANSITION,
-            timingFunction: 'ease-out',
-            duration: 300,
-          },
-        },
       },
     }),
     Button: {
@@ -88,21 +71,9 @@ export const theme = createTheme({
         color: variable.thirdColorDefault,
       },
     },
-    ActionIcon: ActionIcon.extend({
+    Checkbox: Checkbox.extend({
       defaultProps: {
         color: variable.thirdColorDefault,
-      },
-    }),
-    SegmentedControl: SegmentedControl.extend({
-      styles: {
-        root: {
-          boxShadow: '0px 0px 0px 1px var(--mantine-color-default-border)',
-        },
-      },
-      defaultProps: {
-        color: variable.thirdColorDefault,
-        transitionTimingFunction: 'ease-out',
-        transitionDuration: 300,
       },
     }),
     Menu: Menu.extend({
@@ -112,13 +83,6 @@ export const theme = createTheme({
           timingFunction: 'ease-out',
           duration: 300,
         },
-      },
-    }),
-    Pagination: Pagination.extend({
-      defaultProps: {
-        color: variable.thirdColorDefault,
-        siblings: 2,
-        withEdges: true, // Show first/last controls
       },
     }),
     Modal: Modal.extend({
@@ -139,9 +103,58 @@ export const theme = createTheme({
         },
       },
     }),
+    Pagination: Pagination.extend({
+      defaultProps: {
+        color: variable.thirdColorDefault,
+        siblings: 2,
+        withEdges: true, // Show first/last controls
+      },
+    }),
+    Radio: Radio.extend({
+      defaultProps: {
+        color: variable.thirdColorDefault,
+      },
+    }),
+    SegmentedControl: SegmentedControl.extend({
+      styles: {
+        root: {
+          boxShadow: '0px 0px 0px 1px var(--mantine-color-default-border)',
+        },
+      },
+      defaultProps: {
+        color: variable.thirdColorDefault,
+        transitionTimingFunction: 'ease-out',
+        transitionDuration: 300,
+      },
+    }),
+    Select: Select.extend({
+      defaultProps: {
+        comboboxProps: {
+          transitionProps: {
+            transition: OPEN_MENU_TRANSITION,
+            timingFunction: 'ease-out',
+            duration: 300,
+          },
+        },
+      },
+    }),
+    Switch: Switch.extend({
+      defaultProps: {
+        color: variable.thirdColorDefault,
+      },
+    }),
   },
   variantColorResolver(input) {
     const defaultResolvedColors = defaultVariantColorsResolver(input);
+
+    if (input.variant === 'ghost') {
+      return {
+        background: 'transparent',
+        hover: 'var(--mantine-color-default-hover)',
+        color: 'var(--mantine-color-text)',
+        border: 'none',
+      };
+    }
 
     if (input.color === 'first') {
       return {
@@ -150,18 +163,14 @@ export const theme = createTheme({
         color: 'var(--mantine-color-white)',
         border: 'none',
       };
-    }
-
-    if (input.color === 'second') {
+    } else if (input.color === 'second') {
       return {
         background: 'var(--liveuta-second-default)',
         hover: 'var(--liveuta-second-light)',
         color: 'var(--mantine-color-white)',
         border: 'none',
       };
-    }
-
-    if (input.color === 'third') {
+    } else if (input.color === 'third') {
       return {
         background: 'var(--liveuta-third-default)',
         hover: 'var(--liveuta-third-light)',

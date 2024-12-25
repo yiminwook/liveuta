@@ -1,0 +1,26 @@
+.player {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: map-get(var.$colors, dimmed);
+
+  @include util.min-width(xl) {
+    border-radius: 0.5rem;
+  }
+}
+
+.imageBox {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  inset: 0;
+  background-color: map-get(var.$colors, dimmed);
+
+  @include util.min-width(xl) {
+    border-radius: 0.5rem;
+  }
+
+  .image {
+    object-fit: cover;
+  }
+}

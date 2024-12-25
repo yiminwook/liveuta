@@ -1,0 +1,122 @@
+.table {
+  text-indent: 0;
+  border-color: inherit;
+  border-collapse: collapse;
+
+  width: 100%;
+  thead {
+    tr {
+      border-block-end: 1px solid map-get(var.$colors, default-border);
+
+      th {
+        padding: 0.5rem;
+      }
+
+      .headCheck {
+        width: 2rem;
+      }
+
+      .headTime {
+        width: 6rem;
+      }
+
+      .headValue {
+        width: 100%;
+      }
+
+      .headActions {
+        width: 152px;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-block-end: 1px solid map-get(var.$colors, default-border);
+      transition: background-color 0.2s map-get(var.$easing, default);
+
+      &:hover {
+        background-color: map-get(var.$colors, default-hover);
+      }
+
+      &:last-child {
+        border-block-end: unset;
+      }
+
+      td {
+        padding: 0.5rem;
+      }
+
+      .rowTime {
+        display: flex;
+        justify-content: flex-end;
+
+        .popoverTrigger {
+          font-family: map-get(var.$fonts, mono);
+        }
+      }
+
+      .rowInput {
+        width: 100%;
+      }
+
+      .rowActions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        .rowGrip {
+          display: grid;
+          place-items: center;
+          cursor: grab;
+        }
+      }
+    }
+  }
+}
+
+.timePopover {
+  display: flex;
+  gap: 0.5rem;
+
+  .timeInput {
+    display: grid;
+
+    span {
+      font-size: 0.875rem;
+      color: map-get(var.$colors, dimmed);
+    }
+
+    input {
+      padding: 0.25rem 0.5rem;
+      border-radius: 5px;
+      outline: none;
+      border: 1px solid map-get(var.$colors, default-border);
+
+      &:focus {
+        border-color: util.palette(third, default);
+      }
+    }
+  }
+}
+
+.actionButtons {
+  flex: 1;
+  display: flex;
+  transition: background-color 0.2s map-get(var.$easing, default);
+
+  .actionButton {
+    &:hover {
+      background-color: map-get(var.$gray-colors, 2);
+    }
+
+    [data-mantine-color-scheme='dark'] &:hover {
+      background-color: map-get(var.$dark-colors, 3);
+    }
+  }
+
+  .emptyIcon {
+    width: 28px;
+    height: 28px;
+  }
+}

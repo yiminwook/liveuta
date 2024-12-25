@@ -12,9 +12,15 @@
   .left {
     display: flex;
     justify-content: space-between;
+    gap: 0.5rem;
 
-    @include util.min-width(var.$mobile-boundary) {
+    .setlist {
+      display: flex;
       gap: 0.5rem;
+
+      .createLink {
+        height: 100%;
+      }
     }
   }
 }
