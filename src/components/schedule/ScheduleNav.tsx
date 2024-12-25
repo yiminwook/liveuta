@@ -13,7 +13,6 @@ import NavTab from './NavTab';
 import QueryButton from './QueryBtn';
 import css from './ScheduleNav.module.scss';
 import ToggleFavorite from './ToggleFavorite';
-import VideoTypeSelect from './VideoTypeSelect';
 
 type NavSectionProps = {
   session: Session | null;
@@ -33,8 +32,7 @@ export default function ScheduleNav({ session, scheduleDto, length }: NavSection
   const clickFavorite = () => {
     const query = new URLSearchParams(searchParams);
     query.set('isFavorite', String(!scheduleDto.isFavorite));
-    const url = `/schedule?${query.toString()}`;
-    router.push(url);
+    router.push(`/schedule?${query.toString()}`);
   };
 
   return (
@@ -60,7 +58,6 @@ export default function ScheduleNav({ session, scheduleDto, length }: NavSection
       </div>
       <div className={css.right}>
         <QueryButton query={scheduleDto.query} />
-        <VideoTypeSelect select={scheduleDto.select} length={length} />
         <MobileNavButton scheduleDto={scheduleDto} length={length} />
       </div>
     </nav>

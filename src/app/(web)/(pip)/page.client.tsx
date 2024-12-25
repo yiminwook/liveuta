@@ -137,8 +137,6 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
   return (
     <main className={css.homeMain}>
       <section className={css.heroSection}>
-        {/* 임시대문 AM 08:00 자동갱신 */}
-        {/* TODO: Admin에서 대문 이미지 변경 기능 추가 */}
         <div className={css.coverImageBox}>
           <Image className="blur" src={coverImgUrl} alt="blur-image" fill />
           <Image src={coverImgUrl} alt="cover-image" fill />

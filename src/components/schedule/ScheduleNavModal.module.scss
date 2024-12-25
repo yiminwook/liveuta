@@ -1,0 +1,45 @@
+.content {
+  display: flex;
+  flex-direction: column;
+};
+
+.contentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navTabBox {
+  display: flex;
+  align-items: center;
+
+  & > button {
+    margin-right: 0.5rem;
+  }
+}
+
+.searchBox {
+  margin-top: 2rem;
+
+  .queryStatBox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  
+    & > svg {
+      margin-right: 0.5rem;
+    }
+
+    & > span {
+      margin-right: 1rem;
+    }
+
+    & > button {
+      flex-shrink: 0;
+    }
+  }
+}
+
+.vidioTypeBox {
+  margin-top: 2rem;
+}

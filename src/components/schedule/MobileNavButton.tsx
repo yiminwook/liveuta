@@ -4,8 +4,8 @@ import { FilterText, SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import { Button } from '@mantine/core';
 import { BsSliders } from 'react-icons/bs';
-import MobileNavModal from '../common/modal/MobileNavModal';
 import css from './ScheduleNav.module.scss';
+import ScheduleNavModal from './ScheduleNavModal';
 
 type MobileNavButtonProps = {
   length: {
@@ -20,7 +20,7 @@ export default function MobileNavButton({ length, scheduleDto }: MobileNavButton
   const modalStore = useSetModalStore();
 
   const handleOpen = async () => {
-    await modalStore.push(MobileNavModal, {
+    await modalStore.push(ScheduleNavModal, {
       props: {
         scheduleDto,
         length,
