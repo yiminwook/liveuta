@@ -9,7 +9,7 @@ type SearchInputProps = {
   value?: string;
   placeholder?: string;
   onChange?: ChangeEventHandler;
-  onEnterPress?: () => void;
+  onSubmit?: () => void;
   disabled?: boolean;
 };
 
@@ -18,10 +18,10 @@ export default function SearchInput({
   value,
   placeholder,
   onChange,
-  onEnterPress = () => {},
+  onSubmit = () => {},
   disabled,
 }: SearchInputProps) {
-  const hotkeyRef = useHotkeys<HTMLDivElement>('enter', onEnterPress, {
+  const hotkeyRef = useHotkeys<HTMLDivElement>('enter', onSubmit, {
     enableOnFormTags: ['INPUT'],
   });
 
@@ -37,7 +37,13 @@ export default function SearchInput({
         onChange={onChange}
         defaultValue={defaultValue}
       />
-      <ActionIcon className={css.submitButton} variant="filled" radius="xl" disabled={disabled}>
+      <ActionIcon
+        className={css.submitButton}
+        variant="filled"
+        radius="xl"
+        disabled={disabled}
+        onClick={onSubmit}
+      >
         <IoMdMusicalNote color="#fff" />
       </ActionIcon>
     </Input.Wrapper>

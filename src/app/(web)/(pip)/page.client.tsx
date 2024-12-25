@@ -190,7 +190,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
             placeholder="채널명으로 검색"
             value={query}
             onChange={onChangeQuery}
-            onEnterPress={onSearch}
+            onSubmit={onSearch}
           />
         </div>
       </section>
