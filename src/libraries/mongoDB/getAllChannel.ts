@@ -34,12 +34,12 @@ export const getAllChannel = async (dto: TChannelDto) => {
   const direction = CHANNEL_ORDER_MAP[dto.sort];
 
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
-  const channels = await db.find<TChannelDocument>({}).sort(dto.sort, direction).toArray();
+  const channels = await db
+    .find<TChannelData>({}, { projection: { _id: 0 } })
+    .sort(dto.sort, direction)
+    .toArray();
 
-  return channels.map<TChannelData>((channel) => {
-    delete channel._id;
-    return channel;
-  });
+  return channels;
 };
 
 export const getChannelWithYoutube = async (dto: TChannelDto) => {
@@ -51,7 +51,9 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
 
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
   const channels = await db
-    .find<TChannelDocument>(!!query ? regexforDBQuery : {})
+    .find<TChannelData>(!!query ? regexforDBQuery : {}, {
+      projection: { _id: 0 },
+    })
     .sort(sort, direction)
     .skip(skip)
     .limit(size)
@@ -61,7 +63,6 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
   const totalPage = Math.ceil(total / size);
 
   const channelRecord = channels.reduce<Record<string, TChannelData>>((acc, curr) => {
-    delete curr._id;
     acc[curr.channel_id] = { ...curr };
     return acc;
   }, {});
