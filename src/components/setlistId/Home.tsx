@@ -21,6 +21,7 @@ export default async function Home({ params }: HomeProps) {
   const session = await auth();
   const data = await getSetlistByVideoId(params.id);
   if (!data) notFound();
+  console.log(data);
   const setlist = data.setlist;
   const icon = data.channelIcon;
   const document = await getChannelById(setlist.channelId);
@@ -29,7 +30,14 @@ export default async function Home({ params }: HomeProps) {
     <Background>
       <div className={css.inner}>
         <section className={css.left}>
-          <Image src={character} alt="캐릭터 이미지" width={150} height={224} unoptimized={true} />
+          <Image
+            className={css.character}
+            src={character}
+            alt="캐릭터 이미지"
+            width={150}
+            height={224}
+            unoptimized={true}
+          />
           <div className={css.playerWrap}>
             <SetlistPlayer videoId={setlist.videoId} />
           </div>
