@@ -1,3 +1,8 @@
+:root {
+  --app-shell-header-height: #{var.$safe-header-height};
+  --app-shell-header-offset: #{var.$safe-header-height};
+}
+
 .mantine-focus-auto:focus-visible {
   outline: 2px solid util.palette(third, default);
   outline-offset: calc(0.125rem * var(--mantine-scale));

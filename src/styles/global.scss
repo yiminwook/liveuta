@@ -127,9 +127,9 @@ a {
   outline: util.palette(third, default) auto 1px;
 }
 
-.essential {
-  content: '*';
-  color: var(--mantine-color-red);
+.essential::before {
+  content: '* ';
+  color: var(--mantine-color-red-5);
 }
 
 .blind {

@@ -23,3 +23,9 @@ export const scheduleDto = z.object({
     .nullish()
     .transform((v) => v === 'true'),
 });
+
+export type TUpdateMetadataDto = z.infer<typeof UpdateMetadataDto>;
+export const UpdateMetadataDto = z.object({
+  key: z.string(),
+  value: z.string(),
+});

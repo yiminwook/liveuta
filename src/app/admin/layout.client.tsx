@@ -16,7 +16,6 @@ export default function Client({ children }: Props) {
 
   return (
     <AppShell
-      header={{ height: 60 }}
       navbar={{
         width: 200,
         breakpoint: 'sm',
@@ -39,27 +38,34 @@ export default function Client({ children }: Props) {
           </Flex>
         </Flex>
       </AppShell.Header>
-      <AppShell.Navbar p="md">
-        <NavLink
-          component={Link}
-          href="/admin"
-          label="관리자 홈"
-          active={pathname === '/admin'}
-          rightSection={
-            <IconChevronRight size="0.8rem" stroke={1.5} className="mantine-rotate-rtl" />
-          }
-        />
-        <NavLink
-          component={Link}
-          href="/admin/metadata"
-          label="메타데이터"
-          active={pathname === '/admin/metadata'}
-          rightSection={
-            <IconChevronRight size="0.8rem" stroke={1.5} className="mantine-rotate-rtl" />
-          }
-        />
+      <AppShell.Navbar p="xs">
+        <AppShellNavItem href="/admin" label="관리자 홈" />
+        <AppShellNavItem href="/admin/revalidate" label="캐시검증" />
+        <AppShellNavItem href="/admin/metadata" label="메타데이터" />
+        <AppShellNavItem href="/admin/member" label="멤버관리" />
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
     </AppShell>
+  );
+}
+
+type AppShellNavItemProps = {
+  label: string;
+  href: string;
+  children?: React.ReactNode;
+};
+
+function AppShellNavItem({ label, href, children }: AppShellNavItemProps) {
+  const pathname = usePathname();
+  return (
+    <NavLink
+      component={Link}
+      href={href}
+      label={label}
+      active={pathname === href}
+      rightSection={<IconChevronRight size="0.8rem" stroke={1.5} className="mantine-rotate-rtl" />}
+    >
+      {children}
+    </NavLink>
   );
 }
