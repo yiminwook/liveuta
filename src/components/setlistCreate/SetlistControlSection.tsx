@@ -1,23 +1,22 @@
 'use client';
 import { secondsToHMS } from '@/utils/getTime';
+import { hmsToString } from '@/utils/getTime';
 import { testYoutubeUrl } from '@/utils/regexp';
 import { ActionIcon, Button, Checkbox, TextInput } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { TbCirclePlus } from 'react-icons/tb';
 import { toast } from 'sonner';
-import { timeToString, useSetlistStore } from './Context';
+import { usePlayerStore, useSetlistStore } from './Context';
 import css from './SetlistControlSection.module.scss';
 
 export default function SetlistControlSection() {
   const [input, setInput] = useState('');
-  const playerRef = useSetlistStore((state) => state.playerRef);
-  const playerReady = useSetlistStore((state) => state.playerReady);
-  const setUrl = useSetlistStore((state) => state.setUrl);
+  const playerRef = usePlayerStore((state) => state.playerRef);
+  const playerReady = usePlayerStore((state) => state.playerReady);
+  const { setUrl } = usePlayerStore((state) => state.actions);
   const setlist = useSetlistStore((state) => state.setlist);
-  const addSetlist = useSetlistStore((state) => state.addSetlist);
-  const sortSetlist = useSetlistStore((state) => state.sortSetlist);
   const autoSort = useSetlistStore((state) => state.autoSort);
-  const setAutoSort = useSetlistStore((state) => state.setAutoSort);
+  const { addSetlist, setAutoSort, sortSetlist } = useSetlistStore((state) => state.actions);
 
   useEffect(() => {
     if (playerReady) {
@@ -53,7 +52,7 @@ export default function SetlistControlSection() {
     let str = '';
 
     for (const item of setlist) {
-      str += `${timeToString(item.time)} ${item.value}\n`;
+      str += `${hmsToString(item.time)} ${item.value}\n`;
     }
 
     if (str === '') {

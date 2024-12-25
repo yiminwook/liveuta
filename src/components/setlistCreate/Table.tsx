@@ -3,7 +3,6 @@
 import For from '@/components/common/utils/For';
 import { Checkbox } from '@mantine/core';
 import { Reorder } from 'framer-motion';
-import { useState } from 'react';
 import { useSetlistStore } from './Context';
 import css from './Table.module.scss';
 import TableRow from './TableRow';
@@ -11,8 +10,7 @@ import TableRow from './TableRow';
 export default function Table() {
   const setlist = useSetlistStore((state) => state.setlist);
   const allChecked = useSetlistStore((state) => state.setlistAllChecked);
-  const checkAll = useSetlistStore((state) => state.checkAll);
-  const setSetlist = useSetlistStore((state) => state.setSetlist);
+  const { checkAll, setSetlist } = useSetlistStore((state) => state.actions);
 
   return (
     <>

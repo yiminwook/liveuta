@@ -1,5 +1,4 @@
 import Background from '@/components/common/background/Background';
-import cx from 'classnames';
 import css from './Home.module.scss';
 import Player from './Player';
 import SetlistControlSection from './SetlistControlSection';
@@ -17,7 +16,7 @@ export default function Home() {
           <div className={css.playerBox}>
             <Player />
           </div>
-          <div className={cx(css.videoSectionInner, css.videoSectionInner)}>
+          <div className={css.videoSectionInner}>
             <SetlistControlSection />
           </div>
         </div>
