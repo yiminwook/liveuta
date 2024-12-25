@@ -1,4 +1,5 @@
 import dayjs from '@/libraries/dayjs';
+import { HMS } from '@/types/time';
 
 export const getInterval = (scheduledTimeStamp: number): string => {
   const nowTimeStamp = dayjs.tz().valueOf();
@@ -35,6 +36,14 @@ export const secondsToHMS = (seconds: number) => {
   return { h, m, s };
 };
 
-export const hmsToSeconds = (h: number, m: number, s: number) => {
-  return h * 3600 + m * 60 + s;
+export const hmsToSeconds = (hms: HMS) => {
+  return hms.h * 3600 + hms.m * 60 + hms.s;
 };
+
+export function hmsToString(hms: HMS) {
+  const formattedHour = hms.h === 0 ? '' : `${hms.h}:`.padStart(3, '0');
+  const formattedMinute = `${hms.m}`.padStart(2, '0');
+  const formattedSecond = `${hms.s}`.padStart(2, '0');
+
+  return `${formattedHour}${formattedMinute}:${formattedSecond}`;
+}
