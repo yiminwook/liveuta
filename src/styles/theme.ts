@@ -2,6 +2,7 @@
 import {
   ActionIcon,
   ButtonProps,
+  Checkbox,
   MantineTheme,
   MantineTransition,
   Menu,
@@ -44,25 +45,9 @@ export const theme = createTheme({
   },
   colors: {},
   components: {
-    Radio: Radio.extend({
+    ActionIcon: ActionIcon.extend({
       defaultProps: {
         color: variable.thirdColorDefault,
-      },
-    }),
-    Switch: Switch.extend({
-      defaultProps: {
-        color: variable.thirdColorDefault,
-      },
-    }),
-    Select: Select.extend({
-      defaultProps: {
-        comboboxProps: {
-          transitionProps: {
-            transition: OPEN_MENU_TRANSITION,
-            timingFunction: 'ease-out',
-            duration: 300,
-          },
-        },
       },
     }),
     Button: {
@@ -86,21 +71,9 @@ export const theme = createTheme({
         color: variable.thirdColorDefault,
       },
     },
-    ActionIcon: ActionIcon.extend({
+    Checkbox: Checkbox.extend({
       defaultProps: {
         color: variable.thirdColorDefault,
-      },
-    }),
-    SegmentedControl: SegmentedControl.extend({
-      styles: {
-        root: {
-          boxShadow: '0px 0px 0px 1px var(--mantine-color-default-border)',
-        },
-      },
-      defaultProps: {
-        color: variable.thirdColorDefault,
-        transitionTimingFunction: 'ease-out',
-        transitionDuration: 300,
       },
     }),
     Menu: Menu.extend({
@@ -110,13 +83,6 @@ export const theme = createTheme({
           timingFunction: 'ease-out',
           duration: 300,
         },
-      },
-    }),
-    Pagination: Pagination.extend({
-      defaultProps: {
-        color: variable.thirdColorDefault,
-        siblings: 2,
-        withEdges: true, // Show first/last controls
       },
     }),
     Modal: Modal.extend({
@@ -135,6 +101,46 @@ export const theme = createTheme({
           duration: 0,
           timingFunction: '',
         },
+      },
+    }),
+    Pagination: Pagination.extend({
+      defaultProps: {
+        color: variable.thirdColorDefault,
+        siblings: 2,
+        withEdges: true, // Show first/last controls
+      },
+    }),
+    Radio: Radio.extend({
+      defaultProps: {
+        color: variable.thirdColorDefault,
+      },
+    }),
+    SegmentedControl: SegmentedControl.extend({
+      styles: {
+        root: {
+          boxShadow: '0px 0px 0px 1px var(--mantine-color-default-border)',
+        },
+      },
+      defaultProps: {
+        color: variable.thirdColorDefault,
+        transitionTimingFunction: 'ease-out',
+        transitionDuration: 300,
+      },
+    }),
+    Select: Select.extend({
+      defaultProps: {
+        comboboxProps: {
+          transitionProps: {
+            transition: OPEN_MENU_TRANSITION,
+            timingFunction: 'ease-out',
+            duration: 300,
+          },
+        },
+      },
+    }),
+    Switch: Switch.extend({
+      defaultProps: {
+        color: variable.thirdColorDefault,
       },
     }),
   },
