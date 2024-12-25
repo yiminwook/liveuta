@@ -35,7 +35,7 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
   );
 
   useHotkeys(
-    'space',
+    'backspace',
     () => {
       toast.info(`플레이어 ${store.isPlaying ? '정지' : '재생'}`);
       store.actions.toggleIsPlaying();
