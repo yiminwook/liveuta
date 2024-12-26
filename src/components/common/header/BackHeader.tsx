@@ -1,6 +1,5 @@
 import { ROUTES } from '@/constants';
 import { Breadcrumbs, Menu, UnstyledButton } from '@mantine/core';
-import { IconArrowNarrowLeft } from '@tabler/icons-react';
 import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
@@ -27,7 +26,7 @@ export default function BackHeader() {
   return (
     <header className={css.wrap}>
       <UnstyledButton mr={16} className={css.backBtn} onClick={navigateBack}>
-        <IconArrowNarrowLeft size="2rem" color={variable.thirdColorDefault} />
+        <IconTbArrowNarrowLeft width="2rem" color={variable.thirdColorDefault} />
         <span>돌아가기</span>
       </UnstyledButton>
       <Breadcrumbs separatorMargin="md" color={variable.thirdColorDefault}>
