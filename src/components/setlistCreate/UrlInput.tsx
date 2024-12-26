@@ -17,14 +17,12 @@ export default function UrlInput() {
   }, [debouncedUrl]);
 
   return (
-    <div>
-      <TextInput
-        label="YouTube URL"
-        placeholder="https://www.youtube.com/watch?v=pgXpM4l_MwI"
-        type="url"
-        value={input}
-        onInput={(e) => setInput(e.currentTarget.value)}
-      />
-    </div>
+    <TextInput
+      label="YouTube URL"
+      placeholder="https://www.youtube.com/watch?v=pgXpM4l_MwI"
+      type="url"
+      value={input}
+      onInput={(e) => setInput(e.currentTarget.value)}
+    />
   );
 }

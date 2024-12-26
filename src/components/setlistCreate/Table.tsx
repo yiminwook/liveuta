@@ -1,7 +1,6 @@
-import CheckAll from './CheckAll';
 import css from './Table.module.scss';
 import TableBody from './TableBody';
-import TableHeadActions from './TableHeadActions';
+import { CheckAll, TableHeadActions } from './TableHeadActions';
 
 export default function Table() {
   return (

@@ -3,6 +3,7 @@ import type { HMS } from '@/types/time';
 import { hmsToSeconds, hmsToString } from '@/utils/getTime';
 import { createRef } from 'react';
 import ReactPlayer from 'react-player';
+import { toast } from 'sonner';
 import { create } from 'zustand';
 
 export type SetlistItem = {
@@ -176,4 +177,10 @@ export const useSetlistActions = () => useSetlistStore((state) => state.actions)
 
 export function setlistItemToString(item: SetlistItem) {
   return `${hmsToString(item.time)} ${item.value}`;
+}
+
+export function copy(setlist: SetlistItem[]) {
+  const text = setlist.map((item) => setlistItemToString(item)).join('\n');
+  navigator.clipboard.writeText(text);
+  toast('세트 리스트를 복사하였습니다');
 }

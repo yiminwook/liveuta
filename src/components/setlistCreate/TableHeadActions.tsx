@@ -1,24 +1,36 @@
 'use client';
 import { ActionIcon } from '@mantine/core';
+import { Checkbox } from '@mantine/core';
 import cx from 'classnames';
 import { TbCopy, TbX } from 'react-icons/tb';
 import { VscClearAll } from 'react-icons/vsc';
-import { toast } from 'sonner';
-import { setlistItemToString, useSetlistActions, useSetlistStore } from './Context';
+import { useShallow } from 'zustand/react/shallow';
+import { copy, useSetlistActions, useSetlistStore } from './Context';
 import css from './Table.module.scss';
 
-export default function TableHeadActions() {
-  const setlist = useSetlistStore((state) => state.setlist);
-  const { clearChecked, removeChecked } = useSetlistActions();
+export function CheckAll() {
+  const allChecked = useSetlistStore((state) => state.setlistAllChecked);
+  const { checkAll } = useSetlistStore((state) => state.actions);
 
-  function copy() {
-    const text = setlist
-      .filter((item) => item.checked)
-      .map((item) => setlistItemToString(item))
-      .join('\n');
-    navigator.clipboard.writeText(text);
-    toast('선택한 세트 리스트를 복사하였습니다');
-  }
+  return <Checkbox checked={allChecked} onChange={(e) => checkAll(e.currentTarget.checked)} />;
+}
+
+function CopyButton() {
+  const setlist = useSetlistStore(useShallow((state) => state.setlist));
+
+  return (
+    <ActionIcon
+      variant="ghost"
+      className={css.actionButton}
+      onClick={() => copy(setlist.filter((item) => item.checked))}
+    >
+      <TbCopy />
+    </ActionIcon>
+  );
+}
+
+export function TableHeadActions() {
+  const { clearChecked, removeChecked } = useSetlistActions();
 
   return (
     <div className={cx(css.actionButtons, css.headActionButtons)}>
@@ -26,9 +38,7 @@ export default function TableHeadActions() {
         <VscClearAll />
       </ActionIcon>
       <div className={css.emptyIcon}></div>
-      <ActionIcon variant="ghost" className={css.actionButton} onClick={copy}>
-        <TbCopy />
-      </ActionIcon>
+      <CopyButton />
       <ActionIcon variant="ghost" className={css.actionButton} onClick={removeChecked}>
         <TbX />
       </ActionIcon>

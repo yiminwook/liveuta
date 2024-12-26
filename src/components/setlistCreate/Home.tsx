@@ -1,10 +1,11 @@
 import Background from '@/components/common/background/Background';
 import { Divider } from '@mantine/core';
+import cx from 'classnames';
 import css from './Home.module.scss';
 import Player from './Player';
-import SetlistControlSection from './SetlistControlSection';
 import Table from './Table';
 import UrlInput from './UrlInput';
+import { AutoSort, SetlistControlButtons, SetlistItemInput } from './SetlistControlSection';
 
 export default function Home() {
   return (
@@ -19,8 +20,18 @@ export default function Home() {
               <Player />
             </div>
           </div>
-          <div className={css.videoSectionInner}>
-            <SetlistControlSection />
+          <div className={cx(css.videoSectionInner, css.controlSection)}>
+            <div className={css.setlistItemInputBox}>
+              <SetlistItemInput />
+            </div>
+            <div className={css.control}>
+              <div>
+                <AutoSort />
+              </div>
+              <div className={css.buttons}>
+                <SetlistControlButtons />
+              </div>
+            </div>
           </div>
         </div>
         <Divider orientation="vertical" className={css.verticalDivider} />

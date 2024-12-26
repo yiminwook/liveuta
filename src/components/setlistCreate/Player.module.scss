@@ -22,5 +22,12 @@
 
   .image {
     object-fit: cover;
+    width: 128px;
+    height: 128px;
+
+    @include util.min-width(xl) {
+      width: 256px;
+      height: 256px;
+    }
   }
 }

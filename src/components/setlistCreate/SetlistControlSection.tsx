@@ -2,12 +2,13 @@
 import Show from '@/components/common/utils/Show';
 import { secondsToHMS } from '@/utils/getTime';
 import { testYoutubeUrl } from '@/utils/regexp';
-import { ActionIcon, Button, Checkbox, TextInput } from '@mantine/core';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ActionIcon, Button, TextInput } from '@mantine/core';
+import { Checkbox } from '@mantine/core';
+import { ChangeEvent, createRef, useEffect, useState } from 'react';
 import { TbCirclePlus } from 'react-icons/tb';
-import { toast } from 'sonner';
+import { useShallow } from 'zustand/react/shallow';
 import {
-  setlistItemToString,
+  copy,
   usePlayerActions,
   usePlayerStore,
   useSetlistActions,
@@ -15,16 +16,13 @@ import {
 } from './Context';
 import css from './SetlistControlSection.module.scss';
 
-export default function SetlistControlSection() {
+export function SetlistItemInput() {
   const [input, setInput] = useState('');
-
+  const inputRef = createRef<HTMLInputElement>();
   const playerRef = usePlayerStore((state) => state.playerRef);
   const playerReady = usePlayerStore((state) => state.playerReady);
   const { setUrl } = usePlayerActions();
-
-  const setlist = useSetlistStore((state) => state.setlist);
-  const autoSort = useSetlistStore((state) => state.autoSort);
-  const { addItem: addSetlist, setAutoSort, sortSetlist } = useSetlistActions();
+  const { addItem } = useSetlistActions();
 
   useEffect(() => {
     if (playerReady) {
@@ -45,8 +43,31 @@ export default function SetlistControlSection() {
     const currentTime = playerRef.current.getCurrentTime();
     const time = secondsToHMS(currentTime);
 
-    addSetlist(time, input);
+    addItem(time, input);
+    setInput('');
+    console.log(inputRef.current);
+    inputRef.current?.focus();
   }
+
+  return (
+    <>
+      <TextInput
+        className={css.input}
+        placeholder="Ado / Show"
+        ref={inputRef}
+        value={input}
+        onChange={(e) => setInput(e.currentTarget.value)}
+      />
+      <ActionIcon className={css.addButton} variant="ghost" onClick={handleAdd}>
+        <TbCirclePlus size={16} />
+      </ActionIcon>
+    </>
+  );
+}
+
+export function AutoSort() {
+  const autoSort = useSetlistStore((state) => state.autoSort);
+  const { setAutoSort, sortSetlist } = useSetlistActions();
 
   function handleAutoSortChecked(e: ChangeEvent<HTMLInputElement>) {
     setAutoSort(e.currentTarget.checked);
@@ -56,48 +77,20 @@ export default function SetlistControlSection() {
     }
   }
 
-  function copySetlist() {
-    let str = '';
+  return <Checkbox label="자동 정렬" checked={autoSort} onChange={handleAutoSortChecked} />;
+}
 
-    for (const item of setlist) {
-      str += `${setlistItemToString(item)}\n`;
-    }
-
-    str.trimEnd();
-
-    if (str === '') {
-      toast('세트 리스트가 비어있습니다');
-      return;
-    }
-
-    navigator.clipboard.writeText(str);
-    toast('세트 리스트를 복사하였습니다');
-  }
+export function SetlistControlButtons() {
+  const setlist = useSetlistStore(useShallow((state) => state.setlist));
+  const autoSort = useSetlistStore((state) => state.autoSort);
+  const { sortSetlist } = useSetlistActions();
 
   return (
-    <div className={css.wrap}>
-      <div className={css.inputBox}>
-        <TextInput
-          className={css.input}
-          value={input}
-          placeholder="Ado / Show"
-          onChange={(e) => setInput(e.currentTarget.value)}
-        />
-        <ActionIcon className={css.addButton} variant="ghost" onClick={handleAdd}>
-          <TbCirclePlus size={16} />
-        </ActionIcon>
-      </div>
-      <div className={css.controlBox}>
-        <div>
-          <Checkbox label="자동 정렬" checked={autoSort} onChange={handleAutoSortChecked} />
-        </div>
-        <div className={css.buttons}>
-          <Show when={autoSort === false}>
-            <Button onClick={sortSetlist}>정렬</Button>
-          </Show>
-          <Button onClick={copySetlist}>복사</Button>
-        </div>
-      </div>
-    </div>
+    <>
+      <Show when={autoSort === false}>
+        <Button onClick={sortSetlist}>정렬</Button>
+      </Show>
+      <Button onClick={() => copy(setlist)}>복사</Button>
+    </>
   );
 }

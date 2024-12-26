@@ -30,6 +30,28 @@
         padding-block-start: 56.25%;
       }
     }
+
+    .controlSection {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .setlistItemInputBox {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .control {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .buttons {
+          display: flex;
+          gap: 1rem;
+        }
+      }
+    }
   }
 
   .horizontalDivider {
