@@ -1,4 +1,3 @@
-import { RxLink2 } from 'react-icons/rx';
 import { ReactNode } from 'react';
 
 function ExternalLink({ href, text }: { href: string; text: ReactNode }) {
@@ -30,7 +29,7 @@ export default function ExternalLinksSection() {
   return (
     <section>
       <h2>
-        <RxLink2 size={'1rem'} color="inherit" />
+        {/* <IconRxLink2 color="inherit" /> */}
         &nbsp;외부링크
       </h2>
       <ExternalLinkList />

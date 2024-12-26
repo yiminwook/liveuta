@@ -2,12 +2,7 @@ import { ActionIcon, SimpleGrid } from '@mantine/core';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { JSX, useState } from 'react';
-import { GrTest } from 'react-icons/gr';
-import { LiaMicrophoneAltSolid, LiaToolsSolid } from 'react-icons/lia';
-import { LuSettings } from 'react-icons/lu';
-import { TbChevronsDown } from 'react-icons/tb';
-import { TiStarOutline } from 'react-icons/ti';
+import { JSX } from 'react';
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../Vaul';
 import css from './BottomTab.module.scss';
 
@@ -18,22 +13,22 @@ type DrawerItem = {
 };
 
 const INTERNAL_ITEMS: DrawerItem[] = [
-  { href: '/setting', text: '설정', icon: <LuSettings size="1.5rem" /> },
-  { href: '/dev', text: '개발', icon: <GrTest size="1.5rem" /> },
+  { href: '/setting', text: '설정', icon: <IconTbSettings size="1.5rem" /> },
+  { href: '/dev', text: '개발', icon: <IconTbDeviceDesktopCode size="1.5rem" /> },
 ];
 
 const EXTERNAL_ITEMS: DrawerItem[] = [
   {
     href: 'https://gall.dcinside.com/mgallery/board/lists?id=kizunaai',
     text: '키갤',
-    icon: <TiStarOutline size="1.5rem" />,
+    icon: <IconTbStar size="1.5rem" />,
   },
   {
     href: 'https://gall.dcinside.com/mini/board/lists?id=vuta',
     text: '버우갤',
-    icon: <LiaMicrophoneAltSolid size="1.5rem" />,
+    icon: <IconIonMusicNote size="1.5rem" />,
   },
-  { href: 'https://uta-tools.vercel.app', text: '우타툴즈', icon: <LiaToolsSolid size="1.5rem" /> },
+  { href: 'https://uta-tools.vercel.app', text: '우타툴즈', icon: <IconTbTools size="1.5rem" /> },
 ];
 
 type BottomDrawerProps = {

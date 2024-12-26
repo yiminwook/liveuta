@@ -1,7 +1,6 @@
 'use client';
 import classnames from 'classnames';
 import Image from 'next/image';
-import { AiOutlineLoading } from 'react-icons/ai';
 import { RemoveScroll } from 'react-remove-scroll';
 import loadingImage from '/public/loading.png';
 import Backdrop from '../background/Backdrop';
@@ -26,7 +25,7 @@ export default function MainLoading({ backdrop }: MainLoadingProps) {
               unoptimized
               priority
             />
-            <AiOutlineLoading className={css.mainLoadingBar} size={130} color="inherit" />
+            <IconSpinner180Ring className={css.mainLoadingBar} size={130} color="inherit" />
           </div>
           <p className={css.mainLoadingText}>Loading Now!</p>
         </div>

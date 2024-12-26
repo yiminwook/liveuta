@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MdOutlineExplore } from 'react-icons/md';
 import css from './Sidebar.module.scss';
 
 const links = [
@@ -19,7 +18,7 @@ export default function IndexSection() {
   return (
     <section>
       <h2>
-        <MdOutlineExplore size={'1rem'} color="inherit" />
+        {/* <IconMsExploreOutline size={'1rem'} color="inherit" /> */}
         &nbsp;목차
       </h2>
       <ul className={css.links}>

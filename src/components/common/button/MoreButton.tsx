@@ -1,7 +1,6 @@
 import { Button, ButtonProps } from '@mantine/core';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { FaArrowRightLong } from 'react-icons/fa6';
 import css from './MoreButton.module.scss';
 
 type MoreButtonProps = ButtonProps & {
@@ -23,7 +22,7 @@ export default function MoreButton({
       component={component as 'symbol' | undefined}
       href={href}
       onClick={onClick}
-      rightSection={<FaArrowRightLong />}
+      rightSection={<IconIonArrowRightC />}
     >
       More
     </Button>

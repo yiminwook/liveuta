@@ -12,7 +12,6 @@ import { Session } from 'next-auth';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
 import { isDesktop } from 'react-device-detect';
-import { FaStar } from 'react-icons/fa6';
 import { toast } from 'sonner';
 import css from './ChannelCard.module.scss';
 
@@ -109,7 +108,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
             onClick={handleFavorite}
             disabled={mutatePostFavorite.isPending || mutateDeleteFavorite.isPending}
           >
-            <FaStar size="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
+            <IconTbStarFilled size="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
           </button>
           <h3>{channelName}</h3>
         </div>

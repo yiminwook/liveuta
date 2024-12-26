@@ -7,7 +7,6 @@ import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { TbBoxMultiple4 } from 'react-icons/tb';
 import MobileNavButton from './MobileNavButton';
 import NavTab from './NavTab';
 import QueryButton from './QueryBtn';
@@ -52,7 +51,7 @@ export default function ScheduleNav({ session, scheduleDto, length }: NavSection
             variant="default"
             size="lg"
           >
-            <TbBoxMultiple4 size="1.5rem" color="inherit" />
+            <IconTbBoxMultiple4 width="1.5rem" height="1.5rem" color="inherit" />
           </ActionIcon>
         )}
       </div>

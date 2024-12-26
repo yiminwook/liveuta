@@ -95,6 +95,11 @@
       &:hover {
         background-color: util.palette(third, light);
       }
+
+      svg {
+        width: 1.75rem;
+        height: 1.75rem;
+      }
     }
   }
 }

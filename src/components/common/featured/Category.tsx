@@ -8,7 +8,6 @@ import { Button } from '@mantine/core';
 import { Session } from 'next-auth';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import { LuChevronDown } from 'react-icons/lu';
 import css from './Categories.module.scss';
 
 type CategoryProps = {

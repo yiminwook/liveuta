@@ -7,6 +7,7 @@ import { TToken } from '@/types';
 import cx from 'classnames';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import MainLoading from '../common/loading/MainLoading';
 import css from './Home.module.scss';
 
 export default function Home() {

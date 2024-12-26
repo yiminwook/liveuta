@@ -10,7 +10,6 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-import { FaFilter } from 'react-icons/fa';
 import ConfirmModal from '../common/modal/ConfirmModal';
 import NavTab from './NavTab';
 import css from './ScheduleNavModal.module.scss';
@@ -98,7 +97,7 @@ export default function ScheduleNavModal({
         <div className={css.searchBox}>
           {searchParams.get('q') && (
             <div className={css.queryStatBox}>
-              <FaFilter size="1rem" color={variable.thirdColorDefault} />
+              <IconFaSolidFilter size="1rem" color={variable.thirdColorDefault} />
               <span>검색 필터링 중:&nbsp;{searchParams.get('q')}</span>
               <Button variant="light" size="xs" fz={14} onClick={onResetSearch}>
                 초기화

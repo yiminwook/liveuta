@@ -5,9 +5,6 @@ import { ActionIcon } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
-import { FaDiscord } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
-import { RiKakaoTalkFill } from 'react-icons/ri';
 import { toast } from 'sonner';
 import Background from '../common/background/Background';
 import css from './Home.module.scss';
@@ -43,7 +40,7 @@ export default function Home() {
               onClick={() => mutateLogin.mutate('google')}
               disabled={mutateLogin.isPending}
             >
-              <FcGoogle size={28} />
+              <IconLogosGoogleIcon />
             </ActionIcon>
             <ActionIcon
               variant="white"
@@ -53,7 +50,7 @@ export default function Home() {
               onClick={() => mutateLogin.mutate('kakao')}
               disabled={mutateLogin.isPending}
             >
-              <RiKakaoTalkFill size={28} />
+              <IconRiKakaoTalkFill />
             </ActionIcon>
             <ActionIcon
               variant="white"
@@ -63,7 +60,7 @@ export default function Home() {
               onClick={() => mutateLogin.mutate('discord')}
               disabled={mutateLogin.isPending}
             >
-              <FaDiscord size={28} />
+              <IconLogosDiscordIcon />
             </ActionIcon>
           </div>
         </div>

@@ -5,7 +5,6 @@ import { testYoutubeUrl } from '@/utils/regexp';
 import { ActionIcon, Button, TextInput } from '@mantine/core';
 import { Checkbox } from '@mantine/core';
 import { ChangeEvent, createRef, useEffect, useState } from 'react';
-import { TbCirclePlus } from 'react-icons/tb';
 import { useShallow } from 'zustand/react/shallow';
 import {
   copy,
@@ -59,7 +58,7 @@ export function SetlistItemInput() {
         onChange={(e) => setInput(e.currentTarget.value)}
       />
       <ActionIcon className={css.addButton} variant="ghost" onClick={handleAdd}>
-        <TbCirclePlus size={16} />
+        <IconTbCirclePlus />
       </ActionIcon>
     </>
   );

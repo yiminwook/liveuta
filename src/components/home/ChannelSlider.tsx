@@ -1,10 +1,9 @@
 'use client';
 import { TYChannelsData } from '@/types/api/youtube';
 import { renderSubscribe } from '@/utils/renderSubscribe';
-import { Avatar, Box, Button, Center, HoverCard, Text, useMantineTheme } from '@mantine/core';
+import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
 import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
-import { IoIosMore } from 'react-icons/io';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import css from './ChannelSlider.module.scss';
 
@@ -14,7 +13,6 @@ type ChannelSliderProps = {
 
 export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
   const router = useRouter();
-  const theme = useMantineTheme();
 
   const navigationChannel = (channelName: string) => {
     router.push(`/channel?q=${channelName}`);
@@ -51,7 +49,7 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
                       className="swiper-no-swiping" // 슬라이드 이동 방지해야 hover 가능
                       w="100%"
                     >
-                      <IoIosMore size="1.5rem" />
+                      <IconIonIosMore style={{ width: '1.5rem', height: '1.5rem' }} />
                     </Button>
                   </Center>
                 </HoverCard.Target>

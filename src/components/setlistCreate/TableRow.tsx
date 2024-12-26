@@ -3,8 +3,6 @@ import { hmsToString } from '@/utils/getTime';
 import { ActionIcon, Checkbox, Popover, TextInput, UnstyledButton } from '@mantine/core';
 import { Reorder, useDragControls } from 'framer-motion';
 import type { PointerEvent } from 'react';
-import { TbClipboard, TbCopy, TbGripVertical, TbX } from 'react-icons/tb';
-import { VscClearAll } from 'react-icons/vsc';
 import { SetlistItem, copy, useSetlistActions } from './Context';
 import css from './Table.module.scss';
 
@@ -103,7 +101,7 @@ export default function TableRow({ item }: TableRowProps) {
               className={css.actionButton}
               onClick={() => setItemValue(item.id, '')}
             >
-              <VscClearAll />
+              <IconCodiconClearAll />
             </ActionIcon>
             <ActionIcon
               variant="ghost"
@@ -114,21 +112,21 @@ export default function TableRow({ item }: TableRowProps) {
                 });
               }}
             >
-              <TbClipboard />
+              <IconTbClipboard />
             </ActionIcon>
             <ActionIcon variant="ghost" className={css.actionButton} onClick={() => copy([item])}>
-              <TbCopy />
+              <IconTbCopy />
             </ActionIcon>
             <ActionIcon
               variant="ghost"
               className={css.actionButton}
               onClick={() => removeItem(item.id)}
             >
-              <TbX />
+              <IconTbX />
             </ActionIcon>
           </div>
           <div className={css.rowGrip} onPointerDown={handleGripPointerDown}>
-            <TbGripVertical />
+            <IconTbGripVertical />
           </div>
         </div>
       </td>

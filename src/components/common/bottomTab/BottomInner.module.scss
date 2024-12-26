@@ -69,6 +69,11 @@
         &[data-current='true'] {
           color: util.palette(third, lighter);
         }
+
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
       }
     }
   }

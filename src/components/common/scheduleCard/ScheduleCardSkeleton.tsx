@@ -1,5 +1,4 @@
 import { Skeleton } from '@mantine/core';
-import { FaUsers } from 'react-icons/fa';
 import css from './ScheduleCardSkeleton.module.scss';
 
 export default function ScheduleCardSkeleton() {

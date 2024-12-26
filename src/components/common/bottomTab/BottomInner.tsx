@@ -2,12 +2,6 @@ import { UnstyledButton } from '@mantine/core';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
-import { CgUserlane } from 'react-icons/cg';
-import { FaListOl } from 'react-icons/fa';
-import { IoIosMore } from 'react-icons/io';
-import { MdOutlineSchedule } from 'react-icons/md';
-import { RxPinTop } from 'react-icons/rx';
-import { TiHomeOutline } from 'react-icons/ti';
 import css from './BottomInner.module.scss';
 
 enum Direction {
@@ -74,7 +68,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
         data-show={showTobButton}
         onClick={scrollUp}
       >
-        <RxPinTop size="2em" />
+        <IconRxPinTop style={{ width: '2rem', height: '2rem' }} />
       </UnstyledButton>
       <ul className={css.list}>
         <li>
@@ -84,7 +78,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/setlist'}
           >
-            <FaListOl size="1.25rem" />
+            <IconTbList />
             <span>세트리</span>
           </UnstyledButton>
         </li>
@@ -95,7 +89,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/channel'}
           >
-            <CgUserlane size="1.5rem" />
+            <IconGgUserlane />
             <span>채널</span>
           </UnstyledButton>
         </li>
@@ -106,7 +100,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/'}
           >
-            <TiHomeOutline size="1.5rem" />
+            <IconTbHome />
             <span>홈</span>
           </UnstyledButton>
         </li>
@@ -117,13 +111,13 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/schedule'}
           >
-            <MdOutlineSchedule size="1.5rem" />
+            <IconMsScheduleOutlineRounded />
             <span>스케줄</span>
           </UnstyledButton>
         </li>
         <li>
           <UnstyledButton className={css.item} onClick={openDrawer}>
-            <IoIosMore size="1.5rem" />
+            <IconIonIosMore size="1.5rem" />
             <span>더보기</span>
           </UnstyledButton>
         </li>

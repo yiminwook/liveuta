@@ -6,8 +6,6 @@ import classnames from 'classnames';
 import { useRouter } from 'next-nprogress-bar';
 import { memo, useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { BsLightningFill } from 'react-icons/bs';
-import { ImYoutube } from 'react-icons/im';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
 import { useStore } from 'zustand';
@@ -98,14 +96,14 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
         }}
       />
       <button className={classnames(css.pipBtn, { hide: !isShow })} onClick={toggleLeft}>
-        <ImYoutube size={28} />
+        <IconMdiYoutube />
       </button>
       <button
         disabled={isLive}
         className={classnames(css.liveBtn, { hide: !isShow })}
         onClick={navigateLive}
       >
-        <BsLightningFill size={28} />
+        <IconClarityLightningSolid />
       </button>
     </div>
   );

@@ -1,5 +1,4 @@
 import { StreamCategory, StreamCategoryText } from '@/types';
-import { HiSelector } from 'react-icons/hi';
 import css from './FeaturedSelect.module.scss';
 
 export default function FeaturedSelect() {

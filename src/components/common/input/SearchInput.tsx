@@ -1,7 +1,6 @@
 import { ActionIcon, Input } from '@mantine/core';
 import { ChangeEventHandler } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { IoMdMusicalNote } from 'react-icons/io';
 import css from './SearchInput.module.scss';
 
 type SearchInputProps = {
@@ -44,7 +43,7 @@ export default function SearchInput({
         disabled={disabled}
         onClick={onSubmit}
       >
-        <IoMdMusicalNote color="#fff" />
+        <IconTbSearch color="#fff" />
       </ActionIcon>
     </Input.Wrapper>
   );

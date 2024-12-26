@@ -14,9 +14,6 @@ import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
 import { isMobile } from 'react-device-detect';
-import { BsMusicNoteList } from 'react-icons/bs';
-import { ImYoutube } from 'react-icons/im';
-import { IoArrowBack } from 'react-icons/io5';
 import { toast } from 'sonner';
 import css from './Info.module.scss';
 
@@ -76,7 +73,7 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
           variant="transparent"
           onClick={() => router.back()}
         >
-          <IoArrowBack size={24} />
+          <IconIonArrowBack width="1.2rem" />
           <span>Back</span>
         </Button>
         <div className={css.navRight}>
@@ -99,7 +96,7 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
             variant="transparent"
             onClick={() => handleLocation(videoUrl)}
           >
-            <ImYoutube size={24} color="#ff0000" />
+            <IconLogosYoutubeIcon width="1.2rem" />
             유튜브
           </Button>
           <Button
@@ -109,7 +106,7 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
             variant="transparent"
             href="/setlist"
           >
-            <BsMusicNoteList />
+            <IconBiMusicNoteList />
             리스트
           </Button>
         </div>

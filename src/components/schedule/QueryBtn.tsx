@@ -4,8 +4,6 @@ import { TScheduleDto } from '@/types/dto';
 import { Button, Popover } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { FaFilter } from 'react-icons/fa';
-import AlertModal from '../common/modal/AlertModal';
 import ConfirmModal from '../common/modal/ConfirmModal';
 import css from './QueryBtn.module.scss';
 
@@ -42,7 +40,7 @@ export default function QueryButton({ query }: QueryButtonProps) {
           h={40}
           bg="var(--mantine-color-body)"
           variant="outline"
-          leftSection={<FaFilter size="1rem" />}
+          leftSection={<IconFaSolidFilter />}
         >
           검색 필터링 중
         </Button>

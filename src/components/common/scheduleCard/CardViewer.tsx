@@ -1,4 +1,3 @@
-import { FaUsers } from 'react-icons/fa';
 import css from './ScheduleCard.module.scss';
 
 interface CardViewerProps {
@@ -8,7 +7,7 @@ interface CardViewerProps {
 export default function CardViewer({ viewer }: CardViewerProps) {
   return (
     <>
-      <FaUsers className={css.statusSvg} size={'0.75rem'} />
+      <IconIonPerson className={css.statusSvg} size={'0.75rem'} />
       {viewer?.toString() || '?'}
     </>
   );

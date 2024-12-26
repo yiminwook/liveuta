@@ -236,7 +236,10 @@ $active-color2: #e06e61;
       transition: background-color 0.3s;
       background-color: rgba(0, 0, 0, 0.15);
     }
+
+    svg {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
   }
-
-
 }
