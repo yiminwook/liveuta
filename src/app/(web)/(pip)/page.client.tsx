@@ -123,7 +123,9 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
       .slice(0, 19)
       .map((i) => ({ ...i, isFavorite: whiteList.has(i.channelId) }));
 
-    const favoriteContent = [...data.all.reverse()]
+    const favoriteContent = data.all
+      .slice() // copy
+      .reverse()
       .filter((i) => whiteList.has(i.channelId))
       .slice(0, 19)
       .map((i) => ({ ...i, isFavorite: true }));

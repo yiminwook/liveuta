@@ -28,6 +28,7 @@ type ScheduleNavModalProps = {
   };
 };
 
+/** dto는 모달이 닫히고 열려야 반영됨 */
 export default function ScheduleNavModal({
   onClose,
   scheduleDto,
@@ -39,6 +40,8 @@ export default function ScheduleNavModal({
   const { modifier, onAnimationEnd, exit } = useTransition();
   const modalActions = useSetModalStore();
   const router = useRouter(); // transition 효과 제외
+
+  const isFavorite = searchParams.get('isFavorite') === 'true';
 
   const onChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(() => e.target.value);
@@ -66,7 +69,7 @@ export default function ScheduleNavModal({
 
   const onClickFavorite = () => {
     const query = new URLSearchParams(searchParams);
-    query.set('isFavorite', String(!scheduleDto.isFavorite));
+    query.set('isFavorite', String(!isFavorite));
     router.push(`/schedule?${query.toString()}`);
   };
 
@@ -86,9 +89,7 @@ export default function ScheduleNavModal({
       <div className={css.content}>
         <div className={css.contentHeader}>
           <div className={css.navTabBox}>
-            {session.data && (
-              <ToggleFavorite isFavorite={scheduleDto.isFavorite} onClick={onClickFavorite} />
-            )}
+            {session.data && <ToggleFavorite isFavorite={isFavorite} onClick={onClickFavorite} />}
             <NavTab />
           </div>
           <CloseButton w={40} h={40} onClick={onCloseWithExit} />

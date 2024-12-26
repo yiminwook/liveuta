@@ -4,7 +4,7 @@ import { AppShell, Burger, Button, Flex, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import varialble from '@variable';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import css from './layout.module.scss';
 
 type Props = {
   children: React.ReactNode;
@@ -12,7 +12,6 @@ type Props = {
 
 export default function Client({ children }: Props) {
   const [opened, { toggle }] = useDisclosure();
-  const pathname = usePathname();
 
   return (
     <AppShell
@@ -23,7 +22,7 @@ export default function Client({ children }: Props) {
       }}
       padding="md"
     >
-      <AppShell.Header>
+      <AppShell.Header classNames={{ header: css.header }}>
         <Flex align="center" h="100%" px="sm" justify="space-between">
           <Flex align="center">
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" mr="sm" />
