@@ -1,3 +1,4 @@
+import { generateVideoUrl } from '@/libraries/youtube/url';
 import { STAT_MAPPER, TContentsData } from '@/types/api/mongoDB';
 import { ActionIcon, Badge, Card, Text, Tooltip } from '@mantine/core';
 import variable from '@variable';
@@ -5,6 +6,7 @@ import { BsBroadcast } from 'react-icons/bs';
 import { FaPlus, FaStar } from 'react-icons/fa';
 import { HiBellAlert } from 'react-icons/hi2';
 import { MdBlock, MdOpenInNew } from 'react-icons/md';
+import CopyButton from '../button/CopyButton';
 import CardImage from './CardImage';
 import css from './ScheduleCard.module.scss';
 
@@ -16,6 +18,7 @@ type SliderCardProps = {
   addMultiView?: (item: TContentsData) => void;
   toggleFavorite?: (item: TContentsData) => void;
   addBlock?: (item: TContentsData) => void;
+  copy?: (item: TContentsData) => void;
 };
 
 export default function SliderCard({
@@ -48,6 +51,19 @@ export default function SliderCard({
     <Card className={css.sliderCard} padding="xs" shadow="xs" withBorder>
       <Card.Section>
         <CardImage content={content} />
+        <Badge
+          className={css.status}
+          size="md"
+          data-status={STAT_MAPPER[content.isStream]}
+          color={variable.thirdColorDefault}
+          leftSection={content.isStream === 'TRUE' && <BsBroadcast color="#fff" />}
+        >
+          {content.isStream === 'TRUE'
+            ? new Intl.NumberFormat('kr', { notation: 'compact' })
+                .format(content.viewer)
+                .toLowerCase()
+            : STAT_MAPPER[content.isStream]}
+        </Badge>
       </Card.Section>
 
       <Text fw={500} className={css.channelNm} mt="xs">
@@ -85,21 +101,8 @@ export default function SliderCard({
               <MdOpenInNew color={variable.thirdColorDefault} size="1.2rem" />
             </ActionIcon>
           </Tooltip>
+          <CopyButton value={generateVideoUrl(content.videoId)} />
         </div>
-
-        <Badge
-          className={css.status}
-          size="md"
-          data-status={STAT_MAPPER[content.isStream]}
-          color={variable.thirdColorDefault}
-          leftSection={content.isStream === 'TRUE' && <BsBroadcast color="#fff" />}
-        >
-          {content.isStream === 'TRUE'
-            ? new Intl.NumberFormat('kr', { notation: 'compact' })
-                .format(content.viewer)
-                .toLowerCase()
-            : STAT_MAPPER[content.isStream]}
-        </Badge>
       </div>
     </Card>
   );

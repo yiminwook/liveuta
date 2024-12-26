@@ -1,4 +1,5 @@
 'use client';
+import { generateVideoUrl } from '@/libraries/youtube/url';
 import { STAT_MAPPER, TContentsData } from '@/types/api/mongoDB';
 import cx from 'classnames';
 import { Session } from 'next-auth';
@@ -62,6 +63,7 @@ export default function ScheduleCard({
           onClickBlock={onClickBlock}
           onClickFavorite={onClickFavorite}
           onClickNewTab={onClickNewTab}
+          copyValue={generateVideoUrl(content.videoId)}
         />
       )}
     </div>

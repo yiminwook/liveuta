@@ -1,12 +1,14 @@
-import { ActionIcon, Menu } from '@mantine/core';
-import { IconDots } from '@tabler/icons-react';
+import { ActionIcon, CopyButton, Menu } from '@mantine/core';
+import { IconCheck, IconCopy, IconDots } from '@tabler/icons-react';
 import variable from '@variable';
 import { FaPlus, FaStar } from 'react-icons/fa6';
 import { HiBellAlert } from 'react-icons/hi2';
 import { MdBlock, MdOpenInNew } from 'react-icons/md';
+import { toast } from 'sonner';
 
 type CardMenuProps = {
   isFavorite?: boolean;
+  copyValue: string;
   onClickFavorite: () => void;
   onClickBlock: () => void;
   onClickAlarm: () => void;
@@ -16,6 +18,7 @@ type CardMenuProps = {
 
 export default function CardMenu({
   isFavorite = false,
+  copyValue,
   onClickAddMultiView,
   onClickAlarm,
   onClickBlock,
@@ -66,6 +69,26 @@ export default function CardMenu({
         >
           새로열기
         </Menu.Item>
+        <CopyButton value={copyValue}>
+          {({ copied, copy }) => (
+            <Menu.Item
+              component="button"
+              leftSection={
+                copied ? (
+                  <IconCheck color="teal" size="1.2rem" />
+                ) : (
+                  <IconCopy color={variable.thirdColorDefault} size="1.2rem" />
+                )
+              }
+              onClick={() => {
+                copy();
+                toast.info('링크가 복사되었습니다.');
+              }}
+            >
+              링크복사
+            </Menu.Item>
+          )}
+        </CopyButton>
       </Menu.Dropdown>
     </Menu>
   );

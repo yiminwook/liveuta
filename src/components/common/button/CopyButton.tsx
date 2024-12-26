@@ -1,10 +1,7 @@
 'use client';
-import { clipText } from '@/utils/windowEvent';
-import { CSSProperties, MouseEvent } from 'react';
-import { FaCopy } from 'react-icons/fa';
-import { gtagClick } from '@/utils/gtag';
-import cx from 'classnames';
-import { toast } from 'sonner';
+import { ActionIcon, CopyButton as MantineCopyButton, Tooltip } from '@mantine/core';
+import { IconCheck, IconCopy } from '@tabler/icons-react';
+import { CSSProperties } from 'react';
 
 interface CopyButtonProps {
   value: string;
@@ -14,22 +11,26 @@ interface CopyButtonProps {
 }
 
 /** value 복사할 값 */
-export default function CopyButton({ value, size = '2rem', className, style }: CopyButtonProps) {
-  const onClick = (e: MouseEvent) => {
-    e.stopPropagation();
-    clipText(value);
-    gtagClick({
-      target: 'copyButton',
-      content: 'copyButton',
-      detail: value,
-      action: 'copy',
-    });
-    toast.success('복사되었습니다.');
-  };
-
+export default function CopyButton({ value, size = '1.2rem', className }: CopyButtonProps) {
   return (
-    <button className={cx(className)} onClick={onClick} style={style}>
-      <FaCopy size={size} color="inherit" />
-    </button>
+    <MantineCopyButton value={value} timeout={2000}>
+      {({ copied, copy }) => (
+        <Tooltip
+          className="swiper-no-swiping"
+          label={copied ? 'Copied' : 'Copy'}
+          withArrow
+          position="bottom"
+        >
+          <ActionIcon
+            className={className}
+            color={copied ? 'teal' : 'gray'}
+            variant="subtle"
+            onClick={copy}
+          >
+            {copied ? <IconCheck size={size} /> : <IconCopy size={size} />}
+          </ActionIcon>
+        </Tooltip>
+      )}
+    </MantineCopyButton>
   );
 }

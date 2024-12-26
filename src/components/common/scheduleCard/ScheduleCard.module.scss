@@ -192,6 +192,17 @@ $active-color2: #e06e61;
 }
 
 .sliderCard {
+  :global(.app-Card-section) {
+    position: relative;
+    display: flex;
+  }
+
+  .status {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
+
   :global(.imgBtn) {
     position: relative;
     aspect-ratio: 16 / 9;
@@ -201,6 +212,17 @@ $active-color2: #e06e61;
 
     & > img {
       object-fit: cover;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      /* 그라데이션 높이 조정 */
+      height: 50%;
+      background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
     }
   }
 
@@ -216,6 +238,5 @@ $active-color2: #e06e61;
     }
   }
 
-  .status {
-  }
+
 }
