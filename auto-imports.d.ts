@@ -33,10 +33,10 @@ declare global {
   )['default'];
   const IconRiKakaoTalkFill: typeof import('~icons/ri/kakao-talk-fill.jsx')['default'];
   const IconRiPerson: typeof import('~icons/ri/person.jsx')['default'];
+  const IconRxHamburgerMenu: typeof import('~icons/radix-icons/hamburger-menu.jsx')['default'];
   const IconRxPerson: typeof import('~icons/radix-icons/person.jsx')['default'];
   const IconRxPinTop: typeof import('~icons/radix-icons/pin-top.jsx')['default'];
   const IconSpinner180Ring: typeof import('~icons/svg-spinners/180-ring.jsx')['default'];
-  const IconTbCirclePlus: typeof import('~icons/tabler/circle-plus.jsx')['default'];
   const IconTbArrowNarrowLeft: typeof import('~icons/tabler/arrow-narrow-left.jsx')['default'];
   const IconTbArrowNarrowRight: typeof import('~icons/tabler/arrow-narrow-right.jsx')['default'];
   const IconTbArrowRight: typeof import('~icons/tabler/arrow-right.jsx')['default'];
