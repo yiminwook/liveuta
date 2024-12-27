@@ -180,6 +180,11 @@ export function setlistItemToString(item: SetlistItem) {
 }
 
 export function copy(setlist: SetlistItem[]) {
+  if (setlist.length === 0) {
+    toast.error('복사할 항목이 없습니다');
+    return;
+  }
+
   const text = setlist.map((item) => setlistItemToString(item)).join('\n');
   navigator.clipboard.writeText(text);
   toast('세트 리스트를 복사하였습니다');
