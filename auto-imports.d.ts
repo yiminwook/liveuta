@@ -14,6 +14,7 @@ declare global {
   const IconIonMusicNote: typeof import('~icons/ion/music-note.jsx')['default']
   const IconIonPerson: typeof import('~icons/ion/person.jsx')['default']
   const IconIonPlus: typeof import('~icons/ion/plus.jsx')['default']
+  const IconIonSearch: typeof import('~icons/ion/search.jsx')['default']
   const IconMdiBlock: typeof import('~icons/mdi/block.jsx')['default']
   const IconMdiYoutube: typeof import('~icons/mdi/youtube.jsx')['default']
   const IconMsOpenInNew: typeof import('~icons/material-symbols/open-in-new.jsx')['default']

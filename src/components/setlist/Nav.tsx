@@ -48,7 +48,7 @@ export default function Nav({ searchParams, session }: SearchFormProps) {
             component={Link}
             href="/setlist/create"
           >
-            세트리스트 작성
+            신규 작성
           </Button>
         </div>
       </div>

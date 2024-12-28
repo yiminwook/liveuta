@@ -18,7 +18,7 @@ type PostDrawerProps = {
 export default function PostDrawer({ session }: PostDrawerProps) {
   return (
     <Drawer>
-      <DrawerTrigger className={css.trigger}>세트리스트 업로드</DrawerTrigger>
+      <DrawerTrigger className={css.trigger}>업로드</DrawerTrigger>
       <DrawerContent className={css.content} classNames={{ wrapper: css.wrapper }}>
         <DrawerHeader className={css.header}>
           <DrawerTitle className={css.title}>세트리스트 업로드</DrawerTitle>
