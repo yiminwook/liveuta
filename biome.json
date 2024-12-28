@@ -1,8 +1,20 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
-  "files": { "ignoreUnknown": false, "ignore": ["./src/temps/**", "auto-import.d.ts"] },
-  "organizeImports": { "enabled": true },
+  "vcs": {
+    "enabled": false,
+    "clientKind": "git",
+    "useIgnoreFile": false
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "ignore": [
+      "./src/temps/**",
+      "auto-import.d.ts"
+    ]
+  },
+  "organizeImports": {
+    "enabled": true
+  },
   "linter": {
     "enabled": false,
     "rules": {
@@ -19,7 +31,10 @@
     "lineEnding": "lf",
     "lineWidth": 100,
     "attributePosition": "auto",
-    "bracketSpacing": true
+    "bracketSpacing": true,
+    "ignore": [
+      "auto-import.d.ts"
+    ]
   },
   "javascript": {
     "formatter": {
