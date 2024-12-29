@@ -4,7 +4,7 @@ import variable from '@variable';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SliderCard from '../common/scheduleCard/SliderCard';
-import SliderCardPlaceholder from '../common/scheduleCard/SliderCardPlaceholder';
+import SliderCardSkeleton from '../common/scheduleCard/SliderCardSkeleton';
 import css from './ScheduleSlider.module.scss';
 
 type ScheduleSliderProps = {
@@ -47,7 +47,7 @@ export default function ScheduleSlider({
         {Array.from({ length: 6 }).map((item, index) => {
           return (
             <SwiperSlide key={`announce_placeholder_${index}`} className={css.item}>
-              <SliderCardPlaceholder />
+              <SliderCardSkeleton />
             </SwiperSlide>
           );
         })}

@@ -1,4 +1,4 @@
-import css from './ScheduleCard.module.scss';
+import css from './Card.module.scss';
 
 interface CardViewerProps {
   viewer: number;

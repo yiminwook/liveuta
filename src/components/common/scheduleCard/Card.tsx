@@ -3,10 +3,10 @@ import { generateVideoUrl } from '@/libraries/youtube/url';
 import { STAT_MAPPER, TContentsData } from '@/types/api/mongoDB';
 import cx from 'classnames';
 import { Session } from 'next-auth';
+import css from './Card.module.scss';
 import CardDesc from './CardDesc';
 import CardImage from './CardImage';
 import CardMenu from './CardMenu';
-import css from './ScheduleCard.module.scss';
 
 type ScheduleCardProps = {
   classname?: string;

@@ -3,8 +3,8 @@ import { STAT_MAPPER, TContentsData } from '@/types/api/mongoDB';
 import { ActionIcon, Badge, Card, Text, Tooltip } from '@mantine/core';
 import variable from '@variable';
 import CopyButton from '../button/CopyButton';
+import css from './Card.module.scss';
 import CardImage from './CardImage';
-import css from './ScheduleCard.module.scss';
 
 type SliderCardProps = {
   content: TContentsData & { isFavorite: boolean };

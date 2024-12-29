@@ -1,6 +1,7 @@
 .list {
   display: flex;
   flex-wrap: wrap;
+  padding: 0 0.25rem;
 }
 
 .item {
@@ -10,7 +11,6 @@
 
   @include util.min-width(xs) {
     width: 50%;
-    padding: 0.5rem;
   }
 
   @include util.min-width(sm) {

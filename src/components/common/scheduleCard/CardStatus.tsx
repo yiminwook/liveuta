@@ -1,7 +1,6 @@
-//import { isStream } from '@/types/inSheet';
 import { isStream } from '@/types/api/mongoDB';
+import css from './Card.module.scss';
 import CardViewer from './CardViewer';
-import css from './ScheduleCard.module.scss';
 interface CardStatusProps {
   isStream: isStream;
   interval: string;

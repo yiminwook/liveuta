@@ -2,8 +2,8 @@ import { generateChannelUrl } from '@/libraries/youtube/url';
 import { TContentsData } from '@/types/api/mongoDB';
 import { openWindow } from '@/utils/windowEvent';
 import cx from 'classnames';
+import css from './Card.module.scss';
 import CardStatus from './CardStatus';
-import css from './ScheduleCard.module.scss';
 
 type CardDescProps = {
   content: TContentsData;

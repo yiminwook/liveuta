@@ -1,7 +1,7 @@
 import { Box, Card, Skeleton } from '@mantine/core';
-import css from './ScheduleCard.module.scss';
+import css from './Card.module.scss';
 
-export default function SliderCardPlaceholder() {
+export default function SliderCardSkeleton() {
   return (
     <Card className={css.sliderCard} padding="xs" shadow="xs" withBorder>
       <Card.Section>
