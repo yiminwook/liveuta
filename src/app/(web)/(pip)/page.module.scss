@@ -14,7 +14,6 @@
       width: 100%;
       aspect-ratio: 11 / 7;
       margin: 0 auto;
-      object-fit: cover;
 
       @include util.min-width(var.$mobile-boundary) {
         width: 550px;
@@ -27,6 +26,10 @@
         @include util.min-width(var.$mobile-boundary) {
           display: block;
         }
+      }
+
+      .coverImgUrl {
+        object-fit: cover;
       }
     }
   }
