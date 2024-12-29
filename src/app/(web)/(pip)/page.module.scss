@@ -28,7 +28,7 @@
         }
       }
 
-      .coverImgUrl {
+      & > img {
         object-fit: cover;
       }
     }
