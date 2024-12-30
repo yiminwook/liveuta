@@ -1,6 +1,6 @@
-import { redirect } from 'next/navigation';
-import Client from '@/app/logout/page.client';
 import { auth } from '@/libraries/nextAuth';
+import { redirect } from 'next/navigation';
+import Client from './page.client';
 
 export default async function Page() {
   const session = await auth();
