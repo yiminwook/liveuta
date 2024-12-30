@@ -11,6 +11,6 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "i18n-ally.localesPaths": ["./path/to/your/messages"], // E.g. "./messages"
+  "i18n-ally.localesPaths": ["./messages"], // E.g. "./messages"
   "i18n-ally.keystyle": "nested"
 }
