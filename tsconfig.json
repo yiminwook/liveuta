@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["@types/gtag.js", "unplugin-icons/types/react",],
+    "types": ["@types/gtag.js", "unplugin-icons/types/react"],
     "paths": {
       "@variable": ["./src/styles/variable.module.scss"],
       "@web/*": ["./src/app/(web)/*"],
@@ -28,6 +28,12 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/common/modal/ChannelCardModal.module.scs"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/components/common/modal/ChannelCardModal.module.scs"
+  ],
   "exclude": ["node_modules", "src/temps", "src/libraries/cloudflare/index.js"]
 }

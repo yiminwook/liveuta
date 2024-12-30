@@ -8,8 +8,7 @@
   "files": {
     "ignoreUnknown": false,
     "ignore": [
-      "./src/temps/**",
-      "auto-import.d.ts"
+      "./src/temps/**"
     ]
   },
   "organizeImports": {
@@ -31,10 +30,7 @@
     "lineEnding": "lf",
     "lineWidth": 100,
     "attributePosition": "auto",
-    "bracketSpacing": true,
-    "ignore": [
-      "auto-import.d.ts"
-    ]
+    "bracketSpacing": true
   },
   "javascript": {
     "formatter": {
