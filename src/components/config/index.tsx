@@ -1,6 +1,8 @@
 import { auth } from '@/libraries/nextAuth';
 import { TMetadata } from '@/types';
 import { TGetCookiesReturn } from '@/utils/getCookie';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
 import Hotkeys from './Hotkeys';
@@ -28,31 +30,35 @@ export default async function Configs({ children, cookies, colorScheme }: Config
       .then((res) => res.json() as Promise<{ data: TMetadata }>)
       .then((json) => json.data),
   ]);
+  const messages = await getMessages();
 
   return (
-    <NextAuth session={session}>
-      <AppProvider
-        initState={{
-          theme: cookies.theme,
-          defaultVideoId: metadata.default_video_id,
-        }}
-      >
-        <ReactQuery>
-          <NProgressProviders>
-            <MantineProvider defaultColorScheme={colorScheme}>
-              <Hotkeys>
-                {children}
-                <ToastBox />
-                <Particle />
-                <ServiceWorker />
-                <Devtools />
-                <div id="pip" />
-                <ModalContainer />
-              </Hotkeys>
-            </MantineProvider>
-          </NProgressProviders>
-        </ReactQuery>
-      </AppProvider>
-    </NextAuth>
+    <NextIntlClientProvider messages={messages}>
+      <NextAuth session={session}>
+        <AppProvider
+          initState={{
+            theme: cookies.theme,
+            // defaultVideoId: metadata.default_video_id,
+            defaultVideoId: 'LioiUVqnkNI',
+          }}
+        >
+          <ReactQuery>
+            <NProgressProviders>
+              <MantineProvider defaultColorScheme={colorScheme}>
+                <Hotkeys>
+                  {children}
+                  <ToastBox />
+                  <Particle />
+                  <ServiceWorker />
+                  <Devtools />
+                  <div id="pip" />
+                  <ModalContainer />
+                </Hotkeys>
+              </MantineProvider>
+            </NProgressProviders>
+          </ReactQuery>
+        </AppProvider>
+      </NextAuth>
+    </NextIntlClientProvider>
   );
 }

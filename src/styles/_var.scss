@@ -25,12 +25,16 @@ $breakpoints: (
 $mobile-boundary: sm; // breakpoint for mobile devices
 
 $z-indexes: (
-  app: 100,      // mantine default
-  float: 150,    
-  header: 180,   
-  modal: 200,    // mantine default
-  popover: 300,  // mantine default
-  overlay: 400,  // mantine default
+  app: 100,
+  // mantine default
+  float: 150,
+  header: 180,
+  modal: 200,
+  // mantine default
+  popover: 300,
+  // mantine default
+  overlay: 400,
+  // mantine default
   max: 9999
 );
 
@@ -120,6 +124,7 @@ $colors: (
   default: var(--mantine-color-default),
   default-hover: var(--mantine-color-default-hover),
   default-color: var(--mantine-color-default-color),
+  default-active: var(--mantine-color-default-active),
   default-border: var(--mantine-color-default-border),
   dimmed: var(--mantine-color-dimmed)
 );

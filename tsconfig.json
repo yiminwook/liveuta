@@ -17,7 +17,7 @@
     "types": ["@types/gtag.js", "unplugin-icons/types/react"],
     "paths": {
       "@variable": ["./src/styles/variable.module.scss"],
-      "@web/*": ["./src/app/(web)/*"],
+      "@web/*": ["./src/app/[locale]/(web)/*"],
       "@api/*": ["./src/app/api/*"],
       "@/*": ["./src/*"],
       "/*": ["./*"]

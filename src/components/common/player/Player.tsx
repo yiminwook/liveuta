@@ -1,5 +1,6 @@
 'use client';
 import { ORIGIN } from '@/constants';
+import { useRouter as i18nRouter } from '@/i18n/routing';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { usePlayerCtx } from '@/stores/player';
 import classnames from 'classnames';
@@ -19,7 +20,7 @@ type PlayerProps = {
 };
 
 export default memo(function Player({ isLive, isShow }: PlayerProps) {
-  const router = useRouter();
+  const router = useRouter(i18nRouter);
   const [isReady, setIsReady] = useState(false);
   const playerRef = useRef<ReactPlayer>(null);
   const playerCtx = usePlayerCtx();

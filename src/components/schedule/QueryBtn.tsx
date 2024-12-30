@@ -1,9 +1,11 @@
 'use client';
+import { useRouter as i18nRouter } from '@/i18n/routing';
+import { usePathname } from '@/i18n/routing';
 import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
 import { Button, Popover } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import FasFilter from '~icons/fa-solid/filter.jsx';
 import ConfirmModal from '../common/modal/ConfirmModal';
 import css from './QueryBtn.module.scss';
@@ -14,7 +16,7 @@ type QueryButtonProps = {
 
 export default function QueryButton({ query }: QueryButtonProps) {
   const pathname = usePathname();
-  const router = useRouter();
+  const router = useRouter(i18nRouter);
   const searchParams = useSearchParams();
   const modalActions = useSetModalStore();
 

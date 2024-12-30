@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {

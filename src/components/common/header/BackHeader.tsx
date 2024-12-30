@@ -1,9 +1,9 @@
 import { ROUTES } from '@/constants';
+import { Link } from '@/i18n/routing';
+import { usePathname } from '@/i18n/routing';
 import { Breadcrumbs, Menu, UnstyledButton } from '@mantine/core';
 import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import TbArrowNarrowLeft from '~icons/tabler/arrow-narrow-left.jsx';
 import css from './BackHeader.module.scss';
 

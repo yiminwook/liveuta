@@ -1,4 +1,5 @@
 'use client';
+import { useRouter as i18nRouter } from '@/i18n/routing';
 import { Pagination } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
@@ -13,7 +14,7 @@ type PaginationBoxProps = {
 };
 
 export default function PaginationBox({ currentPage, totalPage, query }: PaginationBoxProps) {
-  const router = useRouter();
+  const router = useRouter(i18nRouter);
   const searchParams = useSearchParams();
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
 

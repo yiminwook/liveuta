@@ -1,4 +1,6 @@
 'use client';
+import { Link } from '@/i18n/routing';
+import { useRouter as i18nRouter } from '@/i18n/routing';
 import dayjs from '@/libraries/dayjs';
 import { ChannelDatesetItem } from '@/libraries/mongoDB/getAllChannel';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
@@ -12,7 +14,6 @@ import axios from 'axios';
 import cx from 'classnames';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
-import Link from 'next/link';
 import { isMobile } from 'react-device-detect';
 import { toast } from 'sonner';
 import BiMusicNoteList from '~icons/bi/music-note-list.jsx';
@@ -28,7 +29,7 @@ type InfoProps = {
 };
 
 export default function Info({ setlist, channel, icon, session }: InfoProps) {
-  const router = useRouter();
+  const router = useRouter(i18nRouter);
   const queryClient = useQueryClient();
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);

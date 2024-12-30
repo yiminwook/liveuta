@@ -1,0 +1,28 @@
+.languages {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+
+  .languageButton {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid map-get(var.$colors, default-border);
+    border-radius: 5px;
+
+    &:hover {
+      background-color: map-get(var.$colors, default-hover);
+    }
+
+    &:active {
+      background-color: map-get(var.$colors, default-active);
+    }
+
+    &[data-active='true'] {
+      color: #fff;
+      background-color: util.palette(third, light);
+      border-color: util.palette(third, lighter);
+    }
+  }
+}

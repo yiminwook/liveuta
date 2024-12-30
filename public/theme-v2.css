@@ -60,6 +60,8 @@
 
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --mantine-color-default-active: var(--mantine-color-gray-1);
 }
 
 :root[color='theme2'] {
@@ -121,6 +123,8 @@
   --liveuta-schedule-stream: #fcefc7;
   --liveuta-schedule-stream-text1: #fa8072;
   --liveuta-schedule-stream-text2: #e06e61;
+
+  --mantine-color-default-active: var(--mantine-color-gray-1);
 }
 
 :root[color='theme3'] {
@@ -182,6 +186,8 @@
   --liveuta-schedule-stream: #fcefc7;
   --liveuta-schedule-stream-text1: #fa8072;
   --liveuta-schedule-stream-text2: #e06e61;
+
+  --mantine-color-default-active: var(--mantine-color-gray-1);
 }
 
 :root[color='theme4'] {
@@ -243,6 +249,8 @@
   --liveuta-schedule-stream: hsl(45, 50%, 20%);
   --liveuta-schedule-stream-text1: var(--mantine-color-text);
   --liveuta-schedule-stream-text2: var(--mantine-color-text);
+
+  --mantine-color-default-active: var(--mantine-color-gray-4);
 }
 
 :root[color='theme5'] {
@@ -304,4 +312,6 @@
   --liveuta-schedule-stream: hsl(45, 50%, 20%);
   --liveuta-schedule-stream-text1: var(--mantine-color-text);
   --liveuta-schedule-stream-text2: var(--mantine-color-text);
+  
+  --mantine-color-default-active: var(--mantine-color-gray-4);
 }

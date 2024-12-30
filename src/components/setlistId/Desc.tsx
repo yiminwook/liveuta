@@ -1,5 +1,6 @@
 'use client';
 import TimelineText from '@/components/common/TimestampText';
+import { useRouter as i18nRouter } from '@/i18n/routing';
 import { useSetPlayerStore } from '@/stores/player';
 import { Button, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -17,7 +18,7 @@ type DescProps = {
 };
 
 export default function Desc({ session, videoId, description }: DescProps) {
-  const router = useRouter();
+  const router = useRouter(i18nRouter);
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState('');
   const actions = useSetPlayerStore();

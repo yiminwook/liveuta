@@ -1,6 +1,6 @@
+import { Link } from '@/i18n/routing';
+import { usePathname } from '@/i18n/routing';
 import { NavLink } from '@mantine/core';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import TbChevronLeft from '~icons/tabler/chevron-left.jsx';
 import TbChevronRight from '~icons/tabler/chevron-right.jsx';
 

@@ -1,8 +1,10 @@
 'use client';
+import { useRouter as i18nRouter } from '@/i18n/routing';
+import { usePathname } from '@/i18n/routing';
 import { scheduleDto } from '@/types/dto';
 import { SegmentedControl, SegmentedControlItem } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 const NAV_LINKS: SegmentedControlItem[] = [
   { value: 'scheduled', label: '예정' },
@@ -13,7 +15,7 @@ const NAV_LINKS: SegmentedControlItem[] = [
 
 export default function NavTab() {
   const pathname = usePathname();
-  const router = useRouter(); // transition 효과 제외
+  const router = useRouter(i18nRouter); // transition 효과 제외
   const searchParams = useSearchParams();
   const filterQuery = searchParams.get('t');
   const { filter } = scheduleDto.pick({ filter: true }).parse({ filter: filterQuery });

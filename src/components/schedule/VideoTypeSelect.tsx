@@ -1,4 +1,5 @@
 'use client';
+import { useRouter as i18nRouter } from '@/i18n/routing';
 import { SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import { ComboboxItemGroup, Select } from '@mantine/core';
@@ -16,7 +17,7 @@ type VideoTypeSelectProps = {
 };
 
 export default function VideoTypeSelect({ select, length }: VideoTypeSelectProps) {
-  const router = useRouter();
+  const router = useRouter(i18nRouter);
 
   const handleSelect = (value: string | null) => {
     if (value === null) return;

@@ -1,5 +1,7 @@
+import { redirect } from '@/i18n/routing';
 import { auth } from '@/libraries/nextAuth';
-import { forbidden, redirect, unauthorized } from 'next/navigation';
+import { getLocale } from 'next-intl/server';
+import { forbidden, unauthorized } from 'next/navigation';
 import Client from './layout.client';
 
 type AdminLayoutProps = {
@@ -7,10 +9,11 @@ type AdminLayoutProps = {
 };
 
 export default async function Layout({ children }: AdminLayoutProps) {
-  const session = await auth();
+  const [session] = await Promise.all([auth(), getLocale()]);
 
   if (!session) {
-    redirect('/login');
+    redirect({ href: '/login', locale: 'ko' });
+    return;
   }
 
   // userLv
