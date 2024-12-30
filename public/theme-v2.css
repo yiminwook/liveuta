@@ -42,8 +42,8 @@
   --liveuta-txt-invert: #fff;
   --liveuta-txt-light: #fff;
   --liveuta-txt-active: #e06e61;
-  
-  --liveuta-nprogress: #78AA81;
+
+  --liveuta-nprogress: #78aa81;
 
   --liveuta-main: #fff;
   --liveuta-card-bg: #f4f4f5;
@@ -59,12 +59,13 @@
   --liveuta-schedule-stream-text2: #e06e61;
 
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
 
   --mantine-color-default-active: var(--mantine-color-gray-1);
 }
 
-:root[color='theme2'] {
+:root[color="theme2"] {
   --liveuta-first-25: rgba(200, 233, 202, 0.25);
   --liveuta-first-50: rgba(200, 233, 202, 0.5);
   --liveuta-first-75: rgba(200, 233, 202, 0.75);
@@ -109,7 +110,7 @@
   --liveuta-txt-light: #fff;
   --liveuta-txt-active: #279e27;
 
-  --liveuta-nprogress: #93596F;
+  --liveuta-nprogress: #93596f;
 
   --liveuta-main: #fff;
   --liveuta-card-bg: #f4f4f5;
@@ -127,7 +128,7 @@
   --mantine-color-default-active: var(--mantine-color-gray-1);
 }
 
-:root[color='theme3'] {
+:root[color="theme3"] {
   --liveuta-first-25: rgba(172, 231, 255, 0.25);
   --liveuta-first-50: rgba(172, 231, 255, 0.5);
   --liveuta-first-75: rgba(172, 231, 255, 0.75);
@@ -172,7 +173,7 @@
   --liveuta-txt-light: #fff;
   --liveuta-txt-active: #ff6e2b;
 
-  --liveuta-nprogress: #AA9A87;
+  --liveuta-nprogress: #aa9a87;
 
   --liveuta-main: #fff;
   --liveuta-card-bg: #f4f4f5;
@@ -190,7 +191,7 @@
   --mantine-color-default-active: var(--mantine-color-gray-1);
 }
 
-:root[color='theme4'] {
+:root[color="theme4"] {
   --liveuta-first-25: rgba(13, 21, 36, 0.25);
   --liveuta-first-50: rgba(13, 21, 36, 0.5);
   --liveuta-first-75: rgba(13, 21, 36, 0.75);
@@ -235,7 +236,7 @@
   --liveuta-txt-light: #ccc;
   --liveuta-txt-active: gold;
 
-  --liveuta-nprogress: #796D54;
+  --liveuta-nprogress: #796d54;
 
   --liveuta-main: #000;
   --liveuta-card-bg: #f4f4f5;
@@ -253,7 +254,7 @@
   --mantine-color-default-active: var(--mantine-color-gray-4);
 }
 
-:root[color='theme5'] {
+:root[color="theme5"] {
   --liveuta-first-25: rgba(37, 28, 28, 0.25);
   --liveuta-first-50: rgba(37, 28, 28, 0.5);
   --liveuta-first-75: rgba(37, 28, 28, 0.75);
@@ -298,7 +299,7 @@
   --liveuta-txt-light: #ccc;
   --liveuta-txt-active: red;
 
-  --liveuta-nprogress: #577B61;
+  --liveuta-nprogress: #577b61;
 
   --liveuta-main: #000;
   --liveuta-card-bg: #f4f4f5;
@@ -312,6 +313,6 @@
   --liveuta-schedule-stream: hsl(45, 50%, 20%);
   --liveuta-schedule-stream-text1: var(--mantine-color-text);
   --liveuta-schedule-stream-text2: var(--mantine-color-text);
-  
+
   --mantine-color-default-active: var(--mantine-color-gray-4);
 }
