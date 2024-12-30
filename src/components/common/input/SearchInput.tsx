@@ -1,6 +1,7 @@
 import { ActionIcon, Input } from '@mantine/core';
 import { ChangeEventHandler } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
+import TbSearch from '~icons/tabler/search.jsx';
 import css from './SearchInput.module.scss';
 
 type SearchInputProps = {
@@ -43,7 +44,7 @@ export default function SearchInput({
         disabled={disabled}
         onClick={onSubmit}
       >
-        <IconTbSearch color="#fff" />
+        <TbSearch color="#fff" />
       </ActionIcon>
     </Input.Wrapper>
   );

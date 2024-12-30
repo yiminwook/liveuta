@@ -3,6 +3,8 @@ import { TextInput, UnstyledButton } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
+import IonSearch from '~icons/ion/search.jsx';
+import TbX from '~icons/tabler/x.jsx';
 import css from './SearchForm.module.scss';
 
 interface SearchFormProps {
@@ -47,11 +49,11 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
             placeholder="세트리스트로 검색"
           />
           <button className={css.clearButton} type="button" onClick={() => setQuery('')}>
-            <IconTbX />
+            <TbX />
           </button>
         </div>
         <UnstyledButton className={css.submit} type="submit">
-          <IconIonSearch color="#fff" size="1.75rem" />
+          <IonSearch color="#fff" width="1.75rem" height="1.75rem" />
         </UnstyledButton>
       </div>
     </form>

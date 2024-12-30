@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import RxHamburgerMenu from '~icons/radix-icons/hamburger-menu.jsx';
 import css from './HamburgerBtn.module.scss';
 
 type HamburgerBtnProps = {
@@ -10,7 +11,7 @@ type HamburgerBtnProps = {
 export default function HamburgerBtn({ className, onClick }: HamburgerBtnProps) {
   return (
     <button className={classNames(css.button, className)} onClick={onClick}>
-      <IconRxHamburgerMenu size="2rem" color="inherit" />
+      <RxHamburgerMenu width="2rem" height="2rem" color="inherit" />
     </button>
   );
 }

@@ -3,6 +3,7 @@ import { useSetModalStore } from '@/stores/modal';
 import { FilterText, SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import { Button } from '@mantine/core';
+import BiSliders from '~icons/bi/sliders.jsx';
 import css from './ScheduleNav.module.scss';
 import ScheduleNavModal from './ScheduleNavModal';
 
@@ -38,7 +39,7 @@ export default function MobileNavButton({ length, scheduleDto }: MobileNavButton
         label: css.mobileNavBtnLabel,
       }}
       h={40}
-      leftSection={<IconBiSliders />}
+      leftSection={<BiSliders />}
       variant="default"
       onClick={handleOpen}
     >

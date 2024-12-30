@@ -9,6 +9,8 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
 import { useStore } from 'zustand';
+import ClarityLightningSolid from '~icons/clarity/lightning-solid.jsx';
+import MdiYoutube from '~icons/mdi/youtube.jsx';
 import css from './Player.module.scss';
 
 type PlayerProps = {
@@ -96,14 +98,14 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
         }}
       />
       <button className={classnames(css.pipBtn, { hide: !isShow })} onClick={toggleLeft}>
-        <IconMdiYoutube />
+        <MdiYoutube />
       </button>
       <button
         disabled={isLive}
         className={classnames(css.liveBtn, { hide: !isShow })}
         onClick={navigateLive}
       >
-        <IconClarityLightningSolid />
+        <ClarityLightningSolid />
       </button>
     </div>
   );

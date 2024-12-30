@@ -4,6 +4,7 @@ import { TScheduleDto } from '@/types/dto';
 import { Button, Popover } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
 import { usePathname, useSearchParams } from 'next/navigation';
+import FasFilter from '~icons/fa-solid/filter.jsx';
 import ConfirmModal from '../common/modal/ConfirmModal';
 import css from './QueryBtn.module.scss';
 
@@ -36,12 +37,7 @@ export default function QueryButton({ query }: QueryButtonProps) {
   return (
     <Popover withArrow arrowPosition="center">
       <Popover.Target>
-        <Button
-          h={40}
-          bg="var(--mantine-color-body)"
-          variant="outline"
-          leftSection={<IconFaSolidFilter />}
-        >
+        <Button h={40} bg="var(--mantine-color-body)" variant="outline" leftSection={<FasFilter />}>
           검색 필터링 중
         </Button>
       </Popover.Target>

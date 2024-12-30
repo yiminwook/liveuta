@@ -4,6 +4,7 @@ import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import TbArrowNarrowLeft from '~icons/tabler/arrow-narrow-left.jsx';
 import css from './BackHeader.module.scss';
 
 export default function BackHeader() {
@@ -26,7 +27,7 @@ export default function BackHeader() {
   return (
     <header className={css.wrap}>
       <UnstyledButton mr={16} className={css.backBtn} onClick={navigateBack}>
-        <IconTbArrowNarrowLeft width="2rem" color={variable.thirdColorDefault} />
+        <TbArrowNarrowLeft width="2rem" height="2rem" color={variable.thirdColorDefault} />
         <span>돌아가기</span>
       </UnstyledButton>
       <Breadcrumbs separatorMargin="md" color={variable.thirdColorDefault}>

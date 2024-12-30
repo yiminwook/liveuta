@@ -3,6 +3,11 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { JSX } from 'react';
+import IonMusicNote from '~icons/ion/music-note.jsx';
+import TbDeviceDesktopCode from '~icons/tabler/device-desktop-code.jsx';
+import TbSettings from '~icons/tabler/settings.jsx';
+import TbStar from '~icons/tabler/star.jsx';
+import TbTools from '~icons/tabler/tools.jsx';
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../Vaul';
 import css from './BottomTab.module.scss';
 
@@ -13,22 +18,26 @@ type DrawerItem = {
 };
 
 const INTERNAL_ITEMS: DrawerItem[] = [
-  { href: '/setting', text: '설정', icon: <IconTbSettings size="1.5rem" /> },
-  { href: '/dev', text: '개발', icon: <IconTbDeviceDesktopCode size="1.5rem" /> },
+  { href: '/setting', text: '설정', icon: <TbSettings width="1.5rem" height="1.5rem" /> },
+  { href: '/dev', text: '개발', icon: <TbDeviceDesktopCode width="1.5rem" height="1.5rem" /> },
 ];
 
 const EXTERNAL_ITEMS: DrawerItem[] = [
   {
     href: 'https://gall.dcinside.com/mgallery/board/lists?id=kizunaai',
     text: '키갤',
-    icon: <IconTbStar size="1.5rem" />,
+    icon: <TbStar width="1.5rem" height="1.5rem" />,
   },
   {
     href: 'https://gall.dcinside.com/mini/board/lists?id=vuta',
     text: '버우갤',
-    icon: <IconIonMusicNote size="1.5rem" />,
+    icon: <IonMusicNote width="1.5rem" height="1.5rem" />,
   },
-  { href: 'https://uta-tools.vercel.app', text: '우타툴즈', icon: <IconTbTools size="1.5rem" /> },
+  {
+    href: 'https://uta-tools.vercel.app',
+    text: '우타툴즈',
+    icon: <TbTools width="1.5rem" height="1.5rem" />,
+  },
 ];
 
 type BottomDrawerProps = {

@@ -13,6 +13,7 @@ import Image from 'next/image';
 import { MouseEvent } from 'react';
 import { isDesktop } from 'react-device-detect';
 import { toast } from 'sonner';
+import FasStar from '~icons/fa-solid/star.jsx';
 import css from './ChannelCard.module.scss';
 
 type ChannelItemProps = {
@@ -108,7 +109,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
             onClick={handleFavorite}
             disabled={mutatePostFavorite.isPending || mutateDeleteFavorite.isPending}
           >
-            <IconTbStarFilled size="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
+            <FasStar width="1.2rem" height="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
           </button>
           <h3>{channelName}</h3>
         </div>

@@ -2,6 +2,7 @@
 import classnames from 'classnames';
 import Image from 'next/image';
 import { RemoveScroll } from 'react-remove-scroll';
+import Spinner180Ring from '~icons/spinner-180-ring.jsx';
 import loadingImage from '/public/loading.png';
 import Backdrop from '../background/Backdrop';
 import css from './Loading.module.scss';
@@ -25,7 +26,12 @@ export default function MainLoading({ backdrop }: MainLoadingProps) {
               unoptimized
               priority
             />
-            <IconSpinner180Ring className={css.mainLoadingBar} size={130} color="inherit" />
+            <Spinner180Ring
+              className={css.mainLoadingBar}
+              width={130}
+              height={130}
+              color="inherit"
+            />
           </div>
           <p className={css.mainLoadingText}>Loading Now!</p>
         </div>

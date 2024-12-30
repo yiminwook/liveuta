@@ -2,8 +2,13 @@ import { UnstyledButton } from '@mantine/core';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
+import GgUserlane from '~icons/gg/userlane.jsx';
+import IonIosMore from '~icons/ion/ios-more.jsx';
+import MsScheduleOutlineRounded from '~icons/material-symbols/schedule-outline-rounded.jsx';
+import RxPinTop from '~icons/radix-icons/pin-top.jsx';
+import TbHome from '~icons/tabler/home.jsx';
+import TbList from '~icons/tabler/list.jsx';
 import css from './BottomInner.module.scss';
-
 enum Direction {
   up = 'up',
   down = 'down',
@@ -68,7 +73,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
         data-show={showTobButton}
         onClick={scrollUp}
       >
-        <IconRxPinTop style={{ width: '2rem', height: '2rem' }} />
+        <RxPinTop width="2rem" height="2rem" />
       </UnstyledButton>
       <ul className={css.list}>
         <li>
@@ -78,7 +83,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/setlist'}
           >
-            <IconTbList />
+            <TbList />
             <span>세트리</span>
           </UnstyledButton>
         </li>
@@ -89,7 +94,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/channel'}
           >
-            <IconGgUserlane />
+            <GgUserlane />
             <span>채널</span>
           </UnstyledButton>
         </li>
@@ -100,7 +105,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/'}
           >
-            <IconTbHome />
+            <TbHome />
             <span>홈</span>
           </UnstyledButton>
         </li>
@@ -111,13 +116,13 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/schedule'}
           >
-            <IconMsScheduleOutlineRounded />
+            <MsScheduleOutlineRounded />
             <span>스케줄</span>
           </UnstyledButton>
         </li>
         <li>
           <UnstyledButton className={css.item} onClick={openDrawer}>
-            <IconIonIosMore size="1.5rem" />
+            <IonIosMore width="1.5rem" height="1.5rem" />
             <span>더보기</span>
           </UnstyledButton>
         </li>

@@ -1,3 +1,4 @@
+import IonPerson from '~icons/ion/person.jsx';
 import css from './Card.module.scss';
 
 interface CardViewerProps {
@@ -7,7 +8,7 @@ interface CardViewerProps {
 export default function CardViewer({ viewer }: CardViewerProps) {
   return (
     <>
-      <IconIonPerson className={css.statusSvg} size={'0.75rem'} />
+      <IonPerson className={css.statusSvg} width="0.75rem" height="0.75rem" />
       {viewer?.toString() || '?'}
     </>
   );

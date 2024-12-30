@@ -6,6 +6,8 @@ import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
+import IonIosSearch from '~icons/ion/ios-search.jsx';
+import TbX from '~icons/tabler/x.jsx';
 import css from './Nav.module.scss';
 
 export default function Nav() {
@@ -59,11 +61,11 @@ export default function Nav() {
             placeholder="채널명으로 검색"
           />
           <button className={css.clearButton} type="button" onClick={() => setInput('')}>
-            <IconTbX />
+            <TbX />
           </button>
         </div>
         <UnstyledButton className={css.submit} type="submit">
-          <IconIonIosSearch color="#fff" />
+          <IonIosSearch color="#fff" />
         </UnstyledButton>
       </form>
     </div>

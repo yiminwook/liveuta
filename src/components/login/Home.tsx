@@ -6,6 +6,9 @@ import { useMutation } from '@tanstack/react-query';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import { toast } from 'sonner';
+import LogosDiscordIcon from '~icons/logos/discord-icon.jsx';
+import LogosGoogleIcon from '~icons/logos/google-icon.jsx';
+import RiKakaoTalkFill from '~icons/ri/kakao-talk-fill.jsx';
 import Background from '../common/background/Background';
 import css from './Home.module.scss';
 
@@ -40,7 +43,7 @@ export default function Home() {
               onClick={() => mutateLogin.mutate('google')}
               disabled={mutateLogin.isPending}
             >
-              <IconLogosGoogleIcon />
+              <LogosGoogleIcon />
             </ActionIcon>
             <ActionIcon
               variant="white"
@@ -50,7 +53,7 @@ export default function Home() {
               onClick={() => mutateLogin.mutate('kakao')}
               disabled={mutateLogin.isPending}
             >
-              <IconRiKakaoTalkFill />
+              <RiKakaoTalkFill />
             </ActionIcon>
             <ActionIcon
               variant="white"
@@ -60,7 +63,7 @@ export default function Home() {
               onClick={() => mutateLogin.mutate('discord')}
               disabled={mutateLogin.isPending}
             >
-              <IconLogosDiscordIcon />
+              <LogosDiscordIcon />
             </ActionIcon>
           </div>
         </div>

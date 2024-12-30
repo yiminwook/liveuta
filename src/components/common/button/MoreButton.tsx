@@ -1,6 +1,7 @@
 import { Button, ButtonProps } from '@mantine/core';
 import classNames from 'classnames';
 import Link from 'next/link';
+import IonArrowRightC from '~icons/ion/arrow-right-c.jsx';
 import css from './MoreButton.module.scss';
 
 type MoreButtonProps = ButtonProps & {
@@ -22,7 +23,7 @@ export default function MoreButton({
       component={component as 'symbol' | undefined}
       href={href}
       onClick={onClick}
-      rightSection={<IconIonArrowRightC />}
+      rightSection={<IonArrowRightC />}
     >
       More
     </Button>

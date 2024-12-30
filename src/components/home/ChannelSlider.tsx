@@ -5,6 +5,7 @@ import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
 import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import IonIosMore from '~icons/ion/ios-more.jsx';
 import css from './ChannelSlider.module.scss';
 
 type ChannelSliderProps = {
@@ -49,7 +50,7 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
                       className="swiper-no-swiping" // 슬라이드 이동 방지해야 hover 가능
                       w="100%"
                     >
-                      <IconIonIosMore style={{ width: '1.5rem', height: '1.5rem' }} />
+                      <IonIosMore width="1.5rem" height="1.5rem" />
                     </Button>
                   </Center>
                 </HoverCard.Target>

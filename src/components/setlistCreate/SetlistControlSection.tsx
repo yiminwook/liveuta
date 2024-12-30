@@ -6,6 +6,7 @@ import { ActionIcon, Button, TextInput } from '@mantine/core';
 import { Checkbox } from '@mantine/core';
 import { ChangeEvent, createRef, useEffect, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
+import TbCirclePlus from '~icons/tabler/circle-plus.jsx';
 import {
   copy,
   usePlayerActions,
@@ -58,7 +59,7 @@ export function SetlistItemInput() {
         onChange={(e) => setInput(e.currentTarget.value)}
       />
       <ActionIcon className={css.addButton} variant="ghost" onClick={handleAdd}>
-        <IconTbCirclePlus />
+        <TbCirclePlus />
       </ActionIcon>
     </>
   );

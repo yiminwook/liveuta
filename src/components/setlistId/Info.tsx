@@ -15,6 +15,9 @@ import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
 import { isMobile } from 'react-device-detect';
 import { toast } from 'sonner';
+import BiMusicNoteList from '~icons/bi/music-note-list.jsx';
+import IonArrowBack from '~icons/ion/arrow-back.jsx';
+import LogosYoutubeIcon from '~icons/logos/youtube-icon.jsx';
 import css from './Info.module.scss';
 
 type InfoProps = {
@@ -73,7 +76,7 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
           variant="transparent"
           onClick={() => router.back()}
         >
-          <IconIonArrowBack width="1.2rem" />
+          <IonArrowBack width="1.2rem" height="1.2rem" />
           <span>Back</span>
         </Button>
         <div className={css.navRight}>
@@ -96,7 +99,7 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
             variant="transparent"
             onClick={() => handleLocation(videoUrl)}
           >
-            <IconLogosYoutubeIcon width="1.2rem" />
+            <LogosYoutubeIcon width="1.2rem" height="1.2rem" />
             유튜브
           </Button>
           <Button
@@ -106,7 +109,7 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
             variant="transparent"
             href="/setlist"
           >
-            <IconBiMusicNoteList />
+            <BiMusicNoteList width="1.2rem" height="1.2rem" />
             리스트
           </Button>
         </div>

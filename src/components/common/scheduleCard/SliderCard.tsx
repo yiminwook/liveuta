@@ -2,6 +2,12 @@ import { generateVideoUrl } from '@/libraries/youtube/url';
 import { STAT_MAPPER, TContentsData } from '@/types/api/mongoDB';
 import { ActionIcon, Badge, Card, Text, Tooltip } from '@mantine/core';
 import variable from '@variable';
+import FasStar from '~icons/fa-solid/star.jsx';
+import IonPerson from '~icons/ion/person.jsx';
+import IonPlus from '~icons/ion/plus.jsx';
+import MsOpenInNew from '~icons/material-symbols/open-in-new.jsx';
+import MdiBlock from '~icons/mdi/block.jsx';
+import TbBellRingingFilled from '~icons/tabler/bellRingingFilled.jsx';
 import CopyButton from '../button/CopyButton';
 import css from './Card.module.scss';
 import CardImage from './CardImage';
@@ -52,7 +58,7 @@ export default function SliderCard({
           size="md"
           data-status={STAT_MAPPER[content.isStream]}
           color={variable.thirdColorDefault}
-          leftSection={content.isStream === 'TRUE' && <IconIonPerson color="#fff" />}
+          leftSection={content.isStream === 'TRUE' && <IonPerson color="#fff" />}
         >
           {content.isStream === 'TRUE'
             ? new Intl.NumberFormat('kr', { notation: 'compact' })
@@ -74,27 +80,27 @@ export default function SliderCard({
         <div>
           <Tooltip label="알림설정" position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickAlarm}>
-              <IconTbBellRingingFilled color={variable.thirdColorDefault} />
+              <TbBellRingingFilled color={variable.thirdColorDefault} />
             </ActionIcon>
           </Tooltip>
           <Tooltip label="멀티뷰추가" position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickAddMultiView}>
-              <IconIonPlus color={variable.thirdColorDefault} />
+              <IonPlus color={variable.thirdColorDefault} />
             </ActionIcon>
           </Tooltip>
           <Tooltip label={`즐겨찾기 ${isFavorite ? '해제' : '추가'}`} position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickFavorite}>
-              <IconTbStarFilled color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
+              <FasStar color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
             </ActionIcon>
           </Tooltip>
           <Tooltip label="채널블럭" position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickBlock}>
-              <IconMdiBlock color={variable.thirdColorDefault} />
+              <MdiBlock color={variable.thirdColorDefault} />
             </ActionIcon>
           </Tooltip>
           <Tooltip label="새로열기" position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickNewTab}>
-              <IconMsOpenInNew color={variable.thirdColorDefault} />
+              <MsOpenInNew color={variable.thirdColorDefault} />
             </ActionIcon>
           </Tooltip>
           <CopyButton value={generateVideoUrl(content.videoId)} />

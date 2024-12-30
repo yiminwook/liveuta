@@ -2,7 +2,6 @@ import path from 'node:path';
 import NextBundleAnalyzer from '@next/bundle-analyzer';
 import { SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
-import AutoImport from 'unplugin-auto-import/webpack';
 import IconsResolver from 'unplugin-icons/resolver';
 import Icons from 'unplugin-icons/webpack';
 
@@ -94,22 +93,22 @@ const nextConfig: NextConfig = {
       },
     );
 
-    config.plugins.push(
-      AutoImport({
-        resolvers: [
-          IconsResolver({
-            prefix: 'Icon',
-            extension: 'jsx',
-            alias: {
-              tb: 'tabler',
-              rx: 'radix-icons',
-              ms: 'material-symbols',
-              spinner: 'svg-spinners',
-            },
-          }),
-        ],
-      }),
-    );
+    // config.plugins.push(
+    //   AutoImport({
+    //     resolvers: [
+    //       IconsResolver({
+    //         prefix: 'Icon',
+    //         extension: 'jsx',
+    //         alias: {
+    //           tb: 'tabler',
+    //           rx: 'radix-icons',
+    //           ms: 'material-symbols',
+    //           spinner: 'svg-spinners',
+    //         },
+    //       }),
+    //     ],
+    //   }),
+    // );
 
     config.plugins.push(
       Icons({
