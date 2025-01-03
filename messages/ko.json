@@ -1,5 +1,6 @@
 {
   "hello": "안녕하세요",
+  "dayjsTemplate": "YYYY년 MM월 DD일",
   "actions": {
     "copy": "복사",
     "paste": "붙여넣기",
@@ -14,18 +15,234 @@
     "upload": "업로드",
     "download": "다운로드",
     "submit": "제출",
-    "cancel": "취소"
+    "cancel": "취소",
+    "save": "저장",
+    "edit": "수정",
+    "openNewTab": "새 탭에서 열기"
   },
-  "error": {},
-  "global": {},
-  "home": {},
-  "schedule": {},
-  "multiView": {},
-  "channel": {},
-  "request": {},
-  "setlist": {},
-  "setlistCreate": {},
-  "settings": {},
-  "dev": {},
-  "auth": {}
+  "common": {
+    "live": "라이브",
+    "favorite": "즐겨찾기",
+    "hour": "시간",
+    "hourChar": "시",
+    "minute": "분",
+    "second": "초"
+  },
+  "error": {
+    "noBrowserNotificationError": "브라우저 알림허용 설정이 되어있지 않습니다.",
+    "notLoggedInError": "로그인 후 이용가능한 서비스입니다.",
+    "serverError": "서버에 문제가 발생했습니다."
+  },
+  "global": {
+    "bottomTab": {
+      "drawer": {
+        "title": "사이트 맵",
+        "description": "링크를 선택하세요"
+      }
+    },
+    "config": {
+      "reactQuery": {
+        "communicationError": "통신 에러"
+      }
+    },
+    "externalLink": {
+      "title": "외부 링크",
+      "kizunaAiGallery": "키즈나 아이 갤러리",
+      "vutaGallery": "버튜버 우타와꾸 갤러리",
+      "utaTools": "우타툴즈",
+      "ezgif": "EZ GIF"
+    },
+    "footer": {
+      "site": "이 사이트는 비영리 버튜버 팬 사이트입니다"
+    },
+    "header": {
+      "userAvatarAlt": "사용자 아바타",
+      "internalLink": "목차"
+    },
+    "iframe": {
+      "open": "새로 열기"
+    },
+    "noData": {
+      "imageAlt": "조회된 데이터가 없습니다."
+    },
+    "player": {
+      "title": "플레이어",
+      "play": "재생",
+      "pause": "일시정지",
+      "cannotPlayError": "재생할 수 없습니다."
+    },
+    "session": {
+      "sessionExpired": "세션이 만료되었습니다.",
+      "fetching": "서버와 통신중입니다."
+    }
+  },
+  "home": {
+    "title": "홈",
+    "blockChannel": "채널을 차단하시겠습니까?",
+    "searchSchedule": "스케줄을 검색해보세요",
+    "searchInputPlaceholder": "채널명으로 검색",
+    "recentlyAddedChannel": "최근 추가된 채널"
+  },
+  "auth": {
+    "login": {
+      "title": "로그인",
+      "loginPage": "로그인 페이지",
+      "loginImageAlt": "로그인 이미지",
+      "startWithSocial": "소셜 계정으로 시작하기"
+    },
+    "logout": {
+      "title": "로그아웃"
+    },
+    "register": {
+      "title": "회원가입"
+    }
+  },
+  "channel": {
+    "title": "채널",
+    "addFavoriteChannel": "즐겨찾기에 추가하시겠습니까?",
+    "removeFavoriteChannel": "즐겨찾기에서 제거하시겠습니까?",
+    "blockChannel": "채널을 차단하시겠습니까?",
+    "unblockChannel": "채널 차단을 해제하시겠습니까?",
+    "channelCard": {
+      "hidden": "비공개",
+      "subscriber": "구독자",
+      "video": "동영상",
+      "Details": "상세보기"
+    },
+    "channelSection": {
+      "alphabetical": "가나다순",
+      "createdAt": "등록순",
+      "desktopRequest": "채널 등록",
+      "mobileRequest": "등록",
+      "inputPlaceholder": "채널명으로 검색"
+    }
+  },
+  "dev": {
+    "title": "개발",
+    "browserNotificationAllowed": "브라우저 알림이 허용되었습니다.",
+    "postBox": {
+      "title": "제목",
+      "inputLabel": "내용",
+      "imageUrlInput": "이미지 URL",
+      "linkLabel": "링크",
+      "send": "전송"
+    },
+    "tokenBox": {
+      "tokenError": "토큰을 가져오는데 실패했습니다.",
+      "gettingToken": "토큰을 가져오는 중입니다."
+    }
+  },
+  "multiView": {
+    "title": "멀티뷰"
+  },
+  "schedule": {
+    "title": "일정",
+    "nav": {
+      "scheduled": "예정",
+      "live": "라이브",
+      "daily": "24시",
+      "all": "전체"
+    },
+    "queryButton": {
+      "clearFilter": "검색 필터를 초기화하시겠습니까?",
+      "filtering": "필터링 중입니다.",
+      "now": "현재"
+    },
+    "scheduleCard": {
+      "imageAlt": "의 라이브방송",
+      "setAlarm": "알람 설정",
+      "addMultiView": "멀티뷰 추가",
+      "favorite": "즐겨찾기",
+      "blockChannel": "채널 차단",
+      "copyLink": "링크 복사",
+      "linkCopied": "링크가 복사되었습니다."
+    },
+    "scheduleSection": {
+      "searchAtChannelPage": "채널 페이지에서 검색"
+    },
+    "videoType": {
+      "group": "와꾸종류"
+    }
+  },
+  "request": {
+    "title": "요청"
+  },
+  "setlist": {
+    "title": "세트리",
+    "nav": {
+      "sortBroadcast": "방송일",
+      "sortCreate": "작성일"
+    },
+    "postDrawer": {
+      "uploadSetlist": "세트리 업로드",
+      "gotoCreateSetlist": "세트리 작성하서 가기"
+    },
+    "postForm": {
+      "linkLabel": "유튜브 링크",
+      "textAreaPlaceholder": "38:53 노래제목1\n138:54 노래제목2\n238:54 노래제목3\n338:54 노래제목4",
+      "formSuccess": "세트리가 업로드되었습니다.",
+      "invalidUrlError": "유효하지 않은 유튜브 URL입니다.",
+      "emptySetlistError": "세트리를 입력해주세요."
+    },
+    "searchForm": {
+      "searchPlaceholder": "세트리로 검색"
+    },
+    "tabel": {
+      "sortBroadcast": "방송일",
+      "sortCreate": "작성일"
+    }
+  },
+  "setlistCreate": {
+    "title": "세트리 작성",
+    "context": {
+      "copied": "세트리를 복사하였습니다",
+      "noSetlistError": "복사할 항목이 없습니다."
+    },
+    "setlistControlSection": {
+      "automaticSort": "자동 정렬"
+    },
+    "table": {
+      "headTime": "시간",
+      "headValue": "텍스트"
+    }
+  },
+  "setlistId": {
+    "desc": {
+      "modified": "수정되었습니다",
+      "noContentError": "내용을 입력해주세요."
+    },
+    "info": {
+      "deleted": "삭제되었습니다.",
+      "deleteConfirm": "삭제하시겠습니까?",
+      "youtube": "유튜브",
+      "list": "목록",
+      "avatarAlt": "채널 아이콘",
+      "broadcastDate": "방송일",
+      "createDate": "작성일",
+      "lastModified": "수정일"
+    }
+  },
+  "settings": {
+    "title": "설정",
+    "autoSync": {
+      "title": "자동 동기화",
+      "onLabel": "시용",
+      "offLabel": "사용 안 함",
+      "refreshInterval": "새로고침 간격"
+    },
+    "language": {
+      "title": "언어"
+    },
+    "theme": {
+      "title": "테마"
+    }
+  },
+  "hooks": {
+    "useReservePush": {
+      "tokenError": "토큰을 가져오는데 실패했습니다.",
+      "title": "스케줄 알림",
+      "bodyStart": "곧",
+      "bodyEnd": "의 방송이 시작됩니다."
+    }
+  }
 }
