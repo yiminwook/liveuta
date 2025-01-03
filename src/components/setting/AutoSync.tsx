@@ -1,5 +1,6 @@
 'use client';
-import { AUTO_SYNC_REFRESH_INTERVAL_OPTIONS, useAutoSync } from '@/hooks/useStorage';
+import { useAutoSync } from '@/hooks/useStorage';
+import { siteConfig } from '@/siteConfig';
 import { Radio, Switch } from '@mantine/core';
 import css from './AutoSync.module.scss';
 import settingCss from './Setting.module.scss';
@@ -25,7 +26,7 @@ export default function AutoSync() {
           <div className={css.autoSyncSubSetting}>
             <label className={settingCss.settingLabel}>동기화 주기</label>
             <div className={css.autoSyncRefreshInterval}>
-              {AUTO_SYNC_REFRESH_INTERVAL_OPTIONS.map((interval) => (
+              {siteConfig.refreshIntervalOptions.map((interval) => (
                 <Radio
                   key={interval}
                   label={`${interval}분`}
