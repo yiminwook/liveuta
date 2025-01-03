@@ -35,7 +35,7 @@ export default function LanguageSelect() {
           )}
         </For>
       </div>
-      <p>{t('hello')}</p>
+      <p>{t('Hello')}</p>
     </div>
   );
 }

@@ -1,4 +1,31 @@
 {
-  "Error": "エラー",
-  "hello": "こんにちは"
+  "Hello": "こんにちは",
+  "Actions": {
+    "Copy": "コピー",
+    "Paste": "",
+    "Cut": "",
+    "More": "もっと",
+    "Open": "",
+    "Close": "",
+    "Clear": "",
+    "Add": "",
+    "Remove": "",
+    "Sort": "",
+    "Upload": "アップロード",
+    "Download": "ダウンロード",
+    "Submit": "",
+    "Cancel": ""
+  },
+  "Error": {},
+  "Global": {},
+  "Home": {},
+  "Schedule": {},
+  "MultiView": {},
+  "Channel": {},
+  "Request": {},
+  "Setlist": {},
+  "SetlistCreate": {},
+  "Settings": {},
+  "Dev": {},
+  "Auth": {}
 }

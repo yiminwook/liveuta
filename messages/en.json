@@ -1,4 +1,31 @@
 {
-  "Error": "Error",
-  "hello": "Hello"
+  "Hello": "Hello",
+  "Actions": {
+    "Copy": "Copy",
+    "Paste": "Paste",
+    "Cut": "Cut",
+    "More": "More",
+    "Open": "Open",
+    "Close": "Close",
+    "Clear": "Clear",
+    "Add": "Add",
+    "Remove": "Remove",
+    "Sort": "Sort",
+    "Upload": "Upload",
+    "Download": "Download",
+    "Submit": "Submit",
+    "Cancel": "Cancel"
+  },
+  "Error": {},
+  "Global": {},
+  "Home": {},
+  "Schedule": {},
+  "MultiView": {},
+  "Channel": {},
+  "Request": {},
+  "Setlist": {},
+  "SetlistCreate": {},
+  "Settings": {},
+  "Dev": {},
+  "Auth": {}
 }

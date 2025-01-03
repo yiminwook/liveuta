@@ -1,4 +1,31 @@
 {
-  "Error": "에러",
-  "hello": "안녕하세요"
+  "Hello": "안녕하세요",
+  "Actions": {
+    "Copy": "복사",
+    "Paste": "붙여넣기",
+    "Cut": "잘라내기",
+    "Clear": "지우기",
+    "More": "더보기",
+    "Add": "추가",
+    "Remove": "제거",
+    "Sort": "정렬",
+    "Open": "열기",
+    "Close": "닫기",
+    "Upload": "업로드",
+    "Download": "다운로드",
+    "Submit": "제출",
+    "Cancel": "취소"
+  },
+  "Error": {},
+  "Global": {},
+  "Home": {},
+  "Schedule": {},
+  "MultiView": {},
+  "Channel": {},
+  "Request": {},
+  "Setlist": {},
+  "SetlistCreate": {},
+  "Settings": {},
+  "Dev": {},
+  "Auth": {}
 }
