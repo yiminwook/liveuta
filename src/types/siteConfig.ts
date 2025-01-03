@@ -7,4 +7,7 @@ export type Locale = {
 export type SiteConfig = {
   defaultLocale: LocaleCode;
   locales: Locale[];
+  defaultUseAutoSync: boolean;
+  defaultRefreshInterval: number;
+  refreshIntervalOptions: number[];
 };

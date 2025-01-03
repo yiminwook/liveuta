@@ -16,4 +16,7 @@ export const siteConfig: SiteConfig = {
       name: '日本語',
     },
   ],
+  defaultUseAutoSync: true,
+  defaultRefreshInterval: 3,
+  refreshIntervalOptions: [3, 5, 10, 15, 30, 60],
 };
