@@ -3,7 +3,7 @@ import { useTransition } from '@/hooks/useTransition';
 import { ModalProps } from '@/stores/modal';
 import { useMultiViewStore } from '@/stores/multiView';
 import classNames from 'classnames';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import css from './MultiListModal.module.scss';

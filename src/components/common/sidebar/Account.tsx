@@ -1,12 +1,12 @@
 'use client';
 import useStopPropagation from '@/hooks/useStopPropagation';
+import { usePathname } from '@/i18n/routing';
 import { useAppCtx } from '@/stores/app';
 import { Avatar, CloseButton } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import classnames from 'classnames';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
-import { usePathname } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 import { RemoveScroll } from 'react-remove-scroll';

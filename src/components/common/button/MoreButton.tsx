@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from '@mantine/core';
 import classNames from 'classnames';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import IonArrowRightC from '~icons/ion/arrow-right-c.jsx';
 import css from './MoreButton.module.scss';
 

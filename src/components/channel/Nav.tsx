@@ -1,4 +1,5 @@
 'use client';
+import { useRouter as i18nRouter } from '@/i18n/routing';
 import { TChannelDto } from '@/libraries/mongoDB/getAllChannel';
 import { Button, Flex, SegmentedControl, TextInput, UnstyledButton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
@@ -12,7 +13,7 @@ import css from './Nav.module.scss';
 
 export default function Nav() {
   const searchParams = useSearchParams();
-  const router = useRouter();
+  const router = useRouter(i18nRouter);
   const [input, setInput] = useState(searchParams.get('q') || '');
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
 

@@ -2,10 +2,12 @@ import path from 'node:path';
 import NextBundleAnalyzer from '@next/bundle-analyzer';
 import { SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
-import IconsResolver from 'unplugin-icons/resolver';
+import createNextIntlPlugin from 'next-intl/plugin';
 import Icons from 'unplugin-icons/webpack';
 
 // const isDevelopment = process.env.NODE_ENV !== 'production';
+
+const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   eslint: {
@@ -93,23 +95,6 @@ const nextConfig: NextConfig = {
       },
     );
 
-    // config.plugins.push(
-    //   AutoImport({
-    //     resolvers: [
-    //       IconsResolver({
-    //         prefix: 'Icon',
-    //         extension: 'jsx',
-    //         alias: {
-    //           tb: 'tabler',
-    //           rx: 'radix-icons',
-    //           ms: 'material-symbols',
-    //           spinner: 'svg-spinners',
-    //         },
-    //       }),
-    //     ],
-    //   }),
-    // );
-
     config.plugins.push(
       Icons({
         autoInstall: true,
@@ -158,4 +143,4 @@ const SENTRY_BUILD_OPTIONS: SentryBuildOptions = {
 };
 
 // turbopack 호환 안될시 롤백
-export default withSentryConfig(withBundleAnalyzer(nextConfig), SENTRY_BUILD_OPTIONS);
+export default withSentryConfig(withBundleAnalyzer(withNextIntl(nextConfig)), SENTRY_BUILD_OPTIONS);

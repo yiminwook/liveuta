@@ -3,7 +3,7 @@
 import { useSetAppStore } from '@/stores/app';
 import { Avatar } from '@mantine/core';
 import { Session } from 'next-auth';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 import DesktopNav from './DesktopNav';

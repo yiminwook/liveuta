@@ -41,8 +41,6 @@ pre-push:
       run: pnpm biome format --no-errors-on-unmatched --write "{push_files}"
       exclude:
         - "*.{yaml}"
-        - "auto-imports.d.ts"
     lint:
       glob: "*.{js,ts,jsx,tsx}"
       run: pnpm next lint --file "{push_files}"
-      exclude: "auto-imports.d.ts"

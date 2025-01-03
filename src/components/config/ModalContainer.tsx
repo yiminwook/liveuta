@@ -1,7 +1,7 @@
 'use client';
 import { PORTAL_ID } from '@/constants';
+import { usePathname } from '@/i18n/routing';
 import { useModalStore } from '@/stores/modal';
-import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function ModalContainer() {

@@ -1,6 +1,7 @@
 import SearchInput from '@/components/common/input/SearchInput';
 import Modal from '@/components/common/modal/Modal';
 import { useTransition } from '@/hooks/useTransition';
+import { useRouter as i18nRouter } from '@/i18n/routing';
 import { ModalProps, useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
 import { Button, CloseButton } from '@mantine/core';
@@ -39,7 +40,7 @@ export default function ScheduleNavModal({
   const searchParams = useSearchParams();
   const { modifier, onAnimationEnd, exit } = useTransition();
   const modalActions = useSetModalStore();
-  const router = useRouter(); // transition 효과 제외
+  const router = useRouter(i18nRouter); // transition 효과 제외
 
   const isFavorite = searchParams.get('isFavorite') === 'true';
 

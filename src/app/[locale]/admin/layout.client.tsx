@@ -3,7 +3,7 @@ import NavItem from '@/components/common/sidebar/NavItem';
 import { AppShell, Burger, Button, Flex, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import varialble from '@variable';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import css from './layout.module.scss';
 
 type Props = {
