@@ -104,16 +104,6 @@ const nextConfig: NextConfig = {
     authInterrupts: true, // 401, 403
     reactCompiler: true,
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'], // tree shaking
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-        },
-        '*.scss': {
-          loaders: ['sass-loader'],
-        },
-      },
-    },
   },
 };
 
