@@ -7,8 +7,6 @@ import Icons from 'unplugin-icons/webpack';
 
 // const isDevelopment = process.env.NODE_ENV !== 'production';
 
-const withNextIntl = createNextIntlPlugin();
-
 const nextConfig: NextConfig = {
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -20,14 +18,11 @@ const nextConfig: NextConfig = {
     // ts빌드 에러를 무시하고 싶다면 아래 옵션을 true로 변경하세요.
     ignoreBuildErrors: false,
   },
-  // experimental: {
-  //   optimizePackageImports: ["@mantine/core", "@mantine/hooks"], // tree shaking, 제대로 작동하지 않음.
-  // },
   reactStrictMode: true,
   compiler: {
-    removeConsole: {
-      exclude: ['error', 'warn', 'log', 'info'],
-    },
+    // removeConsole: {
+    //   exclude: ['error', 'warn', 'log', 'info'],
+    // },
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'src', 'styles')], // style 폴더에 있는 파일은 이름만으로 import 가능(경로 축약)
@@ -122,9 +117,9 @@ const nextConfig: NextConfig = {
   },
 };
 
-const withBundleAnalyzer = NextBundleAnalyzer({
-  enabled: false,
-});
+const withNextIntl = createNextIntlPlugin();
+
+const withBundleAnalyzer = NextBundleAnalyzer({ enabled: false });
 
 const isEnableSentry = !!process.env.NEXT_PUBLIC_SENTRY_DSN && !!process.env.SENTRY_AUTH_TOKEN;
 

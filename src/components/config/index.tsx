@@ -38,8 +38,7 @@ export default async function Configs({ children, cookies, colorScheme }: Config
         <AppProvider
           initState={{
             theme: cookies.theme,
-            // defaultVideoId: metadata.default_video_id,
-            defaultVideoId: 'LioiUVqnkNI',
+            defaultVideoId: metadata.default_video_id,
           }}
         >
           <ReactQuery>

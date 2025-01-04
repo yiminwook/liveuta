@@ -1,9 +1,9 @@
 'use client';
 import NavItem from '@/components/common/sidebar/NavItem';
+import { Link } from '@/i18n/routing';
 import { AppShell, Burger, Button, Flex, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import varialble from '@variable';
-import { Link } from '@/i18n/routing';
 import css from './layout.module.scss';
 
 type Props = {
@@ -26,9 +26,11 @@ export default function Client({ children }: Props) {
         <Flex align="center" h="100%" px="sm" justify="space-between">
           <Flex align="center">
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" mr="sm" />
-            <Title component="h1" size="1.25rem" c={varialble.thirdColorDefault}>
-              LU Admin
-            </Title>
+            <Link href="/admin">
+              <Title component="h1" size="1.25rem" c={varialble.thirdColorDefault}>
+                LU Admin
+              </Title>
+            </Link>
           </Flex>
           <Flex>
             <Button component={Link} href="/" size="xs">

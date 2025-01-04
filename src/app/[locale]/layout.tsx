@@ -28,10 +28,10 @@ import type { ReactNode } from 'react';
 
 type Props = {
   children?: ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
@@ -70,7 +70,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 }
 
 /** Default Route Segment Config */
-export const dynamicParams = true; //fallback
+export const dynamicParams = false; //fallback: 'blocking' BUG!! 404 이동이 안됨.
 export const preferredRegion = ['icn1'];
 export const metadata: Metadata = DEFAULT_METADATA;
 export const viewport: Viewport = {
