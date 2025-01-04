@@ -7,6 +7,10 @@ import axios from 'axios';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import css from './not-found.module.scss';
+import '@/styles/mantine/core.scss';
+import '@/styles/mantine/theme.scss';
+import '/public/theme-v2.css';
+import '@/styles/global.scss';
 
 export default function Error({
   error,

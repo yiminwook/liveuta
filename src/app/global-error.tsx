@@ -5,6 +5,10 @@ import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
+import '@/styles/mantine/core.scss';
+import '@/styles/mantine/theme.scss';
+import '/public/theme-v2.css';
+import '@/styles/global.scss';
 
 export default function GlobalError({
   error,
