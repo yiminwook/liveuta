@@ -23,6 +23,7 @@ import { isDarkModeEnabled } from '@/utils/helper';
 import type { Metadata, Viewport } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
+import { notFound } from 'next/navigation';
 import { userAgent } from 'next/server';
 import type { ReactNode } from 'react';
 
@@ -37,6 +38,9 @@ export async function generateStaticParams() {
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
   setRequestLocale(locale);
 
   const cookies = await getCookies();
