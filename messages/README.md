@@ -9,8 +9,7 @@
     // 각각의 네임스페이스에 사용되는 컴포넌트들 번역
     "component1": {
       "element1": "Ado"
-    },
-    ...
+    }
   },
   // 각 페이지 별 번역
   "page1": {
@@ -19,14 +18,11 @@
     "component1": {
       "element1": "Ready for my show"
     },
-    "component2": {},
-    ...
+    "component2": {}
   },
   "page2": {
     "title": "page2"
   },
-  ...
-  ,
   // 에러들
   "error": {
     "someError": "some error"
