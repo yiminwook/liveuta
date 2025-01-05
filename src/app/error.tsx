@@ -3,7 +3,6 @@
 'use client';
 import character from '@/assets/image/character-6.png';
 import * as Sentry from '@sentry/nextjs';
-import axios from 'axios';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import css from './not-found.module.scss';
@@ -15,15 +14,6 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void; //세그먼트를 다시 렌더링하여 복구 시도
 }) {
-  useEffect(() => {
-    console.error('Error-Boundary', process.env.NODE_ENV, error);
-    axios({
-      method: 'POST',
-      url: '/api/v1/log/error',
-      data: { message: error.message, stack: error.stack, digest: error.digest },
-    }).then((res) => res.status === 200 && console.log('에러 전송 성공'));
-  }, [error]);
-
   useEffect(() => {
     Sentry.captureException(error);
   }, [error]);
