@@ -3,10 +3,6 @@ import { siteConfig } from '@/siteConfig';
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import Client from './not-found.client';
-import '@/styles/mantine/core.scss';
-import '@/styles/mantine/theme.scss';
-import '/public/theme-v2.css';
-import '@/styles/global.scss';
 
 export const metadata: Metadata = {
   title: '404: Not Found',
