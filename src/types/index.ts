@@ -3,24 +3,11 @@ export type Promised<T extends Function<any>> = Awaited<ReturnType<T>>;
 
 export type TTheme = 'theme1' | 'theme2' | 'theme3' | 'theme4' | 'theme5';
 
-export enum SelectedText {
-  all = '전체',
-  stream = '방송',
-  video = '동영상',
-}
-
 export enum FilterType {
   scheduled = 'scheduled',
   live = 'live',
   daily = 'daily',
   all = 'all',
-}
-
-export enum FilterText {
-  scheduled = '예정',
-  live = '라이브',
-  daily = '24시',
-  all = '전체',
 }
 
 export enum StreamCategory {
