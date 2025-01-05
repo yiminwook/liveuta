@@ -1,4 +1,4 @@
-import { siteConfig } from '@/siteConfig';
+import { siteConfig } from '@/constants/siteConfig';
 import { getCookies } from '@/utils/getCookie';
 import { getRequestConfig } from 'next-intl/server';
 

@@ -1,7 +1,7 @@
 'use client';
 import For from '@/components/common/utils/For';
+import { siteConfig } from '@/constants/siteConfig';
 import { setUserLocale } from '@/libraries/next-intl';
-import { siteConfig } from '@/siteConfig';
 import { LocaleCode } from '@/types/siteConfig';
 import { useLocale, useTranslations } from 'next-intl';
 import { useTransition } from 'react';

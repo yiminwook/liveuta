@@ -1,4 +1,4 @@
-import { siteConfig } from '@/siteConfig';
+import { siteConfig } from '@/constants/siteConfig';
 import { useLocalStorage } from '@mantine/hooks';
 import { z } from 'zod';
 

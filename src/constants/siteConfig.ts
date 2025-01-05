@@ -1,4 +1,4 @@
-import { SiteConfig } from './types/siteConfig';
+import { SiteConfig } from '@/types/siteConfig';
 
 export const siteConfig: SiteConfig = {
   defaultLocale: 'ko',
