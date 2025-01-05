@@ -19,4 +19,4 @@ export const siteConfig: SiteConfig = {
   defaultUseAutoSync: true,
   defaultRefreshInterval: 3,
   refreshIntervalOptions: [3, 5, 10, 15, 30, 60],
-};
+} as const;

@@ -1,6 +1,6 @@
 'use client';
 import useStopPropagation from '@/hooks/useStopPropagation';
-import { usePathname } from '@/i18n/routing';
+import { usePathname } from 'next/navigation';
 import { useAppCtx } from '@/stores/app';
 import { Avatar, CloseButton } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';

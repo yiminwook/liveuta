@@ -1,6 +1,5 @@
 'use client';
-import { useRouter as i18nRouter } from '@/i18n/routing';
-import { Link } from '@/i18n/routing';
+import Link from 'next/link';
 import { Button, SegmentedControl } from '@mantine/core';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
@@ -20,7 +19,7 @@ type SearchFormProps = {
 };
 
 export default function Nav({ searchParams, session }: SearchFormProps) {
-  const router = useRouter(i18nRouter);
+  const router = useRouter();
 
   function handleOrderChange(value: OrderType) {
     const query = new URLSearchParams();

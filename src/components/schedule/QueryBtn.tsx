@@ -1,6 +1,5 @@
 'use client';
-import { useRouter as i18nRouter } from '@/i18n/routing';
-import { usePathname } from '@/i18n/routing';
+import { usePathname } from 'next/navigation';
 import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
 import { Button, Popover } from '@mantine/core';
@@ -16,7 +15,7 @@ type QueryButtonProps = {
 
 export default function QueryButton({ query }: QueryButtonProps) {
   const pathname = usePathname();
-  const router = useRouter(i18nRouter);
+  const router = useRouter();
   const searchParams = useSearchParams();
   const modalActions = useSetModalStore();
 

@@ -8,7 +8,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/common/Vaul';
-import { Link } from '@/i18n/routing';
+import Link from 'next/link';
 import css from './Drawer.module.scss';
 import { useDrawer, useDrawerActions } from './DrawerContext';
 

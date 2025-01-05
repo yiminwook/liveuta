@@ -1,5 +1,4 @@
 'use client';
-import { useRouter as i18nRouter } from '@/i18n/routing';
 /* eslint-disable @next/next/no-img-element */
 import type { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
@@ -20,7 +19,7 @@ type RowProps = {
 };
 
 export default function Row({ setlist, channel, order }: RowProps) {
-  const router = useRouter(i18nRouter);
+  const router = useRouter();
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
   const title = replaceParentheses(setlist.title);
   const create = dayjs(setlist.createdAt).format('YYYY년 MM월 DD일');

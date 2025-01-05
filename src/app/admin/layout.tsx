@@ -1,7 +1,6 @@
-import { redirect } from '@/i18n/routing';
 import { auth } from '@/libraries/nextAuth';
-import { getLocale, setRequestLocale } from 'next-intl/server';
-import { forbidden, unauthorized } from 'next/navigation';
+import { setRequestLocale } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 import Client from './layout.client';
 
 type AdminLayoutProps = {
@@ -12,8 +11,7 @@ export default async function Layout({ children }: AdminLayoutProps) {
   const session = await auth();
 
   if (!session) {
-    redirect({ href: '/login', locale: 'ko' });
-    return;
+    notFound();
   }
 
   // userLv
@@ -23,7 +21,7 @@ export default async function Layout({ children }: AdminLayoutProps) {
     // 3 - Admin
     // 4 - Collaborator
     // 5 - Maintenance
-    unauthorized();
+    notFound();
   }
 
   setRequestLocale('ko');

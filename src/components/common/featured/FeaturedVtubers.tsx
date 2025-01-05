@@ -1,4 +1,4 @@
-import Featured from '@/app/[locale]/(web)/(pip)/featured/page.client';
+import Featured from '@/app/(web)/(pip)/featured/page.client';
 import { useMemo } from 'react';
 import css from './FeaturedVtuber.module.scss';
 import sectionCss from './Section.module.scss';

@@ -1,10 +1,9 @@
 import Background from '@/components/common/background/Background';
 import Home from '@/components/schedule/Home';
-import { redirect } from '@/i18n/routing';
 import { auth } from '@/libraries/nextAuth';
 import { scheduleDto } from '@/types/dto';
 import { getCookies } from '@/utils/getCookie';
-import { getLocale } from 'next-intl/server';
+import { redirect } from 'next/navigation';
 
 type Props = {
   searchParams: Promise<{
@@ -15,11 +14,10 @@ type Props = {
 };
 
 export default async function Page(props: Props) {
-  const [searchParams, cookies, session, locale] = await Promise.all([
+  const [searchParams, cookies, session] = await Promise.all([
     props.searchParams,
     getCookies(),
     auth(),
-    getLocale(),
   ]);
 
   const dto = scheduleDto.parse({
@@ -30,7 +28,7 @@ export default async function Page(props: Props) {
   });
 
   if (dto.isFavorite && !session) {
-    redirect({ href: '/login', locale });
+    redirect('/login');
   }
 
   return (

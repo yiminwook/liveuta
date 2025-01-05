@@ -1,21 +1,23 @@
 'use client';
 import For from '@/components/common/utils/For';
-import { useRouter } from '@/i18n/routing';
+import { setUserLocale } from '@/libraries/next-intl';
 import { siteConfig } from '@/siteConfig';
 import { LocaleCode } from '@/types/siteConfig';
 import { useLocale, useTranslations } from 'next-intl';
+import { useTransition } from 'react';
 import css from './LanguageSelect.module.scss';
 import settingCss from './Setting.module.scss';
 
 export default function LanguageSelect() {
   const locale = useLocale();
-  const router = useRouter();
   const t = useTranslations();
+  const [_, startTransition] = useTransition();
 
   function onLanguageChange(code: LocaleCode) {
     if (locale === code) return;
-
-    router.replace('/setting', { locale: code });
+    startTransition(() => {
+      setUserLocale(code);
+    });
   }
 
   return (

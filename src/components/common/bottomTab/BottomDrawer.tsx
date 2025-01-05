@@ -1,7 +1,7 @@
 import { ActionIcon, SimpleGrid } from '@mantine/core';
 import classNames from 'classnames';
-import { Link } from '@/i18n/routing';
-import { usePathname } from '@/i18n/routing';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { JSX } from 'react';
 import IonMusicNote from '~icons/ion/music-note.jsx';
 import TbDeviceDesktopCode from '~icons/tabler/device-desktop-code.jsx';

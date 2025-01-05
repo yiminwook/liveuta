@@ -8,10 +8,12 @@ export const getCookies = async () => {
   const select = cookieStore.get('select')?.value as string | undefined;
   const theme = cookieStore.get('theme')?.value as TTheme | undefined;
   const refreshToken = cookieStore.get('refresh_token')?.value;
+  const locale = cookieStore.get('NEXT_LOCALE')?.value;
 
   return {
     theme: theme || 'theme1',
     select: select || 'all',
     refreshToken,
+    locale,
   };
 };

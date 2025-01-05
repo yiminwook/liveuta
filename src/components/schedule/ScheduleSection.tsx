@@ -13,7 +13,7 @@ import { openWindow } from '@/utils/windowEvent';
 import { Button, Loader } from '@mantine/core';
 import variable from '@variable';
 import { Session } from 'next-auth';
-import { Link } from '@/i18n/routing';
+import Link from 'next/link';
 import { GridComponents, VirtuosoGrid } from 'react-virtuoso';
 import { toast } from 'sonner';
 import Nodata from '../common/Nodata';

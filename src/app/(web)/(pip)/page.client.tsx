@@ -10,7 +10,6 @@ import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
-import { useRouter as i18nRouter } from '@/i18n/routing';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetModalStore } from '@/stores/modal';
 import { TContentsData } from '@/types/api/mongoDB';
@@ -35,7 +34,7 @@ type Props = {
 
 export default function Client({ session, coverImgUrl, recentChannels }: Props) {
   const [query, setQuery] = useState('');
-  const router = useRouter(i18nRouter);
+  const router = useRouter();
   const modalStore = useSetModalStore();
   const { whiteList, blackList } = useCachedData({ session });
 

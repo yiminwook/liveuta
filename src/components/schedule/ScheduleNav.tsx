@@ -1,6 +1,5 @@
 'use client';
-import { Link } from '@/i18n/routing';
-import { useRouter as i18nRouter } from '@/i18n/routing';
+import Link from 'next/link';
 import { TScheduleDto } from '@/types/dto';
 import { ActionIcon } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
@@ -28,7 +27,7 @@ type NavSectionProps = {
 export default function ScheduleNav({ session, scheduleDto, length }: NavSectionProps) {
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
   const searchParams = useSearchParams();
-  const router = useRouter(i18nRouter); // transition 예외처리
+  const router = useRouter(); // transition 예외처리
 
   const clickFavorite = () => {
     const query = new URLSearchParams(searchParams);

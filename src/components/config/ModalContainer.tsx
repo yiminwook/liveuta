@@ -1,6 +1,6 @@
 'use client';
 import { PORTAL_ID } from '@/constants';
-import { usePathname } from '@/i18n/routing';
+import { usePathname } from 'next/navigation';
 import { useModalStore } from '@/stores/modal';
 import { useEffect } from 'react';
 

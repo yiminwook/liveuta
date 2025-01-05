@@ -1,9 +1,8 @@
-import { useRouter as i18nRouter } from '@/i18n/routing';
 import { useRouter } from 'next-nprogress-bar';
 import HeaderMenu from './HeaderMenu';
 
 export default function DesktopNav() {
-  const router = useRouter(i18nRouter);
+  const router = useRouter();
   const handleSelect = (value: string) => router.push(value);
 
   const internalLinks = [

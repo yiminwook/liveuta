@@ -1,5 +1,4 @@
 'use client';
-import { useRouter as i18nRouter } from '@/i18n/routing';
 import { TYChannelsData } from '@/types/api/youtube';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
@@ -14,7 +13,7 @@ type ChannelSliderProps = {
 };
 
 export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
-  const router = useRouter(i18nRouter);
+  const router = useRouter();
 
   const navigationChannel = (channelName: string) => {
     router.push(`/channel?q=${channelName}`);

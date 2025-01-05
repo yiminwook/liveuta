@@ -1,4 +1,4 @@
-import { usePathname } from '@/i18n/routing';
+import { usePathname } from "next/navigation";
 
 /** page를 제외한 pathname을 반환 */
 const useLocation = () => {

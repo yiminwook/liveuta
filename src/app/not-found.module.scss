@@ -55,7 +55,6 @@
           color: var(--liveuta-txt-light);
 
           &:hover {
-            cursor: pointer;
             background-color: util.palette(second, light);
           }
         }

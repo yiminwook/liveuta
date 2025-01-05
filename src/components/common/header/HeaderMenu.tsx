@@ -1,5 +1,4 @@
-import { useRouter as i18nRouter } from '@/i18n/routing';
-import { usePathname } from '@/i18n/routing';
+import { usePathname } from 'next/navigation';
 import { Menu, UnstyledButton } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
@@ -13,7 +12,7 @@ type HeaderMenuProps = {
 
 export default function HeaderMenu({ title, links }: HeaderMenuProps) {
   const pathname = usePathname();
-  const router = useRouter(i18nRouter);
+  const router = useRouter();
   const [opened, setOpened] = useState(false);
 
   return (

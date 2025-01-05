@@ -1,4 +1,3 @@
-import { getPathname, routing } from '@/i18n/routing';
 import { Promised } from '@/types';
 import { MetadataRoute } from 'next';
 
@@ -11,26 +10,6 @@ type SiteMap = {
   priority: number;
 } & MetadataRoute.Sitemap[0];
 
-type Href = Parameters<typeof getPathname>[0]['href'];
-
-function getUrl(href: Href, locale: (typeof routing.locales)[number]) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  const pathname = getPathname({ locale, href });
-
-  return baseUrl + pathname;
-}
-
-function getEntry(href: Href) {
-  return {
-    url: getUrl(href, routing.defaultLocale),
-    alternates: {
-      languages: Object.fromEntries(
-        routing.locales.map((locale) => [locale, getUrl(href, locale)]),
-      ),
-    },
-  };
-}
-
 /**
  *  공식문서
  *
@@ -42,27 +21,16 @@ export async function generateSitemaps(): Promise<SiteMapProps[]> {
 }
 
 export default function sitemap({}: Promised<typeof generateSitemaps>[0]): SiteMap[] {
-  const sites = [
-    getEntry('/'),
-    getEntry('/channel'),
-    getEntry('/request'),
-    getEntry('setlist'),
-    getEntry('/setting'),
-  ];
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-  return sites.map((site) => ({
-    ...site,
-    lastModified: new Date(),
-    changeFrequency: 'daily',
-    priority: 0.7,
-  }));
+  const sites = ['/', '/channel', '/request', 'setlist', '/setting'];
 
-  // return sites.map((site) => {
-  //   return {
-  //     url: site !== '/' ? `${baseUrl}${site}` : `${baseUrl}`,
-  //     lastModified: new Date(),
-  //     changeFrequency: 'daily',
-  //     priority: 0.7,
-  //   };
-  // });
+  return sites.map((site) => {
+    return {
+      url: site !== '/' ? `${baseUrl}${site}` : `${baseUrl}`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.7,
+    };
+  });
 }

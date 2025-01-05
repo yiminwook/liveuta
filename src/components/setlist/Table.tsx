@@ -4,7 +4,6 @@ import loadingCss from '@/components/common/loading/Loading.module.scss';
 import Wave from '@/components/common/loading/Wave';
 import { SETLIST_PAGE_SIZE } from '@/constants';
 import useCachedData from '@/hooks/useCachedData';
-import { useRouter as i18nRouter } from '@/i18n/routing';
 import type { Setlist } from '@/libraries/oracleDB/setlist/service';
 import type { GetSetlistRes } from '@/types/api/setlist';
 import { Pagination, Table } from '@mantine/core';
@@ -50,7 +49,7 @@ type DataType = {
 
 export default function SetlistTable({ session, searchParams }: TableProps) {
   const { channelList } = useCachedData({ session });
-  const router = useRouter(i18nRouter);
+  const router = useRouter();
 
   const { data, isLoading } = useQuery({
     queryKey: ['searchSetlist', searchParams],

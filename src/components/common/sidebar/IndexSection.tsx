@@ -1,5 +1,5 @@
-import { Link } from '@/i18n/routing';
-import { usePathname } from '@/i18n/routing';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import css from './Sidebar.module.scss';
 
 const links = [

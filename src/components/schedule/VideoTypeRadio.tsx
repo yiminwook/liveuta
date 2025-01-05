@@ -1,5 +1,4 @@
 'use client';
-import { useRouter as i18nRouter } from '@/i18n/routing';
 import { SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import { Group, Radio } from '@mantine/core';
@@ -17,7 +16,7 @@ type VideoTypeRadioProps = {
 };
 
 export default function VideoTypeRadio({ select, length }: VideoTypeRadioProps) {
-  const router = useRouter(i18nRouter);
+  const router = useRouter();
   const [value, setValue] = useState<TScheduleDto['select']>(select);
 
   const handleSelect = (value: string) => {

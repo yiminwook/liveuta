@@ -1,6 +1,5 @@
 'use client';
-import { Link } from '@/i18n/routing';
-import { useRouter as i18nRouter } from '@/i18n/routing';
+import Link from 'next/link';
 import dayjs from '@/libraries/dayjs';
 import { ChannelDatesetItem } from '@/libraries/mongoDB/getAllChannel';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
@@ -29,7 +28,7 @@ type InfoProps = {
 };
 
 export default function Info({ setlist, channel, icon, session }: InfoProps) {
-  const router = useRouter(i18nRouter);
+  const router = useRouter();
   const queryClient = useQueryClient();
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
