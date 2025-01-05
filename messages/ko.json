@@ -105,9 +105,6 @@
       "pause": "일시정지",
       "cannotPlayError": "재생할 수 없습니다."
     },
-    "reactQuery": {
-      "communicationError": "통신 에러"
-    },
     "serviceWorker": {
       "noBrowserNotificationError": "브라우저 알림허용 설정이 되어있지 않습니다."
     },
