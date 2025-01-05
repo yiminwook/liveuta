@@ -5,13 +5,6 @@ import { SegmentedControl, SegmentedControlItem } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 
-const NAV_LINKS: SegmentedControlItem[] = [
-  { value: 'scheduled', label: '예정' },
-  { value: 'live', label: '라이브' },
-  { value: 'daily', label: '24시' },
-  { value: 'all', label: '전체' },
-];
-
 export default function NavTab() {
   const pathname = usePathname();
   const router = useRouter(); // transition 효과 제외
@@ -29,12 +22,19 @@ export default function NavTab() {
     router.push(`${pathname}?${query.toString()}`);
   };
 
+  const navLinks: SegmentedControlItem[] = [
+    { value: 'scheduled', label: '예정' },
+    { value: 'live', label: '라이브' },
+    { value: 'daily', label: '24시' },
+    { value: 'all', label: '전체' },
+  ];
+
   return (
     <SegmentedControl
       value={filter}
       withItemsBorders={false}
       onChange={handleValueChange}
-      data={NAV_LINKS}
+      data={navLinks}
       size="sm"
       h={40}
     />
