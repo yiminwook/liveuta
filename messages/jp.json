@@ -37,6 +37,9 @@
       "drawer": {
         "title": "サイトマップ",
         "description": "リンクを選択してください"
+      },
+      "bottomInner": {
+        "more": "もっと見る"
       }
     },
     "config": {
@@ -61,7 +64,7 @@
     },
     "header": {
       "userAvatarAlt": "ユーザーアバター",
-      "internalLink": "目次",
+      "login": "ログイン",
       "desktopNav": {
         "index": "目次",
         "externalLink": "外部リンク"
@@ -75,7 +78,9 @@
         "confirm": "確認"
       },
       "channelCardModal": {
-        "channelImageOf": "のチャンネル画像",
+        "channelImageOf": "さんのチャンネル画像",
+        "subscribers": "登録者",
+        "videos": "動画",
         "channel": "チャンネル"
       },
       "confirmModal": {
@@ -101,6 +106,8 @@
     },
     "player": {
       "title": "プレイヤー",
+      "show": "表示",
+      "hide": "非表示",
       "play": "再生",
       "pause": "一時停止",
       "cannotPlayError": "再生できません。"
@@ -127,9 +134,18 @@
     "notLoggedInError": "ログイン後に利用可能なサービスです。",
     "channelSlider": {
       "hidden": "非公開",
-      "subscriber": "登録者",
-      "video": "動画",
+      "subscribers": "登録者",
+      "videos": "動画",
       "navigationChannel": "チャンネルで検索"
+    },
+    "sliderCard": {
+      "alarm": "アラーム設定",
+      "addMultiView": "マルチビュー追加",
+      "favorite": "お気に入り",
+      "remove": "解除",
+      "add": "追加",
+      "blockChannel": "チャンネルをブロック",
+      "openInNewTab": "新しいタブで開く"
     }
   },
   "auth": {
@@ -154,7 +170,7 @@
       "hidden": "非公開",
       "subscriber": "登録者",
       "video": "動画",
-      "Details": "詳細を見る",
+      "details": "詳細を見る",
       "notLoggedInError": "ログイン後に利用可能なサービスです。"
     },
     "channelSection": {
@@ -179,7 +195,7 @@
     "permissionDenied": "拒否",
     "browserNotificationAllowed": "ブラウザ通知が許可されました。",
     "noBrowserNotificationError": "ブラウザ通知が許可されていません。",
-    "browserNotification": "通知許可設定の状態。",
+    "browserNotification": "通知許可設定の状態",
     "request": "リクエスト",
     "token": "トークン",
     "postBox": {
@@ -204,13 +220,13 @@
     }
   },
   "my": {
-    "favorite": "お気に入り",
-    "blacklist": "ブロックリスト",
-    "blacklistComponent": {
+    "blacklist": {
+      "title": "ブロックリスト",
       "removeBlacklist": "ブロックを解除しますか？",
       "remove": "ブロック解除"
     },
-    "favoriteComponent": {
+    "favorite": {
+      "title": "お気に入り",
       "removeFavorite": "お気に入りから削除しますか？",
       "remove": "お気に入り削除"
     }
@@ -247,6 +263,7 @@
         "add": "追加",
         "remove": "解除",
         "blockChannel": "チャンネルをブロック",
+        "openInNewTab": "新しいタブで開く",
         "copyLink": "リンクをコピー",
         "linkCopied": "リンクがコピーされました。"
       }
@@ -255,13 +272,7 @@
       "clearFilter": "検索フィルタをリセットしますか？",
       "filtering": "フィルタリング中です。",
       "clear": "リセット",
-      "queryInputPlaceholder": "チャンネル名で検索",
-      "videoTypeRadio": {
-        "groupLabel": "動画種類",
-        "all": "すべて",
-        "stream": "放送",
-        "video": "動画"
-      }
+      "queryInputPlaceholder": "チャンネル名で検索"
     },
     "scheduleSection": {
       "notLoggedInError": "ログイン後に利用可能なサービスです。",
@@ -269,6 +280,18 @@
       "removeFavoriteChannel": "お気に入りから削除しますか？",
       "blockChannel": "チャンネルをブロックしますか？",
       "searchAtChannelPage": "チャンネルページで検索"
+    },
+    "videoType": {
+      "groupLabel": "動画種類",
+      "all": "すべて",
+      "stream": "放送",
+      "video": "動画",
+      "filter": {
+        "scheduled": "予定",
+        "live": "ライブ",
+        "daily": "24時間",
+        "all": "すべて"
+      }
     }
   },
   "request": {
@@ -284,12 +307,12 @@
     "postDrawer": {
       "upload": "アップロード",
       "uploadSetlist": "セットリストをアップロード",
-      "gotoCreateSetlist": "セットリスト作成に進む"
+      "linkToCreateSetlist": "セットリスト作成に進む"
     },
     "postForm": {
       "linkLabel": "YouTubeリンク",
-      "textAreaLabel": "セットリスト",
-      "textAreaPlaceholder": "38:53 曲名1\n138:54 曲名2\n238:54 曲名3\n338:54 曲名4",
+      "textareaLabel": "セットリスト",
+      "textareaPlaceholder": "38:53 曲名1\n138:54 曲名2\n238:54 曲名3\n338:54 曲名4",
       "submit": "送信",
       "formSuccess": "セットリストがアップロードされました。",
       "invalidUrlError": "無効なYouTube URLです。",
@@ -332,15 +355,17 @@
       "editSuccess": "修正されました。",
       "noContentError": "内容を入力してください。",
       "cancel": "キャンセル",
-      "save": "保存"
+      "save": "保存",
+      "edit": "修正"
     },
     "info": {
       "deleted": "削除されました。",
       "deleteConfirm": "削除してもよろしいですか？",
+      "back": "戻る",
       "youtube": "YouTube",
       "list": "リスト",
       "avatarAlt": "チャンネルアイコン",
-      "broadcastDate": "放送日",
+      "streamDate": "放送日",
       "createDate": "作成日",
       "lastModified": "修正日"
     }

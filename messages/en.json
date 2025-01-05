@@ -37,6 +37,9 @@
       "drawer": {
         "title": "Site Map",
         "description": "Select a link"
+      },
+      "bottomInner": {
+        "more": "More"
       }
     },
     "config": {
@@ -57,11 +60,11 @@
       "less": "Collapse"
     },
     "footer": {
-      "site": "This site is a non-profit VTuber fan website."
+      "site": "This site is a Non-profit V-tuber Fan website"
     },
     "header": {
       "userAvatarAlt": "User Avatar",
-      "internalLink": "Index",
+      "login": "Login",
       "desktopNav": {
         "index": "Index",
         "externalLink": "External Links"
@@ -75,7 +78,9 @@
         "confirm": "Confirm"
       },
       "channelCardModal": {
-        "channelImageOf": "Channel Image of",
+        "channelImageOf": "'s Channel Image",
+        "subscribers": "Subscribers",
+        "videos": "Videos",
         "channel": "Channel"
       },
       "confirmModal": {
@@ -101,6 +106,8 @@
     },
     "player": {
       "title": "Player",
+      "show": "Show",
+      "hide": "Hide",
       "play": "Play",
       "pause": "Pause",
       "cannotPlayError": "Cannot play this video."
@@ -127,9 +134,18 @@
     "notLoggedInError": "This service is available after logging in.",
     "channelSlider": {
       "hidden": "Private",
-      "subscriber": "Subscribers",
-      "video": "Videos",
+      "subscribers": "Subscribers",
+      "videos": "Videos",
       "navigationChannel": "Search by Channel"
+    },
+    "sliderCard": {
+      "alarm": "Set Alarm",
+      "addMultiView": "Add to MultiView",
+      "favorite": "Favorites",
+      "remove": "Remove",
+      "add": "Add",
+      "blockChannel": "Block Channel",
+      "openInNewTab": "Open in New Tab"
     }
   },
   "auth": {
@@ -154,7 +170,7 @@
       "hidden": "Private",
       "subscriber": "Subscribers",
       "video": "Videos",
-      "Details": "View Details",
+      "details": "View Details",
       "notLoggedInError": "This service is available after logging in."
     },
     "channelSection": {
@@ -179,7 +195,7 @@
     "permissionDenied": "Denied",
     "browserNotificationAllowed": "Browser notifications are enabled.",
     "noBrowserNotificationError": "Browser notifications are not enabled.",
-    "browserNotification": "Notification permission settings.",
+    "browserNotification": "Notification permission settings",
     "request": "Request",
     "token": "Token",
     "postBox": {
@@ -204,13 +220,13 @@
     }
   },
   "my": {
-    "favorite": "Favorites",
-    "blacklist": "Blocked List",
-    "blacklistComponent": {
+    "blacklist": {
+      "title": "Blocked List",
       "removeBlacklist": "Would you like to unblock?",
       "remove": "Unblock"
     },
-    "favoriteComponent": {
+    "favorite": {
+      "title": "Favorites",
       "removeFavorite": "Would you like to remove this from your favorites?",
       "remove": "Remove from Favorites"
     }
@@ -247,6 +263,7 @@
         "add": "Add",
         "remove": "Remove",
         "blockChannel": "Block Channel",
+        "openInNewTab": "Open in New Tab",
         "copyLink": "Copy Link",
         "linkCopied": "Link copied."
       }
@@ -255,13 +272,7 @@
       "clearFilter": "Would you like to reset the search filters?",
       "filtering": "Filtering...",
       "clear": "Reset",
-      "queryInputPlaceholder": "Search by channel name",
-      "videoTypeRadio": {
-        "groupLabel": "Stream Type",
-        "all": "All",
-        "stream": "Live",
-        "video": "Video"
-      }
+      "queryInputPlaceholder": "Search by channel name"
     },
     "scheduleSection": {
       "notLoggedInError": "This service is available after logging in.",
@@ -269,6 +280,18 @@
       "removeFavoriteChannel": "Would you like to remove this channel from your favorites?",
       "blockChannel": "Would you like to block this channel?",
       "searchAtChannelPage": "Search on the Channel Page"
+    },
+    "videoType": {
+      "groupLabel": "Stream Type",
+      "all": "All",
+      "stream": "Live",
+      "video": "Video",
+      "filter": {
+        "scheduled": "Upcoming",
+        "live": "Live",
+        "daily": "24-Hour",
+        "all": "All"
+      }
     }
   },
   "request": {
@@ -284,12 +307,12 @@
     "postDrawer": {
       "upload": "Upload",
       "uploadSetlist": "Upload Setlist",
-      "gotoCreateSetlist": "Go to Create Setlist"
+      "linkToCreateSetlist": "Go to Create Setlist"
     },
     "postForm": {
       "linkLabel": "YouTube Link",
-      "textAreaLabel": "Setlist",
-      "textAreaPlaceholder": "38:53 Song Title 1\n138:54 Song Title 2\n238:54 Song Title 3\n338:54 Song Title 4",
+      "textareaLabel": "Setlist",
+      "textareaPlaceholder": "38:53 Song Title 1\n138:54 Song Title 2\n238:54 Song Title 3\n338:54 Song Title 4",
       "submit": "Submit",
       "formSuccess": "The setlist has been uploaded.",
       "invalidUrlError": "Invalid YouTube URL.",
@@ -332,15 +355,17 @@
       "editSuccess": "Edit successful.",
       "noContentError": "Please enter content.",
       "cancel": "Cancel",
-      "save": "Save"
+      "save": "Save",
+      "edit": "Edit"
     },
     "info": {
       "deleted": "Deleted.",
       "deleteConfirm": "Are you sure you want to delete this?",
+      "back": "Back",
       "youtube": "YouTube",
       "list": "List",
       "avatarAlt": "Channel Icon",
-      "broadcastDate": "Broadcast Date",
+      "streamDate": "Broadcast Date",
       "createDate": "Created Date",
       "lastModified": "Edited Date"
     }
