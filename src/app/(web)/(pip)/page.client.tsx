@@ -20,6 +20,7 @@ import { openWindow } from '@/utils/windowEvent';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
@@ -37,6 +38,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
   const router = useRouter();
   const modalStore = useSetModalStore();
   const { whiteList, blackList } = useCachedData({ session });
+  const t = useTranslations('home');
 
   const { data, isPending } = useQuery({
     queryKey: ['schedule'],
@@ -62,7 +64,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
   const mutateDeleteFavorite = useMutateWhitelist();
   const { reservePush } = useReservePush();
 
-  const openMutiViewModal = async (content: TContentsData) => {
+  const openMultiViewModal = async (content: TContentsData) => {
     await modalStore.push(ListModal, {
       id: 'multiViewModal',
       props: {
@@ -72,15 +74,15 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
   };
 
   const handleFavorite = (content: TContentsData) => {
-    if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
+    if (!session) return toast.error(t('notLoggedInError'));
     const isFavorite = whiteList.has(content.channelId);
 
-    if (!isFavorite && confirm('즐겨찾기에 추가하시겠습니까?')) {
+    if (!isFavorite && confirm(t('addFavoriteChannel'))) {
       mutatePostFavorite.mutate({
         session,
         channelId: content.channelId,
       });
-    } else if (isFavorite && confirm('즐겨찾기에서 제거하시겠습니까?')) {
+    } else if (isFavorite && confirm(t('removeFavoriteChannel'))) {
       mutateDeleteFavorite.mutate({
         session,
         channelId: content.channelId,
@@ -89,9 +91,9 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
   };
 
   const handleBlock = async (content: TContentsData) => {
-    if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
+    if (!session) return toast.error(t('notLoggedInError'));
 
-    if (confirm('해당 채널을 블럭 하시겠습니까?')) {
+    if (confirm(t('blockChannel'))) {
       mutateBlock.mutate({
         session,
         channelId: content.channelId,
@@ -148,7 +150,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
       <section className={css.liveSection}>
         <div className={css.liveNav}>
           <h2>
-            🎤 현재 <span className={css.highlight}>라이브</span> 중
+            🎤 <span className={css.highlight}>{t('live')}</span>
           </h2>
           <MoreButton href="/schedule?t=live" />
         </div>
@@ -157,7 +159,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
           contents={proceedScheduleData.liveContent}
           addAlarm={reservePush}
           openNewTab={openStream}
-          addMultiView={openMutiViewModal}
+          addMultiView={openMultiViewModal}
           addBlock={handleBlock}
           toggleFavorite={handleFavorite}
         />
@@ -166,7 +168,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
       {session && (
         <section className={css.favoriteSection}>
           <div className={css.favoriteNav}>
-            <h2>🌟 즐겨찾기</h2>
+            <h2>🌟 {t('favorite')}</h2>
             <MoreButton href="/schedule?isFavorite=true" />
           </div>
           <ScheduleSlider
@@ -174,7 +176,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
             contents={proceedScheduleData.favoriteContent}
             addAlarm={reservePush}
             openNewTab={openStream}
-            addMultiView={openMutiViewModal}
+            addMultiView={openMultiViewModal}
             addBlock={handleBlock}
             toggleFavorite={handleFavorite}
           />
@@ -184,12 +186,12 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
       <section className={css.searchSection}>
         <div className={css.searchNav}>
           <div />
-          <h2>스케줄을 검색해보세요</h2>
+          <h2>{t('searchSchedule')}</h2>
           <MoreButton href="/schedule" />
         </div>
         <div className={css.searchBox}>
           <SearchInput
-            placeholder="채널명으로 검색"
+            placeholder={t('searchInputPlaceholder')}
             value={query}
             onChange={onChangeQuery}
             onSubmit={onSearch}
@@ -199,7 +201,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
 
       <section className={css.recentChannelSection}>
         <div className={css.recentChannelNav}>
-          <h2>🚚 최근 추가된 채널</h2>
+          <h2>🚚 {t('recentlyAddedChannel')}</h2>
           <MoreButton href="/channel?sort=createdAt" />
         </div>
         <ChannelSlider recentChannels={recentChannels} />

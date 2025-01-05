@@ -1,6 +1,7 @@
 'use client';
 import type { HMS } from '@/types/time';
 import { hmsToSeconds, hmsToString } from '@/utils/getTime';
+import { useTranslations } from 'next-intl';
 import { createRef } from 'react';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';

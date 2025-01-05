@@ -3,6 +3,7 @@ import { TChannelDto } from '@/libraries/mongoDB/getAllChannel';
 import { Button, Flex, SegmentedControl, TextInput, UnstyledButton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
@@ -15,6 +16,7 @@ export default function Nav() {
   const router = useRouter();
   const [input, setInput] = useState(searchParams.get('q') || '');
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
+  const t = useTranslations('channel.nav');
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(() => e.target.value);
@@ -44,12 +46,12 @@ export default function Nav() {
           value={searchParams.get('sort') || 'name_kor'}
           onChange={(value) => handleOrderChange(value as TChannelDto['sort'])}
           data={[
-            { label: '사전순', value: 'name_kor' },
-            { label: '등록순', value: 'createdAt' },
+            { label: t('nameKorLabel'), value: 'name_kor' },
+            { label: t('createdAtLabel'), value: 'createdAt' },
           ]}
         />
         <Button h={40} color="third" variant="filled" onClick={() => router.push('/request')}>
-          {isDesktop ? '+ 채널등록' : '등록'}
+          {isDesktop ? `+ ${t('linkToRequest')}` : t('linkToRequestMobile')}
         </Button>
       </Flex>
       <form className={css.form} onSubmit={handleSubmit}>
@@ -58,7 +60,7 @@ export default function Nav() {
             classNames={{ input: css.input }}
             value={input}
             onChange={handleInput}
-            placeholder="채널명으로 검색"
+            placeholder={t('channelSearchInputPlaceholder')}
           />
           <button className={css.clearButton} type="button" onClick={() => setInput('')}>
             <TbX />

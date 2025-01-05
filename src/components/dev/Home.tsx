@@ -5,29 +5,30 @@ import TokenBox from '@/components/dev/TokenBox';
 import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
 import { TToken } from '@/types';
 import cx from 'classnames';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import MainLoading from '../common/loading/MainLoading';
 import css from './Home.module.scss';
 
 export default function Home() {
+  const t = useTranslations('dev');
   const [token, setToken] = useState<TToken>(null);
-  const [permission, setPermission] = useState('설정을 가져오는 중');
+  const [permission, setPermission] = useState(t('initialPermission'));
 
   const handleSetToken = async () => {
     try {
       const token = await generateFcmToken();
 
       if (token === undefined) {
-        throw new Error('브라우저 알림허용 설정이 되어있지 않습니다.');
+        throw new Error(t('noBrowserNotificationError'));
       }
-      setPermission(() => 'granted');
+      setPermission(() => t('permissionGranted'));
       setToken(() => token);
       return true;
     } catch (error) {
       console.error(error);
       const message = error instanceof Error ? error.message : 'Unknown Error';
-      setPermission(() => 'denied');
+      setPermission(() => t('permissionDenied'));
       setToken(() => undefined);
       toast.error(message);
       return false;
@@ -37,7 +38,7 @@ export default function Home() {
   const requerstPermission = async () => {
     const result = await handleSetToken();
     if (result) {
-      toast.success('알림허용 설정이 완료되었습니다.');
+      toast.success(t('browserNotificationAllowed'));
     }
   };
 
@@ -48,7 +49,7 @@ export default function Home() {
         return Notification.permission;
       } catch (error) {
         console.error(error);
-        return 'denied';
+        return t('permissionDenied');
       }
     });
 
@@ -60,15 +61,15 @@ export default function Home() {
       <section className={css.wrap}>
         <div className={cx(css.box, css.permissionBox)}>
           <div>
-            알림허용설정 여부: <b>{permission}</b>
+            {t('browserNotification')}: <b>{permission}</b>
           </div>
           <button className={css.button} data-variant="request" onClick={requerstPermission}>
-            요청
+            {t('request')}
           </button>
         </div>
         <div className={cx(css.box)}>
           <label className={css.tokenLabel} htmlFor="token">
-            SW Token
+            {t('token')}
           </label>
           <div className={css.tokenBox}>
             <TokenBox token={token} />

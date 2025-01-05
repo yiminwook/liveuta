@@ -5,6 +5,7 @@ import { useSetModalStore } from '@/stores/modal';
 import { useIsFetching, useIsMutating, useQuery } from '@tanstack/react-query';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 import AlertModal from './modal/AlertModal';
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export default function DataFetchingObserver({ session }: Props) {
+  const t = useTranslations('global.dataFetchingObserver');
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
   const status = useScheduleStatus();
@@ -37,7 +39,7 @@ export default function DataFetchingObserver({ session }: Props) {
       .push(AlertModal, {
         id: 'session-expired',
         props: {
-          message: '세션이 만료 되었습니다.',
+          message: t('sessionExpired'),
         },
       })
       .then(() => {
@@ -49,7 +51,7 @@ export default function DataFetchingObserver({ session }: Props) {
     const unFetching = isFetching === 0 && isMutating === 0;
 
     if (status !== 'pending' && !unFetching) {
-      toast.loading('서버와 통신중입니다.', {
+      toast.loading(t('fetching'), {
         id: 'loading',
       });
 

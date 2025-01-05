@@ -2,6 +2,7 @@ import { useTransition } from '@/hooks/useTransition';
 import { ModalProps } from '@/stores/modal';
 import { Button } from '@mantine/core';
 import classNames from 'classnames';
+import { useTranslations } from 'next-intl';
 import Modal from './Modal';
 import css from './Modal.module.scss';
 
@@ -18,6 +19,7 @@ export default function ConfirmModal({
   onClose,
   onSuccess,
 }: ModalProps<ConfirmModalProp>) {
+  const t = useTranslations('global.modal.confirmModal');
   const { modifier, onAnimationEnd, exit } = useTransition();
 
   const onCloseWithExit = () => {
@@ -40,9 +42,9 @@ export default function ConfirmModal({
       <div className={css.content}>{message}</div>
       <div className={css.btnBox}>
         <Button variant="light" onClick={onCloseWithExit}>
-          취소
+          {t('cancel')}
         </Button>
-        <Button onClick={onSuccessWithExit}>확인</Button>
+        <Button onClick={onSuccessWithExit}>{t('confirm')}</Button>
       </div>
     </Modal>
   );

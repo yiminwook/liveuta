@@ -1,5 +1,6 @@
 'use client';
 import { ORIGIN } from '@/constants';
+import { useTranslations } from 'next-intl';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
 
@@ -8,6 +9,8 @@ type ShortsProps = {
 };
 
 export default function Shorts({ url }: ShortsProps) {
+  const t = useTranslations('multiView.shortsSection.shorts');
+
   return (
     <ReactPlayer
       width="100%"
@@ -23,7 +26,7 @@ export default function Shorts({ url }: ShortsProps) {
       }}
       controls={true}
       onError={() => {
-        toast.error('실행 할 수 없는 영상입니다.');
+        toast.error(t('cannotPlayError'));
         // setVideoId(() => IINITIAL_PLAYER_VIDEO_ID);
         // setStatus((pre) => ({ ...pre, isPlaying: false }));
       }}

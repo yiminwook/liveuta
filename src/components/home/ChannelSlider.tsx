@@ -3,6 +3,7 @@ import { TYChannelsData } from '@/types/api/youtube';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
 import variable from '@variable';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import IonIosMore from '~icons/ion/ios-more.jsx';
@@ -13,6 +14,7 @@ type ChannelSliderProps = {
 };
 
 export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
+  const t = useTranslations('home.channelSlider');
   const router = useRouter();
 
   const navigationChannel = (channelName: string) => {
@@ -23,8 +25,8 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
     <div className={css.wrap}>
       <Swiper slidesPerGroup={1} slidesPerView={'auto'} centeredSlides={false} spaceBetween={14}>
         {recentChannels.map((item) => {
-          const subscribe = renderSubscribe(item.statistics?.subscriberCount ?? '비공개');
-          const videoCount = item.statistics?.videoCount ?? '비공개';
+          const subscribe = renderSubscribe(item.statistics?.subscriberCount ?? t('hidden'));
+          const videoCount = item.statistics?.videoCount ?? t('hidden');
           return (
             <SwiperSlide key={`recentChannel_${item.uid}`} style={{ width: '75px' }}>
               <Avatar
@@ -63,8 +65,12 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
                   </Box>
 
                   <Box mt="xs">
-                    <Text size="xs">구독자 {subscribe}</Text>
-                    <Text size="xs">영상 {videoCount}개</Text>
+                    <Text size="xs">
+                      {t('subscribers')} {subscribe}
+                    </Text>
+                    <Text size="xs">
+                      {t('videos')} {videoCount}
+                    </Text>
                   </Box>
 
                   <Box mt="xs">
@@ -74,7 +80,7 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
                         size="xs"
                         onClick={() => navigationChannel(item.nameKor)}
                       >
-                        채널로 검색하기
+                        {t('navigationChannel')}
                       </Button>
                     </Center>
                   </Box>

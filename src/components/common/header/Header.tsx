@@ -3,6 +3,7 @@
 import { useSetAppStore } from '@/stores/app';
 import { Avatar } from '@mantine/core';
 import { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -16,6 +17,7 @@ type HeaderProps = {
 export default function Header({ session }: HeaderProps) {
   const gnbRef = useRef<HTMLDivElement>(null);
   const actions = useSetAppStore();
+  const t = useTranslations('global.header');
 
   const openAccountSidebar = () => actions.setIsShowAcctSidebar(true);
 
@@ -58,13 +60,13 @@ export default function Header({ session }: HeaderProps) {
                   w={40}
                   h={40}
                   radius="xl"
-                  alt="유저 이미지"
+                  alt={t('userAvatarAlt')}
                   name={session.user.email}
                 />
               </button>
             ) : (
               <Link href="/login" className={css.loginBtn}>
-                로그인
+                {t('login')}
               </Link>
             )}
           </div>

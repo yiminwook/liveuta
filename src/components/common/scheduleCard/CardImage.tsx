@@ -6,6 +6,7 @@ import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
 import { TContentsData } from '@/types/api/mongoDB';
 import { gtagClick } from '@/utils/gtag';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useCallback, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -21,6 +22,7 @@ export default function CardImage({ content }: CardImageProps) {
   const [imgLoaded, setImgLoaded] = useState(true);
   const actions = useSetPlayerStore();
   const imgRef = useRef<HTMLImageElement>(null);
+  const t = useTranslations('schedule.scheduleCard.cardImage');
 
   const handleImgValidity = useCallback(() => {
     const currentImage = imgRef.current;
@@ -50,7 +52,7 @@ export default function CardImage({ content }: CardImageProps) {
       {imgLoaded ? (
         <Image
           src={thumbnailUrl ?? altImage}
-          alt={`${channelName}의 라이브방송`}
+          alt={`${channelName}${t('livestreamOf')}`}
           loading="lazy"
           ref={imgRef}
           onLoad={handleImgValidity}
@@ -63,7 +65,7 @@ export default function CardImage({ content }: CardImageProps) {
       ) : (
         <Image
           src={altImage}
-          alt={`${channelName}의 라이브방송`}
+          alt={`${channelName}${t('livestreamOf')}`}
           placeholder="blur"
           unoptimized
           fill

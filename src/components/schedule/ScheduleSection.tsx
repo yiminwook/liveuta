@@ -13,6 +13,7 @@ import { openWindow } from '@/utils/windowEvent';
 import { Button, Loader } from '@mantine/core';
 import variable from '@variable';
 import { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { GridComponents, VirtuosoGrid } from 'react-virtuoso';
 import { toast } from 'sonner';
@@ -43,6 +44,7 @@ export default function ScheduleSection({
   isLoading = false,
 }: ScheduleSectionProps) {
   const modalStore = useSetModalStore();
+  const t = useTranslations('schedule.scheduleSection');
 
   const {
     loadContents,
@@ -67,15 +69,15 @@ export default function ScheduleSection({
   };
 
   const handleFavorite = (content: TContentsData) => {
-    if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
+    if (!session) return toast.error(t('notLoggedInError'));
     const isFavorite = whiteList.has(content.channelId);
 
-    if (!isFavorite && confirm('즐겨찾기에 추가하시겠습니까?')) {
+    if (!isFavorite && confirm(t('addFavoriteChannel'))) {
       mutatePostFavorite.mutate({
         session,
         channelId: content.channelId,
       });
-    } else if (isFavorite && confirm('즐겨찾기에서 제거하시겠습니까?')) {
+    } else if (isFavorite && confirm(t('removeFavoriteChannel'))) {
       mutateDeleteFavorite.mutate({
         session,
         channelId: content.channelId,
@@ -84,9 +86,9 @@ export default function ScheduleSection({
   };
 
   const handleBlock = async (content: TContentsData) => {
-    if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
+    if (!session) return toast.error(t('notLoggedInError'));
 
-    if (confirm('해당 채널을 블럭 하시겠습니까?')) {
+    if (confirm(t('blockChannel'))) {
       mutateBlock.mutate({
         session,
         channelId: content.channelId,
@@ -126,7 +128,7 @@ export default function ScheduleSection({
         <Nodata />
         <div className={css.nodataLinkBox}>
           <Button component={Link} href={`/channel?q=${scheduleDto.query}`}>
-            채널페이지에서 검색
+            {t('searchAtChannelPage')}
           </Button>
         </div>
       </section>

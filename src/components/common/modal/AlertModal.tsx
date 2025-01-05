@@ -2,6 +2,7 @@ import { useTransition } from '@/hooks/useTransition';
 import { ModalProps } from '@/stores/modal';
 import { Button } from '@mantine/core';
 import classNames from 'classnames';
+import { useTranslations } from 'next-intl';
 import Modal from './Modal';
 import css from './Modal.module.scss';
 
@@ -17,6 +18,7 @@ export default function AlertModal({
   message,
   onClose,
 }: ModalProps<AletModalProp>) {
+  const t = useTranslations('global.modal.alertModal');
   const { modifier, onAnimationEnd, exit } = useTransition();
 
   const onCloseWithExit = () => {
@@ -33,7 +35,7 @@ export default function AlertModal({
     >
       <div className={css.content}>{message}</div>
       <div className={css.btnBox}>
-        <Button onClick={onCloseWithExit}>확인</Button>
+        <Button onClick={onCloseWithExit}>{t('confirm')}</Button>
       </div>
     </Modal>
   );

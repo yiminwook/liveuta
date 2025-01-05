@@ -1,6 +1,7 @@
 'use client';
 import useCachedData from '@/hooks/useCachedData';
 import { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import FasStar from '~icons/fa-solid/star.jsx';
 import MdiBlock from '~icons/mdi/block.jsx';
@@ -23,6 +24,7 @@ type HomeProps = {
 
 export default function Home({ session }: HomeProps) {
   const { whiteList, channelList, blackList } = useCachedData({ session });
+  const t = useTranslations('my');
 
   return (
     <Background>
@@ -30,14 +32,14 @@ export default function Home({ session }: HomeProps) {
         <section className={css.section}>
           <h2 className={css.sectionTitle}>
             <FasStar width="1.2rem" height="1.2rem" color="#ffbb00" />
-            <b>즐겨찾기</b>
+            <b>{t('favorite.title')}</b>
           </h2>
           <Whitelist session={session} whiteList={whiteList} channelList={channelList} />
         </section>
         <section className={css.section}>
           <h2 className={css.sectionTitle}>
             <MdiBlock width="1.2rem" height="1.2rem" />
-            <b>블랙리스트</b>
+            <b>{t('blacklist.title')}</b>
           </h2>
           <Blacklist session={session} blacklist={blackList} channelList={channelList} />
         </section>

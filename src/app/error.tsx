@@ -3,6 +3,7 @@
 'use client';
 import character from '@/assets/image/character-6.png';
 import * as Sentry from '@sentry/nextjs';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import css from './not-found.module.scss';
@@ -14,6 +15,8 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void; //세그먼트를 다시 렌더링하여 복구 시도
 }) {
+  const t = useTranslations('error.error');
+
   useEffect(() => {
     Sentry.captureException(error);
   }, [error]);
@@ -21,20 +24,14 @@ export default function Error({
   return (
     <div className={css.wrap}>
       <div className={css.box}>
-        <Image
-          alt="에러가 발생하였습니다."
-          src={character}
-          width={200}
-          height={300}
-          unoptimized={true}
-        />
+        <Image alt={t('imageAlt')} src={character} width={200} height={300} unoptimized={true} />
         <div className={css.desc}>
           <div className={css.descTop}>
-            <h1>500: Server Error</h1>
+            <h1>{t('title')}</h1>
             <h2>{error.message}</h2>
           </div>
           <div className={css.descBottom}>
-            <button onClick={reset}>재시도</button>
+            <button onClick={reset}>{t('retry')}</button>
           </div>
         </div>
       </div>

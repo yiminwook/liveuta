@@ -1,9 +1,11 @@
 'use client';
 import CopyButton from '@/components/common/button/CopyButton';
 import { TToken } from '@/types';
+import { useTranslations } from 'next-intl';
 import css from './Home.module.scss';
 
 export default function TokenBox({ token }: { token: TToken }) {
+  const t = useTranslations('dev.tokenBox');
   switch (typeof token) {
     case 'string':
       return (
@@ -13,8 +15,8 @@ export default function TokenBox({ token }: { token: TToken }) {
         </>
       );
     case 'undefined':
-      return <div>토큰을 가져오는데 실패했습니다.</div>;
+      return <div>{t('tokenError')}</div>;
     default:
-      return <div>토큰을 가져오는 중입니다.</div>;
+      return <div>{t('gettingToken')}</div>;
   }
 }

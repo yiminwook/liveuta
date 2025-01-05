@@ -3,6 +3,7 @@ import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import { ModalProps } from '@/stores/modal';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
 import css from './ChannelCardModal.module.scss';
@@ -30,6 +31,8 @@ export default function ChannelCardModal({
   description,
   onClose,
 }: ModalProps<ChannelCardModalProp>) {
+  const t = useTranslations('global.modal.channelCardModal');
+
   const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) =>
     gtagClickAtag(e, {
       target: CHANNEL_MODAL_ID,
@@ -46,7 +49,7 @@ export default function ChannelCardModal({
             <div className={css.itemContainer}>
               <Image
                 src={imageURL}
-                alt={`${channelName}의 채널 이미지`}
+                alt={`${channelName}${t('channelImageOf')}`}
                 loading="lazy"
                 placeholder="blur"
                 blurDataURL={DEFAULT_BLUR_BASE64}
@@ -59,8 +62,12 @@ export default function ChannelCardModal({
             <h2 className={css.h2}>{channelName}</h2>
             <h3 className={css.h3}>{title}</h3>
             <div className={css.detail}>
-              <h4 className={css.h4}>구독자 {subscribe}</h4>
-              <h4 className={css.h4}>업로드 수 {videoCount} 개</h4>
+              <h4 className={css.h4}>
+                {t('subscribers')} {subscribe}
+              </h4>
+              <h4 className={css.h4}>
+                {t('videos')} {videoCount}
+              </h4>
             </div>
             <div className={css.link}>
               <button
@@ -77,7 +84,7 @@ export default function ChannelCardModal({
                   openWindow(url);
                 }}
               >
-                유투브 채널
+                {t('channel')}
               </button>
               <CopyButton value={url} size={'1rem'} />
             </div>

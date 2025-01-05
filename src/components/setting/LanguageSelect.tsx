@@ -22,7 +22,7 @@ export default function LanguageSelect() {
 
   return (
     <div className={settingCss.wrap}>
-      <h3 className={settingCss.settingLabel}>언어 설정</h3>
+      <h3 className={settingCss.settingLabel}>{t('settings.language.title')}</h3>
       <div className={css.languages}>
         <For each={siteConfig.locales}>
           {({ code, name }) => (

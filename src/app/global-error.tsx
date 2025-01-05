@@ -1,6 +1,7 @@
 'use client';
 import character from '@/assets/image/character-6.png';
 import * as Sentry from '@sentry/nextjs';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
@@ -27,6 +28,8 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const t = useTranslations('error.globalError');
+
   useEffect(() => {
     Sentry.captureException(error);
   }, [error]);
@@ -39,7 +42,7 @@ export default function GlobalError({
           <div>
             <div>
               <Image
-                alt="에러가 발생하였습니다."
+                alt={t('imageAlt')}
                 src={character}
                 width={200}
                 height={300}
@@ -53,7 +56,7 @@ export default function GlobalError({
               </div>
               <div>
                 {/* next/link 사용 */}
-                <Link href="/">홈으로 돌아가기</Link>
+                <Link href="/">{t('linkToHome')}</Link>
               </div>
             </div>
           </div>

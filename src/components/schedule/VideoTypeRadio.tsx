@@ -1,7 +1,7 @@
 'use client';
-import { SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import { Group, Radio } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 import Cookies from 'universal-cookie';
@@ -18,6 +18,7 @@ type VideoTypeRadioProps = {
 export default function VideoTypeRadio({ select, length }: VideoTypeRadioProps) {
   const router = useRouter();
   const [value, setValue] = useState<TScheduleDto['select']>(select);
+  const t = useTranslations('schedule.videoType');
 
   const handleSelect = (value: string) => {
     const selectCookie = new Cookies();
@@ -27,19 +28,19 @@ export default function VideoTypeRadio({ select, length }: VideoTypeRadioProps) 
   };
 
   const items = [
-    { label: `${SelectedText.all}: ${length.all}`, value: 'all' },
+    { label: `${t('all')}: ${length.all}`, value: 'all' },
     {
-      label: `${SelectedText.stream}: ${length.stream}`,
+      label: `${t('stream')}: ${length.stream}`,
       value: 'stream',
     },
     {
-      label: `${SelectedText.video}: ${length.video}`,
+      label: `${t('video')}: ${length.video}`,
       value: 'video',
     },
   ];
 
   return (
-    <Radio.Group label="와꾸종류" value={value} onChange={handleSelect}>
+    <Radio.Group label={t('groupLabel')} value={value} onChange={handleSelect}>
       <Group mt={14}>
         {items.map((item) => (
           <Radio key={`radio_${item.value}`} value={item.value} label={item.label} />

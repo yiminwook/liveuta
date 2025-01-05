@@ -1,5 +1,6 @@
 import { Button, ButtonProps } from '@mantine/core';
 import classNames from 'classnames';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import IonArrowRightC from '~icons/ion/arrow-right-c.jsx';
 import css from './MoreButton.module.scss';
@@ -16,6 +17,8 @@ export default function MoreButton({
   component = Link,
   onClick,
 }: MoreButtonProps) {
+  const t = useTranslations('global.moreButton');
+
   return (
     <Button
       className={classNames(css.button, className)}
@@ -25,7 +28,7 @@ export default function MoreButton({
       onClick={onClick}
       rightSection={<IonArrowRightC />}
     >
-      More
+      {t('more')}
     </Button>
   );
 }

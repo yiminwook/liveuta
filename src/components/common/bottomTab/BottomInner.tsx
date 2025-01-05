@@ -1,6 +1,7 @@
+import { UnstyledButton } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { UnstyledButton } from '@mantine/core';
 import { useEffect, useMemo, useState } from 'react';
 import GgUserlane from '~icons/gg/userlane.jsx';
 import IonIosMore from '~icons/ion/ios-more.jsx';
@@ -23,6 +24,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
   const [direction, setDirection] = useState<Direction>(Direction.up);
   const [windowY, setWindowY] = useState(0);
   const pathname = usePathname();
+  const t = useTranslations();
 
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -84,7 +86,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             data-current={pathname === '/setlist'}
           >
             <TbList />
-            <span>세트리</span>
+            <span>{t('setlist.title')}</span>
           </UnstyledButton>
         </li>
         <li>
@@ -95,7 +97,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             data-current={pathname === '/channel'}
           >
             <GgUserlane />
-            <span>채널</span>
+            <span>{t('channel.title')}</span>
           </UnstyledButton>
         </li>
         <li>
@@ -106,7 +108,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             data-current={pathname === '/'}
           >
             <TbHome />
-            <span>홈</span>
+            <span>{t('home.title')}</span>
           </UnstyledButton>
         </li>
         <li>
@@ -117,13 +119,13 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             data-current={pathname === '/schedule'}
           >
             <MsScheduleOutlineRounded />
-            <span>스케줄</span>
+            <span>{t('schedule.title')}</span>
           </UnstyledButton>
         </li>
         <li>
           <UnstyledButton className={css.item} onClick={openDrawer}>
             <IonIosMore width="1.5rem" height="1.5rem" />
-            <span>더보기</span>
+            <span>{t('global.bottomTab.bottomInner.more')}</span>
           </UnstyledButton>
         </li>
       </ul>

@@ -1,7 +1,7 @@
 .content {
   display: flex;
   flex-direction: column;
-};
+}
 
 .contentHeader {
   display: flex;
@@ -25,7 +25,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 0.5rem;
-  
+
     & > svg {
       margin-right: 0.5rem;
     }
@@ -40,6 +40,6 @@
   }
 }
 
-.vidioTypeBox {
+.videoTypeBox {
   margin-top: 2rem;
 }

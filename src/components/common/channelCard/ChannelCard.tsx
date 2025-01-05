@@ -9,6 +9,7 @@ import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import { openWindow } from '@/utils/windowEvent';
 import { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
 import { isDesktop } from 'react-device-detect';
@@ -24,11 +25,12 @@ type ChannelItemProps = {
 
 export default function ChannelItem({ content, session, isFavorite }: ChannelItemProps) {
   const { nameKor: channelName, snippet, url, statistics, uid } = content;
+  const t = useTranslations('channel.channelCard');
   const title = snippet?.title ?? '';
   const imageURL = snippet?.thumbnails?.default?.url ?? '/loading.png';
-  const description = snippet?.description ?? '비공개';
-  const subscribe = renderSubscribe(statistics?.subscriberCount ?? '비공개');
-  const videoCount = statistics?.videoCount ?? '비공개';
+  const description = snippet?.description ?? t('hidden');
+  const subscribe = renderSubscribe(statistics?.subscriberCount ?? t('hidden'));
+  const videoCount = statistics?.videoCount ?? t('hidden');
 
   const modalStore = useSetModalStore();
 
@@ -73,14 +75,14 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
   };
 
   const handleFavorite = () => {
-    if (!session) return toast.error('로그인 후 이용가능한 서비스입니다.');
+    if (!session) return toast.error(t('notLoggedInError'));
 
-    if (!isFavorite && confirm('즐겨찾기에 추가하시겠습니까?')) {
+    if (!isFavorite && confirm(t('addFavoriteChannel'))) {
       mutatePostFavorite.mutate({
         session,
         channelId: uid,
       });
-    } else if (isFavorite && confirm('즐겨찾기에서 제거하시겠습니까?')) {
+    } else if (isFavorite && confirm(t('removeFavoriteChannel'))) {
       mutateDeleteFavorite.mutate({
         session,
         channelId: uid,
@@ -116,15 +118,14 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
         <div className={css.details}>
           <div className={css.channelInfo}>
             <p>
-              <span className={css.descContentLabel}>구독자</span> {subscribe}
+              <span className={css.descContentLabel}>{t('subscriber')}</span> {subscribe}
             </p>
             <p>
-              <span className={css.descContentLabel}>동영상</span> {videoCount}
-              <span>개</span>
+              <span className={css.descContentLabel}>{t('video')}</span> {videoCount}
             </p>
           </div>
           <div className={css.link}>
-            <button onClick={openModal}>+ 상세보기</button>
+            <button onClick={openModal}>+ {t('details')}</button>
           </div>
         </div>
       </div>

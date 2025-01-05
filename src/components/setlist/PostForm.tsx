@@ -3,6 +3,7 @@ import { Button, TextInput, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
 import { MouseEvent, useState } from 'react';
 import { toast } from 'sonner';
 import css from './PostForm.module.scss';
@@ -15,6 +16,7 @@ export default function PostForm({ session }: PostFormProps) {
   const [url, setUrl] = useState('');
   const [desc, setDesc] = useState('');
   const queryClient = useQueryClient();
+  const t = useTranslations('setlist.postForm');
 
   const mutatePost = useMutation({
     mutationKey: ['postSetlist'],
@@ -35,7 +37,7 @@ export default function PostForm({ session }: PostFormProps) {
       return response.data;
     },
     onSuccess: () => {
-      toast.success('세트리가 입력 되었습니다.');
+      toast.success(t('formSuccess'));
       queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
     },
     onError: (error) => toast.error(error.message),
@@ -52,15 +54,15 @@ export default function PostForm({ session }: PostFormProps) {
     const description = desc.trim();
 
     if (!videoId) {
-      return toast.warning('올바른 유튜브 URL을 입력해주세요.');
+      return toast.warning(t('invalidUrlError'));
     }
 
     if (!description) {
-      return toast.warning('세트리를 입력해주세요.');
+      return toast.warning(t('emptySetlistError'));
     }
 
     if (session === null) {
-      return toast.warning('로그인을 해주세요.');
+      return toast.warning(t('notLoggedInError'));
     }
 
     mutatePost.mutate({ videoId, description, session });
@@ -86,7 +88,7 @@ export default function PostForm({ session }: PostFormProps) {
           <TextInput
             className={css.input}
             id="youtube-url"
-            label="유튜브 링크"
+            label={t('linkLabel')}
             placeholder="https://www.youtube.com/watch?v=UkPN32C4wzc"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
@@ -98,7 +100,7 @@ export default function PostForm({ session }: PostFormProps) {
         <div className={css.textAreaSection}>
           <div className={css.textAreaHeader}>
             <label className={css.textAreaLabel} htmlFor="set-list">
-              세트리스트
+              {t('textareaLabel')}
             </label>
             <div>
               <button
@@ -143,12 +145,12 @@ export default function PostForm({ session }: PostFormProps) {
             minRows={14}
             maxRows={14}
             autosize
-            placeholder={'38:53 노래제목1\n138:54 노래제목2\n238:54 노래제목3\n338:54 노래제목4'}
+            placeholder={t('textareaPlaceholder')}
           />
         </div>
       </div>
       <Button type="submit" color="third" variant="filled" disabled={mutatePost.isPending}>
-        제출
+        {t('submit')}
       </Button>
     </form>
   );

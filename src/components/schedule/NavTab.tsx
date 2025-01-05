@@ -1,8 +1,9 @@
 'use client';
-import { usePathname } from 'next/navigation';
 import { scheduleDto } from '@/types/dto';
 import { SegmentedControl, SegmentedControlItem } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
+import { usePathname } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 
 export default function NavTab() {
@@ -11,6 +12,7 @@ export default function NavTab() {
   const searchParams = useSearchParams();
   const filterQuery = searchParams.get('t');
   const { filter } = scheduleDto.pick({ filter: true }).parse({ filter: filterQuery });
+  const t = useTranslations('schedule.navTab');
 
   const handleValueChange = (value: string) => {
     const query = new URLSearchParams(searchParams);
@@ -23,10 +25,10 @@ export default function NavTab() {
   };
 
   const navLinks: SegmentedControlItem[] = [
-    { value: 'scheduled', label: '예정' },
-    { value: 'live', label: '라이브' },
-    { value: 'daily', label: '24시' },
-    { value: 'all', label: '전체' },
+    { value: 'scheduled', label: t('scheduled') },
+    { value: 'live', label: t('live') },
+    { value: 'daily', label: t('daily') },
+    { value: 'all', label: t('all') },
   ];
 
   return (
