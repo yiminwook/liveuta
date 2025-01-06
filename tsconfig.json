@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["@types/gtag.js", "unplugin-icons/types/react"],
+    "types": ["@types/gtag.js"],
     "paths": {
       "@variable": ["./src/styles/variable.module.scss"],
       "@web/*": ["./src/app/(web)/*"],

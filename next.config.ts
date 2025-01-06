@@ -3,7 +3,6 @@ import NextBundleAnalyzer from '@next/bundle-analyzer';
 import { SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
-import Icons from 'unplugin-icons/webpack';
 
 // const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -88,14 +87,6 @@ const nextConfig: NextConfig = {
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
         use: ['@svgr/webpack'],
       },
-    );
-
-    config.plugins.push(
-      Icons({
-        autoInstall: true,
-        compiler: 'jsx',
-        jsx: 'react',
-      }),
     );
 
     return config;
