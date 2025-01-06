@@ -1,13 +1,14 @@
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { STAT_MAPPER, TContentsData } from '@/types/api/mongoDB';
+import FasStar from '@icons/fa-solid/Star';
+import IonPerson from '@icons/ion/Person';
+import IonPlus from '@icons/ion/PlusRound';
+import MsOpenInNew from '@icons/material-symbols/OpenInNew';
+import MdiBlock from '@icons/mdi/Block';
+import TbBellRingingFilled from '@icons/tabler/BellRingingFilled';
 import { ActionIcon, Badge, Card, Text, Tooltip } from '@mantine/core';
 import variable from '@variable';
-import FasStar from '~icons/fa-solid/star.jsx';
-import IonPerson from '~icons/ion/person.jsx';
-import IonPlus from '~icons/ion/plus.jsx';
-import MsOpenInNew from '~icons/material-symbols/open-in-new.jsx';
-import MdiBlock from '~icons/mdi/block.jsx';
-import TbBellRingingFilled from '~icons/tabler/bellRingingFilled.jsx';
+import { useTranslations } from 'next-intl';
 import CopyButton from '../button/CopyButton';
 import css from './Card.module.scss';
 import CardImage from './CardImage';
@@ -32,6 +33,8 @@ export default function SliderCard({
   toggleFavorite,
   addBlock,
 }: SliderCardProps) {
+  const t = useTranslations('home.sliderCard');
+
   const onClickAddMultiView = () => {
     addMultiView?.(content);
   };
@@ -78,27 +81,31 @@ export default function SliderCard({
 
       <div className={css.navBox}>
         <div>
-          <Tooltip label="알림설정" position="bottom" withArrow>
+          <Tooltip label={t('alarm')} position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickAlarm}>
               <TbBellRingingFilled color={variable.thirdColorDefault} />
             </ActionIcon>
           </Tooltip>
-          <Tooltip label="멀티뷰추가" position="bottom" withArrow>
+          <Tooltip label={t('addMultiView')} position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickAddMultiView}>
               <IonPlus color={variable.thirdColorDefault} />
             </ActionIcon>
           </Tooltip>
-          <Tooltip label={`즐겨찾기 ${isFavorite ? '해제' : '추가'}`} position="bottom" withArrow>
+          <Tooltip
+            label={`${t('favorite')} ${isFavorite ? t('remove') : t('add')}`}
+            position="bottom"
+            withArrow
+          >
             <ActionIcon variant="transparent" onClick={onClickFavorite}>
               <FasStar color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
             </ActionIcon>
           </Tooltip>
-          <Tooltip label="채널블럭" position="bottom" withArrow>
+          <Tooltip label={t('blockChannel')} position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickBlock}>
               <MdiBlock color={variable.thirdColorDefault} />
             </ActionIcon>
           </Tooltip>
-          <Tooltip label="새로열기" position="bottom" withArrow>
+          <Tooltip label={t('openInNewTab')} position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickNewTab}>
               <MsOpenInNew color={variable.thirdColorDefault} />
             </ActionIcon>

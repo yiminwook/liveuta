@@ -1,6 +1,7 @@
 'use client';
 import { Button, SegmentedControl } from '@mantine/core';
 import { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
 import css from './Nav.module.scss';
@@ -20,6 +21,7 @@ type SearchFormProps = {
 
 export default function Nav({ searchParams, session }: SearchFormProps) {
   const router = useRouter();
+  const t = useTranslations('setlist.nav');
 
   function handleOrderChange(value: OrderType) {
     const query = new URLSearchParams();
@@ -36,8 +38,8 @@ export default function Nav({ searchParams, session }: SearchFormProps) {
           value={searchParams.sort}
           onChange={(value) => handleOrderChange(value as OrderType)}
           data={[
-            { label: '방송일', value: 'broadcast' },
-            { label: '작성일', value: 'create' },
+            { label: t('sortBroadcast'), value: 'broadcast' },
+            { label: t('sortCreate'), value: 'create' },
           ]}
         />
         <div className={css.setlist}>
@@ -48,7 +50,7 @@ export default function Nav({ searchParams, session }: SearchFormProps) {
             component={Link}
             href="/setlist/create"
           >
-            신규 작성
+            {t('createNew')}
           </Button>
         </div>
       </div>

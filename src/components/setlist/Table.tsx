@@ -12,6 +12,7 @@ import axios, { AxiosHeaders } from 'axios';
 import cx from 'classnames';
 import { Cause, Data, Effect } from 'effect';
 import type { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import SetlistDrawer from './Drawer';
 import { DrawerProvider } from './DrawerContext';
@@ -50,6 +51,7 @@ type DataType = {
 export default function SetlistTable({ session, searchParams }: TableProps) {
   const { channelList } = useCachedData({ session });
   const router = useRouter();
+  const t = useTranslations('setlist.table');
 
   const { data, isLoading } = useQuery({
     queryKey: ['searchSetlist', searchParams],
@@ -119,10 +121,10 @@ export default function SetlistTable({ session, searchParams }: TableProps) {
         <Table.Thead className={css.head}>
           <Table.Tr className={css.headRow}>
             <Table.Td className={cx(css.headCell, css.thumbnail)} />
-            <Table.Td className={cx(css.headCell, css.channel)}>채널명</Table.Td>
-            <Table.Td className={cx(css.headCell, css.title)}>제목</Table.Td>
+            <Table.Td className={cx(css.headCell, css.channel)}>{t('headCellChannel')}</Table.Td>
+            <Table.Td className={cx(css.headCell, css.title)}>{t('headCellTitle')}</Table.Td>
             <Table.Td className={cx(css.headCell, css.time)}>
-              {searchParams.sort === 'create' ? '작성일' : '방송일'}
+              {searchParams.sort === 'create' ? t('sortCreate') : t('sortBroadcast')}
             </Table.Td>
           </Table.Tr>
         </Table.Thead>

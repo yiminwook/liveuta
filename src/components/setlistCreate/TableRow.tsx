@@ -1,13 +1,14 @@
 'use client';
 import { hmsToString } from '@/utils/getTime';
+import CodiconClearAll from '@icons/codicon/ClearAll';
+import TbClipboard from '@icons/tabler/Clipboard';
+import TbCopy from '@icons/tabler/Copy';
+import TbGripVertical from '@icons/tabler/GripVertical';
+import TbX from '@icons/tabler/X';
 import { ActionIcon, Checkbox, Popover, TextInput, UnstyledButton } from '@mantine/core';
 import { Reorder, useDragControls } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import type { PointerEvent } from 'react';
-import CodiconClearAll from '~icons/codicon/clear-all.jsx';
-import TbClipboard from '~icons/tabler/clipboard.jsx';
-import TbCopy from '~icons/tabler/copy.jsx';
-import TbGripVertical from '~icons/tabler/grip-vertical.jsx';
-import TbX from '~icons/tabler/x.jsx';
 import { SetlistItem, copy, useSetlistActions } from './Context';
 import css from './Table.module.scss';
 
@@ -18,6 +19,7 @@ type TableRowProps = {
 export default function TableRow({ item }: TableRowProps) {
   const dragControls = useDragControls();
   const { removeItem, setItemChecked, setItemTime, setItemValue } = useSetlistActions();
+  const t = useTranslations('setlistCreate.table');
 
   function handleGripPointerDown(e: PointerEvent<HTMLDivElement>) {
     e.preventDefault();
@@ -43,7 +45,7 @@ export default function TableRow({ item }: TableRowProps) {
             <Popover.Dropdown>
               <div className={css.timePopover}>
                 <label className={css.timeInput}>
-                  <span>시간</span>
+                  <span>{t('hour')}</span>
                   <input
                     value={item.time.h}
                     type="number"
@@ -58,7 +60,7 @@ export default function TableRow({ item }: TableRowProps) {
                   />
                 </label>
                 <label className={css.timeInput}>
-                  <span>분</span>
+                  <span>{t('minute')}</span>
                   <input
                     value={item.time.m}
                     type="number"
@@ -73,7 +75,7 @@ export default function TableRow({ item }: TableRowProps) {
                   />
                 </label>
                 <label className={css.timeInput}>
-                  <span>초</span>
+                  <span>{t('second')}</span>
                   <input
                     value={item.time.s}
                     type="number"

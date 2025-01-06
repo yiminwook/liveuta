@@ -1,13 +1,14 @@
+import GgUserlane from '@icons/gg/Userlane';
+import IonIosMore from '@icons/ion/IosMore';
+import MsScheduleOutlineRounded from '@icons/material-symbols/ScheduleOutlineRounded';
+import RxPinTop from '@icons/radix-icons/PinTop';
+import TbHome from '@icons/tabler/Home';
+import TbList from '@icons/tabler/List';
 import { UnstyledButton } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
-import GgUserlane from '~icons/gg/userlane.jsx';
-import IonIosMore from '~icons/ion/ios-more.jsx';
-import MsScheduleOutlineRounded from '~icons/material-symbols/schedule-outline-rounded.jsx';
-import RxPinTop from '~icons/radix-icons/pin-top.jsx';
-import TbHome from '~icons/tabler/home.jsx';
-import TbList from '~icons/tabler/list.jsx';
 import css from './BottomInner.module.scss';
 enum Direction {
   up = 'up',
@@ -23,6 +24,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
   const [direction, setDirection] = useState<Direction>(Direction.up);
   const [windowY, setWindowY] = useState(0);
   const pathname = usePathname();
+  const t = useTranslations('global.bottomTab.bottomInner');
 
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -84,7 +86,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             data-current={pathname === '/setlist'}
           >
             <TbList />
-            <span>세트리</span>
+            <span>{t('setlist')}</span>
           </UnstyledButton>
         </li>
         <li>
@@ -95,7 +97,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             data-current={pathname === '/channel'}
           >
             <GgUserlane />
-            <span>채널</span>
+            <span>{t('channel')}</span>
           </UnstyledButton>
         </li>
         <li>
@@ -106,7 +108,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             data-current={pathname === '/'}
           >
             <TbHome />
-            <span>홈</span>
+            <span>{t('home')}</span>
           </UnstyledButton>
         </li>
         <li>
@@ -117,13 +119,13 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             data-current={pathname === '/schedule'}
           >
             <MsScheduleOutlineRounded />
-            <span>스케줄</span>
+            <span>{t('schedule')}</span>
           </UnstyledButton>
         </li>
         <li>
           <UnstyledButton className={css.item} onClick={openDrawer}>
             <IonIosMore width="1.5rem" height="1.5rem" />
-            <span>더보기</span>
+            <span>{t('more')}</span>
           </UnstyledButton>
         </li>
       </ul>

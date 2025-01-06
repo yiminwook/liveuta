@@ -4,6 +4,7 @@ import dayjs from '@/libraries/dayjs';
 import { TToken } from '@/types';
 import axios, { AxiosError } from 'axios';
 import cx from 'classnames';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import css from './Home.module.scss';
@@ -14,6 +15,7 @@ export default function PostBox({ token }: { token: TToken }) {
   const [imageUrl, setImageUrl] = useState('');
   const [link, setLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslations('dev.postBox');
 
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(() => e.target.value.trim());
@@ -75,11 +77,11 @@ export default function PostBox({ token }: { token: TToken }) {
 
   return (
     <div className={cx(css.box)}>
-      <label className={css.postLabel}>알림테스트</label>
+      <label className={css.postLabel}>{t('postLabel')}</label>
       <form className={css.postForm} onSubmit={handleSubmit}>
         <div className={css.postInputBox}>
           <label className={css.postInputLabel} htmlFor="title">
-            제목
+            {t('title')}
           </label>
           <input
             id="title"
@@ -92,7 +94,7 @@ export default function PostBox({ token }: { token: TToken }) {
         </div>
         <div className={css.postInputBox}>
           <label className={css.postInputLabel} htmlFor="body">
-            내용
+            {t('inputLabel')}
           </label>
           <input
             className={css.postInput}
@@ -105,7 +107,7 @@ export default function PostBox({ token }: { token: TToken }) {
         </div>
         <div className={css.postInputBox}>
           <label className={css.postInputLabel} htmlFor="imageUrl">
-            이미지 URL
+            {t('imageUrlInput')}
           </label>
           <input
             id="imageUrl"
@@ -119,7 +121,7 @@ export default function PostBox({ token }: { token: TToken }) {
         </div>
         <div className={css.postInputBox}>
           <label className={css.postInputLabel} htmlFor="link">
-            링크
+            {t('linkLabel')}
           </label>
           <input
             id="link"
@@ -133,7 +135,7 @@ export default function PostBox({ token }: { token: TToken }) {
         </div>
         <div className={css.postButtonBox}>
           <button className={css.button} data-variant="post" type="submit" disabled={isLoading}>
-            Send
+            {t('send')}
           </button>
         </div>
       </form>

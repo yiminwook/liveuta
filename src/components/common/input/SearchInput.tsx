@@ -1,7 +1,7 @@
+import IonIosSearch from '@icons/ion/IosSearch';
 import { ActionIcon, Input } from '@mantine/core';
 import { ChangeEventHandler } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import TbSearch from '~icons/tabler/search.jsx';
 import css from './SearchInput.module.scss';
 
 type SearchInputProps = {
@@ -44,7 +44,7 @@ export default function SearchInput({
         disabled={disabled}
         onClick={onSubmit}
       >
-        <TbSearch color="#fff" />
+        <IonIosSearch color="#fff" />
       </ActionIcon>
     </Input.Wrapper>
   );

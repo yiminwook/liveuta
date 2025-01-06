@@ -2,15 +2,16 @@
 import { ORIGIN } from '@/constants';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { usePlayerCtx } from '@/stores/player';
+import ClarityLightningSolid from '@icons/clarity/LightningSolid';
+import MdiYoutube from '@icons/mdi/YouTube';
 import classnames from 'classnames';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { memo, useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
 import { useStore } from 'zustand';
-import ClarityLightningSolid from '~icons/clarity/lightning-solid.jsx';
-import MdiYoutube from '~icons/mdi/youtube.jsx';
 import css from './Player.module.scss';
 
 type PlayerProps = {
@@ -24,11 +25,12 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
   const playerRef = useRef<ReactPlayer>(null);
   const playerCtx = usePlayerCtx();
   const store = useStore(playerCtx);
+  const t = useTranslations('global.player');
 
   useHotkeys(
     'esc',
     () => {
-      toast.info(`플레이어 ${store.isHide ? '보이기' : '숨기기'}`);
+      toast.info(`${t('title')} ${store.isHide ? t('show') : t('hide')}`);
       store.actions.toggleIsHide();
     },
     { enabled: isReady, scopes: ['*'] },
@@ -37,7 +39,7 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
   useHotkeys(
     'backspace',
     () => {
-      toast.info(`플레이어 ${store.isPlaying ? '정지' : '재생'}`);
+      toast.info(`${t('title')} ${store.isPlaying ? t('pause') : t('play')}`);
       store.actions.toggleIsPlaying();
     },
     { enabled: isReady, scopes: ['*'], preventDefault: true },
@@ -94,7 +96,7 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
         onError={(e) => {
           console.error('Player', e);
           console.log('url', url);
-          toast.error('실행 할 수 없는 영상입니다.');
+          toast.error(t('cannotPlayError'));
         }}
       />
       <button className={classnames(css.pipBtn, { hide: !isShow })} onClick={toggleLeft}>

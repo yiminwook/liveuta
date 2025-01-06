@@ -3,14 +3,15 @@ import Modal from '@/components/common/modal/Modal';
 import { useTransition } from '@/hooks/useTransition';
 import { ModalProps, useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
+import FasFilter from '@icons/fa-solid/Filter';
 import { Button, CloseButton } from '@mantine/core';
 import variable from '@variable';
 import classNames from 'classnames';
 import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-import FasFilter from '~icons/fa-solid/filter.jsx';
 import ConfirmModal from '../common/modal/ConfirmModal';
 import NavTab from './NavTab';
 import css from './ScheduleNavModal.module.scss';
@@ -40,6 +41,7 @@ export default function ScheduleNavModal({
   const { modifier, onAnimationEnd, exit } = useTransition();
   const modalActions = useSetModalStore();
   const router = useRouter(); // transition 효과 제외
+  const t = useTranslations('schedule.scheduleNavModal');
 
   const isFavorite = searchParams.get('isFavorite') === 'true';
 
@@ -51,7 +53,7 @@ export default function ScheduleNavModal({
     const result: true | undefined = await modalActions.push(ConfirmModal, {
       id: 'reset-schedule-query',
       props: {
-        message: '검색 필터링을 초기화하시겠습니까?',
+        message: t('clearFilter'),
       },
     });
 
@@ -99,7 +101,9 @@ export default function ScheduleNavModal({
           {searchParams.get('q') && (
             <div className={css.queryStatBox}>
               <FasFilter color={variable.thirdColorDefault} />
-              <span>검색 필터링 중:&nbsp;{searchParams.get('q')}</span>
+              <span>
+                {t('filtering')}:&nbsp;{searchParams.get('q')}
+              </span>
               <Button variant="light" size="xs" fz={14} onClick={onResetSearch}>
                 초기화
               </Button>
@@ -107,14 +111,14 @@ export default function ScheduleNavModal({
           )}
 
           <SearchInput
-            placeholder="채널명으로 검색"
+            placeholder={t('queryInputPlaceholder')}
             value={query}
             onChange={onChangeQuery}
             onSubmit={onSearch}
           />
         </div>
 
-        <div className={css.vidioTypeBox}>
+        <div className={css.videoTypeBox}>
           <VideoTypeRadio select={scheduleDto.select} length={length} />
         </div>
       </div>

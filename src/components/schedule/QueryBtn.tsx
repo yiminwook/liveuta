@@ -1,10 +1,12 @@
 'use client';
 import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
+import FasFilter from '@icons/fa-solid/Filter';
 import { Button, Popover } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
-import { usePathname, useSearchParams } from 'next/navigation';
-import FasFilter from '~icons/fa-solid/filter.jsx';
+import { usePathname } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import ConfirmModal from '../common/modal/ConfirmModal';
 import css from './QueryBtn.module.scss';
 
@@ -17,12 +19,13 @@ export default function QueryButton({ query }: QueryButtonProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const modalActions = useSetModalStore();
+  const t = useTranslations('schedule.queryButton');
 
   const handleReset = async () => {
     const result: true | undefined = await modalActions.push(ConfirmModal, {
       id: 'reset-schedule-query',
       props: {
-        message: '검색 필터링을 초기화하시겠습니까?',
+        message: t('clearFilter'),
       },
     });
 
@@ -38,14 +41,16 @@ export default function QueryButton({ query }: QueryButtonProps) {
     <Popover withArrow arrowPosition="center">
       <Popover.Target>
         <Button h={40} bg="var(--mantine-color-body)" variant="outline" leftSection={<FasFilter />}>
-          검색 필터링 중
+          {t('filtering')}
         </Button>
       </Popover.Target>
       <Popover.Dropdown>
         <div className={css.content}>
-          <p className={css.description}>현재: {query}</p>
+          <p className={css.description}>
+            {t('now')}: {query}
+          </p>
           <Button variant="outline" onClick={handleReset}>
-            초기화
+            {t('clear')}
           </Button>
         </div>
       </Popover.Dropdown>

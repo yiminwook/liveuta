@@ -1,14 +1,15 @@
+import FasStar from '@icons/fa-solid/Star';
+import IonPlus from '@icons/ion/PlusRound';
+import MsOpenInNew from '@icons/material-symbols/OpenInNew';
+import MdiBlock from '@icons/mdi/Block';
+import TbBellRingingFilled from '@icons/tabler/BellRingingFilled';
+import TbCheck from '@icons/tabler/Check';
+import TbCopy from '@icons/tabler/Copy';
+import TbDots from '@icons/tabler/Dots';
 import { ActionIcon, CopyButton, Menu } from '@mantine/core';
 import variable from '@variable';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-import FasStar from '~icons/fa-solid/star.jsx';
-import IonPlus from '~icons/ion/plus.jsx';
-import MsOpenInNew from '~icons/material-symbols/open-in-new.jsx';
-import MdiBlock from '~icons/mdi/block.jsx';
-import TbBellRingingFilled from '~icons/tabler/bell-ringing-filled.jsx';
-import TbCheck from '~icons/tabler/check.jsx';
-import TbCopy from '~icons/tabler/copy.jsx';
-import TbDots from '~icons/tabler/dots.jsx';
 import css from './CardMenu.module.scss';
 
 type CardMenuProps = {
@@ -30,6 +31,8 @@ export default function CardMenu({
   onClickFavorite,
   onClickNewTab,
 }: CardMenuProps) {
+  const t = useTranslations('schedule.scheduleCard.cardMenu');
+
   return (
     <Menu position="bottom-end" withArrow withinPortal arrowPosition="center" trigger="hover">
       <Menu.Target>
@@ -44,35 +47,35 @@ export default function CardMenu({
           leftSection={<TbBellRingingFilled color={variable.thirdColorDefault} />}
           onClick={onClickAlarm}
         >
-          알림설정
+          {t('setAlarm')}
         </Menu.Item>
         <Menu.Item
           component="button"
           leftSection={<IonPlus color={variable.thirdColorDefault} />}
           onClick={onClickAddMultiView}
         >
-          멀티뷰추가
+          {t('addMultiView')}
         </Menu.Item>
         <Menu.Item
           component="button"
           leftSection={<FasStar color={isFavorite ? '#ffbb00' : '#a7a7a7'} />}
           onClick={onClickFavorite}
         >
-          {`즐겨찾기 ${isFavorite ? '해제' : '추가'}`}
+          {`${t('favorite')} ${isFavorite ? t('remove') : t('add')}`}
         </Menu.Item>
         <Menu.Item
           component="button"
           leftSection={<MdiBlock color={variable.thirdColorDefault} />}
           onClick={onClickBlock}
         >
-          채널블럭
+          {t('blockChannel')}
         </Menu.Item>
         <Menu.Item
           component="button"
           leftSection={<MsOpenInNew color={variable.thirdColorDefault} />}
           onClick={onClickNewTab}
         >
-          새로열기
+          {t('openInNewTab')}
         </Menu.Item>
         <CopyButton value={copyValue}>
           {({ copied, copy }) => (
@@ -83,10 +86,10 @@ export default function CardMenu({
               }
               onClick={() => {
                 copy();
-                toast.info('링크가 복사되었습니다.');
+                toast.info(t('linkCopied'));
               }}
             >
-              링크복사
+              {t('copyLink')}
             </Menu.Item>
           )}
         </CopyButton>

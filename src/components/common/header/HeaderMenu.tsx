@@ -1,6 +1,6 @@
+import { usePathname } from 'next/navigation';
 import { Menu, UnstyledButton } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
-import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import css from './HeaderMenu.module.scss';
 

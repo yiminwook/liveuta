@@ -2,8 +2,7 @@ import path from 'node:path';
 import NextBundleAnalyzer from '@next/bundle-analyzer';
 import { SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
-import IconsResolver from 'unplugin-icons/resolver';
-import Icons from 'unplugin-icons/webpack';
+import createNextIntlPlugin from 'next-intl/plugin';
 
 // const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -18,14 +17,11 @@ const nextConfig: NextConfig = {
     // ts빌드 에러를 무시하고 싶다면 아래 옵션을 true로 변경하세요.
     ignoreBuildErrors: false,
   },
-  // experimental: {
-  //   optimizePackageImports: ["@mantine/core", "@mantine/hooks"], // tree shaking, 제대로 작동하지 않음.
-  // },
   reactStrictMode: true,
   compiler: {
-    removeConsole: {
-      exclude: ['error', 'warn', 'log', 'info'],
-    },
+    // removeConsole: {
+    //   exclude: ['error', 'warn', 'log', 'info'],
+    // },
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'src', 'styles')], // style 폴더에 있는 파일은 이름만으로 import 가능(경로 축약)
@@ -93,53 +89,18 @@ const nextConfig: NextConfig = {
       },
     );
 
-    // config.plugins.push(
-    //   AutoImport({
-    //     resolvers: [
-    //       IconsResolver({
-    //         prefix: 'Icon',
-    //         extension: 'jsx',
-    //         alias: {
-    //           tb: 'tabler',
-    //           rx: 'radix-icons',
-    //           ms: 'material-symbols',
-    //           spinner: 'svg-spinners',
-    //         },
-    //       }),
-    //     ],
-    //   }),
-    // );
-
-    config.plugins.push(
-      Icons({
-        autoInstall: true,
-        compiler: 'jsx',
-        jsx: 'react',
-      }),
-    );
-
     return config;
   },
   experimental: {
     authInterrupts: true, // 401, 403
     reactCompiler: true,
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'], // tree shaking
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-        },
-        '*.scss': {
-          loaders: ['sass-loader'],
-        },
-      },
-    },
   },
 };
 
-const withBundleAnalyzer = NextBundleAnalyzer({
-  enabled: false,
-});
+const withNextIntl = createNextIntlPlugin();
+
+const withBundleAnalyzer = NextBundleAnalyzer({ enabled: false });
 
 const isEnableSentry = !!process.env.NEXT_PUBLIC_SENTRY_DSN && !!process.env.SENTRY_AUTH_TOKEN;
 
@@ -158,4 +119,4 @@ const SENTRY_BUILD_OPTIONS: SentryBuildOptions = {
 };
 
 // turbopack 호환 안될시 롤백
-export default withSentryConfig(withBundleAnalyzer(nextConfig), SENTRY_BUILD_OPTIONS);
+export default withSentryConfig(withBundleAnalyzer(withNextIntl(nextConfig)), SENTRY_BUILD_OPTIONS);

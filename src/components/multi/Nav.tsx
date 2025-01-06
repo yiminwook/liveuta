@@ -1,7 +1,7 @@
 'use client';
 import ListModal from '@/components/common/modal/MultiListModal';
 import { useSetModalStore } from '@/stores/modal';
-import IonPlus from '~icons/ion/plus.jsx';
+import IonPlus from '@icons/ion/PlusRound';
 import css from './Nav.module.scss';
 
 export default function Nav() {

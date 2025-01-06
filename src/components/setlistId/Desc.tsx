@@ -5,6 +5,7 @@ import { Button, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -22,9 +23,10 @@ export default function Desc({ session, videoId, description }: DescProps) {
   const [desc, setDesc] = useState('');
   const actions = useSetPlayerStore();
   const queryClient = useQueryClient();
+  const t = useTranslations('setlistId.desc');
 
   const toggleEditing = () => {
-    if (!session) return toast.warning('로그인이 필요한 서비스입니다.');
+    if (!session) return toast.warning(t('notLoggedInError'));
     setIsEditing((pre) => !pre);
   };
 
@@ -57,7 +59,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
       return response.data;
     },
     onSuccess: () => {
-      toast.success('수정되었습니다.');
+      toast.success(t('modified'));
       queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
       router.refresh();
     },
@@ -69,11 +71,11 @@ export default function Desc({ session, videoId, description }: DescProps) {
     const description = desc.trim();
 
     if (!session) {
-      return toast.warning('로그인이 필요한 서비스입니다.');
+      return toast.warning(t('notLoggedInError'));
     }
 
     if (!description) {
-      return toast.warning('내용을 입력해주세요.');
+      return toast.warning(t('noContentError'));
     }
 
     mutateSetlist.mutate({
@@ -102,7 +104,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
             onClick={handleCancel}
             disabled={mutateSetlist.isPending}
           >
-            취소
+            {t('cancel')}
           </Button>
           <Button
             type="submit"
@@ -110,7 +112,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
             data-variant="save"
             disabled={mutateSetlist.isPending}
           >
-            저장
+            {t('save')}
           </Button>
         </div>
         <div className={css.inner}>
@@ -130,7 +132,7 @@ export default function Desc({ session, videoId, description }: DescProps) {
   return (
     <div className={css.wrap}>
       <Button type="button" color="third" onClick={toggleEditing}>
-        편집
+        {t('edit')}
       </Button>
       <div className={css.inner}>
         {description

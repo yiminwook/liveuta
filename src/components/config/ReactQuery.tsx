@@ -1,9 +1,11 @@
 'use client';
-import { QueryClientProvider, QueryClient, QueryCache } from '@tanstack/react-query';
+import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { PropsWithChildren, useState } from 'react';
 import { toast } from 'sonner';
 
 export default function ReactQuery({ children }: PropsWithChildren) {
+  const t = useTranslations('global.config.reactQuery');
   const [querClient] = useState(() => {
     return new QueryClient({
       queryCache: new QueryCache({
@@ -12,7 +14,7 @@ export default function ReactQuery({ children }: PropsWithChildren) {
           const querykey = query.queryKey;
           if (querykey.includes('ignore')) return;
           // 에러 핸들링
-          toast.error('통신에러');
+          toast.error(t('communicationError'));
         },
       }),
       defaultOptions: {

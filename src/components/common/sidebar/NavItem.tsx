@@ -1,8 +1,8 @@
+import TbChevronLeft from '@icons/tabler/ChevronLeft';
+import TbChevronRight from '@icons/tabler/ChevronRight';
 import { NavLink } from '@mantine/core';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import TbChevronLeft from '~icons/tabler/chevron-left.jsx';
-import TbChevronRight from '~icons/tabler/chevron-right.jsx';
 
 type NavItemProps = {
   label: string;

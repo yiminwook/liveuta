@@ -2,11 +2,12 @@
 import Show from '@/components/common/utils/Show';
 import { secondsToHMS } from '@/utils/getTime';
 import { testYoutubeUrl } from '@/utils/regexp';
+import TbCirclePlus from '@icons/tabler/CirclePlus';
 import { ActionIcon, Button, TextInput } from '@mantine/core';
 import { Checkbox } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import { ChangeEvent, createRef, useEffect, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
-import TbCirclePlus from '~icons/tabler/circle-plus.jsx';
 import {
   copy,
   usePlayerActions,
@@ -68,6 +69,7 @@ export function SetlistItemInput() {
 export function AutoSort() {
   const autoSort = useSetlistStore((state) => state.autoSort);
   const { setAutoSort, sortSetlist } = useSetlistActions();
+  const t = useTranslations('setlistCreate.setlistControlSection');
 
   function handleAutoSortChecked(e: ChangeEvent<HTMLInputElement>) {
     setAutoSort(e.currentTarget.checked);
@@ -77,20 +79,23 @@ export function AutoSort() {
     }
   }
 
-  return <Checkbox label="자동 정렬" checked={autoSort} onChange={handleAutoSortChecked} />;
+  return (
+    <Checkbox label={t('automaticSort')} checked={autoSort} onChange={handleAutoSortChecked} />
+  );
 }
 
 export function SetlistControlButtons() {
   const setlist = useSetlistStore(useShallow((state) => state.setlist));
   const autoSort = useSetlistStore((state) => state.autoSort);
   const { sortSetlist } = useSetlistActions();
+  const t = useTranslations('setlistCreate.setlistControlSection');
 
   return (
     <>
       <Show when={autoSort === false}>
-        <Button onClick={sortSetlist}>정렬</Button>
+        <Button onClick={sortSetlist}>{t('sort')}</Button>
       </Show>
-      <Button onClick={() => copy(setlist)}>복사</Button>
+      <Button onClick={() => copy(setlist)}>{t('copy')}</Button>
     </>
   );
 }

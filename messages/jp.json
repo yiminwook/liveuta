@@ -1,0 +1,418 @@
+{
+  "hello": "こんにちは",
+  "dayjsTemplate": "YYYY年 MM月 DD日",
+  "error": {
+    "errorPage": {
+      "link": "エラーが発生しました"
+    },
+    "error": {
+      "title": "500: サーバーエラー",
+      "imageAlt": "エラーが発生しました。",
+      "retry": "再試行"
+    },
+    "globalError": {
+      "title": "500: サーバーエラー",
+      "imageAlt": "エラーが発生しました。",
+      "linkToHome": "ホームに戻る"
+    },
+    "notFound": {
+      "title": "404: ページが見つかりません",
+      "imageAlt": "ページが見つかりません。",
+      "goBack": "戻る"
+    },
+    "unauthorized": {
+      "title": "401: 権限がありません",
+      "imageAlt": "権限がありません。",
+      "linkToLogin": "ログインする"
+    }
+  },
+  "global": {
+    "bottomTab": {
+      "drawer": {
+        "title": "サイトマップ",
+        "description": "リンクを選択してください",
+        "internalLinks": {
+          "settings": "設定",
+          "dev": "開発"
+        },
+        "externalLinks": {
+          "kizunaAiGallery": "DC1",
+          "vutaGallery": "DC2",
+          "utaTools": "UtaTools"
+        }
+      },
+      "bottomInner": {
+        "setlist": "セットリスト",
+        "channel": "チャンネル",
+        "home": "ホーム",
+        "schedule": "スケジュール",
+        "more": "もっと見る"
+      }
+    },
+    "config": {
+      "reactQuery": {
+        "communicationError": "通信エラー"
+      }
+    },
+    "copyButton": {
+      "copy": "コピー",
+      "copied": "コピーしました。"
+    },
+    "dataFetchingObserver": {
+      "sessionExpired": "セッションが期限切れになりました。",
+      "fetching": "サーバーと通信中です。"
+    },
+    "moreButton": {
+      "more": "もっと見る",
+      "less": "閉じる"
+    },
+    "footer": {
+      "site": "このサイトは非営利のVTuberファンサイトです。"
+    },
+    "header": {
+      "userAvatarAlt": "ユーザーアバター",
+      "login": "ログイン",
+      "desktopNav": {
+        "internalLink": "目次",
+        "externalLink": "外部リンク",
+        "internalLinks": {
+          "home": "ホーム",
+          "schedule": "スケジュール",
+          "multiView": "マルチビュー",
+          "channel": "チャンネル",
+          "setlist": "セットリスト",
+          "settings": "設定",
+          "dev": "開発"
+        },
+        "externalLinks": {
+          "kizunaAiGallery": "キズナアイギャラリー",
+          "vutaGallery": "Vtuber歌枠ギャラリー",
+          "utaTools": "Uta Tools"
+        }
+      }
+    },
+    "iframe": {
+      "open": "新しいウィンドウで開く"
+    },
+    "modal": {
+      "alertModal": {
+        "confirm": "確認"
+      },
+      "channelCardModal": {
+        "channelImageOf": "さんのチャンネル画像",
+        "subscribers": "登録者",
+        "videos": "動画",
+        "channel": "チャンネル"
+      },
+      "confirmModal": {
+        "cancel": "キャンセル",
+        "confirm": "確認"
+      },
+      "errorModal": {
+        "confirm": "確認"
+      },
+      "multiListModal": {
+        "noURLWarning": "URLを入力してください。",
+        "max4Warning": "最大4つまで入力できます。",
+        "modalTitle": "マルチビュー追加",
+        "description1": "最大4つの動画を追加でき、動画サイズはショート動画に適しています。",
+        "description2": "モバイル環境では同時再生ができない場合があります。",
+        "linkToMultiView": "マルチビューに移動",
+        "add": "追加",
+        "remove": "削除"
+      }
+    },
+    "noData": {
+      "imageAlt": "データが見つかりませんでした。"
+    },
+    "player": {
+      "title": "プレイヤー",
+      "show": "表示",
+      "hide": "非表示",
+      "play": "再生",
+      "pause": "一時停止",
+      "cannotPlayError": "再生できません。"
+    },
+    "serviceWorker": {
+      "noBrowserNotificationError": "ブラウザの通知許可設定がされていません。"
+    },
+    "session": {
+      "sessionExpired": "セッションが期限切れになりました。",
+      "fetching": "サーバーと通信中です。"
+    }
+  },
+  "home": {
+    "title": "ホーム",
+    "addFavoriteChannel": "お気に入りに追加しますか？",
+    "removeFavoriteChannel": "お気に入りから削除しますか？",
+    "blockChannel": "チャンネルをブロックしますか？",
+    "unblockChannel": "チャンネルのブロックを解除しますか？",
+    "live": "配信",
+    "favorite": "お気に入り",
+    "searchSchedule": "スケジュールを検索してください",
+    "searchInputPlaceholder": "チャンネル名で検索",
+    "recentlyAddedChannel": "最近追加されたチャンネル",
+    "notLoggedInError": "ログイン後に利用可能なサービスです。",
+    "channelSlider": {
+      "hidden": "非公開",
+      "subscribers": "登録者",
+      "videos": "動画",
+      "navigationChannel": "チャンネルで検索"
+    },
+    "sliderCard": {
+      "alarm": "アラーム設定",
+      "addMultiView": "マルチビュー追加",
+      "favorite": "お気に入り",
+      "remove": "解除",
+      "add": "追加",
+      "blockChannel": "チャンネルをブロック",
+      "openInNewTab": "新しいタブで開く"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "ログイン",
+      "loginPage": "ログインページ",
+      "imageAlt": "ログインイメージ",
+      "startWithSocial": "ソーシャルアカウントで開始する"
+    },
+    "logout": {
+      "title": "ログアウト"
+    },
+    "register": {
+      "title": "新規登録"
+    }
+  },
+  "channel": {
+    "title": "チャンネル",
+    "channelCard": {
+      "addFavoriteChannel": "お気に入りに追加しますか？",
+      "removeFavoriteChannel": "お気に入りから削除しますか？",
+      "hidden": "非公開",
+      "subscriber": "登録者",
+      "video": "動画",
+      "details": "詳細を見る",
+      "notLoggedInError": "ログイン後に利用可能なサービスです。"
+    },
+    "channelSection": {
+      "alphabetical": "あいうえお順",
+      "createdAt": "登録順",
+      "desktopRequest": "チャンネル登録",
+      "mobileRequest": "登録",
+      "inputPlaceholder": "チャンネル名で検索"
+    },
+    "nav": {
+      "nameKorLabel": "名前順",
+      "createdAtLabel": "登録順",
+      "linkToRequest": "チャンネル登録",
+      "linkToRequestMobile": "登録",
+      "channelSearchInputPlaceholder": "チャンネル名で検索"
+    }
+  },
+  "dev": {
+    "title": "開発",
+    "initialPermission": "設定を取得中",
+    "permissionGranted": "許可",
+    "permissionDenied": "拒否",
+    "browserNotificationAllowed": "ブラウザ通知が許可されました。",
+    "noBrowserNotificationError": "ブラウザ通知が許可されていません。",
+    "browserNotification": "通知許可設定の状態",
+    "request": "リクエスト",
+    "token": "トークン",
+    "postBox": {
+      "postLabel": "通知テスト",
+      "title": "タイトル",
+      "inputLabel": "内容",
+      "imageUrlInput": "画像URL",
+      "linkLabel": "リンク",
+      "send": "送信"
+    },
+    "tokenBox": {
+      "tokenError": "トークンの取得に失敗しました。",
+      "gettingToken": "トークンを取得中です。"
+    }
+  },
+  "multiView": {
+    "title": "マルチビュー",
+    "shortsSection": {
+      "shorts": {
+        "cannotPlayError": "再生できません。"
+      }
+    }
+  },
+  "my": {
+    "blacklist": {
+      "title": "ブロックリスト",
+      "removeBlacklist": "ブロックを解除しますか？",
+      "remove": "ブロック解除"
+    },
+    "favorite": {
+      "title": "お気に入り",
+      "removeFavorite": "お気に入りから削除しますか？",
+      "remove": "お気に入り削除"
+    }
+  },
+  "schedule": {
+    "title": "スケジュール",
+    "navTab": {
+      "scheduled": "予定",
+      "live": "配信",
+      "daily": "24時間",
+      "all": "すべて"
+    },
+    "queryButton": {
+      "clearFilter": "検索フィルタをリセットしますか？",
+      "filtering": "フィルタリング中です。",
+      "now": "現在",
+      "clear": "リセット"
+    },
+    "scheduleCard": {
+      "imageAlt": "の配信",
+      "setAlarm": "アラーム設定",
+      "addMultiView": "マルチビュー追加",
+      "favorite": "お気に入り",
+      "blockChannel": "チャンネルをブロック",
+      "copyLink": "リンクをコピー",
+      "linkCopied": "リンクがコピーされました。",
+      "cardImage": {
+        "livestreamOf": "の放送"
+      },
+      "cardMenu": {
+        "setAlarm": "アラーム設定",
+        "addMultiView": "マルチビュー追加",
+        "favorite": "お気に入り",
+        "add": "追加",
+        "remove": "解除",
+        "blockChannel": "チャンネルをブロック",
+        "openInNewTab": "新しいタブで開く",
+        "copyLink": "リンクをコピー",
+        "linkCopied": "リンクがコピーされました。"
+      }
+    },
+    "scheduleNavModal": {
+      "clearFilter": "検索フィルタをリセットしますか？",
+      "filtering": "フィルタリング中です。",
+      "clear": "リセット",
+      "queryInputPlaceholder": "チャンネル名で検索"
+    },
+    "scheduleSection": {
+      "notLoggedInError": "ログイン後に利用可能なサービスです。",
+      "addFavoriteChannel": "お気に入りに追加しますか？",
+      "removeFavoriteChannel": "お気に入りから削除しますか？",
+      "blockChannel": "チャンネルをブロックしますか？",
+      "searchAtChannelPage": "チャンネルページで検索"
+    },
+    "videoType": {
+      "groupLabel": "動画種類",
+      "all": "すべて",
+      "stream": "放送",
+      "video": "動画",
+      "filter": {
+        "scheduled": "予定",
+        "live": "配信",
+        "daily": "24時間",
+        "all": "すべて"
+      }
+    }
+  },
+  "request": {
+    "title": "リクエスト"
+  },
+  "setlist": {
+    "title": "セットリスト",
+    "nav": {
+      "sortBroadcast": "放送日",
+      "sortCreate": "作成日",
+      "createNew": "セットリスト作成"
+    },
+    "postDrawer": {
+      "upload": "アップロード",
+      "uploadSetlist": "セットリストをアップロード",
+      "linkToCreateSetlist": "セットリスト作成に進む"
+    },
+    "postForm": {
+      "linkLabel": "YouTubeリンク",
+      "textareaLabel": "セットリスト",
+      "textareaPlaceholder": "38:53 曲名1\n138:54 曲名2\n238:54 曲名3\n338:54 曲名4",
+      "submit": "送信",
+      "formSuccess": "セットリストがアップロードされました。",
+      "invalidUrlError": "無効なYouTube URLです。",
+      "emptySetlistError": "セットリストを入力してください。",
+      "notLoggedInError": "ログイン後に利用可能なサービスです。"
+    },
+    "searchForm": {
+      "searchInputPlaceholder": "セットリストで検索"
+    },
+    "table": {
+      "headCellChannel": "チャンネル名",
+      "headCellTitle": "タイトル",
+      "sortBroadcast": "放送日",
+      "sortCreate": "作成日"
+    }
+  },
+  "setlistCreate": {
+    "title": "セットリスト作成",
+    "context": {
+      "copied": "セットリストをコピーしました。",
+      "noSetlistError": "コピーする項目がありません。"
+    },
+    "setlistControlSection": {
+      "automaticSort": "自動整列",
+      "sort": "整列",
+      "copy": "コピー"
+    },
+    "table": {
+      "headCellTime": "時間",
+      "headCellValue": "テキスト",
+      "hour": "時",
+      "minute": "分",
+      "second": "秒"
+    }
+  },
+  "setlistId": {
+    "desc": {
+      "modified": "修正されました。",
+      "notLoggedInError": "ログイン後に利用可能なサービスです。",
+      "editSuccess": "修正されました。",
+      "noContentError": "内容を入力してください。",
+      "cancel": "キャンセル",
+      "save": "保存",
+      "edit": "修正"
+    },
+    "info": {
+      "deleted": "削除されました。",
+      "deleteConfirm": "削除してもよろしいですか？",
+      "back": "戻る",
+      "youtube": "YouTube",
+      "list": "リスト",
+      "avatarAlt": "チャンネルアイコン",
+      "streamDate": "放送日",
+      "createDate": "作成日",
+      "lastModified": "修正日"
+    }
+  },
+  "settings": {
+    "title": "設定",
+    "autoSync": {
+      "title": "自動同期",
+      "onLabel": "オン",
+      "offLabel": "オフ",
+      "refreshInterval": "更新間隔",
+      "unit": "分"
+    },
+    "language": {
+      "title": "言語"
+    },
+    "theme": {
+      "title": "テーマ"
+    }
+  },
+  "hooks": {
+    "useReservePush": {
+      "tokenError": "トークンの取得に失敗しました。",
+      "title": "スケジュール通知",
+      "bodyStart": "まもなく",
+      "bodyEnd": "の放送が開始されます。"
+    }
+  }
+}

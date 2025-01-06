@@ -1,0 +1,424 @@
+{
+  "hello": "Hello",
+  "dayjsTemplate": "YYYY-MM-DD",
+  "error": {
+    "errorPage": {
+      "link": "An error has occurred"
+    },
+    "error": {
+      "title": "500: Server Error",
+      "imageAlt": "An error has occurred.",
+      "retry": "Retry"
+    },
+    "globalError": {
+      "title": "500: Server Error",
+      "imageAlt": "An error has occurred.",
+      "linkToHome": "Return to Home"
+    },
+    "notFound": {
+      "title": "404: Page Not Found",
+      "imageAlt": "The page could not be found.",
+      "goBack": "Go Back"
+    },
+    "unauthorized": {
+      "title": "401: Unauthorized",
+      "imageAlt": "You do not have permission.",
+      "linkToLogin": "Go to Login"
+    }
+  },
+  "global": {
+    "externalLink": {
+      "kizunaAiGallery": "Kizuna AI Gallery",
+      "vutaGallery": "VTuber Song Archive Gallery",
+      "utaTools": "UTATools",
+      "ezgif": "EZ GIF"
+    },
+    "bottomTab": {
+      "drawer": {
+        "title": "Site Map",
+        "description": "Select a link",
+        "internalLinks": {
+          "settings": "Settings",
+          "dev": "Dev"
+        },
+        "externalLinks": {
+          "kizunaAiGallery": "DC1",
+          "vutaGallery": "DC2",
+          "utaTools": "UtaTools"
+        }
+      },
+      "bottomInner": {
+        "setlist": "Setlist",
+        "channel": "Channel",
+        "home": "Home",
+        "schedule": "Schedule",
+        "more": "More"
+      }
+    },
+    "config": {
+      "reactQuery": {
+        "communicationError": "Communication Error"
+      }
+    },
+    "copyButton": {
+      "copy": "Copy",
+      "copied": "Copied"
+    },
+    "dataFetchingObserver": {
+      "sessionExpired": "Your session has expired.",
+      "fetching": "Communicating with the server."
+    },
+    "moreButton": {
+      "more": "View More",
+      "less": "Collapse"
+    },
+    "footer": {
+      "site": "This site is a Non-profit V-tuber Fan website"
+    },
+    "header": {
+      "userAvatarAlt": "User Avatar",
+      "login": "Login",
+      "desktopNav": {
+        "internalLink": "Index",
+        "externalLink": "External Links",
+        "internalLinks": {
+          "home": "Home",
+          "schedule": "Schedule",
+          "multiView": "MultiView",
+          "channel": "Channel",
+          "setlist": "Setlist",
+          "settings": "Settings",
+          "dev": "Dev"
+        },
+        "externalLinks": {
+          "kizunaAiGallery": "Kizuna AI Gallery",
+          "vutaGallery": "Vtuber Utawaku Gallery",
+          "utaTools": "Uta Tools"
+        }
+      }
+    },
+    "iframe": {
+      "open": "Open in New Tab"
+    },
+    "modal": {
+      "alertModal": {
+        "confirm": "Confirm"
+      },
+      "channelCardModal": {
+        "channelImageOf": "'s Channel Image",
+        "subscribers": "Subscribers",
+        "videos": "Videos",
+        "channel": "Channel"
+      },
+      "confirmModal": {
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+      },
+      "errorModal": {
+        "confirm": "Confirm"
+      },
+      "multiListModal": {
+        "noURLWarning": "Please enter a URL.",
+        "max4Warning": "You can add up to 4 items.",
+        "modalTitle": "Add MultiView",
+        "description1": "You can add up to 4 videos, and the video size is optimized for Shorts.",
+        "description2": "Simultaneous playback may not work in mobile environments.",
+        "linkToMultiView": "Go to MultiView",
+        "add": "Add",
+        "remove": "Remove"
+      }
+    },
+    "noData": {
+      "imageAlt": "No data retrieved."
+    },
+    "player": {
+      "title": "Player",
+      "show": "Show",
+      "hide": "Hide",
+      "play": "Play",
+      "pause": "Pause",
+      "cannotPlayError": "Cannot play this video."
+    },
+    "serviceWorker": {
+      "noBrowserNotificationError": "Browser notifications are not enabled."
+    },
+    "session": {
+      "sessionExpired": "Your session has expired.",
+      "fetching": "Communicating with the server."
+    }
+  },
+  "home": {
+    "title": "Home",
+    "addFavoriteChannel": "Would you like to add this to your favorites?",
+    "removeFavoriteChannel": "Would you like to remove this from your favorites?",
+    "blockChannel": "Would you like to block this channel?",
+    "unblockChannel": "Would you like to unblock this channel?",
+    "live": "Stream",
+    "favorite": "Favorites",
+    "searchSchedule": "Search the schedule",
+    "searchInputPlaceholder": "Search by channel name",
+    "recentlyAddedChannel": "Recently Added Channels",
+    "notLoggedInError": "This service is available after logging in.",
+    "channelSlider": {
+      "hidden": "Private",
+      "subscribers": "Subscribers",
+      "videos": "Videos",
+      "navigationChannel": "Search by Channel"
+    },
+    "sliderCard": {
+      "alarm": "Set Alarm",
+      "addMultiView": "Add to MultiView",
+      "favorite": "Favorites",
+      "remove": "Remove",
+      "add": "Add",
+      "blockChannel": "Block Channel",
+      "openInNewTab": "Open in New Tab"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "loginPage": "Login Page",
+      "imageAlt": "Login Image",
+      "startWithSocial": "Start with Social Account"
+    },
+    "logout": {
+      "title": "Logout"
+    },
+    "register": {
+      "title": "Register"
+    }
+  },
+  "channel": {
+    "title": "Channel",
+    "channelCard": {
+      "addFavoriteChannel": "Would you like to add this to your favorites?",
+      "removeFavoriteChannel": "Would you like to remove this from your favorites?",
+      "hidden": "Private",
+      "subscriber": "Subscribers",
+      "video": "Videos",
+      "details": "View Details",
+      "notLoggedInError": "This service is available after logging in."
+    },
+    "channelSection": {
+      "alphabetical": "Alphabetical",
+      "createdAt": "By Registration",
+      "desktopRequest": "Register Channel",
+      "mobileRequest": "Register",
+      "inputPlaceholder": "Search by channel name"
+    },
+    "nav": {
+      "nameKorLabel": "Alphabetical",
+      "createdAtLabel": "By Registration",
+      "linkToRequest": "Register Channel",
+      "linkToRequestMobile": "Register",
+      "channelSearchInputPlaceholder": "Search by channel name"
+    }
+  },
+  "dev": {
+    "title": "Development",
+    "initialPermission": "Fetching settings",
+    "permissionGranted": "Granted",
+    "permissionDenied": "Denied",
+    "browserNotificationAllowed": "Browser notifications are enabled.",
+    "noBrowserNotificationError": "Browser notifications are not enabled.",
+    "browserNotification": "Notification permission settings",
+    "request": "Request",
+    "token": "Token",
+    "postBox": {
+      "postLabel": "Notification Test",
+      "title": "Title",
+      "inputLabel": "Content",
+      "imageUrlInput": "Image URL",
+      "linkLabel": "Link",
+      "send": "Send"
+    },
+    "tokenBox": {
+      "tokenError": "Failed to retrieve token.",
+      "gettingToken": "Retrieving token..."
+    }
+  },
+  "multiView": {
+    "title": "MultiView",
+    "shortsSection": {
+      "shorts": {
+        "cannotPlayError": "Cannot play this video."
+      }
+    }
+  },
+  "my": {
+    "blacklist": {
+      "title": "Blocked List",
+      "removeBlacklist": "Would you like to unblock?",
+      "remove": "Unblock"
+    },
+    "favorite": {
+      "title": "Favorites",
+      "removeFavorite": "Would you like to remove this from your favorites?",
+      "remove": "Remove from Favorites"
+    }
+  },
+  "schedule": {
+    "title": "Schedule",
+    "navTab": {
+      "scheduled": "Upcoming",
+      "live": "Stream",
+      "daily": "24-Hour",
+      "all": "All"
+    },
+    "queryButton": {
+      "clearFilter": "Would you like to reset the search filters?",
+      "filtering": "Filtering...",
+      "now": "Now",
+      "clear": "Reset"
+    },
+    "scheduleCard": {
+      "imageAlt": "Livestream",
+      "setAlarm": "Set Alarm",
+      "addMultiView": "Add to MultiView",
+      "favorite": "Favorites",
+      "blockChannel": "Block Channel",
+      "copyLink": "Copy Link",
+      "linkCopied": "Link copied.",
+      "cardImage": {
+        "livestreamOf": "'s stream"
+      },
+      "cardMenu": {
+        "setAlarm": "Set Alarm",
+        "addMultiView": "Add to MultiView",
+        "favorite": "Favorites",
+        "add": "Add",
+        "remove": "Remove",
+        "blockChannel": "Block Channel",
+        "openInNewTab": "Open in New Tab",
+        "copyLink": "Copy Link",
+        "linkCopied": "Link copied."
+      }
+    },
+    "scheduleNavModal": {
+      "clearFilter": "Would you like to reset the search filters?",
+      "filtering": "Filtering...",
+      "clear": "Reset",
+      "queryInputPlaceholder": "Search by channel name"
+    },
+    "scheduleSection": {
+      "notLoggedInError": "This service is available after logging in.",
+      "addFavoriteChannel": "Would you like to add this channel to your favorites?",
+      "removeFavoriteChannel": "Would you like to remove this channel from your favorites?",
+      "blockChannel": "Would you like to block this channel?",
+      "searchAtChannelPage": "Search on the Channel Page"
+    },
+    "videoType": {
+      "groupLabel": "Stream Type",
+      "all": "All",
+      "stream": "Stream",
+      "video": "Video",
+      "filter": {
+        "scheduled": "Upcoming",
+        "live": "Live",
+        "daily": "24-Hour",
+        "all": "All"
+      }
+    }
+  },
+  "request": {
+    "title": "Request"
+  },
+  "setlist": {
+    "title": "Setlist",
+    "nav": {
+      "sortBroadcast": "Broadcast Date",
+      "sortCreate": "Created Date",
+      "createNew": "Create Setlist"
+    },
+    "postDrawer": {
+      "upload": "Upload",
+      "uploadSetlist": "Upload Setlist",
+      "linkToCreateSetlist": "Go to Create Setlist"
+    },
+    "postForm": {
+      "linkLabel": "YouTube Link",
+      "textareaLabel": "Setlist",
+      "textareaPlaceholder": "38:53 Song Title 1\n138:54 Song Title 2\n238:54 Song Title 3\n338:54 Song Title 4",
+      "submit": "Submit",
+      "formSuccess": "The setlist has been uploaded.",
+      "invalidUrlError": "Invalid YouTube URL.",
+      "emptySetlistError": "Please enter the setlist.",
+      "notLoggedInError": "This service is available after logging in."
+    },
+    "searchForm": {
+      "searchInputPlaceholder": "Search by setlist"
+    },
+    "table": {
+      "headCellChannel": "Channel Name",
+      "headCellTitle": "Title",
+      "sortBroadcast": "Broadcast Date",
+      "sortCreate": "Created Date"
+    }
+  },
+  "setlistCreate": {
+    "title": "Create Setlist",
+    "context": {
+      "copied": "Setlist copied.",
+      "noSetlistError": "No items to copy."
+    },
+    "setlistControlSection": {
+      "automaticSort": "Automatic Sort",
+      "sort": "Sort",
+      "copy": "Copy"
+    },
+    "table": {
+      "headCellTime": "Time",
+      "headCellValue": "Text",
+      "hour": "Hour",
+      "minute": "Minute",
+      "second": "Second"
+    }
+  },
+  "setlistId": {
+    "desc": {
+      "modified": "Edited",
+      "notLoggedInError": "This service is available after logging in.",
+      "editSuccess": "Edit successful.",
+      "noContentError": "Please enter content.",
+      "cancel": "Cancel",
+      "save": "Save",
+      "edit": "Edit"
+    },
+    "info": {
+      "deleted": "Deleted.",
+      "deleteConfirm": "Are you sure you want to delete this?",
+      "back": "Back",
+      "youtube": "YouTube",
+      "list": "List",
+      "avatarAlt": "Channel Icon",
+      "streamDate": "Broadcast Date",
+      "createDate": "Created Date",
+      "lastModified": "Edited Date"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "autoSync": {
+      "title": "Auto Sync",
+      "onLabel": "Enabled",
+      "offLabel": "Disabled",
+      "refreshInterval": "Refresh Interval",
+      "unit": "minutes"
+    },
+    "language": {
+      "title": "Language"
+    },
+    "theme": {
+      "title": "Theme"
+    }
+  },
+  "hooks": {
+    "useReservePush": {
+      "tokenError": "Failed to retrieve token.",
+      "title": "Schedule Notification",
+      "bodyStart": "The stream for",
+      "bodyEnd": "is about to start."
+    }
+  }
+}

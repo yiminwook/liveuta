@@ -1,6 +1,6 @@
+import TbCircleArrowUp from '@icons/tabler/CircleArrowUp';
 import { UnstyledButton } from '@mantine/core';
 import variable from '@variable';
-import TbCircleArrowUp from '~icons/tabler/circle-arrow-up.jsx';
 import css from './ScheduleNav.module.scss';
 
 import { useWindowScroll } from '@mantine/hooks';

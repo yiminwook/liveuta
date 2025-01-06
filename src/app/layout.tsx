@@ -1,6 +1,4 @@
 // css 순서변경 금지
-// import '@/styles/reset.css';
-
 import 'overlayscrollbars/overlayscrollbars.css';
 import '@/styles/swiper/core.scss';
 import '@/styles/swiper/pagination.scss';
@@ -19,16 +17,21 @@ import GoogleTagManager from '@/components/config/GoogleTagManager';
 import { DEFAULT_METADATA } from '@/constants/metaData';
 import { getCookies } from '@/utils/getCookie';
 import { isDarkModeEnabled } from '@/utils/helper';
-import type { Metadata, Viewport } from 'next';
+import { Metadata, Viewport } from 'next';
+import { getLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
 import { userAgent } from 'next/server';
-import { PropsWithChildren } from 'react';
+import type { ReactNode } from 'react';
 
-export default async function RootLayout({ children }: PropsWithChildren) {
-  const cookies = await getCookies();
+type Props = {
+  children?: ReactNode;
+};
+
+export default async function Layout({ children }: Props) {
+  const [cookies, header, locale] = await Promise.all([getCookies(), headers(), getLocale()]);
   const isDarkMode = isDarkModeEnabled(cookies.theme);
   const colorScheme = isDarkMode ? 'dark' : 'light';
-  const { os } = userAgent({ headers: await headers() });
+  const { os } = userAgent({ headers: header });
   const isIos = os.name === 'iOS' || os.name === 'iPadOS';
   const overlayScrollbarInitialize = {
     'data-overlayscrollbars-initialize': true,
@@ -36,7 +39,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 
   return (
     <html
-      lang="ko"
+      lang={locale}
       color={cookies.theme}
       {...(isIos ? {} : overlayScrollbarInitialize)}
       data-mantine-color-scheme={colorScheme} // mantine-theme-ssr
@@ -56,7 +59,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 }
 
 /** Default Route Segment Config */
-export const dynamicParams = true; //fallback
+export const dynamicParams = true; //fallback: 'blocking'
 export const preferredRegion = ['icn1'];
 export const metadata: Metadata = DEFAULT_METADATA;
 export const viewport: Viewport = {

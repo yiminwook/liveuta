@@ -2,6 +2,7 @@
 import useDeleteBlacklist from '@/hooks/useDeleteBlacklist';
 import { TChannelData } from '@/types/api/mongoDB';
 import { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
 import css from './List.module.scss';
 
 type BlacklistProps = {
@@ -12,9 +13,10 @@ type BlacklistProps = {
 
 export default function Blacklist({ session, channelList, blacklist }: BlacklistProps) {
   const mutationDelete = useDeleteBlacklist();
+  const t = useTranslations('my.blacklist');
 
   const handleClick = (channelId: string) => {
-    if (confirm('블럭을 취소하시겠습니까?')) {
+    if (confirm(t('removeBlacklist'))) {
       mutationDelete.mutate({ session, channelId });
     }
   };
@@ -35,7 +37,7 @@ export default function Blacklist({ session, channelList, blacklist }: Blacklist
               onClick={() => handleClick(item.channel_id)}
               disabled={mutationDelete.isPending}
             >
-              삭제
+              {t('remove')}
             </button>
           </li>
         ))}

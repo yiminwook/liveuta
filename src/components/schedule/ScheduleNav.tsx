@@ -1,5 +1,6 @@
 'use client';
 import { TScheduleDto } from '@/types/dto';
+import TbBoxMultiple4 from '@icons/tabler/BoxMultiple4';
 import { ActionIcon } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
@@ -7,7 +8,6 @@ import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import TbBoxMultiple4 from '~icons/tabler/box-multiple4.jsx';
 import MobileNavButton from './MobileNavButton';
 import NavTab from './NavTab';
 import QueryButton from './QueryBtn';

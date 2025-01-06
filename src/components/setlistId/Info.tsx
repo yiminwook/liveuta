@@ -6,18 +6,19 @@ import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
 import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { openWindow } from '@/utils/windowEvent';
+import BiMusicNoteList from '@icons/bi/MusicNoteList';
+import IonArrowBack from '@icons/ion/ArrowBack';
+import LogosYoutubeIcon from '@icons/logos/YouTubeIcon';
 import { Avatar, Button } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import cx from 'classnames';
 import { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
 import { isMobile } from 'react-device-detect';
 import { toast } from 'sonner';
-import BiMusicNoteList from '~icons/bi/music-note-list.jsx';
-import IonArrowBack from '~icons/ion/arrow-back.jsx';
-import LogosYoutubeIcon from '~icons/logos/youtube-icon.jsx';
 import css from './Info.module.scss';
 
 type InfoProps = {
@@ -32,10 +33,12 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
   const queryClient = useQueryClient();
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
+  const t = useTranslations('setlistId.info');
+  const dayjsTemplate = useTranslations();
 
-  const broadcast = dayjs(setlist.broadcastAt).format('YYYY년 MM월 DD일');
-  const create = dayjs(setlist.createdAt).format('YYYY년 MM월 DD일');
-  const update = dayjs(setlist.updatedAt).format('YYYY년 MM월 DD일');
+  const broadcast = dayjs(setlist.broadcastAt).format(dayjsTemplate('dayjsTemplate'));
+  const create = dayjs(setlist.createdAt).format(dayjsTemplate('dayjsTemplate'));
+  const update = dayjs(setlist.updatedAt).format(dayjsTemplate('dayjsTemplate'));
   const actions = useSetPlayerStore();
 
   const handleLocation = (url: string) => {
@@ -55,7 +58,7 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
       return response.data.data;
     },
     onSuccess: () => {
-      toast.success('삭제되었습니다.');
+      toast.success(t('deleted'));
       queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
       actions.reset();
       router.back();
@@ -77,7 +80,7 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
           onClick={() => router.back()}
         >
           <IonArrowBack width="1.2rem" height="1.2rem" />
-          <span>Back</span>
+          <span>{t('back')}</span>
         </Button>
         <div className={css.navRight}>
           {deletePermission && (
@@ -85,7 +88,7 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
               className={css.navItem}
               color="red"
               onClick={() => {
-                if (confirm('삭제 하시겠습니까?'))
+                if (confirm(t('deleteConfirm')))
                   mutateDelete.mutate({ session, videoId: setlist.videoId });
               }}
               disabled={mutateDelete.isPending}
@@ -100,7 +103,7 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
             onClick={() => handleLocation(videoUrl)}
           >
             <LogosYoutubeIcon width="1.2rem" height="1.2rem" />
-            유튜브
+            {t('youtube')}
           </Button>
           <Button
             component={Link}
@@ -110,20 +113,26 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
             href="/setlist"
           >
             <BiMusicNoteList width="1.2rem" height="1.2rem" />
-            리스트
+            {t('list')}
           </Button>
         </div>
       </nav>
       <div className={css.infoSection}>
         <h2 className={css.title}>{setlist.title}</h2>
         <button className={css.channel} onClick={() => handleLocation(channelUrl)}>
-          <Avatar className={css.avatar} src={icon} alt="채널 아이콘" size="md" />
+          <Avatar className={css.avatar} src={icon} alt={t('avatarAlt')} size="md" />
           <p className={css.channelName}>{channel.nameKor}</p>
         </button>
         <br />
-        <div>방송일: {broadcast}</div>
-        <div>작성일: {create}</div>
-        <div>수정일: {update}</div>
+        <div>
+          {t('streamDate')}: {broadcast}
+        </div>
+        <div>
+          {t('createDate')}: {create}
+        </div>
+        <div>
+          {t('lastModified')}: {update}
+        </div>
       </div>
     </div>
   );

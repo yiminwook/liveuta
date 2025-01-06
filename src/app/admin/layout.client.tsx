@@ -26,9 +26,11 @@ export default function Client({ children }: Props) {
         <Flex align="center" h="100%" px="sm" justify="space-between">
           <Flex align="center">
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" mr="sm" />
-            <Title component="h1" size="1.25rem" c={varialble.thirdColorDefault}>
-              LU Admin
-            </Title>
+            <Link href="/admin">
+              <Title component="h1" size="1.25rem" c={varialble.thirdColorDefault}>
+                LU Admin
+              </Title>
+            </Link>
           </Flex>
           <Flex>
             <Button component={Link} href="/" size="xs">

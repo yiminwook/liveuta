@@ -23,7 +23,7 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   const [isShow, setIsShow] = useState(true);
   const actions = useSetPlayerStore();
 
-  const handleInteresect: IntersectionObserverCallback = (items) => {
+  const handleIntersect: IntersectionObserverCallback = (items) => {
     const isIntersecting = items[0].isIntersecting;
     setIsShow(() => isIntersecting);
   };
@@ -35,7 +35,7 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   useEffect(() => {
     const current = wrapRef.current;
     if (current === null || isMobile) return;
-    const observer = new IntersectionObserver(handleInteresect);
+    const observer = new IntersectionObserver(handleIntersect);
     requestAnimationFrame(() => {
       // 요소 랜더링 후 옵저버 시작
       observer.observe(current);

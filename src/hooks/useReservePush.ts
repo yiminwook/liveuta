@@ -6,6 +6,7 @@ import { gtagClick } from '@/utils/gtag';
 import { PushData } from '@api/push/route';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 export type TReservePushArgs = {
@@ -19,6 +20,7 @@ export type TReservePushArgs = {
 };
 
 const useReservePush = () => {
+  const t = useTranslations('hooks.useReservePush');
   const mutatePush = useMutation({
     mutationFn: async (arg: TReservePushArgs) => {
       const data: PushData = {
@@ -62,12 +64,12 @@ const useReservePush = () => {
     const token = await generateFcmToken();
 
     if (token === undefined) {
-      throw new Error('토큰을 가져오는데 실패했습니다.');
+      throw new Error(t('tokenError'));
     }
 
     mutatePush.mutate({
-      title: '스케줄 알림',
-      body: `곧 ${content.channelName}의 방송이 시작됩니다.`,
+      title: t('title'),
+      body: `${t('bodyStart')} ${content.channelName}${t('bodyEnd')}`,
       token,
       timestamp: content.timestamp.toString(),
       imageUrl: generateThumbnail(content.videoId, 'mqdefault'),

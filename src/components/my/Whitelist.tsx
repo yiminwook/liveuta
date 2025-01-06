@@ -2,6 +2,7 @@
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import { TChannelData } from '@/types/api/mongoDB';
 import { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
 import css from './List.module.scss';
 
 type WhitelistProps = {
@@ -12,9 +13,10 @@ type WhitelistProps = {
 
 export default function Whitelist({ session, whiteList, channelList }: WhitelistProps) {
   const mutationDelete = useMutateWhitelist();
+  const t = useTranslations('my.favorite');
 
   const handleClick = (channelId: string) => {
-    if (confirm('즐겨찾기을 취소하시겠습니까?')) {
+    if (confirm(t('removeFavorite'))) {
       mutationDelete.mutate({ session, channelId });
     }
   };
@@ -35,7 +37,7 @@ export default function Whitelist({ session, whiteList, channelList }: Whitelist
               onClick={() => handleClick(item.channel_id)}
               disabled={mutationDelete.isPending}
             >
-              삭제
+              {t('remove')}
             </button>
           </li>
         ))}

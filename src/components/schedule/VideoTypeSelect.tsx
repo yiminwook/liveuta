@@ -1,7 +1,7 @@
 'use client';
-import { SelectedText } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import { ComboboxItemGroup, Select } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import Cookies from 'universal-cookie';
 import css from './ScheduleNav.module.scss';
@@ -17,6 +17,7 @@ type VideoTypeSelectProps = {
 
 export default function VideoTypeSelect({ select, length }: VideoTypeSelectProps) {
   const router = useRouter();
+  const t = useTranslations('schedule.videoType');
 
   const handleSelect = (value: string | null) => {
     if (value === null) return;
@@ -27,16 +28,16 @@ export default function VideoTypeSelect({ select, length }: VideoTypeSelectProps
 
   const data: ComboboxItemGroup[] = [
     {
-      group: '와꾸종류',
+      group: t('groupLabel'),
       items: [
-        { label: `${SelectedText.all}: ${length.all}`, value: 'all', disabled: select === 'all' },
+        { label: `${t('all')}: ${length.all}`, value: 'all', disabled: select === 'all' },
         {
-          label: `${SelectedText.stream}: ${length.stream}`,
+          label: `${t('stream')}: ${length.stream}`,
           value: 'stream',
           disabled: select === 'stream',
         },
         {
-          label: `${SelectedText.video}: ${length.video}`,
+          label: `${t('video')}: ${length.video}`,
           value: 'video',
           disabled: select === 'video',
         },

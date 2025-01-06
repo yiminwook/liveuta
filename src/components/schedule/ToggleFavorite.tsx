@@ -1,5 +1,5 @@
+import FasStar from '@icons/fa-solid/Star';
 import { ActionIcon } from '@mantine/core';
-import FasStar from '~icons/fa-solid/star.jsx';
 
 type ToggleFavoriteProps = {
   isFavorite: boolean;

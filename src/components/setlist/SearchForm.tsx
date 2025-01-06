@@ -1,10 +1,11 @@
 'use client';
+import IonSearch from '@icons/ion/IosSearch';
+import TbX from '@icons/tabler/X';
 import { TextInput, UnstyledButton } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
-import IonSearch from '~icons/ion/search.jsx';
-import TbX from '~icons/tabler/x.jsx';
 import css from './SearchForm.module.scss';
 
 interface SearchFormProps {
@@ -19,6 +20,7 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
   const queryClient = useQueryClient();
   const router = useRouter();
   const [query, setQuery] = useState(searchParams.query);
+  const t = useTranslations('setlist.searchForm');
 
   const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -46,7 +48,7 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
             classNames={{ input: css.input }}
             value={query}
             onChange={handleQuery}
-            placeholder="세트리스트로 검색"
+            placeholder={t('searchInputPlaceholder')}
           />
           <button className={css.clearButton} type="button" onClick={() => setQuery('')}>
             <TbX />
