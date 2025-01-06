@@ -19,6 +19,7 @@
       "@variable": ["./src/styles/variable.module.scss"],
       "@web/*": ["./src/app/(web)/*"],
       "@api/*": ["./src/app/api/*"],
+      "@icons/*": ["./src/components/icons/*"],
       "@/*": ["./src/*"],
       "/*": ["./*"]
     },
