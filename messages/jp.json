@@ -27,18 +27,25 @@
     }
   },
   "global": {
-    "externalLink": {
-      "kizunaAiGallery": "キズナアイギャラリー",
-      "vutaGallery": "VTuberうたわくギャラリー",
-      "utaTools": "うたツール",
-      "ezgif": "EZ GIF"
-    },
     "bottomTab": {
       "drawer": {
         "title": "サイトマップ",
-        "description": "リンクを選択してください"
+        "description": "リンクを選択してください",
+        "internalLinks": {
+          "settings": "設定",
+          "dev": "開発"
+        },
+        "externalLinks": {
+          "kizunaAiGallery": "DC1",
+          "vutaGallery": "DC2",
+          "utaTools": "UtaTools"
+        }
       },
       "bottomInner": {
+        "setlist": "セットリスト",
+        "channel": "チャンネル",
+        "home": "ホーム",
+        "schedule": "スケジュール",
         "more": "もっと見る"
       }
     },
@@ -66,8 +73,22 @@
       "userAvatarAlt": "ユーザーアバター",
       "login": "ログイン",
       "desktopNav": {
-        "index": "目次",
-        "externalLink": "外部リンク"
+        "internalLink": "目次",
+        "externalLink": "外部リンク",
+        "internalLinks": {
+          "home": "ホーム",
+          "schedule": "スケジュール",
+          "multiView": "マルチビュー",
+          "channel": "チャンネル",
+          "setlist": "セットリスト",
+          "settings": "設定",
+          "dev": "開発"
+        },
+        "externalLinks": {
+          "kizunaAiGallery": "キズナアイギャラリー",
+          "vutaGallery": "Vtuber歌枠ギャラリー",
+          "utaTools": "Uta Tools"
+        }
       }
     },
     "iframe": {

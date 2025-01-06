@@ -36,9 +36,22 @@
     "bottomTab": {
       "drawer": {
         "title": "Site Map",
-        "description": "Select a link"
+        "description": "Select a link",
+        "internalLinks": {
+          "settings": "Settings",
+          "dev": "Dev"
+        },
+        "externalLinks": {
+          "kizunaAiGallery": "DC1",
+          "vutaGallery": "DC2",
+          "utaTools": "UtaTools"
+        }
       },
       "bottomInner": {
+        "setlist": "Setlist",
+        "channel": "Channel",
+        "home": "Home",
+        "schedule": "Schedule",
         "more": "More"
       }
     },
@@ -66,8 +79,22 @@
       "userAvatarAlt": "User Avatar",
       "login": "Login",
       "desktopNav": {
-        "index": "Index",
-        "externalLink": "External Links"
+        "internalLink": "Index",
+        "externalLink": "External Links",
+        "internalLinks": {
+          "home": "Home",
+          "schedule": "Schedule",
+          "multiView": "MultiView",
+          "channel": "Channel",
+          "setlist": "Setlist",
+          "settings": "Settings",
+          "dev": "Dev"
+        },
+        "externalLinks": {
+          "kizunaAiGallery": "Kizuna AI Gallery",
+          "vutaGallery": "Vtuber Utawaku Gallery",
+          "utaTools": "Uta Tools"
+        }
       }
     },
     "iframe": {

@@ -36,9 +36,22 @@
     "bottomTab": {
       "drawer": {
         "title": "사이트 맵",
-        "description": "링크를 선택하세요"
+        "description": "링크를 선택하세요",
+        "internalLinks": {
+          "settings": "설정",
+          "dev": "개발"
+        },
+        "externalLinks": {
+          "kizunaAiGallery": "키갤",
+          "vutaGallery": "버우갤",
+          "utaTools": "우타툴즈"
+        }
       },
       "bottomInner": {
+        "setlist": "세트리",
+        "channel": "채널",
+        "home": "홈",
+        "schedule": "스케줄",
         "more": "더보기"
       }
     },
@@ -66,8 +79,22 @@
       "userAvatarAlt": "사용자 아바타",
       "login": "로그인",
       "desktopNav": {
-        "index": "목차",
-        "externalLink": "외부 링크"
+        "internalLink": "목차",
+        "externalLink": "외부 링크",
+        "internalLinks": {
+          "home": "홈",
+          "schedule": "스케줄",
+          "multiView": "멀티뷰",
+          "channel": "채널",
+          "setlist": "세트리",
+          "settings": "설정",
+          "dev": "개발"
+        },
+        "externalLinks": {
+          "kizunaAiGallery": "키즈나 아이 갤러리",
+          "vutaGallery": "버튜버 우타와꾸 갤러리",
+          "utaTools": "우타툴즈"
+        }
       }
     },
     "iframe": {
