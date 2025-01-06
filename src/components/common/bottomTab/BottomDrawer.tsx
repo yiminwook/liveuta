@@ -24,34 +24,34 @@ type BottomDrawerProps = {
 };
 
 export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
-  const t = useTranslations();
+  const t = useTranslations('global.bottomTab.drawer');
   const pathname = usePathname();
   const internalLinks: DrawerItem[] = [
     {
       href: '/setting',
-      text: t('settings.title'),
+      text: t('internalLinks.settings'),
       icon: <TbSettings width="1.5rem" height="1.5rem" />,
     },
     {
       href: '/dev',
-      text: t('dev.title'),
+      text: t('internalLinks.dev'),
       icon: <TbDeviceDesktopCode width="1.5rem" height="1.5rem" />,
     },
   ];
   const externalLinks: DrawerItem[] = [
     {
       href: 'https://gall.dcinside.com/mgallery/board/lists?id=kizunaai',
-      text: t('global.externalLink.kizunaAiGallery'),
+      text: t('externalLinks.kizunaAiGallery'),
       icon: <TbStar width="1.5rem" height="1.5rem" />,
     },
     {
       href: 'https://gall.dcinside.com/mini/board/lists?id=vuta',
-      text: t('global.externalLink.vutaGallery'),
+      text: t('externalLinks.vutaGallery'),
       icon: <IonMusicNote width="1.5rem" height="1.5rem" />,
     },
     {
       href: 'https://uta-tools.vercel.app',
-      text: t('global.externalLink.utaTools'),
+      text: t('externalLinks.utaTools'),
       icon: <TbTools width="1.5rem" height="1.5rem" />,
     },
   ];

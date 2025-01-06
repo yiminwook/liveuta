@@ -24,7 +24,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
   const [direction, setDirection] = useState<Direction>(Direction.up);
   const [windowY, setWindowY] = useState(0);
   const pathname = usePathname();
-  const t = useTranslations();
+  const t = useTranslations('global.bottomTab.bottomInner');
 
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -86,7 +86,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             data-current={pathname === '/setlist'}
           >
             <TbList />
-            <span>{t('setlist.title')}</span>
+            <span>{t('setlist')}</span>
           </UnstyledButton>
         </li>
         <li>
@@ -97,7 +97,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             data-current={pathname === '/channel'}
           >
             <GgUserlane />
-            <span>{t('channel.title')}</span>
+            <span>{t('channel')}</span>
           </UnstyledButton>
         </li>
         <li>
@@ -108,7 +108,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             data-current={pathname === '/'}
           >
             <TbHome />
-            <span>{t('home.title')}</span>
+            <span>{t('home')}</span>
           </UnstyledButton>
         </li>
         <li>
@@ -119,13 +119,13 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
             data-current={pathname === '/schedule'}
           >
             <MsScheduleOutlineRounded />
-            <span>{t('schedule.title')}</span>
+            <span>{t('schedule')}</span>
           </UnstyledButton>
         </li>
         <li>
           <UnstyledButton className={css.item} onClick={openDrawer}>
             <IonIosMore width="1.5rem" height="1.5rem" />
-            <span>{t('global.bottomTab.bottomInner.more')}</span>
+            <span>{t('more')}</span>
           </UnstyledButton>
         </li>
       </ul>
