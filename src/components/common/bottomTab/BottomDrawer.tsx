@@ -60,8 +60,8 @@ export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
     <Drawer open={isOpen} onClose={onClose}>
       <DrawerContent>
         <DrawerHeader className="blind">
-          <DrawerTitle>{t('global.bottomTab.drawer.title')}</DrawerTitle>
-          <DrawerDescription>{t('global.bottomTab.drawer.description')}</DrawerDescription>
+          <DrawerTitle>{t('title')}</DrawerTitle>
+          <DrawerDescription>{t('description')}</DrawerDescription>
         </DrawerHeader>
         <SimpleGrid cols={3} className={css.drawerGrid}>
           {internalLinks.map(({ icon, href, text }) => (
