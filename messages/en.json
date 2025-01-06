@@ -153,7 +153,7 @@
     "removeFavoriteChannel": "Would you like to remove this from your favorites?",
     "blockChannel": "Would you like to block this channel?",
     "unblockChannel": "Would you like to unblock this channel?",
-    "live": "Live",
+    "live": "Stream",
     "favorite": "Favorites",
     "searchSchedule": "Search the schedule",
     "searchInputPlaceholder": "Search by channel name",
@@ -262,7 +262,7 @@
     "title": "Schedule",
     "navTab": {
       "scheduled": "Upcoming",
-      "live": "Live",
+      "live": "Stream",
       "daily": "24-Hour",
       "all": "All"
     },
@@ -273,7 +273,7 @@
       "clear": "Reset"
     },
     "scheduleCard": {
-      "imageAlt": "Live stream of",
+      "imageAlt": "Livestream",
       "setAlarm": "Set Alarm",
       "addMultiView": "Add to MultiView",
       "favorite": "Favorites",
@@ -311,7 +311,7 @@
     "videoType": {
       "groupLabel": "Stream Type",
       "all": "All",
-      "stream": "Live",
+      "stream": "Stream",
       "video": "Video",
       "filter": {
         "scheduled": "Upcoming",

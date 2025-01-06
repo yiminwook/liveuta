@@ -147,7 +147,7 @@
     "removeFavoriteChannel": "お気に入りから削除しますか？",
     "blockChannel": "チャンネルをブロックしますか？",
     "unblockChannel": "チャンネルのブロックを解除しますか？",
-    "live": "ライブ",
+    "live": "配信",
     "favorite": "お気に入り",
     "searchSchedule": "スケジュールを検索してください",
     "searchInputPlaceholder": "チャンネル名で検索",
@@ -256,7 +256,7 @@
     "title": "スケジュール",
     "navTab": {
       "scheduled": "予定",
-      "live": "ライブ",
+      "live": "配信",
       "daily": "24時間",
       "all": "すべて"
     },
@@ -267,7 +267,7 @@
       "clear": "リセット"
     },
     "scheduleCard": {
-      "imageAlt": "のライブ放送",
+      "imageAlt": "の配信",
       "setAlarm": "アラーム設定",
       "addMultiView": "マルチビュー追加",
       "favorite": "お気に入り",
@@ -309,7 +309,7 @@
       "video": "動画",
       "filter": {
         "scheduled": "予定",
-        "live": "ライブ",
+        "live": "配信",
         "daily": "24時間",
         "all": "すべて"
       }
