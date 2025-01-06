@@ -1,5 +1,5 @@
+import TbNoCopyright from '@icons/tabler/NoCopyright';
 import { useTranslations } from 'next-intl';
-import TbNoCopyright from '~icons/tabler/no-copyright.jsx';
 import css from './Footer.module.scss';
 
 export default function Footer() {

@@ -1,12 +1,12 @@
 'use client';
 import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
+import FasFilter from '@icons/fa-solid/Filter';
 import { Button, Popover } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { usePathname } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
-import FasFilter from '~icons/fa-solid/filter.jsx';
 import ConfirmModal from '../common/modal/ConfirmModal';
 import css from './QueryBtn.module.scss';
 

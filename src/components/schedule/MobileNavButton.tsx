@@ -1,9 +1,9 @@
 'use client';
 import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
+import BiSliders from '@icons/bi/Sliders';
 import { Button } from '@mantine/core';
 import { useTranslations } from 'next-intl';
-import BiSliders from '~icons/bi/sliders.jsx';
 import css from './ScheduleNav.module.scss';
 import ScheduleNavModal from './ScheduleNavModal';
 

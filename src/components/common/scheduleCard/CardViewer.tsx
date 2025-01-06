@@ -1,4 +1,4 @@
-import IonPerson from '~icons/ion/person.jsx';
+import IonPerson from '@icons/ion/Person';
 import css from './Card.module.scss';
 
 interface CardViewerProps {

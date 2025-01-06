@@ -1,14 +1,14 @@
+import GgUserlane from '@icons/gg/Userlane';
+import IonIosMore from '@icons/ion/IosMore';
+import MsScheduleOutlineRounded from '@icons/material-symbols/ScheduleOutlineRounded';
+import RxPinTop from '@icons/radix-icons/PinTop';
+import TbHome from '@icons/tabler/Home';
+import TbList from '@icons/tabler/List';
 import { UnstyledButton } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
-import GgUserlane from '~icons/gg/userlane.jsx';
-import IonIosMore from '~icons/ion/ios-more.jsx';
-import MsScheduleOutlineRounded from '~icons/material-symbols/schedule-outline-rounded.jsx';
-import RxPinTop from '~icons/radix-icons/pin-top.jsx';
-import TbHome from '~icons/tabler/home.jsx';
-import TbList from '~icons/tabler/list.jsx';
 import css from './BottomInner.module.scss';
 enum Direction {
   up = 'up',

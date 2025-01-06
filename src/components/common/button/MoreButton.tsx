@@ -1,8 +1,8 @@
+import IonArrowRightC from '@icons/ion/ArrowRightC';
 import { Button, ButtonProps } from '@mantine/core';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import IonArrowRightC from '~icons/ion/arrow-right-c.jsx';
 import css from './MoreButton.module.scss';
 
 type MoreButtonProps = ButtonProps & {

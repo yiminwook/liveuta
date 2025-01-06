@@ -1,15 +1,15 @@
+import FasStar from '@icons/fa-solid/Star';
+import IonPlus from '@icons/ion/PlusRound';
+import MsOpenInNew from '@icons/material-symbols/OpenInNew';
+import MdiBlock from '@icons/mdi/Block';
+import TbBellRingingFilled from '@icons/tabler/BellRingingFilled';
+import TbCheck from '@icons/tabler/Check';
+import TbCopy from '@icons/tabler/Copy';
+import TbDots from '@icons/tabler/Dots';
 import { ActionIcon, CopyButton, Menu } from '@mantine/core';
 import variable from '@variable';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-import FasStar from '~icons/fa-solid/star.jsx';
-import IonPlus from '~icons/ion/plus.jsx';
-import MsOpenInNew from '~icons/material-symbols/open-in-new.jsx';
-import MdiBlock from '~icons/mdi/block.jsx';
-import TbBellRingingFilled from '~icons/tabler/bell-ringing-filled.jsx';
-import TbCheck from '~icons/tabler/check.jsx';
-import TbCopy from '~icons/tabler/copy.jsx';
-import TbDots from '~icons/tabler/dots.jsx';
 import css from './CardMenu.module.scss';
 
 type CardMenuProps = {

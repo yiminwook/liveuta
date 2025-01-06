@@ -1,5 +1,5 @@
+import RxHamburgerMenu from '@icons/radix-icons/HamburgerMenu';
 import classNames from 'classnames';
-import RxHamburgerMenu from '~icons/radix-icons/hamburger-menu.jsx';
 import css from './HamburgerBtn.module.scss';
 
 type HamburgerBtnProps = {

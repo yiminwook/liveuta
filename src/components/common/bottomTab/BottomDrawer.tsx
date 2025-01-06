@@ -1,14 +1,14 @@
+import FaSolidStar from '@icons/fa-solid/Star';
+import IonMusicNote from '@icons/ion/MusicNote';
+import TbDeviceDesktopCode from '@icons/tabler/DeviceDesktopCode';
+import TbSettings from '@icons/tabler/Settings';
+import TbTools from '@icons/tabler/Tools';
 import { ActionIcon, SimpleGrid } from '@mantine/core';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { JSX } from 'react';
-import IonMusicNote from '~icons/ion/music-note.jsx';
-import TbDeviceDesktopCode from '~icons/tabler/device-desktop-code.jsx';
-import TbSettings from '~icons/tabler/settings.jsx';
-import TbStar from '~icons/tabler/star.jsx';
-import TbTools from '~icons/tabler/tools.jsx';
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../Vaul';
 import css from './BottomTab.module.scss';
 
@@ -42,7 +42,7 @@ export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
     {
       href: 'https://gall.dcinside.com/mgallery/board/lists?id=kizunaai',
       text: t('externalLinks.kizunaAiGallery'),
-      icon: <TbStar width="1.5rem" height="1.5rem" />,
+      icon: <FaSolidStar width="1.5rem" height="1.5rem" />,
     },
     {
       href: 'https://gall.dcinside.com/mini/board/lists?id=vuta',

@@ -8,13 +8,13 @@ import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import { openWindow } from '@/utils/windowEvent';
+import FasStar from '@icons/fa-solid/Star';
 import { Session } from 'next-auth';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
 import { isDesktop } from 'react-device-detect';
 import { toast } from 'sonner';
-import FasStar from '~icons/fa-solid/star.jsx';
 import css from './ChannelCard.module.scss';
 
 type ChannelItemProps = {

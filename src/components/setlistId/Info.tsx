@@ -6,6 +6,9 @@ import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
 import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { openWindow } from '@/utils/windowEvent';
+import BiMusicNoteList from '@icons/bi/MusicNoteList';
+import IonArrowBack from '@icons/ion/ArrowBack';
+import LogosYoutubeIcon from '@icons/logos/YouTubeIcon';
 import { Avatar, Button } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
@@ -16,9 +19,6 @@ import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
 import { isMobile } from 'react-device-detect';
 import { toast } from 'sonner';
-import BiMusicNoteList from '~icons/bi/music-note-list.jsx';
-import IonArrowBack from '~icons/ion/arrow-back.jsx';
-import LogosYoutubeIcon from '~icons/logos/youtube-icon.jsx';
 import css from './Info.module.scss';
 
 type InfoProps = {

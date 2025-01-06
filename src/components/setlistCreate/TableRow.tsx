@@ -1,14 +1,14 @@
 'use client';
 import { hmsToString } from '@/utils/getTime';
+import CodiconClearAll from '@icons/codicon/ClearAll';
+import TbClipboard from '@icons/tabler/Clipboard';
+import TbCopy from '@icons/tabler/Copy';
+import TbGripVertical from '@icons/tabler/GripVertical';
+import TbX from '@icons/tabler/X';
 import { ActionIcon, Checkbox, Popover, TextInput, UnstyledButton } from '@mantine/core';
 import { Reorder, useDragControls } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import type { PointerEvent } from 'react';
-import CodiconClearAll from '~icons/codicon/clear-all.jsx';
-import TbClipboard from '~icons/tabler/clipboard.jsx';
-import TbCopy from '~icons/tabler/copy.jsx';
-import TbGripVertical from '~icons/tabler/grip-vertical.jsx';
-import TbX from '~icons/tabler/x.jsx';
 import { SetlistItem, copy, useSetlistActions } from './Context';
 import css from './Table.module.scss';
 

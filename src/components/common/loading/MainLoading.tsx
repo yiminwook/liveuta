@@ -1,8 +1,8 @@
 'use client';
+import Spinner180Ring from '@icons/svg-spinners/180Ring';
 import classnames from 'classnames';
 import Image from 'next/image';
 import { RemoveScroll } from 'react-remove-scroll';
-import Spinner180Ring from '~icons/spinner-180-ring.jsx';
 import loadingImage from '/public/loading.png';
 import Backdrop from '../background/Backdrop';
 import css from './Loading.module.scss';

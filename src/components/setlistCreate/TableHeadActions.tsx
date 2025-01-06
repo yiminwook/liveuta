@@ -1,11 +1,11 @@
 'use client';
+import CodiconClearAll from '@icons/codicon/ClearAll';
+import TbCopy from '@icons/tabler/Copy';
+import TbX from '@icons/tabler/X';
 import { ActionIcon } from '@mantine/core';
 import { Checkbox } from '@mantine/core';
 import cx from 'classnames';
 import { useShallow } from 'zustand/react/shallow';
-import TbCopy from '~icons/tabler/copy.jsx';
-import TbX from '~icons/tabler/x.jsx';
-import CodiconClearAll from '~icons/codicon/clear-all.jsx';
 import { copy, useSetlistActions, useSetlistStore } from './Context';
 import css from './Table.module.scss';
 

@@ -1,11 +1,11 @@
 'use client';
+import IonSearch from '@icons/ion/IosSearch';
+import TbX from '@icons/tabler/X';
 import { TextInput, UnstyledButton } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
-import IonSearch from '~icons/ion/search.jsx';
-import TbX from '~icons/tabler/x.jsx';
 import css from './SearchForm.module.scss';
 
 interface SearchFormProps {

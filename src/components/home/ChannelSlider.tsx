@@ -1,12 +1,12 @@
 'use client';
 import { TYChannelsData } from '@/types/api/youtube';
 import { renderSubscribe } from '@/utils/renderSubscribe';
+import IonIosMore from '@icons/ion/IosMore';
 import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
 import variable from '@variable';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import IonIosMore from '~icons/ion/ios-more.jsx';
 import css from './ChannelSlider.module.scss';
 
 type ChannelSliderProps = {

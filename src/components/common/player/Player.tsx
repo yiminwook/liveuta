@@ -2,6 +2,8 @@
 import { ORIGIN } from '@/constants';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { usePlayerCtx } from '@/stores/player';
+import ClarityLightningSolid from '@icons/clarity/LightningSolid';
+import MdiYoutube from '@icons/mdi/YouTube';
 import classnames from 'classnames';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
@@ -10,8 +12,6 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
 import { useStore } from 'zustand';
-import ClarityLightningSolid from '~icons/clarity/lightning-solid.jsx';
-import MdiYoutube from '~icons/mdi/youtube.jsx';
 import css from './Player.module.scss';
 
 type PlayerProps = {

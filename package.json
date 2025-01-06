@@ -75,19 +75,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@iconify-json/bi": "^1.2.2",
-    "@iconify-json/clarity": "^1.2.2",
-    "@iconify-json/codicon": "^1.2.8",
-    "@iconify-json/fa-solid": "^1.2.1",
-    "@iconify-json/gg": "^1.2.2",
-    "@iconify-json/ion": "^1.2.2",
-    "@iconify-json/logos": "^1.2.4",
-    "@iconify-json/material-symbols": "^1.2.12",
-    "@iconify-json/mdi": "^1.2.2",
-    "@iconify-json/radix-icons": "^1.2.2",
-    "@iconify-json/ri": "^1.2.5",
-    "@iconify-json/svg-spinners": "^1.2.2",
-    "@iconify-json/tabler": "^1.2.13",
     "@next/bundle-analyzer": "15.1.0",
     "@svgr/webpack": "^8.1.0",
     "@tanstack/eslint-plugin-query": "^5.62.1",
@@ -109,8 +96,7 @@
     "pm2": "^5.3.1",
     "sass": "^1.75.0",
     "sass-loader": "^16.0.4",
-    "typescript": "^5.7.2",
-    "unplugin-icons": "^0.22.0"
+    "typescript": "^5.7.2"
   },
   "overrides": {
     "node-gyp-build": "4.6.1"

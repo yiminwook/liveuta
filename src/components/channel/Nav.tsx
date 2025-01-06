@@ -1,5 +1,7 @@
 'use client';
 import { TChannelDto } from '@/libraries/mongoDB/getAllChannel';
+import IonIosSearch from '@icons/ion/IosSearch';
+import TbX from '@icons/tabler/X';
 import { Button, Flex, SegmentedControl, TextInput, UnstyledButton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
@@ -7,8 +9,6 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-import IonIosSearch from '~icons/ion/ios-search.jsx';
-import TbX from '~icons/tabler/x.jsx';
 import css from './Nav.module.scss';
 
 export default function Nav() {

@@ -1,9 +1,9 @@
 'use client';
+import TbCheck from '@icons/tabler/Check';
+import TbCopy from '@icons/tabler/Copy';
 import { ActionIcon, CopyButton as MantineCopyButton, Tooltip } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { CSSProperties } from 'react';
-import TbCheck from '~icons/tabler/check.jsx';
-import TbCopy from '~icons/tabler/copy.jsx';
 
 interface CopyButtonProps {
   value: string;

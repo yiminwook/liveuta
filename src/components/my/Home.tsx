@@ -1,10 +1,10 @@
 'use client';
 import useCachedData from '@/hooks/useCachedData';
+import FasStar from '@icons/fa-solid/Star';
+import MdiBlock from '@icons/mdi/Block';
 import { Session } from 'next-auth';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
-import FasStar from '~icons/fa-solid/star.jsx';
-import MdiBlock from '~icons/mdi/block.jsx';
 import Background from '../common/background/Background';
 import css from './Home.module.scss';
 import ListPlaceholder from './ListPlaceholder';
