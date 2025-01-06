@@ -47,7 +47,7 @@ export default function CardMenu({
           leftSection={<TbBellRingingFilled color={variable.thirdColorDefault} />}
           onClick={onClickAlarm}
         >
-          {t('setAlarm')}
+          {t('setNotification')}
         </Menu.Item>
         <Menu.Item
           component="button"

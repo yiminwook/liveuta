@@ -160,7 +160,7 @@
       "navigationChannel": "チャンネルで検索"
     },
     "sliderCard": {
-      "alarm": "通知設定",
+      "setNotification": "通知設定",
       "addMultiView": "マルチビュー追加",
       "favorite": "お気に入り",
       "remove": "解除",
@@ -268,7 +268,7 @@
     },
     "scheduleCard": {
       "imageAlt": "の配信",
-      "setAlarm": "通知設定",
+      "setNotification": "通知設定",
       "addMultiView": "マルチビュー追加",
       "favorite": "お気に入り",
       "blockChannel": "チャンネルをブロック",
@@ -278,7 +278,7 @@
         "livestreamOf": "の放送"
       },
       "cardMenu": {
-        "setAlarm": "通知設定",
+        "setNotification": "通知設定",
         "addMultiView": "マルチビュー追加",
         "favorite": "お気に入り",
         "add": "追加",

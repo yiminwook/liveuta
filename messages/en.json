@@ -166,7 +166,7 @@
       "navigationChannel": "Search by Channel"
     },
     "sliderCard": {
-      "alarm": "Set Notification",
+      "setNotification": "Set Notification",
       "addMultiView": "Add to MultiView",
       "favorite": "Favorites",
       "remove": "Remove",
@@ -274,7 +274,7 @@
     },
     "scheduleCard": {
       "imageAlt": "Livestream",
-      "setAlarm": "Set Notification",
+      "setNotification": "Set Notification",
       "addMultiView": "Add to MultiView",
       "favorite": "Favorites",
       "blockChannel": "Block Channel",
@@ -284,7 +284,7 @@
         "livestreamOf": "'s stream"
       },
       "cardMenu": {
-        "setAlarm": "Set Notification",
+        "setNotification": "Set Notification",
         "addMultiView": "Add to MultiView",
         "favorite": "Favorites",
         "add": "Add",
