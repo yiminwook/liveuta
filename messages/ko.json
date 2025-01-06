@@ -401,7 +401,7 @@
     "title": "설정",
     "autoSync": {
       "title": "자동 동기화",
-      "onLabel": "시용",
+      "onLabel": "사용",
       "offLabel": "사용 안 함",
       "refreshInterval": "새로고침 간격",
       "unit": "분"
