@@ -1,5 +1,5 @@
 import Home from '@/components/channel/Home';
-import { channelDto } from '@/libraries/mongoDB/getAllChannel';
+import { channelDto } from '@/libraries/mongoDB/channels';
 import { notFound } from 'next/navigation';
 
 type Props = {

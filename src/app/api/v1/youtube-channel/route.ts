@@ -1,6 +1,6 @@
 import BadReqError from '@/libraries/error/badRequestError';
 import errorHandler from '@/libraries/error/handler';
-import { channelDto, getChannelWithYoutube } from '@/libraries/mongoDB/getAllChannel';
+import { channelDto, getChannelWithYoutube } from '@/libraries/mongoDB/channels';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {

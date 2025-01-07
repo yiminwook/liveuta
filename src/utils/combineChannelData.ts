@@ -1,5 +1,5 @@
 import dayjs from '@/libraries/dayjs';
-import { TChannelDto } from '@/libraries/mongoDB/getAllChannel';
+import { TChannelDto } from '@/libraries/mongoDB/channels';
 import { getYoutubeChannels } from '@/libraries/youtube';
 import { generateChannelUrl } from '@/libraries/youtube/url';
 import { TChannelListData } from '@/types/api/mongoDB';

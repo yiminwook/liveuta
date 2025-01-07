@@ -3,7 +3,7 @@ import { TChannelData, TChannelDocument } from '@/types/api/mongoDB';
 import { combineChannelData } from '@/utils/combineChannelData';
 import { addEscapeCharacter } from '@/utils/regexp';
 import { z } from 'zod';
-import { connectMongoDB } from './';
+import { connectMongoDB } from '.';
 
 export const channelDto = z.object({
   query: z.string().nullish(),
@@ -35,7 +35,7 @@ export const getAllChannel = async (dto: TChannelDto) => {
 
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
   const channels = await db
-    .find<TChannelData>({}, { projection: { _id: 0 } })
+    .find<TChannelData>({ waiting: false }, { projection: { _id: 0 } })
     .sort(dto.sort, direction)
     .toArray();
 
@@ -46,12 +46,12 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
   const { sort, size, page, query } = dto;
   const direction = CHANNEL_ORDER_MAP[sort];
   const safeQuery = addEscapeCharacter((query || '').trim());
-  const regexforDBQuery = { names: { $regex: safeQuery, $options: 'i' } };
+  const regexforDBQuery = { names: { $regex: safeQuery, $options: 'i' }, waiting: false };
   const skip = (page - 1) * size;
 
   const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
   const channels = await db
-    .find<TChannelData>(!!query ? regexforDBQuery : {}, {
+    .find<TChannelData>(!!query ? regexforDBQuery : { waiting: false }, {
       projection: { _id: 0 },
     })
     .sort(sort, direction)
@@ -59,7 +59,7 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
     .limit(size)
     .toArray();
 
-  const total = await db.countDocuments(!!query ? regexforDBQuery : {});
+  const total = await db.countDocuments(!!query ? regexforDBQuery : { waiting: false });
   const totalPage = Math.ceil(total / size);
 
   const channelRecord = channels.reduce<Record<string, TChannelData>>((acc, curr) => {

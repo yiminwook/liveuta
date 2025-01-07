@@ -1,5 +1,5 @@
 import Footer from '@/components/common/Footer';
-import { TYChannelReturn } from '@/libraries/mongoDB/getAllChannel';
+import { TYChannelReturn } from '@/libraries/mongoDB/channels';
 import { auth } from '@/libraries/nextAuth';
 import { TMetadata } from '@/types';
 import Client from './page.client';

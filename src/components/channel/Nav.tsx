@@ -1,5 +1,5 @@
 'use client';
-import { TChannelDto } from '@/libraries/mongoDB/getAllChannel';
+import { TChannelDto } from '@/libraries/mongoDB/channels';
 import IonIosSearch from '@icons/ion/IosSearch';
 import TbX from '@icons/tabler/X';
 import { Button, Flex, SegmentedControl, TextInput, UnstyledButton } from '@mantine/core';

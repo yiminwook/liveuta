@@ -1,6 +1,6 @@
 'use client';
 import dayjs from '@/libraries/dayjs';
-import { ChannelDatesetItem } from '@/libraries/mongoDB/getAllChannel';
+import { ChannelDatesetItem } from '@/libraries/mongoDB/channels';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';

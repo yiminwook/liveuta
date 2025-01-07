@@ -1,6 +1,6 @@
 import Background from '@/components/common/background/Background';
 import { ITEMS_PER_PAGE } from '@/constants';
-import { TChannelDto, TYChannelReturn } from '@/libraries/mongoDB/getAllChannel';
+import { TChannelDto, TYChannelReturn } from '@/libraries/mongoDB/channels';
 import { auth } from '@/libraries/nextAuth';
 import ChannelSection from './ChannelSection';
 import css from './Home.module.scss';

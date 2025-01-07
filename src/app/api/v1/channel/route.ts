@@ -1,6 +1,6 @@
 import BadReqError from '@/libraries/error/badRequestError';
 import errorHandler from '@/libraries/error/handler';
-import { CHANNEL_ORDER_MAP, channelDto, getAllChannel } from '@/libraries/mongoDB/getAllChannel';
+import { CHANNEL_ORDER_MAP, channelDto, getAllChannel } from '@/libraries/mongoDB/channels';
 import { TChannelData } from '@/types/api/mongoDB';
 import { NextRequest, NextResponse } from 'next/server';
 
