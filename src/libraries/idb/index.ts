@@ -1,13 +1,13 @@
 import type { PocketUtaDB } from '@/types/pocket-uta';
 import { Effect, pipe } from 'effect';
-import { TaggedClass } from 'effect/Data';
 import { openDB } from 'idb';
-
-class CannotConnectIDBError extends TaggedClass('CannotConnectIDBError') {}
-class IDBCreateError extends TaggedClass('CreateError') {}
-class IDBReadError extends TaggedClass('ReadError') {}
-class IDBUpdateError extends TaggedClass('UpdateError') {}
-class IDBDeleteError extends TaggedClass('DeleteError') {}
+import {
+  CannotConnectIDBError,
+  IDBCreateError,
+  IDBDeleteError,
+  IDBReadError,
+  IDBUpdateError,
+} from './error';
 
 function connectIDB() {
   return Effect.tryPromise({
