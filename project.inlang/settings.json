@@ -1,6 +1,6 @@
 {
   "sourceLanguageTag": "ko",
-  "languageTags": ["ko", "en", "jp"],
+  "languageTags": ["ko", "en", "ja"],
   "modules": [
     "https://cdn.jsdelivr.net/npm/@inlang/plugin-next-intl@latest/dist/index.js",
     "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-empty-pattern@latest/dist/index.js",

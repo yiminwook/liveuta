@@ -1,4 +1,4 @@
-export type LocaleCode = 'ko' | 'en' | 'jp';
+export type LocaleCode = 'ko' | 'en' | 'ja';
 export type Locale = {
   code: LocaleCode;
   name: string;

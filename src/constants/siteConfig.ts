@@ -12,7 +12,7 @@ export const siteConfig: SiteConfig = {
       name: 'English',
     },
     {
-      code: 'jp',
+      code: 'ja',
       name: '日本語',
     },
   ],

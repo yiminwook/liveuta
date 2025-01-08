@@ -3,7 +3,11 @@ import { getCookies } from '@/utils/getCookie';
 import { getRequestConfig } from 'next-intl/server';
 
 export default getRequestConfig(async ({}) => {
-  let locale = (await getCookies()).locale || siteConfig.defaultLocale;
+  let locale = (await getCookies()).locale;
+
+  if (locale === undefined || locale === 'jp') {
+    locale = siteConfig.defaultLocale;
+  }
 
   return {
     locale,
