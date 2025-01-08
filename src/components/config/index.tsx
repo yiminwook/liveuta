@@ -19,9 +19,10 @@ type ConfigsProps = {
   children: React.ReactNode;
   cookies: TGetCookiesReturn;
   colorScheme: 'light' | 'dark';
+  locale: string;
 };
 
-export default async function Configs({ children, cookies, colorScheme }: ConfigsProps) {
+export default async function Configs({ children, cookies, colorScheme, locale }: ConfigsProps) {
   const [session, metadata] = await Promise.all([
     auth(),
     fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/metadata`, {
@@ -43,7 +44,7 @@ export default async function Configs({ children, cookies, colorScheme }: Config
         >
           <ReactQuery>
             <NProgressProviders>
-              <MantineProvider defaultColorScheme={colorScheme}>
+              <MantineProvider defaultColorScheme={colorScheme} locale={locale}>
                 <Hotkeys>
                   {children}
                   <ToastBox />

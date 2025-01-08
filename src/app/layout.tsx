@@ -48,7 +48,7 @@ export default async function Layout({ children }: Props) {
         <DefaultHead />
       </head>
       <body {...(isIos ? {} : overlayScrollbarInitialize)}>
-        <Configs cookies={cookies} colorScheme={colorScheme}>
+        <Configs cookies={cookies} colorScheme={colorScheme} locale={locale}>
           {children}
         </Configs>
         <GoogleTagManager />

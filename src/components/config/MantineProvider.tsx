@@ -7,9 +7,14 @@ import 'dayjs/locale/ko';
 type MantineProviderProps = {
   children: React.ReactNode;
   defaultColorScheme: 'light' | 'dark';
+  locale: string;
 };
 
-export default function MantineProvider({ children, defaultColorScheme }: MantineProviderProps) {
+export default function MantineProvider({
+  children,
+  defaultColorScheme,
+  locale,
+}: MantineProviderProps) {
   return (
     <Provider
       classNamesPrefix="app" // ex) app-Button-root
@@ -17,7 +22,7 @@ export default function MantineProvider({ children, defaultColorScheme }: Mantin
       defaultColorScheme={defaultColorScheme}
       withCssVariables={false} // css variable 동적으로 추가되지 않도록
     >
-      <DatesProvider settings={{ locale: 'ko' }}>{children}</DatesProvider>
+      <DatesProvider settings={{ locale }}>{children}</DatesProvider>
     </Provider>
   );
 }
