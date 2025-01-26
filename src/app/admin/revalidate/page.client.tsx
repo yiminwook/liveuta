@@ -36,7 +36,7 @@ export default function Client({}: Props) {
 
       <Box>
         <Text fw="bold">메타데이터</Text>
-        <p>revalidate-time 3600초</p>
+        <p>revalidate-time 3600초(1시간)</p>
         <p>API - GET: https://liveuta.vercel.app/api/v1/revalidate?tag=metadata</p>
         <Button loading={mutation.isPending} onClick={onClick('metadata')}>
           캐시 초기화
@@ -45,7 +45,7 @@ export default function Client({}: Props) {
 
       <Box mt={48}>
         <Text fw="bold">채널정보</Text>
-        <p>revalidate-time 1800초</p>
+        <p>revalidate-time 1800초(30분)</p>
         <p>API - GET: https://liveuta.vercel.app/api/v1/revalidate?tag=channel</p>
         <Button loading={mutation.isPending} onClick={onClick('channel')}>
           캐시 초기화

@@ -1,6 +1,6 @@
 import BadReqError from '@/libraries/error/badRequestError';
 import errorHandler from '@/libraries/error/handler';
-import { CHANNEL_ORDER_MAP, channelDto, getAllChannel } from '@/libraries/mongoDB/channels';
+import { channelDto, getAllChannel } from '@/libraries/mongoDB/channels';
 import { TChannelData } from '@/types/api/mongoDB';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -10,11 +10,8 @@ export type TGetChannelRes = {
 };
 
 export async function GET(req: NextRequest) {
-  const searchParams = new URL(req.url).searchParams;
-  const order = searchParams.get('order') as keyof typeof CHANNEL_ORDER_MAP;
-
   try {
-    const dto = channelDto.safeParse({ order });
+    const dto = channelDto.safeParse({});
 
     if (dto.error) {
       throw new BadReqError(dto.error.errors[0].message);
@@ -29,4 +26,4 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export const revalidate = 60;
+export const revalidate = 1800;

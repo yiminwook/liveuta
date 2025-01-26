@@ -255,12 +255,12 @@
     "blacklist": {
       "title": "Blocked List",
       "removeBlacklist": "Would you like to unblock?",
-      "remove": "Unblock"
+      "remove": "UnBlock"
     },
     "favorite": {
       "title": "Favorites",
       "removeFavorite": "Would you like to remove this from your favorites?",
-      "remove": "Remove from Favorites"
+      "remove": "Remove"
     }
   },
   "schedule": {

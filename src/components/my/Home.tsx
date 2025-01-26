@@ -4,19 +4,10 @@ import FasStar from '@icons/fa-solid/Star';
 import MdiBlock from '@icons/mdi/Block';
 import { Session } from 'next-auth';
 import { useTranslations } from 'next-intl';
-import dynamic from 'next/dynamic';
 import Background from '../common/background/Background';
+import Blacklist from './Blacklist';
 import css from './Home.module.scss';
-import ListPlaceholder from './ListPlaceholder';
-
-const Blacklist = dynamic(() => import('./Blacklist'), {
-  ssr: false,
-  loading: () => <ListPlaceholder />,
-});
-const Whitelist = dynamic(() => import('./Whitelist'), {
-  ssr: false,
-  loading: () => <ListPlaceholder />,
-});
+import Whitelist from './Whitelist';
 
 type HomeProps = {
   session: Session;

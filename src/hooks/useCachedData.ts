@@ -15,7 +15,7 @@ const useCachedData = ({ session }: LayoutDataObserverProps) => {
         queryKey: ['channelList'],
         queryFn: () =>
           fetch('/api/v1/channel', {
-            next: { revalidate: 1800, tags: ['channel'] }, // 1분간 캐시
+            next: { revalidate: 1800, tags: ['channel'] }, // 30분간 캐시
           })
             .then((res) => res.json() as Promise<TGetChannelRes>)
             .then((res) => res.data),

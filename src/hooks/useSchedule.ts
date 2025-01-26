@@ -24,9 +24,5 @@ export const useSchedule = (option?: {
     refetchIntervalInBackground: false,
   });
 
-  console.log('refetchInterval', option?.enableAutoSync ? userCacheTime : false);
-  console.log('isActive', isActive);
-  console.log('userCacheTime', refreshInterval);
-
   return query;
 };

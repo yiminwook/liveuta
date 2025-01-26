@@ -255,12 +255,12 @@
     "blacklist": {
       "title": "차단목록",
       "removeBlacklist": "차단을 해제하시겠습니까?",
-      "remove": "차단 해제"
+      "remove": "해제"
     },
     "favorite": {
       "title": "즐겨찾기",
       "removeFavorite": "즐겨찾기에서 제거하시겠습니까?",
-      "remove": "즐겨찾기 제거"
+      "remove": "제거"
     }
   },
   "schedule": {
