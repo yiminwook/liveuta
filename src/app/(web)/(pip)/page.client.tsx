@@ -5,21 +5,18 @@ import SearchInput from '@/components/common/input/SearchInput';
 import ListModal from '@/components/common/modal/MultiListModal';
 import ChannelSlider from '@/components/home/ChannelSlider';
 import ScheduleSlider from '@/components/home/ScheduleSlider';
-import { SCHEDULE_CACHE_TIME } from '@/constants';
 import useCachedData from '@/hooks/useCachedData';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
+import { useSchedule } from '@/hooks/useSchedule';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetModalStore } from '@/stores/modal';
 import { TContentsData } from '@/types/api/mongoDB';
-import { GetScheduleRes } from '@/types/api/schedule';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { Session } from 'next-auth';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
@@ -41,13 +38,7 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
   const modalStore = useSetModalStore();
   const { whiteList, blackList } = useCachedData({ session });
   const t = useTranslations('home');
-
-  const { data, isPending } = useQuery({
-    queryKey: ['schedule'],
-    queryFn: () => axios.get<GetScheduleRes>('/api/v1/schedule').then((res) => res.data.data),
-    staleTime: SCHEDULE_CACHE_TIME,
-    gcTime: SCHEDULE_CACHE_TIME,
-  });
+  const { data, isPending } = useSchedule({ enableAutoSync: false });
 
   const onChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(() => e.target.value);
