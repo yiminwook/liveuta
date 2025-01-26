@@ -81,11 +81,11 @@ export default function SliderCard({
 
       <div className={css.navBox}>
         <div>
-          <Tooltip label={t('setNotification')} position="bottom" withArrow>
+          {/* <Tooltip label={t('setNotification')} position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickAlarm}>
               <TbBellRingingFilled color={variable.thirdColorDefault} />
             </ActionIcon>
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip label={t('addMultiView')} position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickAddMultiView}>
               <IonPlus color={variable.thirdColorDefault} />

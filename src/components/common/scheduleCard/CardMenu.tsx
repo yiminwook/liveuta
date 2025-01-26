@@ -42,13 +42,13 @@ export default function CardMenu({
       </Menu.Target>
 
       <Menu.Dropdown className={css.dropdown}>
-        <Menu.Item
+        {/* <Menu.Item
           component="button"
           leftSection={<TbBellRingingFilled color={variable.thirdColorDefault} />}
           onClick={onClickAlarm}
         >
           {t('setNotification')}
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item
           component="button"
           leftSection={<IonPlus color={variable.thirdColorDefault} />}
