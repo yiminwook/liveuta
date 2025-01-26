@@ -1,46 +1,110 @@
 'use client';
-import Categories from '@/components/common/featured/Categories';
-import FeaturedVtubers from '@/components/common/featured/FeaturedVtubers';
+import RankingTable from '@/components/featured/RankingTable';
+import useCachedData from '@/hooks/useCachedData';
+import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
+import usePostBlacklist from '@/hooks/usePostBlacklist';
+import usePostWhitelist from '@/hooks/usePostWhitelist';
+import { TFeaturedDataAPIReturn } from '@/types/api/mongoDB';
+import { TYChannelsData } from '@/types/api/youtube';
+import { combineYTData } from '@/utils/combineChannelData-v2';
+import { Button, ButtonGroup } from '@mantine/core';
+import classNames from 'classnames';
 import { Session } from 'next-auth';
+import { useTranslations } from 'next-intl';
+import { useMemo } from 'react';
+import { toast } from 'sonner';
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import css from './page.module.scss';
 
 type Props = {
   session: Session | null;
+  featuredData: TFeaturedDataAPIReturn;
 };
 
-export default function Client({ session }: Props) {
+export default function Client({ session, featuredData }: Props) {
+  const { channelList, blackList, whiteList } = useCachedData({ session });
+  const mutateBlock = usePostBlacklist();
+  const mutatePostFavorite = usePostWhitelist();
+  const mutateDeleteFavorite = useMutateWhitelist();
+  const t = useTranslations('featured');
+
+  const handleFavorite = (content: TYChannelsData) => {
+    if (!session) return toast.error(t('notLoggedInError'));
+    const isFavorite = whiteList.has(content.uid);
+
+    if (!isFavorite && confirm(t('addFavoriteChannel'))) {
+      mutatePostFavorite.mutate({
+        session,
+        channelId: content.uid,
+      });
+    } else if (isFavorite && confirm(t('removeFavoriteChannel'))) {
+      mutateDeleteFavorite.mutate({
+        session,
+        channelId: content.uid,
+      });
+    }
+  };
+
+  const handleBlock = (content: TYChannelsData) => {
+    if (!session) return toast.error(t('notLoggedInError'));
+
+    if (confirm(t('blockChannel'))) {
+      mutateBlock.mutate({
+        session,
+        channelId: content.uid,
+      });
+    }
+  };
+
+  const isFavorite = (channelId: string) => whiteList.has(channelId);
+
+  const combinedData = useMemo(() => {
+    return {
+      promising: combineYTData(channelList, featuredData.promising),
+      topRating: combineYTData(channelList, featuredData.topRating),
+    };
+  }, [featuredData, channelList]);
+
   return (
-    <section className={css.featuredContainer}>
-      {/* <Tabs.Root
-        lazyMount
-        unmountOnExit
-        value={selected}
-        onValueChange={(e) => setSelected(e.value as 'categories' | 'vtubers')}
-      >
-        <Tabs.List className={styles.tabs}>
-          <Tabs.Trigger
-            value="categories"
-            className={styles.tab}
-            data-selected={selected === 'categories'}
-          >
-            <span>카테고리</span>
-          </Tabs.Trigger>
-          <Tabs.Trigger
-            value="vtubers"
-            className={styles.tab}
-            data-selected={selected === 'vtubers'}
-          >
-            <span>버튜버 특집</span>
-          </Tabs.Trigger>
-        </Tabs.List>
-      </Tabs.Root> */}
-      <div className={css.featured} data-show={true}>
-        <div>
-          <div>select</div>
-        </div>
-        <Categories session={session} />
-        <FeaturedVtubers />
+    <div className={css.container}>
+      <p className={classNames('essential', css.essential)}>{t('essential')}</p>
+      <div>
+        <ButtonGroup>
+          <Button className="swiper-prev" size="xs">
+            이전
+          </Button>
+          <Button className="swiper-next" size="xs">
+            다음
+          </Button>
+        </ButtonGroup>
       </div>
-    </section>
+      <Swiper
+        modules={[Navigation, Pagination]}
+        navigation={{
+          nextEl: '.swiper-next',
+          prevEl: '.swiper-prev',
+        }}
+        pagination={{ clickable: true }}
+        className={css.swiper}
+      >
+        <SwiperSlide>
+          <RankingTable
+            title={t('topRating')}
+            data={combinedData.topRating}
+            onFavorite={handleFavorite}
+            onBlock={handleBlock}
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <RankingTable
+            title={t('promising')}
+            data={combinedData.promising}
+            onFavorite={handleFavorite}
+            onBlock={handleBlock}
+          />
+        </SwiperSlide>
+      </Swiper>
+    </div>
   );
 }

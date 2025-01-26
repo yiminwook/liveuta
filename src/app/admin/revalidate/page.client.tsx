@@ -20,7 +20,7 @@ export default function Client({}: Props) {
     },
   });
 
-  const onClick = (tag: 'channel' | 'metadata') => (e: React.MouseEvent) => {
+  const onClick = (tag: 'channel' | 'metadata' | 'featured') => (e: React.MouseEvent) => {
     if (mutation.isPending) return;
     mutation.mutate(tag);
   };
@@ -48,6 +48,15 @@ export default function Client({}: Props) {
         <p>revalidate-time 1800초</p>
         <p>API - GET: https://liveuta.vercel.app/api/v1/revalidate?tag=channel</p>
         <Button loading={mutation.isPending} onClick={onClick('channel')}>
+          캐시 초기화
+        </Button>
+      </Box>
+
+      <Box mt={48}>
+        <Text fw="bold">특집정보</Text>
+        <p>revalidate-time 86400초(1일)</p>
+        <p>API - GET: https://liveuta.vercel.app/api/v1/revalidate?tag=featured</p>
+        <Button loading={mutation.isPending} onClick={onClick('featured')}>
           캐시 초기화
         </Button>
       </Box>

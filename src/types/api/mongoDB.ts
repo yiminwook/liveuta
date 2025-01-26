@@ -1,4 +1,5 @@
 import dayjs from '@/libraries/dayjs';
+import { youtube_v3 } from 'googleapis';
 
 export type isStream = 'TRUE' | 'NULL' | 'FALSE';
 
@@ -84,3 +85,9 @@ export type TFeaturedDocument = {
 };
 
 export type TFeaturedData = Omit<TFeaturedDocument, '_id'>;
+
+export type TFeaturedDataAPIReturn = {
+  lastUpdateAt: string;
+  topRating: youtube_v3.Schema$Channel[];
+  promising: youtube_v3.Schema$Channel[];
+};

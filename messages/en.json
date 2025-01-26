@@ -39,7 +39,8 @@
         "description": "Select a link",
         "internalLinks": {
           "settings": "Settings",
-          "dev": "Dev"
+          "dev": "Dev",
+          "featured": "Featured"
         },
         "externalLinks": {
           "kizunaAiGallery": "DC1",
@@ -88,7 +89,8 @@
           "channel": "Channel",
           "setlist": "Setlist",
           "settings": "Settings",
-          "dev": "Dev"
+          "dev": "Dev",
+          "featured": "Featured"
         },
         "externalLinks": {
           "kizunaAiGallery": "Kizuna AI Gallery",
@@ -415,6 +417,23 @@
     "theme": {
       "title": "Theme"
     }
+  },
+  "featured": {
+    "essential": "The aggregation criteria are based on the gallery's mention.",
+    "promising": "Promising Streamers",
+    "topRating": "Top Rating",
+    "addFavorite": "Add to Favorites",
+    "removeFavorite": "Remove from Favorites",
+
+    "block": "Block",
+    "modified": "Modified",
+    "notLoggedInError": "This service is available after logging in.",
+    "editSuccess": "Edit successful.",
+    "noContentError": "Please enter content.",
+    "addFavoriteChannel": "Would you like to add this to your favorites?",
+    "removeFavoriteChannel": "Would you like to remove this from your favorites?",
+    "blockChannel": "Would you like to block this channel?",
+    "unblockChannel": "Would you like to unblock this channel?"
   },
   "hooks": {
     "useReservePush": {

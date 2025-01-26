@@ -1,6 +1,7 @@
 import FaSolidStar from '@icons/fa-solid/Star';
 import IonMusicNote from '@icons/ion/MusicNote';
 import TbDeviceDesktopCode from '@icons/tabler/DeviceDesktopCode';
+import Diamond from '@icons/tabler/Diamond';
 import TbSettings from '@icons/tabler/Settings';
 import TbTools from '@icons/tabler/Tools';
 import { ActionIcon, SimpleGrid } from '@mantine/core';
@@ -27,6 +28,11 @@ export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
   const t = useTranslations('global.bottomTab.drawer');
   const pathname = usePathname();
   const internalLinks: DrawerItem[] = [
+    {
+      href: '/featured',
+      text: t('internalLinks.featured'),
+      icon: <Diamond width="1.5rem" height="1.5rem" />,
+    },
     {
       href: '/setting',
       text: t('internalLinks.settings'),

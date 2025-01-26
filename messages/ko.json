@@ -39,7 +39,8 @@
         "description": "링크를 선택하세요",
         "internalLinks": {
           "settings": "설정",
-          "dev": "개발"
+          "dev": "개발",
+          "featured": "특집"
         },
         "externalLinks": {
           "kizunaAiGallery": "키갤",
@@ -88,7 +89,8 @@
           "channel": "채널",
           "setlist": "세트리",
           "settings": "설정",
-          "dev": "개발"
+          "dev": "개발",
+          "featured": "특집"
         },
         "externalLinks": {
           "kizunaAiGallery": "키즈나 아이 갤러리",
@@ -415,6 +417,23 @@
     "theme": {
       "title": "테마"
     }
+  },
+  "featured": {
+    "essential": "집계기준은 갤러리언급기준입니다.",
+    "promising": "유망한 스트리머",
+    "topRating": "인기 순위",
+    "addFavorite": "즐겨찾기에 추가",
+    "removeFavorite": "즐겨찾기에서 제거",
+    "block": "차단하기",
+
+    "modified": "수정되었습니다",
+    "notLoggedInError": "로그인 후 이용가능한 서비스입니다.",
+    "editSuccess": "수정되었습니다.",
+    "noContentError": "내용을 입력해주세요.",
+    "addFavoriteChannel": "즐겨찾기에 추가하시겠습니까?",
+    "removeFavoriteChannel": "즐겨찾기에서 제거하시겠습니까?",
+    "blockChannel": "채널을 차단하시겠습니까?",
+    "unblockChannel": "채널 차단을 해제하시겠습니까?"
   },
   "hooks": {
     "useReservePush": {

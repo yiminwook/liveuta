@@ -12,6 +12,7 @@ export default function DesktopNav() {
     { href: '/schedule', text: t('internalLinks.schedule') },
     { href: '/multi', text: t('internalLinks.multiView') },
     { href: '/channel', text: t('internalLinks.channel') },
+    { href: '/featured', text: t('internalLinks.featured') },
     { href: '/setlist', text: t('internalLinks.setlist') },
     { href: '/setting', text: t('internalLinks.settings') },
     { href: '/dev', text: t('internalLinks.dev') },

@@ -51,7 +51,7 @@
   font-size: 1.1rem;
   font-weight: 500;
 
-  @include util.text-line(1, 1rem);
+  @include util.text-line(1, 1);
   @include util.min-width(var.$mobile-boundary) {
     font-size: 1.25rem;
   }

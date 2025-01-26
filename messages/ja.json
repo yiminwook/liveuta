@@ -33,7 +33,8 @@
         "description": "リンクを選択してください",
         "internalLinks": {
           "settings": "設定",
-          "dev": "開発"
+          "dev": "開発",
+          "featured": "特集"
         },
         "externalLinks": {
           "kizunaAiGallery": "DC1",
@@ -82,7 +83,8 @@
           "channel": "チャンネル",
           "setlist": "セットリスト",
           "settings": "設定",
-          "dev": "開発"
+          "dev": "開発",
+          "featured": "特集"
         },
         "externalLinks": {
           "kizunaAiGallery": "キズナアイギャラリー",
@@ -409,6 +411,23 @@
     "theme": {
       "title": "テーマ"
     }
+  },
+  "featured": {
+    "essential": "集計基準は、ギャラリーへの言及が基準となります。",
+    "promising": "有望なストリーマー",
+    "topRating": "人気ランキング",
+    "addFavorite": "お気に入りに追加",
+    "removeFavorite": "お気に入りから削除",
+    "block": "ブロック",
+
+    "modified": "修正されました",
+    "notLoggedInError": "ログイン後に利用可能なサービスです。",
+    "editSuccess": "修正されました。",
+    "noContentError": "内容を入力してください。",
+    "addFavoriteChannel": "お気に入りに追加しますか？",
+    "removeFavoriteChannel": "お気に入りから削除しますか？",
+    "blockChannel": "チャンネルをブロックしますか？",
+    "unblockChannel": "チャンネルのブロックを解除しますか？"
   },
   "hooks": {
     "useReservePush": {
