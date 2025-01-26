@@ -2,7 +2,6 @@ import Nodata from '@/components/common/Nodata';
 import ScheduleCard from '@/components/common/scheduleCard/Card';
 import { SCROLL_PER_YOUTUBE_CARD } from '@/constants';
 import useScheduleStatus from '@/hooks/useScheduleStatus';
-import { StreamCategory } from '@/types';
 import { TContentsData } from '@/types/api/mongoDB';
 import { Button } from '@mantine/core';
 import { Session } from 'next-auth';
@@ -13,7 +12,7 @@ import css from './Categories.module.scss';
 type CategoryProps = {
   contents: TContentsData[];
   session: Session | null;
-  category: StreamCategory;
+  category: string;
 };
 
 export default function Category({ contents, session, category }: CategoryProps) {

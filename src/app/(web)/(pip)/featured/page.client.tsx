@@ -1,6 +1,5 @@
 'use client';
 import Categories from '@/components/common/featured/Categories';
-import FeaturedSelect from '@/components/common/featured/FeaturedSelect';
 import FeaturedVtubers from '@/components/common/featured/FeaturedVtubers';
 import { Session } from 'next-auth';
 import css from './page.module.scss';
@@ -37,7 +36,7 @@ export default function Client({ session }: Props) {
       </Tabs.Root> */}
       <div className={css.featured} data-show={true}>
         <div>
-          <FeaturedSelect />
+          <div>select</div>
         </div>
         <Categories session={session} />
         <FeaturedVtubers />

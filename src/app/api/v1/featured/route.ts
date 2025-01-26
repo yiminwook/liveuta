@@ -1,35 +1,25 @@
-import { MONGODB_SCHEDULE_COLLECTION, MONGODB_SCHEDULE_DB } from '@/constants';
-import dayjs from '@/libraries/dayjs';
+import { MONGODB_FEATURED_COLLECTION, MONGODB_MANAGEMENT_DB } from '@/constants';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
 import { connectMongoDB } from '@/libraries/mongoDB';
-import { ContentDocument, ContentDocumentWithDayjs } from '@/types/api/mongoDB';
-import { parseFeatured } from '@/utils/parseMongoDBData';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const db = await connectMongoDB(MONGODB_SCHEDULE_DB, MONGODB_SCHEDULE_COLLECTION);
+    const db = await connectMongoDB(MONGODB_MANAGEMENT_DB, MONGODB_FEATURED_COLLECTION);
 
-    const scheduleDataRaw = await db
-      .find<Omit<ContentDocument, '_id'>>({}, { projection: { _id: 0 } })
-      .sort({ ScheduledTime: 1, ChannelName: 1 })
-      .toArray();
+    const scheduleDataRaw = await db.findOne(
+      {},
+      { projection: { _id: 0 }, sort: { last_updated: -1 } },
+    );
 
     if (!scheduleDataRaw) {
       throw new CustomServerError({ statusCode: 404, message: '문서를 찾을 수 없습니다.' });
     }
 
-    const scheduleData = scheduleDataRaw.map((doc) => ({
-      ...doc,
-      ScheduledTime: dayjs.tz(doc.ScheduledTime),
-    }));
-
-    const { featured } = parseFeatured(scheduleData);
-
     return NextResponse.json({
-      message: '스케줄이 조회되었습니다.',
-      data: { featured },
+      message: '특집 데이터가 조회되었습니다.',
+      data: { scheduleDataRaw },
     });
   } catch (error) {
     console.error(error);

@@ -21,9 +21,10 @@ export const GTM_TRACKING_ID = 'GTM-KGJ6HZ4J';
 export const MONGODB_SCHEDULE_COLLECTION = 'upcoming_streams';
 export const MONGODB_NOTI_COLLECTION = 'notifications';
 export const MONGODB_CHANNEL_COLLECTION = 'channel_id_names';
+export const MONGODB_FEATURED_COLLECTION = 'featured_channels';
 
 export const MONGODB_SCHEDULE_DB = 'ScheduleDB';
-export const MONGODB_CHANNEL_DB = 'ManagementDB';
+export const MONGODB_MANAGEMENT_DB = 'ManagementDB';
 
 export const ORACLEDB_USER = 'admin';
 

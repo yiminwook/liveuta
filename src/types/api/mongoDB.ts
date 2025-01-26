@@ -1,5 +1,4 @@
 import dayjs from '@/libraries/dayjs';
-import { StreamCategory } from '..';
 
 export type isStream = 'TRUE' | 'NULL' | 'FALSE';
 
@@ -36,7 +35,6 @@ export type ContentDocument = {
   concurrentViewers: number;
   VideoId: string;
   ChannelId: string;
-  category: string;
   tag: string;
 };
 
@@ -61,7 +59,6 @@ export type TContentsData = {
   interval: string;
   isVideo: boolean;
   viewer: number;
-  category: StreamCategory;
   tag: string;
 };
 
@@ -78,3 +75,12 @@ export type TParseAllDataReturn = {
 };
 
 export type TScheduleAPIReturn = TParseAllDataReturn & TParseScheduledDataReturn;
+
+export type TFeaturedDocument = {
+  _id: string;
+  top_channels: string[];
+  promising: string[];
+  last_updated: string;
+};
+
+export type TFeaturedData = Omit<TFeaturedDocument, '_id'>;

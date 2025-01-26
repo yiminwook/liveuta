@@ -1,5 +1,4 @@
 import dayjs from '@/libraries/dayjs';
-import { StreamCategory } from '@/types';
 import {
   ContentDocumentWithDayjs,
   TContentsData,
@@ -16,16 +15,6 @@ export const parseMongoDBDocument = (doc: ContentDocumentWithDayjs): TContentsDa
 
     const replacedTitle = replaceParentheses(doc.Title);
 
-    const categoryMap = {
-      '0': StreamCategory.default,
-      '1': StreamCategory.live,
-      '2': StreamCategory.anniversary,
-      '3': StreamCategory.relay,
-      '4': StreamCategory.endurance,
-    };
-
-    const category = doc.category as keyof typeof categoryMap;
-
     const data: TContentsData = {
       title: replacedTitle,
       channelName: doc.ChannelName,
@@ -37,7 +26,6 @@ export const parseMongoDBDocument = (doc: ContentDocumentWithDayjs): TContentsDa
       interval,
       isVideo: doc.isVideo === 'TRUE' ? true : false,
       viewer: doc.concurrentViewers,
-      category: categoryMap[category] || StreamCategory.default,
       tag: doc.tag || '',
     };
 
@@ -102,47 +90,5 @@ export const parseAllData = (documents: ContentDocumentWithDayjs[]): TParseAllDa
   return {
     daily: daily,
     all: all,
-  };
-};
-
-export const parseFeatured = (documents: ContentDocumentWithDayjs[]) => {
-  const featured: TContentsData[] = [];
-
-  const l = [0, 1, 0, 2, 0, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(
-    (v) => `${v}`,
-  );
-
-  const categoryMap = {
-    '0': StreamCategory.default,
-    '1': StreamCategory.live,
-    '2': StreamCategory.anniversary,
-    '3': StreamCategory.relay,
-    '4': StreamCategory.endurance,
-  };
-
-  const tags = ['', '', 'sad', '123', '', '', '', '', '123', '', 'qwer', '', '123'];
-
-  documents.forEach((doc) => {
-    const isHide = doc.Hide;
-    const isStream = doc.broadcastStatus;
-
-    // Hidden contents are treated as yesterday's content
-    if (isHide === 'TRUE' && isStream === 'NULL') return;
-    if (isHide === 'TRUE' && isStream === 'FALSE') return;
-
-    const data = parseMongoDBDocument(doc); // Assuming parseMongoDBData returns an array
-    if (!data) return;
-
-    const r = l[Math.floor(Math.random() * l.length)];
-    data.category = categoryMap[r as keyof typeof categoryMap] || StreamCategory.default;
-
-    if (data.category !== StreamCategory.default) {
-      data.tag = tags[Math.floor(Math.random() * tags.length)];
-      featured.push(data);
-    }
-  });
-
-  return {
-    featured,
   };
 };

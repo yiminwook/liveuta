@@ -1,4 +1,4 @@
-import { ITEMS_PER_PAGE, MONGODB_CHANNEL_COLLECTION, MONGODB_CHANNEL_DB } from '@/constants';
+import { ITEMS_PER_PAGE, MONGODB_CHANNEL_COLLECTION, MONGODB_MANAGEMENT_DB } from '@/constants';
 import { TChannelData, TChannelDocument } from '@/types/api/mongoDB';
 import { combineChannelData } from '@/utils/combineChannelData';
 import { addEscapeCharacter } from '@/utils/regexp';
@@ -25,7 +25,7 @@ export type TYChannelReturn = ReturnType<typeof getChannelWithYoutube>;
 export type ChannelDatesetItem = ReturnType<typeof parseChannel>;
 
 export const getChannelById = async (channel_id: string) => {
-  const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
+  const db = await connectMongoDB(MONGODB_MANAGEMENT_DB, MONGODB_CHANNEL_COLLECTION);
   const channel = await db.findOne<TChannelDocument>({ channel_id });
   return channel;
 };
@@ -33,7 +33,7 @@ export const getChannelById = async (channel_id: string) => {
 export const getAllChannel = async (dto: TChannelDto) => {
   const direction = CHANNEL_ORDER_MAP[dto.sort];
 
-  const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
+  const db = await connectMongoDB(MONGODB_MANAGEMENT_DB, MONGODB_CHANNEL_COLLECTION);
   const channels = await db
     .find<TChannelData>({ waiting: false }, { projection: { _id: 0 } })
     .sort(dto.sort, direction)
@@ -49,7 +49,7 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
   const regexforDBQuery = { names: { $regex: safeQuery, $options: 'i' }, waiting: false };
   const skip = (page - 1) * size;
 
-  const db = await connectMongoDB(MONGODB_CHANNEL_DB, MONGODB_CHANNEL_COLLECTION);
+  const db = await connectMongoDB(MONGODB_MANAGEMENT_DB, MONGODB_CHANNEL_COLLECTION);
   const channels = await db
     .find<TChannelData>(!!query ? regexforDBQuery : { waiting: false }, {
       projection: { _id: 0 },

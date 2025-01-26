@@ -1,11 +1,10 @@
-import { StreamCategory } from '@/types';
 import { TContentsData } from '@/types/api/mongoDB';
 import { Session } from 'next-auth';
 import { useMemo } from 'react';
 import Category from './Category';
 import sectionCss from './Section.module.scss';
 
-type Categories = Record<StreamCategory, TContentsData[]>;
+type Categories = Record<string, TContentsData[]>;
 
 type CategoriesProps = {
   session: Session | null;
