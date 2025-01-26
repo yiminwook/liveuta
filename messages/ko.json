@@ -173,7 +173,10 @@
       "add": "추가",
       "blockChannel": "채널 차단",
       "openInNewTab": "새 탭에서 열기"
-    }
+    },
+    "featured": "특집",
+    "featuredTitle": "VTuber 특집",
+    "featuredDescription": "인기 있는 VTuber들을 만나보세요"
   },
   "auth": {
     "login": {

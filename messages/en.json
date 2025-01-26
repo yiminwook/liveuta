@@ -173,7 +173,10 @@
       "add": "Add",
       "blockChannel": "Block Channel",
       "openInNewTab": "Open in New Tab"
-    }
+    },
+    "featured": "Featured",
+    "featuredTitle": "VTuber Featured",
+    "featuredDescription": "Find popular VTubers"
   },
   "auth": {
     "login": {

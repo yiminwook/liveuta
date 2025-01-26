@@ -1,4 +1,5 @@
 'use client';
+import character9 from '@/assets/image/character-9.png';
 import MoreButton from '@/components/common/button/MoreButton';
 import SearchInput from '@/components/common/input/SearchInput';
 import ListModal from '@/components/common/modal/MultiListModal';
@@ -23,6 +24,7 @@ import { Session } from 'next-auth';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import css from './page.module.scss';
@@ -207,16 +209,32 @@ export default function Client({ session, coverImgUrl, recentChannels }: Props) 
         <ChannelSlider recentChannels={recentChannels} />
       </section>
 
-      {/* <section className={css.featureSection}>
-        <div className={css.featureBox}>
-          <div className={css.leftCol}></div>
-          <div className={css.rightCol}>
-            <div className={css.row}></div>
-            <div className={css.row}></div>
-            <div className={css.row}></div>
-          </div>
+      <section className={css.featureSection}>
+        <div className={css.featureNav}>
+          <h2>✨ {t('featured')}</h2>
         </div>
-      </section> */}
+        <Link href="/featured">
+          <div className={css.featureBox}>
+            <div className={css.featuredContent}>
+              <div className={css.patternBg}>
+                <svg width="100%" height="100%">
+                  <pattern id="pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.2)" />
+                  </pattern>
+                  <rect width="100%" height="100%" fill="url(#pattern)" />
+                </svg>
+                <div className={css.featuredOverlay}>
+                  <h3>{t('featuredTitle')}</h3>
+                  <p>{t('featuredDescription')}</p>
+                </div>
+                <div className={css.characterImage}>
+                  <Image src={character9} alt="character" fill priority />
+                </div>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </section>
     </main>
   );
 }

@@ -118,32 +118,109 @@
   .featureSection {
     max-width: 1200px;
     margin: 0 auto;
-    border: 1px solid blue;
+    margin-bottom: 100px;
     padding: 1rem;
-    padding-inline: 1rem;
+    
+    .featureNav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      h2 {
+        margin: 0;
+      }
+    }
 
     .featureBox {
-      display: flex;
-      width: min(100%, 800px);
-      margin: 0 auto;
+      width: 100%;
+      height: 200px;
+      border-radius: 1rem;
+      overflow: hidden;
 
-      .leftCol {
-        flex: 1;
-        aspect-ratio: 1 / 1;
-        background-color: rosybrown;
-      }
+      
+      .featuredContent {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+ 
+        .patternBg {
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(45deg, util.palette(third, default), util.palette(first, default));
+          position: relative;
 
-      .rightCol {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        background-color: lightcoral;
+          svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+          }
 
-        .row {
-          flex: 1;
+          .characterImage {
+            position: absolute;
+            width: min(350px, 100%);
+            height: 350px;
+            bottom: -50%;
+            right: 0;
 
-          &:not(:last-of-type) {
-            border-bottom: 1px solid black;
+            @include util.min-width(var.$mobile-boundary) {
+              bottom: -50%;
+              right: 2rem;
+            }
+
+            img {
+              object-fit: cover;
+              width: 100%;
+              height: 100%;
+              filter: drop-shadow(0 0 10px rgba(0,0,0,0.2));
+            }
+          }
+        }
+
+        .featuredOverlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 0.5rem;
+          color: white;
+          text-align: left;
+          background: none;
+          z-index: 1;
+          background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.75));
+
+
+          h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+          }
+
+          p {
+            opacity: 0.9;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 1.1rem;
+            margin: 0;
+          }
+
+          @include util.min-width(var.$mobile-boundary) {
+            background: none;
+            padding: 1.5rem;
+
+            h3 {
+              font-size: 2rem;
+              font-weight: bold;
+              margin-bottom: 1rem;
+            }
+
+            p {
+              margin-block:  1rem;
+            }
           }
         }
       }

@@ -167,7 +167,10 @@
       "add": "追加",
       "blockChannel": "チャンネルをブロック",
       "openInNewTab": "新しいタブで開く"
-    }
+    },
+    "featured": "特集",
+    "featuredTitle": "VTuber特集",
+    "featuredDescription": "人気のVTuberを見つけよう"
   },
   "auth": {
     "login": {
