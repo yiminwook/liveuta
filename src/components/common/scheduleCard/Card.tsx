@@ -3,6 +3,7 @@ import { generateVideoUrl } from '@/libraries/youtube/url';
 import { STAT_MAPPER, TContentsData } from '@/types/api/mongoDB';
 import cx from 'classnames';
 import { Session } from 'next-auth';
+import { memo } from 'react';
 import css from './Card.module.scss';
 import CardDesc from './CardDesc';
 import CardImage from './CardImage';
@@ -22,7 +23,7 @@ type ScheduleCardProps = {
 };
 
 /** 카드 높이가 항상 일정하도록 해야함!! */
-export default function ScheduleCard({
+function ScheduleCard_({
   classname,
   content,
   isFavorite,
@@ -45,7 +46,6 @@ export default function ScheduleCard({
   const onClickNewTab = () => {
     openNewTab?.(content);
   };
-
   const onClickBlock = () => {
     addBlock?.(content);
   };
@@ -69,3 +69,6 @@ export default function ScheduleCard({
     </div>
   );
 }
+
+const ScheduleCard = memo(ScheduleCard_);
+export default ScheduleCard;

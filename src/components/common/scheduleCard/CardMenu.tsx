@@ -37,7 +37,7 @@ export default function CardMenu({
     <Menu position="bottom-end" withArrow withinPortal arrowPosition="center" trigger="hover">
       <Menu.Target>
         <ActionIcon radius="lg" size={25}>
-          <TbDots style={{ width: '25px', height: '25px' }} />
+          <TbDots width="25px" height="25px" />
         </ActionIcon>
       </Menu.Target>
 
