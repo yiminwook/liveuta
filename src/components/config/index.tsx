@@ -44,7 +44,7 @@ export default async function Configs({ children, cookies, colorScheme, locale }
         >
           <ReactQuery>
             <NProgressProviders>
-              <MantineProvider defaultColorScheme={colorScheme} locale={locale}>
+              <MantineProvider locale={locale}>
                 <Hotkeys>
                   {children}
                   <ToastBox />

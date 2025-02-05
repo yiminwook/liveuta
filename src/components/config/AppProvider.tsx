@@ -16,7 +16,10 @@ type AppProviderProps = {
 export default function AppProvider({ children, initState }: AppProviderProps) {
   const appStore = useRef(
     createAppStore({
-      theme: initState.theme,
+      theme:
+        typeof window !== 'undefined'
+          ? (localStorage.getItem('theme') as TTheme) || 'theme1'
+          : 'theme1',
       isShowAcctSidebar: false,
     }),
   );

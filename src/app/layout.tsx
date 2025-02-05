@@ -14,6 +14,7 @@ import Configs from '@/components/config';
 import DefaultHead from '@/components/config/DefaultHead';
 import GlobalScrollbar from '@/components/config/GlobalScrollbar';
 import GoogleTagManager from '@/components/config/GoogleTagManager';
+import ThemeScript from '@/components/config/ThemeScript';
 import { DEFAULT_METADATA } from '@/constants/metaData';
 import { getCookies } from '@/utils/getCookie';
 import { isDarkModeEnabled } from '@/utils/helper';
@@ -40,9 +41,10 @@ export default async function Layout({ children }: Props) {
   return (
     <html
       lang={locale}
-      color={cookies.theme}
       {...(isIos ? {} : overlayScrollbarInitialize)}
-      data-mantine-color-scheme={colorScheme} // mantine-theme-ssr
+      // color={cookies.theme}
+      // data-mantine-color-scheme={colorScheme} // mantine-theme-ssr
+      suppressHydrationWarning
     >
       <head>
         <DefaultHead />
@@ -53,6 +55,7 @@ export default async function Layout({ children }: Props) {
         </Configs>
         <GoogleTagManager />
         {!isIos && <GlobalScrollbar />}
+        <ThemeScript />
       </body>
     </html>
   );

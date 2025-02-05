@@ -1,4 +1,5 @@
 import { TTheme } from '@/types';
+import { isDarkModeEnabled } from '@/utils/helper';
 import { createContext, useContext } from 'react';
 import { createStore, useStore } from 'zustand';
 
@@ -17,6 +18,17 @@ export type TAppStore = TAppState & { actions: TAppAction };
 export const createAppStore = (initState: TAppState) => {
   // get()은 좀 더 실시간으로 상태를 가져올 때 사용합니다.
   // prev는 이전 상태를 가져올 때 사용합니다.
+
+  // 깜빡이는 문제 생겨서 일단 주석처리
+  // if (typeof window !== 'undefined') {
+  //   const isDarkMode = isDarkModeEnabled(initState.theme);
+  //   document.documentElement.setAttribute('color', initState.theme);
+  //   document.documentElement.setAttribute(
+  //     'data-mantine-color-scheme',
+  //     isDarkMode ? 'dark' : 'light',
+  //   );
+  // }
+
   return createStore<TAppState & { actions: TAppAction }>((set, _get, _prev) => ({
     ...initState,
     actions: {
