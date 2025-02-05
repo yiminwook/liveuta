@@ -1,6 +1,4 @@
 /* eslint-disable @next/next/no-before-interactive-script-outside-document */
-import Script from 'next/script';
-
 export const THEME_STORAGE_KEY = 'theme';
 export const THEME_CUSTOM_EVENT_NAME = 'theme-change';
 export const THEME_DARK_CLASS_NAME = 'dark';
@@ -8,8 +6,10 @@ export const THEME_LIGHT_CLASS_NAME = 'light';
 
 export default function ThemeScript() {
   return (
-    <Script id={THEME_CUSTOM_EVENT_NAME} strategy="beforeInteractive">{`
-
+    <script
+      suppressHydrationWarning
+      dangerouslySetInnerHTML={{
+        __html: `\
       function isDarkModeEnabled (theme) {
         const themeIndex = Number(theme.replace('theme', '')) || 1;
         return themeIndex > 3;
@@ -29,8 +29,8 @@ export default function ThemeScript() {
       }
 
       const initialTheme = getThemePreference();
-      console.log("initialTheme", initialTheme);
-      setTheme(initialTheme);
-  `}</Script>
+      setTheme(initialTheme);`,
+      }}
+    ></script>
   );
 }
