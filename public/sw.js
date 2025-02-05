@@ -2,7 +2,9 @@ const VERSION = 'v1';
 const FIREBASE_VERSION = '9.22.0';
 
 importScripts(`https://www.gstatic.com/firebasejs/${FIREBASE_VERSION}/firebase-app-compat.js`);
-importScripts(`https://www.gstatic.com/firebasejs/${FIREBASE_VERSION}/firebase-messaging-compat.js`);
+importScripts(
+  `https://www.gstatic.com/firebasejs/${FIREBASE_VERSION}/firebase-messaging-compat.js`,
+);
 
 // Initialize the Firebase app in the service worker by passing in
 // your app's Firebase config object.
