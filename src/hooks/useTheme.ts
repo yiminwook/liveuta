@@ -1,3 +1,4 @@
+import { THEME_STORAGE_KEY } from '@/components/config/ThemeScript';
 import { useAppCtx } from '@/stores/app';
 import { TTheme } from '@/types';
 import { isDarkModeEnabled } from '@/utils/helper';
@@ -17,15 +18,15 @@ const useTheme = () => {
   const setAttribute = (theme: TTheme) => {
     const isDarkMode = isDarkModeEnabled(theme);
     document.documentElement.setAttribute('color', theme);
-    // document.documentElement.setAttribute(
-    //   'data-mantine-color-scheme',
-    //   isDarkMode ? 'dark' : 'light',
-    // );
+    document.documentElement.setAttribute(
+      'data-mantine-color-scheme',
+      isDarkMode ? 'dark' : 'light',
+    );
   };
 
   const setTheme = (theme: TTheme) => {
     // setCookie(theme);
-    localStorage.setItem('theme', theme);
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
     setAttribute(theme);
     setThemeStore(theme);
   };
