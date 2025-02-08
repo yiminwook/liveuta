@@ -17,7 +17,7 @@ import { TContentsData } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
-import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import Image from 'next/image';
@@ -28,11 +28,11 @@ import css from './page.module.scss';
 
 type Props = {
   coverImgUrl: string;
-  session: Session | null;
   recentChannels: TYChannelsData[];
 };
 
-export default function Client({ session, coverImgUrl, recentChannels }: Props) {
+export default function Client({ coverImgUrl, recentChannels }: Props) {
+  const session = useSession().data;
   const [query, setQuery] = useState('');
   const router = useRouter();
   const modalStore = useSetModalStore();

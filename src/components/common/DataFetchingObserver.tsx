@@ -3,25 +3,23 @@ import useScheduleStatus from '@/hooks/useScheduleStatus';
 import { TMemberInfo } from '@/libraries/oracleDB/auth/service';
 import { useSetModalStore } from '@/stores/modal';
 import { useIsFetching, useIsMutating, useQuery } from '@tanstack/react-query';
-import { Session } from 'next-auth';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 import AlertModal from './modal/AlertModal';
 
-type Props = {
-  session: Session | null;
-};
+type Props = {};
 
-export default function DataFetchingObserver({ session }: Props) {
+export default function DataFetchingObserver({}: Props) {
+  const session = useSession().data;
   const t = useTranslations('global.dataFetchingObserver');
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
   const status = useScheduleStatus();
   const modalActions = useSetModalStore();
 
-  const { data, error } = useQuery({
+  const { error } = useQuery({
     queryKey: ['memberInfo'],
     queryFn: () =>
       fetch(process.env.NEXT_PUBLIC_SITE_URL + '/api/v1/member', {

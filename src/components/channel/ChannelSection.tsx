@@ -4,15 +4,17 @@ import ChannelCard from '@/components/common/channelCard/ChannelCard';
 import useCachedData from '@/hooks/useCachedData';
 import { TYChannelsData } from '@/types/api/youtube';
 import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import css from './Home.module.scss';
 
 type ChannelSectionProps = {
   contents: TYChannelsData[];
-  session: Session | null;
 };
 
-export default function ChannelSection({ contents, session }: ChannelSectionProps) {
+export default function ChannelSection({ contents }: ChannelSectionProps) {
+  const session = useSession().data;
   const { whiteList } = useCachedData({ session });
+
   return (
     <section className={css.channelSection}>
       {contents.map((content) => (

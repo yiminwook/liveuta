@@ -20,6 +20,6 @@ export default function UnAuthorized({ children, fallback }: Props) {
   }, [session.status]);
 
   if (session.status === 'loading') return <>{fallback}</>;
-  if (session.status === 'unauthenticated') return null;
+  if (session.status === 'authenticated') return null;
   return <>{children}</>;
 }

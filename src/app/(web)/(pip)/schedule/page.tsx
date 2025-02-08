@@ -1,6 +1,5 @@
 import Background from '@/components/common/background/Background';
 import Home from '@/components/schedule/Home';
-import { auth } from '@/libraries/nextAuth';
 import { scheduleDto } from '@/types/dto';
 import { getCookies } from '@/utils/getCookie';
 import { redirect } from 'next/navigation';
@@ -14,11 +13,7 @@ type Props = {
 };
 
 export default async function Page(props: Props) {
-  const [searchParams, cookies, session] = await Promise.all([
-    props.searchParams,
-    getCookies(),
-    auth(),
-  ]);
+  const [searchParams, cookies] = await Promise.all([props.searchParams, getCookies()]);
 
   const dto = scheduleDto.parse({
     query: searchParams.q,
@@ -27,13 +22,9 @@ export default async function Page(props: Props) {
     isFavorite: searchParams.isFavorite,
   });
 
-  if (dto.isFavorite && !session) {
-    redirect('/login');
-  }
-
   return (
     <Background tile>
-      <Home scheduleDto={dto} session={session} />
+      <Home scheduleDto={dto} />
     </Background>
   );
 }

@@ -1,6 +1,5 @@
 import { Provider } from '@/types/nextAuth';
 import Discord, { DiscordProfile } from '@auth/core/providers/discord';
-import * as Sentry from '@sentry/nextjs';
 import jwt from 'jsonwebtoken';
 import NextAuth, { User } from 'next-auth';
 import Google, { GoogleProfile } from 'next-auth/providers/google';
@@ -95,7 +94,6 @@ export const { handlers, auth, signIn } = NextAuth({
 
           return payload;
         } catch (e) {
-          Sentry.captureException(e);
           return generateErrorObj('google', e);
         }
       },
@@ -132,7 +130,6 @@ export const { handlers, auth, signIn } = NextAuth({
 
           return payload;
         } catch (e) {
-          Sentry.captureException(e);
           return generateErrorObj('kakao', e);
         }
       },
@@ -170,7 +167,6 @@ export const { handlers, auth, signIn } = NextAuth({
 
           return payload;
         } catch (e) {
-          Sentry.captureException(e);
           return generateErrorObj('discord', e);
         }
       },

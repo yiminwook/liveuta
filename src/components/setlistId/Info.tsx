@@ -14,6 +14,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import cx from 'classnames';
 import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
@@ -25,10 +26,10 @@ type InfoProps = {
   setlist: Setlist;
   channel: ChannelDatesetItem;
   icon: string;
-  session: Session | null;
 };
 
-export default function Info({ setlist, channel, icon, session }: InfoProps) {
+export default function Info({ setlist, channel, icon }: InfoProps) {
+  const session = useSession().data;
   const router = useRouter();
   const queryClient = useQueryClient();
   const videoUrl = generateVideoUrl(setlist.videoId);
@@ -91,7 +92,8 @@ export default function Info({ setlist, channel, icon, session }: InfoProps) {
                 if (confirm(t('deleteConfirm')))
                   mutateDelete.mutate({ session, videoId: setlist.videoId });
               }}
-              disabled={mutateDelete.isPending}
+              loading={mutateDelete.isPending}
+              disabled={!session}
             >
               <span className={css.letterWide}>삭제</span>
             </Button>

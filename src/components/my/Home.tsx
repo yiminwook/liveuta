@@ -2,18 +2,17 @@
 import useCachedData from '@/hooks/useCachedData';
 import FasStar from '@icons/fa-solid/Star';
 import MdiBlock from '@icons/mdi/Block';
-import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import Background from '../common/background/Background';
 import Blacklist from './Blacklist';
 import css from './Home.module.scss';
 import Whitelist from './Whitelist';
 
-type HomeProps = {
-  session: Session;
-};
+type HomeProps = {};
 
-export default function Home({ session }: HomeProps) {
+export default function Home({}: HomeProps) {
+  const session = useSession().data!;
   const { whiteList, channelList, blackList } = useCachedData({ session });
   const t = useTranslations('my');
 

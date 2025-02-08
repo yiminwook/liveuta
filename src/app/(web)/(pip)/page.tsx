@@ -1,12 +1,10 @@
 import Footer from '@/components/common/Footer';
 import { TYChannelReturn } from '@/libraries/mongoDB/channels';
-import { auth } from '@/libraries/nextAuth';
 import { TMetadata } from '@/types';
 import Client from './page.client';
 
 export default async function Page() {
-  const [session, metadata, recentChannelData] = await Promise.all([
-    auth(),
+  const [metadata, recentChannelData] = await Promise.all([
     fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/metadata`, {
       next: { revalidate: 3600, tags: ['metadata'] },
     })
@@ -22,11 +20,7 @@ export default async function Page() {
 
   return (
     <>
-      <Client
-        coverImgUrl={metadata.cover_image_url}
-        session={session}
-        recentChannels={recentChannelData.contents}
-      />
+      <Client coverImgUrl={metadata.cover_image_url} recentChannels={recentChannelData.contents} />
       <Footer />
     </>
   );

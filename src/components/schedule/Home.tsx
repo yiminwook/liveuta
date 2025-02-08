@@ -3,9 +3,10 @@ import useCachedData from '@/hooks/useCachedData';
 import { useSchedule } from '@/hooks/useSchedule';
 import { TScheduleDto } from '@/types/dto';
 import { addEscapeCharacter } from '@/utils/regexp';
-import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
-import { useMemo } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useMemo } from 'react';
 import css from './Home.module.scss';
 import ScheduleNav from './ScheduleNav';
 import ScheduleSection from './ScheduleSection';
@@ -14,12 +15,13 @@ const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
 
 type HomeProps = {
   scheduleDto: TScheduleDto;
-  session: Session | null;
 };
 
-export default function Home({ scheduleDto, session }: HomeProps) {
+export default function Home({ scheduleDto }: HomeProps) {
+  const session = useSession().data;
   const { whiteList, channelList, blackList } = useCachedData({ session });
   const { data, isPending } = useSchedule({ enableAutoSync: true });
+  const router = useRouter();
 
   const proceedScheduleData = useMemo(() => {
     if (!data) {
@@ -81,6 +83,12 @@ export default function Home({ scheduleDto, session }: HomeProps) {
       },
     };
   }, [data, scheduleDto, whiteList, blackList, channelList]);
+
+  useEffect(() => {
+    if (scheduleDto.isFavorite && !session) {
+      router.replace('/login');
+    }
+  }, []);
 
   return (
     <>
