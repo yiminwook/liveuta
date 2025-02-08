@@ -2,7 +2,7 @@
 'use client';
 import { useSetAppStore } from '@/stores/app';
 import { Avatar } from '@mantine/core';
-import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef } from 'react';
@@ -10,11 +10,10 @@ import { isMobile } from 'react-device-detect';
 import DesktopNav from './DesktopNav';
 import css from './Header.module.scss';
 
-type HeaderProps = {
-  session: Session | null;
-};
+type HeaderProps = {};
 
-export default function Header({ session }: HeaderProps) {
+export default function Header({}: HeaderProps) {
+  const session = useSession().data;
   const gnbRef = useRef<HTMLDivElement>(null);
   const actions = useSetAppStore();
   const t = useTranslations('global.header');

@@ -26,7 +26,7 @@ export default function RankingTable({ title, data, onFavorite, onBlock }: Props
             <div className={css.rank}>{index + 1 + '.'}</div>
             <div className={css.thumbnail}>
               <Image
-                src={content.snippet?.thumbnails?.default?.url ?? '/loading.png'}
+                src={content.snippet?.thumbnails?.high?.url ?? '/loading.png'}
                 alt={content.nameKor}
                 className={css.image}
                 fill

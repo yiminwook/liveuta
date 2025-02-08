@@ -1,7 +1,6 @@
 import Background from '@/components/common/background/Background';
 import { ITEMS_PER_PAGE } from '@/constants';
 import { TChannelDto, TYChannelReturn } from '@/libraries/mongoDB/channels';
-import { auth } from '@/libraries/nextAuth';
 import ChannelSection from './ChannelSection';
 import css from './Home.module.scss';
 import Nav from './Nav';
@@ -12,8 +11,7 @@ type HomeProps = {
 };
 
 export default async function Home({ channelDto }: HomeProps) {
-  const [session, YChannelData] = await Promise.all([
-    auth(),
+  const [YChannelData] = await Promise.all([
     fetch(
       `${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/youtube-channel?page=${channelDto.page}&query=${channelDto.query || ''}&size=${ITEMS_PER_PAGE}&sort=${channelDto.sort}`,
       { next: { revalidate: 1800, tags: ['channel'] } },
@@ -26,7 +24,7 @@ export default async function Home({ channelDto }: HomeProps) {
     <Background>
       <div className={css.inner}>
         <Nav />
-        <ChannelSection contents={YChannelData.contents} session={session} />
+        <ChannelSection contents={YChannelData.contents} />
         <PaginationBox
           totalPage={YChannelData.totalPage}
           currentPage={channelDto.page}

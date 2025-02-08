@@ -47,10 +47,10 @@
 
 .thumbnail {
   position: relative;
-  width: 120px;
+  width: 100px;
   flex-shrink: 0;
   border-radius: 0.25rem;
-  aspect-ratio: 2 / 1;
+  aspect-ratio: 1 / 1;
 
   .image {
     object-fit: cover;

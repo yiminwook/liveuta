@@ -2,7 +2,6 @@ import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
 import { getMember } from '@/libraries/oracleDB/auth/service';
 import parseAccessToken from '@/utils/parseAccessToken';
-import * as Sentry from '@sentry/nextjs';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
@@ -20,7 +19,6 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ data });
   } catch (error) {
-    Sentry.captureException(error);
     const { status, message } = errorHandler(error);
     return NextResponse.json({ message }, { status });
   }

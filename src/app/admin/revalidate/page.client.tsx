@@ -1,15 +1,15 @@
 'use client';
 import { Box, Button, Divider, Text } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
-import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import React from 'react';
 import { toast } from 'sonner';
 
-type Props = {
-  session: Session;
-};
+type Props = {};
 
 export default function Client({}: Props) {
+  const session = useSession().data!;
+
   const mutation = useMutation({
     mutationFn: (tag: string) =>
       fetch(`/api/v1/revalidate?tag=${tag}`).then(

@@ -5,6 +5,7 @@ import { Button, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { useEffect, useState } from 'react';
@@ -14,10 +15,10 @@ import css from './Desc.module.scss';
 type DescProps = {
   videoId: string;
   description: string;
-  session: Session | null;
 };
 
-export default function Desc({ session, videoId, description }: DescProps) {
+export default function Desc({ videoId, description }: DescProps) {
+  const session = useSession().data;
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState('');
@@ -71,11 +72,13 @@ export default function Desc({ session, videoId, description }: DescProps) {
     const description = desc.trim();
 
     if (!session) {
-      return toast.warning(t('notLoggedInError'));
+      toast.warning(t('notLoggedInError'));
+      return;
     }
 
     if (!description) {
-      return toast.warning(t('noContentError'));
+      toast.warning(t('noContentError'));
+      return;
     }
 
     mutateSetlist.mutate({
@@ -102,7 +105,8 @@ export default function Desc({ session, videoId, description }: DescProps) {
             variant="filled"
             color="red"
             onClick={handleCancel}
-            disabled={mutateSetlist.isPending}
+            loading={mutateSetlist.isPending}
+            disabled={!session}
           >
             {t('cancel')}
           </Button>
@@ -110,7 +114,8 @@ export default function Desc({ session, videoId, description }: DescProps) {
             type="submit"
             variant="default"
             data-variant="save"
-            disabled={mutateSetlist.isPending}
+            loading={mutateSetlist.isPending}
+            disabled={!session}
           >
             {t('save')}
           </Button>

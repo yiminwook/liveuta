@@ -2,14 +2,14 @@
 import CurrentMetadata from '@/components/adminMetadata/CurrentMetadata';
 import Form from '@/components/adminMetadata/Form';
 import { Divider } from '@mantine/core';
-import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import css from './page.module.scss';
 
-type Props = {
-  session: Session;
-};
+type Props = {};
 
-export default function Client({ session }: Props) {
+export default function Client() {
+  const session = useSession().data!;
+
   return (
     <div>
       <h2>메타데이터</h2>

@@ -1,6 +1,5 @@
 import character from '@/assets/image/character-5-150.png';
 import { getChannelById, parseChannel } from '@/libraries/mongoDB/channels';
-import { auth } from '@/libraries/nextAuth';
 import { getSetlistByVideoId } from '@/libraries/oracleDB/setlist/service';
 import { Divider } from '@mantine/core';
 import Image from 'next/image';
@@ -18,7 +17,6 @@ interface HomeProps {
 }
 
 export default async function Home({ params }: HomeProps) {
-  const session = await auth();
   const data = await getSetlistByVideoId(params.id);
   if (!data) notFound();
   const setlist = data.setlist;
@@ -41,12 +39,12 @@ export default async function Home({ params }: HomeProps) {
             <SetlistPlayer videoId={setlist.videoId} />
           </div>
           <div className={css.infoWrap}>
-            <Info setlist={setlist} channel={channel} icon={icon} session={session} />
+            <Info setlist={setlist} channel={channel} icon={icon} />
           </div>
         </section>
         <Divider className={css.divider} orientation="horizontal" />
         <section className={css.right}>
-          <Desc session={session} videoId={setlist.videoId} description={setlist.description} />
+          <Desc videoId={setlist.videoId} description={setlist.description} />
         </section>
       </div>
     </Background>

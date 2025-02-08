@@ -4,12 +4,13 @@ import useCachedData from '@/hooks/useCachedData';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
+import dayjs from '@/libraries/dayjs';
 import { TFeaturedDataAPIReturn } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
 import { combineYTData } from '@/utils/combineChannelData-v2';
 import { Button, ButtonGroup } from '@mantine/core';
 import classNames from 'classnames';
-import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { toast } from 'sonner';
@@ -18,12 +19,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import css from './page.module.scss';
 
 type Props = {
-  session: Session | null;
   featuredData: TFeaturedDataAPIReturn;
 };
 
-export default function Client({ session, featuredData }: Props) {
-  const { channelList, blackList, whiteList } = useCachedData({ session });
+export default function Client({ featuredData }: Props) {
+  const session = useSession().data;
+  const { channelList, whiteList } = useCachedData({ session });
   const mutateBlock = usePostBlacklist();
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
@@ -68,7 +69,12 @@ export default function Client({ session, featuredData }: Props) {
 
   return (
     <div className={css.container}>
-      <p className={classNames('essential', css.essential)}>{t('essential')}</p>
+      <p className={classNames('essential', css.essential)}>
+        {t('essential')}&nbsp;
+        <time suppressHydrationWarning>
+          ({dayjs(featuredData.lastUpdateAt).format('YYYY-MM-DD HH:mm')})
+        </time>
+      </p>
       <div>
         <ButtonGroup>
           <Button className="swiper-prev" size="xs">

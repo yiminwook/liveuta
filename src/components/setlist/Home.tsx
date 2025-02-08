@@ -1,6 +1,7 @@
+'use client';
 import Background from '@/components/common/background/Background';
-import { auth } from '@/libraries/nextAuth';
-import { getTranslations } from 'next-intl/server';
+import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 import css from './Home.module.scss';
 import Nav from './Nav';
 import Table from './Table';
@@ -13,9 +14,9 @@ interface HomeProps {
   };
 }
 
-export default async function Home({ searchParams }: HomeProps) {
-  const session = await auth();
-  const t = await getTranslations('setlist');
+export default function Home({ searchParams }: HomeProps) {
+  const session = useSession().data;
+  const t = useTranslations('setlist');
 
   const parseSearchParams = {
     query: searchParams.query || '',

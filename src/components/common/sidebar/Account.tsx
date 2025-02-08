@@ -1,12 +1,13 @@
 'use client';
+import withSession from '@/components/config/withSession';
 import useStopPropagation from '@/hooks/useStopPropagation';
-import { usePathname } from 'next/navigation';
 import { useAppCtx } from '@/stores/app';
 import { Avatar, CloseButton } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import classnames from 'classnames';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 import { RemoveScroll } from 'react-remove-scroll';
@@ -18,7 +19,8 @@ import css from './Sidebar.module.scss';
 interface AccountSidebarProps {
   session: Session;
 }
-export default function AccountSidebar({ session }: AccountSidebarProps) {
+
+export default withSession<AccountSidebarProps>(function AccountSidebar({ session }) {
   const pathname = usePathname();
   const appCtx = useAppCtx();
   const isShow = useStore(appCtx, (state) => state.isShowAcctSidebar);
@@ -107,4 +109,4 @@ export default function AccountSidebar({ session }: AccountSidebarProps) {
       </aside>
     </RemoveScroll>
   );
-}
+});

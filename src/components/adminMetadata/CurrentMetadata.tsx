@@ -16,9 +16,9 @@ function Error({ error, resetErrorBoundary }: FallbackProps) {
 function Loading() {
   return (
     <div>
-      <Skeleton height={32} mt={8} radius="xl" />
-      <Skeleton height={32} mt={8} radius="xl" />
-      <Skeleton height={32} mt={8} radius="xl" />
+      <Skeleton height={32} mt={8} radius="md" />
+      <Skeleton height={32} mt={8} radius="md" />
+      <Skeleton height={32} mt={8} radius="md" />
     </div>
   );
 }
