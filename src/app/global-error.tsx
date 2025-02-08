@@ -1,9 +1,5 @@
 'use client';
-import character from '@/assets/image/character-6.png';
 import * as Sentry from '@sentry/nextjs';
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect } from 'react';
 
 /*
@@ -16,50 +12,96 @@ import { useEffect } from 'react';
  *
  * style 적용 가능한 방안
  *
- * 1. module.css / module.scss 사용, global.scss를 global.module.scss로 변경 또는 독립된 global-error.module.scss 스타일 생성
- * 2. global.scss build 후 public 폴더 하위로 이동 css 파일 경로를 <Link href="/global.css" rel="stylesheet"/>로 연결 (과정이 복잡)
- * 3. inline style 사용
- * 4. style 태그 사용   ex) <style> body {} </style>
+ * 1. global.scss build 후 public 폴더 하위로 이동 css 파일 경로를 <Link href="/global.css" rel="stylesheet"/>로 연결 (과정이 복잡)
+ * 2. inline style 사용
+ * 3. style 태그 사용   ex) <style> body {} </style>
  */
 
+// GlobalError 컴포넌트는 번역을 하지않음 기본적으로 영어로
 export default function GlobalError({
   error,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  const t = useTranslations('error.globalError');
-
   useEffect(() => {
     Sentry.captureException(error);
   }, [error]);
 
   return (
     <html>
-      <title>500: Server Error</title>
+      <head>
+        <style>
+          {`
+            #app {
+              height: 100%;
+              width: 100%;
+              flex-direction: column;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 20px;
+              text-align: center;
+              background-color: #f7f7f7;
+            }
+
+            .title {
+              font-size: 2rem;
+              color: #e53e3e;
+              margin-bottom: 1rem;
+            }
+
+            .subtitle {
+              color: #4a5568;
+              margin-bottom: 1.5rem;
+            }
+
+            .refreshButton {
+              background-color: #3182ce;
+              color: white;
+              padding: 0.5rem 1rem;
+              border-radius: 0.375rem;
+              border: none;
+              cursor: pointer;
+              font-size: 1rem;
+            }
+
+            .detailBox {
+              margin-top: 2rem;
+              padding: 1rem;
+              background-color: #fff;
+              border-radius: 0.5rem;
+              max-width: 600px;
+
+
+            }
+
+            .detailBox p {
+              color: #e53e3e;
+              font-weight: bold;
+            }
+
+            .detailBox pre {
+              white-space: pre-wrap;
+              word-break: break-all;
+              color: #4a5568;
+            }
+          `}
+        </style>
+      </head>
       <body>
-        <div>
-          <div>
-            <div>
-              <Image
-                alt={t('imageAlt')}
-                src={character}
-                width={200}
-                height={300}
-                unoptimized={true}
-              />
+        <div id="app">
+          <h1 className="title">Something went wrong</h1>
+          <p className="subtitle">Please refresh the page or try again later</p>
+          {process.env.NODE_ENV === 'development' && (
+            <div className="detailBox">
+              <p>Error details:</p>
+              <pre>{error.message}</pre>
             </div>
-            <div>
-              <div>
-                <h1>500: Server Error</h1>
-                <h2>{error.message}</h2>
-              </div>
-              <div>
-                {/* next/link 사용 */}
-                <Link href="/">{t('linkToHome')}</Link>
-              </div>
-            </div>
-          </div>
+          )}
+          <button onClick={() => window.location.reload()} className="refreshButton">
+            Refresh Page
+          </button>
         </div>
       </body>
     </html>

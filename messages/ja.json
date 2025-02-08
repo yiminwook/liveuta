@@ -10,11 +10,6 @@
       "imageAlt": "エラーが発生しました。",
       "retry": "再試行"
     },
-    "globalError": {
-      "title": "500: サーバーエラー",
-      "imageAlt": "エラーが発生しました。",
-      "linkToHome": "ホームに戻る"
-    },
     "notFound": {
       "title": "404: ページが見つかりません",
       "imageAlt": "ページが見つかりません。",

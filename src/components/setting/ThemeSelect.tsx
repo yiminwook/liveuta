@@ -1,9 +1,9 @@
 'use client';
-import useTheme from '@/hooks/useTheme';
+import { useAppCtx } from '@/stores/app';
 import { TTheme } from '@/types';
-import { gtagClick } from '@/utils/gtag';
 import { useTranslations } from 'next-intl';
 import { MouseEvent } from 'react';
+import { useStore } from 'zustand';
 import settingCss from './Setting.module.scss';
 import css from './ThemeSelect.module.scss';
 
@@ -23,8 +23,9 @@ function ThemeModalButton({ primaryColor, secondaryColor }: ThemeModalButtonProp
 }
 
 export default function ThemeSelect() {
-  const { setTheme } = useTheme();
   const t = useTranslations('settings.theme');
+  const appCtx = useAppCtx();
+  const setTheme = useStore(appCtx, (state) => state.actions.setTheme);
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
@@ -32,13 +33,6 @@ export default function ThemeSelect() {
     const selectedTheme = button?.dataset.theme as TTheme | undefined;
 
     if (selectedTheme === undefined) return;
-
-    gtagClick({
-      target: 'themeSelect',
-      content: selectedTheme,
-      detail: selectedTheme,
-      action: 'themeChange',
-    });
 
     setTheme(selectedTheme);
   };

@@ -14,9 +14,9 @@ import Configs from '@/components/config';
 import DefaultHead from '@/components/config/DefaultHead';
 import GlobalScrollbar from '@/components/config/GlobalScrollbar';
 import GoogleTagManager from '@/components/config/GoogleTagManager';
+import ThemeScript from '@/components/config/ThemeScript';
 import { DEFAULT_METADATA } from '@/constants/metaData';
 import { getCookies } from '@/utils/getCookie';
-import { isDarkModeEnabled } from '@/utils/helper';
 import { Metadata, Viewport } from 'next';
 import { getLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
@@ -29,8 +29,6 @@ type Props = {
 
 export default async function Layout({ children }: Props) {
   const [cookies, header, locale] = await Promise.all([getCookies(), headers(), getLocale()]);
-  const isDarkMode = isDarkModeEnabled(cookies.theme);
-  const colorScheme = isDarkMode ? 'dark' : 'light';
   const { os } = userAgent({ headers: header });
   const isIos = os.name === 'iOS' || os.name === 'iPadOS';
   const overlayScrollbarInitialize = {
@@ -40,19 +38,21 @@ export default async function Layout({ children }: Props) {
   return (
     <html
       lang={locale}
-      color={cookies.theme}
       {...(isIos ? {} : overlayScrollbarInitialize)}
-      data-mantine-color-scheme={colorScheme} // mantine-theme-ssr
+      // color={cookies.theme}
+      // data-mantine-color-scheme={colorScheme} // mantine-theme-ssr
+      suppressHydrationWarning
     >
       <head>
         <DefaultHead />
       </head>
       <body {...(isIos ? {} : overlayScrollbarInitialize)}>
-        <Configs cookies={cookies} colorScheme={colorScheme} locale={locale}>
+        <Configs cookies={cookies} locale={locale}>
           {children}
         </Configs>
         <GoogleTagManager />
         {!isIos && <GlobalScrollbar />}
+        <ThemeScript />
       </body>
     </html>
   );

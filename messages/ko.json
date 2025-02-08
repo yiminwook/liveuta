@@ -10,11 +10,6 @@
       "imageAlt": "에러가 발생했습니다.",
       "retry": "재시도"
     },
-    "globalError": {
-      "title": "500: 서버 에러",
-      "imageAlt": "에러가 발생했습니다.",
-      "linkToHome": "홈으로 돌아가기"
-    },
     "notFound": {
       "title": "404: 페이지를 찾을 수 없음",
       "imageAlt": "페이지를 찾을 수 없습니다.",
