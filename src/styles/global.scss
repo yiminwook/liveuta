@@ -40,10 +40,16 @@ html {
   font-size: 16px; // root font-size
 }
 
-/* ----- Global styles ----- */
+html,
 body {
+  height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
+}
+
+/* ----- Global styles ----- */
+body {
   font-family: var(--mantine-font-family);
   font-size: var(--mantine-font-size-md);
   line-height: var(--mantine-line-height);

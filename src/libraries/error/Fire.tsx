@@ -9,7 +9,7 @@ export const typeErrorAPI = async () => {
   return data.map(() => '');
 };
 
-export default function Fire() {
+export default function Fire({ label = '에러 테스트' }: { label?: string }) {
   const [fire, setFire] = useState(false);
 
   // if (process.env.NODE_ENV === 'production') {
@@ -19,5 +19,12 @@ export default function Fire() {
 
   if (fire) throw new Error('에러테스트!!!');
 
-  return <div onClick={() => setFire(true)}>에러발생</div>;
+  return (
+    <div
+      style={{ backgroundColor: 'red', color: 'white', padding: '1rem' }}
+      onClick={() => setFire(true)}
+    >
+      {label}
+    </div>
+  );
 }
