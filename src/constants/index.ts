@@ -30,7 +30,7 @@ export const ORACLEDB_USER = 'admin';
 
 export const SETLIST_PAGE_SIZE = 15;
 
-export const ORIGIN = 'https://liveuta.vercel.app';
+export const ORIGIN = 'liveuta.vercel.app';
 
 export const PORTAL_ID = 'liveuta-portal';
 
