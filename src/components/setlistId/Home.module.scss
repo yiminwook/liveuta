@@ -50,6 +50,6 @@
     flex: 1;
     position: relative;
     padding: 0.5rem;
-    min-height: calc(100dvh - 3.5rem - 5rem);
+    min-height: util.calc-inner-height(100dvh);
   }
 }

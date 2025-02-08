@@ -83,8 +83,8 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
         onPause={() => handlePlay(false)}
         config={{
           youtube: {
+            // https://developers.google.com/youtube/iframe_api_reference?hl=ko#setPlaybackQuality
             playerVars: {
-              suggestedQuality: 'hd720',
               origin: ORIGIN,
               start: store.timeline, //시작하는 시간
             },

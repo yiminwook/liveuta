@@ -15,11 +15,11 @@ export default function Shorts({ url }: ShortsProps) {
     <ReactPlayer
       width="100%"
       height="100%"
+      style={{ overflow: 'hidden' }}
       url={url}
       config={{
         youtube: {
           playerVars: {
-            suggestedQuality: 'hd720',
             origin: ORIGIN,
           },
         },

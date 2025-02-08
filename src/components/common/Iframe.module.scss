@@ -2,7 +2,7 @@
   display: grid;
   place-items: center;
   position: relative;
-  height: calc(100dvh - 7.5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  height: util.calc-inner-height(100dvh);
   text-align: center;
 
   .inner {
