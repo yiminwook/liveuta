@@ -17,7 +17,6 @@ import GoogleTagManager from '@/components/config/GoogleTagManager';
 import ThemeScript from '@/components/config/ThemeScript';
 import { DEFAULT_METADATA } from '@/constants/metaData';
 import { getCookies } from '@/utils/getCookie';
-import { isDarkModeEnabled } from '@/utils/helper';
 import { Metadata, Viewport } from 'next';
 import { getLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
@@ -30,8 +29,6 @@ type Props = {
 
 export default async function Layout({ children }: Props) {
   const [cookies, header, locale] = await Promise.all([getCookies(), headers(), getLocale()]);
-  const isDarkMode = isDarkModeEnabled(cookies.theme);
-  const colorScheme = isDarkMode ? 'dark' : 'light';
   const { os } = userAgent({ headers: header });
   const isIos = os.name === 'iOS' || os.name === 'iPadOS';
   const overlayScrollbarInitialize = {
@@ -50,7 +47,7 @@ export default async function Layout({ children }: Props) {
         <DefaultHead />
       </head>
       <body {...(isIos ? {} : overlayScrollbarInitialize)}>
-        <Configs cookies={cookies} colorScheme={colorScheme} locale={locale}>
+        <Configs cookies={cookies} locale={locale}>
           {children}
         </Configs>
         <GoogleTagManager />

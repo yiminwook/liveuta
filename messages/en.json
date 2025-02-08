@@ -10,11 +10,6 @@
       "imageAlt": "An error has occurred.",
       "retry": "Retry"
     },
-    "globalError": {
-      "title": "500: Server Error",
-      "imageAlt": "An error has occurred.",
-      "linkToHome": "Return to Home"
-    },
     "notFound": {
       "title": "404: Page Not Found",
       "imageAlt": "The page could not be found.",
