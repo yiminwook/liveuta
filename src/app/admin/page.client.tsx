@@ -1,11 +1,10 @@
 'use client';
-import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 
-type Props = {
-  session: Session;
-};
+type Props = {};
 
-export default function Client({ session }: Props) {
+export default function Client({}: Props) {
+  const session = useSession().data!;
   return (
     <div>
       <h2>관리자 홈</h2>

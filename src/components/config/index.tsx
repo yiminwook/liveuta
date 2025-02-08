@@ -22,8 +22,7 @@ type ConfigsProps = {
 };
 
 export default async function Configs({ children, cookies, locale }: ConfigsProps) {
-  const [session, metadata] = await Promise.all([
-    auth(),
+  const [metadata] = await Promise.all([
     fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/metadata`, {
       next: { revalidate: 3600, tags: ['metadata'] },
     })
@@ -34,7 +33,7 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <NextAuth session={session}>
+      <NextAuth>
         <AppProvider
           initState={{
             defaultVideoId: metadata.default_video_id,

@@ -1,6 +1,6 @@
-import { auth } from '@/libraries/nextAuth';
+import Administrator from '@/components/config/Administrator';
+import Authorized from '@/components/config/Authorized';
 import { setRequestLocale } from 'next-intl/server';
-import { notFound } from 'next/navigation';
 import Client from './layout.client';
 
 type AdminLayoutProps = {
@@ -8,23 +8,13 @@ type AdminLayoutProps = {
 };
 
 export default async function Layout({ children }: AdminLayoutProps) {
-  const session = await auth();
-
-  if (!session) {
-    notFound();
-  }
-
-  // userLv
-  // 1 - Memember
-  // 2 - VIP Memember
-  if (session.user.userLv < 3) {
-    // 3 - Admin
-    // 4 - Collaborator
-    // 5 - Maintenance
-    notFound();
-  }
-
   setRequestLocale('ko');
 
-  return <Client>{children}</Client>;
+  return (
+    <Authorized>
+      <Administrator>
+        <Client>{children}</Client>
+      </Administrator>
+    </Authorized>
+  );
 }

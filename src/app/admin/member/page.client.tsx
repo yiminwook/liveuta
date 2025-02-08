@@ -1,12 +1,12 @@
 'use client';
 import { Divider } from '@mantine/core';
-import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 
-type Props = {
-  session: Session;
-};
+type Props = {};
 
 export default function Client({}: Props) {
+  const session = useSession().data!;
+
   return (
     <div>
       <h2>멤버관리</h2>
