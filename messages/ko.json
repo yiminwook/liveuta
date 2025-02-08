@@ -334,7 +334,7 @@
     "postDrawer": {
       "upload": "업로드",
       "uploadSetlist": "세트리 업로드",
-      "linkToCreateSetlist": "세트리 작성하서 가기"
+      "linkToCreateSetlist": "세트리 작성하러 가기"
     },
     "postForm": {
       "linkLabel": "유튜브 링크",

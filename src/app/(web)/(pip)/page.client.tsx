@@ -158,14 +158,13 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
         />
       </section>
 
-      {session && (
+      {session && !isPending && (
         <section className={css.favoriteSection}>
           <div className={css.favoriteNav}>
             <h2>🌟 {t('favorite')}</h2>
             <MoreButton href="/schedule?isFavorite=true" />
           </div>
           <ScheduleSlider
-            isLoading={isPending}
             contents={proceedScheduleData.favoriteContent}
             addAlarm={reservePush}
             openNewTab={openStream}

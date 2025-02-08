@@ -21,7 +21,7 @@ export default function ReactQuery({ children }: PropsWithChildren) {
         queries: {
           staleTime: 1000 * 60 * 3, // 3분
           gcTime: 1000 * 60 * 5, // 5분
-          refetchOnWindowFocus: true,
+          refetchOnWindowFocus: false,
           refetchOnReconnect: true,
           retry: 3,
           retryDelay: 1000 * 5, //5초

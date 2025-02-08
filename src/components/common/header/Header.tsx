@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 'use client';
 import { useSetAppStore } from '@/stores/app';
-import { Avatar } from '@mantine/core';
+import { Avatar, Skeleton } from '@mantine/core';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -13,7 +13,7 @@ import css from './Header.module.scss';
 type HeaderProps = {};
 
 export default function Header({}: HeaderProps) {
-  const session = useSession().data;
+  const { data: session, status } = useSession();
   const gnbRef = useRef<HTMLDivElement>(null);
   const actions = useSetAppStore();
   const t = useTranslations('global.header');
@@ -52,7 +52,13 @@ export default function Header({}: HeaderProps) {
           </Link>
           <div className={css.right}>
             <DesktopNav />
-            {session ? (
+            {status === 'loading' && <Skeleton height={40} circle />}
+            {status === 'unauthenticated' && (
+              <Link href="/login" className={css.loginBtn}>
+                {t('login')}
+              </Link>
+            )}
+            {status === 'authenticated' && (
               <button className={css.accountBtn} onClick={openAccountSidebar}>
                 <Avatar
                   src={session.user.image}
@@ -63,10 +69,6 @@ export default function Header({}: HeaderProps) {
                   name={session.user.email}
                 />
               </button>
-            ) : (
-              <Link href="/login" className={css.loginBtn}>
-                {t('login')}
-              </Link>
             )}
           </div>
         </nav>
