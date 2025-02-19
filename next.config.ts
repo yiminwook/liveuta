@@ -109,7 +109,7 @@ const SENTRY_BUILD_OPTIONS: SentryBuildOptions = {
   org: 'yisp',
   project: 'liveuta',
   authToken: process.env.SENTRY_AUTH_TOKEN,
-  telemetry: true,
+  telemetry: false, // Sentry 서비스 개선에 활용되지 않도록 설정
   autoInstrumentMiddleware: false,
   autoInstrumentAppDirectory: true,
   autoInstrumentServerFunctions: true,
