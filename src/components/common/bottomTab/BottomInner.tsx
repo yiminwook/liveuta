@@ -36,7 +36,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
     let timer: NodeJS.Timeout | null = null;
     let y = 0;
     return () => {
-      if (timer) clearTimeout(timer);
+      if (timer) return;
       setIsMoving(() => true);
       timer = setTimeout(() => {
         /** 문서 상단부터 뷰포트 상단까지의 높이 */
@@ -56,7 +56,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
         setWindowY(() => currentScrollY);
         setIsMoving(() => false);
         timer = null;
-      }, 500);
+      }, 1000);
     };
   }, []);
 
