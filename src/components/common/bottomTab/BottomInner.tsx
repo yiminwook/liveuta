@@ -8,7 +8,7 @@ import { UnstyledButton } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import css from './BottomInner.module.scss';
 
 enum Direction {
@@ -32,17 +32,18 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleScroll = useMemo(() => {
+  useEffect(() => {
     let timer: NodeJS.Timeout | null = null;
-    let y = 0;
-    return () => {
+    let prevY = 0;
+
+    const onScroll = () => {
       if (timer) return;
       setIsMoving(() => true);
       timer = setTimeout(() => {
         /** 문서 상단부터 뷰포트 상단까지의 높이 */
         const currentScrollY = window.scrollY;
-        let direction = currentScrollY > y ? Direction.down : Direction.up;
-        y = currentScrollY;
+        let direction = currentScrollY > prevY ? Direction.down : Direction.up;
+        prevY = currentScrollY;
 
         // 스크롤이 끝까지 내려갔는지 판단
         /** 현재 뷰포트의 높이 */
@@ -58,14 +59,22 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
         timer = null;
       }, 1000);
     };
+
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      if (timer) clearTimeout(timer);
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      // 페이지 이동시 초기화
+      setDirection(() => Direction.up);
+      setWindowY(() => 0);
+      setIsMoving(() => false);
     };
-  }, []);
+  }, [pathname]);
 
   const hideBottomTab = windowY > 56 && isMoving;
   const showTobButton = windowY > 56;
