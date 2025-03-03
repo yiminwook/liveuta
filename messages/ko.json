@@ -1,6 +1,7 @@
 {
   "hello": "안녕하세요",
   "dayjsTemplate": "YYYY년 MM월 DD일",
+  "dayjsScheduleTemplate": "M월 DD일 (ddd) A hh:mm",
   "error": {
     "errorPage": {
       "link": "에러가 발생했습니다"
@@ -420,7 +421,6 @@
     "addFavorite": "즐겨찾기에 추가",
     "removeFavorite": "즐겨찾기에서 제거",
     "block": "차단하기",
-
     "modified": "수정되었습니다",
     "notLoggedInError": "로그인 후 이용가능한 서비스입니다.",
     "editSuccess": "수정되었습니다.",

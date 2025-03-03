@@ -1,4 +1,5 @@
 'use client';
+import { ClientOnly } from '@/libraries/clientOnly';
 import dayjs from '@/libraries/dayjs';
 import { ChannelDatesetItem } from '@/libraries/mongoDB/channels';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
@@ -35,14 +36,6 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
   const t = useTranslations('setlistId.info');
-  const locale = useLocale();
-  const dayjsTemplate = useTranslations();
-
-  const broadcast = dayjs(setlist.broadcastAt)
-    .locale(locale)
-    .format(dayjsTemplate('dayjsTemplate'));
-  const create = dayjs(setlist.createdAt).locale(locale).format(dayjsTemplate('dayjsTemplate'));
-  const update = dayjs(setlist.updatedAt).locale(locale).format(dayjsTemplate('dayjsTemplate'));
   const actions = useSetPlayerStore();
 
   const handleLocation = (url: string) => {
@@ -54,7 +47,6 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
   };
 
   const mutateDelete = useMutation({
-    mutationKey: ['deleteSetlist'],
     mutationFn: async ({ session, videoId }: { session: Session; videoId: string }) => {
       const response = await axios.delete<DeleteSetlistRes>(`/api/v1/setlist/${videoId}`, {
         headers: { Authorization: `Bearer ${session.user.accessToken}` },
@@ -129,16 +121,42 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
           <p className={css.channelName}>{channel.nameKor}</p>
         </button>
         <br />
-        <div>
-          {t('streamDate')}: {broadcast}
-        </div>
-        <div>
-          {t('createDate')}: {create}
-        </div>
-        <div>
-          {t('lastModified')}: {update}
-        </div>
+        <ClientOnly>
+          <TimeBoxs
+            broadcastAt={setlist.broadcastAt}
+            createdAt={setlist.createdAt}
+            updatedAt={setlist.updatedAt}
+          />
+        </ClientOnly>
       </div>
     </div>
+  );
+}
+
+interface TimeBoxProps {
+  broadcastAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+function TimeBoxs({ broadcastAt, createdAt, updatedAt }: TimeBoxProps) {
+  const t = useTranslations();
+  const locale = useLocale();
+
+  const broadcast = dayjs(broadcastAt).locale(locale).format(t('dayjsTemplate'));
+  const create = dayjs(createdAt).locale(locale).format(t('dayjsTemplate'));
+  const update = dayjs(updatedAt).locale(locale).format(t('dayjsTemplate'));
+  return (
+    <>
+      <div>
+        {t('setlistId.info.streamDate')}: {broadcast}
+      </div>
+      <div>
+        {t('setlistId.info.createDate')}: {create}
+      </div>
+      <div>
+        {t('setlistId.info.lastModified')}: {update}
+      </div>
+    </>
   );
 }

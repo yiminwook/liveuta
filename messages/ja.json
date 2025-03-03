@@ -1,6 +1,7 @@
 {
   "hello": "こんにちは",
   "dayjsTemplate": "YYYY年 MM月 DD日",
+  "dayjsScheduleTemplate": "M月 DD日 (ddd) A hh:mm",
   "error": {
     "errorPage": {
       "link": "エラーが発生しました"
@@ -414,7 +415,6 @@
     "addFavorite": "お気に入りに追加",
     "removeFavorite": "お気に入りから削除",
     "block": "ブロック",
-
     "modified": "修正されました",
     "notLoggedInError": "ログイン後に利用可能なサービスです。",
     "editSuccess": "修正されました。",

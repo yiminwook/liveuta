@@ -3,7 +3,7 @@ import { generateChannelUrl } from '@/libraries/youtube/url';
 import { TContentsData } from '@/types/api/mongoDB';
 import { openWindow } from '@/utils/windowEvent';
 import cx from 'classnames';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import css from './Card.module.scss';
 import CardStatus from './CardStatus';
 
@@ -22,6 +22,7 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
 
   const channelUrl = generateChannelUrl(channelId);
   const locale = useLocale();
+  const t = useTranslations();
 
   const openChannel = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -44,7 +45,7 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
         {title}
       </p>
       <div className={css.time}>
-        <time>{dayjs(utcTime).locale(locale).format('M월 DD일 (ddd) A hh:mm')}</time>
+        <time>{dayjs(utcTime).locale(locale).format(t('dayjsScheduleTemplate'))}</time>
         <CardStatus isStream={isStream} interval={interval} viewer={viewer} />
       </div>
     </div>
