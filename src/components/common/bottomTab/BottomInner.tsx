@@ -56,7 +56,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
         setWindowY(() => currentScrollY);
         setIsMoving(() => false);
         timer = null;
-      }, 1000);
+      }, 500);
     };
   }, []);
 
