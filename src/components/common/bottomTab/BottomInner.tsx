@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import css from './BottomInner.module.scss';
+
 enum Direction {
   up = 'up',
   down = 'down',
@@ -23,6 +24,7 @@ type BottomInnerProps = {
 export default function BottomInner({ openDrawer }: BottomInnerProps) {
   const [direction, setDirection] = useState<Direction>(Direction.up);
   const [windowY, setWindowY] = useState(0);
+  const [isMoving, setIsMoving] = useState(false);
   const pathname = usePathname();
   const t = useTranslations('global.bottomTab.bottomInner');
 
@@ -34,9 +36,9 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
     let timer: NodeJS.Timeout | null = null;
     let y = 0;
     return () => {
-      if (timer) return;
+      if (timer) clearTimeout(timer);
+      setIsMoving(() => true);
       timer = setTimeout(() => {
-        timer = null;
         /** 문서 상단부터 뷰포트 상단까지의 높이 */
         const currentScrollY = window.scrollY;
         let direction = currentScrollY > y ? Direction.down : Direction.up;
@@ -52,7 +54,9 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
 
         setDirection(() => direction);
         setWindowY(() => currentScrollY);
-      }, 300);
+        setIsMoving(() => false);
+        timer = null;
+      }, 1000);
     };
   }, []);
 
@@ -63,7 +67,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
     };
   }, []);
 
-  const hideBottomTab = windowY > 56 && direction === Direction.down;
+  const hideBottomTab = windowY > 56 && isMoving;
   const showTobButton = windowY > 56;
 
   return (

@@ -69,8 +69,6 @@ export default function Client({ featuredData }: Props) {
     };
   }, [featuredData, channelList]);
 
-  console.log('combinedData', featuredData.lastUpdateAt);
-
   return (
     <div className={css.container}>
       <p className={classNames('essential', css.essential)}>

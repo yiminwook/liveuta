@@ -164,6 +164,7 @@
           .characterImage {
             position: absolute;
             width: min(350px, 100%);
+            transform: rotate(25deg);
             height: 350px;
             bottom: -50%;
             right: 0;

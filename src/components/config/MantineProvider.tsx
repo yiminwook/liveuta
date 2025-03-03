@@ -71,7 +71,6 @@ export default function MantineProvider({
   defaultColorScheme,
   locale,
 }: MantineProviderProps) {
-  console.log('locale', locale);
   return (
     <Provider
       classNamesPrefix="app" // ex) app-Button-root
