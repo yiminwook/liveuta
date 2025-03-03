@@ -47,7 +47,7 @@ function Success() {
       </Table.Thead>
       <Table.Tbody>
         {data.map((el) => (
-          <Table.Tr key={el.key}>
+          <Table.Tr key={el.key} styles={{ tr: { wordBreak: 'break-all' } }}>
             <Table.Td>{el.key}</Table.Td>
             <Table.Td>{el.value}</Table.Td>
           </Table.Tr>

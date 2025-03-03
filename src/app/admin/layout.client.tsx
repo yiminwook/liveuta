@@ -4,6 +4,7 @@ import { AppShell, Burger, Button, Flex, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import varialble from '@variable';
 import Link from 'next/link';
+import { MouseEvent } from 'react';
 import css from './layout.module.scss';
 
 type Props = {
@@ -11,7 +12,14 @@ type Props = {
 };
 
 export default function Client({ children }: Props) {
-  const [opened, { toggle }] = useDisclosure();
+  const [opened, { toggle, close }] = useDisclosure();
+
+  const onClickSidebarNav = (e: MouseEvent<HTMLDivElement>) => {
+    // event delegation
+    const target = e.target as HTMLElement;
+    const achor = target.closest('a');
+    if (achor) close();
+  };
 
   return (
     <AppShell
@@ -39,7 +47,7 @@ export default function Client({ children }: Props) {
           </Flex>
         </Flex>
       </AppShell.Header>
-      <AppShell.Navbar p="xs">
+      <AppShell.Navbar p="xs" onClick={onClickSidebarNav}>
         <NavItem direction="rtl" href="/admin" label="관리자 홈" />
         <NavItem direction="rtl" href="/admin/revalidate" label="캐시검증" />
         <NavItem direction="rtl" href="/admin/metadata" label="메타데이터" />

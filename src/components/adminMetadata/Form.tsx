@@ -65,6 +65,7 @@ export default function Form({ session }: Props) {
           flex={1}
           mr={14}
           label="홈 배너 이미지"
+          styles={{ description: { wordBreak: 'break-all' } }}
           description="ex) https://i.ytimg.com/vi/G8O3VXFoIHs/mqdefault.jpg"
           value={coverUrl}
           onChange={onChangeCoverUrl}
@@ -81,6 +82,7 @@ export default function Form({ session }: Props) {
           mr={14}
           label="플레이어 기본 VID"
           description="ex) https://www.youtube.com/watch?v=r0GUqAuM5Fo라면 r0GUqAuM5Fo만 입력"
+          styles={{ description: { wordBreak: 'break-all' } }}
           value={defaultVid}
           onChange={onChangeDefaultVid}
           disabled={mutation.isPending}

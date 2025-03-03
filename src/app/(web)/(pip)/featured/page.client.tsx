@@ -71,9 +71,7 @@ export default function Client({ featuredData }: Props) {
     <div className={css.container}>
       <p className={classNames('essential', css.essential)}>
         {t('essential')}&nbsp;
-        <time suppressHydrationWarning>
-          ({dayjs(featuredData.lastUpdateAt).format('YYYY-MM-DD HH:mm')})
-        </time>
+        <time>({dayjs(featuredData.lastUpdateAt).format('YYYY-MM-DD HH:mm')})</time>
       </p>
       <div>
         <ButtonGroup>
