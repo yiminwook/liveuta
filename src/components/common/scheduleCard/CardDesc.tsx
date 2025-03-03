@@ -1,7 +1,9 @@
+import dayjs from '@/libraries/dayjs';
 import { generateChannelUrl } from '@/libraries/youtube/url';
 import { TContentsData } from '@/types/api/mongoDB';
 import { openWindow } from '@/utils/windowEvent';
 import cx from 'classnames';
+import { useLocale } from 'next-intl';
 import css from './Card.module.scss';
 import CardStatus from './CardStatus';
 
@@ -16,9 +18,10 @@ type CardDescProps = {
  * 채널명 1줄, 제목 2줄, 시간 1줄
  */
 export default function CardDesc({ content, addStreamModifier }: CardDescProps) {
-  const { title, channelName, korTime, interval, isStream, viewer, channelId } = content;
+  const { title, channelName, utcTime, interval, isStream, viewer, channelId } = content;
 
   const channelUrl = generateChannelUrl(channelId);
+  const locale = useLocale();
 
   const openChannel = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -41,9 +44,7 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
         {title}
       </p>
       <div className={css.time}>
-        <time className={'kor'} title={korTime}>
-          {korTime}
-        </time>
+        <time>{dayjs(utcTime).locale(locale).format('M월 DD일 (ddd) A hh:mm')}</time>
         <CardStatus isStream={isStream} interval={interval} viewer={viewer} />
       </div>
     </div>

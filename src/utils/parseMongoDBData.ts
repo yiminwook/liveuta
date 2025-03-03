@@ -10,7 +10,7 @@ import { replaceParentheses } from '@/utils/regexp';
 
 export const parseMongoDBDocument = (doc: ContentDocumentWithDayjs): TContentsData => {
   try {
-    const { timestamp, korTime } = stringToTime(doc.ScheduledTime);
+    const { timestamp, utcTime } = stringToTime(doc.ScheduledTime);
     const interval = getInterval(timestamp);
 
     const replacedTitle = replaceParentheses(doc.Title);
@@ -20,8 +20,8 @@ export const parseMongoDBDocument = (doc: ContentDocumentWithDayjs): TContentsDa
       channelName: doc.ChannelName,
       videoId: doc.VideoId,
       channelId: doc.ChannelId,
-      timestamp: timestamp,
-      korTime: korTime,
+      timestamp,
+      utcTime,
       isStream: doc.broadcastStatus,
       interval,
       isVideo: doc.isVideo === 'TRUE' ? true : false,
@@ -70,7 +70,7 @@ export const parseAllData = (documents: ContentDocumentWithDayjs[]): TParseAllDa
 
   const daily: TContentsData[] = [];
   const all: TContentsData[] = [];
-  const yesterday = dayjs.tz().subtract(1, 'day').valueOf();
+  const yesterday = dayjs().subtract(1, 'day').valueOf();
 
   documents.forEach((doc) => {
     const isHide = doc.Hide;

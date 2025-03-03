@@ -2,7 +2,7 @@ import dayjs from '@/libraries/dayjs';
 import { HMS } from '@/types/time';
 
 export const getInterval = (scheduledTimeStamp: number): string => {
-  const nowTimeStamp = dayjs.tz().valueOf();
+  const nowTimeStamp = dayjs.valueOf();
 
   /** 분 */
   const interval = Math.trunc((scheduledTimeStamp - nowTimeStamp) / (1000 * 60));
@@ -23,9 +23,8 @@ export const getInterval = (scheduledTimeStamp: number): string => {
 
 export const stringToTime = (time: dayjs.Dayjs) => {
   const timestamp = time.valueOf();
-  const korTime = time.format('M월 DD일 (ddd) A hh:mm');
-
-  return { timestamp, korTime };
+  const utcTime = time.toDate();
+  return { timestamp, utcTime };
 };
 
 export const secondsToHMS = (seconds: number) => {

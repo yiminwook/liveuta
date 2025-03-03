@@ -22,7 +22,7 @@ export async function GET() {
 
     const scheduleData = scheduleDataRaw.map((doc) => ({
       ...doc,
-      ScheduledTime: dayjs.tz(doc.ScheduledTime),
+      ScheduledTime: dayjs(doc.ScheduledTime),
     }));
 
     const { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised

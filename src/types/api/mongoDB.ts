@@ -56,7 +56,7 @@ export type TContentsData = {
   channelId: string;
   timestamp: number;
   isStream: isStream;
-  korTime: string;
+  utcTime: Date;
   interval: string;
   isVideo: boolean;
   viewer: number;

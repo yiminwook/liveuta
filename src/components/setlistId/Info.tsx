@@ -15,7 +15,7 @@ import axios from 'axios';
 import cx from 'classnames';
 import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
 import { isMobile } from 'react-device-detect';
@@ -35,11 +35,14 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
   const t = useTranslations('setlistId.info');
+  const locale = useLocale();
   const dayjsTemplate = useTranslations();
 
-  const broadcast = dayjs(setlist.broadcastAt).format(dayjsTemplate('dayjsTemplate'));
-  const create = dayjs(setlist.createdAt).format(dayjsTemplate('dayjsTemplate'));
-  const update = dayjs(setlist.updatedAt).format(dayjsTemplate('dayjsTemplate'));
+  const broadcast = dayjs(setlist.broadcastAt)
+    .locale(locale)
+    .format(dayjsTemplate('dayjsTemplate'));
+  const create = dayjs(setlist.createdAt).locale(locale).format(dayjsTemplate('dayjsTemplate'));
+  const update = dayjs(setlist.updatedAt).locale(locale).format(dayjsTemplate('dayjsTemplate'));
   const actions = useSetPlayerStore();
 
   const handleLocation = (url: string) => {

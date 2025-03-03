@@ -4,6 +4,7 @@ import useCachedData from '@/hooks/useCachedData';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
+import { ClientOnly } from '@/libraries/clientOnly';
 import dayjs from '@/libraries/dayjs';
 import { TFeaturedDataAPIReturn } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
@@ -11,7 +12,7 @@ import { combineYTData } from '@/utils/combineChannelData-v2';
 import { Button, ButtonGroup } from '@mantine/core';
 import classNames from 'classnames';
 import { useSession } from 'next-auth/react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { toast } from 'sonner';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -29,6 +30,7 @@ export default function Client({ featuredData }: Props) {
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
   const t = useTranslations('featured');
+  const locale = useLocale();
 
   const handleFavorite = (content: TYChannelsData) => {
     if (!session) return toast.error(t('notLoggedInError'));
@@ -67,11 +69,17 @@ export default function Client({ featuredData }: Props) {
     };
   }, [featuredData, channelList]);
 
+  console.log('combinedData', featuredData.lastUpdateAt);
+
   return (
     <div className={css.container}>
       <p className={classNames('essential', css.essential)}>
         {t('essential')}&nbsp;
-        <time>({dayjs(featuredData.lastUpdateAt).format('YYYY-MM-DD HH:mm')})</time>
+        <ClientOnly>
+          <time>
+            ({dayjs(featuredData.lastUpdateAt).locale(locale).format('YYYY-MM-DD HH:mm')})
+          </time>
+        </ClientOnly>
       </p>
       <div>
         <ButtonGroup>

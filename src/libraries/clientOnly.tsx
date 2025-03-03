@@ -1,17 +1,17 @@
-import { useState, useEffect, FC } from 'react';
+import { useEffect, useState } from 'react';
 
-const clientOnly = <T extends object>(Component: FC<T>) => {
-  return function ClientComponent(props: T) {
-    const [hasMounted, setHasMounted] = useState(false);
+interface Props {
+  fallback?: React.ReactNode;
+  children: React.ReactNode;
+}
 
-    useEffect(() => {
-      setHasMounted(() => true);
-    }, []);
+export function ClientOnly({ fallback, children }: Props) {
+  const [hasMounted, setHasMounted] = useState(false);
 
-    if (hasMounted === false) return null;
+  useEffect(() => {
+    setHasMounted(() => true);
+  }, []);
 
-    return <Component {...props} />;
-  };
-};
-
-export default clientOnly;
+  if (hasMounted === false) return <>{fallback}</>;
+  return <>{children}</>;
+}

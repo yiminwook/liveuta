@@ -7,6 +7,8 @@ import { MantineProvider as Provider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
 import { THEME_STORAGE_KEY } from './ThemeScript';
 import 'dayjs/locale/ko';
+import 'dayjs/locale/en';
+import 'dayjs/locale/ja';
 
 function localStorageColorSchemeManager({
   key = 'mantine-color-scheme',
@@ -69,6 +71,7 @@ export default function MantineProvider({
   defaultColorScheme,
   locale,
 }: MantineProviderProps) {
+  console.log('locale', locale);
   return (
     <Provider
       classNamesPrefix="app" // ex) app-Button-root

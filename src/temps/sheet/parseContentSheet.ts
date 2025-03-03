@@ -17,7 +17,7 @@ export const parseSheetData = (value: ContentsRowType): TContentsData | undefine
       isVideo,
     ]: ContentsRowType = value;
     if (scheduledTime.length >= 18) {
-      const { timestamp, korTime } = stringToTime(dayjs.tz(scheduledTime));
+      const { timestamp, korTime } = stringToTime(dayjs(scheduledTime));
       const interval = getInterval(timestamp);
       const replacedThumbnailURL = thumbnailURL.replace(
         /(hqdefault|maxresdefault|sddefault|mqdefault|default)/i,
@@ -116,7 +116,7 @@ export const parseAllData = (data: sheets_v4.Schema$ValueRange): ParseAllDataRet
   let dailyVideo = 0;
   const all: SheetAPIReturntype['all']['contents'] = [];
   let allVideo = 0;
-  const yesterday = dayjs.tz().subtract(1, 'day').valueOf();
+  const yesterday = dayjs().subtract(1, 'day').valueOf();
 
   dataValue.forEach((value) => {
     const isHide = value[5];

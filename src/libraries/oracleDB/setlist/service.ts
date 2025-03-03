@@ -33,9 +33,9 @@ const parseSetlistRow = (row: SetlistRow): Setlist => ({
   videoId: row[0],
   title: row[7],
   description: row[1],
-  createdAt: dayjs.tz(row[3]).toISOString(),
-  updatedAt: dayjs.tz(row[4]).toISOString(),
-  broadcastAt: dayjs.tz(row[6]).toISOString(),
+  createdAt: dayjs(row[3]).toISOString(),
+  updatedAt: dayjs(row[4]).toISOString(),
+  broadcastAt: dayjs(row[6]).toISOString(),
 });
 
 export const getSetlistByVideoId = withOracleConnection(async (connection, videoId: string) => {
@@ -145,7 +145,7 @@ export const postSetlist = withOracleConnection(
     },
   ) => {
     try {
-      const nonullableBroadcastAt = dayjs.tz(arg.broadcastAt || undefined).toDate();
+      const nonullableBroadcastAt = dayjs(arg.broadcastAt || undefined).toDate();
 
       await connection.execute(sql.POST_SETLIST, [
         arg.videoId,
@@ -183,7 +183,7 @@ export const updateSetlist = withOracleConnection(
     },
   ) => {
     try {
-      const nonullableBroadcastAt = dayjs.tz(arg.broadcastAt || undefined).toDate();
+      const nonullableBroadcastAt = dayjs(arg.broadcastAt || undefined).toDate();
 
       await connection.execute(sql.UPDATE_SETLIST, [
         arg.title,
