@@ -8,85 +8,79 @@ import { UnstyledButton } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import css from './BottomInner.module.scss';
-
-enum Direction {
-  up = 'up',
-  down = 'down',
-  end = 'end',
-}
 
 type BottomInnerProps = {
   openDrawer: () => void;
 };
 
 export default function BottomInner({ openDrawer }: BottomInnerProps) {
-  const [direction, setDirection] = useState<Direction>(Direction.up);
-  const [windowY, setWindowY] = useState(0);
-  const [isMoving, setIsMoving] = useState(false);
   const pathname = usePathname();
   const t = useTranslations('global.bottomTab.bottomInner');
+  const tabRef = useRef<HTMLDivElement>(null!);
+  const topButtonRef = useRef<HTMLButtonElement>(null!);
 
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   useEffect(() => {
-    let timer: NodeJS.Timeout | null = null;
+    /** 이전 스크롤 위치 저장 */
     let prevY = 0;
+    /** 이전 스크롤 위치와 현재 스크롤 위치의 차이 */
+    let moveY = 0;
+    /** 이동거리 누적 */
+    let translateY = 0;
 
     const onScroll = () => {
-      if (timer) return;
-      setIsMoving(() => true);
-      timer = setTimeout(() => {
-        /** 문서 상단부터 뷰포트 상단까지의 높이 */
-        const currentScrollY = window.scrollY;
-        let direction = currentScrollY > prevY ? Direction.down : Direction.up;
-        prevY = currentScrollY;
+      /** 문서 상단부터 뷰포트 상단까지의 높이 */
+      const currentScrollY = window.scrollY;
+      /** 현재 뷰포트의 높이 */
+      const windowHeight = window.innerHeight;
+      /** 전체 문서의 높이 */
+      const documentHeight = document.documentElement.scrollHeight;
+      /** 탭의 높이 */
+      const height = tabRef.current.getBoundingClientRect().height;
 
-        // 스크롤이 끝까지 내려갔는지 판단
-        /** 현재 뷰포트의 높이 */
-        const windowHeight = window.innerHeight;
-        /** 전체 문서의 높이 */
-        const documentHeight = document.documentElement.scrollHeight;
-        const scrolledToBottom = windowHeight + currentScrollY >= documentHeight;
-        if (scrolledToBottom) direction = Direction.end;
+      const scrolledToBottom = windowHeight + currentScrollY >= documentHeight;
 
-        setDirection(() => direction);
-        setWindowY(() => currentScrollY);
-        setIsMoving(() => false);
-        timer = null;
-      }, 1000);
+      moveY = prevY - currentScrollY;
+      translateY -= moveY; // -= : 스크롤을 올릴 때, translateY가 증가한다.
+      prevY = currentScrollY;
+
+      if (window.scrollY <= height) {
+        // 스크롤 높이가 탭 높이보다 작을 때, 버튼을 숨긴다/
+        topButtonRef.current.style.visibility = 'hidden';
+      } else {
+        // 스크롤 높이가 탭 높이보다 클 때, 버튼이 보이게 한다.
+        topButtonRef.current.style.visibility = 'visible';
+      }
+
+      // 탭이 높이보다 더 아래로 내려가지 않도록 제한
+      if (translateY > height) translateY = height;
+      // 탭이 화면 위로 올라가지 않도록 제한
+      if (translateY < 0) translateY = 0;
+      // 스크롤이 끝까지 내려갔다면 탭이 보이게 한다.
+      if (scrolledToBottom) translateY = 0;
+
+      tabRef.current.style.transform = `translateY(${translateY}px)`;
     };
 
     window.addEventListener('scroll', onScroll);
     return () => {
-      if (timer) clearTimeout(timer);
       window.removeEventListener('scroll', onScroll);
     };
   }, []);
 
-  useEffect(() => {
-    return () => {
-      // 페이지 이동시 초기화
-      setDirection(() => Direction.up);
-      setWindowY(() => 0);
-      setIsMoving(() => false);
-    };
-  }, [pathname]);
-
-  const hideBottomTab = windowY > 56 && isMoving;
-  const showTobButton = windowY > 56;
-
   return (
-    <div className={css.inner} data-hidden={hideBottomTab}>
+    <div className={css.inner} ref={tabRef}>
       <UnstyledButton
         size="input-md"
         variant="transparent"
         className={css.topButton}
-        data-show={showTobButton}
         onClick={scrollUp}
+        ref={topButtonRef}
       >
         <RxPinTop width="2rem" height="2rem" />
       </UnstyledButton>
