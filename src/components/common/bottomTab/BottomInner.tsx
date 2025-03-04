@@ -8,7 +8,7 @@ import { UnstyledButton } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import css from './BottomInner.module.scss';
 
 type BottomInnerProps = {
@@ -22,7 +22,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
   const topButtonRef = useRef<HTMLButtonElement>(null!);
 
   const scrollUp = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
       /** 전체 문서의 높이 */
       const documentHeight = document.documentElement.scrollHeight;
       /** 탭의 높이 */
-      const height = tabRef.current.getBoundingClientRect().height;
+      const tabHeight = tabRef.current.getBoundingClientRect().height;
 
       const scrolledToBottom = windowHeight + currentScrollY >= documentHeight;
 
@@ -51,16 +51,18 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
       translateY -= moveY; // -= : 스크롤을 올릴 때, translateY가 증가한다.
       prevY = currentScrollY;
 
-      if (window.scrollY <= height) {
-        // 스크롤 높이가 탭 높이보다 작을 때, 버튼을 숨긴다/
+      if (window.scrollY <= tabHeight) {
+        // 스크롤 높이가 탭 높이보다 작을 때, 버튼을 숨긴다
         topButtonRef.current.style.visibility = 'hidden';
+        // 모바일 브라우저 상단(URL부분)이 내려오면서 아래로 스크롤되어 translateY가 0보다 커지는걸 방지
+        translateY = 0;
       } else {
         // 스크롤 높이가 탭 높이보다 클 때, 버튼이 보이게 한다.
         topButtonRef.current.style.visibility = 'visible';
       }
 
       // 탭이 높이보다 더 아래로 내려가지 않도록 제한
-      if (translateY > height) translateY = height;
+      if (translateY > tabHeight) translateY = tabHeight;
       // 탭이 화면 위로 올라가지 않도록 제한
       if (translateY < 0) translateY = 0;
       // 스크롤이 끝까지 내려갔다면 탭이 보이게 한다.
