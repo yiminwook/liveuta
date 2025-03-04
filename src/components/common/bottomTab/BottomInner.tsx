@@ -8,7 +8,7 @@ import { UnstyledButton } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import css from './BottomInner.module.scss';
 
 type BottomInnerProps = {
@@ -35,7 +35,9 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
 
     const onScroll = () => {
       /** 문서 상단부터 뷰포트 상단까지의 높이 */
-      const currentScrollY = window.scrollY;
+      const rawScrollY = window.scrollY;
+      /**  모바일에서 상단 바운스 때문에 scrollY가 음수가 되었다면 0으로 보정 */
+      const currentScrollY = rawScrollY < 0 ? 0 : rawScrollY;
       /** 현재 뷰포트의 높이 */
       const windowHeight = window.innerHeight;
       /** 전체 문서의 높이 */
