@@ -57,6 +57,7 @@ $sidebar-min-width: 32px;
   font-size: 0.85rem;
   display: flex;
   flex-direction: column;
+  row-gap: 5px;
 
   &:global(.loading) {
     justify-content: center;
@@ -68,13 +69,15 @@ $sidebar-min-width: 32px;
   }
 }
 
+
+
 .listItem {
   padding: 10px;
   border-radius: 10px;
   transition: background-color 0.5s ease;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.05);
   }
 
   time {
@@ -84,6 +87,12 @@ $sidebar-min-width: 32px;
   .title {
     margin: 0;
     @include util.text-line(2, 1.2);
+  }
+}
+
+@include util.dark { 
+  .listItem:hover {
+    background-color: rgba(255, 255, 255, 0.05);
   }
 }
 

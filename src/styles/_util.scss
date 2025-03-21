@@ -10,13 +10,13 @@
 }
 
 @mixin light {
-  [data-mantine-color-scheme='light'] & {
+  [data-mantine-color-scheme='light'] {
     @content;
   }
 }
 
 @mixin dark {
-  [data-mantine-color-scheme='dark'] & {
+  [data-mantine-color-scheme='dark'] {
     @content;
   }
 }
