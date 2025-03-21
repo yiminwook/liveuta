@@ -11,10 +11,12 @@ import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
 import { useSchedule } from '@/hooks/useSchedule';
 import { generateVideoUrl } from '@/libraries/youtube/url';
+import { useAppCtx } from '@/stores/app';
 import { useSetModalStore } from '@/stores/modal';
 import { TContentsData } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick } from '@/utils/gtag';
+import { isDarkModeEnabled } from '@/utils/helper';
 import { openWindow } from '@/utils/windowEvent';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
@@ -24,6 +26,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 import { toast } from 'sonner';
+import { useStore } from 'zustand';
 import css from './page.module.scss';
 
 type Props = {
@@ -215,13 +218,23 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
         </Link>
       </section>
 
-      <article className={css.tweetArticle}>
-        <TwitterTimelineEmbed
-          sourceType="profile"
-          screenName="LeonaShishigami"
-          options={{ height: 500 }}
-        />
-      </article>
+      <TweetArticle />
     </main>
+  );
+}
+
+function TweetArticle() {
+  const appCtx = useAppCtx();
+  const theme = useStore(appCtx, (state) => (isDarkModeEnabled(state.theme) ? 'dark' : 'light'));
+
+  return (
+    <article className={css.tweetArticle}>
+      <TwitterTimelineEmbed
+        sourceType="profile"
+        screenName="LeonaShishigami"
+        options={{ height: 500 }}
+        theme={theme}
+      />
+    </article>
   );
 }
