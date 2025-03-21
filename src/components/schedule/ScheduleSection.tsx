@@ -18,7 +18,6 @@ import Link from 'next/link';
 import { GridComponents, VirtuosoGrid } from 'react-virtuoso';
 import { toast } from 'sonner';
 import Nodata from '../common/Nodata';
-import ListModal from '../common/modal/MultiListModal';
 import ScheduleCard from '../common/scheduleCard/Card';
 import ScheduleCardSkeleton from '../common/scheduleCard/ScheduleCardSkeleton';
 import css from './ScheduleSection.module.scss';
@@ -58,15 +57,6 @@ export default function ScheduleSection({
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
   const { reservePush } = useReservePush();
-
-  const openMutiViewModal = async (content: TContentsData) => {
-    await modalStore.push(ListModal, {
-      id: 'multiViewModal',
-      props: {
-        defaultValue: generateVideoUrl(content.videoId),
-      },
-    });
-  };
 
   const handleFavorite = (content: TContentsData) => {
     if (!session) return toast.error(t('notLoggedInError'));
@@ -158,7 +148,6 @@ export default function ScheduleSection({
             isFavorite={whiteList.has(data.channelId)}
             openNewTab={openStream}
             addAlarm={reservePush}
-            addMultiView={openMutiViewModal}
             toggleFavorite={handleFavorite}
             addBlock={handleBlock}
           />

@@ -2,7 +2,6 @@
 import character9 from '@/assets/image/character-9.png';
 import MoreButton from '@/components/common/button/MoreButton';
 import SearchInput from '@/components/common/input/SearchInput';
-import ListModal from '@/components/common/modal/MultiListModal';
 import ChannelSlider from '@/components/home/ChannelSlider';
 import ScheduleSlider from '@/components/home/ScheduleSlider';
 import useCachedData from '@/hooks/useCachedData';
@@ -56,15 +55,6 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
   const { reservePush } = useReservePush();
-
-  const openMultiViewModal = async (content: TContentsData) => {
-    await modalStore.push(ListModal, {
-      id: 'multiViewModal',
-      props: {
-        defaultValue: generateVideoUrl(content.videoId),
-      },
-    });
-  };
 
   const handleFavorite = (content: TContentsData) => {
     if (!session) return toast.error(t('notLoggedInError'));
@@ -152,7 +142,6 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
           contents={proceedScheduleData.liveContent}
           addAlarm={reservePush}
           openNewTab={openStream}
-          addMultiView={openMultiViewModal}
           addBlock={handleBlock}
           toggleFavorite={handleFavorite}
         />
@@ -168,7 +157,6 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
             contents={proceedScheduleData.favoriteContent}
             addAlarm={reservePush}
             openNewTab={openStream}
-            addMultiView={openMultiViewModal}
             addBlock={handleBlock}
             toggleFavorite={handleFavorite}
           />

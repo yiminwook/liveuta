@@ -39,7 +39,7 @@ import { Layout, Layouts, Responsive, WidthProvider } from 'react-grid-layout';
 import { toast } from 'sonner';
 import { v4 as uuid } from 'uuid';
 import css from './GridLayout.module.scss';
-import Shorts from './Shorts';
+import GridPlayer from './GridPlayer';
 
 const LAYOUTS_STORAGE_KEY = 'layouts_v1';
 const MAP_STORAGE_KEY = 'multi-video-map';
@@ -438,7 +438,7 @@ function GridLayoutItem({
       style={{ ...style }}
       data-grid={layout}
     >
-      <Shorts url={url} />
+      <GridPlayer url={url} />
       <DragHandle />
       <RemoveHandle onClick={onRemove} />
       {children}

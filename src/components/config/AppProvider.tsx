@@ -1,6 +1,5 @@
 'use client';
 import { AppContext, createAppStore } from '@/stores/app';
-import { useMultiViewStore } from '@/stores/multiView';
 import { PlayerContext, createPlayerStore } from '@/stores/player';
 import { useEffect, useRef } from 'react';
 
@@ -30,7 +29,7 @@ export default function AppProvider({ children, initState }: AppProviderProps) {
   );
 
   useEffect(() => {
-    useMultiViewStore.persist.rehydrate();
+    // useMultiViewStore.persist.rehydrate();
     appStore.current.getState().actions.initTheme();
   }, []);
 

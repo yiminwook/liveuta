@@ -19,13 +19,11 @@ type CardMenuProps = {
   onClickBlock: () => void;
   onClickAlarm: () => void;
   onClickNewTab: () => void;
-  onClickAddMultiView: () => void;
 };
 
 export default function CardMenu({
   isFavorite = false,
   copyValue,
-  onClickAddMultiView,
   onClickAlarm,
   onClickBlock,
   onClickFavorite,
@@ -49,13 +47,6 @@ export default function CardMenu({
         >
           {t('setNotification')}
         </Menu.Item> */}
-        <Menu.Item
-          component="button"
-          leftSection={<IonPlus color={variable.thirdColorDefault} />}
-          onClick={onClickAddMultiView}
-        >
-          {t('addMultiView')}
-        </Menu.Item>
         <Menu.Item
           component="button"
           leftSection={<FasStar color={isFavorite ? '#ffbb00' : '#a7a7a7'} />}

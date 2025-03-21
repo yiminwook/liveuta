@@ -18,7 +18,6 @@ type SliderCardProps = {
   isFavorite?: boolean;
   addAlarm?: (item: TContentsData) => void;
   openNewTab?: (item: TContentsData) => void;
-  addMultiView?: (item: TContentsData) => void;
   toggleFavorite?: (item: TContentsData) => void;
   addBlock?: (item: TContentsData) => void;
   copy?: (item: TContentsData) => void;
@@ -29,15 +28,11 @@ export default function SliderCard({
   isFavorite = false,
   addAlarm,
   openNewTab,
-  addMultiView,
   toggleFavorite,
   addBlock,
 }: SliderCardProps) {
   const t = useTranslations('home.sliderCard');
 
-  const onClickAddMultiView = () => {
-    addMultiView?.(content);
-  };
   const onClickAlarm = () => {
     addAlarm?.(content);
   };
@@ -86,11 +81,6 @@ export default function SliderCard({
               <TbBellRingingFilled color={variable.thirdColorDefault} />
             </ActionIcon>
           </Tooltip> */}
-          <Tooltip label={t('addMultiView')} position="bottom" withArrow>
-            <ActionIcon variant="transparent" onClick={onClickAddMultiView}>
-              <IonPlus color={variable.thirdColorDefault} />
-            </ActionIcon>
-          </Tooltip>
           <Tooltip
             label={`${t('favorite')} ${isFavorite ? t('remove') : t('add')}`}
             position="bottom"

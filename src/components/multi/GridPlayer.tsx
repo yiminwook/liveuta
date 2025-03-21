@@ -5,11 +5,11 @@ import { useTranslations } from 'next-intl';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
 
-type ShortsProps = {
+type Props = {
   url: string;
 };
 
-export default function Shorts({ url }: ShortsProps) {
+export default function GridPlayer({ url }: Props) {
   const t = useTranslations('multiView.shortsSection.shorts');
 
   return (
