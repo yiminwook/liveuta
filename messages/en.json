@@ -36,7 +36,8 @@
         "internalLinks": {
           "settings": "Settings",
           "dev": "Dev",
-          "featured": "Featured"
+          "featured": "Featured",
+          "support": "Support"
         },
         "externalLinks": {
           "kizunaAiGallery": "DC1",
@@ -86,7 +87,8 @@
           "setlist": "Setlist",
           "settings": "Settings",
           "dev": "Dev",
-          "featured": "Featured"
+          "featured": "Featured",
+          "support": "Support"
         },
         "externalLinks": {
           "kizunaAiGallery": "Kizuna AI Gallery",

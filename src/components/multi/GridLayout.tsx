@@ -294,7 +294,7 @@ function Sidebar({ onAdd, onClear, isFlip, toggleFlip }: SidebarProps) {
 
           <div className={css.sidebarHeaderRight}>
             <Tooltip label={'모바일 환경은 지원되지 않습니다.'} position="bottom" withArrow>
-              <ActionIcon variant="ghost" size="compact-xs">
+              <ActionIcon variant="ghost" size="compact-xs" radius="lg">
                 <MaterialSymbolsInfoOutline />
               </ActionIcon>
             </Tooltip>

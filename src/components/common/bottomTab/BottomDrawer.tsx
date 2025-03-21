@@ -1,5 +1,6 @@
 import FaSolidStar from '@icons/fa-solid/Star';
 import IonMusicNote from '@icons/ion/MusicNote';
+import { IcBaselineHelpOutline } from '@icons/material-symbols/BaselineHelpOutline';
 import TbDeviceDesktopCode from '@icons/tabler/DeviceDesktopCode';
 import Diamond from '@icons/tabler/Diamond';
 import TbSettings from '@icons/tabler/Settings';
@@ -43,7 +44,13 @@ export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
       text: t('internalLinks.dev'),
       icon: <TbDeviceDesktopCode width="1.5rem" height="1.5rem" />,
     },
+    {
+      href: '/support',
+      text: t('internalLinks.dev'),
+      icon: <IcBaselineHelpOutline width="1.5rem" height="1.5rem" />,
+    },
   ];
+
   const externalLinks: DrawerItem[] = [
     {
       href: 'https://gall.dcinside.com/mgallery/board/lists?id=kizunaai',
