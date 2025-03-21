@@ -1,8 +1,7 @@
 $w: 7.5rem;
 
 button.trigger {
-  width: $w;
-  height: 3.5rem;
+  min-width: $w;
   font-weight: 600;
   font-size: 1rem;
   text-align: center;
