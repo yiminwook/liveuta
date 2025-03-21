@@ -46,7 +46,7 @@ export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
     },
     {
       href: '/support',
-      text: t('internalLinks.dev'),
+      text: t('internalLinks.support'),
       icon: <IcBaselineHelpOutline width="1.5rem" height="1.5rem" />,
     },
   ];
