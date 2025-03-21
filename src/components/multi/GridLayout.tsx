@@ -44,8 +44,9 @@ import GridPlayer from './GridPlayer';
 const LAYOUTS_STORAGE_KEY = 'layouts_v1';
 const MAP_STORAGE_KEY = 'multi-video-map';
 const BRAEK_POINTS = { lg: 1280, md: 1024, sm: 768, xs: 480 };
-const COLS = { lg: 3, md: 3, sm: 2, xs: 1 };
-const MAX_ITEM_LENGTH = 9;
+const DEFAULT_POINT = 'lg';
+const COLS = { lg: 8, md: 6, sm: 4, xs: 2 };
+const MAX_ITEM_LENGTH = 12;
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -68,10 +69,10 @@ function GridCore() {
   const toggleFlip = () => setIsFlip((p) => !p);
 
   const handleAdd = (url: string) => {
-    const currentLength = layouts.lg?.length || 0;
+    const currentLength = layouts[DEFAULT_POINT]?.length || 0;
 
-    if (currentLength > MAX_ITEM_LENGTH) {
-      toast.warning(`${MAX_ITEM_LENGTH}이상 추가 할 수 없습니다.`);
+    if (currentLength >= MAX_ITEM_LENGTH) {
+      toast.warning(`${MAX_ITEM_LENGTH}개이상 추가 할 수 없습니다.`);
       return;
     }
 
@@ -148,7 +149,7 @@ function GridCore() {
       <div className={css.container} ref={containerRef}>
         <ResponsiveGridLayout
           className={css.layout}
-          layouts={{ lg: layouts.lg }}
+          layouts={layouts}
           breakpoints={BRAEK_POINTS}
           cols={COLS}
           // onWidthChange={(containerWidth, newCols) => {
@@ -172,7 +173,7 @@ function GridCore() {
           // rowHeight={30}
           // measureBeforeMount={false}
         >
-          {layouts.lg?.map((layout) => (
+          {layouts[DEFAULT_POINT]?.map((layout) => (
             <GridLayoutItem
               layout={layout}
               key={layout.i}

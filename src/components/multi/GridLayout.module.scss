@@ -15,6 +15,7 @@ $sidebar-min-width: 32px;
 
 .sidebar[data-active="false"]{
   width: $sidebar-min-width;
+  flex-shrink: 0;
 }
 
 .sidebarPosition {
@@ -22,7 +23,7 @@ $sidebar-min-width: 32px;
   width: $sidebar-max-width;
   top: var.$safe-header-height;
   bottom: 0;
-  background-color: util.palette(first, 25);
+  background-color: util.palette(first, 95);
   padding: 5px;
   display: flex;
   flex-direction: column;
