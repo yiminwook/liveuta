@@ -1,5 +1,6 @@
 'use client';
 import { ORIGIN } from '@/constants';
+import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
@@ -13,6 +14,7 @@ export default function Shorts({ url }: ShortsProps) {
 
   return (
     <ReactPlayer
+      className={classNames('no-drag')}
       width="100%"
       height="100%"
       style={{ overflow: 'hidden' }}

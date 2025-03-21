@@ -1,19 +1,11 @@
 .wrap {
-  display: flex;
-  flex-direction: column;
   height: util.calc-inner-height(100dvh);
   position: relative;
-
-  @include util.min-width(sm) {
-    flex-direction: row;
-  }
-
-  @include util.min-width(lg) {
-    height: calc(100dvh - 3.5rem - env(safe-area-inset-top));
-  }
 }
 
 .playerBox {
   flex: 1;
   height: 100%;
 }
+
+

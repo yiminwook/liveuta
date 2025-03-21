@@ -1,0 +1,46 @@
+
+.layout { 
+  border: 5px solid red;
+}
+
+.box {
+  border: 2px solid map-get(var.$colors, dimmed);
+  border-radius: 2px;
+  position: relative;
+
+  :global(.react-resizable-handle){
+    background-color: #fff;
+    border-radius: 2px;
+  }
+}
+
+
+.drag {
+  position: absolute;
+  background-color:#fff;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  border-radius: 2px;
+  z-index: 1;
+  cursor: grab;
+}
+
+:global(.react-grid-layout)[data-dragging="true"] {
+  .drag {
+    cursor: grabbing;
+  }
+}
+
+.remove {
+  position: absolute;
+  background-color: orange;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  right: 0;
+  border-radius: 2px;
+  z-index: 1;
+  cursor: pointer;
+}
