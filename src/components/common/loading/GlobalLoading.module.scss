@@ -2,7 +2,7 @@
 .wrap {
   @extend %flex-center;
   @extend %fixed-max-size;
-  z-index: map-get($z-indexes, max);
+  z-index: map-get(var.$z-indexes, max);
   font-size: 2rem;
 }
 
@@ -12,7 +12,7 @@
   text-align: center;
   width: 75%;
   aspect-ratio: 1 / 1;
-  max-width: map-get(breakpoints, xs);
+  max-width: map-get(var.$breakpoints, xs);
 }
 
 .image {

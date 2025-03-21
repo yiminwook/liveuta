@@ -1,6 +1,127 @@
 
-.layout { 
-  border: 5px solid red;
+$sidebar-max-width: 250px;
+$sidebar-min-width: 45px;
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar {
+  width: $sidebar-max-width;
+  transition: width 0.5s ease;
+}
+
+.sidebar[data-active="false"]{
+  width: $sidebar-min-width;
+}
+
+.sidebarPosition {
+  position: fixed;
+  width: $sidebar-max-width;
+  top: var.$safe-header-height;
+  bottom: 0;
+  background-color: util.palette(first, 25);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  // border-left: 1px solid map-get(var.$colors, dimmed);
+}
+
+.sidebarHeader {
+  display: flex;
+  justify-content: space-between;
+
+  .sidebarHeaderLeft {
+    display: flex;
+    align-items: center;
+  }
+
+  .sidebarHeaderRight {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+.sidebarInputBox {
+  margin-bottom: 10px;
+  padding: 10px 0;
+}
+
+.sidebarContent {
+  flex: 1;
+  overflow-y: auto;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+
+  &:global(.loading) {
+    justify-content: center;
+    align-items: center;
+  }
+
+  &::-webkit-scrollbar{
+    width: 5px;
+  }
+}
+
+.listItem {
+  padding: 10px;
+  border-radius: 10px;
+  transition: background-color 0.5s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  time {
+    color: map-get(var.$colors, dimmed);
+  }
+
+  .title {
+    margin: 0;
+    @include util.text-line(2, 1.2);
+  }
+}
+
+.listItemHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .listItemHeaderLeft {
+    flex: 1;
+    display: flex;
+    align-items: center;
+
+    :global(.app-Avatar-root) {
+      margin-right: 10px;
+    }
+
+    .channelName{
+      font-size: 1rem;
+      color:  util.palette(third, default);
+    }
+
+    .line {
+      display: block;
+    }
+  }
+
+  .listItemHeaderRight {
+
+  }
+}
+
+.container {
+  flex: 1;
+  padding: 10px;
+
+  :global(.react-grid-item.react-grid-placeholder){
+    background-color: util.palette(third, 95);
+  }
 }
 
 .box {
@@ -11,13 +132,14 @@
   :global(.react-resizable-handle){
     background-color: #fff;
     border-radius: 2px;
-  }
+  } 
 }
 
 
 .drag {
   position: absolute;
   background-color:#fff;
+  color: #000;
   width: 20px;
   height: 20px;
   top: 0;

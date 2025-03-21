@@ -7,7 +7,7 @@ import { replaceParentheses } from '@/utils/regexp';
 import { Table } from '@mantine/core';
 import cx from 'classnames';
 import dayjs from 'dayjs';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { type MouseEvent } from 'react';
 import { useDrawerActions } from './DrawerContext';
@@ -22,10 +22,11 @@ type RowProps = {
 export default function Row({ setlist, channel, order }: RowProps) {
   const t = useTranslations();
   const router = useRouter();
+  const locale = useLocale();
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
   const title = replaceParentheses(setlist.title);
-  const create = dayjs(setlist.createdAt).format(t('dayjsTemplate'));
-  const broad = dayjs(setlist.broadcastAt).format(t('dayjsTemplate'));
+  const create = dayjs(setlist.createdAt).locale(locale).format(t('dayjsTemplate'));
+  const broad = dayjs(setlist.broadcastAt).locale(locale).format(t('dayjsTemplate'));
   const drawerActions = useDrawerActions();
 
   function handleImageClick(e: MouseEvent) {

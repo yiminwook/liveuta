@@ -1,11 +1,14 @@
+$header-and-footer: var.$header-height + 0;
+
 .wrap {
-  height: util.calc-inner-height(100dvh);
+  min-height: calc(100dvh - #{$header-and-footer} - #{var.$env-top} - #{var.$env-bottom});
   position: relative;
 }
 
-.playerBox {
-  flex: 1;
-  height: 100%;
+.gridLoadingBox {
+  width: 100%;
+  height: util.calc-inner-height(100dvh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-

@@ -1,62 +1,109 @@
 import X from '@/components/icons/tabler/X';
+import useCachedData from '@/hooks/useCachedData';
+import { useSchedule } from '@/hooks/useSchedule';
+import dayjs from '@/libraries/dayjs';
+import { generateThumbnail } from '@/libraries/youtube/thumbnail';
+import { generateVideoUrl } from '@/libraries/youtube/url';
+import { TContentsData } from '@/types/api/mongoDB';
+import { TScheduleDto } from '@/types/dto';
 import { AntDesignDragOutlined } from '@icons/antd/DragOutlined';
-import { Button, Input, TextInput } from '@mantine/core';
+import { MaterialSymbolsInfoOutline } from '@icons/material-symbols/InfoOutline';
+import TablerChevronLeft from '@icons/tabler/ChevronLeft';
+import TablerChevronRight from '@icons/tabler/ChevronRight';
+import {
+  ActionIcon,
+  Avatar,
+  Box,
+  Button,
+  ComboboxData,
+  Loader,
+  Select,
+  TextInput,
+  Tooltip,
+  useMantineTheme,
+} from '@mantine/core';
 import classNames from 'classnames';
-import { MouseEventHandler, Ref, TouchEventHandler, useRef, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { useLocale, useTranslations } from 'next-intl';
+import {
+  ChangeEvent,
+  MouseEventHandler,
+  Ref,
+  TouchEventHandler,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { Layout, Layouts, Responsive, WidthProvider } from 'react-grid-layout';
+import { toast } from 'sonner';
 import { v4 as uuid } from 'uuid';
 import css from './GridLayout.module.scss';
 import Shorts from './Shorts';
 
-const LAYOUTS_STORAGE_KEY = 'layouts';
+const LAYOUTS_STORAGE_KEY = 'layouts_v1';
 const MAP_STORAGE_KEY = 'multi-video-map';
-const BRAEK_POINTS = { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 };
+const BRAEK_POINTS = { lg: 1280, md: 1024, sm: 768, xs: 480 };
+const COLS = { lg: 3, md: 3, sm: 2, xs: 1 };
+const MAX_ITEM_LENGTH = 9;
 
-const ResponsiveReactGridLayout = WidthProvider(Responsive);
+const ResponsiveGridLayout = WidthProvider(Responsive);
 
-export default function GridLayout() {
+export default function Grid() {
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <GridCore />
+    </ErrorBoundary>
+  );
+}
+
+function GridCore() {
   const containerRef = useRef<HTMLDivElement>(null!);
-  const [breakPoint, setBreakPoint] = useState('lg');
+
+  // const [breakPoint, setBreakPoint] = useState('lg');
   const [videoMap, setVideoMap] = useState<Record<string, string>>(getVideoMap);
   const [layouts, setLayouts] = useState<Layouts>(getLayout);
+  const [isFlip, setIsFlip] = useState(false);
 
-  const [newUrl, setNewUrl] = useState('');
+  const toggleFlip = () => setIsFlip((p) => !p);
 
-  const handleAdd = () => {
-    if (!newUrl) return;
+  const handleAdd = (url: string) => {
+    const currentLength = layouts.lg?.length || 0;
+
+    if (currentLength > MAX_ITEM_LENGTH) {
+      toast.warning(`${MAX_ITEM_LENGTH}이상 추가 할 수 없습니다.`);
+      return;
+    }
 
     const newItem: Layout = {
       i: uuid(),
       x: 0,
-      y: Infinity,
+      y: 0,
       w: 1,
       h: 1,
     };
 
     setLayouts((prevLayouts) => {
       const updatedLayouts = { ...prevLayouts };
+
       for (const point in BRAEK_POINTS) {
         if (!updatedLayouts[point]) {
-          updatedLayouts[point] = [];
+          updatedLayouts[point] = [newItem];
           continue;
         }
 
         updatedLayouts[point] = [...updatedLayouts[point], newItem];
       }
 
-      console.log('updatedLayouts', updatedLayouts);
       saveLayout(updatedLayouts);
       return updatedLayouts;
     });
 
     setVideoMap((prevMap) => {
-      const updatedMap = { ...prevMap, [newItem.i]: newUrl };
+      const updatedMap = { ...prevMap, [newItem.i]: url };
       saveVideoMap(updatedMap);
       return updatedMap;
     });
-
-    setNewUrl('');
   };
 
   const handleRemove = (id: string) => {
@@ -64,8 +111,9 @@ export default function GridLayout() {
       const updatedLayouts = { ...prevLayouts };
 
       for (const point in BRAEK_POINTS) {
+        if (!updatedLayouts[point]) continue;
+
         updatedLayouts[point] = updatedLayouts[point].filter((item) => {
-          console.log(item.i, id);
           return item.i !== id;
         });
       }
@@ -96,60 +144,232 @@ export default function GridLayout() {
   };
 
   return (
-    <ErrorBoundary fallbackRender={ErrorFallback}>
-      <div>
-        <TextInput label="url" value={newUrl} onChange={(e) => setNewUrl(e.currentTarget.value)} />
-        <Button onClick={handleAdd}>Add</Button>
-        <Button onClick={handleClear}>Clear</Button>
-        <div>{breakPoint}</div>
+    <div className={css.wrapper}>
+      <div className={css.container} ref={containerRef}>
+        <ResponsiveGridLayout
+          className={css.layout}
+          layouts={{ lg: layouts.lg }}
+          breakpoints={BRAEK_POINTS}
+          cols={COLS}
+          // onWidthChange={(containerWidth, newCols) => {
+          //   const newBreakpoint = Object.keys(BRAEK_POINTS).find(
+          //     (point) => containerWidth >= BRAEK_POINTS[point as keyof typeof BRAEK_POINTS],
+          //   );
+          //   if (newBreakpoint) {
+          //     setBreakPoint(newBreakpoint);
+          //   }
+          // }}
+          onLayoutChange={(layout, layouts) => {
+            saveLayout(layouts);
+            setLayouts(layouts);
+          }}
+          onDrag={() => containerRef.current.setAttribute('data-dragging', 'true')}
+          onDragStop={() => containerRef.current.setAttribute('data-dragging', 'false')}
+          draggableCancel={`.${css.remove}`}
+          draggableHandle={`.${css.drag}`}
+          containerPadding={[0, 0]}
+          margin={[0, 0]}
+          // rowHeight={30}
+          // measureBeforeMount={false}
+        >
+          {layouts.lg?.map((layout) => (
+            <GridLayoutItem
+              layout={layout}
+              key={layout.i}
+              url={videoMap?.[layout.i] || ''}
+              className={layout.static ? 'static' : ''}
+              onRemove={() => handleRemove(layout.i)}
+            />
+          ))}
+        </ResponsiveGridLayout>
       </div>
 
-      <ResponsiveReactGridLayout
-        innerRef={containerRef}
-        className={classNames(css.layout, 'layout')}
-        layouts={layouts}
-        breakpoint={breakPoint}
-        breakpoints={BRAEK_POINTS}
-        cols={{ lg: 3, md: 3, sm: 3, xs: 2, xxs: 1 }}
-        // rowHeight={700}
-        // width={1200}
-        // onBreakpointChange={(newBreakpoint) => {
-        //   console.log('onBreakpointChange', newBreakpoint);
-        //   setBreakPoint(() => newBreakpoint);
-        // }}
-        onWidthChange={(containerWidth, newCols) => {
-          console.log('onWidthChange', containerWidth, newCols);
+      <Sidebar isFlip={isFlip} toggleFlip={toggleFlip} onAdd={handleAdd} onClear={handleClear} />
+    </div>
+  );
+}
 
-          const newBreakpoint = Object.keys(BRAEK_POINTS).find(
-            (point) => containerWidth >= BRAEK_POINTS[point as keyof typeof BRAEK_POINTS],
-          );
+interface SidebarProps {
+  onAdd: (url: string) => void;
+  onClear: () => void;
+  isFlip: boolean;
+  toggleFlip: () => void;
+}
 
-          if (newBreakpoint) {
-            setBreakPoint(newBreakpoint);
-          }
-        }}
-        onLayoutChange={(layout, layouts) => {
-          console.log('onLayoutChange', layout, layouts);
-          saveLayout(layouts);
-          setLayouts(layouts);
-        }}
-        onDrag={() => containerRef.current.setAttribute('data-dragging', 'true')}
-        onDragStop={() => containerRef.current.setAttribute('data-dragging', 'false')}
-        draggableCancel={`.${css.remove}`}
-        draggableHandle={`.${css.drag}`}
-        containerPadding={[10, 10]}
-        // measureBeforeMount={false}
-      >
-        {layouts.lg?.map((layout) => (
-          <GridLayoutItem
-            key={layout.i}
-            url={videoMap?.[layout.i] || ''}
-            className={layout.static ? 'static' : ''}
-            onRemove={() => handleRemove(layout.i)}
+function Sidebar({ onAdd, onClear, isFlip, toggleFlip }: SidebarProps) {
+  const [newUrl, setNewUrl] = useState('');
+  const theme = useMantineTheme();
+  const t = useTranslations();
+
+  const session = useSession().data;
+  const { blackList } = useCachedData({ session });
+  const { data, isPending } = useSchedule({ enableAutoSync: true });
+  const [filter, setFilter] = useState<TScheduleDto['filter']>('live');
+
+  const onChangeUrl = (e: ChangeEvent<HTMLInputElement>) => {
+    setNewUrl(() => e.target.value);
+  };
+
+  const onClickAdd = () => {
+    onAdd(newUrl);
+    setNewUrl(() => '');
+  };
+
+  const onClickAddByListItem = (videoId: string) => {
+    onAdd(generateVideoUrl(videoId));
+  };
+
+  const onClickClear = () => {
+    onClear();
+    setNewUrl(() => '');
+  };
+
+  const proceedScheduleData = useMemo(() => {
+    if (!data) return [];
+
+    const filteredContent = data[filter].filter((content) => {
+      const inBlacklist = blackList.has(content.channelId);
+
+      let isPassList: boolean;
+
+      // if (scheduleDto.isFavorite) {
+      //   isPassList = inWhitelist;
+      // } else {
+      isPassList = !inBlacklist;
+      // }
+
+      let isPassType: boolean;
+
+      // switch (scheduleDto.select) {
+      //   case 'stream':
+      //     isPassType = !content.isVideo;
+      //     break;
+      //   case 'video':
+      //     isPassType = content.isVideo;
+      //     break;
+      //   default:
+      isPassType = true;
+      //     break;
+      // }
+
+      return isPassList && isPassType;
+    });
+
+    return filteredContent;
+  }, [data, blackList, filter]);
+
+  const selectItems: ComboboxData = [
+    { value: 'scheduled', label: t('schedule.navTab.scheduled') },
+    { value: 'live', label: t('schedule.navTab.live') },
+    { value: 'daily', label: t('schedule.navTab.daily') },
+    { value: 'all', label: t('schedule.navTab.all') },
+  ];
+
+  if (isFlip) {
+    return (
+      <div className={css.sidebar} data-active="false">
+        <div className={css.sidebarPosition}>
+          <div className={css.sidebarHeader}>
+            <div className={css.sidebarHeaderLeft}>
+              <ActionIcon variant="outline" size="sm" onClick={toggleFlip}>
+                <TablerChevronLeft />
+              </ActionIcon>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={css.sidebar} data-active="true">
+      <div className={css.sidebarPosition}>
+        <div className={css.sidebarHeader}>
+          <div className={css.sidebarHeaderLeft}>
+            <ActionIcon variant="outline" size="sm" onClick={toggleFlip}>
+              <TablerChevronLeft />
+            </ActionIcon>
+          </div>
+
+          <div className={css.sidebarHeaderRight}>
+            <Tooltip label={'모바일 환경은 지원되지 않습니다.'} position="bottom" withArrow>
+              <ActionIcon variant="ghost" size="compact-xs">
+                <MaterialSymbolsInfoOutline />
+              </ActionIcon>
+            </Tooltip>
+
+            <Button
+              variant="subtle"
+              color={theme.colors.green[9]}
+              size="compact-xs"
+              onClick={onClickClear}
+            >
+              CLEAR
+            </Button>
+
+            <Select
+              w={100}
+              size="xs"
+              onChange={(v) => v && setFilter(() => v as TScheduleDto['filter'])}
+              value={filter}
+              data={selectItems}
+            />
+          </div>
+        </div>
+
+        <div className={css.sidebarInputBox}>
+          <TextInput
+            value={newUrl}
+            onChange={onChangeUrl}
+            placeholder="URL을 입력해주세요"
+            rightSection={
+              <Box pe="var(--input-padding-inline-start)">
+                <Button variant="outline" size="compact-xs" onClick={onClickAdd}>
+                  ADD
+                </Button>
+              </Box>
+            }
           />
-        ))}
-      </ResponsiveReactGridLayout>
-    </ErrorBoundary>
+        </div>
+
+        <div className={classNames(css.sidebarContent, { loading: isPending })}>
+          {isPending && <Loader />}
+          {proceedScheduleData.map((content) => (
+            <ListItem key={content.videoId} content={content} onAddById={onClickAddByListItem} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface ListItemProps {
+  content: TContentsData;
+  onAddById: (videoId: string) => void;
+}
+
+function ListItem({ content, onAddById }: ListItemProps) {
+  const thumbnail = generateThumbnail(content.videoId, 'mqdefault');
+  const t = useTranslations();
+  const locale = useLocale();
+  const time = dayjs(content.timestamp).locale(locale).format(t('dayjsScheduleTemplate'));
+  return (
+    <div className={css.listItem}>
+      <div className={css.listItemHeader}>
+        <div className={css.listItemHeaderLeft}>
+          <Avatar className={css.avatar} size="md" src={thumbnail} />
+          <div>
+            <span className={classNames(css.channelName, css.line)}>{content.channelName}</span>
+            {content.viewer > 0 && <span className={css.line}>Viewer: {content.viewer}</span>}
+          </div>
+        </div>
+        <ActionIcon variant="subtle" onClick={() => onAddById(content.videoId)}>
+          +
+        </ActionIcon>
+      </div>
+      <time className={css.line}>{time}</time>
+      <p className={css.title}>{content.title}</p>
+    </div>
   );
 }
 
@@ -158,12 +378,7 @@ function getLayout() {
   const savedItem = window.localStorage?.getItem(LAYOUTS_STORAGE_KEY);
 
   if (savedItem) {
-    try {
-      layouts = JSON.parse(savedItem) || {};
-    } catch (error) {
-      /*Ignore*/
-      console.error('Error parsing saved layouts');
-    }
+    layouts = JSON.parse(savedItem) || {};
   }
 
   return layouts;
@@ -180,12 +395,7 @@ function getVideoMap() {
   const savedItem = window.localStorage?.getItem(MAP_STORAGE_KEY);
 
   if (savedItem) {
-    try {
-      map = JSON.parse(savedItem) || {};
-    } catch (error) {
-      /*Ignore*/
-      console.error('Error parsing saved map');
-    }
+    map = JSON.parse(savedItem) || {};
   }
 
   return map;
@@ -207,6 +417,7 @@ interface GridLayoutItemProps {
   children?: React.ReactNode;
   url: string;
   onRemove: () => void;
+  layout: Layout;
 }
 
 function GridLayoutItem({
@@ -216,10 +427,17 @@ function GridLayoutItem({
   url,
   children,
   onRemove,
+  layout,
   ...props
 }: GridLayoutItemProps) {
   return (
-    <div {...props} className={classNames(className, css.box)} ref={ref} style={{ ...style }}>
+    <div
+      {...props}
+      className={classNames(className, css.box)}
+      ref={ref}
+      style={{ ...style }}
+      data-grid={layout}
+    >
       <Shorts url={url} />
       <DragHandle />
       <RemoveHandle onClick={onRemove} />
@@ -256,5 +474,21 @@ function RemoveHandle({ onClick }: { onClick: () => void }) {
 }
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
-  return <div>에러발생</div>;
+  const onClick = () => {
+    saveLayout({});
+    saveVideoMap({});
+    resetErrorBoundary();
+  };
+
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <p>에러가 발생하였습니다.</p>
+      <p>반복적으로 발생할시 관리자에게 문의해주세요</p>
+      <div style={{ textAlign: 'center' }}>
+        <Button size="xs" onClick={onClick}>
+          RETRY
+        </Button>
+      </div>
+    </div>
+  );
 }
