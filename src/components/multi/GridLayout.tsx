@@ -22,6 +22,7 @@ import {
   Tooltip,
   useMantineTheme,
 } from '@mantine/core';
+import variable from '@variable';
 import classNames from 'classnames';
 import { useSession } from 'next-auth/react';
 import { useLocale, useTranslations } from 'next-intl';
@@ -293,7 +294,7 @@ function Sidebar({ onAdd, onClear, isFlip, toggleFlip }: SidebarProps) {
           </div>
 
           <div className={css.sidebarHeaderRight}>
-            <Tooltip label={'모바일 환경은 지원되지 않습니다.'} position="bottom" withArrow>
+            <Tooltip label={'모바일 환경은 지원되지 않습니다.'} position="top" withArrow>
               <ActionIcon variant="ghost" size="compact-xs" radius="lg">
                 <MaterialSymbolsInfoOutline />
               </ActionIcon>
@@ -334,7 +335,7 @@ function Sidebar({ onAdd, onClear, isFlip, toggleFlip }: SidebarProps) {
         </div>
 
         <div className={classNames(css.sidebarContent, { loading: isPending })}>
-          {isPending && <Loader />}
+          {isPending && <Loader color={variable.thirdColorDefault} />}
           {proceedScheduleData.map((content) => (
             <ListItem key={content.videoId} content={content} onAddById={onClickAddByListItem} />
           ))}

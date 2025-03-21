@@ -12,7 +12,7 @@ const Grid = dynamic(() => import('./GridLayout'), {
   ssr: false,
   loading: () => (
     <div className={css.gridLoadingBox}>
-      <Loader color={variable.secondColorDefault} />
+      <Loader color={variable.thirdColorDefault} />
     </div>
   ),
 });
