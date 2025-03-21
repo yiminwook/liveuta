@@ -10,8 +10,8 @@ import { ActionIcon, Badge, Card, Text, Tooltip } from '@mantine/core';
 import variable from '@variable';
 import { useTranslations } from 'next-intl';
 import CopyButton from '../button/CopyButton';
-import css from './Card.module.scss';
 import CardImage from './CardImage';
+import css from './SliderCard.module.scss';
 
 type SliderCardProps = {
   content: TContentsData & { isFavorite: boolean };

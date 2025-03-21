@@ -1,0 +1,64 @@
+.sliderCard {
+  :global(.app-Card-section) {
+    position: relative;
+    display: flex;
+  }
+
+  .status {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
+
+  :global(.imgBtn) {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    padding: 0px;
+    border-radius: 5px;
+    width: 100%;
+
+    & > img {
+      object-fit: cover;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      /* 그라데이션 높이 조정 */
+      height: 50%;
+      background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
+    }
+  }
+
+  .navBox {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button:hover {
+      transition: background-color 0.3s;
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    svg {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+}
+
+
+
+.title {
+  @include util.text-line(2, 1.4);
+  font-size: 1rem;
+
+  &:global(.stream) {
+    color: var(--liveuta-schedule-stream-text1);
+    font-weight: 500;
+  }
+}

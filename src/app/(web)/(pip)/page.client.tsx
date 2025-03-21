@@ -22,6 +22,7 @@ import { useRouter } from 'next-nprogress-bar';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
 import { toast } from 'sonner';
 import css from './page.module.scss';
 
@@ -213,6 +214,14 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
           </div>
         </Link>
       </section>
+
+      <article className={css.tweetArticle}>
+        <TwitterTimelineEmbed
+          sourceType="profile"
+          screenName="LeonaShishigami"
+          options={{ height: 500 }}
+        />
+      </article>
     </main>
   );
 }
