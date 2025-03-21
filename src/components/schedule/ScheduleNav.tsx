@@ -1,6 +1,6 @@
 'use client';
 import { TScheduleDto } from '@/types/dto';
-import TbBoxMultiple4 from '@icons/tabler/BoxMultiple4';
+import { IcBaselineMonitor } from '@icons/material-symbols/BaselineMonitor';
 import { ActionIcon } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
@@ -52,7 +52,7 @@ export default function ScheduleNav({ session, scheduleDto, length }: NavSection
             variant="default"
             size="lg"
           >
-            <TbBoxMultiple4 width="1.5rem" height="1.5rem" color="inherit" />
+            <IcBaselineMonitor width="1.5rem" height="1.5rem" color="inherit" />
           </ActionIcon>
         )}
       </div>

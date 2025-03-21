@@ -30,7 +30,8 @@
         "internalLinks": {
           "settings": "設定",
           "dev": "開発",
-          "featured": "特集"
+          "featured": "特集",
+          "support": "サポート"
         },
         "externalLinks": {
           "kizunaAiGallery": "DC1",
@@ -80,7 +81,8 @@
           "setlist": "セットリスト",
           "settings": "設定",
           "dev": "開発",
-          "featured": "特集"
+          "featured": "特集",
+          "support":"サポート"
         },
         "externalLinks": {
           "kizunaAiGallery": "キズナアイギャラリー",

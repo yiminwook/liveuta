@@ -12,7 +12,6 @@ type ScheduleSliderProps = {
   isLoading?: boolean;
   addAlarm?: (item: TContentsData) => void;
   openNewTab?: (item: TContentsData) => void;
-  addMultiView?: (item: TContentsData) => void;
   toggleFavorite?: (item: TContentsData) => void;
   addBlock?: (item: TContentsData) => void;
 };
@@ -21,7 +20,6 @@ export default function ScheduleSlider({
   contents,
   addAlarm,
   openNewTab,
-  addMultiView,
   toggleFavorite,
   addBlock,
   isLoading,
@@ -79,7 +77,6 @@ export default function ScheduleSlider({
               content={item}
               addAlarm={addAlarm}
               openNewTab={openNewTab}
-              addMultiView={addMultiView}
               addBlock={addBlock}
               toggleFavorite={toggleFavorite}
               isFavorite={item.isFavorite}

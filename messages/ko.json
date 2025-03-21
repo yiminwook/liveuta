@@ -36,7 +36,8 @@
         "internalLinks": {
           "settings": "설정",
           "dev": "개발",
-          "featured": "특집"
+          "featured": "특집",
+          "support": "지원"
         },
         "externalLinks": {
           "kizunaAiGallery": "키갤",
@@ -86,7 +87,8 @@
           "setlist": "세트리",
           "settings": "설정",
           "dev": "개발",
-          "featured": "특집"
+          "featured": "특집",
+          "support": "지원"
         },
         "externalLinks": {
           "kizunaAiGallery": "키즈나 아이 갤러리",

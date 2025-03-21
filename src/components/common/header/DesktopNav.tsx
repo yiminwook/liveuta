@@ -9,12 +9,13 @@ export default function DesktopNav() {
 
   const internalLinks = [
     { href: '/', text: t('internalLinks.home') },
+    { href: '/support', text: t('internalLinks.support') },
+    { href: '/setting', text: t('internalLinks.settings') },
     { href: '/schedule', text: t('internalLinks.schedule') },
-    { href: '/multi', text: t('internalLinks.multiView') },
     { href: '/channel', text: t('internalLinks.channel') },
     { href: '/featured', text: t('internalLinks.featured') },
+    { href: '/multi', text: t('internalLinks.multiView') },
     { href: '/setlist', text: t('internalLinks.setlist') },
-    { href: '/setting', text: t('internalLinks.settings') },
     { href: '/dev', text: t('internalLinks.dev') },
   ];
 
@@ -28,7 +29,6 @@ export default function DesktopNav() {
       text: t('externalLinks.vutaGallery'),
     },
     { href: 'https://uta-tools.vercel.app', text: t('externalLinks.utaTools') },
-    { href: 'https://ezgif.com', text: 'EZ GIF' },
   ];
 
   return (

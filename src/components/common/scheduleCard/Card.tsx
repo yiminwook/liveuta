@@ -16,7 +16,6 @@ type ScheduleCardProps = {
   isFavorite?: boolean;
   addAlarm?: (item: TContentsData) => void;
   openNewTab?: (item: TContentsData) => void;
-  addMultiView?: (item: TContentsData) => void;
   toggleFavorite?: (item: TContentsData) => void;
   addBlock?: (item: TContentsData) => void;
   showMenu?: boolean;
@@ -29,14 +28,10 @@ function ScheduleCard_({
   isFavorite,
   addAlarm,
   openNewTab,
-  addMultiView,
   toggleFavorite,
   addBlock,
   showMenu = false,
 }: ScheduleCardProps) {
-  const onClickAddMultiView = () => {
-    addMultiView?.(content);
-  };
   const onClickAlarm = () => {
     addAlarm?.(content);
   };
@@ -58,7 +53,6 @@ function ScheduleCard_({
       {showMenu && (
         <CardMenu
           isFavorite={isFavorite}
-          onClickAddMultiView={onClickAddMultiView}
           onClickAlarm={onClickAlarm}
           onClickBlock={onClickBlock}
           onClickFavorite={onClickFavorite}

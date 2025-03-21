@@ -2,7 +2,6 @@
 import character9 from '@/assets/image/character-9.png';
 import MoreButton from '@/components/common/button/MoreButton';
 import SearchInput from '@/components/common/input/SearchInput';
-import ListModal from '@/components/common/modal/MultiListModal';
 import ChannelSlider from '@/components/home/ChannelSlider';
 import ScheduleSlider from '@/components/home/ScheduleSlider';
 import useCachedData from '@/hooks/useCachedData';
@@ -12,10 +11,12 @@ import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
 import { useSchedule } from '@/hooks/useSchedule';
 import { generateVideoUrl } from '@/libraries/youtube/url';
+import { useAppCtx } from '@/stores/app';
 import { useSetModalStore } from '@/stores/modal';
 import { TContentsData } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick } from '@/utils/gtag';
+import { isDarkModeEnabled } from '@/utils/helper';
 import { openWindow } from '@/utils/windowEvent';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
@@ -23,7 +24,9 @@ import { useRouter } from 'next-nprogress-bar';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
 import { toast } from 'sonner';
+import { useStore } from 'zustand';
 import css from './page.module.scss';
 
 type Props = {
@@ -56,15 +59,6 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
   const { reservePush } = useReservePush();
-
-  const openMultiViewModal = async (content: TContentsData) => {
-    await modalStore.push(ListModal, {
-      id: 'multiViewModal',
-      props: {
-        defaultValue: generateVideoUrl(content.videoId),
-      },
-    });
-  };
 
   const handleFavorite = (content: TContentsData) => {
     if (!session) return toast.error(t('notLoggedInError'));
@@ -152,7 +146,6 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
           contents={proceedScheduleData.liveContent}
           addAlarm={reservePush}
           openNewTab={openStream}
-          addMultiView={openMultiViewModal}
           addBlock={handleBlock}
           toggleFavorite={handleFavorite}
         />
@@ -168,7 +161,6 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
             contents={proceedScheduleData.favoriteContent}
             addAlarm={reservePush}
             openNewTab={openStream}
-            addMultiView={openMultiViewModal}
             addBlock={handleBlock}
             toggleFavorite={handleFavorite}
           />
@@ -225,6 +217,24 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
           </div>
         </Link>
       </section>
+
+      <TweetArticle />
     </main>
+  );
+}
+
+function TweetArticle() {
+  const appCtx = useAppCtx();
+  const theme = useStore(appCtx, (state) => (isDarkModeEnabled(state.theme) ? 'dark' : 'light'));
+
+  return (
+    <article className={css.tweetArticle}>
+      <TwitterTimelineEmbed
+        sourceType="profile"
+        screenName="LeonaShishigami"
+        options={{ height: 500 }}
+        theme={theme}
+      />
+    </article>
   );
 }
