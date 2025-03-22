@@ -6,6 +6,14 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 // const isDevelopment = process.env.NODE_ENV !== 'production';
 
+const withNextIntl = createNextIntlPlugin();
+
+const withBundleAnalyzer = NextBundleAnalyzer({
+  enabled: process.env.NODE_ENV === 'production',
+  analyzerMode: 'static',
+  openAnalyzer: false,
+});
+
 const nextConfig: NextConfig = {
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -115,10 +123,6 @@ const nextConfig: NextConfig = {
   },
 };
 
-const withNextIntl = createNextIntlPlugin();
-
-const withBundleAnalyzer = NextBundleAnalyzer({ enabled: false });
-
 const isEnableSentry = !!process.env.NEXT_PUBLIC_SENTRY_DSN && !!process.env.SENTRY_AUTH_TOKEN;
 
 const SENTRY_BUILD_OPTIONS: SentryBuildOptions = {
@@ -135,5 +139,4 @@ const SENTRY_BUILD_OPTIONS: SentryBuildOptions = {
   },
 };
 
-// turbopack 호환 안될시 롤백
 export default withSentryConfig(withBundleAnalyzer(withNextIntl(nextConfig)), SENTRY_BUILD_OPTIONS);
