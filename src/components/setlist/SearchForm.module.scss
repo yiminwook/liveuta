@@ -1,3 +1,5 @@
+@use "sass:map";
+
 .form {
   display: flex;
   justify-content: flex-end;
@@ -24,7 +26,7 @@
         border-right: none;
         transition-property: border-color, width;
         transition-duration: 0.2s;
-        transition-timing-function: map-get(var.$easing, default);
+        transition-timing-function: map.get(var.$easing, default);
 
         &:focus-visible {
           border-color: util.palette(third, default);
@@ -66,11 +68,11 @@
         pointer-events: none;
         transition-property: opacity, rotate, visibility;
         transition-duration: 0.3s;
-        transition-timing-function: map-get(var.$easing, default);
+        transition-timing-function: map.get(var.$easing, default);
         transition-behavior: discrete;
 
         &:hover {
-          background-color: map-get(var.$colors, default-hover);
+          background-color: map.get(var.$colors, default-hover);
         }
 
         &:focus-visible {

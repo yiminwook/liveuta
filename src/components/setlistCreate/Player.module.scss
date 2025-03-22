@@ -1,8 +1,10 @@
+@use "sass:map";
+
 .player {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background-color: map-get(var.$colors, dimmed);
+  background-color: map.get(var.$colors, dimmed);
 
   @include util.min-width(xl) {
     border-radius: 0.5rem;
@@ -14,7 +16,7 @@
   place-items: center;
   position: absolute;
   inset: 0;
-  background-color: map-get(var.$colors, dimmed);
+  background-color: map.get(var.$colors, dimmed);
 
   @include util.min-width(xl) {
     border-radius: 0.5rem;

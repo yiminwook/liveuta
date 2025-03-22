@@ -1,3 +1,5 @@
+@use "sass:map";
+
 .table {
   text-indent: 0;
   border-color: inherit;
@@ -6,7 +8,7 @@
   width: 100%;
   thead {
     tr {
-      border-block-end: 1px solid map-get(var.$colors, default-border);
+      border-block-end: 1px solid map.get(var.$colors, default-border);
 
       th {
         padding: 0.5rem;
@@ -32,11 +34,11 @@
 
   tbody {
     tr {
-      border-block-end: 1px solid map-get(var.$colors, default-border);
-      transition: background-color 0.2s map-get(var.$easing, default);
+      border-block-end: 1px solid map.get(var.$colors, default-border);
+      transition: background-color 0.2s map.get(var.$easing, default);
 
       &:hover {
-        background-color: map-get(var.$colors, default-hover);
+        background-color: map.get(var.$colors, default-hover);
       }
 
       &:last-child {
@@ -52,7 +54,7 @@
         justify-content: flex-end;
 
         .popoverTrigger {
-          font-family: map-get(var.$fonts, mono);
+          font-family: map.get(var.$fonts, mono);
         }
       }
 
@@ -84,14 +86,14 @@
 
     span {
       font-size: 0.875rem;
-      color: map-get(var.$colors, dimmed);
+      color: map.get(var.$colors, dimmed);
     }
 
     input {
       padding: 0.25rem 0.5rem;
       border-radius: 5px;
       outline: none;
-      border: 1px solid map-get(var.$colors, default-border);
+      border: 1px solid map.get(var.$colors, default-border);
 
       &:focus {
         border-color: util.palette(third, default);
@@ -103,15 +105,15 @@
 .actionButtons {
   flex: 1;
   display: flex;
-  transition: background-color 0.2s map-get(var.$easing, default);
+  transition: background-color 0.2s map.get(var.$easing, default);
 
   .actionButton {
     &:hover {
-      background-color: map-get(var.$gray-colors, 2);
+      background-color: map.get(var.$gray-colors, 2);
     }
 
     [data-mantine-color-scheme='dark'] &:hover {
-      background-color: map-get(var.$dark-colors, 3);
+      background-color: map.get(var.$dark-colors, 3);
     }
   }
 

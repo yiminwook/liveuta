@@ -1,3 +1,5 @@
+@use "sass:map";
+
 .content {
   .header {
     padding-inline: 0.5rem;
@@ -7,7 +9,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
-      color: map-get(var.$colors, text);
+      color: map.get(var.$colors, text);
 
       .thumbnailBox {
         display: grid;

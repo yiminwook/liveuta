@@ -1,3 +1,5 @@
+@use "sass:map";
+
 .wrap {
   padding: 0.5rem 1rem;
 
@@ -8,13 +10,13 @@
     gap: 1rem;
 
     .backButton {
-      color: map-get(var.$colors, text);
+      color: map.get(var.$colors, text);
       font-weight: 500;
 
-      transition: background-color 0.2s map-get(var.$easing, default);
+      transition: background-color 0.2s map.get(var.$easing, default);
 
       &:hover {
-        background-color: map-get(var.$colors, default-hover);
+        background-color: map.get(var.$colors, default-hover);
       }
     }
 
@@ -25,13 +27,13 @@
 
       .navItem {
         font-weight: 600;
-        transition: background-color 0.2s map-get(var.$easing, default);
+        transition: background-color 0.2s map.get(var.$easing, default);
       }
 
       .hoverButton {
-        color: map-get(var.$colors, text);
+        color: map.get(var.$colors, text);
         &:hover {
-          background-color: map-get(var.$colors, default-hover);
+          background-color: map.get(var.$colors, default-hover);
         }
       }
     }

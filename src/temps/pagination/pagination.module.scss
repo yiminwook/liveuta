@@ -1,6 +1,4 @@
-@import 'mixin';
-@import 'var';
-@import 'placeholder';
+@use "sass:map";
 
 .pagination {
   box-sizing: border-box;
@@ -17,7 +15,7 @@
   li {
     a {
       border-radius: 5px;
-      background-color: lighten(map-get($colors, main), 10%);
+      background-color: lighten(map.get($colors, main), 10%);
       padding: 0.25rem 0.5rem;
       line-height: 1;
       font-weight: 600;
@@ -33,18 +31,18 @@
 
       &:hover {
         background-color: var(--liveuta-default-color);
-        color: lighten(map-get($colors, main), 10%);
+        color: lighten(map.get($colors, main), 10%);
       }
 
       &.active {
         background-color: var(--liveuta-active-color) !important;
-        color: lighten(map-get($colors, main), 10%) !important;
+        color: lighten(map.get($colors, main), 10%) !important;
         pointer-events: none;
       }
 
       &.disabled {
-        background-color: map-get($colors, font) !important;
-        color: map-get($colors, light-font) !important;
+        background-color: map.get($colors, font) !important;
+        color: map.get($colors, light-font) !important;
         pointer-events: none;
       }
     }

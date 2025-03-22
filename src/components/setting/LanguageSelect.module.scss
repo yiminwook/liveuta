@@ -1,3 +1,5 @@
+@use "sass:map";
+
 .languages {
   display: flex;
   justify-content: flex-start;
@@ -8,15 +10,15 @@
     place-items: center;
     width: 4rem;
     height: 4rem;
-    border: 1px solid map-get(var.$colors, default-border);
+    border: 1px solid map.get(var.$colors, default-border);
     border-radius: 5px;
 
     &:hover {
-      background-color: map-get(var.$colors, default-hover);
+      background-color: map.get(var.$colors, default-hover);
     }
 
     &:active {
-      background-color: map-get(var.$colors, default-active);
+      background-color: map.get(var.$colors, default-active);
     }
 
     &[data-active='true'] {

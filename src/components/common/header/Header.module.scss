@@ -1,3 +1,5 @@
+@use "sass:map";
+
 .header {
   height: var.$safe-header-height;
   padding-top: var.$env-top;
@@ -5,7 +7,7 @@
 
 .inner {
   // view-transition-name: header;
-  z-index: map-get(var.$z-indexes, header);
+  z-index: map.get(var.$z-indexes, header);
   margin: 0px;
   padding-top: var.$env-top;
   top: 0px;

@@ -1,9 +1,11 @@
+@use "sass:map";
+
 .inner {
   width: 100dvw;
   position: fixed;
   bottom: 0;
   height: var.$safe-footer-height;
-  z-index: map-get(var.$z-indexes, float);
+  z-index: map.get(var.$z-indexes, float);
   background-color: util.palette(first, darken);
   font-size: 0.75rem;
   color: var(--liveuta-txt-light);

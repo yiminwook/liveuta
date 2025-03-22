@@ -1,7 +1,9 @@
+@use "sass:map";
+
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: map-get(var.$z-indexes, overlay);
+  z-index: map.get(var.$z-indexes, overlay);
   background-color: #00000060;
 }
 
@@ -13,10 +15,10 @@
   flex-direction: column;
   height: auto;
   margin-block-start: 6rem;
-  z-index: map-get(var.$z-indexes, max);
-  border: 1px solid map-get(var.$colors, default-border);
+  z-index: map.get(var.$z-indexes, max);
+  border: 1px solid map.get(var.$colors, default-border);
   border-radius: 0.5rem 0.5rem 0 0;
-  background-color: map-get(var.$colors, body);
+  background-color: map.get(var.$colors, body);
 }
 
 .handle {
@@ -25,7 +27,7 @@
   margin-inline: auto;
   margin-block-start: 0.5rem;
   border-radius: 100px;
-  background-color: map-get(var.$colors, dimmed);
+  background-color: map.get(var.$colors, dimmed);
 }
 
 .contentWrapper {
@@ -37,7 +39,7 @@
 }
 
 .content {
-  max-width: map-get(var.$breakpoints, sm);
+  max-width: map.get(var.$breakpoints, sm);
   width: 100%;
 }
 
@@ -66,7 +68,7 @@
 }
 
 .description {
-  color: map-get(var.$colors, dimmed);
+  color: map.get(var.$colors, dimmed);
   font-size: 0.875rem;
   padding: 0;
   margin: 0;

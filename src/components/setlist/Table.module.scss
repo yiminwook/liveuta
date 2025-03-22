@@ -1,3 +1,5 @@
+@use "sass:map";
+
 .table {
   .head {
     .headRow {
@@ -15,7 +17,7 @@
 
   .body {
     .row {
-      transition: background-color 0.2s map-get(var.$easing, default);
+      transition: background-color 0.2s map.get(var.$easing, default);
 
       .cell {
         vertical-align: middle;

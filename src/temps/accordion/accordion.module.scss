@@ -1,6 +1,4 @@
-@import 'mixin';
-@import 'var';
-@import 'placeholder';
+@use "sass:map";
 
 .accordion {
   margin-bottom: 1rem;
@@ -21,7 +19,7 @@
 
   .header {
     padding: 0.2rem;
-    border-bottom: 2px solid map-get($colors, gray);
+    border-bottom: 2px solid map.get($colors, gray);
 
     button {
       width: 100%;

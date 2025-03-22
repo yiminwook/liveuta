@@ -1,7 +1,9 @@
+@use "sass:map";
+
 .wrap {
   @extend %fixed-max-size;
   // view-transition-name: sidebar;
-  z-index: map-get(var.$z-indexes, modal) - 1;
+  z-index: map.get(var.$z-indexes, modal) - 1;
   visibility: hidden;
   color: var(--liveuta-txt-default);
   transition: all 0.3s linear;

@@ -1,6 +1,8 @@
+@use "sass:map";
+
 .index {
   -webkit-user-select: none;
   user-select: none;
 
-  color: map-get(var.$colors, dimmed);
+  color: map.get(var.$colors, dimmed);
 }

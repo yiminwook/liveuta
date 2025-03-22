@@ -1,3 +1,5 @@
+@use "sass:map";
+
 .wrapper {
   display: flex;
   width: 100%;
@@ -14,7 +16,7 @@
 }
 
 .box {
-  border: 2px solid map-get(var.$colors, dimmed);
+  border: 2px solid map.get(var.$colors, dimmed);
   border-radius: 2px;
   position: relative;
 
