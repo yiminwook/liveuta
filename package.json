@@ -9,8 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "biome format --write src",
-    "check": "biome check src",
-    "pm2": "pm2 start start.js --name liveuta"
+    "check": "biome check src"
   },
   "dependencies": {
     "@auth/core": "^0.37.4",
@@ -52,7 +51,6 @@
     "next-nprogress-bar": "^2.4.2",
     "oracledb": "6.4.0",
     "overlayscrollbars": "^2.10.1",
-    "pino": "^9.6.0",
     "react": "^19.0.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "^19.0.0",
@@ -98,7 +96,6 @@
     "eslint-config-biome": "^1.9.4",
     "eslint-config-next": "^15.1.0",
     "lefthook": "^1.9.3",
-    "pm2": "^5.3.1",
     "sass": "^1.75.0",
     "sass-loader": "^16.0.4",
     "typescript": "^5.7.2"
