@@ -1,57 +1,50 @@
-
-$sidebar-max-width: 250px;
-$sidebar-min-width: 32px;
+$nav-max-width: 250px;
+$nav-min-width: 32px;
 
 .wrapper {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-
-.sidebar {
-  width: $sidebar-max-width;
+  width: $nav-max-width;
   transition: width 0.5s ease;
 }
 
-.sidebar[data-active="false"]{
-  width: $sidebar-min-width;
+.wrapper[data-active="false"]{
+  width: $nav-min-width;
   flex-shrink: 0;
 }
 
-.sidebarPosition {
+.position {
   position: fixed;
-  width: $sidebar-max-width;
+  width: $nav-max-width;
   top: var.$safe-header-height;
   bottom: 0;
   background-color: util.palette(first, 95);
   padding: 5px;
   display: flex;
   flex-direction: column;
-  // border-left: 1px solid map-get(var.$colors, dimmed);
+  padding-bottom: var.$safe-footer-height;
 }
 
-.sidebarHeader {
+.header {
   display: flex;
   justify-content: space-between;
 
-  .sidebarHeaderLeft {
+  .headerLeft {
     display: flex;
     align-items: center;
   }
 
-  .sidebarHeaderRight {
+  .headerRight {
     display: flex;
     align-items: center;
     gap: 5px;
   }
 }
 
-.sidebarInputBox {
+.urlInputBox {
   margin-bottom: 10px;
   padding: 10px 0;
 }
 
-.sidebarContent {
+.content {
   flex: 1;
   overflow-y: auto;
   font-size: 0.85rem;
@@ -69,15 +62,13 @@ $sidebar-min-width: 32px;
   }
 }
 
-
-
 .listItem {
   padding: 10px;
   border-radius: 10px;
   transition: background-color 0.5s ease;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.04);
   }
 
   time {
@@ -110,8 +101,9 @@ $sidebar-min-width: 32px;
       margin-right: 10px;
     }
 
-    .channelName{
+    .channelName {
       font-size: 1rem;
+      font-weight: 500;
       color:  util.palette(third, default);
     }
 
@@ -123,56 +115,4 @@ $sidebar-min-width: 32px;
   .listItemHeaderRight {
 
   }
-}
-
-.container {
-  flex: 1;
-  padding: 10px;
-
-  :global(.react-grid-item.react-grid-placeholder){
-    background-color: util.palette(third, 95);
-  }
-}
-
-.box {
-  border: 2px solid map-get(var.$colors, dimmed);
-  border-radius: 2px;
-  position: relative;
-
-  :global(.react-resizable-handle){
-    background-color: #fff;
-    border-radius: 2px;
-  } 
-}
-
-
-.drag {
-  position: absolute;
-  background-color:#fff;
-  color: #000;
-  width: 20px;
-  height: 20px;
-  top: 0;
-  left: 0;
-  border-radius: 2px;
-  z-index: 1;
-  cursor: grab;
-}
-
-:global(.react-grid-layout)[data-dragging="true"] {
-  .drag {
-    cursor: grabbing;
-  }
-}
-
-.remove {
-  position: absolute;
-  background-color: orange;
-  width: 20px;
-  height: 20px;
-  top: 0;
-  right: 0;
-  border-radius: 2px;
-  z-index: 1;
-  cursor: pointer;
 }

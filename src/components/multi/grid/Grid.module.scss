@@ -1,0 +1,57 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  flex: 1;
+  padding: 10px;
+
+  :global(.react-grid-item.react-grid-placeholder){
+    background-color: util.palette(third, 95);
+  }
+}
+
+.box {
+  border: 2px solid map-get(var.$colors, dimmed);
+  border-radius: 2px;
+  position: relative;
+
+  :global(.react-resizable-handle){
+    background-color: #fff;
+    border-radius: 2px;
+  } 
+}
+
+
+.drag {
+  position: absolute;
+  background-color:#fff;
+  color: #000;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  border-radius: 2px;
+  z-index: 1;
+  cursor: grab;
+}
+
+:global(.react-grid-layout)[data-dragging="true"] {
+  .drag {
+    cursor: grabbing;
+  }
+}
+
+.remove {
+  position: absolute;
+  background-color: orange;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  right: 0;
+  border-radius: 2px;
+  z-index: 1;
+  cursor: pointer;
+}

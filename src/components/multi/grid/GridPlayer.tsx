@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function GridPlayer({ url }: Props) {
-  const t = useTranslations('multiView.shortsSection.shorts');
+  const t = useTranslations();
 
   return (
     <ReactPlayer
@@ -28,7 +28,7 @@ export default function GridPlayer({ url }: Props) {
       }}
       controls={true}
       onError={() => {
-        toast.error(t('cannotPlayError'));
+        toast.error(t('multiView.cannotPlayError'));
         // setVideoId(() => IINITIAL_PLAYER_VIDEO_ID);
         // setStatus((pre) => ({ ...pre, isPlaying: false }));
       }}

@@ -237,11 +237,7 @@
   },
   "multiView": {
     "title": "マルチビュー",
-    "shortsSection": {
-      "shorts": {
-        "cannotPlayError": "再生できません。"
-      }
-    }
+    "cannotPlayError": "再生できません。"
   },
   "my": {
     "blacklist": {

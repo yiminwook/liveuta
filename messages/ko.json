@@ -242,12 +242,8 @@
     }
   },
   "multiView": {
-    "title": "멀티뷰",
-    "shortsSection": {
-      "shorts": {
-        "cannotPlayError": "재생할 수 없습니다."
-      }
-    }
+     "title": "멀티뷰",
+     "cannotPlayError": "재생할 수 없습니다."
   },
   "my": {
     "blacklist": {

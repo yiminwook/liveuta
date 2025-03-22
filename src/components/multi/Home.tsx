@@ -4,11 +4,13 @@ import variable from '@variable';
 import dynamic from 'next/dynamic';
 import css from './Home.module.scss';
 
-import './GridLayout.module.scss';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
-const Grid = dynamic(() => import('./GridLayout'), {
+import './grid/Grid.module.scss';
+import './grid/GridNav.module.scss';
+
+const Grid = dynamic(() => import('./grid'), {
   ssr: false,
   loading: () => (
     <div className={css.gridLoadingBox}>

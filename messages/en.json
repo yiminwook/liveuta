@@ -243,11 +243,7 @@
   },
   "multiView": {
     "title": "MultiView",
-    "shortsSection": {
-      "shorts": {
-        "cannotPlayError": "Cannot play this video."
-      }
-    }
+    "cannotPlayError": "Cannot play this video."
   },
   "my": {
     "blacklist": {
