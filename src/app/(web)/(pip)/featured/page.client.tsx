@@ -25,23 +25,27 @@ type Props = {
 
 export default function Client({ featuredData }: Props) {
   const session = useSession().data;
-  const { channelList, whiteList } = useCachedData({ session });
+  const { channelMap, whiteListMap } = useCachedData({ session });
   const mutateBlock = usePostBlacklist();
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
-  const t = useTranslations('featured');
+  const t = useTranslations();
   const locale = useLocale();
 
   const handleFavorite = (content: TYChannelsData) => {
-    if (!session) return toast.error(t('notLoggedInError'));
-    const isFavorite = whiteList.has(content.uid);
+    if (!session) {
+      toast.error(t('featured.notLoggedInError'));
+      return;
+    }
 
-    if (!isFavorite && confirm(t('addFavoriteChannel'))) {
+    const isFavorite = whiteListMap.has(content.uid);
+
+    if (!isFavorite && confirm(t('featured.addFavoriteChannel'))) {
       mutatePostFavorite.mutate({
         session,
         channelId: content.uid,
       });
-    } else if (isFavorite && confirm(t('removeFavoriteChannel'))) {
+    } else if (isFavorite && confirm(t('featured.removeFavoriteChannel'))) {
       mutateDeleteFavorite.mutate({
         session,
         channelId: content.uid,
@@ -50,9 +54,12 @@ export default function Client({ featuredData }: Props) {
   };
 
   const handleBlock = (content: TYChannelsData) => {
-    if (!session) return toast.error(t('notLoggedInError'));
+    if (!session) {
+      toast.error(t('featured.notLoggedInError'));
+      return;
+    }
 
-    if (confirm(t('blockChannel'))) {
+    if (confirm(t('featured.blockChannel'))) {
       mutateBlock.mutate({
         session,
         channelId: content.uid,
@@ -60,19 +67,19 @@ export default function Client({ featuredData }: Props) {
     }
   };
 
-  const isFavorite = (channelId: string) => whiteList.has(channelId);
+  const isFavorite = (channelId: string) => whiteListMap.has(channelId);
 
   const combinedData = useMemo(() => {
     return {
-      promising: combineYTData(channelList, featuredData.promising),
-      topRating: combineYTData(channelList, featuredData.topRating),
+      promising: combineYTData(channelMap, featuredData.promising),
+      topRating: combineYTData(channelMap, featuredData.topRating),
     };
-  }, [featuredData, channelList]);
+  }, [featuredData, channelMap]);
 
   return (
     <div className={css.container}>
       <p className={classNames('essential', css.essential)}>
-        {t('essential')}&nbsp;
+        {t('featured.essential')}&nbsp;
         <ClientOnly>
           <time>
             ({dayjs(featuredData.lastUpdateAt).locale(locale).format('YYYY-MM-DD HH:mm')})
@@ -100,7 +107,7 @@ export default function Client({ featuredData }: Props) {
       >
         <SwiperSlide>
           <RankingTable
-            title={t('topRating')}
+            title={t('featured.topRating')}
             data={combinedData.topRating}
             onFavorite={handleFavorite}
             onBlock={handleBlock}
@@ -108,7 +115,7 @@ export default function Client({ featuredData }: Props) {
         </SwiperSlide>
         <SwiperSlide>
           <RankingTable
-            title={t('promising')}
+            title={t('featured.promising')}
             data={combinedData.promising}
             onFavorite={handleFavorite}
             onBlock={handleBlock}

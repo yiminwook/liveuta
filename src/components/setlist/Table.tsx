@@ -49,9 +49,9 @@ type DataType = {
 };
 
 export default function SetlistTable({ session, searchParams }: TableProps) {
-  const { channelList } = useCachedData({ session });
+  const { channelMap } = useCachedData({ session });
   const router = useRouter();
-  const t = useTranslations('setlist.table');
+  const t = useTranslations();
 
   const { data, isLoading } = useQuery({
     queryKey: ['searchSetlist', searchParams],
@@ -121,16 +121,22 @@ export default function SetlistTable({ session, searchParams }: TableProps) {
         <Table.Thead className={css.head}>
           <Table.Tr className={css.headRow}>
             <Table.Td className={cx(css.headCell, css.thumbnail)} />
-            <Table.Td className={cx(css.headCell, css.channel)}>{t('headCellChannel')}</Table.Td>
-            <Table.Td className={cx(css.headCell, css.title)}>{t('headCellTitle')}</Table.Td>
+            <Table.Td className={cx(css.headCell, css.channel)}>
+              {t('setlist.table.headCellChannel')}
+            </Table.Td>
+            <Table.Td className={cx(css.headCell, css.title)}>
+              {t('setlist.table.headCellTitle')}
+            </Table.Td>
             <Table.Td className={cx(css.headCell, css.time)}>
-              {searchParams.sort === 'create' ? t('sortCreate') : t('sortBroadcast')}
+              {searchParams.sort === 'create'
+                ? t('setlist.table.sortCreate')
+                : t('setlist.table.sortBroadcast')}
             </Table.Td>
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody className={css.body}>
           {data.list.map((setlist) => (
-            <Row key={setlist.videoId} setlist={setlist} channel={channelList[setlist.channelId]} />
+            <Row key={setlist.videoId} setlist={setlist} channel={channelMap[setlist.channelId]} />
           ))}
         </Table.Tbody>
       </Table>

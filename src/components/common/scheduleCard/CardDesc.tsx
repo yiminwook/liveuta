@@ -1,6 +1,6 @@
 import dayjs from '@/libraries/dayjs';
 import { generateChannelUrl } from '@/libraries/youtube/url';
-import { TContentsData } from '@/types/api/mongoDB';
+import { TChannelData, TContentData } from '@/types/api/mongoDB';
 import { openWindow } from '@/utils/windowEvent';
 import cx from 'classnames';
 import { useLocale, useTranslations } from 'next-intl';
@@ -8,7 +8,8 @@ import css from './Card.module.scss';
 import CardStatus from './CardStatus';
 
 type CardDescProps = {
-  content: TContentsData;
+  content: TContentData;
+  channel: TChannelData | undefined;
   addStreamModifier: string;
 };
 
@@ -17,8 +18,8 @@ type CardDescProps = {
  *
  * 채널명 1줄, 제목 2줄, 시간 1줄
  */
-export default function CardDesc({ content, addStreamModifier }: CardDescProps) {
-  const { title, channelName, utcTime, interval, isStream, viewer, channelId } = content;
+export default function CardDesc({ content, addStreamModifier, channel }: CardDescProps) {
+  const { title, utcTime, interval, isStream, viewer, channelId } = content;
 
   const channelUrl = generateChannelUrl(channelId);
   const locale = useLocale();
@@ -33,12 +34,12 @@ export default function CardDesc({ content, addStreamModifier }: CardDescProps) 
     <div className={css.descBox}>
       <span>
         <a
-          title={channelName}
+          title={channel?.name_kor}
           className={cx(css.channelNm, addStreamModifier)}
           href={channelUrl}
           onClick={openChannel}
         >
-          {channelName}
+          {channel?.name_kor}
         </a>
       </span>
       <p title={title} className={cx(css.title, addStreamModifier)}>

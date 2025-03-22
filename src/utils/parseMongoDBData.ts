@@ -1,23 +1,22 @@
 import dayjs from '@/libraries/dayjs';
 import {
   ContentDocumentWithDayjs,
-  TContentsData,
+  TContentData,
   TParseAllDataReturn,
   TParseScheduledDataReturn,
 } from '@/types/api/mongoDB';
 import { getInterval, stringToTime } from '@/utils/getTime';
 import { replaceParentheses } from '@/utils/regexp';
 
-export const parseMongoDBDocument = (doc: ContentDocumentWithDayjs): TContentsData => {
+export const parseMongoDBDocument = (doc: ContentDocumentWithDayjs): TContentData => {
   try {
     const { timestamp, utcTime } = stringToTime(doc.ScheduledTime);
     const interval = getInterval(timestamp);
 
     const replacedTitle = replaceParentheses(doc.Title);
 
-    const data: TContentsData = {
+    const data: TContentData = {
       title: replacedTitle,
-      channelName: doc.ChannelName,
       videoId: doc.VideoId,
       channelId: doc.ChannelId,
       timestamp,
@@ -39,8 +38,8 @@ export const parseMongoDBDocument = (doc: ContentDocumentWithDayjs): TContentsDa
 export const parseScheduledData = (
   documents: ContentDocumentWithDayjs[],
 ): TParseScheduledDataReturn => {
-  const scheduled: TContentsData[] = [];
-  const live: TContentsData[] = [];
+  const scheduled: TContentData[] = [];
+  const live: TContentData[] = [];
 
   documents.forEach((doc) => {
     const isHide = doc.Hide;
@@ -68,8 +67,8 @@ export const parseScheduledData = (
 export const parseAllData = (documents: ContentDocumentWithDayjs[]): TParseAllDataReturn => {
   if (!documents) throw new Error('No DataValue');
 
-  const daily: TContentsData[] = [];
-  const all: TContentsData[] = [];
+  const daily: TContentData[] = [];
+  const all: TContentData[] = [];
   const yesterday = dayjs().subtract(1, 'day').valueOf();
 
   documents.forEach((doc) => {

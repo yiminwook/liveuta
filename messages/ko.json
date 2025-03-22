@@ -283,9 +283,7 @@
       "blockChannel": "채널 차단",
       "copyLink": "링크 복사",
       "linkCopied": "링크가 복사되었습니다.",
-      "cardImage": {
-        "livestreamOf": "의 방송"
-      },
+      "thumbnail": "방송 썸네일",
       "cardMenu": {
         "setNotification": "알림 설정",
         "addMultiView": "멀티뷰 추가",
@@ -436,8 +434,7 @@
     "useReservePush": {
       "tokenError": "토큰을 가져오는데 실패했습니다.",
       "title": "스케줄 알림",
-      "bodyStart": "곧",
-      "bodyEnd": "의 방송이 시작됩니다."
+      "body": "곧 {channelName} 의 방송이 시작됩니다."
     }
   }
 }

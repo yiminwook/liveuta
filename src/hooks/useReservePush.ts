@@ -1,7 +1,7 @@
 import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { TContentsData } from '@/types/api/mongoDB';
+import { TChannelData, TContentData } from '@/types/api/mongoDB';
 import { gtagClick } from '@/utils/gtag';
 import { PushData } from '@api/push/route';
 import { useMutation } from '@tanstack/react-query';
@@ -20,7 +20,7 @@ export type TReservePushArgs = {
 };
 
 const useReservePush = () => {
-  const t = useTranslations('hooks.useReservePush');
+  const t = useTranslations();
   const mutatePush = useMutation({
     mutationFn: async (arg: TReservePushArgs) => {
       const data: PushData = {
@@ -59,22 +59,22 @@ const useReservePush = () => {
     },
   });
 
-  const reservePush = async (content: TContentsData) => {
+  const reservePush = async (content: TContentData, channel: TChannelData | undefined) => {
     if (mutatePush.isPending) return;
     const token = await generateFcmToken();
 
     if (token === undefined) {
-      throw new Error(t('tokenError'));
+      throw new Error(t('hooks.useReservePush.tokenError'));
     }
 
     mutatePush.mutate({
-      title: t('title'),
-      body: `${t('bodyStart')} ${content.channelName}${t('bodyEnd')}`,
+      title: t('hooks.useReservePush.title'),
+      body: `${t('hooks.useReservePush.body', { channelName: channel?.name_kor || '' })}`,
       token,
       timestamp: content.timestamp.toString(),
       imageUrl: generateThumbnail(content.videoId, 'mqdefault'),
       link: generateVideoUrl(content.videoId),
-      channelName: content.channelName,
+      channelName: channel?.name_kor || '',
     });
   };
 

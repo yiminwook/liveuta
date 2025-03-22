@@ -4,7 +4,7 @@ import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
-import { TContentsData } from '@/types/api/mongoDB';
+import { TContentData } from '@/types/api/mongoDB';
 import { gtagClick } from '@/utils/gtag';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -12,17 +12,16 @@ import { useCallback, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 interface CardImageProps {
-  content: TContentsData;
+  content: TContentData;
 }
 
 export default function CardImage({ content }: CardImageProps) {
-  const { channelName, videoId } = content;
-  const videoUrl = generateVideoUrl(videoId);
-  const thumbnailUrl = generateThumbnail(videoId, 'mqdefault');
+  const videoUrl = generateVideoUrl(content.videoId);
+  const thumbnailUrl = generateThumbnail(content.videoId, 'mqdefault');
   const [imgLoaded, setImgLoaded] = useState(true);
   const actions = useSetPlayerStore();
   const imgRef = useRef<HTMLImageElement>(null);
-  const t = useTranslations('schedule.scheduleCard.cardImage');
+  const t = useTranslations();
 
   const handleImgValidity = useCallback(() => {
     const currentImage = imgRef.current;
@@ -36,14 +35,14 @@ export default function CardImage({ content }: CardImageProps) {
     gtagClick({
       target: 'scheduleCard',
       action: 'atag',
-      content: content.channelName,
+      content: content.channelId,
       detail: content.title,
     });
 
     if (isMobile) {
       window.location.href = videoUrl;
     } else {
-      actions.setVideo(videoId);
+      actions.setVideo(content.videoId);
     }
   };
 
@@ -52,7 +51,7 @@ export default function CardImage({ content }: CardImageProps) {
       {imgLoaded ? (
         <Image
           src={thumbnailUrl ?? altImage}
-          alt={`${channelName}${t('livestreamOf')}`}
+          alt={t('schedule.scheduleCard.thumbnail')}
           loading="lazy"
           ref={imgRef}
           onLoad={handleImgValidity}
@@ -65,7 +64,7 @@ export default function CardImage({ content }: CardImageProps) {
       ) : (
         <Image
           src={altImage}
-          alt={`${channelName}${t('livestreamOf')}`}
+          alt={t('schedule.scheduleCard.thumbnail')}
           placeholder="blur"
           unoptimized
           fill

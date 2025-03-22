@@ -28,7 +28,6 @@ export type ContentDocument = {
   _id?: string;
   Title: string;
   URL: string;
-  ChannelName: string;
   ScheduledTime: Date;
   broadcastStatus: isStream;
   Hide: isStream;
@@ -43,15 +42,14 @@ export type ContentDocumentWithDayjs = Omit<ContentDocument, '_id' | 'ScheduledT
   ScheduledTime: dayjs.Dayjs;
 };
 
-export type ContentsLength = {
+export type ContentLength = {
   total: number;
   video: number;
   stream: number;
 };
 
-export type TContentsData = {
+export type TContentData = {
   title: string;
-  channelName: string;
   videoId: string;
   channelId: string;
   timestamp: number;
@@ -63,7 +61,7 @@ export type TContentsData = {
   tag: string;
 };
 
-export type TContentsDataReturn = TContentsData[];
+export type TContentsDataReturn = TContentData[];
 
 export type TParseScheduledDataReturn = {
   scheduled: TContentsDataReturn;

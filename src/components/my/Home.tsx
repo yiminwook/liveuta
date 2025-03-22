@@ -13,8 +13,8 @@ type HomeProps = {};
 
 export default function Home({}: HomeProps) {
   const session = useSession().data!;
-  const { whiteList, channelList, blackList } = useCachedData({ session });
-  const t = useTranslations('my');
+  const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
+  const t = useTranslations();
 
   return (
     <Background>
@@ -22,16 +22,16 @@ export default function Home({}: HomeProps) {
         <section className={css.section}>
           <h2 className={css.sectionTitle}>
             <FasStar width="1.2rem" height="1.2rem" color="#ffbb00" />
-            <b>{t('favorite.title')}</b>
+            <b>{t('my.favorite.title')}</b>
           </h2>
-          <Whitelist session={session} whiteList={whiteList} channelList={channelList} />
+          <Whitelist session={session} whiteList={whiteListMap} channelList={channelMap} />
         </section>
         <section className={css.section}>
           <h2 className={css.sectionTitle}>
             <MdiBlock width="1.2rem" height="1.2rem" />
-            <b>{t('blacklist.title')}</b>
+            <b>{t('my.blacklist.title')}</b>
           </h2>
-          <Blacklist session={session} blacklist={blackList} channelList={channelList} />
+          <Blacklist session={session} blacklist={blackListMap} channelList={channelMap} />
         </section>
       </div>
     </Background>

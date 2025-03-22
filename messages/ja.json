@@ -277,9 +277,7 @@
       "blockChannel": "チャンネルをブロック",
       "copyLink": "リンクをコピー",
       "linkCopied": "リンクがコピーされました。",
-      "cardImage": {
-        "livestreamOf": "の放送"
-      },
+      "thumbnail": "放送サムネイル ",
       "cardMenu": {
         "setNotification": "通知設定",
         "addMultiView": "マルチビュー追加",
@@ -430,8 +428,7 @@
     "useReservePush": {
       "tokenError": "トークンの取得に失敗しました。",
       "title": "スケジュール通知",
-      "bodyStart": "まもなく",
-      "bodyEnd": "の放送が開始されます。"
+      "body": "まもなく {channlName} の放送が開始されます。"
     }
   }
 }

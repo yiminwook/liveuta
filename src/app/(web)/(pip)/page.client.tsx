@@ -13,7 +13,7 @@ import { useSchedule } from '@/hooks/useSchedule';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useAppCtx } from '@/stores/app';
 import { useSetModalStore } from '@/stores/modal';
-import { TContentsData } from '@/types/api/mongoDB';
+import { TContentData } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick } from '@/utils/gtag';
 import { isDarkModeEnabled } from '@/utils/helper';
@@ -39,8 +39,8 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
   const [query, setQuery] = useState('');
   const router = useRouter();
   const modalStore = useSetModalStore();
-  const { whiteList, blackList } = useCachedData({ session });
-  const t = useTranslations('home');
+  const { whiteListMap, blackListMap, channelMap } = useCachedData({ session });
+  const t = useTranslations();
   const { data, isPending } = useSchedule({ enableAutoSync: false });
 
   const onChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,16 +60,19 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
   const mutateDeleteFavorite = useMutateWhitelist();
   const { reservePush } = useReservePush();
 
-  const handleFavorite = (content: TContentsData) => {
-    if (!session) return toast.error(t('notLoggedInError'));
-    const isFavorite = whiteList.has(content.channelId);
+  const handleFavorite = (content: TContentData) => {
+    if (!session) {
+      toast.error(t('home.notLoggedInError'));
+      return;
+    }
+    const isFavorite = whiteListMap.has(content.channelId);
 
-    if (!isFavorite && confirm(t('addFavoriteChannel'))) {
+    if (!isFavorite && confirm(t('home.addFavoriteChannel'))) {
       mutatePostFavorite.mutate({
         session,
         channelId: content.channelId,
       });
-    } else if (isFavorite && confirm(t('removeFavoriteChannel'))) {
+    } else if (isFavorite && confirm(t('home.removeFavoriteChannel'))) {
       mutateDeleteFavorite.mutate({
         session,
         channelId: content.channelId,
@@ -77,10 +80,13 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
     }
   };
 
-  const handleBlock = async (content: TContentsData) => {
-    if (!session) return toast.error(t('notLoggedInError'));
+  const handleBlock = async (content: TContentData) => {
+    if (!session) {
+      toast.error(t('home.notLoggedInError'));
+      return;
+    }
 
-    if (confirm(t('blockChannel'))) {
+    if (confirm(t('home.blockChannel'))) {
       mutateBlock.mutate({
         session,
         channelId: content.channelId,
@@ -88,10 +94,10 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
     }
   };
 
-  const openStream = (content: TContentsData) => {
+  const openStream = (content: TContentData) => {
     gtagClick({
       target: 'scheduleCard',
-      content: content.channelName,
+      content: content.channelId,
       detail: content.title,
       action: 'openWindow',
     });
@@ -108,14 +114,14 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
     }
 
     const liveContent = data.live
-      .filter((i) => !blackList.has(i.channelId))
+      .filter((i) => !blackListMap.has(i.channelId))
       .slice(0, 19)
-      .map((i) => ({ ...i, isFavorite: whiteList.has(i.channelId) }));
+      .map((i) => ({ ...i, isFavorite: whiteListMap.has(i.channelId) }));
 
     const favoriteContent = data.all
       .slice() // copy
       .reverse()
-      .filter((i) => whiteList.has(i.channelId))
+      .filter((i) => whiteListMap.has(i.channelId))
       .slice(0, 19)
       .map((i) => ({ ...i, isFavorite: true }));
 
@@ -123,7 +129,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
       liveContent,
       favoriteContent,
     };
-  }, [data, whiteList, blackList]);
+  }, [data, whiteListMap, blackListMap]);
 
   return (
     <main className={css.homeMain}>
@@ -137,28 +143,30 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
       <section className={css.liveSection}>
         <div className={css.liveNav}>
           <h2>
-            🎤 <span className={css.highlight}>{t('live')}</span>
+            🎤 <span className={css.highlight}>{t('home.live')}</span>
           </h2>
           <MoreButton href="/schedule?t=live" />
         </div>
         <ScheduleSlider
-          isLoading={isPending}
           contents={proceedScheduleData.liveContent}
+          channelMap={channelMap}
           addAlarm={reservePush}
           openNewTab={openStream}
           addBlock={handleBlock}
           toggleFavorite={handleFavorite}
+          isLoading={isPending}
         />
       </section>
 
       {session && !isPending && (
         <section className={css.favoriteSection}>
           <div className={css.favoriteNav}>
-            <h2>🌟 {t('favorite')}</h2>
+            <h2>🌟 {t('home.favorite')}</h2>
             <MoreButton href="/schedule?isFavorite=true" />
           </div>
           <ScheduleSlider
             contents={proceedScheduleData.favoriteContent}
+            channelMap={channelMap}
             addAlarm={reservePush}
             openNewTab={openStream}
             addBlock={handleBlock}
@@ -170,12 +178,12 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
       <section className={css.searchSection}>
         <div className={css.searchNav}>
           <div />
-          <h2>{t('searchSchedule')}</h2>
+          <h2>{t('home.searchSchedule')}</h2>
           <MoreButton href="/schedule" />
         </div>
         <div className={css.searchBox}>
           <SearchInput
-            placeholder={t('searchInputPlaceholder')}
+            placeholder={t('home.searchInputPlaceholder')}
             value={query}
             onChange={onChangeQuery}
             onSubmit={onSearch}
@@ -185,7 +193,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
 
       <section className={css.recentChannelSection}>
         <div className={css.recentChannelNav}>
-          <h2>🚚 {t('recentlyAddedChannel')}</h2>
+          <h2>🚚 {t('home.recentlyAddedChannel')}</h2>
           <MoreButton href="/channel?sort=createdAt" />
         </div>
         <ChannelSlider recentChannels={recentChannels} />
@@ -193,7 +201,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
 
       <section className={css.featureSection}>
         <div className={css.featureNav}>
-          <h2>✨ {t('featured')}</h2>
+          <h2>✨ {t('home.featured')}</h2>
         </div>
         <Link href="/featured">
           <div className={css.featureBox}>
@@ -206,8 +214,8 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
                   <rect width="100%" height="100%" fill="url(#pattern)" />
                 </svg>
                 <div className={css.featuredOverlay}>
-                  <h3>{t('featuredTitle')}</h3>
-                  <p>{t('featuredDescription')}</p>
+                  <h3>{t('home.featuredTitle')}</h3>
+                  <p>{t('home.featuredDescription')}</p>
                 </div>
                 <div className={css.characterImage}>
                   <Image src={character9} alt="character" fill priority />

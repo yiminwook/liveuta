@@ -4,7 +4,7 @@ import { useSchedule } from '@/hooks/useSchedule';
 import dayjs from '@/libraries/dayjs';
 import { generateThumbnail } from '@/libraries/youtube/thumbnail';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { TContentsData } from '@/types/api/mongoDB';
+import { TChannelData, TContentData } from '@/types/api/mongoDB';
 import { TScheduleDto } from '@/types/dto';
 import { AntDesignDragOutlined } from '@icons/antd/DragOutlined';
 import { MaterialSymbolsInfoOutline } from '@icons/material-symbols/InfoOutline';
@@ -204,7 +204,7 @@ function Sidebar({ onAdd, onClear, isFlip, toggleFlip }: SidebarProps) {
   const t = useTranslations();
 
   const session = useSession().data;
-  const { blackList } = useCachedData({ session });
+  const { blackListMap, channelMap } = useCachedData({ session });
   const { data, isPending } = useSchedule({ enableAutoSync: true });
   const [filter, setFilter] = useState<TScheduleDto['filter']>('live');
 
@@ -230,7 +230,7 @@ function Sidebar({ onAdd, onClear, isFlip, toggleFlip }: SidebarProps) {
     if (!data) return [];
 
     const filteredContent = data[filter].filter((content) => {
-      const inBlacklist = blackList.has(content.channelId);
+      const inBlacklist = blackListMap.has(content.channelId);
 
       let isPassList: boolean;
 
@@ -258,7 +258,7 @@ function Sidebar({ onAdd, onClear, isFlip, toggleFlip }: SidebarProps) {
     });
 
     return filteredContent;
-  }, [data, blackList, filter]);
+  }, [data, blackListMap, filter]);
 
   const selectItems: ComboboxData = [
     { value: 'scheduled', label: t('schedule.navTab.scheduled') },
@@ -337,7 +337,12 @@ function Sidebar({ onAdd, onClear, isFlip, toggleFlip }: SidebarProps) {
         <div className={classNames(css.sidebarContent, { loading: isPending })}>
           {isPending && <Loader color={variable.thirdColorDefault} />}
           {proceedScheduleData.map((content) => (
-            <ListItem key={content.videoId} content={content} onAddById={onClickAddByListItem} />
+            <ListItem
+              key={content.videoId}
+              content={content}
+              onAddById={onClickAddByListItem}
+              channel={channelMap[content.channelId]}
+            />
           ))}
         </div>
       </div>
@@ -346,11 +351,12 @@ function Sidebar({ onAdd, onClear, isFlip, toggleFlip }: SidebarProps) {
 }
 
 interface ListItemProps {
-  content: TContentsData;
+  content: TContentData;
+  channel: TChannelData | undefined;
   onAddById: (videoId: string) => void;
 }
 
-function ListItem({ content, onAddById }: ListItemProps) {
+function ListItem({ content, channel, onAddById }: ListItemProps) {
   const thumbnail = generateThumbnail(content.videoId, 'mqdefault');
   const t = useTranslations();
   const locale = useLocale();
@@ -361,7 +367,7 @@ function ListItem({ content, onAddById }: ListItemProps) {
         <div className={css.listItemHeaderLeft}>
           <Avatar className={css.avatar} size="md" src={thumbnail} />
           <div>
-            <span className={classNames(css.channelName, css.line)}>{content.channelName}</span>
+            <span className={classNames(css.channelName, css.line)}>{channel?.name_kor}</span>
             {content.viewer > 0 && <span className={css.line}>Viewer: {content.viewer}</span>}
           </div>
         </div>

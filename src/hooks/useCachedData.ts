@@ -50,7 +50,7 @@ const useCachedData = ({ session }: LayoutDataObserverProps) => {
     ],
   });
 
-  const channelData = useMemo(() => {
+  const channelMap = useMemo(() => {
     if (!channelList.data) return {};
     const channelData = Object.fromEntries(
       channelList.data.map((channel) => {
@@ -60,18 +60,18 @@ const useCachedData = ({ session }: LayoutDataObserverProps) => {
     return channelData;
   }, [channelList.data]);
 
-  const blackListData = useMemo(() => {
+  const blackListMap = useMemo(() => {
     return new Set(blacklist.data);
   }, [blacklist.data]);
 
-  const whiteListData = useMemo(() => {
+  const whiteListMap = useMemo(() => {
     return new Set(whitelist.data);
   }, [whitelist.data]);
 
   return {
-    channelList: channelData,
-    blackList: blackListData,
-    whiteList: whiteListData,
+    channelMap,
+    blackListMap,
+    whiteListMap,
   };
 };
 

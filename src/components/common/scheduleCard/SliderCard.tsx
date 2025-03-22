@@ -1,5 +1,5 @@
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { STAT_MAPPER, TContentsData } from '@/types/api/mongoDB';
+import { STAT_MAPPER, TChannelData, TContentData } from '@/types/api/mongoDB';
 import FasStar from '@icons/fa-solid/Star';
 import IonPerson from '@icons/ion/Person';
 import IonPlus from '@icons/ion/PlusRound';
@@ -14,31 +14,35 @@ import CardImage from './CardImage';
 import css from './SliderCard.module.scss';
 
 type SliderCardProps = {
-  content: TContentsData & { isFavorite: boolean };
+  content: TContentData;
+  channel: TChannelData | undefined;
   isFavorite?: boolean;
-  addAlarm?: (item: TContentsData) => void;
-  openNewTab?: (item: TContentsData) => void;
-  toggleFavorite?: (item: TContentsData) => void;
-  addBlock?: (item: TContentsData) => void;
-  copy?: (item: TContentsData) => void;
+  addAlarm?: (item: TContentData, channel: TChannelData | undefined) => void;
+  openNewTab?: (item: TContentData) => void;
+  toggleFavorite?: (item: TContentData) => void;
+  addBlock?: (item: TContentData) => void;
+  copy?: (item: TContentData) => void;
 };
 
 export default function SliderCard({
   content,
+  channel,
   isFavorite = false,
   addAlarm,
   openNewTab,
   toggleFavorite,
   addBlock,
 }: SliderCardProps) {
-  const t = useTranslations('home.sliderCard');
+  const t = useTranslations();
 
   const onClickAlarm = () => {
-    addAlarm?.(content);
+    addAlarm?.(content, channel);
   };
+
   const onClickFavorite = () => {
     toggleFavorite?.(content);
   };
+
   const onClickNewTab = () => {
     openNewTab?.(content);
   };
@@ -67,7 +71,7 @@ export default function SliderCard({
       </Card.Section>
 
       <Text fw={500} className={css.channelNm} mt="xs">
-        {content.channelName}
+        {channel?.name_kor}
       </Text>
 
       <Text size="sm" c="dimmed" className={css.title} mt="xs">
@@ -76,13 +80,13 @@ export default function SliderCard({
 
       <div className={css.navBox}>
         <div>
-          {/* <Tooltip label={t('setNotification')} position="bottom" withArrow>
+          {/* <Tooltip label={t('home.sliderCard.setNotification')} position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickAlarm}>
               <TbBellRingingFilled color={variable.thirdColorDefault} />
             </ActionIcon>
           </Tooltip> */}
           <Tooltip
-            label={`${t('favorite')} ${isFavorite ? t('remove') : t('add')}`}
+            label={`${t('home.sliderCard.favorite')} ${isFavorite ? t('home.sliderCard.remove') : t('home.sliderCard.add')}`}
             position="bottom"
             withArrow
           >
@@ -90,12 +94,12 @@ export default function SliderCard({
               <FasStar color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
             </ActionIcon>
           </Tooltip>
-          <Tooltip label={t('blockChannel')} position="bottom" withArrow>
+          <Tooltip label={t('home.sliderCard.blockChannel')} position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickBlock}>
               <MdiBlock color={variable.thirdColorDefault} />
             </ActionIcon>
           </Tooltip>
-          <Tooltip label={t('openInNewTab')} position="bottom" withArrow>
+          <Tooltip label={t('home.sliderCard.openInNewTab')} position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickNewTab}>
               <MsOpenInNew color={variable.thirdColorDefault} />
             </ActionIcon>

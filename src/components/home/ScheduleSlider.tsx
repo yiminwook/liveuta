@@ -1,5 +1,5 @@
 'use client';
-import { TContentsData } from '@/types/api/mongoDB';
+import { TChannelData, TContentData } from '@/types/api/mongoDB';
 import variable from '@variable';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,16 +8,18 @@ import SliderCardSkeleton from '../common/scheduleCard/SliderCardSkeleton';
 import css from './ScheduleSlider.module.scss';
 
 type ScheduleSliderProps = {
-  contents: (TContentsData & { isFavorite: boolean })[];
+  contents: (TContentData & { isFavorite: boolean })[];
+  channelMap: Record<string, TChannelData>;
   isLoading?: boolean;
-  addAlarm?: (item: TContentsData) => void;
-  openNewTab?: (item: TContentsData) => void;
-  toggleFavorite?: (item: TContentsData) => void;
-  addBlock?: (item: TContentsData) => void;
+  addAlarm?: (item: TContentData, channel: TChannelData | undefined) => void;
+  openNewTab?: (item: TContentData) => void;
+  toggleFavorite?: (item: TContentData) => void;
+  addBlock?: (item: TContentData) => void;
 };
 
 export default function ScheduleSlider({
   contents,
+  channelMap,
   addAlarm,
   openNewTab,
   toggleFavorite,
@@ -70,16 +72,17 @@ export default function ScheduleSlider({
         },
       }}
     >
-      {contents.map((item, index) => {
+      {contents.map(({ isFavorite, ...item }, index) => {
         return (
           <SwiperSlide key={`announce_${index}`} className={css.item}>
             <SliderCard
               content={item}
+              channel={channelMap[item.channelId]}
               addAlarm={addAlarm}
               openNewTab={openNewTab}
               addBlock={addBlock}
               toggleFavorite={toggleFavorite}
-              isFavorite={item.isFavorite}
+              isFavorite={isFavorite}
             />
           </SwiperSlide>
         );

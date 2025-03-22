@@ -1,6 +1,6 @@
 'use client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { STAT_MAPPER, TContentsData } from '@/types/api/mongoDB';
+import { STAT_MAPPER, TChannelData, TContentData } from '@/types/api/mongoDB';
 import cx from 'classnames';
 import { Session } from 'next-auth';
 import { memo } from 'react';
@@ -11,13 +11,14 @@ import CardMenu from './CardMenu';
 
 type ScheduleCardProps = {
   classname?: string;
-  content: TContentsData;
+  content: TContentData;
+  channel: TChannelData | undefined;
   session: Session | null;
   isFavorite?: boolean;
-  addAlarm?: (item: TContentsData) => void;
-  openNewTab?: (item: TContentsData) => void;
-  toggleFavorite?: (item: TContentsData) => void;
-  addBlock?: (item: TContentsData) => void;
+  addAlarm?: (item: TContentData, channel?: TChannelData) => void;
+  openNewTab?: (item: TContentData) => void;
+  toggleFavorite?: (item: TContentData) => void;
+  addBlock?: (item: TContentData) => void;
   showMenu?: boolean;
 };
 
@@ -25,6 +26,7 @@ type ScheduleCardProps = {
 function ScheduleCard_({
   classname,
   content,
+  channel,
   isFavorite,
   addAlarm,
   openNewTab,
@@ -33,7 +35,7 @@ function ScheduleCard_({
   showMenu = false,
 }: ScheduleCardProps) {
   const onClickAlarm = () => {
-    addAlarm?.(content);
+    addAlarm?.(content, channel);
   };
   const onClickFavorite = () => {
     toggleFavorite?.(content);
@@ -49,7 +51,7 @@ function ScheduleCard_({
   return (
     <div className={cx(css.card, addStreamModifier, classname)}>
       <CardImage content={content} />
-      <CardDesc content={content} addStreamModifier={addStreamModifier} />
+      <CardDesc content={content} channel={channel} addStreamModifier={addStreamModifier} />
       {showMenu && (
         <CardMenu
           isFavorite={isFavorite}

@@ -6,7 +6,7 @@ import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetModalStore } from '@/stores/modal';
-import { TContentsData } from '@/types/api/mongoDB';
+import { TChannelData, TContentData } from '@/types/api/mongoDB';
 import { TScheduleDto } from '@/types/dto';
 import { gtagClick } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
@@ -24,33 +24,30 @@ import css from './ScheduleSection.module.scss';
 
 type ScheduleSectionProps = {
   session: Session | null;
-  content: TContentsData[];
-  length: {
-    all: number;
-    stream: number;
-    video: number;
-  };
   scheduleDto: TScheduleDto;
-  whiteList: Set<string>;
+  contents: TContentData[];
+  channelMap: Record<string, TChannelData>;
+  whiteListMap: Set<string>;
   isLoading?: boolean;
 };
 
 export default function ScheduleSection({
   session,
-  content,
   scheduleDto,
-  whiteList,
+  contents,
+  channelMap,
+  whiteListMap,
   isLoading = false,
 }: ScheduleSectionProps) {
   const modalStore = useSetModalStore();
-  const t = useTranslations('schedule.scheduleSection');
+  const t = useTranslations();
 
   const {
     loadContents,
     isLoading: isLoadingScroll,
     handleInfinityScroll,
   } = useInfiniteScheduleData({
-    rawData: content,
+    rawData: contents,
   });
 
   const mutateBlock = usePostBlacklist();
@@ -58,16 +55,20 @@ export default function ScheduleSection({
   const mutateDeleteFavorite = useMutateWhitelist();
   const { reservePush } = useReservePush();
 
-  const handleFavorite = (content: TContentsData) => {
-    if (!session) return toast.error(t('notLoggedInError'));
-    const isFavorite = whiteList.has(content.channelId);
+  const handleFavorite = (content: TContentData) => {
+    if (!session) {
+      toast.error(t('schedule.scheduleSection.notLoggedInError'));
+      return;
+    }
 
-    if (!isFavorite && confirm(t('addFavoriteChannel'))) {
+    const isFavorite = whiteListMap.has(content.channelId);
+
+    if (!isFavorite && confirm(t('schedule.scheduleSection.addFavoriteChannel'))) {
       mutatePostFavorite.mutate({
         session,
         channelId: content.channelId,
       });
-    } else if (isFavorite && confirm(t('removeFavoriteChannel'))) {
+    } else if (isFavorite && confirm(t('schedule.scheduleSection.removeFavoriteChannel'))) {
       mutateDeleteFavorite.mutate({
         session,
         channelId: content.channelId,
@@ -75,10 +76,13 @@ export default function ScheduleSection({
     }
   };
 
-  const handleBlock = async (content: TContentsData) => {
-    if (!session) return toast.error(t('notLoggedInError'));
+  const handleBlock = async (content: TContentData) => {
+    if (!session) {
+      toast.error(t('schedule.scheduleSection.notLoggedInError'));
+      return;
+    }
 
-    if (confirm(t('blockChannel'))) {
+    if (confirm(t('schedule.scheduleSection.blockChannel'))) {
       mutateBlock.mutate({
         session,
         channelId: content.channelId,
@@ -86,10 +90,10 @@ export default function ScheduleSection({
     }
   };
 
-  const openStream = (content: TContentsData) => {
+  const openStream = (content: TContentData) => {
     gtagClick({
       target: 'scheduleCard',
-      content: content.channelName,
+      content: content.channelId,
       detail: content.title,
       action: 'openWindow',
     });
@@ -111,14 +115,14 @@ export default function ScheduleSection({
     );
   }
 
-  if (content.length === 0 && scheduleDto.query.trim() !== '') {
+  if (contents.length === 0 && scheduleDto.query.trim() !== '') {
     // 검색 결과가 없을 때
     return (
       <section>
         <Nodata />
         <div className={css.nodataLinkBox}>
           <Button component={Link} href={`/channel?q=${scheduleDto.query}`}>
-            {t('searchAtChannelPage')}
+            {t('schedule.scheduleSection.searchAtChannelPage')}
           </Button>
         </div>
       </section>
@@ -134,22 +138,23 @@ export default function ScheduleSection({
         components={{
           Footer: ScrollFooter,
         }}
-        totalCount={content.length}
+        totalCount={contents.length}
         data={loadContents}
         listClassName={css.list}
         itemClassName={css.item}
         useWindowScroll
         itemContent={(_i, data) => (
           <ScheduleCard
-            session={session}
             key={`scheduled_${data.videoId}`}
+            session={session}
             content={data}
-            showMenu
-            isFavorite={whiteList.has(data.channelId)}
+            channel={channelMap[data.channelId]}
             openNewTab={openStream}
             addAlarm={reservePush}
             toggleFavorite={handleFavorite}
             addBlock={handleBlock}
+            isFavorite={whiteListMap.has(data.channelId)}
+            showMenu
           />
         )}
         overscan={0} // 0이상일시 maximum call stack size exceeded 에러 발생

@@ -19,7 +19,7 @@ type HomeProps = {
 
 export default function Home({ scheduleDto }: HomeProps) {
   const session = useSession().data;
-  const { whiteList, channelList, blackList } = useCachedData({ session });
+  const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
   const { data, isPending } = useSchedule({ enableAutoSync: true });
   const router = useRouter();
 
@@ -42,10 +42,10 @@ export default function Home({ scheduleDto }: HomeProps) {
     let videoCount = 0;
 
     const filteredContent = data[scheduleDto.filter].filter((content) => {
-      const channelNames = channelList[content.channelId]?.names?.join(' ') || '';
+      const channelNames = channelMap[content.channelId]?.names?.join(' ') || '';
       if (!queryReg.test(channelNames)) return false;
-      const inBlacklist = blackList.has(content.channelId);
-      const inWhitelist = whiteList.has(content.channelId);
+      const inBlacklist = blackListMap.has(content.channelId);
+      const inWhitelist = whiteListMap.has(content.channelId);
 
       let isPassList: boolean;
 
@@ -82,7 +82,7 @@ export default function Home({ scheduleDto }: HomeProps) {
         video: videoCount,
       },
     };
-  }, [data, scheduleDto, whiteList, blackList, channelList]);
+  }, [data, scheduleDto, whiteListMap, blackListMap, channelMap]);
 
   useEffect(() => {
     if (scheduleDto.isFavorite && !session) {
@@ -105,10 +105,10 @@ export default function Home({ scheduleDto }: HomeProps) {
       <TopSection filter={scheduleDto.filter} />
       <ScheduleSection
         session={session}
-        content={proceedScheduleData.content}
-        length={proceedScheduleData.length}
         scheduleDto={scheduleDto}
-        whiteList={whiteList}
+        channelMap={channelMap}
+        contents={proceedScheduleData.content}
+        whiteListMap={whiteListMap}
         isLoading={isPending}
       />
     </>

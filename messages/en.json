@@ -283,9 +283,7 @@
       "blockChannel": "Block Channel",
       "copyLink": "Copy Link",
       "linkCopied": "Link copied.",
-      "cardImage": {
-        "livestreamOf": "'s stream"
-      },
+      "thumbnail": "Broadcast thumbnail",
       "cardMenu": {
         "setNotification": "Set Notification",
         "addMultiView": "Add to MultiView",
@@ -436,8 +434,7 @@
     "useReservePush": {
       "tokenError": "Failed to retrieve token.",
       "title": "Schedule Notification",
-      "bodyStart": "The stream for",
-      "bodyEnd": "is about to start."
+      "body": "The stream for {channelName} is about to start."
     }
   }
 }
