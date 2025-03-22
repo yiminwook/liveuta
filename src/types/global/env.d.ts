@@ -6,6 +6,8 @@ declare global {
       readonly NEXTAUTH_SECRET: string;
       readonly ACCESS_SECRET: string;
 
+      readonly NEXT_PUBLIC_MSW_ENABLED: 'true' | 'false' | undefined;
+
       //vercel env  - https://vercel.com/docs/projects/environment-variables/system-environment-variables
       readonly NEXT_PUBLIC_VERCEL_ENV: 'production' | 'preview' | 'development';
       readonly NEXT_PUBLIC_VERCEL_URL: string; // *.vercel.app

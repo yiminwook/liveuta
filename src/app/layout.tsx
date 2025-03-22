@@ -23,6 +23,9 @@ import { headers } from 'next/headers';
 import { userAgent } from 'next/server';
 import type { ReactNode } from 'react';
 
+import MswProvider from '@/mocks/MswProvider';
+import '@/mocks/enableServer';
+
 type Props = {
   children?: ReactNode;
 };
@@ -47,9 +50,11 @@ export default async function Layout({ children }: Props) {
         <DefaultHead />
       </head>
       <body {...(isIos ? {} : overlayScrollbarInitialize)}>
-        <Configs cookies={cookies} locale={locale}>
-          {children}
-        </Configs>
+        <MswProvider>
+          <Configs cookies={cookies} locale={locale}>
+            {children}
+          </Configs>
+        </MswProvider>
         <GoogleTagManager />
         {!isIos && <GlobalScrollbar />}
         <ThemeScript />

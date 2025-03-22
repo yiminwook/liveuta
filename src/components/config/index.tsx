@@ -1,4 +1,3 @@
-import { auth } from '@/libraries/nextAuth';
 import { TMetadata } from '@/types';
 import { TGetCookiesReturn } from '@/utils/getCookie';
 import { NextIntlClientProvider } from 'next-intl';
@@ -29,6 +28,7 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
       .then((res) => res.json() as Promise<{ data: TMetadata }>)
       .then((json) => json.data),
   ]);
+
   const messages = await getMessages();
 
   return (
