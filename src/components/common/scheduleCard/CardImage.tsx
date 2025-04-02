@@ -1,7 +1,7 @@
 'use client';
 import altImage from '@/assets/image/thumbnail_alt_img.png';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
-import { generateThumbnail } from '@/libraries/youtube/thumbnail';
+import { generateThumbnail } from '@/libraries/youtube/url';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
 import { TContentData } from '@/types/api/mongoDB';

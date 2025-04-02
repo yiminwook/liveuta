@@ -1,5 +1,5 @@
 import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
-import { generateThumbnail } from '@/libraries/youtube/thumbnail';
+import { generateThumbnail } from '@/libraries/youtube/url';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { TChannelData, TContentData } from '@/types/api/mongoDB';
 import { gtagClick } from '@/utils/gtag';

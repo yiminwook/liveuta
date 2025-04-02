@@ -1,9 +1,9 @@
 import dayjs from '@/libraries/dayjs';
 import { youtube_v3 } from 'googleapis';
 
-export type isStream = 'TRUE' | 'NULL' | 'FALSE';
+export type TStream = 'TRUE' | 'NULL' | 'FALSE';
 
-export const STAT_MAPPER = {
+export const STREAM_STATUS_MAPPER = {
   TRUE: 'stream',
   FALSE: 'closed',
   NULL: 'scheduled',
@@ -19,18 +19,19 @@ export interface TChannelDocument {
   createdAt: string;
   waiting: boolean;
   alive: boolean;
+  profile_picture_url: string;
 }
 
 export type TChannelData = Omit<TChannelDocument, '_id'>;
 export type TChannelListData = Record<string, TChannelData>;
 
-export type ContentDocument = {
+export type TContentDocument = {
   _id?: string;
   Title: string;
   URL: string;
   ScheduledTime: Date;
-  broadcastStatus: isStream;
-  Hide: isStream;
+  broadcastStatus: TStream;
+  Hide: TStream;
   isVideo: 'TRUE' | 'FALSE';
   concurrentViewers: number;
   VideoId: string;
@@ -38,11 +39,11 @@ export type ContentDocument = {
   tag: string;
 };
 
-export type ContentDocumentWithDayjs = Omit<ContentDocument, '_id' | 'ScheduledTime'> & {
+export type TContentDocumentWithDayjs = Omit<TContentDocument, '_id' | 'ScheduledTime'> & {
   ScheduledTime: dayjs.Dayjs;
 };
 
-export type ContentLength = {
+export type TContentLength = {
   total: number;
   video: number;
   stream: number;
@@ -53,7 +54,7 @@ export type TContentData = {
   videoId: string;
   channelId: string;
   timestamp: number;
-  isStream: isStream;
+  isStream: TStream;
   utcTime: Date;
   interval: string;
   isVideo: boolean;

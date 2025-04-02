@@ -1,8 +1,8 @@
-import { isStream } from '@/types/api/mongoDB';
+import { TStream } from '@/types/api/mongoDB';
 import css from './Card.module.scss';
 import CardViewer from './CardViewer';
 interface CardStatusProps {
-  isStream: isStream;
+  isStream: TStream;
   interval: string;
   viewer: number;
 }

@@ -1,14 +1,14 @@
 import dayjs from '@/libraries/dayjs';
 import {
-  ContentDocumentWithDayjs,
   TContentData,
+  TContentDocumentWithDayjs,
   TParseAllDataReturn,
   TParseScheduledDataReturn,
 } from '@/types/api/mongoDB';
 import { getInterval, stringToTime } from '@/utils/getTime';
 import { replaceParentheses } from '@/utils/regexp';
 
-export const parseMongoDBDocument = (doc: ContentDocumentWithDayjs): TContentData => {
+export const parseMongoDBDocument = (doc: TContentDocumentWithDayjs): TContentData => {
   try {
     const { timestamp, utcTime } = stringToTime(doc.ScheduledTime);
     const interval = getInterval(timestamp);
@@ -36,7 +36,7 @@ export const parseMongoDBDocument = (doc: ContentDocumentWithDayjs): TContentDat
 };
 
 export const parseScheduledData = (
-  documents: ContentDocumentWithDayjs[],
+  documents: TContentDocumentWithDayjs[],
 ): TParseScheduledDataReturn => {
   const scheduled: TContentData[] = [];
   const live: TContentData[] = [];
@@ -64,7 +64,7 @@ export const parseScheduledData = (
   };
 };
 
-export const parseAllData = (documents: ContentDocumentWithDayjs[]): TParseAllDataReturn => {
+export const parseAllData = (documents: TContentDocumentWithDayjs[]): TParseAllDataReturn => {
   if (!documents) throw new Error('No DataValue');
 
   const daily: TContentData[] = [];

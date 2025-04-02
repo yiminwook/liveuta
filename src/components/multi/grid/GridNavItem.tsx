@@ -1,5 +1,5 @@
 import dayjs from '@/libraries/dayjs';
-import { generateThumbnail } from '@/libraries/youtube/thumbnail';
+import { generateThumbnail } from '@/libraries/youtube/url';
 import { TChannelData, TContentData } from '@/types/api/mongoDB';
 import { ActionIcon, Avatar } from '@mantine/core';
 import classNames from 'classnames';

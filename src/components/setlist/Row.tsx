@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
 import type { Setlist } from '@/libraries/oracleDB/setlist/service';
-import { generateThumbnail } from '@/libraries/youtube/thumbnail';
+import { generateThumbnail } from '@/libraries/youtube/url';
 import { TChannelData } from '@/types/api/mongoDB';
 import { replaceParentheses } from '@/utils/regexp';
 import { Table } from '@mantine/core';

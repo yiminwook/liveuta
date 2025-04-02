@@ -1,6 +1,6 @@
 'use client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { STAT_MAPPER, TChannelData, TContentData } from '@/types/api/mongoDB';
+import { STREAM_STATUS_MAPPER, TChannelData, TContentData } from '@/types/api/mongoDB';
 import cx from 'classnames';
 import { Session } from 'next-auth';
 import { memo } from 'react';
@@ -47,7 +47,7 @@ function ScheduleCard_({
     addBlock?.(content);
   };
 
-  const addStreamModifier = STAT_MAPPER[content.isStream];
+  const addStreamModifier = STREAM_STATUS_MAPPER[content.isStream];
   return (
     <div className={cx(css.card, addStreamModifier, classname)}>
       <CardImage content={content} />

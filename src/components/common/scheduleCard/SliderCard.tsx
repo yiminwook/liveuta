@@ -1,5 +1,5 @@
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { STAT_MAPPER, TChannelData, TContentData } from '@/types/api/mongoDB';
+import { STREAM_STATUS_MAPPER, TChannelData, TContentData } from '@/types/api/mongoDB';
 import FasStar from '@icons/fa-solid/Star';
 import IonPerson from '@icons/ion/Person';
 import IonPlus from '@icons/ion/PlusRound';
@@ -58,7 +58,7 @@ export default function SliderCard({
         <Badge
           className={css.status}
           size="md"
-          data-status={STAT_MAPPER[content.isStream]}
+          data-status={STREAM_STATUS_MAPPER[content.isStream]}
           color={variable.thirdColorDefault}
           leftSection={content.isStream === 'TRUE' && <IonPerson color="#fff" />}
         >
@@ -66,7 +66,7 @@ export default function SliderCard({
             ? new Intl.NumberFormat('kr', { notation: 'compact' })
                 .format(content.viewer)
                 .toLowerCase()
-            : STAT_MAPPER[content.isStream]}
+            : STREAM_STATUS_MAPPER[content.isStream]}
         </Badge>
       </Card.Section>
 
