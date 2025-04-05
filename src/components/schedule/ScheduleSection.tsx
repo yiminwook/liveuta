@@ -138,7 +138,7 @@ export default function ScheduleSection({
         components={{
           Footer: ScrollFooter,
         }}
-        totalCount={contents.length}
+        totalCount={loadContents.length}
         data={loadContents}
         listClassName={css.list}
         itemClassName={css.item}
