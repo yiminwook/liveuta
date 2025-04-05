@@ -68,7 +68,8 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
       // 스크롤이 끝까지 내려갔다면 탭이 보이게 한다.
       if (scrolledToBottom) translateY = 0;
 
-      tabRef.current.style.transform = `translateY(${translateY}px)`;
+      // 탭내려가는거 방지, UX가 생각보다 불편함.
+      // tabRef.current.style.transform = `translateY(${translateY}px)`;
     };
 
     window.addEventListener('scroll', onScroll);
