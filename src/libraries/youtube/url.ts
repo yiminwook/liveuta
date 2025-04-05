@@ -31,7 +31,7 @@ const GENERATE_CHANNEL_IMAGE_URL_DEFAULT_OPTION: {
 
 export const generateChanneImagelUrl = (
   src: string,
-  option?: typeof GENERATE_CHANNEL_IMAGE_URL_DEFAULT_OPTION,
+  option?: Partial<typeof GENERATE_CHANNEL_IMAGE_URL_DEFAULT_OPTION>,
 ) => {
   const mergeOption = {
     ...GENERATE_CHANNEL_IMAGE_URL_DEFAULT_OPTION,
