@@ -2,9 +2,6 @@
 import { ORIGIN } from '@/constants';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { usePlayerCtx } from '@/stores/player';
-import ClarityLightningSolid from '@icons/clarity/LightningSolid';
-import MdiYoutube from '@icons/mdi/YouTube';
-import { ActionIcon } from '@mantine/core';
 import classnames from 'classnames';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
@@ -15,12 +12,9 @@ import { toast } from 'sonner';
 import { useStore } from 'zustand';
 import css from './Player.module.scss';
 
-type PlayerProps = {
-  isShow: boolean;
-  isLive: boolean;
-};
+type Props = {};
 
-export default memo(function Player({ isLive, isShow }: PlayerProps) {
+export default memo(function PipPlayer({}: Props) {
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
   const playerRef = useRef<ReactPlayer>(null);
@@ -54,24 +48,20 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
     store.actions.toggleIsHide();
   };
 
+  const navigateLive = () => router.push('/schedule?t=live');
+
   useEffect(() => {
     if (isReady === true) {
       playerRef.current?.seekTo(store.timeline, 'seconds');
     }
   }, [store.timeline]);
 
-  // const left = isShow === false && store.isHide;
   const url = generateVideoUrl(store.videoId);
 
   return (
-    <div
-      className={classnames(css.playerDiv, {
-        // left,
-        [css.pipBase]: !isShow,
-      })}
-    >
+    <div>
       <ReactPlayer
-        className={classnames(css.playerBase, 'reactPlayer')}
+        className={classnames('reactPlayer')}
         width="100%"
         height="auto"
         ref={playerRef}
@@ -98,13 +88,6 @@ export default memo(function Player({ isLive, isShow }: PlayerProps) {
           toast.error(t('cannotPlayError'));
         }}
       />
-      {/* {!isShow && (
-        <nav className={css.nav}>
-          <ActionIcon variant="transparent" className={classnames(css.pipBtn)} onClick={toggleLeft}>
-            <MdiYoutube />
-          </ActionIcon>
-        </nav>
-      )} */}
     </div>
   );
 });

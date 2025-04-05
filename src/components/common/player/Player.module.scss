@@ -71,14 +71,13 @@
   }
 }
 
+.nav {
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: #fff;
+}
+
 .pipBtn {
-  display: none;
-  position: absolute;
-  top: 0px;
-  right: -40px;
-  z-index: 10px;
-  padding: 0px;
-  margin: 0px;
   width: 40px;
   height: 40px;
   color: #ff0000;
@@ -103,13 +102,6 @@
 }
 
 .liveBtn {
-  display: none;
-  position: absolute;
-  top: 40px;
-  right: -40px;
-  z-index: 10;
-  padding: 0px;
-  margin: 0px;
   width: 40px;
   height: 40px;
   color: orange;

@@ -7,9 +7,6 @@ import css from './Home.module.scss';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
-import './grid/Grid.module.scss';
-import './grid/GridNav.module.scss';
-
 const Grid = dynamic(() => import('./grid'), {
   ssr: false,
   loading: () => (

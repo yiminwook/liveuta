@@ -48,7 +48,6 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
                   <Particle />
                   <ServiceWorker />
                   <Devtools />
-                  <div id="pip" />
                   <ModalContainer />
                 </Hotkeys>
               </MantineProvider>
