@@ -175,7 +175,7 @@ dependencies:
     specifier: ^4.0.4
     version: 4.0.4(react-dom@19.0.0)(react@19.0.0)
   react-virtuoso:
-    specifier: 4.12.6
+    specifier: ^4.12.6
     version: 4.12.6(react-dom@19.0.0)(react@19.0.0)
   sharp:
     specifier: ^0.31.3
