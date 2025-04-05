@@ -30,7 +30,7 @@
     }
 
     .text {
-      @include util.text-line(1, 1.6);
+      @include util.line-clamp(1);
     }
 
     .button {

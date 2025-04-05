@@ -79,7 +79,7 @@ $nav-min-width: 32px;
 
   .title {
     margin: 0;
-    @include util.text-line(2, 1.2);
+    @include util.line-clamp(2);
   }
 }
 

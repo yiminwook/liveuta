@@ -655,7 +655,7 @@ fieldset:disabled .mantine-active:active {
   margin: 0;
   font-weight: 600;
   font-size: 1.1rem;
-  @include util.text-line(1, 1.2)
+  @include util.line-clamp(1);
 }
 
 .m_b5489c3c {

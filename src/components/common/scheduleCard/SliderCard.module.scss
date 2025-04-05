@@ -54,7 +54,7 @@
 
 
 .title {
-  @include util.text-line(2, 1.4);
+  @include util.line-clamp(2);
   font-size: 1rem;
 
   &:global(.stream) {

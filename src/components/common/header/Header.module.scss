@@ -49,7 +49,7 @@
 }
 
 a.title {
-  @include util.text-line(1, 1.2);
+  @include util.line-clamp(1);
   font-size: 2rem;
   color: util.palette(third, lighter);
   font-weight: 600;

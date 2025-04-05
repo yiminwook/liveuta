@@ -26,10 +26,9 @@
           min-width: 8ch;
           padding: 0;
           margin: 0;
-
-          @include util.text-line(2, 1.3);
           height: auto;
           max-height: #{1.3 * 2}em;
+          @include util.line-clamp(2);
         }
       }
 

@@ -64,15 +64,14 @@
     font-weight: bold;
     margin: 0;
     margin-bottom: 0.25rem;
-    @include util.text-line(1, 1.2);
-
+    @include util.line-clamp(1);
   }
   
   .korTitle {
     font-size: 1rem;
     margin: 0;
     color: var(--mantine-color-dimmed);
-    @include util.text-line(1, 1);
+    @include util.line-clamp(1);
   }
 }
 

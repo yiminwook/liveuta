@@ -47,7 +47,7 @@
     }
 
     .title {
-      @include util.text-line(1, 1.6);
+      @include util.line-clamp(1);
       font-size: 1.2rem;
       font-weight: 500;
       letter-spacing: 0.025em;

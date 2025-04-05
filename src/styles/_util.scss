@@ -1,10 +1,10 @@
 /* 
  * 해당 파일은 @mixin,  @function을 정의한 파일입니다.
  */
-
-@use 'var';
-@use 'sass:math';
-@use "sass:map";
+ @use 'sass:math';
+ @use "sass:map";
+ @use "sass:meta";
+ @use 'var';
 
 @function rem($value) {
   @return #{math.div(math.div($value, $value * 0 + 1), 16)}rem;
@@ -78,6 +78,23 @@
   line-height: $line-height;
   height: #{$line-height * $line-count}em;
 }
+
+@mixin line-clamp($line-count) {
+  @if $line-count == "none" {
+    overflow: visible;
+    display: block;
+    -webkit-box-orient: horizontal;
+    -webkit-line-clamp: none;
+  } @else if meta.type-of($line-count) == "number" and $line-count > 0 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line-count;
+  } @else {
+    @error "Invalid argument: line-count must be a number or 'none'.";
+  }
+}
+
 
 @function color($color) {
   @return map.get(var.$colors, $color);
