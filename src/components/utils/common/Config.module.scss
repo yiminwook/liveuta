@@ -1,0 +1,40 @@
+.configRoot {
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  display: grid;
+  gap: 1rem;
+
+  .configItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid util.color(default-border);
+    border-radius: var(--mantine-radius-default);
+    padding-block: 0.75rem;
+    padding-inline: 1rem;
+
+    .configItemHeader {
+      display: flex;
+      flex-direction: column;
+
+      .configItemTitle {
+        font-size: 1.3rem;
+      }
+
+      .configItemDescription {
+        display: none;
+        visibility: hidden;
+        font-size: 0.875rem;
+        color: util.color(dimmed);
+
+        @include util.min-width(md) {
+          display: block;
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
