@@ -35,6 +35,11 @@ export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
       icon: <Diamond width="1.5rem" height="1.5rem" />,
     },
     {
+      href: '/utils',
+      text: t('internalLinks.utils'),
+      icon: <TbTools width="1.5rem" height="1.5rem" />,
+    },
+    {
       href: '/setting',
       text: t('internalLinks.settings'),
       icon: <TbSettings width="1.5rem" height="1.5rem" />,
