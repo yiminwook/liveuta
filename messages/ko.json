@@ -34,9 +34,10 @@
         "title": "사이트 맵",
         "description": "링크를 선택하세요",
         "internalLinks": {
+          "featured": "특집",
+          "utils": "유틸리티",
           "settings": "설정",
           "dev": "개발",
-          "featured": "특집",
           "support": "지원"
         },
         "externalLinks": {
@@ -62,6 +63,14 @@
       "copy": "복사",
       "copied": "복사되었습니다."
     },
+    "pasteButton": {
+      "paste": "붙여넣기",
+      "pasted": "붙여넣었습니다."
+    },
+    "clearButton": {
+      "clear": "초기화",
+      "cleared": "초기화되었습니다."
+    },
     "dataFetchingObserver": {
       "sessionExpired": "세션이 만료되었습니다.",
       "fetching": "서버와 통신중입니다."
@@ -78,6 +87,7 @@
       "login": "로그인",
       "desktopNav": {
         "internalLink": "목차",
+        "utilsLink": "유틸리티",
         "externalLink": "외부 링크",
         "internalLinks": {
           "home": "홈",
@@ -89,6 +99,12 @@
           "dev": "개발",
           "featured": "특집",
           "support": "지원"
+        },
+        "utilsLinks": {
+          "converter": "변환기",
+          "converters": {
+            "base64": "Base64"
+          }
         },
         "externalLinks": {
           "kizunaAiGallery": "키즈나 아이 갤러리",
@@ -425,6 +441,18 @@
     "removeFavoriteChannel": "즐겨찾기에서 제거하시겠습니까?",
     "blockChannel": "채널을 차단하시겠습니까?",
     "unblockChannel": "채널 차단을 해제하시겠습니까?"
+  },
+  "utils": {
+    "title": "유틸리티",
+    "converters": {
+      "title": "변환기",
+      "base64": {
+        "title": "Base64",
+        "swap": "출력값을 입력으로 변환",
+        "encodeError": "올바르지 않은 입력값입니다.",
+        "decodeError": "Base64 디코딩에 실패했습니다."
+      }
+    }
   },
   "hooks": {
     "useReservePush": {

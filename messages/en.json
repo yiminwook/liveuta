@@ -34,9 +34,10 @@
         "title": "Site Map",
         "description": "Select a link",
         "internalLinks": {
+          "featured": "Featured",
+          "utils": "Utilities",
           "settings": "Settings",
           "dev": "Dev",
-          "featured": "Featured",
           "support": "Support"
         },
         "externalLinks": {
@@ -62,6 +63,14 @@
       "copy": "Copy",
       "copied": "Copied"
     },
+    "pasteButton": {
+      "paste": "Paste",
+      "pasted": "Pasted"
+    },
+    "clearButton": {
+      "clear": "Clear",
+      "cleared": "Cleared"
+    },
     "dataFetchingObserver": {
       "sessionExpired": "Your session has expired.",
       "fetching": "Communicating with the server."
@@ -78,6 +87,7 @@
       "login": "Login",
       "desktopNav": {
         "internalLink": "Index",
+        "utilsLink": "Utilities",
         "externalLink": "External Links",
         "internalLinks": {
           "home": "Home",
@@ -89,6 +99,12 @@
           "dev": "Dev",
           "featured": "Featured",
           "support": "Support"
+        },
+        "utilsLinks": {
+          "converter": "Converters",
+          "converters": {
+            "base64": "Base64"
+          }
         },
         "externalLinks": {
           "kizunaAiGallery": "Kizuna AI Gallery",
@@ -425,6 +441,18 @@
     "removeFavoriteChannel": "Would you like to remove this from your favorites?",
     "blockChannel": "Would you like to block this channel?",
     "unblockChannel": "Would you like to unblock this channel?"
+  },
+  "utils": {
+    "title": "Utilities",
+    "converters": {
+      "title": "Converters",
+      "base64": {
+        "title": "Base64",
+        "swap": "Convert Output to Input",
+        "encodeError": "Invalid input.",
+        "decodeError": "Failed to decode."
+      }
+    }
   },
   "hooks": {
     "useReservePush": {
