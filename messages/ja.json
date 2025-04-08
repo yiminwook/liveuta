@@ -442,7 +442,15 @@
       "title": "変換ツール",
       "base64": {
         "title": "Base64",
+        "encode": "エンコード",
+        "decode": "デコード",
+        "isEncodeTitle": "エンコード/デコード",
+        "isEncodeDescription": "エンコーディングかデコーディングのどちらかを選択",
+        "repeatTitle": "繰り返し",
+        "repeatDescription": "エンコードまたはデコードを繰り返す",
         "swap": "出力値を入力に変換",
+        "input": "入力",
+        "output": "出力",
         "encodeError": "Base64エンコードに失敗しました。",
         "decodeError": "Base64デコードに失敗しました。"
       }

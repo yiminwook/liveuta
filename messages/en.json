@@ -448,7 +448,15 @@
       "title": "Converters",
       "base64": {
         "title": "Base64",
+        "encode": "Encode",
+        "decode": "Decode",
+        "isEncodeTitle": "Encode/Decode",
+        "isEncodeDescription": "Switch between encoding and decoding.",
+        "repeatTitle": "Repeat",
+        "repeatDescription": "Repeat encode/decode base64.",
         "swap": "Convert Output to Input",
+        "input": "Input",
+        "output": "Output",
         "encodeError": "Invalid input.",
         "decodeError": "Failed to decode."
       }

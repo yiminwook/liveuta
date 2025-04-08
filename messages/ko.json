@@ -448,7 +448,15 @@
       "title": "변환기",
       "base64": {
         "title": "Base64",
+        "encode": "인코딩",
+        "decode": "디코딩",
+        "isEncodeTitle": "인코딩/디코딩",
+        "isEncodeDescription": "입력값을 인코딩할지 디코딩할지 선택하세요.",
+        "repeatTitle": "반복",
+        "repeatDescription": "인코딩/디코딩을 반복할 횟수를 선택하세요.",
         "swap": "출력값을 입력으로 변환",
+        "input": "입력",
+        "output": "출력",
         "encodeError": "올바르지 않은 입력값입니다.",
         "decodeError": "Base64 디코딩에 실패했습니다."
       }
