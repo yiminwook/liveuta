@@ -16,15 +16,8 @@ export default function DesktopNav() {
     { href: '/featured', text: t('internalLinks.featured') },
     { href: '/multi', text: t('internalLinks.multiView') },
     { href: '/setlist', text: t('internalLinks.setlist') },
+    { href: '/utils', text: t('internalLinks.utils') },
     { href: '/dev', text: t('internalLinks.dev') },
-  ];
-
-  const utilsLinks = [
-    {
-      href: '/utils/converters',
-      text: t('utilsLinks.converter'),
-      subRoutes: [{ href: '/base64', text: t('utilsLinks.converters.base64') }],
-    },
   ];
 
   const externalLinks = [
@@ -43,9 +36,6 @@ export default function DesktopNav() {
     <ul>
       <li>
         <HeaderMenu title={t('internalLink')} links={internalLinks} onSelect={handleSelect} />
-      </li>
-      <li>
-        <HeaderMenu title={t('utilsLink')} links={utilsLinks} onSelect={handleSelect} />
       </li>
       <li>
         <HeaderMenu title={t('externalLink')} links={externalLinks} onSelect={handleSelect} />

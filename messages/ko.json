@@ -98,13 +98,8 @@
           "settings": "설정",
           "dev": "개발",
           "featured": "특집",
-          "support": "지원"
-        },
-        "utilsLinks": {
-          "converter": "변환기",
-          "converters": {
-            "base64": "Base64"
-          }
+          "support": "지원",
+          "utils": "유틸리티"
         },
         "externalLinks": {
           "kizunaAiGallery": "키즈나 아이 갤러리",

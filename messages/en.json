@@ -98,13 +98,8 @@
           "settings": "Settings",
           "dev": "Dev",
           "featured": "Featured",
-          "support": "Support"
-        },
-        "utilsLinks": {
-          "converter": "Converters",
-          "converters": {
-            "base64": "Base64"
-          }
+          "support": "Support",
+          "utils": "Utilities"
         },
         "externalLinks": {
           "kizunaAiGallery": "Kizuna AI Gallery",

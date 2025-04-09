@@ -92,13 +92,8 @@
           "settings": "設定",
           "dev": "開発",
           "featured": "特集",
-          "support": "サポート"
-        },
-        "utilsLinks": {
-          "converter": "変換ツール",
-          "converters": {
-            "base64": "Base64"
-          }
+          "support": "サポート",
+          "utils": "ユーティリティ"
         },
         "externalLinks": {
           "kizunaAiGallery": "キズナアイギャラリー",
