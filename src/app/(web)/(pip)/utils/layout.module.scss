@@ -1,5 +1,12 @@
 .utilsLayoutRoot {
+  display: grid;
+  position: relative;
   padding: 1rem;
+
+  @include util.min-width(md) {
+    gap: 1rem;
+    grid-template-columns: 200px auto;
+  }
 }
 
 .utilsHeader {
