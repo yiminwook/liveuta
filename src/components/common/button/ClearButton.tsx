@@ -1,7 +1,7 @@
 'use client';
 import CodiconClearAll from '@icons/codicon/ClearAll';
 import TbCheck from '@icons/tabler/Check';
-import { ActionIcon, Tooltip } from '@mantine/core';
+import { ActionIcon, ActionIconProps, Tooltip } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
 import Show from '../utils/Show';
@@ -10,6 +10,7 @@ type ClearButtonProps = {
   timeout?: number;
   clear: () => void;
   className?: string;
+  buttonSize?: ActionIconProps['size'];
   size?: string | number;
 };
 
@@ -17,6 +18,7 @@ export default function ClearButton({
   clear,
   timeout = 2000,
   size = '1.2rem',
+  buttonSize = 'md',
   className,
 }: ClearButtonProps) {
   const t = useTranslations('global.clearButton');
@@ -47,6 +49,7 @@ export default function ClearButton({
         className={className}
         variant="subtle"
         color={cleared ? 'teal' : 'gray'}
+        size={buttonSize}
       >
         <Show when={cleared} fallback={<CodiconClearAll width={size} height={size} />}>
           <TbCheck width={size} height={size} />

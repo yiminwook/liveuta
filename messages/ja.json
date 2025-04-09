@@ -437,6 +437,10 @@
       "converter": "変換ツール",
       "converters": {
         "base64": "Base64"
+      },
+      "youtube": "YouTube",
+      "youtubeItems": {
+        "thumbnail": "サムネイルダウンロード"
       }
     },
     "header": {
@@ -462,6 +466,12 @@
         "output": "出力",
         "encodeError": "Base64エンコードに失敗しました。",
         "decodeError": "Base64デコードに失敗しました。"
+      }
+    },
+    "youtube": {
+      "title": "YouTube",
+      "thumbnail": {
+        "submit": "取得"
       }
     }
   },

@@ -5,6 +5,6 @@
 
   @include util.min-width(var.$mobile-boundary) {
     gap: 1rem;
-    grid-template-columns: 200px auto;
+    grid-template-columns: 200px 1fr;
   }
 }

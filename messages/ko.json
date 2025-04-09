@@ -443,6 +443,10 @@
       "converter": "변환기",
       "converters": {
         "base64": "Base64"
+      },
+      "youtube": "유튜브",
+      "youtubeItems": {
+        "thumbnail": "썸네일 다운로드"
       }
     },
     "header": {
@@ -468,6 +472,12 @@
         "output": "출력",
         "encodeError": "올바르지 않은 입력값입니다.",
         "decodeError": "Base64 디코딩에 실패했습니다."
+      }
+    },
+    "youtube": {
+      "title": "유튜브",
+      "thumbnail": {
+        "submit": "가져오기"
       }
     }
   },

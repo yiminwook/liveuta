@@ -443,6 +443,10 @@
       "converter": "Converter",
       "converters": {
         "base64": "Base64"
+      },
+      "youtube": "YouTube",
+      "youtubeItems": {
+        "thumbnail": "Get Thumbnail"
       }
     },
     "header": {
@@ -468,6 +472,12 @@
         "output": "Output",
         "encodeError": "Invalid input.",
         "decodeError": "Failed to decode."
+      }
+    },
+    "youtube": {
+      "title": "YouTube",
+      "thumbnail": {
+        "submit": "Get"
       }
     }
   },

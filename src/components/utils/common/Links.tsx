@@ -33,6 +33,15 @@ export function UtilsLinksProvider({ children }: PropsWithChildren) {
         },
       ],
     },
+    {
+      text: t('youtube'),
+      items: [
+        {
+          text: t('youtubeItems.thumbnail'),
+          href: '/utils/youtube/thumbnail',
+        },
+      ],
+    },
   ];
 
   return <LinksContext.Provider value={linksGroups}>{children}</LinksContext.Provider>;

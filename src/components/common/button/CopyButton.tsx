@@ -1,7 +1,12 @@
 'use client';
 import TbCheck from '@icons/tabler/Check';
 import TbCopy from '@icons/tabler/Copy';
-import { ActionIcon, CopyButton as MantineCopyButton, Tooltip } from '@mantine/core';
+import {
+  ActionIcon,
+  ActionIconProps,
+  CopyButton as MantineCopyButton,
+  Tooltip,
+} from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { CSSProperties } from 'react';
 
@@ -10,10 +15,16 @@ interface CopyButtonProps {
   size?: string;
   className?: string;
   style?: CSSProperties;
+  buttonSize?: ActionIconProps['size'];
 }
 
 /** value 복사할 값 */
-export default function CopyButton({ value, size = '1.2rem', className }: CopyButtonProps) {
+export default function CopyButton({
+  value,
+  size = '1.2rem',
+  buttonSize = 'md',
+  className,
+}: CopyButtonProps) {
   const t = useTranslations('global.copyButton');
 
   return (
@@ -30,6 +41,7 @@ export default function CopyButton({ value, size = '1.2rem', className }: CopyBu
             color={copied ? 'teal' : 'gray'}
             variant="subtle"
             onClick={copy}
+            size={buttonSize}
           >
             {copied ? (
               <TbCheck width={size} height={size} />
