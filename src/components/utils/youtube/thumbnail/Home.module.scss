@@ -1,0 +1,41 @@
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  margin-block-end: 2rem;
+}
+
+.images {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.thumbnailItem {
+  display: hidden;
+
+  .thumbnailLabel {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-block-end: 0.5rem;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--mantine-radius-default);
+    box-shadow: var(--mantine-shadow-sm);
+  }
+}

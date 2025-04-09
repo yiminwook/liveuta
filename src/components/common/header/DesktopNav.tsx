@@ -16,6 +16,7 @@ export default function DesktopNav() {
     { href: '/featured', text: t('internalLinks.featured') },
     { href: '/multi', text: t('internalLinks.multiView') },
     { href: '/setlist', text: t('internalLinks.setlist') },
+    { href: '/utils', text: t('internalLinks.utils') },
     { href: '/dev', text: t('internalLinks.dev') },
   ];
 

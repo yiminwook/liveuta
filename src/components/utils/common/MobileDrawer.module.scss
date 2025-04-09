@@ -1,0 +1,43 @@
+.wrap {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  margin-block-start: 1rem;
+}
+
+.scrollArea {
+  width: 100%;
+  height: 40svh;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+
+  .groupTitle {
+    font-size: 1.5rem;
+    margin-block-end: 0.5rem;
+  }
+}
+
+.groupItems {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  .item {
+    color: util.color(dimmed);
+
+    &:hover {
+      color: util.color(text);
+    }
+  }
+}

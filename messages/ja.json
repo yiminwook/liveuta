@@ -28,9 +28,10 @@
         "title": "サイトマップ",
         "description": "リンクを選択してください",
         "internalLinks": {
+          "featured": "特集",
+          "utils": "ユーティリティ",
           "settings": "設定",
           "dev": "開発",
-          "featured": "特集",
           "support": "サポート"
         },
         "externalLinks": {
@@ -56,6 +57,14 @@
       "copy": "コピー",
       "copied": "コピーしました。"
     },
+    "pasteButton": {
+      "paste": "貼り付け",
+      "pasted": "貼り付けました。"
+    },
+    "clearButton": {
+      "clear": "クリア",
+      "cleared": "クリアしました。"
+    },
     "dataFetchingObserver": {
       "sessionExpired": "セッションが期限切れになりました。",
       "fetching": "サーバーと通信中です。"
@@ -72,6 +81,7 @@
       "login": "ログイン",
       "desktopNav": {
         "internalLink": "目次",
+        "utilsLink": "ユーティリティ",
         "externalLink": "外部リンク",
         "internalLinks": {
           "home": "ホーム",
@@ -82,7 +92,8 @@
           "settings": "設定",
           "dev": "開発",
           "featured": "特集",
-          "support": "サポート"
+          "support": "サポート",
+          "utils": "ユーティリティ"
         },
         "externalLinks": {
           "kizunaAiGallery": "キズナアイギャラリー",
@@ -420,11 +431,55 @@
     "blockChannel": "チャンネルをブロックしますか？",
     "unblockChannel": "チャンネルのブロックを解除しますか？"
   },
+  "utils": {
+    "title": "ユーティリティ",
+    "links": {
+      "converter": "変換ツール",
+      "converters": {
+        "base64": "Base64"
+      },
+      "youtube": "YouTube",
+      "youtubeItems": {
+        "thumbnail": "サムネイルダウンロード"
+      }
+    },
+    "header": {
+      "openMobileSidebar": "開く",
+      "closeMobileSidebar": "閉じる"
+    },
+    "sidebar": {
+      "title": "ユーティリティメニュー",
+      "description": "リンクを選択してください"
+    },
+    "converters": {
+      "title": "変換ツール",
+      "base64": {
+        "title": "Base64",
+        "encode": "エンコード",
+        "decode": "デコード",
+        "isEncodeTitle": "エンコード/デコード",
+        "isEncodeDescription": "エンコーディングかデコーディングのどちらかを選択",
+        "repeatTitle": "繰り返し",
+        "repeatDescription": "エンコードまたはデコードを繰り返す",
+        "swap": "出力値を入力に変換",
+        "input": "入力",
+        "output": "出力",
+        "encodeError": "Base64エンコードに失敗しました。",
+        "decodeError": "Base64デコードに失敗しました。"
+      }
+    },
+    "youtube": {
+      "title": "YouTube",
+      "thumbnail": {
+        "submit": "取得"
+      }
+    }
+  },
   "hooks": {
     "useReservePush": {
       "tokenError": "トークンの取得に失敗しました。",
       "title": "スケジュール通知",
-      "body": "まもなく {channlName} の放送が開始されます。"
+      "body": "まもなく {channelName} の放送が開始されます。"
     }
   }
 }

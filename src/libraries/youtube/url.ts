@@ -90,3 +90,22 @@ export const generateThumbnail = (videoId: string, ThumbnailSize: ThumbnailSize[
   const base = 'https://i.ytimg.com/vi';
   return base + '/' + videoId + '/' + ThumbnailSize + '.jpg';
 };
+
+// export function getYoutubeVideoId(url: string): string | null {
+//   const regExp =
+//     /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:shorts\/|watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+//   const match = url.match(regExp);
+//   return match ? match[1] : null;
+// }
+export const getYoutubeVideoId = (url: string): string | null => {
+  const youtubeRegex =
+    /^((?:https?:)?(?:\/\/)?)?((?:www|m)\.)?((?:youtube\.com|youtu.be))\/(?:embed\/|v\/|live\/|shorts\/|feeds\/api\/videos\/|watch\?v=|watch\?.+&v=)?([\w\-]{11})(\S+)?$/;
+
+  const match = url.match(youtubeRegex);
+
+  if (match && match[4]) {
+    return match[4];
+  }
+
+  return null;
+};

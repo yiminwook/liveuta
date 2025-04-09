@@ -1,0 +1,35 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.isEncodeLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .isEncodeLabelText {
+    font-size: 1.2rem;
+  }
+}
+
+.repeatInput {
+  padding-inline-start: 0.5rem;
+}
+
+.inputWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  .inputLabel {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+}
+
+.swapWrap {
+  display: grid;
+  place-content: center;
+}

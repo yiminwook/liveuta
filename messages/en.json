@@ -34,9 +34,10 @@
         "title": "Site Map",
         "description": "Select a link",
         "internalLinks": {
+          "featured": "Featured",
+          "utils": "Utilities",
           "settings": "Settings",
           "dev": "Dev",
-          "featured": "Featured",
           "support": "Support"
         },
         "externalLinks": {
@@ -62,6 +63,14 @@
       "copy": "Copy",
       "copied": "Copied"
     },
+    "pasteButton": {
+      "paste": "Paste",
+      "pasted": "Pasted"
+    },
+    "clearButton": {
+      "clear": "Clear",
+      "cleared": "Cleared"
+    },
     "dataFetchingObserver": {
       "sessionExpired": "Your session has expired.",
       "fetching": "Communicating with the server."
@@ -78,6 +87,7 @@
       "login": "Login",
       "desktopNav": {
         "internalLink": "Index",
+        "utilsLink": "Utilities",
         "externalLink": "External Links",
         "internalLinks": {
           "home": "Home",
@@ -88,7 +98,8 @@
           "settings": "Settings",
           "dev": "Dev",
           "featured": "Featured",
-          "support": "Support"
+          "support": "Support",
+          "utils": "Utilities"
         },
         "externalLinks": {
           "kizunaAiGallery": "Kizuna AI Gallery",
@@ -425,6 +436,50 @@
     "removeFavoriteChannel": "Would you like to remove this from your favorites?",
     "blockChannel": "Would you like to block this channel?",
     "unblockChannel": "Would you like to unblock this channel?"
+  },
+  "utils": {
+    "title": "Utilities",
+    "links": {
+      "converter": "Converter",
+      "converters": {
+        "base64": "Base64"
+      },
+      "youtube": "YouTube",
+      "youtubeItems": {
+        "thumbnail": "Get Thumbnail"
+      }
+    },
+    "header": {
+      "openMobileSidebar": "Open Sidebar",
+      "closeMobileSidebar": "Close Sidebar"
+    },
+    "sidebar": {
+      "title": "Utilities Menu",
+      "description": "Select a link"
+    },
+    "converters": {
+      "title": "Converters",
+      "base64": {
+        "title": "Base64",
+        "encode": "Encode",
+        "decode": "Decode",
+        "isEncodeTitle": "Encode/Decode",
+        "isEncodeDescription": "Switch between encoding and decoding.",
+        "repeatTitle": "Repeat",
+        "repeatDescription": "Repeat encode/decode base64.",
+        "swap": "Convert Output to Input",
+        "input": "Input",
+        "output": "Output",
+        "encodeError": "Invalid input.",
+        "decodeError": "Failed to decode."
+      }
+    },
+    "youtube": {
+      "title": "YouTube",
+      "thumbnail": {
+        "submit": "Get"
+      }
+    }
   },
   "hooks": {
     "useReservePush": {
