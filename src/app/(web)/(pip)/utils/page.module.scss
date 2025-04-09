@@ -1,29 +1,9 @@
-.wrap {
-  display: none;
-  visibility: hidden;
-
+.contents {
   * {
     margin: 0;
     padding: 0;
   }
 
-  @include util.min-width(var.$mobile-boundary) {
-    display: block;
-    visibility: visible;
-  }
-}
-
-.sidebarContentsWrap {
-  position: fixed;
-}
-
-.scrollArea {
-  position: fixed;
-  width: 200px;
-  height: calc(100svh - 4.5rem);
-}
-
-.sidebarContents {
   display: flex;
   flex-direction: column;
   gap: 2rem;

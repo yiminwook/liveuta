@@ -30,7 +30,7 @@
         font-size: 0.875rem;
         color: util.color(dimmed);
 
-        @include util.min-width(md) {
+        @include util.min-width(var.$mobile-boundary) {
           display: block;
           visibility: visible;
         }

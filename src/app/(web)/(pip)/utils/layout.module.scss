@@ -3,12 +3,8 @@
   position: relative;
   padding: 1rem;
 
-  @include util.min-width(md) {
+  @include util.min-width(var.$mobile-boundary) {
     gap: 1rem;
     grid-template-columns: 200px auto;
   }
-}
-
-.utilsHeader {
-  margin-block-end: 1rem;
 }

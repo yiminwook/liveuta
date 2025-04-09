@@ -433,11 +433,19 @@
   },
   "utils": {
     "title": "ユーティリティ",
-    "sidebar": {
+    "links": {
       "converter": "変換ツール",
       "converters": {
         "base64": "Base64"
       }
+    },
+    "header": {
+      "openMobileSidebar": "開く",
+      "closeMobileSidebar": "閉じる"
+    },
+    "sidebar": {
+      "title": "ユーティリティメニュー",
+      "description": "リンクを選択してください"
     },
     "converters": {
       "title": "変換ツール",

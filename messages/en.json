@@ -439,11 +439,19 @@
   },
   "utils": {
     "title": "Utilities",
-    "sidebar": {
+    "links": {
       "converter": "Converter",
       "converters": {
         "base64": "Base64"
       }
+    },
+    "header": {
+      "openMobileSidebar": "Open Sidebar",
+      "closeMobileSidebar": "Close Sidebar"
+    },
+    "sidebar": {
+      "title": "Utilities Menu",
+      "description": "Select a link"
     },
     "converters": {
       "title": "Converters",

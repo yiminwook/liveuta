@@ -439,11 +439,19 @@
   },
   "utils": {
     "title": "유틸리티",
-    "sidebar": {
+    "links": {
       "converter": "변환기",
       "converters": {
         "base64": "Base64"
       }
+    },
+    "header": {
+      "openMobileSidebar": "사이드바 열기",
+      "closeMobileSidebar": "사이드바 닫기"
+    },
+    "sidebar": {
+      "title": "유틸리티 메뉴",
+      "description": "링크를 선택하세요"
     },
     "converters": {
       "title": "변환기",

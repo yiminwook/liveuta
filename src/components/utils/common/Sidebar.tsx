@@ -2,34 +2,17 @@ import For from '@/components/common/utils/For';
 import { Anchor, ScrollArea } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import css from './Sidebar.module.scss';
-
-type SidebarGroup = {
-  text: string;
-  items: {
-    text: string;
-    href: string;
-  }[];
-};
+import { useUtilsLinksContext } from './Links';
 
 export default function UtilsSidebar() {
   const t = useTranslations('utils.sidebar');
-  const sidebarGroups: SidebarGroup[] = [
-    {
-      text: t('converter'),
-      items: [
-        {
-          text: t('converters.base64'),
-          href: '/utils/converters/base64',
-        },
-      ],
-    },
-  ];
+  const links = useUtilsLinksContext();
 
   return (
     <aside className={css.wrap}>
       <ScrollArea className={css.scrollArea}>
         <div className={css.sidebarContents}>
-          <For each={sidebarGroups}>
+          <For each={links}>
             {(group, index) => (
               <div key={`utils-group-${index}`} className={css.group}>
                 <h3 className={css.groupTitle}>{group.text}</h3>
