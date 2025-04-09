@@ -2,10 +2,11 @@
 import ClearButton from '@/components/common/button/ClearButton';
 import CopyButton from '@/components/common/button/CopyButton';
 import PasteButton from '@/components/common/button/PasteButton';
+import { useDebounce } from '@/hooks/useDebounce';
 import { MdiSwapVertical } from '@icons/mdi/swap-vertical';
 import { ActionIcon, NumberInput, Switch, Textarea, Tooltip } from '@mantine/core';
 import { useTranslations } from 'next-intl';
-import { ChangeEvent, useCallback, useEffect } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useUtilsBreadcrumbContext } from '../../common/BreadcrumbContext';
 import {
   UtilsConfigItem,
@@ -69,21 +70,31 @@ function Repeat() {
 
 function Base64Input() {
   const t = useTranslations('utils.converters.base64');
-  const { setInput } = useBase64ActionsContext();
   const { input } = useBase64Context();
+  const { setInput } = useBase64ActionsContext();
+  const [uiInput, setUiInput] = useState('');
+  const debouncedInput = useDebounce(uiInput, 200);
+
+  const handleInputChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
+    setUiInput(e.currentTarget.value);
+  }, []);
+
+  const clear = useCallback(() => {
+    setInput('');
+    setUiInput('');
+  }, []);
 
   const paste = useCallback((value: ClipboardItem) => {
     const text = value.getType('text/plain');
     if (text) {
-      text.then((v) => v.text()).then((v) => setInput(v));
+      text.then((v) => v.text()).then((v) => setUiInput(v));
     }
   }, []);
 
-  const handleInputChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
-    setInput(e.currentTarget.value);
-  }, []);
+  useEffect(() => {
+    setInput(debouncedInput);
+  }, [debouncedInput]);
 
-  const clear = useCallback(() => setInput(''), []);
   return (
     <>
       <div className={css.inputWrap}>
@@ -96,7 +107,7 @@ function Base64Input() {
           <CopyButton value={input} />
         </div>
       </div>
-      <Textarea id="base64-input" value={input} onChange={handleInputChange} rows={8} />
+      <Textarea id="base64-input" value={uiInput} onChange={handleInputChange} rows={8} />
     </>
   );
 }
