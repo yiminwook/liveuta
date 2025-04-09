@@ -15,12 +15,10 @@ export default function UtilsBreadcrumb() {
   return (
     <div>
       <Breadcrumbs>
-        <Anchor href="/">Liveuta</Anchor>
-        <Anchor href="/utils">{t('title')}</Anchor>
+        <div>Liveuta</div>
+        <div>{t('title')}</div>
         {items.map((item) => (
-          <Anchor href={item.href} key={`utils-breadcrumb-${item.title}`}>
-            {item.title}
-          </Anchor>
+          <div key={`utils-breadcrumb-${item.title}`}>{item.title}</div>
         ))}
       </Breadcrumbs>
     </div>
