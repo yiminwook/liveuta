@@ -439,6 +439,12 @@
   },
   "utils": {
     "title": "Utilities",
+    "sidebar": {
+      "converter": "Converter",
+      "converters": {
+        "base64": "Base64"
+      }
+    },
     "converters": {
       "title": "Converters",
       "base64": {

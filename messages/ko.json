@@ -439,6 +439,12 @@
   },
   "utils": {
     "title": "유틸리티",
+    "sidebar": {
+      "converter": "변환기",
+      "converters": {
+        "base64": "Base64"
+      }
+    },
     "converters": {
       "title": "변환기",
       "base64": {

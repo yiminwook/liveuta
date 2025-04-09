@@ -433,6 +433,12 @@
   },
   "utils": {
     "title": "ユーティリティ",
+    "sidebar": {
+      "converter": "変換ツール",
+      "converters": {
+        "base64": "Base64"
+      }
+    },
     "converters": {
       "title": "変換ツール",
       "base64": {
