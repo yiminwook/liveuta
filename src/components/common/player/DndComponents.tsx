@@ -27,7 +27,7 @@ import { useTranslations } from 'next-intl';
 import { CSSProperties, useState } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import dndCss from './DndComponents.module.scss';
-import PipPlayer from './PlayerBase';
+import PlayerBase from './PlayerBase';
 
 type DraggablePipProps = {
   mode: 'default' | 'pip';
@@ -131,7 +131,7 @@ function Position({
           dndHandleListeners={listeners}
         />
       )}
-      <PipPlayer mode={mode} />
+      <PlayerBase mode={mode} />
     </div>
   );
 }

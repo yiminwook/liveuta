@@ -35,6 +35,7 @@ export default memo(function PlayerBase({ mode }: Props) {
 
   const handlePlay = (isPlaying: boolean) => {
     store.actions.setIsPlaying(isPlaying);
+    store.actions.setIsHide(false);
   };
 
   useEffect(() => {
