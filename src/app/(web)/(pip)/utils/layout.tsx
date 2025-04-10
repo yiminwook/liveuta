@@ -6,11 +6,15 @@ import { UtilsLinksProvider } from '@/components/utils/common/Links';
 import UtilsMobileDrawer from '@/components/utils/common/MobileDrawer';
 import { MobileDrawerProvider } from '@/components/utils/common/MobileDrawerContext';
 import UtilsSidebar from '@/components/utils/common/Sidebar';
+import { Skeleton } from '@mantine/core';
 import dynamic from 'next/dynamic';
 import type { PropsWithChildren } from 'react';
 import css from './layout.module.scss';
 
-const UtilsHeader = dynamic(() => import('@/components/utils/common/Header'), { ssr: false });
+const UtilsHeader = dynamic(() => import('@/components/utils/common/Header'), {
+  ssr: false,
+  loading: () => <Skeleton h={16} maw={300} mb={16} />,
+});
 
 export default function UtilsLayout({ children }: PropsWithChildren) {
   return (
