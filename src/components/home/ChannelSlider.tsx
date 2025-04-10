@@ -6,6 +6,7 @@ import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
 import variable from '@variable';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
+import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import css from './ChannelSlider.module.scss';
 
@@ -14,7 +15,8 @@ type ChannelSliderProps = {
 };
 
 export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
-  const t = useTranslations('home.channelSlider');
+  const t = useTranslations();
+  const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   const navigationChannel = (channelName: string) => {
@@ -22,11 +24,13 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
   };
 
   return (
-    <div className={css.wrap}>
+    <div className={css.wrap} ref={containerRef}>
       <Swiper slidesPerGroup={1} slidesPerView={'auto'} centeredSlides={false} spaceBetween={14}>
         {recentChannels.map((item) => {
-          const subscribe = renderSubscribe(item.statistics?.subscriberCount ?? t('hidden'));
-          const videoCount = item.statistics?.videoCount ?? t('hidden');
+          const subscribe = renderSubscribe(
+            item.statistics?.subscriberCount ?? t('home.channelSlider.hidden'),
+          );
+          const videoCount = item.statistics?.videoCount ?? t('home.channelSlider.hidden');
           return (
             <SwiperSlide key={`recentChannel_${item.uid}`} style={{ width: '75px' }}>
               <Avatar
@@ -43,7 +47,15 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
                 color={variable.firstColorDefault}
                 src={item.snippet?.thumbnails?.default?.url}
               />
-              <HoverCard withArrow width={200} offset={0} arrowOffset={0}>
+              <HoverCard
+                withArrow
+                width={200}
+                offset={0}
+                arrowOffset={0}
+                portalProps={{
+                  target: containerRef.current!,
+                }}
+              >
                 <HoverCard.Target>
                   <Center>
                     <Button
@@ -66,10 +78,10 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
 
                   <Box mt="xs">
                     <Text size="xs">
-                      {t('subscribers')} {subscribe}
+                      {t('home.channelSlider.subscribers')} {subscribe}
                     </Text>
                     <Text size="xs">
-                      {t('videos')} {videoCount}
+                      {t('home.channelSlider.videos')} {videoCount}
                     </Text>
                   </Box>
 
@@ -80,7 +92,7 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
                         size="xs"
                         onClick={() => navigationChannel(item.nameKor)}
                       >
-                        {t('navigationChannel')}
+                        {t('home.channelSlider.navigationChannel')}
                       </Button>
                     </Center>
                   </Box>

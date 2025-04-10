@@ -1,4 +1,4 @@
-import { generateVideoUrl } from '@/libraries/youtube/url';
+import { generateChanneImagelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { STREAM_STATUS_MAPPER, TChannelData, TContentData } from '@/types/api/mongoDB';
 import FasStar from '@icons/fa-solid/Star';
 import IonPerson from '@icons/ion/Person';
@@ -6,7 +6,7 @@ import IonPlus from '@icons/ion/PlusRound';
 import MsOpenInNew from '@icons/material-symbols/OpenInNew';
 import MdiBlock from '@icons/mdi/Block';
 import TbBellRingingFilled from '@icons/tabler/BellRingingFilled';
-import { ActionIcon, Badge, Card, Text, Tooltip } from '@mantine/core';
+import { ActionIcon, Avatar, Badge, Card, Flex, Text, Tooltip } from '@mantine/core';
 import variable from '@variable';
 import { useTranslations } from 'next-intl';
 import CopyButton from '../button/CopyButton';
@@ -70,9 +70,22 @@ export default function SliderCard({
         </Badge>
       </Card.Section>
 
-      <Text fw={500} className={css.channelNm} mt="xs">
-        {channel?.name_kor}
-      </Text>
+      <Flex mt="xs" align="center">
+        <Avatar
+          display="inline-block"
+          mr={5}
+          styles={{ root: { verticalAlign: 'text-bottom' } }}
+          size="sm"
+          src={
+            channel?.profile_picture_url
+              ? generateChanneImagelUrl(channel.profile_picture_url, { size: 20 })
+              : ''
+          }
+        />
+        <Text fw={500} className={css.channelNm} mt="xs" component="span" lineClamp={1}>
+          {channel?.name_kor}
+        </Text>
+      </Flex>
 
       <Text size="sm" c="dimmed" className={css.title} mt="xs">
         {content.title}

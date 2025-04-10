@@ -13,8 +13,8 @@ export default function SliderCardSkeleton() {
       </Box>
 
       <Box mt="md">
-        <Skeleton h="1rem" />
-        <Skeleton h="1rem" w="75%" mt="0.5rem" />
+        <Skeleton h="1.2rem" />
+        <Skeleton h="1.2rem" w="75%" mt="0.6rem" />
       </Box>
 
       <div className={css.navBox}>
