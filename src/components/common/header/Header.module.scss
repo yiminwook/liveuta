@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 
 .header {
   height: var.$safe-header-height;
@@ -53,6 +53,30 @@ a.title {
   font-size: 2rem;
   color: util.palette(third, lighter);
   font-weight: 600;
+}
+
+.searchBtn {
+  display: none;
+  visibility: hidden;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 0.75rem;
+  border-radius: var(--mantine-radius-default);
+  border: 1px solid util.color(default-border);
+  font-weight: 600;
+
+  .cmdShortcut {
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    border: util.color(default-border);
+    background-color: util.color(default-hover);
+    font-size: 0.875rem;
+  }
+
+  @include util.min-width(var.$mobile-boundary) {
+    display: flex;
+    visibility: visible;
+  }
 }
 
 .accountBtn {

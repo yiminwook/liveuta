@@ -2,6 +2,7 @@ import { TMetadata } from '@/types';
 import { TGetCookiesReturn } from '@/utils/getCookie';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import { CommandProvider } from '../common/command/Context';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
 import Hotkeys from './Hotkeys';
@@ -13,6 +14,7 @@ import Particle from './Particle';
 import ReactQuery from './ReactQuery';
 import ServiceWorker from './ServiceWorker';
 import ToastBox from './ToastBox';
+import CommandMenu from '../common/command/CommandMenu';
 
 type ConfigsProps = {
   children: React.ReactNode;
@@ -43,12 +45,15 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
             <NProgressProviders>
               <MantineProvider locale={locale}>
                 <Hotkeys>
-                  {children}
-                  <ToastBox />
-                  <Particle />
-                  <ServiceWorker />
-                  <Devtools />
-                  <ModalContainer />
+                  <CommandProvider>
+                    {children}
+                    <CommandMenu />
+                    <ToastBox />
+                    <Particle />
+                    <ServiceWorker />
+                    <Devtools />
+                    <ModalContainer />
+                  </CommandProvider>
                 </Hotkeys>
               </MantineProvider>
             </NProgressProviders>

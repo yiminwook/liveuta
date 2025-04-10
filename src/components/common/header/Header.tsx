@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 'use client';
 import { useSetAppStore } from '@/stores/app';
+import IonIosSearch from '@icons/ion/IosSearch';
 import { Avatar, Skeleton } from '@mantine/core';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
+import { useCommandActions } from '../command/Context';
 import DesktopNav from './DesktopNav';
 import css from './Header.module.scss';
 
@@ -17,6 +19,7 @@ export default function Header({}: HeaderProps) {
   const gnbRef = useRef<HTMLDivElement>(null);
   const actions = useSetAppStore();
   const t = useTranslations('global.header');
+  const { setCmdOpen } = useCommandActions();
 
   const openAccountSidebar = () => actions.setIsShowAcctSidebar(true);
 
@@ -51,6 +54,11 @@ export default function Header({}: HeaderProps) {
             Live Uta
           </Link>
           <div className={css.right}>
+            <button onClick={() => setCmdOpen(true)} className={css.searchBtn}>
+              <IonIosSearch width={20} height={20} />
+              <span>{t('search')}</span>
+              <div className={css.cmdShortcut}>⌘+K</div>
+            </button>
             <DesktopNav />
             {status === 'loading' && <Skeleton height={40} circle />}
             {status === 'unauthenticated' && (

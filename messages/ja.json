@@ -79,6 +79,7 @@
     "header": {
       "userAvatarAlt": "ユーザーアバター",
       "login": "ログイン",
+      "search": "検索",
       "desktopNav": {
         "internalLink": "目次",
         "utilsLink": "ユーティリティ",
@@ -150,6 +151,31 @@
     "session": {
       "sessionExpired": "セッションが期限切れになりました。",
       "fetching": "サーバーと通信中です。"
+    },
+    "command": {
+      "empty": "コマンドが見つかりません。",
+      "open": "開く",
+      "close": "閉じる",
+      "inputPlaceholder": "コマンドを入力してください...",
+      "globalCommands": {
+        "action": "アクション",
+        "actions": {
+          "commandPalette": "コマンドパレット"
+        },
+        "navigate": "ナビゲート",
+        "navigation": {
+          "home": "ホーム",
+          "schedule": "スケジュール",
+          "multiView": "マルチビュー",
+          "channel": "チャンネル",
+          "setlist": "セットリスト",
+          "settings": "設定",
+          "dev": "開発",
+          "featured": "特集",
+          "support": "サポート",
+          "utils": "ユーティリティ"
+        }
+      }
     }
   },
   "home": {

@@ -3,5 +3,5 @@ import { PropsWithChildren } from 'react';
 import { HotkeysProvider } from 'react-hotkeys-hook';
 
 export default function Hotkeys({ children }: PropsWithChildren) {
-  return <HotkeysProvider>{children}</HotkeysProvider>;
+  return <HotkeysProvider initiallyActiveScopes={['global']}>{children}</HotkeysProvider>;
 }

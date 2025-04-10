@@ -83,6 +83,7 @@
       "site": "This site is a Non-profit V-tuber Fan website"
     },
     "header": {
+      "search": "Search",
       "userAvatarAlt": "User Avatar",
       "login": "Login",
       "desktopNav": {
@@ -156,6 +157,31 @@
     "session": {
       "sessionExpired": "Your session has expired.",
       "fetching": "Communicating with the server."
+    },
+    "command": {
+      "empty": "No results found.",
+      "open": "Open",
+      "close": "Close",
+      "inputPlaceholder": "Search commands...",
+      "globalCommands": {
+        "action": "Actions",
+        "actions": {
+          "commandPalette": "Command Palette"
+        },
+        "navigate": "Navigation",
+        "navigation": {
+          "home": "Home",
+          "schedule": "Schedule",
+          "multiView": "MultiView",
+          "channel": "Channel",
+          "setlist": "Setlist",
+          "settings": "Settings",
+          "dev": "Dev",
+          "featured": "Featured",
+          "support": "Support",
+          "utils": "Utilities"
+        }
+      }
     }
   },
   "home": {

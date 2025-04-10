@@ -85,6 +85,7 @@
     "header": {
       "userAvatarAlt": "사용자 아바타",
       "login": "로그인",
+      "search": "검색",
       "desktopNav": {
         "internalLink": "목차",
         "utilsLink": "유틸리티",
@@ -156,6 +157,31 @@
     "session": {
       "sessionExpired": "세션이 만료되었습니다.",
       "fetching": "서버와 통신중입니다."
+    },
+    "command": {
+      "empty": "커맨드를 찾을 수 없습니다.",
+      "open": "열기",
+      "close": "닫기",
+      "inputPlaceholder": "커맨드를 입력하세요...",
+      "globalCommands": {
+        "action": "액션",
+        "actions": {
+          "commandPalette": "커맨드 팔레트"
+        },
+        "navigate": "페이지 이동",
+        "navigation": {
+          "home": "홈",
+          "schedule": "스케줄",
+          "multiView": "멀티뷰",
+          "channel": "채널",
+          "setlist": "세트리",
+          "settings": "설정",
+          "dev": "개발",
+          "featured": "특집",
+          "support": "지원",
+          "utils": "유틸리티"
+        }
+      }
     }
   },
   "home": {
