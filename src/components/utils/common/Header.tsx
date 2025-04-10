@@ -1,28 +1,21 @@
 'use client';
 import { ActionIcon, Tooltip } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { useTranslations } from 'next-intl';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback } from 'react';
 import UtilsBreadcrumb from './Breadcrumb';
 import css from './Header.module.scss';
 import { useMobileDrawerContext } from './MobileDrawerContext';
 
 export default function UtilsHeader() {
   const t = useTranslations('utils.header');
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const isMobile = useMemo(() => windowWidth < 480, [windowWidth]);
+  const isMobile = useMediaQuery('(max-width: 480px)');
   const { isOpen: isMobileSidebarOpen, setIsOpen: setMobileSidebarOpen } = useMobileDrawerContext();
 
   const toggleSidebar = useCallback(
     () => setMobileSidebarOpen(!isMobileSidebarOpen),
     [isMobileSidebarOpen],
   );
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <div className={css.wrap}>

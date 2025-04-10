@@ -2,8 +2,10 @@
   display: grid;
   position: relative;
   padding: 1rem;
+}
 
-  @include util.min-width(var.$mobile-boundary) {
+@include util.min-width(var.$mobile-boundary) {
+  .utilsLayoutRoot {
     gap: 1rem;
     grid-template-columns: 200px 1fr;
   }

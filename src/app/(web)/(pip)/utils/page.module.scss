@@ -1,13 +1,13 @@
 .contents {
-  * {
-    margin: 0;
-    padding: 0;
-  }
-
   display: flex;
   flex-direction: column;
   gap: 2rem;
   padding-block-end: 1rem;
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 .group {
