@@ -4,14 +4,12 @@ import { useSchedule } from '@/hooks/useSchedule';
 import { TScheduleDto } from '@/types/dto';
 import { addEscapeCharacter } from '@/utils/regexp';
 import { useSession } from 'next-auth/react';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
 import css from './Home.module.scss';
 import ScheduleNav from './ScheduleNav';
 import ScheduleSection from './ScheduleSection';
-
-const TopSection = dynamic(() => import('./TopSection'), { ssr: false });
+import TopSection from './TopSection';
 
 type HomeProps = {
   scheduleDto: TScheduleDto;

@@ -1,11 +1,11 @@
-import Pip from '@/components/common/player/Pip';
+import GlobalPip from '@/components/common/player/GlobalPip';
 import { PropsWithChildren } from 'react';
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <>
       {children}
-      <Pip />
+      <GlobalPip />
     </>
   );
 }

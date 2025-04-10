@@ -5,21 +5,18 @@
   background-color: #424141cf;
 }
 
-.playerDiv {
-  position: relative;
-  border: none;
-  width: 100%;
-
-  &:global(.left) {
-    left: -350px;
-  }
-}
-
-.playerPlaceholder {
+.defaultPlayerPlaceholder {
   @extend .playerBase;
   @extend %flex-center;
 }
 
+.pipBase {
+  width: 350px;
+  aspect-ratio: 16 / 9;
+  background-color: #424141cf;
+}
+
+// SetlistPlayer, LiveCharPlayer에서 사용중
 .playerBox {
   position: relative;
   display: flex;
@@ -35,8 +32,10 @@
   background-color: #000000;
 }
 
-
-.pipBase {
-  width: 350px;
-  aspect-ratio: 16 / 9;
+.popButton {
+  position: absolute;
+  font-weight: 500;
+  top: 0px;
+  right: 0px;
+  letter-spacing: 0px;
 }

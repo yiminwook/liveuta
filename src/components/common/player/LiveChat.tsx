@@ -2,6 +2,7 @@
 import { ORIGIN } from '@/constants';
 import { usePlayerCtx } from '@/stores/player';
 import popupCenter from '@/utils/popup';
+import { Button } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
 import { useEffect, useRef, useState } from 'react';
@@ -36,9 +37,18 @@ export default function LiveChat() {
 
   return (
     <div className={css.liveChatBox}>
-      <button className={css.popBtn} onClick={openPopup}>
+      <Button
+        vars={() => ({ root: { '--button-hover': '#ffae00d2' } })}
+        radius={5}
+        p={5}
+        size="sm"
+        classNames={{ root: css.popButton }}
+        onClick={openPopup}
+        bg="orange"
+        c="white"
+      >
         POP
-      </button>
+      </Button>
       <iframe
         ref={iframeRef}
         className={css.liveChat}

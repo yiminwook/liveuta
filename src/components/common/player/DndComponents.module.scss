@@ -10,6 +10,12 @@
   }
 }
 
+.defaultMode {
+  width: 100%;
+  height: auto;
+  background-color: #424141cf;
+}
+
 .draggable {
   z-index: 300;
   box-shadow: var(--box-shadow);

@@ -12,31 +12,39 @@ import {
   DndContext,
   DragEndEvent,
   DragStartEvent,
+  DraggableAttributes,
   UniqueIdentifier,
   closestCenter,
   useDraggable,
   useDroppable,
 } from '@dnd-kit/core';
+import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 import { AntDesignDragOutlined } from '@icons/antd/DragOutlined';
 import TablerX from '@icons/tabler/X';
 import { ActionIcon, Tooltip } from '@mantine/core';
 import classNames from 'classnames';
+import { useTranslations } from 'next-intl';
 import { CSSProperties, useState } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import dndCss from './DndComponents.module.scss';
-import PipPlayer from './PipPlayer';
+import PipPlayer from './PlayerBase';
 
-type DndPipProps = {
-  isShowHideButton: boolean;
+type DraggablePipProps = {
+  mode: 'default' | 'pip';
+  isShowHideButton?: boolean;
   onClickHide?: () => void;
 };
 
-export function DndPip({ isShowHideButton, onClickHide }: DndPipProps) {
-  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
+export function DraggablePlayer({
+  mode,
+  isShowHideButton = false,
+  onClickHide,
+}: DraggablePipProps) {
+  const [draggingId, setDraggingId] = useState<UniqueIdentifier | null>(null);
   const [boxCorner, setBoxCorner] = useState<TCorner>(getLocalStoragePipPosition); // 박스의 현재 모서리 위치 (null, 'topLeft', ...)
 
   const handleDragStart = (event: DragStartEvent) => {
-    setActiveId(event.active.id);
+    setDraggingId(event.active.id);
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -45,14 +53,14 @@ export function DndPip({ isShowHideButton, onClickHide }: DndPipProps) {
       saveLocalStoragePipPosition(event.over.id as TCorner);
     }
 
-    setActiveId(null);
+    setDraggingId(null);
   };
 
   const handleDragCancel = () => {
-    setActiveId(null);
+    setDraggingId(null);
   };
 
-  const isDragging = activeId !== null;
+  const isDragging = draggingId !== null;
   const boxPositionStyle = getBoxPositionStyle(boxCorner); // 현재 모서리에 따른 스타일 계산
 
   return (
@@ -70,7 +78,8 @@ export function DndPip({ isShowHideButton, onClickHide }: DndPipProps) {
         </RemoveScroll>
       )}
 
-      <Draggable
+      <Position
+        mode={mode}
         id={DRAGGABLE_BOX_ID}
         isShowHideButton={isShowHideButton}
         onClickHide={onClickHide}
@@ -81,22 +90,22 @@ export function DndPip({ isShowHideButton, onClickHide }: DndPipProps) {
   );
 }
 
-export function Draggable({
+function Position({
+  mode,
   id,
   isShowHideButton,
   positionStyle,
   isDragging,
   onClickHide,
 }: {
+  mode: 'default' | 'pip';
   id: string;
   isShowHideButton: boolean;
   positionStyle: CSSProperties;
   isDragging: boolean;
   onClickHide?: () => void;
 }) {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: id,
-  });
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({ id });
 
   return (
     <div
@@ -108,40 +117,69 @@ export function Draggable({
           '--translate-y': `${transform?.y ?? 0}px`,
         } as React.CSSProperties
       }
-      className={classNames(dndCss.draggable, { [dndCss.dragging]: isDragging })}
+      className={classNames({
+        [dndCss.defaultMode]: mode === 'default',
+        [dndCss.draggable]: mode === 'pip',
+        [dndCss.dragging]: isDragging,
+      })}
     >
-      <div className={dndCss.pipNav}>
-        {isShowHideButton && (
-          <Tooltip label="닫기" position="top" withArrow>
-            <ActionIcon
-              variant="transparent"
-              mr={5}
-              size="md"
-              classNames={{ root: classNames(dndCss.pipNavButton) }}
-              onClick={onClickHide}
-            >
-              <TablerX width={18} height={18} />
-            </ActionIcon>
-          </Tooltip>
-        )}
-        <Tooltip label="이동" position="top" withArrow>
-          <ActionIcon
-            size="md"
-            variant="transparent"
-            classNames={{ root: classNames(dndCss.pipNavButton, dndCss.handle) }}
-            {...listeners}
-            {...attributes}
-          >
-            <AntDesignDragOutlined width={18} height={18} />
-          </ActionIcon>
-        </Tooltip>
-      </div>
-      <PipPlayer />
+      {mode === 'pip' && (
+        <PipNav
+          isShowHideButton={isShowHideButton}
+          onClickHide={onClickHide}
+          dndHandleAttributes={attributes}
+          dndHandleListeners={listeners}
+        />
+      )}
+      <PipPlayer mode={mode} />
     </div>
   );
 }
 
-export function DroppableZone({
+type PipNavProps = {
+  isShowHideButton: boolean;
+  onClickHide?: () => void;
+  dndHandleAttributes?: DraggableAttributes;
+  dndHandleListeners?: SyntheticListenerMap | undefined;
+};
+
+function PipNav({
+  isShowHideButton,
+  onClickHide,
+  dndHandleAttributes,
+  dndHandleListeners,
+}: PipNavProps) {
+  const t = useTranslations();
+
+  return (
+    <div className={dndCss.pipNav}>
+      {isShowHideButton && (
+        <Tooltip label={t('global.player.hide')} position="top" withArrow>
+          <ActionIcon
+            variant="transparent"
+            mr={5}
+            size="md"
+            classNames={{ root: classNames(dndCss.pipNavButton) }}
+            onClick={onClickHide}
+          >
+            <TablerX width={18} height={18} />
+          </ActionIcon>
+        </Tooltip>
+      )}
+      <ActionIcon
+        size="md"
+        variant="transparent"
+        classNames={{ root: classNames(dndCss.pipNavButton, dndCss.handle) }}
+        {...dndHandleListeners}
+        {...dndHandleAttributes}
+      >
+        <AntDesignDragOutlined width={18} height={18} />
+      </ActionIcon>
+    </div>
+  );
+}
+
+function DroppableZone({
   id,
   corner,
 }: {

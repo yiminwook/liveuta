@@ -4,7 +4,6 @@ import { generateVideoUrl } from '@/libraries/youtube/url';
 import { usePlayerCtx } from '@/stores/player';
 import classnames from 'classnames';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next-nprogress-bar';
 import { memo, useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import ReactPlayer from 'react-player';
@@ -12,26 +11,16 @@ import { toast } from 'sonner';
 import { useStore } from 'zustand';
 import css from './Player.module.scss';
 
-type Props = {};
+type Props = {
+  mode: 'default' | 'pip';
+};
 
-export default memo(function PipPlayer({}: Props) {
-  const router = useRouter();
+export default memo(function PlayerBase({ mode }: Props) {
   const [isReady, setIsReady] = useState(false);
   const playerRef = useRef<ReactPlayer>(null);
   const playerCtx = usePlayerCtx();
   const store = useStore(playerCtx);
   const t = useTranslations();
-
-  useHotkeys(
-    'esc',
-    () => {
-      toast.info(
-        `${t('global.player.title')} ${store.isHide ? t('global.player.show') : t('global.player.hide')}`,
-      );
-      store.actions.toggleIsHide();
-    },
-    { enabled: isReady, scopes: ['*'] },
-  );
 
   useHotkeys(
     'backspace',
@@ -48,8 +37,6 @@ export default memo(function PipPlayer({}: Props) {
     store.actions.setIsPlaying(isPlaying);
   };
 
-  const navigateLive = () => router.push('/schedule?t=live');
-
   useEffect(() => {
     if (isReady === true) {
       playerRef.current?.seekTo(store.timeline, 'seconds');
@@ -60,8 +47,11 @@ export default memo(function PipPlayer({}: Props) {
 
   return (
     <ReactPlayer
-      className={classnames(css.pipBase)}
-      width="100%"
+      className={classnames({
+        [css.playerBase]: mode === 'default',
+        [css.pipBase]: mode === 'pip',
+      })}
+      width={mode === 'default' ? '100%' : '350px'}
       height="auto"
       ref={playerRef}
       url={url}
