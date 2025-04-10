@@ -5,8 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useStore } from 'zustand';
-import PipPlayer from './PipPlayer';
-import css from './Player.module.scss';
 
 const DndPip = dynamic(() => import('./DndComponents').then((mod) => mod.DndPip), {
   ssr: false,
@@ -18,6 +16,8 @@ export default function Pip() {
   const playerCtx = usePlayerCtx();
   const [isMount, setIsMount] = useState(false);
   const isHide = useStore(playerCtx, (store) => store.isHide);
+  const setIsHide = useStore(playerCtx, (store) => store.actions.setIsHide);
+  const hidePip = () => setIsHide(true);
 
   useEffect(() => {
     if (isMount) return;
@@ -26,5 +26,5 @@ export default function Pip() {
 
   if (!isMount || isMobile || isLive || isHide) return null;
 
-  return <DndPip />;
+  return <DndPip isShowHideButton={true} onClickHide={hidePip} />;
 }

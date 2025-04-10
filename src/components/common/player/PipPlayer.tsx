@@ -20,12 +20,14 @@ export default memo(function PipPlayer({}: Props) {
   const playerRef = useRef<ReactPlayer>(null);
   const playerCtx = usePlayerCtx();
   const store = useStore(playerCtx);
-  const t = useTranslations('global.player');
+  const t = useTranslations();
 
   useHotkeys(
     'esc',
     () => {
-      toast.info(`${t('title')} ${store.isHide ? t('show') : t('hide')}`);
+      toast.info(
+        `${t('global.player.title')} ${store.isHide ? t('global.player.show') : t('global.player.hide')}`,
+      );
       store.actions.toggleIsHide();
     },
     { enabled: isReady, scopes: ['*'] },
@@ -34,7 +36,9 @@ export default memo(function PipPlayer({}: Props) {
   useHotkeys(
     'backspace',
     () => {
-      toast.info(`${t('title')} ${store.isPlaying ? t('pause') : t('play')}`);
+      toast.info(
+        `${t('global.player.title')} ${store.isPlaying ? t('global.player.pause') : t('global.player.play')}`,
+      );
       store.actions.toggleIsPlaying();
     },
     { enabled: isReady, scopes: ['*'], preventDefault: true },
@@ -42,10 +46,6 @@ export default memo(function PipPlayer({}: Props) {
 
   const handlePlay = (isPlaying: boolean) => {
     store.actions.setIsPlaying(isPlaying);
-  };
-
-  const toggleLeft = () => {
-    store.actions.toggleIsHide();
   };
 
   const navigateLive = () => router.push('/schedule?t=live');
@@ -59,35 +59,32 @@ export default memo(function PipPlayer({}: Props) {
   const url = generateVideoUrl(store.videoId);
 
   return (
-    <div>
-      <ReactPlayer
-        className={classnames('reactPlayer')}
-        width="100%"
-        height="auto"
-        ref={playerRef}
-        url={url}
-        muted={store.isMutted}
-        playing={store.isPlaying}
-        onPlay={() => handlePlay(true)}
-        onPause={() => handlePlay(false)}
-        config={{
-          youtube: {
-            // https://developers.google.com/youtube/iframe_api_reference?hl=ko#setPlaybackQuality
-            playerVars: {
-              origin: ORIGIN,
-              start: store.timeline, //시작하는 시간
-            },
+    <ReactPlayer
+      className={classnames(css.pipBase)}
+      width="100%"
+      height="auto"
+      ref={playerRef}
+      url={url}
+      muted={store.isMutted}
+      playing={store.isPlaying}
+      onPlay={() => handlePlay(true)}
+      onPause={() => handlePlay(false)}
+      config={{
+        youtube: {
+          // https://developers.google.com/youtube/iframe_api_reference?hl=ko#setPlaybackQuality
+          playerVars: {
+            origin: ORIGIN,
+            start: store.timeline, //시작하는 시간
           },
-        }}
-        controls={true}
-        onReady={() => setIsReady(() => true)}
-        fallback={<div className={css.playerPlaceholder} />}
-        onError={(e) => {
-          console.error('Player', e);
-          console.log('url', url);
-          toast.error(t('cannotPlayError'));
-        }}
-      />
-    </div>
+        },
+      }}
+      controls={true}
+      onReady={() => setIsReady(() => true)}
+      onError={(e) => {
+        console.error('Player', e);
+        console.log('url', url);
+        toast.error(t('global.player.cannotPlayError'));
+      }}
+    />
   );
 });

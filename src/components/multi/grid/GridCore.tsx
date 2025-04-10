@@ -11,7 +11,12 @@ import { v4 as uuid } from 'uuid';
 import css from './Grid.module.scss';
 import GridLayoutItem from './GridItem';
 import GridNav from './GridNav';
-import { getLayout, getVideoMap, saveLayout, saveVideoMap } from './helper';
+import {
+  getLocalStorageLayout,
+  getLocalStorageVideoMap,
+  saveLocalStorageLayout,
+  saveLocalStorageVideoMap,
+} from './helper';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -19,8 +24,8 @@ export default function GridCore() {
   const containerRef = useRef<HTMLDivElement>(null!);
 
   // const [breakPoint, setBreakPoint] = useState('lg');
-  const [videoMap, setVideoMap] = useState<Record<string, string>>(getVideoMap);
-  const [layouts, setLayouts] = useState<Layouts>(getLayout);
+  const [videoMap, setVideoMap] = useState<Record<string, string>>(getLocalStorageVideoMap);
+  const [layouts, setLayouts] = useState<Layouts>(getLocalStorageLayout);
   const [isFlip, setIsFlip] = useState(false);
 
   const toggleFlip = () => setIsFlip((p) => !p);
@@ -53,13 +58,13 @@ export default function GridCore() {
         updatedLayouts[point] = [...updatedLayouts[point], newItem];
       }
 
-      saveLayout(updatedLayouts);
+      saveLocalStorageLayout(updatedLayouts);
       return updatedLayouts;
     });
 
     setVideoMap((prevMap) => {
       const updatedMap = { ...prevMap, [newItem.i]: url };
-      saveVideoMap(updatedMap);
+      saveLocalStorageVideoMap(updatedMap);
       return updatedMap;
     });
   };
@@ -76,7 +81,7 @@ export default function GridCore() {
         });
       }
 
-      saveLayout(updatedLayouts);
+      saveLocalStorageLayout(updatedLayouts);
 
       return updatedLayouts;
     });
@@ -84,19 +89,19 @@ export default function GridCore() {
     setVideoMap((prevMap) => {
       const updatedMap = { ...prevMap };
       delete updatedMap[id];
-      saveVideoMap(updatedMap);
+      saveLocalStorageVideoMap(updatedMap);
       return updatedMap;
     });
   };
 
   const handleClear = () => {
     setLayouts(() => {
-      saveLayout({});
+      saveLocalStorageLayout({});
       return {};
     });
 
     setVideoMap(() => {
-      saveVideoMap({});
+      saveLocalStorageVideoMap({});
       return {};
     });
   };
@@ -118,7 +123,7 @@ export default function GridCore() {
           //   }
           // }}
           onLayoutChange={(layout, layouts) => {
-            saveLayout(layouts);
+            saveLocalStorageLayout(layouts);
             setLayouts(layouts);
           }}
           onDrag={() => containerRef.current.setAttribute('data-dragging', 'true')}

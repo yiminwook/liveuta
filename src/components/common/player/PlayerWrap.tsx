@@ -1,10 +1,8 @@
 'use client';
 import useScheduleStatus from '@/hooks/useScheduleStatus';
 import { useEffect, useRef, useState } from 'react';
-import LiveChat from './LiveChat';
 import Player from './Player';
 import css from './Player.module.scss';
-import PlayerPlaceholder from './PlayerPlaceholder';
 
 export default function PlayerWrap() {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -31,9 +29,7 @@ export default function PlayerWrap() {
 
   return (
     <div ref={wrapRef} className={css.playerBox}>
-      {!isShow && <PlayerPlaceholder />}
       <Player isShow={isShow} isLive={true} />
-      <LiveChat />
     </div>
   );
 }

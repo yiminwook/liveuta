@@ -1,7 +1,7 @@
 import { Button } from '@mantine/core';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import GridCore from './GridCore';
-import { saveLayout, saveVideoMap } from './helper';
+import { saveLocalStorageLayout, saveLocalStorageVideoMap } from './helper';
 
 export default function Grid() {
   return (
@@ -13,8 +13,8 @@ export default function Grid() {
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   const onClick = () => {
-    saveLayout({});
-    saveVideoMap({});
+    saveLocalStorageLayout({});
+    saveLocalStorageVideoMap({});
     resetErrorBoundary();
   };
 
