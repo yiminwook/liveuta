@@ -82,7 +82,7 @@ export default function SliderCard({
               : ''
           }
         />
-        <Text fw={500} className={css.channelNm} mt="xs" component="span" lineClamp={1}>
+        <Text fw={500} className={css.channelNm} component="span" lineClamp={1}>
           {channel?.name_kor}
         </Text>
       </Flex>
