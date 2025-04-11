@@ -178,8 +178,16 @@
           "settings": "설정",
           "dev": "개발",
           "featured": "특집",
-          "support": "지원",
-          "utils": "유틸리티"
+          "support": "지원"
+        },
+        "utility": "유틸리티",
+        "utilities": {
+          "converters": {
+            "base64": "Base64 인코더/디코더"
+          },
+          "youtube": {
+            "thumbnail": "유튜브 썸네일"
+          }
         }
       }
     }

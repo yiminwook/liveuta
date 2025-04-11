@@ -178,8 +178,16 @@
           "settings": "Settings",
           "dev": "Dev",
           "featured": "Featured",
-          "support": "Support",
-          "utils": "Utilities"
+          "support": "Support"
+        },
+        "utility": "Utility",
+        "utilities": {
+          "convertters": {
+            "base64": "Base64 Converter"
+          },
+          "youtube": {
+            "thumbnail": "YouTube Thumbnail"
+          }
         }
       }
     }

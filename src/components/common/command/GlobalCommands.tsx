@@ -18,49 +18,59 @@ export default function GlobalCommands() {
         {
           title: t('navigation.schedule'),
           fn: () => router.push('/schedule'),
-          keywords: ['schedules'],
+          keywords: ['navigate', 'schedules'],
         },
         {
           title: t('navigation.multiView'),
           fn: () => router.push('/multiView'),
-          keywords: ['multiView'],
+          keywords: ['navigate', 'multiView'],
         },
         {
           title: t('navigation.channel'),
           fn: () => router.push('/channel'),
-          keywords: ['channel'],
+          keywords: ['navigate', 'channel'],
         },
         {
           title: t('navigation.setlist'),
           fn: () => router.push('/setlist'),
-          keywords: ['setlist'],
+          keywords: ['navigate', 'setlist'],
         },
         {
           title: t('navigation.settings'),
           fn: () => router.push('/settings'),
-          keywords: ['settings'],
+          keywords: ['navigate', 'settings'],
         },
         {
           title: t('navigation.dev'),
           fn: () => router.push('/dev'),
-          keywords: ['dev'],
+          keywords: ['navigate', 'dev'],
         },
         {
           title: t('navigation.featured'),
           fn: () => router.push('/featured'),
-          keywords: ['featured'],
+          keywords: ['navigate', 'featured'],
         },
         {
           title: t('navigation.support'),
           fn: () => router.push('/support'),
-          keywords: ['support'],
-        },
-        {
-          title: t('navigation.utils'),
-          fn: () => router.push('/utils'),
-          keywords: ['utils'],
+          keywords: ['navigate', 'support'],
         },
       ],
+    });
+    addCmdGroup({
+      "heading": t('utility'),
+      commands: [
+        {
+          title: t('utilities.converters.base64'),
+          fn: () => router.push('/utils/converters/base64'),
+          keywords: ['utility', 'navigate', 'converters', 'base64'],
+        },
+        {
+          title: t('utilities.youtube.thumbnail'),
+          fn: () => router.push('/utils/youtube/thumbnail'),
+          keywords: ['utility', 'navigate', 'youtube', 'thumbnail'],
+        }
+      ]
     });
     addCmdGroup({
       heading: t('action'),
@@ -68,7 +78,7 @@ export default function GlobalCommands() {
         {
           title: t('actions.commandPalette'),
           fn: () => setCmdOpen(false),
-          keywords: ['command palette'],
+          keywords: ['actions', 'commands', 'command palette'],
         },
       ],
     });

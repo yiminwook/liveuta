@@ -172,8 +172,16 @@
           "settings": "設定",
           "dev": "開発",
           "featured": "特集",
-          "support": "サポート",
-          "utils": "ユーティリティ"
+          "support": "サポート"
+        },
+        "utility": "ユーティリティ",
+        "utilities": {
+          "converters": {
+            "base64": "Base64 変換"
+          },
+          "youtube": {
+            "thumbnail": "サムネイルダウンロード"
+          }
         }
       }
     }
