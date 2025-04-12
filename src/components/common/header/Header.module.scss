@@ -59,21 +59,25 @@ a.title {
   display: none;
   visibility: hidden;
   align-items: center;
-  gap: 0.5rem;
-  padding-inline: 0.75rem;
+  gap: 1rem;
+  padding-inline: 0.25rem;
   border-radius: var(--mantine-radius-default);
   border: 1px solid util.color(default-border);
   font-weight: 600;
+  background-color: util.color(default-hover);
+}
 
-  .cmdShortcut {
-    padding: 0.25rem 0.5rem;
-    border-radius: 5px;
-    border: util.color(default-border);
-    background-color: util.color(default-hover);
-    font-size: 0.875rem;
-  }
+.cmdShortcut {
+  padding: 2px 4px;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  border-radius: var(--mantine-radius-default);
+  color: util.color(default-hover);
+  background-color: util.palette(third, default);
+}
 
-  @include util.min-width(var.$mobile-boundary) {
+@include util.min-width(var.$mobile-boundary) {
+  .searchBtn {
     display: flex;
     visibility: visible;
   }

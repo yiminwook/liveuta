@@ -18,13 +18,14 @@ export default function Header({}: HeaderProps) {
   const { data: session, status } = useSession();
   const gnbRef = useRef<HTMLDivElement>(null);
   const actions = useSetAppStore();
-  const t = useTranslations('global.header');
+  const t = useTranslations();
   const { setCmdOpen } = useCommandActions();
 
   const openAccountSidebar = () => actions.setIsShowAcctSidebar(true);
 
   const handleScroll = useMemo(() => {
     let timer: NodeJS.Timeout | null = null;
+
     return () => {
       if (timer) return;
       timer = setTimeout(() => {
@@ -56,14 +57,14 @@ export default function Header({}: HeaderProps) {
           <div className={css.right}>
             <button onClick={() => setCmdOpen(true)} className={css.searchBtn}>
               <IonIosSearch width={20} height={20} />
-              <span>{t('search')}</span>
+              <span>{t('global.header.search')}</span>
               <div className={css.cmdShortcut}>⌘+K</div>
             </button>
             <DesktopNav />
             {status === 'loading' && <Skeleton height={40} circle />}
             {status === 'unauthenticated' && (
               <Link href="/login" className={css.loginBtn}>
-                {t('login')}
+                {t('global.header.login')}
               </Link>
             )}
             {status === 'authenticated' && (
@@ -73,7 +74,7 @@ export default function Header({}: HeaderProps) {
                   w={40}
                   h={40}
                   radius="xl"
-                  alt={t('userAvatarAlt')}
+                  alt={t('global.header.userAvatarAlt')}
                   name={session.user.email}
                 />
               </button>
