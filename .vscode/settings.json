@@ -18,16 +18,25 @@
   "[css]": {
     "editor.defaultFormatter": "vscode.css-language-features"
   },
+  "[postcss]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
   "[less]": {
     "editor.defaultFormatter": "vscode.css-language-features"
   },
   "[scss]": {
     "editor.defaultFormatter": "vscode.css-language-features"
   },
+  "files.associations": {
+    "*.css": "css"
+  },
   "scss.format.spaceAroundSelectorSeparator": true,
   "css.format.spaceAroundSelectorSeparator": true,
   "less.format.spaceAroundSelectorSeparator": true,
-  "css.format.preserveNewLines": false,
-  "scss.format.preserveNewLines": false,
-  "less.format.preserveNewLines": false
+  "css.format.preserveNewLines": true,     
+  "scss.format.preserveNewLines": true,    
+  "less.format.preserveNewLines": true,    
+  "css.format.maxPreserveNewLines": 2,       
+  "scss.format.maxPreserveNewLines": 2,      
+  "less.format.maxPreserveNewLines": 2      
 }
