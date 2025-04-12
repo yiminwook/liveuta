@@ -14,5 +14,20 @@
   "i18n-ally.localesPaths": ["./messages"], // E.g. "./messages"
   "i18n-ally.keystyle": "nested",
   "i18n-ally.sourceLanguage": "ko",
-  "i18n-ally.displayLanguage": "ko"
+  "i18n-ally.displayLanguage": "ko",
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "scss.format.spaceAroundSelectorSeparator": true,
+  "css.format.spaceAroundSelectorSeparator": true,
+  "less.format.spaceAroundSelectorSeparator": true,
+  "css.format.preserveNewLines": false,
+  "scss.format.preserveNewLines": false,
+  "less.format.preserveNewLines": false
 }
