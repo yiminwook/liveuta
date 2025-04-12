@@ -1,7 +1,8 @@
 'use client';
+import { clientApi } from '@/apis/fetcher';
+import { SETLISTS_TAG } from '@/constants/revalidateTag';
 import { Button, TextInput, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { Session } from 'next-auth';
 import { useTranslations } from 'next-intl';
 import { MouseEvent, useState } from 'react';
@@ -16,10 +17,9 @@ export default function PostForm({ session }: PostFormProps) {
   const [url, setUrl] = useState('');
   const [desc, setDesc] = useState('');
   const queryClient = useQueryClient();
-  const t = useTranslations('setlist.postForm');
+  const t = useTranslations();
 
   const mutatePost = useMutation({
-    mutationKey: ['postSetlist'],
     mutationFn: async ({
       session,
       videoId,
@@ -29,16 +29,17 @@ export default function PostForm({ session }: PostFormProps) {
       videoId: string;
       description: string;
     }) => {
-      const response = await axios.post<{ message: string; data: null }>(
-        `/api/v1/setlist/${videoId}`,
-        { description },
-        { headers: { Authorization: `Bearer ${session.user.accessToken}` } },
-      );
-      return response.data;
+      const json = await clientApi
+        .post<{ message: string; data: null }>(`v1/setlist/${videoId}`, {
+          headers: { Authorization: `Bearer ${session.user.accessToken}` },
+          json: { description },
+        })
+        .json();
+      return json;
     },
     onSuccess: () => {
-      toast.success(t('formSuccess'));
-      queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
+      toast.success(t('setlist.postForm.formSuccess'));
+      queryClient.invalidateQueries({ queryKey: [SETLISTS_TAG] });
     },
     onError: (error) => toast.error(error.message),
   });
@@ -54,15 +55,15 @@ export default function PostForm({ session }: PostFormProps) {
     const description = desc.trim();
 
     if (!videoId) {
-      return toast.warning(t('invalidUrlError'));
+      return toast.warning(t('setlist.postForm.invalidUrlError'));
     }
 
     if (!description) {
-      return toast.warning(t('emptySetlistError'));
+      return toast.warning(t('setlist.postForm.emptySetlistError'));
     }
 
     if (session === null) {
-      return toast.warning(t('notLoggedInError'));
+      return toast.warning(t('setlist.postForm.notLoggedInError'));
     }
 
     mutatePost.mutate({ videoId, description, session });
@@ -88,7 +89,7 @@ export default function PostForm({ session }: PostFormProps) {
           <TextInput
             className={css.input}
             id="youtube-url"
-            label={t('linkLabel')}
+            label={t('setlist.postForm.linkLabel')}
             placeholder="https://www.youtube.com/watch?v=UkPN32C4wzc"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
@@ -100,7 +101,7 @@ export default function PostForm({ session }: PostFormProps) {
         <div className={css.textAreaSection}>
           <div className={css.textAreaHeader}>
             <label className={css.textAreaLabel} htmlFor="set-list">
-              {t('textareaLabel')}
+              {t('setlist.postForm.textareaLabel')}
             </label>
             <div>
               <button
@@ -145,12 +146,12 @@ export default function PostForm({ session }: PostFormProps) {
             minRows={14}
             maxRows={14}
             autosize
-            placeholder={t('textareaPlaceholder')}
+            placeholder={t('setlist.postForm.textareaPlaceholder')}
           />
         </div>
       </div>
       <Button type="submit" color="third" variant="filled" disabled={mutatePost.isPending}>
-        {t('submit')}
+        {t('setlist.postForm.submit')}
       </Button>
     </form>
   );

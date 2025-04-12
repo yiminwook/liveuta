@@ -16,7 +16,6 @@ import css from './Home.module.scss';
 export default function Home() {
   const t = useTranslations('auth.login');
   const mutateLogin = useMutation({
-    mutationKey: ['login'],
     mutationFn: (provider: Provider) => signIn(provider, { callbackUrl: '/' }),
     onError: (error) => toast.error(error.message),
   });

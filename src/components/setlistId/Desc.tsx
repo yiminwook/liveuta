@@ -1,9 +1,10 @@
 'use client';
+import { clientApi } from '@/apis/fetcher';
 import TimelineText from '@/components/common/TimestampText';
+import { SETLISTS_TAG } from '@/constants/revalidateTag';
 import { useSetPlayerStore } from '@/stores/player';
 import { Button, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
@@ -24,10 +25,13 @@ export default function Desc({ videoId, description }: DescProps) {
   const [desc, setDesc] = useState('');
   const actions = useSetPlayerStore();
   const queryClient = useQueryClient();
-  const t = useTranslations('setlistId.desc');
+  const t = useTranslations();
 
   const toggleEditing = () => {
-    if (!session) return toast.warning(t('notLoggedInError'));
+    if (!session) {
+      toast.warning(t('setlistId.desc.notLoggedInError'));
+      return;
+    }
     setIsEditing((pre) => !pre);
   };
 
@@ -42,7 +46,6 @@ export default function Desc({ videoId, description }: DescProps) {
   };
 
   const mutateSetlist = useMutation({
-    mutationKey: ['updateSetlist'],
     mutationFn: async ({
       session,
       videoId,
@@ -52,16 +55,18 @@ export default function Desc({ videoId, description }: DescProps) {
       videoId: string;
       description: string;
     }) => {
-      const response = await axios.put<{ message: string; data: null }>(
-        `/api/v1/setlist/${videoId}`,
-        { description },
-        { headers: { Authorization: `Bearer ${session.user.accessToken}` } },
-      );
-      return response.data;
+      const json = await clientApi
+        .put<{ message: string; data: null }>(`v1/setlist/${videoId}`, {
+          headers: { Authorization: `Bearer ${session.user.accessToken}` },
+          json: { description },
+        })
+        .json();
+
+      return json.data;
     },
     onSuccess: () => {
-      toast.success(t('modified'));
-      queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
+      toast.success(t('setlistId.desc.modified'));
+      queryClient.invalidateQueries({ queryKey: [SETLISTS_TAG] });
       router.refresh();
     },
     onError: (error) => toast.error(error.message),
@@ -72,12 +77,12 @@ export default function Desc({ videoId, description }: DescProps) {
     const description = desc.trim();
 
     if (!session) {
-      toast.warning(t('notLoggedInError'));
+      toast.warning(t('setlistId.desc.notLoggedInError'));
       return;
     }
 
     if (!description) {
-      toast.warning(t('noContentError'));
+      toast.warning(t('setlistId.desc.noContentError'));
       return;
     }
 
@@ -108,7 +113,7 @@ export default function Desc({ videoId, description }: DescProps) {
             loading={mutateSetlist.isPending}
             disabled={!session}
           >
-            {t('cancel')}
+            {t('setlistId.desc.cancel')}
           </Button>
           <Button
             type="submit"
@@ -117,7 +122,7 @@ export default function Desc({ videoId, description }: DescProps) {
             loading={mutateSetlist.isPending}
             disabled={!session}
           >
-            {t('save')}
+            {t('setlistId.desc.save')}
           </Button>
         </div>
         <div className={css.inner}>
@@ -137,7 +142,7 @@ export default function Desc({ videoId, description }: DescProps) {
   return (
     <div className={css.wrap}>
       <Button type="button" color="third" onClick={toggleEditing}>
-        {t('edit')}
+        {t('setlistId.desc.edit')}
       </Button>
       <div className={css.inner}>
         {description

@@ -1,20 +1,23 @@
+import { serverApi } from '@/apis/fetcher';
 import Footer from '@/components/common/Footer';
+import { CHANNELS_TAG, METADATAS_TAG } from '@/constants/revalidateTag';
 import { TYChannelReturn } from '@/libraries/mongoDB/channels';
 import { TMetadata } from '@/types';
 import Client from './page.client';
 
 export default async function Page() {
   const [metadata, recentChannelData] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/metadata`, {
-      next: { revalidate: 3600, tags: ['metadata'] },
-    })
-      .then((res) => res.json() as Promise<{ data: TMetadata }>)
+    serverApi
+      .get<{ data: TMetadata }>('v1/metadata', {
+        next: { revalidate: 3600, tags: [METADATAS_TAG] },
+      })
+      .json()
       .then((json) => json.data),
-    fetch(
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/youtube-channel?page=1&sort=createdAt&size=20`,
-      { next: { revalidate: 1800, tags: ['channel'] } },
-    )
-      .then((res) => res.json() as Promise<{ data: TYChannelReturn }>)
+    serverApi
+      .get<{ data: TYChannelReturn }>('v1/youtube-channel?page=1&sort=createdAt&size=20', {
+        next: { revalidate: 1800, tags: [CHANNELS_TAG] },
+      })
+      .json()
       .then((json) => json.data),
   ]);
 

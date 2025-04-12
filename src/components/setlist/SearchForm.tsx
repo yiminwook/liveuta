@@ -1,4 +1,5 @@
 'use client';
+import { SETLISTS_TAG } from '@/constants/revalidateTag';
 import IonSearch from '@icons/ion/IosSearch';
 import TbX from '@icons/tabler/X';
 import { TextInput, UnstyledButton } from '@mantine/core';
@@ -20,7 +21,7 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
   const queryClient = useQueryClient();
   const router = useRouter();
   const [query, setQuery] = useState(searchParams.query);
-  const t = useTranslations('setlist.searchForm');
+  const t = useTranslations();
 
   const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -30,7 +31,7 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
     e.preventDefault();
     const trimmedQuery = query.trim();
     if (trimmedQuery === searchParams.query) {
-      queryClient.invalidateQueries({ queryKey: ['searchSetlist', searchParams] });
+      queryClient.invalidateQueries({ queryKey: [SETLISTS_TAG, searchParams] });
     } else {
       const params = new URLSearchParams();
       params.set('query', trimmedQuery);
@@ -48,7 +49,7 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
             classNames={{ input: css.input }}
             value={query}
             onChange={handleQuery}
-            placeholder={t('searchInputPlaceholder')}
+            placeholder={t('setlist.searchForm.searchInputPlaceholder')}
           />
           <button className={css.clearButton} type="button" onClick={() => setQuery('')}>
             <TbX />

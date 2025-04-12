@@ -1,4 +1,6 @@
 'use client';
+import { clientApi } from '@/apis/fetcher';
+import { MEMBER_TAG } from '@/constants/revalidateTag';
 import useScheduleStatus from '@/hooks/useScheduleStatus';
 import { TMemberInfo } from '@/libraries/oracleDB/auth/service';
 import { useSetModalStore } from '@/stores/modal';
@@ -13,20 +15,21 @@ type Props = {};
 
 export default function DataFetchingObserver({}: Props) {
   const session = useSession().data;
-  const t = useTranslations('global.dataFetchingObserver');
+  const t = useTranslations();
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
   const status = useScheduleStatus();
   const modalActions = useSetModalStore();
 
   const { error } = useQuery({
-    queryKey: ['memberInfo'],
+    queryKey: [MEMBER_TAG],
     queryFn: () =>
-      fetch(process.env.NEXT_PUBLIC_SITE_URL + '/api/v1/member', {
-        headers: { Authorization: `Bearer ${session?.user.accessToken}` },
-      })
-        .then((res) => res.json() as Promise<{ data: TMemberInfo }>)
-        .then((res) => res.data),
+      clientApi
+        .get<{ data: TMemberInfo }>('v1/member', {
+          headers: { Authorization: `Bearer ${session?.user.accessToken}` },
+        })
+        .json()
+        .then((json) => json.data),
     enabled: !!session,
     staleTime: 1000 * 60, // 1분
   });
@@ -37,7 +40,7 @@ export default function DataFetchingObserver({}: Props) {
       .push(AlertModal, {
         id: 'session-expired',
         props: {
-          message: t('sessionExpired'),
+          message: t('global.dataFetchingObserver.sessionExpired'),
         },
       })
       .then(() => {
@@ -49,7 +52,7 @@ export default function DataFetchingObserver({}: Props) {
     const unFetching = isFetching === 0 && isMutating === 0;
 
     if (status !== 'pending' && !unFetching) {
-      toast.loading(t('fetching'), {
+      toast.loading(t('global.dataFetchingObserver.fetching'), {
         id: 'loading',
       });
 

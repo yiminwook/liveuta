@@ -1,3 +1,5 @@
+import { clientApi, revalidateApi } from '@/apis/fetcher';
+import { METADATAS_TAG } from '@/constants/revalidateTag';
 import { TMetadata } from '@/types';
 import { TUpdateMetadataDto } from '@/types/dto';
 import { Box, Button, Flex, LoadingOverlay, TextInput } from '@mantine/core';
@@ -15,26 +17,21 @@ export default function Form({ session }: Props) {
   const [defaultVid, serDefaultVid] = useState('');
 
   const queryClient = useQueryClient();
+
   const mutation = useMutation({
     mutationFn: async (dto: TUpdateMetadataDto) => {
-      const res = await fetch('/api/v1/metadata', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${session.user.accessToken}`,
-        },
-        body: JSON.stringify(dto),
-      });
+      const json = await clientApi
+        .patch('v1/metadata', {
+          headers: { Authorization: `Bearer ${session.user.accessToken}` },
+          json: dto,
+        })
+        .json();
 
-      if (!res.ok) {
-        throw new Error('업데이트에 실패했습니다.');
-      }
-
-      return res.json();
+      return json;
     },
     onSuccess: async () => {
-      await fetch('/api/v1/revalidate?tag=metadata');
-      await queryClient.invalidateQueries({ queryKey: ['metadata'] });
+      await revalidateApi.get('?tag=' + METADATAS_TAG);
+      await queryClient.invalidateQueries({ queryKey: [METADATAS_TAG] });
       toast.success('업데이트 되었습니다.');
     },
   });

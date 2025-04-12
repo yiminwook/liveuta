@@ -1,3 +1,5 @@
+import { clientApi } from '@/apis/fetcher';
+import { METADATAS_TAG } from '@/constants/revalidateTag';
 import { TMetadata } from '@/types';
 import { Button, Skeleton, Table } from '@mantine/core';
 import { QueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query';
@@ -25,10 +27,11 @@ function Loading() {
 
 function Success() {
   const { data } = useSuspenseQuery({
-    queryKey: ['metadata'],
+    queryKey: [METADATAS_TAG],
     queryFn: () =>
-      fetch('/api/v1/metadata', { next: { revalidate: 3600, tags: ['metadata'] } })
-        .then((res) => res.json() as Promise<{ data: TMetadata }>)
+      clientApi
+        .get<{ data: TMetadata }>('v1/metadata')
+        .json()
         .then((json) => json.data),
     select: (data) =>
       Object.keys(data).map((key, idx, arr) => ({

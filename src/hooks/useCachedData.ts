@@ -1,49 +1,48 @@
 'use client';
+import { clientApi } from '@/apis/fetcher';
+import { BLACKLIST_TAG, CHANNELS_TAG, WHITELIST_TAG } from '@/constants/revalidateTag';
 import { TGetChannelRes } from '@api/v1/channel/route';
 import { useQueries } from '@tanstack/react-query';
-import axios from 'axios';
 import { Session } from 'next-auth';
 import { useMemo } from 'react';
 
 type LayoutDataObserverProps = {
   session: Session | null;
 };
+
 const useCachedData = ({ session }: LayoutDataObserverProps) => {
   const [channelList, blacklist, whitelist] = useQueries({
     queries: [
       {
-        queryKey: ['channelList'],
+        queryKey: [CHANNELS_TAG],
         queryFn: () =>
-          fetch('/api/v1/channel', {
-            next: { revalidate: 1800, tags: ['channel'] }, // 30분간 캐시
-          })
-            .then((res) => res.json() as Promise<TGetChannelRes>)
-            .then((res) => res.data),
+          clientApi
+            .get<TGetChannelRes>('v1/channel')
+            .json()
+            .then((json) => json.data),
         gcTime: Infinity,
       },
       {
-        queryKey: ['blacklist'],
+        queryKey: [BLACKLIST_TAG],
         queryFn: () =>
-          axios
-            .get<{ message: string; data: string[] }>('/api/v1/blacklist', {
-              headers: {
-                Authorization: `Bearer ${session?.user.accessToken}`,
-              },
+          clientApi
+            .get<{ message: string; data: string[] }>('v1/blacklist', {
+              headers: { Authorization: `Bearer ${session?.user.accessToken}` },
             })
-            .then((res) => res.data.data),
+            .json()
+            .then((json) => json.data),
         enabled: !!session,
         gcTime: Infinity,
       },
       {
-        queryKey: ['whitelist'],
+        queryKey: [WHITELIST_TAG],
         queryFn: () =>
-          axios
-            .get<{ message: string; data: string[] }>('/api/v1/whitelist', {
-              headers: {
-                Authorization: `Bearer ${session?.user.accessToken}`,
-              },
+          clientApi
+            .get<{ message: string; data: string[] }>('v1/whitelist', {
+              headers: { Authorization: `Bearer ${session?.user.accessToken}` },
             })
-            .then((res) => res.data.data),
+            .json()
+            .then((json) => json.data),
         enabled: !!session,
         gcTime: Infinity,
       },

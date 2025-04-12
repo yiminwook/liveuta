@@ -1,4 +1,6 @@
 'use client';
+import { revalidateApi } from '@/apis/fetcher';
+import { CHANNELS_TAG, FEATURED_TAG, METADATAS_TAG } from '@/constants/revalidateTag';
 import { Box, Button, Divider, Text } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
@@ -12,15 +14,11 @@ export default function Client({}: Props) {
 
   const mutation = useMutation({
     mutationFn: (tag: string) =>
-      fetch(`/api/v1/revalidate?tag=${tag}`).then(
-        (res) => res.json() as Promise<{ revalidated: boolean; now: number; kind: string }>,
-      ),
-    onSuccess: () => {
-      toast.success('캐시 초기화 완료');
-    },
+      revalidateApi.get<{ revalidated: boolean; now: number; kind: string }>(`?tag=${tag}`).json(),
+    onSuccess: () => toast.success('캐시 초기화 완료'),
   });
 
-  const onClick = (tag: 'channel' | 'metadata' | 'featured') => (e: React.MouseEvent) => {
+  const onClick = (tag: string) => (e: React.MouseEvent) => {
     if (mutation.isPending) return;
     mutation.mutate(tag);
   };
@@ -37,8 +35,8 @@ export default function Client({}: Props) {
       <Box>
         <Text fw="bold">메타데이터</Text>
         <p>revalidate-time 3600초(1시간)</p>
-        <p>API - GET: https://liveuta.vercel.app/api/v1/revalidate?tag=metadata</p>
-        <Button loading={mutation.isPending} onClick={onClick('metadata')}>
+        <p>API - GET: {`https://liveuta.vercel.app/api/v1/revalidate?tag=${METADATAS_TAG}`}</p>
+        <Button loading={mutation.isPending} onClick={onClick(METADATAS_TAG)}>
           캐시 초기화
         </Button>
       </Box>
@@ -46,8 +44,8 @@ export default function Client({}: Props) {
       <Box mt={48}>
         <Text fw="bold">채널정보</Text>
         <p>revalidate-time 1800초(30분)</p>
-        <p>API - GET: https://liveuta.vercel.app/api/v1/revalidate?tag=channel</p>
-        <Button loading={mutation.isPending} onClick={onClick('channel')}>
+        <p>API - GET: {`https://liveuta.vercel.app/api/v1/revalidate?tag=${CHANNELS_TAG}`}</p>
+        <Button loading={mutation.isPending} onClick={onClick(CHANNELS_TAG)}>
           캐시 초기화
         </Button>
       </Box>
@@ -55,8 +53,8 @@ export default function Client({}: Props) {
       <Box mt={48}>
         <Text fw="bold">특집정보</Text>
         <p>revalidate-time 86400초(1일)</p>
-        <p>API - GET: https://liveuta.vercel.app/api/v1/revalidate?tag=featured</p>
-        <Button loading={mutation.isPending} onClick={onClick('featured')}>
+        <p>API - GET: {`https://liveuta.vercel.app/api/v1/revalidate?tag=${FEATURED_TAG}`}</p>
+        <Button loading={mutation.isPending} onClick={onClick(FEATURED_TAG)}>
           캐시 초기화
         </Button>
       </Box>

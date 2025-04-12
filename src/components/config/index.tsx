@@ -1,7 +1,10 @@
+import { serverApi } from '@/apis/fetcher';
+import { METADATAS_TAG } from '@/constants/revalidateTag';
 import { TMetadata } from '@/types';
 import { TGetCookiesReturn } from '@/utils/getCookie';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import CommandMenu from '../common/command/CommandMenu';
 import { CommandProvider } from '../common/command/Context';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
@@ -14,7 +17,6 @@ import Particle from './Particle';
 import ReactQuery from './ReactQuery';
 import ServiceWorker from './ServiceWorker';
 import ToastBox from './ToastBox';
-import CommandMenu from '../common/command/CommandMenu';
 
 type ConfigsProps = {
   children: React.ReactNode;
@@ -24,10 +26,11 @@ type ConfigsProps = {
 
 export default async function Configs({ children, cookies, locale }: ConfigsProps) {
   const [metadata] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/v1/metadata`, {
-      next: { revalidate: 3600, tags: ['metadata'] },
-    })
-      .then((res) => res.json() as Promise<{ data: TMetadata }>)
+    serverApi
+      .get<{ data: TMetadata }>('v1/metadata', {
+        next: { revalidate: 3600, tags: [METADATAS_TAG] },
+      })
+      .json()
       .then((json) => json.data),
   ]);
 

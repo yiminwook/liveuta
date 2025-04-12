@@ -1,9 +1,10 @@
 'use client';
+import { clientApi } from '@/apis/fetcher';
 import { PushData } from '@/app/api/push/route';
 import dayjs from '@/libraries/dayjs';
 import { TToken } from '@/types';
-import axios, { AxiosError } from 'axios';
 import cx from 'classnames';
+import { BatchResponse } from 'firebase-admin/messaging';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -15,7 +16,7 @@ export default function PostBox({ token }: { token: TToken }) {
   const [imageUrl, setImageUrl] = useState('');
   const [link, setLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const t = useTranslations('dev.postBox');
+  const t = useTranslations();
 
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(() => e.target.value.trim());
@@ -49,22 +50,17 @@ export default function PostBox({ token }: { token: TToken }) {
 
       setIsLoading(() => true);
 
-      const res = await axios({
-        method: 'POST',
-        url: '/api/push',
-        data: [requestBody],
-      });
+      const json = await clientApi.post<BatchResponse>('api/push', { json: [requestBody] }).json();
 
-      const data = res.data;
-      console.log(data);
+      console.log(json);
     } catch (error) {
       console.log(error);
       let message = 'Unknown Error';
-      if (error instanceof AxiosError) {
-        message = error.response?.data.data as string;
-      } else if (error instanceof Error) {
+
+      if (error instanceof Error) {
         message = error.message;
       }
+
       toast.error(message);
     } finally {
       setIsLoading(() => false);
@@ -77,11 +73,11 @@ export default function PostBox({ token }: { token: TToken }) {
 
   return (
     <div className={cx(css.box)}>
-      <label className={css.postLabel}>{t('postLabel')}</label>
+      <label className={css.postLabel}>{t('dev.postBox,postLabel')}</label>
       <form className={css.postForm} onSubmit={handleSubmit}>
         <div className={css.postInputBox}>
           <label className={css.postInputLabel} htmlFor="title">
-            {t('title')}
+            {t('dev.postBox.title')}
           </label>
           <input
             id="title"
@@ -94,7 +90,7 @@ export default function PostBox({ token }: { token: TToken }) {
         </div>
         <div className={css.postInputBox}>
           <label className={css.postInputLabel} htmlFor="body">
-            {t('inputLabel')}
+            {t('dev.postBox.inputLabel')}
           </label>
           <input
             className={css.postInput}
@@ -107,7 +103,7 @@ export default function PostBox({ token }: { token: TToken }) {
         </div>
         <div className={css.postInputBox}>
           <label className={css.postInputLabel} htmlFor="imageUrl">
-            {t('imageUrlInput')}
+            {t('dev.postBox.imageUrlInput')}
           </label>
           <input
             id="imageUrl"
@@ -121,7 +117,7 @@ export default function PostBox({ token }: { token: TToken }) {
         </div>
         <div className={css.postInputBox}>
           <label className={css.postInputLabel} htmlFor="link">
-            {t('linkLabel')}
+            {t('dev.postBox.linkLabel')}
           </label>
           <input
             id="link"
@@ -135,7 +131,7 @@ export default function PostBox({ token }: { token: TToken }) {
         </div>
         <div className={css.postButtonBox}>
           <button className={css.button} data-variant="post" type="submit" disabled={isLoading}>
-            {t('send')}
+            {t('dev.postBox.send')}
           </button>
         </div>
       </form>

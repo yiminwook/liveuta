@@ -1,3 +1,4 @@
+import { clientApi } from '@/apis/fetcher';
 import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
 import { generateThumbnail } from '@/libraries/youtube/url';
 import { generateVideoUrl } from '@/libraries/youtube/url';
@@ -5,7 +6,6 @@ import { TChannelData, TContentData } from '@/types/api/mongoDB';
 import { gtagClick } from '@/utils/gtag';
 import { PushData } from '@api/push/route';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
@@ -32,14 +32,14 @@ const useReservePush = () => {
         link: arg.link,
       };
 
-      const response = await axios<{ message: string }>({
-        method: 'POST',
-        url: '/api/v1/reserve/push',
-        data,
-      });
+      const json = await clientApi
+        .post<{ message: string }>('v1/reserve/push', {
+          json: data,
+        })
+        .json();
 
       return {
-        message: response.data.message,
+        message: json.message,
         channelName: arg.channelName,
         title: arg.title,
       };

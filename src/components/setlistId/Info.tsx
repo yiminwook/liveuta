@@ -1,4 +1,6 @@
 'use client';
+import { clientApi } from '@/apis/fetcher';
+import { SETLISTS_TAG } from '@/constants/revalidateTag';
 import { ClientOnly } from '@/libraries/clientOnly';
 import dayjs from '@/libraries/dayjs';
 import { ChannelDatesetItem } from '@/libraries/mongoDB/channels';
@@ -12,7 +14,6 @@ import IonArrowBack from '@icons/ion/ArrowBack';
 import LogosYoutubeIcon from '@icons/logos/YouTubeIcon';
 import { Avatar, Button } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import cx from 'classnames';
 import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
@@ -35,7 +36,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
   const queryClient = useQueryClient();
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
-  const t = useTranslations('setlistId.info');
+  const t = useTranslations();
   const actions = useSetPlayerStore();
 
   const handleLocation = (url: string) => {
@@ -48,14 +49,16 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
 
   const mutateDelete = useMutation({
     mutationFn: async ({ session, videoId }: { session: Session; videoId: string }) => {
-      const response = await axios.delete<DeleteSetlistRes>(`/api/v1/setlist/${videoId}`, {
-        headers: { Authorization: `Bearer ${session.user.accessToken}` },
-      });
-      return response.data.data;
+      const json = await clientApi
+        .delete<DeleteSetlistRes>(`v1/setlist/${videoId}`, {
+          headers: { Authorization: `Bearer ${session.user.accessToken}` },
+        })
+        .json();
+      return json.data;
     },
     onSuccess: () => {
-      toast.success(t('deleted'));
-      queryClient.invalidateQueries({ queryKey: ['searchSetlist'] });
+      toast.success(t('setlistId.info.deleted'));
+      queryClient.invalidateQueries({ queryKey: [SETLISTS_TAG] });
       actions.reset();
       router.back();
     },
@@ -76,7 +79,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
           onClick={() => router.back()}
         >
           <IonArrowBack width="1.2rem" height="1.2rem" />
-          <span>{t('back')}</span>
+          <span>{t('setlistId.info.back')}</span>
         </Button>
         <div className={css.navRight}>
           {deletePermission && (
@@ -84,7 +87,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
               className={css.navItem}
               color="red"
               onClick={() => {
-                if (confirm(t('deleteConfirm')))
+                if (confirm(t('setlistId.info.deleteConfirm')))
                   mutateDelete.mutate({ session, videoId: setlist.videoId });
               }}
               loading={mutateDelete.isPending}
@@ -100,7 +103,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
             onClick={() => handleLocation(videoUrl)}
           >
             <LogosYoutubeIcon width="1.2rem" height="1.2rem" />
-            {t('youtube')}
+            {t('setlistId.info.youtube')}
           </Button>
           <Button
             component={Link}
@@ -110,14 +113,14 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
             href="/setlist"
           >
             <BiMusicNoteList width="1.2rem" height="1.2rem" />
-            {t('list')}
+            {t('setlistId.info.list')}
           </Button>
         </div>
       </nav>
       <div className={css.infoSection}>
         <h2 className={css.title}>{setlist.title}</h2>
         <button className={css.channel} onClick={() => handleLocation(channelUrl)}>
-          <Avatar className={css.avatar} src={icon} alt={t('avatarAlt')} size="md" />
+          <Avatar className={css.avatar} src={icon} alt={t('setlistId.info.avatarAlt')} size="md" />
           <p className={css.channelName}>{channel.nameKor}</p>
         </button>
         <br />

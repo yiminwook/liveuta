@@ -1,3 +1,4 @@
+// @ts-nocheck
 import errorHandler from '@/libraries/error/handler';
 import { SearchCommentItemType, SearchCommentResponseType } from '@/types/api/holodex';
 import axios, { AxiosResponse } from 'axios';

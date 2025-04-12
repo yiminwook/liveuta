@@ -30,7 +30,6 @@ export default withSession<AccountSidebarProps>(function AccountSidebar({ sessio
   const { stopPropagation } = useStopPropagation();
 
   const mutateLogout = useMutation({
-    mutationKey: ['logout'],
     mutationFn: () => signOut({ callbackUrl: '/' }),
     onError: (error) => toast.error(error.message),
   });
