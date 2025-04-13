@@ -16,7 +16,7 @@ export default function GlobalCommands() {
         {
           title: t('global.command.globalCommands.navigation.home'),
           fn: () => router.push('/'),
-          keywords: ['home'],
+          keywords: ['navigate', 'home'],
         },
         {
           title: t('global.command.globalCommands.navigation.schedule'),
