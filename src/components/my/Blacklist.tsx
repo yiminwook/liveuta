@@ -1,6 +1,8 @@
 'use client';
 import useDeleteBlacklist from '@/hooks/useDeleteBlacklist';
+import { generateChanneImagelUrl } from '@/libraries/youtube/url';
 import { TChannelData } from '@/types/api/mongoDB';
+import { Avatar, Button } from '@mantine/core';
 import { Session } from 'next-auth';
 import { useTranslations } from 'next-intl';
 import css from './List.module.scss';
@@ -13,10 +15,10 @@ type BlacklistProps = {
 
 export default function Blacklist({ session, channelList, blacklist }: BlacklistProps) {
   const mutationDelete = useDeleteBlacklist();
-  const t = useTranslations('my.blacklist');
+  const t = useTranslations();
 
   const handleClick = (channelId: string) => {
-    if (confirm(t('removeBlacklist'))) {
+    if (confirm(t('my.blacklist.removeBlacklist'))) {
       mutationDelete.mutate({ session, channelId });
     }
   };
@@ -31,14 +33,22 @@ export default function Blacklist({ session, channelList, blacklist }: Blacklist
       <ul className={css.list}>
         {data.map((item) => (
           <li key={item.channel_id} className={css.row}>
-            <span className={css.text}>{item.name_kor}</span>
-            <button
-              className={css.button}
+            <div className={css.channelBox}>
+              <Avatar
+                size="md"
+                mr="0.85rem"
+                src={generateChanneImagelUrl(item.profile_picture_url, { size: 40 })}
+              />
+              <span className={css.text}>{item.name_kor}</span>
+            </div>
+            <Button
+              size="xs"
+              fz="0.95rem"
               onClick={() => handleClick(item.channel_id)}
-              disabled={mutationDelete.isPending}
+              loading={mutationDelete.isPending}
             >
-              {t('remove')}
-            </button>
+              {t('my.blacklist.remove')}
+            </Button>
           </li>
         ))}
       </ul>

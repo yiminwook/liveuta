@@ -78,7 +78,7 @@ export default function SliderCard({
           size="sm"
           src={
             channel?.profile_picture_url
-              ? generateChanneImagelUrl(channel.profile_picture_url, { size: 20 })
+              ? generateChanneImagelUrl(channel.profile_picture_url, { size: 40 })
               : ''
           }
         />

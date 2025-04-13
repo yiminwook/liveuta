@@ -5,29 +5,27 @@
   width: 100%;
   padding: 0.5rem;
 
-  * {
-    padding: 0;
-    margin: 0;
-  }
+}
 
-  @include util.min-width(sm) {
+@include util.min-width(sm) {
+  .wrap {
     flex-direction: row;
     gap: 1rem;
     padding: 1rem;
   }
+}
 
-  .section {
-    flex: 1;
-    padding: 1rem;
-    border-radius: 5px;
-    border: 1px solid util.palette(monochrome, 2);
+.section {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid util.palette(monochrome, 2);
+}
 
-    .sectionTitle {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 1.1rem;
-    }
-  }
+.sectionTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
 }

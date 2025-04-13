@@ -28,7 +28,7 @@ export default function Home({}: HomeProps) {
         </section>
         <section className={css.section}>
           <h2 className={css.sectionTitle}>
-            <MdiBlock width="1.2rem" height="1.2rem" />
+            <MdiBlock width="1.2rem" height="1.2rem" color="#ED2939" />
             <b>{t('my.blacklist.title')}</b>
           </h2>
           <Blacklist session={session} blacklist={blackListMap} channelList={channelMap} />
