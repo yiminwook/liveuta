@@ -58,12 +58,17 @@ export function CommandProvider({ children }: PropsWithChildren) {
   const [commandGroups, setCommandGroups] = useState<CommandGroup[]>([]);
   const [open, setOpen] = useState(false);
 
-  const addCommandGroup = useCallback(
-    (group: CommandGroup) => setCommandGroups((prevGroups) => [...prevGroups, group]),
-    [],
+  const addCmdGroup = useCallback(
+    (group: CommandGroup) => {
+      if (commandGroups.some((g) => g.heading === group.heading)) {
+        return;
+      }
+      setCommandGroups((prevGroups) => [group, ...prevGroups]);
+    },
+    [commandGroups],
   );
 
-  const removeCommandGroup = useCallback(
+  const removeCmdGroup = useCallback(
     (heading: string) =>
       setCommandGroups((prevGroups) => prevGroups.filter((group) => group.heading !== heading)),
     [],
@@ -73,13 +78,13 @@ export function CommandProvider({ children }: PropsWithChildren) {
     <CommandActionsContext.Provider
       value={{
         setCmdOpen: setOpen,
-        addCmdGroup: addCommandGroup,
-        removeCmdGroup: removeCommandGroup,
+        addCmdGroup,
+        removeCmdGroup,
       }}
     >
       <CommandContext.Provider value={{ cmdGroups: commandGroups, cmdOpen: open }}>
-        {children}
         <GlobalCommands />
+        {children}
       </CommandContext.Provider>
     </CommandActionsContext.Provider>
   );

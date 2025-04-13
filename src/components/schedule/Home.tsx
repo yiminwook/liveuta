@@ -4,8 +4,11 @@ import { useSchedule } from '@/hooks/useSchedule';
 import { TScheduleDto } from '@/types/dto';
 import { addEscapeCharacter } from '@/utils/regexp';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
+import Cookies from 'universal-cookie';
+import { useCommandActions } from '../common/command/Context';
 import css from './Home.module.scss';
 import ScheduleNav from './ScheduleNav';
 import ScheduleSection from './ScheduleSection';
@@ -20,6 +23,10 @@ export default function Home({ scheduleDto }: HomeProps) {
   const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
   const { data, isPending } = useSchedule({ enableAutoSync: true });
   const router = useRouter();
+  const { addCmdGroup, removeCmdGroup } = useCommandActions();
+  const t = useTranslations();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const proceedScheduleData = useMemo(() => {
     if (!data) {
@@ -86,6 +93,65 @@ export default function Home({ scheduleDto }: HomeProps) {
     if (scheduleDto.isFavorite && !session) {
       router.replace('/login');
     }
+
+    const setFilter = (value: string) => {
+      const query = new URLSearchParams(searchParams);
+      if (value === 'scheduled') {
+        query.delete('t');
+      } else {
+        query.set('t', value);
+      }
+      router.push(`${pathname}?${query.toString()}`);
+    };
+
+    const setVideoType = (value: string) => {
+      const selectCookie = new Cookies();
+      selectCookie.set('select', value, { path: '/', maxAge: 60 * 60 * 24 * 30 * 3 }); //3개월 저장
+      router.refresh();
+    };
+
+    addCmdGroup({
+      heading: t('schedule.title'),
+      commands: [
+        {
+          title: t('schedule.command.filter.scheduled'),
+          fn: () => setFilter('scheduled'),
+          keywords: ['schedule', 'filter'],
+        },
+        {
+          title: t('schedule.command.filter.live'),
+          fn: () => setFilter('live'),
+          keywords: ['schedule', 'filter'],
+        },
+        {
+          title: t('schedule.command.filter.daily'),
+          fn: () => setFilter('daily'),
+          keywords: ['schedule', 'filter'],
+        },
+        {
+          title: t('schedule.command.filter.all'),
+          fn: () => setFilter('all'),
+          keywords: ['schedule', 'filter'],
+        },
+        {
+          title: t('schedule.command.type.all'),
+          fn: () => setVideoType('all'),
+          keywords: ['schedule', 'type'],
+        },
+        {
+          title: t('schedule.command.type.stream'),
+          fn: () => setVideoType('stream'),
+          keywords: ['schedule', 'type'],
+        },
+        {
+          title: t('schedule.command.type.video'),
+          fn: () => setVideoType('video'),
+          keywords: ['schedule', 'type'],
+        },
+      ],
+    });
+
+    return () => removeCmdGroup(t('schedule.title'));
   }, []);
 
   return (

@@ -11,6 +11,31 @@ export default function GlobalCommands() {
 
   useEffect(() => {
     addCmdGroup({
+      heading: t('global.command.globalCommands.action'),
+      commands: [
+        {
+          title: t('global.command.globalCommands.actions.commandPalette'),
+          fn: () => setCmdOpen(false),
+          keywords: ['actions', 'commands', 'command palette'],
+        },
+      ],
+    });
+    addCmdGroup({
+      heading: t('global.command.globalCommands.utility'),
+      commands: [
+        {
+          title: t('global.command.globalCommands.utilities.converters.base64'),
+          fn: () => router.push('/utils/converters/base64'),
+          keywords: ['utility', 'navigate', 'converters', 'base64'],
+        },
+        {
+          title: t('global.command.globalCommands.utilities.youtube.thumbnail'),
+          fn: () => router.push('/utils/youtube/thumbnail'),
+          keywords: ['utility', 'navigate', 'youtube', 'thumbnail'],
+        },
+      ],
+    });
+    addCmdGroup({
       heading: t('global.command.globalCommands.navigate'),
       commands: [
         {
@@ -52,31 +77,6 @@ export default function GlobalCommands() {
           title: t('global.command.globalCommands.navigation.support'),
           fn: () => router.push('/support'),
           keywords: ['navigate', 'support'],
-        },
-      ],
-    });
-    addCmdGroup({
-      heading: t('global.command.globalCommands.utility'),
-      commands: [
-        {
-          title: t('global.command.globalCommands.utilities.converters.base64'),
-          fn: () => router.push('/utils/converters/base64'),
-          keywords: ['utility', 'navigate', 'converters', 'base64'],
-        },
-        {
-          title: t('global.command.globalCommands.utilities.youtube.thumbnail'),
-          fn: () => router.push('/utils/youtube/thumbnail'),
-          keywords: ['utility', 'navigate', 'youtube', 'thumbnail'],
-        },
-      ],
-    });
-    addCmdGroup({
-      heading: t('global.command.globalCommands.action'),
-      commands: [
-        {
-          title: t('global.command.globalCommands.actions.commandPalette'),
-          fn: () => setCmdOpen(false),
-          keywords: ['actions', 'commands', 'command palette'],
         },
       ],
     });

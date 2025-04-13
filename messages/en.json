@@ -361,6 +361,19 @@
         "daily": "24-Hour",
         "all": "All"
       }
+    },
+    "command": {
+      "filter": {
+        "scheduled": "Filter : Upcoming",
+        "live": "Filter : Live",
+        "daily": "Filter : 24-Hour",
+        "all": "Filter : All"
+      },
+      "type": {
+        "all": "Video Type : All",
+        "stream": "Video Type : Stream",
+        "video": "Video Type : Video"
+      }
     }
   },
   "request": {
