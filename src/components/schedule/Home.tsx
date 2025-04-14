@@ -110,41 +110,44 @@ export default function Home({ scheduleDto }: HomeProps) {
       router.refresh();
     };
 
+    const filterLabel = t('schedule.command.filter');
+    const typeLabel = t('schedule.command.type');
+
     addCmdGroup({
       heading: t('schedule.title'),
       commands: [
         {
-          title: t('schedule.command.filter.scheduled'),
+          title: `${filterLabel} | ${t('schedule.command.filters.scheduled')}`,
           fn: () => setFilter('scheduled'),
           keywords: ['schedule', 'filter'],
         },
         {
-          title: t('schedule.command.filter.live'),
+          title: `${filterLabel} | ${t('schedule.command.filters.live')}`,
           fn: () => setFilter('live'),
           keywords: ['schedule', 'filter'],
         },
         {
-          title: t('schedule.command.filter.daily'),
+          title: `${filterLabel} | ${t('schedule.command.filters.daily')}`,
           fn: () => setFilter('daily'),
           keywords: ['schedule', 'filter'],
         },
         {
-          title: t('schedule.command.filter.all'),
+          title: `${filterLabel} | ${t('schedule.command.filters.all')}`,
           fn: () => setFilter('all'),
           keywords: ['schedule', 'filter'],
         },
         {
-          title: t('schedule.command.type.all'),
+          title: `${typeLabel} | ${t('schedule.command.types.all')}`,
           fn: () => setVideoType('all'),
           keywords: ['schedule', 'type'],
         },
         {
-          title: t('schedule.command.type.stream'),
+          title: `${typeLabel} | ${t('schedule.command.types.stream')}`,
           fn: () => setVideoType('stream'),
           keywords: ['schedule', 'type'],
         },
         {
-          title: t('schedule.command.type.video'),
+          title: `${typeLabel} | ${t('schedule.command.types.video')}`,
           fn: () => setVideoType('video'),
           keywords: ['schedule', 'type'],
         },

@@ -363,16 +363,18 @@
       }
     },
     "command": {
-      "filter": {
-        "scheduled": "Filter : Upcoming",
-        "live": "Filter : Live",
-        "daily": "Filter : 24-Hour",
-        "all": "Filter : All"
+      "filter": "Filter",
+      "filters": {
+        "scheduled": "Upcoming",
+        "live": "Live",
+        "daily": "24-Hour",
+        "all": "All"
       },
-      "type": {
-        "all": "Video Type : All",
-        "stream": "Video Type : Stream",
-        "video": "Video Type : Video"
+      "type": "Video Type",
+      "types": {
+        "all": "All",
+        "stream": "Stream",
+        "video": "Video"
       }
     }
   },

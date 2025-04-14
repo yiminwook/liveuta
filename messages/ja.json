@@ -357,16 +357,18 @@
       }
     },
     "command": {
-      "filter": {
-        "scheduled": "フィルタ : 予定",
-        "live": "フィルタ : 配信",
-        "daily": "フィルタ : 24時間",
-        "all": "フィルタ : すべて"
+      "filter": "フィルタ",
+      "filters": {
+        "scheduled": "予定",
+        "live": "配信",
+        "daily": "24時間",
+        "all": "すべて"
       },
-      "type": {
-        "all": "動画タイプ : すべて",
-        "stream": "動画タイプ : 放送",
-        "video": "動画タイプ : 動画"
+      "type": "タイプ",
+      "types": {
+        "all": "すべて",
+        "stream": "放送",
+        "video": "動画"
       }
     }
   },
