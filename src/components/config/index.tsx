@@ -5,7 +5,7 @@ import { TGetCookiesReturn } from '@/utils/getCookie';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import CommandMenu from '../common/command/CommandMenu';
-import { CommandProvider } from '../common/command/Context';
+import { CmdProvider } from '../common/command/Context';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
 import Hotkeys from './Hotkeys';
@@ -48,7 +48,7 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
             <NProgressProviders>
               <MantineProvider locale={locale}>
                 <Hotkeys>
-                  <CommandProvider>
+                  <CmdProvider>
                     {children}
                     <CommandMenu />
                     <ToastBox />
@@ -56,7 +56,7 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
                     <ServiceWorker />
                     <Devtools />
                     <ModalContainer />
-                  </CommandProvider>
+                  </CmdProvider>
                 </Hotkeys>
               </MantineProvider>
             </NProgressProviders>
