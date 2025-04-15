@@ -8,12 +8,12 @@ import { useTranslations } from 'next-intl';
 import { memo, useCallback } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import css from './CommandMenu.module.scss';
-import { useCommand, useCommandActions } from './Context';
+import { useCmd, useCmdActions } from './Context';
 
 function CommandMenuComponent() {
   const t = useTranslations('global.command');
-  const { cmdGroups } = useCommand();
-  const { setCmdOpen } = useCommandActions();
+  const { cmdGroups } = useCmd();
+  const { setCmdOpen } = useCmdActions();
 
   const closeCmd = useCallback(() => setCmdOpen(false), []);
 
@@ -67,8 +67,8 @@ CommandMenuMemo.displayName = 'CommandMenuItems';
 
 export default function CommandMenu() {
   const t = useTranslations('global.command');
-  const { cmdOpen } = useCommand();
-  const { setCmdOpen } = useCommandActions();
+  const { cmdOpen } = useCmd();
+  const { setCmdOpen } = useCmdActions();
 
   const toggleCmdOpen = useCallback(() => setCmdOpen(!cmdOpen), [cmdOpen]);
 

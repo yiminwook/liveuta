@@ -16,7 +16,9 @@ export default function LanguageSelect() {
   function onLanguageChange(code: LocaleCode) {
     if (locale === code) return;
     startTransition(() => {
-      setUserLocale(code);
+      setUserLocale(code).then(() => {
+        window.location.reload();
+      });
     });
   }
 

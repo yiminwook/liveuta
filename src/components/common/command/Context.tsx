@@ -7,9 +7,9 @@ import {
   useCallback,
   useState,
 } from 'react';
-import GlobalCommands from './GlobalCommands';
+import GlobalCmd from './GlobalCmd';
 
-type Command = {
+type Cmd = {
   title: string;
   fn: () => void;
   description?: string;
@@ -18,74 +18,74 @@ type Command = {
   keywords?: string[];
 };
 
-type CommandGroup = {
+type CmdGroup = {
+  id: string;
   heading: string;
-  commands: Command[];
+  commands: Cmd[];
 };
 
-type CommandActionsContextType = {
+type CmdActionsContextType = {
   setCmdOpen: (open: boolean) => void;
-  addCmdGroup: (group: CommandGroup) => void;
-  removeCmdGroup: (heading: string) => void;
+  addCmdGroup: (group: CmdGroup) => void;
+  removeCmdGroup: (id: string) => void;
 };
 
-type CommandContextType = {
-  cmdGroups: CommandGroup[];
+type CmdContextType = {
+  cmdGroups: CmdGroup[];
   cmdOpen: boolean;
 };
 
-const CommandContext = createContext<CommandContextType | null>(null);
+const CmdContext = createContext<CmdContextType | null>(null);
 
-const CommandActionsContext = createContext<CommandActionsContextType | null>(null);
+const CmdActionsContext = createContext<CmdActionsContextType | null>(null);
 
-export function useCommand() {
-  const context = useContext(CommandContext);
+export function useCmd() {
+  const context = useContext(CmdContext);
   if (context === null) {
-    throw new Error('useCommandContext must be used within a CommandProvider');
+    throw new Error('useCmdContext must be used within a CommandProvider');
   }
   return context;
 }
 
-export function useCommandActions() {
-  const context = useContext(CommandActionsContext);
+export function useCmdActions() {
+  const context = useContext(CmdActionsContext);
   if (!context) {
-    throw new Error('useCommandActionsContext must be used within a CommandProvider');
+    throw new Error('useCmdActionsContext must be used within a CommandProvider');
   }
   return context;
 }
 
-export function CommandProvider({ children }: PropsWithChildren) {
-  const [commandGroups, setCommandGroups] = useState<CommandGroup[]>([]);
-  const [open, setOpen] = useState(false);
+export function CmdProvider({ children }: PropsWithChildren) {
+  const [cmdGroups, setCmdGroups] = useState<CmdGroup[]>([]);
+  const [cmdOpen, setCmdOpen] = useState(false);
 
   const addCmdGroup = useCallback(
-    (group: CommandGroup) => {
-      if (commandGroups.some((g) => g.heading === group.heading)) {
+    (group: CmdGroup) => {
+      if (cmdGroups.some((g) => g.heading === group.heading)) {
         return;
       }
-      setCommandGroups((prevGroups) => [group, ...prevGroups]);
+      setCmdGroups((prevGroups) => [group, ...prevGroups]);
     },
-    [commandGroups],
+    [cmdGroups],
   );
 
   const removeCmdGroup = useCallback(
-    (heading: string) =>
-      setCommandGroups((prevGroups) => prevGroups.filter((group) => group.heading !== heading)),
+    (id: string) => setCmdGroups((prevGroups) => prevGroups.filter((group) => group.id !== id)),
     [],
   );
 
   return (
-    <CommandActionsContext.Provider
+    <CmdActionsContext.Provider
       value={{
-        setCmdOpen: setOpen,
+        setCmdOpen,
         addCmdGroup,
         removeCmdGroup,
       }}
     >
-      <CommandContext.Provider value={{ cmdGroups: commandGroups, cmdOpen: open }}>
-        <GlobalCommands />
+      <CmdContext.Provider value={{ cmdGroups, cmdOpen }}>
+        <GlobalCmd />
         {children}
-      </CommandContext.Provider>
-    </CommandActionsContext.Provider>
+      </CmdContext.Provider>
+    </CmdActionsContext.Provider>
   );
 }

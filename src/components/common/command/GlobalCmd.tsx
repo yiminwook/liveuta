@@ -2,15 +2,16 @@
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { useEffect } from 'react';
-import { useCommandActions } from './Context';
+import { useCmdActions } from './Context';
 
-export default function GlobalCommands() {
+export default function GlobalCmd() {
   const t = useTranslations();
-  const { addCmdGroup, setCmdOpen } = useCommandActions();
+  const { addCmdGroup, setCmdOpen } = useCmdActions();
   const router = useRouter();
 
   useEffect(() => {
     addCmdGroup({
+      id: 'global-actions',
       heading: t('global.command.globalCommands.action'),
       commands: [
         {
@@ -21,6 +22,7 @@ export default function GlobalCommands() {
       ],
     });
     addCmdGroup({
+      id: 'global-utilities',
       heading: t('global.command.globalCommands.utility'),
       commands: [
         {
@@ -36,6 +38,7 @@ export default function GlobalCommands() {
       ],
     });
     addCmdGroup({
+      id: 'global-navigate',
       heading: t('global.command.globalCommands.navigate'),
       commands: [
         {

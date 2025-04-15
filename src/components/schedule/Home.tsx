@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
 import Cookies from 'universal-cookie';
-import { useCommandActions } from '../common/command/Context';
+import { useCmdActions } from '../common/command/Context';
 import css from './Home.module.scss';
 import ScheduleNav from './ScheduleNav';
 import ScheduleSection from './ScheduleSection';
@@ -23,7 +23,7 @@ export default function Home({ scheduleDto }: HomeProps) {
   const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
   const { data, isPending } = useSchedule({ enableAutoSync: true });
   const router = useRouter();
-  const { addCmdGroup, removeCmdGroup } = useCommandActions();
+  const { addCmdGroup, removeCmdGroup } = useCmdActions();
   const t = useTranslations();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -114,6 +114,7 @@ export default function Home({ scheduleDto }: HomeProps) {
     const typeLabel = t('schedule.command.type');
 
     addCmdGroup({
+      id: 'schedule',
       heading: t('schedule.title'),
       commands: [
         {
@@ -154,7 +155,7 @@ export default function Home({ scheduleDto }: HomeProps) {
       ],
     });
 
-    return () => removeCmdGroup(t('schedule.title'));
+    return () => removeCmdGroup(t('schedule'));
   }, []);
 
   return (
