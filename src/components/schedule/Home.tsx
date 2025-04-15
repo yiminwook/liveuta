@@ -110,52 +110,61 @@ export default function Home({ scheduleDto }: HomeProps) {
       router.refresh();
     };
 
-    const filterLabel = t('schedule.command.filter');
-    const typeLabel = t('schedule.command.type');
+    const filterId = 'schedule-filter';
+    const typeId = 'schedule-type';
 
     addCmdGroup({
-      id: 'schedule',
-      heading: t('schedule.title'),
+      id: typeId,
+      heading: `${t('schedule.title')} - ${t('schedule.command.type')}`,
       commands: [
         {
-          title: `${filterLabel} | ${t('schedule.command.filters.scheduled')}`,
-          fn: () => setFilter('scheduled'),
-          keywords: ['schedule', 'filter'],
-        },
-        {
-          title: `${filterLabel} | ${t('schedule.command.filters.live')}`,
-          fn: () => setFilter('live'),
-          keywords: ['schedule', 'filter'],
-        },
-        {
-          title: `${filterLabel} | ${t('schedule.command.filters.daily')}`,
-          fn: () => setFilter('daily'),
-          keywords: ['schedule', 'filter'],
-        },
-        {
-          title: `${filterLabel} | ${t('schedule.command.filters.all')}`,
-          fn: () => setFilter('all'),
-          keywords: ['schedule', 'filter'],
-        },
-        {
-          title: `${typeLabel} | ${t('schedule.command.types.all')}`,
+          title: t('schedule.command.types.all'),
           fn: () => setVideoType('all'),
-          keywords: ['schedule', 'type'],
+          keywords: ['schedule', '스케줄', 'スケジュール', '타입', 'type', 'タイプ'],
         },
         {
-          title: `${typeLabel} | ${t('schedule.command.types.stream')}`,
+          title: t('schedule.command.types.stream'),
           fn: () => setVideoType('stream'),
-          keywords: ['schedule', 'type'],
+          keywords: ['schedule', '스케줄', 'スケジュール', '타입', 'type', 'タイプ'],
         },
         {
-          title: `${typeLabel} | ${t('schedule.command.types.video')}`,
+          title: t('schedule.command.types.video'),
           fn: () => setVideoType('video'),
-          keywords: ['schedule', 'type'],
+          keywords: ['schedule', '스케줄', 'スケジュール', '타입', 'type', 'タイプ'],
+        },
+      ],
+    });
+    addCmdGroup({
+      id: filterId,
+      heading: `${t('schedule.title')} - ${t('schedule.command.filter')}`,
+      commands: [
+        {
+          title: t('schedule.command.filters.scheduled'),
+          fn: () => setFilter('scheduled'),
+          keywords: ['schedule', '스케줄', 'スケジュール', '필터', 'filter', 'フィルター'],
+        },
+        {
+          title: t('schedule.command.filters.live'),
+          fn: () => setFilter('live'),
+          keywords: ['schedule', '스케줄', 'スケジュール', '필터', 'filter', 'フィルター'],
+        },
+        {
+          title: t('schedule.command.filters.daily'),
+          fn: () => setFilter('daily'),
+          keywords: ['schedule', '스케줄', 'スケジュール', '필터', 'filter', 'フィルター'],
+        },
+        {
+          title: t('schedule.command.filters.all'),
+          fn: () => setFilter('all'),
+          keywords: ['schedule', '스케줄', 'スケジュール', '필터', 'filter', 'フィルター'],
         },
       ],
     });
 
-    return () => removeCmdGroup(t('schedule'));
+    return () => {
+      removeCmdGroup(filterId);
+      removeCmdGroup(typeId);
+    };
   }, []);
 
   return (

@@ -160,7 +160,11 @@
       "globalCommands": {
         "action": "アクション",
         "actions": {
-          "commandPalette": "コマンドパレット"
+          "commandPalette": "コマンドパレット",
+          "theme": "テーマ",
+          "korean": "韓国語",
+          "english": "英語",
+          "japanese": "日本語"
         },
         "navigate": "ナビゲート",
         "navigation": {
@@ -362,7 +366,7 @@
         "scheduled": "予定",
         "live": "配信",
         "daily": "24時間",
-        "all": "すべて"
+        "all": "フィルタなし"
       },
       "type": "タイプ",
       "types": {
