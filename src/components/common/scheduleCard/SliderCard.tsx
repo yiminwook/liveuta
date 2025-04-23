@@ -87,10 +87,9 @@ export default function SliderCard({
         </Text>
       </Flex>
 
-      <Text size="sm" c="dimmed" className={css.title} mt="xs">
-        {content.title}
-      </Text>
-
+      <div className={css.titleBox}>
+        <span className={css.title}>{content.title}</span>
+      </div>
       <div className={css.navBox}>
         <div>
           {/* <Tooltip label={t('home.sliderCard.setNotification')} position="bottom" withArrow>
