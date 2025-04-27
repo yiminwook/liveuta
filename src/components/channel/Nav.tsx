@@ -1,6 +1,5 @@
 'use client';
-import { useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TChannelDto } from '@/libraries/mongoDB/channels';
 import IonIosSearch from '@icons/ion/IosSearch';
 import TbX from '@icons/tabler/X';
@@ -17,8 +16,8 @@ export default function Nav() {
   const router = useRouter();
   const [input, setInput] = useState(searchParams.get('q') || '');
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(() => e.target.value);

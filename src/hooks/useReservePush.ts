@@ -1,6 +1,6 @@
 import { clientApi } from '@/apis/fetcher';
 import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { generateThumbnail } from '@/libraries/youtube/url';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { TChannelData, TContentData } from '@/types/api/mongoDB';
@@ -20,7 +20,9 @@ export type TReservePushArgs = {
 };
 
 const useReservePush = () => {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
+
   const mutatePush = useMutation({
     mutationFn: async (arg: TReservePushArgs) => {
       const data: PushData = {

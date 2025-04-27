@@ -11,8 +11,7 @@ import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
 import { useSchedule } from '@/hooks/useSchedule';
 import { Link } from '@/libraries/i18n';
-import { useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useAppCtx } from '@/stores/app';
 import { useSetModalStore } from '@/stores/modal';
@@ -36,13 +35,14 @@ type Props = {
 };
 
 export default function Client({ coverImgUrl, recentChannels }: Props) {
-  const session = useSession().data;
-  const [query, setQuery] = useState('');
   const router = useRouter();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
+  const session = useSession().data;
+
+  const [query, setQuery] = useState('');
   const modalStore = useSetModalStore();
   const { whiteListMap, blackListMap, channelMap } = useCachedData({ session });
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
   const { data, isPending } = useSchedule({ enableAutoSync: false });
 
   const onChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {

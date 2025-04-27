@@ -1,5 +1,5 @@
 'use client';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import TablerClipboard from '@icons/tabler/Clipboard';
 import TablerClipboardCheck from '@icons/tabler/ClipboardCheck';
 import { ActionIcon, ActionIconProps, Tooltip } from '@mantine/core';
@@ -21,7 +21,8 @@ export default function PasteButton({
   buttonSize = 'md',
   className,
 }: PasteButtonProps) {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const [pasted, setPasted] = useState(false);
   const [pasteTimeout, setPasteTimeout] = useState<number | null>(null);

@@ -1,8 +1,9 @@
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import HeaderMenu from './HeaderMenu';
 
 export default function DesktopNav() {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const internalLinks = [
     { href: '/', text: t('global.header.desktopNav.internalLinks.home') },

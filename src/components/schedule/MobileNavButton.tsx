@@ -1,5 +1,5 @@
 'use client';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
 import BiSliders from '@icons/bi/Sliders';
@@ -18,7 +18,8 @@ type MobileNavButtonProps = {
 
 export default function MobileNavButton({ length, scheduleDto }: MobileNavButtonProps) {
   const modalStore = useSetModalStore();
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const handleOpen = async () => {
     await modalStore.push(ScheduleNavModal, {

@@ -1,10 +1,11 @@
 'use client';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import TbNoCopyright from '@icons/tabler/NoCopyright';
 import css from './Footer.module.scss';
 
 export default function Footer() {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   return (
     <footer className={css.footer}>

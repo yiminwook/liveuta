@@ -1,6 +1,7 @@
 'use client';
 import For from '@/components/common/utils/For';
 import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import IonIosSearch from '@icons/ion/IosSearch';
 import TablerX from '@icons/tabler/X';
 import { ActionIcon, Modal, Tooltip } from '@mantine/core';
@@ -10,8 +11,8 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import css from './CommandMenu.module.scss';
 import { useCommand, useCommandActions } from './Context';
 
-function CommandMenuComponent() {
-  const { t } = useTranslations();
+function CommandMenuComponent({ locale }: { locale: TLocaleCode }) {
+  const { t } = useTranslations(locale);
   const { cmdGroups } = useCommand();
   const { setCmdOpen } = useCommandActions();
 
@@ -65,7 +66,7 @@ function CommandMenuComponent() {
 const CommandMenuMemo = memo(CommandMenuComponent);
 CommandMenuMemo.displayName = 'CommandMenuItems';
 
-export default function CommandMenu() {
+export default function CommandMenu({ locale }: { locale: TLocaleCode }) {
   const { cmdOpen } = useCommand();
   const { setCmdOpen } = useCommandActions();
 
@@ -87,7 +88,7 @@ export default function CommandMenu() {
   return (
     <Modal opened={cmdOpen} onClose={closeCmd} centered withCloseButton={false} padding={0}>
       <div className={css.wrap}>
-        <CommandMenuMemo />
+        <CommandMenuMemo locale={locale} />
       </div>
     </Modal>
   );

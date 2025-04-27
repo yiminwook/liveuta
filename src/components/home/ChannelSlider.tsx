@@ -1,6 +1,5 @@
 'use client';
-import { useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TYChannelsData } from '@/types/api/youtube';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import IonIosMore from '@icons/ion/IosMore';
@@ -16,8 +15,8 @@ type ChannelSliderProps = {
 };
 
 export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 

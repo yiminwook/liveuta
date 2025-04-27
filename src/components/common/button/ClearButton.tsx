@@ -1,5 +1,5 @@
 'use client';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import CodiconClearAll from '@icons/codicon/ClearAll';
 import TbCheck from '@icons/tabler/Check';
 import { ActionIcon, ActionIconProps, Tooltip } from '@mantine/core';
@@ -21,7 +21,8 @@ export default function ClearButton({
   buttonSize = 'md',
   className,
 }: ClearButtonProps) {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const [cleared, setCleared] = useState(false);
   const [clearTimeout, setClearTimeout] = useState<number | null>(null);

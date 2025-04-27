@@ -1,7 +1,7 @@
 import SearchInput from '@/components/common/input/SearchInput';
 import Modal from '@/components/common/modal/Modal';
 import { useTransition } from '@/hooks/useTransition';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { ModalProps, useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
@@ -36,14 +36,15 @@ export default function ScheduleNavModal({
   scheduleDto,
   length,
 }: ModalProps<ScheduleNavModalProps>) {
-  const session = useSession();
-  const [query, setQuery] = useState(scheduleDto.query);
+  const router = useRouter(); // transition 효과 제외
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const searchParams = useSearchParams();
+  const session = useSession();
+
+  const [query, setQuery] = useState(scheduleDto.query);
   const { modifier, onAnimationEnd, exit } = useTransition();
   const modalActions = useSetModalStore();
-  const router = useRouter(); // transition 효과 제외
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
 
   const isFavorite = searchParams.get('isFavorite') === 'true';
 
@@ -56,6 +57,7 @@ export default function ScheduleNavModal({
       id: 'reset-schedule-query',
       props: {
         message: t('schedule.scheduleNavModal.clearFilter'),
+        locale,
       },
     });
 

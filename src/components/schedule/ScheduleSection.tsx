@@ -5,8 +5,7 @@ import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
 import { Link } from '@/libraries/i18n';
-import { useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetModalStore } from '@/stores/modal';
 import { TChannelData, TContentData } from '@/types/api/mongoDB';
@@ -41,8 +40,8 @@ export default function ScheduleSection({
   isLoading = false,
 }: ScheduleSectionProps) {
   const modalStore = useSetModalStore();
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const {
     loadContents,
@@ -121,7 +120,7 @@ export default function ScheduleSection({
     // 검색 결과가 없을 때
     return (
       <section>
-        <Nodata />
+        <Nodata locale={locale} />
         <div className={css.nodataLinkBox}>
           <Button component={Link} href={`/channel?q=${scheduleDto.query}`} locale={locale}>
             {t('schedule.scheduleSection.searchAtChannelPage')}

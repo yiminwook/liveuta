@@ -5,10 +5,9 @@ import { useRouter } from 'next-nprogress-bar';
 import { useEffect } from 'react';
 import { useCommandActions } from './Context';
 
-export default function GlobalCommands() {
+export default function GlobalCommands({ locale }: { locale: TLocaleCode }) {
   const router = useRouter();
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
+  const { t } = useTranslations(locale);
   const { addCmdGroup, setCmdOpen } = useCommandActions();
 
   useEffect(() => {

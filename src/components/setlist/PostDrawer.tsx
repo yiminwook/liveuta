@@ -6,7 +6,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/common/Vaul';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { Anchor } from '@mantine/core';
 import { Session } from 'next-auth';
 import css from './PostDrawer.module.scss';
@@ -17,7 +17,8 @@ type PostDrawerProps = {
 };
 
 export default function PostDrawer({ session }: PostDrawerProps) {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   return (
     <Drawer>

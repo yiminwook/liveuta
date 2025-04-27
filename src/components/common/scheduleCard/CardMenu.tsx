@@ -1,4 +1,4 @@
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import FasStar from '@icons/fa-solid/Star';
 import IonPlus from '@icons/ion/PlusRound';
 import MsOpenInNew from '@icons/material-symbols/OpenInNew';
@@ -29,7 +29,8 @@ export default function CardMenu({
   onClickFavorite,
   onClickNewTab,
 }: CardMenuProps) {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   return (
     <Menu position="bottom-end" withArrow withinPortal arrowPosition="center" trigger="hover">

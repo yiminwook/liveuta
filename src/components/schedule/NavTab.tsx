@@ -1,5 +1,5 @@
 'use client';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { usePathname } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { scheduleDto } from '@/types/dto';
@@ -10,8 +10,8 @@ import { useSearchParams } from 'next/navigation';
 export default function NavTab() {
   const pathname = usePathname();
   const router = useRouter(); // transition 효과 제외
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const searchParams = useSearchParams();
   const filterQuery = searchParams.get('t');

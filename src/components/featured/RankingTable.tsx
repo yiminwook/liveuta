@@ -1,4 +1,4 @@
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TYChannelsData } from '@/types/api/youtube';
 import FasStar from '@icons/fa-solid/Star';
 import MdiBlock from '@icons/mdi/Block';
@@ -14,7 +14,8 @@ type Props = {
 };
 
 export default function RankingTable({ title, data, onFavorite, onBlock }: Props) {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   return (
     <div className={css.container}>

@@ -1,5 +1,6 @@
 'use client';
 import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { useAppCtx } from '@/stores/app';
 import { openWindow } from '@/utils/windowEvent';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
@@ -8,14 +9,15 @@ import css from './Iframe.module.scss';
 
 interface IframeProps {
   url: string;
+  locale: TLocaleCode;
 }
 
-export default function Iframe({ url }: IframeProps) {
+export default function Iframe({ url, locale }: IframeProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const appCtx = useAppCtx();
   const theme = useStore(appCtx, (state) => state.theme);
-  const { t } = useTranslations();
+  const { t } = useTranslations(locale);
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault();

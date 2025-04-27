@@ -1,10 +1,12 @@
-import { useTranslations } from '@/libraries/i18n/client';
+'use client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import css from './Table.module.scss';
 import TableBody from './TableBody';
 import { CheckAll, TableHeadActions } from './TableHeadActions';
 
 export default function Table() {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   return (
     <table className={css.table}>

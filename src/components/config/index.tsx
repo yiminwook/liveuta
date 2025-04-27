@@ -1,5 +1,6 @@
 import { serverApi } from '@/apis/fetcher';
 import { METADATAS_TAG } from '@/constants/revalidateTag';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { TMetadata } from '@/types';
 import { TGetCookiesReturn } from '@/utils/getCookie';
 import CommandMenu from '../common/command/CommandMenu';
@@ -19,7 +20,7 @@ import ToastBox from './ToastBox';
 type ConfigsProps = {
   children: React.ReactNode;
   cookies: TGetCookiesReturn;
-  locale: string;
+  locale: TLocaleCode;
 };
 
 export default async function Configs({ children, cookies, locale }: ConfigsProps) {
@@ -39,13 +40,13 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
           defaultVideoId: metadata.default_video_id,
         }}
       >
-        <ReactQuery>
+        <ReactQuery locale={locale}>
           <NProgressProviders>
             <MantineProvider locale={locale}>
               <Hotkeys>
-                <CommandProvider>
+                <CommandProvider locale={locale}>
                   {children}
-                  <CommandMenu />
+                  <CommandMenu locale={locale} />
                   <ToastBox />
                   <Particle />
                   <ServiceWorker />

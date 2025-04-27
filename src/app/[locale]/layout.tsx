@@ -49,11 +49,11 @@ export default async function Layout(props: Props) {
   return (
     <Document locale={locale}>
       <HydrationBoundary state={dehydratedState}>
-        <DataFetchingObserver />
+        <DataFetchingObserver locale={locale} />
         <PageView>
-          <Header />
+          <Header locale={locale} />
           <>{props.children}</>
-          <BottomTab />
+          <BottomTab locale={locale} />
           <AccountSidebar />
         </PageView>
       </HydrationBoundary>

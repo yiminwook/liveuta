@@ -1,6 +1,7 @@
 import CopyButton from '@/components/common/button/CopyButton';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { ModalProps } from '@/stores/modal';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
@@ -17,6 +18,7 @@ type ChannelCardModalProp = {
   videoCount: string;
   subscribe: string;
   description: string;
+  locale: TLocaleCode;
 };
 
 const CHANNEL_MODAL_ID = 'channelCardModal';
@@ -30,8 +32,9 @@ export default function ChannelCardModal({
   subscribe,
   description,
   onClose,
+  locale,
 }: ModalProps<ChannelCardModalProp>) {
-  const { t } = useTranslations();
+  const { t } = useTranslations(locale);
 
   const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) =>
     gtagClickAtag(e, {

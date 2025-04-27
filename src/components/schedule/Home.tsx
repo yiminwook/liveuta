@@ -102,7 +102,7 @@ export default function Home({ scheduleDto }: HomeProps) {
         </div>
       </div>
       {/* live player */}
-      <TopSection filter={scheduleDto.filter} />
+      <TopSection filter={scheduleDto.filter} locale={locale} />
       <ScheduleSection
         session={session}
         scheduleDto={scheduleDto}

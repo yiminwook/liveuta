@@ -3,7 +3,7 @@ import Background from '@/components/common/background/Background';
 import PostBox from '@/components/dev/PostBox';
 import TokenBox from '@/components/dev/TokenBox';
 import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TToken } from '@/types';
 import cx from 'classnames';
 import { useEffect, useState } from 'react';
@@ -11,7 +11,8 @@ import { toast } from 'sonner';
 import css from './Home.module.scss';
 
 export default function Home() {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const [token, setToken] = useState<TToken>(null);
   const [permission, setPermission] = useState(t('dev.initialPermission'));
 

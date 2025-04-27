@@ -1,4 +1,5 @@
 'use client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { useContext } from 'react';
 import {
   type PropsWithChildren,
@@ -54,7 +55,7 @@ export function useCommandActions() {
   return context;
 }
 
-export function CommandProvider({ children }: PropsWithChildren) {
+export function CommandProvider({ children, locale }: PropsWithChildren<{ locale: TLocaleCode }>) {
   const [commandGroups, setCommandGroups] = useState<CommandGroup[]>([]);
   const [open, setOpen] = useState(false);
 
@@ -79,7 +80,7 @@ export function CommandProvider({ children }: PropsWithChildren) {
     >
       <CommandContext.Provider value={{ cmdGroups: commandGroups, cmdOpen: open }}>
         {children}
-        <GlobalCommands />
+        <GlobalCommands locale={locale} />
       </CommandContext.Provider>
     </CommandActionsContext.Provider>
   );

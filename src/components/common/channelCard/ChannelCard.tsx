@@ -3,7 +3,7 @@ import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { useSetModalStore } from '@/stores/modal';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
@@ -25,7 +25,8 @@ type ChannelItemProps = {
 
 export default function ChannelItem({ content, session, isFavorite }: ChannelItemProps) {
   const { nameKor: channelName, snippet, url, statistics, uid } = content;
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const title = snippet?.title ?? '';
   const imageURL = snippet?.thumbnails?.default?.url ?? '/loading.png';
   const description = snippet?.description ?? t('channel.channelCard.hidden');
@@ -70,6 +71,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
         videoCount,
         subscribe,
         description,
+        locale,
       },
     });
   };

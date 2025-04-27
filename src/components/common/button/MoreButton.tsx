@@ -7,19 +7,23 @@ import classNames from 'classnames';
 import { ComponentProps } from 'react';
 import css from './MoreButton.module.scss';
 
-type MoreButtonProps<C> = ComponentProps<typeof Button<C>>;
+type MoreButtonProps<C> = ComponentProps<typeof Button<C>> & {
+  locale: TLocaleCode;
+};
 
 export default function MoreButton<C = 'button'>({
   className,
   rightSection = <IonArrowRightC />,
   variant = 'transparent',
+  locale,
   ...props
 }: MoreButtonProps<C>) {
-  const { t } = useTranslations();
+  const { t } = useTranslations(locale);
 
   return (
     <Button<any>
       {...props}
+      locale={locale}
       className={classNames(css.button, className)}
       variant={variant}
       rightSection={rightSection}

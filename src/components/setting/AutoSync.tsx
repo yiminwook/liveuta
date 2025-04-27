@@ -1,14 +1,15 @@
 'use client';
 import { siteConfig } from '@/constants/siteConfig';
 import { useAutoSync } from '@/hooks/useStorage';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { Radio, Switch } from '@mantine/core';
 import css from './AutoSync.module.scss';
 import settingCss from './Setting.module.scss';
 
 export default function AutoSync() {
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const { isActive, setIsActive, refreshInterval, setRefreshInterval } = useAutoSync();
-  const { t } = useTranslations();
 
   return (
     <div className={settingCss.wrap}>

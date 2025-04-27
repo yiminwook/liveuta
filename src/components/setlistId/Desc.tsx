@@ -2,7 +2,7 @@
 import { clientApi } from '@/apis/fetcher';
 import TimelineText from '@/components/common/TimestampText';
 import { SETLISTS_TAG } from '@/constants/revalidateTag';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { useSetPlayerStore } from '@/stores/player';
 import { Button, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -19,13 +19,16 @@ type DescProps = {
 };
 
 export default function Desc({ videoId, description }: DescProps) {
-  const session = useSession().data;
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const router = useRouter();
+
+  const queryClient = useQueryClient();
+  const { data: session } = useSession();
+
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState('');
   const actions = useSetPlayerStore();
-  const queryClient = useQueryClient();
-  const { t } = useTranslations();
 
   const toggleEditing = () => {
     if (!session) {

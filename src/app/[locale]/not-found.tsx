@@ -1,3 +1,5 @@
+import { FALLBACK_LANG } from '@/libraries/i18n/config';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import type { Metadata } from 'next';
 import Client from './not-found.client';
 
@@ -5,6 +7,15 @@ export const metadata: Metadata = {
   title: '404: Not Found',
 };
 
-export default function NotFound() {
-  return <Client />;
+type Props = {
+  params: Promise<{
+    locale: TLocaleCode;
+  }>;
+};
+
+export default async function NotFound(props: Props) {
+  const params = await props.params;
+  const locale = params?.locale ?? FALLBACK_LANG;
+
+  return <Client locale={locale} />;
 }

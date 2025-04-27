@@ -1,4 +1,4 @@
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { generateChanneImagelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { STREAM_STATUS_MAPPER, TChannelData, TContentData } from '@/types/api/mongoDB';
 import FasStar from '@icons/fa-solid/Star';
@@ -33,7 +33,8 @@ export default function SliderCard({
   toggleFavorite,
   addBlock,
 }: SliderCardProps) {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const onClickAlarm = () => {
     addAlarm?.(content, channel);

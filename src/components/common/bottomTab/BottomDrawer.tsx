@@ -21,13 +21,13 @@ type DrawerItem = {
 };
 
 type BottomDrawerProps = {
+  locale: TLocaleCode;
   onClose: () => void;
   isOpen: boolean;
 };
 
-export default function BottomDrawer({ isOpen, onClose }: BottomDrawerProps) {
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
+export default function BottomDrawer({ isOpen, onClose, locale }: BottomDrawerProps) {
+  const { t } = useTranslations(locale);
   const pathname = usePathname();
 
   const internalLinks: DrawerItem[] = [

@@ -1,6 +1,7 @@
 'use client';
 import css from '@/components/common/player/Player.module.scss';
 import { DefaultPlayerPlaceholder } from '@/components/common/player/PlayerPlaceholder';
+import { useLocale } from '@/libraries/i18n/client';
 import { useSetPlayerStore } from '@/stores/player';
 import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
@@ -22,6 +23,7 @@ type PlayerWrapProps = {
 export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
+  const locale = useLocale();
   const timestamp = Number(searchParams.get('t')) || 0;
   const [isShow, setIsShow] = useState(true);
   const actions = useSetPlayerStore();
@@ -50,7 +52,7 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   return (
     <div ref={wrapRef} className={css.playerBox}>
       {!isShow && <DefaultPlayerPlaceholder />}
-      <DraggablePlayer mode={isShow ? 'default' : 'pip'} />
+      <DraggablePlayer mode={isShow ? 'default' : 'pip'} locale={locale} />
     </div>
   );
 }

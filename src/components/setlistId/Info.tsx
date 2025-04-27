@@ -5,7 +5,6 @@ import { ClientOnly } from '@/libraries/clientOnly';
 import dayjs from '@/libraries/dayjs';
 import { Link } from '@/libraries/i18n';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
 import { ChannelDatesetItem } from '@/libraries/mongoDB/channels';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
@@ -32,13 +31,15 @@ type InfoProps = {
 };
 
 export default function Info({ setlist, channel, icon }: InfoProps) {
-  const session = useSession().data;
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { data: session } = useSession();
+
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
+
   const actions = useSetPlayerStore();
 
   const handleLocation = (url: string) => {
@@ -146,8 +147,8 @@ interface TimeBoxProps {
 }
 
 function TimeBoxs({ broadcastAt, createdAt, updatedAt }: TimeBoxProps) {
-  const { t } = useTranslations();
   const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const broadcast = dayjs(broadcastAt).locale(locale).format(t('dayjsTemplate'));
   const create = dayjs(createdAt).locale(locale).format(t('dayjsTemplate'));

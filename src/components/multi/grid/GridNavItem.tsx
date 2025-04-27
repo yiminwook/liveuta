@@ -1,5 +1,5 @@
 import dayjs from '@/libraries/dayjs';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { generateChanneImagelUrl, generateThumbnail } from '@/libraries/youtube/url';
 import { TChannelData, TContentData } from '@/types/api/mongoDB';
@@ -14,8 +14,9 @@ type Props = {
 };
 
 export default function GridNavItem({ content, channel, onAddById }: Props) {
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
+
   const time = dayjs(content.timestamp).locale(locale).format(t('dayjsScheduleTemplate'));
 
   const channelImage = channel?.profile_picture_url

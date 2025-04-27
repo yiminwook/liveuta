@@ -1,5 +1,5 @@
 'use client';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { useAppCtx } from '@/stores/app';
 import { TTheme } from '@/types';
 import { MouseEvent } from 'react';
@@ -23,7 +23,8 @@ function ThemeModalButton({ primaryColor, secondaryColor }: ThemeModalButtonProp
 }
 
 export default function ThemeSelect() {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const appCtx = useAppCtx();
   const setTheme = useStore(appCtx, (state) => state.actions.setTheme);
 

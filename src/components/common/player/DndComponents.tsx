@@ -8,6 +8,7 @@ import {
   transfromStringToConer,
 } from '@/constants/pip';
 import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { getBoxPositionStyle } from '@/utils/helper';
 import {
   DndContext,
@@ -33,12 +34,14 @@ type DraggablePipProps = {
   mode: 'default' | 'pip';
   isShowHideButton?: boolean;
   onClickHide?: () => void;
+  locale: TLocaleCode;
 };
 
 export function DraggablePlayer({
   mode,
   isShowHideButton = false,
   onClickHide,
+  locale,
 }: DraggablePipProps) {
   const [draggingId, setDraggingId] = useState<UniqueIdentifier | null>(null);
   const [boxCorner, setBoxCorner] = useState<TCorner>(getLocalStoragePipPosition); // 박스의 현재 모서리 위치 (null, 'topLeft', ...)
@@ -79,6 +82,7 @@ export function DraggablePlayer({
       )}
 
       <Position
+        locale={locale}
         mode={mode}
         id={DRAGGABLE_BOX_ID}
         isShowHideButton={isShowHideButton}
@@ -97,6 +101,7 @@ function Position({
   positionStyle,
   isDragging,
   onClickHide,
+  locale,
 }: {
   mode: 'default' | 'pip';
   id: string;
@@ -104,6 +109,7 @@ function Position({
   positionStyle: CSSProperties;
   isDragging: boolean;
   onClickHide?: () => void;
+  locale: TLocaleCode;
 }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({ id });
 
@@ -125,13 +131,14 @@ function Position({
     >
       {mode === 'pip' && (
         <PipNav
+          locale={locale}
           isShowHideButton={isShowHideButton}
           onClickHide={onClickHide}
           dndHandleAttributes={attributes}
           dndHandleListeners={listeners}
         />
       )}
-      <PlayerBase mode={mode} />
+      <PlayerBase mode={mode} locale={locale} />
     </div>
   );
 }
@@ -141,6 +148,7 @@ type PipNavProps = {
   onClickHide?: () => void;
   dndHandleAttributes?: DraggableAttributes;
   dndHandleListeners?: SyntheticListenerMap | undefined;
+  locale: TLocaleCode;
 };
 
 function PipNav({
@@ -148,8 +156,9 @@ function PipNav({
   onClickHide,
   dndHandleAttributes,
   dndHandleListeners,
+  locale,
 }: PipNavProps) {
-  const { t } = useTranslations();
+  const { t } = useTranslations(locale);
 
   return (
     <div className={dndCss.pipNav}>

@@ -1,6 +1,6 @@
 'use client';
 import Show from '@/components/common/utils/Show';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { secondsToHMS } from '@/utils/getTime';
 import { testYoutubeUrl } from '@/utils/regexp';
 import TbCirclePlus from '@icons/tabler/CirclePlus';
@@ -69,7 +69,8 @@ export function SetlistItemInput() {
 export function AutoSort() {
   const autoSort = useSetlistStore((state) => state.autoSort);
   const { setAutoSort, sortSetlist } = useSetlistActions();
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   function handleAutoSortChecked(e: ChangeEvent<HTMLInputElement>) {
     setAutoSort(e.currentTarget.checked);
@@ -92,7 +93,8 @@ export function SetlistControlButtons() {
   const setlist = useSetlistStore(useShallow((state) => state.setlist));
   const autoSort = useSetlistStore((state) => state.autoSort);
   const { sortSetlist } = useSetlistActions();
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   return (
     <>

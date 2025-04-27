@@ -1,5 +1,5 @@
 'use client';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { hmsToString } from '@/utils/getTime';
 import CodiconClearAll from '@icons/codicon/ClearAll';
 import TbClipboard from '@icons/tabler/Clipboard';
@@ -17,9 +17,10 @@ type TableRowProps = {
 };
 
 export default function TableRow({ item }: TableRowProps) {
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const dragControls = useDragControls();
   const { removeItem, setItemChecked, setItemTime, setItemValue } = useSetlistActions();
-  const { t } = useTranslations();
 
   function handleGripPointerDown(e: PointerEvent<HTMLDivElement>) {
     e.preventDefault();

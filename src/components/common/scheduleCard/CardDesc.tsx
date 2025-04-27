@@ -23,7 +23,7 @@ export default function CardDesc({ content, addStreamModifier, channel }: CardDe
 
   const channelUrl = generateChannelUrl(channelId);
   const locale = useLocale();
-  const { t } = useTranslations();
+  const { t } = useTranslations(locale);
 
   const openChannel = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();

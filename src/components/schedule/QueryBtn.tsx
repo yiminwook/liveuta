@@ -1,5 +1,5 @@
 'use client';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { usePathname } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { useSetModalStore } from '@/stores/modal';
@@ -18,16 +18,18 @@ type QueryButtonProps = {
 export default function QueryButton({ query }: QueryButtonProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
+
   const searchParams = useSearchParams();
   const modalActions = useSetModalStore();
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
 
   const handleReset = async () => {
     const result: true | undefined = await modalActions.push(ConfirmModal, {
       id: 'reset-schedule-query',
       props: {
         message: t('schedule.queryButton.clearFilter'),
+        locale,
       },
     });
 

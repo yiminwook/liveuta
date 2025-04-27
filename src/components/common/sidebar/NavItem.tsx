@@ -1,8 +1,8 @@
-import { Link } from '@/libraries/i18n';
 import { usePathname } from '@/libraries/i18n/client';
 import TbChevronLeft from '@icons/tabler/ChevronLeft';
 import TbChevronRight from '@icons/tabler/ChevronRight';
 import { NavLink } from '@mantine/core';
+import NextLink from 'next/link';
 
 type NavItemProps = {
   label: string;
@@ -16,8 +16,7 @@ export default function NavItem({ label, href, direction, children }: NavItemPro
 
   return (
     <NavLink
-      component={Link}
-      locale="ko"
+      component={NextLink}
       href={href}
       label={label}
       active={pathname === href}

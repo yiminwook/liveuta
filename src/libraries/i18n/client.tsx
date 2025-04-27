@@ -1,15 +1,18 @@
-"use client";
-import { i18next } from "./i18next";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useTranslation as useTranslationClient } from "react-i18next";
-import { TLocaleCode } from "./type";
-import { usePathname as useNextPathname } from "next/navigation";
+'use client';
+import { useParams } from 'next/navigation';
+import { usePathname as useNextPathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useTranslation as useTranslationClient } from 'react-i18next';
+import { FALLBACK_LANG } from './config';
+import { i18next } from './i18next';
+import { TLocaleCode } from './type';
 
-const runsOnServerSide = typeof window === "undefined";
+const runsOnServerSide = typeof window === 'undefined';
 
-export function useTranslations(options?: Parameters<typeof useTranslationClient>[1]) {
-  const locale = useLocale();
+export function useTranslations(
+  locale: TLocaleCode,
+  options?: Parameters<typeof useTranslationClient>[1],
+) {
   const [activeLng, setActiveLng] = useState(i18next.resolvedLanguage);
 
   useEffect(() => {
@@ -32,16 +35,12 @@ export function useTranslations(options?: Parameters<typeof useTranslationClient
 export const useLocale = () => {
   const params = useParams<{ locale?: TLocaleCode }>();
 
-  if (!params.locale) {
-    throw new Error("Locale Layout is required");
-  }
-
-  return params.locale;
+  return params.locale ?? FALLBACK_LANG;
 };
 
 export const usePathname = () => {
   const pathname = useNextPathname();
   const locale = useLocale();
 
-  return pathname.replace(`/${locale}`, "");
+  return pathname.replace(`/${locale}`, '');
 };

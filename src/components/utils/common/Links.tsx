@@ -1,4 +1,4 @@
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import type { PropsWithChildren } from 'react';
 import { createContext, useContext } from 'react';
 
@@ -21,7 +21,8 @@ export function useUtilsLinksContext() {
 }
 
 export function UtilsLinksProvider({ children }: PropsWithChildren) {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const linksGroups: LinksGroup[] = [
     {

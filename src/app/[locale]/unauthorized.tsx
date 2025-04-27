@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from '@/libraries/i18n/client';
 // 401 - Unauthorized page
 export default function Unauthorized() {
   const locale = useLocale();
-  const { t } = useTranslations();
+  const { t } = useTranslations(locale);
 
   return (
     <main>

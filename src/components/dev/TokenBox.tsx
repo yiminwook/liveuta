@@ -1,11 +1,12 @@
 'use client';
 import CopyButton from '@/components/common/button/CopyButton';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TToken } from '@/types';
 import css from './Home.module.scss';
 
 export default function TokenBox({ token }: { token: TToken }) {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   switch (typeof token) {
     case 'string':

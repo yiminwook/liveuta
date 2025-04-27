@@ -1,5 +1,6 @@
 import { useTransition } from '@/hooks/useTransition';
 import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { ModalProps } from '@/stores/modal';
 import { Button } from '@mantine/core';
 import classNames from 'classnames';
@@ -9,6 +10,7 @@ import css from './Modal.module.scss';
 type ErrorModalProp = {
   title?: string;
   error: Error;
+  locale: TLocaleCode;
 };
 
 const ERROR_MODAL_ID = 'errorModal';
@@ -16,9 +18,10 @@ const ERROR_MODAL_ID = 'errorModal';
 export default function ErrorModal({
   title = 'Confirm',
   error,
+  locale,
   onClose,
 }: ModalProps<ErrorModalProp>) {
-  const { t } = useTranslations();
+  const { t } = useTranslations(locale);
   const { modifier, onAnimationEnd, exit } = useTransition();
 
   const onCloseWithExit = () => {

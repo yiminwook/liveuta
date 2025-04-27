@@ -13,14 +13,15 @@ import { useCommandActions } from '../command/Context';
 import DesktopNav from './DesktopNav';
 import css from './Header.module.scss';
 
-type HeaderProps = {};
+type HeaderProps = {
+  locale: TLocaleCode;
+};
 
-export default function Header({}: HeaderProps) {
+export default function Header({ locale }: HeaderProps) {
   const { data: session, status } = useSession();
   const gnbRef = useRef<HTMLDivElement>(null);
   const actions = useSetAppStore();
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
+  const { t } = useTranslations(locale);
   const { setCmdOpen } = useCommandActions();
 
   const openAccountSidebar = () => actions.setIsShowAcctSidebar(true);

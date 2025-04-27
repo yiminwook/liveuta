@@ -1,10 +1,15 @@
 import character from '@/assets/image/character-1.png';
 import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import Image from 'next/image';
 import css from './Nodata.module.scss';
 
-export default function Nodata() {
-  const { t } = useTranslations();
+type Props = {
+  locale: TLocaleCode;
+};
+
+export default function Nodata({ locale }: Props) {
+  const { t } = useTranslations(locale);
 
   return (
     <div className={css.nodataBox}>

@@ -34,7 +34,7 @@ export default function ScheduleNav({ session, scheduleDto, length }: NavSection
   const clickFavorite = () => {
     const query = new URLSearchParams(searchParams);
     query.set('isFavorite', String(!scheduleDto.isFavorite));
-    router.push(`/schedule?${query.toString()}`);
+    router.push(`/${locale}/schedule?${query.toString()}`);
   };
 
   return (

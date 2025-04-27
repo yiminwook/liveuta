@@ -1,7 +1,6 @@
 'use client';
 import { Link } from '@/libraries/i18n';
-import { useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { Button, SegmentedControl } from '@mantine/core';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
@@ -22,8 +21,8 @@ type SearchFormProps = {
 
 export default function Nav({ searchParams, session }: SearchFormProps) {
   const router = useRouter();
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   function handleOrderChange(value: OrderType) {
     const query = new URLSearchParams();

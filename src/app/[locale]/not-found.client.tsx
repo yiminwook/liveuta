@@ -1,12 +1,17 @@
 'use client';
 import character from '@/assets/image/character-8.png';
 import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { useRouter } from 'next-nprogress-bar';
 import Image from 'next/image';
 import css from './not-found.module.scss';
 
-export default function Client() {
-  const { t } = useTranslations();
+type Props = {
+  locale: TLocaleCode;
+};
+
+export default function Client({ locale }: Props) {
+  const { t } = useTranslations(locale);
   const router = useRouter();
 
   return (

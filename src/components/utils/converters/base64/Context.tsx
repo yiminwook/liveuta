@@ -1,4 +1,4 @@
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { Effect } from 'effect';
 import type { ReactNode } from 'react';
 import { createContext, memo, useContext, useMemo, useState } from 'react';
@@ -40,7 +40,8 @@ export function useBase64ActionsContext() {
 }
 
 export function Base64Provider({ children }: { children: ReactNode }) {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const [isEncode, setIsEncode] = useState(true);
   const [repeat, setRepeat] = useState(1);
   const [input, setInput] = useState('');

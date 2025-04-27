@@ -3,19 +3,21 @@ import For from '@/components/common/utils/For';
 import { siteConfig } from '@/constants/siteConfig';
 import { usePathname, useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import { LocaleCode } from '@/types/siteConfig';
 import { useRouter, useSearchParams } from 'next/navigation';
 import css from './LanguageSelect.module.scss';
 import settingCss from './Setting.module.scss';
 
-export default function LanguageSelect() {
+type Props = {
+  locale: TLocaleCode;
+};
+
+export default function LanguageSelect({ locale }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
+  const { t, i18n } = useTranslations(locale);
 
-  const onLanguageChange = (selectedLocale: LocaleCode) => {
+  const onLanguageChange = (selectedLocale: TLocaleCode) => {
     if (locale === selectedLocale) return;
     i18n.changeLanguage(selectedLocale);
     router.replace(`/${selectedLocale}${pathname}?${searchParams.toString()}`);

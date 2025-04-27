@@ -3,7 +3,7 @@ import ClearButton from '@/components/common/button/ClearButton';
 import CopyButton from '@/components/common/button/CopyButton';
 import PasteButton from '@/components/common/button/PasteButton';
 import { useDebounce } from '@/hooks/useDebounce';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { MdiSwapVertical } from '@icons/mdi/swap-vertical';
 import { ActionIcon, NumberInput, Switch, Textarea, Tooltip } from '@mantine/core';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
@@ -18,7 +18,8 @@ import { Base64Provider, useBase64ActionsContext, useBase64Context } from './Con
 import css from './Home.module.scss';
 
 function IsEncode() {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const { setIsEncode } = useBase64ActionsContext();
   const { isEncode } = useBase64Context();
 
@@ -45,7 +46,8 @@ function IsEncode() {
 }
 
 function Repeat() {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const { setRepeat } = useBase64ActionsContext();
   const { repeat } = useBase64Context();
 
@@ -77,7 +79,8 @@ function Repeat() {
 }
 
 function Base64Input() {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const { input } = useBase64Context();
   const { setInput } = useBase64ActionsContext();
   const [uiInput, setUiInput] = useState('');
@@ -121,7 +124,8 @@ function Base64Input() {
 }
 
 function Swap() {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const { setInput } = useBase64ActionsContext();
   const { result } = useBase64Context();
 
@@ -137,7 +141,8 @@ function Swap() {
 }
 
 function Base64Output() {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const { result } = useBase64Context();
 
   return (
@@ -162,7 +167,8 @@ function Base64Output() {
 }
 
 export default function Base64Home() {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const { setItems } = useUtilsBreadcrumbContext();
 
   useEffect(() => {

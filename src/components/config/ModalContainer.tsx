@@ -1,12 +1,12 @@
 'use client';
 import { PORTAL_ID } from '@/constants';
-import { usePathname } from '@/libraries/i18n/client';
 import { useModalStore } from '@/stores/modal';
+import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function ModalContainer() {
   const store = useModalStore();
-  const pathname = usePathname();
+  const pathname = usePathname(); // 반드시 next/navigation을 사용
 
   useEffect(() => {
     return () => {

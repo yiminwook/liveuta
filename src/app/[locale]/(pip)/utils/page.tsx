@@ -1,13 +1,14 @@
 'use client';
-
 import For from '@/components/common/utils/For';
 import { useUtilsLinksContext } from '@/components/utils/common/Links';
+import { Link } from '@/libraries/i18n';
+import { useLocale } from '@/libraries/i18n/client';
 import { Anchor } from '@mantine/core';
 import css from './page.module.scss';
 
 export default function Utils() {
   const links = useUtilsLinksContext();
-
+  const locale = useLocale();
   return (
     <div className={css.contents}>
       <For each={links}>
@@ -21,6 +22,8 @@ export default function Utils() {
                     key={`utils-group-${index}-${itemIndex}`}
                     href={item.href}
                     className={css.item}
+                    locale={locale}
+                    component={Link}
                   >
                     {item.text}
                   </Anchor>

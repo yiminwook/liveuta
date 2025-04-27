@@ -1,11 +1,19 @@
 import GlobalPip from '@/components/common/player/GlobalPip';
-import { PropsWithChildren } from 'react';
+import { TLocaleCode } from '@/libraries/i18n/type';
+import { ReactNode } from 'react';
 
-export default function Layout({ children }: PropsWithChildren) {
+type Props = {
+  params: Promise<{ locale: TLocaleCode }>;
+  children: ReactNode;
+};
+
+export default async function Layout(props: Props) {
+  const params = await props.params;
+  const locale = params.locale;
   return (
     <>
-      {children}
-      <GlobalPip />
+      {props.children}
+      <GlobalPip locale={locale} />
     </>
   );
 }

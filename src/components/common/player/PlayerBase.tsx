@@ -1,6 +1,7 @@
 'use client';
 import { ORIGIN } from '@/constants';
 import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { usePlayerCtx } from '@/stores/player';
 import classnames from 'classnames';
@@ -13,14 +14,15 @@ import css from './Player.module.scss';
 
 type Props = {
   mode: 'default' | 'pip';
+  locale: TLocaleCode;
 };
 
-export default memo(function PlayerBase({ mode }: Props) {
+export default memo(function PlayerBase({ mode, locale }: Props) {
   const [isReady, setIsReady] = useState(false);
   const playerRef = useRef<ReactPlayer>(null);
   const playerCtx = usePlayerCtx();
   const store = useStore(playerCtx);
-  const { t } = useTranslations();
+  const { t } = useTranslations(locale);
 
   useHotkeys(
     'backspace',

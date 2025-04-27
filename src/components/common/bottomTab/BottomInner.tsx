@@ -14,12 +14,12 @@ import css from './BottomInner.module.scss';
 
 type BottomInnerProps = {
   openDrawer: () => void;
+  locale: TLocaleCode;
 };
 
-export default function BottomInner({ openDrawer }: BottomInnerProps) {
+export default function BottomInner({ openDrawer, locale }: BottomInnerProps) {
   const pathname = usePathname();
-  const { t, i18n } = useTranslations();
-  const locale = i18n.language as TLocaleCode;
+  const { t } = useTranslations(locale);
   const tabRef = useRef<HTMLDivElement>(null!);
   const topButtonRef = useRef<HTMLButtonElement>(null!);
 

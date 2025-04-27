@@ -7,7 +7,7 @@ import {
   DrawerTitle,
 } from '@/components/common/Vaul';
 import For from '@/components/common/utils/For';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { Anchor, ScrollArea } from '@mantine/core';
 import { useCallback } from 'react';
 import { useUtilsLinksContext } from './Links';
@@ -15,7 +15,8 @@ import css from './MobileDrawer.module.scss';
 import { useMobileDrawerContext } from './MobileDrawerContext';
 
 export default function UtilsMobileDrawer() {
-  const { t } = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const { isOpen, setIsOpen } = useMobileDrawerContext();
   const links = useUtilsLinksContext();
 
