@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link } from '@/libraries/i18n';
+import { useLocale, usePathname } from '@/libraries/i18n/client';
 import css from './Sidebar.module.scss';
 
 const links = [
@@ -14,6 +14,7 @@ const links = [
 
 export default function IndexSection() {
   const pathname = usePathname();
+  const locale = useLocale();
 
   return (
     <section>
@@ -24,7 +25,7 @@ export default function IndexSection() {
       <ul className={css.links}>
         {links.map((link, i) => (
           <li key={`sidebar-link-${i}`}>
-            <Link href={link.href} data-current={pathname === link.href}>
+            <Link locale={locale} href={link.href} data-current={pathname === link.href}>
               {link.text}
             </Link>
           </li>

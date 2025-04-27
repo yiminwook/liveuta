@@ -1,10 +1,10 @@
 'use client';
 import { SETLISTS_TAG } from '@/constants/revalidateTag';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import IonSearch from '@icons/ion/IosSearch';
 import TbX from '@icons/tabler/X';
 import { TextInput, UnstyledButton } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 import css from './SearchForm.module.scss';
@@ -18,10 +18,12 @@ interface SearchFormProps {
 }
 
 export default function SearchForm({ searchParams }: SearchFormProps) {
-  const queryClient = useQueryClient();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const router = useRouter();
+  const queryClient = useQueryClient();
+
   const [query, setQuery] = useState(searchParams.query);
-  const t = useTranslations();
 
   const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -37,7 +39,7 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
       params.set('query', trimmedQuery);
       params.set('page', '1');
       params.set('sort', searchParams.sort);
-      router.push(`/setlist?${params.toString()}`);
+      router.push(`/${locale}/setlist?${params.toString()}`);
     }
   };
 

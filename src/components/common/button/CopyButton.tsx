@@ -1,4 +1,5 @@
 'use client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import TbCheck from '@icons/tabler/Check';
 import TbCopy from '@icons/tabler/Copy';
 import {
@@ -7,7 +8,6 @@ import {
   CopyButton as MantineCopyButton,
   Tooltip,
 } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import { CSSProperties } from 'react';
 
 interface CopyButtonProps {
@@ -25,14 +25,15 @@ export default function CopyButton({
   buttonSize = 'md',
   className,
 }: CopyButtonProps) {
-  const t = useTranslations('global.copyButton');
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   return (
     <MantineCopyButton value={value} timeout={2000}>
       {({ copied, copy }) => (
         <Tooltip
           className="swiper-no-swiping"
-          label={copied ? t('copied') : t('copy')}
+          label={copied ? t('global.copyButton.copied') : t('global.copyButton.copy')}
           withArrow
           position="bottom"
         >

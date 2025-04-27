@@ -1,11 +1,12 @@
 'use client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { useEffect, useRef, useState } from 'react';
 import { DraggablePlayer } from './DndComponents';
 import LiveChat from './LiveChat';
 import css from './Player.module.scss';
 import { DefaultPlayerPlaceholder } from './PlayerPlaceholder';
 
-export default function LiveChatPlayer() {
+export default function LiveChatPlayer({ locale }: { locale: TLocaleCode }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [isShow, setIsShow] = useState(true);
 
@@ -31,7 +32,7 @@ export default function LiveChatPlayer() {
   return (
     <div ref={wrapRef} className={css.playerBox}>
       {!isShow && <DefaultPlayerPlaceholder />}
-      <DraggablePlayer mode={isShow ? 'default' : 'pip'} />
+      <DraggablePlayer mode={isShow ? 'default' : 'pip'} locale={locale} />
       <LiveChat />
     </div>
   );

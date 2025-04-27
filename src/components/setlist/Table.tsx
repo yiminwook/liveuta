@@ -6,13 +6,13 @@ import Wave from '@/components/common/loading/Wave';
 import { SETLIST_PAGE_SIZE } from '@/constants';
 import { SETLISTS_TAG } from '@/constants/revalidateTag';
 import useCachedData from '@/hooks/useCachedData';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import type { Setlist } from '@/libraries/oracleDB/setlist/service';
 import type { GetSetlistRes } from '@/types/api/setlist';
 import { Pagination, Table } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
 import type { Session } from 'next-auth';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import SetlistDrawer from './Drawer';
 import { DrawerProvider } from './DrawerContext';
@@ -34,9 +34,10 @@ type DataType = {
 };
 
 export default function SetlistTable({ session, searchParams }: TableProps) {
-  const { channelMap } = useCachedData({ session });
   const router = useRouter();
-  const t = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
+  const { channelMap } = useCachedData({ session });
 
   const { data, isLoading } = useQuery({
     queryKey: [SETLISTS_TAG, searchParams],
@@ -69,7 +70,7 @@ export default function SetlistTable({ session, searchParams }: TableProps) {
     query.set('query', searchParams.query);
     query.set('page', page.toString());
     query.set('sort', searchParams.sort);
-    router.push(`/setlist?${query.toString()}`);
+    router.push(`/${locale}/setlist?${query.toString()}`);
   };
 
   if (isLoading)
@@ -79,7 +80,7 @@ export default function SetlistTable({ session, searchParams }: TableProps) {
       </div>
     );
 
-  if (!data || data.list.length === 0) return <Nodata />;
+  if (!data || data.list.length === 0) return <Nodata locale={locale} />;
 
   return (
     <DrawerProvider>

@@ -1,10 +1,10 @@
 'use client';
 import { clientApi } from '@/apis/fetcher';
 import { SETLISTS_TAG } from '@/constants/revalidateTag';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { Button, TextInput, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Session } from 'next-auth';
-import { useTranslations } from 'next-intl';
 import { MouseEvent, useState } from 'react';
 import { toast } from 'sonner';
 import css from './PostForm.module.scss';
@@ -17,7 +17,8 @@ export default function PostForm({ session }: PostFormProps) {
   const [url, setUrl] = useState('');
   const [desc, setDesc] = useState('');
   const queryClient = useQueryClient();
-  const t = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const mutatePost = useMutation({
     mutationFn: async ({

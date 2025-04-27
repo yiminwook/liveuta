@@ -1,10 +1,13 @@
-import Authorized from '@/components/config/Authorized';
+import { Authorized } from '@/components/common/authorization/Authorized';
+import Document from '@/components/config/Document';
 import Client from './page.client';
 
 export default async function Page() {
   return (
-    <Authorized>
-      <Client />
-    </Authorized>
+    <Document locale="ko">
+      <Authorized signInUrl={`/ko/login`}>
+        <Client />
+      </Authorized>
+    </Document>
   );
 }

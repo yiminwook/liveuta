@@ -2,20 +2,23 @@
 import { clientApi } from '@/apis/fetcher';
 import { MEMBER_TAG } from '@/constants/revalidateTag';
 import useScheduleStatus from '@/hooks/useScheduleStatus';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { TMemberInfo } from '@/libraries/oracleDB/auth/service';
 import { useSetModalStore } from '@/stores/modal';
 import { useIsFetching, useIsMutating, useQuery } from '@tanstack/react-query';
 import { signOut, useSession } from 'next-auth/react';
-import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 import AlertModal from './modal/AlertModal';
 
-type Props = {};
+type Props = {
+  locale: TLocaleCode;
+};
 
-export default function DataFetchingObserver({}: Props) {
-  const session = useSession().data;
-  const t = useTranslations();
+export default function DataFetchingObserver({ locale }: Props) {
+  const { data: session } = useSession();
+  const { t } = useTranslations(locale);
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
   const status = useScheduleStatus();
@@ -41,6 +44,7 @@ export default function DataFetchingObserver({}: Props) {
         id: 'session-expired',
         props: {
           message: t('global.dataFetchingObserver.sessionExpired'),
+          locale,
         },
       })
       .then(() => {

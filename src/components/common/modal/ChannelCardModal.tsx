@@ -1,9 +1,10 @@
 import CopyButton from '@/components/common/button/CopyButton';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { ModalProps } from '@/stores/modal';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
-import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
 import css from './ChannelCardModal.module.scss';
@@ -17,6 +18,7 @@ type ChannelCardModalProp = {
   videoCount: string;
   subscribe: string;
   description: string;
+  locale: TLocaleCode;
 };
 
 const CHANNEL_MODAL_ID = 'channelCardModal';
@@ -30,8 +32,9 @@ export default function ChannelCardModal({
   subscribe,
   description,
   onClose,
+  locale,
 }: ModalProps<ChannelCardModalProp>) {
-  const t = useTranslations('global.modal.channelCardModal');
+  const { t } = useTranslations(locale);
 
   const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) =>
     gtagClickAtag(e, {
@@ -49,7 +52,7 @@ export default function ChannelCardModal({
             <div className={css.itemContainer}>
               <Image
                 src={imageURL}
-                alt={`${channelName}${t('channelImageOf')}`}
+                alt={`${channelName}${t('global.modal.channelCardModal.channelImageOf')}`}
                 loading="lazy"
                 placeholder="blur"
                 blurDataURL={DEFAULT_BLUR_BASE64}
@@ -63,10 +66,10 @@ export default function ChannelCardModal({
             <h3 className={css.h3}>{title}</h3>
             <div className={css.detail}>
               <h4 className={css.h4}>
-                {t('subscribers')} {subscribe}
+                {t('global.modal.channelCardModal.subscribers')} {subscribe}
               </h4>
               <h4 className={css.h4}>
-                {t('videos')} {videoCount}
+                {t('global.modal.channelCardModal.videos')} {videoCount}
               </h4>
             </div>
             <div className={css.link}>
@@ -84,7 +87,7 @@ export default function ChannelCardModal({
                   openWindow(url);
                 }}
               >
-                {t('channel')}
+                {t('global.modal.channelCardModal.channel')}
               </button>
               <CopyButton value={url} size={'1rem'} />
             </div>

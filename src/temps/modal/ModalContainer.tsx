@@ -1,6 +1,6 @@
 import { PORTAL_ID } from '@/constants';
-import useModalStore from '@/hooks/useModalStore';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/libraries/i18n/client';
+import useModalStore from '@/stores/modal';
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 

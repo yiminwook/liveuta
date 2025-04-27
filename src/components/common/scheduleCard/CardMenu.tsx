@@ -1,3 +1,4 @@
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import FasStar from '@icons/fa-solid/Star';
 import IonPlus from '@icons/ion/PlusRound';
 import MsOpenInNew from '@icons/material-symbols/OpenInNew';
@@ -8,7 +9,6 @@ import TbCopy from '@icons/tabler/Copy';
 import TbDots from '@icons/tabler/Dots';
 import { ActionIcon, CopyButton, Menu } from '@mantine/core';
 import variable from '@variable';
-import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import css from './CardMenu.module.scss';
 
@@ -29,7 +29,8 @@ export default function CardMenu({
   onClickFavorite,
   onClickNewTab,
 }: CardMenuProps) {
-  const t = useTranslations('schedule.scheduleCard.cardMenu');
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   return (
     <Menu position="bottom-end" withArrow withinPortal arrowPosition="center" trigger="hover">
@@ -52,21 +53,21 @@ export default function CardMenu({
           leftSection={<FasStar color={isFavorite ? '#ffbb00' : '#a7a7a7'} />}
           onClick={onClickFavorite}
         >
-          {`${t('favorite')} ${isFavorite ? t('remove') : t('add')}`}
+          {`${t('schedule.scheduleCard.cardMenu.favorite')} ${isFavorite ? t('schedule.scheduleCard.cardMenu.remove') : t('schedule.scheduleCard.cardMenu.add')}`}
         </Menu.Item>
         <Menu.Item
           component="button"
           leftSection={<MdiBlock color={variable.thirdColorDefault} />}
           onClick={onClickBlock}
         >
-          {t('blockChannel')}
+          {t('schedule.scheduleCard.cardMenu.blockChannel')}
         </Menu.Item>
         <Menu.Item
           component="button"
           leftSection={<MsOpenInNew color={variable.thirdColorDefault} />}
           onClick={onClickNewTab}
         >
-          {t('openInNewTab')}
+          {t('schedule.scheduleCard.cardMenu.openInNewTab')}
         </Menu.Item>
         <CopyButton value={copyValue}>
           {({ copied, copy }) => (
@@ -77,10 +78,10 @@ export default function CardMenu({
               }
               onClick={() => {
                 copy();
-                toast.info(t('linkCopied'));
+                toast.info(t('schedule.scheduleCard.cardMenu.linkCopied'));
               }}
             >
-              {t('copyLink')}
+              {t('schedule.scheduleCard.cardMenu.copyLink')}
             </Menu.Item>
           )}
         </CopyButton>

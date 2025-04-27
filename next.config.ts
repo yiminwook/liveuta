@@ -2,11 +2,8 @@ import path from 'node:path';
 import NextBundleAnalyzer from '@next/bundle-analyzer';
 import { SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
-import createNextIntlPlugin from 'next-intl/plugin';
 
 // const isDevelopment = process.env.NODE_ENV !== 'production';
-
-const withNextIntl = createNextIntlPlugin();
 
 const withBundleAnalyzer = NextBundleAnalyzer({
   enabled: process.env.NODE_ENV === 'production',
@@ -139,4 +136,4 @@ const SENTRY_BUILD_OPTIONS: SentryBuildOptions = {
   },
 };
 
-export default withSentryConfig(withBundleAnalyzer(withNextIntl(nextConfig)), SENTRY_BUILD_OPTIONS);
+export default withSentryConfig(withBundleAnalyzer(nextConfig), SENTRY_BUILD_OPTIONS);

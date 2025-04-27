@@ -1,13 +1,13 @@
 import For from '@/components/common/utils/For';
+import { Link } from '@/libraries/i18n';
+import { useLocale } from '@/libraries/i18n/client';
 import { Anchor, ScrollArea } from '@mantine/core';
-import { useTranslations } from 'next-intl';
-import css from './Sidebar.module.scss';
 import { useUtilsLinksContext } from './Links';
+import css from './Sidebar.module.scss';
 
 export default function UtilsSidebar() {
-  const t = useTranslations('utils.sidebar');
   const links = useUtilsLinksContext();
-
+  const locale = useLocale();
   return (
     <aside className={css.wrap}>
       <ScrollArea className={css.scrollArea}>
@@ -23,6 +23,8 @@ export default function UtilsSidebar() {
                         key={`utils-group-${index}-${itemIndex}`}
                         href={item.href}
                         className={css.item}
+                        locale={locale}
+                        component={Link}
                       >
                         {item.text}
                       </Anchor>

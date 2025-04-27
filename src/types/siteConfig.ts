@@ -1,11 +1,12 @@
-export type LocaleCode = 'ko' | 'en' | 'ja';
+import { TLocaleCode } from '@/libraries/i18n/type';
+
 export type Locale = {
-  code: LocaleCode;
+  code: TLocaleCode;
   name: string;
 };
 
 export type SiteConfig = {
-  defaultLocale: LocaleCode;
+  defaultLocale: TLocaleCode;
   locales: Locale[];
   defaultUseAutoSync: boolean;
   defaultRefreshInterval: number;

@@ -1,6 +1,6 @@
-import Administrator from '@/components/config/Administrator';
-import Authorized from '@/components/config/Authorized';
-import { setRequestLocale } from 'next-intl/server';
+import { Administrator } from '@/components/common/authorization/Administrator';
+import { Authorized } from '@/components/common/authorization/Authorized';
+import Document from '@/components/config/Document';
 import Client from './layout.client';
 
 type AdminLayoutProps = {
@@ -8,13 +8,13 @@ type AdminLayoutProps = {
 };
 
 export default async function Layout({ children }: AdminLayoutProps) {
-  setRequestLocale('ko');
-
   return (
-    <Authorized>
-      <Administrator>
-        <Client>{children}</Client>
-      </Administrator>
-    </Authorized>
+    <Document locale="ko">
+      <Authorized signInUrl={`/ko/login`}>
+        <Administrator fallback={null}>
+          <Client>{children}</Client>
+        </Administrator>
+      </Authorized>
+    </Document>
   );
 }

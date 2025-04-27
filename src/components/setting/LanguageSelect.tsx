@@ -1,26 +1,27 @@
 'use client';
 import For from '@/components/common/utils/For';
 import { siteConfig } from '@/constants/siteConfig';
-import { setUserLocale } from '@/libraries/next-intl';
-import { LocaleCode } from '@/types/siteConfig';
-import { useLocale, useTranslations } from 'next-intl';
-import { useTransition } from 'react';
+import { usePathname, useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
+import { useRouter, useSearchParams } from 'next/navigation';
 import css from './LanguageSelect.module.scss';
 import settingCss from './Setting.module.scss';
 
-export default function LanguageSelect() {
-  const locale = useLocale();
-  const t = useTranslations();
-  const [_, startTransition] = useTransition();
+type Props = {
+  locale: TLocaleCode;
+};
 
-  function onLanguageChange(code: LocaleCode) {
-    if (locale === code) return;
-    startTransition(() => {
-      setUserLocale(code).then(() => {
-        window.location.reload();
-      });
-    });
-  }
+export default function LanguageSelect({ locale }: Props) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { t, i18n } = useTranslations(locale);
+
+  const onLanguageChange = (selectedLocale: TLocaleCode) => {
+    if (locale === selectedLocale) return;
+    i18n.changeLanguage(selectedLocale);
+    router.replace(`/${selectedLocale}${pathname}?${searchParams.toString()}`);
+  };
 
   return (
     <div className={settingCss.wrap}>

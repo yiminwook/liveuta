@@ -1,10 +1,10 @@
 'use client';
 import useCachedData from '@/hooks/useCachedData';
 import { useSchedule } from '@/hooks/useSchedule';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
 import { addEscapeCharacter } from '@/utils/regexp';
 import { useSession } from 'next-auth/react';
-import { useTranslations } from 'next-intl';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
 import Cookies from 'universal-cookie';
@@ -19,14 +19,17 @@ type HomeProps = {
 };
 
 export default function Home({ scheduleDto }: HomeProps) {
-  const session = useSession().data;
-  const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
-  const { data, isPending } = useSchedule({ enableAutoSync: true });
+  const { data: session } = useSession();
   const router = useRouter();
-  const { addCmdGroup, removeCmdGroup } = useCmdActions();
-  const t = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
+  const { data, isPending } = useSchedule({ enableAutoSync: true });
+
+  const { addCmdGroup, removeCmdGroup } = useCmdActions();
 
   const proceedScheduleData = useMemo(() => {
     if (!data) {
@@ -91,7 +94,7 @@ export default function Home({ scheduleDto }: HomeProps) {
 
   useEffect(() => {
     if (scheduleDto.isFavorite && !session) {
-      router.replace('/login');
+      router.replace(`/${locale}/login`);
     }
 
     const setFilter = (value: string) => {
@@ -179,7 +182,7 @@ export default function Home({ scheduleDto }: HomeProps) {
         </div>
       </div>
       {/* live player */}
-      <TopSection filter={scheduleDto.filter} />
+      <TopSection filter={scheduleDto.filter} locale={locale} />
       <ScheduleSection
         session={session}
         scheduleDto={scheduleDto}

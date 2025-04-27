@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import type { PropsWithChildren } from 'react';
 import { createContext, useContext } from 'react';
 
@@ -21,23 +21,24 @@ export function useUtilsLinksContext() {
 }
 
 export function UtilsLinksProvider({ children }: PropsWithChildren) {
-  const t = useTranslations('utils.links');
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const linksGroups: LinksGroup[] = [
     {
-      text: t('converter'),
+      text: t('utils.links.converter'),
       items: [
         {
-          text: t('converters.base64'),
+          text: t('utils.links.converters.base64'),
           href: '/utils/converters/base64',
         },
       ],
     },
     {
-      text: t('youtube'),
+      text: t('utils.links.youtube'),
       items: [
         {
-          text: t('youtubeItems.thumbnail'),
+          text: t('utils.links.youtubeItems.thumbnail'),
           href: '/utils/youtube/thumbnail',
         },
       ],

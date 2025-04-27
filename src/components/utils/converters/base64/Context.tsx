@@ -1,5 +1,5 @@
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { Effect } from 'effect';
-import { useTranslations } from 'next-intl';
 import type { ReactNode } from 'react';
 import { createContext, memo, useContext, useMemo, useState } from 'react';
 import { execute } from './convert';
@@ -40,7 +40,8 @@ export function useBase64ActionsContext() {
 }
 
 export function Base64Provider({ children }: { children: ReactNode }) {
-  const t = useTranslations('utils.converters.base64');
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const [isEncode, setIsEncode] = useState(true);
   const [repeat, setRepeat] = useState(1);
   const [input, setInput] = useState('');
@@ -56,7 +57,10 @@ export function Base64Provider({ children }: { children: ReactNode }) {
         })),
         Effect.catchAll((e) =>
           Effect.succeed({
-            value: e.type === 'decode' ? t('decodeError') : t('encodeError'),
+            value:
+              e.type === 'decode'
+                ? t('utils.converters.base64.decodeError')
+                : t('utils.converters.base64.encodeError'),
             error: true,
           }),
         ),

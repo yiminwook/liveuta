@@ -1,18 +1,21 @@
 'use client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { usePathname } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { scheduleDto } from '@/types/dto';
 import { SegmentedControl, SegmentedControlItem } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
-import { usePathname } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 
 export default function NavTab() {
   const pathname = usePathname();
   const router = useRouter(); // transition 효과 제외
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
+
   const searchParams = useSearchParams();
   const filterQuery = searchParams.get('t');
   const { filter } = scheduleDto.pick({ filter: true }).parse({ filter: filterQuery });
-  const t = useTranslations('schedule.navTab');
 
   const handleValueChange = (value: string) => {
     const query = new URLSearchParams(searchParams);
@@ -21,14 +24,14 @@ export default function NavTab() {
     } else {
       query.set('t', value);
     }
-    router.push(`${pathname}?${query.toString()}`);
+    router.push(`/${locale}${pathname}?${query.toString()}`);
   };
 
   const navLinks: SegmentedControlItem[] = [
-    { value: 'scheduled', label: t('scheduled') },
-    { value: 'live', label: t('live') },
-    { value: 'daily', label: t('daily') },
-    { value: 'all', label: t('all') },
+    { value: 'scheduled', label: t('schedule.navTab.scheduled') },
+    { value: 'live', label: t('schedule.navTab.live') },
+    { value: 'daily', label: t('schedule.navTab.daily') },
+    { value: 'all', label: t('schedule.navTab.all') },
   ];
 
   return (

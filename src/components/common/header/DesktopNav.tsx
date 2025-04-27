@@ -1,44 +1,53 @@
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'next-nprogress-bar';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import HeaderMenu from './HeaderMenu';
 
 export default function DesktopNav() {
-  const router = useRouter();
-  const t = useTranslations('global.header.desktopNav');
-  const handleSelect = (value: string) => router.push(value);
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const internalLinks = [
-    { href: '/', text: t('internalLinks.home') },
-    { href: '/support', text: t('internalLinks.support') },
-    { href: '/setting', text: t('internalLinks.settings') },
-    { href: '/schedule', text: t('internalLinks.schedule') },
-    { href: '/channel', text: t('internalLinks.channel') },
-    { href: '/featured', text: t('internalLinks.featured') },
-    { href: '/multi', text: t('internalLinks.multiView') },
-    { href: '/setlist', text: t('internalLinks.setlist') },
-    { href: '/utils', text: t('internalLinks.utils') },
-    { href: '/dev', text: t('internalLinks.dev') },
+    { href: '/', text: t('global.header.desktopNav.internalLinks.home') },
+    { href: '/support', text: t('global.header.desktopNav.internalLinks.support') },
+    { href: '/setting', text: t('global.header.desktopNav.internalLinks.settings') },
+    { href: '/schedule', text: t('global.header.desktopNav.internalLinks.schedule') },
+    { href: '/channel', text: t('global.header.desktopNav.internalLinks.channel') },
+    { href: '/featured', text: t('global.header.desktopNav.internalLinks.featured') },
+    { href: '/multi', text: t('global.header.desktopNav.internalLinks.multiView') },
+    { href: '/setlist', text: t('global.header.desktopNav.internalLinks.setlist') },
+    { href: '/utils', text: t('global.header.desktopNav.internalLinks.utils') },
+    { href: '/dev', text: t('global.header.desktopNav.internalLinks.dev') },
   ];
 
   const externalLinks = [
     {
       href: 'https://gall.dcinside.com/mgallery/board/lists?id=kizunaai',
-      text: t('externalLinks.kizunaAiGallery'),
+      text: t('global.header.desktopNav.externalLinks.kizunaAiGallery'),
     },
     {
       href: 'https://gall.dcinside.com/mini/board/lists?id=vuta',
-      text: t('externalLinks.vutaGallery'),
+      text: t('global.header.desktopNav.externalLinks.vutaGallery'),
     },
-    { href: 'https://uta-tools.vercel.app', text: t('externalLinks.utaTools') },
+    {
+      href: 'https://uta-tools.vercel.app',
+      text: t('global.header.desktopNav.externalLinks.utaTools'),
+    },
   ];
 
   return (
     <ul>
       <li>
-        <HeaderMenu title={t('internalLink')} links={internalLinks} onSelect={handleSelect} />
+        <HeaderMenu
+          title={t('global.header.desktopNav.internalLink')}
+          links={internalLinks}
+          isExternal={false}
+        />
       </li>
       <li>
-        <HeaderMenu title={t('externalLink')} links={externalLinks} onSelect={handleSelect} />
+        <HeaderMenu
+          title={t('global.header.desktopNav.externalLink')}
+          links={externalLinks}
+          isExternal={true}
+        />
       </li>
     </ul>
   );

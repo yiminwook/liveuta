@@ -1,10 +1,9 @@
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TYChannelsData } from '@/types/api/youtube';
 import FasStar from '@icons/fa-solid/Star';
 import MdiBlock from '@icons/mdi/Block';
 import variable from '@variable';
-import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import Link from 'next/link';
 import css from './RankingTable.module.scss';
 
 type Props = {
@@ -15,7 +14,8 @@ type Props = {
 };
 
 export default function RankingTable({ title, data, onFavorite, onBlock }: Props) {
-  const t = useTranslations('featured');
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   return (
     <div className={css.container}>

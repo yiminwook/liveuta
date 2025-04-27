@@ -1,7 +1,7 @@
 'use client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
 import { ComboboxItemGroup, Select } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import Cookies from 'universal-cookie';
 import css from './ScheduleNav.module.scss';
@@ -17,7 +17,8 @@ type VideoTypeSelectProps = {
 
 export default function VideoTypeSelect({ select, length }: VideoTypeSelectProps) {
   const router = useRouter();
-  const t = useTranslations('schedule.videoType');
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   const handleSelect = (value: string | null) => {
     if (value === null) return;
@@ -28,16 +29,20 @@ export default function VideoTypeSelect({ select, length }: VideoTypeSelectProps
 
   const data: ComboboxItemGroup[] = [
     {
-      group: t('groupLabel'),
+      group: t('schedule.videoType.groupLabel'),
       items: [
-        { label: `${t('all')}: ${length.all}`, value: 'all', disabled: select === 'all' },
         {
-          label: `${t('stream')}: ${length.stream}`,
+          label: `${t('schedule.videoType.all')}: ${length.all}`,
+          value: 'all',
+          disabled: select === 'all',
+        },
+        {
+          label: `${t('schedule.videoType.stream')}: ${length.stream}`,
           value: 'stream',
           disabled: select === 'stream',
         },
         {
-          label: `${t('video')}: ${length.video}`,
+          label: `${t('schedule.videoType.video')}: ${length.video}`,
           value: 'video',
           disabled: select === 'video',
         },

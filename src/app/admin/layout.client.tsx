@@ -1,9 +1,10 @@
 'use client';
 import NavItem from '@/components/common/sidebar/NavItem';
+import { Link } from '@/libraries/i18n';
 import { AppShell, Burger, Button, Flex, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import varialble from '@variable';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { MouseEvent } from 'react';
 import css from './layout.module.scss';
 
@@ -34,14 +35,14 @@ export default function Client({ children }: Props) {
         <Flex align="center" h="100%" px="sm" justify="space-between">
           <Flex align="center">
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" mr="sm" />
-            <Link href="/admin">
+            <NextLink href="/admin">
               <Title component="h1" size="1.25rem" c={varialble.thirdColorDefault}>
                 LU Admin
               </Title>
-            </Link>
+            </NextLink>
           </Flex>
           <Flex>
-            <Button component={Link} href="/" size="xs">
+            <Button component={Link} locale="ko" href="/" size="xs">
               나가기
             </Button>
           </Flex>

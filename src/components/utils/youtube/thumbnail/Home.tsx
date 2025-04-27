@@ -4,16 +4,18 @@ import ClearButton from '@/components/common/button/ClearButton';
 import PasteButton from '@/components/common/button/PasteButton';
 import For from '@/components/common/utils/For';
 import Show from '@/components/common/utils/Show';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { generateThumbnail, getYoutubeVideoId } from '@/libraries/youtube/url';
 import { Button, Input, InputLabel } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
 import css from './Home.module.scss';
 
 export default function Home() {
-  const t = useTranslations('utils.youtube.thumbnail');
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
   const [input, setInput] = useState('');
   const [videoId, setVideoId] = useState('');
+
   const imageList = useMemo(
     () => [
       { label: 'maxresdefault', url: generateThumbnail(videoId, 'maxresdefault') },
@@ -29,6 +31,7 @@ export default function Home() {
     (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.currentTarget.value),
     [],
   );
+
   const onSubmit = useCallback(() => {
     if (input === '') return;
     const res = getYoutubeVideoId(input);
@@ -37,6 +40,7 @@ export default function Home() {
     }
     setVideoId(res);
   }, [input]);
+
   const clear = useCallback(() => setInput(''), []);
   const paste = useCallback((value: ClipboardItem) => {
     const text = value.getType('text/plain');
@@ -61,7 +65,7 @@ export default function Home() {
             <PasteButton paste={paste} buttonSize="lg" size={24} />
           </div>
           <Button type="button" onClick={onSubmit}>
-            {t('submit')}
+            {t('utils.youtube.thumbnail.submit')}
           </Button>
         </div>
       </div>

@@ -1,9 +1,9 @@
 'use client';
+import { Link } from '@/libraries/i18n';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { Button, SegmentedControl } from '@mantine/core';
 import { Session } from 'next-auth';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
-import Link from 'next/link';
 import css from './Nav.module.scss';
 import PostDrawer from './PostDrawer';
 import SearchForm from './SearchForm';
@@ -21,14 +21,15 @@ type SearchFormProps = {
 
 export default function Nav({ searchParams, session }: SearchFormProps) {
   const router = useRouter();
-  const t = useTranslations('setlist.nav');
+  const locale = useLocale();
+  const { t } = useTranslations(locale);
 
   function handleOrderChange(value: OrderType) {
     const query = new URLSearchParams();
     query.set('query', searchParams.query);
     query.set('page', searchParams.page.toString());
     query.set('sort', value);
-    router.push(`/setlist?${query.toString()}`);
+    router.push(`/${locale}/setlist?${query.toString()}`);
   }
 
   return (
@@ -38,8 +39,8 @@ export default function Nav({ searchParams, session }: SearchFormProps) {
           value={searchParams.sort}
           onChange={(value) => handleOrderChange(value as OrderType)}
           data={[
-            { label: t('sortBroadcast'), value: 'broadcast' },
-            { label: t('sortCreate'), value: 'create' },
+            { label: t('setlist.nav.sortBroadcast'), value: 'broadcast' },
+            { label: t('setlist.nav.sortCreate'), value: 'create' },
           ]}
         />
         <div className={css.setlist}>
@@ -49,8 +50,9 @@ export default function Nav({ searchParams, session }: SearchFormProps) {
             variant="gradient"
             component={Link}
             href="/setlist/create"
+            locale={locale}
           >
-            {t('createNew')}
+            {t('setlist.nav.createNew')}
           </Button>
         </div>
       </div>
