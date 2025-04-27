@@ -6,16 +6,17 @@ import { useEffect } from 'react';
 interface Props {
   fallback?: React.ReactNode;
   children: React.ReactNode;
+  signInUrl: string;
 }
 
 /** children 하위 컴포넌트는 session이 있음을 보장 */
-export default function Authorized({ children, fallback }: Props) {
+export default function Authorized({ children, fallback, signInUrl }: Props) {
   const session = useSession();
   const router = useRouter();
 
   useEffect(() => {
     if (session.status === 'unauthenticated') {
-      router.replace('/login');
+      router.replace(signInUrl);
     }
   }, [session.status]);
 

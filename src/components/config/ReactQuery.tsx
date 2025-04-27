@@ -1,11 +1,12 @@
 'use client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useTranslations } from 'next-intl';
 import { PropsWithChildren, useState } from 'react';
 import { toast } from 'sonner';
 
 export default function ReactQuery({ children }: PropsWithChildren) {
-  const t = useTranslations();
+  const { t } = useTranslations();
+
   const [querClient] = useState(() => {
     return new QueryClient({
       queryCache: new QueryCache({

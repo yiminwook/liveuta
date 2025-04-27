@@ -1,11 +1,12 @@
 'use client';
+import { useTranslations } from '@/libraries/i18n/client';
+import { usePathname } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
 import FasFilter from '@icons/fa-solid/Filter';
 import { Button, Popover } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
-import { usePathname } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import ConfirmModal from '../common/modal/ConfirmModal';
 import css from './QueryBtn.module.scss';
@@ -19,20 +20,21 @@ export default function QueryButton({ query }: QueryButtonProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const modalActions = useSetModalStore();
-  const t = useTranslations('schedule.queryButton');
+  const { t, i18n } = useTranslations();
+  const locale = i18n.language as TLocaleCode;
 
   const handleReset = async () => {
     const result: true | undefined = await modalActions.push(ConfirmModal, {
       id: 'reset-schedule-query',
       props: {
-        message: t('clearFilter'),
+        message: t('schedule.queryButton.clearFilter'),
       },
     });
 
     if (!result) return;
     const query = new URLSearchParams(searchParams);
     query.delete('q');
-    router.push(`${pathname}?${query.toString()}`);
+    router.push(`/${locale}${pathname}?${query.toString()}`);
   };
 
   if (query === '') return null;
@@ -41,16 +43,16 @@ export default function QueryButton({ query }: QueryButtonProps) {
     <Popover withArrow arrowPosition="center">
       <Popover.Target>
         <Button h={40} bg="var(--mantine-color-body)" variant="outline" leftSection={<FasFilter />}>
-          {t('filtering')}
+          {t('schedule.queryButton.filtering')}
         </Button>
       </Popover.Target>
       <Popover.Dropdown>
         <div className={css.content}>
           <p className={css.description}>
-            {t('now')}: {query}
+            {t('schedule.queryButton.now')}: {query}
           </p>
           <Button variant="outline" onClick={handleReset}>
-            {t('clear')}
+            {t('schedule.queryButton.clear')}
           </Button>
         </div>
       </Popover.Dropdown>

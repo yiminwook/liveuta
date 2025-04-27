@@ -1,4 +1,5 @@
 'use client';
+import { useLocale } from '@/libraries/i18n/client';
 import { Pagination } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
@@ -15,13 +16,14 @@ type PaginationBoxProps = {
 export default function PaginationBox({ currentPage, totalPage, query }: PaginationBoxProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const locale = useLocale();
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
 
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams);
     params.set('q', query);
     params.set('page', page.toString());
-    router.push(`/channel?${params.toString()}`);
+    router.push(`/${locale}/channel?${params.toString()}`);
   };
 
   return (

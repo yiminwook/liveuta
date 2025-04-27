@@ -1,8 +1,8 @@
 'use client';
+import { useTranslations } from '@/libraries/i18n/client';
 import CodiconClearAll from '@icons/codicon/ClearAll';
 import TbCheck from '@icons/tabler/Check';
 import { ActionIcon, ActionIconProps, Tooltip } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
 import Show from '../utils/Show';
 
@@ -21,7 +21,7 @@ export default function ClearButton({
   buttonSize = 'md',
   className,
 }: ClearButtonProps) {
-  const t = useTranslations('global.clearButton');
+  const { t } = useTranslations();
 
   const [cleared, setCleared] = useState(false);
   const [clearTimeout, setClearTimeout] = useState<number | null>(null);
@@ -39,7 +39,7 @@ export default function ClearButton({
 
   return (
     <Tooltip
-      label={cleared ? t('cleared') : t('clear')}
+      label={cleared ? t('global.clearButton.cleared') : t('global.clearButton.clear')}
       withArrow
       position="bottom"
       className="swiper-no-swiping"

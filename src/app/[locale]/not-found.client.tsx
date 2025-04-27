@@ -1,24 +1,30 @@
 'use client';
 import character from '@/assets/image/character-8.png';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/libraries/i18n/client';
 import { useRouter } from 'next-nprogress-bar';
 import Image from 'next/image';
 import css from './not-found.module.scss';
 
 export default function Client() {
-  const t = useTranslations('error.notFound');
+  const { t } = useTranslations();
   const router = useRouter();
 
   return (
     <div className={css.wrap}>
       <div className={css.box}>
-        <Image src={character} alt={t('imageAlt')} width={200} height={300} unoptimized={true} />
+        <Image
+          src={character}
+          alt={t('error.notFound.imageAlt')}
+          width={200}
+          height={300}
+          unoptimized={true}
+        />
         <div className={css.desc}>
           <div className={css.descTop}>
-            <h1>{t('title')}</h1>
+            <h1>{t('error.notFound.title')}</h1>
           </div>
           <div className={css.descBottom}>
-            <button onClick={() => router.back()}>{t('goBack')}</button>
+            <button onClick={() => router.back()}>{t('error.notFound.goBack')}</button>
           </div>
         </div>
       </div>

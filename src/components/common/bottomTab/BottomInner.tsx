@@ -1,3 +1,7 @@
+import { Link } from '@/libraries/i18n';
+import { useTranslations } from '@/libraries/i18n/client';
+import { usePathname } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import GgUserlane from '@icons/gg/Userlane';
 import IonIosMore from '@icons/ion/IosMore';
 import MsScheduleOutlineRounded from '@icons/material-symbols/ScheduleOutlineRounded';
@@ -5,9 +9,6 @@ import RxPinTop from '@icons/radix-icons/PinTop';
 import TbHome from '@icons/tabler/Home';
 import TbList from '@icons/tabler/List';
 import { UnstyledButton } from '@mantine/core';
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import css from './BottomInner.module.scss';
 
@@ -17,7 +18,8 @@ type BottomInnerProps = {
 
 export default function BottomInner({ openDrawer }: BottomInnerProps) {
   const pathname = usePathname();
-  const t = useTranslations('global.bottomTab.bottomInner');
+  const { t, i18n } = useTranslations();
+  const locale = i18n.language as TLocaleCode;
   const tabRef = useRef<HTMLDivElement>(null!);
   const topButtonRef = useRef<HTMLButtonElement>(null!);
 
@@ -93,51 +95,55 @@ export default function BottomInner({ openDrawer }: BottomInnerProps) {
         <li>
           <UnstyledButton
             component={Link}
+            locale={locale}
             href="/setlist"
             className={css.item}
             data-current={pathname === '/setlist'}
           >
             <TbList />
-            <span>{t('setlist')}</span>
+            <span>{t('global.bottomTab.bottomInner.setlist')}</span>
           </UnstyledButton>
         </li>
         <li>
           <UnstyledButton
             component={Link}
+            locale={locale}
             href="/channel"
             className={css.item}
             data-current={pathname === '/channel'}
           >
             <GgUserlane />
-            <span>{t('channel')}</span>
+            <span>{t('global.bottomTab.bottomInner.channel')}</span>
           </UnstyledButton>
         </li>
         <li>
           <UnstyledButton
             component={Link}
+            locale={locale}
             href="/"
             className={css.item}
             data-current={pathname === '/'}
           >
             <TbHome />
-            <span>{t('home')}</span>
+            <span>{t('global.bottomTab.bottomInner.home')}</span>
           </UnstyledButton>
         </li>
         <li>
           <UnstyledButton
             component={Link}
+            locale={locale}
             href="/schedule"
             className={css.item}
             data-current={pathname === '/schedule'}
           >
             <MsScheduleOutlineRounded />
-            <span>{t('schedule')}</span>
+            <span>{t('global.bottomTab.bottomInner.schedule')}</span>
           </UnstyledButton>
         </li>
         <li>
           <UnstyledButton className={css.item} onClick={openDrawer}>
             <IonIosMore width="1.5rem" height="1.5rem" />
-            <span>{t('more')}</span>
+            <span>{t('global.bottomTab.bottomInner.more')}</span>
           </UnstyledButton>
         </li>
       </ul>

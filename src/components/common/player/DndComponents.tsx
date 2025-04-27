@@ -7,6 +7,7 @@ import {
   TCorner,
   transfromStringToConer,
 } from '@/constants/pip';
+import { useTranslations } from '@/libraries/i18n/client';
 import { getBoxPositionStyle } from '@/utils/helper';
 import {
   DndContext,
@@ -23,7 +24,6 @@ import { AntDesignDragOutlined } from '@icons/antd/DragOutlined';
 import TablerX from '@icons/tabler/X';
 import { ActionIcon, Tooltip } from '@mantine/core';
 import classNames from 'classnames';
-import { useTranslations } from 'next-intl';
 import { CSSProperties, useState } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import dndCss from './DndComponents.module.scss';
@@ -149,7 +149,7 @@ function PipNav({
   dndHandleAttributes,
   dndHandleListeners,
 }: PipNavProps) {
-  const t = useTranslations();
+  const { t } = useTranslations();
 
   return (
     <div className={dndCss.pipNav}>

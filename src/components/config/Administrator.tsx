@@ -16,7 +16,7 @@ export default function Administrator({ children }: { children: React.ReactNode 
   // 5 - Maintenance
   useEffect(() => {
     if (userLv < 3) {
-      router.replace('/not-found');
+      router.replace('/ko/not-found');
     }
   }, [userLv]);
 

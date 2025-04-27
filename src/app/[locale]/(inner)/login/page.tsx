@@ -6,9 +6,18 @@ export const metadata: Metadata = {
   title: '로그인 | Live Uta',
 };
 
-export default async function Page() {
+type Props = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
+
+export default async function Page(props: Props) {
+  const params = await props.params;
+  const locale = params.locale;
+
   return (
-    <UnAuthorized>
+    <UnAuthorized homeUrl={`/${locale}`}>
       <Home />
     </UnAuthorized>
   );

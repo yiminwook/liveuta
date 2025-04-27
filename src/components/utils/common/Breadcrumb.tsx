@@ -1,5 +1,5 @@
-import { Anchor, Breadcrumbs } from '@mantine/core';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/libraries/i18n/client';
+import { Breadcrumbs } from '@mantine/core';
 import { useUtilsBreadcrumbContext } from './BreadcrumbContext';
 
 export type BreadcrumbItem = {
@@ -8,7 +8,7 @@ export type BreadcrumbItem = {
 };
 
 export default function UtilsBreadcrumb() {
-  const t = useTranslations('utils');
+  const { t } = useTranslations();
 
   const { items } = useUtilsBreadcrumbContext();
 
@@ -16,7 +16,7 @@ export default function UtilsBreadcrumb() {
     <div>
       <Breadcrumbs>
         <div>Liveuta</div>
-        <div>{t('title')}</div>
+        <div>{t('utils.title')}</div>
         {items.map((item) => (
           <div key={`utils-breadcrumb-${item.title}`}>{item.title}</div>
         ))}

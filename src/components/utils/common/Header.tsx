@@ -1,14 +1,14 @@
 'use client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { ActionIcon, Tooltip } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { useTranslations } from 'next-intl';
 import { useCallback } from 'react';
 import UtilsBreadcrumb from './Breadcrumb';
 import css from './Header.module.scss';
 import { useMobileDrawerContext } from './MobileDrawerContext';
 
 export default function UtilsHeader() {
-  const t = useTranslations('utils.header');
+  const { t } = useTranslations();
   const isMobile = useMediaQuery('(max-width: 480px)');
   const { isOpen: isMobileSidebarOpen, setIsOpen: setMobileSidebarOpen } = useMobileDrawerContext();
 
@@ -20,7 +20,13 @@ export default function UtilsHeader() {
   return (
     <div className={css.wrap}>
       <div className={css.mobileSidebarToggleWrap} data-mobile={isMobile}>
-        <Tooltip label={isMobileSidebarOpen ? t('closeMobileSidebar') : t('openMobileSidebar')}>
+        <Tooltip
+          label={
+            isMobileSidebarOpen
+              ? t('utils.header.closeMobileSidebar')
+              : t('utils.header.openMobileSidebar')
+          }
+        >
           <ActionIcon onClick={toggleSidebar} variant="ghost">
             <svg
               viewBox="0 0 24 24"

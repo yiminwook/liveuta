@@ -2,12 +2,12 @@
 import { clientApi } from '@/apis/fetcher';
 import TimelineText from '@/components/common/TimestampText';
 import { SETLISTS_TAG } from '@/constants/revalidateTag';
+import { useTranslations } from '@/libraries/i18n/client';
 import { useSetPlayerStore } from '@/stores/player';
 import { Button, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -25,7 +25,7 @@ export default function Desc({ videoId, description }: DescProps) {
   const [desc, setDesc] = useState('');
   const actions = useSetPlayerStore();
   const queryClient = useQueryClient();
-  const t = useTranslations();
+  const { t } = useTranslations();
 
   const toggleEditing = () => {
     if (!session) {

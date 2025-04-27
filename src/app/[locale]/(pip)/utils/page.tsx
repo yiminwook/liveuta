@@ -3,11 +3,9 @@
 import For from '@/components/common/utils/For';
 import { useUtilsLinksContext } from '@/components/utils/common/Links';
 import { Anchor } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import css from './page.module.scss';
 
 export default function Utils() {
-  const t = useTranslations('utils.sidebar');
   const links = useUtilsLinksContext();
 
   return (

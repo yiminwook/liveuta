@@ -1,11 +1,9 @@
 import For from '@/components/common/utils/For';
 import { Anchor, ScrollArea } from '@mantine/core';
-import { useTranslations } from 'next-intl';
-import css from './Sidebar.module.scss';
 import { useUtilsLinksContext } from './Links';
+import css from './Sidebar.module.scss';
 
 export default function UtilsSidebar() {
-  const t = useTranslations('utils.sidebar');
   const links = useUtilsLinksContext();
 
   return (

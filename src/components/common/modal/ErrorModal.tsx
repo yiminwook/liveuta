@@ -1,8 +1,8 @@
 import { useTransition } from '@/hooks/useTransition';
+import { useTranslations } from '@/libraries/i18n/client';
 import { ModalProps } from '@/stores/modal';
 import { Button } from '@mantine/core';
 import classNames from 'classnames';
-import { useTranslations } from 'next-intl';
 import Modal from './Modal';
 import css from './Modal.module.scss';
 
@@ -18,7 +18,7 @@ export default function ErrorModal({
   error,
   onClose,
 }: ModalProps<ErrorModalProp>) {
-  const t = useTranslations('global.modal.errorModal');
+  const { t } = useTranslations();
   const { modifier, onAnimationEnd, exit } = useTransition();
 
   const onCloseWithExit = () => {
@@ -35,7 +35,7 @@ export default function ErrorModal({
     >
       <div className={css.content}>{error.message}</div>
       <div className={css.btnBox}>
-        <Button onClick={onCloseWithExit}>{t('confirm')}</Button>
+        <Button onClick={onCloseWithExit}>{t('global.modal.errorModal.confirm')}</Button>
       </div>
     </Modal>
   );

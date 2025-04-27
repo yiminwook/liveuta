@@ -1,6 +1,6 @@
 'use client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { usePlayerCtx } from '@/stores/player';
-import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -17,7 +17,7 @@ const DraggablePlayer = dynamic(
 );
 
 export default function GlobalPip() {
-  const t = useTranslations();
+  const { t } = useTranslations();
   const searchParams = useSearchParams();
   const isLive = searchParams.get('t') === 'live';
   const [isMount, setIsMount] = useState(false);

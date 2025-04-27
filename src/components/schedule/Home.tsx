@@ -1,6 +1,7 @@
 'use client';
 import useCachedData from '@/hooks/useCachedData';
 import { useSchedule } from '@/hooks/useSchedule';
+import { useLocale } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
 import { addEscapeCharacter } from '@/utils/regexp';
 import { useSession } from 'next-auth/react';
@@ -20,6 +21,7 @@ export default function Home({ scheduleDto }: HomeProps) {
   const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
   const { data, isPending } = useSchedule({ enableAutoSync: true });
   const router = useRouter();
+  const locale = useLocale();
 
   const proceedScheduleData = useMemo(() => {
     if (!data) {
@@ -84,7 +86,7 @@ export default function Home({ scheduleDto }: HomeProps) {
 
   useEffect(() => {
     if (scheduleDto.isFavorite && !session) {
-      router.replace('/login');
+      router.replace(`/${locale}/login`);
     }
   }, []);
 

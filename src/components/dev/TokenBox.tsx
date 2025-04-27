@@ -1,11 +1,12 @@
 'use client';
 import CopyButton from '@/components/common/button/CopyButton';
+import { useTranslations } from '@/libraries/i18n/client';
 import { TToken } from '@/types';
-import { useTranslations } from 'next-intl';
 import css from './Home.module.scss';
 
 export default function TokenBox({ token }: { token: TToken }) {
-  const t = useTranslations('dev.tokenBox');
+  const { t } = useTranslations();
+
   switch (typeof token) {
     case 'string':
       return (
@@ -15,8 +16,8 @@ export default function TokenBox({ token }: { token: TToken }) {
         </>
       );
     case 'undefined':
-      return <div>{t('tokenError')}</div>;
+      return <div>{t('dev.tokenBox.tokenError')}</div>;
     default:
-      return <div>{t('gettingToken')}</div>;
+      return <div>{t('dev.tokenBox.gettingToken')}</div>;
   }
 }

@@ -10,6 +10,9 @@ import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
 import { useSchedule } from '@/hooks/useSchedule';
+import { Link } from '@/libraries/i18n';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useAppCtx } from '@/stores/app';
 import { useSetModalStore } from '@/stores/modal';
@@ -19,10 +22,8 @@ import { gtagClick } from '@/utils/gtag';
 import { isDarkModeEnabled } from '@/utils/helper';
 import { openWindow } from '@/utils/windowEvent';
 import { useSession } from 'next-auth/react';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 import { toast } from 'sonner';
@@ -40,7 +41,8 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
   const router = useRouter();
   const modalStore = useSetModalStore();
   const { whiteListMap, blackListMap, channelMap } = useCachedData({ session });
-  const t = useTranslations();
+  const { t, i18n } = useTranslations();
+  const locale = i18n.language as TLocaleCode;
   const { data, isPending } = useSchedule({ enableAutoSync: false });
 
   const onChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +54,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
     const params = new URLSearchParams();
     params.set('q', trimmedQuery);
     params.set('t', 'all');
-    router.push(`/schedule?${params.toString()}`);
+    router.push(`/${locale}/schedule?${params.toString()}`);
   };
 
   const mutateBlock = usePostBlacklist();
@@ -145,7 +147,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
           <h2>
             🎤 <span className={css.highlight}>{t('home.live')}</span>
           </h2>
-          <MoreButton href="/schedule?t=live" />
+          <MoreButton component={Link} locale={locale} href="/schedule?t=live" />
         </div>
         <ScheduleSlider
           contents={proceedScheduleData.liveContent}
@@ -162,7 +164,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
         <section className={css.favoriteSection}>
           <div className={css.favoriteNav}>
             <h2>🌟 {t('home.favorite')}</h2>
-            <MoreButton href="/schedule?isFavorite=true" />
+            <MoreButton component={Link} locale={locale} href="/schedule?isFavorite=true" />
           </div>
           <ScheduleSlider
             contents={proceedScheduleData.favoriteContent}
@@ -179,7 +181,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
         <div className={css.searchNav}>
           <div />
           <h2>{t('home.searchSchedule')}</h2>
-          <MoreButton href="/schedule" />
+          <MoreButton component={Link} locale={locale} href="/schedule" />
         </div>
         <div className={css.searchBox}>
           <SearchInput
@@ -194,7 +196,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
       <section className={css.recentChannelSection}>
         <div className={css.recentChannelNav}>
           <h2>🚚 {t('home.recentlyAddedChannel')}</h2>
-          <MoreButton href="/channel?sort=createdAt" />
+          <MoreButton component={Link} locale={locale} href="/channel?sort=createdAt" />
         </div>
         <ChannelSlider recentChannels={recentChannels} />
       </section>
@@ -203,7 +205,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
         <div className={css.featureNav}>
           <h2>✨ {t('home.featured')}</h2>
         </div>
-        <Link href="/featured">
+        <Link locale={locale} href="/featured">
           <div className={css.featureBox}>
             <div className={css.featuredContent}>
               <div className={css.patternBg}>

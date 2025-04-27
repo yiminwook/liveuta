@@ -1,7 +1,7 @@
 'use client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { useAppCtx } from '@/stores/app';
 import { openWindow } from '@/utils/windowEvent';
-import { useTranslations } from 'next-intl';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
 import { useStore } from 'zustand';
 import css from './Iframe.module.scss';
@@ -15,7 +15,7 @@ export default function Iframe({ url }: IframeProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const appCtx = useAppCtx();
   const theme = useStore(appCtx, (state) => state.theme);
-  const t = useTranslations('global.iframe');
+  const { t } = useTranslations();
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault();
@@ -66,7 +66,7 @@ export default function Iframe({ url }: IframeProps) {
         />
       </div>
       <button className={css.openButton} onClick={onClick}>
-        + {t('open')}
+        + {t('global.iframe.open')}
       </button>
     </div>
   );

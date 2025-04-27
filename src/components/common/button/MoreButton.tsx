@@ -1,34 +1,30 @@
+import { Link } from '@/libraries/i18n';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import IonArrowRightC from '@icons/ion/ArrowRightC';
 import { Button, ButtonProps } from '@mantine/core';
 import classNames from 'classnames';
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { ComponentProps } from 'react';
 import css from './MoreButton.module.scss';
 
-type MoreButtonProps = ButtonProps & {
-  href?: string;
-  onClick?: () => void;
-  component?: 'a' | 'button' | typeof Link;
-};
+type MoreButtonProps<C> = ComponentProps<typeof Button<C>>;
 
-export default function MoreButton({
-  href,
+export default function MoreButton<C = 'button'>({
   className,
-  component = Link,
-  onClick,
-}: MoreButtonProps) {
-  const t = useTranslations('global.moreButton');
+  rightSection = <IonArrowRightC />,
+  variant = 'transparent',
+  ...props
+}: MoreButtonProps<C>) {
+  const { t } = useTranslations();
 
   return (
-    <Button
+    <Button<any>
+      {...props}
       className={classNames(css.button, className)}
-      variant="transparent"
-      component={component as 'symbol' | undefined}
-      href={href}
-      onClick={onClick}
-      rightSection={<IonArrowRightC />}
+      variant={variant}
+      rightSection={rightSection}
     >
-      {t('more')}
+      {t('global.moreButton.more')}
     </Button>
   );
 }

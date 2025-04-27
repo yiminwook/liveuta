@@ -1,3 +1,4 @@
+import { useTranslations } from '@/libraries/i18n/client';
 import { generateChanneImagelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { STREAM_STATUS_MAPPER, TChannelData, TContentData } from '@/types/api/mongoDB';
 import FasStar from '@icons/fa-solid/Star';
@@ -8,7 +9,6 @@ import MdiBlock from '@icons/mdi/Block';
 import TbBellRingingFilled from '@icons/tabler/BellRingingFilled';
 import { ActionIcon, Avatar, Badge, Card, Flex, Text, Tooltip } from '@mantine/core';
 import variable from '@variable';
-import { useTranslations } from 'next-intl';
 import CopyButton from '../button/CopyButton';
 import CardImage from './CardImage';
 import css from './SliderCard.module.scss';
@@ -33,7 +33,7 @@ export default function SliderCard({
   toggleFavorite,
   addBlock,
 }: SliderCardProps) {
-  const t = useTranslations();
+  const { t } = useTranslations();
 
   const onClickAlarm = () => {
     addAlarm?.(content, channel);

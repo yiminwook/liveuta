@@ -1,9 +1,9 @@
 'use client';
 import { ORIGIN } from '@/constants';
+import { useTranslations } from '@/libraries/i18n/client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { usePlayerCtx } from '@/stores/player';
 import classnames from 'classnames';
-import { useTranslations } from 'next-intl';
 import { memo, useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import ReactPlayer from 'react-player';
@@ -20,7 +20,7 @@ export default memo(function PlayerBase({ mode }: Props) {
   const playerRef = useRef<ReactPlayer>(null);
   const playerCtx = usePlayerCtx();
   const store = useStore(playerCtx);
-  const t = useTranslations();
+  const { t } = useTranslations();
 
   useHotkeys(
     'backspace',

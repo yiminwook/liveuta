@@ -1,17 +1,17 @@
 'use client';
 import For from '@/components/common/utils/For';
+import { useTranslations } from '@/libraries/i18n/client';
 import IonIosSearch from '@icons/ion/IosSearch';
 import TablerX from '@icons/tabler/X';
-import { ActionIcon, Input, Modal, Tooltip } from '@mantine/core';
+import { ActionIcon, Modal, Tooltip } from '@mantine/core';
 import { Command } from 'cmdk';
-import { useTranslations } from 'next-intl';
 import { memo, useCallback } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import css from './CommandMenu.module.scss';
 import { useCommand, useCommandActions } from './Context';
 
 function CommandMenuComponent() {
-  const t = useTranslations('global.command');
+  const { t } = useTranslations();
   const { cmdGroups } = useCommand();
   const { setCmdOpen } = useCommandActions();
 
@@ -22,16 +22,16 @@ function CommandMenuComponent() {
       <div className={css.header}>
         <div className={css.inputWrap}>
           <IonIosSearch className={css.icon} />
-          <Command.Input className={css.input} placeholder={t('inputPlaceholder')} />
+          <Command.Input className={css.input} placeholder={t('global.command.inputPlaceholder')} />
         </div>
-        <Tooltip label={t('close')}>
+        <Tooltip label={t('global.command.close')}>
           <ActionIcon variant="ghost" size="lg" onClick={closeCmd}>
             <TablerX />
           </ActionIcon>
         </Tooltip>
       </div>
       <Command.List>
-        <Command.Empty>{t('empty')}</Command.Empty>
+        <Command.Empty>{t('global.command.empty')}</Command.Empty>
         <For each={cmdGroups}>
           {(group, groupIndex) => (
             <Command.Group
@@ -66,7 +66,6 @@ const CommandMenuMemo = memo(CommandMenuComponent);
 CommandMenuMemo.displayName = 'CommandMenuItems';
 
 export default function CommandMenu() {
-  const t = useTranslations('global.command');
   const { cmdOpen } = useCommand();
   const { setCmdOpen } = useCommandActions();
 

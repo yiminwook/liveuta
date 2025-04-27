@@ -1,9 +1,9 @@
 import dayjs from '@/libraries/dayjs';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { generateChannelUrl } from '@/libraries/youtube/url';
 import { TChannelData, TContentData } from '@/types/api/mongoDB';
 import { openWindow } from '@/utils/windowEvent';
 import cx from 'classnames';
-import { useLocale, useTranslations } from 'next-intl';
 import css from './Card.module.scss';
 import CardStatus from './CardStatus';
 
@@ -23,7 +23,7 @@ export default function CardDesc({ content, addStreamModifier, channel }: CardDe
 
   const channelUrl = generateChannelUrl(channelId);
   const locale = useLocale();
-  const t = useTranslations();
+  const { t } = useTranslations();
 
   const openChannel = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();

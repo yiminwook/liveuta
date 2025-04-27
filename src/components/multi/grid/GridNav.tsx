@@ -1,5 +1,6 @@
 import useCachedData from '@/hooks/useCachedData';
 import { useSchedule } from '@/hooks/useSchedule';
+import { useTranslations } from '@/libraries/i18n/client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { TScheduleDto } from '@/types/dto';
 import { MaterialSymbolsInfoOutline } from '@icons/material-symbols/InfoOutline';
@@ -17,7 +18,6 @@ import {
 import variable from '@variable';
 import classNames from 'classnames';
 import { useSession } from 'next-auth/react';
-import { useTranslations } from 'next-intl';
 import { ChangeEvent, useMemo, useState } from 'react';
 import css from './GridNav.module.scss';
 import GridNavItem from './GridNavItem';
@@ -34,7 +34,7 @@ export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
   const [newUrl, setNewUrl] = useState('');
 
   const theme = useMantineTheme();
-  const t = useTranslations();
+  const { t } = useTranslations();
   const session = useSession().data;
 
   const { blackListMap, channelMap } = useCachedData({ session });

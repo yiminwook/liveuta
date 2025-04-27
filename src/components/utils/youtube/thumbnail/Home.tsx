@@ -4,14 +4,14 @@ import ClearButton from '@/components/common/button/ClearButton';
 import PasteButton from '@/components/common/button/PasteButton';
 import For from '@/components/common/utils/For';
 import Show from '@/components/common/utils/Show';
+import { useTranslations } from '@/libraries/i18n/client';
 import { generateThumbnail, getYoutubeVideoId } from '@/libraries/youtube/url';
 import { Button, Input, InputLabel } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
 import css from './Home.module.scss';
 
 export default function Home() {
-  const t = useTranslations('utils.youtube.thumbnail');
+  const { t } = useTranslations();
   const [input, setInput] = useState('');
   const [videoId, setVideoId] = useState('');
   const imageList = useMemo(
@@ -61,7 +61,7 @@ export default function Home() {
             <PasteButton paste={paste} buttonSize="lg" size={24} />
           </div>
           <Button type="button" onClick={onSubmit}>
-            {t('submit')}
+            {t('utils.youtube.thumbnail.submit')}
           </Button>
         </div>
       </div>

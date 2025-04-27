@@ -2,10 +2,10 @@
 import { clientApi } from '@/apis/fetcher';
 import { PushData } from '@/app/api/push/route';
 import dayjs from '@/libraries/dayjs';
+import { useTranslations } from '@/libraries/i18n/client';
 import { TToken } from '@/types';
 import cx from 'classnames';
 import { BatchResponse } from 'firebase-admin/messaging';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import css from './Home.module.scss';
@@ -16,7 +16,7 @@ export default function PostBox({ token }: { token: TToken }) {
   const [imageUrl, setImageUrl] = useState('');
   const [link, setLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const t = useTranslations();
+  const { t } = useTranslations();
 
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(() => e.target.value.trim());

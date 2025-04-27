@@ -3,6 +3,9 @@ import { clientApi } from '@/apis/fetcher';
 import { SETLISTS_TAG } from '@/constants/revalidateTag';
 import { ClientOnly } from '@/libraries/clientOnly';
 import dayjs from '@/libraries/dayjs';
+import { Link } from '@/libraries/i18n';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { ChannelDatesetItem } from '@/libraries/mongoDB/channels';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
@@ -17,9 +20,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import cx from 'classnames';
 import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
-import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
-import Link from 'next/link';
 import { isMobile } from 'react-device-detect';
 import { toast } from 'sonner';
 import css from './Info.module.scss';
@@ -36,7 +37,8 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
   const queryClient = useQueryClient();
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
-  const t = useTranslations();
+  const { t, i18n } = useTranslations();
+  const locale = i18n.language as TLocaleCode;
   const actions = useSetPlayerStore();
 
   const handleLocation = (url: string) => {
@@ -107,6 +109,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
           </Button>
           <Button
             component={Link}
+            locale={locale}
             className={cx(css.navItem, css.hoverButton)}
             classNames={{ label: css.buttonLabel }}
             variant="transparent"
@@ -143,7 +146,7 @@ interface TimeBoxProps {
 }
 
 function TimeBoxs({ broadcastAt, createdAt, updatedAt }: TimeBoxProps) {
-  const t = useTranslations();
+  const { t } = useTranslations();
   const locale = useLocale();
 
   const broadcast = dayjs(broadcastAt).locale(locale).format(t('dayjsTemplate'));

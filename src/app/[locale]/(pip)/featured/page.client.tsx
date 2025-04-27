@@ -6,13 +6,13 @@ import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
 import { ClientOnly } from '@/libraries/clientOnly';
 import dayjs from '@/libraries/dayjs';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TFeaturedDataAPIReturn } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
 import { combineYTData } from '@/utils/combineChannelData-v2';
 import { Button, ButtonGroup } from '@mantine/core';
 import classNames from 'classnames';
 import { useSession } from 'next-auth/react';
-import { useLocale, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { toast } from 'sonner';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -29,7 +29,7 @@ export default function Client({ featuredData }: Props) {
   const mutateBlock = usePostBlacklist();
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
-  const t = useTranslations();
+  const { t } = useTranslations();
   const locale = useLocale();
 
   const handleFavorite = (content: TYChannelsData) => {

@@ -1,8 +1,8 @@
 'use client';
+import { useTranslations } from '@/libraries/i18n/client';
 import TablerClipboard from '@icons/tabler/Clipboard';
 import TablerClipboardCheck from '@icons/tabler/ClipboardCheck';
 import { ActionIcon, ActionIconProps, Tooltip } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
 import Show from '../utils/Show';
 
@@ -21,7 +21,7 @@ export default function PasteButton({
   buttonSize = 'md',
   className,
 }: PasteButtonProps) {
-  const t = useTranslations('global.pasteButton');
+  const { t } = useTranslations();
 
   const [pasted, setPasted] = useState(false);
   const [pasteTimeout, setPasteTimeout] = useState<number | null>(null);
@@ -47,7 +47,7 @@ export default function PasteButton({
 
   return (
     <Tooltip
-      label={pasted ? t('pasted') : t('paste')}
+      label={pasted ? t('global.pasteButton.pasted') : t('global.pasteButton.paste')}
       withArrow
       position="bottom"
       className="swiper-no-swiping"

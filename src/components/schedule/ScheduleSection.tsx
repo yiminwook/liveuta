@@ -4,6 +4,9 @@ import useInfiniteScheduleData from '@/hooks/useInfiniteScheduleData';
 import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
+import { Link } from '@/libraries/i18n';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetModalStore } from '@/stores/modal';
 import { TChannelData, TContentData } from '@/types/api/mongoDB';
@@ -13,8 +16,6 @@ import { openWindow } from '@/utils/windowEvent';
 import { Button, Loader } from '@mantine/core';
 import variable from '@variable';
 import { Session } from 'next-auth';
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { GridComponents, VirtuosoGrid } from 'react-virtuoso';
 import { toast } from 'sonner';
 import Nodata from '../common/Nodata';
@@ -40,7 +41,8 @@ export default function ScheduleSection({
   isLoading = false,
 }: ScheduleSectionProps) {
   const modalStore = useSetModalStore();
-  const t = useTranslations();
+  const { t, i18n } = useTranslations();
+  const locale = i18n.language as TLocaleCode;
 
   const {
     loadContents,
@@ -121,7 +123,7 @@ export default function ScheduleSection({
       <section>
         <Nodata />
         <div className={css.nodataLinkBox}>
-          <Button component={Link} href={`/channel?q=${scheduleDto.query}`}>
+          <Button component={Link} href={`/channel?q=${scheduleDto.query}`} locale={locale}>
             {t('schedule.scheduleSection.searchAtChannelPage')}
           </Button>
         </div>

@@ -1,9 +1,9 @@
 'use client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
 import BiSliders from '@icons/bi/Sliders';
 import { Button } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import css from './ScheduleNav.module.scss';
 import ScheduleNavModal from './ScheduleNavModal';
 
@@ -18,7 +18,7 @@ type MobileNavButtonProps = {
 
 export default function MobileNavButton({ length, scheduleDto }: MobileNavButtonProps) {
   const modalStore = useSetModalStore();
-  const t = useTranslations('schedule.videoType');
+  const { t } = useTranslations();
 
   const handleOpen = async () => {
     await modalStore.push(ScheduleNavModal, {
@@ -31,23 +31,23 @@ export default function MobileNavButton({ length, scheduleDto }: MobileNavButton
 
   function filterText(filter: typeof scheduleDto.filter) {
     if (filter === 'all') {
-      return t('filter.all');
+      return t('schedule.videoType.filter.all');
     } else if (filter === 'daily') {
-      return t('filter.daily');
+      return t('schedule.videoType.filter.daily');
     } else if (filter === 'live') {
-      return t('filter.live');
+      return t('schedule.videoType.filter.live');
     } else {
-      return t('filter.scheduled');
+      return t('schedule.videoType.filter.scheduled');
     }
   }
 
   function videoTypeText(videoType: typeof scheduleDto.select) {
     if (videoType === 'all') {
-      return t('all');
+      return t('schedule.videoType.all');
     } else if (videoType === 'stream') {
-      return t('stream');
+      return t('schedule.videoType.stream');
     } else {
-      return t('video');
+      return t('schedule.videoType.video');
     }
   }
 

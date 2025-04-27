@@ -1,5 +1,6 @@
-'use client';
 /* eslint-disable @next/next/no-img-element */
+'use client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import type { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateThumbnail } from '@/libraries/youtube/url';
 import { TChannelData } from '@/types/api/mongoDB';
@@ -7,7 +8,6 @@ import { replaceParentheses } from '@/utils/regexp';
 import { Table } from '@mantine/core';
 import cx from 'classnames';
 import dayjs from 'dayjs';
-import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { type MouseEvent } from 'react';
 import { useDrawerActions } from './DrawerContext';
@@ -20,7 +20,7 @@ type RowProps = {
 };
 
 export default function Row({ setlist, channel, order }: RowProps) {
-  const t = useTranslations();
+  const { t } = useTranslations();
   const router = useRouter();
   const locale = useLocale();
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
@@ -31,7 +31,7 @@ export default function Row({ setlist, channel, order }: RowProps) {
 
   function handleImageClick(e: MouseEvent) {
     e.stopPropagation();
-    router.push(`/setlist/${setlist.videoId}`);
+    router.push(`/${locale}/setlist/${setlist.videoId}`);
   }
 
   function handleRowClick() {
