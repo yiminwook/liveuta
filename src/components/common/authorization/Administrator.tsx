@@ -3,24 +3,30 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-interface Props {
+type Props = {
   fallback?: React.ReactNode;
   children: React.ReactNode;
-  signInUrl: string;
-}
+};
 
-/** children 하위 컴포넌트는 session이 있음을 보장 */
-export default function Authorized({ children, fallback, signInUrl }: Props) {
+export function Administrator({ children, fallback }: Props) {
   const session = useSession();
   const router = useRouter();
+  const userLv = session.data?.user.userLv;
 
+  // userLv
+  // 1 - Memember
+  // 2 - VIP Memember
+  // 3 - Admin
+  // 4 - Collaborator
+  // 5 - Maintenance
   useEffect(() => {
-    if (session.status === 'unauthenticated') {
-      router.replace(signInUrl);
+    if (userLv && userLv < 3) {
+      router.replace('/ko/not-found');
     }
-  }, [session.status]);
+  }, [userLv]);
 
   if (session.status === 'loading') return <>{fallback}</>;
   if (session.status === 'unauthenticated') return null;
+  if (userLv && userLv < 3) return null;
   return <>{children}</>;
 }

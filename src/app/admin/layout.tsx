@@ -1,5 +1,5 @@
-import Administrator from '@/components/config/Administrator';
-import Authorized from '@/components/config/Authorized';
+import { Administrator } from '@/components/common/authorization/Administrator';
+import { Authorized } from '@/components/common/authorization/Authorized';
 import Document from '@/components/config/Document';
 import Client from './layout.client';
 
@@ -11,7 +11,7 @@ export default async function Layout({ children }: AdminLayoutProps) {
   return (
     <Document locale="ko">
       <Authorized signInUrl={`/ko/login`}>
-        <Administrator>
+        <Administrator fallback={null}>
           <Client>{children}</Client>
         </Administrator>
       </Authorized>

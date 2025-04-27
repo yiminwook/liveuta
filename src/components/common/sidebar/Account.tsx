@@ -1,5 +1,5 @@
 'use client';
-import withSession from '@/components/config/withSession';
+import { withSession } from '@/components/common/authorization/withSession';
 import useStopPropagation from '@/hooks/useStopPropagation';
 import { usePathname } from '@/libraries/i18n/client';
 import { useAppCtx } from '@/stores/app';

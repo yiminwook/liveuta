@@ -1,4 +1,4 @@
-import UnAuthorized from '@/components/config/UnAuthorized';
+import { UnAuthorized } from '@/components/common/authorization/UnAuthorized';
 import Home from '@/components/login/Home';
 import { Metadata } from 'next';
 

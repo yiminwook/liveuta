@@ -1,4 +1,4 @@
-import Authorized from '@/components/config/Authorized';
+import { Authorized } from '@/components/common/authorization/Authorized';
 import Home from '@/components/my/Home';
 
 type Props = {
