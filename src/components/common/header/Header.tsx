@@ -9,7 +9,7 @@ import { Avatar, Skeleton } from '@mantine/core';
 import { useSession } from 'next-auth/react';
 import { useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
-import { useCommandActions } from '../command/Context';
+import { useCmdActions } from '../command/Context';
 import DesktopNav from './DesktopNav';
 import css from './Header.module.scss';
 
@@ -22,7 +22,7 @@ export default function Header({ locale }: HeaderProps) {
   const gnbRef = useRef<HTMLDivElement>(null);
   const actions = useSetAppStore();
   const { t } = useTranslations(locale);
-  const { setCmdOpen } = useCommandActions();
+  const { setCmdOpen } = useCmdActions();
 
   const openAccountSidebar = () => actions.setIsShowAcctSidebar(true);
 

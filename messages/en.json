@@ -166,7 +166,11 @@
       "globalCommands": {
         "action": "Actions",
         "actions": {
-          "commandPalette": "Command Palette"
+          "commandPalette": "Command Palette",
+          "theme": "Theme",
+          "korean": "Korean",
+          "english": "English",
+          "japanese": "Japanese"
         },
         "navigate": "Navigation",
         "navigation": {
@@ -182,7 +186,7 @@
         },
         "utility": "Utility",
         "utilities": {
-          "convertters": {
+          "converters": {
             "base64": "Base64 Converter"
           },
           "youtube": {
@@ -360,6 +364,21 @@
         "live": "Live",
         "daily": "24-Hour",
         "all": "All"
+      }
+    },
+    "command": {
+      "filter": "Filter",
+      "filters": {
+        "scheduled": "Upcoming",
+        "live": "Live",
+        "daily": "24-Hour",
+        "all": "No Filter"
+      },
+      "type": "Video Type",
+      "types": {
+        "all": "All Videos",
+        "stream": "Stream",
+        "video": "Video"
       }
     }
   },

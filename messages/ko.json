@@ -166,7 +166,11 @@
       "globalCommands": {
         "action": "액션",
         "actions": {
-          "commandPalette": "커맨드 팔레트"
+          "commandPalette": "커맨드 팔레트",
+          "theme": "테마",
+          "korean": "한국어",
+          "english": "영어",
+          "japanese": "일본어"
         },
         "navigate": "페이지 이동",
         "navigation": {
@@ -360,6 +364,21 @@
         "live": "라이브",
         "daily": "24시",
         "all": "전체"
+      }
+    },
+    "command": {
+      "filter": "필터",
+      "filters": {
+        "scheduled": "예정",
+        "live": "라이브",
+        "daily": "24시",
+        "all": "필터 없음"
+      },
+      "type": "영상 타입",
+      "types": {
+        "all": "전체 영상",
+        "stream": "방송",
+        "video": "동영상"
       }
     }
   },

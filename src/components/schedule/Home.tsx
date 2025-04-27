@@ -1,12 +1,14 @@
 'use client';
 import useCachedData from '@/hooks/useCachedData';
 import { useSchedule } from '@/hooks/useSchedule';
-import { useLocale } from '@/libraries/i18n/client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
 import { addEscapeCharacter } from '@/utils/regexp';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
+import Cookies from 'universal-cookie';
+import { useCmdActions } from '../common/command/Context';
 import css from './Home.module.scss';
 import ScheduleNav from './ScheduleNav';
 import ScheduleSection from './ScheduleSection';
@@ -17,11 +19,17 @@ type HomeProps = {
 };
 
 export default function Home({ scheduleDto }: HomeProps) {
-  const session = useSession().data;
-  const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
-  const { data, isPending } = useSchedule({ enableAutoSync: true });
+  const { data: session } = useSession();
   const router = useRouter();
   const locale = useLocale();
+  const { t } = useTranslations(locale);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
+  const { data, isPending } = useSchedule({ enableAutoSync: true });
+
+  const { addCmdGroup, removeCmdGroup } = useCmdActions();
 
   const proceedScheduleData = useMemo(() => {
     if (!data) {
@@ -88,6 +96,78 @@ export default function Home({ scheduleDto }: HomeProps) {
     if (scheduleDto.isFavorite && !session) {
       router.replace(`/${locale}/login`);
     }
+
+    const setFilter = (value: string) => {
+      const query = new URLSearchParams(searchParams);
+      if (value === 'scheduled') {
+        query.delete('t');
+      } else {
+        query.set('t', value);
+      }
+      router.push(`${pathname}?${query.toString()}`);
+    };
+
+    const setVideoType = (value: string) => {
+      const selectCookie = new Cookies();
+      selectCookie.set('select', value, { path: '/', maxAge: 60 * 60 * 24 * 30 * 3 }); //3개월 저장
+      router.refresh();
+    };
+
+    const filterId = 'schedule-filter';
+    const typeId = 'schedule-type';
+
+    addCmdGroup({
+      id: typeId,
+      heading: `${t('schedule.title')} - ${t('schedule.command.type')}`,
+      commands: [
+        {
+          title: t('schedule.command.types.all'),
+          fn: () => setVideoType('all'),
+          keywords: ['schedule', '스케줄', 'スケジュール', '타입', 'type', 'タイプ'],
+        },
+        {
+          title: t('schedule.command.types.stream'),
+          fn: () => setVideoType('stream'),
+          keywords: ['schedule', '스케줄', 'スケジュール', '타입', 'type', 'タイプ'],
+        },
+        {
+          title: t('schedule.command.types.video'),
+          fn: () => setVideoType('video'),
+          keywords: ['schedule', '스케줄', 'スケジュール', '타입', 'type', 'タイプ'],
+        },
+      ],
+    });
+    addCmdGroup({
+      id: filterId,
+      heading: `${t('schedule.title')} - ${t('schedule.command.filter')}`,
+      commands: [
+        {
+          title: t('schedule.command.filters.scheduled'),
+          fn: () => setFilter('scheduled'),
+          keywords: ['schedule', '스케줄', 'スケジュール', '필터', 'filter', 'フィルター'],
+        },
+        {
+          title: t('schedule.command.filters.live'),
+          fn: () => setFilter('live'),
+          keywords: ['schedule', '스케줄', 'スケジュール', '필터', 'filter', 'フィルター'],
+        },
+        {
+          title: t('schedule.command.filters.daily'),
+          fn: () => setFilter('daily'),
+          keywords: ['schedule', '스케줄', 'スケジュール', '필터', 'filter', 'フィルター'],
+        },
+        {
+          title: t('schedule.command.filters.all'),
+          fn: () => setFilter('all'),
+          keywords: ['schedule', '스케줄', 'スケジュール', '필터', 'filter', 'フィルター'],
+        },
+      ],
+    });
+
+    return () => {
+      removeCmdGroup(filterId);
+      removeCmdGroup(typeId);
+    };
   }, []);
 
   return (

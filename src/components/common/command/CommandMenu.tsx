@@ -9,12 +9,12 @@ import { Command } from 'cmdk';
 import { memo, useCallback } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import css from './CommandMenu.module.scss';
-import { useCommand, useCommandActions } from './Context';
+import { useCmd, useCmdActions } from './Context';
 
 function CommandMenuComponent({ locale }: { locale: TLocaleCode }) {
   const { t } = useTranslations(locale);
-  const { cmdGroups } = useCommand();
-  const { setCmdOpen } = useCommandActions();
+  const { cmdGroups } = useCmd();
+  const { setCmdOpen } = useCmdActions();
 
   const closeCmd = useCallback(() => setCmdOpen(false), []);
 
@@ -67,8 +67,8 @@ const CommandMenuMemo = memo(CommandMenuComponent);
 CommandMenuMemo.displayName = 'CommandMenuItems';
 
 export default function CommandMenu({ locale }: { locale: TLocaleCode }) {
-  const { cmdOpen } = useCommand();
-  const { setCmdOpen } = useCommandActions();
+  const { cmdOpen } = useCmd();
+  const { setCmdOpen } = useCmdActions();
 
   const toggleCmdOpen = useCallback(() => setCmdOpen(!cmdOpen), [cmdOpen]);
 

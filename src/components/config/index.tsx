@@ -4,7 +4,7 @@ import { TLocaleCode } from '@/libraries/i18n/type';
 import { TMetadata } from '@/types';
 import { TGetCookiesReturn } from '@/utils/getCookie';
 import CommandMenu from '../common/command/CommandMenu';
-import { CommandProvider } from '../common/command/Context';
+import { CmdProvider } from '../common/command/Context';
 import AppProvider from './AppProvider';
 import Devtools from './Devtools';
 import Hotkeys from './Hotkeys';
@@ -44,7 +44,7 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
           <NProgressProviders>
             <MantineProvider locale={locale}>
               <Hotkeys>
-                <CommandProvider locale={locale}>
+                <CmdProvider locale={locale}>
                   {children}
                   <CommandMenu locale={locale} />
                   <ToastBox />
@@ -52,7 +52,7 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
                   <ServiceWorker />
                   <Devtools />
                   <ModalContainer />
-                </CommandProvider>
+                </CmdProvider>
               </Hotkeys>
             </MantineProvider>
           </NProgressProviders>
