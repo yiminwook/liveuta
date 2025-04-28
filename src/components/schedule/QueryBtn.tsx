@@ -19,7 +19,7 @@ export default function QueryButton({ query }: QueryButtonProps) {
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const searchParams = useSearchParams();
   const modalActions = useSetModalStore();

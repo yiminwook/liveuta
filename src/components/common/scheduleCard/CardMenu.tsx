@@ -29,8 +29,7 @@ export default function CardMenu({
   onClickFavorite,
   onClickNewTab,
 }: CardMenuProps) {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   return (
     <Menu position="bottom-end" withArrow withinPortal arrowPosition="center" trigger="hover">

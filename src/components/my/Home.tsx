@@ -1,6 +1,6 @@
 'use client';
 import useCachedData from '@/hooks/useCachedData';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import FasStar from '@icons/fa-solid/Star';
 import MdiBlock from '@icons/mdi/Block';
 import { useSession } from 'next-auth/react';
@@ -12,8 +12,7 @@ import Whitelist from './Whitelist';
 type HomeProps = {};
 
 export default function Home({}: HomeProps) {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const session = useSession().data!;
   const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });

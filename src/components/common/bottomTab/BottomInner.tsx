@@ -19,7 +19,7 @@ type BottomInnerProps = {
 
 export default function BottomInner({ openDrawer, locale }: BottomInnerProps) {
   const pathname = usePathname();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const tabRef = useRef<HTMLDivElement>(null!);
   const topButtonRef = useRef<HTMLButtonElement>(null!);
 

@@ -34,7 +34,7 @@ export default function ChannelCardModal({
   onClose,
   locale,
 }: ModalProps<ChannelCardModalProp>) {
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) =>
     gtagClickAtag(e, {

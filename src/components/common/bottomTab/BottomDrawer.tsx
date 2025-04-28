@@ -27,7 +27,7 @@ type BottomDrawerProps = {
 };
 
 export default function BottomDrawer({ isOpen, onClose, locale }: BottomDrawerProps) {
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const pathname = usePathname();
 
   const internalLinks: DrawerItem[] = [

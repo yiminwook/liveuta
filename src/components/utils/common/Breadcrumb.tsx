@@ -1,4 +1,4 @@
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { Breadcrumbs } from '@mantine/core';
 import { useUtilsBreadcrumbContext } from './BreadcrumbContext';
 
@@ -8,8 +8,7 @@ export type BreadcrumbItem = {
 };
 
 export default function UtilsBreadcrumb() {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const { items } = useUtilsBreadcrumbContext();
 

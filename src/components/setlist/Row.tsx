@@ -22,7 +22,7 @@ type RowProps = {
 export default function Row({ setlist, channel, order }: RowProps) {
   const router = useRouter();
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
   const title = replaceParentheses(setlist.title);
   const create = dayjs(setlist.createdAt).locale(locale).format(t('dayjsTemplate'));

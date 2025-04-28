@@ -41,7 +41,7 @@ export default function ScheduleSection({
 }: ScheduleSectionProps) {
   const modalStore = useSetModalStore();
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const {
     loadContents,
@@ -120,7 +120,7 @@ export default function ScheduleSection({
     // 검색 결과가 없을 때
     return (
       <section>
-        <Nodata locale={locale} />
+        <Nodata />
         <div className={css.nodataLinkBox}>
           <Button component={Link} href={`/channel?q=${scheduleDto.query}`} locale={locale}>
             {t('schedule.scheduleSection.searchAtChannelPage')}

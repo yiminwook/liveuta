@@ -1,7 +1,6 @@
 'use client';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { usePathname } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
 import { scheduleDto } from '@/types/dto';
 import { SegmentedControl, SegmentedControlItem } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
@@ -11,7 +10,7 @@ export default function NavTab() {
   const pathname = usePathname();
   const router = useRouter(); // transition 효과 제외
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const searchParams = useSearchParams();
   const filterQuery = searchParams.get('t');

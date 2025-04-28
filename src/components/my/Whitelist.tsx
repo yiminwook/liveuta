@@ -1,6 +1,6 @@
 'use client';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { generateChanneImagelUrl } from '@/libraries/youtube/url';
 import { TChannelData } from '@/types/api/mongoDB';
 import { Avatar, Button } from '@mantine/core';
@@ -14,8 +14,7 @@ type WhitelistProps = {
 };
 
 export default function Whitelist({ session, whiteList, channelList }: WhitelistProps) {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const mutationDelete = useMutateWhitelist();
 

@@ -11,8 +11,7 @@ import { toast } from 'sonner';
 import css from './Home.module.scss';
 
 export default function PostBox({ token }: { token: TToken }) {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');

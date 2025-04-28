@@ -22,7 +22,7 @@ type SearchFormProps = {
 export default function Nav({ searchParams, session }: SearchFormProps) {
   const router = useRouter();
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   function handleOrderChange(value: OrderType) {
     const query = new URLSearchParams();

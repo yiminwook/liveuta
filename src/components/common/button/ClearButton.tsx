@@ -22,7 +22,7 @@ export default function ClearButton({
   className,
 }: ClearButtonProps) {
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const [cleared, setCleared] = useState(false);
   const [clearTimeout, setClearTimeout] = useState<number | null>(null);

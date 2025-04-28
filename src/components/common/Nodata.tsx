@@ -4,12 +4,10 @@ import { TLocaleCode } from '@/libraries/i18n/type';
 import Image from 'next/image';
 import css from './Nodata.module.scss';
 
-type Props = {
-  locale: TLocaleCode;
-};
+type Props = {};
 
-export default function Nodata({ locale }: Props) {
-  const { t } = useTranslations(locale);
+export default function Nodata({}: Props) {
+  const { t } = useTranslations();
 
   return (
     <div className={css.nodataBox}>

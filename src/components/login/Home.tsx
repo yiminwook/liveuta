@@ -1,6 +1,6 @@
 'use client';
 import character from '@/assets/image/character-3.png';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { Provider } from '@/types/nextAuth';
 import LogosDiscordIcon from '@icons/logos/DiscordIcon';
 import LogosGoogleIcon from '@icons/logos/GoogleIcon';
@@ -14,8 +14,7 @@ import Background from '../common/background/Background';
 import css from './Home.module.scss';
 
 export default function Home() {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const mutateLogin = useMutation({
     mutationFn: (provider: Provider) => signIn(provider, { callbackUrl: '/' }),

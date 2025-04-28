@@ -22,7 +22,7 @@ type Props = {
 };
 
 export default function GlobalPip({ locale }: Props) {
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const searchParams = useSearchParams();
   const isLive = searchParams.get('t') === 'live';
   const [isMount, setIsMount] = useState(false);

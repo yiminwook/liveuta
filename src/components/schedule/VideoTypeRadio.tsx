@@ -1,5 +1,5 @@
 'use client';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
 import { Group, Radio } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
@@ -17,8 +17,7 @@ type VideoTypeRadioProps = {
 
 export default function VideoTypeRadio({ select, length }: VideoTypeRadioProps) {
   const router = useRouter();
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const [value, setValue] = useState<TScheduleDto['select']>(select);
 
   const handleSelect = (value: string) => {

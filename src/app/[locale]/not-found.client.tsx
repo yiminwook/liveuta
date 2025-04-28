@@ -6,12 +6,10 @@ import { useRouter } from 'next-nprogress-bar';
 import Image from 'next/image';
 import css from './not-found.module.scss';
 
-type Props = {
-  locale: TLocaleCode;
-};
+type Props = {};
 
-export default function Client({ locale }: Props) {
-  const { t } = useTranslations(locale);
+export default function Client({}: Props) {
+  const { t } = useTranslations();
   const router = useRouter();
 
   return (

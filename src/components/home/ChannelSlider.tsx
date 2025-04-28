@@ -16,7 +16,7 @@ type ChannelSliderProps = {
 
 export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 

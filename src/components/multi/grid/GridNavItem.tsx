@@ -15,7 +15,7 @@ type Props = {
 
 export default function GridNavItem({ content, channel, onAddById }: Props) {
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const time = dayjs(content.timestamp).locale(locale).format(t('dayjsScheduleTemplate'));
 

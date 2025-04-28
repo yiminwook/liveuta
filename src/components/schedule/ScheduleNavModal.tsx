@@ -38,7 +38,7 @@ export default function ScheduleNavModal({
 }: ModalProps<ScheduleNavModalProps>) {
   const router = useRouter(); // transition 효과 제외
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const searchParams = useSearchParams();
   const session = useSession();
 

@@ -5,7 +5,7 @@ import css from './Footer.module.scss';
 
 export default function Footer() {
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   return (
     <footer className={css.footer}>

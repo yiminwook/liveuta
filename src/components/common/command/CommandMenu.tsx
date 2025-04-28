@@ -11,8 +11,8 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import css from './CommandMenu.module.scss';
 import { useCmd, useCmdActions } from './Context';
 
-function CommandMenuComponent({ locale }: { locale: TLocaleCode }) {
-  const { t } = useTranslations(locale);
+function CommandMenuComponent() {
+  const { t } = useTranslations();
   const { cmdGroups } = useCmd();
   const { setCmdOpen } = useCmdActions();
 
@@ -88,7 +88,7 @@ export default function CommandMenu({ locale }: { locale: TLocaleCode }) {
   return (
     <Modal opened={cmdOpen} onClose={closeCmd} centered withCloseButton={false} padding={0}>
       <div className={css.wrap}>
-        <CommandMenuMemo locale={locale} />
+        <CommandMenuMemo />
       </div>
     </Modal>
   );

@@ -9,7 +9,7 @@ export default function ReactQuery({
   children,
   locale,
 }: PropsWithChildren<{ locale: TLocaleCode }>) {
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const [querClient] = useState(() => {
     return new QueryClient({

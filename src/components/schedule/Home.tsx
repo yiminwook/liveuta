@@ -22,7 +22,7 @@ export default function Home({ scheduleDto }: HomeProps) {
   const { data: session } = useSession();
   const router = useRouter();
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 

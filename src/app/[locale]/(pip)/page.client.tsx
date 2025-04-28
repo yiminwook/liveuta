@@ -37,7 +37,7 @@ type Props = {
 export default function Client({ coverImgUrl, recentChannels }: Props) {
   const router = useRouter();
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const session = useSession().data;
 
   const [query, setQuery] = useState('');

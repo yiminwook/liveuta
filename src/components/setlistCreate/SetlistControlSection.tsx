@@ -69,8 +69,7 @@ export function SetlistItemInput() {
 export function AutoSort() {
   const autoSort = useSetlistStore((state) => state.autoSort);
   const { setAutoSort, sortSetlist } = useSetlistActions();
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   function handleAutoSortChecked(e: ChangeEvent<HTMLInputElement>) {
     setAutoSort(e.currentTarget.checked);
@@ -93,8 +92,7 @@ export function SetlistControlButtons() {
   const setlist = useSetlistStore(useShallow((state) => state.setlist));
   const autoSort = useSetlistStore((state) => state.autoSort);
   const { sortSetlist } = useSetlistActions();
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   return (
     <>

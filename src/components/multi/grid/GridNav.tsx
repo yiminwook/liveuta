@@ -1,6 +1,6 @@
 import useCachedData from '@/hooks/useCachedData';
 import { useSchedule } from '@/hooks/useSchedule';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { TScheduleDto } from '@/types/dto';
 import { MaterialSymbolsInfoOutline } from '@icons/material-symbols/InfoOutline';
@@ -31,8 +31,7 @@ type Props = {
 
 export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
   const theme = useMantineTheme();
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const session = useSession().data;
 
   const [filter, setFilter] = useState<TScheduleDto['filter']>('live');

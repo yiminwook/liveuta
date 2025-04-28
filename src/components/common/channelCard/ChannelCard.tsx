@@ -26,7 +26,7 @@ type ChannelItemProps = {
 export default function ChannelItem({ content, session, isFavorite }: ChannelItemProps) {
   const { nameKor: channelName, snippet, url, statistics, uid } = content;
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const title = snippet?.title ?? '';
   const imageURL = snippet?.thumbnails?.default?.url ?? '/loading.png';
   const description = snippet?.description ?? t('channel.channelCard.hidden');

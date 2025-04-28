@@ -22,7 +22,7 @@ export default memo(function PlayerBase({ mode, locale }: Props) {
   const playerRef = useRef<ReactPlayer>(null);
   const playerCtx = usePlayerCtx();
   const store = useStore(playerCtx);
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   useHotkeys(
     'backspace',

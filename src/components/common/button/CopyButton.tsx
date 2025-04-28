@@ -1,5 +1,5 @@
 'use client';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import TbCheck from '@icons/tabler/Check';
 import TbCopy from '@icons/tabler/Copy';
 import {
@@ -25,8 +25,7 @@ export default function CopyButton({
   buttonSize = 'md',
   className,
 }: CopyButtonProps) {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   return (
     <MantineCopyButton value={value} timeout={2000}>

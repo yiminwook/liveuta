@@ -30,7 +30,7 @@ export default function Client({ featuredData }: Props) {
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const handleFavorite = (content: TYChannelsData) => {
     if (!session) {

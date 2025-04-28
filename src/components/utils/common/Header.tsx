@@ -1,5 +1,5 @@
 'use client';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { ActionIcon, Tooltip } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { useCallback } from 'react';
@@ -8,8 +8,7 @@ import css from './Header.module.scss';
 import { useMobileDrawerContext } from './MobileDrawerContext';
 
 export default function UtilsHeader() {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const isMobile = useMediaQuery('(max-width: 480px)');
   const { isOpen: isMobileSidebarOpen, setIsOpen: setMobileSidebarOpen } = useMobileDrawerContext();
 

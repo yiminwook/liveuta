@@ -15,11 +15,10 @@ export default function LanguageSelect({ locale }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { t, i18n } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const onLanguageChange = (selectedLocale: TLocaleCode) => {
     if (locale === selectedLocale) return;
-    i18n.changeLanguage(selectedLocale);
     router.replace(`/${selectedLocale}${pathname}?${searchParams.toString()}`);
   };
 

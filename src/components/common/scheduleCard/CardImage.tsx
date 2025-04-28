@@ -1,7 +1,7 @@
 'use client';
 import altImage from '@/assets/image/thumbnail_alt_img.png';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { generateThumbnail } from '@/libraries/youtube/url';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
@@ -21,8 +21,7 @@ export default function CardImage({ content }: CardImageProps) {
   const [imgLoaded, setImgLoaded] = useState(true);
   const actions = useSetPlayerStore();
   const imgRef = useRef<HTMLImageElement>(null);
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const handleImgValidity = useCallback(() => {
     const currentImage = imgRef.current;

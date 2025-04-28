@@ -21,8 +21,7 @@ export default function PasteButton({
   buttonSize = 'md',
   className,
 }: PasteButtonProps) {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const [pasted, setPasted] = useState(false);
   const [pasteTimeout, setPasteTimeout] = useState<number | null>(null);

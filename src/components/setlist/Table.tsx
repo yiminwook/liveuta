@@ -36,7 +36,7 @@ type DataType = {
 export default function SetlistTable({ session, searchParams }: TableProps) {
   const router = useRouter();
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const { channelMap } = useCachedData({ session });
 
   const { data, isLoading } = useQuery({
@@ -80,7 +80,7 @@ export default function SetlistTable({ session, searchParams }: TableProps) {
       </div>
     );
 
-  if (!data || data.list.length === 0) return <Nodata locale={locale} />;
+  if (!data || data.list.length === 0) return <Nodata />;
 
   return (
     <DrawerProvider>

@@ -11,8 +11,7 @@ import { toast } from 'sonner';
 import css from './Home.module.scss';
 
 export default function Home() {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const [token, setToken] = useState<TToken>(null);
   const [permission, setPermission] = useState(t('dev.initialPermission'));
 

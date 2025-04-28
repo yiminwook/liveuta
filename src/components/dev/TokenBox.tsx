@@ -5,8 +5,7 @@ import { TToken } from '@/types';
 import css from './Home.module.scss';
 
 export default function TokenBox({ token }: { token: TToken }) {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   switch (typeof token) {
     case 'string':

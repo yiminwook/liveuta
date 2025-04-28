@@ -32,7 +32,7 @@ type InfoProps = {
 
 export default function Info({ setlist, channel, icon }: InfoProps) {
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const router = useRouter();
   const queryClient = useQueryClient();
   const { data: session } = useSession();
@@ -148,7 +148,7 @@ interface TimeBoxProps {
 
 function TimeBoxs({ broadcastAt, createdAt, updatedAt }: TimeBoxProps) {
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const broadcast = dayjs(broadcastAt).locale(locale).format(t('dayjsTemplate'));
   const create = dayjs(createdAt).locale(locale).format(t('dayjsTemplate'));

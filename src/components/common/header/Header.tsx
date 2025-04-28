@@ -21,7 +21,7 @@ export default function Header({ locale }: HeaderProps) {
   const { data: session, status } = useSession();
   const gnbRef = useRef<HTMLDivElement>(null);
   const actions = useSetAppStore();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const { setCmdOpen } = useCmdActions();
 
   const openAccountSidebar = () => actions.setIsShowAcctSidebar(true);

@@ -18,7 +18,7 @@ type Props = {
 
 export default function DataFetchingObserver({ locale }: Props) {
   const { data: session } = useSession();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
   const status = useScheduleStatus();

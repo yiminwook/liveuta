@@ -22,7 +22,7 @@ export default function ConfirmModal({
   onClose,
   onSuccess,
 }: ModalProps<ConfirmModalProp>) {
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const { modifier, onAnimationEnd, exit } = useTransition();
 
   const onCloseWithExit = () => {

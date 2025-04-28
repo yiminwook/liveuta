@@ -9,15 +9,14 @@ import css from './Iframe.module.scss';
 
 interface IframeProps {
   url: string;
-  locale: TLocaleCode;
 }
 
-export default function Iframe({ url, locale }: IframeProps) {
+export default function Iframe({ url }: IframeProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const appCtx = useAppCtx();
   const theme = useStore(appCtx, (state) => state.theme);
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault();

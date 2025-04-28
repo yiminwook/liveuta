@@ -1,6 +1,6 @@
 'use client';
 import useDeleteBlacklist from '@/hooks/useDeleteBlacklist';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { generateChanneImagelUrl } from '@/libraries/youtube/url';
 import { TChannelData } from '@/types/api/mongoDB';
 import { Avatar, Button } from '@mantine/core';
@@ -15,8 +15,7 @@ type BlacklistProps = {
 
 export default function Blacklist({ session, channelList, blacklist }: BlacklistProps) {
   const mutationDelete = useDeleteBlacklist();
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const handleClick = (channelId: string) => {
     if (confirm(t('my.blacklist.removeBlacklist'))) {

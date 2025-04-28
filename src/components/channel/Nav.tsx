@@ -17,7 +17,7 @@ export default function Nav() {
   const [input, setInput] = useState(searchParams.get('q') || '');
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(() => e.target.value);

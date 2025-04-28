@@ -18,7 +18,7 @@ export default function MoreButton<C = 'button'>({
   locale,
   ...props
 }: MoreButtonProps<C>) {
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   return (
     <Button<any>

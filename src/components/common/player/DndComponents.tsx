@@ -156,9 +156,8 @@ function PipNav({
   onClickHide,
   dndHandleAttributes,
   dndHandleListeners,
-  locale,
 }: PipNavProps) {
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   return (
     <div className={dndCss.pipNav}>

@@ -1,5 +1,5 @@
 'use client';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
 import { ComboboxItemGroup, Select } from '@mantine/core';
 import { useRouter } from 'next-nprogress-bar';
@@ -17,8 +17,7 @@ type VideoTypeSelectProps = {
 
 export default function VideoTypeSelect({ select, length }: VideoTypeSelectProps) {
   const router = useRouter();
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const handleSelect = (value: string | null) => {
     if (value === null) return;

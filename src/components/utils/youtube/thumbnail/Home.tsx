@@ -4,15 +4,14 @@ import ClearButton from '@/components/common/button/ClearButton';
 import PasteButton from '@/components/common/button/PasteButton';
 import For from '@/components/common/utils/For';
 import Show from '@/components/common/utils/Show';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { generateThumbnail, getYoutubeVideoId } from '@/libraries/youtube/url';
-import { Button, Input, InputLabel } from '@mantine/core';
+import { Button, Input } from '@mantine/core';
 import { useCallback, useMemo, useState } from 'react';
 import css from './Home.module.scss';
 
 export default function Home() {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const [input, setInput] = useState('');
   const [videoId, setVideoId] = useState('');
 

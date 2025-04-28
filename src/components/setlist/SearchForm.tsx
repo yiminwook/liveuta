@@ -19,7 +19,7 @@ interface SearchFormProps {
 
 export default function SearchForm({ searchParams }: SearchFormProps) {
   const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const router = useRouter();
   const queryClient = useQueryClient();
 

@@ -33,8 +33,7 @@ export default function SliderCard({
   toggleFavorite,
   addBlock,
 }: SliderCardProps) {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const onClickAlarm = () => {
     addAlarm?.(content, channel);

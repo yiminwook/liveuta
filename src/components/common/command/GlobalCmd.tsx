@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default function GlobalCmd({ locale }: Props) {
-  const { t, i18n } = useTranslations(locale);
+  const { t } = useTranslations();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function GlobalCmd({ locale }: Props) {
 
   const onLanguageChange = (selectedLocale: TLocaleCode) => {
     if (locale === selectedLocale) return;
-    i18n.changeLanguage(selectedLocale);
+    console.log(`/${selectedLocale}${pathname}?${searchParams.toString()}`);
     router.replace(`/${selectedLocale}${pathname}?${searchParams.toString()}`);
   };
 

@@ -21,7 +21,7 @@ export default function AlertModal({
   onClose,
   locale,
 }: ModalProps<AletModalProp>) {
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const { modifier, onAnimationEnd, exit } = useTransition();
 
   const onCloseWithExit = () => {

@@ -23,8 +23,7 @@ function ThemeModalButton({ primaryColor, secondaryColor }: ThemeModalButtonProp
 }
 
 export default function ThemeSelect() {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const appCtx = useAppCtx();
   const setTheme = useStore(appCtx, (state) => state.actions.setTheme);
 

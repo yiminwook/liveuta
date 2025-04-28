@@ -1,6 +1,6 @@
 'use client';
 import Background from '@/components/common/background/Background';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { useSession } from 'next-auth/react';
 import css from './Home.module.scss';
 import Nav from './Nav';
@@ -16,8 +16,7 @@ interface HomeProps {
 
 export default function Home({ searchParams }: HomeProps) {
   const { data: session } = useSession();
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const parseSearchParams = {
     query: searchParams.query || '',

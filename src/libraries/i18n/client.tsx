@@ -9,10 +9,8 @@ import { TLocaleCode } from './type';
 
 const runsOnServerSide = typeof window === 'undefined';
 
-export function useTranslations(
-  locale: TLocaleCode,
-  options?: Parameters<typeof useTranslationClient>[1],
-) {
+export function useTranslations(options?: Parameters<typeof useTranslationClient>[1]) {
+  const locale = useLocale();
   const [activeLng, setActiveLng] = useState(i18next.resolvedLanguage);
 
   useEffect(() => {

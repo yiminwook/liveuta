@@ -21,8 +21,7 @@ export function useUtilsLinksContext() {
 }
 
 export function UtilsLinksProvider({ children }: PropsWithChildren) {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
 
   const linksGroups: LinksGroup[] = [
     {

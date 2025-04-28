@@ -2,7 +2,7 @@
 import { clientApi } from '@/apis/fetcher';
 import TimelineText from '@/components/common/TimestampText';
 import { SETLISTS_TAG } from '@/constants/revalidateTag';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { useSetPlayerStore } from '@/stores/player';
 import { Button, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -19,8 +19,7 @@ type DescProps = {
 };
 
 export default function Desc({ videoId, description }: DescProps) {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const router = useRouter();
 
   const queryClient = useQueryClient();

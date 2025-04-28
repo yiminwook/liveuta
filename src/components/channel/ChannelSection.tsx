@@ -26,7 +26,7 @@ export default function ChannelSection({ contents }: ChannelSectionProps) {
           isFavorite={whiteListMap.has(content.uid)}
         />
       ))}
-      {contents.length === 0 && <Nodata locale={locale} />}
+      {contents.length === 0 && <Nodata />}
     </section>
   );
 }

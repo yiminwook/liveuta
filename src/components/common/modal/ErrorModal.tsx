@@ -21,7 +21,7 @@ export default function ErrorModal({
   locale,
   onClose,
 }: ModalProps<ErrorModalProp>) {
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const { modifier, onAnimationEnd, exit } = useTransition();
 
   const onCloseWithExit = () => {

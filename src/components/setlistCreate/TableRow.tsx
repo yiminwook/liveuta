@@ -17,8 +17,7 @@ type TableRowProps = {
 };
 
 export default function TableRow({ item }: TableRowProps) {
-  const locale = useLocale();
-  const { t } = useTranslations(locale);
+  const { t } = useTranslations();
   const dragControls = useDragControls();
   const { removeItem, setItemChecked, setItemTime, setItemValue } = useSetlistActions();
 

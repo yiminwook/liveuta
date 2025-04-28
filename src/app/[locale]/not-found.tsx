@@ -15,7 +15,6 @@ type Props = {
 
 export default async function NotFound(props: Props) {
   const params = await props.params;
-  const locale = params?.locale ?? FALLBACK_LANG;
 
-  return <Client locale={locale} />;
+  return <Client />;
 }
