@@ -1,7 +1,8 @@
 import useCachedData from '@/hooks/useCachedData';
-import { useSchedule } from '@/hooks/useSchedule';
-import { useTranslations } from '@/libraries/i18n/client';
+import { useScheduleQuery } from '@/hooks/useSchedule';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
+import { StreamFilter } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import { MaterialSymbolsInfoOutline } from '@icons/material-symbols/InfoOutline';
 import TablerChevronLeft from '@icons/tabler/ChevronLeft';
@@ -32,13 +33,14 @@ type Props = {
 export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
   const theme = useMantineTheme();
   const { t } = useTranslations();
-  const session = useSession().data;
+  const { data: session } = useSession();
+  const locale = useLocale();
 
-  const [filter, setFilter] = useState<TScheduleDto['filter']>('live');
+  const [filter, setFilter] = useState<StreamFilter>(StreamFilter.live);
   const [newUrl, setNewUrl] = useState('');
 
   const { blackListMap, channelMap } = useCachedData({ session });
-  const { data, isPending } = useSchedule({ enableAutoSync: true });
+  const { data, isPending } = useScheduleQuery({ enableAutoSync: true, locale });
 
   const onChangeUrl = (e: ChangeEvent<HTMLInputElement>) => {
     setNewUrl(() => e.target.value);

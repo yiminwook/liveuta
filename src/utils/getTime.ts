@@ -1,11 +1,13 @@
 import dayjs from '@/libraries/dayjs';
 import { HMS } from '@/types/time';
 
-export const getInterval = (scheduledTimeStamp: number): string => {
-  const nowTimeStamp = dayjs().valueOf();
+export const getInterval = (scheduledTimeStamp: Date): string => {
+  const utcTime = dayjs(scheduledTimeStamp);
+  const nowTimeStamp = dayjs();
 
   /** 분 */
-  const interval = Math.trunc((scheduledTimeStamp - nowTimeStamp) / (1000 * 60));
+  const interval = Math.trunc((utcTime.diff(nowTimeStamp, 'minute') / 60) * 100) / 100;
+
   if (interval < 0) {
     return '';
   }

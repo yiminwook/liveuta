@@ -1,12 +1,12 @@
 import BadReqError from '@/libraries/error/badRequestError';
 import errorHandler from '@/libraries/error/handler';
 import { channelDto, getAllChannel } from '@/libraries/mongoDB/channels';
-import { TChannelData } from '@/types/api/mongoDB';
+import { TChannelDocumentWithoutId } from '@/types/api/mongoDB';
 import { NextRequest, NextResponse } from 'next/server';
 
 export type TGetChannelRes = {
   message: string;
-  data: TChannelData[];
+  data: TChannelDocumentWithoutId[];
 };
 
 export async function GET(req: NextRequest) {

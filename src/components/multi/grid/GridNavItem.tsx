@@ -1,15 +1,14 @@
 import dayjs from '@/libraries/dayjs';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
 import { generateChanneImagelUrl, generateThumbnail } from '@/libraries/youtube/url';
-import { TChannelData, TContentData } from '@/types/api/mongoDB';
+import { TChannelDocumentWithoutId, TParsedClientContent } from '@/types/api/mongoDB';
 import { ActionIcon, Avatar } from '@mantine/core';
 import classNames from 'classnames';
 import css from './GridNav.module.scss';
 
 type Props = {
-  content: TContentData;
-  channel: TChannelData | undefined;
+  content: TParsedClientContent;
+  channel: TChannelDocumentWithoutId | undefined;
   onAddById: (videoId: string) => void;
 };
 
@@ -17,7 +16,7 @@ export default function GridNavItem({ content, channel, onAddById }: Props) {
   const locale = useLocale();
   const { t } = useTranslations();
 
-  const time = dayjs(content.timestamp).locale(locale).format(t('dayjsScheduleTemplate'));
+  const time = content.utcTime.locale(locale).format(t('dayjsScheduleTemplate'));
 
   const channelImage = channel?.profile_picture_url
     ? generateChanneImagelUrl(channel.profile_picture_url, {

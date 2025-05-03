@@ -8,7 +8,7 @@ import { Link } from '@/libraries/i18n';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetModalStore } from '@/stores/modal';
-import { TChannelData, TContentData } from '@/types/api/mongoDB';
+import { TChannelDocumentWithoutId, TParsedClientContent } from '@/types/api/mongoDB';
 import { TScheduleDto } from '@/types/dto';
 import { gtagClick } from '@/utils/gtag';
 import { openWindow } from '@/utils/windowEvent';
@@ -25,8 +25,8 @@ import css from './ScheduleSection.module.scss';
 type ScheduleSectionProps = {
   session: Session | null;
   scheduleDto: TScheduleDto;
-  contents: TContentData[];
-  channelMap: Record<string, TChannelData>;
+  contents: TParsedClientContent[];
+  channelMap: Record<string, TChannelDocumentWithoutId>;
   whiteListMap: Set<string>;
   isLoading?: boolean;
 };
@@ -56,7 +56,7 @@ export default function ScheduleSection({
   const mutateDeleteFavorite = useMutateWhitelist();
   const { reservePush } = useReservePush();
 
-  const handleFavorite = (content: TContentData) => {
+  const handleFavorite = (content: TParsedClientContent) => {
     if (!session) {
       toast.error(t('schedule.scheduleSection.notLoggedInError'));
       return;
@@ -77,7 +77,7 @@ export default function ScheduleSection({
     }
   };
 
-  const handleBlock = async (content: TContentData) => {
+  const handleBlock = async (content: TParsedClientContent) => {
     if (!session) {
       toast.error(t('schedule.scheduleSection.notLoggedInError'));
       return;
@@ -91,7 +91,7 @@ export default function ScheduleSection({
     }
   };
 
-  const openStream = (content: TContentData) => {
+  const openStream = (content: TParsedClientContent) => {
     gtagClick({
       target: 'scheduleCard',
       content: content.channelId,

@@ -1,6 +1,6 @@
 'use client';
 import useCachedData from '@/hooks/useCachedData';
-import { useSchedule } from '@/hooks/useSchedule';
+import { useScheduleQuery } from '@/hooks/useSchedule';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
 import { addEscapeCharacter } from '@/utils/regexp';
@@ -19,15 +19,15 @@ type HomeProps = {
 };
 
 export default function Home({ scheduleDto }: HomeProps) {
-  const { data: session } = useSession();
   const router = useRouter();
   const locale = useLocale();
   const { t } = useTranslations();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const { data: session } = useSession();
   const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
-  const { data, isPending } = useSchedule({ enableAutoSync: true });
+  const { data, isPending } = useScheduleQuery({ enableAutoSync: true, locale });
 
   const { addCmdGroup, removeCmdGroup } = useCmdActions();
 

@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import type { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateThumbnail } from '@/libraries/youtube/url';
-import { TChannelData } from '@/types/api/mongoDB';
+import { TChannelDocumentWithoutId } from '@/types/api/mongoDB';
 import { replaceParentheses } from '@/utils/regexp';
 import { Table } from '@mantine/core';
 import cx from 'classnames';
@@ -15,7 +15,7 @@ import css from './Table.module.scss';
 
 type RowProps = {
   setlist: Setlist;
-  channel?: TChannelData;
+  channel?: TChannelDocumentWithoutId;
   order?: 'broadcast' | 'create';
 };
 

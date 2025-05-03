@@ -1,5 +1,5 @@
 'use client';
-import { TChannelData, TContentData } from '@/types/api/mongoDB';
+import { TChannelDocumentWithoutId, TParsedClientContent } from '@/types/api/mongoDB';
 import variable from '@variable';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,13 +8,13 @@ import SliderCardSkeleton from '../common/scheduleCard/SliderCardSkeleton';
 import css from './ScheduleSlider.module.scss';
 
 type ScheduleSliderProps = {
-  contents: (TContentData & { isFavorite: boolean })[];
-  channelMap: Record<string, TChannelData>;
+  contents: (TParsedClientContent & { isFavorite: boolean })[];
+  channelMap: Record<string, TChannelDocumentWithoutId>;
   isLoading?: boolean;
-  addAlarm?: (item: TContentData, channel: TChannelData | undefined) => void;
-  openNewTab?: (item: TContentData) => void;
-  toggleFavorite?: (item: TContentData) => void;
-  addBlock?: (item: TContentData) => void;
+  addAlarm?: (item: TParsedClientContent, channel: TChannelDocumentWithoutId | undefined) => void;
+  openNewTab?: (item: TParsedClientContent) => void;
+  toggleFavorite?: (item: TParsedClientContent) => void;
+  addBlock?: (item: TParsedClientContent) => void;
 };
 
 export default function ScheduleSlider({

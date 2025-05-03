@@ -5,14 +5,14 @@ import { useTranslations } from '@/libraries/i18n/client';
 import { generateThumbnail } from '@/libraries/youtube/url';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
-import { TContentData } from '@/types/api/mongoDB';
+import { TParsedClientContent } from '@/types/api/mongoDB';
 import { gtagClick } from '@/utils/gtag';
 import Image from 'next/image';
 import { useCallback, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 interface CardImageProps {
-  content: TContentData;
+  content: TParsedClientContent;
 }
 
 export default function CardImage({ content }: CardImageProps) {

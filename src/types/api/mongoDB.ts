@@ -9,7 +9,7 @@ export const STREAM_STATUS_MAPPER = {
   NULL: 'scheduled',
 } as const;
 
-export interface TChannelDocument {
+export type TChannelDocument = {
   _id?: string;
   channel_id: string;
   name_kor: string;
@@ -20,10 +20,10 @@ export interface TChannelDocument {
   waiting: boolean;
   alive: boolean;
   profile_picture_url: string;
-}
+};
 
-export type TChannelData = Omit<TChannelDocument, '_id'>;
-export type TChannelListData = Record<string, TChannelData>;
+export type TChannelDocumentWithoutId = Omit<TChannelDocument, '_id'>;
+export type TChannelRecord = Record<string, TChannelDocumentWithoutId>;
 
 export type TContentDocument = {
   _id?: string;
@@ -31,16 +31,43 @@ export type TContentDocument = {
   URL: string;
   ScheduledTime: Date;
   broadcastStatus: TStream;
-  Hide: TStream;
+  /** 취소된 스케줄은 TRUE로 표시 */
+  Hide: 'TRUE' | 'FALSE';
   isVideo: 'TRUE' | 'FALSE';
-  concurrentViewers: number;
+  concurrentViewers: string;
   VideoId: string;
   ChannelId: string;
   tag: string;
 };
 
-export type TContentDocumentWithDayjs = Omit<TContentDocument, '_id' | 'ScheduledTime'> & {
-  ScheduledTime: dayjs.Dayjs;
+export type TParsedServerContent = {
+  title: string;
+  videoId: string;
+  channelId: string;
+  broadcastStatus: TStream;
+
+  viewer: string;
+  tag: string;
+  utcTime: Date;
+
+  // 가공된 데이터
+  isVideo: boolean;
+  isHide: boolean;
+};
+
+export type TParsedClientContent = {
+  videoId: string;
+  channelId: string;
+  broadcastStatus: TStream;
+  isHide: boolean;
+  isVideo: boolean;
+  tag: string;
+
+  // 가공된 데이터
+  title: string;
+  viewer: number;
+  utcTime: dayjs.Dayjs;
+  interval: string;
 };
 
 export type TContentLength = {
@@ -48,33 +75,6 @@ export type TContentLength = {
   video: number;
   stream: number;
 };
-
-export type TContentData = {
-  title: string;
-  videoId: string;
-  channelId: string;
-  timestamp: number;
-  isStream: TStream;
-  utcTime: Date;
-  interval: string;
-  isVideo: boolean;
-  viewer: number;
-  tag: string;
-};
-
-export type TContentsDataReturn = TContentData[];
-
-export type TParseScheduledDataReturn = {
-  scheduled: TContentsDataReturn;
-  live: TContentsDataReturn;
-};
-
-export type TParseAllDataReturn = {
-  daily: TContentsDataReturn;
-  all: TContentsDataReturn;
-};
-
-export type TScheduleAPIReturn = TParseAllDataReturn & TParseScheduledDataReturn;
 
 export type TFeaturedDocument = {
   _id: string;

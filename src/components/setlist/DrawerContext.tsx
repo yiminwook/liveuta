@@ -1,18 +1,18 @@
 'use client';
 import { Setlist } from '@/libraries/oracleDB/setlist/service';
-import { TChannelData } from '@/types/api/mongoDB';
+import { TChannelDocumentWithoutId } from '@/types/api/mongoDB';
 import { ReactNode, createContext, use, useMemo, useState } from 'react';
 
 type SetlistDrawerActionContext = {
   onOpenChange: (value: boolean) => void;
-  open: (setlist: Setlist, thumbnailUrl: string, channel?: TChannelData) => void;
+  open: (setlist: Setlist, thumbnailUrl: string, channel?: TChannelDocumentWithoutId) => void;
 };
 
 type SetlistDrawerContext = {
   open: boolean;
   setlist?: Setlist;
   thumbnailUrl?: string;
-  channel?: TChannelData;
+  channel?: TChannelDocumentWithoutId;
 };
 
 // @ts-expect-error empty context
@@ -40,7 +40,7 @@ export function DrawerProvider({ children }: { children: ReactNode }) {
           open: value,
         });
       },
-      open: (setlist: Setlist, thumbnailUrl: string, channel?: TChannelData) => {
+      open: (setlist: Setlist, thumbnailUrl: string, channel?: TChannelDocumentWithoutId) => {
         setDrawerContext({
           open: true,
           setlist,

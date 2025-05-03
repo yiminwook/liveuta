@@ -9,13 +9,13 @@ import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
 import useReservePush from '@/hooks/useReservePush';
-import { useSchedule } from '@/hooks/useSchedule';
+import { useScheduleQuery } from '@/hooks/useSchedule';
 import { Link } from '@/libraries/i18n';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useAppCtx } from '@/stores/app';
 import { useSetModalStore } from '@/stores/modal';
-import { TContentData } from '@/types/api/mongoDB';
+import { TParsedClientContent } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick } from '@/utils/gtag';
 import { isDarkModeEnabled } from '@/utils/helper';
@@ -38,12 +38,12 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
   const router = useRouter();
   const locale = useLocale();
   const { t } = useTranslations();
-  const session = useSession().data;
+  const { data: session } = useSession();
 
   const [query, setQuery] = useState('');
   const modalStore = useSetModalStore();
   const { whiteListMap, blackListMap, channelMap } = useCachedData({ session });
-  const { data, isPending } = useSchedule({ enableAutoSync: false });
+  const { data, isPending } = useScheduleQuery({ enableAutoSync: false, locale });
 
   const onChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(() => e.target.value);
@@ -62,7 +62,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
   const mutateDeleteFavorite = useMutateWhitelist();
   const { reservePush } = useReservePush();
 
-  const handleFavorite = (content: TContentData) => {
+  const handleFavorite = (content: TParsedClientContent) => {
     if (!session) {
       toast.error(t('home.notLoggedInError'));
       return;
@@ -82,7 +82,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
     }
   };
 
-  const handleBlock = async (content: TContentData) => {
+  const handleBlock = async (content: TParsedClientContent) => {
     if (!session) {
       toast.error(t('home.notLoggedInError'));
       return;
@@ -96,7 +96,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
     }
   };
 
-  const openStream = (content: TContentData) => {
+  const openStream = (content: TParsedClientContent) => {
     gtagClick({
       target: 'scheduleCard',
       content: content.channelId,

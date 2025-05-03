@@ -1,10 +1,10 @@
 import { SCROLL_PER_YOUTUBE_CARD } from '@/constants';
-import { TContentData } from '@/types/api/mongoDB';
+import { TParsedClientContent } from '@/types/api/mongoDB';
 import { waitfor } from '@/utils/helper';
 import { useMemo, useState } from 'react';
 
 type UseInfiniteScheduleDataArgs = {
-  rawData: TContentData[];
+  rawData: TParsedClientContent[];
 };
 
 const useInfiniteScheduleData = ({ rawData }: UseInfiniteScheduleDataArgs) => {
