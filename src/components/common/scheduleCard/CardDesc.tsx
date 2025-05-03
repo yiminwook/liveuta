@@ -1,5 +1,4 @@
-import dayjs from '@/libraries/dayjs';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { generateChannelUrl } from '@/libraries/youtube/url';
 import { TChannelDocumentWithoutId, TParsedClientContent } from '@/types/api/mongoDB';
 import { openWindow } from '@/utils/windowEvent';
@@ -22,7 +21,6 @@ export default function CardDesc({ content, addStreamModifier, channel }: CardDe
   const { title, utcTime, interval, broadcastStatus: isStream, viewer, channelId } = content;
 
   const channelUrl = generateChannelUrl(channelId);
-  const locale = useLocale();
   const { t } = useTranslations();
 
   const openChannel = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -46,7 +44,7 @@ export default function CardDesc({ content, addStreamModifier, channel }: CardDe
         {title}
       </p>
       <div className={css.time}>
-        <time>{utcTime.locale(locale).format(t('dayjsScheduleTemplate'))}</time>
+        <time>{utcTime.format(t('time.longTemplate'))}</time>
         <CardStatus isStream={isStream} interval={interval} viewer={viewer} />
       </div>
     </div>

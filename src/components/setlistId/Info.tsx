@@ -147,12 +147,11 @@ interface TimeBoxProps {
 }
 
 function TimeBoxs({ broadcastAt, createdAt, updatedAt }: TimeBoxProps) {
-  const locale = useLocale();
   const { t } = useTranslations();
 
-  const broadcast = dayjs(broadcastAt).locale(locale).format(t('dayjsTemplate'));
-  const create = dayjs(createdAt).locale(locale).format(t('dayjsTemplate'));
-  const update = dayjs(updatedAt).locale(locale).format(t('dayjsTemplate'));
+  const broadcast = dayjs(broadcastAt).format(t('time.shortTemplate'));
+  const create = dayjs(createdAt).format(t('time.shortTemplate'));
+  const update = dayjs(updatedAt).format(t('time.shortTemplate'));
   return (
     <>
       <div>

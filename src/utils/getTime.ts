@@ -1,7 +1,9 @@
 import dayjs from '@/libraries/dayjs';
 import { HMS } from '@/types/time';
 
-export const getInterval = (scheduledTimeStamp: Date): string => {
+type TranslateFunction = (key: string, options?: { count: number }) => string;
+
+export const getInterval = (scheduledTimeStamp: Date, t: TranslateFunction): string => {
   const utcTime = dayjs(scheduledTimeStamp);
   const nowTimeStamp = dayjs();
 
@@ -12,12 +14,12 @@ export const getInterval = (scheduledTimeStamp: Date): string => {
     return '';
   }
 
-  if (interval >= 0 && interval < 60) {
-    return `${Math.trunc(interval)}분 후`;
+  if (interval < 60) {
+    return t('time.intervalMinutes', { count: Math.trunc(interval) });
   }
 
-  if (interval > 60) {
-    return `${Math.trunc(interval / 60)}시간 후`;
+  if (interval >= 60) {
+    return t('time.intervalHours', { count: Math.trunc(interval / 60) });
   }
 
   return '';

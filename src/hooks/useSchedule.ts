@@ -2,6 +2,7 @@ import { clientApi } from '@/apis/fetcher';
 import { SCHEDULE_CACHE_TIME } from '@/constants';
 import { SCHEDULES_TAG } from '@/constants/revalidateTag';
 import dayjs from '@/libraries/dayjs';
+import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { StreamFilter } from '@/types';
 import { TParsedClientContent } from '@/types/api/mongoDB';
@@ -32,6 +33,7 @@ export function useScheduleQuery(arg: {
   locale: TLocaleCode;
 }) {
   const { isActive, refreshInterval } = useAutoSync(); //유저설정
+  const { t } = useTranslations();
 
   const userCacheTime = isActive ? refreshInterval * 60 * 1000 : false;
 
@@ -62,7 +64,7 @@ export function useScheduleQuery(arg: {
               title: replaceParentheses(item.title),
               viewer: Number(item.viewer),
               utcTime: dayjs(item.utcTime),
-              interval: getInterval(item.utcTime),
+              interval: getInterval(item.utcTime, t),
             };
 
             if (parsedData.isHide === true && parsedData.broadcastStatus == 'NULL') {

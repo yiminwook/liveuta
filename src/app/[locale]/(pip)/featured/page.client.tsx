@@ -6,7 +6,7 @@ import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
 import { ClientOnly } from '@/libraries/clientOnly';
 import dayjs from '@/libraries/dayjs';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { TFeaturedDataAPIReturn } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
 import { combineYTData } from '@/utils/combineChannelData-v2';
@@ -24,13 +24,12 @@ type Props = {
 };
 
 export default function Client({ featuredData }: Props) {
-  const session = useSession().data;
+  const { t } = useTranslations();
+  const { data: session } = useSession();
   const { channelMap, whiteListMap } = useCachedData({ session });
   const mutateBlock = usePostBlacklist();
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
-  const locale = useLocale();
-  const { t } = useTranslations();
 
   const handleFavorite = (content: TYChannelsData) => {
     if (!session) {
@@ -81,9 +80,7 @@ export default function Client({ featuredData }: Props) {
       <p className={classNames('essential', css.essential)}>
         {t('featured.essential')}&nbsp;
         <ClientOnly>
-          <time>
-            ({dayjs(featuredData.lastUpdateAt).locale(locale).format('YYYY-MM-DD HH:mm')})
-          </time>
+          <time>({dayjs(featuredData.lastUpdateAt).format('YYYY-MM-DD HH:mm')})</time>
         </ClientOnly>
       </p>
       <div>

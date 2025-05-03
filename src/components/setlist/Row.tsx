@@ -25,18 +25,18 @@ export default function Row({ setlist, channel, order }: RowProps) {
   const { t } = useTranslations();
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
   const title = replaceParentheses(setlist.title);
-  const create = dayjs(setlist.createdAt).locale(locale).format(t('dayjsTemplate'));
-  const broad = dayjs(setlist.broadcastAt).locale(locale).format(t('dayjsTemplate'));
+  const create = dayjs(setlist.createdAt).format(t('time.shortTemplate'));
+  const broad = dayjs(setlist.broadcastAt).format(t('time.shortTemplate'));
   const drawerActions = useDrawerActions();
 
-  function handleImageClick(e: MouseEvent) {
+  const handleImageClick = (e: MouseEvent) => {
     e.stopPropagation();
     router.push(`/${locale}/setlist/${setlist.videoId}`);
-  }
+  };
 
-  function handleRowClick() {
+  const handleRowClick = () => {
     drawerActions.open(setlist, thumbnailUrl, channel);
-  }
+  };
 
   return (
     <Table.Tr className={css.row} onClick={handleRowClick}>

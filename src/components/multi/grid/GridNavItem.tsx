@@ -1,5 +1,4 @@
-import dayjs from '@/libraries/dayjs';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { generateChanneImagelUrl, generateThumbnail } from '@/libraries/youtube/url';
 import { TChannelDocumentWithoutId, TParsedClientContent } from '@/types/api/mongoDB';
 import { ActionIcon, Avatar } from '@mantine/core';
@@ -13,10 +12,9 @@ type Props = {
 };
 
 export default function GridNavItem({ content, channel, onAddById }: Props) {
-  const locale = useLocale();
   const { t } = useTranslations();
 
-  const time = content.utcTime.locale(locale).format(t('dayjsScheduleTemplate'));
+  const time = content.utcTime.format(t('time.longTemplate'));
 
   const channelImage = channel?.profile_picture_url
     ? generateChanneImagelUrl(channel.profile_picture_url, {
