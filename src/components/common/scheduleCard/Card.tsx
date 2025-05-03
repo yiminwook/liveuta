@@ -1,10 +1,10 @@
 'use client';
-import { generateVideoUrl } from '@/libraries/youtube/url';
 import {
   STREAM_STATUS_MAPPER,
   TChannelDocumentWithoutId,
   TParsedClientContent,
-} from '@/types/api/mongoDB';
+} from '@/libraries/mongodb/type';
+import { generateVideoUrl } from '@/libraries/youtube/url';
 import cx from 'classnames';
 import { Session } from 'next-auth';
 import { memo } from 'react';

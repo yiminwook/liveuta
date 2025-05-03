@@ -1,8 +1,8 @@
 'use client';
 import useDeleteBlacklist from '@/hooks/useDeleteBlacklist';
 import { useTranslations } from '@/libraries/i18n/client';
+import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
 import { generateChanneImagelUrl } from '@/libraries/youtube/url';
-import { TChannelDocumentWithoutId } from '@/types/api/mongoDB';
 import { Avatar, Button } from '@mantine/core';
 import { Session } from 'next-auth';
 import css from './List.module.scss';

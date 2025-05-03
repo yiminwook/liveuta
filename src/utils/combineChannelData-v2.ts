@@ -1,5 +1,5 @@
+import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
 import { generateChannelUrl } from '@/libraries/youtube/url';
-import { TChannelDocumentWithoutId } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
 import { youtube_v3 } from 'googleapis';
 

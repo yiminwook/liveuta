@@ -4,7 +4,7 @@ import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { ModalProps } from '@/stores/modal';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
-import { openWindow } from '@/utils/windowEvent';
+import { openWindow } from '@/utils/window-event';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
 import css from './ChannelCardModal.module.scss';

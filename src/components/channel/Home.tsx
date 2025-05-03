@@ -2,11 +2,11 @@ import { serverApi } from '@/apis/fetcher';
 import Background from '@/components/common/background/Background';
 import { ITEMS_PER_PAGE } from '@/constants';
 import { CHANNELS_TAG } from '@/constants/revalidateTag';
-import { TChannelDto, TYChannelReturn } from '@/libraries/mongoDB/channels';
-import ChannelSection from './ChannelSection';
+import { TChannelDto, TYChannelReturn } from '@/libraries/mongodb/channels';
 import css from './Home.module.scss';
 import Nav from './Nav';
 import PaginationBox from './PaginationBox';
+import ChannelSection from './channel-section';
 
 type HomeProps = {
   channelDto: TChannelDto;

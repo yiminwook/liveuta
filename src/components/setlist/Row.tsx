@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import type { Setlist } from '@/libraries/oracleDB/setlist/service';
+import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
+import type { Setlist } from '@/libraries/oracledb/setlist/service';
 import { generateThumbnail } from '@/libraries/youtube/url';
-import { TChannelDocumentWithoutId } from '@/types/api/mongoDB';
 import { replaceParentheses } from '@/utils/regexp';
 import { Table } from '@mantine/core';
 import cx from 'classnames';

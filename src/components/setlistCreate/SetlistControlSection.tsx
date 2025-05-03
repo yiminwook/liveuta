@@ -1,8 +1,8 @@
 'use client';
 import Show from '@/components/common/utils/Show';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import { secondsToHMS } from '@/utils/getTime';
+import { useTranslations } from '@/libraries/i18n/client';
 import { testYoutubeUrl } from '@/utils/regexp';
+import { secondsToHMS } from '@/utils/time';
 import TbCirclePlus from '@icons/tabler/CirclePlus';
 import { ActionIcon, Button, TextInput } from '@mantine/core';
 import { Checkbox } from '@mantine/core';

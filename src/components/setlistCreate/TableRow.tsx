@@ -1,6 +1,6 @@
 'use client';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import { hmsToString } from '@/utils/getTime';
+import { hmsToString } from '@/utils/time';
 import CodiconClearAll from '@icons/codicon/ClearAll';
 import TbClipboard from '@icons/tabler/Clipboard';
 import TbCopy from '@icons/tabler/Copy';

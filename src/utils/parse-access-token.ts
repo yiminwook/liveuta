@@ -1,4 +1,4 @@
-import { Payload } from '@/types/nextAuth';
+import { Payload } from '@/types/next-auth';
 import jwt from 'jsonwebtoken';
 import { headers } from 'next/headers';
 

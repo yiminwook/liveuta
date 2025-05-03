@@ -1,7 +1,7 @@
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
-import { getMember } from '@/libraries/oracleDB/auth/service';
-import parseAccessToken from '@/utils/parseAccessToken';
+import { getMember } from '@/libraries/oracledb/auth/service';
+import parseAccessToken from '@/utils/parse-access-token';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {

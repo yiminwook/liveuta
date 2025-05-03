@@ -1,5 +1,5 @@
 import { ITEMS_PER_PAGE, MONGODB_CHANNEL_COLLECTION, MONGODB_MANAGEMENT_DB } from '@/constants';
-import { TChannelDocument, TChannelDocumentWithoutId } from '@/types/api/mongoDB';
+import { TChannelDocument, TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
 import { combineChannelData } from '@/utils/combineChannelData';
 import { addEscapeCharacter } from '@/utils/regexp';
 import { z } from 'zod';

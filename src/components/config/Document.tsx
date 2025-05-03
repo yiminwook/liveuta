@@ -1,8 +1,7 @@
 /* eslint-disable @next/next/no-head-element */
-
+import { getCookies } from '@/apis/cached';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import MswProvider from '@/mocks/MswProvider';
-import { getCookies } from '@/utils/getCookie';
+import MswProvider from '@/mocks/msw-provider';
 import { headers } from 'next/headers';
 import { userAgent } from 'next/server';
 import { ReactNode } from 'react';
@@ -24,7 +23,7 @@ import '@/styles/mantine/theme.scss';
 import '/public/theme-v2.css';
 import '@/styles/global.scss';
 
-import '@/mocks/enableServer';
+import '@/mocks/enable-server';
 
 type Props = {
   children: ReactNode;

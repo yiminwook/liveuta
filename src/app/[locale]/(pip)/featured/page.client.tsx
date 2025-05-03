@@ -1,17 +1,18 @@
 'use client';
 import RankingTable from '@/components/featured/RankingTable';
+import { useMount } from '@/hooks/use-mount';
 import useCachedData from '@/hooks/useCachedData';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
 import usePostBlacklist from '@/hooks/usePostBlacklist';
 import usePostWhitelist from '@/hooks/usePostWhitelist';
-import { ClientOnly } from '@/libraries/clientOnly';
 import dayjs from '@/libraries/dayjs';
 import { useTranslations } from '@/libraries/i18n/client';
-import { TFeaturedDataAPIReturn } from '@/types/api/mongoDB';
+import { TFeaturedDataAPIReturn } from '@/libraries/mongodb/type';
 import { TYChannelsData } from '@/types/api/youtube';
 import { combineYTData } from '@/utils/combineChannelData-v2';
 import { Button, ButtonGroup } from '@mantine/core';
 import classNames from 'classnames';
+import { func } from 'effect/FastCheck';
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 import { toast } from 'sonner';
@@ -79,9 +80,7 @@ export default function Client({ featuredData }: Props) {
     <div className={css.container}>
       <p className={classNames('essential', css.essential)}>
         {t('featured.essential')}&nbsp;
-        <ClientOnly>
-          <time>({dayjs(featuredData.lastUpdateAt).format('YYYY-MM-DD HH:mm')})</time>
-        </ClientOnly>
+        <TimeBox featuredData={featuredData} />
       </p>
       <div>
         <ButtonGroup>
@@ -121,4 +120,12 @@ export default function Client({ featuredData }: Props) {
       </Swiper>
     </div>
   );
+}
+
+function TimeBox({ featuredData }: { featuredData: TFeaturedDataAPIReturn }) {
+  const isMounted = useMount();
+
+  if (!isMounted) return null;
+
+  return <time>({dayjs(featuredData.lastUpdateAt).format('YYYY-MM-DD HH:mm')})</time>;
 }

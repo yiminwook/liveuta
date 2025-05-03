@@ -1,7 +1,7 @@
 import BadReqError from '@/libraries/error/badRequestError';
 import errorHandler from '@/libraries/error/handler';
-import { channelDto, getAllChannel } from '@/libraries/mongoDB/channels';
-import { TChannelDocumentWithoutId } from '@/types/api/mongoDB';
+import { channelDto, getAllChannel } from '@/libraries/mongodb/channels';
+import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
 import { NextRequest, NextResponse } from 'next/server';
 
 export type TGetChannelRes = {

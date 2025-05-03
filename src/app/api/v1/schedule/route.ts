@@ -1,8 +1,8 @@
 import { MONGODB_SCHEDULE_COLLECTION, MONGODB_SCHEDULE_DB } from '@/constants';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
-import { connectMongoDB } from '@/libraries/mongoDB';
-import { TContentDocument, TParsedServerContent } from '@/types/api/mongoDB';
+import { connectMongoDB } from '@/libraries/mongodb';
+import { TContentDocument, TParsedServerContent } from '@/libraries/mongodb/type';
 import { TGetScheduleResponse } from '@/types/api/schedule';
 import { NextResponse } from 'next/server';
 

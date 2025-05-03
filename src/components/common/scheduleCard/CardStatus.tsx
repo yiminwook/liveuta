@@ -1,4 +1,4 @@
-import { TStream } from '@/types/api/mongoDB';
+import { TStream } from '@/libraries/mongodb/type';
 import css from './Card.module.scss';
 import CardViewer from './CardViewer';
 interface CardStatusProps {

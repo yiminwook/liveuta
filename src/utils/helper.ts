@@ -1,3 +1,4 @@
+import { ITEMS_PER_PAGE } from '@/constants';
 import { DRAGGABLE_ZONE_RANGE, TCorner } from '@/constants/pip';
 import { TTheme } from '@/types';
 

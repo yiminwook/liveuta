@@ -1,8 +1,7 @@
+import { getCookies } from '@/apis/cached';
 import Background from '@/components/common/background/Background';
 import Home from '@/components/schedule/Home';
 import { scheduleDto } from '@/types/dto';
-import { getCookies } from '@/utils/getCookie';
-import { redirect } from 'next/navigation';
 
 type Props = {
   searchParams: Promise<{

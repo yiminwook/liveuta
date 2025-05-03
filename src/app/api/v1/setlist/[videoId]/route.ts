@@ -1,9 +1,9 @@
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
-import { deleteSetlist, postSetlist, updateSetlist } from '@/libraries/oracleDB/setlist/service';
+import { deleteSetlist, postSetlist, updateSetlist } from '@/libraries/oracledb/setlist/service';
 import { getYoutubeChannelsByVideoId } from '@/libraries/youtube';
 import { SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
-import parseAccessToken from '@/utils/parseAccessToken';
+import parseAccessToken from '@/utils/parse-access-token';
 import { NextRequest, NextResponse } from 'next/server';
 import { checkDescription } from './validation';
 

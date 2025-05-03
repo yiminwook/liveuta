@@ -1,10 +1,10 @@
-import { Provider } from '@/types/nextAuth';
+import { Provider } from '@/types/next-auth';
 import Discord, { DiscordProfile } from '@auth/core/providers/discord';
 import jwt from 'jsonwebtoken';
 import NextAuth, { User } from 'next-auth';
 import Google, { GoogleProfile } from 'next-auth/providers/google';
 import kakao, { KakaoProfile } from 'next-auth/providers/kakao';
-import { loginAndFindone } from '../oracleDB/auth/service';
+import { loginAndFindone } from '../oracledb/auth/service';
 
 const generateErrorObj = (provider: Provider, error: unknown): User => ({
   userId: -1,

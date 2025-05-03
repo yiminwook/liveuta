@@ -1,5 +1,5 @@
 import { FALLBACK_LANG } from '@/libraries/i18n/config';
-import { SiteConfig } from '@/types/siteConfig';
+import { SiteConfig } from '@/types/site-config';
 
 export const siteConfig: SiteConfig = {
   defaultLocale: FALLBACK_LANG,

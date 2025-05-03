@@ -1,6 +1,6 @@
 import character from '@/assets/image/character-5-150.png';
-import { getChannelById, parseChannel } from '@/libraries/mongoDB/channels';
-import { getSetlistByVideoId } from '@/libraries/oracleDB/setlist/service';
+import { getChannelById, parseChannel } from '@/libraries/mongodb/channels';
+import { getSetlistByVideoId } from '@/libraries/oracledb/setlist/service';
 import { Divider } from '@mantine/core';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';

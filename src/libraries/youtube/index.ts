@@ -1,4 +1,3 @@
-import { CHANNELS_TAG } from '@/constants/revalidateTag';
 import { google } from 'googleapis';
 
 export const youtubeService = google.youtube('v3');

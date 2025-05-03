@@ -1,8 +1,8 @@
+import { getCookies } from '@/apis/cached';
 import { serverApi } from '@/apis/fetcher';
 import { METADATAS_TAG } from '@/constants/revalidateTag';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import { TMetadata } from '@/types';
-import { TGetCookiesReturn } from '@/utils/getCookie';
+import { Promised, TMetadata } from '@/types';
 import CommandMenu from '../common/command/CommandMenu';
 import { CmdProvider } from '../common/command/Context';
 import AppProvider from './AppProvider';
@@ -19,7 +19,7 @@ import ToastBox from './ToastBox';
 
 type ConfigsProps = {
   children: React.ReactNode;
-  cookies: TGetCookiesReturn;
+  cookies: Promised<typeof getCookies>;
   locale: TLocaleCode;
 };
 

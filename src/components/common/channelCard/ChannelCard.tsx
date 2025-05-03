@@ -8,7 +8,7 @@ import { useSetModalStore } from '@/stores/modal';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { renderSubscribe } from '@/utils/renderSubscribe';
-import { openWindow } from '@/utils/windowEvent';
+import { openWindow } from '@/utils/window-event';
 import FasStar from '@icons/fa-solid/Star';
 import { Session } from 'next-auth';
 import Image from 'next/image';

@@ -4,7 +4,7 @@ import { MEMBER_TAG } from '@/constants/revalidateTag';
 import useScheduleStatus from '@/hooks/useScheduleStatus';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import { TMemberInfo } from '@/libraries/oracleDB/auth/service';
+import { TMemberInfo } from '@/libraries/oracledb/auth/service';
 import { useSetModalStore } from '@/stores/modal';
 import { useIsFetching, useIsMutating, useQuery } from '@tanstack/react-query';
 import { signOut, useSession } from 'next-auth/react';

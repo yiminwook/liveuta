@@ -4,11 +4,11 @@ import { SCHEDULES_TAG } from '@/constants/revalidateTag';
 import dayjs from '@/libraries/dayjs';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
+import { TParsedClientContent } from '@/libraries/mongodb/type';
 import { StreamFilter } from '@/types';
-import { TParsedClientContent } from '@/types/api/mongoDB';
 import { TGetScheduleResponse } from '@/types/api/schedule';
-import { getInterval } from '@/utils/getTime';
 import { replaceParentheses } from '@/utils/regexp';
+import { getInterval } from '@/utils/time';
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { useAutoSync } from './useStorage';
 

@@ -2,7 +2,7 @@
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { useAppCtx } from '@/stores/app';
-import { openWindow } from '@/utils/windowEvent';
+import { openWindow } from '@/utils/window-event';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
 import { useStore } from 'zustand';
 import css from './Iframe.module.scss';

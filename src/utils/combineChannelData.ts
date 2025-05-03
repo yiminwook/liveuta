@@ -1,8 +1,8 @@
 import dayjs from '@/libraries/dayjs';
-import { TChannelDto } from '@/libraries/mongoDB/channels';
+import { TChannelDto } from '@/libraries/mongodb/channels';
+import { TChannelRecord } from '@/libraries/mongodb/type';
 import { getYoutubeChannels } from '@/libraries/youtube';
 import { generateChannelUrl } from '@/libraries/youtube/url';
-import { TChannelRecord } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
 
 /* YoutubeData API + MongoDB Channel Data */

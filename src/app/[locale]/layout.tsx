@@ -1,5 +1,5 @@
+import { getQueryClient } from '@/apis/cached';
 import { serverApi } from '@/apis/fetcher';
-import getQueryClient from '@/apis/getQueryClient';
 import DataFetchingObserver from '@/components/common/DataFetchingObserver';
 import PageView from '@/components/common/PageView';
 import BottomTab from '@/components/common/bottomTab/BottomTab';

@@ -1,5 +1,5 @@
 import { SCROLL_PER_YOUTUBE_CARD } from '@/constants';
-import { TParsedClientContent } from '@/types/api/mongoDB';
+import { TParsedClientContent } from '@/libraries/mongodb/type';
 import { waitfor } from '@/utils/helper';
 import { useMemo, useState } from 'react';
 

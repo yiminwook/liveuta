@@ -1,7 +1,7 @@
 import { useTranslations } from '@/libraries/i18n/client';
+import { TChannelDocumentWithoutId, TParsedClientContent } from '@/libraries/mongodb/type';
 import { generateChannelUrl } from '@/libraries/youtube/url';
-import { TChannelDocumentWithoutId, TParsedClientContent } from '@/types/api/mongoDB';
-import { openWindow } from '@/utils/windowEvent';
+import { openWindow } from '@/utils/window-event';
 import cx from 'classnames';
 import css from './Card.module.scss';
 import CardStatus from './CardStatus';

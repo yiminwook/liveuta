@@ -1,7 +1,7 @@
 import { PushData } from '@/app/api/push/route';
 import { MONGODB_NOTI_COLLECTION, MONGODB_SCHEDULE_DB } from '@/constants';
 import errorHandler from '@/libraries/error/handler';
-import { connectMongoDB } from '@/libraries/mongoDB';
+import { connectMongoDB } from '@/libraries/mongodb';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {

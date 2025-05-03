@@ -1,5 +1,5 @@
 'use client';
-import { TChannelDocumentWithoutId, TParsedClientContent } from '@/types/api/mongoDB';
+import { TChannelDocumentWithoutId, TParsedClientContent } from '@/libraries/mongodb/type';
 import variable from '@variable';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';

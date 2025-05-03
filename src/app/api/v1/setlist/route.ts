@@ -1,6 +1,6 @@
 import errorHandler from '@/libraries/error/handler';
-import { getAllSetlist, searchSetlist } from '@/libraries/oracleDB/setlist/service';
-import parseAccessToken from '@/utils/parseAccessToken';
+import { getAllSetlist, searchSetlist } from '@/libraries/oracledb/setlist/service';
+import parseAccessToken from '@/utils/parse-access-token';
 import { NextRequest, NextResponse } from 'next/server';
 import * as validation from './validation';
 

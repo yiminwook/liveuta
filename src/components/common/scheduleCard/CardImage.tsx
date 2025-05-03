@@ -2,10 +2,10 @@
 import altImage from '@/assets/image/thumbnail_alt_img.png';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import { useTranslations } from '@/libraries/i18n/client';
+import { TParsedClientContent } from '@/libraries/mongodb/type';
 import { generateThumbnail } from '@/libraries/youtube/url';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
-import { TParsedClientContent } from '@/types/api/mongoDB';
 import { gtagClick } from '@/utils/gtag';
 import Image from 'next/image';
 import { useCallback, useRef, useState } from 'react';

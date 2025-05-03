@@ -1,7 +1,7 @@
 'use client';
 import character from '@/assets/image/character-3.png';
 import { useTranslations } from '@/libraries/i18n/client';
-import { Provider } from '@/types/nextAuth';
+import { Provider } from '@/types/next-auth';
 import LogosDiscordIcon from '@icons/logos/DiscordIcon';
 import LogosGoogleIcon from '@icons/logos/GoogleIcon';
 import RiKakaoTalkFill from '@icons/ri/KakaoTalkFilled';

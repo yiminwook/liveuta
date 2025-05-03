@@ -1,5 +1,5 @@
-import Motion from '@/libraries/framer';
-
+'use client';
+import { motion } from 'framer-motion';
 interface SquareToRoundProps {
   className?: string;
   children?: React.ReactNode;
@@ -7,7 +7,7 @@ interface SquareToRoundProps {
 
 export default function SquareToRound({ className, children }: SquareToRoundProps) {
   return (
-    <Motion.div
+    <motion.div
       className={className}
       style={{
         display: 'flex',
@@ -28,6 +28,6 @@ export default function SquareToRound({ className, children }: SquareToRoundProp
       }}
     >
       {children}
-    </Motion.div>
+    </motion.div>
   );
 }

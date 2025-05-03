@@ -1,10 +1,10 @@
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import { generateChanneImagelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import {
   STREAM_STATUS_MAPPER,
   TChannelDocumentWithoutId,
   TParsedClientContent,
-} from '@/types/api/mongoDB';
+} from '@/libraries/mongodb/type';
+import { generateChanneImagelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import FasStar from '@icons/fa-solid/Star';
 import IonPerson from '@icons/ion/Person';
 import IonPlus from '@icons/ion/PlusRound';

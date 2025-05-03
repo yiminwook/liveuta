@@ -1,6 +1,6 @@
 'use client';
-import { Setlist } from '@/libraries/oracleDB/setlist/service';
-import { TChannelDocumentWithoutId } from '@/types/api/mongoDB';
+import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
+import { Setlist } from '@/libraries/oracledb/setlist/service';
 import { ReactNode, createContext, use, useMemo, useState } from 'react';
 
 type SetlistDrawerActionContext = {

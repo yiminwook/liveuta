@@ -1,4 +1,5 @@
-import Motion from '@/libraries/framer';
+'use client';
+import { motion } from 'framer-motion';
 
 const colors = ['#22238f', '#6b45fa', '#ca3286', '#fe2b49', '#fe652d'];
 
@@ -24,7 +25,7 @@ const dotVariants = {
 
 export default function Wave({ count = 5 }) {
   return (
-    <Motion.div
+    <motion.div
       variants={containerVariants}
       initial="initial"
       animate="animate"
@@ -39,7 +40,7 @@ export default function Wave({ count = 5 }) {
         .fill(null)
         .map((_, index) => {
           return (
-            <Motion.div
+            <motion.div
               key={index}
               variants={dotVariants}
               style={{
@@ -51,6 +52,6 @@ export default function Wave({ count = 5 }) {
             />
           );
         })}
-    </Motion.div>
+    </motion.div>
   );
 }

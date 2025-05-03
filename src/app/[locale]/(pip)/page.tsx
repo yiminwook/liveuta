@@ -1,7 +1,7 @@
 import { serverApi } from '@/apis/fetcher';
 import Footer from '@/components/common/Footer';
 import { CHANNELS_TAG, METADATAS_TAG } from '@/constants/revalidateTag';
-import { TYChannelReturn } from '@/libraries/mongoDB/channels';
+import { TYChannelReturn } from '@/libraries/mongodb/channels';
 import { TMetadata } from '@/types';
 import Client from './page.client';
 

@@ -7,7 +7,7 @@ import { SETLIST_PAGE_SIZE } from '@/constants';
 import { SETLISTS_TAG } from '@/constants/revalidateTag';
 import useCachedData from '@/hooks/useCachedData';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import type { Setlist } from '@/libraries/oracleDB/setlist/service';
+import type { Setlist } from '@/libraries/oracledb/setlist/service';
 import type { GetSetlistRes } from '@/types/api/setlist';
 import { Pagination, Table } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
