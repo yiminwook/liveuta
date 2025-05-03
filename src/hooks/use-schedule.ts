@@ -1,16 +1,18 @@
 import { clientApi } from '@/apis/fetcher';
-import { SCHEDULE_CACHE_TIME } from '@/constants';
-import { SCHEDULES_TAG } from '@/constants/revalidateTag';
+import { SCHEDULE_CACHE_TIME, SCROLL_PER_YOUTUBE_CARD } from '@/constants';
+import { SCHEDULES_TAG } from '@/constants/revalidate-tag';
 import dayjs from '@/libraries/dayjs';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { TParsedClientContent } from '@/libraries/mongodb/type';
 import { StreamFilter } from '@/types';
 import { TGetScheduleResponse } from '@/types/api/schedule';
+import { waitfor } from '@/utils/helper';
 import { replaceParentheses } from '@/utils/regexp';
 import { getInterval } from '@/utils/time';
-import { UseQueryResult, useQuery } from '@tanstack/react-query';
-import { useAutoSync } from './useStorage';
+import { UseQueryResult, useIsFetching, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMemo, useState } from 'react';
+import { useAutoSync } from './use-storage';
 
 export function useScheduleQuery(arg: {
   filter: StreamFilter;
@@ -113,3 +115,41 @@ export function useScheduleQuery(arg: {
 
   return query;
 }
+
+export const useInfiniteScheduleData = ({ rawData }: { rawData: TParsedClientContent[] }) => {
+  const [scrollPage, setScrollPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const maxPage = Math.ceil(rawData.length / SCROLL_PER_YOUTUBE_CARD);
+  const isDone = scrollPage >= maxPage;
+
+  const handleInfinityScroll = async () => {
+    if (isLoading || isDone) return;
+    setIsLoading(() => true);
+
+    await waitfor(500); // 성능 최적화를 위한 딜레이
+
+    setScrollPage((pre) => pre + 1);
+    setIsLoading(() => false);
+  };
+
+  const loadContents = useMemo(
+    () => rawData.slice(0, SCROLL_PER_YOUTUBE_CARD * scrollPage),
+    [rawData, scrollPage],
+  );
+
+  return {
+    handleInfinityScroll,
+    loadContents,
+    isLoading,
+  };
+};
+
+/** query observer가 없을때 undefined 반환 */
+export const useScheduleStatus = () => {
+  'use no memo';
+  const queryClient = useQueryClient();
+  useIsFetching({ queryKey: [SCHEDULES_TAG] }); //리랜더링용
+
+  return queryClient.getQueryState([SCHEDULES_TAG])?.status;
+};

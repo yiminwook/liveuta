@@ -1,7 +1,7 @@
 'use client';
 import { clientApi } from '@/apis/fetcher';
 import TimelineText from '@/components/common/TimestampText';
-import { SETLISTS_TAG } from '@/constants/revalidateTag';
+import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import { useTranslations } from '@/libraries/i18n/client';
 import { useSetPlayerStore } from '@/stores/player';
 import { Button, Textarea } from '@mantine/core';

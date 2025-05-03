@@ -1,5 +1,5 @@
 import { clientApi } from '@/apis/fetcher';
-import { BLACKLIST_TAG } from '@/constants/revalidateTag';
+import { BLACKLIST_TAG } from '@/constants/revalidate-tag';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Session } from 'next-auth';
 import { toast } from 'sonner';

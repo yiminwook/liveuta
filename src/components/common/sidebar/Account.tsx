@@ -1,6 +1,6 @@
 'use client';
 import { withSession } from '@/components/common/authorization/withSession';
-import useStopPropagation from '@/hooks/useStopPropagation';
+import useStopPropagation from '@/hooks/use-stop-propagation';
 import { useLocale, usePathname } from '@/libraries/i18n/client';
 import { useAppCtx } from '@/stores/app';
 import { Avatar, CloseButton } from '@mantine/core';

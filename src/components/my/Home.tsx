@@ -1,5 +1,5 @@
 'use client';
-import useCachedData from '@/hooks/useCachedData';
+import useCachedData from '@/hooks/use-cached-data';
 import { useTranslations } from '@/libraries/i18n/client';
 import FasStar from '@icons/fa-solid/Star';
 import MdiBlock from '@icons/mdi/Block';

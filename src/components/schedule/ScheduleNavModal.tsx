@@ -1,6 +1,6 @@
 import SearchInput from '@/components/common/input/SearchInput';
 import Modal from '@/components/common/modal/Modal';
-import { useTransition } from '@/hooks/useTransition';
+import { useTransition } from '@/hooks/use-transition';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { ModalProps, useSetModalStore } from '@/stores/modal';

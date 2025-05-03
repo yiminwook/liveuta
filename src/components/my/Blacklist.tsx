@@ -1,5 +1,5 @@
 'use client';
-import useDeleteBlacklist from '@/hooks/useDeleteBlacklist';
+import useDeleteBlacklist from '@/hooks/use-delete-blacklist';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
 import { generateChanneImagelUrl } from '@/libraries/youtube/url';

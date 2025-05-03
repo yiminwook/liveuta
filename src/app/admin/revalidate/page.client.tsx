@@ -1,6 +1,6 @@
 'use client';
 import { revalidateApi } from '@/apis/fetcher';
-import { CHANNELS_TAG, FEATURED_TAG, METADATAS_TAG } from '@/constants/revalidateTag';
+import { CHANNELS_TAG, FEATURED_TAG, METADATAS_TAG } from '@/constants/revalidate-tag';
 import { Box, Button, Divider, Text } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';

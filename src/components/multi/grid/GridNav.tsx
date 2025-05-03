@@ -1,5 +1,5 @@
-import useCachedData from '@/hooks/useCachedData';
-import { useScheduleQuery } from '@/hooks/useSchedule';
+import useCachedData from '@/hooks/use-cached-data';
+import { useScheduleQuery } from '@/hooks/use-schedule';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { StreamFilter } from '@/types';

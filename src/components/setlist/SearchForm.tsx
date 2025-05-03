@@ -1,5 +1,5 @@
 'use client';
-import { SETLISTS_TAG } from '@/constants/revalidateTag';
+import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import IonSearch from '@icons/ion/IosSearch';
 import TbX from '@icons/tabler/X';

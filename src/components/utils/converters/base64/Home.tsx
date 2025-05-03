@@ -2,7 +2,7 @@
 import ClearButton from '@/components/common/button/ClearButton';
 import CopyButton from '@/components/common/button/CopyButton';
 import PasteButton from '@/components/common/button/PasteButton';
-import { useDebounce } from '@/hooks/useDebounce';
+import { useDebounce } from '@/hooks/use-debounce';
 import { useTranslations } from '@/libraries/i18n/client';
 import { MdiSwapVertical } from '@icons/mdi/swap-vertical';
 import { ActionIcon, NumberInput, Switch, Textarea, Tooltip } from '@mantine/core';

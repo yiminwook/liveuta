@@ -1,6 +1,6 @@
 'use client';
 import { clientApi } from '@/apis/fetcher';
-import { SETLISTS_TAG } from '@/constants/revalidateTag';
+import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import { useMount } from '@/hooks/use-mount';
 import dayjs from '@/libraries/dayjs';
 import { Link } from '@/libraries/i18n';

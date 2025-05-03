@@ -1,7 +1,7 @@
 'use client';
 import { clientApi } from '@/apis/fetcher';
-import { MEMBER_TAG } from '@/constants/revalidateTag';
-import useScheduleStatus from '@/hooks/useScheduleStatus';
+import { MEMBER_TAG } from '@/constants/revalidate-tag';
+import { useScheduleStatus } from '@/hooks/use-schedule';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { TMemberInfo } from '@/libraries/oracledb/auth/service';

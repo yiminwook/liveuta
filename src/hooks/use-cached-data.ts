@@ -1,6 +1,6 @@
 'use client';
 import { clientApi } from '@/apis/fetcher';
-import { BLACKLIST_TAG, CHANNELS_TAG, WHITELIST_TAG } from '@/constants/revalidateTag';
+import { BLACKLIST_TAG, CHANNELS_TAG, WHITELIST_TAG } from '@/constants/revalidate-tag';
 import { TGetChannelRes } from '@api/v1/channel/route';
 import { useQueries } from '@tanstack/react-query';
 import { Session } from 'next-auth';

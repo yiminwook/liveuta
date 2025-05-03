@@ -1,25 +1,26 @@
 import { clientApi } from '@/apis/fetcher';
-import { WHITELIST_TAG } from '@/constants/revalidateTag';
+import { WHITELIST_TAG } from '@/constants/revalidate-tag';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Session } from 'next-auth';
 import { toast } from 'sonner';
 
-export default function useMutateWhitelist() {
+export default function usePostWhitelist() {
   const queryClient = useQueryClient();
-  return useMutation({
+
+  const mutation = useMutation({
     mutationFn: async ({ session, channelId }: { session: Session; channelId: string }) => {
-      const json = await clientApi
-        .delete<{ message: string; data: string }>(`v1/whitelist/${channelId}`, {
+      const response = await clientApi
+        .post<{ message: string; data: string }>(`v1/whitelist/${channelId}`, {
           headers: { Authorization: `Bearer ${session.user.accessToken}` },
         })
         .json();
-      return json;
+      return response;
     },
     onSuccess: (res) => {
       toast.success(res.message);
       if (queryClient.getQueryData([WHITELIST_TAG])) {
         queryClient.setQueryData([WHITELIST_TAG], (prev: string[]) => {
-          return prev.filter((id) => id !== res.data);
+          return [...prev, res.data];
         });
       }
     },
@@ -28,4 +29,6 @@ export default function useMutateWhitelist() {
       queryClient.invalidateQueries({ queryKey: [WHITELIST_TAG] });
     },
   });
+
+  return mutation;
 }

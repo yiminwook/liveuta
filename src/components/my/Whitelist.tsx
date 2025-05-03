@@ -1,5 +1,5 @@
 'use client';
-import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
+import useMutateWhitelist from '@/hooks/use-delete-whitelist';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
 import { generateChanneImagelUrl } from '@/libraries/youtube/url';

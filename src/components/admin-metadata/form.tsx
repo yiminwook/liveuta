@@ -1,5 +1,5 @@
 import { clientApi, revalidateApi } from '@/apis/fetcher';
-import { METADATAS_TAG } from '@/constants/revalidateTag';
+import { METADATAS_TAG } from '@/constants/revalidate-tag';
 import { TMetadata } from '@/types';
 import { TUpdateMetadataDto } from '@/types/dto';
 import { Box, Button, Flex, LoadingOverlay, TextInput } from '@mantine/core';

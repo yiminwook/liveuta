@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Mutate, StoreApi } from 'zustand';
+import 'zustand/middleware';
 
 type StoreWithPersist<T> = Mutate<StoreApi<T>, [['zustand/persist', any]]>;
 

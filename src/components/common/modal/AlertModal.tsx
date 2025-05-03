@@ -1,4 +1,4 @@
-import { useTransition } from '@/hooks/useTransition';
+import { useTransition } from '@/hooks/use-transition';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { ModalProps } from '@/stores/modal';

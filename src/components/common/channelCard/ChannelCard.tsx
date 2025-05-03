@@ -1,8 +1,8 @@
 'use client';
 import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
-import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
-import usePostWhitelist from '@/hooks/usePostWhitelist';
+import useMutateWhitelist from '@/hooks/use-delete-whitelist';
+import usePostWhitelist from '@/hooks/use-post-whitelist';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { useSetModalStore } from '@/stores/modal';
 import { TYChannelsData } from '@/types/api/youtube';

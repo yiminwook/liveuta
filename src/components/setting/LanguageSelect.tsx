@@ -1,6 +1,6 @@
 'use client';
 import For from '@/components/common/utils/For';
-import { siteConfig } from '@/constants/siteConfig';
+import { siteConfig } from '@/constants/site-config';
 import { usePathname, useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { useRouter, useSearchParams } from 'next/navigation';

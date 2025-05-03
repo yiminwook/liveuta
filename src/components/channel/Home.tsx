@@ -1,7 +1,7 @@
 import { serverApi } from '@/apis/fetcher';
 import Background from '@/components/common/background/Background';
 import { ITEMS_PER_PAGE } from '@/constants';
-import { CHANNELS_TAG } from '@/constants/revalidateTag';
+import { CHANNELS_TAG } from '@/constants/revalidate-tag';
 import { TChannelDto, TYChannelReturn } from '@/libraries/mongodb/channels';
 import css from './Home.module.scss';
 import Nav from './Nav';

@@ -1,6 +1,6 @@
 'use client';
-import { siteConfig } from '@/constants/siteConfig';
-import { useAutoSync } from '@/hooks/useStorage';
+import { siteConfig } from '@/constants/site-config';
+import { useAutoSync } from '@/hooks/use-storage';
 import { useTranslations } from '@/libraries/i18n/client';
 import { Radio, Switch } from '@mantine/core';
 import css from './AutoSync.module.scss';

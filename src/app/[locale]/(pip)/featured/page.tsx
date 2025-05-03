@@ -1,5 +1,5 @@
 import { serverApi } from '@/apis/fetcher';
-import { FEATURED_TAG } from '@/constants/revalidateTag';
+import { FEATURED_TAG } from '@/constants/revalidate-tag';
 import { TFeaturedDataAPIReturn } from '@/libraries/mongodb/type';
 import Client from './page.client';
 

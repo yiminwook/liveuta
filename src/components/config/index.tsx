@@ -1,6 +1,6 @@
 import { getCookies } from '@/apis/cached';
 import { serverApi } from '@/apis/fetcher';
-import { METADATAS_TAG } from '@/constants/revalidateTag';
+import { METADATAS_TAG } from '@/constants/revalidate-tag';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { Promised, TMetadata } from '@/types';
 import CommandMenu from '../common/command/CommandMenu';

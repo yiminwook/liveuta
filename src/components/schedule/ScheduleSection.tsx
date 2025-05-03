@@ -1,9 +1,9 @@
 'use client';
-import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
-import useInfiniteScheduleData from '@/hooks/useInfiniteScheduleData';
-import usePostBlacklist from '@/hooks/usePostBlacklist';
-import usePostWhitelist from '@/hooks/usePostWhitelist';
-import useReservePush from '@/hooks/useReservePush';
+import useMutateWhitelist from '@/hooks/use-delete-whitelist';
+import usePostBlacklist from '@/hooks/use-post-blacklist';
+import usePostWhitelist from '@/hooks/use-post-whitelist';
+import useReservePush from '@/hooks/use-reserve-push';
+import { useInfiniteScheduleData } from '@/hooks/use-schedule';
 import { Link } from '@/libraries/i18n';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TChannelDocumentWithoutId, TParsedClientContent } from '@/libraries/mongodb/type';

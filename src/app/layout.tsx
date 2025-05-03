@@ -1,4 +1,4 @@
-import { DEFAULT_METADATA } from '@/constants/metaData';
+import { DEFAULT_METADATA } from '@/constants/meta-data';
 import { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 

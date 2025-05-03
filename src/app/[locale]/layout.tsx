@@ -6,7 +6,7 @@ import BottomTab from '@/components/common/bottomTab/BottomTab';
 import Header from '@/components/common/header/Header';
 import AccountSidebar from '@/components/common/sidebar/Account';
 import Document from '@/components/config/Document';
-import { CHANNELS_TAG } from '@/constants/revalidateTag';
+import { CHANNELS_TAG } from '@/constants/revalidate-tag';
 import { FALLBACK_LANG, LANGUAGES } from '@/libraries/i18n/config';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { TGetChannelRes } from '@api/v1/channel/route';

@@ -1,5 +1,5 @@
 import { clientApi } from '@/apis/fetcher';
-import { METADATAS_TAG } from '@/constants/revalidateTag';
+import { METADATAS_TAG } from '@/constants/revalidate-tag';
 import { TMetadata } from '@/types';
 import { Button, Skeleton, Table } from '@mantine/core';
 import { QueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query';

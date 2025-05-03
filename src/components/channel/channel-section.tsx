@@ -1,7 +1,7 @@
 'use client';
 import Nodata from '@/components/common/Nodata';
 import ChannelCard from '@/components/common/channelCard/ChannelCard';
-import useCachedData from '@/hooks/useCachedData';
+import useCachedData from '@/hooks/use-cached-data';
 import { useLocale } from '@/libraries/i18n/client';
 import { TYChannelsData } from '@/types/api/youtube';
 import { useSession } from 'next-auth/react';

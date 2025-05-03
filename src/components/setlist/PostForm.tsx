@@ -1,6 +1,6 @@
 'use client';
 import { clientApi } from '@/apis/fetcher';
-import { SETLISTS_TAG } from '@/constants/revalidateTag';
+import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import { useTranslations } from '@/libraries/i18n/client';
 import { Button, TextInput, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';

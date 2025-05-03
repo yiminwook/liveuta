@@ -1,10 +1,10 @@
 'use client';
 import RankingTable from '@/components/featured/RankingTable';
+import useCachedData from '@/hooks/use-cached-data';
+import useMutateWhitelist from '@/hooks/use-delete-whitelist';
 import { useMount } from '@/hooks/use-mount';
-import useCachedData from '@/hooks/useCachedData';
-import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
-import usePostBlacklist from '@/hooks/usePostBlacklist';
-import usePostWhitelist from '@/hooks/usePostWhitelist';
+import usePostBlacklist from '@/hooks/use-post-blacklist';
+import usePostWhitelist from '@/hooks/use-post-whitelist';
 import dayjs from '@/libraries/dayjs';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TFeaturedDataAPIReturn } from '@/libraries/mongodb/type';
