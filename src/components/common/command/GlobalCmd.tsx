@@ -23,8 +23,7 @@ export default function GlobalCmd({ locale }: Props) {
 
   const onLanguageChange = (selectedLocale: TLocaleCode) => {
     if (locale === selectedLocale) return;
-    console.log(`/${selectedLocale}${pathname}?${searchParams.toString()}`);
-    router.replace(`/${selectedLocale}${pathname}?${searchParams.toString()}`);
+    window.location.href = `/${selectedLocale}${pathname}?${searchParams.toString()}`;
   };
 
   useEffect(() => {
