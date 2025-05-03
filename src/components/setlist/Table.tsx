@@ -51,7 +51,7 @@ export default function SetlistTable({ session, searchParams }: TableProps) {
       const json = await clientApi
         .get<GetSetlistRes>(`v1/setlist?${query.toString()}`, {
           headers: {
-            Authorization: `Bearer ${session?.user.accessToken}`,
+            Authorization: session ? `Bearer ${session.user.accessToken}` : '',
           },
         })
         .json();

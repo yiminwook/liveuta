@@ -27,7 +27,7 @@ const useCachedData = ({ session }: LayoutDataObserverProps) => {
         queryFn: () =>
           clientApi
             .get<{ message: string; data: string[] }>('v1/blacklist', {
-              headers: { Authorization: `Bearer ${session?.user.accessToken}` },
+              headers: { Authorization: session ? `Bearer ${session.user.accessToken}` : '' },
             })
             .json()
             .then((json) => json.data),
@@ -39,7 +39,7 @@ const useCachedData = ({ session }: LayoutDataObserverProps) => {
         queryFn: () =>
           clientApi
             .get<{ message: string; data: string[] }>('v1/whitelist', {
-              headers: { Authorization: `Bearer ${session?.user.accessToken}` },
+              headers: { Authorization: session ? `Bearer ${session.user.accessToken}` : '' },
             })
             .json()
             .then((json) => json.data),

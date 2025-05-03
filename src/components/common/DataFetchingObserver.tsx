@@ -29,7 +29,7 @@ export default function DataFetchingObserver({ locale }: Props) {
     queryFn: () =>
       clientApi
         .get<{ data: TMemberInfo }>('v1/member', {
-          headers: { Authorization: `Bearer ${session?.user.accessToken}` },
+          headers: { Authorization: session ? `Bearer ${session.user.accessToken}` : '' },
         })
         .json()
         .then((json) => json.data),
