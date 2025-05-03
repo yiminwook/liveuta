@@ -27,7 +27,8 @@ export function useScheduleQuery(arg: {
 }>;
 export function useScheduleQuery(arg: {
   filter?: StreamFilter;
-  enableAutoSync: boolean; //유저설정과 관계없이 페이지별로 설정옵션
+  /** 유저설정과 관계없이 페이지별로 설정옵션 */
+  enableAutoSync: boolean;
   locale: TLocaleCode;
 }) {
   const { isActive, refreshInterval } = useAutoSync(); //유저설정
@@ -88,14 +89,16 @@ export function useScheduleQuery(arg: {
         }),
     select: (data) => {
       switch (arg?.filter) {
+        case StreamFilter.scheduled:
+          return data.scheduled;
         case StreamFilter.live:
-          return [...data.live];
+          return data.live;
         case StreamFilter.all:
-          return [...data.all];
+          return data.all;
         case StreamFilter.daily:
-          return [...data.daily];
+          return data.daily;
         default:
-          return { ...data };
+          return data;
       }
     },
     staleTime: SCHEDULE_CACHE_TIME, // 페이지 이동시 SCHEDULE_CACHE_TIME 동안은 캐시를 사용, data-fetching이 발생하지 않음

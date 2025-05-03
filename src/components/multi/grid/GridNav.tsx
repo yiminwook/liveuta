@@ -40,7 +40,7 @@ export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
   const [newUrl, setNewUrl] = useState('');
 
   const { blackListMap, channelMap } = useCachedData({ session });
-  const { data, isPending } = useScheduleQuery({ enableAutoSync: true, locale });
+  const { data, isPending } = useScheduleQuery({ filter, enableAutoSync: true, locale });
 
   const onChangeUrl = (e: ChangeEvent<HTMLInputElement>) => {
     setNewUrl(() => e.target.value);
@@ -63,7 +63,7 @@ export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
   const proceedScheduleData = useMemo(() => {
     if (!data) return [];
 
-    const filteredContent = data[filter].filter((content) => {
+    const filteredContent = data.filter((content) => {
       const inBlacklist = blackListMap.has(content.channelId);
 
       let isPassList: boolean;

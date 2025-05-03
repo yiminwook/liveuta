@@ -6,7 +6,7 @@ export const getInterval = (scheduledTimeStamp: Date): string => {
   const nowTimeStamp = dayjs();
 
   /** 분 */
-  const interval = Math.trunc((utcTime.diff(nowTimeStamp, 'minute') / 60) * 100) / 100;
+  const interval = utcTime.diff(nowTimeStamp, 'minute');
 
   if (interval < 0) {
     return '';

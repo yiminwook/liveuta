@@ -27,7 +27,11 @@ export default function Home({ scheduleDto }: HomeProps) {
 
   const { data: session } = useSession();
   const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
-  const { data, isPending } = useScheduleQuery({ enableAutoSync: true, locale });
+  const { data, isPending } = useScheduleQuery({
+    filter: scheduleDto.filter,
+    enableAutoSync: true,
+    locale,
+  });
 
   const { addCmdGroup, removeCmdGroup } = useCmdActions();
 
@@ -49,7 +53,7 @@ export default function Home({ scheduleDto }: HomeProps) {
     let allCount = 0;
     let videoCount = 0;
 
-    const filteredContent = data[scheduleDto.filter].filter((content) => {
+    const filteredContent = data.filter((content) => {
       const channelNames = channelMap[content.channelId]?.names?.join(' ') || '';
       if (!queryReg.test(channelNames)) return false;
       const inBlacklist = blackListMap.has(content.channelId);
