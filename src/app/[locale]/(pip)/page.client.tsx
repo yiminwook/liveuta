@@ -142,6 +142,23 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
         </div>
       </section>
 
+      {session && !isPending && (
+        <section className={css.favoriteSection}>
+          <div className={css.favoriteNav}>
+            <h2>🌟 {t('home.favorite')}</h2>
+            <MoreButton component={Link} locale={locale} href="/schedule?isFavorite=true" />
+          </div>
+          <ScheduleSlider
+            contents={proceedScheduleData.favoriteContent}
+            channelMap={channelMap}
+            addAlarm={reservePush}
+            openNewTab={openStream}
+            addBlock={handleBlock}
+            toggleFavorite={handleFavorite}
+          />
+        </section>
+      )}
+
       <section className={css.liveSection}>
         <div className={css.liveNav}>
           <h2>
@@ -159,23 +176,6 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
           isLoading={isPending}
         />
       </section>
-
-      {session && !isPending && (
-        <section className={css.favoriteSection}>
-          <div className={css.favoriteNav}>
-            <h2>🌟 {t('home.favorite')}</h2>
-            <MoreButton component={Link} locale={locale} href="/schedule?isFavorite=true" />
-          </div>
-          <ScheduleSlider
-            contents={proceedScheduleData.favoriteContent}
-            channelMap={channelMap}
-            addAlarm={reservePush}
-            openNewTab={openStream}
-            addBlock={handleBlock}
-            toggleFavorite={handleFavorite}
-          />
-        </section>
-      )}
 
       <section className={css.searchSection}>
         <div className={css.searchNav}>
