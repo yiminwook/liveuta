@@ -1,4 +1,6 @@
 'use client';
+import { Link } from '@/libraries/i18n';
+import { useLocale } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
 import { IcBaselineMonitor } from '@icons/material-symbols/BaselineMonitor';
 import { ActionIcon } from '@mantine/core';
@@ -6,7 +8,6 @@ import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import MobileNavButton from './MobileNavButton';
 import NavTab from './NavTab';
@@ -28,11 +29,12 @@ export default function ScheduleNav({ session, scheduleDto, length }: NavSection
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
   const searchParams = useSearchParams();
   const router = useRouter(); // transition 예외처리
+  const locale = useLocale();
 
   const clickFavorite = () => {
     const query = new URLSearchParams(searchParams);
     query.set('isFavorite', String(!scheduleDto.isFavorite));
-    router.push(`/schedule?${query.toString()}`);
+    router.push(`/${locale}/schedule?${query.toString()}`);
   };
 
   return (
@@ -47,6 +49,7 @@ export default function ScheduleNav({ session, scheduleDto, length }: NavSection
             className={css.multiLink}
             component={Link}
             href="/multi"
+            locale={locale}
             w={40}
             h={40}
             variant="default"

@@ -3,32 +3,32 @@ import Background from '@/components/common/background/Background';
 import PostBox from '@/components/dev/PostBox';
 import TokenBox from '@/components/dev/TokenBox';
 import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TToken } from '@/types';
 import cx from 'classnames';
-import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import css from './Home.module.scss';
 
 export default function Home() {
-  const t = useTranslations('dev');
+  const { t } = useTranslations();
   const [token, setToken] = useState<TToken>(null);
-  const [permission, setPermission] = useState(t('initialPermission'));
+  const [permission, setPermission] = useState(t('dev.initialPermission'));
 
   const handleSetToken = async () => {
     try {
       const token = await generateFcmToken();
 
       if (token === undefined) {
-        throw new Error(t('noBrowserNotificationError'));
+        throw new Error(t('dev.noBrowserNotificationError'));
       }
-      setPermission(() => t('permissionGranted'));
+      setPermission(() => t('dev.permissionGranted'));
       setToken(() => token);
       return true;
     } catch (error) {
       console.error(error);
       const message = error instanceof Error ? error.message : 'Unknown Error';
-      setPermission(() => t('permissionDenied'));
+      setPermission(() => t('dev.permissionDenied'));
       setToken(() => undefined);
       toast.error(message);
       return false;
@@ -38,7 +38,7 @@ export default function Home() {
   const requerstPermission = async () => {
     const result = await handleSetToken();
     if (result) {
-      toast.success(t('browserNotificationAllowed'));
+      toast.success(t('dev.browserNotificationAllowed'));
     }
   };
 
@@ -49,7 +49,7 @@ export default function Home() {
         return Notification.permission;
       } catch (error) {
         console.error(error);
-        return t('permissionDenied');
+        return t('dev.permissionDenied');
       }
     });
 
@@ -61,15 +61,15 @@ export default function Home() {
       <section className={css.wrap}>
         <div className={cx(css.box, css.permissionBox)}>
           <div>
-            {t('browserNotification')}: <b>{permission}</b>
+            {t('dev.browserNotification')}: <b>{permission}</b>
           </div>
           <button className={css.button} data-variant="request" onClick={requerstPermission}>
-            {t('request')}
+            {t('dev.request')}
           </button>
         </div>
         <div className={cx(css.box)}>
           <label className={css.tokenLabel} htmlFor="token">
-            {t('token')}
+            {t('dev.token')}
           </label>
           <div className={css.tokenBox}>
             <TokenBox token={token} />

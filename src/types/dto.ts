@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { StreamFilter } from './index';
 
 export const homeDto = z.object({
   coverImgUrl: z.string().url(),
@@ -11,9 +12,9 @@ export const scheduleDto = z.object({
     .nullish()
     .transform((v) => v || ''),
   filter: z
-    .enum(['scheduled', 'live', 'daily', 'all'])
+    .nativeEnum(StreamFilter)
     .nullish()
-    .transform((v) => v || 'scheduled'),
+    .transform((v) => v || StreamFilter.scheduled),
   select: z
     .enum(['all', 'video', 'stream'])
     .nullish()

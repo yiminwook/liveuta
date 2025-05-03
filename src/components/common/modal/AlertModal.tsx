@@ -1,14 +1,16 @@
 import { useTransition } from '@/hooks/useTransition';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { ModalProps } from '@/stores/modal';
 import { Button } from '@mantine/core';
 import classNames from 'classnames';
-import { useTranslations } from 'next-intl';
 import Modal from './Modal';
 import css from './Modal.module.scss';
 
 type AletModalProp = {
   title?: string;
   message: string;
+  locale: TLocaleCode;
 };
 
 const ALERT_MODAL_ID = 'alertModal';
@@ -17,8 +19,9 @@ export default function AlertModal({
   title = 'Alert',
   message,
   onClose,
+  locale,
 }: ModalProps<AletModalProp>) {
-  const t = useTranslations('global.modal.alertModal');
+  const { t } = useTranslations();
   const { modifier, onAnimationEnd, exit } = useTransition();
 
   const onCloseWithExit = () => {
@@ -35,7 +38,7 @@ export default function AlertModal({
     >
       <div className={css.content}>{message}</div>
       <div className={css.btnBox}>
-        <Button onClick={onCloseWithExit}>{t('confirm')}</Button>
+        <Button onClick={onCloseWithExit}>{t('global.modal.alertModal.confirm')}</Button>
       </div>
     </Modal>
   );

@@ -2,11 +2,8 @@ import path from 'node:path';
 import NextBundleAnalyzer from '@next/bundle-analyzer';
 import { SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
-import createNextIntlPlugin from 'next-intl/plugin';
 
 // const isDevelopment = process.env.NODE_ENV !== 'production';
-
-const withNextIntl = createNextIntlPlugin();
 
 const withBundleAnalyzer = NextBundleAnalyzer({
   enabled: process.env.NODE_ENV === 'production',
@@ -80,6 +77,28 @@ const nextConfig: NextConfig = {
     ];
   },
   webpack: (config, { isServer }) => {
+    /**
+     * oracledb
+     * These packages need to be added as external, else Oracle DB will try to load them due to a
+     * Webpack bug.
+     *
+     * https://github.com/oracle/node-oracledb/issues/1691
+     *
+     * See these two issues for more information:
+     * - https://github.com/oracle/node-oracledb/issues/1688
+     * - https://github.com/oracle/node-oracledb/issues/1691
+     **/
+    config.externals.push(
+      ...[
+        '@azure/app-configuration',
+        '@azure/identity',
+        '@azure/keyvault-secrets',
+        'oci-common',
+        'oci-objectstorage',
+        'oci-secrets',
+      ],
+    );
+
     /** SVGR **/
     const fileLoaderRule = config.module.rules.find((rule: any) => rule.test?.test?.('.svg'));
     fileLoaderRule.exclude = /\.svg$/i;
@@ -97,6 +116,7 @@ const nextConfig: NextConfig = {
       },
     );
 
+    /** msw **/
     if (isServer) {
       // next server build => ignore msw/browser
       if (Array.isArray(config.resolve.alias)) {
@@ -139,4 +159,4 @@ const SENTRY_BUILD_OPTIONS: SentryBuildOptions = {
   },
 };
 
-export default withSentryConfig(withBundleAnalyzer(withNextIntl(nextConfig)), SENTRY_BUILD_OPTIONS);
+export default withSentryConfig(withBundleAnalyzer(nextConfig), SENTRY_BUILD_OPTIONS);

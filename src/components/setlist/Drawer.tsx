@@ -8,7 +8,6 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/common/Vaul';
-import Link from 'next/link';
 import css from './Drawer.module.scss';
 import { useDrawer, useDrawerActions } from './DrawerContext';
 
@@ -22,9 +21,9 @@ export default function Setlist() {
         <DrawerHeader className={css.header}>
           <DrawerTitle>{drawer.setlist?.title}</DrawerTitle>
           <DrawerDescription>
-            <Link href={`https://youtu.be/${drawer.setlist?.videoId}`}>
+            <a href={`https://youtu.be/${drawer.setlist?.videoId}`}>
               https://youtu.be/{drawer.setlist?.videoId}
-            </Link>
+            </a>
           </DrawerDescription>
           <div className={css.description}>
             <div className={css.thumbnailBox}>

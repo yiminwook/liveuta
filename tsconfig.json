@@ -17,7 +17,7 @@
     "types": ["@types/gtag.js"],
     "paths": {
       "@variable": ["./src/styles/variable.module.scss"],
-      "@web/*": ["./src/app/(web)/*"],
+      "@web/*": ["./src/app/[locale]/*"],
       "@api/*": ["./src/app/api/*"],
       "@icons/*": ["./src/components/icons/*"],
       "@/*": ["./src/*"],

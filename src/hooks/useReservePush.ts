@@ -1,12 +1,12 @@
 import { clientApi } from '@/apis/fetcher';
 import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
+import { useTranslations } from '@/libraries/i18n/client';
 import { generateThumbnail } from '@/libraries/youtube/url';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { TChannelData, TContentData } from '@/types/api/mongoDB';
+import { TChannelDocumentWithoutId, TParsedClientContent } from '@/types/api/mongoDB';
 import { gtagClick } from '@/utils/gtag';
 import { PushData } from '@api/push/route';
 import { useMutation } from '@tanstack/react-query';
-import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 export type TReservePushArgs = {
@@ -20,7 +20,8 @@ export type TReservePushArgs = {
 };
 
 const useReservePush = () => {
-  const t = useTranslations();
+  const { t } = useTranslations();
+
   const mutatePush = useMutation({
     mutationFn: async (arg: TReservePushArgs) => {
       const data: PushData = {
@@ -59,7 +60,10 @@ const useReservePush = () => {
     },
   });
 
-  const reservePush = async (content: TContentData, channel: TChannelData | undefined) => {
+  const reservePush = async (
+    content: TParsedClientContent,
+    channel: TChannelDocumentWithoutId | undefined,
+  ) => {
     if (mutatePush.isPending) return;
     const token = await generateFcmToken();
 
@@ -71,7 +75,7 @@ const useReservePush = () => {
       title: t('hooks.useReservePush.title'),
       body: `${t('hooks.useReservePush.body', { channelName: channel?.name_kor || '' })}`,
       token,
-      timestamp: content.timestamp.toString(),
+      timestamp: content.utcTime.toString(),
       imageUrl: generateThumbnail(content.videoId, 'mqdefault'),
       link: generateVideoUrl(content.videoId),
       channelName: channel?.name_kor || '',

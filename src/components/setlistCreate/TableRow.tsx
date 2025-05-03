@@ -1,4 +1,5 @@
 'use client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { hmsToString } from '@/utils/getTime';
 import CodiconClearAll from '@icons/codicon/ClearAll';
 import TbClipboard from '@icons/tabler/Clipboard';
@@ -7,7 +8,6 @@ import TbGripVertical from '@icons/tabler/GripVertical';
 import TbX from '@icons/tabler/X';
 import { ActionIcon, Checkbox, Popover, TextInput, UnstyledButton } from '@mantine/core';
 import { Reorder, useDragControls } from 'framer-motion';
-import { useTranslations } from 'next-intl';
 import type { PointerEvent } from 'react';
 import { SetlistItem, copy, useSetlistActions } from './Context';
 import css from './Table.module.scss';
@@ -17,9 +17,9 @@ type TableRowProps = {
 };
 
 export default function TableRow({ item }: TableRowProps) {
+  const { t } = useTranslations();
   const dragControls = useDragControls();
   const { removeItem, setItemChecked, setItemTime, setItemValue } = useSetlistActions();
-  const t = useTranslations('setlistCreate.table');
 
   function handleGripPointerDown(e: PointerEvent<HTMLDivElement>) {
     e.preventDefault();
@@ -45,7 +45,7 @@ export default function TableRow({ item }: TableRowProps) {
             <Popover.Dropdown>
               <div className={css.timePopover}>
                 <label className={css.timeInput}>
-                  <span>{t('hour')}</span>
+                  <span>{t('setlistCreate.table.hour')}</span>
                   <input
                     value={item.time.h}
                     type="number"
@@ -60,7 +60,7 @@ export default function TableRow({ item }: TableRowProps) {
                   />
                 </label>
                 <label className={css.timeInput}>
-                  <span>{t('minute')}</span>
+                  <span>{t('setlistCreate.table.minute')}</span>
                   <input
                     value={item.time.m}
                     type="number"
@@ -75,7 +75,7 @@ export default function TableRow({ item }: TableRowProps) {
                   />
                 </label>
                 <label className={css.timeInput}>
-                  <span>{t('second')}</span>
+                  <span>{t('setlistCreate.table.second')}</span>
                   <input
                     value={item.time.s}
                     type="number"

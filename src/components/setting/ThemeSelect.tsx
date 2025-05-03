@@ -1,7 +1,7 @@
 'use client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { useAppCtx } from '@/stores/app';
 import { TTheme } from '@/types';
-import { useTranslations } from 'next-intl';
 import { MouseEvent } from 'react';
 import { useStore } from 'zustand';
 import settingCss from './Setting.module.scss';
@@ -23,7 +23,7 @@ function ThemeModalButton({ primaryColor, secondaryColor }: ThemeModalButtonProp
 }
 
 export default function ThemeSelect() {
-  const t = useTranslations('settings.theme');
+  const { t } = useTranslations();
   const appCtx = useAppCtx();
   const setTheme = useStore(appCtx, (state) => state.actions.setTheme);
 
@@ -39,7 +39,7 @@ export default function ThemeSelect() {
 
   return (
     <div className={settingCss.wrap}>
-      <label className={settingCss.settingLabel}>{t('title')}</label>
+      <label className={settingCss.settingLabel}>{t('settings.theme.title')}</label>
       <div className={css.content} onClick={handleClick}>
         <button data-theme="theme1">
           <ThemeModalButton primaryColor="#ffc1cc" secondaryColor="#ed4463" />

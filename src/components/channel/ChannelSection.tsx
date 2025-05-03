@@ -2,6 +2,7 @@
 import Nodata from '@/components/common/Nodata';
 import ChannelCard from '@/components/common/channelCard/ChannelCard';
 import useCachedData from '@/hooks/useCachedData';
+import { useLocale } from '@/libraries/i18n/client';
 import { TYChannelsData } from '@/types/api/youtube';
 import { useSession } from 'next-auth/react';
 import css from './Home.module.scss';
@@ -11,7 +12,8 @@ type ChannelSectionProps = {
 };
 
 export default function ChannelSection({ contents }: ChannelSectionProps) {
-  const session = useSession().data;
+  const { data: session } = useSession();
+  const locale = useLocale();
   const { whiteListMap } = useCachedData({ session });
 
   return (

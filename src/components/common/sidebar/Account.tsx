@@ -1,13 +1,13 @@
 'use client';
-import withSession from '@/components/config/withSession';
+import { withSession } from '@/components/common/authorization/withSession';
 import useStopPropagation from '@/hooks/useStopPropagation';
+import { useLocale, usePathname } from '@/libraries/i18n/client';
 import { useAppCtx } from '@/stores/app';
 import { Avatar, CloseButton } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import classnames from 'classnames';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
-import { usePathname } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 import { RemoveScroll } from 'react-remove-scroll';
@@ -22,6 +22,7 @@ interface AccountSidebarProps {
 
 export default withSession<AccountSidebarProps>(function AccountSidebar({ session }) {
   const pathname = usePathname();
+  const locale = useLocale();
   const appCtx = useAppCtx();
   const isShow = useStore(appCtx, (state) => state.isShowAcctSidebar);
   const setIsShow = useStore(appCtx, (state) => state.actions.setIsShowAcctSidebar);
@@ -98,7 +99,7 @@ export default withSession<AccountSidebarProps>(function AccountSidebar({ sessio
             </div>
 
             <nav className={css.nav}>
-              <NavItem direction="ltr" label="마이페이지" href="/my" />
+              <NavItem direction="ltr" label="마이페이지" href={`/${locale}/my`} />
               {session.user.userLv >= 3 && (
                 <NavItem direction="ltr" label="관리자페이지" href="/admin" />
               )}

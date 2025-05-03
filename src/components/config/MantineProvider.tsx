@@ -5,7 +5,10 @@ import { isDarkModeEnabled } from '@/utils/helper';
 import { LocalStorageColorSchemeManagerOptions, MantineColorSchemeManager } from '@mantine/core';
 import { MantineProvider as Provider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
+import { useEffect } from 'react';
 import { THEME_STORAGE_KEY } from './ThemeScript';
+
+import dayjs from '@/libraries/dayjs';
 import 'dayjs/locale/ko';
 import 'dayjs/locale/en';
 import 'dayjs/locale/ja';
@@ -71,6 +74,11 @@ export default function MantineProvider({
   defaultColorScheme,
   locale,
 }: MantineProviderProps) {
+  useEffect(() => {
+    // set global dayjs locale
+    dayjs.locale(locale);
+  }, [locale]);
+
   return (
     <Provider
       classNamesPrefix="app" // ex) app-Button-root

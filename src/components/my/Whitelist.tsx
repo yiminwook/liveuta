@@ -1,21 +1,22 @@
 'use client';
 import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
+import { useTranslations } from '@/libraries/i18n/client';
 import { generateChanneImagelUrl } from '@/libraries/youtube/url';
-import { TChannelData } from '@/types/api/mongoDB';
+import { TChannelDocumentWithoutId } from '@/types/api/mongoDB';
 import { Avatar, Button } from '@mantine/core';
 import { Session } from 'next-auth';
-import { useTranslations } from 'next-intl';
 import css from './List.module.scss';
 
 type WhitelistProps = {
   session: Session;
   whiteList: Set<string>;
-  channelList: Record<string, TChannelData>;
+  channelList: Record<string, TChannelDocumentWithoutId>;
 };
 
 export default function Whitelist({ session, whiteList, channelList }: WhitelistProps) {
+  const { t } = useTranslations();
+
   const mutationDelete = useMutateWhitelist();
-  const t = useTranslations();
 
   const handleClick = (channelId: string) => {
     if (confirm(t('my.favorite.removeFavorite'))) {
@@ -24,7 +25,7 @@ export default function Whitelist({ session, whiteList, channelList }: Whitelist
   };
 
   const data = [...whiteList]
-    .map<TChannelData>((item) => channelList[item])
+    .map<TChannelDocumentWithoutId>((item) => channelList[item])
     .filter((item) => !!item)
     .sort((a, b) => a.name_kor.localeCompare(b.name_kor));
 

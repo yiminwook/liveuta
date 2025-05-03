@@ -1,13 +1,13 @@
-'use client';
 /* eslint-disable @next/next/no-img-element */
+'use client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import type { Setlist } from '@/libraries/oracleDB/setlist/service';
 import { generateThumbnail } from '@/libraries/youtube/url';
-import { TChannelData } from '@/types/api/mongoDB';
+import { TChannelDocumentWithoutId } from '@/types/api/mongoDB';
 import { replaceParentheses } from '@/utils/regexp';
 import { Table } from '@mantine/core';
 import cx from 'classnames';
 import dayjs from 'dayjs';
-import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { type MouseEvent } from 'react';
 import { useDrawerActions } from './DrawerContext';
@@ -15,28 +15,28 @@ import css from './Table.module.scss';
 
 type RowProps = {
   setlist: Setlist;
-  channel?: TChannelData;
+  channel?: TChannelDocumentWithoutId;
   order?: 'broadcast' | 'create';
 };
 
 export default function Row({ setlist, channel, order }: RowProps) {
-  const t = useTranslations();
   const router = useRouter();
   const locale = useLocale();
+  const { t } = useTranslations();
   const thumbnailUrl = generateThumbnail(setlist.videoId, 'mqdefault');
   const title = replaceParentheses(setlist.title);
-  const create = dayjs(setlist.createdAt).locale(locale).format(t('dayjsTemplate'));
-  const broad = dayjs(setlist.broadcastAt).locale(locale).format(t('dayjsTemplate'));
+  const create = dayjs(setlist.createdAt).format(t('time.shortTemplate'));
+  const broad = dayjs(setlist.broadcastAt).format(t('time.shortTemplate'));
   const drawerActions = useDrawerActions();
 
-  function handleImageClick(e: MouseEvent) {
+  const handleImageClick = (e: MouseEvent) => {
     e.stopPropagation();
-    router.push(`/setlist/${setlist.videoId}`);
-  }
+    router.push(`/${locale}/setlist/${setlist.videoId}`);
+  };
 
-  function handleRowClick() {
+  const handleRowClick = () => {
     drawerActions.open(setlist, thumbnailUrl, channel);
-  }
+  };
 
   return (
     <Table.Tr className={css.row} onClick={handleRowClick}>

@@ -1,11 +1,6 @@
-import { TContentsDataReturn } from '@/types/api/mongoDB';
+import { TParsedServerContent } from '@/types/api/mongoDB';
 
-export type GetScheduleRes = {
+export type TGetScheduleResponse = {
   message: string;
-  data: {
-    scheduled: TContentsDataReturn;
-    live: TContentsDataReturn;
-    daily: TContentsDataReturn;
-    all: TContentsDataReturn;
-  };
+  data: TParsedServerContent[];
 };

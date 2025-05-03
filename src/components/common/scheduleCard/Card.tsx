@@ -1,6 +1,10 @@
 'use client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { STREAM_STATUS_MAPPER, TChannelData, TContentData } from '@/types/api/mongoDB';
+import {
+  STREAM_STATUS_MAPPER,
+  TChannelDocumentWithoutId,
+  TParsedClientContent,
+} from '@/types/api/mongoDB';
 import cx from 'classnames';
 import { Session } from 'next-auth';
 import { memo } from 'react';
@@ -11,14 +15,14 @@ import CardMenu from './CardMenu';
 
 type ScheduleCardProps = {
   classname?: string;
-  content: TContentData;
-  channel: TChannelData | undefined;
+  content: TParsedClientContent;
+  channel: TChannelDocumentWithoutId | undefined;
   session: Session | null;
   isFavorite?: boolean;
-  addAlarm?: (item: TContentData, channel?: TChannelData) => void;
-  openNewTab?: (item: TContentData) => void;
-  toggleFavorite?: (item: TContentData) => void;
-  addBlock?: (item: TContentData) => void;
+  addAlarm?: (item: TParsedClientContent, channel?: TChannelDocumentWithoutId) => void;
+  openNewTab?: (item: TParsedClientContent) => void;
+  toggleFavorite?: (item: TParsedClientContent) => void;
+  addBlock?: (item: TParsedClientContent) => void;
   showMenu?: boolean;
 };
 
@@ -47,7 +51,7 @@ function ScheduleCard_({
     addBlock?.(content);
   };
 
-  const addStreamModifier = STREAM_STATUS_MAPPER[content.isStream];
+  const addStreamModifier = STREAM_STATUS_MAPPER[content.broadcastStatus];
   return (
     <div className={cx(css.card, addStreamModifier, classname)}>
       <CardImage content={content} />

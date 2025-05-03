@@ -1,32 +1,30 @@
 'use client';
-import { setUserLocale } from '@/libraries/next-intl';
+import { usePathname, useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { useAppCtx } from '@/stores/app';
-import { LocaleCode } from '@/types/siteConfig';
-import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
-import { useCallback, useEffect, useTransition } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 import { useStore } from 'zustand';
 import { useCmdActions } from './Context';
 
-export default function GlobalCmd() {
-  const t = useTranslations();
-  const { addCmdGroup, setCmdOpen } = useCmdActions();
+type Props = {
+  locale: TLocaleCode;
+};
+
+export default function GlobalCmd({ locale }: Props) {
+  const { t } = useTranslations();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const router = useRouter();
   const appCtx = useAppCtx();
   const setTheme = useStore(appCtx, (state) => state.actions.setTheme);
-  const locale = useLocale();
-  const [_, startTransition] = useTransition();
-  const onLanguageChange = useCallback(
-    (code: LocaleCode) => {
-      if (locale === code) return;
-      startTransition(() => {
-        setUserLocale(code).then(() => {
-          window.location.reload();
-        });
-      });
-    },
-    [locale],
-  );
+  const { addCmdGroup, setCmdOpen } = useCmdActions();
+
+  const onLanguageChange = (selectedLocale: TLocaleCode) => {
+    if (locale === selectedLocale) return;
+    window.location.href = `/${selectedLocale}${pathname}?${searchParams.toString()}`;
+  };
 
   useEffect(() => {
     addCmdGroup({
@@ -182,7 +180,7 @@ export default function GlobalCmd() {
       commands: [
         {
           title: t('global.command.globalCommands.utilities.converters.base64'),
-          fn: () => router.push('/utils/converters/base64'),
+          fn: () => router.push(`/${locale}/utils/converters/base64`),
           keywords: [
             '유틸리티',
             'utility',
@@ -198,7 +196,7 @@ export default function GlobalCmd() {
         },
         {
           title: t('global.command.globalCommands.utilities.youtube.thumbnail'),
-          fn: () => router.push('/utils/youtube/thumbnail'),
+          fn: () => router.push(`/${locale}/utils/youtube/thumbnail`),
           keywords: [
             '유틸리티',
             'utility',
@@ -222,17 +220,17 @@ export default function GlobalCmd() {
       commands: [
         {
           title: t('global.command.globalCommands.navigation.home'),
-          fn: () => router.push('/'),
+          fn: () => router.push(`/${locale}`),
           keywords: ['페이지 이동', 'navigate', 'ページ移動', '홈', 'home', 'ホーム'],
         },
         {
           title: t('global.command.globalCommands.navigation.schedule'),
-          fn: () => router.push('/schedule'),
+          fn: () => router.push(`/${locale}/schedule`),
           keywords: ['페이지 이동', 'navigate', 'ページ移動', '스케줄', 'schedule', 'スケジュール'],
         },
         {
           title: t('global.command.globalCommands.navigation.multiView'),
-          fn: () => router.push('/multi'),
+          fn: () => router.push(`/${locale}/multi`),
           keywords: [
             '페이지 이동',
             'navigate',
@@ -244,12 +242,12 @@ export default function GlobalCmd() {
         },
         {
           title: t('global.command.globalCommands.navigation.channel'),
-          fn: () => router.push('/channel'),
+          fn: () => router.push(`/${locale}/channel`),
           keywords: ['페이지 이동', 'navigate', 'ページ移動', '채널', 'channel', 'チャンネル'],
         },
         {
           title: t('global.command.globalCommands.navigation.setlist'),
-          fn: () => router.push('/setlist'),
+          fn: () => router.push(`/${locale}/setlist`),
           keywords: [
             '페이지 이동',
             'navigate',
@@ -261,17 +259,17 @@ export default function GlobalCmd() {
         },
         {
           title: t('global.command.globalCommands.navigation.settings'),
-          fn: () => router.push('/setting'),
+          fn: () => router.push(`/${locale}/setting`),
           keywords: ['페이지 이동', 'navigate', 'ページ移動', '설정', 'settings', '設定'],
         },
         {
           title: t('global.command.globalCommands.navigation.featured'),
-          fn: () => router.push('/featured'),
+          fn: () => router.push(`/${locale}/featured`),
           keywords: ['페이지 이동', 'navigate', 'ページ移動', '특집', 'featured', '特集'],
         },
         {
           title: t('global.command.globalCommands.navigation.support'),
-          fn: () => router.push('/support'),
+          fn: () => router.push(`/${locale}/support`),
           keywords: ['페이지 이동', 'navigate', 'ページ移動', '지원', 'support', 'サポート'],
         },
       ],

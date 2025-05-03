@@ -3,7 +3,7 @@ export type Promised<T extends Function<any>> = Awaited<ReturnType<T>>;
 
 export type TTheme = 'theme1' | 'theme2' | 'theme3' | 'theme4' | 'theme5';
 
-export enum FilterType {
+export enum StreamFilter {
   scheduled = 'scheduled',
   live = 'live',
   daily = 'daily',
