@@ -1,9 +1,8 @@
+import { getCookies } from '@/apis/cached';
 import { serverApi } from '@/apis/fetcher';
-import { METADATAS_TAG } from '@/constants/revalidateTag';
-import { TMetadata } from '@/types';
-import { TGetCookiesReturn } from '@/utils/getCookie';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { METADATAS_TAG } from '@/constants/revalidate-tag';
+import { TLocaleCode } from '@/libraries/i18n/type';
+import { Promised, TMetadata } from '@/types';
 import CommandMenu from '../common/command/CommandMenu';
 import { CmdProvider } from '../common/command/Context';
 import AppProvider from './AppProvider';
@@ -20,8 +19,8 @@ import ToastBox from './ToastBox';
 
 type ConfigsProps = {
   children: React.ReactNode;
-  cookies: TGetCookiesReturn;
-  locale: string;
+  cookies: Promised<typeof getCookies>;
+  locale: TLocaleCode;
 };
 
 export default async function Configs({ children, cookies, locale }: ConfigsProps) {
@@ -34,35 +33,31 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
       .then((json) => json.data),
   ]);
 
-  const messages = await getMessages();
-
   return (
-    <NextIntlClientProvider messages={messages}>
-      <NextAuth>
-        <AppProvider
-          initState={{
-            defaultVideoId: metadata.default_video_id,
-          }}
-        >
-          <ReactQuery>
-            <NProgressProviders>
-              <MantineProvider locale={locale}>
-                <Hotkeys>
-                  <CmdProvider>
-                    {children}
-                    <CommandMenu />
-                    <ToastBox />
-                    <Particle />
-                    <ServiceWorker />
-                    <Devtools />
-                    <ModalContainer />
-                  </CmdProvider>
-                </Hotkeys>
-              </MantineProvider>
-            </NProgressProviders>
-          </ReactQuery>
-        </AppProvider>
-      </NextAuth>
-    </NextIntlClientProvider>
+    <NextAuth>
+      <AppProvider
+        initState={{
+          defaultVideoId: metadata.default_video_id,
+        }}
+      >
+        <ReactQuery locale={locale}>
+          <NProgressProviders>
+            <MantineProvider locale={locale}>
+              <Hotkeys>
+                <CmdProvider locale={locale}>
+                  {children}
+                  <CommandMenu locale={locale} />
+                  <ToastBox />
+                  <Particle />
+                  <ServiceWorker />
+                  <Devtools />
+                  <ModalContainer />
+                </CmdProvider>
+              </Hotkeys>
+            </MantineProvider>
+          </NProgressProviders>
+        </ReactQuery>
+      </AppProvider>
+    </NextAuth>
   );
 }

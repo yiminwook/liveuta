@@ -1,5 +1,5 @@
 'use client';
-import { useDebounce } from '@/hooks/useDebounce';
+import { useDebounce } from '@/hooks/use-debounce';
 import { testYoutubeUrl } from '@/utils/regexp';
 import { TextInput } from '@mantine/core';
 import { useEffect, useState } from 'react';

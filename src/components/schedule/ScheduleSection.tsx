@@ -1,20 +1,20 @@
 'use client';
-import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
-import useInfiniteScheduleData from '@/hooks/useInfiniteScheduleData';
-import usePostBlacklist from '@/hooks/usePostBlacklist';
-import usePostWhitelist from '@/hooks/usePostWhitelist';
-import useReservePush from '@/hooks/useReservePush';
+import useMutateWhitelist from '@/hooks/use-delete-whitelist';
+import usePostBlacklist from '@/hooks/use-post-blacklist';
+import usePostWhitelist from '@/hooks/use-post-whitelist';
+import useReservePush from '@/hooks/use-reserve-push';
+import { useInfiniteScheduleData } from '@/hooks/use-schedule';
+import { Link } from '@/libraries/i18n';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { TChannelDocumentWithoutId, TParsedClientContent } from '@/libraries/mongodb/type';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetModalStore } from '@/stores/modal';
-import { TChannelData, TContentData } from '@/types/api/mongoDB';
 import { TScheduleDto } from '@/types/dto';
 import { gtagClick } from '@/utils/gtag';
-import { openWindow } from '@/utils/windowEvent';
+import { openWindow } from '@/utils/window-event';
 import { Button, Loader } from '@mantine/core';
 import variable from '@variable';
 import { Session } from 'next-auth';
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { GridComponents, VirtuosoGrid } from 'react-virtuoso';
 import { toast } from 'sonner';
 import Nodata from '../common/Nodata';
@@ -25,8 +25,8 @@ import css from './ScheduleSection.module.scss';
 type ScheduleSectionProps = {
   session: Session | null;
   scheduleDto: TScheduleDto;
-  contents: TContentData[];
-  channelMap: Record<string, TChannelData>;
+  contents: TParsedClientContent[];
+  channelMap: Record<string, TChannelDocumentWithoutId>;
   whiteListMap: Set<string>;
   isLoading?: boolean;
 };
@@ -40,7 +40,8 @@ export default function ScheduleSection({
   isLoading = false,
 }: ScheduleSectionProps) {
   const modalStore = useSetModalStore();
-  const t = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations();
 
   const {
     loadContents,
@@ -55,7 +56,7 @@ export default function ScheduleSection({
   const mutateDeleteFavorite = useMutateWhitelist();
   const { reservePush } = useReservePush();
 
-  const handleFavorite = (content: TContentData) => {
+  const handleFavorite = (content: TParsedClientContent) => {
     if (!session) {
       toast.error(t('schedule.scheduleSection.notLoggedInError'));
       return;
@@ -76,7 +77,7 @@ export default function ScheduleSection({
     }
   };
 
-  const handleBlock = async (content: TContentData) => {
+  const handleBlock = async (content: TParsedClientContent) => {
     if (!session) {
       toast.error(t('schedule.scheduleSection.notLoggedInError'));
       return;
@@ -90,7 +91,7 @@ export default function ScheduleSection({
     }
   };
 
-  const openStream = (content: TContentData) => {
+  const openStream = (content: TParsedClientContent) => {
     gtagClick({
       target: 'scheduleCard',
       content: content.channelId,
@@ -121,7 +122,7 @@ export default function ScheduleSection({
       <section>
         <Nodata />
         <div className={css.nodataLinkBox}>
-          <Button component={Link} href={`/channel?q=${scheduleDto.query}`}>
+          <Button component={Link} href={`/channel?q=${scheduleDto.query}`} locale={locale}>
             {t('schedule.scheduleSection.searchAtChannelPage')}
           </Button>
         </div>

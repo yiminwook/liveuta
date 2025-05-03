@@ -1,21 +1,21 @@
 'use client';
-import useDeleteBlacklist from '@/hooks/useDeleteBlacklist';
+import useDeleteBlacklist from '@/hooks/use-delete-blacklist';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
 import { generateChanneImagelUrl } from '@/libraries/youtube/url';
-import { TChannelData } from '@/types/api/mongoDB';
 import { Avatar, Button } from '@mantine/core';
 import { Session } from 'next-auth';
-import { useTranslations } from 'next-intl';
 import css from './List.module.scss';
 
 type BlacklistProps = {
   session: Session;
-  channelList: Record<string, TChannelData>;
+  channelList: Record<string, TChannelDocumentWithoutId>;
   blacklist: Set<string>;
 };
 
 export default function Blacklist({ session, channelList, blacklist }: BlacklistProps) {
   const mutationDelete = useDeleteBlacklist();
-  const t = useTranslations();
+  const { t } = useTranslations();
 
   const handleClick = (channelId: string) => {
     if (confirm(t('my.blacklist.removeBlacklist'))) {
@@ -24,7 +24,7 @@ export default function Blacklist({ session, channelList, blacklist }: Blacklist
   };
 
   const data = [...blacklist]
-    .map<TChannelData>((item) => channelList[item])
+    .map<TChannelDocumentWithoutId>((item) => channelList[item])
     .filter((item) => !!item)
     .sort((a, b) => a.name_kor.localeCompare(b.name_kor)); //TODO: 점검필요
 

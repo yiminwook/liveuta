@@ -1,7 +1,7 @@
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
-import { getAllBlackList } from '@/libraries/oracleDB/blacklist/service';
-import parseAccessToken from '@/utils/parseAccessToken';
+import { getAllBlackList } from '@/libraries/oracledb/blacklist/service';
+import parseAccessToken from '@/utils/parse-access-token';
 import { NextResponse } from 'next/server';
 
 export async function GET() {

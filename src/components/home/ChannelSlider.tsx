@@ -1,10 +1,10 @@
 'use client';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TYChannelsData } from '@/types/api/youtube';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import IonIosMore from '@icons/ion/IosMore';
 import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
 import variable from '@variable';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,12 +15,13 @@ type ChannelSliderProps = {
 };
 
 export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
-  const t = useTranslations();
+  const locale = useLocale();
+  const { t } = useTranslations();
   const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   const navigationChannel = (channelName: string) => {
-    router.push(`/channel?q=${channelName}`);
+    router.push(`/${locale}/channel?q=${channelName}`);
   };
 
   return (

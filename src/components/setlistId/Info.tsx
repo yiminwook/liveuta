@@ -1,14 +1,16 @@
 'use client';
 import { clientApi } from '@/apis/fetcher';
-import { SETLISTS_TAG } from '@/constants/revalidateTag';
-import { ClientOnly } from '@/libraries/clientOnly';
+import { SETLISTS_TAG } from '@/constants/revalidate-tag';
+import { useMount } from '@/hooks/use-mount';
 import dayjs from '@/libraries/dayjs';
-import { ChannelDatesetItem } from '@/libraries/mongoDB/channels';
-import { Setlist } from '@/libraries/oracleDB/setlist/service';
+import { Link } from '@/libraries/i18n';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { ChannelDatesetItem } from '@/libraries/mongodb/channels';
+import { Setlist } from '@/libraries/oracledb/setlist/service';
 import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
 import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
-import { openWindow } from '@/utils/windowEvent';
+import { openWindow } from '@/utils/window-event';
 import BiMusicNoteList from '@icons/bi/MusicNoteList';
 import IonArrowBack from '@icons/ion/ArrowBack';
 import LogosYoutubeIcon from '@icons/logos/YouTubeIcon';
@@ -17,9 +19,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import cx from 'classnames';
 import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
-import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
-import Link from 'next/link';
 import { isMobile } from 'react-device-detect';
 import { toast } from 'sonner';
 import css from './Info.module.scss';
@@ -31,12 +31,15 @@ type InfoProps = {
 };
 
 export default function Info({ setlist, channel, icon }: InfoProps) {
-  const session = useSession().data;
+  const locale = useLocale();
+  const { t } = useTranslations();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { data: session } = useSession();
+
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
-  const t = useTranslations();
+
   const actions = useSetPlayerStore();
 
   const handleLocation = (url: string) => {
@@ -107,6 +110,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
           </Button>
           <Button
             component={Link}
+            locale={locale}
             className={cx(css.navItem, css.hoverButton)}
             classNames={{ label: css.buttonLabel }}
             variant="transparent"
@@ -124,13 +128,12 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
           <p className={css.channelName}>{channel.nameKor}</p>
         </button>
         <br />
-        <ClientOnly>
-          <TimeBoxs
-            broadcastAt={setlist.broadcastAt}
-            createdAt={setlist.createdAt}
-            updatedAt={setlist.updatedAt}
-          />
-        </ClientOnly>
+
+        <TimeBoxs
+          broadcastAt={setlist.broadcastAt}
+          createdAt={setlist.createdAt}
+          updatedAt={setlist.updatedAt}
+        />
       </div>
     </div>
   );
@@ -143,12 +146,15 @@ interface TimeBoxProps {
 }
 
 function TimeBoxs({ broadcastAt, createdAt, updatedAt }: TimeBoxProps) {
-  const t = useTranslations();
-  const locale = useLocale();
+  const { t } = useTranslations();
+  const isMounted = useMount();
 
-  const broadcast = dayjs(broadcastAt).locale(locale).format(t('dayjsTemplate'));
-  const create = dayjs(createdAt).locale(locale).format(t('dayjsTemplate'));
-  const update = dayjs(updatedAt).locale(locale).format(t('dayjsTemplate'));
+  const broadcast = dayjs(broadcastAt).format(t('time.shortTemplate'));
+  const create = dayjs(createdAt).format(t('time.shortTemplate'));
+  const update = dayjs(updatedAt).format(t('time.shortTemplate'));
+
+  if (!isMounted) return null;
+
   return (
     <>
       <div>

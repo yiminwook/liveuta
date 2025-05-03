@@ -1,9 +1,9 @@
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
 import { getAccessToken } from '@/libraries/firebase/admin';
-import { getAllMetadata, updateMetadataValue } from '@/libraries/oracleDB/metadata/service';
+import { getAllMetadata, updateMetadataValue } from '@/libraries/oracledb/metadata/service';
 import { UpdateMetadataDto } from '@/types/dto';
-import parseAccessToken from '@/utils/parseAccessToken';
+import parseAccessToken from '@/utils/parse-access-token';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET() {

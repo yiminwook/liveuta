@@ -2,10 +2,10 @@
 import ClearButton from '@/components/common/button/ClearButton';
 import CopyButton from '@/components/common/button/CopyButton';
 import PasteButton from '@/components/common/button/PasteButton';
-import { useDebounce } from '@/hooks/useDebounce';
+import { useDebounce } from '@/hooks/use-debounce';
+import { useTranslations } from '@/libraries/i18n/client';
 import { MdiSwapVertical } from '@icons/mdi/swap-vertical';
 import { ActionIcon, NumberInput, Switch, Textarea, Tooltip } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useUtilsBreadcrumbContext } from '../../common/BreadcrumbContext';
 import {
@@ -18,7 +18,7 @@ import { Base64Provider, useBase64ActionsContext, useBase64Context } from './Con
 import css from './Home.module.scss';
 
 function IsEncode() {
-  const t = useTranslations('utils.converters.base64');
+  const { t } = useTranslations();
   const { setIsEncode } = useBase64ActionsContext();
   const { isEncode } = useBase64Context();
 
@@ -28,10 +28,15 @@ function IsEncode() {
 
   return (
     <UtilsConfigItem>
-      <UtilsConfigItemHeader title={t('isEncodeTitle')} description={t('isEncodeDescription')} />
+      <UtilsConfigItemHeader
+        title={t('utils.converters.base64.isEncodeTitle')}
+        description={t('utils.converters.base64.isEncodeDescription')}
+      />
       <UtilsConfigItemContents>
         <label className={css.isEncodeLabel}>
-          <span className={css.isEncodeLabelText}>{isEncode ? t('encode') : t('decode')}</span>
+          <span className={css.isEncodeLabelText}>
+            {isEncode ? t('utils.converters.base64.encode') : t('utils.converters.base64.decode')}
+          </span>
           <Switch checked={isEncode} onChange={handleIsEncodingChange} size="lg" />
         </label>
       </UtilsConfigItemContents>
@@ -40,7 +45,7 @@ function IsEncode() {
 }
 
 function Repeat() {
-  const t = useTranslations('utils.converters.base64');
+  const { t } = useTranslations();
   const { setRepeat } = useBase64ActionsContext();
   const { repeat } = useBase64Context();
 
@@ -53,7 +58,10 @@ function Repeat() {
   }, []);
   return (
     <UtilsConfigItem>
-      <UtilsConfigItemHeader title={t('repeatTitle')} description={t('repeatDescription')} />
+      <UtilsConfigItemHeader
+        title={t('utils.converters.base64.repeatTitle')}
+        description={t('utils.converters.base64.repeatDescription')}
+      />
       <UtilsConfigItemContents>
         <NumberInput
           min={1}
@@ -69,7 +77,7 @@ function Repeat() {
 }
 
 function Base64Input() {
-  const t = useTranslations('utils.converters.base64');
+  const { t } = useTranslations();
   const { input } = useBase64Context();
   const { setInput } = useBase64ActionsContext();
   const [uiInput, setUiInput] = useState('');
@@ -99,7 +107,7 @@ function Base64Input() {
     <>
       <div className={css.inputWrap}>
         <label className={css.inputLabel} htmlFor="base64-input">
-          {t('input')}
+          {t('utils.converters.base64.input')}
         </label>
         <div>
           <ClearButton clear={clear} />
@@ -113,14 +121,14 @@ function Base64Input() {
 }
 
 function Swap() {
-  const t = useTranslations('utils.converters.base64');
+  const { t } = useTranslations();
   const { setInput } = useBase64ActionsContext();
   const { result } = useBase64Context();
 
   const handleSwap = useCallback(() => setInput(result.value), [result]);
 
   return (
-    <Tooltip label={t('swap')} withArrow position="right">
+    <Tooltip label={t('utils.converters.base64.swap')} withArrow position="right">
       <ActionIcon size={48} variant="outline" color="gray" onClick={handleSwap}>
         <MdiSwapVertical width={32} height={32} />
       </ActionIcon>
@@ -129,14 +137,14 @@ function Swap() {
 }
 
 function Base64Output() {
-  const t = useTranslations('utils.converters.base64');
+  const { t } = useTranslations();
   const { result } = useBase64Context();
 
   return (
     <>
       <div className={css.inputWrap}>
         <label className={css.inputLabel} htmlFor="base64-output">
-          {t('output')}
+          {t('utils.converters.base64.output')}
         </label>
         <div>
           <CopyButton value={result.value} />
@@ -154,18 +162,18 @@ function Base64Output() {
 }
 
 export default function Base64Home() {
-  const t = useTranslations('utils.converters');
+  const { t } = useTranslations();
   const { setItems } = useUtilsBreadcrumbContext();
 
   useEffect(() => {
     setItems([
       {
         href: '/utils/converters',
-        title: t('title'),
+        title: t('utils.converters.title'),
       },
       {
         href: '/utils/converters/base64',
-        title: t('base64.title'),
+        title: t('utils.converters.base64.title'),
       },
     ]);
   }, []);

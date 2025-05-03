@@ -1,18 +1,18 @@
 'use client';
 import altImage from '@/assets/image/thumbnail_alt_img.png';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TParsedClientContent } from '@/libraries/mongodb/type';
 import { generateThumbnail } from '@/libraries/youtube/url';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
-import { TContentData } from '@/types/api/mongoDB';
 import { gtagClick } from '@/utils/gtag';
-import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useCallback, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 interface CardImageProps {
-  content: TContentData;
+  content: TParsedClientContent;
 }
 
 export default function CardImage({ content }: CardImageProps) {
@@ -21,7 +21,7 @@ export default function CardImage({ content }: CardImageProps) {
   const [imgLoaded, setImgLoaded] = useState(true);
   const actions = useSetPlayerStore();
   const imgRef = useRef<HTMLImageElement>(null);
-  const t = useTranslations();
+  const { t } = useTranslations();
 
   const handleImgValidity = useCallback(() => {
     const currentImage = imgRef.current;

@@ -1,6 +1,6 @@
 'use client';
-import CurrentMetadata from '@/components/adminMetadata/CurrentMetadata';
-import Form from '@/components/adminMetadata/Form';
+import CurrentMetadata from '@/components/admin-metadata/current-metadata';
+import Form from '@/components/admin-metadata/form';
 import { Divider } from '@mantine/core';
 import { useSession } from 'next-auth/react';
 import css from './page.module.scss';

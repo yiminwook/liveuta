@@ -1,4 +1,4 @@
-import convertTimeToSec from '@/utils/convertTimeToSec';
+import { convertTimeToSec } from '@/utils/time';
 
 type wrapTimeWithLinkProps = {
   text: string;

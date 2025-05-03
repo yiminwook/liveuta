@@ -1,7 +1,7 @@
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
-import { deleteBlacklist, postBlacklist } from '@/libraries/oracleDB/blacklist/service';
-import parseAccessToken from '@/utils/parseAccessToken';
+import { deleteBlacklist, postBlacklist } from '@/libraries/oracledb/blacklist/service';
+import parseAccessToken from '@/utils/parse-access-token';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(

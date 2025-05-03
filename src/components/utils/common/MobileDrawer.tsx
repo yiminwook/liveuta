@@ -1,5 +1,4 @@
 'use client';
-
 import {
   Drawer,
   DrawerContent,
@@ -8,15 +7,15 @@ import {
   DrawerTitle,
 } from '@/components/common/Vaul';
 import For from '@/components/common/utils/For';
+import { useTranslations } from '@/libraries/i18n/client';
 import { Anchor, ScrollArea } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import { useCallback } from 'react';
 import { useUtilsLinksContext } from './Links';
 import css from './MobileDrawer.module.scss';
 import { useMobileDrawerContext } from './MobileDrawerContext';
 
 export default function UtilsMobileDrawer() {
-  const t = useTranslations('utils.sidebar');
+  const { t } = useTranslations();
   const { isOpen, setIsOpen } = useMobileDrawerContext();
   const links = useUtilsLinksContext();
 
@@ -26,8 +25,8 @@ export default function UtilsMobileDrawer() {
     <Drawer open={isOpen} onClose={onClose}>
       <DrawerContent>
         <DrawerHeader className="blind">
-          <DrawerTitle>{t('title')}</DrawerTitle>
-          <DrawerDescription>{t('description')}</DrawerDescription>
+          <DrawerTitle>{t('utils.sidebar.title')}</DrawerTitle>
+          <DrawerDescription>{t('utils.sidebar.description')}</DrawerDescription>
         </DrawerHeader>
         <div className={css.wrap}>
           <ScrollArea className={css.scrollArea}>

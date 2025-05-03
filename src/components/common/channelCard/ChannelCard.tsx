@@ -1,16 +1,16 @@
 'use client';
 import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
-import useMutateWhitelist from '@/hooks/useDeleteWhitelist';
-import usePostWhitelist from '@/hooks/usePostWhitelist';
+import useMutateWhitelist from '@/hooks/use-delete-whitelist';
+import usePostWhitelist from '@/hooks/use-post-whitelist';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { useSetModalStore } from '@/stores/modal';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { renderSubscribe } from '@/utils/renderSubscribe';
-import { openWindow } from '@/utils/windowEvent';
+import { openWindow } from '@/utils/window-event';
 import FasStar from '@icons/fa-solid/Star';
 import { Session } from 'next-auth';
-import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
 import { isDesktop } from 'react-device-detect';
@@ -25,12 +25,13 @@ type ChannelItemProps = {
 
 export default function ChannelItem({ content, session, isFavorite }: ChannelItemProps) {
   const { nameKor: channelName, snippet, url, statistics, uid } = content;
-  const t = useTranslations('channel.channelCard');
+  const locale = useLocale();
+  const { t } = useTranslations();
   const title = snippet?.title ?? '';
   const imageURL = snippet?.thumbnails?.default?.url ?? '/loading.png';
-  const description = snippet?.description ?? t('hidden');
-  const subscribe = renderSubscribe(statistics?.subscriberCount ?? t('hidden'));
-  const videoCount = statistics?.videoCount ?? t('hidden');
+  const description = snippet?.description ?? t('channel.channelCard.hidden');
+  const subscribe = renderSubscribe(statistics?.subscriberCount ?? t('channel.channelCard.hidden'));
+  const videoCount = statistics?.videoCount ?? t('channel.channelCard.hidden');
 
   const modalStore = useSetModalStore();
 
@@ -70,19 +71,23 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
         videoCount,
         subscribe,
         description,
+        locale,
       },
     });
   };
 
   const handleFavorite = () => {
-    if (!session) return toast.error(t('notLoggedInError'));
+    if (!session) {
+      toast.error(t('channel.channelCard.notLoggedInError'));
+      return;
+    }
 
-    if (!isFavorite && confirm(t('addFavoriteChannel'))) {
+    if (!isFavorite && confirm(t('channel.channelCard.addFavoriteChannel'))) {
       mutatePostFavorite.mutate({
         session,
         channelId: uid,
       });
-    } else if (isFavorite && confirm(t('removeFavoriteChannel'))) {
+    } else if (isFavorite && confirm(t('channel.channelCard.removeFavoriteChannel'))) {
       mutateDeleteFavorite.mutate({
         session,
         channelId: uid,
@@ -118,14 +123,16 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
         <div className={css.details}>
           <div className={css.channelInfo}>
             <p>
-              <span className={css.descContentLabel}>{t('subscriber')}</span> {subscribe}
+              <span className={css.descContentLabel}>{t('channel.channelCard.subscriber')}</span>{' '}
+              {subscribe}
             </p>
             <p>
-              <span className={css.descContentLabel}>{t('video')}</span> {videoCount}
+              <span className={css.descContentLabel}>{t('channel.channelCard.video')}</span>{' '}
+              {videoCount}
             </p>
           </div>
           <div className={css.link}>
-            <button onClick={openModal}>+ {t('details')}</button>
+            <button onClick={openModal}>+ {t('channel.channelCard.details')}</button>
           </div>
         </div>
       </div>

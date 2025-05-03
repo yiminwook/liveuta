@@ -1,9 +1,9 @@
 import { MONGODB_FEATURED_COLLECTION, MONGODB_MANAGEMENT_DB } from '@/constants';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
-import { connectMongoDB } from '@/libraries/mongoDB';
+import { connectMongoDB } from '@/libraries/mongodb';
+import { TFeaturedData } from '@/libraries/mongodb/type';
 import { getYoutubeChannels } from '@/libraries/youtube';
-import { TFeaturedData } from '@/types/api/mongoDB';
 import { youtube_v3 } from 'googleapis';
 import { NextResponse } from 'next/server';
 

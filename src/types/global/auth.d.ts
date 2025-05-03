@@ -1,4 +1,4 @@
-import { Payload } from '../nextAuth';
+import { Payload } from '../next-auth';
 
 declare module '@auth/core/types' {
   interface User extends Payload {

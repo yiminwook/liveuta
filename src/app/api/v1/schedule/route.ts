@@ -1,10 +1,9 @@
 import { MONGODB_SCHEDULE_COLLECTION, MONGODB_SCHEDULE_DB } from '@/constants';
-import dayjs from '@/libraries/dayjs';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
-import { connectMongoDB } from '@/libraries/mongoDB';
-import { TContentDocument } from '@/types/api/mongoDB';
-import { parseAllData, parseScheduledData } from '@/utils/parseMongoDBData';
+import { connectMongoDB } from '@/libraries/mongodb';
+import { TContentDocument, TParsedServerContent } from '@/libraries/mongodb/type';
+import { TGetScheduleResponse } from '@/types/api/schedule';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
@@ -20,17 +19,21 @@ export async function GET() {
       throw new CustomServerError({ statusCode: 404, message: '문서를 찾을 수 없습니다.' });
     }
 
-    const scheduleData = scheduleDataRaw.map((doc) => ({
-      ...doc,
-      ScheduledTime: dayjs(doc.ScheduledTime),
+    const parseScheduledData = scheduleDataRaw.map<TParsedServerContent>((raw) => ({
+      title: raw.Title,
+      videoId: raw.VideoId,
+      channelId: raw.ChannelId,
+      utcTime: raw.ScheduledTime,
+      broadcastStatus: raw.broadcastStatus,
+      isHide: raw.Hide === 'TRUE' ? true : false,
+      isVideo: raw.isVideo === 'TRUE' ? true : false,
+      viewer: raw.concurrentViewers,
+      tag: raw.tag || '',
     }));
 
-    const { scheduled, live } = parseScheduledData(scheduleData); // Need to be revised
-    const { daily, all } = parseAllData(scheduleData); // Need to be revised
-
-    return NextResponse.json({
+    return NextResponse.json<TGetScheduleResponse>({
       message: '스케줄이 조회되었습니다.',
-      data: { scheduled, live, daily, all },
+      data: parseScheduledData,
     });
   } catch (error) {
     console.error(error);

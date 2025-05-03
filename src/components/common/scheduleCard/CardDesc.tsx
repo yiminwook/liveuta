@@ -1,15 +1,14 @@
-import dayjs from '@/libraries/dayjs';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TChannelDocumentWithoutId, TParsedClientContent } from '@/libraries/mongodb/type';
 import { generateChannelUrl } from '@/libraries/youtube/url';
-import { TChannelData, TContentData } from '@/types/api/mongoDB';
-import { openWindow } from '@/utils/windowEvent';
+import { openWindow } from '@/utils/window-event';
 import cx from 'classnames';
-import { useLocale, useTranslations } from 'next-intl';
 import css from './Card.module.scss';
 import CardStatus from './CardStatus';
 
 type CardDescProps = {
-  content: TContentData;
-  channel: TChannelData | undefined;
+  content: TParsedClientContent;
+  channel: TChannelDocumentWithoutId | undefined;
   addStreamModifier: string;
 };
 
@@ -19,11 +18,10 @@ type CardDescProps = {
  * 채널명 1줄, 제목 2줄, 시간 1줄
  */
 export default function CardDesc({ content, addStreamModifier, channel }: CardDescProps) {
-  const { title, utcTime, interval, isStream, viewer, channelId } = content;
+  const { title, utcTime, interval, broadcastStatus: isStream, viewer, channelId } = content;
 
   const channelUrl = generateChannelUrl(channelId);
-  const locale = useLocale();
-  const t = useTranslations();
+  const { t } = useTranslations();
 
   const openChannel = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -46,7 +44,7 @@ export default function CardDesc({ content, addStreamModifier, channel }: CardDe
         {title}
       </p>
       <div className={css.time}>
-        <time>{dayjs(utcTime).locale(locale).format(t('dayjsScheduleTemplate'))}</time>
+        <time>{utcTime.format(t('time.longTemplate'))}</time>
         <CardStatus isStream={isStream} interval={interval} viewer={viewer} />
       </div>
     </div>

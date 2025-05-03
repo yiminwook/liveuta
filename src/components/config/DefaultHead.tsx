@@ -1,4 +1,4 @@
-import { DEFAULT_ICON, DEFAULT_SITE_URL } from '@/constants/metaData';
+import { DEFAULT_ICON, DEFAULT_SITE_URL } from '@/constants/meta-data';
 import Script from 'next/script';
 import GoogleAnalytics from './GoogleAnalytics';
 

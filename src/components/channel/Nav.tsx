@@ -1,11 +1,11 @@
 'use client';
-import { TChannelDto } from '@/libraries/mongoDB/channels';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { TChannelDto } from '@/libraries/mongodb/channels';
 import IonIosSearch from '@icons/ion/IosSearch';
 import TbX from '@icons/tabler/X';
 import { Button, Flex, SegmentedControl, TextInput, UnstyledButton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
@@ -16,7 +16,8 @@ export default function Nav() {
   const router = useRouter();
   const [input, setInput] = useState(searchParams.get('q') || '');
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
-  const t = useTranslations('channel.nav');
+  const locale = useLocale();
+  const { t } = useTranslations();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(() => e.target.value);
@@ -28,13 +29,13 @@ export default function Nav() {
     const trimmedInput = input.trim();
     params.set('q', trimmedInput);
     params.set('page', '1');
-    router.push(`/channel?${params.toString()}`);
+    router.push(`/${locale}/channel?${params.toString()}`);
   };
 
   function handleOrderChange(value: TChannelDto['sort']) {
     const params = new URLSearchParams(searchParams);
     params.set('sort', value);
-    router.push(`/channel?${params.toString()}`);
+    router.push(`/${locale}/channel?${params.toString()}`);
   }
 
   return (
@@ -46,12 +47,17 @@ export default function Nav() {
           value={searchParams.get('sort') || 'name_kor'}
           onChange={(value) => handleOrderChange(value as TChannelDto['sort'])}
           data={[
-            { label: t('nameKorLabel'), value: 'name_kor' },
-            { label: t('createdAtLabel'), value: 'createdAt' },
+            { label: t('channel.nav.nameKorLabel'), value: 'name_kor' },
+            { label: t('channel.nav.createdAtLabel'), value: 'createdAt' },
           ]}
         />
-        <Button h={40} color="third" variant="filled" onClick={() => router.push('/request')}>
-          {isDesktop ? `+ ${t('linkToRequest')}` : t('linkToRequestMobile')}
+        <Button
+          h={40}
+          color="third"
+          variant="filled"
+          onClick={() => router.push(`/${locale}/request`)}
+        >
+          {isDesktop ? `+ ${t('channel.nav.linkToRequest')}` : t('channel.nav.linkToRequestMobile')}
         </Button>
       </Flex>
       <form className={css.form} onSubmit={handleSubmit}>
@@ -60,7 +66,7 @@ export default function Nav() {
             classNames={{ input: css.input }}
             value={input}
             onChange={handleInput}
-            placeholder={t('channelSearchInputPlaceholder')}
+            placeholder={t('channel.nav.channelSearchInputPlaceholder')}
           />
           <button className={css.clearButton} type="button" onClick={() => setInput('')}>
             <TbX />

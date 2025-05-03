@@ -1,3 +1,5 @@
+import { TImageFormat, ThumbnailSize } from './type';
+
 export const generateVideoUrl = (videoId: string) => {
   return `https://www.youtube.com/watch?v=${videoId}`;
 };
@@ -5,8 +7,6 @@ export const generateVideoUrl = (videoId: string) => {
 export const generateChannelUrl = (channelId: string) => {
   return `https://www.youtube.com/channel/${channelId}`;
 };
-
-type TImageFormat = 'webp' | 'jpg' | 'png';
 
 const IMAGE_FORMAT_KEY_MAP: Record<TImageFormat, string> = {
   webp: 'rw',
@@ -49,43 +49,6 @@ export const generateChanneImagelUrl = (
   return src + '=' + parameter.join('-');
 };
 
-type ThumbnailSize =
-  | ThumbnailDefault
-  | ThumbnailMedium
-  | ThumbnailHigh
-  | ThumbnailStandard
-  | ThumbnailMaxres;
-
-type ThumbnailDefault = {
-  type: 'default';
-  width: 120;
-  height: 90;
-};
-
-type ThumbnailMedium = {
-  type: 'mqdefault';
-  width: 320;
-  height: 180;
-};
-
-type ThumbnailHigh = {
-  type: 'hqdefault';
-  width: 480;
-  height: 360;
-};
-
-type ThumbnailStandard = {
-  type: 'sddefault';
-  width: 640;
-  height: 480;
-};
-
-type ThumbnailMaxres = {
-  type: 'maxresdefault';
-  width: 1280;
-  height: 720;
-};
-
 export const generateThumbnail = (videoId: string, ThumbnailSize: ThumbnailSize['type']) => {
   const base = 'https://i.ytimg.com/vi';
   return base + '/' + videoId + '/' + ThumbnailSize + '.jpg';
@@ -97,6 +60,7 @@ export const generateThumbnail = (videoId: string, ThumbnailSize: ThumbnailSize[
 //   const match = url.match(regExp);
 //   return match ? match[1] : null;
 // }
+
 export const getYoutubeVideoId = (url: string): string | null => {
   const youtubeRegex =
     /^((?:https?:)?(?:\/\/)?)?((?:www|m)\.)?((?:youtube\.com|youtu.be))\/(?:embed\/|v\/|live\/|shorts\/|feeds\/api\/videos\/|watch\?v=|watch\?.+&v=)?([\w\-]{11})(\S+)?$/;

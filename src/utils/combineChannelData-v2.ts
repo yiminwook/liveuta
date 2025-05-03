@@ -1,11 +1,11 @@
+import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
 import { generateChannelUrl } from '@/libraries/youtube/url';
-import { TChannelData } from '@/types/api/mongoDB';
 import { TYChannelsData } from '@/types/api/youtube';
 import { youtube_v3 } from 'googleapis';
 
 // refactor
 export const combineYTData = (
-  channelData: Record<string, TChannelData>,
+  channelData: Record<string, TChannelDocumentWithoutId>,
   youtubeData: youtube_v3.Schema$Channel[],
 ) => {
   return youtubeData.reduce<TYChannelsData[]>((acc, curr) => {

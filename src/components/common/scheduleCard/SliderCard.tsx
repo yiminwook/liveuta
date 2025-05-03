@@ -1,5 +1,10 @@
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import {
+  STREAM_STATUS_MAPPER,
+  TChannelDocumentWithoutId,
+  TParsedClientContent,
+} from '@/libraries/mongodb/type';
 import { generateChanneImagelUrl, generateVideoUrl } from '@/libraries/youtube/url';
-import { STREAM_STATUS_MAPPER, TChannelData, TContentData } from '@/types/api/mongoDB';
 import FasStar from '@icons/fa-solid/Star';
 import IonPerson from '@icons/ion/Person';
 import IonPlus from '@icons/ion/PlusRound';
@@ -8,20 +13,19 @@ import MdiBlock from '@icons/mdi/Block';
 import TbBellRingingFilled from '@icons/tabler/BellRingingFilled';
 import { ActionIcon, Avatar, Badge, Card, Flex, Text, Tooltip } from '@mantine/core';
 import variable from '@variable';
-import { useTranslations } from 'next-intl';
 import CopyButton from '../button/CopyButton';
 import CardImage from './CardImage';
 import css from './SliderCard.module.scss';
 
 type SliderCardProps = {
-  content: TContentData;
-  channel: TChannelData | undefined;
+  content: TParsedClientContent;
+  channel: TChannelDocumentWithoutId | undefined;
   isFavorite?: boolean;
-  addAlarm?: (item: TContentData, channel: TChannelData | undefined) => void;
-  openNewTab?: (item: TContentData) => void;
-  toggleFavorite?: (item: TContentData) => void;
-  addBlock?: (item: TContentData) => void;
-  copy?: (item: TContentData) => void;
+  addAlarm?: (item: TParsedClientContent, channel: TChannelDocumentWithoutId | undefined) => void;
+  openNewTab?: (item: TParsedClientContent) => void;
+  toggleFavorite?: (item: TParsedClientContent) => void;
+  addBlock?: (item: TParsedClientContent) => void;
+  copy?: (item: TParsedClientContent) => void;
 };
 
 export default function SliderCard({
@@ -33,7 +37,7 @@ export default function SliderCard({
   toggleFavorite,
   addBlock,
 }: SliderCardProps) {
-  const t = useTranslations();
+  const { t } = useTranslations();
 
   const onClickAlarm = () => {
     addAlarm?.(content, channel);
@@ -58,15 +62,15 @@ export default function SliderCard({
         <Badge
           className={css.status}
           size="md"
-          data-status={STREAM_STATUS_MAPPER[content.isStream]}
+          data-status={STREAM_STATUS_MAPPER[content.broadcastStatus]}
           color={variable.thirdColorDefault}
-          leftSection={content.isStream === 'TRUE' && <IonPerson color="#fff" />}
+          leftSection={content.broadcastStatus === 'TRUE' && <IonPerson color="#fff" />}
         >
-          {content.isStream === 'TRUE'
+          {content.broadcastStatus === 'TRUE'
             ? new Intl.NumberFormat('kr', { notation: 'compact' })
                 .format(content.viewer)
                 .toLowerCase()
-            : STREAM_STATUS_MAPPER[content.isStream]}
+            : STREAM_STATUS_MAPPER[content.broadcastStatus]}
         </Badge>
       </Card.Section>
 

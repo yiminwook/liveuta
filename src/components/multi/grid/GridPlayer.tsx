@@ -1,7 +1,7 @@
 'use client';
 import { ORIGIN } from '@/constants';
+import { useTranslations } from '@/libraries/i18n/client';
 import classNames from 'classnames';
-import { useTranslations } from 'next-intl';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
 
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function GridPlayer({ url }: Props) {
-  const t = useTranslations();
+  const { t } = useTranslations();
 
   return (
     <ReactPlayer

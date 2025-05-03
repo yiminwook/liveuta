@@ -1,15 +1,20 @@
 import Background from '@/components/common/background/Background';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import AutoSync from './AutoSync';
 import css from './Home.module.scss';
 import LanguageSelect from './LanguageSelect';
 import ThemeSelect from './ThemeSelect';
 
-export default function Home() {
+type Props = {
+  locale: TLocaleCode;
+};
+
+export default function Home({ locale }: Props) {
   return (
     <Background>
       <div className={css.wrap}>
         <ThemeSelect />
-        <LanguageSelect />
+        <LanguageSelect locale={locale} />
         <AutoSync />
       </div>
     </Background>
