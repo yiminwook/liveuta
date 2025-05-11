@@ -4,8 +4,6 @@ import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { StreamFilter } from '@/types';
 import { TScheduleDto } from '@/types/dto';
-import { MaterialSymbolsInfoOutline } from '@icons/material-symbols/InfoOutline';
-import TablerChevronLeft from '@icons/tabler/ChevronLeft';
 import {
   ActionIcon,
   Button,
@@ -16,6 +14,8 @@ import {
   Tooltip,
   useMantineTheme,
 } from '@mantine/core';
+import { IconInfoCircle } from '@tabler/icons-react';
+import { IconChevronLeft } from '@tabler/icons-react';
 import variable from '@variable';
 import classNames from 'classnames';
 import { useSession } from 'next-auth/react';
@@ -108,7 +108,7 @@ export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
           <div className={css.header}>
             <div className={css.headerLeft}>
               <ActionIcon variant="outline" size="sm" onClick={toggleFlip}>
-                <TablerChevronLeft />
+                <IconChevronLeft />
               </ActionIcon>
             </div>
           </div>
@@ -123,14 +123,14 @@ export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
         <div className={css.header}>
           <div className={css.headerLeft}>
             <ActionIcon variant="outline" size="sm" onClick={toggleFlip}>
-              <TablerChevronLeft />
+              <IconChevronLeft />
             </ActionIcon>
           </div>
 
           <div className={css.headerRight}>
             <Tooltip label={'모바일 환경은 지원되지 않습니다.'} position="top" withArrow>
               <ActionIcon variant="transparent" size="compact-xs" radius="lg">
-                <MaterialSymbolsInfoOutline color={variable.thirdColorDefault} />
+                <IconInfoCircle color={variable.thirdColorDefault} />
               </ActionIcon>
             </Tooltip>
 

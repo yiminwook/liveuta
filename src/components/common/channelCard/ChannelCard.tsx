@@ -9,7 +9,7 @@ import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import { openWindow } from '@/utils/window-event';
-import FasStar from '@icons/fa-solid/Star';
+import { IconStarFilled } from '@tabler/icons-react';
 import { Session } from 'next-auth';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
@@ -116,7 +116,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
             onClick={handleFavorite}
             disabled={mutatePostFavorite.isPending || mutateDeleteFavorite.isPending}
           >
-            <FasStar width="1.2rem" height="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
+            <IconStarFilled size="1.2rem" color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
           </button>
           <h3>{channelName}</h3>
         </div>

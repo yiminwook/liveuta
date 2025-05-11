@@ -2,13 +2,16 @@ import { Link } from '@/libraries/i18n';
 import { useTranslations } from '@/libraries/i18n/client';
 import { usePathname } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import GgUserlane from '@icons/gg/Userlane';
-import IonIosMore from '@icons/ion/IosMore';
-import MsScheduleOutlineRounded from '@icons/material-symbols/ScheduleOutlineRounded';
-import RxPinTop from '@icons/radix-icons/PinTop';
-import TbHome from '@icons/tabler/Home';
-import TbList from '@icons/tabler/List';
 import { UnstyledButton } from '@mantine/core';
+import {
+  IconBrandYoutube,
+  IconBrandYoutubeFilled,
+  IconCircleArrowUp,
+  IconClockHour4,
+  IconDots,
+  IconHome,
+  IconList,
+} from '@tabler/icons-react';
 import { useEffect, useRef } from 'react';
 import css from './BottomInner.module.scss';
 
@@ -89,7 +92,7 @@ export default function BottomInner({ openDrawer, locale }: BottomInnerProps) {
         onClick={scrollUp}
         ref={topButtonRef}
       >
-        <RxPinTop width="2rem" height="2rem" />
+        <IconCircleArrowUp size="2rem" />
       </UnstyledButton>
       <ul className={css.list}>
         <li>
@@ -100,7 +103,7 @@ export default function BottomInner({ openDrawer, locale }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/setlist'}
           >
-            <TbList />
+            <IconList />
             <span>{t('global.bottomTab.bottomInner.setlist')}</span>
           </UnstyledButton>
         </li>
@@ -112,7 +115,7 @@ export default function BottomInner({ openDrawer, locale }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/channel'}
           >
-            <GgUserlane />
+            <IconBrandYoutubeFilled />
             <span>{t('global.bottomTab.bottomInner.channel')}</span>
           </UnstyledButton>
         </li>
@@ -124,7 +127,7 @@ export default function BottomInner({ openDrawer, locale }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/'}
           >
-            <TbHome />
+            <IconHome />
             <span>{t('global.bottomTab.bottomInner.home')}</span>
           </UnstyledButton>
         </li>
@@ -136,13 +139,13 @@ export default function BottomInner({ openDrawer, locale }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/schedule'}
           >
-            <MsScheduleOutlineRounded />
+            <IconClockHour4 />
             <span>{t('global.bottomTab.bottomInner.schedule')}</span>
           </UnstyledButton>
         </li>
         <li>
           <UnstyledButton className={css.item} onClick={openDrawer}>
-            <IonIosMore width="1.5rem" height="1.5rem" />
+            <IconDots size="1.5rem" />
             <span>{t('global.bottomTab.bottomInner.more')}</span>
           </UnstyledButton>
         </li>

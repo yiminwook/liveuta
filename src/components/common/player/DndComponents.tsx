@@ -22,8 +22,8 @@ import {
 } from '@dnd-kit/core';
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 import { AntDesignDragOutlined } from '@icons/antd/DragOutlined';
-import TablerX from '@icons/tabler/X';
 import { ActionIcon, Tooltip } from '@mantine/core';
+import { IconX } from '@tabler/icons-react';
 import classNames from 'classnames';
 import { CSSProperties, useState } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
@@ -170,7 +170,7 @@ function PipNav({
             classNames={{ root: classNames(dndCss.pipNavButton) }}
             onClick={onClickHide}
           >
-            <TablerX width={18} height={18} />
+            <IconX size={18} />
           </ActionIcon>
         </Tooltip>
       )}

@@ -1,13 +1,12 @@
 'use client';
 import { useTranslations } from '@/libraries/i18n/client';
-import TbCheck from '@icons/tabler/Check';
-import TbCopy from '@icons/tabler/Copy';
 import {
   ActionIcon,
   ActionIconProps,
   CopyButton as MantineCopyButton,
   Tooltip,
 } from '@mantine/core';
+import { IconCheck, IconCopy } from '@tabler/icons-react';
 import { CSSProperties } from 'react';
 
 interface CopyButtonProps {
@@ -43,11 +42,7 @@ export default function CopyButton({
             onClick={copy}
             size={buttonSize}
           >
-            {copied ? (
-              <TbCheck width={size} height={size} />
-            ) : (
-              <TbCopy width={size} height={size} />
-            )}
+            {copied ? <IconCheck size={size} /> : <IconCopy size={size} />}
           </ActionIcon>
         </Tooltip>
       )}

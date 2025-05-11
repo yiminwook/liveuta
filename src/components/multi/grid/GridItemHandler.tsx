@@ -1,5 +1,5 @@
-import X from '@/components/icons/tabler/X';
 import { AntDesignDragOutlined } from '@icons/antd/DragOutlined';
+import { IconX } from '@tabler/icons-react';
 import classNames from 'classnames';
 import { MouseEventHandler, Ref, TouchEventHandler } from 'react';
 import css from './Grid.module.scss';
@@ -26,7 +26,7 @@ export function DragHandle({ className, style, ref, children, ...props }: DragHa
 export function RemoveHandle({ onClick }: { onClick: () => void }) {
   return (
     <span className={classNames(css.remove)} onClick={onClick}>
-      <X color="#fff" width={20} height={20} />
+      <IconX color="#fff" size={20} />
     </span>
   );
 }

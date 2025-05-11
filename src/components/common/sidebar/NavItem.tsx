@@ -1,7 +1,7 @@
 import { usePathname } from '@/libraries/i18n/client';
-import TbChevronLeft from '@icons/tabler/ChevronLeft';
-import TbChevronRight from '@icons/tabler/ChevronRight';
 import { NavLink } from '@mantine/core';
+import { IconChevronLeft } from '@tabler/icons-react';
+import { IconChevronRight } from '@tabler/icons-react';
 import NextLink from 'next/link';
 
 type NavItemProps = {
@@ -22,22 +22,12 @@ export default function NavItem({ label, href, direction, children }: NavItemPro
       active={pathname === href}
       leftSection={
         direction === 'ltr' && (
-          <TbChevronLeft
-            width="0.8rem"
-            height="0.8rem"
-            stroke="1.5px"
-            className="mantine-rotate-ltr"
-          />
+          <IconChevronLeft size="0.8rem" stroke="1.5px" className="mantine-rotate-ltr" />
         )
       }
       rightSection={
         direction === 'rtl' && (
-          <TbChevronRight
-            width="0.8rem"
-            height="0.8rem"
-            stroke="1.5px"
-            className="mantine-rotate-rtl"
-          />
+          <IconChevronRight size="0.8rem" stroke="1.5px" className="mantine-rotate-rtl" />
         )
       }
     >

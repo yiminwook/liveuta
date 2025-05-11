@@ -1,10 +1,9 @@
 'use client';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TChannelDto } from '@/libraries/mongodb/channels';
-import IonIosSearch from '@icons/ion/IosSearch';
-import TbX from '@icons/tabler/X';
 import { Button, Flex, SegmentedControl, TextInput, UnstyledButton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { IconSearch, IconX } from '@tabler/icons-react';
 import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
@@ -69,11 +68,11 @@ export default function Nav() {
             placeholder={t('channel.nav.channelSearchInputPlaceholder')}
           />
           <button className={css.clearButton} type="button" onClick={() => setInput('')}>
-            <TbX />
+            <IconX />
           </button>
         </div>
         <UnstyledButton className={css.submit} type="submit">
-          <IonIosSearch color="#fff" />
+          <IconSearch color="#fff" />
         </UnstyledButton>
       </form>
     </div>

@@ -2,8 +2,8 @@
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TYChannelsData } from '@/types/api/youtube';
 import { renderSubscribe } from '@/utils/renderSubscribe';
-import IonIosMore from '@icons/ion/IosMore';
 import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
+import { IconDots } from '@tabler/icons-react';
 import variable from '@variable';
 import { useRouter } from 'next-nprogress-bar';
 import { useRef } from 'react';
@@ -65,7 +65,7 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
                       className="swiper-no-swiping" // 슬라이드 이동 방지해야 hover 가능
                       w="100%"
                     >
-                      <IonIosMore width="1.5rem" height="1.5rem" />
+                      <IconDots size="1.5rem" />
                     </Button>
                   </Center>
                 </HoverCard.Target>

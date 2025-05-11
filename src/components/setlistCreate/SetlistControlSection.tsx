@@ -3,9 +3,9 @@ import Show from '@/components/common/utils/Show';
 import { useTranslations } from '@/libraries/i18n/client';
 import { testYoutubeUrl } from '@/utils/regexp';
 import { secondsToHMS } from '@/utils/time';
-import TbCirclePlus from '@icons/tabler/CirclePlus';
 import { ActionIcon, Button, TextInput } from '@mantine/core';
 import { Checkbox } from '@mantine/core';
+import { IconCirclePlus } from '@tabler/icons-react';
 import { ChangeEvent, createRef, useEffect, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import {
@@ -60,7 +60,7 @@ export function SetlistItemInput() {
         onChange={(e) => setInput(e.currentTarget.value)}
       />
       <ActionIcon className={css.addButton} variant="ghost" onClick={handleAdd}>
-        <TbCirclePlus />
+        <IconCirclePlus />
       </ActionIcon>
     </>
   );

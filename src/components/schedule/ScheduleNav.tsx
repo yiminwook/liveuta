@@ -2,9 +2,9 @@
 import { Link } from '@/libraries/i18n';
 import { useLocale } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
-import { IcBaselineMonitor } from '@icons/material-symbols/BaselineMonitor';
 import { ActionIcon } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { IconDeviceDesktop } from '@tabler/icons-react';
 import variable from '@variable';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
@@ -55,7 +55,7 @@ export default function ScheduleNav({ session, scheduleDto, length }: NavSection
             variant="default"
             size="lg"
           >
-            <IcBaselineMonitor width="1.5rem" height="1.5rem" color="inherit" />
+            <IconDeviceDesktop size="1.5rem" color="inherit" />
           </ActionIcon>
         )}
       </div>

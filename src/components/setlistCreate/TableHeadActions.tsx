@@ -1,9 +1,8 @@
 'use client';
 import CodiconClearAll from '@icons/codicon/ClearAll';
-import TbCopy from '@icons/tabler/Copy';
-import TbX from '@icons/tabler/X';
 import { ActionIcon } from '@mantine/core';
 import { Checkbox } from '@mantine/core';
+import { IconCopy, IconX } from '@tabler/icons-react';
 import cx from 'classnames';
 import { useShallow } from 'zustand/react/shallow';
 import { copy, useSetlistActions, useSetlistStore } from './Context';
@@ -25,7 +24,7 @@ function CopyButton() {
       className={css.actionButton}
       onClick={() => copy(setlist.filter((item) => item.checked))}
     >
-      <TbCopy />
+      <IconCopy />
     </ActionIcon>
   );
 }
@@ -41,7 +40,7 @@ export function TableHeadActions() {
       <div className={css.emptyIcon}></div>
       <CopyButton />
       <ActionIcon variant="ghost" className={css.actionButton} onClick={removeChecked}>
-        <TbX />
+        <IconX />
       </ActionIcon>
     </div>
   );

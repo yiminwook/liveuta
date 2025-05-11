@@ -5,8 +5,8 @@ import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { ModalProps, useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
-import FasFilter from '@icons/fa-solid/Filter';
 import { Button, CloseButton } from '@mantine/core';
+import { IconFilter } from '@tabler/icons-react';
 import variable from '@variable';
 import classNames from 'classnames';
 import { useSession } from 'next-auth/react';
@@ -104,7 +104,7 @@ export default function ScheduleNavModal({
         <div className={css.searchBox}>
           {searchParams.get('q') && (
             <div className={css.queryStatBox}>
-              <FasFilter color={variable.thirdColorDefault} />
+              <IconFilter color={variable.thirdColorDefault} />
               <span>
                 {t('schedule.scheduleNavModal.filtering')}:&nbsp;{searchParams.get('q')}
               </span>

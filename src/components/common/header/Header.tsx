@@ -4,8 +4,8 @@ import { Link } from '@/libraries/i18n';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { useSetAppStore } from '@/stores/app';
-import IonIosSearch from '@icons/ion/IosSearch';
 import { Avatar, Skeleton } from '@mantine/core';
+import { IconSearch } from '@tabler/icons-react';
 import { useSession } from 'next-auth/react';
 import { useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -59,7 +59,7 @@ export default function Header({ locale }: HeaderProps) {
           </Link>
           <div className={css.right}>
             <button onClick={() => setCmdOpen(true)} className={css.searchBtn}>
-              <IonIosSearch width={20} height={20} />
+              <IconSearch size={20} />
               <span>{t('global.header.search')}</span>
               <div className={css.cmdShortcut}>⌘+K</div>
             </button>

@@ -11,10 +11,9 @@ import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetPlayerStore } from '@/stores/player';
 import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { openWindow } from '@/utils/window-event';
-import BiMusicNoteList from '@icons/bi/MusicNoteList';
-import IonArrowBack from '@icons/ion/ArrowBack';
 import LogosYoutubeIcon from '@icons/logos/YouTubeIcon';
 import { Avatar, Button } from '@mantine/core';
+import { IconArrowBack, IconMusic } from '@tabler/icons-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import cx from 'classnames';
 import { Session } from 'next-auth';
@@ -81,7 +80,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
           variant="transparent"
           onClick={() => router.back()}
         >
-          <IonArrowBack width="1.2rem" height="1.2rem" />
+          <IconArrowBack size="1.2rem" />
           <span>{t('setlistId.info.back')}</span>
         </Button>
         <div className={css.navRight}>
@@ -116,7 +115,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
             variant="transparent"
             href="/setlist"
           >
-            <BiMusicNoteList width="1.2rem" height="1.2rem" />
+            <IconMusic size="1.2rem" />
             {t('setlistId.info.list')}
           </Button>
         </div>

@@ -4,8 +4,8 @@ import CopyButton from '@/components/common/button/CopyButton';
 import PasteButton from '@/components/common/button/PasteButton';
 import { useDebounce } from '@/hooks/use-debounce';
 import { useTranslations } from '@/libraries/i18n/client';
-import { MdiSwapVertical } from '@icons/mdi/swap-vertical';
 import { ActionIcon, NumberInput, Switch, Textarea, Tooltip } from '@mantine/core';
+import { IconTransferVertical } from '@tabler/icons-react';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useUtilsBreadcrumbContext } from '../../common/BreadcrumbContext';
 import {
@@ -130,7 +130,7 @@ function Swap() {
   return (
     <Tooltip label={t('utils.converters.base64.swap')} withArrow position="right">
       <ActionIcon size={48} variant="outline" color="gray" onClick={handleSwap}>
-        <MdiSwapVertical width={32} height={32} />
+        <IconTransferVertical size={32} />
       </ActionIcon>
     </Tooltip>
   );

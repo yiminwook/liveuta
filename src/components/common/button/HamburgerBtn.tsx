@@ -1,4 +1,4 @@
-import RxHamburgerMenu from '@icons/radix-icons/HamburgerMenu';
+import { IconMenu2 } from '@tabler/icons-react';
 import classNames from 'classnames';
 import css from './HamburgerBtn.module.scss';
 
@@ -11,7 +11,7 @@ type HamburgerBtnProps = {
 export default function HamburgerBtn({ className, onClick }: HamburgerBtnProps) {
   return (
     <button className={classNames(css.button, className)} onClick={onClick}>
-      <RxHamburgerMenu width="2rem" height="2rem" color="inherit" />
+      <IconMenu2 size="2rem" color="inherit" />
     </button>
   );
 }
