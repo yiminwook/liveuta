@@ -2,7 +2,7 @@
 import { clientApi } from '@/apis/fetcher';
 import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import { useMount } from '@/hooks/use-mount';
-import LogosYoutubeIcon from '@/icons/logos-youtube-icon.svg?react';
+import { LogosYoutubeIcon } from '@/icons';
 import dayjs from '@/libraries/dayjs';
 import { Link } from '@/libraries/i18n';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';

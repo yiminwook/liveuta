@@ -1,4 +1,4 @@
-import AntDesignDragOutlined from '@/icons/ant-design-drag-outlined.svg?react';
+import { AntDesignDragOutlined } from '@/icons';
 import { IconX } from '@tabler/icons-react';
 import classNames from 'classnames';
 import { MouseEventHandler, Ref, TouchEventHandler } from 'react';

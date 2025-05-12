@@ -1,0 +1,32 @@
+.wrap {
+  padding: 1rem;
+}
+
+.grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, 150px);
+}
+
+.container {
+  text-align: center;
+  cursor: pointer;
+}
+
+.iconBox {
+  @extend %flex-center;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+
+.label {
+  display: inline-block;
+  font-size: 0.75rem;
+  margin-top: 0.2rem;
+  letter-spacing: 0.025em;
+}

@@ -7,7 +7,7 @@ import {
   TCorner,
   transfromStringToConer,
 } from '@/constants/pip';
-import AntDesignDragOutlined from '@/icons/ant-design-drag-outlined.svg?react';
+import { AntDesignDragOutlined } from '@/icons';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { getBoxPositionStyle } from '@/utils/helper';

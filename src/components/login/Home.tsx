@@ -1,8 +1,6 @@
 'use client';
 import character from '@/assets/image/character-3.png';
-import LogosDiscordIcon from '@/icons/logos-discord-icon.svg?react';
-import LogosGoogleIcon from '@/icons/logos-google-icon.svg?react';
-import RiKakaoTalkFill from '@/icons/ri-kakao-talk-fill.svg?react';
+import { LogosDiscordIcon, LogosGoogleIcon, RiKakaoTalkFill } from '@/icons';
 import { useTranslations } from '@/libraries/i18n/client';
 import { Provider } from '@/types/next-auth';
 import { ActionIcon } from '@mantine/core';
