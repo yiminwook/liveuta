@@ -1,5 +1,5 @@
 'use client';
-import CodiconClearAll from '@icons/codicon/ClearAll';
+import CodiconClearAll from '@/icons/codicon-clear-all.svg?react';
 import { ActionIcon } from '@mantine/core';
 import { Checkbox } from '@mantine/core';
 import { IconCopy, IconX } from '@tabler/icons-react';

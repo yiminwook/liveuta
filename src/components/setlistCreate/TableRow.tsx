@@ -1,7 +1,7 @@
 'use client';
+import CodiconClearAll from '@/icons/codicon-clear-all.svg?react';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { hmsToString } from '@/utils/time';
-import CodiconClearAll from '@icons/codicon/ClearAll';
 import { ActionIcon, Checkbox, Popover, TextInput, UnstyledButton } from '@mantine/core';
 import { IconClipboard, IconCopy, IconGripVertical, IconX } from '@tabler/icons-react';
 import { Reorder, useDragControls } from 'framer-motion';

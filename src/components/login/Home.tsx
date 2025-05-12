@@ -1,10 +1,10 @@
 'use client';
 import character from '@/assets/image/character-3.png';
+import LogosDiscordIcon from '@/icons/logos-discord-icon.svg?react';
+import LogosGoogleIcon from '@/icons/logos-google-icon.svg?react';
+import RiKakaoTalkFill from '@/icons/ri-kakao-talk-fill.svg?react';
 import { useTranslations } from '@/libraries/i18n/client';
 import { Provider } from '@/types/next-auth';
-import LogosDiscordIcon from '@icons/logos/DiscordIcon';
-import LogosGoogleIcon from '@icons/logos/GoogleIcon';
-import RiKakaoTalkFill from '@icons/ri/KakaoTalkFilled';
 import { ActionIcon } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import { signIn } from 'next-auth/react';

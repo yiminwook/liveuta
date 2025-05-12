@@ -1,8 +1,8 @@
 'use client';
+import CodiconClearAll from '@/icons/codicon-clear-all.svg?react';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import CodiconClearAll from '@icons/codicon/ClearAll';
-import { IconCheck } from "@tabler/icons-react";
 import { ActionIcon, ActionIconProps, Tooltip } from '@mantine/core';
+import { IconCheck } from '@tabler/icons-react';
 import { useCallback, useState } from 'react';
 import Show from '../utils/Show';
 

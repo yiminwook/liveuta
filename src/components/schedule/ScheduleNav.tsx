@@ -55,7 +55,7 @@ export default function ScheduleNav({ session, scheduleDto, length }: NavSection
             variant="default"
             size="lg"
           >
-            <IconDeviceDesktop size="1.5rem" color="inherit" />
+            <IconDeviceDesktop size="1.5rem" />
           </ActionIcon>
         )}
       </div>

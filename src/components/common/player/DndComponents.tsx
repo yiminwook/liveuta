@@ -7,6 +7,7 @@ import {
   TCorner,
   transfromStringToConer,
 } from '@/constants/pip';
+import AntDesignDragOutlined from '@/icons/ant-design-drag-outlined.svg?react';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { getBoxPositionStyle } from '@/utils/helper';
@@ -21,7 +22,6 @@ import {
   useDroppable,
 } from '@dnd-kit/core';
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
-import { AntDesignDragOutlined } from '@icons/antd/DragOutlined';
 import { ActionIcon, Tooltip } from '@mantine/core';
 import { IconX } from '@tabler/icons-react';
 import classNames from 'classnames';
