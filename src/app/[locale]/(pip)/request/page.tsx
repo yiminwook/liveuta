@@ -1,5 +1,6 @@
 import Iframe from '@/components/common/Iframe';
 import Background from '@/components/common/background/Background';
+import Home from '@/components/request/Home';
 import { TLocaleCode } from '@/libraries/i18n/type';
 
 type Props = {
@@ -12,7 +13,8 @@ export default async function Page(props: Props) {
 
   return (
     <Background>
-      <Iframe url={process.env.NEXT_PUBLIC_REQUEST_URL} />
+      {/* <Iframe url={process.env.NEXT_PUBLIC_REQUEST_URL} /> */}
+      <Home />
     </Background>
   );
 }

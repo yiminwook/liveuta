@@ -388,7 +388,15 @@
     }
   },
   "request": {
-    "title": "요청"
+    "title": "요청",
+    "requestForm": {
+      "channelNameInputLabel": "채널 이름",
+      "channelAddressInputLabel": "채널 주소"
+    },
+    "waitingList": {
+      "channelName": "채널 이름",
+      "noWaitingList": "대기중인 버튜버가 없습니다."
+    }
   },
   "setlist": {
     "title": "세트리",

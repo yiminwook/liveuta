@@ -387,7 +387,16 @@
     }
   },
   "request": {
-    "title": "Request"
+    "title": "Request",
+    "requestForm": {
+      "channelNameInputLabel": "Channel Name",
+      "channelAddressInputLabel": "Channel Address",
+      "submit": "Submit"
+    },
+    "waitingList": {
+      "channelName": "Channel Name",
+      "noWaitingList": "No Waiting List."
+    }
   },
   "setlist": {
     "title": "Setlist",

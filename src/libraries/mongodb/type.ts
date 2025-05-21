@@ -1,4 +1,5 @@
 import dayjs from '@/libraries/dayjs';
+import { Schema } from 'effect';
 import { youtube_v3 } from 'googleapis';
 
 export type TStream = 'TRUE' | 'NULL' | 'FALSE';
@@ -23,6 +24,7 @@ export type TChannelDocument = {
 };
 
 export type TChannelDocumentWithoutId = Omit<TChannelDocument, '_id'>;
+export type WaitingListItem = Pick<TChannelDocument, 'channel_addr' | 'name_kor'>;
 export type TChannelRecord = Record<string, TChannelDocumentWithoutId>;
 
 export type TContentDocument = {

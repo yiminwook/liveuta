@@ -381,7 +381,15 @@
     }
   },
   "request": {
-    "title": "リクエスト"
+    "title": "リクエスト",
+    "requestForm": {
+      "channelAddressInputLabel": "チャンネルアドレス",
+      "channelNameInputLabel": "チャンネル名"
+    },
+    "waitingList": {
+      "channelName": "チャンネル名",
+      "noWaitingList": "待機列が空いています"
+    }
   },
   "setlist": {
     "title": "セットリスト",

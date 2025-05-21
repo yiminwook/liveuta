@@ -1,5 +1,6 @@
 export const METADATAS_TAG = 'metadatas';
 export const CHANNELS_TAG = 'channels';
+export const WAITING_TAG = 'waiting';
 export const FEATURED_TAG = 'featured';
 export const SCHEDULES_TAG = 'schedules';
 export const MEMBER_TAG = 'member'; // 단건
