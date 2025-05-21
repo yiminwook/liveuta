@@ -1,7 +1,6 @@
-import { parse } from 'url';
 import { MONGODB_CHANNEL_COLLECTION, MONGODB_MANAGEMENT_DB } from '@/constants';
 import { Data, Effect } from 'effect';
-import { Collection, Document, MongoClient } from 'mongodb';
+import { Collection } from 'mongodb';
 import { mongoDB } from '.';
 import { getYoutubeChannelByHandle, getYoutubeChannelsByUid } from '../youtube';
 import { TChannelDocument, TChannelDocumentWithoutId } from './type';
