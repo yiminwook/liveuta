@@ -20,7 +20,7 @@ export const useAutoCompleteQuery = () => {
   });
 };
 
-export const useSumitChannelMutation = () => {
+export const useSubmitChannelMutation = () => {
   return useMutation({
     mutationFn: (arg: {
       channelName: string;

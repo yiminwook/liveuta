@@ -14,7 +14,7 @@ export default async function Page(props: Props) {
   return (
     <Background>
       {/* <Iframe url={process.env.NEXT_PUBLIC_REQUEST_URL} /> */}
-      <Home />
+      <Home locale={locale} />
     </Background>
   );
 }

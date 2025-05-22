@@ -1,6 +1,6 @@
 'use client';
 import Show from '@/components/common/utils/Show';
-import { useAutoCompleteQuery, useSumitChannelMutation } from '@/hooks/use-proxy';
+import { useAutoCompleteQuery, useSubmitChannelMutation } from '@/hooks/use-proxy';
 import { CodiconClearAll } from '@/icons';
 import { useLocale } from '@/libraries/i18n/client';
 import { useTranslations } from '@/libraries/i18n/client';
@@ -20,19 +20,6 @@ function ClearButton() {
   const { t } = useTranslations();
 
   const [cleared, setCleared] = useState(false);
-
-  // const [channelName, setChannelName] = useState('');
-  // const [channelAddress, setChannelAddress] = useState('');
-
-  // const onChannelNameChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-  //   setChannelName(e.currentTarget.value);
-  // }, []);
-
-  // const onChannelAddressChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-  //   setChannelAddress(e.currentTarget.value);
-  // }, []);
-
-  // const onSubmit = useCallback(() => {}, [channelName, channelAddress]);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -96,7 +83,7 @@ export default function RequestForm() {
   const { data: autoComplete } = useAutoCompleteQuery();
   // console.log('autoComplete', autoComplete);
 
-  const mutation = useSumitChannelMutation();
+  const mutation = useSubmitChannelMutation();
 
   const onSubmit = (data: TForm) => {
     if (mutation.isPending) return;
@@ -108,7 +95,7 @@ export default function RequestForm() {
         ]);
 
         form.reset();
-        toast.success('채널 추가 요청이 완료되었습니다.');
+        toast.success(t('request.requestForm.submitSuccess'));
       },
       onError: (error) => toast.error(error.message),
     });
@@ -152,7 +139,7 @@ export default function RequestForm() {
         <Button variant="filled" size="md" type="submit" loading={mutation.isPending}>
           <div className={css.buttonInner}>
             <IconSend2 width="1.2rem" height="1.2rem" />
-            <span>제출</span>
+            <span>{t('request.requestForm.submit')}</span>
           </div>
         </Button>
       </div>

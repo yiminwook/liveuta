@@ -1,35 +1,31 @@
-import { serverApi } from '@/apis/fetcher';
-import { WAITING_TAG } from '@/constants/revalidate-tag';
 import { Spinner180Ring } from '@/icons';
-import type { WaitingListItem } from '@/libraries/mongodb/type';
-import { ActionIcon } from '@mantine/core';
-import { IconArrowBack, IconArrowBigLeftFilled } from '@tabler/icons-react';
+import { getTranslations } from '@/libraries/i18n/server';
+import { TLocaleCode } from '@/libraries/i18n/type';
 import { Suspense } from 'react';
 import GoBack from './go-back';
 import css from './home.module.scss';
 import RequestForm from './request-form';
 import WaitingList from './waiting-list';
 
-export default async function Home() {
-  // const waitingList = await serverApi
-  //   .get<{ data: WaitingListItem[] }>(`v1/channel/waiting`, {
-  //     next: { revalidate: 1800, tags: [WAITING_TAG] },
-  //   })
-  //   .json()
-  //   .then((json) => json.data);
+type HomeProps = {
+  locale: TLocaleCode;
+};
+
+export default async function Home({ locale }: HomeProps) {
+  const { t } = await getTranslations(locale);
 
   return (
     <div className={css.wrap}>
       <div>
         <div className={css.requestFormHeader}>
           <GoBack />
-          <p className={css.requestChannel}>채널 등록</p>
+          <p className={css.requestChannel}>{t('request.home.requestChannel')}</p>
         </div>
         <RequestForm />
       </div>
       <div>
         <div>
-          <p className={css.waitingChannels}>대기중인 채널</p>
+          <p className={css.waitingChannels}>{t('request.home.waitingList')}</p>
         </div>
         <Suspense
           fallback={

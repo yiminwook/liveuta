@@ -384,11 +384,17 @@
     "title": "リクエスト",
     "requestForm": {
       "channelAddressInputLabel": "チャンネルアドレス",
-      "channelNameInputLabel": "チャンネル名"
+      "channelNameInputLabel": "チャンネル名",
+      "submit": "提出",
+      "submitSuccess": "チャンネル追加リクエストが完了しました。"
     },
     "waitingList": {
       "channelName": "チャンネル名",
       "noWaitingList": "待機列が空いています"
+    },
+    "home": {
+      "requestChannel": "チャンネル登録",
+      "waitingList": "待機中のチャンネル"
     }
   },
   "setlist": {

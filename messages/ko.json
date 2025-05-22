@@ -391,11 +391,17 @@
     "title": "요청",
     "requestForm": {
       "channelNameInputLabel": "채널 이름",
-      "channelAddressInputLabel": "채널 주소"
+      "channelAddressInputLabel": "채널 주소",
+      "submit": "제출",
+      "submitSuccess": "채널 추가 요청이 완료되었습니다."
     },
     "waitingList": {
       "channelName": "채널 이름",
       "noWaitingList": "대기중인 버튜버가 없습니다."
+    },
+    "home": {
+      "requestChannel": "채널 등록",
+      "waitingList": "대기중인 채널"
     }
   },
   "setlist": {

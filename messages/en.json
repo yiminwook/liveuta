@@ -391,11 +391,16 @@
     "requestForm": {
       "channelNameInputLabel": "Channel Name",
       "channelAddressInputLabel": "Channel Address",
-      "submit": "Submit"
+      "submit": "Submit",
+      "submitSuccess": "Successfully requested new vtuber"
     },
     "waitingList": {
       "channelName": "Channel Name",
       "noWaitingList": "No Waiting List."
+    },
+    "home": {
+      "requestChannel": "Request Channel",
+      "waitingList": "Waiting List"
     }
   },
   "setlist": {

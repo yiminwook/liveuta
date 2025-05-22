@@ -6,9 +6,7 @@ import { useTranslations } from '@/libraries/i18n/client';
 import { Anchor } from '@mantine/core';
 import css from './waiting-list.module.scss';
 
-type WaitingListProps = {};
-
-export default function WaitingList({}: WaitingListProps) {
+export default function WaitingList() {
   const { t } = useTranslations();
 
   const { data } = useWaitingListSuspenseQuery();
@@ -38,7 +36,7 @@ export default function WaitingList({}: WaitingListProps) {
         </ul>
       </Show>
       <Show when={data.length === 0}>
-        <div>대기중인 버튜버가 없습니다.{t('request.waitingList.noWaitingList')}</div>
+        <div>{t('request.waitingList.noWaitingList')}</div>
       </Show>
     </div>
   );
