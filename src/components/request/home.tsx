@@ -5,18 +5,18 @@ import type { WaitingListItem } from '@/libraries/mongodb/type';
 import { ActionIcon } from '@mantine/core';
 import { IconArrowBack, IconArrowBigLeftFilled } from '@tabler/icons-react';
 import { Suspense } from 'react';
-import css from './Home.module.scss';
-import RequestForm from './RequestFrom';
-import WaitingList from './WaitingList';
-import GoBack from './GoBack';
+import GoBack from './go-back';
+import css from './home.module.scss';
+import RequestForm from './request-form';
+import WaitingList from './waiting-list';
 
 export default async function Home() {
-  const waitingList = await serverApi
-    .get<{ data: WaitingListItem[] }>(`v1/channel/waiting`, {
-      next: { revalidate: 1800, tags: [WAITING_TAG] },
-    })
-    .json()
-    .then((json) => json.data);
+  // const waitingList = await serverApi
+  //   .get<{ data: WaitingListItem[] }>(`v1/channel/waiting`, {
+  //     next: { revalidate: 1800, tags: [WAITING_TAG] },
+  //   })
+  //   .json()
+  //   .then((json) => json.data);
 
   return (
     <div className={css.wrap}>
@@ -38,7 +38,7 @@ export default async function Home() {
             </div>
           }
         >
-          <WaitingList waitingList={waitingList} />
+          <WaitingList />
         </Suspense>
       </div>
     </div>

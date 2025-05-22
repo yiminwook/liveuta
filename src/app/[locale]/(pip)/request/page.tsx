@@ -1,6 +1,6 @@
 import Iframe from '@/components/common/Iframe';
 import Background from '@/components/common/background/Background';
-import Home from '@/components/request/Home';
+import Home from '@/components/request/home';
 import { TLocaleCode } from '@/libraries/i18n/type';
 
 type Props = {

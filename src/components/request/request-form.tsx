@@ -1,6 +1,6 @@
 'use client';
-
 import Show from '@/components/common/utils/Show';
+import { useAutoCompleteQuery, useSumitChannelMutation } from '@/hooks/use-proxy';
 import { CodiconClearAll } from '@/icons';
 import { useLocale } from '@/libraries/i18n/client';
 import { useTranslations } from '@/libraries/i18n/client';
@@ -8,10 +8,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, TextInput } from '@mantine/core';
 import { IconSend2 } from '@tabler/icons-react';
 import { IconCheck } from '@tabler/icons-react';
+import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
-import css from './RequestForm.module.scss';
+import css from './request-form.module.scss';
 
 function ClearButton() {
   const locale = useLocale();
@@ -74,32 +76,42 @@ function ClearButton() {
 
 const formDto = z.object({
   channelName: z.string().min(1),
-  channelAddress: z.string().min(1).url(),
+  channelURL: z.string().min(1).url(),
 });
 
 type TForm = z.infer<typeof formDto>;
 
 export default function RequestForm() {
   const { t } = useTranslations();
+  const queryClient = useQueryClient();
 
   const form = useForm<TForm>({
     defaultValues: {
       channelName: '',
-      channelAddress: '',
+      channelURL: '',
     },
     resolver: zodResolver(formDto),
   });
 
-  const onSubmit = (data: TForm) => {
-    try {
-      console.log('data', data);
+  const { data: autoComplete } = useAutoCompleteQuery();
+  // console.log('autoComplete', autoComplete);
 
-      throw new Error('test');
-    } catch (error) {
-      console.error(error);
-      form.setError('root', { message: error instanceof Error ? error.message : 'example error' });
-      //or toast.error("example error")
-    }
+  const mutation = useSumitChannelMutation();
+
+  const onSubmit = (data: TForm) => {
+    if (mutation.isPending) return;
+    mutation.mutate(data, {
+      onSuccess: async () => {
+        await Promise.all([
+          queryClient.invalidateQueries({ queryKey: ['autoComplete'] }),
+          queryClient.invalidateQueries({ queryKey: ['waitingList'] }),
+        ]);
+
+        form.reset();
+        toast.success('채널 추가 요청이 완료되었습니다.');
+      },
+      onError: (error) => toast.error(error.message),
+    });
   };
 
   return (
@@ -120,14 +132,14 @@ export default function RequestForm() {
         />
 
         <Controller
-          name="channelAddress"
+          name="channelURL"
           control={form.control}
           render={({ field }) => (
             <TextInput
               {...field}
               label={t('request.requestForm.channelAddressInputLabel')}
               placeholder="https://www.youtube.com/@Ado1024"
-              error={form.formState.errors.channelAddress?.message}
+              error={form.formState.errors.channelURL?.message}
               required
               type="url"
             />
@@ -135,13 +147,9 @@ export default function RequestForm() {
         />
       </div>
 
-      {form.formState.errors.root && (
-        <p className="example">{form.formState.errors.root.message}</p>
-      )}
-
       <div className={css.buttons}>
         <ClearButton />
-        <Button variant="filled" size="md" type="submit">
+        <Button variant="filled" size="md" type="submit" loading={mutation.isPending}>
           <div className={css.buttonInner}>
             <IconSend2 width="1.2rem" height="1.2rem" />
             <span>제출</span>
