@@ -11,6 +11,7 @@ import { renderSubscribe } from '@/utils/renderSubscribe';
 import { openWindow } from '@/utils/window-event';
 import { IconStarFilled } from '@tabler/icons-react';
 import { Session } from 'next-auth';
+import { useRouter } from 'next-nprogress-bar';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
 import { isDesktop } from 'react-device-detect';
@@ -27,6 +28,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
   const { nameKor: channelName, snippet, url, statistics, uid } = content;
   const locale = useLocale();
   const { t } = useTranslations();
+  const router = useRouter();
   const title = snippet?.title ?? '';
   const imageURL = snippet?.thumbnails?.default?.url ?? '/loading.png';
   const description = snippet?.description ?? t('channel.channelCard.hidden');
@@ -37,6 +39,10 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
 
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
+
+  const onCardClick = () => {
+    router.push(`channel/${uid}`);
+  };
 
   const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) => {
     e.stopPropagation();
@@ -54,7 +60,9 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
     }
   };
 
-  const openModal = async () => {
+  const openModal = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+
     gtagClick({
       target: 'channelCard',
       content: channelName,
@@ -76,7 +84,9 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
     });
   };
 
-  const handleFavorite = () => {
+  const handleFavorite = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+
     if (!session) {
       toast.error(t('channel.channelCard.notLoggedInError'));
       return;
@@ -96,7 +106,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
   };
 
   return (
-    <div className={css.channelCard}>
+    <div className={css.channelCard} onClick={onCardClick}>
       <a href={url} onClick={linkClickEvent}>
         <div className={css.imageContainer}>
           <Image

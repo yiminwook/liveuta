@@ -1,4 +1,5 @@
 export const METADATAS_TAG = 'metadatas';
+export const CHANNEL_TAG = 'channel';
 export const CHANNELS_TAG = 'channels';
 export const WAITING_TAG = 'waiting';
 export const FEATURED_TAG = 'featured';

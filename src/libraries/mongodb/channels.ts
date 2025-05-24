@@ -5,9 +5,11 @@ import {
   WaitingListItem,
 } from '@/libraries/mongodb/type';
 import { combineChannelData } from '@/utils/combineChannelData';
+import { combineSingleYTData } from '@/utils/combineChannelData-v2';
 import { addEscapeCharacter } from '@/utils/regexp';
 import { z } from 'zod';
 import { connectMongoDB } from '.';
+import { getYoutubeChannelsByUid } from '../youtube';
 
 export const channelDto = z.object({
   query: z.string().nullish(),
@@ -74,6 +76,32 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
   const combinedChannelContents = await combineChannelData(channelRecord, { sort: sort });
 
   return { contents: combinedChannelContents, total, totalPage };
+};
+
+export const getChannelWithYoutubeById = async (channelId: string) => {
+  const db = await connectMongoDB(MONGODB_MANAGEMENT_DB, MONGODB_CHANNEL_COLLECTION);
+  const channel = await db.findOne<TChannelDocumentWithoutId>(
+    {
+      channel_id: channelId,
+    },
+    {
+      projection: { _id: 0 },
+    },
+  );
+
+  if (!channel) {
+    throw new Error(`Channel with ID ${channelId} not found`);
+  }
+
+  const youtubeData = await getYoutubeChannelsByUid(channelId);
+
+  const singleYoutubeData = youtubeData.items?.[0];
+
+  if (!singleYoutubeData) {
+    throw new Error(`YouTube data for channel ID ${channelId} not found`);
+  }
+
+  return combineSingleYTData(channel, singleYoutubeData);
 };
 
 export const parseChannel = (channel: TChannelDocument | null) => ({

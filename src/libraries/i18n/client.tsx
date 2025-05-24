@@ -1,4 +1,6 @@
 'use client';
+import { Locale } from '@/types/site-config';
+import { useRouter } from 'next-nprogress-bar';
 import { useParams } from 'next/navigation';
 import { usePathname as useNextPathname } from 'next/navigation';
 import { useEffect, useState } from 'react';

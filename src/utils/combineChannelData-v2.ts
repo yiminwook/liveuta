@@ -26,3 +26,17 @@ export const combineYTData = (
     return acc;
   }, []);
 };
+
+export function combineSingleYTData(
+  channelData: TChannelDocumentWithoutId,
+  youtubeData: youtube_v3.Schema$Channel,
+): TYChannelsData {
+  return {
+    ...youtubeData,
+    uid: channelData.channel_id,
+    nameKor: channelData.name_kor,
+    createdAt: channelData.createdAt,
+    url: generateChannelUrl(channelData.channel_id),
+    alive: channelData.alive,
+  };
+}
