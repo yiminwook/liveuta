@@ -18,3 +18,11 @@
   gap: 0.5rem;
   align-items: center;
 }
+
+.description {
+  margin-block-start: 2rem;
+
+  p {
+    text-align: right;
+  }
+}

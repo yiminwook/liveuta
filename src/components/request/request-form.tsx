@@ -5,7 +5,7 @@ import { CodiconClearAll } from '@/icons';
 import { useLocale } from '@/libraries/i18n/client';
 import { useTranslations } from '@/libraries/i18n/client';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, TextInput } from '@mantine/core';
+import { Anchor, Button, TextInput } from '@mantine/core';
 import { IconSend2 } from '@tabler/icons-react';
 import { IconCheck } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
@@ -142,6 +142,20 @@ export default function RequestForm() {
             <span>{t('request.requestForm.submit')}</span>
           </div>
         </Button>
+      </div>
+
+      <div className={css.description}>
+        <p>
+          현재 <b>{autoComplete?.length ?? 0}</b>개의 채널이 등록되어 있습니다.
+        </p>
+        <p>실제 일정표에 반영되기까지 약 1일 이내의 간격이 있을 수 있습니다.</p>
+        <p>
+          오·탈자 등으로 인해 수정이 필요한 경우{' '}
+          <Anchor href="https://gall.dcinside.com/mini/board/view/?id=vuta&no=114373">
+            갤러리
+          </Anchor>
+          에 알려주세요.
+        </p>
       </div>
     </form>
   );
