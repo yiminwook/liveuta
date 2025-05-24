@@ -71,8 +71,8 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/proxy/viewer',
-        destination: 'https://yt.grs0412.workers.dev',
+        source: '/proxy/append-new-vchan/:path*',
+        destination: 'https://append-new-vchan.vercel.app/api/:path*',
       },
     ];
   },

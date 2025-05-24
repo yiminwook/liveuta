@@ -387,7 +387,21 @@
     }
   },
   "request": {
-    "title": "Request"
+    "title": "Request",
+    "requestForm": {
+      "channelNameInputLabel": "Channel Name",
+      "channelAddressInputLabel": "Channel Address",
+      "submit": "Submit",
+      "submitSuccess": "Successfully requested new vtuber"
+    },
+    "waitingList": {
+      "channelName": "Channel Name",
+      "noWaitingList": "No Waiting List."
+    },
+    "home": {
+      "requestChannel": "Request Channel",
+      "waitingList": "Waiting List"
+    }
   },
   "setlist": {
     "title": "Setlist",

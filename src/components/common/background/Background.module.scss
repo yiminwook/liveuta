@@ -4,6 +4,7 @@
   padding: 0 var.$env-right 0 var.$env-left;
   margin: 0 auto;
   min-height: util.calc-inner-height(100dvh);
+  container-type: inline-size;
 
   @include util.min-width(lg) {
     width: 80vw;
@@ -16,7 +17,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  
+
   &::after {
     display: block;
     content: '';
