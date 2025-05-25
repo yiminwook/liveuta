@@ -6,8 +6,6 @@
 }
 
 .waitingList {
-  width: 100%;
-
   & > li {
     display: grid;
     grid-auto-flow: column;
@@ -34,21 +32,20 @@
       @include util.line-clamp(1);
     }
   }
+}
 
-  .waitingListLabel {
-    font-size: 0.875rem;
-    color: map.get(var.$colors, dimmed);
-    font-weight: 500;
+.waitingListLabel {
+  font-size: 0.875rem;
+  color: map.get(var.$colors, dimmed);
+}
+
+.waitingItem {
+
+  &:hover {
+    background-color: map.get(var.$colors, default-hover);
   }
 
-  .waitingItem {
-
-    &:hover {
-      background-color: map.get(var.$colors, default-hover);
-    }
-
-    &:nth-child(even) {
-      border-block: 1px solid map.get(var.$colors, default-border);
-    }
+  &:nth-child(even) {
+    border-block: 1px solid map.get(var.$colors, default-border);
   }
 }
