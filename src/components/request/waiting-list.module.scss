@@ -1,22 +1,47 @@
 @use "sass:map";
 
+.wrap {
+  max-width: 100%;
+  overflow: auto;
+}
+
 .waitingList {
-  display: grid;
+  width: 100%;
 
   & > li {
     display: grid;
+    grid-auto-flow: column;
     grid-template-columns: 40% 60%;
-    justify-items: center;
+  }
+
+  [data-label="name"] {
+    font-weight: 500;
+    text-align: center;
+    padding: 0.5rem;
+    min-width: 0px;
+
+    span {
+      @include util.line-clamp(1);
+    }
+  }
+
+  [data-label="url"] {
+    text-align: center;
+    padding: 0.5rem;
+    min-width: 0px; // 충분히 축소되도록
+
+    a {
+      @include util.line-clamp(1);
+    }
   }
 
   .waitingListLabel {
-    margin-block-end: 0.5rem;
     font-size: 0.875rem;
     color: map.get(var.$colors, dimmed);
+    font-weight: 500;
   }
 
   .waitingItem {
-    padding-block: 0.5rem;
 
     &:hover {
       background-color: map.get(var.$colors, default-hover);
@@ -24,12 +49,6 @@
 
     &:nth-child(even) {
       border-block: 1px solid map.get(var.$colors, default-border);
-      ;
-    }
-
-    .channelName {
-      font-weight: 500;
-
     }
   }
 }

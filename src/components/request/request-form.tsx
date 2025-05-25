@@ -2,21 +2,20 @@
 import Show from '@/components/common/utils/Show';
 import { useAutoCompleteQuery, useSubmitChannelMutation } from '@/hooks/use-proxy';
 import { CodiconClearAll } from '@/icons';
-import { useLocale } from '@/libraries/i18n/client';
 import { useTranslations } from '@/libraries/i18n/client';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Anchor, Button, TextInput } from '@mantine/core';
+import { Anchor, Button } from '@mantine/core';
+import { Autocomplete } from '@mantine/core';
 import { IconSend2 } from '@tabler/icons-react';
 import { IconCheck } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import css from './request-form.module.scss';
 
 function ClearButton() {
-  const locale = useLocale();
   const { t } = useTranslations();
 
   const [cleared, setCleared] = useState(false);
@@ -80,8 +79,7 @@ export default function RequestForm() {
     resolver: zodResolver(formDto),
   });
 
-  const { data: autoComplete } = useAutoCompleteQuery();
-  // console.log('autoComplete', autoComplete);
+  const { data: autoCompleteData } = useAutoCompleteQuery();
 
   const mutation = useSubmitChannelMutation();
 
@@ -108,12 +106,14 @@ export default function RequestForm() {
           name="channelName"
           control={form.control}
           render={({ field }) => (
-            <TextInput
+            <Autocomplete
               {...field}
               label={t('request.requestForm.channelNameInputLabel')}
               placeholder="Ado"
               error={form.formState.errors.channelName?.message}
               required
+              data={autoCompleteData?.nameList}
+              limit={100}
             />
           )}
         />
@@ -122,13 +122,15 @@ export default function RequestForm() {
           name="channelURL"
           control={form.control}
           render={({ field }) => (
-            <TextInput
+            <Autocomplete
               {...field}
               label={t('request.requestForm.channelAddressInputLabel')}
               placeholder="https://www.youtube.com/@Ado1024"
               error={form.formState.errors.channelURL?.message}
               required
               type="url"
+              data={autoCompleteData?.urlList}
+              limit={100}
             />
           )}
         />
@@ -146,7 +148,7 @@ export default function RequestForm() {
 
       <div className={css.description}>
         <p>
-          현재 <b>{autoComplete?.length ?? 0}</b>개의 채널이 등록되어 있습니다.
+          현재 <b>{autoCompleteData?.urlList.length ?? 0}</b>개의 채널이 등록되어 있습니다.
         </p>
         <p>실제 일정표에 반영되기까지 약 1일 이내의 간격이 있을 수 있습니다.</p>
         <p>
