@@ -1,6 +1,6 @@
 import { Administrator } from '@/components/common/authorization/Administrator';
 import { Authorized } from '@/components/common/authorization/Authorized';
-import Document from '@/components/config/Document';
+import Document from '@/components/config/document';
 import Client from './layout.client';
 
 type AdminLayoutProps = {

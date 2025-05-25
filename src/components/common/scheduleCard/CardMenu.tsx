@@ -32,7 +32,7 @@ export default function CardMenu({
   const { t } = useTranslations();
 
   return (
-    <Menu position="bottom-end" withArrow withinPortal arrowPosition="center" trigger="hover">
+    <Menu position="bottom-end" withArrow arrowPosition="center" trigger="hover">
       <Menu.Target>
         <ActionIcon radius="lg" size={25}>
           <IconDots size="25px" />

@@ -9,7 +9,7 @@ import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { ChannelDatesetItem } from '@/libraries/mongodb/channels';
 import { Setlist } from '@/libraries/oracledb/setlist/service';
 import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
-import { useSetPlayerStore } from '@/stores/player';
+import { usePlayer } from '@/stores/player';
 import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { openWindow } from '@/utils/window-event';
 import { Avatar, Button } from '@mantine/core';
@@ -39,7 +39,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
 
-  const actions = useSetPlayerStore();
+  const actions = usePlayer((state) => state.actions);
 
   const handleLocation = (url: string) => {
     if (isMobile) {

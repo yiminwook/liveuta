@@ -1,9 +1,8 @@
 'use client';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import { useAppCtx } from '@/stores/app';
+import { useTranslations } from '@/libraries/i18n/client';
+import { useCustomMantineColorScheme } from '@/libraries/mantine/custom-theme-hook';
 import { TTheme } from '@/types';
 import { MouseEvent } from 'react';
-import { useStore } from 'zustand';
 import settingCss from './Setting.module.scss';
 import css from './ThemeSelect.module.scss';
 
@@ -24,8 +23,7 @@ function ThemeModalButton({ primaryColor, secondaryColor }: ThemeModalButtonProp
 
 export default function ThemeSelect() {
   const { t } = useTranslations();
-  const appCtx = useAppCtx();
-  const setTheme = useStore(appCtx, (state) => state.actions.setTheme);
+  const { setColorScheme: setAppColorScheme } = useCustomMantineColorScheme();
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
@@ -34,7 +32,7 @@ export default function ThemeSelect() {
 
     if (selectedTheme === undefined) return;
 
-    setTheme(selectedTheme);
+    setAppColorScheme(selectedTheme);
   };
 
   return (

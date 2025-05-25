@@ -83,6 +83,7 @@ export const theme = createTheme({
           timingFunction: 'ease-out',
           duration: 300,
         },
+        withinPortal: false,
       },
     }),
     Modal: Modal.extend({
@@ -92,6 +93,7 @@ export const theme = createTheme({
           duration: 0,
           timingFunction: '',
         },
+        withinPortal: false,
       },
     }),
     ModalContent: ModalContent.extend({
@@ -135,6 +137,7 @@ export const theme = createTheme({
             timingFunction: 'ease-out',
             duration: 300,
           },
+          withinPortal: false,
         },
       },
     }),

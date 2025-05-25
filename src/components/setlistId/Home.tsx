@@ -8,7 +8,7 @@ import Background from '../common/background/Background';
 import Desc from './Desc';
 import css from './Home.module.scss';
 import Info from './Info';
-import SetlistPlayer from './SetlistPlayer';
+import SetlistPlayer from './setlist-player';
 
 interface HomeProps {
   params: {

@@ -3,7 +3,7 @@ import { clientApi } from '@/apis/fetcher';
 import TimelineText from '@/components/common/TimestampText';
 import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import { useTranslations } from '@/libraries/i18n/client';
-import { useSetPlayerStore } from '@/stores/player';
+import { usePlayer } from '@/stores/player';
 import { Button, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Session } from 'next-auth';
@@ -27,7 +27,7 @@ export default function Desc({ videoId, description }: DescProps) {
 
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState('');
-  const actions = useSetPlayerStore();
+  const actions = usePlayer((state) => state.actions);
 
   const toggleEditing = () => {
     if (!session) {

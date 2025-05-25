@@ -3,7 +3,7 @@
 import { Link } from '@/libraries/i18n';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import { useSetAppStore } from '@/stores/app';
+import { useApp } from '@/stores/app';
 import { Avatar, Skeleton } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import { useSession } from 'next-auth/react';
@@ -11,7 +11,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useCmdActions } from '../command/Context';
 import DesktopNav from './DesktopNav';
-import css from './Header.module.scss';
+import css from './header.module.scss';
 
 type HeaderProps = {
   locale: TLocaleCode;
@@ -20,7 +20,7 @@ type HeaderProps = {
 export default function Header({ locale }: HeaderProps) {
   const { data: session, status } = useSession();
   const gnbRef = useRef<HTMLDivElement>(null);
-  const actions = useSetAppStore();
+  const actions = useApp((state) => state.actions);
   const { t } = useTranslations();
   const { setCmdOpen } = useCmdActions();
 

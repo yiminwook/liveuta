@@ -1,5 +1,5 @@
 import { Authorized } from '@/components/common/authorization/Authorized';
-import Document from '@/components/config/Document';
+import Document from '@/components/config/document';
 import Client from './page.client';
 
 export default async function Page() {

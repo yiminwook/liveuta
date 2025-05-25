@@ -3,13 +3,12 @@ import { ORIGIN } from '@/constants';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { usePlayerCtx } from '@/stores/player';
+import { usePlayer } from '@/stores/player';
 import classnames from 'classnames';
 import { memo, useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
-import { useStore } from 'zustand';
 import css from './Player.module.scss';
 
 type Props = {
@@ -20,8 +19,7 @@ type Props = {
 export default memo(function PlayerBase({ mode, locale }: Props) {
   const [isReady, setIsReady] = useState(false);
   const playerRef = useRef<ReactPlayer>(null);
-  const playerCtx = usePlayerCtx();
-  const store = useStore(playerCtx);
+  const store = usePlayer();
   const { t } = useTranslations();
 
   useHotkeys(

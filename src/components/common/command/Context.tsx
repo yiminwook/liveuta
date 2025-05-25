@@ -8,7 +8,7 @@ import {
   useCallback,
   useState,
 } from 'react';
-import GlobalCmd from './GlobalCmd';
+import GlobalCmd from './global-cmd';
 
 type Cmd = {
   title: string;

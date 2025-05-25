@@ -5,7 +5,7 @@ import { useTranslations } from '@/libraries/i18n/client';
 import { TParsedClientContent } from '@/libraries/mongodb/type';
 import { generateThumbnail } from '@/libraries/youtube/url';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { useSetPlayerStore } from '@/stores/player';
+import { usePlayer } from '@/stores/player';
 import { gtagClick } from '@/utils/gtag';
 import Image from 'next/image';
 import { useCallback, useRef, useState } from 'react';
@@ -19,7 +19,7 @@ export default function CardImage({ content }: CardImageProps) {
   const videoUrl = generateVideoUrl(content.videoId);
   const thumbnailUrl = generateThumbnail(content.videoId, 'mqdefault');
   const [imgLoaded, setImgLoaded] = useState(true);
-  const actions = useSetPlayerStore();
+  const actions = usePlayer((state) => state.actions);
   const imgRef = useRef<HTMLImageElement>(null);
   const { t } = useTranslations();
 

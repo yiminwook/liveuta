@@ -2,7 +2,7 @@
 import css from '@/components/common/player/Player.module.scss';
 import { DefaultPlayerPlaceholder } from '@/components/common/player/PlayerPlaceholder';
 import { useLocale } from '@/libraries/i18n/client';
-import { useSetPlayerStore } from '@/stores/player';
+import { usePlayer } from '@/stores/player';
 import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -26,7 +26,7 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   const locale = useLocale();
   const timestamp = Number(searchParams.get('t')) || 0;
   const [isShow, setIsShow] = useState(true);
-  const actions = useSetPlayerStore();
+  const actions = usePlayer((state) => state.actions);
 
   useEffect(() => {
     actions.prepareSetlist(videoId, timestamp);

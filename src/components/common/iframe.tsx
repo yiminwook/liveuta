@@ -1,11 +1,9 @@
 'use client';
 import { useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
-import { useAppCtx } from '@/stores/app';
+import { useCustomMantineColorScheme } from '@/libraries/mantine/custom-theme-hook';
 import { openWindow } from '@/utils/window-event';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
-import { useStore } from 'zustand';
-import css from './Iframe.module.scss';
+import css from './iframe.module.scss';
 
 interface IframeProps {
   url: string;
@@ -14,8 +12,7 @@ interface IframeProps {
 export default function Iframe({ url }: IframeProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const appCtx = useAppCtx();
-  const theme = useStore(appCtx, (state) => state.theme);
+  const { colorScheme: appTheme } = useCustomMantineColorScheme();
   const { t } = useTranslations();
 
   const onClick = (e: MouseEvent) => {
@@ -29,7 +26,7 @@ export default function Iframe({ url }: IframeProps) {
 
     const msg = {
       action: 'themeChange',
-      theme,
+      theme: appTheme,
     };
 
     childWindow.postMessage(msg, url);
@@ -49,7 +46,7 @@ export default function Iframe({ url }: IframeProps) {
   useEffect(() => {
     if (isLoaded === false) return;
     postMsgToChild();
-  }, [isLoaded, theme]);
+  }, [isLoaded, appTheme]);
 
   return (
     <div className={css.wrap}>
