@@ -1,7 +1,5 @@
-import { Spinner180Ring } from '@/icons';
 import { getTranslations } from '@/libraries/i18n/server';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import { Suspense } from 'react';
 import GoBack from './go-back';
 import css from './home.module.scss';
 import RequestForm from './request-form';
@@ -27,15 +25,7 @@ export default async function Home({ locale }: HomeProps) {
         <div>
           <p className={css.waitingChannels}>{t('request.home.waitingList')}</p>
         </div>
-        <Suspense
-          fallback={
-            <div>
-              <Spinner180Ring />
-            </div>
-          }
-        >
-          <WaitingList />
-        </Suspense>
+        <WaitingList />
       </div>
     </div>
   );

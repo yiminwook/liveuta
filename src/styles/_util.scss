@@ -1,10 +1,10 @@
 /* 
  * 해당 파일은 @mixin,  @function을 정의한 파일입니다.
  */
- @use 'sass:math';
- @use "sass:map";
- @use "sass:meta";
- @use 'var';
+@use 'sass:math';
+@use "sass:map";
+@use "sass:meta";
+@use 'var';
 
 @function rem($value) {
   @return #{math.div(math.div($value, $value * 0 + 1), 16)}rem;
@@ -80,36 +80,57 @@
 }
 
 @mixin line-clamp($line-count) {
-  @if $line-count == "none" {
-    overflow: visible;
+  overflow: hidden;
+
+  @if $line-count =="none" {
     display: block;
     -webkit-box-orient: horizontal;
     -webkit-line-clamp: none;
-  } @else if meta.type-of($line-count) == "number" and $line-count > 0 {
-    overflow: hidden;
+    white-space: normal;
+    text-overflow: clip;
+  }
+
+  @else if $line-count ==1 {
+    // 한 줄일 때는 수평 말줄임 사용
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  @else if meta.type-of($line-count)=="number" and $line-count > 0 {
+    // 여러 줄일 때는 수직 말줄임 사용
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: $line-count;
-  } @else {
+  }
+
+  @else {
     @error "Invalid argument: line-count must be a number or 'none'.";
   }
 }
-
 
 @function color($color) {
   @return map.get(var.$colors, $color);
 }
 
 @function palette($variant, $color) {
-  @if $variant == 'first' {
+  @if $variant =='first' {
     @return map.get(var.$first-colors, $color);
-  } @else if $variant == 'second' {
+  }
+
+  @else if $variant =='second' {
     @return map.get(var.$second-colors, $color);
-  } @else if $variant == 'third' {
+  }
+
+  @else if $variant =='third' {
     @return map.get(var.$third-colors, $color);
-  } @else if $variant == 'dark' {
+  }
+
+  @else if $variant =='dark' {
     @return map.get(var.$dark-colors, $color);
-  } @else if $variant == 'monochrome' {
+  }
+
+  @else if $variant =='monochrome' {
     @return map.get(var.$gray-colors, $color);
   }
 }

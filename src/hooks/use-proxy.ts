@@ -16,7 +16,24 @@ export const useWaitingListSuspenseQuery = () => {
 export const useAutoCompleteQuery = () => {
   return useQuery({
     queryKey: ['autoComplete'],
-    queryFn: () => proxyApi.get<TResItem[]>('append-new-vchan/getAutocompleteData').json(),
+    queryFn: async () => {
+      const data = await proxyApi.get<TResItem[]>('append-new-vchan/getAutocompleteData').json();
+
+      // 중복 제거
+      const nameSet: Set<string> = new Set();
+      const urlSet: Set<string> = new Set();
+
+      data.forEach((item) => {
+        nameSet.add(item.name_kor);
+        urlSet.add(item.channel_addr);
+      });
+
+      // 정렬
+      const nameList = Array.from(nameSet).sort((a, b) => a.localeCompare(b));
+      const urlList = Array.from(urlSet).sort((a, b) => a.localeCompare(b));
+
+      return { nameList, urlList };
+    },
   });
 };
 
