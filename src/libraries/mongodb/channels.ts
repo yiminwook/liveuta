@@ -7,8 +7,9 @@ import {
 import { combineChannelData } from '@/utils/combineChannelData';
 import { combineSingleYTData } from '@/utils/combineChannelData-v2';
 import { addEscapeCharacter } from '@/utils/regexp';
+import { Effect } from 'effect';
 import { z } from 'zod';
-import { connectMongoDB } from '.';
+import { connectMongoDB, mongoDBEffect } from '.';
 import { getYoutubeChannelsByUid } from '../youtube';
 
 export const channelDto = z.object({
@@ -31,8 +32,11 @@ export type TYChannelReturn = ReturnType<typeof getChannelWithYoutube>;
 export type ChannelDatesetItem = ReturnType<typeof parseChannel>;
 
 export const getChannelById = async (channel_id: string) => {
-  const db = await connectMongoDB(MONGODB_MANAGEMENT_DB, MONGODB_CHANNEL_COLLECTION);
-  const channel = await db.findOne<TChannelDocument>({ channel_id });
+  const db = await connectMongoDB<TChannelDocument>(
+    MONGODB_MANAGEMENT_DB,
+    MONGODB_CHANNEL_COLLECTION,
+  );
+  const channel = await db.findOne({ channel_id });
   return channel;
 };
 
@@ -127,3 +131,31 @@ export async function getWaitingList() {
 
   return channels;
 }
+
+export const searchChannelAutocomplete = (query: string) =>
+  Effect.gen(function* () {
+    const client = yield* mongoDBEffect;
+    const results = yield* Effect.tryPromise(() =>
+      client
+        .db(MONGODB_MANAGEMENT_DB)
+        .collection<TChannelDocument>(MONGODB_CHANNEL_COLLECTION)
+        .find<Pick<TChannelDocument, 'name_kor' | 'channel_id'>>(
+          {
+            $or: [
+              { name_kor: { $regex: query, $options: 'i' } },
+              // { names: { $regex: addEscapeCharacter(query.trim()), $options: 'i' } },
+            ],
+          },
+          {
+            projection: {
+              name_kor: 1,
+              channel_id: 1,
+            },
+          },
+        )
+        .limit(10)
+        .toArray(),
+    );
+
+    return results;
+  });

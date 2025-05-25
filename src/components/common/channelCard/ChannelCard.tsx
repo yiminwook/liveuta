@@ -41,7 +41,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
   const mutateDeleteFavorite = useMutateWhitelist();
 
   const onCardClick = () => {
-    router.push(`channel/${uid}`);
+    router.push(`/${locale}/channel/${uid}`);
   };
 
   const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) => {
