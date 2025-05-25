@@ -48,14 +48,10 @@ export const createPlayerStore = (initState: TPlayerState) => {
 
 export const PlayerContext = createContext<ReturnType<typeof createPlayerStore> | null>(null);
 
-export const usePlayerCtx = () => {
+export function usePlayer(): TPlayerStore;
+export function usePlayer<T>(selector: (state: TPlayerStore) => T): T;
+export function usePlayer<T>(selector?: (state: TPlayerStore) => T) {
   const context = useContext(PlayerContext);
-  if (!context) throw new Error('usePlayerCtx must be used within a PlayerProvider');
-  return context;
-};
-
-export const useSetPlayerStore = () => {
-  const context = useContext(PlayerContext);
-  if (!context) throw new Error('useSetPlayerStore must be used within a PlayerProvider');
-  return useStore(context, (store) => store.actions);
-};
+  if (!context) throw new Error('usePlayer must be used within a PlayerProvider');
+  return useStore(context, selector!);
+}

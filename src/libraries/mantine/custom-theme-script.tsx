@@ -1,5 +1,5 @@
 // https://github.com/mantinedev/mantine/blob/master/packages/%40mantine/core/src/core/MantineProvider/ColorSchemeScript/ColorSchemeScript.tsx
-export default function CustomThemeScript({ localStorageKey = 'mantine-color-scheme' }) {
+export function CustomThemeScript({ localStorageKey = 'mantine-color-scheme' }) {
   return (
     <script
       data-mantine-script

@@ -1,79 +1,26 @@
 'use client';
+import { THEME_STORAGE_KEY } from '@/libraries/mantine/config';
+import { customLocalStorageColorSchemeManager } from '@/libraries/mantine/custom-theme-manager';
+import { CustomMantineProvider as Provider } from '@/libraries/mantine/custom-theme-provider';
 import { theme } from '@/styles/theme';
-import { TTheme } from '@/types';
-import { isDarkModeEnabled } from '@/utils/helper';
-import { LocalStorageColorSchemeManagerOptions, MantineColorSchemeManager } from '@mantine/core';
-import { MantineProvider as Provider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
 import { useEffect } from 'react';
-import { THEME_STORAGE_KEY } from './ThemeScript';
 
 import dayjs from '@/libraries/dayjs';
 import 'dayjs/locale/ko';
 import 'dayjs/locale/en';
 import 'dayjs/locale/ja';
 
-function localStorageColorSchemeManager({
-  key = 'mantine-color-scheme',
-}: LocalStorageColorSchemeManagerOptions = {}): MantineColorSchemeManager {
-  // let handleStorageEvent: (event: StorageEvent) => void;
-
-  return {
-    get: (defaultValue) => {
-      if (typeof window === 'undefined') {
-        return defaultValue;
-      }
-
-      try {
-        const theme = window.localStorage.getItem(key) as TTheme;
-        const mantineTheme = isDarkModeEnabled(theme) ? 'dark' : 'light';
-        return mantineTheme || defaultValue;
-      } catch {
-        return defaultValue;
-      }
-    },
-
-    set: (value) => {
-      // mantine color scheme manager는 직접 set하지 않는다.
-    },
-
-    subscribe: (onUpdate) => {
-      // handleStorageEvent = (event) => {
-      //   if (event.storageArea === window.localStorage && event.key === key) {
-      //     console.log(event.newValue);
-      //     if (!event.newValue) return;
-      //     const isDark = isDarkModeEnabled(event.newValue as TTheme);
-      //     onUpdate(isDark ? 'dark' : 'light');
-      //   }
-      // };
-      // window.addEventListener('storage', handleStorageEvent);
-    },
-
-    unsubscribe: () => {
-      // window.removeEventListener('storage', handleStorageEvent);
-    },
-
-    clear: () => {
-      window.localStorage.removeItem(key);
-    },
-  };
-}
-
-const colorSchemeManager = localStorageColorSchemeManager({
+const colorSchemeManager = customLocalStorageColorSchemeManager({
   key: THEME_STORAGE_KEY,
 });
 
 type MantineProviderProps = {
   children: React.ReactNode;
-  defaultColorScheme?: 'light' | 'dark';
   locale: string;
 };
 
-export default function MantineProvider({
-  children,
-  defaultColorScheme,
-  locale,
-}: MantineProviderProps) {
+export default function MantineProvider({ children, locale }: MantineProviderProps) {
   useEffect(() => {
     // set global dayjs locale
     dayjs.locale(locale);

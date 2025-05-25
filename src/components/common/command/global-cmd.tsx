@@ -1,11 +1,10 @@
 'use client';
 import { usePathname, useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import { useAppCtx } from '@/stores/app';
+import { useCustomMantineColorScheme } from '@/libraries/mantine/custom-theme-hook';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
-import { useStore } from 'zustand';
 import { useCmdActions } from './Context';
 
 type Props = {
@@ -17,13 +16,12 @@ export default function GlobalCmd({ locale }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const appCtx = useAppCtx();
-  const setTheme = useStore(appCtx, (state) => state.actions.setTheme);
+  const { setColorScheme: setAppColorScheme } = useCustomMantineColorScheme();
   const { addCmdGroup, setCmdOpen } = useCmdActions();
 
   const onLanguageChange = (selectedLocale: TLocaleCode) => {
     if (locale === selectedLocale) return;
-    window.location.href = `/${selectedLocale}${pathname}?${searchParams.toString()}`;
+    router.replace(`/${selectedLocale}${pathname}?${searchParams.toString()}`);
   };
 
   useEffect(() => {
@@ -45,7 +43,7 @@ export default function GlobalCmd({ locale }: Props) {
         },
         {
           title: `${t('global.command.globalCommands.actions.theme')}1`,
-          fn: () => setTheme('theme1'),
+          fn: () => setAppColorScheme('theme1'),
           keywords: [
             '액션',
             'actions',
@@ -60,7 +58,7 @@ export default function GlobalCmd({ locale }: Props) {
         },
         {
           title: `${t('global.command.globalCommands.actions.theme')}2`,
-          fn: () => setTheme('theme2'),
+          fn: () => setAppColorScheme('theme2'),
           keywords: [
             '액션',
             'actions',
@@ -75,7 +73,7 @@ export default function GlobalCmd({ locale }: Props) {
         },
         {
           title: `${t('global.command.globalCommands.actions.theme')}3`,
-          fn: () => setTheme('theme3'),
+          fn: () => setAppColorScheme('theme3'),
           keywords: [
             '액션',
             'actions',
@@ -90,7 +88,7 @@ export default function GlobalCmd({ locale }: Props) {
         },
         {
           title: `${t('global.command.globalCommands.actions.theme')}4`,
-          fn: () => setTheme('theme4'),
+          fn: () => setAppColorScheme('theme4'),
           keywords: [
             '액션',
             'actions',
@@ -105,7 +103,7 @@ export default function GlobalCmd({ locale }: Props) {
         },
         {
           title: `${t('global.command.globalCommands.actions.theme')}5`,
-          fn: () => setTheme('theme5'),
+          fn: () => setAppColorScheme('theme5'),
           keywords: [
             '액션',
             'actions',

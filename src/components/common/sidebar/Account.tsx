@@ -2,7 +2,7 @@
 import { withSession } from '@/components/common/authorization/withSession';
 import useStopPropagation from '@/hooks/use-stop-propagation';
 import { useLocale, usePathname } from '@/libraries/i18n/client';
-import { useAppCtx } from '@/stores/app';
+import { useApp } from '@/stores/app';
 import { Avatar, CloseButton } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import classnames from 'classnames';
@@ -12,7 +12,6 @@ import { useCallback, useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 import { RemoveScroll } from 'react-remove-scroll';
 import { toast } from 'sonner';
-import { useStore } from 'zustand';
 import NavItem from './NavItem';
 import css from './Sidebar.module.scss';
 
@@ -23,9 +22,8 @@ interface AccountSidebarProps {
 export default withSession<AccountSidebarProps>(function AccountSidebar({ session }) {
   const pathname = usePathname();
   const locale = useLocale();
-  const appCtx = useAppCtx();
-  const isShow = useStore(appCtx, (state) => state.isShowAcctSidebar);
-  const setIsShow = useStore(appCtx, (state) => state.actions.setIsShowAcctSidebar);
+  const isShow = useApp((state) => state.isShowAcctSidebar);
+  const setIsShow = useApp((state) => state.actions.setIsShowAcctSidebar);
 
   const { enableScope, disableScope } = useHotkeysContext();
   const { stopPropagation } = useStopPropagation();
