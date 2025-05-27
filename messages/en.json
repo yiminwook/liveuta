@@ -558,5 +558,14 @@
       "title": "Schedule Notification",
       "body": "The stream for {channelName} is about to start."
     }
+  },
+  "channelInfo": {
+    "channelInfo": {
+      "notLoggedInError": "This service is available after logging in.",
+      "addFavoriteChannel": "Would you like to add this to your favorites?",
+      "removeFavoriteChannel": "Would you like to remove this from your favorites?",
+      "subscriber": "Subscribers",
+      "video": "Videos"
+    }
   }
 }

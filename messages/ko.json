@@ -559,5 +559,14 @@
       "title": "스케줄 알림",
       "body": "곧 {channelName} 의 방송이 시작됩니다."
     }
+  },
+  "channelInfo": {
+    "channelInfo": {
+      "addFavoriteChannel": "즐겨찾기에 추가하시겠습니까?",
+      "removeFavoriteChannel": "즐겨찾기에서 제거하시겠습니까?",
+      "notLoggedInError": "로그인 후 이용가능한 서비스입니다.",
+      "subscriber": "구독자",
+      "video": "동영상"
+    }
   }
 }

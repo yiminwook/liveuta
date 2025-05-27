@@ -1,6 +1,6 @@
 import css from './profile-image.module.scss';
 
-export default function ProfileImage({ url }: { url: string }) {
+export default function ProfileImage({ src }: { src: string }) {
   return (
     <svg
       version="1.1"
@@ -18,7 +18,7 @@ export default function ProfileImage({ url }: { url: string }) {
         height="100%"
         preserveAspectRatio="xMidYMid slice"
         clipPath="url(#profile-image-clip-path)"
-        xlinkHref={url}
+        xlinkHref={src}
       />
     </svg>
   );

@@ -552,5 +552,14 @@
       "title": "スケジュール通知",
       "body": "まもなく {channelName} の放送が開始されます。"
     }
+  },
+  "channelInfo": {
+    "channelInfo": {
+      "addFavoriteChannel": "お気に入りに追加しますか？",
+      "removeFavoriteChannel": "お気に入りから削除しますか？",
+      "notLoggedInError": "ログイン後に利用可能なサービスです。",
+      "subscriber": "登録者",
+      "video": "動画"
+    }
   }
 }
