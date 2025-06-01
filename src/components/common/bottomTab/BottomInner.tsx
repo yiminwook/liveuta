@@ -1,17 +1,10 @@
+import { LogosYoutubeIcon } from '@/icons';
 import { Link } from '@/libraries/i18n';
 import { useTranslations } from '@/libraries/i18n/client';
 import { usePathname } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { UnstyledButton } from '@mantine/core';
-import {
-  IconBrandYoutube,
-  IconBrandYoutubeFilled,
-  IconCircleArrowUp,
-  IconClockHour4,
-  IconDots,
-  IconHome,
-  IconList,
-} from '@tabler/icons-react';
+import { ArrowUp, Clock, Ellipsis, House, List, Tv } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import css from './BottomInner.module.scss';
 
@@ -92,7 +85,7 @@ export default function BottomInner({ openDrawer, locale }: BottomInnerProps) {
         onClick={scrollUp}
         ref={topButtonRef}
       >
-        <IconCircleArrowUp size="2rem" />
+        <ArrowUp />
       </UnstyledButton>
       <ul className={css.list}>
         <li>
@@ -103,7 +96,7 @@ export default function BottomInner({ openDrawer, locale }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/setlist'}
           >
-            <IconList />
+            <List />
             <span>{t('global.bottomTab.bottomInner.setlist')}</span>
           </UnstyledButton>
         </li>
@@ -115,7 +108,7 @@ export default function BottomInner({ openDrawer, locale }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/channel'}
           >
-            <IconBrandYoutubeFilled />
+            <LogosYoutubeIcon />
             <span>{t('global.bottomTab.bottomInner.channel')}</span>
           </UnstyledButton>
         </li>
@@ -127,7 +120,7 @@ export default function BottomInner({ openDrawer, locale }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/'}
           >
-            <IconHome />
+            <House />
             <span>{t('global.bottomTab.bottomInner.home')}</span>
           </UnstyledButton>
         </li>
@@ -139,13 +132,13 @@ export default function BottomInner({ openDrawer, locale }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/schedule'}
           >
-            <IconClockHour4 />
+            <Clock />
             <span>{t('global.bottomTab.bottomInner.schedule')}</span>
           </UnstyledButton>
         </li>
         <li>
           <UnstyledButton className={css.item} onClick={openDrawer}>
-            <IconDots size="1.5rem" />
+            <Ellipsis />
             <span>{t('global.bottomTab.bottomInner.more')}</span>
           </UnstyledButton>
         </li>

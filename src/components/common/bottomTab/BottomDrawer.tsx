@@ -2,15 +2,8 @@ import { Link } from '@/libraries/i18n';
 import { usePathname, useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { ActionIcon, SimpleGrid } from '@mantine/core';
-import { IconHelpCircle, IconMusic } from '@tabler/icons-react';
-import {
-  IconDeviceDesktopCode,
-  IconDiamond,
-  IconSettings,
-  IconStarFilled,
-  IconTools,
-} from '@tabler/icons-react';
 import classNames from 'classnames';
+import { CircleHelp, Gem, MonitorDot, Music, Settings, Star, Wrench } from 'lucide-react';
 import { JSX } from 'react';
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../Vaul';
 import css from './BottomTab.module.scss';
@@ -35,27 +28,27 @@ export default function BottomDrawer({ isOpen, onClose, locale }: BottomDrawerPr
     {
       href: '/featured',
       text: t('global.bottomTab.drawer.internalLinks.featured'),
-      icon: <IconDiamond size="1.5rem" />,
+      icon: <Gem />,
     },
     {
       href: '/utils',
       text: t('global.bottomTab.drawer.internalLinks.utils'),
-      icon: <IconTools size="1.5rem" />,
+      icon: <Wrench />,
     },
     {
       href: '/setting',
       text: t('global.bottomTab.drawer.internalLinks.settings'),
-      icon: <IconSettings size="1.5rem" />,
+      icon: <Settings />,
     },
     {
       href: '/dev',
       text: t('global.bottomTab.drawer.internalLinks.dev'),
-      icon: <IconDeviceDesktopCode size="1.5rem" />,
+      icon: <MonitorDot />,
     },
     {
       href: '/support',
       text: t('global.bottomTab.drawer.internalLinks.support'),
-      icon: <IconHelpCircle size="1.5rem" />,
+      icon: <CircleHelp />,
     },
   ];
 
@@ -63,17 +56,17 @@ export default function BottomDrawer({ isOpen, onClose, locale }: BottomDrawerPr
     {
       href: 'https://gall.dcinside.com/mgallery/board/lists?id=kizunaai',
       text: t('global.bottomTab.drawer.externalLinks.kizunaAiGallery'),
-      icon: <IconStarFilled size="1.5rem" />,
+      icon: <Star />,
     },
     {
       href: 'https://gall.dcinside.com/mini/board/lists?id=vuta',
       text: t('global.bottomTab.drawer.externalLinks.vutaGallery'),
-      icon: <IconMusic size="1.5rem" />,
+      icon: <Music />,
     },
     {
       href: 'https://uta-tools.vercel.app',
       text: t('global.bottomTab.drawer.externalLinks.utaTools'),
-      icon: <IconTools size="1.5rem" />,
+      icon: <Wrench />,
     },
   ];
 

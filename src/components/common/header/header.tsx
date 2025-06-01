@@ -5,7 +5,7 @@ import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { useApp } from '@/stores/app';
 import { Avatar, Skeleton } from '@mantine/core';
-import { IconSearch } from '@tabler/icons-react';
+import { Search } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -59,7 +59,7 @@ export default function Header({ locale }: HeaderProps) {
           </Link>
           <div className={css.right}>
             <button onClick={() => setCmdOpen(true)} className={css.searchBtn}>
-              <IconSearch size={20} />
+              <Search size="0.85rem" />
               <span>{t('global.header.search')}</span>
               <div className={css.cmdShortcut}>⌘+K</div>
             </button>

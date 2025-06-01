@@ -14,10 +14,9 @@ import {
   Tooltip,
   useMantineTheme,
 } from '@mantine/core';
-import { IconInfoCircle } from '@tabler/icons-react';
-import { IconChevronLeft } from '@tabler/icons-react';
 import variable from '@variable';
 import classNames from 'classnames';
+import { ChevronLeft, Info } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { ChangeEvent, useMemo, useState } from 'react';
 import css from './GridNav.module.scss';
@@ -108,7 +107,7 @@ export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
           <div className={css.header}>
             <div className={css.headerLeft}>
               <ActionIcon variant="outline" size="sm" onClick={toggleFlip}>
-                <IconChevronLeft />
+                <ChevronLeft />
               </ActionIcon>
             </div>
           </div>
@@ -123,14 +122,14 @@ export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
         <div className={css.header}>
           <div className={css.headerLeft}>
             <ActionIcon variant="outline" size="sm" onClick={toggleFlip}>
-              <IconChevronLeft />
+              <ChevronLeft size="1rem" />
             </ActionIcon>
           </div>
 
           <div className={css.headerRight}>
             <Tooltip label={'모바일 환경은 지원되지 않습니다.'} position="top" withArrow>
               <ActionIcon variant="transparent" size="compact-xs" radius="lg">
-                <IconInfoCircle color={variable.thirdColorDefault} />
+                <Info color={variable.thirdColorDefault} size="1rem" />
               </ActionIcon>
             </Tooltip>
 

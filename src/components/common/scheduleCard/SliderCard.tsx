@@ -6,8 +6,8 @@ import {
 } from '@/libraries/mongodb/type';
 import { generateChanneImagelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { ActionIcon, Avatar, Badge, Card, Flex, Text, Tooltip } from '@mantine/core';
-import { IconExternalLink, IconForbid2, IconStarFilled, IconUser } from '@tabler/icons-react';
 import variable from '@variable';
+import { Ban, SquareArrowOutUpRight, Star, Users } from 'lucide-react';
 import CopyButton from '../button/CopyButton';
 import CardImage from './CardImage';
 import css from './SliderCard.module.scss';
@@ -59,7 +59,7 @@ export default function SliderCard({
           size="md"
           data-status={STREAM_STATUS_MAPPER[content.broadcastStatus]}
           color={variable.thirdColorDefault}
-          leftSection={content.broadcastStatus === 'TRUE' && <IconUser color="#fff" />}
+          leftSection={content.broadcastStatus === 'TRUE' && <Users color="#fff" size="0.85rem" />}
         >
           {content.broadcastStatus === 'TRUE'
             ? new Intl.NumberFormat('kr', { notation: 'compact' })
@@ -102,17 +102,20 @@ export default function SliderCard({
             withArrow
           >
             <ActionIcon variant="transparent" onClick={onClickFavorite}>
-              <IconStarFilled color={isFavorite ? '#ffbb00' : '#a7a7a7'} />
+              <Star
+                color={isFavorite ? '#ffbb00' : '#a7a7a7'}
+                fill={isFavorite ? '#ffbb00' : '#a7a7a7'}
+              />
             </ActionIcon>
           </Tooltip>
           <Tooltip label={t('home.sliderCard.blockChannel')} position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickBlock}>
-              <IconForbid2 color={variable.thirdColorDefault} />
+              <Ban color={variable.thirdColorDefault} />
             </ActionIcon>
           </Tooltip>
           <Tooltip label={t('home.sliderCard.openInNewTab')} position="bottom" withArrow>
             <ActionIcon variant="transparent" onClick={onClickNewTab}>
-              <IconExternalLink color={variable.thirdColorDefault} />
+              <SquareArrowOutUpRight color={variable.thirdColorDefault} />
             </ActionIcon>
           </Tooltip>
           <CopyButton value={generateVideoUrl(content.videoId)} />

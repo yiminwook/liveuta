@@ -1,6 +1,6 @@
 import { UnstyledButton } from '@mantine/core';
-import { IconCircleArrowUp } from '@tabler/icons-react';
 import variable from '@variable';
+import { ArrowUp } from 'lucide-react';
 import css from './ScheduleNav.module.scss';
 
 import { useWindowScroll } from '@mantine/hooks';
@@ -13,7 +13,7 @@ export default forwardRef(function TopBtn() {
 
   return (
     <UnstyledButton className={css.topBtn} onClick={() => scrollTo({ y: 0 })}>
-      <IconCircleArrowUp size="3.5rem" color={variable.secondColorDefault} />
+      <ArrowUp size="3.5rem" color={variable.secondColorDefault} />
     </UnstyledButton>
   );
 });

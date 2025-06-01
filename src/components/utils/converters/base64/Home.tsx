@@ -2,18 +2,18 @@
 import ClearButton from '@/components/common/button/ClearButton';
 import CopyButton from '@/components/common/button/CopyButton';
 import PasteButton from '@/components/common/button/PasteButton';
-import { useDebounce } from '@/hooks/use-debounce';
-import { useTranslations } from '@/libraries/i18n/client';
-import { ActionIcon, NumberInput, Switch, Textarea, Tooltip } from '@mantine/core';
-import { IconTransferVertical } from '@tabler/icons-react';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { useUtilsBreadcrumbContext } from '../../common/BreadcrumbContext';
+import { useUtilsBreadcrumbContext } from '@/components/utils/common/BreadcrumbContext';
 import {
   UtilsConfigItem,
   UtilsConfigItemContents,
   UtilsConfigItemHeader,
   UtilsConfigRoot,
-} from '../../common/Config';
+} from '@/components/utils/common/Config';
+import { useDebounce } from '@/hooks/use-debounce';
+import { useTranslations } from '@/libraries/i18n/client';
+import { ActionIcon, NumberInput, Switch, Textarea, Tooltip } from '@mantine/core';
+import { ArrowUpDown } from 'lucide-react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { Base64Provider, useBase64ActionsContext, useBase64Context } from './Context';
 import css from './Home.module.scss';
 
@@ -130,7 +130,7 @@ function Swap() {
   return (
     <Tooltip label={t('utils.converters.base64.swap')} withArrow position="right">
       <ActionIcon size={48} variant="outline" color="gray" onClick={handleSwap}>
-        <IconTransferVertical size={32} />
+        <ArrowUpDown size={32} />
       </ActionIcon>
     </Tooltip>
   );

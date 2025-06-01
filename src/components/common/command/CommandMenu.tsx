@@ -3,8 +3,8 @@ import For from '@/components/common/utils/For';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { ActionIcon, Modal, Tooltip } from '@mantine/core';
-import { IconSearch, IconX } from '@tabler/icons-react';
 import { Command } from 'cmdk';
+import { Search, X } from 'lucide-react';
 import { memo, useCallback } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import css from './CommandMenu.module.scss';
@@ -21,12 +21,12 @@ function CommandMenuComponent() {
     <Command label="Command Menu" className={css.wrap}>
       <div className={css.header}>
         <div className={css.inputWrap}>
-          <IconSearch className={css.icon} />
+          <Search className={css.icon} />
           <Command.Input className={css.input} placeholder={t('global.command.inputPlaceholder')} />
         </div>
         <Tooltip label={t('global.command.close')}>
           <ActionIcon variant="ghost" size="lg" onClick={closeCmd}>
-            <IconX />
+            <X className={css.icon} />
           </ActionIcon>
         </Tooltip>
       </div>

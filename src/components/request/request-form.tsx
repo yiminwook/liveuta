@@ -6,9 +6,8 @@ import { useTranslations } from '@/libraries/i18n/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Anchor, Button } from '@mantine/core';
 import { Autocomplete } from '@mantine/core';
-import { IconSend2 } from '@tabler/icons-react';
-import { IconCheck } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
+import { Check, Send } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -52,7 +51,7 @@ function ClearButton() {
     >
       <div className={css.buttonInner}>
         <Show when={cleared} fallback={<CodiconClearAll width="1.2rem" height="1.2rem" />}>
-          <IconCheck size="1.2rem" />
+          <Check size="1.2rem" />
         </Show>
         <span>{t('global.clearButton.clear')}</span>
       </div>
@@ -140,7 +139,7 @@ export default function RequestForm() {
         <ClearButton />
         <Button variant="filled" size="md" type="submit" loading={mutation.isPending}>
           <div className={css.buttonInner}>
-            <IconSend2 width="1.2rem" height="1.2rem" />
+            <Send width="1.2rem" height="1.2rem" />
             <span>{t('request.requestForm.submit')}</span>
           </div>
         </Button>

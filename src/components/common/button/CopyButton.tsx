@@ -6,7 +6,7 @@ import {
   CopyButton as MantineCopyButton,
   Tooltip,
 } from '@mantine/core';
-import { IconCheck, IconCopy } from '@tabler/icons-react';
+import { Check, Copy } from 'lucide-react';
 import { CSSProperties } from 'react';
 
 interface CopyButtonProps {
@@ -42,7 +42,7 @@ export default function CopyButton({
             onClick={copy}
             size={buttonSize}
           >
-            {copied ? <IconCheck size={size} /> : <IconCopy size={size} />}
+            {copied ? <Check size={size} /> : <Copy size={size} />}
           </ActionIcon>
         </Tooltip>
       )}

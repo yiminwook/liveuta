@@ -1,7 +1,6 @@
 import { usePathname } from '@/libraries/i18n/client';
 import { NavLink } from '@mantine/core';
-import { IconChevronLeft } from '@tabler/icons-react';
-import { IconChevronRight } from '@tabler/icons-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import NextLink from 'next/link';
 
 type NavItemProps = {
@@ -20,16 +19,8 @@ export default function NavItem({ label, href, direction, children }: NavItemPro
       href={href}
       label={label}
       active={pathname === href}
-      leftSection={
-        direction === 'ltr' && (
-          <IconChevronLeft size="0.8rem" stroke="1.5px" className="mantine-rotate-ltr" />
-        )
-      }
-      rightSection={
-        direction === 'rtl' && (
-          <IconChevronRight size="0.8rem" stroke="1.5px" className="mantine-rotate-rtl" />
-        )
-      }
+      leftSection={direction === 'ltr' && <ChevronLeft size="0.85rem" />}
+      rightSection={direction === 'rtl' && <ChevronRight size="0.85rem" />}
     >
       {children}
     </NavLink>

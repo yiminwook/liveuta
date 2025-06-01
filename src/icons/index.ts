@@ -5,6 +5,7 @@ import LogosGoogleIcon from './logos-google-icon.svg?react';
 import LogosYoutubeIcon from './logos-youtube-icon.svg?react';
 import RiKakaoTalkFill from './ri-kakao-talk-fill.svg?react';
 import Spinner180Ring from './svg-spinners-180-ring.svg?react';
+import TablerNoCopyrightOff from './tabler-no-copyright-off.svg?react';
 
 export {
   AntDesignDragOutlined,
@@ -14,4 +15,5 @@ export {
   LogosGoogleIcon,
   LogosYoutubeIcon,
   RiKakaoTalkFill,
+  TablerNoCopyrightOff,
 };

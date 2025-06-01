@@ -14,7 +14,10 @@
 .navTabBox {
   display: none;
 
-  @include util.min-width(sm) {
+}
+
+@include util.min-width(sm) {
+  .navTabBox {
     display: block;
   }
 }
@@ -36,7 +39,6 @@
   padding: 0 0.5rem;
   height: 2.5rem;
 
-
 }
 
 .select {
@@ -49,15 +51,25 @@
 
 button.topBtn {
   z-index: 1;
-  background-color: var(--liveuta-main);
+  background-color: var(--mantine-color-white);
   border-radius: 9999px;
   position: fixed;
   box-shadow: var.$box-shadow;
   right: 0.5rem;
   bottom: calc(0.5rem + env(safe-area-inset-bottom));
 
-  @include util.min-width(md) {
+}
+
+@include util.min-width(md) {
+  button.topBtn {
     right: 3.5rem;
     bottom: calc(3.5rem + env(safe-area-inset-bottom));
+
+  }
+}
+
+@include util.dark {
+  button.topBtn {
+    background-color: var(--mantine-color-dark-6);
   }
 }

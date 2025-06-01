@@ -2,13 +2,12 @@ import SearchInput from '@/components/common/input/SearchInput';
 import Modal from '@/components/common/modal/Modal';
 import { useTransition } from '@/hooks/use-transition';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
 import { ModalProps, useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
 import { Button, CloseButton } from '@mantine/core';
-import { IconFilter } from '@tabler/icons-react';
 import variable from '@variable';
 import classNames from 'classnames';
+import { Filter } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
@@ -104,7 +103,7 @@ export default function ScheduleNavModal({
         <div className={css.searchBox}>
           {searchParams.get('q') && (
             <div className={css.queryStatBox}>
-              <IconFilter color={variable.thirdColorDefault} />
+              <Filter color={variable.thirdColorDefault} />
               <span>
                 {t('schedule.scheduleNavModal.filtering')}:&nbsp;{searchParams.get('q')}
               </span>

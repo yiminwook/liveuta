@@ -1,7 +1,7 @@
 'use client';
 import useCachedData from '@/hooks/use-cached-data';
 import { useTranslations } from '@/libraries/i18n/client';
-import { IconForbid2, IconStarFilled } from '@tabler/icons-react';
+import { Ban, Star } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Background from '../common/background/Background';
 import Blacklist from './Blacklist';
@@ -19,14 +19,14 @@ export default function Home() {
       <div className={css.wrap}>
         <section className={css.section}>
           <h2 className={css.sectionTitle}>
-            <IconStarFilled size="1.2rem" color="#ffbb00" />
+            <Star size="1.2rem" color="#ffbb00" fill="#ffbb00" />
             <b>{t('my.favorite.title')}</b>
           </h2>
           <Whitelist session={session} whiteList={whiteListMap} channelList={channelMap} />
         </section>
         <section className={css.section}>
           <h2 className={css.sectionTitle}>
-            <IconForbid2 size="1.2rem" color="#ED2939" />
+            <Ban size="1.2rem" color="#ED2939" />
             <b>{t('my.blacklist.title')}</b>
           </h2>
           <Blacklist session={session} blacklist={blackListMap} channelList={channelMap} />

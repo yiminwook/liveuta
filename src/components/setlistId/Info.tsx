@@ -13,9 +13,9 @@ import { usePlayer } from '@/stores/player';
 import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { openWindow } from '@/utils/window-event';
 import { Avatar, Button } from '@mantine/core';
-import { IconArrowBack, IconMusic } from '@tabler/icons-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import cx from 'classnames';
+import { ArrowLeft, ListMusic } from 'lucide-react';
 import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
@@ -80,7 +80,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
           variant="transparent"
           onClick={() => router.back()}
         >
-          <IconArrowBack size="1.2rem" />
+          <ArrowLeft size="1.2rem" />
           <span>{t('setlistId.info.back')}</span>
         </Button>
         <div className={css.navRight}>
@@ -115,7 +115,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
             variant="transparent"
             href="/setlist"
           >
-            <IconMusic size="1.2rem" />
+            <ListMusic size="1.2rem" />
             {t('setlistId.info.list')}
           </Button>
         </div>

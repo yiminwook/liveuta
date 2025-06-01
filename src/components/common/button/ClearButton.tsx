@@ -2,7 +2,7 @@
 import { CodiconClearAll } from '@/icons';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { ActionIcon, ActionIconProps, Tooltip } from '@mantine/core';
-import { IconCheck } from '@tabler/icons-react';
+import { Check } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import Show from '../utils/Show';
 
@@ -53,7 +53,7 @@ export default function ClearButton({
         size={buttonSize}
       >
         <Show when={cleared} fallback={<CodiconClearAll width={size} height={size} />}>
-          <IconCheck size={size} />
+          <Check size={size} />
         </Show>
       </ActionIcon>
     </Tooltip>

@@ -4,8 +4,8 @@ import { useLocale } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
 import { ActionIcon } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { IconDeviceDesktop } from '@tabler/icons-react';
 import variable from '@variable';
+import { Monitor } from 'lucide-react';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
@@ -55,7 +55,7 @@ export default function ScheduleNav({ session, scheduleDto, length }: NavSection
             variant="default"
             size="lg"
           >
-            <IconDeviceDesktop size="1.5rem" />
+            <Monitor size="1.5rem" />
           </ActionIcon>
         )}
       </div>

@@ -1,8 +1,8 @@
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { Button } from '@mantine/core';
-import { IconArrowNarrowRight } from '@tabler/icons-react';
 import classNames from 'classnames';
+import { ArrowRight } from 'lucide-react';
 import { ComponentProps } from 'react';
 import css from './MoreButton.module.scss';
 
@@ -12,7 +12,7 @@ type MoreButtonProps<C> = ComponentProps<typeof Button<C>> & {
 
 export default function MoreButton<C = 'button'>({
   className,
-  rightSection = <IconArrowNarrowRight />,
+  rightSection = <ArrowRight />,
   variant = 'transparent',
   locale,
   ...props

@@ -2,8 +2,8 @@
 import { CodiconClearAll } from '@/icons';
 import { ActionIcon } from '@mantine/core';
 import { Checkbox } from '@mantine/core';
-import { IconCopy, IconX } from '@tabler/icons-react';
 import cx from 'classnames';
+import { Copy, X } from 'lucide-react';
 import { useShallow } from 'zustand/react/shallow';
 import { copy, useSetlistActions, useSetlistStore } from './Context';
 import css from './Table.module.scss';
@@ -24,7 +24,7 @@ function CopyButton() {
       className={css.actionButton}
       onClick={() => copy(setlist.filter((item) => item.checked))}
     >
-      <IconCopy />
+      <Copy />
     </ActionIcon>
   );
 }
@@ -40,7 +40,7 @@ export function TableHeadActions() {
       <div className={css.emptyIcon}></div>
       <CopyButton />
       <ActionIcon variant="ghost" className={css.actionButton} onClick={removeChecked}>
-        <IconX />
+        <X />
       </ActionIcon>
     </div>
   );

@@ -3,8 +3,8 @@ import { CodiconClearAll } from '@/icons';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { hmsToString } from '@/utils/time';
 import { ActionIcon, Checkbox, Popover, TextInput, UnstyledButton } from '@mantine/core';
-import { IconClipboard, IconCopy, IconGripVertical, IconX } from '@tabler/icons-react';
 import { Reorder, useDragControls } from 'framer-motion';
+import { Clipboard, Copy, GripVertical, X } from 'lucide-react';
 import type { PointerEvent } from 'react';
 import { SetlistItem, copy, useSetlistActions } from './Context';
 import css from './Table.module.scss';
@@ -116,21 +116,21 @@ export default function TableRow({ item }: TableRowProps) {
                 });
               }}
             >
-              <IconClipboard />
+              <Clipboard />
             </ActionIcon>
             <ActionIcon variant="ghost" className={css.actionButton} onClick={() => copy([item])}>
-              <IconCopy />
+              <Copy />
             </ActionIcon>
             <ActionIcon
               variant="ghost"
               className={css.actionButton}
               onClick={() => removeItem(item.id)}
             >
-              <IconX />
+              <X />
             </ActionIcon>
           </div>
           <div className={css.rowGrip} onPointerDown={handleGripPointerDown}>
-            <IconGripVertical />
+            <GripVertical />
           </div>
         </div>
       </td>

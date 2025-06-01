@@ -1,5 +1,5 @@
 import { ActionIcon, Input } from '@mantine/core';
-import { IconSearch } from '@tabler/icons-react';
+import { Search } from 'lucide-react';
 import { ChangeEventHandler } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import css from './SearchInput.module.scss';
@@ -44,7 +44,7 @@ export default function SearchInput({
         disabled={disabled}
         onClick={onSubmit}
       >
-        <IconSearch color="#fff" />
+        <Search color="#fff" size="1rem" />
       </ActionIcon>
     </Input.Wrapper>
   );

@@ -23,8 +23,8 @@ import {
 } from '@dnd-kit/core';
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 import { ActionIcon, Tooltip } from '@mantine/core';
-import { IconX } from '@tabler/icons-react';
 import classNames from 'classnames';
+import { X } from 'lucide-react';
 import { CSSProperties, useState } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import dndCss from './DndComponents.module.scss';
@@ -170,7 +170,7 @@ function PipNav({
             classNames={{ root: classNames(dndCss.pipNavButton) }}
             onClick={onClickHide}
           >
-            <IconX size={18} />
+            <X size={18} />
           </ActionIcon>
         </Tooltip>
       )}

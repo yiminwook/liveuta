@@ -3,7 +3,7 @@ import { useTranslations } from '@/libraries/i18n/client';
 import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
 import { Button } from '@mantine/core';
-import { IconAdjustmentsHorizontal } from '@tabler/icons-react';
+import { SlidersHorizontal } from 'lucide-react';
 import css from './ScheduleNav.module.scss';
 import ScheduleNavModal from './ScheduleNavModal';
 
@@ -62,7 +62,7 @@ export default function MobileNavButton({ length, scheduleDto }: MobileNavButton
         label: css.mobileNavBtnLabel,
       }}
       h={40}
-      leftSection={<IconAdjustmentsHorizontal />}
+      leftSection={<SlidersHorizontal />}
       variant="default"
       onClick={handleOpen}
     >
