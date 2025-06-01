@@ -1,6 +1,6 @@
-import X from '@/components/icons/tabler/X';
-import { AntDesignDragOutlined } from '@icons/antd/DragOutlined';
+import { AntDesignDragOutlined } from '@/icons';
 import classNames from 'classnames';
+import { X } from 'lucide-react';
 import { MouseEventHandler, Ref, TouchEventHandler } from 'react';
 import css from './Grid.module.scss';
 
@@ -26,7 +26,7 @@ export function DragHandle({ className, style, ref, children, ...props }: DragHa
 export function RemoveHandle({ onClick }: { onClick: () => void }) {
   return (
     <span className={classNames(css.remove)} onClick={onClick}>
-      <X color="#fff" width={20} height={20} />
+      <X color="#fff" size={20} />
     </span>
   );
 }

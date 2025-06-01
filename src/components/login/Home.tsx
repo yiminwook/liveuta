@@ -1,10 +1,8 @@
 'use client';
 import character from '@/assets/image/character-3.png';
+import { LogosDiscordIcon, LogosGoogleIcon, RiKakaoTalkFill } from '@/icons';
 import { useTranslations } from '@/libraries/i18n/client';
 import { Provider } from '@/types/next-auth';
-import LogosDiscordIcon from '@icons/logos/DiscordIcon';
-import LogosGoogleIcon from '@icons/logos/GoogleIcon';
-import RiKakaoTalkFill from '@icons/ri/KakaoTalkFilled';
 import { ActionIcon } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import { signIn } from 'next-auth/react';

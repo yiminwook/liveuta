@@ -4,8 +4,8 @@ import { usePathname } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
-import FasFilter from '@icons/fa-solid/Filter';
 import { Button, Popover } from '@mantine/core';
+import { Filter } from 'lucide-react';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 import ConfirmModal from '../common/modal/ConfirmModal';
@@ -44,7 +44,7 @@ export default function QueryButton({ query }: QueryButtonProps) {
   return (
     <Popover withArrow arrowPosition="center">
       <Popover.Target>
-        <Button h={40} bg="var(--mantine-color-body)" variant="outline" leftSection={<FasFilter />}>
+        <Button h={40} bg="var(--mantine-color-body)" variant="outline" leftSection={<Filter />}>
           {t('schedule.queryButton.filtering')}
         </Button>
       </Popover.Target>

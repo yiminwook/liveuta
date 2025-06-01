@@ -54,6 +54,7 @@
   font-weight: 500;
 
   @include util.line-clamp(1);
+
   @include util.min-width(var.$mobile-boundary) {
     font-size: 1.25rem;
   }
@@ -66,6 +67,7 @@
   @include util.min-width(var.$mobile-boundary) {
     flex-direction: row;
     justify-content: space-between;
+    align-items: flex-end;
   }
 }
 
@@ -75,6 +77,8 @@
   font-size: 0.875rem;
 
   @include util.min-width(var.$mobile-boundary) {
+    flex-direction: column;
+    gap: 0;
     font-size: 1rem;
   }
 }

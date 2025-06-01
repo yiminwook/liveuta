@@ -1,14 +1,7 @@
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import FasStar from '@icons/fa-solid/Star';
-import IonPlus from '@icons/ion/PlusRound';
-import MsOpenInNew from '@icons/material-symbols/OpenInNew';
-import MdiBlock from '@icons/mdi/Block';
-import TbBellRingingFilled from '@icons/tabler/BellRingingFilled';
-import TbCheck from '@icons/tabler/Check';
-import TbCopy from '@icons/tabler/Copy';
-import TbDots from '@icons/tabler/Dots';
+import { useTranslations } from '@/libraries/i18n/client';
 import { ActionIcon, CopyButton, Menu } from '@mantine/core';
 import variable from '@variable';
+import { Ban, Check, Copy, Ellipsis, SquareArrowOutUpRight, Star } from 'lucide-react';
 import { toast } from 'sonner';
 import css from './CardMenu.module.scss';
 
@@ -32,10 +25,10 @@ export default function CardMenu({
   const { t } = useTranslations();
 
   return (
-    <Menu position="bottom-end" withArrow withinPortal arrowPosition="center" trigger="hover">
+    <Menu position="bottom-end" withArrow arrowPosition="center" trigger="hover">
       <Menu.Target>
         <ActionIcon radius="lg" size={25}>
-          <TbDots width="25px" height="25px" />
+          <Ellipsis />
         </ActionIcon>
       </Menu.Target>
 
@@ -49,21 +42,26 @@ export default function CardMenu({
         </Menu.Item> */}
         <Menu.Item
           component="button"
-          leftSection={<FasStar color={isFavorite ? '#ffbb00' : '#a7a7a7'} />}
+          leftSection={
+            <Star
+              color={isFavorite ? '#ffbb00' : '#a7a7a7'}
+              fill={isFavorite ? '#ffbb00' : '#a7a7a7'}
+            />
+          }
           onClick={onClickFavorite}
         >
           {`${t('schedule.scheduleCard.cardMenu.favorite')} ${isFavorite ? t('schedule.scheduleCard.cardMenu.remove') : t('schedule.scheduleCard.cardMenu.add')}`}
         </Menu.Item>
         <Menu.Item
           component="button"
-          leftSection={<MdiBlock color={variable.thirdColorDefault} />}
+          leftSection={<Ban color={variable.thirdColorDefault} />}
           onClick={onClickBlock}
         >
           {t('schedule.scheduleCard.cardMenu.blockChannel')}
         </Menu.Item>
         <Menu.Item
           component="button"
-          leftSection={<MsOpenInNew color={variable.thirdColorDefault} />}
+          leftSection={<SquareArrowOutUpRight color={variable.thirdColorDefault} />}
           onClick={onClickNewTab}
         >
           {t('schedule.scheduleCard.cardMenu.openInNewTab')}
@@ -73,7 +71,7 @@ export default function CardMenu({
             <Menu.Item
               component="button"
               leftSection={
-                copied ? <TbCheck color="teal" /> : <TbCopy color={variable.thirdColorDefault} />
+                copied ? <Check color="teal" /> : <Copy color={variable.thirdColorDefault} />
               }
               onClick={() => {
                 copy();

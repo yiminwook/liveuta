@@ -1,5 +1,9 @@
 import { ITEMS_PER_PAGE, MONGODB_CHANNEL_COLLECTION, MONGODB_MANAGEMENT_DB } from '@/constants';
-import { TChannelDocument, TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
+import {
+  TChannelDocument,
+  TChannelDocumentWithoutId,
+  WaitingListItem,
+} from '@/libraries/mongodb/type';
 import { combineChannelData } from '@/utils/combineChannelData';
 import { addEscapeCharacter } from '@/utils/regexp';
 import { z } from 'zod';
@@ -78,3 +82,20 @@ export const parseChannel = (channel: TChannelDocument | null) => ({
   nameKor: channel?.name_kor || 'no data',
   // handleName: channel?.handle_name || '',
 });
+
+export async function getWaitingList() {
+  const db = await connectMongoDB(MONGODB_MANAGEMENT_DB, MONGODB_CHANNEL_COLLECTION);
+  const channels = await db
+    .find<WaitingListItem>(
+      { waiting: true },
+      {
+        projection: {
+          name_kor: 1,
+          channel_addr: 1,
+        },
+      },
+    )
+    .toArray();
+
+  return channels;
+}

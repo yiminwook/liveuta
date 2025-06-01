@@ -1,20 +1,25 @@
 .inner {
-  padding: 0.5rem;
+  padding-block: 0.5rem;
+  container-type: inline-size;
 }
 
 .channelSection {
   position: relative;
 
-  @include util.min-width(md) {
+  @container (min-width: 48rem) {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     padding-block-start: 1rem;
     padding-inline: 0.5rem;
   }
 
-  @include util.min-width(2xl) {
-    grid-template-columns: 1fr 1fr 1fr;
+  @container (min-width: 72rem) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @container (min-width: 96rem) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

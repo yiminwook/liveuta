@@ -1,7 +1,7 @@
 'use client';
 import { AppContext, createAppStore } from '@/stores/app';
 import { PlayerContext, createPlayerStore } from '@/stores/player';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -13,7 +13,6 @@ type AppProviderProps = {
 export default function AppProvider({ children, initState }: AppProviderProps) {
   const appStore = useRef(
     createAppStore({
-      theme: 'theme1',
       isShowAcctSidebar: false,
     }),
   );
@@ -27,13 +26,6 @@ export default function AppProvider({ children, initState }: AppProviderProps) {
       timeline: 0,
     }),
   );
-
-  useEffect(() => {
-    // useMultiViewStore.persist.rehydrate();
-    appStore.current.getState().actions.initTheme();
-  }, []);
-
-  // useStorageDOMEvents(useMultiViewStore);
 
   return (
     <AppContext value={appStore.current}>

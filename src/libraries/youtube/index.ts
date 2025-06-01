@@ -60,3 +60,16 @@ export const getYoutubeChannelsByVideoId = async (videoId: string) => {
 };
 
 // https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q={custom_username}&key={api_key}'
+
+export const getYoutubeChannelByHandle = async (handle: string) => {
+  const response = await youtubeService.channels.list(
+    {
+      forHandle: handle,
+      part: ['id', 'snippet', 'statistics'],
+      key: process.env.GOOGLE_API_KEY,
+    },
+    // { fetchImplementation: fetcher },
+  );
+
+  return response.data.items?.[0] || null;
+};

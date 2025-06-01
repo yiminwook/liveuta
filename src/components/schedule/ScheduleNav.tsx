@@ -2,10 +2,10 @@
 import { Link } from '@/libraries/i18n';
 import { useLocale } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
-import { IcBaselineMonitor } from '@icons/material-symbols/BaselineMonitor';
 import { ActionIcon } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
+import { Monitor } from 'lucide-react';
 import { Session } from 'next-auth';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
@@ -55,7 +55,7 @@ export default function ScheduleNav({ session, scheduleDto, length }: NavSection
             variant="default"
             size="lg"
           >
-            <IcBaselineMonitor width="1.5rem" height="1.5rem" color="inherit" />
+            <Monitor size="1.5rem" />
           </ActionIcon>
         )}
       </div>

@@ -1,5 +1,5 @@
-import RxHamburgerMenu from '@icons/radix-icons/HamburgerMenu';
 import classNames from 'classnames';
+import { Menu } from 'lucide-react';
 import css from './HamburgerBtn.module.scss';
 
 type HamburgerBtnProps = {
@@ -11,7 +11,7 @@ type HamburgerBtnProps = {
 export default function HamburgerBtn({ className, onClick }: HamburgerBtnProps) {
   return (
     <button className={classNames(css.button, className)} onClick={onClick}>
-      <RxHamburgerMenu width="2rem" height="2rem" color="inherit" />
+      <Menu size="2rem" color="inherit" />
     </button>
   );
 }

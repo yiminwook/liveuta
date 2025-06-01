@@ -12,13 +12,12 @@ import useReservePush from '@/hooks/use-reserve-push';
 import { useScheduleQuery } from '@/hooks/use-schedule';
 import { Link } from '@/libraries/i18n';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useCustomMantineColorScheme } from '@/libraries/mantine/custom-theme-hook';
 import { TParsedClientContent } from '@/libraries/mongodb/type';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import { useAppCtx } from '@/stores/app';
 import { useSetModalStore } from '@/stores/modal';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick } from '@/utils/gtag';
-import { isDarkModeEnabled } from '@/utils/helper';
 import { openWindow } from '@/utils/window-event';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
@@ -26,7 +25,6 @@ import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 import { toast } from 'sonner';
-import { useStore } from 'zustand';
 import css from './page.module.scss';
 
 type Props = {
@@ -234,8 +232,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
 }
 
 function TweetArticle() {
-  const appCtx = useAppCtx();
-  const theme = useStore(appCtx, (state) => (isDarkModeEnabled(state.theme) ? 'dark' : 'light'));
+  const { mantineColorScheme } = useCustomMantineColorScheme();
 
   return (
     <article className={css.tweetArticle}>
@@ -243,7 +240,7 @@ function TweetArticle() {
         sourceType="profile"
         screenName="LeonaShishigami"
         options={{ height: 500 }}
-        theme={theme}
+        theme={mantineColorScheme === 'light' ? 'light' : 'dark'}
       />
     </article>
   );

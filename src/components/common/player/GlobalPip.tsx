@@ -1,14 +1,13 @@
 'use client';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import { usePlayerCtx } from '@/stores/player';
+import { usePlayer } from '@/stores/player';
 import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { toast } from 'sonner';
-import { useStore } from 'zustand';
 
 const DraggablePlayer = dynamic(
   () => import('./DndComponents').then((mod) => mod.DraggablePlayer),
@@ -27,9 +26,8 @@ export default function GlobalPip({ locale }: Props) {
   const isLive = searchParams.get('t') === 'live';
   const [isMount, setIsMount] = useState(false);
 
-  const playerCtx = usePlayerCtx();
-  const isHide = useStore(playerCtx, (store) => store.isHide);
-  const setIsHide = useStore(playerCtx, (store) => store.actions.setIsHide);
+  const isHide = usePlayer((store) => store.isHide);
+  const setIsHide = usePlayer((store) => store.actions.setIsHide);
 
   const hidePip = () => setIsHide(true);
 

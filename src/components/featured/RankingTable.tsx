@@ -1,8 +1,5 @@
 import { useTranslations } from '@/libraries/i18n/client';
 import { TYChannelsData } from '@/types/api/youtube';
-import FasStar from '@icons/fa-solid/Star';
-import MdiBlock from '@icons/mdi/Block';
-import variable from '@variable';
 import Image from 'next/image';
 import css from './RankingTable.module.scss';
 

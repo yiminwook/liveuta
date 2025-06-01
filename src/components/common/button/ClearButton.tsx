@@ -1,8 +1,8 @@
 'use client';
+import { CodiconClearAll } from '@/icons';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import CodiconClearAll from '@icons/codicon/ClearAll';
-import TbCheck from '@icons/tabler/Check';
 import { ActionIcon, ActionIconProps, Tooltip } from '@mantine/core';
+import { Check } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import Show from '../utils/Show';
 
@@ -53,7 +53,7 @@ export default function ClearButton({
         size={buttonSize}
       >
         <Show when={cleared} fallback={<CodiconClearAll width={size} height={size} />}>
-          <TbCheck width={size} height={size} />
+          <Check size={size} />
         </Show>
       </ActionIcon>
     </Tooltip>

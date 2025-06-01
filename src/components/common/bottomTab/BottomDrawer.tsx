@@ -1,15 +1,9 @@
 import { Link } from '@/libraries/i18n';
 import { usePathname, useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import FaSolidStar from '@icons/fa-solid/Star';
-import IonMusicNote from '@icons/ion/MusicNote';
-import { IcBaselineHelpOutline } from '@icons/material-symbols/BaselineHelpOutline';
-import TbDeviceDesktopCode from '@icons/tabler/DeviceDesktopCode';
-import Diamond from '@icons/tabler/Diamond';
-import TbSettings from '@icons/tabler/Settings';
-import TbTools from '@icons/tabler/Tools';
 import { ActionIcon, SimpleGrid } from '@mantine/core';
 import classNames from 'classnames';
+import { CircleHelp, Gem, MonitorDot, Music, Settings, Star, Wrench } from 'lucide-react';
 import { JSX } from 'react';
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../Vaul';
 import css from './BottomTab.module.scss';
@@ -34,27 +28,27 @@ export default function BottomDrawer({ isOpen, onClose, locale }: BottomDrawerPr
     {
       href: '/featured',
       text: t('global.bottomTab.drawer.internalLinks.featured'),
-      icon: <Diamond width="1.5rem" height="1.5rem" />,
+      icon: <Gem />,
     },
     {
       href: '/utils',
       text: t('global.bottomTab.drawer.internalLinks.utils'),
-      icon: <TbTools width="1.5rem" height="1.5rem" />,
+      icon: <Wrench />,
     },
     {
       href: '/setting',
       text: t('global.bottomTab.drawer.internalLinks.settings'),
-      icon: <TbSettings width="1.5rem" height="1.5rem" />,
+      icon: <Settings />,
     },
     {
       href: '/dev',
       text: t('global.bottomTab.drawer.internalLinks.dev'),
-      icon: <TbDeviceDesktopCode width="1.5rem" height="1.5rem" />,
+      icon: <MonitorDot />,
     },
     {
       href: '/support',
       text: t('global.bottomTab.drawer.internalLinks.support'),
-      icon: <IcBaselineHelpOutline width="1.5rem" height="1.5rem" />,
+      icon: <CircleHelp />,
     },
   ];
 
@@ -62,17 +56,17 @@ export default function BottomDrawer({ isOpen, onClose, locale }: BottomDrawerPr
     {
       href: 'https://gall.dcinside.com/mgallery/board/lists?id=kizunaai',
       text: t('global.bottomTab.drawer.externalLinks.kizunaAiGallery'),
-      icon: <FaSolidStar width="1.5rem" height="1.5rem" />,
+      icon: <Star />,
     },
     {
       href: 'https://gall.dcinside.com/mini/board/lists?id=vuta',
       text: t('global.bottomTab.drawer.externalLinks.vutaGallery'),
-      icon: <IonMusicNote width="1.5rem" height="1.5rem" />,
+      icon: <Music />,
     },
     {
       href: 'https://uta-tools.vercel.app',
       text: t('global.bottomTab.drawer.externalLinks.utaTools'),
-      icon: <TbTools width="1.5rem" height="1.5rem" />,
+      icon: <Wrench />,
     },
   ];
 

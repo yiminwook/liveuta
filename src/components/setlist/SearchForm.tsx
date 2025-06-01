@@ -1,10 +1,9 @@
 'use client';
 import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import IonSearch from '@icons/ion/IosSearch';
-import TbX from '@icons/tabler/X';
 import { TextInput, UnstyledButton } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
+import { Search, X } from 'lucide-react';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 import css from './SearchForm.module.scss';
@@ -54,11 +53,11 @@ export default function SearchForm({ searchParams }: SearchFormProps) {
             placeholder={t('setlist.searchForm.searchInputPlaceholder')}
           />
           <button className={css.clearButton} type="button" onClick={() => setQuery('')}>
-            <TbX />
+            <X size="1rem" />
           </button>
         </div>
         <UnstyledButton className={css.submit} type="submit">
-          <IonSearch color="#fff" width="1.75rem" height="1.75rem" />
+          <Search color="#fff" size="1.25rem" />
         </UnstyledButton>
       </div>
     </form>

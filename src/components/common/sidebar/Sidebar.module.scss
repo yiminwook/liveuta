@@ -38,12 +38,15 @@
   &:global(.left) {
     left: -18rem;
   }
+
   &:global(.right) {
     right: -18rem;
   }
+
   &:global(.moveRight) {
     transform: translateX(18rem);
   }
+
   &:global(.moveLeft) {
     transform: translateX(-18rem);
   }
@@ -72,4 +75,3 @@
   padding: 0.5rem 1rem 0 1rem;
   // align-items: center;
 }
-

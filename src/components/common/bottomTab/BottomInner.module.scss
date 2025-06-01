@@ -11,65 +11,78 @@
   color: var(--liveuta-txt-light);
   transition: transform 0.3s util.easing(default);
 
- 
-  @include util.min-width(var.$mobile-boundary) {
+}
+
+@include util.min-width(var.$mobile-boundary) {
+  .inner {
     height: 0;
   }
+}
 
-  .topButton {
-    position: absolute;
-    top: -65px;
-    right: 16px;
-    padding: 0.5em;
-    border-radius: 5px;
-    box-shadow: var.$box-shadow;
-    background-color: util.color(body);
-    color: util.color(text);
-    visibility: hidden;
+button.topButton {
+  position: absolute;
+  top: -65px;
+  right: 16px;
+  padding: 0.5em;
+  border-radius: 5px;
+  box-shadow: var.$box-shadow;
+  background-color: var(--mantine-color-white);
+  color: util.color(text);
+  visibility: hidden;
+}
 
-    @include util.min-width(var.$mobile-boundary) {
-      right: 32px;
-    }
+@include util.dark {
+  button.topButton {
+    background-color: var(--mantine-color-dark-6);
+  }
+}
+
+@include util.min-width(var.$mobile-boundary) {
+  button.topButton {
+    right: 32px;
+  }
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: var.$env-bottom;
+
+  li {
+    flex: 1;
+    height: 100%;
+
+  }
+}
+
+@include util.min-width(var.$mobile-boundary) {
+  .list {
+    display: none; // tab 선택 안되게 방지
+  }
+}
+
+.item {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+  transition: color 0.2s util.easing(default);
+
+  &:hover {
+    color: util.palette(third, lighter);
   }
 
-  .list {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    text-align: center;
-    padding-bottom: var.$env-bottom;
+  &[data-current='true'] {
+    color: util.palette(third, lighter);
+  }
 
-    @include util.min-width(var.$mobile-boundary) {
-      display: none; // tab 선택 안되게 방지
-    }
-
-    li {
-      flex: 1;
-      height: 100%;
-
-      .item {
-        display: grid;
-        place-items: center;
-        width: 100%;
-        height: 100%;
-        padding: 0.5em;
-        transition: color 0.2s util.easing(default);
-
-        &:hover {
-          color: util.palette(third, lighter);
-        }
-
-        &[data-current='true'] {
-          color: util.palette(third, lighter);
-        }
-
-        svg {
-          width: 1.5rem;
-          height: 1.5rem;
-        }
-      }
-    }
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }

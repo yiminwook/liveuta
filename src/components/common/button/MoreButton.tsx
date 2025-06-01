@@ -1,9 +1,8 @@
-import { Link } from '@/libraries/i18n';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import IonArrowRightC from '@icons/ion/ArrowRightC';
-import { Button, ButtonProps } from '@mantine/core';
+import { Button } from '@mantine/core';
 import classNames from 'classnames';
+import { ArrowRight } from 'lucide-react';
 import { ComponentProps } from 'react';
 import css from './MoreButton.module.scss';
 
@@ -13,7 +12,7 @@ type MoreButtonProps<C> = ComponentProps<typeof Button<C>> & {
 
 export default function MoreButton<C = 'button'>({
   className,
-  rightSection = <IonArrowRightC />,
+  rightSection = <ArrowRight />,
   variant = 'transparent',
   locale,
   ...props

@@ -2,21 +2,20 @@
 import { clientApi } from '@/apis/fetcher';
 import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import { useMount } from '@/hooks/use-mount';
+import { LogosYoutubeIcon } from '@/icons';
 import dayjs from '@/libraries/dayjs';
 import { Link } from '@/libraries/i18n';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { ChannelDatesetItem } from '@/libraries/mongodb/channels';
 import { Setlist } from '@/libraries/oracledb/setlist/service';
 import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
-import { useSetPlayerStore } from '@/stores/player';
+import { usePlayer } from '@/stores/player';
 import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { openWindow } from '@/utils/window-event';
-import BiMusicNoteList from '@icons/bi/MusicNoteList';
-import IonArrowBack from '@icons/ion/ArrowBack';
-import LogosYoutubeIcon from '@icons/logos/YouTubeIcon';
 import { Avatar, Button } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import cx from 'classnames';
+import { ArrowLeft, ListMusic } from 'lucide-react';
 import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
@@ -40,7 +39,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
 
-  const actions = useSetPlayerStore();
+  const actions = usePlayer((state) => state.actions);
 
   const handleLocation = (url: string) => {
     if (isMobile) {
@@ -81,7 +80,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
           variant="transparent"
           onClick={() => router.back()}
         >
-          <IonArrowBack width="1.2rem" height="1.2rem" />
+          <ArrowLeft size="1.2rem" />
           <span>{t('setlistId.info.back')}</span>
         </Button>
         <div className={css.navRight}>
@@ -116,7 +115,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
             variant="transparent"
             href="/setlist"
           >
-            <BiMusicNoteList width="1.2rem" height="1.2rem" />
+            <ListMusic size="1.2rem" />
             {t('setlistId.info.list')}
           </Button>
         </div>

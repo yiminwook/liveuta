@@ -1,0 +1,51 @@
+@use "sass:map";
+
+.wrap {
+  max-width: 100%;
+  overflow: auto;
+}
+
+.waitingList {
+  & > li {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 40% 60%;
+  }
+
+  [data-label="name"] {
+    font-weight: 500;
+    text-align: center;
+    padding: 0.5rem;
+    min-width: 0px;
+
+    span {
+      @include util.line-clamp(1);
+    }
+  }
+
+  [data-label="url"] {
+    text-align: center;
+    padding: 0.5rem;
+    min-width: 0px; // 충분히 축소되도록
+
+    a {
+      @include util.line-clamp(1);
+    }
+  }
+}
+
+.waitingListLabel {
+  font-size: 0.875rem;
+  color: map.get(var.$colors, dimmed);
+}
+
+.waitingItem {
+
+  &:hover {
+    background-color: map.get(var.$colors, default-hover);
+  }
+
+  &:nth-child(even) {
+    border-block: 1px solid map.get(var.$colors, default-border);
+  }
+}

@@ -7,6 +7,7 @@ import {
   TCorner,
   transfromStringToConer,
 } from '@/constants/pip';
+import { AntDesignDragOutlined } from '@/icons';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { getBoxPositionStyle } from '@/utils/helper';
@@ -21,10 +22,9 @@ import {
   useDroppable,
 } from '@dnd-kit/core';
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
-import { AntDesignDragOutlined } from '@icons/antd/DragOutlined';
-import TablerX from '@icons/tabler/X';
 import { ActionIcon, Tooltip } from '@mantine/core';
 import classNames from 'classnames';
+import { X } from 'lucide-react';
 import { CSSProperties, useState } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import dndCss from './DndComponents.module.scss';
@@ -170,7 +170,7 @@ function PipNav({
             classNames={{ root: classNames(dndCss.pipNavButton) }}
             onClick={onClickHide}
           >
-            <TablerX width={18} height={18} />
+            <X size={18} />
           </ActionIcon>
         </Tooltip>
       )}

@@ -1,17 +1,14 @@
 'use client';
 import useCachedData from '@/hooks/use-cached-data';
 import { useTranslations } from '@/libraries/i18n/client';
-import FasStar from '@icons/fa-solid/Star';
-import MdiBlock from '@icons/mdi/Block';
+import { Ban, Star } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Background from '../common/background/Background';
 import Blacklist from './Blacklist';
 import css from './Home.module.scss';
 import Whitelist from './Whitelist';
 
-type HomeProps = {};
-
-export default function Home({}: HomeProps) {
+export default function Home() {
   const { t } = useTranslations();
 
   const session = useSession().data!;
@@ -22,14 +19,14 @@ export default function Home({}: HomeProps) {
       <div className={css.wrap}>
         <section className={css.section}>
           <h2 className={css.sectionTitle}>
-            <FasStar width="1.2rem" height="1.2rem" color="#ffbb00" />
+            <Star size="1.2rem" color="#ffbb00" fill="#ffbb00" />
             <b>{t('my.favorite.title')}</b>
           </h2>
           <Whitelist session={session} whiteList={whiteListMap} channelList={channelMap} />
         </section>
         <section className={css.section}>
           <h2 className={css.sectionTitle}>
-            <MdiBlock width="1.2rem" height="1.2rem" color="#ED2939" />
+            <Ban size="1.2rem" color="#ED2939" />
             <b>{t('my.blacklist.title')}</b>
           </h2>
           <Blacklist session={session} blacklist={blackListMap} channelList={channelMap} />

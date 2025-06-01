@@ -2,10 +2,9 @@
 import For from '@/components/common/utils/For';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import IonIosSearch from '@icons/ion/IosSearch';
-import TablerX from '@icons/tabler/X';
 import { ActionIcon, Modal, Tooltip } from '@mantine/core';
 import { Command } from 'cmdk';
+import { Search, X } from 'lucide-react';
 import { memo, useCallback } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import css from './CommandMenu.module.scss';
@@ -22,12 +21,12 @@ function CommandMenuComponent() {
     <Command label="Command Menu" className={css.wrap}>
       <div className={css.header}>
         <div className={css.inputWrap}>
-          <IonIosSearch className={css.icon} />
+          <Search className={css.icon} />
           <Command.Input className={css.input} placeholder={t('global.command.inputPlaceholder')} />
         </div>
         <Tooltip label={t('global.command.close')}>
           <ActionIcon variant="ghost" size="lg" onClick={closeCmd}>
-            <TablerX />
+            <X className={css.icon} />
           </ActionIcon>
         </Tooltip>
       </div>

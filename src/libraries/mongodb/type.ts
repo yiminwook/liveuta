@@ -23,6 +23,7 @@ export type TChannelDocument = {
 };
 
 export type TChannelDocumentWithoutId = Omit<TChannelDocument, '_id'>;
+export type WaitingListItem = Pick<TChannelDocument, 'channel_addr' | 'name_kor'>;
 export type TChannelRecord = Record<string, TChannelDocumentWithoutId>;
 
 export type TContentDocument = {

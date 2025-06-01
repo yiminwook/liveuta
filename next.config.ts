@@ -71,8 +71,8 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/proxy/viewer',
-        destination: 'https://yt.grs0412.workers.dev',
+        source: '/proxy/append-new-vchan/:path*',
+        destination: 'https://append-new-vchan.vercel.app/api/:path*',
       },
     ];
   },
@@ -112,11 +112,18 @@ const nextConfig: NextConfig = {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
-        use: ['@svgr/webpack'],
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              svgo: false, // viewBox 유지
+            },
+          },
+        ],
       },
     );
 
-    /** msw **/
+    /** MSW **/
     if (isServer) {
       // next server build => ignore msw/browser
       if (Array.isArray(config.resolve.alias)) {

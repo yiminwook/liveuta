@@ -1,13 +1,10 @@
 'use client';
+import { CodiconClearAll } from '@/icons';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { hmsToString } from '@/utils/time';
-import CodiconClearAll from '@icons/codicon/ClearAll';
-import TbClipboard from '@icons/tabler/Clipboard';
-import TbCopy from '@icons/tabler/Copy';
-import TbGripVertical from '@icons/tabler/GripVertical';
-import TbX from '@icons/tabler/X';
 import { ActionIcon, Checkbox, Popover, TextInput, UnstyledButton } from '@mantine/core';
 import { Reorder, useDragControls } from 'framer-motion';
+import { Clipboard, Copy, GripVertical, X } from 'lucide-react';
 import type { PointerEvent } from 'react';
 import { SetlistItem, copy, useSetlistActions } from './Context';
 import css from './Table.module.scss';
@@ -119,21 +116,21 @@ export default function TableRow({ item }: TableRowProps) {
                 });
               }}
             >
-              <TbClipboard />
+              <Clipboard />
             </ActionIcon>
             <ActionIcon variant="ghost" className={css.actionButton} onClick={() => copy([item])}>
-              <TbCopy />
+              <Copy />
             </ActionIcon>
             <ActionIcon
               variant="ghost"
               className={css.actionButton}
               onClick={() => removeItem(item.id)}
             >
-              <TbX />
+              <X />
             </ActionIcon>
           </div>
           <div className={css.rowGrip} onPointerDown={handleGripPointerDown}>
-            <TbGripVertical />
+            <GripVertical />
           </div>
         </div>
       </td>

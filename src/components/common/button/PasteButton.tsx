@@ -1,8 +1,7 @@
 'use client';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import TablerClipboard from '@icons/tabler/Clipboard';
-import TablerClipboardCheck from '@icons/tabler/ClipboardCheck';
 import { ActionIcon, ActionIconProps, Tooltip } from '@mantine/core';
+import { Clipboard, ClipboardCheck } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import Show from '../utils/Show';
 
@@ -59,8 +58,8 @@ export default function PasteButton({
         color={pasted ? 'teal' : 'gray'}
         size={buttonSize}
       >
-        <Show when={pasted} fallback={<TablerClipboard width={size} height={size} />}>
-          <TablerClipboardCheck width={size} height={size} />
+        <Show when={pasted} fallback={<Clipboard size={size} />}>
+          <ClipboardCheck size={size} />
         </Show>
       </ActionIcon>
     </Tooltip>
