@@ -392,7 +392,10 @@
       "channelNameInputLabel": "Channel Name",
       "channelAddressInputLabel": "Channel Address",
       "submit": "Submit",
-      "submitSuccess": "Successfully requested new vtuber"
+      "submitSuccess": "Successfully requested new vtuber",
+      "noValidUrl": "Already submitted or invalid channel urls",
+      "validate": "Test Channels",
+      "nameKor": "Channel Name"
     },
     "waitingList": {
       "channelName": "Channel Name",
@@ -513,7 +516,8 @@
     "links": {
       "converter": "Converter",
       "converters": {
-        "base64": "Base64"
+        "base64": "Base64",
+        "colors": "Colors"
       },
       "youtube": "YouTube",
       "youtubeItems": {
@@ -543,6 +547,9 @@
         "output": "Output",
         "encodeError": "Invalid input.",
         "decodeError": "Failed to decode."
+      },
+      "colors": {
+        "title": "Colors"
       }
     },
     "youtube": {

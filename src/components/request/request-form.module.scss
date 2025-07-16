@@ -1,9 +1,67 @@
-.form {}
+.channelsForm {
+  margin-block-start: 1rem;
+}
 
-.inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.channels {
+  display: grid;
+  gap: 1.5rem;
+
+  @include util.min-width(var.$mobile-boundary) {
+    gap: 0.25rem;
+  }
+}
+
+.channelsLabel {
+  display: hidden;
+  visibility: hidden;
+  height: 0;
+
+  @include util.min-width(var.$mobile-boundary) {
+    display: grid;
+    visibility: visible;
+    height: auto;
+    gap: 0.5rem;
+    grid-template-columns: 1fr 1fr;
+    font-size: 0.875rem;
+    color: map-get(var.$colors, dimmed);
+
+    & > div {
+      display: grid;
+      place-content: center;
+    }
+  }
+}
+
+.channel {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr;
+
+  @include util.min-width(var.$mobile-boundary) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.channelUrl {
+  display: grid;
+
+  & input {
+    color: map-get(var.$colors, text) !important;
+  }
+}
+
+.channelName {
+  display: grid;
+}
+
+.channelFieldLabel {
+  font-size: 0.875rem;
+  color: map-get(var.$colors, dimmed);
+
+  @include util.min-width(var.$mobile-boundary) {
+    display: none;
+    visibility: hidden;
+  }
 }
 
 .buttons {

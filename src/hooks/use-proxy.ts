@@ -39,9 +39,28 @@ export const useAutoCompleteQuery = () => {
 
 export const useSubmitChannelMutation = () => {
   return useMutation({
-    mutationFn: (arg: {
-      channelName: string;
-      channelURL: string;
-    }) => proxyApi.post('append-new-vchan/submitForm', { json: arg }).json(),
+    mutationFn: (
+      arg: {
+        url: string;
+        nameKor: string;
+        channelId: string;
+        handle: string;
+      }[],
+    ) => proxyApi.post('append-new-vchan/submitBatch', { json: { channels: arg } }).json(),
+  });
+};
+
+type ValidatedChannel = {
+  url: string;
+  channelId: string;
+  handle: string;
+};
+
+export const useValidateChannelsMutation = () => {
+  return useMutation({
+    mutationFn: (urls: string[]) =>
+      proxyApi
+        .post('append-new-vchan/checkDuplicatesBatch', { json: { urls } })
+        .json<{ results: ValidatedChannel[] }>(),
   });
 };
