@@ -77,6 +77,20 @@
   align-items: center;
 }
 
+.registeredChannelsTitle {
+  text-align: center;
+  margin-block-end: 0.5rem;
+}
+
+.registeredChannels {
+  display: grid;
+  gap: 1.5rem;
+
+  @include util.min-width(var.$mobile-boundary) {
+    gap: 0.25rem;
+  }
+}
+
 .description {
   margin-block-start: 2rem;
   word-break: keep-all;

@@ -54,6 +54,7 @@ type ValidatedChannel = {
   url: string;
   channelId: string;
   handle: string;
+  existingName: string;
 };
 
 export const useValidateChannelsMutation = () => {

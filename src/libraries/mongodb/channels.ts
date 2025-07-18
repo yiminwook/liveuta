@@ -83,6 +83,12 @@ export const parseChannel = (channel: TChannelDocument | null) => ({
   // handleName: channel?.handle_name || '',
 });
 
+export async function getRegisteredChannelCount() {
+  const db = await connectMongoDB(MONGODB_MANAGEMENT_DB, MONGODB_CHANNEL_COLLECTION);
+  const count = await db.countDocuments({ waiting: false });
+  return count;
+}
+
 export async function getWaitingList() {
   const db = await connectMongoDB(MONGODB_MANAGEMENT_DB, MONGODB_CHANNEL_COLLECTION);
   const channels = await db

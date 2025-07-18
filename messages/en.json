@@ -395,7 +395,9 @@
       "submitSuccess": "Successfully requested new vtuber",
       "noValidUrl": "Already submitted or invalid channel urls",
       "validate": "Test Channels",
-      "nameKor": "Channel Name"
+      "nameKor": "Channel Name",
+      "submitAll": "Submit All",
+      "registeredChannels": "Already Registered Channels"
     },
     "waitingList": {
       "channelName": "Channel Name",
