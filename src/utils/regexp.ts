@@ -23,3 +23,17 @@ export const testYoutubeUrl = (url: string) => {
     url,
   );
 };
+
+/**
+ * 유투브 채널 URL인지 검사
+ * @param {string} url 유튜브 채널 URL
+ * @returns {boolean} 유효한 유튜브 채널 URL인지 여부
+ */
+export const testYoutubeChannelUrl = (url: string) => {
+  // https://www.youtube.com/@MEMENTOVANITAS
+  // https://www.youtube.com/channel/UCO5MA_Dr1o6I0IPQZ6tp_6w
+  //
+  return /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/(channel\/[a-zA-Z0-9_-]{24}|@[\w-]+)$/.test(
+    url,
+  );
+};

@@ -392,7 +392,15 @@
       "channelNameInputLabel": "Channel Name",
       "channelAddressInputLabel": "Channel Address",
       "submit": "Submit",
-      "submitSuccess": "Successfully requested new vtuber"
+      "submitSuccess": "Successfully requested new vtuber",
+      "validate": "Test Channels",
+      "nameKor": "Channel Name",
+      "submitAll": "Submit All",
+      "registeredChannels": "Already Registered Channels",
+      "description": "It may take up to 1 day for changes to be reflected in the actual schedule.",
+      "description2": "If you need to modify due to typos or other issues, please let us know at <a>gallery</a>.",
+      "channelCount": "Currently <b>{{count}}</b> channels are registered.",
+      "invalidUrlError": "Invalid URL."
     },
     "waitingList": {
       "channelName": "Channel Name",
@@ -513,7 +521,8 @@
     "links": {
       "converter": "Converter",
       "converters": {
-        "base64": "Base64"
+        "base64": "Base64",
+        "colors": "Colors"
       },
       "youtube": "YouTube",
       "youtubeItems": {
@@ -543,6 +552,9 @@
         "output": "Output",
         "encodeError": "Invalid input.",
         "decodeError": "Failed to decode."
+      },
+      "colors": {
+        "title": "Colors"
       }
     },
     "youtube": {

@@ -386,7 +386,15 @@
       "channelAddressInputLabel": "チャンネルアドレス",
       "channelNameInputLabel": "チャンネル名",
       "submit": "提出",
-      "submitSuccess": "チャンネル追加リクエストが完了しました。"
+      "submitSuccess": "チャンネル追加リクエストが完了しました。",
+      "validate": "チャンネルテスト",
+      "nameKor": "チャンネル名",
+      "submitAll": "全体提出",
+      "registeredChannels": "登録済みチャンネル",
+      "description": "実際のスケジュールに反映されるまで約1日以内の間隔がある場合があります。",
+      "description2": "誤字・脱字などで修正が必要な場合は<a>ギャラリー</a>にお知らせください。",
+      "channelCount": "現在 <b>{{count}}</b> 個のチャンネルが登録されています。",
+      "invalidUrlError": "無効なURLです。"
     },
     "waitingList": {
       "channelName": "チャンネル名",
@@ -507,7 +515,8 @@
     "links": {
       "converter": "変換ツール",
       "converters": {
-        "base64": "Base64"
+        "base64": "Base64",
+        "colors": "色"
       },
       "youtube": "YouTube",
       "youtubeItems": {
@@ -537,6 +546,9 @@
         "output": "出力",
         "encodeError": "Base64エンコードに失敗しました。",
         "decodeError": "Base64デコードに失敗しました。"
+      },
+      "colors": {
+        "title": "色"
       }
     },
     "youtube": {

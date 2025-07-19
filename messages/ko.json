@@ -393,7 +393,15 @@
       "channelNameInputLabel": "채널 이름",
       "channelAddressInputLabel": "채널 주소",
       "submit": "제출",
-      "submitSuccess": "채널 추가 요청이 완료되었습니다."
+      "submitSuccess": "채널 추가 요청이 완료되었습니다.",
+      "validate": "채널 검증",
+      "nameKor": "채널명",
+      "submitAll": "전체 제출",
+      "registeredChannels": "이미 등록된 채널",
+      "description": "실제 일정표에 반영되기까지 약 1일 이내의 간격이 있을 수 있습니다.",
+      "description2": "오·탈자 등으로 인해 수정이 필요한 경우 <a>갤러리</a>에 알려주세요.",
+      "channelCount": "현재 <b>{{count}}</b>개의 채널이 등록되어 있습니다.",
+      "invalidUrlError": "유효한 URL이 없습니다."
     },
     "waitingList": {
       "channelName": "채널 이름",
@@ -514,7 +522,8 @@
     "links": {
       "converter": "변환기",
       "converters": {
-        "base64": "Base64"
+        "base64": "Base64",
+        "colors": "색상"
       },
       "youtube": "유튜브",
       "youtubeItems": {
@@ -544,6 +553,9 @@
         "output": "출력",
         "encodeError": "올바르지 않은 입력값입니다.",
         "decodeError": "Base64 디코딩에 실패했습니다."
+      },
+      "colors": {
+        "title": "색상"
       }
     },
     "youtube": {
