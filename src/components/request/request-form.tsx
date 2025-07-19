@@ -1,15 +1,17 @@
 'use client';
-import { clientApi } from '@/apis/fetcher';
 import For from '@/components/common/utils/For';
 import Show from '@/components/common/utils/Show';
-import { CHANNEL_COUNT_TAG } from '@/constants/revalidate-tag';
-import { useSubmitChannelMutation, useValidateChannelsMutation } from '@/hooks/use-proxy';
+import { CHANNEL_COUNT_TAG, WAITING_TAG } from '@/constants/revalidate-tag';
+import {
+  useChannelCountSuspenseQuery,
+  useSubmitChannelMutation,
+  useValidateChannelsMutation,
+} from '@/hooks/use-channel-request';
 import { useTranslations } from '@/libraries/i18n/client';
 import { testYoutubeChannelUrl } from '@/utils/regexp';
-import { TGetRegisteredChannelCount } from '@api/v1/channel/count/route';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Anchor, Button, Input, Skeleton, Textarea } from '@mantine/core';
-import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { Send } from 'lucide-react';
 import { Suspense, useCallback, useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
@@ -70,7 +72,6 @@ export default function RequestForm() {
           const results = data.results;
 
           if (results.length === 0) {
-            // toast.error(t('request.requestForm.noValidUrl'));
             toast.error('유효한 URL이 없습니다.');
           } else {
             form.setValue('channels', [
@@ -109,10 +110,13 @@ export default function RequestForm() {
 
     submitMutation.mutate(data.channels, {
       onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey: ['waitingList'] });
+        await Promise.all([
+          queryClient.invalidateQueries({ queryKey: [WAITING_TAG] }),
+          queryClient.invalidateQueries({ queryKey: [CHANNEL_COUNT_TAG] }),
+        ]);
 
         form.setValue('channels', []);
-        setAlreadyRegistered([]);
+        setAlreadyRegistered(() => []);
 
         toast.success(t('request.requestForm.submitSuccess'));
       },
@@ -245,14 +249,7 @@ export default function RequestForm() {
 
 function ChannelCountTextBox() {
   const { t } = useTranslations();
-  const { data: channelCount } = useSuspenseQuery({
-    queryKey: [CHANNEL_COUNT_TAG],
-    queryFn: async () => {
-      const json = await clientApi.get<TGetRegisteredChannelCount>('v1/channel/count').json();
-
-      return json.data;
-    },
-  });
+  const { data: channelCount } = useChannelCountSuspenseQuery();
 
   return <p>{parse(t('request.requestForm.channelCount', { count: channelCount || 0 }))}</p>;
 }

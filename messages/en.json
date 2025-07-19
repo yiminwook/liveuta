@@ -393,7 +393,6 @@
       "channelAddressInputLabel": "Channel Address",
       "submit": "Submit",
       "submitSuccess": "Successfully requested new vtuber",
-      "noValidUrl": "Already submitted or invalid channel urls",
       "validate": "Test Channels",
       "nameKor": "Channel Name",
       "submitAll": "Submit All",

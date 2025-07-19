@@ -1,7 +1,7 @@
 'use client';
 import For from '@/components/common/utils/For';
 import Show from '@/components/common/utils/Show';
-import { useWaitingListSuspenseQuery } from '@/hooks/use-proxy';
+import { useWaitingListSuspenseQuery } from '@/hooks/use-channel-request';
 import { useTranslations } from '@/libraries/i18n/client';
 import { Anchor, Skeleton } from '@mantine/core';
 import { Suspense } from 'react';

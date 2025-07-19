@@ -394,7 +394,6 @@
       "channelAddressInputLabel": "채널 주소",
       "submit": "제출",
       "submitSuccess": "채널 추가 요청이 완료되었습니다.",
-      "noValidUrl": "이미 등록된 채널이거나 올바르지 않은 입력입니다.",
       "validate": "채널 검증",
       "nameKor": "채널명",
       "submitAll": "전체 제출",

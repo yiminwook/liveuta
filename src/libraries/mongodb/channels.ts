@@ -96,6 +96,7 @@ export async function getWaitingList() {
       { waiting: true },
       {
         projection: {
+          _id: 0,
           name_kor: 1,
           channel_addr: 1,
         },

@@ -387,7 +387,6 @@
       "channelNameInputLabel": "チャンネル名",
       "submit": "提出",
       "submitSuccess": "チャンネル追加リクエストが完了しました。",
-      "noValidUrl": "登録済みチャンネルまたは無効な入力です。",
       "validate": "チャンネルテスト",
       "nameKor": "チャンネル名",
       "submitAll": "全体提出",
