@@ -72,7 +72,7 @@ export default function RequestForm() {
           const results = data.results;
 
           if (results.length === 0) {
-            toast.error('유효한 URL이 없습니다.');
+            toast.error(t('request.requestForm.invalidUrlError'));
           } else {
             form.setValue('channels', [
               ...fields,
