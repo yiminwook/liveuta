@@ -2,7 +2,7 @@ import errorHandler from '@/libraries/error/handler';
 import { getRegisteredChannelCount } from '@/libraries/mongodb/channels';
 import { NextResponse } from 'next/server';
 
-export type TGetRegisteredChannelCount = {
+export type TGetRegisteredChannelCountRes = {
   message: string;
   data: number;
 };
@@ -14,8 +14,8 @@ export async function GET() {
   } catch (error) {
     console.error(error);
     const { status, message } = errorHandler(error);
-    return NextResponse.json({ message, data: 0 }, { status });
+    return NextResponse.json({ message }, { status });
   }
 }
 
-export const revalidate = 1800;
+export const dynamic = 'force-dynamic';

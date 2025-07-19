@@ -1,6 +1,6 @@
 import { clientApi, proxyApi } from '@/apis/fetcher';
 import { CHANNEL_COUNT_TAG, WAITING_TAG } from '@/constants/revalidate-tag';
-import { TGetRegisteredChannelCount } from '@api/v1/channel/count/route';
+import { TGetRegisteredChannelCountRes } from '@api/v1/channel/count/route';
 import { TGetChannelRes } from '@api/v1/channel/route';
 import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 
@@ -9,7 +9,7 @@ export const useChannelCountSuspenseQuery = () => {
     queryKey: [CHANNEL_COUNT_TAG],
     queryFn: () =>
       clientApi
-        .get<TGetRegisteredChannelCount>('v1/channel/count')
+        .get<TGetRegisteredChannelCountRes>('v1/channel/count')
         .json()
         .then((json) => json.data),
   });

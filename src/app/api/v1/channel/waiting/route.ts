@@ -19,4 +19,4 @@ export async function GET() {
   }
 }
 
-export const revalidate = 1800;
+export const dynamic = 'force-dynamic';
