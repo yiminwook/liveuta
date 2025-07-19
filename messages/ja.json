@@ -391,7 +391,11 @@
       "validate": "チャンネルテスト",
       "nameKor": "チャンネル名",
       "submitAll": "全体提出",
-      "registeredChannels": "登録済みチャンネル"
+      "registeredChannels": "登録済みチャンネル",
+      "description": "実際のスケジュールに反映されるまで約1日以内の間隔がある場合があります。",
+      "description2": "誤字・脱字などで修正が必要な場合は<a>ギャラリー</a>にお知らせください。",
+      "channelCount": "現在 <b>{{count}}</b> 個のチャンネルが登録されています。",
+      "gallery": "ギャラリー"
     },
     "waitingList": {
       "channelName": "チャンネル名",

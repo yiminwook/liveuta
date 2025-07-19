@@ -8,11 +8,12 @@ import { useTranslations } from '@/libraries/i18n/client';
 import { testYoutubeChannelUrl } from '@/utils/regexp';
 import { TGetRegisteredChannelCount } from '@api/v1/channel/count/route';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Anchor, Button, Input, Textarea } from '@mantine/core';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { Anchor, Button, Input, Skeleton, Textarea } from '@mantine/core';
+import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { Send } from 'lucide-react';
 import { Suspense, useCallback, useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
+import parse from 'react-html-parser';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import css from './request-form.module.scss';
@@ -35,6 +36,7 @@ export default function RequestForm() {
   const queryClient = useQueryClient();
 
   const [urlList, setUrlList] = useState('');
+  const [alreadyRegistered, setAlreadyRegistered] = useState<TForm['channels']>([]);
 
   const form = useForm<TForm>({
     defaultValues: {
@@ -42,26 +44,19 @@ export default function RequestForm() {
     },
     resolver: zodResolver(formDto),
   });
+
   const { fields } = useFieldArray({
     control: form.control,
     name: 'channels',
   });
-  const [alreadyRegistered, setAlreadyRegistered] = useState<TForm['channels']>([]);
 
-  const { data: channelCount } = useQuery({
-    queryKey: [CHANNEL_COUNT_TAG],
-    queryFn: async () => {
-      const json = await clientApi.get<TGetRegisteredChannelCount>('v1/channel/count').json();
-
-      return json.data;
-    },
-  });
   const validateMutation = useValidateChannelsMutation();
   const submitMutation = useSubmitChannelMutation();
 
   const onDuplicateTest = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      if (validateMutation.isPending) return;
 
       const urls = urlList
         .replaceAll(',', '\n')
@@ -73,6 +68,7 @@ export default function RequestForm() {
       validateMutation.mutate(urls, {
         onSuccess: (data) => {
           const results = data.results;
+
           if (results.length === 0) {
             // toast.error(t('request.requestForm.noValidUrl'));
             toast.error('유효한 URL이 없습니다.');
@@ -89,8 +85,9 @@ export default function RequestForm() {
                 })),
             ]);
           }
-          setAlreadyRegistered([
-            ...alreadyRegistered,
+
+          setAlreadyRegistered((_prev) => [
+            // ...prev, // 중복으로 나타나지 않도록 매번 다시 초기화
             ...results
               .filter((item) => item.existingName !== '')
               .map((item) => ({
@@ -101,7 +98,7 @@ export default function RequestForm() {
               })),
           ]);
         },
-        onError: (error) => toast.error(error.message.toString()),
+        onError: (error) => toast.error(error.message),
       });
     },
     [urlList],
@@ -133,11 +130,12 @@ export default function RequestForm() {
           onChange={(e) => setUrlList(e.currentTarget.value)}
         />
         <div className={css.buttons}>
-          <Button variant="filled" size="md" type="submit">
+          <Button variant="filled" size="md" type="submit" loading={validateMutation.isPending}>
             {t('request.requestForm.validate')}
           </Button>
         </div>
       </form>
+
       <Show when={fields.length > 0}>
         <form className={css.channelsForm} onSubmit={form.handleSubmit(onSubmit)}>
           <div className={css.channelsLabel}>
@@ -148,10 +146,11 @@ export default function RequestForm() {
               <span>{t('request.requestForm.nameKor')}</span>
             </div>
           </div>
+
           <ul className={css.channels}>
             <For each={fields}>
               {(field, index) => (
-                <li key={`request-channel-${field.channelId}`} className={css.channel}>
+                <li key={`request-channel-${field.channelId}-${index}`} className={css.channel}>
                   <div className={css.channelUrl}>
                     <label className={css.channelFieldLabel}>URL</label>
                     <Input value={field.url} disabled className={css.channelUrl} />
@@ -178,6 +177,7 @@ export default function RequestForm() {
               )}
             </For>
           </ul>
+
           <div className={css.buttons}>
             <Button variant="filled" size="md" type="submit" loading={submitMutation.isPending}>
               <div className={css.buttonInner}>
@@ -188,16 +188,18 @@ export default function RequestForm() {
           </div>
         </form>
       </Show>
+
       <Show when={alreadyRegistered.length > 0}>
         <div>
           <h4 className={css.registeredChannelsTitle}>
             {t('request.requestForm.registeredChannels')}
           </h4>
         </div>
+
         <ul className={css.registeredChannels}>
           <For each={alreadyRegistered}>
-            {(item) => (
-              <li key={`registered-${item.channelId}`} className={css.channel}>
+            {(item, index) => (
+              <li key={`registered-${item.channelId}-${index}`} className={css.channel}>
                 <div className={css.channelUrl}>
                   <label className={css.channelFieldLabel}>URL</label>
                   <Input value={item.url} disabled className={css.channelUrl} />
@@ -213,21 +215,44 @@ export default function RequestForm() {
           </For>
         </ul>
       </Show>
+
       <div className={css.description}>
+        <Suspense fallback={<Skeleton ml="auto" height={16} width={200} />}>
+          <ChannelCountTextBox />
+        </Suspense>
+
+        <p>{t('request.requestForm.description')}</p>
         <p>
-          <Suspense>
-            현재 <b>{channelCount || 0}</b>개의 채널이 등록되어 있습니다.
-          </Suspense>
-        </p>
-        <p>실제 일정표에 반영되기까지 약 1일 이내의 간격이 있을 수 있습니다.</p>
-        <p>
-          오·탈자 등으로 인해 수정이 필요한 경우{' '}
-          <Anchor href="https://gall.dcinside.com/mini/board/view/?id=vuta&no=114373">
-            갤러리
-          </Anchor>
-          에 알려주세요.
+          {parse(t('request.requestForm.description2'), {
+            transform: (node, index) => {
+              if (node.type === 'tag' && node.name === 'a' && node.children?.[0]?.data) {
+                return (
+                  <Anchor
+                    key={index}
+                    href="https://gall.dcinside.com/mini/board/view/?id=vuta&no=114373"
+                  >
+                    {node.children[0].data}
+                  </Anchor>
+                );
+              }
+            },
+          })}
         </p>
       </div>
     </div>
   );
+}
+
+function ChannelCountTextBox() {
+  const { t } = useTranslations();
+  const { data: channelCount } = useSuspenseQuery({
+    queryKey: [CHANNEL_COUNT_TAG],
+    queryFn: async () => {
+      const json = await clientApi.get<TGetRegisteredChannelCount>('v1/channel/count').json();
+
+      return json.data;
+    },
+  });
+
+  return <p>{parse(t('request.requestForm.channelCount', { count: channelCount || 0 }))}</p>;
 }

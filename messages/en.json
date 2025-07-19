@@ -397,7 +397,11 @@
       "validate": "Test Channels",
       "nameKor": "Channel Name",
       "submitAll": "Submit All",
-      "registeredChannels": "Already Registered Channels"
+      "registeredChannels": "Already Registered Channels",
+      "description": "It may take up to 1 day for changes to be reflected in the actual schedule.",
+      "description2": "If you need to modify due to typos or other issues, please let us know at <a>gallery</a>.",
+      "channelCount": "Currently <b>{{count}}</b> channels are registered.",
+      "gallery": "gallery"
     },
     "waitingList": {
       "channelName": "Channel Name",
