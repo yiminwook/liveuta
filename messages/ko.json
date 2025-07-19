@@ -269,7 +269,8 @@
       "createdAtLabel": "등록순",
       "linkToRequest": "채널 등록",
       "linkToRequestMobile": "등록",
-      "channelSearchInputPlaceholder": "채널명으로 검색"
+      "channelSearchInputPlaceholder": "채널명으로 검색",
+      "invalidUrlError": "올바르지 않은 URL 형식입니다."
     }
   },
   "dev": {

@@ -268,7 +268,8 @@
       "createdAtLabel": "By Registration",
       "linkToRequest": "Register Channel",
       "linkToRequestMobile": "Register",
-      "channelSearchInputPlaceholder": "Search by channel name"
+      "channelSearchInputPlaceholder": "Search by channel name",
+      "invalidUrlError": "Invalid URL format"
     }
   },
   "dev": {

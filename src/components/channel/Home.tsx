@@ -14,12 +14,12 @@ type HomeProps = {
 
 export default async function Home({ channelDto }: HomeProps) {
   const YChannelData = await serverApi
-      .get<{ data: TYChannelReturn }>(
-        `v1/youtube-channel?page=${channelDto.page}&query=${channelDto.query || ''}&size=${ITEMS_PER_PAGE}&sort=${channelDto.sort}`,
-        { next: { revalidate: 1800, tags: [CHANNELS_TAG] } },
-      )
-      .json()
-      .then((json) => json.data);
+    .get<{ data: TYChannelReturn }>(
+      `v1/youtube-channel?page=${channelDto.page}&query=${channelDto.query || ''}&size=${ITEMS_PER_PAGE}&sort=${channelDto.sort}&query-type=${channelDto.queryType || ''}`,
+      { next: { revalidate: 1800, tags: [CHANNELS_TAG] } },
+    )
+    .json()
+    .then((json) => json.data);
 
   return (
     <Background>

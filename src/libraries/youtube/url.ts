@@ -73,3 +73,16 @@ export const getYoutubeVideoId = (url: string): string | null => {
 
   return null;
 };
+
+export const getYoutubeChannelIdOrHandle = (url: string) => {
+  const match = url.match(/youtube\.com\/(?:channel\/([a-zA-Z0-9_-]+)|(@[a-zA-Z0-9_-]+))/);
+
+  if (match) {
+    return {
+      type: match[1] ? 'channelId' : 'handle',
+      value: match[1] || match[2],
+    };
+  }
+
+  return null;
+};

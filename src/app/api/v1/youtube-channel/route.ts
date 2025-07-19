@@ -9,9 +9,16 @@ export async function GET(req: NextRequest) {
   const size = searchParams.get('size');
   const page = searchParams.get('page');
   const query = searchParams.get('query');
+  const queryType = searchParams.get('query-type');
 
   try {
-    const dto = channelDto.safeParse({ sort, size, page, query });
+    const dto = channelDto.safeParse({
+      sort,
+      size,
+      page,
+      query,
+      queryType: queryType === '' ? null : queryType,
+    });
 
     if (dto.error) {
       throw new BadReqError(dto.error.errors[0].message);
