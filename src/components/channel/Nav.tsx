@@ -54,7 +54,6 @@ export default function Nav() {
     }
 
     params.set('page', '1');
-    console.log('params', params.toString());
     router.push(`/${locale}/channel?${params.toString()}`);
   };
 
