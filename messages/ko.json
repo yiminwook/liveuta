@@ -402,7 +402,7 @@
       "description": "실제 일정표에 반영되기까지 약 1일 이내의 간격이 있을 수 있습니다.",
       "description2": "오·탈자 등으로 인해 수정이 필요한 경우 <a>갤러리</a>에 알려주세요.",
       "channelCount": "현재 <b>{{count}}</b>개의 채널이 등록되어 있습니다.",
-      "gallery": "갤러리"
+      "invalidUrlError": "유효한 URL이 없습니다."
     },
     "waitingList": {
       "channelName": "채널 이름",

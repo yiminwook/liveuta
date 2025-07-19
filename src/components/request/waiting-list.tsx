@@ -72,7 +72,7 @@ function Loading() {
           </div>
         </li>
         <For each={Array(5).fill(null)}>
-          {(item, index) => {
+          {(_item, index) => {
             return (
               <li key={`waiting-list-${index}`} className={css.waitingItem}>
                 <div data-label="name">
