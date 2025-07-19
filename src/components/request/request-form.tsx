@@ -85,19 +85,18 @@ export default function RequestForm() {
                   handle: item.handle,
                 })),
             ]);
-          }
 
-          setAlreadyRegistered((_prev) => [
-            // ...prev, // 중복으로 나타나지 않도록 매번 다시 초기화
-            ...results
-              .filter((item) => item.existingName !== '')
-              .map((item) => ({
-                nameKor: item.existingName,
-                url: item.url,
-                channelId: item.channelId,
-                handle: item.handle,
-              })),
-          ]);
+            setAlreadyRegistered(
+              results
+                .filter((item) => item.existingName !== '')
+                .map((item) => ({
+                  nameKor: item.existingName,
+                  url: item.url,
+                  channelId: item.channelId,
+                  handle: item.handle,
+                })),
+            );
+          }
         },
         onError: (error) => toast.error(error.message),
       });
