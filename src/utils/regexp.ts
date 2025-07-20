@@ -39,7 +39,7 @@ export const testYoutubeChannelUrl = (url: string) => {
 };
 
 export const testYoutubeChannelOrVideo = (url: string) => {
-  return /^((?:https?:)?(?:\/\/)?)?((?:www|m)\.)?((?:youtube\.com|youtu.be))\/(?:(?:embed\/|v\/|live\/|shorts\/|feeds\/api\/videos\/|watch\?v=|watch\?.+&v=)([\w\-]{11})(\S+)?|(?:channel\/[a-zA-Z0-9_-]{24}|@[\w-]+))$/.test(
+  return /^((?:https?:)?(?:\/\/)?)?((?:www|m)\.)?((?:youtube\.com|youtu.be))\/(?:(?:embed\/|v\/|live\/|shorts\/|feeds\/api\/videos\/|watch\?v=|watch\?.+&v=)([\w\-]{11})|(?:channel\/[a-zA-Z0-9_-]{24}|@[\w-]+)|[\w\-]{11})?(\S+)$/.test(
     url,
   );
 };

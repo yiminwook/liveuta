@@ -27,6 +27,7 @@ const formDto = z.object({
       url: z.string().min(1).url(),
       channelId: z.string().min(1),
       handle: z.string().min(1),
+      channelTitle: z.string(),
     }),
   ),
 });
@@ -83,6 +84,7 @@ export default function RequestForm() {
                   url: item.url,
                   channelId: item.channelId,
                   handle: item.handle,
+                  channelTitle: item.channelTitle || 'Ado',
                 })),
             ]);
 
@@ -94,6 +96,7 @@ export default function RequestForm() {
                   url: item.url,
                   channelId: item.channelId,
                   handle: item.handle,
+                  channelTitle: '',
                 })),
             );
           }
@@ -172,7 +175,7 @@ export default function RequestForm() {
                         </label>
                         <Input
                           {...nameKor}
-                          placeholder="Ado"
+                          placeholder={field.channelTitle}
                           error={form.formState.errors.channels?.[index]?.nameKor?.message}
                           required
                           className={css.channelUrl}

@@ -45,6 +45,7 @@ type ValidatedChannel =
       channelId: string;
       handle: string;
       existingName: string;
+      channelTitle: string;
       error: null;
     }
   | {
@@ -52,6 +53,7 @@ type ValidatedChannel =
       channelId: null;
       handle: null;
       existingName: undefined;
+      channelTitle: null;
       error: string;
     };
 
