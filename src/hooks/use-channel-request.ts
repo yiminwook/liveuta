@@ -39,12 +39,21 @@ export const useSubmitChannelMutation = () => {
   });
 };
 
-type ValidatedChannel = {
-  url: string;
-  channelId: string;
-  handle: string;
-  existingName: string;
-};
+type ValidatedChannel =
+  | {
+      url: string;
+      channelId: string;
+      handle: string;
+      existingName: string;
+      error: null;
+    }
+  | {
+      url: string;
+      channelId: null;
+      handle: null;
+      existingName: undefined;
+      error: string;
+    };
 
 export const useValidateChannelsMutation = () => {
   return useMutation({

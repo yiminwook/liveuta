@@ -33,7 +33,13 @@ export const testYoutubeChannelUrl = (url: string) => {
   // https://www.youtube.com/@MEMENTOVANITAS
   // https://www.youtube.com/channel/UCO5MA_Dr1o6I0IPQZ6tp_6w
   //
-  return /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/(channel\/[a-zA-Z0-9_-]{24}|@[\w-]+)$/.test(
+  return /^((?:https?:)?(?:\/\/)?)?((?:www|m)\.)?((?:youtube\.com|youtu.be))\/(channel\/[a-zA-Z0-9_-]{24}|@[\w-]+)$/.test(
+    url,
+  );
+};
+
+export const testYoutubeChannelOrVideo = (url: string) => {
+  return /^((?:https?:)?(?:\/\/)?)?((?:www|m)\.)?((?:youtube\.com|youtu.be))\/(?:(?:embed\/|v\/|live\/|shorts\/|feeds\/api\/videos\/|watch\?v=|watch\?.+&v=)([\w\-]{11})(\S+)?|(?:channel\/[a-zA-Z0-9_-]{24}|@[\w-]+))$/.test(
     url,
   );
 };

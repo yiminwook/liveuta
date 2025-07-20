@@ -8,7 +8,7 @@ import {
   useValidateChannelsMutation,
 } from '@/hooks/use-channel-request';
 import { useTranslations } from '@/libraries/i18n/client';
-import { testYoutubeChannelUrl } from '@/utils/regexp';
+import { testYoutubeChannelOrVideo } from '@/utils/regexp';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Anchor, Button, Input, Skeleton, Textarea } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
@@ -65,11 +65,11 @@ export default function RequestForm() {
         .split('\n')
         .map((u) => u.trim())
         .filter((u) => u.length > 0)
-        .filter(testYoutubeChannelUrl);
+        .filter(testYoutubeChannelOrVideo);
 
       validateMutation.mutate(urls, {
         onSuccess: (data) => {
-          const results = data.results;
+          const results = data.results.filter((item) => item.error === null);
 
           if (results.length === 0) {
             toast.error(t('request.requestForm.invalidUrlError'));
