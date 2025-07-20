@@ -2,7 +2,7 @@
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TChannelDto } from '@/libraries/mongodb/channels';
 import { getYoutubeChannelIdOrHandle } from '@/libraries/youtube/url';
-import { testYoutubeChannelIdOrHandle } from '@/utils/regexp';
+import { testYoutubeChannelUrl } from '@/utils/regexp';
 import { Button, Flex, SegmentedControl, TextInput, UnstyledButton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
@@ -41,7 +41,7 @@ export default function Nav() {
 
       params.set('query-type', channelIdOrHandle.type);
       params.set('q', channelIdOrHandle.value);
-    } else if (testYoutubeChannelIdOrHandle(trimmedInput)) {
+    } else if (testYoutubeChannelUrl(trimmedInput)) {
       if (trimmedInput.startsWith('@')) {
         params.set('query-type', 'handle');
       } else {
