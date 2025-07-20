@@ -57,11 +57,11 @@ export default function Nav() {
     router.push(`/${locale}/channel?${params.toString()}`);
   };
 
-  function handleOrderChange(value: TChannelDto['sort']) {
+  const handleOrderChange = (value: TChannelDto['sort']) => {
     const params = new URLSearchParams(searchParams);
     params.set('sort', value);
     router.push(`/${locale}/channel?${params.toString()}`);
-  }
+  };
 
   return (
     <div className={css.wrap}>

@@ -4,18 +4,20 @@ import {
   TChannelDocumentWithoutId,
   WaitingListItem,
 } from '@/libraries/mongodb/type';
+import { CHANNEL_QUERY_TYPE, CHANNEL_SORT } from '@/types';
 import { combineChannelData } from '@/utils/combineChannelData';
 import { addEscapeCharacter } from '@/utils/regexp';
+import { Document, Filter } from 'mongodb';
 import { z } from 'zod';
 import { connectMongoDB } from '.';
 
 export const channelDto = z.object({
   query: z.string().nullish(),
-  queryType: z.enum(['name', 'handle', 'channelId']).nullish(),
+  queryType: z.enum(CHANNEL_QUERY_TYPE).nullish(),
   page: z.preprocess((input) => Number(input ?? 1), z.number().int().min(1)),
   size: z.preprocess((input) => Number(input ?? 1), z.number().int().min(1).max(ITEMS_PER_PAGE)),
   sort: z
-    .enum(['createdAt', 'name_kor'])
+    .enum(CHANNEL_SORT)
     .nullish()
     .transform((value) => value || 'name_kor'),
 });
@@ -50,26 +52,36 @@ export const getAllChannel = async (dto: TChannelDto) => {
 export const getChannelWithYoutube = async (dto: TChannelDto) => {
   const { sort, size, page, query, queryType } = dto;
   const direction = CHANNEL_ORDER_MAP[sort];
+
   const safeQuery = addEscapeCharacter((query || '').trim());
-  const regexForDBQuery: any = {
+
+  const regexForDBQuery: Filter<Document> = {
     $or: [],
     waiting: false,
   };
-  if (queryType === 'name') {
-    regexForDBQuery.$or.push(
-      { names: { $regex: safeQuery, $options: 'i' } },
-      { name_kor: { $regex: safeQuery, $options: 'i' } },
-    );
-  } else if (queryType === 'handle') {
-    regexForDBQuery.$or.push({ handle_name: { $regex: safeQuery, $options: 'i' } });
-  } else if (queryType === 'channelId') {
-    regexForDBQuery.$or.push({ channel_id: { $regex: safeQuery, $options: 'i' } });
+
+  switch (queryType) {
+    case 'name':
+      regexForDBQuery.$or!.push(
+        { names: { $regex: safeQuery, $options: 'i' } },
+        { name_kor: { $regex: safeQuery, $options: 'i' } },
+      );
+      break;
+    case 'handle':
+      regexForDBQuery.$or!.push({ handle_name: { $regex: safeQuery, $options: 'i' } });
+      break;
+    case 'channelId':
+      regexForDBQuery.$or!.push({ channel_id: { $regex: safeQuery, $options: 'i' } });
+      break;
   }
+
   const skip = (page - 1) * size;
+  const filter = !!query ? regexForDBQuery : { waiting: false };
 
   const db = await connectMongoDB(MONGODB_MANAGEMENT_DB, MONGODB_CHANNEL_COLLECTION);
+
   const channels = await db
-    .find<TChannelDocumentWithoutId>(query ? regexForDBQuery : { waiting: false }, {
+    .find<TChannelDocumentWithoutId>(filter, {
       projection: { _id: 0 },
     })
     .sort(sort, direction)
@@ -77,7 +89,7 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
     .limit(size)
     .toArray();
 
-  const total = await db.countDocuments(query ? regexForDBQuery : { waiting: false });
+  const total = await db.countDocuments(filter);
   const totalPage = Math.ceil(total / size);
 
   const channelRecord = channels.reduce<Record<string, TChannelDocumentWithoutId>>((acc, curr) => {

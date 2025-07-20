@@ -7,7 +7,7 @@ type Props = {
     page?: string;
     q?: string;
     'query-type'?: string;
-    sort?: 'createAt' | 'name_kor';
+    sort?: string;
   }>;
 };
 
@@ -16,7 +16,7 @@ export default async function Page(props: Props) {
   const page = searchParams.page;
   const query = searchParams.q?.trim();
   const queryType = searchParams['query-type'] || null;
-  const sort = searchParams.sort;
+  const sort = searchParams.sort || 'name_kor';
 
   const dto = channelDto.safeParse({
     page,

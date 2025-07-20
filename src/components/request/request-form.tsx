@@ -86,7 +86,7 @@ export default function RequestForm() {
                 })),
             ]);
 
-            setAlreadyRegistered(
+            setAlreadyRegistered(() =>
               results
                 .filter((item) => item.existingName !== '')
                 .map((item) => ({
@@ -123,6 +123,10 @@ export default function RequestForm() {
     });
   };
 
+  const onChangeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setUrlList(() => e.target.value);
+  };
+
   return (
     <div>
       <form className={css.form} onSubmit={onDuplicateTest}>
@@ -130,7 +134,7 @@ export default function RequestForm() {
           rows={8}
           placeholder="https://www.youtube.com/@Ado1024"
           value={urlList}
-          onChange={(e) => setUrlList(e.currentTarget.value)}
+          onChange={onChangeTextarea}
         />
         <div className={css.buttons}>
           <Button variant="filled" size="md" type="submit" loading={validateMutation.isPending}>

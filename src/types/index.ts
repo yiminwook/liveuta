@@ -27,3 +27,9 @@ export type TMetadata = {
   cover_image_url: string;
   default_video_id: string;
 };
+
+export const CHANNEL_QUERY_TYPE = ['name', 'handle', 'channelId'] as const;
+export type TChannelQueryType = (typeof CHANNEL_QUERY_TYPE)[number];
+
+export const CHANNEL_SORT = ['createdAt', 'name_kor'] as const;
+export type TChannelSort = (typeof CHANNEL_SORT)[number];
