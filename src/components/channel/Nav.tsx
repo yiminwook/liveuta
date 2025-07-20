@@ -1,6 +1,8 @@
 'use client';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TChannelDto } from '@/libraries/mongodb/channels';
+import { getYoutubeChannelIdOrHandle } from '@/libraries/youtube/url';
+import { testYoutubeChannelUrl } from '@/utils/regexp';
 import { Button, Flex, SegmentedControl, TextInput, UnstyledButton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
@@ -8,6 +10,7 @@ import { Search, X } from 'lucide-react';
 import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import css from './Nav.module.scss';
 
 export default function Nav() {
@@ -26,7 +29,30 @@ export default function Nav() {
     e.preventDefault();
     const params = new URLSearchParams(searchParams);
     const trimmedInput = input.trim();
-    params.set('q', trimmedInput);
+
+    // if input is url
+    if (trimmedInput.startsWith('www.') || trimmedInput.startsWith('https://')) {
+      const channelIdOrHandle = getYoutubeChannelIdOrHandle(trimmedInput);
+
+      if (!channelIdOrHandle) {
+        toast.error(t('channel.nav.invalidUrlError'));
+        return;
+      }
+
+      params.set('query-type', channelIdOrHandle.type);
+      params.set('q', channelIdOrHandle.value);
+    } else if (testYoutubeChannelUrl(trimmedInput)) {
+      if (trimmedInput.startsWith('@')) {
+        params.set('query-type', 'handle');
+      } else {
+        params.set('query-type', 'channelId');
+      }
+      params.set('q', trimmedInput);
+    } else {
+      params.set('query-type', 'name');
+      params.set('q', trimmedInput);
+    }
+
     params.set('page', '1');
     router.push(`/${locale}/channel?${params.toString()}`);
   };

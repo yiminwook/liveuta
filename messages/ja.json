@@ -262,7 +262,8 @@
       "createdAtLabel": "登録順",
       "linkToRequest": "チャンネル登録",
       "linkToRequestMobile": "登録",
-      "channelSearchInputPlaceholder": "チャンネル名で検索"
+      "channelSearchInputPlaceholder": "チャンネル名で検索",
+      "invalidUrlError": "正しくないURL形式です"
     }
   },
   "dev": {

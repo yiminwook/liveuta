@@ -11,6 +11,7 @@ import { connectMongoDB } from '.';
 
 export const channelDto = z.object({
   query: z.string().nullish(),
+  queryType: z.enum(['name', 'handle', 'channelId']).nullish(),
   page: z.preprocess((input) => Number(input ?? 1), z.number().int().min(1)),
   size: z.preprocess((input) => Number(input ?? 1), z.number().int().min(1).max(ITEMS_PER_PAGE)),
   sort: z
@@ -47,15 +48,28 @@ export const getAllChannel = async (dto: TChannelDto) => {
 };
 
 export const getChannelWithYoutube = async (dto: TChannelDto) => {
-  const { sort, size, page, query } = dto;
+  const { sort, size, page, query, queryType } = dto;
   const direction = CHANNEL_ORDER_MAP[sort];
   const safeQuery = addEscapeCharacter((query || '').trim());
-  const regexforDBQuery = { names: { $regex: safeQuery, $options: 'i' }, waiting: false };
+  const regexForDBQuery: any = {
+    $or: [],
+    waiting: false,
+  };
+  if (queryType === 'name') {
+    regexForDBQuery.$or.push(
+      { names: { $regex: safeQuery, $options: 'i' } },
+      { name_kor: { $regex: safeQuery, $options: 'i' } },
+    );
+  } else if (queryType === 'handle') {
+    regexForDBQuery.$or.push({ handle_name: { $regex: safeQuery, $options: 'i' } });
+  } else if (queryType === 'channelId') {
+    regexForDBQuery.$or.push({ channel_id: { $regex: safeQuery, $options: 'i' } });
+  }
   const skip = (page - 1) * size;
 
   const db = await connectMongoDB(MONGODB_MANAGEMENT_DB, MONGODB_CHANNEL_COLLECTION);
   const channels = await db
-    .find<TChannelDocumentWithoutId>(!!query ? regexforDBQuery : { waiting: false }, {
+    .find<TChannelDocumentWithoutId>(query ? regexForDBQuery : { waiting: false }, {
       projection: { _id: 0 },
     })
     .sort(sort, direction)
@@ -63,7 +77,7 @@ export const getChannelWithYoutube = async (dto: TChannelDto) => {
     .limit(size)
     .toArray();
 
-  const total = await db.countDocuments(!!query ? regexforDBQuery : { waiting: false });
+  const total = await db.countDocuments(query ? regexForDBQuery : { waiting: false });
   const totalPage = Math.ceil(total / size);
 
   const channelRecord = channels.reduce<Record<string, TChannelDocumentWithoutId>>((acc, curr) => {

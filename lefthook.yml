@@ -38,7 +38,8 @@ pre-push:
   parallel: true
   commands:
     format:
-      run: pnpm biome format --no-errors-on-unmatched --write "{push_files}"
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: pnpm biome format --no-errors-on-unmatched --files-ignore-unknown=true --colors=off --write "{push_files}"
       exclude:
         - "*.{yaml}"
     lint:
