@@ -1,3 +1,4 @@
+import 'server-only';
 export const IS_BLACKLIST = `
   SELECT COUNT(*)
   FROM BLACKLIST

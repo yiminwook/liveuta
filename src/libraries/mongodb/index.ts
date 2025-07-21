@@ -1,3 +1,4 @@
+import 'server-only';
 import { MongoClient } from 'mongodb';
 
 export const mongoDB = new MongoClient(process.env.MONGODB_URI, { maxPoolSize: 100 });

@@ -1,3 +1,4 @@
+import 'server-only';
 import { SETLIST_PAGE_SIZE } from '@/constants';
 import dayjs from '@/libraries/dayjs';
 import CustomServerError from '@/libraries/error/customServerError';

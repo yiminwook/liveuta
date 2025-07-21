@@ -1,3 +1,4 @@
+import 'server-only';
 import { google } from 'googleapis';
 
 export const youtubeService = google.youtube('v3');

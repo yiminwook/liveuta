@@ -1,3 +1,4 @@
+import 'server-only';
 export const GET_ONE_MEMBER = `
   SELECT * 
   FROM MEMBER
