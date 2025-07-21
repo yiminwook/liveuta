@@ -1,5 +1,4 @@
 'use client';
-import character9 from '@/assets/image/character-9.png';
 import MoreButton from '@/components/common/button/MoreButton';
 import SearchInput from '@/components/common/input/SearchInput';
 import ChannelSlider from '@/components/home/ChannelSlider';
@@ -25,6 +24,7 @@ import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 import { toast } from 'sonner';
+import character9 from '/public/assets/character-9.png';
 import css from './page.module.scss';
 
 type Props = {

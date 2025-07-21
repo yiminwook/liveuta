@@ -1,5 +1,4 @@
 'use client';
-import altImage from '@/assets/image/thumbnail_alt_img.png';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TParsedClientContent } from '@/libraries/mongodb/type';
@@ -10,6 +9,7 @@ import { gtagClick } from '@/utils/gtag';
 import Image from 'next/image';
 import { useCallback, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import altImage from '/public/assets/thumbnail_alt_img.png';
 
 interface CardImageProps {
   content: TParsedClientContent;

@@ -48,7 +48,7 @@ export const getSetlistByVideoId = withOracleConnection(async (connection, video
 
   return {
     setlist: parsed,
-    channelIcon: youtubeData.items?.[0].snippet?.thumbnails?.default?.url ?? '/loading.png',
+    channelIcon: youtubeData.items?.[0].snippet?.thumbnails?.default?.url ?? '/assets/loading.png',
   };
 });
 
