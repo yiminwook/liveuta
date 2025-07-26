@@ -28,7 +28,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
   const locale = useLocale();
   const { t } = useTranslations();
   const title = snippet?.title ?? '';
-  const imageURL = snippet?.thumbnails?.default?.url ?? '/loading.png';
+  const imageURL = snippet?.thumbnails?.default?.url ?? '/assets/loading.png';
   const description = snippet?.description ?? t('channel.channelCard.hidden');
   const subscribe = renderSubscribe(statistics?.subscriberCount ?? t('channel.channelCard.hidden'));
   const videoCount = statistics?.videoCount ?? t('channel.channelCard.hidden');

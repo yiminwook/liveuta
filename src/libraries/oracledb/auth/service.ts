@@ -1,4 +1,4 @@
-'use server';
+import 'server-only';
 import dayjs from '@/libraries/dayjs';
 import CustomServerError from '@/libraries/error/customServerError';
 import { withOracleConnection } from '../connection';

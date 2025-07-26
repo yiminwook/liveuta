@@ -1,5 +1,4 @@
 'use client';
-import character from '@/assets/image/character-3.png';
 import { LogosDiscordIcon, LogosGoogleIcon, RiKakaoTalkFill } from '@/icons';
 import { useTranslations } from '@/libraries/i18n/client';
 import { Provider } from '@/types/next-auth';
@@ -8,6 +7,7 @@ import { useMutation } from '@tanstack/react-query';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import { toast } from 'sonner';
+import character from '/public/assets/character-3.png';
 import Background from '../common/background/Background';
 import css from './Home.module.scss';
 

@@ -3,7 +3,7 @@ import { Spinner180Ring } from '@/icons';
 import classnames from 'classnames';
 import Image from 'next/image';
 import { RemoveScroll } from 'react-remove-scroll';
-import loadingImage from '/public/loading.png';
+import loadingImage from '/public/assets/loading.png';
 import Backdrop from '../background/Backdrop';
 import css from './Loading.module.scss';
 

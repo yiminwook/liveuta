@@ -8,7 +8,7 @@ import {
   useValidateChannelsMutation,
 } from '@/hooks/use-channel-request';
 import { useTranslations } from '@/libraries/i18n/client';
-import { testYoutubeChannelUrl } from '@/utils/regexp';
+import { testYoutubeChannelOrVideo } from '@/utils/regexp';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Anchor, Button, Input, Skeleton, Textarea } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
@@ -27,6 +27,7 @@ const formDto = z.object({
       url: z.string().min(1).url(),
       channelId: z.string().min(1),
       handle: z.string().min(1),
+      channelTitle: z.string(),
     }),
   ),
 });
@@ -65,11 +66,11 @@ export default function RequestForm() {
         .split('\n')
         .map((u) => u.trim())
         .filter((u) => u.length > 0)
-        .filter(testYoutubeChannelUrl);
+        .filter(testYoutubeChannelOrVideo);
 
       validateMutation.mutate(urls, {
         onSuccess: (data) => {
-          const results = data.results;
+          const results = data.results.filter((item) => item.error === null);
 
           if (results.length === 0) {
             toast.error(t('request.requestForm.invalidUrlError'));
@@ -83,6 +84,7 @@ export default function RequestForm() {
                   url: item.url,
                   channelId: item.channelId,
                   handle: item.handle,
+                  channelTitle: item.channelTitle || 'Ado',
                 })),
             ]);
 
@@ -94,6 +96,7 @@ export default function RequestForm() {
                   url: item.url,
                   channelId: item.channelId,
                   handle: item.handle,
+                  channelTitle: '',
                 })),
             );
           }
@@ -172,7 +175,7 @@ export default function RequestForm() {
                         </label>
                         <Input
                           {...nameKor}
-                          placeholder="Ado"
+                          placeholder={field.channelTitle}
                           error={form.formState.errors.channels?.[index]?.nameKor?.message}
                           required
                           className={css.channelUrl}

@@ -1,5 +1,5 @@
-import loadingImage from '@/assets/image/character-13.png';
 import Image from 'next/image';
+import loadingImage from '/public/assets/character-13.png';
 import css from './GlobalLoading.module.scss';
 
 export default function GlobalLoading() {

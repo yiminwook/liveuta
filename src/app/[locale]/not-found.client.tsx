@@ -1,9 +1,8 @@
 'use client';
-import character from '@/assets/image/character-8.png';
 import { useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
 import { useRouter } from 'next-nprogress-bar';
 import Image from 'next/image';
+import character from '/public/assets/character-8.png';
 import css from './not-found.module.scss';
 
 type Props = {};

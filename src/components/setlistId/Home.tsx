@@ -1,9 +1,9 @@
-import character from '@/assets/image/character-5-150.png';
 import { getChannelById, parseChannel } from '@/libraries/mongodb/channels';
 import { getSetlistByVideoId } from '@/libraries/oracledb/setlist/service';
 import { Divider } from '@mantine/core';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import character from '/public/assets/character-5-150.png';
 import Background from '../common/background/Background';
 import Desc from './Desc';
 import css from './Home.module.scss';

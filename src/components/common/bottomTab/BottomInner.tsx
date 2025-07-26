@@ -1,10 +1,9 @@
-import { LogosYoutubeIcon } from '@/icons';
 import { Link } from '@/libraries/i18n';
 import { useTranslations } from '@/libraries/i18n/client';
 import { usePathname } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { UnstyledButton } from '@mantine/core';
-import { ArrowUp, Clock, Ellipsis, House, List, Tv } from 'lucide-react';
+import { ArrowUp, Clock, Ellipsis, House, List, Tv2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import css from './BottomInner.module.scss';
 
@@ -108,7 +107,7 @@ export default function BottomInner({ openDrawer, locale }: BottomInnerProps) {
             className={css.item}
             data-current={pathname === '/channel'}
           >
-            <LogosYoutubeIcon />
+            <Tv2 />
             <span>{t('global.bottomTab.bottomInner.channel')}</span>
           </UnstyledButton>
         </li>

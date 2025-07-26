@@ -10,7 +10,6 @@
   font-size: 0.75rem;
   color: var(--liveuta-txt-light);
   transition: transform 0.3s util.easing(default);
-
 }
 
 @include util.min-width(var.$mobile-boundary) {
@@ -55,7 +54,6 @@ button.topButton {
   li {
     flex: 1;
     height: 100%;
-
   }
 }
 
@@ -65,13 +63,15 @@ button.topButton {
   }
 }
 
-.item {
+button.item,
+a.item {
   display: grid;
   place-items: center;
   width: 100%;
   height: 100%;
   padding: 0.5em;
   transition: color 0.2s util.easing(default);
+  font-size: 0.875rem;
 
   &:hover {
     color: util.palette(third, lighter);
