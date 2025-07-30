@@ -391,7 +391,6 @@
   "request": {
     "title": "요청",
     "requestForm": {
-     
       "channelNameInputLabel": "채널 이름",
       "channelAddressInputLabel": "채널 주소",
       "submit": "제출",

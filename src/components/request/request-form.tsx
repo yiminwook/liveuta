@@ -132,7 +132,7 @@ export default function RequestForm() {
   return (
     <div>
       <form className={css.form} onSubmit={onDuplicateTest}>
-        <p>{t('request.requestForm.description3')}</p>
+        <p className={css.formDesc}>{t('request.requestForm.description3')}</p>
         <Textarea
           rows={8}
           placeholder={`https://www.youtube.com/@example
