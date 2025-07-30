@@ -25,8 +25,8 @@ const formDto = z.object({
     z.object({
       nameKor: z.string().min(1),
       url: z.string().min(1).url(),
-      channelId: z.string().min(1),
-      handle: z.string().min(1),
+      channelId: z.string(),
+      handle: z.string(),
       channelTitle: z.string(),
     }),
   ),
@@ -70,7 +70,7 @@ export default function RequestForm() {
 
       validateMutation.mutate(urls, {
         onSuccess: (data) => {
-          const results = data.results.filter((item) => item.error === null);
+          const results = data.filter((item) => item.error === null);
 
           if (results.length === 0) {
             toast.error(t('request.requestForm.invalidUrlError'));
@@ -80,11 +80,11 @@ export default function RequestForm() {
               ...results
                 .filter((item) => item.existingName === '')
                 .map((item) => ({
-                  nameKor: '',
                   url: item.url,
+                  nameKor: '',
                   channelId: item.channelId,
+                  channelTitle: item.channelTitle || 'UN_KNOWN',
                   handle: item.handle,
-                  channelTitle: item.channelTitle || 'Ado',
                 })),
             ]);
 
@@ -92,11 +92,11 @@ export default function RequestForm() {
               results
                 .filter((item) => item.existingName !== '')
                 .map((item) => ({
-                  nameKor: item.existingName,
                   url: item.url,
+                  nameKor: item.existingName,
                   channelId: item.channelId,
+                  channelTitle: item.channelTitle,
                   handle: item.handle,
-                  channelTitle: '',
                 })),
             );
           }
@@ -119,7 +119,6 @@ export default function RequestForm() {
 
         form.setValue('channels', []);
         setAlreadyRegistered(() => []);
-
         toast.success(t('request.requestForm.submitSuccess'));
       },
       onError: (error) => toast.error(error.message),
@@ -133,9 +132,12 @@ export default function RequestForm() {
   return (
     <div>
       <form className={css.form} onSubmit={onDuplicateTest}>
+        <p>{t('request.requestForm.description3')}</p>
         <Textarea
           rows={8}
-          placeholder="https://www.youtube.com/@Ado1024"
+          placeholder={`https://www.youtube.com/@example
+https://www.youtube.com/watch?v=VIDEO_ID
+https://youtube.com/shorts/VIDEO_ID`}
           value={urlList}
           onChange={onChangeTextarea}
         />
@@ -147,7 +149,10 @@ export default function RequestForm() {
       </form>
 
       <Show when={fields.length > 0}>
-        <form className={css.channelsForm} onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          className={css.channelsForm}
+          onSubmit={form.handleSubmit(onSubmit, (erros) => console.error(erros))}
+        >
           <div className={css.channelsLabel}>
             <div>
               <span>URL</span>
