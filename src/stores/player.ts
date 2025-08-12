@@ -4,7 +4,7 @@ import { create, useStore } from 'zustand';
 export type TPlayerState = {
   videoId: string;
   isPlaying: boolean;
-  isMutted: boolean;
+  isMuted: boolean;
   isHide: boolean;
   timeline: number;
 };
@@ -19,6 +19,7 @@ export type TPlayerAction = {
   toggleIsHide: () => void;
   setIsPlaying: (isPlaying: boolean) => void;
   toggleIsPlaying: () => void;
+  setIsMuted: (isMuted: boolean) => void;
 };
 
 export type TPlayerStore = TPlayerState & { actions: TPlayerAction };
@@ -42,6 +43,7 @@ export const createPlayerStore = (initState: TPlayerState) => {
       toggleIsHide: () => set((state) => ({ isHide: !state.isHide })),
       setIsPlaying: (isPlaying) => set(() => ({ isPlaying })),
       toggleIsPlaying: () => set((state) => ({ isPlaying: !state.isPlaying })),
+      setIsMuted: (isMuted) => set(() => ({ isMuted })),
     },
   }));
 };

@@ -5,7 +5,7 @@ import {
   DROP_ZONE_RANGE,
   PIP_LOCAL_STORAGE_KEY,
   TCorner,
-  transfromStringToConer,
+  transformStringToCorner,
 } from '@/constants/pip';
 import { AntDesignDragOutlined } from '@/icons';
 import { useTranslations } from '@/libraries/i18n/client';
@@ -207,7 +207,7 @@ function DroppableZone({
 
 const getLocalStoragePipPosition = () => {
   const savedConer = window.localStorage?.getItem(PIP_LOCAL_STORAGE_KEY);
-  return transfromStringToConer.parse(savedConer);
+  return transformStringToCorner.parse(savedConer);
 };
 
 const saveLocalStoragePipPosition = (corner: TCorner) => {

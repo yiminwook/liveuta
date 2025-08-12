@@ -21,7 +21,7 @@ export default function AppProvider({ children, initState }: AppProviderProps) {
     createPlayerStore({
       videoId: initState.defaultVideoId,
       isPlaying: false,
-      isMutted: false,
+      isMuted: false,
       isHide: true,
       timeline: 0,
     }),

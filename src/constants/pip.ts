@@ -25,7 +25,7 @@ export const DRAGGABLE_ZONE_RANGE = {
   bottomRight: { bottom: 20, right: 20 },
 } as const;
 
-export const transfromStringToConer = z
+export const transformStringToCorner = z
   .string()
   .nullable()
   .transform((value) => {

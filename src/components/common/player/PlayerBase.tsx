@@ -5,7 +5,7 @@ import { TLocaleCode } from '@/libraries/i18n/type';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { usePlayer } from '@/stores/player';
 import classnames from 'classnames';
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
@@ -21,6 +21,7 @@ export default memo(function PlayerBase({ mode, locale }: Props) {
   const playerRef = useRef<ReactPlayer>(null);
   const store = usePlayer();
   const { t } = useTranslations();
+  const url = useMemo(() => generateVideoUrl(store.videoId), [store.videoId]);
 
   useHotkeys(
     'backspace',
@@ -44,8 +45,6 @@ export default memo(function PlayerBase({ mode, locale }: Props) {
     }
   }, [store.timeline]);
 
-  const url = generateVideoUrl(store.videoId);
-
   return (
     <ReactPlayer
       className={classnames({
@@ -56,7 +55,7 @@ export default memo(function PlayerBase({ mode, locale }: Props) {
       height="auto"
       ref={playerRef}
       url={url}
-      muted={store.isMutted}
+      muted={store.isMuted}
       playing={store.isPlaying}
       onPlay={() => handlePlay(true)}
       onPause={() => handlePlay(false)}
