@@ -1,6 +1,6 @@
 'use client';
 import { useTranslations } from '@/libraries/i18n/client';
-import { useRouter } from 'next-nprogress-bar';
+import { useRouter } from '@bprogress/next';
 import Image from 'next/image';
 import character from '/public/assets/character-8.png';
 import css from './not-found.module.scss';

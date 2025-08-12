@@ -2,10 +2,10 @@
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TYChannelsData } from '@/types/api/youtube';
 import { renderSubscribe } from '@/utils/renderSubscribe';
+import { useRouter } from '@bprogress/next';
 import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
 import variable from '@variable';
 import { Ellipsis } from 'lucide-react';
-import { useRouter } from 'next-nprogress-bar';
 import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import css from './ChannelSlider.module.scss';

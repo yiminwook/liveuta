@@ -2,8 +2,8 @@
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { usePathname } from '@/libraries/i18n/client';
 import { scheduleDto } from '@/types/dto';
+import { useRouter } from '@bprogress/next';
 import { SegmentedControl, SegmentedControlItem } from '@mantine/core';
-import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 
 export default function NavTab() {

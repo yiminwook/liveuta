@@ -10,7 +10,7 @@ import Devtools from './Devtools';
 import Hotkeys from './Hotkeys';
 import MantineProvider from './MantineProvider';
 import ModalContainer from './ModalContainer';
-import NProgressProviders from './NProgress';
+import BProgressProviders from './BProgress';
 import NextAuth from './NextAuth';
 import Particle from './Particle';
 import ReactQuery from './ReactQuery';
@@ -41,7 +41,7 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
         }}
       >
         <ReactQuery locale={locale}>
-          <NProgressProviders>
+          <BProgressProviders>
             <MantineProvider locale={locale}>
               <Hotkeys>
                 <CmdProvider locale={locale}>
@@ -55,7 +55,7 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
                 </CmdProvider>
               </Hotkeys>
             </MantineProvider>
-          </NProgressProviders>
+          </BProgressProviders>
         </ReactQuery>
       </AppProvider>
     </NextAuth>

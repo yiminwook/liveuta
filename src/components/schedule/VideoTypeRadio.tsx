@@ -1,8 +1,8 @@
 'use client';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
+import { useRouter } from '@bprogress/next';
 import { Group, Radio } from '@mantine/core';
-import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 import Cookies from 'universal-cookie';
 

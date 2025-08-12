@@ -1,9 +1,9 @@
 'use client';
 import { Link } from '@/libraries/i18n';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useRouter } from '@bprogress/next';
 import { Button, SegmentedControl } from '@mantine/core';
 import { Session } from 'next-auth';
-import { useRouter } from 'next-nprogress-bar';
 import css from './Nav.module.scss';
 import PostDrawer from './PostDrawer';
 import SearchForm from './SearchForm';

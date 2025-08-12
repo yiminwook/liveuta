@@ -1,10 +1,10 @@
 'use client';
 import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useRouter } from '@bprogress/next';
 import { TextInput, UnstyledButton } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
 import { Search, X } from 'lucide-react';
-import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 import css from './SearchForm.module.scss';
 

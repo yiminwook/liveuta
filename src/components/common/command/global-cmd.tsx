@@ -2,7 +2,7 @@
 import { usePathname, useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { useCustomMantineColorScheme } from '@/libraries/mantine/custom-theme-hook';
-import { useRouter } from 'next-nprogress-bar';
+import { useRouter } from '@bprogress/next';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useCmdActions } from './Context';

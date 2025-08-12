@@ -1,8 +1,8 @@
 'use client';
 import { useLocale } from '@/libraries/i18n/client';
+import { useRouter } from '@bprogress/next';
 import { ActionIcon } from '@mantine/core';
 import { ArrowLeft } from 'lucide-react';
-import { useRouter } from 'next-nprogress-bar';
 
 export default function GoBack() {
   const locale = useLocale();

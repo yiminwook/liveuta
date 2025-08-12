@@ -1,8 +1,8 @@
 'use client';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
+import { useRouter } from '@bprogress/next';
 import { ComboboxItemGroup, Select } from '@mantine/core';
-import { useRouter } from 'next-nprogress-bar';
 import Cookies from 'universal-cookie';
 import css from './ScheduleNav.module.scss';
 

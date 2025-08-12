@@ -1,9 +1,9 @@
 'use client';
 import { useLocale } from '@/libraries/i18n/client';
+import { useRouter } from '@bprogress/next';
 import { Pagination } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
-import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 import css from './Home.module.scss';
 

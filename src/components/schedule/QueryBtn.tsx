@@ -1,12 +1,11 @@
 'use client';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { usePathname } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
 import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
+import { useRouter } from '@bprogress/next';
 import { Button, Popover } from '@mantine/core';
 import { Filter } from 'lucide-react';
-import { useRouter } from 'next-nprogress-bar';
 import { useSearchParams } from 'next/navigation';
 import ConfirmModal from '../common/modal/ConfirmModal';
 import css from './QueryBtn.module.scss';

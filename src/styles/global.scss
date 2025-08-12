@@ -204,9 +204,9 @@ a {
 // }
 
 // css specificity required
-body #nprogress {
+body .bprogress {
   .bar {
-    background: var(--liveuta-nprogress);
+    background: var(--liveuta-bprogress);
 
     position: fixed;
     z-index: 99999;
@@ -223,8 +223,8 @@ body #nprogress {
       width: 100px;
       height: 100%;
       box-shadow:
-        0 0 10px var(--liveuta-nprogress),
-        0 0 5px var(--liveuta-nprogress);
+        0 0 10px var(--liveuta-bprogress),
+        0 0 5px var(--liveuta-bprogress);
       opacity: 1;
 
       -webkit-transform: rotate(3deg) translate(0px, -4px);

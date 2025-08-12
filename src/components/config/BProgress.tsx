@@ -1,20 +1,21 @@
-// Create a Providers component to wrap your application with all the components requiring 'use client', such as next-nprogress-bar or your different contexts...
+// Create a Providers component to wrap your application with all the components requiring 'use client', such as @bprogress/next or your different contexts...
 'use client';
 
-import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
+import { ProgressProvider } from '@bprogress/next/app';
 import { PropsWithChildren } from 'react';
 
-const NProgressProviders = ({ children }: PropsWithChildren) => {
+const BProgressProviders = ({ children }: PropsWithChildren) => {
   return (
     <>
-      {children}
-      <ProgressBar
+      <ProgressProvider
         options={{
           showSpinner: false,
           template: '<div class="bar" role="bar"><div class="peg"></div></div></div>',
         }}
         shallowRouting
-      />
+      >
+        {children}
+      </ProgressProvider>
       {/* <div className="bar" role="bar">
         <div className="peg"></div>
       </div>
@@ -25,4 +26,4 @@ const NProgressProviders = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default NProgressProviders;
+export default BProgressProviders;
