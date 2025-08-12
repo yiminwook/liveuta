@@ -8,7 +8,7 @@ import {
   useValidateChannelsMutation,
 } from '@/hooks/use-channel-request';
 import { useTranslations } from '@/libraries/i18n/client';
-import { testYoutubeChannelUrl } from '@/utils/regexp';
+import { testYoutubeChannelOrVideo } from '@/utils/regexp';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Anchor, Button, Input, Skeleton, Textarea } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
@@ -25,8 +25,9 @@ const formDto = z.object({
     z.object({
       nameKor: z.string().min(1),
       url: z.string().min(1).url(),
-      channelId: z.string().min(1),
-      handle: z.string().min(1),
+      channelId: z.string(),
+      handle: z.string(),
+      channelTitle: z.string(),
     }),
   ),
 });
@@ -65,11 +66,11 @@ export default function RequestForm() {
         .split('\n')
         .map((u) => u.trim())
         .filter((u) => u.length > 0)
-        .filter(testYoutubeChannelUrl);
+        .filter(testYoutubeChannelOrVideo);
 
       validateMutation.mutate(urls, {
         onSuccess: (data) => {
-          const results = data.results;
+          const results = data.filter((item) => item.error === null);
 
           if (results.length === 0) {
             toast.error(t('request.requestForm.invalidUrlError'));
@@ -79,9 +80,10 @@ export default function RequestForm() {
               ...results
                 .filter((item) => item.existingName === '')
                 .map((item) => ({
-                  nameKor: '',
                   url: item.url,
+                  nameKor: '',
                   channelId: item.channelId,
+                  channelTitle: item.channelTitle || 'UN_KNOWN',
                   handle: item.handle,
                 })),
             ]);
@@ -90,9 +92,10 @@ export default function RequestForm() {
               results
                 .filter((item) => item.existingName !== '')
                 .map((item) => ({
-                  nameKor: item.existingName,
                   url: item.url,
+                  nameKor: item.existingName,
                   channelId: item.channelId,
+                  channelTitle: item.channelTitle,
                   handle: item.handle,
                 })),
             );
@@ -116,7 +119,6 @@ export default function RequestForm() {
 
         form.setValue('channels', []);
         setAlreadyRegistered(() => []);
-
         toast.success(t('request.requestForm.submitSuccess'));
       },
       onError: (error) => toast.error(error.message),
@@ -130,9 +132,12 @@ export default function RequestForm() {
   return (
     <div>
       <form className={css.form} onSubmit={onDuplicateTest}>
+        <p className={css.formDesc}>{t('request.requestForm.description3')}</p>
         <Textarea
           rows={8}
-          placeholder="https://www.youtube.com/@Ado1024"
+          placeholder={`https://www.youtube.com/@example
+https://www.youtube.com/watch?v=VIDEO_ID
+https://youtube.com/shorts/VIDEO_ID`}
           value={urlList}
           onChange={onChangeTextarea}
         />
@@ -144,7 +149,10 @@ export default function RequestForm() {
       </form>
 
       <Show when={fields.length > 0}>
-        <form className={css.channelsForm} onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          className={css.channelsForm}
+          onSubmit={form.handleSubmit(onSubmit, (erros) => console.error(erros))}
+        >
           <div className={css.channelsLabel}>
             <div>
               <span>URL</span>
@@ -172,7 +180,7 @@ export default function RequestForm() {
                         </label>
                         <Input
                           {...nameKor}
-                          placeholder="Ado"
+                          placeholder={field.channelTitle}
                           error={form.formState.errors.channels?.[index]?.nameKor?.message}
                           required
                           className={css.channelUrl}

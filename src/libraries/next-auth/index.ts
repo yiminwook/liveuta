@@ -1,3 +1,4 @@
+import 'server-only';
 import { Provider } from '@/types/next-auth';
 import Discord, { DiscordProfile } from '@auth/core/providers/discord';
 import jwt from 'jsonwebtoken';

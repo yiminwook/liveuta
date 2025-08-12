@@ -1,3 +1,4 @@
+import 'server-only';
 import { ITEMS_PER_PAGE, MONGODB_CHANNEL_COLLECTION, MONGODB_MANAGEMENT_DB } from '@/constants';
 import {
   TChannelDocument,

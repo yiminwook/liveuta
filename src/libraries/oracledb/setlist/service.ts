@@ -1,3 +1,4 @@
+import 'server-only';
 import { SETLIST_PAGE_SIZE } from '@/constants';
 import dayjs from '@/libraries/dayjs';
 import CustomServerError from '@/libraries/error/customServerError';
@@ -47,7 +48,7 @@ export const getSetlistByVideoId = withOracleConnection(async (connection, video
 
   return {
     setlist: parsed,
-    channelIcon: youtubeData.items?.[0].snippet?.thumbnails?.default?.url ?? '/loading.png',
+    channelIcon: youtubeData.items?.[0].snippet?.thumbnails?.default?.url ?? '/assets/loading.png',
   };
 });
 

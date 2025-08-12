@@ -1,7 +1,6 @@
-import character from '@/assets/image/character-1.png';
 import { useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
 import Image from 'next/image';
+import character from '/public/assets/character-1.png';
 import css from './Nodata.module.scss';
 
 type Props = {};

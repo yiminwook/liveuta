@@ -1,3 +1,4 @@
+import 'server-only';
 import { TMetadata } from '@/types';
 import { TUpdateMetadataDto } from '@/types/dto';
 import { withOracleConnection } from '../connection';

@@ -1,3 +1,4 @@
+import 'server-only';
 import { ORACLEDB_USER } from '@/constants';
 import type * as OracleDB from 'oracledb';
 import oracledb from 'oracledb';
