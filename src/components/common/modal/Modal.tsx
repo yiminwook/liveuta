@@ -32,10 +32,10 @@ export default function Modal({
   onAnimationEnd,
   onClose,
 }: ModalProps) {
-  const { enableScope, disableScope, enabledScopes } = useHotkeysContext();
+  const { enableScope, disableScope, activeScopes } = useHotkeysContext();
 
   useHotkeys('esc', onClose, {
-    enabled: enabledScopes.at(-1) === id, //모달이 위에서부터 하나씩 닫히게 컨트롤
+    enabled: activeScopes.at(-1) === id, //모달이 위에서부터 하나씩 닫히게 컨트롤
     preventDefault: true,
     scopes: [id],
   });
