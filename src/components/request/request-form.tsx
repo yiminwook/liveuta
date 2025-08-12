@@ -9,7 +9,7 @@ import {
 } from '@/hooks/use-channel-request';
 import { useTranslations } from '@/libraries/i18n/client';
 import { testYoutubeChannelOrVideo } from '@/utils/regexp';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
 import { Anchor, Button, Input, Skeleton, Textarea } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
 import { Send } from 'lucide-react';
@@ -24,7 +24,7 @@ const formDto = z.object({
   channels: z.array(
     z.object({
       nameKor: z.string().min(1),
-      url: z.string().min(1).url(),
+      url: z.url().min(1),
       channelId: z.string(),
       handle: z.string(),
       channelTitle: z.string(),
@@ -45,7 +45,7 @@ export default function RequestForm() {
     defaultValues: {
       channels: [],
     },
-    resolver: zodResolver(formDto),
+    resolver: standardSchemaResolver(formDto),
   });
 
   const { fields } = useFieldArray({

@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { StreamFilter } from './index';
 
 export const homeDto = z.object({
-  coverImgUrl: z.string().url(),
+  coverImgUrl: z.url(),
 });
 
 export type TScheduleDto = z.infer<typeof scheduleDto>;
@@ -12,7 +12,7 @@ export const scheduleDto = z.object({
     .nullish()
     .transform((v) => v || ''),
   filter: z
-    .nativeEnum(StreamFilter)
+    .enum(StreamFilter)
     .nullish()
     .transform((v) => v || StreamFilter.scheduled),
   select: z

@@ -2,6 +2,7 @@ import BadReqError from '@/libraries/error/badRequestError';
 import errorHandler from '@/libraries/error/handler';
 import { channelDto, getChannelWithYoutube } from '@/libraries/mongodb/channels';
 import { NextRequest, NextResponse } from 'next/server';
+import z from 'zod';
 
 export async function GET(req: NextRequest) {
   const searchParams = new URL(req.url).searchParams;
@@ -21,7 +22,7 @@ export async function GET(req: NextRequest) {
     });
 
     if (dto.error) {
-      throw new BadReqError(dto.error.errors[0].message);
+      throw new BadReqError(z.prettifyError(dto.error));
     }
 
     const data = await getChannelWithYoutube(dto.data);
