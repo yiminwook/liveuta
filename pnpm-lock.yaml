@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@auth/core':
-        specifier: ^0.37.4
-        version: 0.37.4
+        specifier: ^0.40.0
+        version: 0.40.0
       '@bprogress/next':
         specifier: ^3.2.12
         version: 3.2.12(next@15.2.3(@babel/core@7.28.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.54.1)(babel-plugin-react-compiler@19.1.0-rc.2)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.89.2))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -99,8 +99,8 @@ importers:
         specifier: ^1.1.7
         version: 1.1.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       effect:
-        specifier: ^3.17.3
-        version: 3.17.3
+        specifier: ^3.17.7
+        version: 3.17.7
       firebase:
         specifier: 9.22.0
         version: 9.22.0(encoding@0.1.13)
@@ -129,8 +129,8 @@ importers:
         specifier: ^1.8.2
         version: 1.8.2
       lucide-react:
-        specifier: ^0.511.0
-        version: 0.511.0(react@19.1.1)
+        specifier: ^0.530.0
+        version: 0.530.0(react@19.1.1)
       mongodb:
         specifier: ^6.18.0
         version: 6.18.0(gcp-metadata@5.3.0(encoding@0.1.13))
@@ -159,8 +159,8 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
       react-error-boundary:
-        specifier: ^5.0.0
-        version: 5.0.0(react@19.1.1)
+        specifier: ^6.0.0
+        version: 6.0.0(react@19.1.1)
       react-grid-layout:
         specifier: ^1.5.2
         version: 1.5.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -286,8 +286,8 @@ importers:
         specifier: 9.16.0
         version: 9.16.0
       eslint-config-biome:
-        specifier: ^1.9.4
-        version: 1.9.4
+        specifier: ^2.1.3
+        version: 2.1.3
       eslint-config-next:
         specifier: ^15.4.5
         version: 15.4.5(eslint@9.16.0)(typescript@5.8.3)
@@ -336,8 +336,8 @@ packages:
       nodemailer:
         optional: true
 
-  '@auth/core@0.37.4':
-    resolution: {integrity: sha512-HOXJwXWXQRhbBDHlMU0K/6FT1v+wjtzdKhsNg0ZN7/gne6XPsIrjZ4daMcFnbq0Z/vsAbYBinQhhua0d77v7qw==}
+  '@auth/core@0.40.0':
+    resolution: {integrity: sha512-n53uJE0RH5SqZ7N1xZoMKekbHfQgjd0sAEyUbE+IYJnmuQkbvuZnXItCU7d+i7Fj8VGOgqvNO7Mw4YfBTlZeQw==}
     peerDependencies:
       '@simplewebauthn/browser': ^9.0.1
       '@simplewebauthn/server': ^9.0.2
@@ -4105,8 +4105,8 @@ packages:
   ecdsa-sig-formatter@1.0.11:
     resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==}
 
-  effect@3.17.3:
-    resolution: {integrity: sha512-FbFMr6xBXPII5Od8QJnkHz+2GTmQgq+8NPQev6C2k9cf1lcUjQ4vpw1kjbMc2X0UkjIkIWe0EtNK2RV6bl34UQ==}
+  effect@3.17.7:
+    resolution: {integrity: sha512-dpt0ONUn3zzAuul6k4nC/coTTw27AL5nhkORXgTi6NfMPzqWYa1M05oKmOMTxpVSTKepqXVcW9vIwkuaaqx9zA==}
 
   electron-to-chromium@1.5.192:
     resolution: {integrity: sha512-rP8Ez0w7UNw/9j5eSXCe10o1g/8B1P5SM90PCCMVkIRQn2R0LEHWz4Eh9RnxkniuDe1W0cTSOB3MLlkTGDcuCg==}
@@ -4205,8 +4205,8 @@ packages:
     engines: {node: '>=4.0'}
     hasBin: true
 
-  eslint-config-biome@1.9.4:
-    resolution: {integrity: sha512-4HX+rfUk1R2rPwN3hcxPxq5sLDLGb/xtu48AggTtxCVoRoD18kjwOwHA1c7gYsbRrEQso+9mlRSS9+G7OfDqFg==}
+  eslint-config-biome@2.1.3:
+    resolution: {integrity: sha512-IL720kAN79egw8KyaoZsC0UMLn+NlVdPeX2ZmL0CIEcQdLJCf6d1ELCQTKnJ9Lpe6dzfP5ZF8yZ0PTMOirtT+w==}
 
   eslint-config-next@15.4.5:
     resolution: {integrity: sha512-IMijiXaZ43qFB+Gcpnb374ipTKD8JIyVNR+6VsifFQ/LHyx+A9wgcgSIhCX5PYSjwOoSYD5LtNHKlM5uc23eww==}
@@ -4913,6 +4913,9 @@ packages:
   jose@5.10.0:
     resolution: {integrity: sha512-s+3Al/p9g32Iq+oqXxkW//7jk2Vig6FF1CFqzVXoTUXt2qz89YWbL+OwS17NFYEvxC35n0FKeGO2LGYSxeM2Gg==}
 
+  jose@6.0.12:
+    resolution: {integrity: sha512-T8xypXs8CpmiIi78k0E+Lk7T2zlK4zDyg+o1CZ4AkOHgDg98ogdP2BeZ61lTFKFyoEwJ9RgAgN+SdM3iPgNonQ==}
+
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -5172,8 +5175,8 @@ packages:
   lru-memoizer@2.3.0:
     resolution: {integrity: sha512-GXn7gyHAMhO13WSKrIiNfztwxodVsP8IoZ3XfrJV4yH2x0/OeTO/FIaAHTY5YekdGgW94njfuKmyyt1E0mR6Ug==}
 
-  lucide-react@0.511.0:
-    resolution: {integrity: sha512-VK5a2ydJ7xm8GvBeKLS9mu1pVK6ucef9780JVUjw6bAjJL/QXnd4Y0p7SPeOUMC27YhzNCZvm5d/QX0Tp3rc0w==}
+  lucide-react@0.530.0:
+    resolution: {integrity: sha512-5RkjKHbEMPnkPth9T+BIuVh+E3y4mO6qI2E+4/6GBw2KKKX8taiCPuJVtn/KdtbgBUVqKVJmEqB4ETdU4IjloQ==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -5798,8 +5801,8 @@ packages:
       react: '>= 16.3.0'
       react-dom: '>= 16.3.0'
 
-  react-error-boundary@5.0.0:
-    resolution: {integrity: sha512-tnjAxG+IkpLephNcePNA7v6F/QpWLH8He65+DmedchDwg162JZqx4NmbXj0mlAYVVEd81OW7aFhmbsScYfiAFQ==}
+  react-error-boundary@6.0.0:
+    resolution: {integrity: sha512-gdlJjD7NWr0IfkPlaREN2d9uUZUlksrfOx7SX62VRerwXbMY6ftGCIZua1VG1aXFNOimhISsTq+Owp725b9SiA==}
     peerDependencies:
       react: '>=16.13.1'
 
@@ -6969,10 +6972,10 @@ snapshots:
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
 
-  '@auth/core@0.37.4':
+  '@auth/core@0.40.0':
     dependencies:
       '@panva/hkdf': 1.2.1
-      jose: 5.10.0
+      jose: 6.0.12
       oauth4webapi: 3.6.0
       preact: 10.24.3
       preact-render-to-string: 6.5.11(preact@10.24.3)
@@ -11199,7 +11202,7 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
-  effect@3.17.3:
+  effect@3.17.7:
     dependencies:
       '@standard-schema/spec': 1.0.0
       fast-check: 3.23.2
@@ -11393,7 +11396,7 @@ snapshots:
       source-map: 0.6.1
     optional: true
 
-  eslint-config-biome@1.9.4: {}
+  eslint-config-biome@2.1.3: {}
 
   eslint-config-next@15.4.5(eslint@9.16.0)(typescript@5.8.3):
     dependencies:
@@ -12313,6 +12316,8 @@ snapshots:
 
   jose@5.10.0: {}
 
+  jose@6.0.12: {}
+
   js-tokens@4.0.0: {}
 
   js-tokens@9.0.1: {}
@@ -12595,7 +12600,7 @@ snapshots:
       lodash.clonedeep: 4.5.0
       lru-cache: 6.0.0
 
-  lucide-react@0.511.0(react@19.1.1):
+  lucide-react@0.530.0(react@19.1.1):
     dependencies:
       react: 19.1.1
 
@@ -13263,7 +13268,7 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
-  react-error-boundary@5.0.0(react@19.1.1):
+  react-error-boundary@6.0.0(react@19.1.1):
     dependencies:
       '@babel/runtime': 7.28.2
       react: 19.1.1
