@@ -141,7 +141,13 @@ function Position({
       )}
       {/* <PlayerBase mode={mode} locale={locale} /> */}
       <YoutubePlayerControllerProvider>
-        <YoutubePlayer videoId={store.videoId} title="PIP" channelName="Temp" channelId="Temp" />
+        <YoutubePlayer
+          autoLoad={true}
+          videoId={store.videoId}
+          title="PIP"
+          channelName="Temp"
+          channelId="Temp"
+        />
       </YoutubePlayerControllerProvider>
     </div>
   );

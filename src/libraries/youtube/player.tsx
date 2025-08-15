@@ -169,7 +169,6 @@ export type YoutubePlayerProps = {
   aspectWidth?: number;
   aspectHeight?: number;
   autoLoad?: boolean;
-  autoPlay?: boolean;
   fullPage?: boolean;
   iframeClass?: string;
   muted?: boolean;
@@ -188,7 +187,6 @@ export function YoutubePlayer({
   aspectWidth = 16,
   aspectHeight = 9,
   autoLoad = false,
-  autoPlay = false,
   iframeClass,
   muted = false,
   params,
@@ -201,7 +199,7 @@ export function YoutubePlayer({
   videoId,
   onIframeAdded = () => {},
 }: YoutubePlayerProps) {
-  const youtubeUrl = 'https://www.youtube-nocookie.com';
+  const youtubeUrl = 'https://www.youtube.com';
 
   const iframeWrapperRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -223,9 +221,8 @@ export function YoutubePlayer({
     () => (params !== undefined && params !== '' ? `&${params}` : ''),
     [params],
   );
-  const autoPlayApi = useMemo(() => (autoPlay ? '&autoplay=1' : ''), [autoPlay]);
   const iframeSource = useMemo(
-    () => `${youtubeUrl}/embed/${videoId}?enablejsapi=1&state=1${autoPlayApi}${muted}${params}`,
+    () => `${youtubeUrl}/embed/${videoId}?enablejsapi=1&state=1&autoplay=1${mutedApi}${paramsApi}`,
     [mutedApi, paramsApi, videoId],
   );
 
@@ -236,7 +233,7 @@ export function YoutubePlayer({
 
   const addIframe = () => {
     if (iframeAdded) return;
-    setIframeAdded(() => true);
+    setIframeAdded(true);
     setIframeState('on');
     onIframeAdded();
   };
@@ -306,7 +303,7 @@ export function YoutubePlayer({
             allowFullScreen
             src={iframeSource}
             className={iframeClass}
-            onLoad={async (e) => {
+            onLoad={(e) => {
               if (!iframeRef.current) return;
               setController(new YouTubeIFrameCtrl(iframeRef.current));
               e.currentTarget.contentWindow?.postMessage(
