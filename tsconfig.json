@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["@types/gtag.js"],
+    "types": ["@types/gtag.js", "@types/youtube"],
     "paths": {
       "@variable": ["./src/styles/variable.module.scss"],
       "@web/*": ["./src/app/[locale]/*"],
