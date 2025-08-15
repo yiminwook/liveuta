@@ -34,14 +34,13 @@
 #     "any.go":
 #       runner: go run
 
-pre-push:
-  parallel: true
+pre-commit:
   commands:
     format:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
-      run: pnpm biome format --no-errors-on-unmatched --files-ignore-unknown=true --colors=off --write "{push_files}"
-      exclude:
-        - "*.{yaml}"
+      run: pnpm biome format --no-errors-on-unmatched --files-ignore-unknown=true --colors=off --write "{staged_files}"
+      stage_fixed: true
     lint:
-      glob: "*.{js,ts,jsx,tsx}"
-      run: pnpm next lint --file "{push_files}"
+      glob: "*.{js,jsx,ts,tsx}"
+      run: pnpm next lint --file --fix "{staged_files}"
+      stage_fixed: true
