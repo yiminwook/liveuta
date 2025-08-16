@@ -50,6 +50,7 @@ import {
 import Show from '@/components/common/utils/Show';
 import YouTubeIFrameCtrl from './iframe-controller';
 import { ThumbnailSize } from './type';
+import classNames from 'classnames';
 import './player.css';
 
 type Rel = 'prefetch' | 'preload';
@@ -179,6 +180,7 @@ export type YoutubePlayerProps = {
   thumbnailWebp?: boolean;
   wrapperClass?: string;
   onIframeAdded?: () => void;
+  mode: 'default' | 'pip';
 };
 
 export function YoutubePlayer({
@@ -198,6 +200,7 @@ export function YoutubePlayer({
   wrapperClass = 'lite-youtube',
   videoId,
   onIframeAdded = () => {},
+  mode,
 }: YoutubePlayerProps) {
   const youtubeUrl = 'https://www.youtube.com';
 
@@ -278,17 +281,23 @@ export function YoutubePlayer({
         <link rel="preconnect" href="https://www.google.com" />
       </Show>
       <div
-        className={`${wrapperClass} ${iframeState === 'on' ? activatedClass : ''}`}
         ref={iframeWrapperRef}
-        data-title={title}
-        onPointerOver={warmConnections}
-        onClick={addIframe}
+        className={classNames(wrapperClass, {
+          [activatedClass]: iframeState === 'on',
+          playerBase: mode === 'default',
+          pipBase: mode === 'pip',
+        })}
         style={
           {
+            width: mode === 'default' ? '100%' : '350px',
+            height: 'auto',
             backgroundImage: `url(${thumbnailUrl})`,
             '--aspect-ratio': `${(aspectHeight / aspectWidth) * 100}%`,
           } as CSSProperties
         }
+        data-title={title}
+        onPointerOver={warmConnections}
+        onClick={addIframe}
       >
         <button type="button" className={playerClass} aria-label={`${announce} ${title}`} />
         <Show when={iframeAdded}>
@@ -296,8 +305,8 @@ export function YoutubePlayer({
             id="youtube-player"
             ref={iframeRef}
             title={title}
-            width="560"
-            height="315"
+            width="100%"
+            height="100%"
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -313,7 +322,7 @@ export function YoutubePlayer({
               window.addEventListener('message', volumeListener);
             }}
             // @ts-expect-error youtube-embed
-            credentialless
+            credentialless="true"
           />
         </Show>
       </div>
