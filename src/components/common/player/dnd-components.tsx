@@ -147,6 +147,7 @@ function Position({
           title="PIP"
           channelName="Temp"
           channelId="Temp"
+          mode={'pip'}
         />
       </YoutubePlayerControllerProvider>
     </div>
