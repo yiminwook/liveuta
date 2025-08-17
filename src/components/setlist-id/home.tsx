@@ -6,7 +6,7 @@ import { getSetlistByVideoId } from '@/libraries/oracledb/setlist/service';
 import character from '/public/assets/character-5-150.png';
 import Background from '../common/background/Background';
 import Desc from './desc';
-import css from './Home.module.scss';
+import css from './home.module.scss';
 import Info from './info';
 import SetlistPlayer from './setlist-player';
 
