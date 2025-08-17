@@ -1,4 +1,4 @@
-import Home from '@/components/setlistId/Home';
+import Home from '@/components/setlist-id/home';
 
 interface Props {
   params: Promise<{

@@ -1,9 +1,9 @@
+import { ActionIcon, Avatar } from '@mantine/core';
+import classNames from 'classnames';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TChannelDocumentWithoutId, TParsedClientContent } from '@/libraries/mongodb/type';
 import { generateChanneImagelUrl, generateThumbnail } from '@/libraries/youtube/url';
-import { ActionIcon, Avatar } from '@mantine/core';
-import classNames from 'classnames';
-import css from './GridNav.module.scss';
+import css from './grid-nav.module.scss';
 
 type Props = {
   content: TParsedClientContent;

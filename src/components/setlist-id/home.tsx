@@ -1,13 +1,13 @@
-import { getChannelById, parseChannel } from '@/libraries/mongodb/channels';
-import { getSetlistByVideoId } from '@/libraries/oracledb/setlist/service';
 import { Divider } from '@mantine/core';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { getChannelById, parseChannel } from '@/libraries/mongodb/channels';
+import { getSetlistByVideoId } from '@/libraries/oracledb/setlist/service';
 import character from '/public/assets/character-5-150.png';
 import Background from '../common/background/Background';
-import Desc from './Desc';
+import Desc from './desc';
 import css from './Home.module.scss';
-import Info from './Info';
+import Info from './info';
 import SetlistPlayer from './setlist-player';
 
 interface HomeProps {

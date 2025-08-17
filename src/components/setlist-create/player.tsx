@@ -1,9 +1,9 @@
 'use client';
-import Show from '@/components/common/utils/Show';
 import Image from 'next/image';
 import ReactPlayer from 'react-player';
-import { usePlayerActions, usePlayerStore } from './Context';
-import css from './Player.module.scss';
+import Show from '@/components/common/utils/Show';
+import { usePlayerActions, usePlayerStore } from './context';
+import css from './player.module.scss';
 
 export default function Player() {
   const url = usePlayerStore((state) => state.url);

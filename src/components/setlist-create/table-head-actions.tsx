@@ -1,12 +1,11 @@
 'use client';
-import { CodiconClearAll } from '@/icons';
-import { ActionIcon } from '@mantine/core';
-import { Checkbox } from '@mantine/core';
+import { ActionIcon, Checkbox } from '@mantine/core';
 import cx from 'classnames';
 import { Copy, X } from 'lucide-react';
 import { useShallow } from 'zustand/react/shallow';
-import { copy, useSetlistActions, useSetlistStore } from './Context';
-import css from './Table.module.scss';
+import { CodiconClearAll } from '@/icons';
+import { copy, useSetlistActions, useSetlistStore } from './context';
+import css from './table.module.scss';
 
 export function CheckAll() {
   const allChecked = useSetlistStore((state) => state.setlistAllChecked);

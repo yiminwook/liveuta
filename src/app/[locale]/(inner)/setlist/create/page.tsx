@@ -1,4 +1,4 @@
-import Home from '@/components/setlistCreate/Home';
+import Home from '@/components/setlist-create/home';
 
 export default function Page() {
   return <Home />;

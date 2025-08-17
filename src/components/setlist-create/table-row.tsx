@@ -1,13 +1,13 @@
 'use client';
-import { CodiconClearAll } from '@/icons';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import { hmsToString } from '@/utils/time';
 import { ActionIcon, Checkbox, Popover, TextInput, UnstyledButton } from '@mantine/core';
 import { Reorder, useDragControls } from 'framer-motion';
 import { Clipboard, Copy, GripVertical, X } from 'lucide-react';
 import type { PointerEvent } from 'react';
-import { SetlistItem, copy, useSetlistActions } from './Context';
-import css from './Table.module.scss';
+import { CodiconClearAll } from '@/icons';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { hmsToString } from '@/utils/time';
+import { copy, SetlistItem, useSetlistActions } from './context';
+import css from './table.module.scss';
 
 type TableRowProps = {
   item: SetlistItem;

@@ -1,9 +1,4 @@
 'use client';
-import { clientApi } from '@/apis/fetcher';
-import TimelineText from '@/components/common/TimestampText';
-import { SETLISTS_TAG } from '@/constants/revalidate-tag';
-import { useTranslations } from '@/libraries/i18n/client';
-import { usePlayer } from '@/stores/player';
 import { useRouter } from '@bprogress/next';
 import { Button, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -11,7 +6,12 @@ import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import css from './Desc.module.scss';
+import { clientApi } from '@/apis/fetcher';
+import TimelineText from '@/components/common/TimestampText';
+import { SETLISTS_TAG } from '@/constants/revalidate-tag';
+import { useTranslations } from '@/libraries/i18n/client';
+import { usePlayer } from '@/stores/player';
+import css from './desc.module.scss';
 
 type DescProps = {
   videoId: string;

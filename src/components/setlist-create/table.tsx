@@ -1,8 +1,8 @@
 'use client';
 import { useTranslations } from '@/libraries/i18n/client';
-import css from './Table.module.scss';
-import TableBody from './TableBody';
-import { CheckAll, TableHeadActions } from './TableHeadActions';
+import css from './table.module.scss';
+import TableBody from './table-body';
+import { CheckAll, TableHeadActions } from './table-head-actions';
 
 export default function Table() {
   const { t } = useTranslations();

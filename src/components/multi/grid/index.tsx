@@ -1,6 +1,6 @@
 import { Button } from '@mantine/core';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
-import GridCore from './GridCore';
+import GridCore from './grid-core';
 import { saveLocalStorageLayout, saveLocalStorageVideoMap } from './helper';
 
 export default function Grid() {

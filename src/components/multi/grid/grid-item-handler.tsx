@@ -1,8 +1,8 @@
-import { AntDesignDragOutlined } from '@/icons';
 import classNames from 'classnames';
 import { X } from 'lucide-react';
 import { MouseEventHandler, Ref, TouchEventHandler } from 'react';
-import css from './Grid.module.scss';
+import { AntDesignDragOutlined } from '@/icons';
+import css from './grid.module.scss';
 
 type DragHandleProps = {
   className?: string;

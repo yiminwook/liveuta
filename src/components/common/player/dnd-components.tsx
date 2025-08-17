@@ -187,13 +187,7 @@ function PipNav({
   );
 }
 
-function DroppableZone({
-  id,
-  corner,
-}: {
-  id: string;
-  corner: TCorner;
-}) {
+function DroppableZone({ id, corner }: { id: string; corner: TCorner }) {
   const { setNodeRef, isOver } = useDroppable({ id });
 
   return (

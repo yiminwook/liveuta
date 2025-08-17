@@ -1,9 +1,9 @@
 'use client';
-import { useDebounce } from '@/hooks/use-debounce';
-import { testYoutubeUrl } from '@/utils/regexp';
 import { TextInput } from '@mantine/core';
 import { useEffect, useState } from 'react';
-import { usePlayerStore } from './Context';
+import { useDebounce } from '@/hooks/use-debounce';
+import { testYoutubeUrl } from '@/utils/regexp';
+import { usePlayerStore } from './context';
 
 export default function UrlInput() {
   const [input, setInput] = useState('');

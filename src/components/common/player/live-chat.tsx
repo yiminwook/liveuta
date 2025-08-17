@@ -1,12 +1,12 @@
 'use client';
-import { ORIGIN } from '@/constants';
-import { usePlayer } from '@/stores/player';
-import popupCenter from '@/utils/popup';
 import { Button } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
 import { useEffect, useRef, useState } from 'react';
-import css from './Player.module.scss';
+import { ORIGIN } from '@/constants';
+import { usePlayer } from '@/stores/player';
+import popupCenter from '@/utils/popup';
+import css from './player.module.scss';
 
 export default function LiveChat() {
   const iframeRef = useRef<HTMLIFrameElement>(null);

@@ -1,6 +1,6 @@
-import GlobalPip from '@/components/common/player/GlobalPip';
-import { TLocaleCode } from '@/libraries/i18n/type';
 import { ReactNode } from 'react';
+import GlobalPip from '@/components/common/player/global-pip';
+import { TLocaleCode } from '@/libraries/i18n/type';
 
 type Props = {
   params: Promise<{ locale: TLocaleCode }>;

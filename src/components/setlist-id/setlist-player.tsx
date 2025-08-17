@@ -1,15 +1,15 @@
 'use client';
-import css from '@/components/common/player/Player.module.scss';
-import { DefaultPlayerPlaceholder } from '@/components/common/player/PlayerPlaceholder';
-import { useLocale } from '@/libraries/i18n/client';
-import { usePlayer } from '@/stores/player';
 import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import css from '@/components/common/player/player.module.scss';
+import { DefaultPlayerPlaceholder } from '@/components/common/player/player-placeholder';
+import { useLocale } from '@/libraries/i18n/client';
+import { usePlayer } from '@/stores/player';
 
 const DraggablePlayer = dynamic(
-  () => import('@/components/common/player/DndComponents').then((mod) => mod.DraggablePlayer),
+  () => import('@/components/common/player/dnd-components').then((mod) => mod.DraggablePlayer),
   {
     ssr: false,
     loading: () => <DefaultPlayerPlaceholder />,
