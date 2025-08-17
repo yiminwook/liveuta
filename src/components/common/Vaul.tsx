@@ -1,5 +1,5 @@
 'use client';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { ComponentProps, HTMLAttributes } from 'react';
 import { Drawer as DrawerPrimitive } from 'vaul';
 import css from './Vaul.module.scss';
@@ -57,7 +57,7 @@ const DrawerOverlay = ({
   ref,
   ...props
 }: ComponentProps<typeof DrawerPrimitive.Overlay>) => (
-  <DrawerPrimitive.Overlay ref={ref} className={cx(css.overlay, className)} {...props} />
+  <DrawerPrimitive.Overlay ref={ref} className={clsx(css.overlay, className)} {...props} />
 );
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
@@ -97,12 +97,12 @@ const DrawerContent = ({ className, classNames, children, ref, ...props }: Drawe
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref={ref}
-      className={cx(css.contentComponent, classNames?.contentComponent)}
+      className={clsx(css.contentComponent, classNames?.contentComponent)}
       {...props}
     >
-      <div className={cx(css.handle, classNames?.handle)} />
-      <div className={cx(css.contentWrapper, classNames?.wrapper)}>
-        <div className={cx(css.content, className)}>{children}</div>
+      <div className={clsx(css.handle, classNames?.handle)} />
+      <div className={clsx(css.contentWrapper, classNames?.wrapper)}>
+        <div className={clsx(css.content, className)}>{children}</div>
       </div>
     </DrawerPrimitive.Content>
   </DrawerPortal>
@@ -110,12 +110,12 @@ const DrawerContent = ({ className, classNames, children, ref, ...props }: Drawe
 DrawerContent.displayName = 'DrawerContent';
 
 const DrawerHeader = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
-  <div className={cx(css.header, className)} {...props} />
+  <div className={clsx(css.header, className)} {...props} />
 );
 DrawerHeader.displayName = 'DrawerHeader';
 
 const DrawerFooter = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
-  <div className={cx(css.footer, className)} {...props} />
+  <div className={clsx(css.footer, className)} {...props} />
 );
 DrawerFooter.displayName = 'DrawerFooter';
 
@@ -124,7 +124,7 @@ const DrawerTitle = ({
   ref,
   ...props
 }: ComponentProps<typeof DrawerPrimitive.Title>) => (
-  <DrawerPrimitive.Title ref={ref} className={cx(css.title, className)} {...props} />
+  <DrawerPrimitive.Title ref={ref} className={clsx(css.title, className)} {...props} />
 );
 DrawerTitle.displayName = DrawerPrimitive.Title.displayName;
 
@@ -133,7 +133,7 @@ const DrawerDescription = ({
   ref,
   ...props
 }: ComponentProps<typeof DrawerPrimitive.Description>) => (
-  <DrawerPrimitive.Description ref={ref} className={cx(css.description, className)} {...props} />
+  <DrawerPrimitive.Description ref={ref} className={clsx(css.description, className)} {...props} />
 );
 DrawerDescription.displayName = DrawerPrimitive.Description.displayName;
 

@@ -22,11 +22,10 @@ import {
   useDroppable,
 } from '@dnd-kit/core';
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
-import { ActionIcon, Tooltip } from '@mantine/core';
-import classNames from 'classnames';
+import { ActionIcon, RemoveScroll, Tooltip } from '@mantine/core';
+import clsx from 'clsx';
 import { X } from 'lucide-react';
 import { CSSProperties, useState } from 'react';
-import { RemoveScroll } from 'react-remove-scroll';
 import dndCss from './dnd-components.module.scss';
 import PlayerBase from './player-base';
 
@@ -123,7 +122,7 @@ function Position({
           '--translate-y': `${transform?.y ?? 0}px`,
         } as React.CSSProperties
       }
-      className={classNames({
+      className={clsx({
         [dndCss.defaultMode]: mode === 'default',
         [dndCss.draggable]: mode === 'pip',
         [dndCss.dragging]: isDragging,
@@ -167,7 +166,7 @@ function PipNav({
             variant="transparent"
             mr={5}
             size="md"
-            classNames={{ root: classNames(dndCss.pipNavButton) }}
+            classNames={{ root: clsx(dndCss.pipNavButton) }}
             onClick={onClickHide}
           >
             <X size={18} />
@@ -177,7 +176,7 @@ function PipNav({
       <ActionIcon
         size="md"
         variant="transparent"
-        classNames={{ root: classNames(dndCss.pipNavButton, dndCss.handle) }}
+        classNames={{ root: clsx(dndCss.pipNavButton, dndCss.handle) }}
         {...dndHandleListeners}
         {...dndHandleAttributes}
       >
@@ -194,7 +193,7 @@ function DroppableZone({ id, corner }: { id: string; corner: TCorner }) {
     <div
       ref={setNodeRef}
       style={DROP_ZONE_RANGE[corner]}
-      className={classNames(dndCss.droppableZone, { [dndCss.isOver]: isOver })}
+      className={clsx(dndCss.droppableZone, { [dndCss.isOver]: isOver })}
     />
   );
 }

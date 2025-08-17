@@ -9,7 +9,7 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import variable from '@variable';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { ChevronLeft, Info } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { ChangeEvent, useMemo, useState } from 'react';
@@ -170,7 +170,7 @@ export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
           />
         </div>
 
-        <div className={classNames(css.content, { loading: isPending })}>
+        <div className={clsx(css.content, { loading: isPending })}>
           {isPending && <Loader color={variable.thirdColorDefault} />}
           {proceedScheduleData.map((content) => (
             <GridNavItem

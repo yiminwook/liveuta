@@ -5,7 +5,7 @@ import {
   TParsedClientContent,
 } from '@/libraries/mongodb/type';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { Session } from 'next-auth';
 import { memo } from 'react';
 import css from './Card.module.scss';
@@ -53,7 +53,7 @@ function ScheduleCard_({
 
   const addStreamModifier = STREAM_STATUS_MAPPER[content.broadcastStatus];
   return (
-    <div className={cx(css.card, addStreamModifier, classname)}>
+    <div className={clsx(css.card, addStreamModifier, classname)}>
       <CardImage content={content} />
       <CardDesc content={content} channel={channel} addStreamModifier={addStreamModifier} />
       {showMenu && (

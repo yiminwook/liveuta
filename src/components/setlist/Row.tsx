@@ -7,7 +7,7 @@ import { generateThumbnail } from '@/libraries/youtube/url';
 import { replaceParentheses } from '@/utils/regexp';
 import { useRouter } from '@bprogress/next';
 import { Table } from '@mantine/core';
-import cx from 'classnames';
+import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { type MouseEvent } from 'react';
 import { useDrawerActions } from './DrawerContext';
@@ -40,20 +40,20 @@ export default function Row({ setlist, channel, order }: RowProps) {
 
   return (
     <Table.Tr className={css.row} onClick={handleRowClick}>
-      <Table.Td className={cx(css.cell, css.thumbnail)}>
+      <Table.Td className={clsx(css.cell, css.thumbnail)}>
         <button className={css.thumbnailButton} onClick={handleImageClick}>
           <div className={css.thumbnailBox}>
             <img src={thumbnailUrl} alt={setlist.title} loading="lazy" />
           </div>
         </button>
       </Table.Td>
-      <Table.Td className={cx(css.cell, css.channel)}>
+      <Table.Td className={clsx(css.cell, css.channel)}>
         <p>{channel?.name_kor}</p>
       </Table.Td>
-      <Table.Td className={cx(css.cell, css.title)}>
+      <Table.Td className={clsx(css.cell, css.title)}>
         <p>{title}</p>
       </Table.Td>
-      <Table.Td className={cx(css.cell, css.time)}>
+      <Table.Td className={clsx(css.cell, css.time)}>
         <p>{order ? create : broad}</p>
       </Table.Td>
     </Table.Tr>

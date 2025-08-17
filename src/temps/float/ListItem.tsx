@@ -1,5 +1,4 @@
-import Motion from '@/libraries/framer';
-import { Variants } from 'framer-motion';
+import { Variants, motion } from 'motion/react';
 
 const variants: Variants = {
   open: {
@@ -23,7 +22,7 @@ const colors = ['#FF008C', '#D309E1', '#9C1AFF', '#7700FF', '#4400FF'];
 export default function ListItem({ index }: { index: number }) {
   const style = { border: `2px solid ${colors[index]}` };
   return (
-    <Motion.li
+    <motion.li
       variants={variants}
       style={{
         listStyle: 'none',
@@ -38,6 +37,6 @@ export default function ListItem({ index }: { index: number }) {
       list {index + 1}
       <div className="icon-placeholder" style={style} />
       <div className="text-placeholder" style={style} />
-    </Motion.li>
+    </motion.li>
   );
 }

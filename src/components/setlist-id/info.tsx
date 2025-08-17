@@ -2,7 +2,7 @@
 import { useRouter } from '@bprogress/next';
 import { Avatar, Button } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { ArrowLeft, ListMusic } from 'lucide-react';
 import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
@@ -99,7 +99,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
             </Button>
           )}
           <Button
-            className={cx(css.navItem, css.hoverButton)}
+            className={clsx(css.navItem, css.hoverButton)}
             classNames={{ label: css.buttonLabel }}
             variant="transparent"
             onClick={() => handleLocation(videoUrl)}
@@ -110,7 +110,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
           <Button
             component={Link}
             locale={locale}
-            className={cx(css.navItem, css.hoverButton)}
+            className={clsx(css.navItem, css.hoverButton)}
             classNames={{ label: css.buttonLabel }}
             variant="transparent"
             href="/setlist"

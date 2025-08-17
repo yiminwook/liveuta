@@ -1,5 +1,5 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const colors = ['#22238f', '#6b45fa', '#ca3286', '#fe2b49', '#fe652d'];
 

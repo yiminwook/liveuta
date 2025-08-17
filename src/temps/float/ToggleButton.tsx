@@ -1,4 +1,4 @@
-import cx from 'classnames';
+import clsx from 'clsx';
 import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import { IoGlobeOutline } from 'react-icons/io5';
 import { AiOutlineLoading } from 'react-icons/ai';
@@ -44,7 +44,7 @@ export default function ToggleButton({ isOpen, onClick }: ToggleButtonProps) {
 
   if (unFetching) {
     return (
-      <button className={cx(styles.toggleButton, 'right', 'hover')} onClick={onClick}>
+      <button className={clsx(styles.toggleButton, 'right', 'hover')} onClick={onClick}>
         {isOpen ? (
           <IoClose size="32px" color="inherit" />
         ) : (
@@ -55,7 +55,7 @@ export default function ToggleButton({ isOpen, onClick }: ToggleButtonProps) {
   }
 
   return (
-    <button className={cx(styles.toggleButton, 'right', 'hover')} onClick={onClick}>
+    <button className={clsx(styles.toggleButton, 'right', 'hover')} onClick={onClick}>
       <IoGlobeOutline className={styles.networkSvg} size="24px" color="inherit" />
       <AiOutlineLoading className={styles.loadingSvg} size="36px" color="inherit" />
     </button>

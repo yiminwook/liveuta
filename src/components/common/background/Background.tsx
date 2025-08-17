@@ -1,5 +1,4 @@
-import classnames from 'classnames';
-import cx from 'classnames';
+import clsx from 'clsx';
 import css from './Background.module.scss';
 import SideBackground from './SideBackground';
 import Tile from './Tile';
@@ -15,7 +14,7 @@ export default function Background({ children, tile = false }: BackgroundProps) 
       <SideBackground side="left" />
       <SideBackground side="right" />
       {tile && <Tile />}
-      <main className={cx(classnames(css.main), 'view-swap')}>{children}</main>
+      <main className={clsx(css.main, 'view-swap')}>{children}</main>
     </>
   );
 }

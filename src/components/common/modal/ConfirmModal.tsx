@@ -3,7 +3,7 @@ import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { ModalProps } from '@/stores/modal';
 import { Button } from '@mantine/core';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import Modal from './Modal';
 import css from './Modal.module.scss';
 
@@ -37,7 +37,7 @@ export default function ConfirmModal({
     <Modal
       id={CONFIRM_MODAL_ID}
       title={title}
-      className={classNames(modifier)}
+      className={clsx(modifier)}
       onClose={onCloseWithExit}
       onAnimationEnd={onAnimationEnd}
       closeOnClickOutside={false}

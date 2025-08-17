@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { X } from 'lucide-react';
 import { MouseEventHandler, Ref, TouchEventHandler } from 'react';
 import { AntDesignDragOutlined } from '@/icons';
@@ -16,7 +16,7 @@ type DragHandleProps = {
 
 export function DragHandle({ className, style, ref, children, ...props }: DragHandleProps) {
   return (
-    <span {...props} className={classNames(className, css.drag)} style={{ ...style }} ref={ref}>
+    <span {...props} className={clsx(className, css.drag)} style={{ ...style }} ref={ref}>
       <AntDesignDragOutlined width={20} height={20} />
       {children}
     </span>
@@ -25,7 +25,7 @@ export function DragHandle({ className, style, ref, children, ...props }: DragHa
 
 export function RemoveHandle({ onClick }: { onClick: () => void }) {
   return (
-    <span className={classNames(css.remove)} onClick={onClick}>
+    <span className={clsx(css.remove)} onClick={onClick}>
       <X color="#fff" size={20} />
     </span>
   );

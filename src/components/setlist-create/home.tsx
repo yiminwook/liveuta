@@ -1,5 +1,5 @@
 import { Divider } from '@mantine/core';
-import cx from 'classnames';
+import clsx from 'clsx';
 import Background from '@/components/common/background/Background';
 import css from './home.module.scss';
 import Player from './player';
@@ -20,7 +20,7 @@ export default function Home() {
               <Player />
             </div>
           </div>
-          <div className={cx(css.videoSectionInner, css.controlSection)}>
+          <div className={clsx(css.videoSectionInner, css.controlSection)}>
             <div className={css.setlistItemInputBox}>
               <SetlistItemInput />
             </div>

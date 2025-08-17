@@ -2,9 +2,9 @@
 import { clientApi } from '@/apis/fetcher';
 import { PushData } from '@/app/api/push/route';
 import dayjs from '@/libraries/dayjs';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { TToken } from '@/types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { BatchResponse } from 'firebase-admin/messaging';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -73,7 +73,7 @@ export default function PostBox({ token }: { token: TToken }) {
   }
 
   return (
-    <div className={cx(css.box)}>
+    <div className={clsx(css.box)}>
       <label className={css.postLabel}>{t('dev.postBox,postLabel')}</label>
       <form className={css.postForm} onSubmit={handleSubmit}>
         <div className={css.postInputBox}>

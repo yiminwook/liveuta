@@ -1,7 +1,7 @@
 'use client';
 import { ORIGIN } from '@/constants';
 import { useTranslations } from '@/libraries/i18n/client';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
 
@@ -14,7 +14,7 @@ export default function GridPlayer({ url }: Props) {
 
   return (
     <ReactPlayer
-      className={classNames('no-drag')}
+      className={clsx('no-drag')}
       width="100%"
       height="100%"
       style={{ overflow: 'hidden' }}

@@ -1,5 +1,5 @@
 import { ActionIcon, Avatar } from '@mantine/core';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TChannelDocumentWithoutId, TParsedClientContent } from '@/libraries/mongodb/type';
 import { generateChanneImagelUrl, generateThumbnail } from '@/libraries/youtube/url';
@@ -28,7 +28,7 @@ export default function GridNavItem({ content, channel, onAddById }: Props) {
         <div className={css.listItemHeaderLeft}>
           <Avatar className={css.avatar} size="md" src={channelImage} />
           <div>
-            <span className={classNames(css.channelName, css.line)}>{channel?.name_kor}</span>
+            <span className={clsx(css.channelName, css.line)}>{channel?.name_kor}</span>
             {content.viewer > 0 && <span className={css.line}>Viewer: {content.viewer}</span>}
           </div>
         </div>

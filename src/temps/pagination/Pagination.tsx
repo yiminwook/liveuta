@@ -4,7 +4,7 @@ import pagination from './pagination.module.scss';
 import { AfterLink, BeforeLink, FirstLink, LastLink, PaginationItem } from './PaginationChild';
 import { ITEMS_PER_PAGE, PAGINATION_RANGE } from '@/constants';
 import { useParams } from 'next/navigation';
-import cx from 'classnames';
+import clsx from 'clsx';
 
 interface PaginationProps {
   totalLength: number;
@@ -32,7 +32,7 @@ export default function Pagination({ totalLength, className }: PaginationProps) 
   });
 
   return (
-    <ul className={cx(pagination['pagination'], className)}>
+    <ul className={clsx(pagination['pagination'], className)}>
       <FirstLink currentPage={currentPage} />
       <BeforeLink initialPage={pageArray[0]} totalPage={totalPage} />
       {pageArray.map((page, index) => (

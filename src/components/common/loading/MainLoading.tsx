@@ -1,11 +1,11 @@
 'use client';
 import { Spinner180Ring } from '@/icons';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import Image from 'next/image';
-import { RemoveScroll } from 'react-remove-scroll';
 import loadingImage from '/public/assets/loading.png';
 import Backdrop from '../background/Backdrop';
 import css from './Loading.module.scss';
+import { RemoveScroll } from '@mantine/core';
 
 type MainLoadingProps = {
   backdrop: boolean;
@@ -15,7 +15,7 @@ export default function MainLoading({ backdrop }: MainLoadingProps) {
   return (
     <RemoveScroll>
       {backdrop && <Backdrop activeParticles={true} />}
-      <div className={classnames(css.mainLoadingWrap)}>
+      <div className={clsx(css.mainLoadingWrap)}>
         <div>
           <div className={css.MainLoadingInner}>
             <Image

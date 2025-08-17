@@ -3,9 +3,9 @@ import Background from '@/components/common/background/Background';
 import PostBox from '@/components/dev/PostBox';
 import TokenBox from '@/components/dev/TokenBox';
 import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { TToken } from '@/types';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import css from './Home.module.scss';
@@ -59,7 +59,7 @@ export default function Home() {
   return (
     <Background>
       <section className={css.wrap}>
-        <div className={cx(css.box, css.permissionBox)}>
+        <div className={clsx(css.box, css.permissionBox)}>
           <div>
             {t('dev.browserNotification')}: <b>{permission}</b>
           </div>
@@ -67,7 +67,7 @@ export default function Home() {
             {t('dev.request')}
           </button>
         </div>
-        <div className={cx(css.box)}>
+        <div className={clsx(css.box)}>
           <label className={css.tokenLabel} htmlFor="token">
             {t('dev.token')}
           </label>

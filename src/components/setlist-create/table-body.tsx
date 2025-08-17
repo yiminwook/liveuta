@@ -1,5 +1,5 @@
 'use client';
-import { Reorder } from 'framer-motion';
+import { Reorder } from 'motion/react';
 import For from '@/components/common/utils/For';
 import { useSetlistActions, useSetlistStore } from './context';
 import TableRow from './table-row';

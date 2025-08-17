@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { Menu } from 'lucide-react';
 import css from './HamburgerBtn.module.scss';
 
@@ -10,7 +10,7 @@ type HamburgerBtnProps = {
 
 export default function HamburgerBtn({ className, onClick }: HamburgerBtnProps) {
   return (
-    <button className={classNames(css.button, className)} onClick={onClick}>
+    <button className={clsx(css.button, className)} onClick={onClick}>
       <Menu size="2rem" color="inherit" />
     </button>
   );

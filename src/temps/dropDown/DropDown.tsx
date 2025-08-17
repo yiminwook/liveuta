@@ -2,7 +2,7 @@
 import { MouseEvent, ReactNode, useState } from 'react';
 import { GoTriangleDown } from 'react-icons/go';
 import dropDown from './dropDown.module.scss';
-import cx from 'classnames';
+import clsx from 'clsx';
 import OutsideClickHandler from 'react-outside-click-handler';
 
 interface DropDownProps {
@@ -35,7 +35,7 @@ export default function DropDown({
   };
 
   return (
-    <div className={cx(dropDown['wrap'], isShow && dropDown['active'])} onClick={onClick}>
+    <div className={clsx(dropDown['wrap'], isShow && dropDown['active'])} onClick={onClick}>
       <OutsideClickHandler onOutsideClick={onClose}>
         <button onClick={handleToggle} style={{ height, width }}>
           <h3>{title}</h3>
@@ -44,7 +44,7 @@ export default function DropDown({
           </span>
         </button>
       </OutsideClickHandler>
-      <div className={cx(dropDown['content'], isShow ? dropDown['active'] : '')}>
+      <div className={clsx(dropDown['content'], isShow ? dropDown['active'] : '')}>
         <div>{children}</div>
       </div>
     </div>
