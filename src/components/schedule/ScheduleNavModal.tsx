@@ -7,7 +7,7 @@ import { TScheduleDto } from '@/types/dto';
 import { useRouter } from '@bprogress/next';
 import { Button, CloseButton } from '@mantine/core';
 import variable from '@variable';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { Filter } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
@@ -85,7 +85,7 @@ export default function ScheduleNavModal({
   return (
     <Modal
       id={SCHEDULE_NAV_MODAL_ID}
-      className={classNames(modifier)}
+      className={clsx(modifier)}
       onClose={onCloseWithExit}
       onAnimationEnd={onAnimationEnd}
       width={750}

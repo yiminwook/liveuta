@@ -11,8 +11,7 @@ import { TFeaturedDataAPIReturn } from '@/libraries/mongodb/type';
 import { TYChannelsData } from '@/types/api/youtube';
 import { combineYTData } from '@/utils/combineChannelData-v2';
 import { Button, ButtonGroup } from '@mantine/core';
-import classNames from 'classnames';
-import { func } from 'effect/FastCheck';
+import clsx from 'clsx';
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 import { toast } from 'sonner';
@@ -78,7 +77,7 @@ export default function Client({ featuredData }: Props) {
 
   return (
     <div className={css.container}>
-      <p className={classNames('essential', css.essential)}>
+      <p className={clsx('essential', css.essential)}>
         {t('featured.essential')}&nbsp;
         <TimeBox featuredData={featuredData} />
       </p>

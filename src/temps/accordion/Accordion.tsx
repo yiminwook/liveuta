@@ -2,7 +2,7 @@
 import { ReactNode, useCallback, useState } from 'react';
 import { GoTriangleDown } from 'react-icons/go';
 import accordion from './accordion.module.scss';
-import cx from 'classnames';
+import clsx from 'clsx';
 
 interface AccordionProps {
   title: string;
@@ -19,7 +19,7 @@ export default function Accordion({ title, children, buttonSize = '1rem' }: Acco
   }, [show]);
 
   return (
-    <div className={cx(accordion['accordion'], show ? accordion['active'] : '')}>
+    <div className={clsx(accordion['accordion'], show ? accordion['active'] : '')}>
       <div className={accordion['header']}>
         <button onClick={toggleShow}>
           <h3>{title}</h3>

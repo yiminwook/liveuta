@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { CSSProperties } from 'react';
 import css from './Background.module.scss';
 
@@ -9,5 +9,5 @@ type SideBackgroundProps = {
 
 /** 모바일에서는 display:none; */
 export default function SideBackground({ side, width = '10vw' }: SideBackgroundProps) {
-  return <div className={classNames(css.sideBg, side)} style={{ width }} />;
+  return <div className={clsx(css.sideBg, side)} style={{ width }} />;
 }

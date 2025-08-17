@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { MantineLoaderComponent } from '@mantine/core';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 const RingLoader: MantineLoaderComponent = forwardRef(function _RingLoader(
   { style, className, ...others },
@@ -10,7 +10,7 @@ const RingLoader: MantineLoaderComponent = forwardRef(function _RingLoader(
     <svg
       {...others}
       ref={ref}
-      className={classNames('ring-loader', className)}
+      className={clsx('ring-loader', className)}
       style={{
         width: 'var(--loader-size)',
         height: 'var(--loader-size)',

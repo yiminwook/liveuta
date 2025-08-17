@@ -1,5 +1,5 @@
 import Show from '@/components/common/utils/Show';
-import cx from 'classnames';
+import clsx from 'clsx';
 import type { ReactNode } from 'react';
 import css from './Config.module.scss';
 
@@ -9,7 +9,7 @@ type UtilsConfigRootProps = {
 };
 
 function UtilsConfigRoot({ children, className }: UtilsConfigRootProps) {
-  return <section className={cx(css.configRoot, className)}>{children}</section>;
+  return <section className={clsx(css.configRoot, className)}>{children}</section>;
 }
 
 type UtilsConfigItemProps = {
@@ -18,7 +18,7 @@ type UtilsConfigItemProps = {
 };
 
 function UtilsConfigItem({ children, className }: UtilsConfigItemProps) {
-  return <div className={cx(css.configItem, className)}>{children}</div>;
+  return <div className={clsx(css.configItem, className)}>{children}</div>;
 }
 
 type UtilsConfigItemHeaderProps = {
@@ -37,10 +37,10 @@ function UtilsConfigItemHeader({
   descriptionClassName,
 }: UtilsConfigItemHeaderProps) {
   return (
-    <div className={cx(css.configItemHeader, className)}>
-      <h3 className={cx(css.configItemTitle, titleClassName)}>{title}</h3>
+    <div className={clsx(css.configItemHeader, className)}>
+      <h3 className={clsx(css.configItemTitle, titleClassName)}>{title}</h3>
       <Show when={description !== undefined}>
-        <p className={cx(css.configItemDescription, descriptionClassName)}>{description}</p>
+        <p className={clsx(css.configItemDescription, descriptionClassName)}>{description}</p>
       </Show>
     </div>
   );

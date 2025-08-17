@@ -1,6 +1,6 @@
 'use client';
 import { ActionIcon, Checkbox } from '@mantine/core';
-import cx from 'classnames';
+import clsx from 'clsx';
 import { Copy, X } from 'lucide-react';
 import { useShallow } from 'zustand/react/shallow';
 import { CodiconClearAll } from '@/icons';
@@ -32,7 +32,7 @@ export function TableHeadActions() {
   const { clearChecked, removeChecked } = useSetlistActions();
 
   return (
-    <div className={cx(css.actionButtons, css.headActionButtons)}>
+    <div className={clsx(css.actionButtons, css.headActionButtons)}>
       <ActionIcon variant="ghost" className={css.actionButton} onClick={clearChecked}>
         <CodiconClearAll />
       </ActionIcon>

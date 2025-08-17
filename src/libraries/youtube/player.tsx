@@ -36,7 +36,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
 import Show from '@/components/common/utils/Show';
 import YouTubeIFrameCtrl from './iframe-controller';
@@ -208,7 +208,7 @@ export function YoutubePlayer({
       </Show>
       <div
         ref={iframeWrapperRef}
-        className={classNames(wrapperClass, {
+        className={clsx(wrapperClass, {
           [css.playerBase]: mode === 'default',
           [css.pipBase]: mode === 'pip',
           [activatedClass]: isIframeAdded,

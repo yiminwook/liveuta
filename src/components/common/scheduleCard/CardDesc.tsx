@@ -2,7 +2,7 @@ import { useTranslations } from '@/libraries/i18n/client';
 import { TChannelDocumentWithoutId, TParsedClientContent } from '@/libraries/mongodb/type';
 import { generateChannelUrl } from '@/libraries/youtube/url';
 import { openWindow } from '@/utils/window-event';
-import cx from 'classnames';
+import clsx from 'clsx';
 import css from './Card.module.scss';
 import CardStatus from './CardStatus';
 
@@ -33,14 +33,14 @@ export default function CardDesc({ content, addStreamModifier, channel }: CardDe
       <span>
         <a
           title={channel?.name_kor}
-          className={cx(css.channelNm, addStreamModifier)}
+          className={clsx(css.channelNm, addStreamModifier)}
           href={channelUrl}
           onClick={openChannel}
         >
           {channel?.name_kor}
         </a>
       </span>
-      <p title={title} className={cx(css.title, addStreamModifier)}>
+      <p title={title} className={clsx(css.title, addStreamModifier)}>
         {title}
       </p>
       <div className={css.time}>

@@ -2,7 +2,7 @@ import { Link } from '@/libraries/i18n';
 import { usePathname, useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { ActionIcon, SimpleGrid } from '@mantine/core';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { CircleHelp, Gem, MonitorDot, Music, Settings, Star, Wrench } from 'lucide-react';
 import { JSX } from 'react';
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../Vaul';
@@ -82,7 +82,7 @@ export default function BottomDrawer({ isOpen, onClose, locale }: BottomDrawerPr
             <div className={css.item} key={`bottomDrawer_${text}`}>
               <ActionIcon
                 variant="default"
-                className={classNames(css.roundBtn)}
+                className={clsx(css.roundBtn)}
                 component={Link}
                 href={href}
                 locale={locale}
@@ -99,7 +99,7 @@ export default function BottomDrawer({ isOpen, onClose, locale }: BottomDrawerPr
             <div className={css.item} key={`bottomDrawer_${text}`}>
               <ActionIcon
                 variant="default"
-                className={classNames(css.roundBtn)}
+                className={clsx(css.roundBtn)}
                 component={'a'}
                 href={href}
               >

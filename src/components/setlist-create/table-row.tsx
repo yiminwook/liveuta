@@ -1,6 +1,6 @@
 'use client';
 import { ActionIcon, Checkbox, Popover, TextInput, UnstyledButton } from '@mantine/core';
-import { Reorder, useDragControls } from 'framer-motion';
+import { Reorder, useDragControls } from 'motion/react';
 import { Clipboard, Copy, GripVertical, X } from 'lucide-react';
 import type { PointerEvent } from 'react';
 import { CodiconClearAll } from '@/icons';

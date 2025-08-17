@@ -12,7 +12,7 @@ import type { GetSetlistRes } from '@/types/api/setlist';
 import { useRouter } from '@bprogress/next';
 import { Pagination, Table } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
-import cx from 'classnames';
+import clsx from 'clsx';
 import type { Session } from 'next-auth';
 import SetlistDrawer from './Drawer';
 import { DrawerProvider } from './DrawerContext';
@@ -87,14 +87,14 @@ export default function SetlistTable({ session, searchParams }: TableProps) {
       <Table className={css.table} highlightOnHover>
         <Table.Thead className={css.head}>
           <Table.Tr className={css.headRow}>
-            <Table.Td className={cx(css.headCell, css.thumbnail)} />
-            <Table.Td className={cx(css.headCell, css.channel)}>
+            <Table.Td className={clsx(css.headCell, css.thumbnail)} />
+            <Table.Td className={clsx(css.headCell, css.channel)}>
               {t('setlist.table.headCellChannel')}
             </Table.Td>
-            <Table.Td className={cx(css.headCell, css.title)}>
+            <Table.Td className={clsx(css.headCell, css.title)}>
               {t('setlist.table.headCellTitle')}
             </Table.Td>
-            <Table.Td className={cx(css.headCell, css.time)}>
+            <Table.Td className={clsx(css.headCell, css.time)}>
               {searchParams.sort === 'create'
                 ? t('setlist.table.sortCreate')
                 : t('setlist.table.sortBroadcast')}

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import horizonScrollBox from './horizonScrollBox.module.scss';
-import cx from 'classnames';
+import clsx from 'clsx';
 
 interface HorizonScrollBoxProps {
   className?: string;
@@ -31,7 +31,7 @@ export default function HorizonScrollBox({ className, children }: HorizonScrollB
   }, []);
 
   return (
-    <div className={cx(horizonScrollBox['wrap'], className)} ref={scrollRef}>
+    <div className={clsx(horizonScrollBox['wrap'], className)} ref={scrollRef}>
       <div>{children}</div>
     </div>
   );

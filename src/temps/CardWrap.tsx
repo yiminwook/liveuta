@@ -1,8 +1,7 @@
 import { isMobile } from 'react-device-detect';
-import cx from 'classnames';
+import clsx from 'clsx';
 import * as styles from '@/components/common/scheduleCard/card.css';
-import { Variants } from 'framer-motion';
-import Motion from '@/libraries/framer';
+import { Variants, motion } from 'motion/react';
 
 const cardVariants: Variants = {
   hidden: {
@@ -25,10 +24,10 @@ interface ScheduleCardProps {
 export default function CardWrap({ index, className, children }: ScheduleCardProps) {
   // 모바일에서 깜빡거림이 있어서 모바일일 경우에는 framer-motion을 사용하지 않는다.
   if (isMobile) {
-    return <div className={cx('scheduleCard', styles.card, className)}>{children}</div>;
+    return <div className={clsx('scheduleCard', styles.card, className)}>{children}</div>;
   } else {
     return (
-      <Motion.div
+      <motion.div
         variants={cardVariants}
         initial="hidden"
         animate="visible"
@@ -36,10 +35,10 @@ export default function CardWrap({ index, className, children }: ScheduleCardPro
         viewport={{
           once: true,
         }}
-        className={cx('scheduleCard', styles.card, className)}
+        className={clsx('scheduleCard', styles.card, className)}
       >
         {children}
-      </Motion.div>
+      </motion.div>
     );
   }
 }

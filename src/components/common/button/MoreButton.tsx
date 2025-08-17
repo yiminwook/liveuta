@@ -1,7 +1,7 @@
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { Button } from '@mantine/core';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { ArrowRight } from 'lucide-react';
 import { ComponentProps } from 'react';
 import css from './MoreButton.module.scss';
@@ -23,7 +23,7 @@ export default function MoreButton<C = 'button'>({
     <Button<any>
       {...props}
       locale={locale}
-      className={classNames(css.button, className)}
+      className={clsx(css.button, className)}
       variant={variant}
       rightSection={rightSection}
     >

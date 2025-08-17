@@ -3,14 +3,13 @@ import { withSession } from '@/components/common/authorization/withSession';
 import useStopPropagation from '@/hooks/use-stop-propagation';
 import { useLocale, usePathname } from '@/libraries/i18n/client';
 import { useApp } from '@/stores/app';
-import { Avatar, CloseButton } from '@mantine/core';
+import { Avatar, CloseButton, RemoveScroll } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import { useCallback, useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
-import { RemoveScroll } from 'react-remove-scroll';
 import { toast } from 'sonner';
 import NavItem from './NavItem';
 import css from './Sidebar.module.scss';
@@ -76,11 +75,8 @@ export default withSession<AccountSidebarProps>(function AccountSidebar({ sessio
   return (
     <RemoveScroll enabled={isShow} removeScrollBar={false}>
       <aside>
-        <div className={classnames(css.wrap, { show: isShow })} onClick={handleClose}>
-          <div
-            className={classnames(css.inner, 'right', { moveLeft: isShow })}
-            onClick={stopPropagation}
-          >
+        <div className={clsx(css.wrap, { show: isShow })} onClick={handleClose}>
+          <div className={clsx(css.inner, 'right', { moveLeft: isShow })} onClick={stopPropagation}>
             <div className={css.logoutBtnBox}>
               <button className={css.logoutBtn} onClick={logout} disabled={mutateLogout.isPending}>
                 <Avatar

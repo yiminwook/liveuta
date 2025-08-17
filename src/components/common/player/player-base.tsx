@@ -1,5 +1,5 @@
 'use client';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import ReactPlayer from 'react-player';
@@ -47,7 +47,7 @@ export default memo(function PlayerBase({ mode, locale }: Props) {
 
   return (
     <ReactPlayer
-      className={classnames({
+      className={clsx({
         [css.playerBase]: mode === 'default',
         [css.pipBase]: mode === 'pip',
       })}

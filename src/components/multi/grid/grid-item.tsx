@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { MouseEventHandler, Ref, TouchEventHandler } from 'react';
 import { Layout } from 'react-grid-layout';
 import css from './grid.module.scss';
@@ -31,7 +31,7 @@ export default function GridLayoutItem({
   return (
     <div
       {...props}
-      className={classNames(className, css.box)}
+      className={clsx(className, css.box)}
       ref={ref}
       style={{ ...style }}
       data-grid={layout}
