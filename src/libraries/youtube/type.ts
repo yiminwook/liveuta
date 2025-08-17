@@ -36,3 +36,14 @@ export type ThumbnailSize =
   | ThumbnailHigh
   | ThumbnailStandard
   | ThumbnailMaxres;
+
+export type TPlayerStateCode = -2 | -1 | 0 | 1 | 2 | 3 | 5;
+
+export type TPlayerState =
+  | 'NOT_READY'
+  | 'UNSTARTED'
+  | 'ENDED'
+  | 'PLAYING'
+  | 'PAUSED'
+  | 'BUFFERING'
+  | 'CUED';

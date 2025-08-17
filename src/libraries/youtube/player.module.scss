@@ -79,7 +79,6 @@ limitations under the License.
 .lite-youtube::after {
   content: "";
   display: block;
-  padding-bottom: var(--aspect-ratio);
 }
 
 .lite-youtube > iframe {
@@ -103,7 +102,7 @@ limitations under the License.
   cursor: pointer;
   z-index: 1;
   filter: grayscale(100%);
-  transition: filter 0.1s cubic-bezier(0, 0, 0.2, 1);
+  transition: filter 0.3s cubic-bezier(0, 0, 0.2, 1);
   border: 0;
 }
 
@@ -152,7 +151,7 @@ limitations under the License.
   pointer-events: none;
 } */
 
-
+// mode - default시
 .playerBase {
   aspect-ratio: 16 / 9;
   width: 100%;
@@ -160,8 +159,10 @@ limitations under the License.
   background-color: #424141cf;
 }
 
+// mode - pip시
 .pipBase {
   width: 350px;
   aspect-ratio: 16 / 9;
+  height: auto;
   background-color: #424141cf;
 }

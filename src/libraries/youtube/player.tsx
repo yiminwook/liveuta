@@ -36,226 +36,140 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
-import {
-  CSSProperties,
-  createContext,
-  JSX,
-  use,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import classNames from 'classnames';
+import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
 import Show from '@/components/common/utils/Show';
 import YouTubeIFrameCtrl from './iframe-controller';
+import css from './player.module.scss';
 import { ThumbnailSize } from './type';
-import classNames from 'classnames';
-import './player.css';
 
-type Rel = 'prefetch' | 'preload';
+const YOUTUBE_URL = 'https://www.youtube.com';
 
-export type iframeStatus = 'off' | 'on';
+type TRel = 'prefetch' | 'preload';
 
-type VolumeState = {
+type TVolumeState = {
   muted: boolean;
   volume: number;
 };
 
-type YoutubePlayerContextType = {
-  iframeState: iframeStatus;
-  setIframeState: (status: iframeStatus) => void;
-  controller: YouTubeIFrameCtrl | null;
-  setController: (controller: YouTubeIFrameCtrl | null) => void;
-  volumeState: VolumeState;
-  setVolumeState: (state: VolumeState) => void;
-  setVolume: (volume: number) => void;
-  incrementVolume: () => void;
-  decrementVolume: () => void;
-  setMuted: (muted: boolean) => void;
-  toggleMuted: () => void;
+export type YoutubePlayerProps = {
+  videoId: string;
+
+  wrapperClass?: string;
+  playerClass?: string;
+  iframeClass?: string;
+  /** player load시 적용되는 클래스 */
+  activatedClass?: string;
+
+  autoLoad?: boolean;
+  muted?: boolean;
+  params?: string;
+
+  /** 사전 로드 여부 */
+  rel?: TRel;
+  thumbnailSize?: ThumbnailSize['type'];
+  onIframeAdded?: () => void;
+  /**
+   * aria-label 속성 값
+   *
+   * 웹 접근성을 위해 사용되는 속성 값
+   */
+  label?: string;
+
+  mode: 'default' | 'pip';
 };
 
-const YoutubePlayerControllerContext = createContext<YoutubePlayerContextType | null>(null);
+export function YoutubePlayer({
+  videoId,
 
-export function useYoutubePlayerControllerContext() {
-  const context = use(YoutubePlayerControllerContext);
+  wrapperClass = css['lite-youtube'],
+  playerClass = css['lty-playbtn'],
+  iframeClass,
+  activatedClass = css['lyt-activated'],
 
-  if (!context) {
-    throw new Error(
-      'useYoutubePlayerControllerContext must be used within a PlayerControllerProvider',
-    );
-  }
+  autoLoad = false,
+  muted = false,
+  params,
+  rel = 'prefetch',
+  thumbnailSize = 'mqdefault',
 
-  return context;
-}
+  onIframeAdded = () => {},
+  label = 'Watch Youtube Video',
+  mode,
+}: YoutubePlayerProps) {
+  const iframeWrapperRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
-export function YoutubePlayerControllerProvider(props: { children: JSX.Element }) {
+  const [isPreConnected, setIsPreConnected] = useState(false);
+  const [isIframeAdded, setIsIframeAdded] = useState(false);
+
   const [controller, setController] = useState<YouTubeIFrameCtrl | null>(null);
-  const [iframeState, setIframeState] = useState<iframeStatus>('off');
-  const [volumeState, setVolumeState] = useState<VolumeState>({
+  const [volumeState, setVolumeState] = useState<TVolumeState>({
     muted: false,
     volume: -1,
   });
 
   const setVolume = (volume: number) => {
     if (!controller) return;
-    controller?.setVolume(volume).then(() => {
+
+    controller.setVolume(volume).then(() => {
       setVolumeState((prev) => ({ ...prev, volume }));
     });
   };
 
-  const incrementVolume = () => {
-    const targetVolume = volumeState.volume + 5 > 100 ? 100 : volumeState.volume + 5;
-    setVolume(targetVolume);
-  };
-
-  const decrementVolume = () => {
-    const targetVolume = volumeState.volume - 5 < 0 ? 0 : volumeState.volume - 5;
-    setVolume(targetVolume);
-  };
-
   const setMuted = (muted: boolean) => {
     if (!controller) return;
+
     if (muted) {
-      controller?.mute().then(() => {
+      controller.mute().then(() => {
         setVolumeState((prev) => ({ ...prev, muted }));
       });
     } else {
-      controller?.unMute().then(() => {
+      controller.unMute().then(() => {
         setVolumeState((prev) => ({ ...prev, muted }));
       });
     }
   };
 
+  const incrementVolume = () => setVolume(Math.min(volumeState.volume + 5, 100));
+
+  const decrementVolume = () => setVolume(Math.max(volumeState.volume - 5, 0));
+
   const toggleMuted = () => setMuted(!volumeState.muted);
 
-  return (
-    <YoutubePlayerControllerContext
-      value={{
-        controller,
-        setController,
-        iframeState,
-        setIframeState,
-        volumeState,
-        setVolumeState,
-        setVolume,
-        incrementVolume,
-        decrementVolume,
-        setMuted,
-        toggleMuted,
-      }}
-    >
-      {props.children}
-    </YoutubePlayerControllerContext>
-  );
-}
-
-export type YoutubePlayerProps = {
-  videoId: string;
-  title: string;
-  channelName: string;
-  // scheduledTime: Temporal.PlainDateTime;
-  channelId: string;
-  // channelName: Schema.String,
-  // scheduledTime: Schema.String,
-  // broadcastStatus: Schema.UndefinedOr(Schema.Boolean),
-  // hide: Schema.Boolean,
-  // isVideo: Schema.Boolean,
-  // concurrentViewers: Schema.Number,
-  // channelId: Schema.String,
-  // tag: Schema.UndefinedOr(Schema.String),
-  activatedClass?: string;
-  announce?: string;
-  aspectWidth?: number;
-  aspectHeight?: number;
-  autoLoad?: boolean;
-  fullPage?: boolean;
-  iframeClass?: string;
-  muted?: boolean;
-  params?: string;
-  playerClass?: string;
-  rel?: Rel;
-  thumbnailSize?: ThumbnailSize['type'];
-  thumbnailWebp?: boolean;
-  wrapperClass?: string;
-  onIframeAdded?: () => void;
-  mode: 'default' | 'pip';
-};
-
-export function YoutubePlayer({
-  activatedClass = 'lyt-activated',
-  announce = 'Watch',
-  aspectWidth = 16,
-  aspectHeight = 9,
-  autoLoad = false,
-  iframeClass,
-  muted = false,
-  params,
-  playerClass = 'lty-playbtn',
-  rel = 'prefetch' as Rel,
-  title = '',
-  thumbnailSize = 'maxresdefault',
-  thumbnailWebp = false,
-  wrapperClass = 'lite-youtube',
-  videoId,
-  onIframeAdded = () => {},
-  mode,
-}: YoutubePlayerProps) {
-  const youtubeUrl = 'https://www.youtube.com';
-
-  const iframeWrapperRef = useRef<HTMLDivElement>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  const { setController, iframeState, setIframeState, setVolumeState } =
-    useYoutubePlayerControllerContext();
-  const [preConnected, setPreConnected] = useState(false);
-  const [iframeAdded, setIframeAdded] = useState(false);
-
-  const thumbnailUrl = useMemo(
-    () =>
-      thumbnailWebp
-        ? `https://i.ytimg.com/vi_webp/${videoId}/${thumbnailSize}.webp`
-        : `https://i.ytimg.com/vi/${videoId}/${thumbnailSize}.jpg`,
-    [thumbnailWebp, thumbnailSize, videoId],
-  );
-  const mutedApi = useMemo(() => (muted ? '&mute=1' : ''), [muted]);
-  const paramsApi = useMemo(
-    () => (params !== undefined && params !== '' ? `&${params}` : ''),
-    [params],
-  );
-  const iframeSource = useMemo(
-    () => `${youtubeUrl}/embed/${videoId}?enablejsapi=1&state=1&autoplay=1${mutedApi}${paramsApi}`,
-    [mutedApi, paramsApi, videoId],
-  );
-
   const warmConnections = () => {
-    if (preConnected) return;
-    setPreConnected(true);
+    if (isPreConnected) return;
+
+    setIsPreConnected(() => true);
   };
 
   const addIframe = () => {
-    if (iframeAdded) return;
-    setIframeAdded(true);
-    setIframeState('on');
+    if (isIframeAdded) return;
+
+    setIsIframeAdded(() => true);
     onIframeAdded();
   };
 
   const volumeListener = async (event: MessageEvent) => {
-    const data = (await JSON.parse(event.data)) as {
-      event: string;
-      info: Record<string, unknown>;
-      channel: string;
-    };
+    try {
+      const string = await event.data;
 
-    if (data.event === 'infoDelivery') {
-      if (data.info.volume !== undefined) {
-        setVolumeState({
+      const data: {
+        event: string;
+        info: Record<string, unknown>;
+        channel: string;
+      } = JSON.parse(string);
+
+      if (data.event === 'infoDelivery' && data.info.volume !== undefined) {
+        setVolumeState(() => ({
           volume: data.info.volume as number,
           muted: data.info.muted as boolean,
-        });
+        }));
         window.removeEventListener('message', volumeListener);
       }
+    } catch (error) {
+      console.log('volumeListener event debug:', event);
+      console.error('volumeListener error:', error);
     }
   };
 
@@ -266,55 +180,63 @@ export function YoutubePlayer({
   }, []);
 
   useEffect(() => {
-    if (!iframeAdded) {
+    if (!isIframeAdded) {
       window.removeEventListener('message', volumeListener);
-      setVolumeState({ muted: false, volume: -1 });
-      setController(null);
+      setVolumeState(() => ({ muted: false, volume: -1 }));
+      setController(() => null);
     }
-  }, [iframeAdded]);
+  }, [isIframeAdded]);
+
+  const thumbnailUrl = useMemo(() => {
+    // JPG - `https://i.ytimg.com/vi/${videoId}/${thumbnailSize}.jpg`,
+    // 무조건 webp로 가져오는걸로
+    return `https://i.ytimg.com/vi_webp/${videoId}/${thumbnailSize}.webp`;
+  }, [thumbnailSize, videoId]);
+
+  const iframeSource = useMemo(() => {
+    const mutedApi = muted ? '&mute=1' : '';
+    const paramsApi = params !== undefined && params !== '' ? `&${params}` : '';
+    return `${YOUTUBE_URL}/embed/${videoId}?enablejsapi=1&state=1&autoplay=1${mutedApi}${paramsApi}`;
+  }, [videoId]);
 
   return (
     <>
       <link rel={rel} href={thumbnailUrl} as="image" />
-      <Show when={preConnected}>
-        <link rel="preconnect" href={youtubeUrl} />
+      <Show when={isPreConnected}>
+        <link rel="preconnect" href={YOUTUBE_URL} />
         <link rel="preconnect" href="https://www.google.com" />
       </Show>
       <div
         ref={iframeWrapperRef}
         className={classNames(wrapperClass, {
-          [activatedClass]: iframeState === 'on',
-          playerBase: mode === 'default',
-          pipBase: mode === 'pip',
+          [css.playerBase]: mode === 'default',
+          [css.pipBase]: mode === 'pip',
+          [activatedClass]: isIframeAdded,
         })}
         style={
           {
-            width: mode === 'default' ? '100%' : '350px',
-            height: 'auto',
             backgroundImage: `url(${thumbnailUrl})`,
-            '--aspect-ratio': `${(aspectHeight / aspectWidth) * 100}%`,
           } as CSSProperties
         }
-        data-title={title}
         onPointerOver={warmConnections}
         onClick={addIframe}
       >
-        <button type="button" className={playerClass} aria-label={`${announce} ${title}`} />
-        <Show when={iframeAdded}>
+        <button type="button" className={playerClass} aria-label={label} />
+        <Show when={isIframeAdded}>
           <iframe
             id="youtube-player"
             ref={iframeRef}
-            title={title}
+            src={iframeSource}
+            className={iframeClass}
             width="100%"
             height="100%"
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            src={iframeSource}
-            className={iframeClass}
             onLoad={(e) => {
               if (!iframeRef.current) return;
-              setController(new YouTubeIFrameCtrl(iframeRef.current));
+              const ctrl = new YouTubeIFrameCtrl(iframeRef.current);
+              setController(() => ctrl);
               e.currentTarget.contentWindow?.postMessage(
                 '{"event":"command","func":"getVolume"}',
                 '*',
