@@ -26,11 +26,10 @@ import {
 import { AntDesignDragOutlined } from '@/icons';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import { YoutubePlayer, YoutubePlayerControllerProvider } from '@/libraries/youtube/player';
+import { YoutubePlayer } from '@/libraries/youtube/player';
 import { usePlayer } from '@/stores/player';
 import { getBoxPositionStyle } from '@/utils/helper';
 import dndCss from './DndComponents.module.scss';
-import PlayerBase from './PlayerBase';
 
 type DraggablePipProps = {
   mode: 'default' | 'pip';
@@ -142,16 +141,7 @@ function Position({
         />
       )}
       {/* <PlayerBase mode={mode} locale={locale} /> */}
-      <YoutubePlayerControllerProvider>
-        <YoutubePlayer
-          autoLoad={true}
-          videoId={store.videoId}
-          title="PIP"
-          channelName="Temp"
-          channelId="Temp"
-          mode={'pip'}
-        />
-      </YoutubePlayerControllerProvider>
+      <YoutubePlayer videoId={store.videoId} mode={mode} autoLoad={false} />
     </div>
   );
 }

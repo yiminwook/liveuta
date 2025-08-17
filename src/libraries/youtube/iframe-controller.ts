@@ -22,34 +22,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-type PlayerStateCode = -2 | -1 | 0 | 1 | 2 | 3 | 5;
-export type PlayerState =
-  | "NOT_READY"
-  | "UNSTARTED"
-  | "ENDED"
-  | "PLAYING"
-  | "PAUSED"
-  | "BUFFERING"
-  | "CUED";
+import { TPlayerState, TPlayerStateCode } from './type';
 
 export default class YouTubeIFrameCtrl {
   private errors = [
-    "Element not found",
-    "Element is not an iframe",
-    "Youtube url does not include query parameter - enablejsapi=1 - JS API is disabled",
+    'Element not found',
+    'Element is not an iframe',
+    'Youtube url does not include query parameter - enablejsapi=1 - JS API is disabled',
   ];
 
-  private playerStates: { [code in PlayerStateCode]: PlayerState } = {
-    [-2]: "NOT_READY",
-    [-1]: "UNSTARTED",
-    [0]: "ENDED",
-    [1]: "PLAYING",
-    [2]: "PAUSED",
-    [3]: "BUFFERING",
-    [5]: "CUED",
-  } as const;
+  private playerStates = {
+    [-2]: 'NOT_READY',
+    [-1]: 'UNSTARTED',
+    [0]: 'ENDED',
+    [1]: 'PLAYING',
+    [2]: 'PAUSED',
+    [3]: 'BUFFERING',
+    [5]: 'CUED',
+  } satisfies Record<TPlayerStateCode, TPlayerState>;
 
-  public currentPlayerStateCode: PlayerStateCode = -2;
+  public currentPlayerStateCode: TPlayerStateCode = -2;
 
   private iframe: HTMLIFrameElement;
   private loaded: Promise<boolean>;
@@ -58,7 +50,7 @@ export default class YouTubeIFrameCtrl {
   constructor(iframe: HTMLIFrameElement | string) {
     let element: HTMLElement | null = null;
 
-    if (typeof iframe === "string") {
+    if (typeof iframe === 'string') {
       element = document.querySelector(iframe);
 
       if (element === null) {
@@ -74,7 +66,7 @@ export default class YouTubeIFrameCtrl {
       this.throwError(1);
     }
 
-    if (!this.iframe.src.includes("enablejsapi=1")) {
+    if (!this.iframe.src.includes('enablejsapi=1')) {
       this.throwError(2, this.iframe.src);
     }
 
@@ -82,14 +74,14 @@ export default class YouTubeIFrameCtrl {
       let loaded = false;
 
       const loadListener = () => {
-        this.iframe.removeEventListener("load", loadListener);
+        this.iframe.removeEventListener('load', loadListener);
 
         setTimeout(() => {
-          this.iframe.contentWindow?.postMessage('{"event":"listening"}', "*");
+          this.iframe.contentWindow?.postMessage('{"event":"listening"}', '*');
         });
       };
 
-      this.iframe.addEventListener("load", loadListener);
+      this.iframe.addEventListener('load', loadListener);
 
       this.messageListener = (event: MessageEvent) => {
         if (event.source === this.iframe.contentWindow && event.data) {
@@ -101,13 +93,13 @@ export default class YouTubeIFrameCtrl {
             return;
           }
 
-          if (eventData.event === "onReady" && !loaded) {
+          if (eventData.event === 'onReady' && !loaded) {
             loaded = true;
-            this.iframe.removeEventListener("load", loadListener);
+            this.iframe.removeEventListener('load', loadListener);
             resolve(true);
           }
 
-          if (typeof eventData.info?.playerState === "number") {
+          if (typeof eventData.info?.playerState === 'number') {
             this.stateChangeHandler(eventData.info.playerState);
           }
 
@@ -115,25 +107,25 @@ export default class YouTubeIFrameCtrl {
         }
       };
 
-      window.addEventListener("message", this.messageListener);
-      this.iframe.contentWindow?.postMessage('{"event":"listening"}', "*");
+      window.addEventListener('message', this.messageListener);
+      this.iframe.contentWindow?.postMessage('{"event":"listening"}', '*');
     });
   }
 
   private throwError(errorCode: number, optionalMessage?: string): never {
-    throw new Error(this.errors[errorCode] + (optionalMessage ? `: ${optionalMessage}` : "."));
+    throw new Error(this.errors[errorCode] + (optionalMessage ? `: ${optionalMessage}` : '.'));
   }
 
-  private stateChangeHandler(playerStateCode: PlayerStateCode): void {
+  private stateChangeHandler(playerStateCode: TPlayerStateCode): void {
     this.currentPlayerStateCode = playerStateCode;
-    const event = new CustomEvent("ytstatechange", {
+    const event = new CustomEvent('ytstatechange', {
       detail: this.playerStates[this.currentPlayerStateCode],
     });
     this.iframe.dispatchEvent(event);
   }
 
   private messageHandler(data: any): void {
-    const event = new CustomEvent("ytmessage", { detail: data });
+    const event = new CustomEvent('ytmessage', { detail: data });
     this.iframe.dispatchEvent(event);
   }
 
@@ -142,37 +134,37 @@ export default class YouTubeIFrameCtrl {
 
     this.iframe.contentWindow?.postMessage(
       JSON.stringify({
-        event: "command",
+        event: 'command',
         func: command,
         args: args || [],
       }),
-      "*",
+      '*',
     );
   }
 
   async play() {
-    return this.command("playVideo");
+    return this.command('playVideo');
   }
 
   async pause() {
-    return this.command("pauseVideo");
+    return this.command('pauseVideo');
   }
 
   async stop() {
-    return this.command("stopVideo");
+    return this.command('stopVideo');
   }
 
   async mute() {
-    return this.command("mute");
+    return this.command('mute');
   }
 
   async unMute() {
-    return this.command("unMute");
+    return this.command('unMute');
   }
 
   async setVolume(volume: number) {
     await this.unMute();
-    await this.command("setVolume", [volume]);
+    await this.command('setVolume', [volume]);
   }
 
   get playerState() {
