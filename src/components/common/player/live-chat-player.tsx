@@ -1,10 +1,10 @@
 'use client';
-import { TLocaleCode } from '@/libraries/i18n/type';
 import { useEffect, useRef, useState } from 'react';
-import { DraggablePlayer } from './DndComponents';
-import LiveChat from './LiveChat';
-import css from './Player.module.scss';
-import { DefaultPlayerPlaceholder } from './PlayerPlaceholder';
+import { TLocaleCode } from '@/libraries/i18n/type';
+import { DraggablePlayer } from './dnd-components';
+import LiveChat from './live-chat';
+import css from './player.module.scss';
+import { DefaultPlayerPlaceholder } from './player-placeholder';
 
 export default function LiveChatPlayer({ locale }: { locale: TLocaleCode }) {
   const wrapRef = useRef<HTMLDivElement>(null);

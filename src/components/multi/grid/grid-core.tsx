@@ -1,16 +1,16 @@
+import { useRef, useState } from 'react';
+import { Layout, Layouts, Responsive, WidthProvider } from 'react-grid-layout';
+import { toast } from 'sonner';
+import { v4 as uuid } from 'uuid';
 import {
   MULTI_VIEW_GRID_LAYOUT_BRAEK_POINTS,
   MULTI_VIEW_GRID_LAYOUT_COLMNS,
   MULTI_VIEW_GRID_LAYOUT_DEFAULT_BREAK_POINT,
   MULTI_VIEW_GRID_MAX_ITEM_LENGTH,
 } from '@/constants/multi';
-import { useRef, useState } from 'react';
-import { Layout, Layouts, Responsive, WidthProvider } from 'react-grid-layout';
-import { toast } from 'sonner';
-import { v4 as uuid } from 'uuid';
-import css from './Grid.module.scss';
-import GridLayoutItem from './GridItem';
-import GridNav from './GridNav';
+import css from './grid.module.scss';
+import GridLayoutItem from './grid-item';
+import GridNav from './grid-nav';
 import {
   getLocalStorageLayout,
   getLocalStorageVideoMap,

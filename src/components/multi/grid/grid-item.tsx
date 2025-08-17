@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { MouseEventHandler, Ref, TouchEventHandler } from 'react';
 import { Layout } from 'react-grid-layout';
-import css from './Grid.module.scss';
-import { DragHandle, RemoveHandle } from './GridItemHandler';
-import GridPlayer from './GridPlayer';
+import css from './grid.module.scss';
+import { DragHandle, RemoveHandle } from './grid-item-handler';
+import GridPlayer from './grid-player';
 
 type Props = {
   className?: string;

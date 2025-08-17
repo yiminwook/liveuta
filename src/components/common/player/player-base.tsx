@@ -1,15 +1,15 @@
 'use client';
-import { ORIGIN } from '@/constants';
-import { useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
-import { generateVideoUrl } from '@/libraries/youtube/url';
-import { usePlayer } from '@/stores/player';
 import classnames from 'classnames';
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import ReactPlayer from 'react-player';
 import { toast } from 'sonner';
-import css from './Player.module.scss';
+import { ORIGIN } from '@/constants';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
+import { generateVideoUrl } from '@/libraries/youtube/url';
+import { usePlayer } from '@/stores/player';
+import css from './player.module.scss';
 
 type Props = {
   mode: 'default' | 'pip';

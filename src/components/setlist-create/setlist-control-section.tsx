@@ -1,21 +1,20 @@
 'use client';
+import { ActionIcon, Button, Checkbox, TextInput } from '@mantine/core';
+import { CirclePlus } from 'lucide-react';
+import { ChangeEvent, createRef, useEffect, useState } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 import Show from '@/components/common/utils/Show';
 import { useTranslations } from '@/libraries/i18n/client';
 import { testYoutubeUrl } from '@/utils/regexp';
 import { secondsToHMS } from '@/utils/time';
-import { ActionIcon, Button, TextInput } from '@mantine/core';
-import { Checkbox } from '@mantine/core';
-import { CirclePlus } from 'lucide-react';
-import { ChangeEvent, createRef, useEffect, useState } from 'react';
-import { useShallow } from 'zustand/react/shallow';
 import {
   copy,
   usePlayerActions,
   usePlayerStore,
   useSetlistActions,
   useSetlistStore,
-} from './Context';
-import css from './SetlistControlSection.module.scss';
+} from './context';
+import css from './setlist-control-section.module.scss';
 
 export function SetlistItemInput() {
   const [input, setInput] = useState('');

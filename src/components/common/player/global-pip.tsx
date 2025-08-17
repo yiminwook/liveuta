@@ -1,16 +1,16 @@
 'use client';
-import { useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
-import { usePlayer } from '@/stores/player';
 import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { toast } from 'sonner';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
+import { usePlayer } from '@/stores/player';
 
 const DraggablePlayer = dynamic(
-  () => import('./DndComponents').then((mod) => mod.DraggablePlayer),
+  () => import('./dnd-components').then((mod) => mod.DraggablePlayer),
   {
     ssr: false,
   },

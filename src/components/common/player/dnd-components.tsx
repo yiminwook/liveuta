@@ -29,7 +29,7 @@ import { TLocaleCode } from '@/libraries/i18n/type';
 import { YoutubePlayer } from '@/libraries/youtube/player';
 import { usePlayer } from '@/stores/player';
 import { getBoxPositionStyle } from '@/utils/helper';
-import dndCss from './DndComponents.module.scss';
+import dndCss from './dnd-components.module.scss';
 
 type DraggablePipProps = {
   mode: 'default' | 'pip';

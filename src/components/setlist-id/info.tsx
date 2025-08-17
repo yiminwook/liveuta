@@ -1,4 +1,13 @@
 'use client';
+import { useRouter } from '@bprogress/next';
+import { Avatar, Button } from '@mantine/core';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import cx from 'classnames';
+import { ArrowLeft, ListMusic } from 'lucide-react';
+import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
+import { isMobile } from 'react-device-detect';
+import { toast } from 'sonner';
 import { clientApi } from '@/apis/fetcher';
 import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import { useMount } from '@/hooks/use-mount';
@@ -12,16 +21,7 @@ import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { usePlayer } from '@/stores/player';
 import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { openWindow } from '@/utils/window-event';
-import { useRouter } from '@bprogress/next';
-import { Avatar, Button } from '@mantine/core';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import cx from 'classnames';
-import { ArrowLeft, ListMusic } from 'lucide-react';
-import { Session } from 'next-auth';
-import { useSession } from 'next-auth/react';
-import { isMobile } from 'react-device-detect';
-import { toast } from 'sonner';
-import css from './Info.module.scss';
+import css from './info.module.scss';
 
 type InfoProps = {
   setlist: Setlist;

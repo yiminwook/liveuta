@@ -1,9 +1,3 @@
-import useCachedData from '@/hooks/use-cached-data';
-import { useScheduleQuery } from '@/hooks/use-schedule';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import { generateVideoUrl } from '@/libraries/youtube/url';
-import { StreamFilter } from '@/types';
-import { TScheduleDto } from '@/types/dto';
 import {
   ActionIcon,
   Button,
@@ -19,8 +13,14 @@ import classNames from 'classnames';
 import { ChevronLeft, Info } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { ChangeEvent, useMemo, useState } from 'react';
-import css from './GridNav.module.scss';
-import GridNavItem from './GridNavItem';
+import useCachedData from '@/hooks/use-cached-data';
+import { useScheduleQuery } from '@/hooks/use-schedule';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { generateVideoUrl } from '@/libraries/youtube/url';
+import { StreamFilter } from '@/types';
+import { TScheduleDto } from '@/types/dto';
+import css from './grid-nav.module.scss';
+import GridNavItem from './grid-nav-item';
 
 type Props = {
   isFlip: boolean;

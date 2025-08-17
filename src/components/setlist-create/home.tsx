@@ -1,11 +1,11 @@
-import Background from '@/components/common/background/Background';
 import { Divider } from '@mantine/core';
 import cx from 'classnames';
-import css from './Home.module.scss';
-import Player from './Player';
-import Table from './Table';
-import UrlInput from './UrlInput';
-import { AutoSort, SetlistControlButtons, SetlistItemInput } from './SetlistControlSection';
+import Background from '@/components/common/background/Background';
+import css from './home.module.scss';
+import Player from './player';
+import { AutoSort, SetlistControlButtons, SetlistItemInput } from './setlist-control-section';
+import Table from './table';
+import UrlInput from './url-input';
 
 export default function Home() {
   return (

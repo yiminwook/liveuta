@@ -1,8 +1,8 @@
 'use client';
-import For from '@/components/common/utils/For';
 import { Reorder } from 'framer-motion';
-import { useSetlistActions, useSetlistStore } from './Context';
-import TableRow from './TableRow';
+import For from '@/components/common/utils/For';
+import { useSetlistActions, useSetlistStore } from './context';
+import TableRow from './table-row';
 
 export default function TableBody() {
   const setlist = useSetlistStore((state) => state.setlist);
