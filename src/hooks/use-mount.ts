@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /** no ssr */
 export const useMount = () => {
@@ -9,4 +9,13 @@ export const useMount = () => {
   }, []);
 
   return isMounted;
+};
+
+export const useHook = (fn: () => void) => {
+  const hasRun = useRef(false);
+
+  if (!hasRun.current) {
+    hasRun.current = true;
+    fn();
+  }
 };

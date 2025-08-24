@@ -148,10 +148,12 @@ export default class YouTubeIFrameCtrl {
   }
 
   async pause() {
+    // 일시정지
     return this.command('pauseVideo');
   }
 
   async stop() {
+    // 현재 비디오의 로딩을 중지하고 취소, 다시 재생하지 않을 사용자에게 사용
     return this.command('stopVideo');
   }
 

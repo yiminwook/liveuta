@@ -97,6 +97,7 @@ export default function Desc({ videoId, description }: DescProps) {
 
   const handleTimestamp = ({ timestamp }: { videoId: string; timestamp: number }) => {
     actions.setTimeline(timestamp);
+    actions.setIsPlaying(true);
   };
 
   useEffect(() => {

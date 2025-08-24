@@ -1,7 +1,7 @@
 'use client';
-import { AppContext, createAppStore } from '@/stores/app';
-import { PlayerContext, createPlayerStore } from '@/stores/player';
 import { useRef } from 'react';
+import { AppContext, createAppStore } from '@/stores/app';
+import { createPlayerStore, PlayerContext } from '@/stores/player';
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -24,6 +24,8 @@ export default function AppProvider({ children, initState }: AppProviderProps) {
       isMuted: false,
       isHide: true,
       timeline: 0,
+      controller: null,
+      volume: 75,
     }),
   );
 
