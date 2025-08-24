@@ -24,6 +24,7 @@ SOFTWARE.
 */
 import { TPlayerState, TPlayerStateCode } from './type';
 
+// https://developers.google.com/youtube/iframe_api_reference
 export default class YouTubeIFrameCtrl {
   private errors = [
     'Element not found',
@@ -160,6 +161,10 @@ export default class YouTubeIFrameCtrl {
 
   async unMute() {
     return this.command('unMute');
+  }
+
+  async seekTo(seconds: number) {
+    return this.command('seekTo', [seconds]);
   }
 
   async setVolume(volume: number) {

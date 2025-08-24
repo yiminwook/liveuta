@@ -39,6 +39,7 @@ limitations under the License.
 import classNames from 'classnames';
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
 import Show from '@/components/common/utils/Show';
+import { usePlayer } from '@/stores/player';
 import YouTubeIFrameCtrl from './iframe-controller';
 import css from './player.module.scss';
 import { ThumbnailSize } from './type';
@@ -108,6 +109,8 @@ export function YoutubePlayer({
     muted: false,
     volume: -1,
   });
+
+  const { timeline } = usePlayer();
 
   const setVolume = (volume: number) => {
     if (!controller) return;
@@ -186,6 +189,12 @@ export function YoutubePlayer({
       setController(() => null);
     }
   }, [isIframeAdded]);
+
+  useEffect(() => {
+    if (timeline >= 0 && controller) {
+      controller.seekTo(timeline);
+    }
+  }, [timeline]);
 
   const thumbnailUrl = useMemo(() => {
     // JPG - `https://i.ytimg.com/vi/${videoId}/${thumbnailSize}.jpg`,
