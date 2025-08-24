@@ -37,7 +37,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 import clsx from 'clsx';
-import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
+import { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Show from '@/components/common/utils/Show';
 import { usePlayer } from '@/stores/player';
 import YouTubeIFrameCtrl from './iframe-controller';
@@ -104,41 +104,7 @@ export function YoutubePlayer({
   const [isPreConnected, setIsPreConnected] = useState(false);
   const [isIframeAdded, setIsIframeAdded] = useState(false);
 
-  const [controller, setController] = useState<YouTubeIFrameCtrl | null>(null);
-  const [volumeState, setVolumeState] = useState<TVolumeState>({
-    muted: false,
-    volume: -1,
-  });
-
-  const { timeline } = usePlayer();
-
-  const setVolume = (volume: number) => {
-    if (!controller) return;
-
-    controller.setVolume(volume).then(() => {
-      setVolumeState((prev) => ({ ...prev, volume }));
-    });
-  };
-
-  const setMuted = (muted: boolean) => {
-    if (!controller) return;
-
-    if (muted) {
-      controller.mute().then(() => {
-        setVolumeState((prev) => ({ ...prev, muted }));
-      });
-    } else {
-      controller.unMute().then(() => {
-        setVolumeState((prev) => ({ ...prev, muted }));
-      });
-    }
-  };
-
-  const incrementVolume = () => setVolume(Math.min(volumeState.volume + 5, 100));
-
-  const decrementVolume = () => setVolume(Math.max(volumeState.volume - 5, 0));
-
-  const toggleMuted = () => setMuted(!volumeState.muted);
+  const { timeline, controller, volume, isMuted, isPlaying, actions } = usePlayer();
 
   const warmConnections = () => {
     if (isPreConnected) return;
@@ -153,48 +119,77 @@ export function YoutubePlayer({
     onIframeAdded();
   };
 
-  const volumeListener = async (event: MessageEvent) => {
-    try {
-      const string = await event.data;
+  const volumeListener = useCallback(
+    async (event: MessageEvent) => {
+      try {
+        const string = await event.data;
 
-      const data: {
-        event: string;
-        info: Record<string, unknown>;
-        channel: string;
-      } = JSON.parse(string);
+        const data: {
+          event: string;
+          info: Record<string, unknown>;
+          channel: string;
+        } = JSON.parse(string);
 
-      if (data.event === 'infoDelivery' && data.info.volume !== undefined) {
-        setVolumeState(() => ({
-          volume: data.info.volume as number,
-          muted: data.info.muted as boolean,
-        }));
-        window.removeEventListener('message', volumeListener);
+        if (data.event === 'infoDelivery' && data.info.volume !== undefined) {
+          actions.setVolume(data.info.volume as number);
+          actions.setIsMuted(data.info.muted as boolean);
+          window.removeEventListener('message', volumeListener);
+        }
+      } catch (error) {
+        console.log('volumeListener event debug:', event);
+        console.error('volumeListener error:', error);
       }
-    } catch (error) {
-      console.log('volumeListener event debug:', event);
-      console.error('volumeListener error:', error);
-    }
-  };
+    },
+    [actions],
+  );
 
   useEffect(() => {
     if (autoLoad) {
       addIframe();
+      console.log('youtube player added');
     }
   }, []);
 
   useEffect(() => {
     if (!isIframeAdded) {
       window.removeEventListener('message', volumeListener);
-      setVolumeState(() => ({ muted: false, volume: -1 }));
-      setController(() => null);
+      actions.resetController();
+      console.log('youtube player reset');
     }
   }, [isIframeAdded]);
 
+  // 타임라인과 재생여부를 초기화시 플레이어 로딩 돌고 있는데 더 나은방식이 있는지 찾아보자
+  // useEffect(() => {
+  //   if (timeline >= 0 && controller) {
+  //     controller.seekTo(timeline);
+  //   }
+  // }, [controller, timeline]);
+
+  // useEffect(() => {
+  //   if (controller) {
+  //     if (isPlaying) {
+  //       controller.play();
+  //     } else {
+  //       controller.pause();
+  //     }
+  //   }
+  // }, [controller, isPlaying]);
+
   useEffect(() => {
-    if (timeline >= 0 && controller) {
-      controller.seekTo(timeline);
+    if (controller) {
+      controller.setVolume(volume);
     }
-  }, [timeline]);
+  }, [controller, volume]);
+
+  useEffect(() => {
+    if (controller) {
+      if (isMuted) {
+        controller.mute();
+      } else {
+        controller.unMute();
+      }
+    }
+  }, [controller, isMuted]);
 
   const thumbnailUrl = useMemo(() => {
     // JPG - `https://i.ytimg.com/vi/${videoId}/${thumbnailSize}.jpg`,
@@ -245,7 +240,7 @@ export function YoutubePlayer({
             onLoad={(e) => {
               if (!iframeRef.current) return;
               const ctrl = new YouTubeIFrameCtrl(iframeRef.current);
-              setController(() => ctrl);
+              actions.setController(ctrl);
               e.currentTarget.contentWindow?.postMessage(
                 '{"event":"command","func":"getVolume"}',
                 '*',

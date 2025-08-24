@@ -52,7 +52,7 @@ export default function SetlistPlayer({ videoId }: PlayerWrapProps) {
   return (
     <div ref={wrapRef} className={css.playerBox}>
       {!isShow && <DefaultPlayerPlaceholder />}
-      <DraggablePlayer mode={isShow ? 'default' : 'pip'} locale={locale} />
+      <DraggablePlayer mode={isShow ? 'default' : 'pip'} locale={locale} autoLoad={true} />
     </div>
   );
 }

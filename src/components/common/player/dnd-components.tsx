@@ -35,6 +35,7 @@ type DraggablePipProps = {
   isShowHideButton?: boolean;
   onClickHide?: () => void;
   locale: TLocaleCode;
+  autoLoad?: boolean;
 };
 
 export function DraggablePlayer({
@@ -42,6 +43,7 @@ export function DraggablePlayer({
   isShowHideButton = false,
   onClickHide,
   locale,
+  autoLoad = false,
 }: DraggablePipProps) {
   const [draggingId, setDraggingId] = useState<UniqueIdentifier | null>(null);
   const [boxCorner, setBoxCorner] = useState<TCorner>(getLocalStoragePipPosition); // 박스의 현재 모서리 위치 (null, 'topLeft', ...)
@@ -89,6 +91,7 @@ export function DraggablePlayer({
         onClickHide={onClickHide}
         positionStyle={boxPositionStyle}
         isDragging={isDragging}
+        autoLoad={autoLoad}
       />
     </DndContext>
   );
@@ -102,6 +105,7 @@ function Position({
   isDragging,
   onClickHide,
   locale,
+  autoLoad,
 }: {
   mode: 'default' | 'pip';
   id: string;
@@ -110,6 +114,7 @@ function Position({
   isDragging: boolean;
   onClickHide?: () => void;
   locale: TLocaleCode;
+  autoLoad: boolean;
 }) {
   const store = usePlayer();
   const { attributes, listeners, setNodeRef, transform } = useDraggable({ id });
@@ -140,7 +145,7 @@ function Position({
         />
       )}
       {/* <PlayerBase mode={mode} locale={locale} /> */}
-      <YoutubePlayer videoId={store.videoId} mode={mode} autoLoad={false} />
+      <YoutubePlayer videoId={store.videoId} mode={mode} autoLoad={autoLoad} />
     </div>
   );
 }

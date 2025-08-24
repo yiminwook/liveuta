@@ -32,7 +32,7 @@ export default function LiveChatPlayer({ locale }: { locale: TLocaleCode }) {
   return (
     <div ref={wrapRef} className={css.playerBox}>
       {!isShow && <DefaultPlayerPlaceholder />}
-      <DraggablePlayer mode={isShow ? 'default' : 'pip'} locale={locale} />
+      <DraggablePlayer mode={isShow ? 'default' : 'pip'} locale={locale} autoLoad />
       <LiveChat />
     </div>
   );

@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
 import { create, useStore } from 'zustand';
+import YouTubeIFrameCtrl from '@/libraries/youtube/iframe-controller';
 
 export type TPlayerState = {
   videoId: string;
@@ -7,6 +8,9 @@ export type TPlayerState = {
   isMuted: boolean;
   isHide: boolean;
   timeline: number;
+
+  controller: YouTubeIFrameCtrl | null;
+  volume: number;
 };
 
 export type TPlayerAction = {
@@ -19,6 +23,14 @@ export type TPlayerAction = {
   toggleIsHide: () => void;
   setIsPlaying: (isPlaying: boolean) => void;
   toggleIsPlaying: () => void;
+
+  setController: (controller: YouTubeIFrameCtrl) => void;
+  resetController: () => void;
+
+  setVolume: (volume: number) => void;
+  incrementVolume: () => void;
+  decrementVolume: () => void;
+  toggleMuted: () => void;
   setIsMuted: (isMuted: boolean) => void;
 };
 
@@ -36,14 +48,27 @@ export const createPlayerStore = (initState: TPlayerState) => {
         // 자동재생 되지 않도록 설정
         set(() => ({ videoId, timeline, isHide: false, isPlaying: false }));
       },
-      setTimeline: (timeline) => set(() => ({ timeline, isHide: false, isPlaying: true })),
-      reset: () => set(() => initState),
-      resetTimeline: () => set(() => ({ timeline: 0 })),
+
       setIsHide: (isHide) => set(() => ({ isHide })),
       toggleIsHide: () => set((state) => ({ isHide: !state.isHide })),
+
       setIsPlaying: (isPlaying) => set(() => ({ isPlaying })),
       toggleIsPlaying: () => set((state) => ({ isPlaying: !state.isPlaying })),
+
       setIsMuted: (isMuted) => set(() => ({ isMuted })),
+      toggleMuted: () => set((state) => ({ isMuted: !state.isMuted })),
+
+      setController: (controller) => set(() => ({ controller })),
+      resetController: () => set(() => ({ controller: null })),
+
+      setVolume: (volume) => set(() => ({ volume })),
+      incrementVolume: () => set((state) => ({ volume: Math.min(state.volume + 5, 100) })),
+      decrementVolume: () => set((state) => ({ volume: Math.max(state.volume - 5, 0) })),
+
+      setTimeline: (timeline) => set(() => ({ timeline, isHide: false, isPlaying: true })),
+      resetTimeline: () => set(() => ({ timeline: 0 })),
+
+      reset: () => set(() => initState),
     },
   }));
 };
