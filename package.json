@@ -86,7 +86,7 @@
     "zustand": "^5.0.6"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.1.4",
+    "@biomejs/biome": "^2.2.4",
     "@next/bundle-analyzer": "^15.4.5",
     "@playwright/test": "^1.54.1",
     "@svgr/webpack": "^8.1.0",
