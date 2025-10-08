@@ -1,17 +1,17 @@
+import { useRouter } from '@bprogress/next';
+import { Button, CloseButton } from '@mantine/core';
+import variable from '@variable';
+import clsx from 'clsx';
+import { Filter } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { useState } from 'react';
 import SearchInput from '@/components/common/input/SearchInput';
 import Modal from '@/components/common/modal/Modal';
 import { useTransition } from '@/hooks/use-transition';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { ModalProps, useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
-import { useRouter } from '@bprogress/next';
-import { Button, CloseButton } from '@mantine/core';
-import variable from '@variable';
-import clsx from 'clsx';
-import { Filter } from 'lucide-react';
-import { useSession } from 'next-auth/react';
-import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
 import ConfirmModal from '../common/modal/ConfirmModal';
 import NavTab from './NavTab';
 import css from './ScheduleNavModal.module.scss';
@@ -21,6 +21,7 @@ import VideoTypeRadio from './VideoTypeRadio';
 const SCHEDULE_NAV_MODAL_ID = 'scheduleNavModal';
 
 type ScheduleNavModalProps = {
+  onClose: () => void;
   scheduleDto: TScheduleDto;
   length: {
     all: number;
@@ -29,12 +30,7 @@ type ScheduleNavModalProps = {
   };
 };
 
-/** dto는 모달이 닫히고 열려야 반영됨 */
-export default function ScheduleNavModal({
-  onClose,
-  scheduleDto,
-  length,
-}: ModalProps<ScheduleNavModalProps>) {
+export default function ScheduleNavModal({ onClose, scheduleDto, length }: ScheduleNavModalProps) {
   const router = useRouter(); // transition 효과 제외
   const locale = useLocale();
   const { t } = useTranslations();

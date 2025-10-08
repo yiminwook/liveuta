@@ -17,6 +17,7 @@ const eslintConfig = [
       '@typescript-eslint/ban-ts-comment': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
       'react/jsx-no-undef': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
     },
   }),
   biome,

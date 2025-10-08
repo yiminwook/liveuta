@@ -6,13 +6,14 @@ import { Promised, TMetadata } from '@/types';
 import CommandMenu from '../common/command/CommandMenu';
 import { CmdProvider } from '../common/command/Context';
 import AppProvider from './AppProvider';
+import AsyncModalContainer from './async-modal-container';
+import BProgressProviders from './BProgress';
 import Devtools from './Devtools';
 import Hotkeys from './Hotkeys';
 import MantineProvider from './MantineProvider';
-import ModalContainer from './ModalContainer';
-import BProgressProviders from './BProgress';
 import NextAuth from './NextAuth';
 import Particle from './Particle';
+import PortalModalContainer from './portal-modal-container';
 import ReactQuery from './ReactQuery';
 import ServiceWorker from './ServiceWorker';
 import ToastBox from './ToastBox';
@@ -51,7 +52,8 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
                   <Particle />
                   <ServiceWorker />
                   <Devtools />
-                  <ModalContainer />
+                  <PortalModalContainer />
+                  <AsyncModalContainer />
                 </CmdProvider>
               </Hotkeys>
             </MantineProvider>

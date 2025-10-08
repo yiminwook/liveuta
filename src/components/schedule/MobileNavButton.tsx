@@ -1,9 +1,11 @@
 'use client';
-import { useTranslations } from '@/libraries/i18n/client';
-import { useSetModalStore } from '@/stores/modal';
-import { TScheduleDto } from '@/types/dto';
 import { Button } from '@mantine/core';
 import { SlidersHorizontal } from 'lucide-react';
+import { AnimatePresence } from 'motion/react';
+import { useState } from 'react';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TScheduleDto } from '@/types/dto';
+import Portal from '../config/portal';
 import css from './ScheduleNav.module.scss';
 import ScheduleNavModal from './ScheduleNavModal';
 
@@ -17,17 +19,11 @@ type MobileNavButtonProps = {
 };
 
 export default function MobileNavButton({ length, scheduleDto }: MobileNavButtonProps) {
-  const modalStore = useSetModalStore();
   const { t } = useTranslations();
+  const [isOpenNavModal, setIsOpenNavModal] = useState(false);
 
-  const handleOpen = async () => {
-    await modalStore.push(ScheduleNavModal, {
-      props: {
-        scheduleDto,
-        length,
-      },
-    });
-  };
+  const openNavModal = () => setIsOpenNavModal(() => true);
+  const closeNavModal = () => setIsOpenNavModal(() => false);
 
   function filterText(filter: typeof scheduleDto.filter) {
     if (filter === 'all') {
@@ -56,17 +52,27 @@ export default function MobileNavButton({ length, scheduleDto }: MobileNavButton
   }`;
 
   return (
-    <Button
-      className={css.mobileNavBtn}
-      classNames={{
-        label: css.mobileNavBtnLabel,
-      }}
-      h={40}
-      leftSection={<SlidersHorizontal />}
-      variant="default"
-      onClick={handleOpen}
-    >
-      {text}
-    </Button>
+    <>
+      <Button
+        className={css.mobileNavBtn}
+        classNames={{
+          label: css.mobileNavBtnLabel,
+        }}
+        h={40}
+        leftSection={<SlidersHorizontal />}
+        variant="default"
+        onClick={openNavModal}
+      >
+        {text}
+      </Button>
+
+      <AnimatePresence>
+        {isOpenNavModal && (
+          <Portal>
+            <ScheduleNavModal onClose={closeNavModal} scheduleDto={scheduleDto} length={length} />
+          </Portal>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

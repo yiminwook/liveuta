@@ -1,0 +1,16 @@
+@use "sass:map";
+
+.modalContainer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: map.get(var.$z-indexes, modal);
+
+  &:global(.active) {
+    display: block;
+  }
+}

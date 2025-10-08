@@ -1,14 +1,14 @@
 'use client';
-import { Link } from '@/libraries/i18n';
-import { useLocale } from '@/libraries/i18n/client';
-import { TScheduleDto } from '@/types/dto';
 import { useRouter } from '@bprogress/next';
 import { ActionIcon } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
 import { Monitor } from 'lucide-react';
-import { Session } from 'next-auth';
 import { useSearchParams } from 'next/navigation';
+import { Session } from 'next-auth';
+import { Link } from '@/libraries/i18n';
+import { useLocale } from '@/libraries/i18n/client';
+import { TScheduleDto } from '@/types/dto';
 import MobileNavButton from './MobileNavButton';
 import NavTab from './NavTab';
 import QueryButton from './QueryBtn';
