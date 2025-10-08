@@ -29,7 +29,9 @@ export default function GridNavItem({ content, channel, onAddById }: Props) {
           <Avatar className={css.avatar} size="md" src={channelImage} />
           <div>
             <span className={clsx(css.channelName, css.line)}>{channel?.name_kor}</span>
-            {content.viewer > 0 && <span className={css.line}>Viewer: {content.viewer}</span>}
+            {content.viewer > 0 && (
+              <span className={css.line}>{`${t('multiView.0007')}: ${content.viewer}`}</span>
+            )}
           </div>
         </div>
         <ActionIcon variant="light" onClick={() => onAddById(content.videoId)}>

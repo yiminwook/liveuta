@@ -127,7 +127,7 @@ export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
           </div>
 
           <div className={css.headerRight}>
-            <Tooltip label={'모바일 환경은 지원되지 않습니다.'} position="top" withArrow>
+            <Tooltip label={t('multiView.3001')} position="top" withArrow>
               <ActionIcon variant="transparent" size="compact-xs" radius="lg">
                 <Info color={variable.thirdColorDefault} size="1rem" />
               </ActionIcon>
@@ -139,7 +139,7 @@ export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
               size="compact-xs"
               onClick={onClickClear}
             >
-              CLEAR
+              {t('multiView.0005')}
             </Button>
 
             <Select
@@ -161,10 +161,10 @@ export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
             }}
             value={newUrl}
             onChange={onChangeUrl}
-            placeholder="URL을 입력해주세요"
+            placeholder={t('multiView.1000')}
             rightSection={
               <Button variant="filled" size="compact-xs" onClick={onClickAdd}>
-                ADD
+                {t('multiView.0006')}
               </Button>
             }
           />

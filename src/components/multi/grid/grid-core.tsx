@@ -8,6 +8,7 @@ import {
   MULTI_VIEW_GRID_LAYOUT_DEFAULT_BREAK_POINT,
   MULTI_VIEW_GRID_MAX_ITEM_LENGTH,
 } from '@/constants/multi';
+import { useTranslations } from '@/libraries/i18n/client';
 import css from './grid.module.scss';
 import GridLayoutItem from './grid-item';
 import GridNav from './grid-nav';
@@ -22,6 +23,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 export default function GridCore() {
   const containerRef = useRef<HTMLDivElement>(null!);
+  const { t } = useTranslations();
 
   // const [breakPoint, setBreakPoint] = useState('lg');
   const [videoMap, setVideoMap] = useState<Record<string, string>>(getLocalStorageVideoMap);
@@ -34,7 +36,7 @@ export default function GridCore() {
     const currentLength = layouts[MULTI_VIEW_GRID_LAYOUT_DEFAULT_BREAK_POINT]?.length || 0;
 
     if (currentLength >= MULTI_VIEW_GRID_MAX_ITEM_LENGTH) {
-      toast.warning(`${MULTI_VIEW_GRID_MAX_ITEM_LENGTH}개이상 추가 할 수 없습니다.`);
+      toast.warning(t('multiView.3000', { count: MULTI_VIEW_GRID_MAX_ITEM_LENGTH }));
       return;
     }
 

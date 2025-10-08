@@ -10,9 +10,10 @@
     "errorPage": {
       "link": "An error has occurred"
     },
-    "error": {
+    "internalServerError": {
       "title": "500: Server Error",
-      "imageAlt": "An error has occurred.",
+      "message1": "An error has occurred.",
+      "message2": "If it occurs repeatedly, please contact the administrator.",
       "retry": "Retry"
     },
     "notFound": {
@@ -296,8 +297,14 @@
     }
   },
   "multiView": {
-    "title": "MultiView",
-    "cannotPlayError": "Cannot play this video."
+    "0000": "MultiView",
+    "0005": "Initialize",
+    "0006": "Add",
+    "0007": "Viewer",
+    "1000": "Enter URL",
+    "3000": "You can add up to {{count}} items.",
+    "3001": "Mobile environment is not supported.",
+    "3002": "Cannot play this video."
   },
   "my": {
     "blacklist": {

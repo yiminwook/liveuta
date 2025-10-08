@@ -1,5 +1,6 @@
 import { Button } from '@mantine/core';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+import { useTranslations } from '@/libraries/i18n/client';
 import GridCore from './grid-core';
 import { saveLocalStorageLayout, saveLocalStorageVideoMap } from './helper';
 
@@ -12,6 +13,8 @@ export default function Grid() {
 }
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
+  const { t } = useTranslations();
+
   const onClick = () => {
     saveLocalStorageLayout({});
     saveLocalStorageVideoMap({});
@@ -20,11 +23,11 @@ function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <p>에러가 발생하였습니다.</p>
-      <p>반복적으로 발생할시 관리자에게 문의해주세요</p>
+      <p>{t('error.internalServerError.message1')}</p>
+      <p>{t('error.internalServerError.message2')}</p>
       <div style={{ textAlign: 'center' }}>
         <Button size="xs" onClick={onClick}>
-          RETRY
+          {t('error.internalServerError.retry')}
         </Button>
       </div>
     </div>

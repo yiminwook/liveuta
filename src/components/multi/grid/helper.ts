@@ -1,8 +1,8 @@
+import { Layouts } from 'react-grid-layout';
 import {
   MULTI_VIEW_GRID_LAYOUT_STORAGE_KEY,
   MULTI_VIEW_VIDEO_MAP_STORAGE_KEY,
 } from '@/constants/multi';
-import { Layouts } from 'react-grid-layout';
 
 export const getLocalStorageLayout = () => {
   let layouts: Layouts = {};
