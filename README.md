@@ -7,7 +7,7 @@ Main - https://liveuta.vercel.app
 Dev - https://liveuta-dev.vercel.app
 
 ## 개발환경
-- node v20.14.0
+- node v22.14.0
 - pnpm v9.15
 
 

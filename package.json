@@ -93,7 +93,7 @@
     "@tanstack/eslint-plugin-query": "^5.81.2",
     "@types/gtag.js": "^0.0.18",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^20.19.9",
+    "@types/node": "^22.18.8",
     "@types/oracledb": "6.6.0",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",
@@ -121,7 +121,7 @@
     "node-gyp-build": "4.6.1"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "packageManager": "pnpm@9.15.0",
   "msw": {
