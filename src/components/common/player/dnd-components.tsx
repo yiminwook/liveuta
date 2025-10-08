@@ -27,8 +27,8 @@ import classNames from 'classnames';
 import { X } from 'lucide-react';
 import { CSSProperties, useState } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
-import dndCss from './DndComponents.module.scss';
-import PlayerBase from './PlayerBase';
+import dndCss from './dnd-components.module.scss';
+import PlayerBase from './player-base';
 
 type DraggablePipProps = {
   mode: 'default' | 'pip';
