@@ -1,40 +1,31 @@
+import Image from 'next/image';
+import { MouseEvent } from 'react';
 import CopyButton from '@/components/common/button/CopyButton';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import { useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
-import { ModalProps } from '@/stores/modal';
+import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
+import { renderSubscribe } from '@/utils/renderSubscribe';
 import { openWindow } from '@/utils/window-event';
-import Image from 'next/image';
-import { MouseEvent } from 'react';
 import css from './ChannelCardModal.module.scss';
 import Modal from './Modal';
 
 type ChannelCardModalProp = {
-  channelName: string;
-  title: string;
-  imageURL: string;
-  url: string;
-  videoCount: string;
-  subscribe: string;
-  description: string;
-  locale: TLocaleCode;
+  content: TYChannelsData;
+  onClose: () => void;
 };
 
 const CHANNEL_MODAL_ID = 'channelCardModal';
 
-export default function ChannelCardModal({
-  title,
-  channelName,
-  imageURL,
-  url,
-  videoCount,
-  subscribe,
-  description,
-  onClose,
-  locale,
-}: ModalProps<ChannelCardModalProp>) {
+export default function ChannelCardModal({ content, onClose }: ChannelCardModalProp) {
+  const { nameKor: channelName, snippet, url, statistics, uid } = content;
   const { t } = useTranslations();
+
+  const videoCount = statistics?.videoCount ?? t('channel.channelCard.hidden');
+  const subscribe = renderSubscribe(statistics?.subscriberCount ?? t('channel.channelCard.hidden'));
+  const title = snippet?.title ?? '';
+  const imageURL = snippet?.thumbnails?.default?.url ?? '/assets/loading.png';
+  const description = snippet?.description ?? t('channel.channelCard.hidden');
 
   const linkClickEvent = (e: MouseEvent<HTMLAnchorElement>) =>
     gtagClickAtag(e, {

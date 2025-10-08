@@ -1,31 +1,35 @@
 'use client';
-import ChannelCardModal from '@/components/common/modal/ChannelCardModal';
+import { Star } from 'lucide-react';
+import Image from 'next/image';
+import { Session } from 'next-auth';
+import { MouseEvent } from 'react';
+import { isDesktop } from 'react-device-detect';
+import { toast } from 'sonner';
 import { DEFAULT_BLUR_BASE64 } from '@/constants';
 import useMutateWhitelist from '@/hooks/use-delete-whitelist';
 import usePostWhitelist from '@/hooks/use-post-whitelist';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useTranslations } from '@/libraries/i18n/client';
 import { useSetModalStore } from '@/stores/modal';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick, gtagClickAtag } from '@/utils/gtag';
 import { renderSubscribe } from '@/utils/renderSubscribe';
 import { openWindow } from '@/utils/window-event';
-import { Star } from 'lucide-react';
-import { Session } from 'next-auth';
-import Image from 'next/image';
-import { MouseEvent } from 'react';
-import { isDesktop } from 'react-device-detect';
-import { toast } from 'sonner';
 import css from './ChannelCard.module.scss';
 
 type ChannelItemProps = {
   content: TYChannelsData;
   session: Session | null;
   isFavorite: boolean;
+  selecteChannel: (content: TYChannelsData) => void;
 };
 
-export default function ChannelItem({ content, session, isFavorite }: ChannelItemProps) {
+export default function ChannelCard({
+  content,
+  session,
+  isFavorite,
+  selecteChannel,
+}: ChannelItemProps) {
   const { nameKor: channelName, snippet, url, statistics, uid } = content;
-  const locale = useLocale();
   const { t } = useTranslations();
   const title = snippet?.title ?? '';
   const imageURL = snippet?.thumbnails?.default?.url ?? '/assets/loading.png';
@@ -54,7 +58,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
     }
   };
 
-  const openModal = async () => {
+  const openModal = () => {
     gtagClick({
       target: 'channelCard',
       content: channelName,
@@ -62,18 +66,7 @@ export default function ChannelItem({ content, session, isFavorite }: ChannelIte
       action: 'openModal',
     });
 
-    await modalStore.push(ChannelCardModal, {
-      props: {
-        channelName,
-        title,
-        imageURL,
-        url,
-        videoCount,
-        subscribe,
-        description,
-        locale,
-      },
-    });
+    selecteChannel(content);
   };
 
   const handleFavorite = () => {

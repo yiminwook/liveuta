@@ -10,7 +10,7 @@ import SearchInput from '@/components/common/input/SearchInput';
 import Modal from '@/components/common/modal/Modal';
 import { useTransition } from '@/hooks/use-transition';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import { ModalProps, useSetModalStore } from '@/stores/modal';
+import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
 import ConfirmModal from '../common/modal/ConfirmModal';
 import NavTab from './NavTab';
