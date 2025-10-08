@@ -1,11 +1,10 @@
 @keyframes pop {
   0% {
-    transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0)
-      scale(1);
+    transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0) scale(1);
   }
+
   100% {
-    transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0)
-      scale(var(--scale));
+    transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0) scale(var(--scale));
     box-shadow: var(--box-shadow);
   }
 }
@@ -19,8 +18,7 @@
 .draggable {
   z-index: 300;
   box-shadow: var(--box-shadow);
-  transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0)
-    scale(var(--scale, 1));
+  transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0) scale(var(--scale, 1));
   transition: box-shadow 300ms ease;
   border-radius: 5px;
   position: fixed;
@@ -43,6 +41,8 @@
   align-items: center;
   justify-content: flex-end;
   padding: 5px;
+  position: relative;
+  z-index: 1;
 }
 
 .pipNavButton {
@@ -74,3 +74,11 @@
   }
 }
 
+.eventBlocker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grabbing;
+}

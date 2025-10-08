@@ -1,23 +1,10 @@
 import {
-  DRAGGABLE_BOX_ID,
-  DRAGGABLE_ZONE_RANGE,
-  DROP_ZONES,
-  DROP_ZONE_RANGE,
-  PIP_LOCAL_STORAGE_KEY,
-  TCorner,
-  transformStringToCorner,
-} from '@/constants/pip';
-import { AntDesignDragOutlined } from '@/icons';
-import { useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
-import { getBoxPositionStyle } from '@/utils/helper';
-import {
+  closestCenter,
   DndContext,
   DragEndEvent,
-  DragStartEvent,
   DraggableAttributes,
+  DragStartEvent,
   UniqueIdentifier,
-  closestCenter,
   useDraggable,
   useDroppable,
 } from '@dnd-kit/core';
@@ -26,6 +13,19 @@ import { ActionIcon, RemoveScroll, Tooltip } from '@mantine/core';
 import clsx from 'clsx';
 import { X } from 'lucide-react';
 import { CSSProperties, useState } from 'react';
+import {
+  DRAGGABLE_BOX_ID,
+  DRAGGABLE_ZONE_RANGE,
+  DROP_ZONE_RANGE,
+  DROP_ZONES,
+  PIP_LOCAL_STORAGE_KEY,
+  TCorner,
+  transformStringToCorner,
+} from '@/constants/pip';
+import { AntDesignDragOutlined } from '@/icons';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
+import { getBoxPositionStyle } from '@/utils/helper';
 import dndCss from './dnd-components.module.scss';
 import PlayerBase from './player-base';
 
@@ -137,6 +137,9 @@ function Position({
           dndHandleListeners={listeners}
         />
       )}
+
+      {isDragging && <div className={dndCss.eventBlocker} />}
+
       <PlayerBase mode={mode} locale={locale} />
     </div>
   );
