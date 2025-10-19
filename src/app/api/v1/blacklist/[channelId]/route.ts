@@ -20,7 +20,7 @@ export async function POST(
     }
 
     const data = await postBlacklist({
-      memberId: payload.userId,
+      memberEmail: payload.email!,
       channelId: params.channelId,
     });
 
@@ -48,7 +48,7 @@ export async function DELETE(
     }
 
     const data = await deleteBlacklist({
-      memberId: payload.userId,
+      memberEmail: payload.email!,
       channelId: params.channelId,
     });
 

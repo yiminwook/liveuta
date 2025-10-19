@@ -52,6 +52,8 @@ export default function Header({ locale }: HeaderProps) {
     };
   }, [isMobile]);
 
+  console.log('session', session.user);
+
   return (
     <header className={css.header}>
       <div className={css.inner} ref={gnbRef}>
@@ -67,11 +69,15 @@ export default function Header({ locale }: HeaderProps) {
             </button>
             <DesktopNav />
 
-            {session.isLoading && <Skeleton height={40} circle />}
-            {!session.isLoading && !!session.user ? (
+            {session.isLoading ? (
+              <Skeleton height={40} circle />
+            ) : !session.user ? (
+              <Link locale={locale} href="/sign-in" className={css.loginBtn}>
+                {t('global.header.login')}
+              </Link>
+            ) : (
               <button className={css.accountBtn} onClick={openAccountSidebar}>
                 <Avatar
-                  // src={session.user.photoURL}
                   name={session.user.email ?? ''}
                   w={40}
                   h={40}
@@ -79,10 +85,6 @@ export default function Header({ locale }: HeaderProps) {
                   alt={t('global.header.userAvatarAlt')}
                 />
               </button>
-            ) : (
-              <Link locale={locale} href="/sign-in" className={css.loginBtn}>
-                {t('global.header.login')}
-              </Link>
             )}
           </div>
         </nav>

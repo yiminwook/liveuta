@@ -3,9 +3,13 @@ import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import FirebaseClient from '@/libraries/firebase/client';
+import { Link } from '@/libraries/i18n';
+import { useLocale } from '@/libraries/i18n/client';
 
 export default function Page() {
   const router = useRouter();
+  const locale = useLocale();
+
   const [state, setState] = useState<'loading' | 'success' | 'failed'>('loading');
 
   useEffect(() => {
@@ -23,6 +27,7 @@ export default function Page() {
         })
         .catch((error) => {
           console.error('signin failed', error);
+          setState(() => 'failed');
         });
     } else {
       setState(() => 'failed');
@@ -30,12 +35,19 @@ export default function Page() {
   }, [router]);
 
   if (state === 'loading') {
-    return <div>loading...</div>;
+    return <div>로그인 중입니다...</div>;
   }
 
   if (state === 'failed') {
-    return <div>signin failed</div>;
+    return (
+      <div>
+        <div>유효하지 않은 링크입니다.</div>
+        <Link locale={locale} href="/sign-in">
+          로그인 페이지로 이동
+        </Link>
+      </div>
+    );
   }
 
-  return <div>signin success</div>;
+  return <div>로그인에 성공했습니다. 잠시후 홈페이지로 이동합니다.</div>;
 }

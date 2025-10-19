@@ -5,12 +5,13 @@ import { WHITELIST_TAG } from '@/constants/revalidate-tag';
 
 export default function useMutateWhitelist() {
   const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (args: { channelId: string }) =>
+
+  const mutation = useMutation({
+    mutationFn: (args: { channelId: string; email: string }) =>
       clientApi.delete<{ message: string; data: string }>(`v1/whitelist/${args.channelId}`).json(),
-    onSuccess: (res) => {
-      if (queryClient.getQueryData([WHITELIST_TAG])) {
-        queryClient.setQueryData([WHITELIST_TAG], (prev: string[]) => {
+    onSuccess: (res, args) => {
+      if (queryClient.getQueryData([WHITELIST_TAG, args.email])) {
+        queryClient.setQueryData([WHITELIST_TAG, args.email], (prev: string[]) => {
           return prev.filter((id) => id !== res.data);
         });
       }
@@ -22,4 +23,6 @@ export default function useMutateWhitelist() {
       toast.error('서버에러가 발생했습니다. 잠시후 다시 시도해주세요.');
     },
   });
+
+  return mutation;
 }

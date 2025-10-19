@@ -7,11 +7,11 @@ export default function useDeleteBlacklist() {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (args: { channelId: string }) =>
+    mutationFn: (args: { channelId: string; email: string }) =>
       clientApi.delete<{ message: string; data: string }>(`v1/blacklist/${args.channelId}`).json(),
-    onSuccess: (res) => {
-      if (queryClient.getQueryData([BLACKLIST_TAG])) {
-        queryClient.setQueryData([BLACKLIST_TAG], (pre: string[]) => {
+    onSuccess: (res, args) => {
+      if (queryClient.getQueryData([BLACKLIST_TAG, args.email])) {
+        queryClient.setQueryData([BLACKLIST_TAG, args.email], (pre: string[]) => {
           return pre.filter((channelId) => channelId !== res.data);
         });
       }

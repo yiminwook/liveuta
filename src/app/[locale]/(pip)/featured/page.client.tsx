@@ -33,7 +33,9 @@ export default function Client({ featuredData }: Props) {
   const mutateDeleteFavorite = useMutateWhitelist();
 
   const handleFavorite = (content: TYChannelsData) => {
-    if (!session) {
+    const email = session.user?.email;
+
+    if (!email) {
       toast.error(t('featured.notLoggedInError'));
       return;
     }
@@ -43,22 +45,26 @@ export default function Client({ featuredData }: Props) {
     if (!isFavorite && confirm(t('featured.addFavoriteChannel'))) {
       mutatePostFavorite.mutate({
         channelId: content.uid,
+        email,
       });
     } else if (isFavorite && confirm(t('featured.removeFavoriteChannel'))) {
       mutateDeleteFavorite.mutate({
         channelId: content.uid,
+        email,
       });
     }
   };
 
   const handleBlock = (content: TYChannelsData) => {
-    if (!session) {
+    const email = session.user?.email;
+
+    if (!email) {
       toast.error(t('featured.notLoggedInError'));
       return;
     }
 
     if (confirm(t('featured.blockChannel'))) {
-      mutateBlock.mutate({ channelId: content.uid });
+      mutateBlock.mutate({ channelId: content.uid, email });
     }
   };
 

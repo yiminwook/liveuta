@@ -247,6 +247,7 @@
     "0003": "Enter Your Email Address",
     "0004": "Request Email Verification",
     "0005": "If you don't receive the email, please check your spam folder or try again.",
+    "0006": "Sent",
     "3000": "Email verification request has been sent."
   },
   "channel": {

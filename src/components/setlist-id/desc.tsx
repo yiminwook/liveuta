@@ -66,7 +66,7 @@ export default function Desc({ videoId, description }: DescProps) {
     e.preventDefault();
     const description = desc.trim();
 
-    if (!session) {
+    if (!session.user) {
       toast.warning(t('setlistId.desc.notLoggedInError'));
       return;
     }
@@ -100,7 +100,7 @@ export default function Desc({ videoId, description }: DescProps) {
             color="red"
             onClick={handleCancel}
             loading={mutateSetlist.isPending}
-            disabled={!session}
+            disabled={!session.user}
           >
             {t('setlistId.desc.cancel')}
           </Button>
@@ -109,7 +109,7 @@ export default function Desc({ videoId, description }: DescProps) {
             variant="default"
             data-variant="save"
             loading={mutateSetlist.isPending}
-            disabled={!session}
+            disabled={!session.user}
           >
             {t('setlistId.desc.save')}
           </Button>

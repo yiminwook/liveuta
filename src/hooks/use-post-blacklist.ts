@@ -7,11 +7,11 @@ export default function usePostBlacklist() {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (args: { channelId: string }) =>
+    mutationFn: (args: { channelId: string; email: string }) =>
       clientApi.post<{ message: string; data: string }>(`v1/blacklist/${args.channelId}`).json(),
-    onSuccess: (res) => {
-      if (queryClient.getQueryData([BLACKLIST_TAG])) {
-        queryClient.setQueryData([BLACKLIST_TAG], (prev: string[]) => {
+    onSuccess: (res, args) => {
+      if (queryClient.getQueryData([BLACKLIST_TAG, args.email])) {
+        queryClient.setQueryData([BLACKLIST_TAG, args.email], (prev: string[]) => {
           return [...prev, res.data];
         });
       }

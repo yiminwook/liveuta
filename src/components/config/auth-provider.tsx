@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const auth = FirebaseClient.getInstance().auth;
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log('auth state changed', user);
       useSession.getState().signIn(user);
     });
 

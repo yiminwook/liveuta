@@ -7,7 +7,7 @@ import * as validation from './validation';
 export async function GET(request: NextRequest) {
   try {
     const payload = await parseIdToken();
-    const memberId = payload?.userId || 0;
+    const memberEmail = payload?.email || '';
     const searchParams = request.nextUrl.searchParams;
     const query = validation.checkQuery(searchParams.get('query')); // DESCRIPTION query
     const start = validation.checkStart(searchParams.get('start'));
@@ -15,8 +15,14 @@ export async function GET(request: NextRequest) {
     const isFavorite = validation.checkIsFavorite(searchParams.get('isFavorite'));
 
     const data = query
-      ? await searchSetlist({ query, memberId, startRow: start, orderType, isFavorite })
-      : await getAllSetlist({ memberId, startRow: start, orderType, isFavorite });
+      ? await searchSetlist({
+          query,
+          memberEmail,
+          startRow: start,
+          orderType,
+          isFavorite,
+        })
+      : await getAllSetlist({ memberEmail, startRow: start, orderType, isFavorite });
 
     return NextResponse.json({ message: '세트리스트를 조회 하였습니다.', data });
   } catch (error) {

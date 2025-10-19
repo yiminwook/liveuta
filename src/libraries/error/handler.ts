@@ -6,7 +6,7 @@ interface TErrorHandlerReturn {
 }
 
 const errorHandler = (error: unknown): TErrorHandlerReturn => {
-  console.error(error);
+  // console.error(error);
   let unknownErr = error;
 
   if (error instanceof CustomServerError === false) {

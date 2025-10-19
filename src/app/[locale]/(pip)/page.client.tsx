@@ -62,31 +62,38 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
   const { reservePush } = useReservePush();
 
   const handleFavorite = (content: TParsedClientContent) => {
-    if (!session.user) {
+    const email = session.user?.email;
+
+    if (!email) {
       toast.error(t('home.notLoggedInError'));
       return;
     }
+
     const isFavorite = whiteListMap.has(content.channelId);
 
     if (!isFavorite && confirm(t('home.addFavoriteChannel'))) {
       mutatePostFavorite.mutate({
         channelId: content.channelId,
+        email,
       });
     } else if (isFavorite && confirm(t('home.removeFavoriteChannel'))) {
       mutateDeleteFavorite.mutate({
         channelId: content.channelId,
+        email,
       });
     }
   };
 
   const handleBlock = async (content: TParsedClientContent) => {
-    if (!session) {
+    const email = session.user?.email;
+
+    if (!email) {
       toast.error(t('home.notLoggedInError'));
       return;
     }
 
     if (confirm(t('home.blockChannel'))) {
-      mutateBlock.mutate({ channelId: content.channelId });
+      mutateBlock.mutate({ channelId: content.channelId, email });
     }
   };
 
@@ -136,7 +143,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
         </div>
       </section>
 
-      {session && !isPending && (
+      {session.user && !isPending && (
         <section className={css.favoriteSection}>
           <div className={css.favoriteNav}>
             <h2>🌟 {t('home.favorite')}</h2>

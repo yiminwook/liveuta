@@ -1,5 +1,6 @@
 'use client';
 import { Avatar, Button } from '@mantine/core';
+import { User } from 'firebase/auth';
 import useMutateWhitelist from '@/hooks/use-delete-whitelist';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
@@ -9,16 +10,17 @@ import css from './List.module.scss';
 type WhitelistProps = {
   whiteList: Set<string>;
   channelList: Record<string, TChannelDocumentWithoutId>;
+  user: User;
 };
 
-export default function Whitelist({ whiteList, channelList }: WhitelistProps) {
+export default function Whitelist({ whiteList, channelList, user }: WhitelistProps) {
   const { t } = useTranslations();
 
   const mutationDelete = useMutateWhitelist();
 
   const handleClick = (channelId: string) => {
     if (confirm(t('my.favorite.removeFavorite'))) {
-      mutationDelete.mutate({ channelId });
+      mutationDelete.mutate({ channelId, email: user.email ?? '' });
     }
   };
 

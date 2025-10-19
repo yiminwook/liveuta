@@ -1,13 +1,14 @@
 //ts-ignore
-import { SheetAPIReturntype } from '@/temps/sheet/sheet';
-import { getSheet } from '@/temps/sheet';
-import { parseAllData, parseScheduledData } from '@/temps/sheet/parseContentSheet';
-import { NextRequest, NextResponse } from 'next/server';
-import errorHandler from '@/libraries/error/handler';
-import { cookies } from 'next/headers';
+
 import { PushData } from '@api/push/route';
 import { google } from 'googleapis';
+import { cookies } from 'next/headers';
+import { NextRequest, NextResponse } from 'next/server';
+import errorHandler from '@/libraries/error/handler';
 import { jwtAuth } from '@/libraries/firebase/admin';
+import { getSheet } from '@/temps/sheet';
+import { parseAllData, parseScheduledData } from '@/temps/sheet/parseContentSheet';
+import { SheetAPIReturntype } from '@/temps/sheet/sheet';
 
 export async function GET(_req: NextRequest) {
   try {
@@ -46,7 +47,7 @@ export async function GET(_req: NextRequest) {
   } catch (error) {
     console.error(error);
     const { status, message } = errorHandler(error);
-    return NextResponse.json({ error: message }, { status });
+    return NextResponse.json({ message }, { status });
   }
 }
 

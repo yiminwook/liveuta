@@ -7,12 +7,12 @@ export default function usePostWhitelist() {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (args: { channelId: string }) =>
+    mutationFn: (args: { channelId: string; email: string }) =>
       clientApi.post<{ message: string; data: string }>(`v1/whitelist/${args.channelId}`).json(),
-    onSuccess: (res) => {
+    onSuccess: (res, args) => {
       toast.success(res.message);
-      if (queryClient.getQueryData([WHITELIST_TAG])) {
-        queryClient.setQueryData([WHITELIST_TAG], (prev: string[]) => {
+      if (queryClient.getQueryData([WHITELIST_TAG, args.email])) {
+        queryClient.setQueryData([WHITELIST_TAG, args.email], (prev: string[]) => {
           return [...prev, res.data];
         });
       }

@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getMessaging } from 'firebase-admin/messaging';
-import FirebaseAdmin from '@/libraries/firebase/admin';
 import { PushData } from '@api/push/route';
+import { getMessaging } from 'firebase-admin/messaging';
+import { NextRequest, NextResponse } from 'next/server';
 import dayjs from '@/libraries/dayjs';
 import errorHandler from '@/libraries/error/handler';
+import FirebaseAdmin from '@/libraries/firebase/admin';
 
 export const POST = async (request: NextRequest) => {
   try {
@@ -44,6 +44,6 @@ export const POST = async (request: NextRequest) => {
   } catch (error) {
     console.error(error);
     const { status, message } = errorHandler(error);
-    return NextResponse.json({ error: message }, { status });
+    return NextResponse.json({ message }, { status });
   }
 };

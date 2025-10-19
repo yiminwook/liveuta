@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, TextInput } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { clientApi } from '@/apis/fetcher';
@@ -15,6 +16,7 @@ import css from './Home.module.scss';
 export default function Home() {
   const { t } = useTranslations();
   const locale = useLocale();
+  const [isSent, setIsSent] = useState(false);
 
   const form = useForm<TSignInDto>({
     mode: 'onTouched',
@@ -30,12 +32,16 @@ export default function Home() {
     mutationFn: (args: TSignInDto) =>
       clientApi.post<{ message: string }>(`v1/sign-in`, { json: args }).json(),
     onError: (error) => toast.error(error.message),
-    onSuccess: () => toast.success(t('signIn.3000')),
+    onSuccess: () => {
+      toast.success(t('signIn.3000'));
+      setIsSent(() => true);
+    },
   });
 
   const onSubmit = (data: TSignInDto) => {
     if (mutateLogin.isPending) return;
-
+    form.reset();
+    setIsSent(() => false);
     mutateLogin.mutate(data);
   };
 
@@ -68,6 +74,7 @@ export default function Home() {
                   {...field}
                   placeholder={t('signIn.0003')}
                   error={formState.errors.email?.message}
+                  disabled={mutateLogin.isPending}
                 />
               )}
             />
@@ -75,7 +82,7 @@ export default function Home() {
 
           <div className={css.buttonBox}>
             <Button type="submit" loading={mutateLogin.isPending} form="sign-in-form">
-              {t('signIn.0004')}
+              {isSent ? t('signIn.0006') : t('signIn.0004')}
             </Button>
           </div>
 

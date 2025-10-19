@@ -85,14 +85,7 @@ export default withSession<AccountSidebarProps>(function AccountSidebar({ user }
           <div className={clsx(css.inner, 'right', { moveLeft: isShow })} onClick={stopPropagation}>
             <div className={css.logoutBtnBox}>
               <button className={css.logoutBtn} onClick={logout} disabled={mutateLogout.isPending}>
-                <Avatar
-                  // src={user.photoURL}
-                  name={user.email ?? ''}
-                  w={40}
-                  h={40}
-                  radius="xl"
-                  alt="유저 이미지"
-                />
+                <Avatar name={user.email ?? ''} w={40} h={40} radius="xl" alt="유저 이미지" />
                 로그아웃
               </button>
               <CloseButton w={40} h={40} onClick={handleClose} />

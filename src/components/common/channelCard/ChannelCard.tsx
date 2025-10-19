@@ -70,15 +70,17 @@ export default function ChannelCard({
   };
 
   const handleFavorite = () => {
-    if (!user) {
+    const email = user?.email;
+
+    if (!email) {
       toast.error(t('channel.channelCard.notLoggedInError'));
       return;
     }
 
     if (!isFavorite && confirm(t('channel.channelCard.addFavoriteChannel'))) {
-      mutatePostFavorite.mutate({ channelId: uid });
+      mutatePostFavorite.mutate({ channelId: uid, email });
     } else if (isFavorite && confirm(t('channel.channelCard.removeFavoriteChannel'))) {
-      mutateDeleteFavorite.mutate({ channelId: uid });
+      mutateDeleteFavorite.mutate({ channelId: uid, email });
     }
   };
 

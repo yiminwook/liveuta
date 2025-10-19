@@ -1,4 +1,5 @@
 import 'server-only';
+
 export const GET_ONE_MEMBER = `
   SELECT * 
   FROM MEMBER
@@ -7,14 +8,14 @@ export const GET_ONE_MEMBER = `
 `;
 
 export const POST_MEMBER = `
-  INSERT INTO MEMBER (ID, EMAIL, PROVIDER)
-  VALUES (ADMIN.MEMBER_SEQ.NEXTVAL, :email, :provider)
+  INSERT INTO MEMBER (EMAIL, PROVIDER)
+  VALUES (:email, :provider)
 `;
 
 export const UPDATE_MEMBER = `
   UPDATE MEMBER
   SET LOGIN_AT = CURRENT_TIMESTAMP, DISCONNECT = 'N'
-  WHERE EMAIL = :email AND PROVIDER = :provider
+  WHERE EMAIL = :email
 `;
 
 export const DICONNECT_ALL_MEMBER = `

@@ -12,6 +12,8 @@ export default function Home() {
   const { t } = useTranslations();
 
   const session = useSession();
+  if (!session.user) throw new Error('not provided authorized user');
+
   const { whiteListMap, channelMap, blackListMap } = useCachedData({ user: session.user });
 
   return (
@@ -22,14 +24,14 @@ export default function Home() {
             <Star size="1.2rem" color="#ffbb00" fill="#ffbb00" />
             <b>{t('my.favorite.title')}</b>
           </h2>
-          <Whitelist whiteList={whiteListMap} channelList={channelMap} />
+          <Whitelist user={session.user} whiteList={whiteListMap} channelList={channelMap} />
         </section>
         <section className={css.section}>
           <h2 className={css.sectionTitle}>
             <Ban size="1.2rem" color="#ED2939" />
             <b>{t('my.blacklist.title')}</b>
           </h2>
-          <Blacklist blacklist={blackListMap} channelList={channelMap} />
+          <Blacklist user={session.user} blacklist={blackListMap} channelList={channelMap} />
         </section>
       </div>
     </Background>

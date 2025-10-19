@@ -90,7 +90,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
                   mutateDelete.mutate({ videoId: setlist.videoId });
               }}
               loading={mutateDelete.isPending}
-              disabled={!session}
+              disabled={!session.user}
             >
               <span className={css.letterWide}>삭제</span>
             </Button>

@@ -1,16 +1,15 @@
 import 'server-only';
+import { DBError } from 'oracledb';
 import { SETLIST_PAGE_SIZE } from '@/constants';
 import dayjs from '@/libraries/dayjs';
 import CustomServerError from '@/libraries/error/customServerError';
 import { getYoutubeChannelsByUid } from '@/libraries/youtube';
-import { DBError } from 'oracledb';
 import { withOracleConnection } from '../connection';
 import * as sql from './sql';
 
 export type SetlistRow = [
   string, //videoId
   string, //description
-  number, //memberId = 편집자
   Date, // createAt
   Date, // updateAt
   string, // channelId
@@ -27,23 +26,25 @@ export type Setlist = {
   broadcastAt: string;
   title: string;
   channelId: string;
+  email: string;
 };
 
 const parseSetlistRow = (row: SetlistRow): Setlist => ({
-  channelId: row[5],
   videoId: row[0],
-  title: row[7],
   description: row[1],
-  createdAt: dayjs(row[3]).toISOString(),
-  updatedAt: dayjs(row[4]).toISOString(),
-  broadcastAt: dayjs(row[6]).toISOString(),
+  createdAt: dayjs(row[2]).toISOString(),
+  updatedAt: dayjs(row[3]).toISOString(),
+  channelId: row[4],
+  broadcastAt: dayjs(row[5]).toISOString(),
+  title: row[6],
+  email: row[7],
 });
 
 export const getSetlistByVideoId = withOracleConnection(async (connection, videoId: string) => {
   const result = await connection.execute<SetlistRow>(sql.GET_SETLIST, [videoId]);
   const row = result.rows?.[0];
   if (!row) return null;
-  const youtubeData = await getYoutubeChannelsByUid(row[5]);
+  const youtubeData = await getYoutubeChannelsByUid(row[4]);
   const parsed = parseSetlistRow(row);
 
   return {
@@ -58,13 +59,13 @@ export const getAllSetlist = withOracleConnection(
     arg: {
       startRow: number;
       /** 세션에서 가져오는 id */
-      memberId: number;
+      memberEmail: string;
       orderType: sql.SetlistOrder;
       isFavorite: boolean;
     },
   ) => {
     const maxCountSql = arg.isFavorite ? sql.GET_MAX_COUNT_WITH_WHITELIST : sql.GET_MAX_COUNT;
-    const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberId]);
+    const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberEmail]);
     const total = countResult.rows?.[0][0] || 0;
 
     if (total === 0 || arg.startRow >= total) {
@@ -75,7 +76,7 @@ export const getAllSetlist = withOracleConnection(
       ? sql.GET_ALL_SETLIST_WITH_WHITELIST(arg.orderType)
       : sql.GET_ALL_SETLIST(arg.orderType);
     const searchResult = await connection.execute<SetlistRow>(searchSql, [
-      arg.memberId,
+      arg.memberEmail,
       arg.startRow,
       SETLIST_PAGE_SIZE,
     ]);
@@ -97,14 +98,14 @@ export const searchSetlist = withOracleConnection(
     arg: {
       query: string;
       startRow: number;
-      memberId: number;
+      memberEmail: string;
       orderType: sql.SetlistOrder;
       isFavorite: boolean;
     },
   ) => {
     const pattern = arg.query.toLowerCase();
     const maxCountSql = arg.isFavorite ? sql.SEARCH_MAX_COUNT_WITH_WHITELIST : sql.SEARCH_MAX_COUNT;
-    const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberId, pattern]);
+    const countResult = await connection.execute<[number]>(maxCountSql, [arg.memberEmail, pattern]);
     const total = countResult.rows?.[0][0] || 0;
 
     if (total === 0 || arg.startRow >= total) {
@@ -116,7 +117,7 @@ export const searchSetlist = withOracleConnection(
       : sql.SEARCH_SETLIST(arg.orderType);
 
     const searchResult = await connection.execute<SetlistRow>(searchSql, [
-      arg.memberId,
+      arg.memberEmail,
       pattern,
       arg.startRow,
       SETLIST_PAGE_SIZE,
@@ -139,7 +140,7 @@ export const postSetlist = withOracleConnection(
     arg: {
       videoId: string;
       description: string;
-      memberId: number;
+      memberEmail: string;
       channelId: string;
       broadcastAt: string | null | undefined;
       title: string;
@@ -151,7 +152,7 @@ export const postSetlist = withOracleConnection(
       await connection.execute(sql.POST_SETLIST, [
         arg.videoId,
         arg.description,
-        arg.memberId,
+        arg.memberEmail,
         arg.channelId,
         nonullableBroadcastAt,
         arg.title,
@@ -177,7 +178,7 @@ export const updateSetlist = withOracleConnection(
     arg: {
       videoId: string;
       description: string;
-      memberId: number;
+      memberEmail: string;
       channelId: string;
       broadcastAt: string | null | undefined;
       title: string;
@@ -190,7 +191,7 @@ export const updateSetlist = withOracleConnection(
         arg.title,
         arg.description,
         arg.channelId,
-        arg.memberId,
+        arg.memberEmail,
         nonullableBroadcastAt,
         arg.videoId,
       ]);

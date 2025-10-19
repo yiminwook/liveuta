@@ -1,8 +1,9 @@
 // @ts-nocheck
-import errorHandler from '@/libraries/error/handler';
-import { SearchCommentItemType, SearchCommentResponseType } from '@/types/api/holodex';
+
 import axios, { AxiosResponse } from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
+import errorHandler from '@/libraries/error/handler';
+import { SearchCommentItemType, SearchCommentResponseType } from '@/types/api/holodex';
 
 const PAGINATION_LIMIT = 15;
 const SERCH_COMMENT_ENDPOINT = 'https://holodex.net/api/v2/search/commentSearch';
@@ -50,7 +51,7 @@ export const GET = async (req: NextRequest) => {
     );
   } catch (error) {
     const { status, message } = errorHandler(error);
-    return NextResponse.json({ error: message }, { status });
+    return NextResponse.json({ message }, { status });
   }
 };
 

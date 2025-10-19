@@ -33,7 +33,7 @@ export async function POST(req: NextRequest, props: { params: Promise<{ videoId:
     await postSetlist({
       videoId: params.videoId,
       description,
-      memberId: payload.userId,
+      memberEmail: payload.email!,
       channelId,
       broadcastAt,
       title,
@@ -73,7 +73,7 @@ export async function PUT(req: NextRequest, props: { params: Promise<{ videoId: 
     await updateSetlist({
       videoId: params.videoId,
       description,
-      memberId: payload.userId,
+      memberEmail: payload.email!,
       channelId,
       broadcastAt,
       title,

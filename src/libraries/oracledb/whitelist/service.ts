@@ -4,16 +4,16 @@ import { withOracleConnection } from '../connection';
 import * as sql from './sql';
 
 export type WhitelistRow = [
-  number, //memberId
   string, //channelId
+  string, //memberEmail
 ];
 
 export type Whitelist = string[];
 
 export const isWhiteList = withOracleConnection(
-  async (connection, arg: { memberId: number; channelId: string }) => {
+  async (connection, arg: { memberEmail: string; channelId: string }) => {
     const result = await connection.execute<[number]>(sql.IS_WHITELIST, [
-      arg.memberId,
+      arg.memberEmail,
       arg.channelId,
     ]);
 
@@ -23,21 +23,21 @@ export const isWhiteList = withOracleConnection(
 );
 
 export const getAllWhiteList = withOracleConnection(
-  async (connection, arg: { memberId: number }) => {
-    const result = await connection.execute<WhitelistRow>(sql.GET_ALL_WHITELIST, [arg.memberId]);
+  async (connection, arg: { memberEmail: string }) => {
+    const result = await connection.execute<WhitelistRow>(sql.GET_ALL_WHITELIST, [arg.memberEmail]);
 
-    const channelList = result.rows?.map((row) => row[1]) || [];
+    const channelList = result.rows?.map((row) => row[0]) || [];
     return channelList;
   },
 );
 
 export const postWhitelist = withOracleConnection(
-  async (connection, arg: { memberId: number; channelId: string }) => {
+  async (connection, arg: { memberEmail: string; channelId: string }) => {
     try {
       const result = await connection.execute(sql.POST_WHITELIST, [
-        arg.memberId,
+        arg.memberEmail,
         arg.channelId,
-        arg.memberId,
+        arg.memberEmail,
         arg.channelId,
       ]);
 
@@ -55,9 +55,12 @@ export const postWhitelist = withOracleConnection(
 );
 
 export const deleteWhitelist = withOracleConnection(
-  async (connection, arg: { memberId: number; channelId: string }) => {
+  async (connection, arg: { memberEmail: string; channelId: string }) => {
     try {
-      const result = await connection.execute(sql.DELETE_WHITELIST, [arg.memberId, arg.channelId]);
+      const result = await connection.execute(sql.DELETE_WHITELIST, [
+        arg.memberEmail,
+        arg.channelId,
+      ]);
       if (result.rowsAffected === 0) {
         throw new CustomServerError({ statusCode: 400, message: '취소된 채널입니다.' });
       }

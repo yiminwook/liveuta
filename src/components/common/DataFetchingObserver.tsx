@@ -26,8 +26,6 @@ export default function DataFetchingObserver({ locale }: Props) {
 
   const { error } = useUserInfo({ user });
 
-  console.log('user info error', error);
-
   useEffect(() => {
     if (!error) return;
     modalActions

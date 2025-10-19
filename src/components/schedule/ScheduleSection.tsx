@@ -57,7 +57,9 @@ export default function ScheduleSection({
   const { reservePush } = useReservePush();
 
   const handleFavorite = (content: TParsedClientContent) => {
-    if (!user) {
+    const email = user?.email;
+
+    if (!email) {
       toast.error(t('schedule.scheduleSection.notLoggedInError'));
       return;
     }
@@ -65,20 +67,22 @@ export default function ScheduleSection({
     const isFavorite = whiteListMap.has(content.channelId);
 
     if (!isFavorite && confirm(t('schedule.scheduleSection.addFavoriteChannel'))) {
-      mutatePostFavorite.mutate({ channelId: content.channelId });
+      mutatePostFavorite.mutate({ channelId: content.channelId, email });
     } else if (isFavorite && confirm(t('schedule.scheduleSection.removeFavoriteChannel'))) {
-      mutateDeleteFavorite.mutate({ channelId: content.channelId });
+      mutateDeleteFavorite.mutate({ channelId: content.channelId, email });
     }
   };
 
   const handleBlock = async (content: TParsedClientContent) => {
-    if (!user) {
+    const email = user?.email;
+
+    if (!email) {
       toast.error(t('schedule.scheduleSection.notLoggedInError'));
       return;
     }
 
     if (confirm(t('schedule.scheduleSection.blockChannel'))) {
-      mutateBlock.mutate({ channelId: content.channelId });
+      mutateBlock.mutate({ channelId: content.channelId, email });
     }
   };
 
