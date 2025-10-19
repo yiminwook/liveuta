@@ -1,15 +1,15 @@
 'use client';
-import { clientApi } from '@/apis/fetcher';
-import { MEMBER_TAG } from '@/constants/revalidate-tag';
-import { useScheduleStatus } from '@/hooks/use-schedule';
-import { useTranslations } from '@/libraries/i18n/client';
-import { TLocaleCode } from '@/libraries/i18n/type';
-import { TMemberInfo } from '@/libraries/oracledb/auth/service';
-import { useSetModalStore } from '@/stores/modal';
-import { useIsFetching, useIsMutating, useQuery } from '@tanstack/react-query';
-import { signOut, useSession } from 'next-auth/react';
+import { useIsFetching, useIsMutating } from '@tanstack/react-query';
+import { signOut } from 'firebase/auth';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
+import { useScheduleStatus } from '@/hooks/use-schedule';
+import { useUserInfo } from '@/hooks/use-user-info';
+import FirebaseClient from '@/libraries/firebase/client';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TLocaleCode } from '@/libraries/i18n/type';
+import { useSetModalStore } from '@/stores/modal';
+import { useSession } from '@/stores/session';
 import AlertModal from './modal/AlertModal';
 
 type Props = {
@@ -17,25 +17,16 @@ type Props = {
 };
 
 export default function DataFetchingObserver({ locale }: Props) {
-  const { data: session } = useSession();
+  const { user } = useSession();
   const { t } = useTranslations();
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
   const status = useScheduleStatus();
   const modalActions = useSetModalStore();
 
-  const { error } = useQuery({
-    queryKey: [MEMBER_TAG],
-    queryFn: () =>
-      clientApi
-        .get<{ data: TMemberInfo }>('v1/member', {
-          headers: { Authorization: session ? `Bearer ${session.user.accessToken}` : '' },
-        })
-        .json()
-        .then((json) => json.data),
-    enabled: !!session,
-    staleTime: 1000 * 60, // 1분
-  });
+  const { error } = useUserInfo({ user });
+
+  console.log('user info error', error);
 
   useEffect(() => {
     if (!error) return;
@@ -47,9 +38,7 @@ export default function DataFetchingObserver({ locale }: Props) {
           locale,
         },
       })
-      .then(() => {
-        signOut({ callbackUrl: '/' });
-      });
+      .then(() => signOut(FirebaseClient.getInstance().auth));
   }, [error]);
 
   useEffect(() => {

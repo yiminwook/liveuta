@@ -1,12 +1,12 @@
+import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/libraries/error/handler';
 import { getAllSetlist, searchSetlist } from '@/libraries/oracledb/setlist/service';
-import parseAccessToken from '@/utils/parse-access-token';
-import { NextRequest, NextResponse } from 'next/server';
+import parseIdToken from '@/utils/parse-id-token';
 import * as validation from './validation';
 
 export async function GET(request: NextRequest) {
   try {
-    const payload = await parseAccessToken();
+    const payload = await parseIdToken();
     const memberId = payload?.userId || 0;
     const searchParams = request.nextUrl.searchParams;
     const query = validation.checkQuery(searchParams.get('query')); // DESCRIPTION query
@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ message: '세트리스트를 조회 하였습니다.', data });
   } catch (error) {
-    console.error(error);
+    console.error('GET /api/v1/setlist', error);
     const { message, status } = errorHandler(error);
     return NextResponse.json({ message, data: null }, { status });
   }

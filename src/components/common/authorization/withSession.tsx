@@ -1,13 +1,13 @@
 'use client';
-import { Session } from 'next-auth';
-import { useSession } from 'next-auth/react';
+import { User } from 'firebase/auth';
+import { useSession } from '@/stores/session';
 
-export function withSession<P extends { session: Session }>(Component: React.ComponentType<P>) {
-  return function WithSession(props: Omit<P, 'session'>) {
+export function withSession<P extends { user: User | null }>(Component: React.ComponentType<P>) {
+  return function WithSession(props: Omit<P, 'user'>) {
     const session = useSession();
 
-    if (session.status === 'loading') return null;
-    if (session.status === 'unauthenticated') return null;
-    return <Component {...(props as P)} session={session.data!} />;
+    if (session.isLoading) return null;
+    if (!session.user) return null;
+    return <Component {...(props as P)} user={session.user} />;
   };
 }

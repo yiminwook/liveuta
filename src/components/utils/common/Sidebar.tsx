@@ -1,7 +1,7 @@
+import { Anchor, ScrollArea } from '@mantine/core';
 import For from '@/components/common/utils/For';
 import { Link } from '@/libraries/i18n';
 import { useLocale } from '@/libraries/i18n/client';
-import { Anchor, ScrollArea } from '@mantine/core';
 import { useUtilsLinksContext } from './Links';
 import css from './Sidebar.module.scss';
 

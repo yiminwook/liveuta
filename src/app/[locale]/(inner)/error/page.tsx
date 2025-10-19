@@ -14,7 +14,7 @@ export default async function Page(props: Props) {
 
   return (
     <div>
-      <Link locale={locale} href={'/logout'}>
+      <Link locale={locale} href={'/sign-out'}>
         {t('error.errorPage.link')}
       </Link>
     </div>

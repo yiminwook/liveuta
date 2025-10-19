@@ -1,26 +1,25 @@
 'use client';
-import { revalidateApi } from '@/apis/fetcher';
-import { CHANNELS_TAG, FEATURED_TAG, METADATAS_TAG } from '@/constants/revalidate-tag';
 import { Box, Button, Divider, Text } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
-import { useSession } from 'next-auth/react';
 import React from 'react';
 import { toast } from 'sonner';
+import { revalidateApi } from '@/apis/fetcher';
+import { CHANNELS_TAG, FEATURED_TAG, METADATAS_TAG } from '@/constants/revalidate-tag';
 
 type Props = {};
 
 export default function Client({}: Props) {
-  const session = useSession().data!;
-
   const mutation = useMutation({
-    mutationFn: (tag: string) =>
-      revalidateApi.get<{ revalidated: boolean; now: number; kind: string }>(`?tag=${tag}`).json(),
+    mutationFn: (args: { tag: string }) =>
+      revalidateApi
+        .get<{ revalidated: boolean; now: number; kind: string }>(`?tag=${args.tag}`)
+        .json(),
     onSuccess: () => toast.success('캐시 초기화 완료'),
   });
 
   const onClick = (tag: string) => (e: React.MouseEvent) => {
     if (mutation.isPending) return;
-    mutation.mutate(tag);
+    mutation.mutate({ tag });
   };
 
   return (

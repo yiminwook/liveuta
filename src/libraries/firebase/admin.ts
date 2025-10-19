@@ -1,6 +1,7 @@
 import 'server-only';
 import * as admin from 'firebase-admin';
 import { getAuth } from 'firebase-admin/auth';
+import { getMessaging } from 'firebase-admin/messaging';
 import { google } from 'googleapis';
 
 const MESSAGING_SCOPE = 'https://www.googleapis.com/auth/firebase.messaging';
@@ -46,6 +47,8 @@ export default class FirebaseAdmin {
       FirebaseAdmin.instance.bootstrap();
     }
 
+    // 싱글톤 패턴
+    // FirebaseAdmin의 인스턴스를 하나만 만들어서 사용한다.
     return FirebaseAdmin.instance;
   }
 
@@ -73,6 +76,15 @@ export default class FirebaseAdmin {
     if (this.init === false) {
       this.bootstrap();
     }
+
     return getAuth();
+  }
+
+  public get messaging() {
+    if (this.init === false) {
+      this.bootstrap();
+    }
+
+    return getMessaging();
   }
 }

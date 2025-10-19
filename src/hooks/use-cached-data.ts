@@ -1,16 +1,16 @@
 'use client';
-import { clientApi } from '@/apis/fetcher';
-import { BLACKLIST_TAG, CHANNELS_TAG, WHITELIST_TAG } from '@/constants/revalidate-tag';
 import { TGetChannelRes } from '@api/v1/channel/route';
 import { useQueries } from '@tanstack/react-query';
-import { Session } from 'next-auth';
+import { User } from 'firebase/auth';
 import { useMemo } from 'react';
+import { clientApi } from '@/apis/fetcher';
+import { BLACKLIST_TAG, CHANNELS_TAG, WHITELIST_TAG } from '@/constants/revalidate-tag';
 
 type LayoutDataObserverProps = {
-  session: Session | null;
+  user: User | null;
 };
 
-const useCachedData = ({ session }: LayoutDataObserverProps) => {
+const useCachedData = (args: LayoutDataObserverProps) => {
   const [channelList, blacklist, whitelist] = useQueries({
     queries: [
       {
@@ -23,27 +23,23 @@ const useCachedData = ({ session }: LayoutDataObserverProps) => {
         gcTime: Infinity,
       },
       {
-        queryKey: [BLACKLIST_TAG],
+        queryKey: [BLACKLIST_TAG, args.user?.email],
         queryFn: () =>
           clientApi
-            .get<{ message: string; data: string[] }>('v1/blacklist', {
-              headers: { Authorization: session ? `Bearer ${session.user.accessToken}` : '' },
-            })
+            .get<{ message: string; data: string[] }>('v1/blacklist')
             .json()
             .then((json) => json.data),
-        enabled: !!session,
+        enabled: !!args.user,
         gcTime: Infinity,
       },
       {
-        queryKey: [WHITELIST_TAG],
+        queryKey: [WHITELIST_TAG, args.user?.email],
         queryFn: () =>
           clientApi
-            .get<{ message: string; data: string[] }>('v1/whitelist', {
-              headers: { Authorization: session ? `Bearer ${session.user.accessToken}` : '' },
-            })
+            .get<{ message: string; data: string[] }>('v1/whitelist')
             .json()
             .then((json) => json.data),
-        enabled: !!session,
+        enabled: !!args.user,
         gcTime: Infinity,
       },
     ],

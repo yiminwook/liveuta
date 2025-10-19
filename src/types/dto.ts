@@ -25,8 +25,16 @@ export const scheduleDto = z.object({
     .transform((v) => v === 'true'),
 });
 
-export type TUpdateMetadataDto = z.infer<typeof UpdateMetadataDto>;
-export const UpdateMetadataDto = z.object({
+export type TUpdateMetadataDto = z.infer<typeof updateMetadataDto>;
+export const updateMetadataDto = z.object({
   key: z.string(),
   value: z.string(),
 });
+
+export const signInDto = z.object({
+  email: z.email({ error: '이메일 형식이 올바르지 않습니다.' }),
+  callbackUrl: z.optional(z.string()),
+  locale: z.string(),
+});
+
+export type TSignInDto = z.infer<typeof signInDto>;

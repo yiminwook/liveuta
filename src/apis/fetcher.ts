@@ -1,4 +1,5 @@
 import ky from 'ky';
+import FirebaseClient from '@/libraries/firebase/client';
 
 export const serverApi = ky.create({
   fetch: fetch, // next/fetch
@@ -31,7 +32,15 @@ export const serverApi = ky.create({
 export const clientApi = ky.create({
   prefixUrl: process.env.NEXT_PUBLIC_SITE_URL + '/api',
   hooks: {
-    beforeRequest: [(request) => {}],
+    beforeRequest: [
+      async (request) => {
+        const idToken = await FirebaseClient.getInstance().auth.currentUser?.getIdToken();
+
+        if (idToken) {
+          request.headers.set('Authorization', `Bearer ${idToken}`);
+        }
+      },
+    ],
     beforeRetry: [],
     afterResponse: [],
     beforeError: [

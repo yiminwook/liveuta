@@ -1,3 +1,5 @@
+import { Anchor } from '@mantine/core';
+import { User } from 'firebase/auth';
 import {
   Drawer,
   DrawerContent,
@@ -7,16 +9,14 @@ import {
   DrawerTrigger,
 } from '@/components/common/Vaul';
 import { useTranslations } from '@/libraries/i18n/client';
-import { Anchor } from '@mantine/core';
-import { Session } from 'next-auth';
 import css from './PostDrawer.module.scss';
 import PostForm from './PostForm';
 
 type PostDrawerProps = {
-  session: Session | null;
+  user: User | null;
 };
 
-export default function PostDrawer({ session }: PostDrawerProps) {
+export default function PostDrawer({ user }: PostDrawerProps) {
   const { t } = useTranslations();
 
   return (
@@ -31,7 +31,7 @@ export default function PostDrawer({ session }: PostDrawerProps) {
             </Anchor>
           </DrawerDescription>
         </DrawerHeader>
-        <PostForm session={session} />
+        <PostForm user={user} />
       </DrawerContent>
     </Drawer>
   );

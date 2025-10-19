@@ -1,35 +1,41 @@
 'use client';
-import { withSession } from '@/components/common/authorization/withSession';
-import useStopPropagation from '@/hooks/use-stop-propagation';
-import { useLocale, usePathname } from '@/libraries/i18n/client';
-import { useApp } from '@/stores/app';
 import { Avatar, CloseButton, RemoveScroll } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
-import { Session } from 'next-auth';
-import { signOut } from 'next-auth/react';
+import { signOut, User } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 import { toast } from 'sonner';
+import { withSession } from '@/components/common/authorization/withSession';
+import useStopPropagation from '@/hooks/use-stop-propagation';
+import { useUserInfo } from '@/hooks/use-user-info';
+import FirebaseClient from '@/libraries/firebase/client';
+import { useLocale, usePathname } from '@/libraries/i18n/client';
+import { useApp } from '@/stores/app';
 import NavItem from './NavItem';
 import css from './Sidebar.module.scss';
 
 interface AccountSidebarProps {
-  session: Session;
+  user: User;
 }
 
-export default withSession<AccountSidebarProps>(function AccountSidebar({ session }) {
+export default withSession<AccountSidebarProps>(function AccountSidebar({ user }) {
   const pathname = usePathname();
+  const router = useRouter();
   const locale = useLocale();
+
   const isShow = useApp((state) => state.isShowAcctSidebar);
   const setIsShow = useApp((state) => state.actions.setIsShowAcctSidebar);
 
+  const userInfo = useUserInfo({ user });
   const { enableScope, disableScope } = useHotkeysContext();
   const { stopPropagation } = useStopPropagation();
 
   const mutateLogout = useMutation({
-    mutationFn: () => signOut({ callbackUrl: '/' }),
+    mutationFn: () => signOut(FirebaseClient.getInstance().auth),
     onError: (error) => toast.error(error.message),
+    onSettled: () => router.replace('/'),
   });
 
   const handleClose = useCallback(() => setIsShow(false), [setIsShow]);
@@ -80,12 +86,12 @@ export default withSession<AccountSidebarProps>(function AccountSidebar({ sessio
             <div className={css.logoutBtnBox}>
               <button className={css.logoutBtn} onClick={logout} disabled={mutateLogout.isPending}>
                 <Avatar
-                  src={session.user.image}
+                  // src={user.photoURL}
+                  name={user.email ?? ''}
                   w={40}
                   h={40}
                   radius="xl"
                   alt="유저 이미지"
-                  name={session.user.email}
                 />
                 로그아웃
               </button>
@@ -94,7 +100,7 @@ export default withSession<AccountSidebarProps>(function AccountSidebar({ sessio
 
             <nav className={css.nav}>
               <NavItem direction="ltr" label="마이페이지" href={`/${locale}/my`} />
-              {session.user.userLv >= 3 && (
+              {userInfo.data?.userLv && userInfo.data.userLv >= 3 && (
                 <NavItem direction="ltr" label="관리자페이지" href="/admin" />
               )}
             </nav>

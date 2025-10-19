@@ -1,7 +1,7 @@
 'use client';
+import { User } from 'firebase/auth';
 import { Star } from 'lucide-react';
 import Image from 'next/image';
-import { Session } from 'next-auth';
 import { MouseEvent } from 'react';
 import { isDesktop } from 'react-device-detect';
 import { toast } from 'sonner';
@@ -18,14 +18,14 @@ import css from './ChannelCard.module.scss';
 
 type ChannelItemProps = {
   content: TYChannelsData;
-  session: Session | null;
+  user: User | null;
   isFavorite: boolean;
   selecteChannel: (content: TYChannelsData) => void;
 };
 
 export default function ChannelCard({
   content,
-  session,
+  user,
   isFavorite,
   selecteChannel,
 }: ChannelItemProps) {
@@ -70,21 +70,15 @@ export default function ChannelCard({
   };
 
   const handleFavorite = () => {
-    if (!session) {
+    if (!user) {
       toast.error(t('channel.channelCard.notLoggedInError'));
       return;
     }
 
     if (!isFavorite && confirm(t('channel.channelCard.addFavoriteChannel'))) {
-      mutatePostFavorite.mutate({
-        session,
-        channelId: uid,
-      });
+      mutatePostFavorite.mutate({ channelId: uid });
     } else if (isFavorite && confirm(t('channel.channelCard.removeFavoriteChannel'))) {
-      mutateDeleteFavorite.mutate({
-        session,
-        channelId: uid,
-      });
+      mutateDeleteFavorite.mutate({ channelId: uid });
     }
   };
 

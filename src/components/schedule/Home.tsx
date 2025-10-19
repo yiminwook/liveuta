@@ -1,11 +1,11 @@
 'use client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import { useEffect, useMemo } from 'react';
 import Cookies from 'universal-cookie';
 import useCachedData from '@/hooks/use-cached-data';
 import { useScheduleQuery } from '@/hooks/use-schedule';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { useSession } from '@/stores/session';
 import { TScheduleDto } from '@/types/dto';
 import { addEscapeCharacter } from '@/utils/regexp';
 import { useCmdActions } from '../common/command/Context';
@@ -25,8 +25,8 @@ export default function Home({ scheduleDto }: HomeProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const { data: session } = useSession();
-  const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
+  const session = useSession();
+  const { whiteListMap, channelMap, blackListMap } = useCachedData({ user: session.user });
   const { data, isPending } = useScheduleQuery({
     filter: scheduleDto.filter,
     enableAutoSync: true,
@@ -98,7 +98,7 @@ export default function Home({ scheduleDto }: HomeProps) {
 
   useEffect(() => {
     if (scheduleDto.isFavorite && !session) {
-      router.replace(`/${locale}/login`);
+      router.replace(`/${locale}/sign-in`);
     }
 
     const setFilter = (value: string) => {
@@ -179,7 +179,7 @@ export default function Home({ scheduleDto }: HomeProps) {
       <div className={css.position}>
         <div className={css.inner}>
           <ScheduleNav
-            session={session}
+            user={session.user}
             scheduleDto={scheduleDto}
             length={proceedScheduleData.length}
           />
@@ -188,7 +188,7 @@ export default function Home({ scheduleDto }: HomeProps) {
       {/* live player */}
       <TopSection filter={scheduleDto.filter} locale={locale} />
       <ScheduleSection
-        session={session}
+        user={session.user}
         scheduleDto={scheduleDto}
         channelMap={channelMap}
         contents={proceedScheduleData.content}

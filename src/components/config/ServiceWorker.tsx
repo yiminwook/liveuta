@@ -1,8 +1,8 @@
 'use client';
-import FirebaseClient from '@/libraries/firebase/client';
-import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
 import { onMessage } from 'firebase/messaging';
 import { useEffect } from 'react';
+import FirebaseClient from '@/libraries/firebase/client';
+import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
 
 export default function ServiceWorker() {
   const handleMessage = async () => {
@@ -14,6 +14,7 @@ export default function ServiceWorker() {
       }
 
       const messaging = FirebaseClient.getInstance().message;
+
       onMessage(messaging, ({ data }) => {
         if (data === undefined) return;
 

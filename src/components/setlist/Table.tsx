@@ -1,19 +1,19 @@
 'use client';
+import { useRouter } from '@bprogress/next';
+import { Pagination, Table } from '@mantine/core';
+import { useQuery } from '@tanstack/react-query';
+import clsx from 'clsx';
+import { User } from 'firebase/auth';
 import { clientApi } from '@/apis/fetcher';
-import Nodata from '@/components/common/Nodata';
 import loadingCss from '@/components/common/loading/Loading.module.scss';
 import Wave from '@/components/common/loading/Wave';
+import Nodata from '@/components/common/Nodata';
 import { SETLIST_PAGE_SIZE } from '@/constants';
 import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import useCachedData from '@/hooks/use-cached-data';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import type { Setlist } from '@/libraries/oracledb/setlist/service';
 import type { GetSetlistRes } from '@/types/api/setlist';
-import { useRouter } from '@bprogress/next';
-import { Pagination, Table } from '@mantine/core';
-import { useQuery } from '@tanstack/react-query';
-import clsx from 'clsx';
-import type { Session } from 'next-auth';
 import SetlistDrawer from './Drawer';
 import { DrawerProvider } from './DrawerContext';
 import Row from './Row';
@@ -25,7 +25,7 @@ type TableProps = {
     page: number;
     sort: 'broadcast' | 'create';
   };
-  session: Session | null;
+  user: User | null;
 };
 
 type DataType = {
@@ -33,14 +33,14 @@ type DataType = {
   totalPage: number;
 };
 
-export default function SetlistTable({ session, searchParams }: TableProps) {
+export default function SetlistTable({ user, searchParams }: TableProps) {
   const router = useRouter();
   const locale = useLocale();
   const { t } = useTranslations();
-  const { channelMap } = useCachedData({ session });
+  const { channelMap } = useCachedData({ user });
 
   const { data, isLoading } = useQuery({
-    queryKey: [SETLISTS_TAG, searchParams],
+    queryKey: [SETLISTS_TAG, user?.email, searchParams],
     queryFn: async () => {
       const query = new URLSearchParams();
       query.set('query', searchParams.query);
@@ -48,13 +48,7 @@ export default function SetlistTable({ session, searchParams }: TableProps) {
       query.set('sort', searchParams.sort);
       query.set('isFavorite', 'false');
 
-      const json = await clientApi
-        .get<GetSetlistRes>(`v1/setlist?${query.toString()}`, {
-          headers: {
-            Authorization: session ? `Bearer ${session.user.accessToken}` : '',
-          },
-        })
-        .json();
+      const json = await clientApi.get<GetSetlistRes>(`v1/setlist?${query.toString()}`).json();
 
       const returnValue: DataType = {
         list: json.data.list,

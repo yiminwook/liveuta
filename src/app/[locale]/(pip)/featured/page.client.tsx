@@ -1,4 +1,10 @@
 'use client';
+import { Button, ButtonGroup } from '@mantine/core';
+import clsx from 'clsx';
+import { useMemo } from 'react';
+import { toast } from 'sonner';
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import RankingTable from '@/components/featured/RankingTable';
 import useCachedData from '@/hooks/use-cached-data';
 import useMutateWhitelist from '@/hooks/use-delete-whitelist';
@@ -8,15 +14,9 @@ import usePostWhitelist from '@/hooks/use-post-whitelist';
 import dayjs from '@/libraries/dayjs';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TFeaturedDataAPIReturn } from '@/libraries/mongodb/type';
+import { useSession } from '@/stores/session';
 import { TYChannelsData } from '@/types/api/youtube';
 import { combineYTData } from '@/utils/combineChannelData-v2';
-import { Button, ButtonGroup } from '@mantine/core';
-import clsx from 'clsx';
-import { useSession } from 'next-auth/react';
-import { useMemo } from 'react';
-import { toast } from 'sonner';
-import { Navigation, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import css from './page.module.scss';
 
 type Props = {
@@ -25,8 +25,9 @@ type Props = {
 
 export default function Client({ featuredData }: Props) {
   const { t } = useTranslations();
-  const { data: session } = useSession();
-  const { channelMap, whiteListMap } = useCachedData({ session });
+
+  const session = useSession();
+  const { channelMap, whiteListMap } = useCachedData({ user: session.user });
   const mutateBlock = usePostBlacklist();
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
@@ -41,12 +42,10 @@ export default function Client({ featuredData }: Props) {
 
     if (!isFavorite && confirm(t('featured.addFavoriteChannel'))) {
       mutatePostFavorite.mutate({
-        session,
         channelId: content.uid,
       });
     } else if (isFavorite && confirm(t('featured.removeFavoriteChannel'))) {
       mutateDeleteFavorite.mutate({
-        session,
         channelId: content.uid,
       });
     }
@@ -59,10 +58,7 @@ export default function Client({ featuredData }: Props) {
     }
 
     if (confirm(t('featured.blockChannel'))) {
-      mutateBlock.mutate({
-        session,
-        channelId: content.uid,
-      });
+      mutateBlock.mutate({ channelId: content.uid });
     }
   };
 

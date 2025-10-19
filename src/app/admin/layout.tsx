@@ -10,7 +10,7 @@ type AdminLayoutProps = {
 export default async function Layout({ children }: AdminLayoutProps) {
   return (
     <Document locale="ko">
-      <Authorized signInUrl={`/ko/login`}>
+      <Authorized signInUrl={`/ko/sign-in`}>
         <Administrator fallback={null}>
           <Client>{children}</Client>
         </Administrator>

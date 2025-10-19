@@ -1,9 +1,9 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 import BadReqError from '@/libraries/error/badRequestError';
 import errorHandler from '@/libraries/error/handler';
 import { channelDto, getAllChannel } from '@/libraries/mongodb/channels';
 import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
-import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
 
 export type TGetChannelRes = {
   message: string;

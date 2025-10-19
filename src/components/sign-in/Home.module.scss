@@ -23,30 +23,25 @@
         object-fit: contain;
       }
     }
+  }
+}
 
-    p {
-      font-size: 1.5rem;
-      text-align: center;
-      line-height: 1.5rem;
-      font-weight: 500;
-    }
+.buttonBox {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-block-start: 1rem;
+  color: #000;
+}
 
-    .buttonBox {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-block-start: 1rem;
-      color: #000;
+.messageBox {
+  margin-top: 2rem;
 
-      .socialLoginButton {
-        color: #000;
-        box-shadow: var.$box-shadow;
-
-        svg {
-          width: 1.5rem;
-          height: 1.5rem;
-        }
-      }
-    }
+  p {
+    font-size: 0.85rem;
+    text-align: center;
+    line-height: 1.2rem;
+    font-weight: 500;
+    word-break: keep-all;
   }
 }

@@ -1,4 +1,13 @@
 'use client';
+import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
+import { Anchor, Button, Input, Skeleton, Textarea } from '@mantine/core';
+import { useQueryClient } from '@tanstack/react-query';
+import { Send } from 'lucide-react';
+import { Suspense, useCallback, useState } from 'react';
+import { Controller, useFieldArray, useForm } from 'react-hook-form';
+import parse from 'react-html-parser';
+import { toast } from 'sonner';
+import { z } from 'zod';
 import For from '@/components/common/utils/For';
 import Show from '@/components/common/utils/Show';
 import { CHANNEL_COUNT_TAG, WAITING_TAG } from '@/constants/revalidate-tag';
@@ -9,15 +18,6 @@ import {
 } from '@/hooks/use-channel-request';
 import { useTranslations } from '@/libraries/i18n/client';
 import { testYoutubeChannelOrVideo } from '@/utils/regexp';
-import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
-import { Anchor, Button, Input, Skeleton, Textarea } from '@mantine/core';
-import { useQueryClient } from '@tanstack/react-query';
-import { Send } from 'lucide-react';
-import { Suspense, useCallback, useState } from 'react';
-import { Controller, useFieldArray, useForm } from 'react-hook-form';
-import parse from 'react-html-parser';
-import { toast } from 'sonner';
-import { z } from 'zod';
 import css from './request-form.module.scss';
 
 const formDto = z.object({
@@ -68,41 +68,44 @@ export default function RequestForm() {
         .filter((u) => u.length > 0)
         .filter(testYoutubeChannelOrVideo);
 
-      validateMutation.mutate(urls, {
-        onSuccess: (data) => {
-          const results = data.filter((item) => item.error === null);
+      validateMutation.mutate(
+        { urls },
+        {
+          onSuccess: (data) => {
+            const results = data.filter((item) => item.error === null);
 
-          if (results.length === 0) {
-            toast.error(t('request.requestForm.invalidUrlError'));
-          } else {
-            form.setValue('channels', [
-              ...fields,
-              ...results
-                .filter((item) => item.existingName === '')
-                .map((item) => ({
-                  url: item.url,
-                  nameKor: '',
-                  channelId: item.channelId,
-                  channelTitle: item.channelTitle || 'UN_KNOWN',
-                  handle: item.handle,
-                })),
-            ]);
+            if (results.length === 0) {
+              toast.error(t('request.requestForm.invalidUrlError'));
+            } else {
+              form.setValue('channels', [
+                ...fields,
+                ...results
+                  .filter((item) => item.existingName === '')
+                  .map((item) => ({
+                    url: item.url,
+                    nameKor: '',
+                    channelId: item.channelId,
+                    channelTitle: item.channelTitle || 'UN_KNOWN',
+                    handle: item.handle,
+                  })),
+              ]);
 
-            setAlreadyRegistered(() =>
-              results
-                .filter((item) => item.existingName !== '')
-                .map((item) => ({
-                  url: item.url,
-                  nameKor: item.existingName,
-                  channelId: item.channelId,
-                  channelTitle: item.channelTitle,
-                  handle: item.handle,
-                })),
-            );
-          }
+              setAlreadyRegistered(() =>
+                results
+                  .filter((item) => item.existingName !== '')
+                  .map((item) => ({
+                    url: item.url,
+                    nameKor: item.existingName,
+                    channelId: item.channelId,
+                    channelTitle: item.channelTitle,
+                    handle: item.handle,
+                  })),
+              );
+            }
+          },
+          onError: (error) => toast.error(error.message),
         },
-        onError: (error) => toast.error(error.message),
-      });
+      );
     },
     [urlList],
   );
@@ -110,19 +113,22 @@ export default function RequestForm() {
   const onSubmit = (data: TForm) => {
     if (submitMutation.isPending) return;
 
-    submitMutation.mutate(data.channels, {
-      onSuccess: async () => {
-        await Promise.all([
-          queryClient.invalidateQueries({ queryKey: [WAITING_TAG] }),
-          queryClient.invalidateQueries({ queryKey: [CHANNEL_COUNT_TAG] }),
-        ]);
+    submitMutation.mutate(
+      { channels: data.channels },
+      {
+        onSuccess: async () => {
+          await Promise.all([
+            queryClient.invalidateQueries({ queryKey: [WAITING_TAG] }),
+            queryClient.invalidateQueries({ queryKey: [CHANNEL_COUNT_TAG] }),
+          ]);
 
-        form.setValue('channels', []);
-        setAlreadyRegistered(() => []);
-        toast.success(t('request.requestForm.submitSuccess'));
+          form.setValue('channels', []);
+          setAlreadyRegistered(() => []);
+          toast.success(t('request.requestForm.submitSuccess'));
+        },
+        onError: (error) => toast.error(error.message),
       },
-      onError: (error) => toast.error(error.message),
-    });
+    );
   };
 
   const onChangeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

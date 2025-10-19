@@ -1,6 +1,6 @@
 'use client';
-import FirebaseClient from './client';
 import { getToken } from 'firebase/messaging';
+import FirebaseClient from './client';
 
 export const generateFcmToken = async () => {
   const permission = await Notification.requestPermission();

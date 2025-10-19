@@ -1,15 +1,12 @@
 'use client';
+import { Divider } from '@mantine/core';
 import CurrentMetadata from '@/components/admin-metadata/current-metadata';
 import Form from '@/components/admin-metadata/form';
-import { Divider } from '@mantine/core';
-import { useSession } from 'next-auth/react';
 import css from './page.module.scss';
 
 type Props = {};
 
 export default function Client() {
-  const session = useSession().data!;
-
   return (
     <div>
       <h2>메타데이터</h2>
@@ -26,7 +23,7 @@ export default function Client() {
       </section>
 
       <section className={css.section}>
-        <Form session={session} />
+        <Form />
       </section>
     </div>
   );

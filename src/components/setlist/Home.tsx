@@ -1,7 +1,7 @@
 'use client';
 import Background from '@/components/common/background/Background';
 import { useTranslations } from '@/libraries/i18n/client';
-import { useSession } from 'next-auth/react';
+import { useSession } from '@/stores/session';
 import css from './Home.module.scss';
 import Nav from './Nav';
 import Table from './Table';
@@ -15,7 +15,7 @@ interface HomeProps {
 }
 
 export default function Home({ searchParams }: HomeProps) {
-  const { data: session } = useSession();
+  const session = useSession();
   const { t } = useTranslations();
 
   const parseSearchParams = {
@@ -28,8 +28,8 @@ export default function Home({ searchParams }: HomeProps) {
     <Background>
       <div className={css.inner}>
         <h1 className="blind">{t('setlist.title')}</h1>
-        <Nav searchParams={parseSearchParams} session={session} />
-        <Table session={session} searchParams={parseSearchParams} />
+        <Nav searchParams={parseSearchParams} user={session.user} />
+        <Table user={session.user} searchParams={parseSearchParams} />
       </div>
     </Background>
   );

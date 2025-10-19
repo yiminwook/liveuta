@@ -1,10 +1,8 @@
-'use client';
-
-import { FirebaseApp, getApps, initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
+import { FirebaseApp, getApps, initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 import { getMessaging } from 'firebase/messaging';
 import firebaseConfig from './firebaseClient.json';
-import { getAuth } from 'firebase/auth';
 
 export default class FirebaseClient {
   private static instance: FirebaseClient;
@@ -13,6 +11,7 @@ export default class FirebaseClient {
   public static getInstance(): FirebaseClient {
     if (FirebaseClient.instance === undefined || FirebaseClient.instance === null) {
       FirebaseClient.instance = new FirebaseClient();
+      console.log('create new instance');
       FirebaseClient.instance.init();
     }
     // 싱글톤 패턴
@@ -21,9 +20,10 @@ export default class FirebaseClient {
   }
 
   private init() {
+    console.log('apps', getApps());
+
     if (getApps().length === 0) {
-      const app = initializeApp(firebaseConfig);
-      this.app = app;
+      this.app = initializeApp(firebaseConfig);
       console.log('Firebase Client initialized!!');
     }
   }

@@ -7,11 +7,11 @@ import CommandMenu from '../common/command/CommandMenu';
 import { CmdProvider } from '../common/command/Context';
 import AppProvider from './AppProvider';
 import AsyncModalContainer from './async-modal-container';
+import { AuthProvider } from './auth-provider';
 import BProgressProviders from './BProgress';
 import Devtools from './Devtools';
 import Hotkeys from './Hotkeys';
 import MantineProvider from './MantineProvider';
-import NextAuth from './NextAuth';
 import Particle from './Particle';
 import PortalModalContainer from './portal-modal-container';
 import ReactQuery from './ReactQuery';
@@ -35,7 +35,7 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
   ]);
 
   return (
-    <NextAuth>
+    <AuthProvider>
       <AppProvider
         initState={{
           defaultVideoId: metadata.default_video_id,
@@ -60,6 +60,6 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
           </BProgressProviders>
         </ReactQuery>
       </AppProvider>
-    </NextAuth>
+    </AuthProvider>
   );
 }

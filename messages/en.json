@@ -233,18 +233,21 @@
     "featuredDescription": "Find popular VTubers"
   },
   "auth": {
-    "login": {
-      "title": "Login",
-      "loginPage": "Login Page",
-      "imageAlt": "Login Image",
-      "startWithSocial": "Start with Social Account"
-    },
     "logout": {
       "title": "Logout"
     },
     "register": {
       "title": "Register"
     }
+  },
+  "signIn": {
+    "0000": "Sign In",
+    "0001": "Sign In Page",
+    "0002": "Welcome to LiveUta",
+    "0003": "Enter Your Email Address",
+    "0004": "Request Email Verification",
+    "0005": "If you don't receive the email, please check your spam folder or try again.",
+    "3000": "Email verification request has been sent."
   },
   "channel": {
     "title": "Channel",

@@ -1,9 +1,9 @@
 'use client';
-import { Link } from '@/libraries/i18n';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { useRouter } from '@bprogress/next';
 import { Button, SegmentedControl } from '@mantine/core';
-import { Session } from 'next-auth';
+import { User } from 'firebase/auth';
+import { Link } from '@/libraries/i18n';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import css from './Nav.module.scss';
 import PostDrawer from './PostDrawer';
 import SearchForm from './SearchForm';
@@ -16,10 +16,10 @@ type SearchFormProps = {
     page: number;
     sort: 'broadcast' | 'create';
   };
-  session: Session | null;
+  user: User | null;
 };
 
-export default function Nav({ searchParams, session }: SearchFormProps) {
+export default function Nav({ searchParams, user }: SearchFormProps) {
   const router = useRouter();
   const locale = useLocale();
   const { t } = useTranslations();
@@ -44,7 +44,7 @@ export default function Nav({ searchParams, session }: SearchFormProps) {
           ]}
         />
         <div className={css.setlist}>
-          <PostDrawer session={session} />
+          <PostDrawer user={user} />
           <Button
             className={css.createLink}
             variant="gradient"

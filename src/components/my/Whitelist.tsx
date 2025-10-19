@@ -1,26 +1,24 @@
 'use client';
+import { Avatar, Button } from '@mantine/core';
 import useMutateWhitelist from '@/hooks/use-delete-whitelist';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
 import { generateChanneImagelUrl } from '@/libraries/youtube/url';
-import { Avatar, Button } from '@mantine/core';
-import { Session } from 'next-auth';
 import css from './List.module.scss';
 
 type WhitelistProps = {
-  session: Session;
   whiteList: Set<string>;
   channelList: Record<string, TChannelDocumentWithoutId>;
 };
 
-export default function Whitelist({ session, whiteList, channelList }: WhitelistProps) {
+export default function Whitelist({ whiteList, channelList }: WhitelistProps) {
   const { t } = useTranslations();
 
   const mutationDelete = useMutateWhitelist();
 
   const handleClick = (channelId: string) => {
     if (confirm(t('my.favorite.removeFavorite'))) {
-      mutationDelete.mutate({ session, channelId });
+      mutationDelete.mutate({ channelId });
     }
   };
 

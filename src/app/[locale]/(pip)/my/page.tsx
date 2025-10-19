@@ -12,7 +12,7 @@ export default async function Page(props: Props) {
   const locale = params.locale;
 
   return (
-    <Authorized signInUrl={`/${locale}/login`}>
+    <Authorized signInUrl={`/${locale}/sign-in`}>
       <Home />
     </Authorized>
   );

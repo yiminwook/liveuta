@@ -1,7 +1,8 @@
 'use client';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { useUserInfo } from '@/hooks/use-user-info';
+import { useSession } from '@/stores/session';
 
 type Props = {
   fallback?: React.ReactNode;
@@ -9,9 +10,10 @@ type Props = {
 };
 
 export function Administrator({ children, fallback }: Props) {
-  const session = useSession();
   const router = useRouter();
-  const userLv = session.data?.user.userLv;
+
+  const session = useSession();
+  const userInfo = useUserInfo({ user: session.user });
 
   // userLv
   // 1 - Memember
@@ -20,13 +22,13 @@ export function Administrator({ children, fallback }: Props) {
   // 4 - Collaborator
   // 5 - Maintenance
   useEffect(() => {
-    if (userLv && userLv < 3) {
+    if (userInfo.data?.userLv && userInfo.data?.userLv < 3) {
       router.replace('/ko/not-found');
     }
-  }, [userLv]);
+  }, [userInfo.data?.userLv]);
 
-  if (session.status === 'loading') return <>{fallback}</>;
-  if (session.status === 'unauthenticated') return null;
-  if (userLv && userLv < 3) return null;
+  if (session.isLoading || userInfo.isPending) return <>{fallback}</>;
+  if (!session.user) return null;
+  if (userInfo.data?.userLv && userInfo.data.userLv < 3) return null;
   return <>{children}</>;
 }

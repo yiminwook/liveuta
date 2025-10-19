@@ -1,18 +1,18 @@
+import { TGetChannelRes } from '@api/v1/channel/route';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { redirect } from 'next/navigation';
+import { ReactNode } from 'react';
 import { getQueryClient } from '@/apis/cached';
 import { serverApi } from '@/apis/fetcher';
-import DataFetchingObserver from '@/components/common/DataFetchingObserver';
-import PageView from '@/components/common/PageView';
 import BottomTab from '@/components/common/bottomTab/BottomTab';
+import DataFetchingObserver from '@/components/common/DataFetchingObserver';
 import Header from '@/components/common/header/header';
+import PageView from '@/components/common/PageView';
 import AccountSidebar from '@/components/common/sidebar/Account';
 import Document from '@/components/config/document';
 import { CHANNELS_TAG } from '@/constants/revalidate-tag';
 import { FALLBACK_LANG, LANGUAGES } from '@/libraries/i18n/config';
 import { TLocaleCode } from '@/libraries/i18n/type';
-import { TGetChannelRes } from '@api/v1/channel/route';
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
-import { redirect } from 'next/navigation';
-import { ReactNode } from 'react';
 
 const checkIsRoutingLocale = (locale: string): locale is TLocaleCode => {
   return LANGUAGES.includes(locale as TLocaleCode);

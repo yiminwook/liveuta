@@ -4,13 +4,13 @@ import variable from '@variable';
 import clsx from 'clsx';
 import { Filter } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import SearchInput from '@/components/common/input/SearchInput';
 import Modal from '@/components/common/modal/Modal';
 import { useTransition } from '@/hooks/use-transition';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { useSetModalStore } from '@/stores/modal';
+import { useSession } from '@/stores/session';
 import { TScheduleDto } from '@/types/dto';
 import ConfirmModal from '../common/modal/ConfirmModal';
 import NavTab from './NavTab';
@@ -90,7 +90,7 @@ export default function ScheduleNavModal({ onClose, scheduleDto, length }: Sched
       <div className={css.content}>
         <div className={css.contentHeader}>
           <div className={css.navTabBox}>
-            {session.data && <ToggleFavorite isFavorite={isFavorite} onClick={onClickFavorite} />}
+            {!!session.user && <ToggleFavorite isFavorite={isFavorite} onClick={onClickFavorite} />}
             <NavTab />
           </div>
           <CloseButton w={40} h={40} onClick={onCloseWithExit} />

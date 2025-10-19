@@ -1,9 +1,9 @@
-import { clientApi, proxyApi } from '@/apis/fetcher';
-import { CHANNEL_COUNT_TAG, WAITING_TAG } from '@/constants/revalidate-tag';
-import { TCheckDuplicatesBatchResult } from '@/types/api/proxy';
 import { TGetRegisteredChannelCountRes } from '@api/v1/channel/count/route';
 import { TGetChannelRes } from '@api/v1/channel/route';
 import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
+import { clientApi, proxyApi } from '@/apis/fetcher';
+import { CHANNEL_COUNT_TAG, WAITING_TAG } from '@/constants/revalidate-tag';
+import { TCheckDuplicatesBatchResult } from '@/types/api/proxy';
 
 export const useChannelCountSuspenseQuery = () => {
   return useSuspenseQuery({
@@ -29,29 +29,29 @@ export const useWaitingListSuspenseQuery = () => {
 
 export const useSubmitChannelMutation = () => {
   return useMutation({
-    mutationFn: (
-      arg: {
+    mutationFn: (arg: {
+      channels: {
         nameKor: string;
         channelId: string;
         handle: string;
-      }[],
-    ) =>
+      }[];
+    }) =>
       proxyApi
         .post<{
           inserted: number;
-        }>('append-new-vchan/submitBatch', { json: { channels: arg } })
+        }>('append-new-vchan/submitBatch', { json: arg })
         .json(),
   });
 };
 
 export const useValidateChannelsMutation = () => {
   return useMutation({
-    mutationFn: (urls: string[]) =>
+    mutationFn: (args: { urls: string[] }) =>
       proxyApi
         .post<{
           results: TCheckDuplicatesBatchResult[];
         }>('append-new-vchan/checkDuplicatesBatch', {
-          json: { urls },
+          json: args,
         })
         .json()
         .then((json) => json.results),

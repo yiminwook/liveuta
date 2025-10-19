@@ -4,21 +4,22 @@ import { Avatar, Button } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { ArrowLeft, ListMusic } from 'lucide-react';
-import { Session } from 'next-auth';
-import { useSession } from 'next-auth/react';
 import { isMobile } from 'react-device-detect';
 import { toast } from 'sonner';
 import { clientApi } from '@/apis/fetcher';
 import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import { useMount } from '@/hooks/use-mount';
+import { useUserInfo } from '@/hooks/use-user-info';
 import { LogosYoutubeIcon } from '@/icons';
 import dayjs from '@/libraries/dayjs';
+import FirebaseClient from '@/libraries/firebase/client';
 import { Link } from '@/libraries/i18n';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { ChannelDatesetItem } from '@/libraries/mongodb/channels';
 import { Setlist } from '@/libraries/oracledb/setlist/service';
 import { generateChannelUrl, generateVideoUrl } from '@/libraries/youtube/url';
 import { usePlayer } from '@/stores/player';
+import { useSession } from '@/stores/session';
 import { DeleteSetlistRes, SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
 import { openWindow } from '@/utils/window-event';
 import css from './info.module.scss';
@@ -34,7 +35,9 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
   const { t } = useTranslations();
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { data: session } = useSession();
+
+  const session = useSession();
+  const userInfo = useUserInfo({ user: session.user });
 
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
@@ -50,14 +53,8 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
   };
 
   const mutateDelete = useMutation({
-    mutationFn: async ({ session, videoId }: { session: Session; videoId: string }) => {
-      const json = await clientApi
-        .delete<DeleteSetlistRes>(`v1/setlist/${videoId}`, {
-          headers: { Authorization: `Bearer ${session.user.accessToken}` },
-        })
-        .json();
-      return json.data;
-    },
+    mutationFn: (args: { videoId: string }) =>
+      clientApi.delete<DeleteSetlistRes>(`v1/setlist/${args.videoId}`).json(),
     onSuccess: () => {
       toast.success(t('setlistId.info.deleted'));
       queryClient.invalidateQueries({ queryKey: [SETLISTS_TAG] });
@@ -69,7 +66,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
     },
   });
 
-  const deletePermission = session && session.user.userLv >= SETLIST_DELETE_LEVEL;
+  const deletePermission = userInfo.data && userInfo.data?.userLv >= SETLIST_DELETE_LEVEL;
 
   return (
     <div className={css.wrap}>
@@ -90,7 +87,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
               color="red"
               onClick={() => {
                 if (confirm(t('setlistId.info.deleteConfirm')))
-                  mutateDelete.mutate({ session, videoId: setlist.videoId });
+                  mutateDelete.mutate({ videoId: setlist.videoId });
               }}
               loading={mutateDelete.isPending}
               disabled={!session}

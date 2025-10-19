@@ -1,34 +1,23 @@
+import { Box, Button, Flex, LoadingOverlay, TextInput } from '@mantine/core';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+import { toast } from 'sonner';
 import { clientApi, revalidateApi } from '@/apis/fetcher';
 import { METADATAS_TAG } from '@/constants/revalidate-tag';
 import { TMetadata } from '@/types';
 import { TUpdateMetadataDto } from '@/types/dto';
-import { Box, Button, Flex, LoadingOverlay, TextInput } from '@mantine/core';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Session } from 'next-auth';
-import { useState } from 'react';
-import { toast } from 'sonner';
 
-type Props = {
-  session: Session;
-};
+type Props = {};
 
-export default function Form({ session }: Props) {
+export default function Form({}: Props) {
   const [coverUrl, setCoverUrl] = useState('');
   const [defaultVid, serDefaultVid] = useState('');
 
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: async (dto: TUpdateMetadataDto) => {
-      const json = await clientApi
-        .patch('v1/metadata', {
-          headers: { Authorization: `Bearer ${session.user.accessToken}` },
-          json: dto,
-        })
-        .json();
-
-      return json;
-    },
+    mutationFn: (dto: TUpdateMetadataDto) =>
+      clientApi.patch<{ message: string }>('v1/metadata', { json: dto }).json(),
     onSuccess: async () => {
       await revalidateApi.get('?tag=' + METADATAS_TAG);
       await queryClient.invalidateQueries({ queryKey: [METADATAS_TAG] });

@@ -1,10 +1,10 @@
 'use client';
 import { AnimatePresence } from 'motion/react';
-import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import ChannelCard from '@/components/common/channelCard/ChannelCard';
 import Nodata from '@/components/common/Nodata';
 import useCachedData from '@/hooks/use-cached-data';
+import { useSession } from '@/stores/session';
 import { TYChannelsData } from '@/types/api/youtube';
 import ChannelCardModal from '../common/modal/ChannelCardModal';
 import Portal from '../config/portal';
@@ -15,8 +15,8 @@ type ChannelSectionProps = {
 };
 
 export default function ChannelSection({ contents }: ChannelSectionProps) {
-  const { data: session } = useSession();
-  const { whiteListMap } = useCachedData({ session });
+  const session = useSession();
+  const { whiteListMap } = useCachedData({ user: session.user });
   const [selectedChannel, setSelectedChannel] = useState<TYChannelsData | null>(null);
 
   const selecteChannel = (content: TYChannelsData) => setSelectedChannel(() => content);
@@ -29,7 +29,7 @@ export default function ChannelSection({ contents }: ChannelSectionProps) {
           <ChannelCard
             key={content.uid}
             content={content}
-            session={session}
+            user={session.user}
             isFavorite={whiteListMap.has(content.uid)}
             selecteChannel={selecteChannel}
           />

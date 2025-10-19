@@ -1,4 +1,9 @@
 'use client';
+import { Button, Loader } from '@mantine/core';
+import variable from '@variable';
+import { User } from 'firebase/auth';
+import { GridComponents, VirtuosoGrid } from 'react-virtuoso';
+import { toast } from 'sonner';
 import useMutateWhitelist from '@/hooks/use-delete-whitelist';
 import usePostBlacklist from '@/hooks/use-post-blacklist';
 import usePostWhitelist from '@/hooks/use-post-whitelist';
@@ -12,18 +17,13 @@ import { useSetModalStore } from '@/stores/modal';
 import { TScheduleDto } from '@/types/dto';
 import { gtagClick } from '@/utils/gtag';
 import { openWindow } from '@/utils/window-event';
-import { Button, Loader } from '@mantine/core';
-import variable from '@variable';
-import { Session } from 'next-auth';
-import { GridComponents, VirtuosoGrid } from 'react-virtuoso';
-import { toast } from 'sonner';
 import Nodata from '../common/Nodata';
 import ScheduleCard from '../common/scheduleCard/Card';
 import ScheduleCardSkeleton from '../common/scheduleCard/ScheduleCardSkeleton';
 import css from './ScheduleSection.module.scss';
 
 type ScheduleSectionProps = {
-  session: Session | null;
+  user: User | null;
   scheduleDto: TScheduleDto;
   contents: TParsedClientContent[];
   channelMap: Record<string, TChannelDocumentWithoutId>;
@@ -32,7 +32,7 @@ type ScheduleSectionProps = {
 };
 
 export default function ScheduleSection({
-  session,
+  user,
   scheduleDto,
   contents,
   channelMap,
@@ -57,7 +57,7 @@ export default function ScheduleSection({
   const { reservePush } = useReservePush();
 
   const handleFavorite = (content: TParsedClientContent) => {
-    if (!session) {
+    if (!user) {
       toast.error(t('schedule.scheduleSection.notLoggedInError'));
       return;
     }
@@ -65,29 +65,20 @@ export default function ScheduleSection({
     const isFavorite = whiteListMap.has(content.channelId);
 
     if (!isFavorite && confirm(t('schedule.scheduleSection.addFavoriteChannel'))) {
-      mutatePostFavorite.mutate({
-        session,
-        channelId: content.channelId,
-      });
+      mutatePostFavorite.mutate({ channelId: content.channelId });
     } else if (isFavorite && confirm(t('schedule.scheduleSection.removeFavoriteChannel'))) {
-      mutateDeleteFavorite.mutate({
-        session,
-        channelId: content.channelId,
-      });
+      mutateDeleteFavorite.mutate({ channelId: content.channelId });
     }
   };
 
   const handleBlock = async (content: TParsedClientContent) => {
-    if (!session) {
+    if (!user) {
       toast.error(t('schedule.scheduleSection.notLoggedInError'));
       return;
     }
 
     if (confirm(t('schedule.scheduleSection.blockChannel'))) {
-      mutateBlock.mutate({
-        session,
-        channelId: content.channelId,
-      });
+      mutateBlock.mutate({ channelId: content.channelId });
     }
   };
 
@@ -147,7 +138,7 @@ export default function ScheduleSection({
         itemContent={(_i, data) => (
           <ScheduleCard
             key={`scheduled_${data.videoId}`}
-            session={session}
+            user={user}
             content={data}
             channel={channelMap[data.channelId]}
             openNewTab={openStream}

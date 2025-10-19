@@ -3,8 +3,6 @@ declare global {
     interface ProcessEnv {
       readonly NODE_ENV: 'development' | 'production' | 'test';
       readonly TZ?: string;
-      readonly NEXTAUTH_SECRET: string;
-      readonly ACCESS_SECRET: string;
 
       readonly NEXT_PUBLIC_MSW_ENABLED: 'true' | 'false' | undefined;
 
@@ -14,15 +12,10 @@ declare global {
       readonly NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG: string; // main or dev
 
       readonly NEXT_PUBLIC_SITE_URL: string;
-      readonly NEXT_PUBLIC_REQUEST_URL: string;
 
       readonly GOOGLE_API_KEY: string;
       readonly GOOGLE_CLIENT_ID: string;
       readonly GOOGLE_CLIENT_SECRET: string;
-      // readonly NAVER_CLIENT_ID: string;
-      // readonly NAVER_CLIENT_SECRET: string;
-      readonly KAKAO_CLIENT_ID: string;
-      readonly KAKAO_CLIENT_SECRET: string;
 
       readonly FIREBASE_PROJECT_ID: string;
       readonly FIREBASE_PRIVATE_KEY: string;
@@ -38,8 +31,15 @@ declare global {
       readonly SENTRY_AUTH_TOKEN?: string;
 
       /** 폐기 */
-      // readonly GOOGLE_CLIENT_ID: string;
-      // readonly GOOGLE_SECRET_KEY: string;
+      // readonly NEXT_PUBLIC_REQUEST_URL: string;
+
+      // readonly NEXTAUTH_SECRET: string;
+      // readonly ACCESS_SECRET: string;
+
+      // readonly NAVER_CLIENT_ID: string;
+      // readonly NAVER_CLIENT_SECRET: string;
+      // readonly KAKAO_CLIENT_ID: string;
+      // readonly KAKAO_CLIENT_SECRET: string;
 
       // readonly CONTENTS_SHEET_RANGE: string;
       // readonly CHANNELS_SHEET_RANGE: string;

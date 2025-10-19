@@ -1,25 +1,23 @@
 'use client';
+import { Avatar, Button } from '@mantine/core';
 import useDeleteBlacklist from '@/hooks/use-delete-blacklist';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
 import { generateChanneImagelUrl } from '@/libraries/youtube/url';
-import { Avatar, Button } from '@mantine/core';
-import { Session } from 'next-auth';
 import css from './List.module.scss';
 
 type BlacklistProps = {
-  session: Session;
   channelList: Record<string, TChannelDocumentWithoutId>;
   blacklist: Set<string>;
 };
 
-export default function Blacklist({ session, channelList, blacklist }: BlacklistProps) {
+export default function Blacklist({ channelList, blacklist }: BlacklistProps) {
   const mutationDelete = useDeleteBlacklist();
   const { t } = useTranslations();
 
   const handleClick = (channelId: string) => {
     if (confirm(t('my.blacklist.removeBlacklist'))) {
-      mutationDelete.mutate({ session, channelId });
+      mutationDelete.mutate({ channelId });
     }
   };
 

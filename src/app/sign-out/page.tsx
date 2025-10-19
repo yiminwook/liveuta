@@ -5,7 +5,7 @@ import Client from './page.client';
 export default async function Page() {
   return (
     <Document locale="ko">
-      <Authorized signInUrl={`/ko/login`}>
+      <Authorized signInUrl={`/ko/sign-in`}>
         <Client />
       </Authorized>
     </Document>

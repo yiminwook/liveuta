@@ -11,12 +11,12 @@ import {
 import variable from '@variable';
 import clsx from 'clsx';
 import { ChevronLeft, Info } from 'lucide-react';
-import { useSession } from 'next-auth/react';
 import { ChangeEvent, useMemo, useState } from 'react';
 import useCachedData from '@/hooks/use-cached-data';
 import { useScheduleQuery } from '@/hooks/use-schedule';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { generateVideoUrl } from '@/libraries/youtube/url';
+import { useSession } from '@/stores/session';
 import { StreamFilter } from '@/types';
 import { TScheduleDto } from '@/types/dto';
 import css from './grid-nav.module.scss';
@@ -32,13 +32,13 @@ type Props = {
 export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
   const theme = useMantineTheme();
   const { t } = useTranslations();
-  const { data: session } = useSession();
   const locale = useLocale();
 
   const [filter, setFilter] = useState<StreamFilter>(StreamFilter.live);
   const [newUrl, setNewUrl] = useState('');
 
-  const { blackListMap, channelMap } = useCachedData({ session });
+  const session = useSession();
+  const { blackListMap, channelMap } = useCachedData({ user: session.user });
   const { data, isPending } = useScheduleQuery({ filter, enableAutoSync: true, locale });
 
   const onChangeUrl = (e: ChangeEvent<HTMLInputElement>) => {

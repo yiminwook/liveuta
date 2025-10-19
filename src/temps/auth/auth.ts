@@ -48,6 +48,6 @@ export const getSessionInServer = async () => {
     return response.session;
   } catch (error) {
     console.error('getSessionInServer', error);
-    redirect('/logout');
+    redirect('/sign-out');
   }
 };

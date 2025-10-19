@@ -1,4 +1,9 @@
 'use client';
+import { useRouter } from '@bprogress/next';
+import Image from 'next/image';
+import { useMemo, useState } from 'react';
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
+import { toast } from 'sonner';
 import MoreButton from '@/components/common/button/MoreButton';
 import SearchInput from '@/components/common/input/SearchInput';
 import ChannelSlider from '@/components/home/ChannelSlider';
@@ -15,15 +20,10 @@ import { useCustomMantineColorScheme } from '@/libraries/mantine/custom-theme-ho
 import { TParsedClientContent } from '@/libraries/mongodb/type';
 import { generateVideoUrl } from '@/libraries/youtube/url';
 import { useSetModalStore } from '@/stores/modal';
+import { useSession } from '@/stores/session';
 import { TYChannelsData } from '@/types/api/youtube';
 import { gtagClick } from '@/utils/gtag';
 import { openWindow } from '@/utils/window-event';
-import { useRouter } from '@bprogress/next';
-import { useSession } from 'next-auth/react';
-import Image from 'next/image';
-import { useMemo, useState } from 'react';
-import { TwitterTimelineEmbed } from 'react-twitter-embed';
-import { toast } from 'sonner';
 import character9 from '/public/assets/character-9.png';
 import css from './page.module.scss';
 
@@ -36,11 +36,12 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
   const router = useRouter();
   const locale = useLocale();
   const { t } = useTranslations();
-  const { data: session } = useSession();
 
   const [query, setQuery] = useState('');
+
   const modalStore = useSetModalStore();
-  const { whiteListMap, blackListMap, channelMap } = useCachedData({ session });
+  const session = useSession();
+  const { whiteListMap, blackListMap, channelMap } = useCachedData({ user: session.user });
   const { data, isPending } = useScheduleQuery({ enableAutoSync: false, locale });
 
   const onChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +62,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
   const { reservePush } = useReservePush();
 
   const handleFavorite = (content: TParsedClientContent) => {
-    if (!session) {
+    if (!session.user) {
       toast.error(t('home.notLoggedInError'));
       return;
     }
@@ -69,12 +70,10 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
 
     if (!isFavorite && confirm(t('home.addFavoriteChannel'))) {
       mutatePostFavorite.mutate({
-        session,
         channelId: content.channelId,
       });
     } else if (isFavorite && confirm(t('home.removeFavoriteChannel'))) {
       mutateDeleteFavorite.mutate({
-        session,
         channelId: content.channelId,
       });
     }
@@ -87,10 +86,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
     }
 
     if (confirm(t('home.blockChannel'))) {
-      mutateBlock.mutate({
-        session,
-        channelId: content.channelId,
-      });
+      mutateBlock.mutate({ channelId: content.channelId });
     }
   };
 

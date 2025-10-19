@@ -1,7 +1,7 @@
 'use client';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { useSession } from '@/stores/session';
 
 interface Props {
   fallback?: React.ReactNode;
@@ -15,12 +15,12 @@ export function Authorized({ children, fallback, signInUrl }: Props) {
   const router = useRouter();
 
   useEffect(() => {
-    if (session.status === 'unauthenticated') {
+    if (session.isLoading === false && session.user === null) {
       router.replace(signInUrl);
     }
-  }, [session.status]);
+  }, [session]);
 
-  if (session.status === 'loading') return <>{fallback}</>;
-  if (session.status === 'unauthenticated') return null;
+  if (session.isLoading) return <>{fallback}</>;
+  if (!session.user) return null;
   return <>{children}</>;
 }

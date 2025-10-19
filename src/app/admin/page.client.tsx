@@ -1,15 +1,18 @@
 'use client';
-import { useSession } from 'next-auth/react';
+import { useUserInfo } from '@/hooks/use-user-info';
+import { useSession } from '@/stores/session';
 
 type Props = {};
 
 export default function Client({}: Props) {
-  const session = useSession().data!;
+  const session = useSession();
+  const userInfo = useUserInfo({ user: session.user });
+
   return (
     <div>
       <h2>관리자 홈</h2>
-      <div>Email: {session.user.email}</div>
-      <div>userLv: {session.user.userLv}</div>
+      <div>Email: {userInfo.data?.email}</div>
+      <div>userLv: {userInfo.data?.userLv}</div>
     </div>
   );
 }

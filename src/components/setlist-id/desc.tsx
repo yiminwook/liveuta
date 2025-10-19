@@ -2,8 +2,6 @@
 import { useRouter } from '@bprogress/next';
 import { Button, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Session } from 'next-auth';
-import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { clientApi } from '@/apis/fetcher';
@@ -11,6 +9,7 @@ import TimelineText from '@/components/common/TimestampText';
 import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import { useTranslations } from '@/libraries/i18n/client';
 import { usePlayer } from '@/stores/player';
+import { useSession } from '@/stores/session';
 import css from './desc.module.scss';
 
 type DescProps = {
@@ -23,17 +22,18 @@ export default function Desc({ videoId, description }: DescProps) {
   const router = useRouter();
 
   const queryClient = useQueryClient();
-  const { data: session } = useSession();
+  const session = useSession();
 
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState('');
   const actions = usePlayer((state) => state.actions);
 
   const toggleEditing = () => {
-    if (!session) {
+    if (!session.user) {
       toast.warning(t('setlistId.desc.notLoggedInError'));
       return;
     }
+
     setIsEditing((pre) => !pre);
   };
 
@@ -48,24 +48,12 @@ export default function Desc({ videoId, description }: DescProps) {
   };
 
   const mutateSetlist = useMutation({
-    mutationFn: async ({
-      session,
-      videoId,
-      description,
-    }: {
-      session: Session;
-      videoId: string;
-      description: string;
-    }) => {
-      const json = await clientApi
-        .put<{ message: string; data: null }>(`v1/setlist/${videoId}`, {
-          headers: { Authorization: `Bearer ${session.user.accessToken}` },
-          json: { description },
+    mutationFn: (args: { videoId: string; description: string }) =>
+      clientApi
+        .put<{ message: string; data: null }>(`v1/setlist/${args.videoId}`, {
+          json: { description: args.description },
         })
-        .json();
-
-      return json.data;
-    },
+        .json(),
     onSuccess: () => {
       toast.success(t('setlistId.desc.modified'));
       queryClient.invalidateQueries({ queryKey: [SETLISTS_TAG] });
@@ -89,7 +77,6 @@ export default function Desc({ videoId, description }: DescProps) {
     }
 
     mutateSetlist.mutate({
-      session,
       videoId,
       description,
     });

@@ -1,3 +1,5 @@
+import { UseQueryResult, useIsFetching, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMemo, useState } from 'react';
 import { clientApi } from '@/apis/fetcher';
 import { SCHEDULE_CACHE_TIME, SCROLL_PER_YOUTUBE_CARD } from '@/constants';
 import { SCHEDULES_TAG } from '@/constants/revalidate-tag';
@@ -10,8 +12,6 @@ import { TGetScheduleResponse } from '@/types/api/schedule';
 import { waitfor } from '@/utils/helper';
 import { replaceParentheses } from '@/utils/regexp';
 import { getInterval } from '@/utils/time';
-import { UseQueryResult, useIsFetching, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
 import { useAutoSync } from './use-storage';
 
 export function useScheduleQuery(arg: {

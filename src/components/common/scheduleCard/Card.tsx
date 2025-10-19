@@ -1,13 +1,13 @@
 'use client';
+import clsx from 'clsx';
+import { User } from 'firebase/auth';
+import { memo } from 'react';
 import {
   STREAM_STATUS_MAPPER,
   TChannelDocumentWithoutId,
   TParsedClientContent,
 } from '@/libraries/mongodb/type';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import clsx from 'clsx';
-import { Session } from 'next-auth';
-import { memo } from 'react';
 import css from './Card.module.scss';
 import CardDesc from './CardDesc';
 import CardImage from './CardImage';
@@ -17,7 +17,7 @@ type ScheduleCardProps = {
   classname?: string;
   content: TParsedClientContent;
   channel: TChannelDocumentWithoutId | undefined;
-  session: Session | null;
+  user: User | null;
   isFavorite?: boolean;
   addAlarm?: (item: TParsedClientContent, channel?: TChannelDocumentWithoutId) => void;
   openNewTab?: (item: TParsedClientContent) => void;

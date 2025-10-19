@@ -1,42 +1,31 @@
 'use client';
+import { Button, Textarea, TextInput } from '@mantine/core';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { User } from 'firebase/auth';
+import { MouseEvent, useState } from 'react';
+import { toast } from 'sonner';
 import { clientApi } from '@/apis/fetcher';
 import { SETLISTS_TAG } from '@/constants/revalidate-tag';
 import { useTranslations } from '@/libraries/i18n/client';
-import { Button, TextInput, Textarea } from '@mantine/core';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Session } from 'next-auth';
-import { MouseEvent, useState } from 'react';
-import { toast } from 'sonner';
 import css from './PostForm.module.scss';
 
 type PostFormProps = {
-  session: Session | null;
+  user: User | null;
 };
 
-export default function PostForm({ session }: PostFormProps) {
+export default function PostForm({ user }: PostFormProps) {
   const [url, setUrl] = useState('');
   const [desc, setDesc] = useState('');
   const queryClient = useQueryClient();
   const { t } = useTranslations();
 
   const mutatePost = useMutation({
-    mutationFn: async ({
-      session,
-      videoId,
-      description,
-    }: {
-      session: Session;
-      videoId: string;
-      description: string;
-    }) => {
-      const json = await clientApi
-        .post<{ message: string; data: null }>(`v1/setlist/${videoId}`, {
-          headers: { Authorization: `Bearer ${session.user.accessToken}` },
-          json: { description },
+    mutationFn: (args: { videoId: string; description: string }) =>
+      clientApi
+        .post<{ message: string; data: null }>(`v1/setlist/${args.videoId}`, {
+          json: { description: args.description },
         })
-        .json();
-      return json;
-    },
+        .json(),
     onSuccess: () => {
       toast.success(t('setlist.postForm.formSuccess'));
       queryClient.invalidateQueries({ queryKey: [SETLISTS_TAG] });
@@ -62,11 +51,11 @@ export default function PostForm({ session }: PostFormProps) {
       return toast.warning(t('setlist.postForm.emptySetlistError'));
     }
 
-    if (session === null) {
+    if (user === null) {
       return toast.warning(t('setlist.postForm.notLoggedInError'));
     }
 
-    mutatePost.mutate({ videoId, description, session });
+    mutatePost.mutate({ videoId, description });
   };
 
   const clear = (e: MouseEvent) => {

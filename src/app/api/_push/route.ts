@@ -1,7 +1,7 @@
+import { Message } from 'firebase-admin/messaging';
 import { NextRequest, NextResponse } from 'next/server';
-import { getMessaging, Message } from 'firebase-admin/messaging';
-import FirebaseAdmin from '@/libraries/firebase/admin';
 import errorHandler from '@/libraries/error/handler';
+import FirebaseAdmin from '@/libraries/firebase/admin';
 
 export interface PushData {
   token: string;
@@ -35,9 +35,9 @@ export async function POST(req: NextRequest) {
 
     console.log('push FCM!!', messages.length);
 
-    FirebaseAdmin.getInstance();
-
-    const response = await getMessaging().sendAll(messages);
+    const messaging = FirebaseAdmin.getInstance().messaging;
+    // @ts-ignore
+    const response = await messaging.sendEachForMulticast(messages);
 
     return NextResponse.json(response, { status: 201 });
   } catch (error) {

@@ -1,8 +1,8 @@
 'use client';
+import { Ban, Star } from 'lucide-react';
 import useCachedData from '@/hooks/use-cached-data';
 import { useTranslations } from '@/libraries/i18n/client';
-import { Ban, Star } from 'lucide-react';
-import { useSession } from 'next-auth/react';
+import { useSession } from '@/stores/session';
 import Background from '../common/background/Background';
 import Blacklist from './Blacklist';
 import css from './Home.module.scss';
@@ -11,8 +11,8 @@ import Whitelist from './Whitelist';
 export default function Home() {
   const { t } = useTranslations();
 
-  const session = useSession().data!;
-  const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
+  const session = useSession();
+  const { whiteListMap, channelMap, blackListMap } = useCachedData({ user: session.user });
 
   return (
     <Background>
@@ -22,14 +22,14 @@ export default function Home() {
             <Star size="1.2rem" color="#ffbb00" fill="#ffbb00" />
             <b>{t('my.favorite.title')}</b>
           </h2>
-          <Whitelist session={session} whiteList={whiteListMap} channelList={channelMap} />
+          <Whitelist whiteList={whiteListMap} channelList={channelMap} />
         </section>
         <section className={css.section}>
           <h2 className={css.sectionTitle}>
             <Ban size="1.2rem" color="#ED2939" />
             <b>{t('my.blacklist.title')}</b>
           </h2>
-          <Blacklist session={session} blacklist={blackListMap} channelList={channelMap} />
+          <Blacklist blacklist={blackListMap} channelList={channelMap} />
         </section>
       </div>
     </Background>

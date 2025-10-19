@@ -16,11 +16,8 @@ export type TMemberInfo = {
 };
 
 export const getMember = withOracleConnection(
-  async (
-    connection,
-    { email, provider }: { email: string; provider: string },
-  ): Promise<TMemberInfo> => {
-    const getresult = await connection.execute<MemberRow>(GET_ONE_MEMBER, [email, provider]);
+  async (connection, { email }: { email: string }): Promise<TMemberInfo> => {
+    const getresult = await connection.execute<MemberRow>(GET_ONE_MEMBER, [email]);
     const row = getresult.rows?.[0];
 
     if (!row) {

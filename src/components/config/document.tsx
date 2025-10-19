@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-head-element */
+import { headers } from 'next/headers';
+import { userAgent } from 'next/server';
+import { ReactNode } from 'react';
 import { getCookies } from '@/apis/cached';
 import { TLocaleCode } from '@/libraries/i18n/type';
 import { THEME_STORAGE_KEY } from '@/libraries/mantine/config';
 import { CustomThemeScript } from '@/libraries/mantine/custom-theme-script';
-import MswProvider from '@/mocks/msw-provider';
-import { headers } from 'next/headers';
-import { userAgent } from 'next/server';
-import { ReactNode } from 'react';
+// import MswProvider from '@/mocks/msw-provider';
 import Configs from '.';
 import DefaultHead from './DefaultHead';
 import GlobalScrollbar from './GlobalScrollbar';
@@ -52,11 +52,11 @@ export default async function Document({ children, locale }: Props) {
         <CustomThemeScript localStorageKey={THEME_STORAGE_KEY} />
       </head>
       <body {...(isIos ? {} : overlayScrollbarInitialize)}>
-        <MswProvider>
-          <Configs cookies={cookies} locale={locale}>
-            {children}
-          </Configs>
-        </MswProvider>
+        {/* <MswProvider> */}
+        <Configs cookies={cookies} locale={locale}>
+          {children}
+        </Configs>
+        {/* </MswProvider> */}
         <GoogleTagManager />
         {!isIos && <GlobalScrollbar />}
       </body>

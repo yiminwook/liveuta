@@ -3,9 +3,9 @@ import { useRouter } from '@bprogress/next';
 import { ActionIcon } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import variable from '@variable';
+import { User } from 'firebase/auth';
 import { Monitor } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
-import { Session } from 'next-auth';
 import { Link } from '@/libraries/i18n';
 import { useLocale } from '@/libraries/i18n/client';
 import { TScheduleDto } from '@/types/dto';
@@ -16,7 +16,7 @@ import css from './ScheduleNav.module.scss';
 import ToggleFavorite from './ToggleFavorite';
 
 type NavSectionProps = {
-  session: Session | null;
+  user: User | null;
   scheduleDto: TScheduleDto;
   length: {
     all: number;
@@ -25,7 +25,7 @@ type NavSectionProps = {
   };
 };
 
-export default function ScheduleNav({ session, scheduleDto, length }: NavSectionProps) {
+export default function ScheduleNav({ user, scheduleDto, length }: NavSectionProps) {
   const isDesktop = useMediaQuery(`(min-width: ${variable.breakpointSm})`);
   const searchParams = useSearchParams();
   const router = useRouter(); // transition 예외처리
@@ -40,7 +40,7 @@ export default function ScheduleNav({ session, scheduleDto, length }: NavSection
   return (
     <nav className={css.wrap}>
       <div className={css.left}>
-        {session && <ToggleFavorite isFavorite={scheduleDto.isFavorite} onClick={clickFavorite} />}
+        {!!user && <ToggleFavorite isFavorite={scheduleDto.isFavorite} onClick={clickFavorite} />}
         <div className={css.navTabBox}>
           <NavTab />
         </div>

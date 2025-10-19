@@ -1,13 +1,13 @@
 'use client';
-import { clientApi } from '@/apis/fetcher';
-import { PushData } from '@/app/api/push/route';
-import dayjs from '@/libraries/dayjs';
-import { useTranslations } from '@/libraries/i18n/client';
-import { TToken } from '@/types';
+import { PushData } from '@api/_push/route';
 import clsx from 'clsx';
 import { BatchResponse } from 'firebase-admin/messaging';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { clientApi } from '@/apis/fetcher';
+import dayjs from '@/libraries/dayjs';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TToken } from '@/types';
 import css from './Home.module.scss';
 
 export default function PostBox({ token }: { token: TToken }) {

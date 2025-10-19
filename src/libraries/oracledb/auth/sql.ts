@@ -2,7 +2,7 @@ import 'server-only';
 export const GET_ONE_MEMBER = `
   SELECT * 
   FROM MEMBER
-  WHERE EMAIL = :email AND PROVIDER = :provider
+  WHERE EMAIL = :email
   FETCH FIRST 1 ROW ONLY
 `;
 
