@@ -1,6 +1,7 @@
 import { TStream } from '@/libraries/mongodb/type';
-import css from './Card.module.scss';
-import CardViewer from './CardViewer';
+import css from './card.module.scss';
+import CardViewer from './card-viewer';
+
 interface CardStatusProps {
   isStream: TStream;
   interval: string;

@@ -8,10 +8,10 @@ import {
   TParsedClientContent,
 } from '@/libraries/mongodb/type';
 import { generateVideoUrl } from '@/libraries/youtube/url';
-import css from './Card.module.scss';
-import CardDesc from './CardDesc';
-import CardImage from './CardImage';
-import CardMenu from './CardMenu';
+import css from './card.module.scss';
+import CardDesc from './card-desc';
+import CardImage from './card-image';
+import CardMenu from './card-menu';
 
 type ScheduleCardProps = {
   classname?: string;

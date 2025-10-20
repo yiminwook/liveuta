@@ -1,5 +1,5 @@
 import { Users } from 'lucide-react';
-import css from './Card.module.scss';
+import css from './card.module.scss';
 
 interface CardViewerProps {
   viewer: number;

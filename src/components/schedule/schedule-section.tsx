@@ -18,8 +18,8 @@ import { TScheduleDto } from '@/types/dto';
 import { gtagClick } from '@/utils/gtag';
 import { openWindow } from '@/utils/window-event';
 import Nodata from '../common/Nodata';
-import ScheduleCard from '../common/scheduleCard/Card';
-import ScheduleCardSkeleton from '../common/scheduleCard/ScheduleCardSkeleton';
+import ScheduleCard from '../common/scheduleCard/card';
+import ScheduleCardSkeleton from '../common/scheduleCard/schedule-card-skeleton';
 import css from './ScheduleSection.module.scss';
 
 type ScheduleSectionProps = {

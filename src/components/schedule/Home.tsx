@@ -11,7 +11,7 @@ import { addEscapeCharacter } from '@/utils/regexp';
 import { useCmdActions } from '../common/command/Context';
 import css from './Home.module.scss';
 import ScheduleNav from './ScheduleNav';
-import ScheduleSection from './ScheduleSection';
+import ScheduleSection from './schedule-section';
 import TopSection from './TopSection';
 
 type HomeProps = {

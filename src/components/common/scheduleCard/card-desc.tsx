@@ -1,10 +1,10 @@
+import clsx from 'clsx';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TChannelDocumentWithoutId, TParsedClientContent } from '@/libraries/mongodb/type';
 import { generateChannelUrl } from '@/libraries/youtube/url';
 import { openWindow } from '@/utils/window-event';
-import clsx from 'clsx';
-import css from './Card.module.scss';
-import CardStatus from './CardStatus';
+import css from './card.module.scss';
+import CardStatus from './card-status';
 
 type CardDescProps = {
   content: TParsedClientContent;

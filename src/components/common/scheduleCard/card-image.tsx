@@ -1,14 +1,13 @@
 'use client';
-import { DEFAULT_BLUR_BASE64 } from '@/constants';
-import { useTranslations } from '@/libraries/i18n/client';
-import { TParsedClientContent } from '@/libraries/mongodb/type';
-import { generateThumbnail } from '@/libraries/youtube/url';
-import { generateVideoUrl } from '@/libraries/youtube/url';
-import { usePlayer } from '@/stores/player';
-import { gtagClick } from '@/utils/gtag';
 import Image from 'next/image';
 import { useCallback, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import { DEFAULT_BLUR_BASE64 } from '@/constants';
+import { useTranslations } from '@/libraries/i18n/client';
+import { TParsedClientContent } from '@/libraries/mongodb/type';
+import { generateThumbnail, generateVideoUrl } from '@/libraries/youtube/url';
+import { usePlayer } from '@/stores/player';
+import { gtagClick } from '@/utils/gtag';
 import altImage from '/public/assets/thumbnail_alt_img.png';
 
 interface CardImageProps {

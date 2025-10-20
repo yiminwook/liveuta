@@ -1,11 +1,11 @@
 'use client';
-import { TChannelDocumentWithoutId, TParsedClientContent } from '@/libraries/mongodb/type';
 import variable from '@variable';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SliderCard from '../common/scheduleCard/SliderCard';
-import SliderCardSkeleton from '../common/scheduleCard/SliderCardSkeleton';
-import css from './ScheduleSlider.module.scss';
+import { TChannelDocumentWithoutId, TParsedClientContent } from '@/libraries/mongodb/type';
+import SliderCard from '../common/scheduleCard/slider-card';
+import SliderCardSkeleton from '../common/scheduleCard/slider-card-skeleton';
+import css from './schedule-slider.module.scss';
 
 type ScheduleSliderProps = {
   contents: (TParsedClientContent & { isFavorite: boolean })[];

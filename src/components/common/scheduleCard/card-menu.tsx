@@ -1,9 +1,9 @@
-import { useTranslations } from '@/libraries/i18n/client';
 import { ActionIcon, CopyButton, Menu } from '@mantine/core';
 import variable from '@variable';
 import { Ban, Check, Copy, Ellipsis, SquareArrowOutUpRight, Star } from 'lucide-react';
 import { toast } from 'sonner';
-import css from './CardMenu.module.scss';
+import { useTranslations } from '@/libraries/i18n/client';
+import css from './card-menu.module.scss';
 
 type CardMenuProps = {
   isFavorite?: boolean;
@@ -25,7 +25,7 @@ export default function CardMenu({
   const { t } = useTranslations();
 
   return (
-    <Menu position="bottom-end" withArrow arrowPosition="center" trigger="hover">
+    <Menu position="bottom-end" withArrow arrowPosition="center" trigger="hover" withinPortal>
       <Menu.Target>
         <ActionIcon radius="lg" size={25}>
           <Ellipsis />

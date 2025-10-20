@@ -1,5 +1,5 @@
 import { Box, Card, Skeleton } from '@mantine/core';
-import css from './Card.module.scss';
+import css from './card.module.scss';
 
 export default function SliderCardSkeleton() {
   return (

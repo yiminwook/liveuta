@@ -1,3 +1,6 @@
+import { ActionIcon, Avatar, Badge, Card, Flex, Text, Tooltip } from '@mantine/core';
+import variable from '@variable';
+import { Ban, SquareArrowOutUpRight, Star, Users } from 'lucide-react';
 import { useTranslations } from '@/libraries/i18n/client';
 import {
   STREAM_STATUS_MAPPER,
@@ -5,12 +8,9 @@ import {
   TParsedClientContent,
 } from '@/libraries/mongodb/type';
 import { generateChanneImagelUrl, generateVideoUrl } from '@/libraries/youtube/url';
-import { ActionIcon, Avatar, Badge, Card, Flex, Text, Tooltip } from '@mantine/core';
-import variable from '@variable';
-import { Ban, SquareArrowOutUpRight, Star, Users } from 'lucide-react';
 import CopyButton from '../button/CopyButton';
-import CardImage from './CardImage';
-import css from './SliderCard.module.scss';
+import CardImage from './card-image';
+import css from './slider-card.module.scss';
 
 type SliderCardProps = {
   content: TParsedClientContent;

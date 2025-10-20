@@ -1,5 +1,5 @@
 import { Skeleton } from '@mantine/core';
-import css from './ScheduleCardSkeleton.module.scss';
+import css from './schedule-card-skeleton.module.scss';
 
 export default function ScheduleCardSkeleton() {
   return (

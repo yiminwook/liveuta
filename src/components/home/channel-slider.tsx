@@ -1,14 +1,14 @@
 'use client';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import { TYChannelsData } from '@/types/api/youtube';
-import { renderSubscribe } from '@/utils/renderSubscribe';
 import { useRouter } from '@bprogress/next';
 import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
 import variable from '@variable';
 import { Ellipsis } from 'lucide-react';
 import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import css from './ChannelSlider.module.scss';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { TYChannelsData } from '@/types/api/youtube';
+import { renderSubscribe } from '@/utils/renderSubscribe';
+import css from './channel-slider.module.scss';
 
 type ChannelSliderProps = {
   recentChannels: TYChannelsData[];
@@ -48,15 +48,7 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
                 color={variable.firstColorDefault}
                 src={item.snippet?.thumbnails?.default?.url}
               />
-              <HoverCard
-                withArrow
-                width={200}
-                offset={0}
-                arrowOffset={0}
-                portalProps={{
-                  target: containerRef.current!,
-                }}
-              >
+              <HoverCard withArrow width={200} offset={0} arrowOffset={0}>
                 <HoverCard.Target>
                   <Center>
                     <Button
