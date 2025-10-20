@@ -2,7 +2,7 @@
 import { onMessage } from 'firebase/messaging';
 import { useEffect } from 'react';
 import FirebaseClient from '@/libraries/firebase/client';
-import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
+import { generateFcmToken } from '@/libraries/firebase/generate-fcm-token';
 
 export default function ServiceWorker() {
   const handleMessage = async () => {

@@ -2,7 +2,7 @@ import { PushData } from '@api/_push/route';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { clientApi } from '@/apis/fetcher';
-import { generateFcmToken } from '@/libraries/firebase/generateFcmToken';
+import { generateFcmToken } from '@/libraries/firebase/generate-fcm-token';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TChannelDocumentWithoutId, TParsedClientContent } from '@/libraries/mongodb/type';
 import { generateThumbnail, generateVideoUrl } from '@/libraries/youtube/url';
