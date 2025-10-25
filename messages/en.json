@@ -1,5 +1,6 @@
 {
   "hello": "Hello",
+  "dayjsScheduleTemplate": "MMM DD (ddd) hh:mm A",
   "time": {
     "intervalMinutes": "in {{count}} minutes",
     "intervalHours": "in {{count}} hours",

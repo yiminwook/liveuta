@@ -1,5 +1,6 @@
 {
   "hello": "こんにちは",
+  "dayjsScheduleTemplate": "M月 DD日 (ddd) A hh:mm",
   "time": {
     "intervalMinutes": "{{count}}分後",
     "intervalHours": "{{count}}時間後",
