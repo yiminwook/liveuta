@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { UnAuthorized } from '@/components/common/authorization/UnAuthorized';
-import Home from '@/components/sign-in/Home';
+import Home from '@/components/sign-in/home';
 
 export const metadata: Metadata = {
   title: '로그인 | Live Uta',

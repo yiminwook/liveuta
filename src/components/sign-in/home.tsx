@@ -11,12 +11,12 @@ import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { signInDto, TSignInDto } from '@/types/dto';
 import character from '/public/assets/character-3.png';
 import Background from '../common/background/Background';
-import css from './Home.module.scss';
+import css from './home.module.scss';
 
 export default function Home() {
   const { t } = useTranslations();
   const locale = useLocale();
-  const [isSent, setIsSent] = useState(false);
+  const [lastSentEmail, setLastSentEmail] = useState<string | null>(null);
 
   const form = useForm<TSignInDto>({
     mode: 'onTouched',
@@ -32,16 +32,15 @@ export default function Home() {
     mutationFn: (args: TSignInDto) =>
       clientApi.post<{ message: string }>(`v1/sign-in`, { json: args }).json(),
     onError: (error) => toast.error(error.message),
-    onSuccess: () => {
-      toast.success(t('signIn.3000'));
-      setIsSent(() => true);
+    onSuccess: (_, args) => {
+      setLastSentEmail(() => args.email);
     },
   });
 
   const onSubmit = (data: TSignInDto) => {
     if (mutateLogin.isPending) return;
     form.reset();
-    setIsSent(() => false);
+    setLastSentEmail(() => null);
     mutateLogin.mutate(data);
   };
 
@@ -82,11 +81,12 @@ export default function Home() {
 
           <div className={css.buttonBox}>
             <Button type="submit" loading={mutateLogin.isPending} form="sign-in-form">
-              {isSent ? t('signIn.0006') : t('signIn.0004')}
+              {!!lastSentEmail ? t('signIn.0006') : t('signIn.0004')}
             </Button>
           </div>
 
           <div className={css.messageBox}>
+            {!!lastSentEmail && <p>{t('signIn.0007', { email: lastSentEmail })}</p>}
             <p>{t('signIn.0005')}</p>
           </div>
         </div>
