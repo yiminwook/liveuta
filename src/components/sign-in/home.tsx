@@ -33,13 +33,13 @@ export default function Home() {
       clientApi.post<{ message: string }>(`v1/sign-in`, { json: args }).json(),
     onError: (error) => toast.error(error.message),
     onSuccess: (_, args) => {
+      form.reset();
       setLastSentEmail(() => args.email);
     },
   });
 
   const onSubmit = (data: TSignInDto) => {
     if (mutateLogin.isPending) return;
-    form.reset();
     setLastSentEmail(() => null);
     mutateLogin.mutate(data);
   };
