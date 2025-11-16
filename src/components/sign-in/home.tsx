@@ -137,6 +137,7 @@ export default function Home() {
                 placeholder={t('signIn.0003')}
                 disabled={mutateSignIn.isPending}
                 error={errorCode ? t(errorCode) : undefined}
+                inputMode="email"
               />
 
               <div className={css.buttonBox}>
@@ -162,6 +163,7 @@ export default function Home() {
                 value={verificationCode}
                 onChange={onChangeVerificationCode}
                 length={8}
+                inputMode="numeric"
               />
 
               <div className={css.resendBox}>
