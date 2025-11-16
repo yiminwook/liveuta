@@ -2,6 +2,8 @@ import { useTranslations } from '@/libraries/i18n/client';
 import HeaderMenu from './HeaderMenu';
 
 export default function DesktopNav() {
+  'use no memo';
+
   const { t } = useTranslations();
 
   const internalLinks = [
