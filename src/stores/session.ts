@@ -24,15 +24,12 @@ export const useSession = create<TSessionStore>()(
       loginAt: null,
       actions: {
         signIn: (args: { session: TSession }) => {
-          console.log('signIn');
           set(() => ({ session: args.session, loginAt: dayjs().toDate() }));
         },
         refreshSession: (args: { session: TSession }) => {
-          console.log('refreshSession');
           set(() => ({ session: args.session }));
         },
         signOut: () => {
-          console.log('signOut');
           set(() => ({ session: null, loginAt: null }));
         },
       },
@@ -47,8 +44,6 @@ export const useSession = create<TSessionStore>()(
       }),
       merge: (_persistedState, currentState) => {
         const persistedState = _persistedState as Pick<TSessionState, 'session' | 'loginAt'>;
-        console.log('currentState', currentState);
-        console.log('persistedState', persistedState);
 
         return {
           ...currentState,
