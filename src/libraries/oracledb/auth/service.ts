@@ -3,7 +3,10 @@ import jwt from 'jsonwebtoken';
 import { headers } from 'next/headers';
 import dayjs from '@/libraries/dayjs';
 import CustomServerError from '@/libraries/error/customServerError';
-import { ACCESS_TOKEN_EXPIRES_IN } from '@/libraries/oracledb/auth/config';
+import {
+  ACCESS_TOKEN_EXPIRES_IN,
+  VERIFICATION_CODE_EXPIRES_IN,
+} from '@/libraries/oracledb/auth/config';
 import { withOracleConnection } from '../connection';
 import { GET_ONE_MEMBER, POST_MEMBER, UPDATE_MEMBER, UPDATE_VERIFICATION_CODE } from './sql';
 
@@ -105,7 +108,7 @@ export const postMember = withOracleConnection(
 
       await connection.execute(UPDATE_VERIFICATION_CODE, [
         verificationCode,
-        dayjs().add(10, 'minute').toDate(),
+        dayjs().add(VERIFICATION_CODE_EXPIRES_IN, 'second').toDate(),
         email,
       ]);
 

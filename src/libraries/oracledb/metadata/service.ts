@@ -9,10 +9,14 @@ export type MetadataRow = [
   string, //value
 ];
 
-export const getAllMetadata = withOracleConnection(async (connection) => {
+export const getAllPulbicMetadata = withOracleConnection(async (connection) => {
   const result = await connection.execute<MetadataRow>(sql.GET_ALL_METADATA);
 
   const metadata = result.rows?.reduce<Record<string, string>>((acc, [key, value]) => {
+    if (key === 'google_refresh_token') {
+      // 민감한 정보는 제외
+      return acc;
+    }
     acc[key] = value;
     return acc;
   }, {});
@@ -38,3 +42,16 @@ export const updateMetadataValue = withOracleConnection(
     }
   },
 );
+
+export const getMetadataByKey = withOracleConnection(async (connection, dto: { key: string }) => {
+  const result = await connection.execute<MetadataRow>(sql.GET_METADATA_BY_KEY, {
+    key: dto.key,
+  });
+  const token = result.rows?.[0]?.[0];
+
+  if (!token) {
+    throw new Error('google refresh token is not provided');
+  }
+
+  return token;
+});

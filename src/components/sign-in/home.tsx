@@ -1,47 +1,50 @@
 'use client';
 import { Button, PinInput, TextInput } from '@mantine/core';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { z } from 'zod';
 import { clientApi } from '@/apis/fetcher';
-import dayjs from '@/libraries/dayjs';
 import { useTranslations } from '@/libraries/i18n/client';
+import { VERIFICATION_CODE_EXPIRES_IN } from '@/libraries/oracledb/auth/config';
 import { useSession } from '@/stores/session';
 import character from '/public/assets/character-3.png';
 import Background from '../common/background/Background';
 import css from './home.module.scss';
 
+const sendEmailDto = z.object({
+  email: z.email({ error: 'signIn.3000' }),
+});
+
 export default function Home() {
-  const queryClient = useQueryClient();
   const { t } = useTranslations();
-  const [sentTime, setSentTime] = useState<dayjs.Dayjs | null>(null);
+  const [sent, setSent] = useState(false);
+  const [expireSeconds, setExpireSeconds] = useState(0);
   const [verificationCode, setVerificationCode] = useState('');
   const [email, setEmail] = useState('');
+  const [errorCode, setErrorCode] = useState<string | null>(null);
 
-  const session = useSession();
   const signIn = useSession((state) => state.actions.signIn);
-  console.log('session', session);
 
   const mutateSendVerificationCode = useMutation({
     mutationFn: (args: { email: string }) =>
       clientApi.post<{ message: string }>(`v1/send-verification-code`, { json: args }).json(),
     onError: (error) => toast.error(error.message),
     onSuccess: (_, args) => {
-      setSentTime(() => dayjs().add(10, 'minutes'));
+      setSent(() => true);
+      setExpireSeconds(() => VERIFICATION_CODE_EXPIRES_IN);
     },
   });
 
-  const mutateLogin = useMutation({
+  const mutateSignIn = useMutation({
     mutationFn: (args: { email: string; verificationCode: string }) =>
       clientApi
         .post<{ message: string; data: { session: TSession } }>(`v1/sign-in`, { json: args })
         .json(),
     onError: (error) => toast.error(error.message),
     onSuccess: (json, args) => {
-      console.log('signin success', json);
       signIn({ session: json.data.session });
-      // queryClient.invalidateQueries({ queryKey: ['session'] });
     },
   });
 
@@ -49,38 +52,65 @@ export default function Home() {
     event.preventDefault();
 
     if (mutateSendVerificationCode.isPending) return;
+    const validation = sendEmailDto.safeParse({ email });
+
+    if (validation.error) {
+      setErrorCode(() => z.treeifyError(validation.error).properties?.email?.errors[0] || '');
+      return;
+    }
+
     mutateSendVerificationCode.mutate({ email });
   };
 
   const resend = () => {
     if (mutateSendVerificationCode.isPending) return;
+
+    const validation = sendEmailDto.safeParse({ email });
+
+    if (validation.error) {
+      setErrorCode(() => validation.error.message);
+      return;
+    }
+
     mutateSendVerificationCode.mutate({ email });
   };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!sentTime) return;
-    if (mutateLogin.isPending) return;
+    if (!sent) return;
+    if (mutateSignIn.isPending) return;
 
-    mutateLogin.mutate({
+    mutateSignIn.mutate({
       email,
       verificationCode,
     });
   };
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(() => event.target.value);
+    const value = event.target.value.replace(/\s/g, ''); // 공백 제거
+    setEmail(() => value);
+    setErrorCode(() => null);
   };
 
   const onChangeVerificationCode = (value: string) => {
     setVerificationCode(() => value);
+    setErrorCode(() => null);
   };
 
   const reset = () => {
-    setSentTime(() => null);
+    setSent(() => false);
+    setExpireSeconds(() => 0);
     setVerificationCode(() => '');
     setEmail(() => '');
+    setErrorCode(() => null);
+  };
+
+  const updateExpireSeconds = () => {
+    setExpireSeconds((prev) => {
+      const next = prev - 1;
+      return next <= 0 ? 0 : next;
+    });
   };
 
   return (
@@ -98,20 +128,23 @@ export default function Home() {
             />
           </div>
 
-          {sentTime === null ? (
+          {!sent ? (
             <form id="send-verification-code-form" onSubmit={onSendVerificationCode}>
               <TextInput
+                label={t('signIn.0010')}
                 value={email}
                 onChange={onChangeEmail}
                 placeholder={t('signIn.0003')}
-                disabled={mutateLogin.isPending}
+                disabled={mutateSignIn.isPending}
+                error={errorCode ? t(errorCode) : undefined}
               />
 
               <div className={css.buttonBox}>
                 <Button
                   type="submit"
-                  loading={mutateSendVerificationCode.isPending}
                   form="send-verification-code-form"
+                  loading={mutateSendVerificationCode.isPending}
+                  disabled={errorCode !== null || email.length <= 0}
                 >
                   {t('signIn.0004')}
                 </Button>
@@ -123,25 +156,46 @@ export default function Home() {
             </form>
           ) : (
             <form id="sign-in-form" onSubmit={onSubmit}>
-              <PinInput value={verificationCode} onChange={onChangeVerificationCode} length={8} />
+              <label htmlFor="verification-code-input">{t('signIn.0011')}</label>
+              <PinInput
+                id="verification-code-input"
+                value={verificationCode}
+                onChange={onChangeVerificationCode}
+                length={8}
+              />
+
+              <div className={css.resendBox}>
+                {expireSeconds > 0 ? (
+                  <Timer expiresSeconds={expireSeconds} onUpdate={updateExpireSeconds} />
+                ) : (
+                  <span className={css.expireText}>{t('signIn.0008')}</span>
+                )}
+
+                <Button
+                  type="button"
+                  onClick={resend}
+                  size="compact-sm"
+                  loading={mutateSendVerificationCode.isPending}
+                >
+                  {t('signIn.0006')}
+                </Button>
+              </div>
 
               <div className={css.messageBox}>
                 <p>{t('signIn.0007', { email })}</p>
-
-                <div>
-                  <Timer sentTime={sentTime} />
-                  <Button type="button" onClick={resend}>
-                    {t('signIn.0006')}
-                  </Button>
-                </div>
               </div>
 
-              <div>
-                <Button type="button" onClick={reset}>
-                  이전
+              <div className={css.buttonBox}>
+                <Button type="button" onClick={reset} variant="outline">
+                  {t('signIn.0009')}
                 </Button>
-                <Button type="submit" form="sign-in-form" loading={mutateLogin.isPending}>
-                  로그인
+                <Button
+                  type="submit"
+                  form="sign-in-form"
+                  loading={mutateSignIn.isPending}
+                  disabled={expireSeconds <= 0}
+                >
+                  {t('signIn.0000')}
                 </Button>
               </div>
             </form>
@@ -153,28 +207,23 @@ export default function Home() {
 }
 
 interface TimerProps {
-  sentTime: dayjs.Dayjs;
+  expiresSeconds: number;
+  onUpdate: () => void;
 }
 
-function Timer({ sentTime }: TimerProps) {
-  const now = dayjs();
-  const [seconds, setSeconds] = useState(() => now.diff(sentTime, 'seconds'));
+function Timer({ expiresSeconds, onUpdate }: TimerProps) {
+  const { t } = useTranslations();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds(() => seconds - 1);
-    }, 1000);
+    const interval = setInterval(() => onUpdate(), 1000);
     return () => clearInterval(interval);
   }, []);
 
-  const min = Math.floor(seconds / 60)
+  const min = Math.floor(expiresSeconds / 60)
     .toString()
     .padStart(2, '0');
-  const sec = (seconds % 60).toString().padStart(2, '0');
 
-  return (
-    <div>
-      {min}:{sec}
-    </div>
-  );
+  const sec = (expiresSeconds % 60).toString().padStart(2, '0');
+
+  return <span className={css.expireText}>{t('signIn.0012', { minutes: min, seconds: sec })}</span>;
 }

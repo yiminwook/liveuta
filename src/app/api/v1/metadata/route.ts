@@ -2,12 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
 import { getMemberByEmail, parseAccessToken } from '@/libraries/oracledb/auth/service';
-import { getAllMetadata, updateMetadataValue } from '@/libraries/oracledb/metadata/service';
+import { getAllPulbicMetadata, updateMetadataValue } from '@/libraries/oracledb/metadata/service';
 import { updateMetadataDto } from '@/types/dto';
 
 export async function GET() {
   try {
-    const metadata = await getAllMetadata();
+    const metadata = await getAllPulbicMetadata();
     return NextResponse.json({ message: '메타데이터를 조회했습니다.', data: metadata });
   } catch (error) {
     console.error('GET /api/v1/metadata', error);

@@ -5,24 +5,25 @@
   margin-block-start: 3.5rem;
   padding: 1rem;
 
-  .inner {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 4rem 2rem;
-    border-radius: 10px;
-    box-shadow: var.$box-shadow;
-    background-color: util.palette(first, 25);
+}
 
-    .imgBox {
-      width: 100%;
-      margin: 1rem auto;
+.inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 2rem;
+  border-radius: 10px;
+  box-shadow: var.$box-shadow;
+  background-color: rgba(200, 200, 200, 0.2);
+}
 
-      img {
-        width: 100%;
-        object-fit: contain;
-      }
-    }
+.imgBox {
+  width: 100%;
+  margin: 1rem auto;
+
+  img {
+    width: 100%;
+    object-fit: contain;
   }
 }
 
@@ -32,6 +33,14 @@
   gap: 1rem;
   margin-block-start: 1rem;
   color: #000;
+}
+
+.resendBox {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .messageBox {

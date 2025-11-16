@@ -26,9 +26,10 @@ export type ServerActionResponse<T> = {
 export type TMetadata = {
   cover_image_url: string;
   default_video_id: string;
-  google_refresh_token: string;
   app_runtime_version: string;
 };
+
+export const GOOGLE_REFRESH_TOKEN_KEY = 'google_refresh_token';
 
 export const CHANNEL_QUERY_TYPE = ['name', 'handle', 'channelId'] as const;
 export type TChannelQueryType = (typeof CHANNEL_QUERY_TYPE)[number];

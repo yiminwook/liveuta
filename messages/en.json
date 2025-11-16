@@ -247,9 +247,15 @@
     "0002": "Welcome to LiveUta",
     "0003": "Enter Your Email Address",
     "0004": "Request Email Verification",
-    "0005": "If you don't receive the email, please check your spam folder or try again.",
+    "0005": "* If you don't receive the email, please check your spam folder or try again.",
     "0006": "Resend",
-    "0007": "{{email}} Email verification request has been sent."
+    "0007": "{{email}} Email verification request has been sent.",
+    "0008": "Authentication code expired",
+    "0009": "Back",
+    "0010": "Email",
+    "0011": "Verification Code",
+    "0012": "Expiration time: {{minutes}} minutes {{seconds}} seconds",
+    "3000": "Invalid email address."
   },
   "channel": {
     "title": "Channel",

@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import BadReqError from '@/libraries/error/badRequestError';
-import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
 import { sendMail } from '@/libraries/mail';
 import { postMember } from '@/libraries/oracledb/auth/service';
-import { getAllMetadata } from '@/libraries/oracledb/metadata/service';
+import { getMetadataByKey } from '@/libraries/oracledb/metadata/service';
+import { GOOGLE_REFRESH_TOKEN_KEY } from '@/types';
 
 const sendEmailDto = z.object({
-  email: z.string(),
+  email: z.email({ error: '이메일 형식이 올바르지 않습니다.' }),
 });
 
 export async function POST(request: NextRequest) {
@@ -22,12 +22,7 @@ export async function POST(request: NextRequest) {
 
     const verificationCode = await postMember({ email: dto.data.email });
 
-    const metadata = await getAllMetadata();
-    const refreshToken = metadata.google_refresh_token;
-
-    if (!refreshToken) {
-      throw new CustomServerError({ statusCode: 500, message: 'refresh token is not provided' });
-    }
+    const refreshToken = await getMetadataByKey({ key: GOOGLE_REFRESH_TOKEN_KEY });
 
     const res = await sendMail({
       to: dto.data.email,

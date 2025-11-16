@@ -15,7 +15,8 @@ export const sendMail = async (arg: {
   const gmail = google.gmail({ version: 'v1', auth: oauth2Client });
 
   const emailLines = [
-    `To: grs0412@naver.com`,
+    'From: 라이브우타',
+    `To: ${arg.to}`,
     `Subject: =?UTF-8?B?${Buffer.from(arg.title, 'utf-8').toString('base64')}?=`,
     `Content-Type: text/html; charset=UTF-8`,
     `Content-Transfer-Encoding: base64`,
