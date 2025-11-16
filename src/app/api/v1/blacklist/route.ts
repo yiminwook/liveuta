@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
+import { parseAccessToken } from '@/libraries/oracledb/auth/service';
 import { getAllBlackList } from '@/libraries/oracledb/blacklist/service';
-import parseIdToken from '@/utils/parse-id-token';
 
 export async function GET() {
   try {
-    const payload = await parseIdToken();
+    const payload = await parseAccessToken();
 
     if (!payload) {
       console.error('id token is not provided');
@@ -14,7 +14,7 @@ export async function GET() {
     }
 
     const data = await getAllBlackList({
-      memberEmail: payload.email!,
+      memberEmail: payload.email,
     });
 
     return NextResponse.json({ message: '블랙리스트를 조회했습니다.', data });

@@ -12,15 +12,15 @@ interface Props {
 /** children 하위 컴포넌트는 session이 없음을 보장 */
 export function UnAuthorized({ children, fallback, homeUrl }: Props) {
   const router = useRouter();
-  const session = useSession();
+  const sessionStore = useSession();
 
   useEffect(() => {
-    if (session.isLoading === false && session.user !== null) {
+    if (sessionStore.hydrated && sessionStore.session !== null) {
       router.replace(homeUrl);
     }
-  }, [session]);
+  }, [sessionStore]);
 
-  if (session.isLoading) return <>{fallback}</>;
-  if (session.user !== null) return null;
+  if (!sessionStore.hydrated) return <>{fallback}</>;
+  if (sessionStore.session !== null) return null;
   return <>{children}</>;
 }

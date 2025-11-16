@@ -1,6 +1,5 @@
 'use client';
 import { Avatar, Button } from '@mantine/core';
-import { User } from 'firebase/auth';
 import useDeleteBlacklist from '@/hooks/use-delete-blacklist';
 import { useTranslations } from '@/libraries/i18n/client';
 import { TChannelDocumentWithoutId } from '@/libraries/mongodb/type';
@@ -10,16 +9,16 @@ import css from './List.module.scss';
 type BlacklistProps = {
   channelList: Record<string, TChannelDocumentWithoutId>;
   blacklist: Set<string>;
-  user: User;
+  session: TSession;
 };
 
-export default function Blacklist({ channelList, blacklist, user }: BlacklistProps) {
+export default function Blacklist({ channelList, blacklist, session }: BlacklistProps) {
   const mutationDelete = useDeleteBlacklist();
   const { t } = useTranslations();
 
   const handleClick = (channelId: string) => {
     if (confirm(t('my.blacklist.removeBlacklist'))) {
-      mutationDelete.mutate({ channelId, email: user.email ?? '' });
+      mutationDelete.mutate({ channelId, email: session.email });
     }
   };
 

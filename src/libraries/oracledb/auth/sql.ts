@@ -23,3 +23,9 @@ export const DICONNECT_ALL_MEMBER = `
     SET DISCONNECT = 'Y'
     WHERE DISCONNECT = 'N';
  `;
+
+export const UPDATE_VERIFICATION_CODE = `
+  UPDATE MEMBER
+  SET VERIFICATION_CODE = :verificationCode, EXPIRES_AT = :expiresAt
+  WHERE EMAIL = :email
+ `;

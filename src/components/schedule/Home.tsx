@@ -25,8 +25,8 @@ export default function Home({ scheduleDto }: HomeProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const session = useSession();
-  const { whiteListMap, channelMap, blackListMap } = useCachedData({ user: session.user });
+  const session = useSession((state) => state.session);
+  const { whiteListMap, channelMap, blackListMap } = useCachedData({ session });
   const { data, isPending } = useScheduleQuery({
     filter: scheduleDto.filter,
     enableAutoSync: true,
@@ -179,7 +179,7 @@ export default function Home({ scheduleDto }: HomeProps) {
       <div className={css.position}>
         <div className={css.inner}>
           <ScheduleNav
-            user={session.user}
+            session={session}
             scheduleDto={scheduleDto}
             length={proceedScheduleData.length}
           />
@@ -188,7 +188,7 @@ export default function Home({ scheduleDto }: HomeProps) {
       {/* live player */}
       <TopSection filter={scheduleDto.filter} locale={locale} />
       <ScheduleSection
-        user={session.user}
+        session={session}
         scheduleDto={scheduleDto}
         channelMap={channelMap}
         contents={proceedScheduleData.content}

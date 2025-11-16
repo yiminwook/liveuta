@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
+import { parseAccessToken } from '@/libraries/oracledb/auth/service';
 import { deleteBlacklist, postBlacklist } from '@/libraries/oracledb/blacklist/service';
-import parseIdToken from '@/utils/parse-id-token';
 
 export async function POST(
   _req: NextRequest,
@@ -12,7 +12,7 @@ export async function POST(
 ) {
   const params = await props.params;
   try {
-    const payload = await parseIdToken();
+    const payload = await parseAccessToken();
 
     if (!payload) {
       console.error('id token is not provided');
@@ -20,7 +20,7 @@ export async function POST(
     }
 
     const data = await postBlacklist({
-      memberEmail: payload.email!,
+      memberEmail: payload.email,
       channelId: params.channelId,
     });
 
@@ -40,7 +40,7 @@ export async function DELETE(
 ) {
   const params = await props.params;
   try {
-    const payload = await parseIdToken();
+    const payload = await parseAccessToken();
 
     if (!payload) {
       console.error('id token is not provided');
@@ -48,7 +48,7 @@ export async function DELETE(
     }
 
     const data = await deleteBlacklist({
-      memberEmail: payload.email!,
+      memberEmail: payload.email,
       channelId: params.channelId,
     });
 

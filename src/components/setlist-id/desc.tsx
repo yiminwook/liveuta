@@ -22,14 +22,14 @@ export default function Desc({ videoId, description }: DescProps) {
   const router = useRouter();
 
   const queryClient = useQueryClient();
-  const session = useSession();
+  const session = useSession((state) => state.session);
 
   const [isEditing, setIsEditing] = useState(false);
   const [desc, setDesc] = useState('');
   const actions = usePlayer((state) => state.actions);
 
   const toggleEditing = () => {
-    if (!session.user) {
+    if (!session) {
       toast.warning(t('setlistId.desc.notLoggedInError'));
       return;
     }
@@ -66,7 +66,7 @@ export default function Desc({ videoId, description }: DescProps) {
     e.preventDefault();
     const description = desc.trim();
 
-    if (!session.user) {
+    if (!session) {
       toast.warning(t('setlistId.desc.notLoggedInError'));
       return;
     }
@@ -100,7 +100,7 @@ export default function Desc({ videoId, description }: DescProps) {
             color="red"
             onClick={handleCancel}
             loading={mutateSetlist.isPending}
-            disabled={!session.user}
+            disabled={!session}
           >
             {t('setlistId.desc.cancel')}
           </Button>
@@ -109,7 +109,7 @@ export default function Desc({ videoId, description }: DescProps) {
             variant="default"
             data-variant="save"
             loading={mutateSetlist.isPending}
-            disabled={!session.user}
+            disabled={!session}
           >
             {t('setlistId.desc.save')}
           </Button>

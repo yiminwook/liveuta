@@ -15,8 +15,8 @@ type ChannelSectionProps = {
 };
 
 export default function ChannelSection({ contents }: ChannelSectionProps) {
-  const session = useSession();
-  const { whiteListMap } = useCachedData({ user: session.user });
+  const session = useSession((state) => state.session);
+  const { whiteListMap } = useCachedData({ session });
   const [selectedChannel, setSelectedChannel] = useState<TYChannelsData | null>(null);
 
   const selecteChannel = (content: TYChannelsData) => setSelectedChannel(() => content);
@@ -29,7 +29,7 @@ export default function ChannelSection({ contents }: ChannelSectionProps) {
           <ChannelCard
             key={content.uid}
             content={content}
-            user={session.user}
+            session={session}
             isFavorite={whiteListMap.has(content.uid)}
             selecteChannel={selecteChannel}
           />

@@ -12,8 +12,8 @@ type Props = {
 export function Administrator({ children, fallback }: Props) {
   const router = useRouter();
 
-  const session = useSession();
-  const userInfo = useUserInfo({ user: session.user });
+  const sessionStore = useSession();
+  const userInfo = useUserInfo({ session: sessionStore.session });
 
   // userLv
   // 1 - Memember
@@ -27,8 +27,8 @@ export function Administrator({ children, fallback }: Props) {
     }
   }, [userInfo.data?.userLv]);
 
-  if (session.isLoading || userInfo.isPending) return <>{fallback}</>;
-  if (!session.user) return null;
+  if (!sessionStore.hydrated || userInfo.isPending) return <>{fallback}</>;
+  if (!sessionStore.session) return null;
   if (userInfo.data?.userLv && userInfo.data.userLv < 3) return null;
   return <>{children}</>;
 }

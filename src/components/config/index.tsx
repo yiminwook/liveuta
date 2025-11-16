@@ -7,7 +7,6 @@ import CommandMenu from '../common/command/CommandMenu';
 import { CmdProvider } from '../common/command/Context';
 import AppProvider from './AppProvider';
 import AsyncModalContainer from './async-modal-container';
-import { AuthProvider } from './auth-provider';
 import BProgressProviders from './BProgress';
 import Devtools from './Devtools';
 import Hotkeys from './Hotkeys';
@@ -35,31 +34,29 @@ export default async function Configs({ children, cookies, locale }: ConfigsProp
   ]);
 
   return (
-    <AuthProvider>
-      <AppProvider
-        initState={{
-          defaultVideoId: metadata.default_video_id,
-        }}
-      >
-        <ReactQuery locale={locale}>
-          <BProgressProviders>
-            <MantineProvider locale={locale}>
-              <Hotkeys>
-                <CmdProvider locale={locale}>
-                  {children}
-                  <CommandMenu locale={locale} />
-                  <ToastBox />
-                  <Particle />
-                  <ServiceWorker />
-                  <Devtools />
-                  <PortalModalContainer />
-                  <AsyncModalContainer />
-                </CmdProvider>
-              </Hotkeys>
-            </MantineProvider>
-          </BProgressProviders>
-        </ReactQuery>
-      </AppProvider>
-    </AuthProvider>
+    <AppProvider
+      initState={{
+        defaultVideoId: metadata.default_video_id,
+      }}
+    >
+      <ReactQuery locale={locale}>
+        <BProgressProviders>
+          <MantineProvider locale={locale}>
+            <Hotkeys>
+              <CmdProvider locale={locale}>
+                {children}
+                <CommandMenu locale={locale} />
+                <ToastBox />
+                <Particle />
+                <ServiceWorker />
+                <Devtools />
+                <PortalModalContainer />
+                <AsyncModalContainer />
+              </CmdProvider>
+            </Hotkeys>
+          </MantineProvider>
+        </BProgressProviders>
+      </ReactQuery>
+    </AppProvider>
   );
 }

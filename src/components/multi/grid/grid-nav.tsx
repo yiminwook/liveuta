@@ -37,8 +37,8 @@ export default function GridNav({ onAdd, onClear, isFlip, toggleFlip }: Props) {
   const [filter, setFilter] = useState<StreamFilter>(StreamFilter.live);
   const [newUrl, setNewUrl] = useState('');
 
-  const session = useSession();
-  const { blackListMap, channelMap } = useCachedData({ user: session.user });
+  const session = useSession((state) => state.session);
+  const { blackListMap, channelMap } = useCachedData({ session });
   const { data, isPending } = useScheduleQuery({ filter, enableAutoSync: true, locale });
 
   const onChangeUrl = (e: ChangeEvent<HTMLInputElement>) => {

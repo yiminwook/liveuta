@@ -1,8 +1,6 @@
 'use client';
 import { Avatar, CloseButton, RemoveScroll } from '@mantine/core';
-import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
-import { signOut, User } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 import { useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
@@ -10,17 +8,17 @@ import { toast } from 'sonner';
 import { withSession } from '@/components/common/authorization/withSession';
 import useStopPropagation from '@/hooks/use-stop-propagation';
 import { useUserInfo } from '@/hooks/use-user-info';
-import FirebaseClient from '@/libraries/firebase/client';
 import { useLocale, usePathname } from '@/libraries/i18n/client';
 import { useApp } from '@/stores/app';
+import { useSession } from '@/stores/session';
 import NavItem from './NavItem';
 import css from './Sidebar.module.scss';
 
 interface AccountSidebarProps {
-  user: User;
+  session: TSession;
 }
 
-export default withSession<AccountSidebarProps>(function AccountSidebar({ user }) {
+export default withSession<AccountSidebarProps>(function AccountSidebar({ session }) {
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
@@ -28,21 +26,21 @@ export default withSession<AccountSidebarProps>(function AccountSidebar({ user }
   const isShow = useApp((state) => state.isShowAcctSidebar);
   const setIsShow = useApp((state) => state.actions.setIsShowAcctSidebar);
 
-  const userInfo = useUserInfo({ user });
+  const userInfo = useUserInfo({ session });
+  const signOut = useSession((state) => state.actions.signOut);
   const { enableScope, disableScope } = useHotkeysContext();
   const { stopPropagation } = useStopPropagation();
 
-  const mutateLogout = useMutation({
-    mutationFn: () => signOut(FirebaseClient.getInstance().auth),
-    onError: (error) => toast.error(error.message),
-    onSettled: () => router.replace('/'),
-  });
-
   const handleClose = useCallback(() => setIsShow(false), [setIsShow]);
 
-  const logout = () => {
-    if (mutateLogout.isPending) return;
-    mutateLogout.mutate();
+  const handleSignOut = () => {
+    try {
+      signOut();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Unknown error');
+    } finally {
+      router.replace('/');
+    }
   };
 
   useHotkeys(
@@ -84,8 +82,8 @@ export default withSession<AccountSidebarProps>(function AccountSidebar({ user }
         <div className={clsx(css.wrap, { show: isShow })} onClick={handleClose}>
           <div className={clsx(css.inner, 'right', { moveLeft: isShow })} onClick={stopPropagation}>
             <div className={css.logoutBtnBox}>
-              <button className={css.logoutBtn} onClick={logout} disabled={mutateLogout.isPending}>
-                <Avatar name={user.email ?? ''} w={40} h={40} radius="xl" alt="유저 이미지" />
+              <button className={css.logoutBtn} onClick={handleSignOut}>
+                <Avatar name={session.email} w={40} h={40} radius="xl" alt="유저 이미지" />
                 로그아웃
               </button>
               <CloseButton w={40} h={40} onClick={handleClose} />

@@ -4,6 +4,7 @@ import BadReqError from '@/libraries/error/badRequestError';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
 import { sendMail } from '@/libraries/mail';
+import { postMember } from '@/libraries/oracledb/auth/service';
 import { getAllMetadata } from '@/libraries/oracledb/metadata/service';
 
 const sendEmailDto = z.object({
@@ -19,6 +20,8 @@ export async function POST(request: NextRequest) {
       throw new BadReqError(z.prettifyError(dto.error));
     }
 
+    const verificationCode = await postMember({ email: dto.data.email });
+
     const metadata = await getAllMetadata();
     const refreshToken = metadata.google_refresh_token;
 
@@ -29,7 +32,7 @@ export async function POST(request: NextRequest) {
     const res = await sendMail({
       to: dto.data.email,
       title: '라이브우타 인증코드 입니다.',
-      body: '<div>Hello</div>',
+      body: `<div>${verificationCode}</div>`,
       refreshToken,
     });
 

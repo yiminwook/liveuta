@@ -20,7 +20,7 @@ export const sendMail = async (arg: {
     `Content-Type: text/html; charset=UTF-8`,
     `Content-Transfer-Encoding: base64`,
     ``,
-    Buffer.from('<div>Hello</div>', 'utf-8').toString('base64'),
+    Buffer.from(arg.body, 'utf-8').toString('base64'),
   ];
 
   const email = emailLines.join('\r\n');

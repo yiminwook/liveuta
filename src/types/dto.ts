@@ -33,8 +33,7 @@ export const updateMetadataDto = z.object({
 
 export const signInDto = z.object({
   email: z.email({ error: '이메일 형식이 올바르지 않습니다.' }),
-  callbackUrl: z.optional(z.string()),
-  locale: z.string(),
+  verificationCode: z.string(),
 });
 
 export type TSignInDto = z.infer<typeof signInDto>;

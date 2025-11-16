@@ -5,8 +5,8 @@ import { useSession } from '@/stores/session';
 type Props = {};
 
 export default function Client({}: Props) {
-  const session = useSession();
-  const userInfo = useUserInfo({ user: session.user });
+  const session = useSession((state) => state.session);
+  const userInfo = useUserInfo({ session });
 
   return (
     <div>

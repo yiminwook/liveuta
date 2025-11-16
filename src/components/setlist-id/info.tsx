@@ -12,7 +12,6 @@ import { useMount } from '@/hooks/use-mount';
 import { useUserInfo } from '@/hooks/use-user-info';
 import { LogosYoutubeIcon } from '@/icons';
 import dayjs from '@/libraries/dayjs';
-import FirebaseClient from '@/libraries/firebase/client';
 import { Link } from '@/libraries/i18n';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { ChannelDatesetItem } from '@/libraries/mongodb/channels';
@@ -36,8 +35,8 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const session = useSession();
-  const userInfo = useUserInfo({ user: session.user });
+  const session = useSession((state) => state.session);
+  const userInfo = useUserInfo({ session });
 
   const videoUrl = generateVideoUrl(setlist.videoId);
   const channelUrl = generateChannelUrl(channel.channelId);
@@ -90,7 +89,7 @@ export default function Info({ setlist, channel, icon }: InfoProps) {
                   mutateDelete.mutate({ videoId: setlist.videoId });
               }}
               loading={mutateDelete.isPending}
-              disabled={!session.user}
+              disabled={!session}
             >
               <span className={css.letterWide}>삭제</span>
             </Button>

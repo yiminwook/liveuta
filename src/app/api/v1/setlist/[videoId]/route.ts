@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
+import { getMemberByEmail, parseAccessToken } from '@/libraries/oracledb/auth/service';
 import { deleteSetlist, postSetlist, updateSetlist } from '@/libraries/oracledb/setlist/service';
 import { getYoutubeChannelsByVideoId } from '@/libraries/youtube';
 import { SETLIST_DELETE_LEVEL } from '@/types/api/setlist';
-import parseIdToken from '@/utils/parse-id-token';
 import { checkDescription } from './validation';
 
 export async function POST(req: NextRequest, props: { params: Promise<{ videoId: string }> }) {
   const params = await props.params;
   try {
-    const payload = await parseIdToken();
+    const payload = await parseAccessToken();
 
     if (!payload) {
       console.error('id token is not provided');
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest, props: { params: Promise<{ videoId:
 export async function PUT(req: NextRequest, props: { params: Promise<{ videoId: string }> }) {
   const params = await props.params;
   try {
-    const payload = await parseIdToken();
+    const payload = await parseAccessToken();
 
     if (!payload) {
       console.error('id token is not provided');
@@ -90,16 +90,18 @@ export async function PUT(req: NextRequest, props: { params: Promise<{ videoId: 
 export async function DELETE(_req: NextRequest, props: { params: Promise<{ videoId: string }> }) {
   const params = await props.params;
   try {
-    const payload = await parseIdToken();
+    const payload = await parseAccessToken();
 
     if (!payload) {
       console.error('id token is not provided');
       throw new CustomServerError({ statusCode: 401, message: '로그인이 필요합니다.' });
     }
 
-    if (payload.userLv < SETLIST_DELETE_LEVEL) {
-      console.error('user level is not enough', payload.userLv);
-      throw new CustomServerError({ message: '권한이 없습니다.', statusCode: 401 });
+    const userInfo = await getMemberByEmail({ email: payload.email });
+
+    if (userInfo.userLv < SETLIST_DELETE_LEVEL) {
+      console.error('user level is not enough', userInfo.userLv);
+      throw new CustomServerError({ message: '권한이 없습니다.', statusCode: 403 });
     }
 
     await deleteSetlist(params.videoId);

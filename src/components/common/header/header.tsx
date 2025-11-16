@@ -22,7 +22,7 @@ export default function Header({ locale }: HeaderProps) {
   const gnbRef = useRef<HTMLDivElement>(null);
 
   const actions = useApp((state) => state.actions);
-  const session = useSession();
+  const sessionStore = useSession();
 
   const { setCmdOpen } = useCmdActions();
 
@@ -52,8 +52,6 @@ export default function Header({ locale }: HeaderProps) {
     };
   }, [isMobile]);
 
-  console.log('session', session.user);
-
   return (
     <header className={css.header}>
       <div className={css.inner} ref={gnbRef}>
@@ -69,16 +67,16 @@ export default function Header({ locale }: HeaderProps) {
             </button>
             <DesktopNav />
 
-            {session.isLoading ? (
+            {!sessionStore.hydrated ? (
               <Skeleton height={40} circle />
-            ) : !session.user ? (
+            ) : !sessionStore.session ? (
               <Link locale={locale} href="/sign-in" className={css.loginBtn}>
                 {t('global.header.login')}
               </Link>
             ) : (
               <button className={css.accountBtn} onClick={openAccountSidebar}>
                 <Avatar
-                  name={session.user.email ?? ''}
+                  name={sessionStore.session.email}
                   w={40}
                   h={40}
                   radius="xl"

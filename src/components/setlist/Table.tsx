@@ -3,7 +3,6 @@ import { useRouter } from '@bprogress/next';
 import { Pagination, Table } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
-import { User } from 'firebase/auth';
 import { clientApi } from '@/apis/fetcher';
 import loadingCss from '@/components/common/loading/Loading.module.scss';
 import Wave from '@/components/common/loading/Wave';
@@ -25,7 +24,7 @@ type TableProps = {
     page: number;
     sort: 'broadcast' | 'create';
   };
-  user: User | null;
+  session: TSession | null;
 };
 
 type DataType = {
@@ -33,14 +32,14 @@ type DataType = {
   totalPage: number;
 };
 
-export default function SetlistTable({ user, searchParams }: TableProps) {
+export default function SetlistTable({ session, searchParams }: TableProps) {
   const router = useRouter();
   const locale = useLocale();
   const { t } = useTranslations();
-  const { channelMap } = useCachedData({ user });
+  const { channelMap } = useCachedData({ session });
 
   const { data, isLoading } = useQuery({
-    queryKey: [SETLISTS_TAG, user?.email, searchParams],
+    queryKey: [SETLISTS_TAG, session?.email, searchParams],
     queryFn: async () => {
       const query = new URLSearchParams();
       query.set('query', searchParams.query);

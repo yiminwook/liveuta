@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import errorHandler from '@/libraries/error/handler';
+import { parseAccessToken } from '@/libraries/oracledb/auth/service';
 import { getAllSetlist, searchSetlist } from '@/libraries/oracledb/setlist/service';
-import parseIdToken from '@/utils/parse-id-token';
 import * as validation from './validation';
 
 export async function GET(request: NextRequest) {
   try {
-    const payload = await parseIdToken();
+    const payload = await parseAccessToken();
     const memberEmail = payload?.email || '';
     const searchParams = request.nextUrl.searchParams;
     const query = validation.checkQuery(searchParams.get('query')); // DESCRIPTION query

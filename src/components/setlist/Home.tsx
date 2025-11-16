@@ -15,7 +15,7 @@ interface HomeProps {
 }
 
 export default function Home({ searchParams }: HomeProps) {
-  const session = useSession();
+  const session = useSession((state) => state.session);
   const { t } = useTranslations();
 
   const parseSearchParams = {
@@ -28,8 +28,8 @@ export default function Home({ searchParams }: HomeProps) {
     <Background>
       <div className={css.inner}>
         <h1 className="blind">{t('setlist.title')}</h1>
-        <Nav searchParams={parseSearchParams} user={session.user} />
-        <Table user={session.user} searchParams={parseSearchParams} />
+        <Nav searchParams={parseSearchParams} session={session} />
+        <Table session={session} searchParams={parseSearchParams} />
       </div>
     </Background>
   );

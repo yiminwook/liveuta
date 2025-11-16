@@ -1,7 +1,6 @@
 'use client';
 import { Button, Loader } from '@mantine/core';
 import variable from '@variable';
-import { User } from 'firebase/auth';
 import { GridComponents, VirtuosoGrid } from 'react-virtuoso';
 import { toast } from 'sonner';
 import useMutateWhitelist from '@/hooks/use-delete-whitelist';
@@ -23,7 +22,7 @@ import ScheduleCardSkeleton from '../common/scheduleCard/schedule-card-skeleton'
 import css from './ScheduleSection.module.scss';
 
 type ScheduleSectionProps = {
-  user: User | null;
+  session: TSession | null;
   scheduleDto: TScheduleDto;
   contents: TParsedClientContent[];
   channelMap: Record<string, TChannelDocumentWithoutId>;
@@ -32,7 +31,7 @@ type ScheduleSectionProps = {
 };
 
 export default function ScheduleSection({
-  user,
+  session,
   scheduleDto,
   contents,
   channelMap,
@@ -57,7 +56,7 @@ export default function ScheduleSection({
   const { reservePush } = useReservePush();
 
   const handleFavorite = (content: TParsedClientContent) => {
-    const email = user?.email;
+    const email = session?.email;
 
     if (!email) {
       toast.error(t('schedule.scheduleSection.notLoggedInError'));
@@ -74,7 +73,7 @@ export default function ScheduleSection({
   };
 
   const handleBlock = async (content: TParsedClientContent) => {
-    const email = user?.email;
+    const email = session?.email;
 
     if (!email) {
       toast.error(t('schedule.scheduleSection.notLoggedInError'));
@@ -142,7 +141,7 @@ export default function ScheduleSection({
         itemContent={(_i, data) => (
           <ScheduleCard
             key={`scheduled_${data.videoId}`}
-            user={user}
+            session={session}
             content={data}
             channel={channelMap[data.channelId]}
             openNewTab={openStream}

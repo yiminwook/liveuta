@@ -13,6 +13,8 @@ declare global {
 
       readonly NEXT_PUBLIC_SITE_URL: string;
 
+      readonly ACCESS_SECRET: string;
+
       readonly GOOGLE_API_KEY: string;
       readonly GOOGLE_CLIENT_ID: string;
       readonly GOOGLE_CLIENT_SECRET: string;
@@ -29,25 +31,6 @@ declare global {
 
       readonly NEXT_PUBLIC_SENTRY_DSN?: string;
       readonly SENTRY_AUTH_TOKEN?: string;
-
-      /** 폐기 */
-      // readonly NEXT_PUBLIC_REQUEST_URL: string;
-
-      // readonly NEXTAUTH_SECRET: string;
-      // readonly ACCESS_SECRET: string;
-
-      // readonly NAVER_CLIENT_ID: string;
-      // readonly NAVER_CLIENT_SECRET: string;
-      // readonly KAKAO_CLIENT_ID: string;
-      // readonly KAKAO_CLIENT_SECRET: string;
-
-      // readonly CONTENTS_SHEET_RANGE: string;
-      // readonly CHANNELS_SHEET_RANGE: string;
-      // readonly PUSH_SHEET_RANGE: string;
-
-      // readonly CONTENTS_SHEET_ID: string;
-      // readonly CHANNELS_SHEET_ID: string;
-      // readonly PUSH_SHEET_ID: string;
 
       /** 미사용 */
       readonly HOLODEX_API_KEY: string;

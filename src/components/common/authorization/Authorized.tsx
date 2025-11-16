@@ -11,16 +11,16 @@ interface Props {
 
 /** children 하위 컴포넌트는 session이 있음을 보장 */
 export function Authorized({ children, fallback, signInUrl }: Props) {
-  const session = useSession();
   const router = useRouter();
+  const sessionStore = useSession();
 
   useEffect(() => {
-    if (session.isLoading === false && session.user === null) {
+    if (sessionStore.hydrated && sessionStore.session === null) {
       router.replace(signInUrl);
     }
-  }, [session]);
+  }, [sessionStore]);
 
-  if (session.isLoading) return <>{fallback}</>;
-  if (!session.user) return null;
+  if (!sessionStore.hydrated) return <>{fallback}</>;
+  if (!sessionStore.session) return null;
   return <>{children}</>;
 }

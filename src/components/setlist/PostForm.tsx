@@ -1,7 +1,6 @@
 'use client';
 import { Button, Textarea, TextInput } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { User } from 'firebase/auth';
 import { MouseEvent, useState } from 'react';
 import { toast } from 'sonner';
 import { clientApi } from '@/apis/fetcher';
@@ -10,10 +9,10 @@ import { useTranslations } from '@/libraries/i18n/client';
 import css from './PostForm.module.scss';
 
 type PostFormProps = {
-  user: User | null;
+  session: TSession | null;
 };
 
-export default function PostForm({ user }: PostFormProps) {
+export default function PostForm({ session }: PostFormProps) {
   const [url, setUrl] = useState('');
   const [desc, setDesc] = useState('');
   const queryClient = useQueryClient();
@@ -51,7 +50,7 @@ export default function PostForm({ user }: PostFormProps) {
       return toast.warning(t('setlist.postForm.emptySetlistError'));
     }
 
-    if (user === null) {
+    if (session === null) {
       return toast.warning(t('setlist.postForm.notLoggedInError'));
     }
 

@@ -1,6 +1,5 @@
 'use client';
 import clsx from 'clsx';
-import { User } from 'firebase/auth';
 import { memo } from 'react';
 import {
   STREAM_STATUS_MAPPER,
@@ -17,7 +16,7 @@ type ScheduleCardProps = {
   classname?: string;
   content: TParsedClientContent;
   channel: TChannelDocumentWithoutId | undefined;
-  user: User | null;
+  session: TSession | null;
   isFavorite?: boolean;
   addAlarm?: (item: TParsedClientContent, channel?: TChannelDocumentWithoutId) => void;
   openNewTab?: (item: TParsedClientContent) => void;

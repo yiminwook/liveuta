@@ -40,8 +40,10 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
   const [query, setQuery] = useState('');
 
   const modalStore = useSetModalStore();
-  const session = useSession();
-  const { whiteListMap, blackListMap, channelMap } = useCachedData({ user: session.user });
+  const session = useSession((state) => state.session);
+  const { whiteListMap, blackListMap, channelMap } = useCachedData({
+    session: session,
+  });
   const { data, isPending } = useScheduleQuery({ enableAutoSync: false, locale });
 
   const onChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,9 +64,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
   const { reservePush } = useReservePush();
 
   const handleFavorite = (content: TParsedClientContent) => {
-    const email = session.user?.email;
-
-    if (!email) {
+    if (!session) {
       toast.error(t('home.notLoggedInError'));
       return;
     }
@@ -74,26 +74,24 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
     if (!isFavorite && confirm(t('home.addFavoriteChannel'))) {
       mutatePostFavorite.mutate({
         channelId: content.channelId,
-        email,
+        email: session.email,
       });
     } else if (isFavorite && confirm(t('home.removeFavoriteChannel'))) {
       mutateDeleteFavorite.mutate({
         channelId: content.channelId,
-        email,
+        email: session.email,
       });
     }
   };
 
   const handleBlock = async (content: TParsedClientContent) => {
-    const email = session.user?.email;
-
-    if (!email) {
+    if (!session) {
       toast.error(t('home.notLoggedInError'));
       return;
     }
 
     if (confirm(t('home.blockChannel'))) {
-      mutateBlock.mutate({ channelId: content.channelId, email });
+      mutateBlock.mutate({ channelId: content.channelId, email: session.email });
     }
   };
 
@@ -143,7 +141,7 @@ export default function Client({ coverImgUrl, recentChannels }: Props) {
         </div>
       </section>
 
-      {session.user && !isPending && (
+      {!!session && !isPending && (
         <section className={css.favoriteSection}>
           <div className={css.favoriteNav}>
             <h2>🌟 {t('home.favorite')}</h2>

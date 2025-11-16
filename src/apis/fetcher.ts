@@ -1,5 +1,5 @@
 import ky from 'ky';
-import FirebaseClient from '@/libraries/firebase/client';
+import { useSession } from '@/stores/session';
 
 export const serverApi = ky.create({
   fetch: fetch, // next/fetch
@@ -34,10 +34,10 @@ export const clientApi = ky.create({
   hooks: {
     beforeRequest: [
       async (request) => {
-        const idToken = await FirebaseClient.getInstance().auth.currentUser?.getIdToken();
+        const accessToken = useSession.getState().session?.accessToken;
 
-        if (idToken) {
-          request.headers.set('Authorization', `Bearer ${idToken}`);
+        if (accessToken) {
+          request.headers.set('Authorization', `Bearer ${accessToken}`);
         }
       },
     ],

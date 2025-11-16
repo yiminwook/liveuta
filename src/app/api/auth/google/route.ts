@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import errorHandler from '@/libraries/error/handler';
 import { GMAIL_SCOPE, oauth2Client } from '@/libraries/google';
 
+/** 지메일 보내는 계정 로그인용 */
 export async function GET() {
   try {
     const url = oauth2Client.generateAuthUrl({

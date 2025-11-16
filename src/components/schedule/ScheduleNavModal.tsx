@@ -35,7 +35,7 @@ export default function ScheduleNavModal({ onClose, scheduleDto, length }: Sched
   const locale = useLocale();
   const { t } = useTranslations();
   const searchParams = useSearchParams();
-  const session = useSession();
+  const session = useSession((state) => state.session);
 
   const [query, setQuery] = useState(scheduleDto.query);
   const { modifier, onAnimationEnd, exit } = useTransition();
@@ -90,7 +90,7 @@ export default function ScheduleNavModal({ onClose, scheduleDto, length }: Sched
       <div className={css.content}>
         <div className={css.contentHeader}>
           <div className={css.navTabBox}>
-            {!!session.user && <ToggleFavorite isFavorite={isFavorite} onClick={onClickFavorite} />}
+            {!!session && <ToggleFavorite isFavorite={isFavorite} onClick={onClickFavorite} />}
             <NavTab />
           </div>
           <CloseButton w={40} h={40} onClick={onCloseWithExit} />

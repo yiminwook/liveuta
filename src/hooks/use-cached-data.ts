@@ -1,13 +1,12 @@
 'use client';
 import { TGetChannelRes } from '@api/v1/channel/route';
 import { useQueries } from '@tanstack/react-query';
-import { User } from 'firebase/auth';
 import { useMemo } from 'react';
 import { clientApi } from '@/apis/fetcher';
 import { BLACKLIST_TAG, CHANNELS_TAG, WHITELIST_TAG } from '@/constants/revalidate-tag';
 
 type LayoutDataObserverProps = {
-  user: User | null;
+  session: TSession | null;
 };
 
 const useCachedData = (args: LayoutDataObserverProps) => {
@@ -23,23 +22,23 @@ const useCachedData = (args: LayoutDataObserverProps) => {
         gcTime: Infinity,
       },
       {
-        queryKey: [BLACKLIST_TAG, args.user?.email],
+        queryKey: [BLACKLIST_TAG, args.session?.email],
         queryFn: () =>
           clientApi
             .get<{ message: string; data: string[] }>('v1/blacklist')
             .json()
             .then((json) => json.data),
-        enabled: !!args.user,
+        enabled: !!args.session,
         gcTime: Infinity,
       },
       {
-        queryKey: [WHITELIST_TAG, args.user?.email],
+        queryKey: [WHITELIST_TAG, args.session?.email],
         queryFn: () =>
           clientApi
             .get<{ message: string; data: string[] }>('v1/whitelist')
             .json()
             .then((json) => json.data),
-        enabled: !!args.user,
+        enabled: !!args.session,
         gcTime: Infinity,
       },
     ],

@@ -1,7 +1,6 @@
 'use client';
 import { useRouter } from '@bprogress/next';
 import { Button, SegmentedControl } from '@mantine/core';
-import { User } from 'firebase/auth';
 import { Link } from '@/libraries/i18n';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import css from './Nav.module.scss';
@@ -16,10 +15,10 @@ type SearchFormProps = {
     page: number;
     sort: 'broadcast' | 'create';
   };
-  user: User | null;
+  session: TSession | null;
 };
 
-export default function Nav({ searchParams, user }: SearchFormProps) {
+export default function Nav({ searchParams, session }: SearchFormProps) {
   const router = useRouter();
   const locale = useLocale();
   const { t } = useTranslations();
@@ -44,7 +43,7 @@ export default function Nav({ searchParams, user }: SearchFormProps) {
           ]}
         />
         <div className={css.setlist}>
-          <PostDrawer user={user} />
+          <PostDrawer session={session} />
           <Button
             className={css.createLink}
             variant="gradient"

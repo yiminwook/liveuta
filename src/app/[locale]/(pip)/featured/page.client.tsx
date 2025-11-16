@@ -26,16 +26,14 @@ type Props = {
 export default function Client({ featuredData }: Props) {
   const { t } = useTranslations();
 
-  const session = useSession();
-  const { channelMap, whiteListMap } = useCachedData({ user: session.user });
+  const session = useSession((state) => state.session);
+  const { channelMap, whiteListMap } = useCachedData({ session });
   const mutateBlock = usePostBlacklist();
   const mutatePostFavorite = usePostWhitelist();
   const mutateDeleteFavorite = useMutateWhitelist();
 
   const handleFavorite = (content: TYChannelsData) => {
-    const email = session.user?.email;
-
-    if (!email) {
+    if (!session) {
       toast.error(t('featured.notLoggedInError'));
       return;
     }
@@ -45,26 +43,24 @@ export default function Client({ featuredData }: Props) {
     if (!isFavorite && confirm(t('featured.addFavoriteChannel'))) {
       mutatePostFavorite.mutate({
         channelId: content.uid,
-        email,
+        email: session.email,
       });
     } else if (isFavorite && confirm(t('featured.removeFavoriteChannel'))) {
       mutateDeleteFavorite.mutate({
         channelId: content.uid,
-        email,
+        email: session.email,
       });
     }
   };
 
   const handleBlock = (content: TYChannelsData) => {
-    const email = session.user?.email;
-
-    if (!email) {
+    if (!session) {
       toast.error(t('featured.notLoggedInError'));
       return;
     }
 
     if (confirm(t('featured.blockChannel'))) {
-      mutateBlock.mutate({ channelId: content.uid, email });
+      mutateBlock.mutate({ channelId: content.uid, email: session.email });
     }
   };
 

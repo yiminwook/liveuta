@@ -1,5 +1,4 @@
 import { Anchor } from '@mantine/core';
-import { User } from 'firebase/auth';
 import {
   Drawer,
   DrawerContent,
@@ -13,10 +12,10 @@ import css from './PostDrawer.module.scss';
 import PostForm from './PostForm';
 
 type PostDrawerProps = {
-  user: User | null;
+  session: TSession | null;
 };
 
-export default function PostDrawer({ user }: PostDrawerProps) {
+export default function PostDrawer({ session }: PostDrawerProps) {
   const { t } = useTranslations();
 
   return (
@@ -31,7 +30,7 @@ export default function PostDrawer({ user }: PostDrawerProps) {
             </Anchor>
           </DrawerDescription>
         </DrawerHeader>
-        <PostForm user={user} />
+        <PostForm session={session} />
       </DrawerContent>
     </Drawer>
   );

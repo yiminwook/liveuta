@@ -1,5 +1,4 @@
 'use client';
-import { User } from 'firebase/auth';
 import { Star } from 'lucide-react';
 import Image from 'next/image';
 import { MouseEvent } from 'react';
@@ -18,14 +17,14 @@ import css from './ChannelCard.module.scss';
 
 type ChannelItemProps = {
   content: TYChannelsData;
-  user: User | null;
+  session: TSession | null;
   isFavorite: boolean;
   selecteChannel: (content: TYChannelsData) => void;
 };
 
 export default function ChannelCard({
   content,
-  user,
+  session,
   isFavorite,
   selecteChannel,
 }: ChannelItemProps) {
@@ -70,7 +69,7 @@ export default function ChannelCard({
   };
 
   const handleFavorite = () => {
-    const email = user?.email;
+    const email = session?.email;
 
     if (!email) {
       toast.error(t('channel.channelCard.notLoggedInError'));

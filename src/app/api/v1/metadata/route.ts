@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
-import { getAccessToken } from '@/libraries/firebase/admin';
+import { getMemberByEmail, parseAccessToken } from '@/libraries/oracledb/auth/service';
 import { getAllMetadata, updateMetadataValue } from '@/libraries/oracledb/metadata/service';
 import { updateMetadataDto } from '@/types/dto';
-import parseIdToken from '@/utils/parse-id-token';
 
 export async function GET() {
   try {
@@ -19,16 +18,18 @@ export async function GET() {
 
 export async function PATCH(req: NextRequest) {
   try {
-    const payload = await parseIdToken();
+    const payload = await parseAccessToken();
 
     if (!payload) {
       console.error('id token is not provided');
       throw new CustomServerError({ statusCode: 401, message: '로그인이 필요합니다.' });
     }
 
-    if (payload.userLv < 3) {
-      console.error('user level is not enough', payload.userLv);
-      throw new CustomServerError({ statusCode: 401, message: '접근권한이 없습니다.' });
+    const userInfo = await getMemberByEmail({ email: payload.email });
+
+    if (userInfo.userLv < 3) {
+      console.error('user level is not enough', userInfo.userLv);
+      throw new CustomServerError({ statusCode: 403, message: '접근권한이 없습니다.' });
     }
 
     const body = await req.json();

@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import CustomServerError from '@/libraries/error/customServerError';
 import errorHandler from '@/libraries/error/handler';
+import { parseAccessToken } from '@/libraries/oracledb/auth/service';
 import { getAllWhiteList } from '@/libraries/oracledb/whitelist/service';
-import parseIdToken from '@/utils/parse-id-token';
 
 export async function GET() {
   try {
-    const payload = await parseIdToken();
+    const payload = await parseAccessToken();
 
     if (!payload) {
       console.error('id token is not provided');

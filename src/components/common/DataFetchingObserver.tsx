@@ -1,6 +1,5 @@
 'use client';
 import { useIsFetching, useIsMutating } from '@tanstack/react-query';
-import { signOut } from 'firebase/auth';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 import { useScheduleStatus } from '@/hooks/use-schedule';
@@ -17,14 +16,15 @@ type Props = {
 };
 
 export default function DataFetchingObserver({ locale }: Props) {
-  const { user } = useSession();
+  const session = useSession((state) => state.session);
   const { t } = useTranslations();
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
   const status = useScheduleStatus();
   const modalActions = useSetModalStore();
+  const signOut = useSession((state) => state.actions.signOut);
 
-  const { error } = useUserInfo({ user });
+  const { error } = useUserInfo({ session });
 
   useEffect(() => {
     if (!error) return;
@@ -36,7 +36,7 @@ export default function DataFetchingObserver({ locale }: Props) {
           locale,
         },
       })
-      .then(() => signOut(FirebaseClient.getInstance().auth));
+      .then(() => signOut());
   }, [error]);
 
   useEffect(() => {
