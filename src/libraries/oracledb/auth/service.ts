@@ -43,7 +43,7 @@ export const getMemberByEmail = withOracleConnection(
     if (!row) {
       // 가입되지 않은 유저
       throw new CustomServerError({
-        statusCode: 500,
+        statusCode: 404,
         message: '가입되지 않은 유저입니다.',
       });
     }
@@ -51,14 +51,14 @@ export const getMemberByEmail = withOracleConnection(
     if (isDisabled) {
       // 정지된 유저
       throw new CustomServerError({
-        statusCode: 500,
+        statusCode: 401,
         message: '제한된 계정입니다.',
       });
     }
 
     if (isDisconnect) {
       // 세션 만료 - DISCONNECT === "Y"
-      throw new CustomServerError({ statusCode: 499, message: '세션이 만료되었습니다.' });
+      throw new CustomServerError({ statusCode: 401, message: '세션이 만료되었습니다.' });
     }
 
     return {
