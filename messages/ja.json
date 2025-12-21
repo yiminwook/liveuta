@@ -8,6 +8,7 @@
     "longTemplate": "M月 DD日 (ddd) A hh:mm"
   },
   "error": {
+    "0000": "データが見つかりませんでした。",
     "errorPage": {
       "link": "エラーが発生しました"
     },
@@ -140,9 +141,6 @@
         "remove": "削除"
       }
     },
-    "noData": {
-      "imageAlt": "データが見つかりませんでした。"
-    },
     "player": {
       "title": "プレイヤー",
       "show": "表示",
@@ -253,6 +251,7 @@
   },
   "channel": {
     "title": "チャンネル",
+    "3000": "チャンネル登録に進む",
     "channelCard": {
       "addFavoriteChannel": "お気に入りに追加しますか？",
       "removeFavoriteChannel": "お気に入りから削除しますか？",

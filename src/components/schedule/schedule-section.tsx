@@ -113,10 +113,14 @@ export default function ScheduleSection({
   if (contents.length === 0 && scheduleDto.query.trim() !== '') {
     // 검색 결과가 없을 때
     return (
-      <section>
+      <section style={{ marginBlock: '5rem' }}>
         <Nodata />
         <div className={css.nodataLinkBox}>
-          <Button component={Link} href={`/channel?q=${scheduleDto.query}`} locale={locale}>
+          <Button
+            component={Link}
+            href={`/channel?query-type=name&q=${scheduleDto.query}`}
+            locale={locale}
+          >
             {t('schedule.scheduleSection.searchAtChannelPage')}
           </Button>
         </div>

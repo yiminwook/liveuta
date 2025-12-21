@@ -1,8 +1,4 @@
 'use client';
-import { useLocale, useTranslations } from '@/libraries/i18n/client';
-import { TChannelDto } from '@/libraries/mongodb/channels';
-import { getYoutubeChannelIdOrHandle } from '@/libraries/youtube/url';
-import { testYoutubeChannelUrl } from '@/utils/regexp';
 import { useRouter } from '@bprogress/next';
 import { Button, Flex, SegmentedControl, TextInput, UnstyledButton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
@@ -11,6 +7,10 @@ import { Search, X } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { useLocale, useTranslations } from '@/libraries/i18n/client';
+import { TChannelDto } from '@/libraries/mongodb/channels';
+import { getYoutubeChannelIdOrHandle } from '@/libraries/youtube/url';
+import { testYoutubeChannelUrl } from '@/utils/regexp';
 import css from './Nav.module.scss';
 
 export default function Nav() {

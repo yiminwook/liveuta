@@ -8,6 +8,7 @@
     "shortTemplate": "YYYY년 MM월 DD일"
   },
   "error": {
+    "0000": "조회된 데이터가 없습니다.",
     "errorPage": {
       "link": "에러가 발생했습니다"
     },
@@ -146,9 +147,6 @@
         "remove": "제거"
       }
     },
-    "noData": {
-      "imageAlt": "조회된 데이터가 없습니다."
-    },
     "player": {
       "title": "플레이어",
       "show": "보이기",
@@ -282,7 +280,8 @@
       "linkToRequestMobile": "등록",
       "channelSearchInputPlaceholder": "채널명으로 검색",
       "invalidUrlError": "올바르지 않은 URL 형식입니다."
-    }
+    },
+    "3000": "채널 등록하러 가기"
   },
   "dev": {
     "title": "개발",

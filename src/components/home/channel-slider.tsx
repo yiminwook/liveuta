@@ -21,7 +21,7 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
   const router = useRouter();
 
   const navigationChannel = (channelName: string) => {
-    router.push(`/${locale}/channel?q=${channelName}`);
+    router.push(`/${locale}/channel?query-type=name&q=${channelName}`);
   };
 
   return (

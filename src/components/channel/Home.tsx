@@ -3,10 +3,10 @@ import Background from '@/components/common/background/Background';
 import { ITEMS_PER_PAGE } from '@/constants';
 import { CHANNELS_TAG } from '@/constants/revalidate-tag';
 import { TChannelDto, TYChannelReturn } from '@/libraries/mongodb/channels';
+import ChannelSection from './channel-section';
 import css from './Home.module.scss';
 import Nav from './Nav';
 import PaginationBox from './PaginationBox';
-import ChannelSection from './channel-section';
 
 type HomeProps = {
   channelDto: TChannelDto;

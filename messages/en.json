@@ -8,6 +8,7 @@
     "longTemplate": "MMM DD (ddd) hh:mm A"
   },
   "error": {
+    "0000": "No data retrieved.",
     "errorPage": {
       "link": "An error has occurred"
     },
@@ -146,9 +147,6 @@
         "remove": "Remove"
       }
     },
-    "noData": {
-      "imageAlt": "No data retrieved."
-    },
     "player": {
       "title": "Player",
       "show": "Show",
@@ -259,6 +257,7 @@
   },
   "channel": {
     "title": "Channel",
+    "3000": "Go to Request Channel",
     "channelCard": {
       "addFavoriteChannel": "Would you like to add this to your favorites?",
       "removeFavoriteChannel": "Would you like to remove this from your favorites?",
