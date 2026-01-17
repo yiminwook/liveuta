@@ -35,3 +35,5 @@ export const ORIGIN = 'liveuta.vercel.app';
 export const PORTAL_ID = 'liveuta-portal';
 
 export const SCHEDULE_CACHE_TIME = 3 * 60 * 1000;
+
+export const CHANNEL_JSON_API = 'https://instance-20251221-0510.tail7609b.ts.net/channels.json';
