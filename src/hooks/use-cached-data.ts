@@ -1,10 +1,8 @@
 'use client';
 import { TGetChannelRes } from '@api/v1/channel/route';
 import { useQueries } from '@tanstack/react-query';
-import ky from 'ky';
 import { useMemo } from 'react';
 import { clientApi } from '@/apis/fetcher';
-import { CHANNEL_JSON_API } from '@/constants';
 import { BLACKLIST_TAG, CHANNELS_TAG, WHITELIST_TAG } from '@/constants/revalidate-tag';
 
 type LayoutDataObserverProps = {
@@ -17,10 +15,10 @@ const useCachedData = (args: LayoutDataObserverProps) => {
       {
         queryKey: [CHANNELS_TAG],
         queryFn: () =>
-          ky
-            .get<TGetChannelRes['data']>(CHANNEL_JSON_API)
+          clientApi
+            .get<TGetChannelRes>('v1/channel')
             .json()
-            .then((json) => json),
+            .then((json) => json.data),
         gcTime: Infinity,
       },
       {
