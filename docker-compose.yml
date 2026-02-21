@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  next-app:
+    build: .
+    container_name: liveuta
+    # 컴퓨터 켜질 때 자동 실행
+    restart: always
+    ports:
+      # [호스트 포트]:[컨테이너 내부 포트]
+      # 내 컴퓨터 3010으로 들어오면 -> 컨테이너 3000(Next.js)으로 보냄
+      - "3010:3000"
+    environment:
+      # 프로덕션 환경임을 명시
+      - NODE_ENV=production
