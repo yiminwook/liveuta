@@ -1,2 +1,83 @@
+@use "sass:map";
+
 .wrap {
+  padding-block: 4px;
+}
+
+.slide {
+  width: 200px;
+  height: auto;
+  cursor: pointer;
+}
+
+.card {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  // align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  padding-top: 13px; // 스트라이프 공간 보정
+  border-radius: 10px;
+  border: 1.5px solid map.get(var.$third-colors, default);
+  background-color: map.get(var.$colors, body);
+  overflow: hidden;
+  box-shadow: var.$box-shadow;
+
+  // 상단 포인트 스트라이프
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+        map.get(var.$first-colors, default),
+        map.get(var.$third-colors, default));
+  }
+}
+
+.avatarFrame {
+  flex-shrink: 0;
+  margin-bottom: auto;
+  padding: 2px;
+  border-radius: 10px;
+  background: linear-gradient(135deg,
+      map.get(var.$first-colors, default),
+      map.get(var.$third-colors, default));
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+  gap: 1px;
+}
+
+.name {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.enName {
+  font-size: 0.65rem;
+}
+
+.divider {
+  height: 1px;
+  margin-block: 4px;
+  background-color: map.get(var.$third-colors, default);
+  opacity: 0.4;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.65rem;
+  color: map.get(var.$colors, dimmed);
 }

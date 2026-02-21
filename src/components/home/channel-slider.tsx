@@ -1,9 +1,8 @@
 'use client';
 import { useRouter } from '@bprogress/next';
-import { Avatar, Box, Button, Center, HoverCard, Text } from '@mantine/core';
+import { Avatar, Text } from '@mantine/core';
 import variable from '@variable';
-import { Ellipsis } from 'lucide-react';
-import { useRef } from 'react';
+import { Users, Video } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useLocale, useTranslations } from '@/libraries/i18n/client';
 import { TYChannelsData } from '@/types/api/youtube';
@@ -17,7 +16,6 @@ type ChannelSliderProps = {
 export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
   const locale = useLocale();
   const { t } = useTranslations();
-  const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   const navigationChannel = (channelName: string) => {
@@ -25,72 +23,46 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
   };
 
   return (
-    <div className={css.wrap} ref={containerRef}>
-      <Swiper slidesPerGroup={1} slidesPerView={'auto'} centeredSlides={false} spaceBetween={14}>
+    <div className={css.wrap}>
+      <Swiper slidesPerGroup={1} slidesPerView={'auto'} centeredSlides={false} spaceBetween={10}>
         {recentChannels.map((item) => {
           const subscribe = renderSubscribe(
             item.statistics?.subscriberCount ?? t('home.channelSlider.hidden'),
           );
           const videoCount = item.statistics?.videoCount ?? t('home.channelSlider.hidden');
           return (
-            <SwiperSlide key={`recentChannel_${item.uid}`} style={{ width: '75px' }}>
-              <Avatar
-                radius="md"
-                styles={{
-                  root: {
-                    borderColor: variable.thirdColorDefault,
-                    borderWidth: '2px',
-                    borderStyle: 'solid',
-                    width: '100%',
-                    height: '100%',
-                  },
-                }}
-                color={variable.firstColorDefault}
-                src={item.snippet?.thumbnails?.default?.url}
-              />
-              <HoverCard withArrow width={200} offset={0} arrowOffset={0}>
-                <HoverCard.Target>
-                  <Center>
-                    <Button
-                      variant="transparent"
-                      size="compact-xs"
-                      className="swiper-no-swiping" // 슬라이드 이동 방지해야 hover 가능
-                      w="100%"
-                    >
-                      <Ellipsis size="1.5rem" />
-                    </Button>
-                  </Center>
-                </HoverCard.Target>
-                <HoverCard.Dropdown>
-                  <Box>
-                    <Text size="sm">{item.nameKor}</Text>
-                    <Text size="sm" c="dimmed">
-                      {item.snippet?.title}
-                    </Text>
-                  </Box>
-
-                  <Box mt="xs">
-                    <Text size="xs">
-                      {t('home.channelSlider.subscribers')} {subscribe}
-                    </Text>
-                    <Text size="xs">
-                      {t('home.channelSlider.videos')} {videoCount}
-                    </Text>
-                  </Box>
-
-                  <Box mt="xs">
-                    <Center>
-                      <Button
-                        variant="light"
-                        size="xs"
-                        onClick={() => navigationChannel(item.nameKor)}
-                      >
-                        {t('home.channelSlider.navigationChannel')}
-                      </Button>
-                    </Center>
-                  </Box>
-                </HoverCard.Dropdown>
-              </HoverCard>
+            <SwiperSlide
+              key={`recentChannel_${item.uid}`}
+              className={css.slide}
+              onClick={() => navigationChannel(item.nameKor)}
+            >
+              <div className={css.card}>
+                <div className={css.avatarFrame}>
+                  <Avatar
+                    radius="md"
+                    size={52}
+                    color={variable.firstColorDefault}
+                    src={item.snippet?.thumbnails?.default?.url}
+                  />
+                </div>
+                <div className={css.info}>
+                  <Text size="xs" fw={600} lineClamp={1} className={css.name}>
+                    {item.nameKor}
+                  </Text>
+                  <Text size="xs" c="dimmed" lineClamp={1} className={css.enName}>
+                    {item.snippet?.title}
+                  </Text>
+                  <div className={css.divider} />
+                  <div className={css.stat}>
+                    <Users size={10} />
+                    <span>{subscribe}</span>
+                  </div>
+                  <div className={css.stat}>
+                    <Video size={10} />
+                    <span>{videoCount}</span>
+                  </div>
+                </div>
+              </div>
             </SwiperSlide>
           );
         })}
