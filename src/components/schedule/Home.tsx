@@ -97,10 +97,6 @@ export default function Home({ scheduleDto }: HomeProps) {
   }, [data, scheduleDto, whiteListMap, blackListMap, channelMap]);
 
   useEffect(() => {
-    if (scheduleDto.isFavorite && !session) {
-      router.replace(`/${locale}/sign-in`);
-    }
-
     const setFilter = (value: string) => {
       const query = new URLSearchParams(searchParams);
       if (value === 'scheduled') {
