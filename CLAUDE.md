@@ -2,6 +2,27 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Serena MCP 활용
+
+### 프로젝트 구조 파악
+코드베이스를 탐색할 때는 **Serena MCP 도구를 적극 활용**한다. Glob/Grep 대신 아래 도구를 우선 사용:
+
+- `mcp__serena__get_symbols_overview` — 파일의 심볼(클래스/함수/타입) 구조 파악
+- `mcp__serena__find_symbol` — 특정 심볼 위치와 본문 조회
+- `mcp__serena__find_referencing_symbols` — 심볼 참조 관계 파악
+- `mcp__serena__list_dir` / `mcp__serena__find_file` — 디렉토리/파일 탐색
+- `mcp__serena__search_for_pattern` — 코드 패턴 검색
+
+세션 시작 시 `mcp__serena__activate_project`로 프로젝트를 활성화하고, `mcp__serena__list_memories`로 기존 메모리를 확인한다.
+
+### 구조 변경 시 메모리 업데이트
+라우팅, 디렉토리 구조, 주요 아키텍처가 크게 변경되면 작업 완료 후 반드시 Serena MCP 메모리를 업데이트한다:
+
+```
+mcp__serena__write_memory 또는 mcp__serena__edit_memory
+대상 파일: architecture.md, project_overview.md, MEMORY.md
+```
+
 ## Project Overview
 
 **Liveuta** — V-Singer(버추얼 유튜버) 스케줄 모아보기 서비스. 라이브/예정 방송 목록, 멀티뷰, 즐겨찾기/차단, 채널 목록, 세트리스트 기능 제공.
