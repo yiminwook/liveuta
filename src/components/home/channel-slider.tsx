@@ -35,6 +35,8 @@ export default function ChannelSlider({ recentChannels }: ChannelSliderProps) {
               key={`recentChannel_${item.uid}`}
               className={css.slide}
               onClick={() => navigationChannel(item.nameKor)}
+              role="button"
+              tabIndex={0}
             >
               <div className={css.card}>
                 <div className={css.avatarFrame}>

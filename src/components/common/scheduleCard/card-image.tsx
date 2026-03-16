@@ -46,7 +46,7 @@ export default function CardImage({ content }: CardImageProps) {
   };
 
   return (
-    <button className="imgBtn" onClick={linkClickEvent}>
+    <div className="imgBtn" onClick={linkClickEvent} role="button" tabIndex={0}>
       {imgLoaded ? (
         <Image
           src={thumbnailUrl ?? altImage}
@@ -69,6 +69,6 @@ export default function CardImage({ content }: CardImageProps) {
           fill
         />
       )}
-    </button>
+    </div>
   );
 }
