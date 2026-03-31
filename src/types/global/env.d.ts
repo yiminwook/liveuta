@@ -6,10 +6,10 @@ declare global {
 
       readonly NEXT_PUBLIC_MSW_ENABLED: 'true' | 'false' | undefined;
 
-      //vercel env  - https://vercel.com/docs/projects/environment-variables/system-environment-variables
-      readonly NEXT_PUBLIC_VERCEL_ENV: 'production' | 'preview' | 'development';
-      readonly NEXT_PUBLIC_VERCEL_URL: string; // *.vercel.app
-      readonly NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG: string; // main or dev
+      // vercel env  - https://vercel.com/docs/projects/environment-variables/system-environment-variables
+      // readonly NEXT_PUBLIC_VERCEL_ENV: 'production' | 'preview' | 'development';
+      // readonly NEXT_PUBLIC_VERCEL_URL: string; // *.vercel.app
+      // readonly NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG: string; // main or dev
 
       readonly NEXT_PUBLIC_SITE_URL: string;
 

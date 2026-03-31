@@ -46,7 +46,7 @@ export default function PostBox({ token }: { token: TToken }) {
         token,
         timestamp: dayjs().toDate().getTime().toString(),
         link,
-        imageUrl: imageUrl === '' ? 'https://liveuta.vercel.app/assets/meta-image.png' : imageUrl,
+        imageUrl: imageUrl === '' ? 'https://liveuta.mini-lab.net/assets/meta-image.png' : imageUrl,
       };
 
       setIsLoading(() => true);

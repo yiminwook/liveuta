@@ -4,8 +4,7 @@
 V-Singer(버추얼 유튜버) 스케줄 모아보기 서비스.
 라이브/예정 방송 목록, 멀티뷰, 즐겨찾기/차단, 채널 목록, 세트리스트 기능 제공.
 
-- Production: https://liveuta.vercel.app
-- Dev: https://liveuta-dev.vercel.app
+- Production: https://liveuta.mini-lab.net
 
 ## 기술 스택
 - **Framework**: Next.js 15 (App Router), React 19

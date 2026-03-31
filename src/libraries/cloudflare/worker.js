@@ -1,5 +1,5 @@
 const corsHeaders = {
-  'Access-Control-Allow-Origin': 'https://liveuta.vercel.app',
+  'Access-Control-Allow-Origin': 'https://liveuta.mini-lab.net',
   'Access-Control-Allow-Methods': 'OPTIONS, GET',
   // 'Access-Control-Allow-Headers': '*',
 };

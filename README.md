@@ -2,9 +2,7 @@
 
 ### 📢 Pull Request는 dev 브랜치에 부탁드립니다.
 
-Main - https://liveuta.vercel.app
-
-Dev - https://liveuta-dev.vercel.app
+Main - https://liveuta.mini-lab.net
 
 ## 개발환경
 - node v22.14.0

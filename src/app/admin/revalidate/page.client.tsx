@@ -34,7 +34,7 @@ export default function Client({}: Props) {
       <Box>
         <Text fw="bold">메타데이터</Text>
         <p>revalidate-time 3600초(1시간)</p>
-        <p>API - GET: {`https://liveuta.vercel.app/api/v1/revalidate?tag=${METADATAS_TAG}`}</p>
+        <p>API - GET: {`https://liveuta.mini-lab.net/api/v1/revalidate?tag=${METADATAS_TAG}`}</p>
         <Button loading={mutation.isPending} onClick={onClick(METADATAS_TAG)}>
           캐시 초기화
         </Button>
@@ -43,7 +43,7 @@ export default function Client({}: Props) {
       <Box mt={48}>
         <Text fw="bold">채널정보</Text>
         <p>revalidate-time 1800초(30분)</p>
-        <p>API - GET: {`https://liveuta.vercel.app/api/v1/revalidate?tag=${CHANNELS_TAG}`}</p>
+        <p>API - GET: {`https://liveuta.mini-lab.net/api/v1/revalidate?tag=${CHANNELS_TAG}`}</p>
         <Button loading={mutation.isPending} onClick={onClick(CHANNELS_TAG)}>
           캐시 초기화
         </Button>
@@ -52,7 +52,7 @@ export default function Client({}: Props) {
       <Box mt={48}>
         <Text fw="bold">특집정보</Text>
         <p>revalidate-time 86400초(1일)</p>
-        <p>API - GET: {`https://liveuta.vercel.app/api/v1/revalidate?tag=${FEATURED_TAG}`}</p>
+        <p>API - GET: {`https://liveuta.mini-lab.net/api/v1/revalidate?tag=${FEATURED_TAG}`}</p>
         <Button loading={mutation.isPending} onClick={onClick(FEATURED_TAG)}>
           캐시 초기화
         </Button>
