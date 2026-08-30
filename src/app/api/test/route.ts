@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { endpointApi, VIDEOS } from '@/libraries/endpoint';
+import { endpointApi, GET_CHANNELS, GET_FEATURED, GET_VIDEOS } from '@/libraries/endpoint';
 
 export async function GET(request: Request) {
   try {
-    const response = await endpointApi.get(VIDEOS.live).json();
+    const response = await endpointApi.get('').json();
     console.log(response);
     return NextResponse.json(response);
   } catch (error) {
